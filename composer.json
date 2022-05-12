@@ -49,8 +49,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Acme\\SyliusExamplePlugin\\": "src/",
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+            "BitBag\\MultiVendorMarketplace\\": "src/",
+            "Tests\\BitBag\\MultiVendorMarketplace\\": "tests/"
         }
     },
     "autoload-dev": {

@@ -1,0 +1,36 @@
+Arguments: 
+  /home/raf/.nvm/versions/node/v12.22.12/bin/node /usr/bin/yarn install
+
+PATH: 
+  /home/raf/.nvm/versions/node/v12.22.12/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/raf/dev/SyliusMultiVendorMarketplacePlugin/node_modules/.bin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  12.22.12
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EEXIST: file already exists, mkdir '/home/raf/dev/SyliusMultiVendorMarketplacePlugin/node_modules'
+
+npm manifest: 
+  {
+    "name": "@bitbag/skeleton-plugin",
+    "version": "1.0.0",
+    "description": "Skeleton for starting Sylius plugins.",
+    "repository": "git@github.com:BitBagCommerce/SyliusPluginSkeleton.git",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+      "dist": "yarn encore production --config-name bitbag-plugin-dist"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
