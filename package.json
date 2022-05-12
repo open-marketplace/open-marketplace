@@ -1,0 +1,11 @@
+{
+  "name": "@bitbag/skeleton-plugin",
+  "version": "1.0.0",
+  "description": "Skeleton for starting Sylius plugins.",
+  "repository": "git@github.com:BitBagCommerce/SyliusPluginSkeleton.git",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dist": "yarn encore production --config-name bitbag-plugin-dist"
+  }
+}
