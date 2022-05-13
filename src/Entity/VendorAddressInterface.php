@@ -6,23 +6,21 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 interface VendorAddressInterface
 {
-    public function getId(): int;
+    public function getId(): ?int;
 
-    public function setId(int $id): void;
+    public function getCountry(): ?string;
 
-    public function getCountry(): string;
+    public function setCountry(?string $country): void;
 
-    public function setCountry(string $country): void;
+    public function getCity(): ?string;
 
-    public function getCity(): string;
+    public function setCity(?string $city): void;
 
-    public function setCity(string $city): void;
+    public function getStreet(): ?string;
 
-    public function getStreet(): string;
+    public function setStreet(?string $street): void;
 
-    public function setStreet(string $street): void;
+    public function getPostalCode(): ?string;
 
-    public function getPostalCode(): string;
-
-    public function setPostalCode(string $postalCode): void;
+    public function setPostalCode(?string $postalCode): void;
 }

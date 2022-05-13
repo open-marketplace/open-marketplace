@@ -4,67 +4,60 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-class VendorAddres
+class VendorAddress implements VendorAddressInterface
 {
-    private int $is;
+    private ?int $id;
 
-    private string $country;
+    private ?string $country;
 
-    private string $city;
+    private ?string $city;
 
-    private string $street;
+    private ?string $street;
 
-    private string $postalCode;
+    private ?string $postalCode;
 
-    public function getIs(): int
+    public function getId(): ?int
     {
-        return $this->is;
+        return $this->id;
     }
 
-    public function setIs(int $is): void
-    {
-        $this->is = $is;
-    }
-
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    public function setCountry(string $country): void
+    public function setCountry(?string $country): void
     {
         $this->country = $country;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
-    public function setCity(string $city): void
+    public function setCity(?string $city): void
     {
         $this->city = $city;
     }
 
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
 
-
-    public function setStreet(string $street): void
+    public function setStreet(?string $street): void
     {
         $this->street = $street;
     }
 
-    public function getPostalCode(): string
+    public function getPostalCode(): ?string
     {
         return $this->postalCode;
     }
 
-    public function setPostalCode(string $postalCode): void
+    public function setPostalCode(?string $postalCode): void
     {
         $this->postalCode = $postalCode;
     }
-
 }
