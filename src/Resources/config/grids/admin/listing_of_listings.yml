@@ -1,0 +1,11 @@
+sylius_grid:
+  grids:
+    bitbag_sylius_multi_vendor_marketplace_plugin_admin_listing_of_listings:
+      driver:
+        name: doctrine/orm
+        options:
+          class: Bitbag\SyliusMultiVendorMarketplacePlugin\Entity\ListingOfListings
+      fields:
+        name:
+          type: string
+          label: sylius.ui.name

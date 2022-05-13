@@ -1,0 +1,6 @@
+sylius_resource:
+  resource:
+    sylius_multi_vendor_marketplace_plugin.listing_of_listings:
+      driver: doctrine/orm
+      classes:
+        model: Bitbag\SyliusMultiVendorMarketplacePlugin\Entity\ListingOfListings

@@ -1,0 +1,3 @@
+bitbag_sylius_multi_vendor_marketplace_plugin_admin_listing_of_listings:
+  resource: 'admin/listing_of_listings.yml'
+  prefix: /admin
