@@ -49,8 +49,8 @@
     },
     "autoload": {
         "psr-4": {
-            "BitBag\\MultiVendorMarketplace\\": "src/",
-            "Tests\\BitBag\\MultiVendorMarketplace\\": "tests/"
+            "BitBag\\SyliusMultiVendorMarketplacePlugin\\": "src/",
+            "Tests\\BitBag\\SyliusMultiVendorMarketplacePlugin\\": "tests/"
         }
     },
     "autoload-dev": {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Tests\BitBag\MultiVendorMarketplace\Application\Kernel;
+use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Application\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
