@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-class ListingOfListings implements ListingOfListingsInterface
+class ProductListing implements ProductListingInterface
 {
     protected ?int $id;
     protected ?string $name;

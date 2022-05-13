@@ -1,2 +1,2 @@
 imports:
-  - { 'admin/listing_of_listings.yml' }
+  - { 'admin/product_listing.yml' }

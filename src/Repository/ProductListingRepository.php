@@ -6,7 +6,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class ListingOfListingsRepository extends EntityRepository implements ListingOfListingsRepositoryInterface
+class ProductListingRepository extends EntityRepository implements ProductListingRepositoryInterface
 {
 
 }

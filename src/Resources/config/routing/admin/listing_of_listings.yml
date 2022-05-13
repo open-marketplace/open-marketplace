@@ -1,9 +1,0 @@
-bitbag_sylius_multi_vendor_marketplace_plugin_admin_listing_of_listings:
-  resource: |
-    alias: bitbag_sylius_multi_vendor_marketplace_plugin.listing_of_listings
-    section: admin
-    templates: SyliusAdminBundle:Crud
-    except: ['show']
-    redirect: update
-    grid: bitbag_sylius_multi_vendor_marketplace_plugin_admin_listing_of_listings
-  type: sylius.resource
