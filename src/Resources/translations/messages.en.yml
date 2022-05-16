@@ -1,0 +1,4 @@
+bitbag_sylius_mvm_plugin:
+    ui:
+        marketplace: Marketplace
+        vendors: Vendors

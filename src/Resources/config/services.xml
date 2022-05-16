@@ -5,7 +5,9 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" id="bit_bag.sylius_multi_vendor_marketplace_plugin.entity.vendor"/>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" id="bit_bag.sylius_multi_vendor_marketplace_plugin.entity.vendor_address"/>
 
-
+        <service id="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\AdminMainMenuListener">
+            <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addMarketplaceSubMenu" />
+        </service>
         <!-- Put your services here -->
     </services>
 </container>
