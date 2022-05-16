@@ -1,5 +1,5 @@
 vendor_register:
   path: /vendor_register
-  controller: BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorRegisterAction
+  controller: bit_bag.sylius_multi_vendor_marketplace_plugin.controller.register_vendor_action
 #  requirements:
 #    page: '\d+'
