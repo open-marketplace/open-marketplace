@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-interface VendorInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface VendorInterface extends ResourceInterface
 {
     public function getId(): int;
 
