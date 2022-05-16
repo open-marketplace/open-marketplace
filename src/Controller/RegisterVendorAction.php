@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class RegisterVendorAction extends AbstractController
+final class RegisterVendorAction extends AbstractController
 {
     public function __invoke(): Response
     {
