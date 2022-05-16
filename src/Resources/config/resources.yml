@@ -1,6 +1,2 @@
-sylius_resource:
-  resource:
-    sylius_multi_vendor_marketplace_plugin.product_listing:
-      driver: doctrine/orm
-      classes:
-        model: Bitbag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing
+imports:
+  - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/multi_vendor_market_place_product_listing.yml' }

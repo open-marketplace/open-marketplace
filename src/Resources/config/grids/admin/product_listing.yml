@@ -4,7 +4,7 @@ sylius_grid:
       driver:
         name: doctrine/orm
         options:
-          class: Bitbag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing
+          class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing
       fields:
         name:
           type: string
