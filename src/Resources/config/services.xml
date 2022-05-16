@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/**/*.xml" />
+    </imports>
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" id="bit_bag.sylius_multi_vendor_marketplace_plugin.entity.customer"/>
-
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" id="bit_bag.sylius_multi_vendor_marketplace_plugin.entity.vendor"/>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" id="bit_bag.sylius_multi_vendor_marketplace_plugin.entity.vendor_address"/>
-
-        <!-- Put your services here -->
+          <!-- Put your services here -->
     </services>
 </container>
