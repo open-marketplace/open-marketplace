@@ -1,2 +1,2 @@
 imports:
-  - { resource: "resources.yml"}
+  - { resource: "resources.yml" }
