@@ -9,3 +9,9 @@ sylius_grid:
         name:
           type: string
           label: sylius.ui.name
+        publishedAt:
+          type: datetime
+          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.publishedAt
+        status:
+          type: string
+          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status

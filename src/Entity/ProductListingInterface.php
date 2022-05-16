@@ -15,6 +15,23 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProductListingInterface extends ResourceInterface
 {
+    public const CREATED = 'created';
+
+    public const UNDER_VERIFICATION = 'under_verification';
+
+    public const VERIFIED = 'verified';
+
+    public const REJECTED = 'rejected';
+
     public function getName(): ?string;
+
     public function setName(string $name): void;
+
+    public function getPublishedAt(): ?\DateTimeInterface;
+
+    public function setPublishedAt(\DatetimeInterface $publishedAt): void;
+
+    public function getStatus(): string;
+
+    public function setStatus(string $status): void;
 }

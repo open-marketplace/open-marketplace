@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
         <field name="name" column="name" type="string" unique="false" nullable="false" />
+        <field name="publishedAt" column="published_at" type="datetime" unique="false" nullable="true"/>
+        <field name="status" column="status" type="string" unique="false" nullable="false" />
     </entity>
 
 </doctrine-mapping>

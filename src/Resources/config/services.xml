@@ -4,9 +4,4 @@
     <imports>
         <import resource="services/**/*.xml" />
     </imports>
-    <services>
-        <defaults public="false" />
-        <defaults autowire="false" />
-        <defaults autoconfigure="false" />
-    </services>
 </container>

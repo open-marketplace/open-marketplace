@@ -14,7 +14,12 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 class ProductListing implements ProductListingInterface
 {
     protected ?int $id;
+
     protected ?string $name;
+
+    protected ?\DateTimeInterface $publishedAt;
+
+    protected ?string $status;
 
     public function getId(): ?int
     {
@@ -29,5 +34,25 @@ class ProductListing implements ProductListingInterface
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTimeInterface $publishedAt): void
+    {
+        $this->publishedAt = $publishedAt;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 }
