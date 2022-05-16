@@ -1,0 +1,18 @@
+imports:
+  - { resource: "resources.yml"}
+#sylius_resource:
+#  resources:
+#    bit_bag.sylius_multi_vendor_marketplace_plugin.entity.customer:
+#      driver: doctrine/orm
+#      classes:
+#        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer
+#        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface
+
+#sylius_customer:
+#  resources:
+#    customer:
+#      classes:
+#        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer
+#    customer_group:
+#      classes:
+#        model: App\Entity\Customer\CustomerGroup
