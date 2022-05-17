@@ -1,3 +1,0 @@
-vendor_register:
-  path: /vendor_register
-  controller: bit_bag.sylius_multi_vendor_marketplace_plugin.controller.register_vendor_action
