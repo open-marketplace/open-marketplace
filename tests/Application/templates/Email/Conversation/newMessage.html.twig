@@ -1,0 +1,26 @@
+{% block subject %}
+    New message
+{% endblock %}
+    New message
+{% block body %}
+    {% set mailRedirect = app.request.get('_sylius')['redirect'] %}
+    {% set conversationLink = app.request.schemeAndHttpHost ~ path(mailRedirect, { id: message.conversation.id }) %}
+    Hello!
+<div>
+    <span>
+        You have a new message from {{ user.username }} <{{ user.email }}>
+    </span>
+</div>
+
+<div>
+    <span>
+        Created: {{ message.createdAt|date }}
+    </span>
+</div>
+
+<div>
+    <span>
+        Check it <a href="{{ conversationLink }}">here</a>
+    </span>
+</div>
+{% endblock %}

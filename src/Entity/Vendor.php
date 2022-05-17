@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use Sylius\Component\Customer\Model\Customer;
+
 class Vendor implements VendorInterface
 {
     public function getId(): int
@@ -56,6 +58,17 @@ class Vendor implements VendorInterface
         $this->vendorAddress = $vendorAddress;
     }
 
+
+    public function getCustomer(): Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(Customer $customer): void
+    {
+        $this->customer = $customer;
+    }
+
     private int $id;
 
     private ?string $companyName;
@@ -65,4 +78,6 @@ class Vendor implements VendorInterface
     private ?string $phoneNumber;
 
     private ?VendorAddress $vendorAddress;
+
+    private Customer $customer;
 }

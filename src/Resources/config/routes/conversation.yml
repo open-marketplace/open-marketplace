@@ -1,0 +1,51 @@
+mvm_admin_conversation:
+    resource: |
+        alias: mvm.conversation
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        except: ['show', 'update', 'bulk_delete']
+        redirect: index
+        grid: mvm_vendor_conversation
+        permission: true
+        vars:
+            all:
+                header: mvm.ui.conversations_listing.admin_header
+                subheader: mvm.ui.conversations_listing.admin_subheader
+    type: sylius.resource
+    prefix: /admin
+    
+mvm_admin_conversation_create:
+    path: /admin/conversation/create
+    methods: [GET,POST]
+    defaults:
+        _controller: mvm.controller.create_new_conversation_action
+        _sylius:
+            template: "App/Conversation/Admin/create.html.twig"
+            redirect: mvm_admin_conversation_show
+            mail_redirect: mvm_vendor_conversation_show
+        
+mvm_admin_conversation_show:
+    path: /admin/conversations/{id}
+    methods: [GET,POST]
+    defaults:
+        _controller: mvm.controller.conversation_controller:show
+        _sylius:
+            template: "App/Conversation/Admin/show.html.twig"
+
+mvm_admin_conversation_archive:
+    path: /admin/conversations/{id}/archive
+    methods: [GET,POST]
+    defaults:
+        _controller: mvm.controller.archive_conversation_action
+        _sylius:
+            redirect: mvm_admin_conversation_index
+
+mvm_admin_conversation_message_add:
+    path: /admin/conversations/{id}/message/add
+    methods: [GET, POST]
+    defaults:
+        _controller: mvm.controller.add_message_action
+        _sylius:
+            redirect: mvm_admin_conversation_show
+            mail_redirect: mvm_vendor_conversation_show
+            

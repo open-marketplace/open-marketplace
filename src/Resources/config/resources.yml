@@ -1,0 +1,6 @@
+imports:
+    - { resource: "resources/conversation.yml" }
+    - { resource: "resources/conversation_category.yml" }
+    - { resource: "resources/vendor.yml" }
+    - { resource: "resources/conversation_message.yml" }
+    - { resource: "resources/vendor_user.yml" }

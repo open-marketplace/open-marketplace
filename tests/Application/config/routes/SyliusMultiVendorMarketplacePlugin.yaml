@@ -1,0 +1,6 @@
+conversation:
+  resource: "../../../../src/Resources/config/routes.yml"
+
+
+
+

@@ -1,0 +1,152 @@
+<?php
+
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
+declare(strict_types=1);
+
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation;
+
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+class Conversation implements ConversationInterface
+{
+    public const STATUS_OPEN = 'open';
+
+    public const STATUS_CLOSED = 'closed';
+
+    protected ?int $id = null;
+
+    protected ?CategoryInterface $category = null;
+
+    protected ?ShopUserInterface $shopUser = null;
+
+    protected ?VendorInterface $vendorUser = null;
+
+    protected AdminUserInterface $adminUser;
+
+    protected ?Collection $messages = null;
+
+    protected string $status = self::STATUS_OPEN;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getCategory(): ?CategoryInterface
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?CategoryInterface $category): void
+    {
+        $this->category = $category;
+    }
+
+    public function getApplicant(): UserInterface
+    {
+        $user = $this->getVendorUser();
+
+        if ($user === null) {
+            $user = $this->getShopUser();
+        }
+
+        return $user;
+    }
+
+    public function setApplicant(UserInterface $user): void
+    {
+        if ($user instanceof VendorInterface) {
+            $this->setVendorUser($user);
+
+            return;
+        }
+        $this->setShopUser($user);
+    }
+
+    public function getAdminUser(): AdminUserInterface
+    {
+        return $this->adminUser;
+    }
+
+    public function setAdminUser(AdminUserInterface $adminUser): void
+    {
+        $this->adminUser = $adminUser;
+    }
+
+    public function addMessage(MessageInterface $message): void
+    {
+        $this->messages->add($message);
+        $message->setConversation($this);
+    }
+
+    public function removeMessage(MessageInterface $message): void
+    {
+        $this->messages->removeElement($message);
+    }
+
+    public function getMessages(): ?Collection
+    {
+        return $this->messages;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
+    public function setMessages(?Collection $messages): void
+    {
+        $this->messages = $messages;
+    }
+
+    public function getShopUser(): ?ShopUserInterface
+    {
+        return $this->shopUser;
+    }
+
+    public function setShopUser(?ShopUserInterface $shopUser): void
+    {
+        $this->shopUser = $shopUser;
+    }
+
+    public function getVendorUser(): ?VendorInterface
+    {
+        return $this->vendorUser;
+    }
+
+    public function setVendorUser(?VendorInterface $vendorUser): void
+    {
+        $this->vendorUser = $vendorUser;
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->status === self::STATUS_CLOSED;
+    }
+
+    public function isOpen(): bool
+    {
+        return !$this->isClosed();
+    }
+}

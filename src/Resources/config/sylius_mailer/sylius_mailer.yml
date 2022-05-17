@@ -1,0 +1,10 @@
+sylius_mailer:
+    sender:
+        name: TasteDesk
+        address: custom@tastedesk.pl
+    emails:
+        new_conversation_message:
+            template: "Email/Conversation/newMessage.html.twig"
+        vendor_registered_notification:
+            template: "Email/vendorRegisteredNotification.html.twig"
+            

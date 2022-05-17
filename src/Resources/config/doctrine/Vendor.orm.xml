@@ -12,5 +12,8 @@
         <field name="taxIdentifier" column="tax_identifier" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" />
+        <one-to-one field="customer" target-entity="Sylius\Component\Customer\Model\Customer" >
+            <join-column name="customer_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
+        </one-to-one>
     </entity>
 </doctrine-mapping>

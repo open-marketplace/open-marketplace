@@ -1,0 +1,8 @@
+conversation:
+  resource: "routes/conversation.yml"
+
+conversation_vendor:
+  resource: "routes/vendor_conversation.yml"
+
+vendor_user:
+  resource: "routes/vendor_user.yml"

@@ -1,0 +1,11 @@
+app_admin_vendor_user:
+    resource: |
+        alias: app.vendor_user
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        except: ['show', 'delete', 'bulkDelete']
+        redirect: index
+        grid: app_admin_vendor_user
+        permission: true
+    type: sylius.resource
+    prefix: /admin
