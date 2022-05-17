@@ -1,2 +1,3 @@
 imports:
-  - { resource: "resources.yml" }
+    - { resource: "resources.yml" }
+    - { resource: "grids.yaml"}

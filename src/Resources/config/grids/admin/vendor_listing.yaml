@@ -1,0 +1,42 @@
+sylius_grid:
+    grids:
+        bitbag_sylius_mvm_plugin_vendor:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.vendor.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                id: asc
+            fields:
+                id:
+                    type: string
+                    label: ID
+                    sortable: ~
+                companyName:
+                    type: string
+                    label: Company name
+                    sortable: ~
+                taxIdentifier:
+                    type: string
+                    label: Tax ID
+                    sortable: ~
+            filters:
+                search:
+                    type: string
+                    label: filterSearchLabel
+                    options:
+                        fields: [companyName, translation.name]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+                bulk:
+                    delete:
+                        type: delete
