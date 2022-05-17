@@ -1,5 +1,5 @@
-bitbag_sylius_organization_plugin_shop_register_organization:
-  path: /organization/register
+vendor_register_form:
+  path: /vendor/register
   methods: [GET, POST]
   defaults:
     _controller: bitbag_multi_vendor_marketplace.controller.vendor:createAction
