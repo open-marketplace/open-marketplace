@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
@@ -8,6 +15,18 @@ use Sylius\Component\Customer\Model\Customer;
 
 class Vendor implements VendorInterface
 {
+    private int $id;
+
+    private Customer $customer;
+
+    private ?string $companyName;
+
+    private ?string $taxIdentifier;
+
+    private ?string $phoneNumber;
+
+    private ?VendorAddress $vendorAddress;
+
     public function getId(): int
     {
         return $this->id;
@@ -58,7 +77,6 @@ class Vendor implements VendorInterface
         $this->vendorAddress = $vendorAddress;
     }
 
-
     public function getCustomer(): Customer
     {
         return $this->customer;
@@ -68,16 +86,4 @@ class Vendor implements VendorInterface
     {
         $this->customer = $customer;
     }
-
-    private int $id;
-
-    private ?string $companyName;
-
-    private ?string $taxIdentifier;
-
-    private ?string $phoneNumber;
-
-    private ?VendorAddress $vendorAddress;
-
-    private Customer $customer;
 }

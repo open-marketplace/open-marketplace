@@ -4,3 +4,4 @@ imports:
     - { resource: "resources/vendor.yml" }
     - { resource: "resources/conversation_message.yml" }
     - { resource: "resources/vendor_user.yml" }
+    - { resource: "resources/customer.yml"}
