@@ -11,30 +11,30 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VendorType extends AbstractResourceType
+class VendorAddressType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('companyName', TextType::class, [
+            ->add('country', TextType::class, [
 //                'label' => 'bitbag_sylius_organization_plugin.ui.organization_name',
             ])
-            ->add('taxIdentifier', TextType::class)
-            ->add('phoneNumber', TextType::class)
-            ->add('vendorAddress', VendorAddressType::class)
-            ;
+            ->add('city', TextType::class)
+            ->add('street', TextType::class)
+            ->add('postalCode', TextType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Vendor::class,
+            'data_class' => VendorAddress::class,
         ]);
     }
 }
