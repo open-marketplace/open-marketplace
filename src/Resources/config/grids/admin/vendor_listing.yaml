@@ -12,22 +12,20 @@ sylius_grid:
             fields:
                 id:
                     type: string
-                    label: ID
+                    label: bitbag_sylius_mvm_plugin.ui.id
                     sortable: ~
                 companyName:
                     type: string
-                    label: Company name
+                    label: bitbag_sylius_mvm_plugin.ui.company_name
                     sortable: ~
                 taxIdentifier:
                     type: string
-                    label: Tax ID
+                    label: bitbag_sylius_mvm_plugin.ui.tax_id
                     sortable: ~
-            filters:
-                search:
+                state:
                     type: string
-                    label: filterSearchLabel
-                    options:
-                        fields: [companyName, translation.name]
+                    label: bitbag_sylius_mvm_plugin.ui.state
+                    sortable: ~
             actions:
                 main:
                     create:

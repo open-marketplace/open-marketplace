@@ -2,7 +2,12 @@ bitbag_sylius_mvm_plugin:
     ui:
         marketplace: Marketplace
         vendors: Vendors
+        id: ID
+        company_name: Company name
+        tax_id: Tax ID
+        state: State
 
 app:
     ui:
         vendors: Vendors
+        new_vendor: New vendor

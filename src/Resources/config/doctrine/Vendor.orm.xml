@@ -11,6 +11,7 @@
         <field name="companyName" column="company_name" type="text" />
         <field name="taxIdentifier" column="tax_identifier" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
+        <field name="state" column="state" type="text" />
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" />
         <one-to-one field="customer" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" mapped-by="vendor" />
 
