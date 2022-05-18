@@ -5,6 +5,6 @@
         <import resource="services/**/*.xml" />
     </imports>
     <services>
-          <!-- Put your services here -->
+
     </services>
 </container>

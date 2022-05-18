@@ -1,2 +1,2 @@
-bitbag_sylius_wishlist_plugin:
-  resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/routing.xml"
+bitbag_sylius_mvm:
+  resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/routing.yml"

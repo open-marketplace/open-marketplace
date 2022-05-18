@@ -19,7 +19,7 @@ final class AdminMainMenuListener
 
         $newSubmenu
             ->addChild('vendors', [
-                'route' => 'sylius_admin_customer_index',
+                'route' => 'app_admin_vendor_index',
             ])
             ->setLabel('bitbag_sylius_mvm_plugin.ui.vendors')
             ->setLabelAttribute('icon', 'users')
