@@ -13,5 +13,4 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
 interface ProductListingRepositoryInterface
 {
-
 }

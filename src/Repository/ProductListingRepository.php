@@ -15,5 +15,4 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ProductListingRepository extends EntityRepository implements ProductListingRepositoryInterface
 {
-
 }
