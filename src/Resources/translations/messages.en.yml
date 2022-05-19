@@ -6,3 +6,4 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     marketplace: 'Marketplace'
     publishedAt: 'Published at'
     status: 'Status'
+    details: 'Details'
