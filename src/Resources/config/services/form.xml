@@ -17,6 +17,7 @@
                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType"
         >
             <argument>%bitbag_multi_vendor_marketplace.model.vendor.class%</argument>
+            <argument type="service" id="security.token_storage"/>
             <argument>%bitbag_sylius_organization_plugin.form.type.vendor.validation_groups%</argument>
             <tag name="form.type"/>
         </service>

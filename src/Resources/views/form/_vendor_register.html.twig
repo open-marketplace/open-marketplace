@@ -2,12 +2,17 @@
     {{ sylius_template_event('sylius.shop.register.before_form') }}
 
     {{ form_start(form, {'action': path('vendor_register_form'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-
+   
     {{ form_row(form.companyName) }}
     {{ form_row(form.taxIdentifier) }}
     {{ form_row(form.phoneNumber) }}
     {{ form_row(form.vendorAddress) }}
-
+{#    {% if form.customer %}#}
+        
+{#    {% endif %}#}
+    <div style="display: none"> 
+        {{ form_row(form.customer) }}
+    </div>
     {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
     <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('register-button') }}>
         {{ 'sylius.ui.create_an_account'|trans }}

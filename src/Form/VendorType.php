@@ -11,50 +11,69 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\Type\UserType;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class VendorType extends AbstractResourceType
 {
+    private TokenStorageInterface $tokenStorage;
+
+    public function __construct(
+        string $dataClass,
+        TokenStorageInterface $tokenStorage,
+        array $validationGroups = []
+    )
+    {
+        parent::__construct($dataClass, $validationGroups);
+        $this->tokenStorage = $tokenStorage;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('customer', EntityType::class, [
+                'class' => Customer::class,
+            ])
             ->add('companyName', TextType::class, [
 //                'label' => 'bitbag_sylius_organization_plugin.ui.organization_name',
             ])
             ->add('taxIdentifier', TextType::class)
             ->add('phoneNumber', TextType::class)
             ->add('vendorAddress', VendorAddressType::class)
-            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
-                /** @var CustomerInterface $customer */
-                $customer = $event->getData();
+            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
+                $token = $this->tokenStorage->getToken();
+                if (null === $token) {
+                    throw new TokenNotFoundException('No token found.');
+                }
 
+                /** @var ShopUserInterface|null $user */
+                $user = $token->getUser();
+                if (null === $user) {
+                    throw new UserNotFoundException('No user found.');
+                }
                 /** @var ShopUserInterface $user */
-//                $user = $customer->getUser();
-
-//                $user->addRole(Vendor::ROLE_VENDOR);
-//                dd($customer);
-                $event->setData($customer);
+                $user = $token->getUser();
+                /** @var CustomerInterface $customer */
+                $customer = $user->getCustomer();
+                $form = $event->getForm();
+                $form->get('customer')->setData($customer);
+                $event->setData($form);
             })
-            ;   
-        
+            ;
     }
-    
-//    public function getParent(): string
-//    {
-//        return UserRefgType::class;
-//    }
-    
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

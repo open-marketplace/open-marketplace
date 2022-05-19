@@ -13,7 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,7 +24,7 @@ class VendorAddressType extends AbstractType
         $builder
             ->add('country', TextType::class, [
 //                'label' => 'bitbag_sylius_organization_plugin.ui.organization_name',
-            ])           
+            ])
             ->add('city', TextType::class)
             ->add('street', TextType::class)
             ->add('postalCode', TextType::class)
