@@ -1,0 +1,2 @@
+imports:
+    - { resource: "state_machine/vendor.yaml" }
