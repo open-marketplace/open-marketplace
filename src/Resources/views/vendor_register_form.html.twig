@@ -1,28 +1,5 @@
-{% extends '@SyliusShop/layout.html.twig' %}
+{% extends "@SyliusShop/Account/dashboard.html.twig" %}
 
-{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
-
-{% block title %}{{ 'sylius.ui.register_in_the_store'|trans }} | {{ parent() }}{% endblock %}
-
-{% block content %}
-
-    {{ sylius_template_event('sylius.shop.register.after_content_header') }}
-
-    <div class="ui padded segment">
-        {{ sylius_template_event('sylius.shop.register.before_form') }}
-
-        {{ form_start(form, {'action': path('vendor_register_form'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-
-        {{ form_row(form.companyName) }}
-        {{ form_row(form.taxIdentifier) }}
-        {{ form_row(form.phoneNumber) }}
-        {{ form_row(form.vendorAddress) }}
-        
-        {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
-        <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('register-button') }}>
-            {{ 'sylius.ui.create_an_account'|trans }}
-        </button>
-        {{ form_row(form._token) }}
-        {{ form_end(form, {'render_rest': false}) }}
-    </div>
+{% block subcontent %}
+   {{ include('@BitBagSyliusMultiVendorMarketplacePlugin/form/_vendor_register.html.twig') }}
 {% endblock %}

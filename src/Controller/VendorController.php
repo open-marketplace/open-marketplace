@@ -25,13 +25,13 @@ class VendorController extends ResourceController
     public function createAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
+        
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
         $newResource = $this->newResourceFactory->create($configuration, $this->factory);
 
         $form = $this->resourceFormFactory->create($configuration, $newResource);
         $form->handleRequest($request);
-
+        dump($this->getUser());
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             $newResource = $form->getData();
 
@@ -61,7 +61,7 @@ class VendorController extends ResourceController
             if ($configuration->isHtmlRequest()) {
                 $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
             }
-
+        
             $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {

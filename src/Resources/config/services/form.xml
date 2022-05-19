@@ -2,13 +2,22 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="bitbag_sylius_organization_plugin.form.type.vendor.validation_groups" type="collection">
+            <parameter>Default</parameter>
+            <parameter>VendorUserRegister</parameter>
+            <parameter>sylius</parameter>
+        </parameter>
+    </parameters>
+    
     <services>
+        <defaults autowire="true" autoconfigure="false" />
         <service
                 id="bit_bag.sylius_multi_vendor_marketplace_plugin.form.vendor_type"
                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType"
         >
             <argument>%bitbag_multi_vendor_marketplace.model.vendor.class%</argument>
-<!--            <argument>%bitbag_sylius_organization_plugin.form.type.organization.validation_groups%</argument>-->
+            <argument>%bitbag_sylius_organization_plugin.form.type.vendor.validation_groups%</argument>
             <tag name="form.type"/>
         </service>
     </services>

@@ -1,3 +1,7 @@
 bitbag_sylius_multi_vendor_marketplace_plugin:
   ui:
     vendor_dashboard: "vendor dashboard"
+    organization_name: "Company Name"
+    tax_identifier: "Tax Identifier"
+  formLabels:
+    atLeast: 
