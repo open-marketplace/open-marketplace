@@ -23,11 +23,17 @@ class VendorAddressType extends AbstractType
     {
         $builder
             ->add('country', TextType::class, [
-//                'label' => 'bitbag_sylius_organization_plugin.ui.organization_name',
+                'label' => 'bitbag_mvm.ui.country',
             ])
-            ->add('city', TextType::class)
-            ->add('street', TextType::class)
-            ->add('postalCode', TextType::class)
+            ->add('city', TextType::class, [
+                'label' => 'bitbag_mvm.ui.city',
+            ])
+            ->add('street', TextType::class, [
+                'label' => 'bitbag_mvm.ui.street',
+            ])
+            ->add('postalCode', TextType::class, [
+                'label' => 'bitbag_mvm.ui.postal_code',
+            ])
         ;
     }
 

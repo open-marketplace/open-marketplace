@@ -1,13 +1,12 @@
 bitbag_mvm:
   ui:
-    vendor_dashboard: "vendor dashboard"
-    organization_name: "Company Name"
+    vendor_dashboard: "vendor dashboard"    
     tax_identifier: "Tax Identifier"
     not_blank: "This field cant be empty"
-  formLabels:
-    minimum: "This field have to be longer than"
-    maximum: 'This field cant be longer than'   
-    vendor_dashboard: "Vendor Dashboard"
-    organization_name: "Company Name"
-    tax_identifier: "Tax Identifier"
-    notBlank: "This field cant be empty"
+    company_name: "Company name"
+    country: "Country"
+    city: "City"
+    street: "Street"
+    phone_number: "Phone number"
+    company_address: "Company Address"
+    postal_code: "Postal code"
