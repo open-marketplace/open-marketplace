@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory\Message\Message;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory\Message;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

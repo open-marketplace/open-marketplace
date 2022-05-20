@@ -10,9 +10,5 @@
             <argument type="service" id="sylius.canonicalizer" />
         </service>
 
-        <service id="mvm.recipients_emails_collection_provider" class="BitBag\SyliusMultiVendorMarketplacePlugin\Provider\Email\RecipientsEmailsCollectionProvider">
-            <argument type="service" id="app.actual_user_resolver" />
-            <argument type="service" id="sylius.repository.admin_user" />
-        </service>
     </services>
 </container>

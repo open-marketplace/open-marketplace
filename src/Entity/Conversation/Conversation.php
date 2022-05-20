@@ -60,23 +60,14 @@ class Conversation implements ConversationInterface
 
     public function getApplicant(): UserInterface
     {
-        $user = $this->getVendorUser();
-
-        if ($user === null) {
-            $user = $this->getShopUser();
-        }
-
-        return $user;
+        return $this->getVendorUser()->getCustomer()->getUser();
     }
 
-    public function setApplicant(UserInterface $user): void
+    public function setApplicant(VendorInterface $vendor): void
     {
-        if ($user instanceof VendorInterface) {
-            $this->setVendorUser($user);
+        $this->setVendorUser($vendor);
 
-            return;
-        }
-        $this->setShopUser($user);
+        $this->setShopUser($vendor->getCustomer()->getUser());
     }
 
     public function getAdminUser(): AdminUserInterface

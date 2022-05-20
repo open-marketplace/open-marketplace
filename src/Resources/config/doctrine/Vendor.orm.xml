@@ -12,7 +12,11 @@
         <field name="taxIdentifier" column="tax_identifier" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" />
-        <one-to-one field="customer" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" mapped-by="vendor" />
+        <one-to-one field="customer" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" mapped-by="vendor" >
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-one>
 
     </entity>
 </doctrine-mapping>

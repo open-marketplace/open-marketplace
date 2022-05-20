@@ -12,22 +12,28 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Menu;
 
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class VendorConversationMenuListener
 {
+    private TokenStorageInterface $tokenStorage;
+
+    public function __construct(TokenStorageInterface $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
+
     public function addConversationMenuItems(MenuBuilderEvent $event): void
     {
-        $menu = $event->getMenu();
+        if ($this->tokenStorage->getToken()->getUser()->getCustomer()->getVendor()) {
+            $menu = $event->getMenu();
 
-        $menu
-            ->addChild('dashboard', ['route' => 'app_vendor_dashboard'])
-            ->setLabel('mvm.ui.menu.dashboard')
-            ->setLabelAttribute('icon', 'home');
-
-        $menu
-            ->addChild('conversations', ['route' => 'mvm_vendor_conversation_index'])
-            ->setLabel('mvm.ui.menu.conversations')
-            ->setLabelAttribute('icon', 'inbox')
-        ;
+            $menu
+                ->addChild('conversations', ['route' => 'mvm_vendor_conversation_index']);
+            $menu
+                ->setLabel('mvm.ui.menu.conversations');
+            $menu
+                ->setLabelAttribute('icon', 'inbox');;
+        }
     }
 }

@@ -18,7 +18,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationIn
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -34,16 +33,13 @@ final class ConversationType extends AbstractType
 
     private VendorRepositoryInterface $vendorRepository;
 
-    private UserRepositoryInterface $userRepository;
 
     public function __construct(
         ActualUserResolverInterface $actualUserResolver,
         VendorRepositoryInterface   $vendorRepository,
-        UserRepositoryInterface     $userRepository
     ) {
         $this->actualUserResolver = $actualUserResolver;
         $this->vendorRepository = $vendorRepository;
-        $this->userRepository = $userRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -59,8 +55,7 @@ final class ConversationType extends AbstractType
                 'allow_add' => true,
             ])
             ->addEventListener(FormEvents::SUBMIT, [$this, 'onSubmit'])
-            ->addEventListener(FormEvents::POST_SET_DATA, [$this, 'postSetData'])
-            ;
+            ->addEventListener(FormEvents::POST_SET_DATA, [$this, 'postSetData']);
     }
 
     public function postSetData(FormEvent $event): void
@@ -70,11 +65,11 @@ final class ConversationType extends AbstractType
         if ($user instanceof AdminUserInterface) {
             $form = $event->getForm();
 
-            $form->add('users', ChoiceType::class, [
+            $form->add('vendorUser', ChoiceType::class, [
                 'choices' => [
                     'Vendors' => $this->vendorRepository->findAll(),
                 ],
-                'choice_label' => 'username',
+                'choice_label' => 'companyName',
                 'mapped' => false,
                 'label' => 'mvm.ui.form.conversation.users',
             ]);
@@ -88,14 +83,16 @@ final class ConversationType extends AbstractType
         /** @var ConversationInterface $conversation */
         $conversation = $event->getData();
 
-        if ($event->getForm()->has('users')) {
-            $conversation->setApplicant($event->getForm()->get('users')->getData());
+        $resolvedUser = $this->actualUserResolver->resolve();
+
+        if ($event->getForm()->has('vendorUser')) {
+            $conversation->setApplicant($event->getForm()->get('vendorUser')->getData());
+            $conversation->setAdminUser($resolvedUser);
 
             return;
         }
-
-        $resolvedUser = $this->actualUserResolver->resolve();
-        $conversation->setApplicant($resolvedUser);
+        $vendor = $resolvedUser->getCustomer()->getVendor();
+        $conversation->setApplicant($vendor);
     }
 
     public function configureOptions(OptionsResolver $resolver)

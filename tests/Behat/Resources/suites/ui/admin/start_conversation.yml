@@ -1,0 +1,8 @@
+default:
+  suites:
+    admin_start_conversation:
+      contexts:
+        - bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.admin.start_conversation
+        - Behat\MinkExtension\Context\MinkContext
+      filters:
+        tags: '@admin_start_conversation && @ui'

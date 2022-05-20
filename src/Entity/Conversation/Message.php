@@ -96,6 +96,9 @@ class Message implements MessageInterface
 
         foreach ($users as $user) {
             if(null !== $user) {
+                if ($user instanceof VendorInterface) {
+                    return $user->getCustomer()->getUser();
+                }
                 return $user;
             }
         }
@@ -106,15 +109,12 @@ class Message implements MessageInterface
      */
     public function setAuthor(UserInterface $user): void
     {
-        if ($user instanceof VendorInterface) {
-            $this->setVendorUser($user);
-            return;
-        } else if ($user instanceof AdminUserInterface) {
+        if ($user instanceof AdminUserInterface) {
             $this->setAdminUser($user);
             return;
         }
 
-        $this->setShopUser($user);
+        $this->setVendorUser($user->getCustomer()->getVendor());
     }
 
     public function getShopUser(): ?ShopUserInterface

@@ -2,21 +2,13 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="app.listener.admin.menu_builder" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\VendorMenuListener">
-            <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addVendorMenuItems" />
-        </service>
         <service id="mvm.listener.admin.menu_builder_conversation" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\AdminConversationMenuListener">
             <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addConversationMenuItems" />
         </service>
 
         <service id="mvm.listener.vendor.menu_builder_conversation" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\VendorConversationMenuListener">
-            <tag name="kernel.event_listener" event="app.menu.vendor.main" method="addConversationMenuItems" />
-        </service>
-
-        <service id="app.vendor.menu_builder.main" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\VendorMainMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="app.vendor.main" />
+            <argument type="service" id="security.token_storage" />
+            <tag name="kernel.event_listener" event="sylius.menu.shop.account" method="addConversationMenuItems" />
         </service>
     </services>
 </container>

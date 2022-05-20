@@ -5,6 +5,10 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" table="sylius_customer">
-        <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" inversed-by="customer" />
+        <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" inversed-by="customer">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-one>
     </entity>
 </doctrine-mapping>

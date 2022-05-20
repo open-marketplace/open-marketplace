@@ -26,7 +26,7 @@ interface ConversationInterface extends ResourceInterface
 
     public function getApplicant(): UserInterface;
 
-    public function setApplicant(UserInterface $user): void;
+    public function setApplicant(VendorInterface $vendor): void;
 
     public function getShopUser(): ?ShopUserInterface;
 

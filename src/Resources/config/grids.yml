@@ -1,3 +1,2 @@
 imports:
     - { resource: "grid/conversation.yml" }
-    - { resource: "grid/vendor_user.yml" }

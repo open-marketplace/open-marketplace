@@ -12,10 +12,10 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation;
 
 use ApiPlatform\Core\Api\UrlGeneratorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Controller\AbstractController;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\Message\Message\MessageFactoryInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\Message\MessageFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +41,10 @@ final class SendArchiveRequestAction extends AbstractController
 
     public function __invoke(int $id, Request $request): Response
     {
+        if (!$this->isAssetsUser())
+        {
+            return $this->notAssetsVendorUserRedirect();
+        }
         $redirect = $request->attributes->get('_sylius')['redirect'];
 
         /** @var MessageInterface $archiveRequestMessage */

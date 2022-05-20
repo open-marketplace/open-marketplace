@@ -8,3 +8,5 @@
 #
 #            filters:
 #                tags: "@greeting_customer"
+imports:
+  - suites/ui/admin/start_conversation.yml

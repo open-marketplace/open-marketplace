@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Conversation;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Controller\AbstractController;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,6 +45,11 @@ final class ConversationController extends AbstractController
 
     public function index(Request $request): Response
     {
+        if (!$this->isAssetsUser())
+        {
+            return $this->notAssetsVendorUserRedirect();
+        }
+
         $template = $request->attributes->get('_sylius')['template'];
 
         $actualUser = $this->actualUserResolver->resolve();

@@ -34,8 +34,10 @@ final class DefaultVendorUsernameORMListener
 
     private function processEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
-        /** @var User $user */
-        foreach ($entities as $user) {
+        foreach ($entities as $vendor) {
+
+            $user = (method_exists($vendor , "getCustomer"))? $vendor->getCustomer()->getUser(): $vendor;
+
             if (!$user instanceof VendorInterface) {
                 continue;
             }

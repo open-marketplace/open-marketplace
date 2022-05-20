@@ -8,8 +8,6 @@
             <argument type="service" id="app.actual_user_resolver" />
             <argument type="service" id="app.uploader.file_uploader" />
             <argument type="service" id="mvm.repository.conversation" />
-            <argument type="service" id="sylius.email_sender" />
-            <argument type="service" id="mvm.recipients_emails_collection_provider" />
         </service>
     </services>
 </container>

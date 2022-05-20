@@ -11,13 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\Email\RecipientsEmailsCollectionProviderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
@@ -29,22 +27,14 @@ final class AddMessageFacade implements AddMessageFacadeInterface
 
     private ConversationRepositoryInterface $conversationRepository;
 
-    private SenderInterface $mailSender;
-
-    private RecipientsEmailsCollectionProviderInterface $recipientsEmailsCollectionProvider;
-
     public function __construct(
         ActualUserResolverInterface $actualUserResolver,
         FileUploaderInterface $fileUploader,
-        ConversationRepositoryInterface $conversationRepository,
-        SenderInterface $mailSender,
-        RecipientsEmailsCollectionProviderInterface $recipientsEmailsCollectionProvider
+        ConversationRepositoryInterface $conversationRepository
     ) {
         $this->actualUserResolver = $actualUserResolver;
         $this->fileUploader = $fileUploader;
         $this->conversationRepository = $conversationRepository;
-        $this->mailSender = $mailSender;
-        $this->recipientsEmailsCollectionProvider = $recipientsEmailsCollectionProvider;
     }
 
     public function createWithConversation(
@@ -75,11 +65,5 @@ final class AddMessageFacade implements AddMessageFacadeInterface
 
         $conversation->addMessage($message);
         $this->conversationRepository->add($conversation);
-
-        $recipientsMailsCollection = $this
-            ->recipientsEmailsCollectionProvider
-            ->provideEmailsCollection($conversation);
-
-        $this->mailSender->send('new_conversation_message', $recipientsMailsCollection, ['user' => $currentUser, 'message' => $message]);
     }
 }
