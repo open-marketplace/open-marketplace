@@ -35,8 +35,7 @@ class VendorType extends AbstractResourceType
         string $dataClass,
         TokenStorageInterface $tokenStorage,
         array $validationGroups = []
-    )
-    {
+    ) {
         parent::__construct($dataClass, $validationGroups);
         $this->tokenStorage = $tokenStorage;
     }
@@ -51,14 +50,14 @@ class VendorType extends AbstractResourceType
                 'label' => 'bitbag_mvm.ui.companyName',
             ])
             ->add('taxIdentifier', TextType::class, [
-                'label' => 'bitbag_mvm.ui.tax_identifier'
+                'label' => 'bitbag_mvm.ui.tax_identifier',
             ])
-            ->add('phoneNumber', TextType::class,[
-                'label' => 'bitbag_mvm.ui.phone_number'
+            ->add('phoneNumber', TextType::class, [
+                'label' => 'bitbag_mvm.ui.phone_number',
             ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'bitbag_mvm.ui.company_address',
-                'constraints'=>[new Valid()]
+                'constraints' => [new Valid()],
             ])
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
                 $token = $this->tokenStorage->getToken();
