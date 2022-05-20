@@ -20,7 +20,7 @@ class AccountMenuListener
         $menu = $event->getMenu();
         $menu
             ->addChild('new', ['route' => 'vendor_register_form'])
-            ->setLabel('bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_dashboard')
+            ->setLabel('bitbag_mvm.formLabels.vendor_dashboard')
             ->setLabelAttribute('icon', 'star')
         ;
     }

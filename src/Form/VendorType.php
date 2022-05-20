@@ -25,6 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class VendorType extends AbstractResourceType
 {
@@ -51,20 +52,22 @@ class VendorType extends AbstractResourceType
             ])
             ->add('taxIdentifier', TextType::class)
             ->add('phoneNumber', TextType::class)
-            ->add('vendorAddress', VendorAddressType::class)
+            ->add('vendorAddress', VendorAddressType::class,[
+                'constraints'=>[new Valid()]
+            ])
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
                 $token = $this->tokenStorage->getToken();
                 if (null === $token) {
                     throw new TokenNotFoundException('No token found.');
                 }
 
-                /** @var ShopUserInterface|null $user */
-                $user = $token->getUser();
-                if (null === $user) {
-                    throw new UserNotFoundException('No user found.');
-                }
                 /** @var ShopUserInterface $user */
                 $user = $token->getUser();
+
+                if (!($user instanceof ShopUserInterface)) {
+                    throw new UserNotFoundException('No user found.');
+                }
+
                 /** @var CustomerInterface $customer */
                 $customer = $user->getCustomer();
                 $form = $event->getForm();

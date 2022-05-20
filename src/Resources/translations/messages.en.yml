@@ -1,7 +1,13 @@
-bitbag_sylius_multi_vendor_marketplace_plugin:
+bitbag_mvm:
   ui:
     vendor_dashboard: "vendor dashboard"
     organization_name: "Company Name"
     tax_identifier: "Tax Identifier"
+    not_blank: "This field cant be empty"
   formLabels:
-    atLeast: 
+    minimum: "This field have to be longer than"
+    maximum: 'This field cant be longer than'   
+    vendor_dashboard: "Vendor Dashboard"
+    organization_name: "Company Name"
+    tax_identifier: "Tax Identifier"
+    notBlank: "This field cant be empty"

@@ -3,13 +3,11 @@
 
     {{ form_start(form, {'action': path('vendor_register_form'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
    
-    {{ form_row(form.companyName) }}
+    {{ form_row(form.companyName, sylius_test_form_attribute('companyName')) }}
     {{ form_row(form.taxIdentifier) }}
     {{ form_row(form.phoneNumber) }}
     {{ form_row(form.vendorAddress) }}
-{#    {% if form.customer %}#}
-        
-{#    {% endif %}#}
+
     <div style="display: none"> 
         {{ form_row(form.customer) }}
     </div>

@@ -1,0 +1,9 @@
+validator:
+  message:    
+    organization_name: "Company Name"
+    tax_identifier: "Tax Identifier"
+    not_blank: "This field cant be empty"
+    minimum: "Required length: {{ limit }} characters."
+    maximum: 'This field cant be longer than {{ limit }}'
+    vendor_dashboard: "Vendor Dashboard"   
+    notBlank: "This field cant be empty"
