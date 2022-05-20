@@ -14,6 +14,17 @@
                     <value>VendorUserRegister</value>
                 </option>
             </constraint>
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="max">16</option>
+                <option name="minMessage">validator.message.minimum</option>
+                <option name="maxMessage">validator.message.maximum</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
         </property>
         <property name="companyName">
             <constraint name="NotBlank">

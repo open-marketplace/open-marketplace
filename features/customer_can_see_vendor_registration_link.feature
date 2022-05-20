@@ -1,3 +1,4 @@
+@customer_dashboard
 Feature: Link to vendor register form is visible on customer dashboard
   In order to create new vendor account
   As an customer

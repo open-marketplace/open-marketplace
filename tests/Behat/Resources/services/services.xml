@@ -5,7 +5,12 @@
         <service                
                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\CustomerDashboardContext"
                 id="tests.bit_bag.sylius_organization_plugin.behat.context.customer_dashboard_context"                
-        >           
+        >
+        </service>
+        <service
+                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\VendorRegisterContext"
+                id="tests.bit_bag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor_register_context"
+        >
         </service>
     </services>
 </container>

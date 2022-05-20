@@ -1,8 +1,8 @@
 default:
     suites:
-        customer_dashboard:
+        vendor_register:
             contexts:
-                - tests.bit_bag.sylius_organization_plugin.behat.context.customer_dashboard_context
+                - tests.bit_bag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor_register_context
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.admin_security
@@ -10,4 +10,4 @@ default:
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.ui.shop.account
             filters:
-                    tags: "@customer_dashboard"
+                    tags: "@vendor_register"
