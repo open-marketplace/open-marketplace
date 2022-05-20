@@ -4,7 +4,4 @@
     <imports>
         <import resource="services/**/*.xml" />
     </imports>
-    <services>
-
-    </services>
 </container>
