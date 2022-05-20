@@ -1,8 +1,6 @@
 bitbag_sylius_multi_vendor_marketplace_plugin:
   ui:
     product_listings: 'Product listings'
-    new_product_listing: 'New product listing'
-    edit_product_listing: 'Edit product listing'
     marketplace: 'Marketplace'
     publishedAt: 'Published at'
     status: 'Status'
