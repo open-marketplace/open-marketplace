@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListingRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,7 @@ final class ShowAction
 
     public function __invoke(Request $request): Response
     {
+        /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
         return new Response(

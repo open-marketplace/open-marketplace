@@ -11,10 +11,10 @@ sylius_grid:
       fields:
         name:
           type: string
-          label: sylius.ui.name
+          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.name
         publishedAt:
           type: datetime
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.publishedAt
+          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at
         status:
           type: string
           label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
