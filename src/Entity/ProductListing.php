@@ -46,7 +46,7 @@ class ProductListing implements ProductListingInterface
         $this->publishedAt = $publishedAt;
     }
 
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }

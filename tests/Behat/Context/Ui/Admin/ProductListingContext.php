@@ -18,22 +18,16 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEmpty;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
+
     private AdminUserExampleFactory $adminUserExampleFactory;
 
-    /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
-     */
     public function __construct(
         EntityManagerInterface $entityManager,
         AdminUserExampleFactory $adminUserExampleFactory
@@ -62,7 +56,6 @@ final class ProductListingContext extends RawMinkContext implements Context
         $admin->setEmail('admin@email.com');
         $this->entityManager->persist($admin);
         $this->entityManager->flush();
-
     }
 
     /**
@@ -76,16 +69,15 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->getPage()->pressButton('Login');
     }
 
-
     /**
      * @Given there are :count product listings
      */
     public function thereAreProductListings($count)
     {
-        for ($i=0; $i<$count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             $productListing = new ProductListing();
-            $productListing->setName('product listing '. $i);
-            $productListing->setStatus(ProductListingInterface::CREATED);
+            $productListing->setName('product listing ' . $i);
+            $productListing->setStatus(ProductListingInterface::STATUS_CREATED);
             $this->entityManager->persist($productListing);
         }
         $this->entityManager->flush();

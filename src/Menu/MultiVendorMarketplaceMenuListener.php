@@ -19,12 +19,12 @@ final class MultiVendorMarketplaceMenuListener
     {
         $menu = $menuBuilderEvent->getMenu();
 
-        $cmsRootMenuItem =
+        $mvmRootMenuItem =
             $menu
                 ->addChild('marketplace')
                 ->setLabel('bitbag_sylius_multi_vendor_marketplace_plugin.ui.marketplace');
 
-        $cmsRootMenuItem
+        $mvmRootMenuItem
             ->addChild('multi_vendor_marketplace_product_listings', [
                 'route' => 'bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_index',
             ])
