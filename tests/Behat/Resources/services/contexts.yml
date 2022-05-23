@@ -1,0 +1,2 @@
+imports:
+    - { resource: "contexts/admin/ui.yml" }

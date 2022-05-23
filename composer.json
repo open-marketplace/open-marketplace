@@ -50,7 +50,7 @@
     "autoload": {
         "psr-4": {
             "BitBag\\SyliusMultiVendorMarketplacePlugin\\": "src/",
-            "Tests\\BitBag\\SyliusMultiVendorMarketplacePlugin\\": "tests/"
+            "Tests\\BitBag\\SyliusMultiVendorMarketplacePlugin\\": ["tests/Application/src", "tests/"]
         }
     },
     "autoload-dev": {
