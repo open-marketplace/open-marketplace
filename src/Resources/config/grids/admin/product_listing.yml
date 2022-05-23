@@ -1,7 +1,7 @@
 sylius_grid:
   templates:
     action:
-      details: 'BitBag\SyliusMultiVendorMarketplacePlugin\Resources'
+      details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
   grids:
     bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing:
       driver:

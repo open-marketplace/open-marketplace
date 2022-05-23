@@ -7,3 +7,12 @@ app_admin_product_listing:
     redirect: index
     grid: bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing
   type: sylius.resource
+
+bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_show:
+  path: /product-listings/{id}
+  defaults:
+    _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.admin.product_listing.show_action
+    _sylius:
+      section: admin
+      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig'
+      permission: true
