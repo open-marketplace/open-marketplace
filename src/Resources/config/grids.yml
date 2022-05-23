@@ -1,7 +1,2 @@
 imports:
   - { resource: 'grids/**/*.yml' }
-
-#sylius_grid:
-#  templates:
-#    action:
-#      details: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig"
