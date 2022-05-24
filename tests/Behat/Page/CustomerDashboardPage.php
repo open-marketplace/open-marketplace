@@ -19,7 +19,7 @@ class CustomerDashboardPage extends SymfonyPage implements SymfonyPageInterface
 {
     public function getRouteName(): string
     {
-        return 'vendor_register_form';
+        return 'sylius_shop_account_dashboard';
     }
     
     public function itemWithValueExistsInsideSidebar($value): bool

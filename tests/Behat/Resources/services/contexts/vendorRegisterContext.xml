@@ -6,6 +6,7 @@
                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\VendorRegisterContext"
                 id="tests.bit_bag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor_register_context"
         >
+            <argument type="service" id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.vendor_register_page" />
         </service>
     </services>
 </container>

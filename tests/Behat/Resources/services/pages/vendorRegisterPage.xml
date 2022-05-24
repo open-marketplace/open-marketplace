@@ -3,10 +3,11 @@
     <services>
         <defaults public="true" />
         <service
-                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\CustomerDashboardContext"
-                id="tests.bit_bag.sylius_organization_plugin.behat.context.customer_dashboard_context"
+                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\VendorRegisterPage"
+                id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.vendor_register_page"
+                parent="sylius.behat.symfony_page"
         >
-            <argument type="service" id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.customer_dashboard_page" />           
+
         </service>
     </services>
 </container>

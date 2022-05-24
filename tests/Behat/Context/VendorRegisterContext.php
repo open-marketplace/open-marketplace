@@ -13,12 +13,19 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\CustomerDashboardPage;
+use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\VendorRegisterPage;
 use function PHPUnit\Framework\assertEquals;
 
 class VendorRegisterContext extends MinkContext implements Context
 {
 
+    private VendorRegisterPage $vendorRegisterPage;
+
+    public function __construct(VendorRegisterPage $vendorRegisterPage)
+    {
+
+        $this->vendorRegisterPage = $vendorRegisterPage;
+    }
     /**
      * @Then I should see :arg1 :arg2 times
      */
@@ -27,7 +34,8 @@ class VendorRegisterContext extends MinkContext implements Context
 //        $this->dashboardPage->open();
         $page = $this->getSession()->getPage();
         $validationMessages = $page->findAll('css', '.sylius-validation-error');
-        assertEquals(7, count($validationMessages));        
+        $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount();
+        assertEquals(7, $validationMessageCount);        
     }
     
 }
