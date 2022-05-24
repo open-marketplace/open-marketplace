@@ -29,11 +29,9 @@ final class VendorConversationMenuListener
             $menu = $event->getMenu();
 
             $menu
-                ->addChild('conversations', ['route' => 'mvm_vendor_conversation_index']);
-            $menu
-                ->setLabel('mvm.ui.menu.conversations');
-            $menu
-                ->setLabelAttribute('icon', 'inbox');;
+                ->addChild('conversations', ['route' => 'mvm_vendor_conversation_index'])
+                ->setLabel('mvm.ui.menu.conversations')
+                ->setLabelAttribute('icon', 'inbox');
         }
     }
 }
