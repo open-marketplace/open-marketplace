@@ -27,15 +27,15 @@ class VendorRegisterContext extends MinkContext implements Context
         $this->vendorRegisterPage = $vendorRegisterPage;
     }
     /**
-     * @Then I should see :arg1 :arg2 times
+     * @Then I should see :itemCLass :times times
      */
-    public function iShouldSeeTimes($arg1, $arg2)
+    public function iShouldSeeTimes($itemCLass, $times)
     {  
 //        $this->dashboardPage->open();
         $page = $this->getSession()->getPage();
-        $validationMessages = $page->findAll('css', '.sylius-validation-error');
-        $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount();
-        assertEquals($arg2, $validationMessageCount);        
+//        $validationMessages = $page->findAll('css', ".$arg1");
+        $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount($itemCLass);
+        assertEquals($times, $validationMessageCount);        
     }
     
 }

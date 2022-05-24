@@ -11,7 +11,7 @@ Feature: Registration form registers vendor
   Scenario: Attempting to submit empty form
     When I am on "/en_US/vendor/register"
     And I press "Create an account"
-    Then I should see "This field cant be empty" "6" times
+    Then I should see "sylius-validation-error" "6" times
     
   Scenario: Fill form with data that fail validation
     When I am on "/en_US/vendor/register"
@@ -22,7 +22,7 @@ Feature: Registration form registers vendor
     And I fill in "vendor_vendorAddress_street" with "et"
     And I fill in "vendor_vendorAddress_postalCode" with "de"
     And I press "Create an account"
-    Then I should see "Required length" "6" times
+    Then I should see "sylius-validation-error" "6" times
 
   Scenario: Correct completion of the form
     When I am on "/en_US/vendor/register"

@@ -5,6 +5,6 @@
         <import resource="contexts/*.xml"/>
     </imports>
     <services>
-        <defaults public="true" />
+<!--        <defaults public="true" />-->
     </services>
 </container>
