@@ -1,4 +1,4 @@
-vendor_reg:
+vendor_registration:
   resource: "routes/vendor_register_form.yml"
   prefix: /{_locale}
   requirements:

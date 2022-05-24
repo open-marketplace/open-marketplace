@@ -13,8 +13,22 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
+use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\CustomerDashboardPage;
+use function PHPUnit\Framework\assertTrue;
 
 class CustomerDashboardContext extends MinkContext implements Context
 {
+    private CustomerDashboardPage $dashboardPage;
 
+    public function __construct(CustomerDashboardPage $dashboardPage)
+    {
+        $this->dashboardPage = $dashboardPage;
+    }
+    /**
+     * @Then I should see :arg1 inside sidebar
+     */
+    public function iShouldSeeInsideSidebar($arg1)
+    {
+        assertTrue($this->dashboardPage->itemWithValueExistsInsideSidebar( $arg1), "cannot find $arg1 inside sidebar");
+    }
 }

@@ -10,4 +10,4 @@ Feature: Link to vendor register form is visible on customer dashboard
 
   Scenario: Seeing vendor form link
     When I am on "/en_US/account/dashboard"
-    Then I should see "Vendor Dashboard"
+    Then I should see "Vendor dashboard" inside sidebar

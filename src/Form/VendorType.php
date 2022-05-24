@@ -47,7 +47,7 @@ class VendorType extends AbstractResourceType
                 'class' => Customer::class,
             ])
             ->add('companyName', TextType::class, [
-                'label' => 'bitbag_mvm.ui.companyName',
+                'label' => 'bitbag_mvm.ui.company_name',
             ])
             ->add('taxIdentifier', TextType::class, [
                 'label' => 'bitbag_mvm.ui.tax_identifier',

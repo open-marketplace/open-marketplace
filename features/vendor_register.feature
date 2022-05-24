@@ -8,12 +8,12 @@ Feature: Registration form registers vendor
     Given the store operates on a single channel in "United States"
     And I am a logged in customer
 
-  Scenario: attempt to submit empty form
+  Scenario: Attempting to submit empty form
     When I am on "/en_US/vendor/register"
     And I press "Create an account"
     Then I should see "This field cant be empty" "7" times
     
-  Scenario: fill form with data that fail validation
+  Scenario: Fill form with data that fail validation
     When I am on "/en_US/vendor/register"
     And I fill in "vendor_companyName" with "te"
     And I fill in "vendor_taxIdentifier" with "56"
@@ -25,7 +25,7 @@ Feature: Registration form registers vendor
     And I press "Create an account"
     Then I should see "Required length" "7" times
 
-  Scenario: correct completion of the form
+  Scenario: Correct completion of the form
     When I am on "/en_US/vendor/register"
     And I fill in "vendor_companyName" with "testCompanyName"
     And I fill in "vendor_taxIdentifier" with "6546546456"
