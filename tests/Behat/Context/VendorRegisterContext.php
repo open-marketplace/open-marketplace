@@ -35,7 +35,7 @@ class VendorRegisterContext extends MinkContext implements Context
         $page = $this->getSession()->getPage();
         $validationMessages = $page->findAll('css', '.sylius-validation-error');
         $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount();
-        assertEquals(7, $validationMessageCount);        
+        assertEquals($arg2, $validationMessageCount);        
     }
     
 }

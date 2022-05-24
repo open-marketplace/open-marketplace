@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-
-
 use Sylius\Component\Addressing\Model\Country;
 
 interface VendorAddressInterface
