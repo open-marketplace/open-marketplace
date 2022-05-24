@@ -11,11 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
-use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+
 
 class VendorController extends ResourceController
 {
@@ -23,9 +24,7 @@ class VendorController extends ResourceController
     {
         try {
             return parent::createAction($request);
-        } catch (TokenNotFoundException $exception) {
-            return $this->redirectToRoute('sylius_shop_login');
-        } catch (UserNotFoundException $exception) {
+        } catch (UserNotFoundException|TokenNotFoundException $exception) {
             return $this->redirectToRoute('sylius_shop_login');
         }
     }
