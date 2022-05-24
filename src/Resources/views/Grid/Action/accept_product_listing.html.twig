@@ -1,0 +1,3 @@
+{% set path =  path('bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_accept', { 'id': productListing.id }) %}
+
+<a class="ui button green" href={{ path }} onclick="return confirm('{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.confirm' | trans }}')"> <i class="icon check"></i>{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.accept' | trans }}</a>

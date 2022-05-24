@@ -15,4 +15,8 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ProductListingRepository extends EntityRepository implements ProductListingRepositoryInterface
 {
+    public function flush()
+    {
+        $this->_em->flush();
+    }
 }

@@ -16,3 +16,19 @@ bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_show:
       section: admin
       template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig'
       permission: true
+
+bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_accept:
+  path: /product-listings/{id}/accept
+  defaults:
+    _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.admin.product_listing.accept_action
+    _sylius:
+      section: admin
+      permission: true
+
+bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_reject:
+  path: /product-listings/{id}/reject
+  defaults:
+    _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.admin.product_listing.reject_action
+    _sylius:
+      section: admin
+      permission: true

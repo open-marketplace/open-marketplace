@@ -6,3 +6,6 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     status: 'Status'
     details: 'Details'
     name: 'Name'
+    accept: 'Accept'
+    reject: 'Reject'
+    confirm: 'Are you sure?'

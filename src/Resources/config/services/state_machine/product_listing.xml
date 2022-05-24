@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing" public="true"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductListingCallbacks">
+            <argument key="$productListingRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_listing" />
+        </service>
+    </services>
+</container>
