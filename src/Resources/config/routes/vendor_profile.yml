@@ -5,7 +5,3 @@ vendor_profile:
         _controller: BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController:showAction
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_profile.html.twig"
-            form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType
-            event: register
-            redirect:
-                route: sylius_shop_account_dashboard        
