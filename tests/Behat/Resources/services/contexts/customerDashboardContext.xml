@@ -4,7 +4,7 @@
         <defaults public="true" />
         <service
                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\CustomerDashboardContext"
-                id="tests.bit_bag.sylius_organization_plugin.behat.context.customer_dashboard_context"
+                id="tests.bitbag.sylius_organization_plugin.behat.context.customer_dashboard_context"
         >
             <argument type="service" id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.customer_dashboard_page" />           
         </service>

@@ -13,7 +13,7 @@
     <services>
         <defaults autowire="true" autoconfigure="false" />
         <service
-                id="bit_bag.sylius_multi_vendor_marketplace_plugin.form.vendor_type"
+                id="bitbag.sylius_multi_vendor_marketplace_plugin.form.vendor_type"
                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType"
         >
             <argument>%bitbag_multi_vendor_marketplace.model.vendor.class%</argument>
