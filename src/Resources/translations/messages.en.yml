@@ -1,13 +1,16 @@
 bitbag_sylius_mvm_plugin:
     ui:
-        marketplace: Marketplace
-        vendors: Vendors
-        id: ID
         company_name: Company name
+        customer: Customer
+        details: Details
+        id: ID
+        marketplace: Marketplace
+        phone_number: Phone number
+        status: Status
         tax_id: Tax ID
-        state: State
-
-app:
-    ui:
+        unverified: Unverified
+        vendor_address: Vendor address
         vendors: Vendors
-        new_vendor: New vendor
+        verified: Verified
+        verify: Verify
+

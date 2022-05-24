@@ -1,7 +1,7 @@
 winzou_state_machine:
     bitbag_sylius_mvm_plugin_vendor:
-        class: "%app.model.vendor.class%"
-        property_path: state
+        class: "%bitbag_sylius_mvm_plugin.model.vendor.class%"
+        property_path: status
         graph: bitbag_sylius_mvm_plugin_vendor
         state_machine_class: "%sylius.state_machine.class%"
         states:
