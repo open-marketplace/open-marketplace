@@ -6,3 +6,10 @@ services:
         arguments:
             - "@doctrine.orm.default_entity_manager"
             - "@sylius.fixture.example_factory.admin_user"
+
+    bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_verification:
+        class: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\VendorVerificationContext
+        arguments:
+            - "@sylius.fixture.example_factory.admin_user"
+            - "@doctrine.orm.default_entity_manager"
+

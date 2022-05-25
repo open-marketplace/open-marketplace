@@ -1,0 +1,8 @@
+default:
+    suites:
+        ui_verifying_vendors:
+            contexts:
+                - bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_verification
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@verifying_vendors && @ui"
