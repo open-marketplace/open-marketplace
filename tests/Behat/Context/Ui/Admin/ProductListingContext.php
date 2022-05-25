@@ -80,6 +80,8 @@ final class ProductListingContext extends RawMinkContext implements Context
             $productListing->setStatus(ProductListingInterface::STATUS_UNDER_VERIFICATION);
             $productListing->setCode('code' . $i);
             $productListing->setVersionNumber(0);
+            $productListing->setLocale('en_US');
+            $productListing->setSlug('product-listing-' . $i);
             $this->entityManager->persist($productListing);
         }
         $this->entityManager->flush();

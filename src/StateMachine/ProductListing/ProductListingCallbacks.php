@@ -70,14 +70,8 @@ final class ProductListingCallbacks
     {
         $now = new \DateTime();
 
-        // Temporary solution
-        // TODO: Develop functionality for proper locale setting
-        $product->setCurrentLocale('en_US');
-
-        // Temporary solution
-        // TODO: Develop functionality for proper slug setting
-        $product->setSlug($productListing->getCode());
-
+        $product->setCurrentLocale($productListing->getLocale());
+        $product->setSlug($productListing->getSlug());
         $product->setName($productListing->getName());
         $product->setEnabled(true);
         $product->setCode($productListing->getCode());

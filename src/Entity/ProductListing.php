@@ -31,6 +31,10 @@ class ProductListing implements ProductListingInterface
 
     protected ?string $code;
 
+    protected ?string $locale;
+
+    protected ?string $slug;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,5 +108,25 @@ class ProductListing implements ProductListingInterface
     public function setCode(?string $code): void
     {
         $this->code = $code;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): void
+    {
+        $this->locale = $locale;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
     }
 }

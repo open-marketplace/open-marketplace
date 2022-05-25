@@ -17,7 +17,9 @@
         <many-to-one field="product" target-entity="Sylius\Component\Product\Model\ProductInterface">
             <join-column name="product_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>
-        <field name="code" column="code" type="string" length="255" unique="false" nullable="false" />
+        <field name="code" column="code" type="string" unique="false" nullable="false" />
+        <field name="locale" column="locale" type="string" unique="false" nullable="false" />
+        <field name="slug" column="slug" type="string" unique="false" nullable="false" />
     </entity>
 
 </doctrine-mapping>

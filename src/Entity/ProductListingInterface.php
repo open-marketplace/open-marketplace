@@ -51,4 +51,12 @@ interface ProductListingInterface extends ResourceInterface
     public function getCode(): ?string;
 
     public function setCode(?string $code): void;
+
+    public function getLocale(): ?string;
+
+    public function setLocale(?string $locale): void;
+
+    public function getSlug(): ?string;
+
+    public function setSlug(?string $slug): void;
 }
