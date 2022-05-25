@@ -1,6 +1,7 @@
 bitbag_mvm:
   ui:
-    vendor_dashboard: "Vendor dashboard"    
+    vendor_dashboard: "Vendor dashboard"
+    vendor_profile: "Profile"
     tax_identifier: "Tax Identifier"
     not_blank: "This field cannnot be empty"
     company_name: "Company name"

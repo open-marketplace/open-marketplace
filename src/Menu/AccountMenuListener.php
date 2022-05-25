@@ -23,5 +23,10 @@ class AccountMenuListener
             ->setLabel('bitbag_mvm.ui.vendor_dashboard')
             ->setLabelAttribute('icon', 'star')
         ;
+        $menu
+            ->addChild('newes', ['route' => 'vendor_register_form'])
+            ->setLabel('bitbag_mvm.ui.vendor_profile')
+            ->setLabelAttribute('icon', 'pencil')
+        ;
     }
 }
