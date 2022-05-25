@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use Sylius\Component\Product\Model\ProductInterface;
+
 class ProductListing implements ProductListingInterface
 {
     protected ?int $id;
@@ -20,6 +22,14 @@ class ProductListing implements ProductListingInterface
     protected ?\DateTimeInterface $publishedAt;
 
     protected ?string $status;
+
+    protected ?\DateTimeInterface $verifiedAt;
+
+    protected ?int $versionNumber;
+
+    protected ?ProductInterface $product;
+
+    protected ?string $code;
 
     public function getId(): ?int
     {
@@ -54,5 +64,45 @@ class ProductListing implements ProductListingInterface
     public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+
+    public function getVerifiedAt(): ?\DateTimeInterface
+    {
+        return $this->verifiedAt;
+    }
+
+    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void
+    {
+        $this->verifiedAt = $verifiedAt;
+    }
+
+    public function getVersionNumber(): ?int
+    {
+        return $this->versionNumber;
+    }
+
+    public function setVersionNumber(?int $versionNumber): void
+    {
+        $this->versionNumber = $versionNumber;
+    }
+
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?ProductInterface $product): void
+    {
+        $this->product = $product;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(?string $code): void
+    {
+        $this->code = $code;
     }
 }
