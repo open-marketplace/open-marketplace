@@ -16,8 +16,6 @@
                 <cascade-persist/>
             </cascade>
         </one-to-one>
-        <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" inversed-by="vendor">
-            <join-column name="customer_id" referenced-column-name="id" />
-        </one-to-one>
+        <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" />    
     </entity>
 </doctrine-mapping>

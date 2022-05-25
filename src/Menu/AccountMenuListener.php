@@ -24,7 +24,7 @@ class AccountMenuListener
             ->setLabelAttribute('icon', 'star')
         ;
         $menu
-            ->addChild('newes', ['route' => 'vendor_register_form'])
+            ->addChild('newes', ['route' => 'vendor_profile'])
             ->setLabel('bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_profile')
             ->setLabelAttribute('icon', 'pencil')
         ;
