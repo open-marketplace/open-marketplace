@@ -1,6 +1,10 @@
-bitbag_mvm:
+bitbag_sylius_multi_vendor_marketplace_plugin:
   ui:
-    vendor_dashboard: "Vendor dashboard"    
+    product_listings: 'Product listings'
+    marketplace: 'Marketplace'
+    publishedAt: 'Published at'
+    status: 'Status'
+    vendor_dashboard: "Vendor dashboard"
     tax_identifier: "Tax Identifier"
     not_blank: "This field cannnot be empty"
     company_name: "Company name"
