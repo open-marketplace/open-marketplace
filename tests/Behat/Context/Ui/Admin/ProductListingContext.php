@@ -77,7 +77,9 @@ final class ProductListingContext extends RawMinkContext implements Context
         for ($i = 0; $i < $count; ++$i) {
             $productListing = new ProductListing();
             $productListing->setName('product listing ' . $i);
-            $productListing->setStatus(ProductListingInterface::STATUS_CREATED);
+            $productListing->setStatus(ProductListingInterface::STATUS_UNDER_VERIFICATION);
+            $productListing->setCode('code' . $i);
+            $productListing->setVersionNumber(0);
             $this->entityManager->persist($productListing);
         }
         $this->entityManager->flush();
