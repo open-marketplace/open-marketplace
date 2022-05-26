@@ -14,5 +14,6 @@
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" />
         <one-to-one field="customer" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" mapped-by="vendor" />
         <field name="status" column="status" type="string" />
+        <field name="blocked" column="blocked" type="string" />
     </entity>
 </doctrine-mapping>

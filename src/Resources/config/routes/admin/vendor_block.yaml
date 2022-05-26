@@ -1,11 +1,12 @@
-bitbag_sylius_mvm_plugin_admin_vendor_verify:
-    path: /vendors/{id}/verify
+bitbag_sylius_mvm_plugin_admin_vendor_block:
+    path: /vendors/{id}/block
     methods: [PUT]
     defaults:
         _controller: bitbag_sylius_mvm_plugin.controller.vendor:applyStateMachineTransitionAction
         _sylius:
             state_machine:
-                graph: bitbag_sylius_mvm_plugin_vendor
-                transition: verify
+                graph: bitbag_sylius_mvm_plugin_vendor_blocking
+                transition: block
             redirect: bitbag_sylius_mvm_plugin_admin_vendor_index
-            flash: bitbag_sylius_mvm_plugin.ui.vendor_verified
+            flash: bitbag_sylius_mvm_plugin.ui.vendor_blocked
+

@@ -1,3 +1,5 @@
 bitbag_sylius_mvm_plugin:
     ui:
-        vendor_verified: 'Vendor has been successfully verified'
+        vendor_blocked: 'Vendor has been successfully blocked.'
+        vendor_unblocked: 'Vendor has been successfully unblocked.'
+        vendor_verified: 'Vendor has been successfully verified.'

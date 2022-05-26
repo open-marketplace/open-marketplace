@@ -1,5 +1,6 @@
 bitbag_sylius_mvm_plugin:
     ui:
+        block: Block
         company_name: Company name
         customer: Customer
         details: Details
@@ -8,9 +9,9 @@ bitbag_sylius_mvm_plugin:
         phone_number: Phone number
         status: Status
         tax_id: Tax ID
+        unblock: Unblock
         unverified: Unverified
         vendor_address: Vendor address
         vendors: Vendors
         verified: Verified
         verify: Verify
-

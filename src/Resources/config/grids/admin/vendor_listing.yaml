@@ -1,4 +1,7 @@
 sylius_grid:
+    templates:
+        action:
+            apply_transition_blocking: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/applyTransitionBlocking.html.twig"
     grids:
         bitbag_sylius_mvm_plugin_vendor:
             driver:
@@ -38,6 +41,35 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                    block:
+                        type: apply_transition_blocking
+                        label: bitbag_sylius_mvm_plugin.ui.block
+                        icon: lock
+                        options:
+                            link:
+                                route: bitbag_sylius_mvm_plugin_admin_vendor_block
+                                parameters:
+                                    id: resource.id
+                            transition: block
+                            graph: bitbag_sylius_mvm_plugin_vendor_blocking
+                    unblock:
+                        type: apply_transition_blocking
+                        label: bitbag_sylius_mvm_plugin.ui.unblock
+                        icon: lock open
+                        options:
+                            link:
+                                route: bitbag_sylius_mvm_plugin_admin_vendor_unblock
+                                parameters:
+                                    id: resource.id
+                            transition: unblock
+                            graph: bitbag_sylius_mvm_plugin_vendor_blocking
+#                    exampleAction:
+#                        type: exampleAction
+#                        label: exampleLabel
+#                        options:
+#                            link:
+#                                route: bitbag_sylius_mvm_plugin_admin_vendor_show
+#                                parameters: resource.id
 
 #                    verify:
 #                        type: apply_transition
