@@ -14,10 +14,15 @@ vendor_profile_update:
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$  
 vendor_register_form:
-  resource: "routes/vendor_register_form.yml"
-  prefix: /{_locale}
-  requirements:
-    _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    resource: "routes/vendor_register_form.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+vendor_profile_update_action:
+    resource: "routes/vendor_profile_update_action.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$       
 app_admin:
-  resource: 'routing/admin.yml'
-  prefix: /admin
+    resource: 'routing/admin.yml'
+    prefix: /admin

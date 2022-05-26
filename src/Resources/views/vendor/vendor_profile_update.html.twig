@@ -16,7 +16,7 @@
 
 {% block subcontent %}
     <div class="ui segment">
-        {{ form_start(form, {'action': path('vendor_profile_update'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'action': path('vendor_profile_update_action'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         <h1 class="ui dividing header">
             {{ 'sylius.ui.your_profile'|trans }}
             <div class="sub header">{{ 'sylius.ui.edit_your_personal_information'|trans }}</div>
@@ -32,9 +32,9 @@
         {{ form_row(form.vendorAddress) }}
 
         {{ sylius_template_event('sylius.shop.account.profile.update.form', {'vendor': vendor, 'form': form}) }}
-        <div style="display: none">
-            {{ form_row(form.customer) }}
-        </div>
+{#        <div style="display: none">#}
+{#            {{ form_row(form.customer) }}#}
+{#        </div>#}
         <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}

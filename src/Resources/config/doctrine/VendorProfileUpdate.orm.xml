@@ -16,6 +16,12 @@
                 <cascade-persist/>
             </cascade>
         </one-to-one>
-        <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" />    
+        <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" >
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-one>
+        <field name="token" column="token" type="text" />
+        
     </entity>
 </doctrine-mapping>

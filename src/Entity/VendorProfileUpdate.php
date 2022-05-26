@@ -24,6 +24,8 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
     private ?string $phoneNumber;
 
     private ?VendorAddress $vendorAddress;
+    
+    private ?string $token;
 
     public function getId(): int
     {
@@ -84,5 +86,16 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
     {
         $this->vendorAddress = $vendorAddress;
     }
+   
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+   
+    public function setToken(?string $token): void
+    {
+        $this->token = $token;
+    }
+    
     
 }

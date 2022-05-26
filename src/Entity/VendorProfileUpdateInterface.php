@@ -34,4 +34,8 @@ interface VendorProfileUpdateInterface
     public function getVendorAddress(): ?VendorAddress;
 
     public function setVendorAddress(?VendorAddress $vendorAddress): void;
+
+    public function getToken(): ?string;
+
+    public function setToken(?string $token): void;
 }
