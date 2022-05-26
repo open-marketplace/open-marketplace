@@ -1,0 +1,8 @@
+sylius_mailer:    
+    sender:
+        name: vendor profile update
+        address: no-reply@movie-database-example.com
+    emails:
+        vendor_profile_update:
+            subject: Vendor profile update
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/vendor/Email/vendor_profile_update.html.twig"
