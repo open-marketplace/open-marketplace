@@ -7,7 +7,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListingRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 
 final class ProductListingCallbacks
@@ -15,14 +15,17 @@ final class ProductListingCallbacks
     protected ProductListingRepositoryInterface $productListingRepository;
 
     private EntityManagerInterface $entityManager;
+    private ProductFactoryInterface $productFactory;
 
 
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        ProductFactoryInterface $productFactory
     ) {
         $this->productListingRepository = $productListingRepository;
         $this->entityManager = $entityManager;
+        $this->productFactory = $productFactory;
     }
 
     public function sendToVerify(ProductListingInterface $productListing)
@@ -52,7 +55,8 @@ final class ProductListingCallbacks
 
     private function createProduct(ProductListingInterface $productListing)
     {
-        $product = new Product();
+        /** @var ProductInterface $product */
+        $product = $this->productFactory->createNew();
         $product = $this->setProductFields($product, $productListing);
 
         $productListing->setProduct($product);
