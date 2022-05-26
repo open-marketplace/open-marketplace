@@ -23,3 +23,29 @@ Feature: Listing product listings
     And I should see 1 product listing
     When I follow "Details"
     Then I should see url "#\/admin\/product-listings\/(\d+)#"
+
+  @ui
+  Scenario: Accept listing product
+    Given there is 1 product listing
+    And I am on "/admin"
+    And I follow "Product listings"
+    And I should see 1 product listing
+    And I should see product's listing status "under_verification"
+    And I follow "Details"
+    And I should see url "#\/admin\/product-listings\/(\d+)#"
+    And I click "Accept" button
+    Then I should see url "#\/admin\/product-listings\/$#"
+    And I should see product's listing status "verified"
+
+  @ui
+  Scenario: Reject listing product
+    Given there is 1 product listing
+    And I am on "/admin"
+    And I follow "Product listings"
+    And I should see 1 product listing
+    And I should see product's listing status "under_verification"
+    And I follow "Details"
+    And I should see url "#\/admin\/product-listings\/(\d+)#"
+    And I click "Reject" button
+    Then I should see url "#\/admin\/product-listings\/$#"
+    And I should see product's listing status "rejected"
