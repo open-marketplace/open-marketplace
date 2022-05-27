@@ -4,7 +4,4 @@
         <import resource="pages/*.xml"/>
         <import resource="contexts/*.xml"/>
     </imports>
-    <services>
-<!--        <defaults public="true" />-->
-    </services>
 </container>

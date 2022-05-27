@@ -1,5 +1,5 @@
 @customer_dashboard
-Feature: Link to vendor register form is visible on customer dashboard
+Feature: Customer can see vendor registration link
   In order to create a new vendor account
   As a customer
   I want to see vendor registration link
