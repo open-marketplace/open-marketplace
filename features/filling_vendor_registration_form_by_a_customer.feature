@@ -33,4 +33,4 @@ Feature: Filling vendor registration form by a customer
     And I fill in "vendor_vendorAddress_street" with "test_street"
     And I fill in "vendor_vendorAddress_postalCode" with "test_postalCode"
     And I press "Become a Vendor"    
-    Then I should see "Success"
+    Then I should see "Thank you for filling the Vendor registration form. Your request now will be reviewed by our administrators"
