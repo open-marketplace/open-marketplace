@@ -17,15 +17,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
-
-class VendorController extends ResourceController
+final class VendorController extends ResourceController
 {
     public function createAction(Request $request): Response
     {
         try {
             return parent::createAction($request);
-        } catch (UserNotFoundException|TokenNotFoundException $exception) {
+        } catch (UserNotFoundException$exception) {
             return $this->redirectToRoute('sylius_shop_login');
-        }
+        } catch (TokenNotFoundException $exception){
+            return $this->redirectToRoute('sylius_shop_login');
+        }        
     }
 }

@@ -5,9 +5,6 @@ default:
                 - tests.bitbag.sylius_organization_plugin.behat.context.customer_dashboard_context
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.hook.doctrine_orm
-#                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
-#                - sylius.behat.context.setup.locale
-#                - sylius.behat.context.ui.shop.account
             filters:
                     tags: "@customer_dashboard"

@@ -18,6 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -27,7 +28,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Validator\Constraints\Valid;
 
-class VendorType extends AbstractResourceType
+final class VendorType extends AbstractResourceType
 {
     private TokenStorageInterface $tokenStorage;
 
@@ -52,7 +53,7 @@ class VendorType extends AbstractResourceType
             ->add('taxIdentifier', TextType::class, [
                 'label' => 'bitbag_mvm.ui.tax_identifier',
             ])
-            ->add('phoneNumber', TextType::class, [
+            ->add('phoneNumber', TelType::class, [
                 'label' => 'bitbag_mvm.ui.phone_number',
             ])
             ->add('vendorAddress', VendorAddressType::class, [
