@@ -1,15 +1,13 @@
 {% extends '@SyliusCore/Email/layout.html.twig' %}
 
 {% block subject %}
-{#    A new movie {{ movie.title }} has been submitted#}
+   
 {% endblock %}
 
 {% block body %}
-    Hello Movie Database Example!
-
-    A new movie has been submitted for review to your database.
-
+   {{ 'bitbag_sylius_multi_vendor_marketplace_plugin.email.request_profile_update' | trans }}
    
+{#   <a href="{{ url('') }}"#}
 
-    Please review it and accept or reject!
+ 
 {% endblock %}

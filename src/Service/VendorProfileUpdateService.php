@@ -35,21 +35,32 @@ class VendorProfileUpdateService
     
     public function createPendingVendorProfileUpdate(Vendor $vendorData)
     {
-//        $pendingVendorUpdate = new VendorProfileUpdate();
-//        $pendingVendorUpdate->setVendor($this->security->getUser()->getCustomer()->getVendor());
-//        $pendingVendorUpdate->setCompanyName($vendorData->getCompanyName());
-//        $pendingVendorUpdate->setTaxIdentifier($vendorData->getTaxIdentifier());
-//        $pendingVendorUpdate->setPhoneNumber($vendorData->getPhoneNumber());
-//        $pendingVendorUpdate->setVendorAddress($vendorData->getVendorAddress());
-//        $pendingVendorUpdate->setToken("sdadassa");
-//        $this->entityManager->persist($pendingVendorUpdate);
-//        $this->entityManager->flush();
-        $this->sendEmail($this->security->getUser()->getUsername());
+        $currentVendor = $this->security->getUser()->getCustomer()->getVendor();
+        $OldVendorPendingData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor'=> $currentVendor]);
+        $pendingVendorUpdate = $OldVendorPendingData;
+       
+        if(null == $OldVendorPendingData)
+            $pendingVendorUpdate = new VendorProfileUpdate();        
+        
+        $pendingVendorUpdate->setVendor($currentVendor);
+        $pendingVendorUpdate->setCompanyName($vendorData->getCompanyName());
+        $pendingVendorUpdate->setTaxIdentifier($vendorData->getTaxIdentifier());
+        $pendingVendorUpdate->setPhoneNumber($vendorData->getPhoneNumber());
+        
+        $vendorAddressData = $vendorData->getVendorAddress();
+        $pendingVendorUpdate->getVendorAddress()->setCity($vendorAddressData->getCity());
+        $pendingVendorUpdate->getVendorAddress()->setCountry($vendorAddressData->getCountry());
+        $pendingVendorUpdate->getVendorAddress()->setPostalCode($vendorAddressData->getPostalCode());
+        $pendingVendorUpdate->getVendorAddress()->setStreet($vendorAddressData->getStreet());
+        $token = sha1(mt_rand(1, 90000) . 'SALT');
+        $pendingVendorUpdate->setToken($token);
+        $this->entityManager->persist($pendingVendorUpdate);
+        $this->entityManager->flush();
+        $this->sendEmail($this->security->getUser()->getUsername(), $token);
     }
     
-    public function sendEmail(string $recipentAddress)
+    public function sendEmail(string $recipientAddress, string $token)
     {        
-        $this->sender->send('vendor_profile_update', [$recipentAddress]);
-
+//        $this->sender->send('vendor_profile_update', [$recipientAddress], ['token'=>$token]);
     }
 }

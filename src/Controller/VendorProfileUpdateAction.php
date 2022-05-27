@@ -29,8 +29,7 @@ class VendorProfileUpdateAction extends AbstractController
     public function __construct(RequestStack $request, VendorProfileUpdateService $vendorProfileUpdateService)
     {
         $this->request = $request;
-        $this->vendorProfileUpdateService = $vendorProfileUpdateService;
-        
+        $this->vendorProfileUpdateService = $vendorProfileUpdateService;        
     }
 
     public function __invoke(): Response
