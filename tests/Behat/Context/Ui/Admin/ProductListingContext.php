@@ -68,6 +68,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->getPage()->fillField('Username', 'admin');
         $this->getPage()->fillField('Password', 'admin');
         $this->getPage()->pressButton('Login');
+        assertNotNull($this->getPage()->findLink('Logout'));
     }
 
     /**
