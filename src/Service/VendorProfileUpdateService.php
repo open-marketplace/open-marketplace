@@ -44,13 +44,12 @@ class VendorProfileUpdateService
 //        $pendingVendorUpdate->setToken("sdadassa");
 //        $this->entityManager->persist($pendingVendorUpdate);
 //        $this->entityManager->flush();
-        $this->sendEmail();
+        $this->sendEmail($this->security->getUser()->getUsername());
     }
     
-    public function sendEmail()
+    public function sendEmail(string $recipentAddress)
     {        
-        $this->sender->send('vendor_profile_update', ['rs@ss.x']);
-        
-//        dd("s");
+        $this->sender->send('vendor_profile_update', [$recipentAddress]);
+
     }
 }
