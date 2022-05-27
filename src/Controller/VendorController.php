@@ -23,10 +23,10 @@ final class VendorController extends ResourceController
     {
         try {
             return parent::createAction($request);
-        } catch (UserNotFoundException$exception) {
+        } catch (UserNotFoundException $exception) {
             return $this->redirectToRoute('sylius_shop_login');
-        } catch (TokenNotFoundException $exception){
+        } catch (TokenNotFoundException $exception) {
             return $this->redirectToRoute('sylius_shop_login');
-        }        
+        }
     }
 }

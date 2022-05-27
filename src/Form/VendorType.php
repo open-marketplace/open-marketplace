@@ -69,7 +69,7 @@ final class VendorType extends AbstractResourceType
                 /** @var ShopUserInterface $user */
                 $user = $token->getUser();
 
-                if (!($user instanceof ShopUserInterface)) {
+                if (!$user instanceof ShopUserInterface) {
                     throw new UserNotFoundException('No user found.');
                 }
 

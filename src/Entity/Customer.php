@@ -17,7 +17,7 @@ class Customer extends BaseCustomer implements CustomerInterface
 {
     private ?VendorInterface $vendor;
 
-    public function getVendor(): ?Vendor
+    public function getVendor(): ?VendorInterface
     {
         return $this->vendor;
     }
