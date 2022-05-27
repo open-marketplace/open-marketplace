@@ -15,15 +15,15 @@ use Sylius\Component\Core\Model\Customer as BaseCustomer;
 
 class Customer extends BaseCustomer implements CustomerInterface
 {
-    private ?Vendor $vendor;
-
-    public function setVendor(Vendor $vendor): void
-    {
-        $this->vendor = $vendor;
-    }
+    private ?VendorInterface $vendor;
 
     public function getVendor(): ?Vendor
     {
         return $this->vendor;
+    }
+
+    public function setVendor(VendorInterface $vendor): void
+    {
+        $this->vendor = $vendor;
     }
 }
