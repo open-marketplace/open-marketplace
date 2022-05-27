@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
+
 interface ProductListingRepositoryInterface
 {
+    public function find($id): ?ProductListingInterface;
 }

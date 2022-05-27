@@ -1,35 +1,37 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListingRepositoryInterface;
-use SM\Factory\Factory;
+use SM\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Router;
-use Twig\Environment;
+use Symfony\Component\Routing\RouterInterface;
 
 final class RejectAction
 {
     private ProductListingRepositoryInterface $productListingRepository;
 
-    private Environment $twig;
+    private RouterInterface $router;
 
-    private Router $router;
-
-    private Factory $SMFactory;
+    private FactoryInterface $SMFactory;
 
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
-        Environment $twig,
-        Router $router,
-        Factory $SMFactory
+        RouterInterface $router,
+        FactoryInterface $SMFactory
     ) {
         $this->productListingRepository = $productListingRepository;
-        $this->twig = $twig;
         $this->router = $router;
         $this->SMFactory = $SMFactory;
     }
