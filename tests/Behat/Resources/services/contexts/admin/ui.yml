@@ -13,3 +13,9 @@ services:
             - "@sylius.fixture.example_factory.admin_user"
             - "@doctrine.orm.default_entity_manager"
 
+    bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_blocking:
+        class: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\VendorBlockingContext
+        arguments:
+            - "@sylius.fixture.example_factory.admin_user"
+            - "@doctrine.orm.default_entity_manager"
+

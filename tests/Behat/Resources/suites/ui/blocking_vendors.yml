@@ -1,0 +1,8 @@
+default:
+    suites:
+        ui_blocking_vendors:
+            contexts:
+                - bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_blocking
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@blocking_vendors && @ui"
