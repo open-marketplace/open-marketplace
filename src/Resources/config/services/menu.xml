@@ -6,5 +6,10 @@
         <service id="bitbag_sylius_multi_vendor_marketplace_plugin.menu.multi_vendor_marketplace_menu_listener" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\MultiVendorMarketplaceMenuListener">
             <tag name="kernel.event_listener" method="buildMenu" event="sylius.menu.admin.main" />
         </service>
+
+        <service id="mvm.listener.vendor.menu_builder_product_list" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\VendorMenuListener">
+            <argument type="service" id="security.token_storage" />
+            <tag name="kernel.event_listener" event="sylius.menu.shop.account" method="addProductListMenuItems" />
+        </service>
     </services>
 </container>

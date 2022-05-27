@@ -2,37 +2,33 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Twig\Environment;
 
-final class ShowAction
+final class ShowProductListings extends AbstractController
 {
     private ProductListingRepositoryInterface $productListingRepository;
 
-    private Environment $twig;
-
     public function __construct(
-        ProductListingRepositoryInterface $productListingRepository,
-        Environment $twig
+        ProductListingRepositoryInterface $productListingRepository
     ) {
         $this->productListingRepository = $productListingRepository;
-        $this->twig = $twig;
     }
 
     public function __invoke(Request $request): Response
     {
         /** @var ProductListingInterface $productListing */
-        $productListing = $this->productListingRepository->find($request->attributes->get('id'));
+        $productListing = $this->productListingRepository->findBy(['vendor' => $this->getUser()->getId()]);
 
         return new Response(
-            $this->twig->render('@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig', [
-                'productListing' => $productListing
-            ])
+            $this->renderView('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig', [
+                    'productListings' => $productListing
+                ])
         );
     }
 }

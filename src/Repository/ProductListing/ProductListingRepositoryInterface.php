@@ -9,8 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
+
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 
 interface ProductListingRepositoryInterface
 {
+    public function save(ProductListingInterface $productListing): void;
 }

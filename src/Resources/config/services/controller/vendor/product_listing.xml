@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.vendor.product_listing.show_product_listing_index" public="true"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\ShowProductListings">
+            <argument key="$productListingRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_listing" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.vendor.product_listing.create_product_action" public="true"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\CreateProductAction">
+            <argument type="service">
+                <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
+                    <factory service="sylius.resource_registry" method="get" />
+                    <argument type="string">sylius.shop_user</argument>
+                </service>
+            </argument>
+            <argument key="$requestConfigurationFactory" type="service" id="sylius.resource_controller.request_configuration_factory" />
+            <argument key="$newResourceFactory" type="service" id="sylius.resource_controller.new_resource_factory" />
+            <argument key="$factory" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.factory.product_draft" />
+            <argument key="$chanelRepository" type="service" id="sylius.repository.channel"/>
+            <argument key="$createProductListingCommand" type="service" id="bitbag.command.product_listing.create"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+    </services>
+</container>

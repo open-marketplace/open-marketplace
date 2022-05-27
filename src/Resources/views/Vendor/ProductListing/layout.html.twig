@@ -1,0 +1,29 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'mvm.ui.product_listing.breadcrumb_header'|trans }}</div>
+
+    </div>
+    <div class="ui stackable two column grid">
+        <div class="column">
+            <h1 class="ui header">
+                <div class="content">
+                    {{ 'mvm.ui.product_listing.product_list'|trans }}
+                    <div class="sub header">{{ 'mvm.ui.product_listing.product_manage'|trans }}</div>
+                </div>
+            </h1>
+        </div>
+        <div class="middle aligned column">
+            <a href="{{ path('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_create_product') }}" class="ui right floated blue button">
+                <i class="circle plus icon"></i>
+                {{ 'mvm.ui.create_new_product'|trans }}
+            </a>
+
+        </div>
+    </div>
+{% endblock %}

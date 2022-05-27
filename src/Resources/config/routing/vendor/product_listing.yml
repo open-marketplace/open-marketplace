@@ -1,0 +1,29 @@
+bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index:
+  path: /product-listings
+  methods: [GET]
+  defaults:
+    _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.vendor.product_listing.show_product_listing_index
+    _sylius:
+      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig'
+
+#bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_show:
+#  path: /product-listings/{id}
+#  defaults:
+#    _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.vendor.product_listing.show_action
+#    _sylius:
+#      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig'
+
+bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_create_product:
+  path: /product-listings/create
+  methods: [GET,POST]
+  defaults:
+    _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.vendor.product_listing.create_product_action
+    _sylius:
+      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig'
+
+sylius_shop_user_index:
+  path: /product-listings
+
+
+sylius_shop_user_create:
+  path: /product-listings/create

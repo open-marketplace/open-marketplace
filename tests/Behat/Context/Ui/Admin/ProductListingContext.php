@@ -14,13 +14,13 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEmpty;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
@@ -76,7 +76,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         for ($i = 0; $i < $count; ++$i) {
             $productListing = new ProductListing();
-            $productListing->setName('product listing ' . $i);
+            $productListing->setCode('product listing ' . $i);
             $productListing->setStatus(ProductListingInterface::STATUS_UNDER_VERIFICATION);
             $productListing->setCode('code' . $i);
             $productListing->setVersionNumber(0);

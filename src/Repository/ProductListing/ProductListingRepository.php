@@ -9,10 +9,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ProductListingRepository extends EntityRepository implements ProductListingRepositoryInterface
 {
+    public function save(ProductListingInterface $productListing): void
+    {
+        $this->_em->persist($productListing);
+        $this->_em->flush();
+    }
 }

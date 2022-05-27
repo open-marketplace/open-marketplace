@@ -1,0 +1,2 @@
+bitbag_multi_vendor_marketplace_product_listings:
+  resource: 'vendor/product_listing.yml'
