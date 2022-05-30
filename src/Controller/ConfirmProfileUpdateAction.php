@@ -17,6 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ConfirmProfileUpdateAction extends AbstractController
@@ -33,11 +34,11 @@ final class ConfirmProfileUpdateAction extends AbstractController
     public function __invoke(string $token): Response
     {                
         $vendorProfileUpdateData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneByToken($token);
-//        dd($vendorProfileUpdateData);
+
         $this->denyAccessUnlessGranted(TokenOwningVoter::UPDATE, $vendorProfileUpdateData);
         
         $this->vendorProfileUpdateService->updateVendorFromPendingData($vendorProfileUpdateData);
         
-        return new JsonResponse($vendorProfileUpdateData);
+        return new RedirectResponse('vendor_profile');
     }
 }

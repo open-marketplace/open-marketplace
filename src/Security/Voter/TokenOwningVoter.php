@@ -36,12 +36,10 @@ class TokenOwningVoter extends Voter
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
-//        return true;
-        if (!$user instanceof User) {
-            // the user must be logged in; if not, deny access
-            return false;
-        }
-        
+
+        if (!$user instanceof User || null == $subject)        
+            return false;       
+                
         /** @var VendorProfileUpdateInterface $vendorUpdateData */
         $vendorUpdateData = $subject;
 
