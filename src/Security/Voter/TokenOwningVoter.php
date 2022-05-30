@@ -19,12 +19,12 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class TokenOwningVoter extends Voter
 {
-    // these strings are just invented: you can use anything
+ 
     public const UPDATE = 'UPDATE';
 
     protected function supports($attribute, $subject)
     {
-//         if the attribute isn't one we support, return false
+
         if (!in_array($attribute, [self::UPDATE])) {
             return false;
         }
@@ -32,11 +32,7 @@ class TokenOwningVoter extends Voter
         return true;
     }
 
-    protected function voteOnAttribute(
-        string $attribute,
-        $subject,
-        TokenInterface $token
-    ): bool
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token )    
     {
         $user = $token->getUser();
 
