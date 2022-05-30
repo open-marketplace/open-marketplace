@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
 
-interface ProductListingRepositoryInterface
+interface ProductListingStateMachineTransitionInterface
 {
-    public function find($id, $lockMode = null, $lockVersion = null);
+    public function apply(ProductListingInterface $productListing, string $transition): void;
 }
