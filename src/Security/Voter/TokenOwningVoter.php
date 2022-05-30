@@ -23,7 +23,7 @@ class TokenOwningVoter extends Voter
     const UPDATE = 'UPDATE';
 
 
-    protected function supports(string $attribute, $subject)
+    protected function supports($attribute, $subject)
     {
 //         if the attribute isn't one we support, return false
         if (!in_array($attribute, [self::UPDATE])) {
