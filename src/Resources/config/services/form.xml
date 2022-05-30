@@ -8,8 +8,7 @@
             <parameter>VendorUserRegister</parameter>
             <parameter>sylius</parameter>
         </parameter>
-    </parameters>
-    
+    </parameters>    
     <services>        
         <service id="bitbag.sylius_multi_vendor_marketplace_plugin.form.vendor_type"
                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType"
