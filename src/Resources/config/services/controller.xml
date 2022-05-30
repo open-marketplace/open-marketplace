@@ -23,7 +23,8 @@
                 <argument type="service" id="service_container"/>                
             </call>
             <tag name="container.service_subscriber"/>
-            <argument type="service" id="doctrine.orm.entity_manager" />            
+            <argument type="service" id="doctrine.orm.default_entity_manager" />    
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service"/>
         </service>
     </services>
 </container>

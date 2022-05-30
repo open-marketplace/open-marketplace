@@ -13,27 +13,31 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\TokenOwningVoter;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ConfirmProfileUpdateAction extends AbstractController
+final class ConfirmProfileUpdateAction extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private VendorProfileUpdateService $vendorProfileUpdateService;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, VendorProfileUpdateService $vendorProfileUpdateService)
     {
         $this->entityManager = $entityManager;
+        $this->vendorProfileUpdateService = $vendorProfileUpdateService;
     }
 
-    public function __invoke(string $token)
-    {        
-        
+    public function __invoke(string $token): Response
+    {                
         $vendorProfileUpdateData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneByToken($token);
 //        dd($vendorProfileUpdateData);
-        $this->denyAccessUnlessGranted('UPDATE', $vendorProfileUpdateData);
-//        $this->doctrine->getRepository(VendorProfileUpdate::class);
+        $this->denyAccessUnlessGranted(TokenOwningVoter::UPDATE, $vendorProfileUpdateData);
+        
+        $this->vendorProfileUpdateService->updateVendorFromPendingData($vendorProfileUpdateData);
+        
         return new JsonResponse($vendorProfileUpdateData);
     }
 }
