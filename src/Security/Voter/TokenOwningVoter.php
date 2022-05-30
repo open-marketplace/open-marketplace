@@ -32,7 +32,7 @@ class TokenOwningVoter extends Voter
         return true;
     }
 
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token )    
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)    
     {
         $user = $token->getUser();
 
