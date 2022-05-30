@@ -15,5 +15,6 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     phone_number: "Phone number"
     company_address: "Company Address"
     postal_code: "Postal code"
+    pending_update_message: "You cannot change the data until you accept the previous change."
   email:
     request_profile_update: "Hey, you asked to change your company details. For security purposes, we need to verify your decision. Click on the link below if you want to make a change or ignore this message."
