@@ -38,7 +38,7 @@ final class ShowAction
 
         return new Response(
             $this->twig->render('@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig', [
-                'productListing' => $productListing
+                'productListing' => $productListing,
             ])
         );
     }

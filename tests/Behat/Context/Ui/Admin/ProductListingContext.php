@@ -20,8 +20,8 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEmpty;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use function PHPUnit\Framework\assertNotNull;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {

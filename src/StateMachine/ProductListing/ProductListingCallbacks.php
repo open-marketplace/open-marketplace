@@ -12,36 +12,31 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListingRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 
 final class ProductListingCallbacks
 {
-    protected ProductListingRepositoryInterface $productListingRepository;
-
     private EntityManagerInterface $entityManager;
+
     private ProductFactoryInterface $productFactory;
 
-
     public function __construct(
-        ProductListingRepositoryInterface $productListingRepository,
         EntityManagerInterface $entityManager,
         ProductFactoryInterface $productFactory
     ) {
-        $this->productListingRepository = $productListingRepository;
         $this->entityManager = $entityManager;
         $this->productFactory = $productFactory;
     }
 
-    public function sendToVerify(ProductListingInterface $productListing)
+    public function sendToVerify(ProductListingInterface $productListing): void
     {
         $productListing->setStatus(ProductListingInterface::STATUS_UNDER_VERIFICATION);
         $this->entityManager->flush();
     }
 
-    public function verify(ProductListingInterface $productListing)
+    public function verify(ProductListingInterface $productListing): void
     {
         $productListing->setStatus(ProductListingInterface::STATUS_VERIFIED);
         $productListing->setVerifiedAt((new \DateTime()));
@@ -53,14 +48,14 @@ final class ProductListingCallbacks
         $this->editProduct($productListing);
     }
 
-    public function reject(ProductListingInterface $productListing)
+    public function reject(ProductListingInterface $productListing): void
     {
         $productListing->setStatus(ProductListingInterface::STATUS_REJECTED);
         $productListing->setVerifiedAt((new \DateTime()));
         $this->entityManager->flush();
     }
 
-    private function createProduct(ProductListingInterface $productListing)
+    private function createProduct(ProductListingInterface $productListing): void
     {
         /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
@@ -71,7 +66,7 @@ final class ProductListingCallbacks
         $this->entityManager->flush();
     }
 
-    private function editProduct(ProductListingInterface $productListing)
+    private function editProduct(ProductListingInterface $productListing): void
     {
         $this->setProductFields($productListing->getProduct(), $productListing);
         $this->entityManager->flush();

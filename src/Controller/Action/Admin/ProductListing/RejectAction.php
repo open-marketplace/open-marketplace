@@ -27,7 +27,6 @@ final class RejectAction
 
     private ProductListingStateMachineTransitionInterface $productListingStateMachineTransition;
 
-
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
         RouterInterface $router,
