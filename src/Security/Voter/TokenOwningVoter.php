@@ -19,20 +19,23 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class TokenOwningVoter extends Voter
 {
- 
     public const UPDATE = 'UPDATE';
 
     protected function supports($attribute, $subject)
     {
-
         if (!in_array($attribute, [self::UPDATE])) {
             return false;
         }
 
         return true;
     }
+
     /** @phpstan-ignore-next-line */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)    
+    protected function voteOnAttribute(
+        $attribute,
+        $subject,
+        TokenInterface $token
+    )
     {
         $user = $token->getUser();
 
@@ -60,7 +63,7 @@ class TokenOwningVoter extends Voter
         }
         $loggedInVendor = $customer->getVendor();
         $vendorData = $profileUpdate->getVendor();
-        if ($loggedInVendor == $vendorData) {
+        if ($loggedInVendor === $vendorData) {
             return true;
         }
 

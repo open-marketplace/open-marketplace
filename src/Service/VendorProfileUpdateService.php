@@ -33,8 +33,7 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         Security $security,
         EntityManagerInterface $entityManager,
         SenderInterface $sender
-    )
-    {
+    ) {
         $this->security = $security;
         $this->entityManager = $entityManager;
         $this->sender = $sender;
