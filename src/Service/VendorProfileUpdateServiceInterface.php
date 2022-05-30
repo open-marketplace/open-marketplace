@@ -10,10 +10,13 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 
 interface VendorProfileUpdateServiceInterface
 {
-    public function createPendingVendorProfileUpdate(Vendor $vendorData);
+    public function createPendingVendorProfileUpdate(Vendor $vendorData): void;
 
-    public function sendEmail(string $recipientAddress, string $token);
+    public function sendEmail(string $recipientAddress, string $token): void;
+
+    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void;
 }

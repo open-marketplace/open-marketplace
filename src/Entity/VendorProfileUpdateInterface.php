@@ -14,4 +14,8 @@ interface VendorProfileUpdateInterface extends VendorDataInterface
     public function getToken(): ?string;
 
     public function setToken(?string $token): void;
+
+    public function getVendor(): ?VendorInterface;
+
+    public function setVendor(?VendorInterface $vendor): void;
 }

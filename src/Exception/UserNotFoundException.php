@@ -13,5 +13,4 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Exception;
 
 class UserNotFoundException extends \Exception
 {
-
 }
