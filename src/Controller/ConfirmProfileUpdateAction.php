@@ -33,7 +33,7 @@ final class ConfirmProfileUpdateAction extends AbstractController
 
     public function __invoke(string $token): Response
     {                
-        $vendorProfileUpdateData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneByToken($token);
+        $vendorProfileUpdateData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['token'=>$token]);
 
         $this->denyAccessUnlessGranted(TokenOwningVoter::UPDATE, $vendorProfileUpdateData);
         
