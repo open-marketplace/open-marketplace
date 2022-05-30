@@ -11,3 +11,6 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     reject: 'Reject'
     confirm: 'Are you sure?'
     code: 'Code'
+    verified: 'Verified'
+    rejected: 'Rejected'
+    under_verification: 'Under verification'

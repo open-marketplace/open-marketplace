@@ -14,12 +14,3 @@ Feature: Listing product listings
     And I am on "/admin"
     When I follow "Product listings"
     Then I should see 3 product listings
-
-  @ui
-  Scenario: Listing product details
-    Given there is 1 product listing
-    And I am on "/admin"
-    And I follow "Product listings"
-    And I should see 1 product listing
-    When I follow "Details"
-    Then I should see url "#\/admin\/product-listings\/(\d+)#"

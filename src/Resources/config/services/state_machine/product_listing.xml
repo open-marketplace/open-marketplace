@@ -7,6 +7,7 @@
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductListingCallbacks">
             <argument key="$productListingRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_listing" />
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
+            <argument key="$productFactory" type="service" id="sylius.custom_factory.product" />
         </service>
     </services>
 </container>

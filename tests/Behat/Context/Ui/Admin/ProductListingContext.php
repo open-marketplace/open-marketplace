@@ -21,6 +21,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEmpty;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use function PHPUnit\Framework\assertNotNull;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
@@ -67,6 +69,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->getPage()->fillField('Username', 'admin');
         $this->getPage()->fillField('Password', 'admin');
         $this->getPage()->pressButton('Login');
+        assertNotNull($this->getPage()->findLink('Logout'));
     }
 
     /**
@@ -105,6 +108,31 @@ final class ProductListingContext extends RawMinkContext implements Context
         $currentUrl = $this->getSession()->getCurrentUrl();
         $matches = preg_match($url, $currentUrl);
         assertEquals(1, $matches);
+    }
+
+    /**
+     * @Given I should see product's listing status :status
+     */
+    public function iShouldSeeProductsListingStatus($status)
+    {
+        $productListingStatus = $this->getPage()->find('css', sprintf('table > tbody > tr > td:contains("%s")', $status));
+        assertNotNull($productListingStatus);
+    }
+
+    /**
+     * @Given I click :button button
+     */
+    public function iClickButton($button)
+    {
+        $this->getPage()->pressButton($button);
+    }
+
+    /**
+     * @Then I should be redirected to :url
+     */
+    public function iShouldBeRedirectedTo($url)
+    {
+        assertEquals($url, $this->getSession()->getCurrentUrl());
     }
 
     /**

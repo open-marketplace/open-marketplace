@@ -2,8 +2,20 @@ sylius_grid:
   templates:
     action:
       details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
+    filter:
+      product_listing_status: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Filter/product_listing_status.html.twig'
   grids:
     bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing:
+      filters:
+        search:
+          type: string
+          form_options:
+            type: contains
+          options:
+            fields: ['name', 'code']
+        status:
+          type: product_listing_status
+          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
       driver:
         name: doctrine/orm
         options:

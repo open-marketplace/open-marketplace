@@ -13,7 +13,9 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
+
 interface ProductListingRepositoryInterface
 {
-    public function save(ProductListingInterface $productListing): void;
+    public function find($id): ?ProductListingInterface;
 }
