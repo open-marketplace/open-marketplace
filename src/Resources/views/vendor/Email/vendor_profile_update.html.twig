@@ -1,13 +1,14 @@
 {% extends '@SyliusCore/Email/layout.html.twig' %}
 
 {% block subject %}
-   
+   Pending profile update
 {% endblock %}
 
 {% block body %}
    {{ 'bitbag_sylius_multi_vendor_marketplace_plugin.email.request_profile_update' | trans }}
    
-{#   <a href="{{ url('') }}"#}
-
+   <a href="{{ url('confirm_profile_update_link',{'token': token}) }} ">
+      {{ url('confirm_profile_update_link',{'token': token}) }}
+   </a>
  
 {% endblock %}

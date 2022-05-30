@@ -61,6 +61,6 @@ class VendorProfileUpdateService
     
     public function sendEmail(string $recipientAddress, string $token)
     {        
-//        $this->sender->send('vendor_profile_update', [$recipientAddress], ['token'=>$token]);
+        $this->sender->send('vendor_profile_update', [$recipientAddress], ['token'=>$token]);
     }
 }

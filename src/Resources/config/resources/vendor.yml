@@ -3,4 +3,5 @@ sylius_resource:
     bitbag_multi_vendor_marketplace.vendor:
       classes:
         model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface
         controller: BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController

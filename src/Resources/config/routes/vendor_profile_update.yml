@@ -6,6 +6,6 @@ vendor_profile_update:
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_profile_update.html.twig"
             form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType
-#            event: update
+            event: update
             redirect:
                 route: sylius_shop_account_dashboard        
