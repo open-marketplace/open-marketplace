@@ -31,8 +31,8 @@ class TokenOwningVoter extends Voter
 
         return true;
     }
-
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)    
+    /** @phpstan-ignore-next-line */
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)    
     {
         $user = $token->getUser();
 
