@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorDataInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
@@ -39,29 +40,29 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     {
         $currentVendor = $this->security->getUser()->getCustomer()->getVendor();
         $OldVendorPendingData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor'=> $currentVendor]);
-        $pendingVendorUpdate = $OldVendorPendingData;
-       
+        $pendingVendorUpdate = $OldVendorPendingData;       
         if(null == $OldVendorPendingData)
-            $pendingVendorUpdate = new VendorProfileUpdate();        
-        
+            $pendingVendorUpdate = new VendorProfileUpdate();    
         $pendingVendorUpdate->setVendor($currentVendor);
-        $pendingVendorUpdate->setCompanyName($vendorData->getCompanyName());
-        $pendingVendorUpdate->setTaxIdentifier($vendorData->getTaxIdentifier());
-        $pendingVendorUpdate->setPhoneNumber($vendorData->getPhoneNumber());
-       
-        $vendorAddressData = $vendorData->getVendorAddress();
-//        dd($pendingVendorUpdate->getVendorAddress());
-        $pendingVendorUpdate->setVendorAddress($vendorAddressData);
-        $pendingVendorUpdate->getVendorAddress()->setCity($vendorAddressData->getCity());
-        $pendingVendorUpdate->getVendorAddress()->setCountry($vendorAddressData->getCountry());
-        $pendingVendorUpdate->getVendorAddress()->setPostalCode($vendorAddressData->getPostalCode());
-        $pendingVendorUpdate->getVendorAddress()->setStreet($vendorAddressData->getStreet());
-        $token = sha1(mt_rand(1, 90000) . 'SALT');
+        $token = md5(mt_rand(1, 90000) . 'SALT');
         $pendingVendorUpdate->setToken($token);
-        
-        $this->entityManager->persist($pendingVendorUpdate);
-        $this->entityManager->flush();
+        $this->setVendorFromData($pendingVendorUpdate, $vendorData);            
         $this->sendEmail($this->security->getUser()->getUsername(), $token);
+    }
+    
+    private function setVendorFromData(VendorDataInterface $vendor, VendorDataInterface $data): void
+    {        
+        $vendor->setCompanyName($data->getCompanyName());
+        $vendor->setTaxIdentifier($data->getTaxIdentifier());
+        $vendor->setPhoneNumber($data->getPhoneNumber());
+        $vendorAddress = $data->getVendorAddress();
+        $vendor->setVendorAddress($vendorAddress);
+        $vendor->getVendorAddress()->setCity($vendorAddress->getCity());
+        $vendor->getVendorAddress()->setCountry($vendorAddress->getCountry());
+        $vendor->getVendorAddress()->setPostalCode($vendorAddress->getPostalCode());
+        $vendor->getVendorAddress()->setStreet($vendorAddress->getStreet());        
+        $this->entityManager->persist($vendor);
+        $this->entityManager->flush();
     }
     
     public function sendEmail(string $recipientAddress, string $token): void
@@ -71,17 +72,8 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     
     public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
     {
-        $vendor = $vendorData->getVendor();
-       
-        $vendor->setCompanyName($vendorData->getCompanyName());
-        $vendor->setTaxIdentifier($vendorData->getTaxIdentifier());
-        $vendor->setPhoneNumber($vendorData->getPhoneNumber());
-
-        $vendorAddressData = $vendorData->getVendorAddress();
-        $vendor->getVendorAddress()->setCity($vendorAddressData->getCity());
-        $vendor->getVendorAddress()->setCountry($vendorAddressData->getCountry());
-        $vendor->getVendorAddress()->setPostalCode($vendorAddressData->getPostalCode());
-        $vendor->getVendorAddress()->setStreet($vendorAddressData->getStreet());
+        $vendor = $vendorData->getVendor();       
+        $this->setVendorFromData($vendor, $vendorData);
         $this->deletePendingData($vendorData);       
     }
     
@@ -89,10 +81,5 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     {
         $this->entityManager->remove($vendorData);
         $this->entityManager->flush();
-    }
-    
-    private function setVendorFromData(Vendor $vendor, VendorProfileUpdateInterface $vendorData, string $token = null): void
-    {
-        
     }
 }
