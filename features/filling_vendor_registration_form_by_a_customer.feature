@@ -1,7 +1,7 @@
 @vendor_register
 Feature: Filling vendor registration form by a customer
   In order to create new vendor account
-  As an customer
+  As a customer
   I can fill registration form
 
   Background:
