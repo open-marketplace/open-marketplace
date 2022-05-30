@@ -79,8 +79,4 @@ class ResourceTranslationsType extends AbstractType
         return FixedCollectionType::class;
     }
 
-    public function getBlockPrefix(): string
-    {
-        return 'bitbag_translations';
-    }
 }

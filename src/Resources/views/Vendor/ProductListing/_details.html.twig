@@ -10,15 +10,31 @@
                 <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at'|trans }}</strong></td>
             </tr>
             {% for productListing in productListings %}
+                {% set productDrat = productListing.productDrafts|last %}
             <tr>
                 <td>
                     <ul class="ui bulleted list">
-                        {{ productListing.code }}
+                        {{ productDrat.code }}
                     </ul>
                 </td>
                 <td>
                     <ul class="ui bulleted list">
-                        {{ productListing.publishedAt | date }}
+                        {{ productDrat.createdAt | date }}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="ui bulleted list">
+                        {{ productDrat.versionNumber }}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="ui bulleted list">
+                        {{ productDrat.status }}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <a href="{{ path('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_edit_product',{'id': productDrat.id}) }}">edit</a>
                     </ul>
                 </td>
             </tr>

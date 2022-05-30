@@ -7,7 +7,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata" public="false">
-                    <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing</argument>
+                    <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft</argument>
                     <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
                 </service>
             </argument>

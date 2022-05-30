@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
@@ -30,71 +31,38 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class CreateProductAction extends AbstractController
+class EditProductAction extends AbstractController
 {
     private MetadataInterface $metadata;
     private RequestConfigurationFactoryInterface $requestConfigurationFactory;
-    private NewResourceFactoryInterface $newResourceFactory;
-    private FactoryInterface $factory;
-    private RepositoryInterface $chanelRepository;
     private CreateProductListingCommandInterface $createProductListingCommand;
-    private RedirectHandlerInterface $redirectHandler;
-    private FlashHelperInterface $flashHelper;
-    private EventDispatcherInterface $eventDispatcher;
+    private ProductDraftRepositoryInterface $productDraftRepository;
 
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        NewResourceFactoryInterface $newResourceFactory,
-        FactoryInterface $factory,
-        RepositoryInterface $chanelRepository,
         CreateProductListingCommandInterface $createProductListingCommand,
-        RedirectHandlerInterface $redirectHandler,
-        FlashHelperInterface $flashHelper,
-        EventDispatcherInterface $eventDispatcher
+        ProductDraftRepositoryInterface $productDraftRepository
 )
     {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
-        $this->newResourceFactory = $newResourceFactory;
-        $this->factory = $factory;
         $this->metadata = $metadata;
-        $this->chanelRepository = $chanelRepository;
         $this->createProductListingCommand = $createProductListingCommand;
-        $this->redirectHandler = $redirectHandler;
-        $this->flashHelper = $flashHelper;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->productDraftRepository = $productDraftRepository;
     }
 
     public function __invoke(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $newResource = $this->newResourceFactory->create($configuration, $this->factory);
-
+        $newResource = $this->productDraftRepository->find($request->get('id'));
         $form = $this->createForm(ProductType::class, $newResource);
-
         $form->handleRequest($request);
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
 
-            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
-
-            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-                throw new HttpException($event->getErrorCode(), $event->getMessage());
-            }
-            if ($event->isStopped()) {
-                $this->flashHelper->addFlashFromEvent($configuration, $event);
-
-                $eventResponse = $event->getResponse();
-                if (null !== $eventResponse) {
-                    return $eventResponse;
-                }
-
-                return $this->redirectHandler->redirectToIndex($configuration, $newResource);
-            }
-
-            $this->createProductListingCommand->create($productDraft, $form->get('saveAndAdd')->isClicked());
+            $this->createProductListingCommand->editAndCreate($productDraft, $form->get('saveAndAdd')->isClicked());
 
             return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index');
         }

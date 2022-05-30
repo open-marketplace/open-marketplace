@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
-use JetBrains\PhpStorm\Internal\TentativeType;
 
 class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
 {
@@ -98,6 +96,8 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         $this->channelCode = $channelCode;
         return $this;
     }
+
+
 
     public function offsetExists($offset)
     {

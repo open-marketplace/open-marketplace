@@ -61,78 +61,78 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): ProductTranslation
+    public function setName(?string $name): ProductTranslation
     {
         $this->name = $name;
         return $this;
     }
 
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setSlug(string $slug): ProductTranslation
+    public function setSlug(?string $slug): ProductTranslation
     {
         $this->slug = $slug;
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): ProductTranslation
+    public function setDescription(?string $description): ProductTranslation
     {
         $this->description = $description;
         return $this;
     }
 
-    public function getMetaKeywords(): string
+    public function getMetaKeywords(): ?string
     {
         return $this->metaKeywords;
     }
 
-    public function setMetaKeywords(string $metaKeywords): ProductTranslation
+    public function setMetaKeywords(?string $metaKeywords): ProductTranslation
     {
         $this->metaKeywords = $metaKeywords;
         return $this;
     }
 
-    public function getMetaDescription(): string
+    public function getMetaDescription(): ?string
     {
         return $this->metaDescription;
     }
 
-    public function setMetaDescription(string $metaDescription): ProductTranslation
+    public function setMetaDescription(?string $metaDescription): ProductTranslation
     {
         $this->metaDescription = $metaDescription;
         return $this;
     }
 
-    public function getShortDescription(): string
+    public function getShortDescription(): ?string
     {
         return $this->shortDescription;
     }
 
-    public function setShortDescription(string $shortDescription): ProductTranslation
+    public function setShortDescription(?string $shortDescription): ProductTranslation
     {
         $this->shortDescription = $shortDescription;
         return $this;
     }
 
-    public function getLocale(): string
+    public function getLocale(): ?string
     {
         return $this->locale;
     }
 
-    public function setLocale(string $locale): ProductTranslation
+    public function setLocale(?string $locale): ProductTranslation
     {
         $this->locale = $locale;
         return $this;

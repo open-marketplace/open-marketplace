@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 
 class ProductDraft implements ProductDraftInterface
 {
-    protected int $id;
+    protected ?int $id;
 
     protected string $code;
 
@@ -40,6 +40,7 @@ class ProductDraft implements ProductDraftInterface
 
     public function __construct()
     {
+        $this->code = '';
 
         $this->status = ProductDraftInterface::STATUS_CREATED;
 
@@ -59,7 +60,7 @@ class ProductDraft implements ProductDraftInterface
         return $this->id;
     }
 
-    public function setId(int $id): ProductDraft
+    public function setId(?int $id): ProductDraft
     {
         $this->id = $id;
         return $this;
@@ -162,5 +163,19 @@ class ProductDraft implements ProductDraftInterface
     {
         $this->status = $status;
         return $this;
+    }
+
+    public function newVersion(): void
+    {
+        $this->versionNumber++;
+    }
+
+    public function clear(): void
+    {
+        $this->id = null;
+
+        $this->productListingPrice = new ArrayCollection();
+
+        $this->translations = new ArrayCollection();
     }
 }

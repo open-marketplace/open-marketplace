@@ -18,12 +18,9 @@ bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_create_prod
   methods: [GET,POST]
   defaults:
     _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.vendor.product_listing.create_product_action
-    _sylius:
-      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig'
 
-sylius_shop_user_index:
-  path: /product-listings
-
-
-sylius_shop_user_create:
-  path: /product-listings/create
+bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_edit_product:
+  path: /product-listings/{id}/edit
+  methods: [GET,POST]
+  defaults:
+    _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.vendor.product_listing.edit_product_action

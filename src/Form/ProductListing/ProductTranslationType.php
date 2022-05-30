@@ -55,9 +55,4 @@ class ProductTranslationType extends AbstractType
             'data_class' => $this->dataClass,
         ]);
     }
-
-    public function getBlockPrefix(): string
-    {
-        return 'bitbag_product_translation';
-    }
 }

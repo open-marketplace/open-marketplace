@@ -10,13 +10,13 @@
             <generator strategy="AUTO" />
         </id>
         <many-to-one field="vendor" target-entity="Sylius\Component\Core\Model\ShopUserInterface" />
-        <one-to-many field="productDrafts" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft" mapped-by="code">
+        <one-to-many field="productDrafts" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft" mapped-by="productListing">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
         <field name="code" column="code" type="string" unique="false" nullable="false" />
-        <field name="publishedAt" column="published_at" type="datetime" unique="false" nullable="true"/>
+        <field name="createAt" column="create_at" type="datetime" unique="false" nullable="true"/>
         <many-to-one field="product" target-entity="Sylius\Component\Product\Model\ProductInterface">
             <join-column name="product_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>

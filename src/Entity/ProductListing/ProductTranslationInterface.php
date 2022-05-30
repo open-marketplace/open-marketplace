@@ -22,31 +22,31 @@ interface ProductTranslationInterface
 
     public function setProductDraft(ProductDraftInterface $productDraft): ProductTranslation;
 
-    public function getName(): string;
+    public function getName(): ?string;
 
-    public function setName(string $name): ProductTranslation;
+    public function setName(?string $name): ProductTranslation;
 
-    public function getSlug(): string;
+    public function getSlug(): ?string;
 
-    public function setSlug(string $slug): ProductTranslation;
+    public function setSlug(?string $slug): ProductTranslation;
 
-    public function getDescription(): string;
+    public function getDescription(): ?string;
 
-    public function setDescription(string $description): ProductTranslation;
+    public function setDescription(?string $description): ProductTranslation;
 
-    public function getMetaKeywords(): string;
+    public function getMetaKeywords(): ?string;
 
-    public function setMetaKeywords(string $metaKeywords): ProductTranslation;
+    public function setMetaKeywords(?string $metaKeywords): ProductTranslation;
 
-    public function getMetaDescription(): string;
+    public function getMetaDescription(): ?string;
 
-    public function setMetaDescription(string $metaDescription): ProductTranslation;
+    public function setMetaDescription(?string $metaDescription): ProductTranslation;
 
-    public function getShortDescription(): string;
+    public function getShortDescription(): ?string;
 
-    public function setShortDescription(string $shortDescription): ProductTranslation;
+    public function setShortDescription(?string $shortDescription): ProductTranslation;
 
-    public function getLocale(): string;
+    public function getLocale(): ?string;
 
-    public function setLocale(string $locale): ProductTranslation;
+    public function setLocale(?string $locale): ProductTranslation;
 }

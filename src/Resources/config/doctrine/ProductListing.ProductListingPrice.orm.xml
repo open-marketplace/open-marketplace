@@ -19,6 +19,7 @@
         <field name="price" column="price" type="float" unique="false" nullable="false" />
         <field name="minimumPrice" column="minimum_price" type="float" unique="false" nullable="true" />
         <field name="originalPrice" column="original_price" type="float" unique="false" nullable="false" />
+        <field name="channelCode" column="channel_code" type="string" unique="false" nullable="false" />
     </entity>
 
 </doctrine-mapping>

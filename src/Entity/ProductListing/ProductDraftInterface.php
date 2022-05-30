@@ -65,4 +65,8 @@ interface ProductDraftInterface extends ResourceInterface
     public function getStatus(): ?string;
 
     public function setStatus(string $status): ProductDraft;
+
+    public function newVersion();
+
+    public function clear(): void;
 }

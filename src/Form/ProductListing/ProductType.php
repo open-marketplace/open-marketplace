@@ -16,6 +16,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -28,15 +29,29 @@ final class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('code', TextType::class, array_merge(
-                ['label' => 'sylius.ui.code'],
-                ['disabled' => key_exists('disabled', $options) ? $options['disabled'] : false]
-            ))
+            ->add('code', TextType::class, [
+                'label' => 'sylius.ui.code',
+                'disabled' => ($builder->getData()->getCode())
+                ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ProductTranslationType::class,
                 'label' => 'sylius.form.product.translations',
+                'attr' => [
+                    'class' => 'ui styled fluid accordion'
+                    ]
+            ])
+            ->add('save', SubmitType::class,[
+                'attr' => [
+                    'class' => 'ui labeled icon primary button'
+                ]
+            ])
+            ->add('saveAndAdd', SubmitType::class,[
+                'attr' => [
+                    'class' => 'ui labeled icon secondary button'
+                ]
             ])
         ;
+
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $productDraft = $event->getData();
 
@@ -48,6 +63,7 @@ final class ProductType extends AbstractType
                     'required' => false,
                 ],
                 'label' => 'sylius.form.variant.price',
+                'disabled' => ($event->getData()->getCode())
             ]);
         });
     }

@@ -8,8 +8,8 @@
 
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
-{% block subcontent %}
-    {{ sylius_template_event([event_prefix, 'sylius.admin.create'], _context) }}
+{% block content %}
+    {{ include('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/_content.html.twig') }}
 {% endblock %}
 
 {% block stylesheets %}

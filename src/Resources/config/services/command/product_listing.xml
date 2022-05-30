@@ -7,6 +7,10 @@
             <argument key="$productListingRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_listing"/>
             <argument key="$productListingFactoryInterface" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.factory.product_listing" />
             <argument key="$tokenStorage" type="service" id="security.token_storage" />
+            <argument key="$draftFactory" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.factory.product_draft" />
+            <argument key="$priceFactory" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.factory.product_listing_price" />
+            <argument key="$translationFactory" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.factory.product_translation" />
+            <argument key="$draftRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_draft"/>
             <tag name="maker.command" />
         </service>
     </services>

@@ -27,7 +27,7 @@ class ProductListing implements ProductListingInterface
 //todo: refactor to VendorInterface
     protected ShopUserInterface $vendor;
 
-    protected \DateTimeInterface $publishedAt;
+    protected \DateTimeInterface $createAt;
 
     protected ?\DateTimeInterface $verifiedAt;
 
@@ -40,7 +40,7 @@ class ProductListing implements ProductListingInterface
     public function __construct()
     {
         $this->productDrafts = new ArrayCollection();
-        $this->publishedAt = new \DateTime();
+        $this->createAt = new \DateTime();
     }
 
     public function getId(): int
@@ -76,14 +76,14 @@ class ProductListing implements ProductListingInterface
         return $this;
     }
 
-    public function getPublishedAt(): ?\DateTimeInterface
+    public function getCreateAt(): ?\DateTimeInterface
     {
-        return $this->publishedAt;
+        return $this->createAt;
     }
 
-    public function setPublishedAt($publishedAt): ProductListingInterface
+    public function setCreateAt($createAt): ProductListingInterface
     {
-        $this->publishedAt = $publishedAt;
+        $this->createAt = $createAt;
         return $this;
     }
 

@@ -19,9 +19,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProductListingInterface extends ResourceInterface
 {
-    public function getPublishedAt(): ?\DateTimeInterface;
+    public function getCreateAt(): ?\DateTimeInterface;
 
-    public function setPublishedAt(\DatetimeInterface $publishedAt): ProductListingInterface;
+    public function setCreateAt(\DatetimeInterface $publishedAt): ProductListingInterface;
 
     public function getVerifiedAt(): ?\DateTimeInterface;
 

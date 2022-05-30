@@ -9,18 +9,18 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <many-to-one field="productListing" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing" >
-            <join-column name="product_listing_id" referenced-column-name="id" />
+        <many-to-one field="productListing" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing" inversed-by="productDrafts">
+            <join-column name="product_listing_id" referenced-column-name="id"/>
             <cascade>
                 <cascade-persist />
             </cascade>
         </many-to-one>
-        <one-to-many field="translations" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation" mapped-by="code">
+        <one-to-many field="translations" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation" mapped-by="productDraft" index-by="locale">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
-        <one-to-many field="productListingPrice" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice" mapped-by="productDraft">
+        <one-to-many field="productListingPrice" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice" mapped-by="productDraft" index-by="channelCode">
             <cascade>
                 <cascade-persist/>
             </cascade>
