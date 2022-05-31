@@ -62,7 +62,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given There are :count vendors
+     * @Given There are :count vendors listed
      */
     public function thereAreVendors($count)
     {
