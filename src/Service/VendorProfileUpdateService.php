@@ -28,23 +28,25 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     private EntityManagerInterface $entityManager;
 
     private SenderInterface $sender;
+    
+    private VendorProvider $vendorProvider;
 
     public function __construct(
         Security $security,
         EntityManagerInterface $entityManager,
-        SenderInterface $sender
+        SenderInterface $sender,
+        VendorProvider $vendorProvider
     ) {
         $this->security = $security;
         $this->entityManager = $entityManager;
         $this->sender = $sender;
+        $this->vendorProvider = $vendorProvider;
     }
 
     public function createPendingVendorProfileUpdate(VendorInterface $vendorData): void
     {
-        $currentVendor = $this->getVendor();
-        if (null == $currentVendor) {
-            return;
-        }
+        $currentVendor = $this->vendorProvider->getLoggedVendor();
+        
         $OldVendorPendingData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
         $pendingVendorUpdate = $OldVendorPendingData;
         if (null == $pendingVendorUpdate) {
@@ -59,22 +61,6 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
             return;
         }
         $this->sendEmail($user->getUsername(), $token);
-    }
-
-    private function getVendor(): ?VendorInterface
-    {
-        /** @var ShopUserInterface $user */
-        $user = $this->security->getUser();
-        if (null == $user) {
-            return null;
-        }
-        /** @var Customer $customer */
-        $customer = $user->getCustomer();
-        if (null == $customer) {
-            return null;
-        }
-
-        return $customer->getVendor();
     }
 
     private function setVendorFromData(VendorDataInterface $vendor, VendorDataInterface $data): void
@@ -113,7 +99,7 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         }
         $this->setVendorFromData($vendor, $vendorData);
         $this->deletePendingData($vendorData);
-    }
+    }    
 
     private function deletePendingData(VendorProfileUpdateInterface $vendorData): void
     {

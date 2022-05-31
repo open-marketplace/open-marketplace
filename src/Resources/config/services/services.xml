@@ -8,6 +8,7 @@
             <argument type="service" id="security.helper"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.email_sender"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider"/>
         </service>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider" 
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider">

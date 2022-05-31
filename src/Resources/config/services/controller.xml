@@ -26,5 +26,10 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />    
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service"/>
         </service>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController" 
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_controller" 
+                 parent="sylius.controller.zone">
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider"/>
+        </service>
     </services>
 </container>
