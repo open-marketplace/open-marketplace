@@ -11,11 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
+use function Clue\StreamFilter\fun;
+use function ECSPrefix20211002\React\Promise\map;
+use function PHPUnit\Framework\returnValue;
 
 class VendorController extends ResourceController
 {
@@ -26,5 +30,22 @@ class VendorController extends ResourceController
         } catch (UserNotFoundException|TokenNotFoundException $exception) {
             return $this->redirectToRoute('sylius_shop_login');
         }
+    }
+
+    public function showVendorPageAction(Request $request): Response
+    {
+        /** @var VendorInterface $vendor */
+        $vendor = $this->repository->findOneBy(['slug' => $request->attributes->get('slug')]);
+
+        $images = [];
+        foreach ($vendor->getImages() as $image) {
+            $images[$image->getType()] = $image->getPath();
+        }
+
+        return $this->render('@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_page.html.twig', [
+            'vendor' => $vendor,
+            'imagesDir' => '/media/image/',
+            'images' => $images,
+        ]);
     }
 }

@@ -1,0 +1,7 @@
+vendor_profile_update:
+  path: /vendor/{slug}
+  methods: [GET]
+  defaults:
+    _controller: BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController:showVendorPageAction
+    _sylius:
+      template: "@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_page.html.twig"

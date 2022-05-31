@@ -1,0 +1,25 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    Logo:
+                    {% if images.main is defined %}
+                        <img src="{{ imagesDir ~ images['main'] }}" alt="dupa">
+                    {% endif %}
+                </div>
+                <div class="row">
+                    Vendor name:
+                    {{ vendor.companyName }}
+                </div>
+                <div class="row">
+                    Description:
+                    {{ vendor.description}}
+                </div>
+            </div>
+            <div class="col-9">
+                Vendor's products:
+            </div>
+        </div>
+{% endblock %}

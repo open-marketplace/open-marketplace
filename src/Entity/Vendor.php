@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
@@ -26,6 +29,22 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
     private ?string $phoneNumber;
 
     private ?VendorAddress $vendorAddress;
+
+    private ?string $slug;
+
+    private ?string $description;
+
+    /** @return Collection<int, VendorImageInterface> */
+    private Collection $images;
+
+    /** @return Collection<int, ProductInterface> */
+    private Collection $products;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -85,5 +104,67 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
     public function setCustomer(Customer $customer): void
     {
         $this->customer = $customer;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /** @return Collection<int, VendorImageInterface> */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(VendorImageInterface $vendorImage): void
+    {
+        if (false === $this->images->contains($vendorImage)) {
+            $this->images->add($vendorImage);
+            $vendorImage->setVendor($this);
+        }
+    }
+
+    public function removeImage(VendorImageInterface $vendorImage): void
+    {
+        if (true === $this->images->contains($vendorImage)) {
+            $this->images->removeElement($vendorImage);
+        }
+    }
+
+    /** @return Collection<int, VendorImageInterface> */
+    public function getProducts(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addProduct(ProductInterface $product): void
+    {
+        if (false === $this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setVendor($this);
+        }
+    }
+
+    public function removeProduct(ProductInterface $product): void
+    {
+        if (true === $this->products->contains($product)) {
+            $this->products->removeElement($product);
+        }
     }
 }
