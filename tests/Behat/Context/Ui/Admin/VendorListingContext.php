@@ -22,8 +22,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     public function __construct(
         EntityManagerInterface $entityManager,
         AdminUserExampleFactory $adminUserExample
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->adminUserExample = $adminUserExample;
     }
