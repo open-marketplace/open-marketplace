@@ -38,7 +38,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given there is an admin user :username with password :password
+     * @Given There is an admin user :username with password :password
      */
     public function thereIsAnAdminUserWithPassword($username, $password)
     {
