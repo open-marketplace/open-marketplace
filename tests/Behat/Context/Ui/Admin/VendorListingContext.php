@@ -17,13 +17,13 @@ use function PHPUnit\Framework\assertNotEmpty;
 final class VendorListingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
+
     private AdminUserExampleFactory $adminUserExample;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         AdminUserExampleFactory $adminUserExample
-    )
-    {
+    ){
         $this->entityManager = $entityManager;
         $this->adminUserExample = $adminUserExample;
     }
@@ -38,7 +38,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given there is an admin user :username with password :password
+     * @Given There is an admin user :username with password :password
      */
     public function thereIsAnAdminUserWithPassword($username, $password)
     {
@@ -62,7 +62,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given There are :count vendors
+     * @Given There are :count vendors listed
      */
     public function thereAreVendors($count)
     {

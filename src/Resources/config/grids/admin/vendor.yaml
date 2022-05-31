@@ -12,15 +12,15 @@ sylius_grid:
             fields:
                 id:
                     type: string
-                    label: bitbag_sylius_mvm_plugin.ui.id
+                    label: bitbag.mvm.ui.id
                     sortable: ~
                 companyName:
                     type: string
-                    label: bitbag_sylius_mvm_plugin.ui.company_name
+                    label: bitbag.mvm.ui.company_name
                     sortable: ~
                 taxIdentifier:
                     type: string
-                    label: bitbag_sylius_mvm_plugin.ui.tax_id
+                    label: bitbag.mvm.ui.tax_id
                     sortable: ~
             actions:
                 main:
