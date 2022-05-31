@@ -2,7 +2,7 @@
 Feature: Listing vendors
   In order to manage vendors
   As an Administrator
-  I should be able to see vendors listing
+  I should be able to see vendors list
 
   @ui
   Scenario: Listing vendors
