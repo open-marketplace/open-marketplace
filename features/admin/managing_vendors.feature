@@ -1,5 +1,5 @@
 @managing_vendors
-Feature: Managing vendors
+Feature: Listing vendors
   In order to manage vendors
   As an Administrator
   I should be able to see vendors listing
