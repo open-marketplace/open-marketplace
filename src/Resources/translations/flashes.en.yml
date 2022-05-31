@@ -3,4 +3,4 @@
 
 sylius:
     customer:
-        registe: 'ZAzThank you for registering, check your email to verify your account.'
+        register: 'ZAzThank you for registering, check your email to verify your account.'
