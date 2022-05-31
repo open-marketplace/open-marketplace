@@ -1,6 +1,6 @@
 @managing_vendors
 Feature: Managing vendors
-  In order manage vendors
+  In order to manage vendors
   As an Administrator
   I should be able to see vendors listing
 
