@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin;
+namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
@@ -19,6 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEmpty;
 use function PHPUnit\Framework\assertNotNull;
@@ -26,15 +27,15 @@ use function PHPUnit\Framework\assertNotNull;
 final class ProductListingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
+    private ShopUserExampleFactory $shopUserExampleFactory;
 
-    private AdminUserExampleFactory $adminUserExampleFactory;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        AdminUserExampleFactory $adminUserExampleFactory
+        ShopUserExampleFactory $shopUserExampleFactory
     ) {
         $this->entityManager = $entityManager;
-        $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->shopUserExampleFactory = $shopUserExampleFactory;
     }
 
     /**
@@ -47,26 +48,27 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given there is an admin user :username with password :password
+     * @Given there is an vendor user :username with password :password
      */
     public function thereIsAnAdminUserWithPassword($username, $password)
     {
-        $admin = $this->adminUserExampleFactory->create();
-        $admin->setUsername($username);
-        $admin->setPlainPassword($password);
-        $admin->setEmail('admin@email.com');
-        $this->entityManager->persist($admin);
+        $user = $this->shopUserExampleFactory->create();
+        $user->setUsername($username);
+        $user->setPlainPassword($password);
+        $user->setEmail('vendor@email.com');
+        $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 
     /**
-     * @Given I am logged in as an admin
+     * @Given I am logged in as an vendor
      */
     public function iAmLoggedInAsAnAdmin()
     {
-        $this->visitPath('/admin/login');
-        $this->getPage()->fillField('Username', 'admin');
-        $this->getPage()->fillField('Password', 'admin');
+        $this->visitPath('/en_US/login');
+        var_dump($this->getPage()->getText());
+        $this->getPage()->fillField('Username', 'vendor@email.com');
+        $this->getPage()->fillField('Password', 'vendor');
         $this->getPage()->pressButton('Login');
         assertNotNull($this->getPage()->findLink('Logout'));
     }
@@ -90,26 +92,6 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then I should see :count product listing(s)
-     */
-    public function iShouldSeeProductListings($count)
-    {
-        $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
-        assertNotEmpty($rows, 'Could not find any rows');
-        assertEquals($count, count($rows), 'Rows numbers are not equal');
-    }
-
-    /**
-     * @Then I should see url :url
-     */
-    public function iShouldSeeUrl($url)
-    {
-        $currentUrl = $this->getSession()->getCurrentUrl();
-        $matches = preg_match($url, $currentUrl);
-        assertEquals(1, $matches);
-    }
-
-    /**
      * @Given I should see product's listing status :status
      */
     public function iShouldSeeProductsListingStatus($status)
@@ -124,14 +106,6 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function iClickButton($button)
     {
         $this->getPage()->pressButton($button);
-    }
-
-    /**
-     * @Then I should be redirected to :url
-     */
-    public function iShouldBeRedirectedTo($url)
-    {
-        assertEquals($url, $this->getSession()->getCurrentUrl());
     }
 
     /**

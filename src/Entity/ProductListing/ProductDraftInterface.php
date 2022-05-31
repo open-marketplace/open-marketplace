@@ -54,9 +54,13 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function addTranslations(ProductTranslation $translation): ProductDraft;
 
+    public function addTranslationsWithKey(ProductTranslation $translation, string $key): ProductDraft;
+
     public function getProductListingPrice(): Collection;
 
     public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): ProductDraft;
+
+    public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): ProductDraft;
 
     public function getProductListing(): ProductListing;
 
@@ -67,6 +71,4 @@ interface ProductDraftInterface extends ResourceInterface
     public function setStatus(string $status): ProductDraft;
 
     public function newVersion();
-
-    public function clear(): void;
 }

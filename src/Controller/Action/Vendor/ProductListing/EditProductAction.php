@@ -55,14 +55,21 @@ class EditProductAction extends AbstractController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
+        /** @var ProductDraftInterface $newResource */
         $newResource = $this->productDraftRepository->find($request->get('id'));
+
+        if (!(ProductDraftInterface::STATUS_CREATED == $newResource->getStatus())) {
+            $newResource = $this->createProductListingCommand->editAndCreate($newResource, false);
+        }
+
         $form = $this->createForm(ProductType::class, $newResource);
         $form->handleRequest($request);
+
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
 
-            $this->createProductListingCommand->editAndCreate($productDraft, $form->get('saveAndAdd')->isClicked());
+            $this->createProductListingCommand->saveEdit($productDraft, $form->get('saveAndAdd')->isClicked());
 
             return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index');
         }

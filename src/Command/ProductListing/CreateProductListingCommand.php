@@ -79,7 +79,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     }
 
 
-    public function editAndCreate(ProductDraftInterface $productDraft, bool $isSend): void
+    public function editAndCreate(ProductDraftInterface $productDraft, bool $isSend)
     {
         $productListing = $productDraft->getProductListing();
 
@@ -91,7 +91,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
             ->setProductListing($productListing);
 
         if ($isSend){
-            $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+            $newProductDrat->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
         }
 
         $this->cloneTranslation($newProductDrat, $productDraft);
@@ -100,7 +100,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         $newProductDrat->setProductListing($this->productListingRepository->find($productDraft->getProductListing()->getId()));
 
-        $this->draftRepository->save($newProductDrat);
+        return $newProductDrat;
     }
 
     private function cloneTranslation(ProductDraftInterface $newProductDrat, ProductDraftInterface $productDraft): void
@@ -119,7 +119,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
                 ->setMetaKeywords($translation->getMetaKeywords())
                 ->setSlug($translation->getSlug())
                 ->setShortDescription($translation->getShortDescription());
-            $newProductDrat->addTranslations($newTranslation);
+            $newProductDrat->addTranslationsWithKey($newTranslation, $newTranslation->getLocale());
         }
     }
 
@@ -136,7 +136,18 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
                 ->setMinimumPrice($price->getMinimumPrice())
                 ->setOriginalPrice($price->getOriginalPrice())
                 ->setProductDraft($newProductDrat);
-            $newProductDrat->addProductListingPrice($newPrice);
+            $newProductDrat->addProductListingPriceWithKey($newPrice, $newPrice->getChannelCode());
         }
+    }
+
+    public function saveEdit(ProductDraftInterface $productDraft,bool $isSend): void
+    {
+        $this->formatTranslation($productDraft);
+
+        if ($isSend){
+            $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+        }
+
+        $this->draftRepository->save($productDraft);
     }
 }

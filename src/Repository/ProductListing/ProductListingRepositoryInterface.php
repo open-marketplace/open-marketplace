@@ -16,4 +16,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 interface ProductListingRepositoryInterface
 {
     public function save(ProductListingInterface $productListing): void;
+
+    public function find($argument1);
 }

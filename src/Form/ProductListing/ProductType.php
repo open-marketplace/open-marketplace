@@ -62,8 +62,7 @@ final class ProductType extends AbstractType
                     'product_draft' => $productDraft,
                     'required' => false,
                 ],
-                'label' => 'sylius.form.variant.price',
-                'disabled' => ($event->getData()->getCode())
+                'label' => 'sylius.form.variant.price'
             ]);
         });
     }

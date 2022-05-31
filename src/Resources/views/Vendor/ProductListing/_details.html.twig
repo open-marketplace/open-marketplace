@@ -34,7 +34,9 @@
                 </td>
                 <td>
                     <ul class="ui bulleted list">
+                        {% if productDrat.status != 'under_verification' %}
                         <a href="{{ path('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_edit_product',{'id': productDrat.id}) }}">edit</a>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>

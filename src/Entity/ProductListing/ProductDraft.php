@@ -178,4 +178,16 @@ class ProductDraft implements ProductDraftInterface
 
         $this->translations = new ArrayCollection();
     }
+
+    public function addTranslationsWithKey(ProductTranslation $translation, string $key): ProductDraft
+    {
+        $this->translations->set($key, $translation);
+        return $this;
+    }
+
+    public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): ProductDraft
+    {
+        $this->productListingPrice->set($key,$productListingPrice);
+        return $this;
+    }
 }
