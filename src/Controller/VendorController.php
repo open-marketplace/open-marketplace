@@ -77,7 +77,7 @@ class VendorController extends ResourceController
         if (null == $pendingUpdate) {
             return parent::updateAction($request);
         }
-        $this->addFlash('error','sylius.customer.register');
+        $this->addFlash('error','sylius.user.verify_email_request');
 
         return $this->redirectToRoute('vendor_profile');
     }
