@@ -1,11 +1,11 @@
-bitbag_sylius_mvm_plugin_admin_vendor_verify:
+bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_verify:
     path: /vendors/{id}/verify
     methods: [GET, PUT]
     defaults:
-        _controller: bitbag_sylius_mvm_plugin.controller.vendor:applyStateMachineTransitionAction
+        _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.vendor:applyStateMachineTransitionAction
         _sylius:
             state_machine:
-                graph: bitbag_sylius_mvm_plugin_vendor
+                graph: bitbag_sylius_multi_vendor_marketplace_plugin_vendor
                 transition: verify
-            redirect: bitbag_sylius_mvm_plugin_admin_vendor_index
+            redirect: bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_index
             flash: bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_verified

@@ -13,10 +13,12 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendors: 'Vendors'
+        verified: 'Verified'
+        verify: 'Verify'
 
 app:
     ui:
         vendors: 'Vendors'
-        verified: 'Verified'
-        verify: 'Verify'
+
+
 

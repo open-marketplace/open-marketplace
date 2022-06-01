@@ -33,7 +33,7 @@ final class MultiVendorMarketplaceMenuListener
 
         $mvmRootMenuItem
             ->addChild('vendors', [
-                'route' => 'bitbag_sylius_mvm_plugin_admin_vendor_index',
+                'route' => 'bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_index',
             ])
             ->setLabel('bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendors')
             ->setLabelAttribute('icon', 'users');
