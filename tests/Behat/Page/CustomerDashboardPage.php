@@ -26,7 +26,7 @@ class CustomerDashboardPage extends SymfonyPage implements SymfonyPageInterface
         $sidebar = $this->getDocument()->find('css', '.grid .four .menu');
         $links = $sidebar->findAll('css', '.item');
         foreach ($links as $link){
-            if($value == $link->getText())
+            if($value === $link->getText())
                 return true;
         }
         return false;
