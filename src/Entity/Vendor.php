@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 class Vendor implements VendorInterface
 {
-    private int $id;
+    private ?int $id;
 
     private CustomerInterface $customer;
 
@@ -25,12 +25,12 @@ class Vendor implements VendorInterface
 
     private ?VendorAddressInterface $vendorAddress;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }

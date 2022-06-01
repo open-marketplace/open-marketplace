@@ -14,4 +14,10 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     street: "Street"
     phone_number: "Phone number"
     company_address: "Company Address"
-    postal_code: "Postal code"
+    postal_code: "Postal code"   
+    id: 'ID'  
+    tax_id: 'Tax ID'
+    vendors: 'Vendors'
+app:
+    ui:
+        vendors: Vendors

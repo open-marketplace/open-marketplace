@@ -4,3 +4,4 @@ sylius_resource:
       classes:
         model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor
         controller: BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController
+        repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository
