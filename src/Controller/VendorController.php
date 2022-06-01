@@ -33,7 +33,6 @@ class VendorController extends ResourceController
     {
         /** @var VendorInterface $vendor */
         $vendor = $this->repository->findOneBy(['slug' => $request->attributes->get('slug')]);
-//        dd($vendor->getImage());
 
         return $this->render('@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_page.html.twig', [
             'vendor' => $vendor,
