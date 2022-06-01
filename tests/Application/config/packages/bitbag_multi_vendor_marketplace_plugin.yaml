@@ -1,0 +1,2 @@
+imports:
+  - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/config.yml' }
