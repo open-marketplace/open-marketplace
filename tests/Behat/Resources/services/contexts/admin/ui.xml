@@ -15,5 +15,11 @@
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
         </service>
 
+        <service id="bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_verification" public="true"
+                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\VendorVerificationContext">
+            <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+
     </services>
 </container>

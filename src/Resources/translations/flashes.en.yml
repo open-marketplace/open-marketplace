@@ -1,0 +1,3 @@
+bitbag_sylius_mvm_plugin:
+    ui:
+        vendor_verified: 'Vendor has been successfully verified'

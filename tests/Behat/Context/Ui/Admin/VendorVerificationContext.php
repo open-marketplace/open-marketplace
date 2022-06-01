@@ -11,21 +11,19 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertNotEmpty;
 
-final class VendorListingContext extends RawMinkContext implements Context
+final class VendorVerificationContext extends RawMinkContext implements Context
 {
+    private AdminUserExampleFactory $adminUserExample;
     private EntityManagerInterface $entityManager;
 
-    private AdminUserExampleFactory $adminUserExample;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        AdminUserExampleFactory $adminUserExample
-    ) {
-        $this->entityManager = $entityManager;
+        AdminUserExampleFactory $adminUserExample,
+        EntityManagerInterface $entityManager
+    )
+    {
         $this->adminUserExample = $adminUserExample;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -38,7 +36,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given There is an admin user :username with password :password
+     * @Given there is an admin user :username with password :password
      */
     public function thereIsAnAdminUserWithPassword($username, $password)
     {
@@ -61,28 +59,25 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given There are :count vendors listed
+     * @Given There is an unverified vendor
      */
-    public function thereAreVendors($count)
+    public function thereIsAnUnverifiedVendor()
     {
-        for ($i=0; $i<$count; $i++) {
-            $vendor = new Vendor();
-            $vendor->setCompanyName('vendor ' . $i);
-            $vendor->setTaxIdentifier('vendorTax' . $i);
-            $vendor->setPhoneNumber('vendorPhone' . $i);
-            $this->entityManager->persist($vendor);
-        }
+        $vendor = new Vendor();
+        $vendor->setCompanyName('vendor');
+        $vendor->setTaxIdentifier('vendorTax');
+        $vendor->setPhoneNumber('vendorPhone');
+        $vendor->setStatus('unverified');
+        $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
 
     /**
-     * @Then I should see :count vendor rows
+     * @When I click :buttonText
      */
-    public function iShouldSeeVendorRows($count)
+    public function iClick($buttonText)
     {
-        $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
-        assertNotEmpty($rows, 'Could not find any rows');
-        assertEquals($count, count($rows), 'Rows numbers are not equal');
+        $this->getPage()->pressButton($buttonText);
     }
 
     /**
@@ -92,4 +87,5 @@ final class VendorListingContext extends RawMinkContext implements Context
     {
         return $this->getSession()->getPage();
     }
+
 }

@@ -38,4 +38,8 @@ interface VendorInterface extends ResourceInterface
     public function getCustomer(): Customer;
 
     public function setCustomer(Customer $customer): void;
+
+    public function getStatus(): string;
+
+    public function setStatus(string $status): void;
 }

@@ -1,14 +1,22 @@
 bitbag_sylius_multi_vendor_marketplace_plugin:
     ui:
         company_name: 'Company name'
+        customer: 'Customer'
+        details: 'Details'
         id: 'ID'
         marketplace: 'Marketplace'
+        phone_number: 'Phone number'
         product_listings: 'Product listings'
         publishedAt: 'Published at'
         status: 'Status'
         tax_id: 'Tax ID'
+        unverified: 'Unverified'
+        vendor_address: 'Vendor address'
         vendors: 'Vendors'
 
 app:
     ui:
-        vendors: Vendors
+        vendors: 'Vendors'
+        verified: 'Verified'
+        verify: 'Verify'
+
