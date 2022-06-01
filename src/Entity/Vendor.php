@@ -34,15 +34,13 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 
     private ?string $description;
 
-    /** @return Collection<int, VendorImageInterface> */
-    private Collection $images;
+    private ?VendorImageInterface $image;
 
     /** @return Collection<int, ProductInterface> */
     private Collection $products;
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
 
@@ -126,31 +124,20 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
         $this->description = $description;
     }
 
-    /** @return Collection<int, VendorImageInterface> */
-    public function getImages(): Collection
+    public function getImage(): ?VendorImageInterface
     {
-        return $this->images;
+        return $this->image;
     }
 
-    public function addImage(VendorImageInterface $vendorImage): void
+    public function setImage(VendorImageInterface $vendorImage): void
     {
-        if (false === $this->images->contains($vendorImage)) {
-            $this->images->add($vendorImage);
-            $vendorImage->setVendor($this);
-        }
-    }
-
-    public function removeImage(VendorImageInterface $vendorImage): void
-    {
-        if (true === $this->images->contains($vendorImage)) {
-            $this->images->removeElement($vendorImage);
-        }
+        $this->image = $vendorImage;
     }
 
     /** @return Collection<int, VendorImageInterface> */
     public function getProducts(): Collection
     {
-        return $this->images;
+        return $this->products;
     }
 
     public function addProduct(ProductInterface $product): void

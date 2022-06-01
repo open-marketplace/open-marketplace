@@ -8,10 +8,7 @@
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="type" column="type" type="string" length="32"/>
-        <field name="path" column="path" type="text" />
-        <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor">
-            <join-column referenced-column-name="id" />
-        </many-to-one>
+        <field name="path" column="path" type="string" />
+        <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" inversed-by="image" />
     </entity>
 </doctrine-mapping>

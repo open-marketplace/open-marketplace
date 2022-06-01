@@ -17,9 +17,6 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
-use function Clue\StreamFilter\fun;
-use function ECSPrefix20211002\React\Promise\map;
-use function PHPUnit\Framework\returnValue;
 
 class VendorController extends ResourceController
 {
@@ -36,16 +33,11 @@ class VendorController extends ResourceController
     {
         /** @var VendorInterface $vendor */
         $vendor = $this->repository->findOneBy(['slug' => $request->attributes->get('slug')]);
-
-        $images = [];
-        foreach ($vendor->getImages() as $image) {
-            $images[$image->getType()] = $image->getPath();
-        }
+//        dd($vendor->getImage());
 
         return $this->render('@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_page.html.twig', [
             'vendor' => $vendor,
             'imagesDir' => '/media/image/',
-            'images' => $images,
         ]);
     }
 }

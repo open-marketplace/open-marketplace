@@ -5,8 +5,8 @@
             <div class="col-3">
                 <div class="row">
                     Logo:
-                    {% if images.main is defined %}
-                        <img src="{{ imagesDir ~ images['main'] }}" alt="dupa">
+                    {% if vendor.image is defined and vendor.image is not null%}
+                        <img src="{{ imagesDir ~ vendor.image.path }}" alt="image broken">
                     {% endif %}
                 </div>
                 <div class="row">

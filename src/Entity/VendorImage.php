@@ -8,8 +8,6 @@ final class VendorImage implements VendorImageInterface
 {
     private ?int $id;
 
-    private ?string $type;
-
     private ?string $path;
 
     private ?VendorInterface $vendor;
@@ -17,16 +15,6 @@ final class VendorImage implements VendorImageInterface
     public function getId(): int
     {
         $this->getId();
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(?string $type): void
-    {
-        $this->type = $type;
     }
 
     public function getPath(): ?string

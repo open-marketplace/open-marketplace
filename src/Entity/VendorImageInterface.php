@@ -8,10 +8,6 @@ interface VendorImageInterface
 {
     public function getId(): ?int;
 
-    public function getType(): ?string;
-
-    public function setType(?string $type): void;
-
     public function getPath(): ?string;
 
     public function setPath(?string $path): void;
