@@ -24,7 +24,7 @@ sylius_grid:
                     sortable: ~
                 status:
                     type: string
-                    label: bitbag_sylius_mvm_plugin.ui.status
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
                     sortable: ~
             actions:
                 main:
@@ -32,21 +32,9 @@ sylius_grid:
                         type: create
                 item:
                     details:
-                        label: bitbag_sylius_mvm_plugin.ui.details
+                        label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.details
                         type: show
                     update:
                         type: update
                     delete:
                         type: delete
-
-#                    verify:
-#                        type: apply_transition
-#                        label: bitbag_sylius_mvm_plugin.ui.verify
-#                        icon: thumbs up
-#                        options:
-#                            link:
-#                                route: bitbag_sylius_mvm_plugin_admin_vendor_verify
-#                                parameters:
-#                                    id: resource.id
-#                            transition: verify
-#                            graph: bitbag_sylius_mvm_plugin_vendor

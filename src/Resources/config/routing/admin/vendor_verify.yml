@@ -8,4 +8,4 @@ bitbag_sylius_mvm_plugin_admin_vendor_verify:
                 graph: bitbag_sylius_mvm_plugin_vendor
                 transition: verify
             redirect: bitbag_sylius_mvm_plugin_admin_vendor_index
-            flash: bitbag_sylius_mvm_plugin.ui.vendor_verified
+            flash: bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_verified
