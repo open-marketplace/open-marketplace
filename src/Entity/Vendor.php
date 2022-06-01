@@ -19,7 +19,7 @@ class Vendor implements VendorInterface
 
     private ?int $id;
 
-    private Customer $customer;
+    private CustomerInterface $customer;
 
     private ?string $companyName;
 
@@ -27,7 +27,7 @@ class Vendor implements VendorInterface
 
     private ?string $phoneNumber;
 
-    private ?VendorAddress $vendorAddress;
+    private ?VendorAddressInterface $vendorAddress;
 
     private string $status = self::STATUS_UNVERIFIED;
 
@@ -71,22 +71,22 @@ class Vendor implements VendorInterface
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function getVendorAddress(): ?VendorAddress
+    public function getVendorAddress(): ?VendorAddressInterface
     {
         return $this->vendorAddress;
     }
 
-    public function setVendorAddress(?VendorAddress $vendorAddress): void
+    public function setVendorAddress(?VendorAddressInterface $vendorAddress): void
     {
         $this->vendorAddress = $vendorAddress;
     }
 
-    public function getCustomer(): Customer
+    public function getCustomer(): CustomerInterface
     {
         return $this->customer;
     }
 
-    public function setCustomer(Customer $customer): void
+    public function setCustomer(CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }

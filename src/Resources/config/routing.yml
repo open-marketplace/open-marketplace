@@ -1,7 +1,11 @@
+vendor_registration:
+  resource: "routing/vendor_register_form.yml"
+  prefix: /{_locale}
+  requirements:
+    _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 app_admin:
     resource: 'routing/admin.yml'
     prefix: /admin
-
 vendor_register:
     resource: "routing/vendor_register.yml"
     prefix: /{_locale}

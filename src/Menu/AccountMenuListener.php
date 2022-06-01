@@ -13,14 +13,14 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Menu;
 
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
-class AccountMenuListener
+final class AccountMenuListener
 {
     public function addAccountMenuItems(MenuBuilderEvent $event): void
     {
         $menu = $event->getMenu();
         $menu
-            ->addChild('new', ['route' => 'vendor_register'])
-            ->setLabel('Register as vendor')
+            ->addChild('new', ['route' => 'vendor_register_form'])
+            ->setLabel('bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_dashboard')
             ->setLabelAttribute('icon', 'star')
         ;
     }

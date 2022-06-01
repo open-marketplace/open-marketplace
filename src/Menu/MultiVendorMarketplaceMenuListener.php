@@ -39,4 +39,3 @@ final class MultiVendorMarketplaceMenuListener
             ->setLabelAttribute('icon', 'users');
     }
 }
-
