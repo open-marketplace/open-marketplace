@@ -18,11 +18,11 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
 
     protected ProductDraft $productDraft;
 
-    protected float $price;
+    protected ?float $price;
 
-    protected float $originalPrice;
+    protected ?float $originalPrice;
 
-    protected float $minimumPrice;
+    protected ?float $minimumPrice;
 
     protected string $channelCode;
 
@@ -53,34 +53,34 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         return $this;
     }
 
-    public function getPrice(): float
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): ProductListingPrice
+    public function setPrice(?float $price): ProductListingPrice
     {
         $this->price = $price;
         return $this;
     }
 
-    public function getOriginalPrice(): float
+    public function getOriginalPrice(): ?float
     {
         return $this->originalPrice;
     }
 
-    public function setOriginalPrice(float $originalPrice): ProductListingPrice
+    public function setOriginalPrice(?float $originalPrice): ProductListingPrice
     {
         $this->originalPrice = $originalPrice;
         return $this;
     }
 
-    public function getMinimumPrice(): float
+    public function getMinimumPrice(): ?float
     {
         return $this->minimumPrice;
     }
 
-    public function setMinimumPrice(float $minimumPrice): ProductListingPrice
+    public function setMinimumPrice(?float $minimumPrice): ProductListingPrice
     {
         $this->minimumPrice = $minimumPrice;
         return $this;

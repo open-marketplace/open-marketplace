@@ -17,9 +17,5 @@ interface ProductListingRepositoryInterface
 {
     public function save(ProductListingInterface $productListing): void;
 
-    public function find(
-        $id,
-        $lockMode = null,
-        $lockVersion = null
-    );
+
 }

@@ -41,11 +41,13 @@ final class ProductType extends AbstractType
                     ]
             ])
             ->add('save', SubmitType::class,[
+                'label' => 'mvm.ui.save',
                 'attr' => [
                     'class' => 'ui labeled icon primary button'
                 ]
             ])
             ->add('saveAndAdd', SubmitType::class,[
+                'label' => 'mvm.ui.save_and_add',
                 'attr' => [
                     'class' => 'ui labeled icon secondary button'
                 ]
@@ -72,7 +74,7 @@ final class ProductType extends AbstractType
         return 'bitbag_product';
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'compound' => true,

@@ -21,7 +21,7 @@ interface ProductListingInterface extends ResourceInterface
 {
     public function getCreateAt(): ?\DateTimeInterface;
 
-    public function setCreateAt(\DatetimeInterface $publishedAt): ProductListingInterface;
+    public function setCreateAt(\DatetimeInterface $createAt): ProductListingInterface;
 
     public function getVerifiedAt(): ?\DateTimeInterface;
 
@@ -39,7 +39,7 @@ interface ProductListingInterface extends ResourceInterface
 
     public function setCode(?string $code): ProductListingInterface;
 
-    public function addProductDrafts($productDrafts): ProductListingInterface;
+    public function addProductDrafts(ProductDraftInterface $productDrafts): ProductListingInterface;
 
     public function getProductDrafts(): Collection;
 

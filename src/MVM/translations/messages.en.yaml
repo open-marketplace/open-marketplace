@@ -1,0 +1,7 @@
+mvm:
+  ui:
+    menu:
+      product_list: Product List
+    create_new_product: Create Product
+    save: Save
+    save_and_add: Save and Add

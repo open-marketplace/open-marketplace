@@ -26,7 +26,7 @@ interface ProductDraftInterface extends ResourceInterface
 
     public const STATUS_REJECTED = 'rejected';
 
-    public function getId(): int;
+    public function getId(): ?int;
 
     public function setId(int $id): ProductDraft;
 
@@ -44,11 +44,11 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function getCreatedAt(): \DateTimeInterface;
 
-    public function setCreatedAt(?\DateTimeInterface $createdAt): ProductDraft;
+    public function setCreatedAt(\DateTimeInterface $createdAt): ProductDraft;
 
     public function getVersionNumber(): int;
 
-    public function setVersionNumber(int $version): ProductDraft;
+    public function setVersionNumber(int $versionNumber): ProductDraft;
 
     public function getTranslations(): Collection;
 
@@ -70,5 +70,5 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function setStatus(string $status): ProductDraft;
 
-    public function newVersion();
+    public function newVersion(): ProductDraft;
 }

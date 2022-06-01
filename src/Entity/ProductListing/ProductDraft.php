@@ -55,7 +55,7 @@ class ProductDraft implements ProductDraftInterface
         $this->versionNumber = 1;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -104,7 +104,7 @@ class ProductDraft implements ProductDraftInterface
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $createdAt): ProductDraft
+    public function setCreatedAt(\DateTimeInterface $createdAt): ProductDraft
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -165,9 +165,10 @@ class ProductDraft implements ProductDraftInterface
         return $this;
     }
 
-    public function newVersion(): void
+    public function newVersion(): ProductDraft
     {
         $this->versionNumber++;
+        return $this;
     }
 
     public function clear(): void

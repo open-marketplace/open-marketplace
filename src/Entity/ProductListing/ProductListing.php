@@ -81,7 +81,7 @@ class ProductListing implements ProductListingInterface
         return $this->createAt;
     }
 
-    public function setCreateAt($createAt): ProductListingInterface
+    public function setCreateAt(\DateTimeInterface $createAt): ProductListingInterface
     {
         $this->createAt = $createAt;
         return $this;
@@ -125,7 +125,7 @@ class ProductListing implements ProductListingInterface
         return $this->productDrafts;
     }
 
-    public function addProductDrafts($productDrafts): ProductListingInterface
+    public function addProductDrafts(ProductDraftInterface $productDrafts): ProductListingInterface
     {
         $this->productDrafts->add($productDrafts);
         return $this;

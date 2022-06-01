@@ -33,7 +33,7 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
 
     protected ?string $shortDescription;
 
-    protected string $locale;
+    protected ?string $locale;
 
     public function __construct()
     {

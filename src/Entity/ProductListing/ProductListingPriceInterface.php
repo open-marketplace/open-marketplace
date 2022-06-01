@@ -23,17 +23,17 @@ interface ProductListingPriceInterface extends ResourceInterface
 
     public function setProductDraft(ProductDraft $productDraft): ProductListingPrice;
 
-    public function getPrice(): float;
+    public function getPrice(): ?float;
 
-    public function setPrice(float $price): ProductListingPrice;
+    public function setPrice(?float $price): ProductListingPrice;
 
-    public function getOriginalPrice(): float;
+    public function getOriginalPrice(): ?float;
 
-    public function setOriginalPrice(float $originalPrice): ProductListingPrice;
+    public function setOriginalPrice(?float $originalPrice): ProductListingPrice;
 
-    public function getMinimumPrice(): float;
+    public function getMinimumPrice(): ?float;
 
-    public function setMinimumPrice(float $minimumPrice): ProductListingPrice;
+    public function setMinimumPrice(?float $minimumPrice): ProductListingPrice;
 
     public function getChannelCode(): string;
 

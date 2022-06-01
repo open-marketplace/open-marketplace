@@ -16,6 +16,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 interface CreateProductListingCommandInterface
 {
     public function create(ProductDraftInterface $productDraft,bool $isSend): void;
-    public function editAndCreate(ProductDraftInterface $productDraft,bool $isSend);
+    public function cloneProduct(ProductDraftInterface $productDraft, bool $isSend): ProductDraftInterface;
     public function saveEdit(ProductDraftInterface $productDraft,bool $isSend): void;
 }

@@ -59,7 +59,7 @@ class EditProductAction extends AbstractController
         $newResource = $this->productDraftRepository->find($request->get('id'));
 
         if (!(ProductDraftInterface::STATUS_CREATED == $newResource->getStatus())) {
-            $newResource = $this->createProductListingCommand->editAndCreate($newResource, false);
+            $newResource = $this->createProductListingCommand->cloneProduct($newResource, false);
         }
 
         $form = $this->createForm(ProductType::class, $newResource);

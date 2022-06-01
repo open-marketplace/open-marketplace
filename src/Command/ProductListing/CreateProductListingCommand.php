@@ -17,13 +17,14 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage;
 
 class CreateProductListingCommand implements CreateProductListingCommandInterface
 {
     private RepositoryInterface $productListingRepository;
     private FactoryInterface $productListingFactoryInterface;
-    private UsageTrackingTokenStorage $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
     private FactoryInterface $translationFactory;
     private FactoryInterface $draftFactory;
     private FactoryInterface $priceFactory;
@@ -32,7 +33,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     public function __construct(
         RepositoryInterface $productListingRepository,
         FactoryInterface $productListingFactoryInterface,
-        UsageTrackingTokenStorage $tokenStorage,
+        TokenStorageInterface $tokenStorage,
         FactoryInterface $translationFactory,
         FactoryInterface $draftFactory,
         FactoryInterface $priceFactory,
@@ -69,7 +70,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         $this->productListingRepository->save($productListing);
     }
 
-    private function formatTranslation(ProductDraftInterface $productDraft)
+    private function formatTranslation(ProductDraftInterface $productDraft): ProductDraftInterface
     {
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation){
@@ -79,14 +80,16 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     }
 
 
-    public function editAndCreate(ProductDraftInterface $productDraft, bool $isSend)
+    public function cloneProduct(ProductDraftInterface $productDraft, bool $isSend): ProductDraftInterface
     {
         $productListing = $productDraft->getProductListing();
 
         /** @var ProductDraftInterface $newProductDrat */
         $newProductDrat = $this->draftFactory->createNew();
+
         $newProductDrat
-            ->setVersionNumber($productDraft->getVersionNumber()+1)
+            ->setVersionNumber($productDraft->getVersionNumber())
+            ->newVersion()
             ->setCode($productDraft->getCode())
             ->setProductListing($productListing);
 
@@ -98,7 +101,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         $this->clonePrice($newProductDrat, $productDraft);
 
-        $newProductDrat->setProductListing($this->productListingRepository->find($productDraft->getProductListing()->getId()));
+        $newProductDrat->setProductListing($productDraft->getProductListing());
 
         return $newProductDrat;
     }
@@ -150,4 +153,6 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         $this->draftRepository->save($productDraft);
     }
+
+
 }

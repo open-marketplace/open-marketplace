@@ -72,7 +72,7 @@ final class ProductPriceType extends AbstractResourceType
                 return;
             }
 
-            if ($pricing->getPrice() === null && $pricing->getOriginalPrice() === null) {
+            if (($pricing->getPrice() === null) && ($pricing->getOriginalPrice() === null)) {
                 $event->setData(null);
 
                 if ($pricing->getId() !== null) {

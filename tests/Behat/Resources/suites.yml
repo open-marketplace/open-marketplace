@@ -1,2 +1,3 @@
 imports:
   - suites/ui/admin/product_listing.yml
+  - suites/ui/vendor/product_listing.yml
