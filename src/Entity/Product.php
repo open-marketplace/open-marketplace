@@ -6,7 +6,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Core\Model\Product as BaseProduct;
 
-final class Product extends BaseProduct implements ProductInterface
+class Product extends BaseProduct implements ProductInterface
 {
     private ?VendorInterface $vendor;
 

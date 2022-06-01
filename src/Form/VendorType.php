@@ -14,30 +14,46 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGeneratorInterface;
+use Ramsey\Uuid\Uuid;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Valid;
 
 class VendorType extends AbstractResourceType
 {
     private TokenStorageInterface $tokenStorage;
 
+    private VendorSlugGeneratorInterface $vendorSlugGenerator;
+
+    private VendorImageFactoryInterface $vendorImageFactory;
+
     public function __construct(
         string $dataClass,
         TokenStorageInterface $tokenStorage,
-        array $validationGroups = []
+        array $validationGroups = [],
+        VendorSlugGeneratorInterface $vendorSlugGenerator,
+        VendorImageFactoryInterface $vendorImageFactory
     ) {
         parent::__construct($dataClass, $validationGroups);
         $this->tokenStorage = $tokenStorage;
+        $this->vendorSlugGenerator = $vendorSlugGenerator;
+        $this->vendorImageFactory = $vendorImageFactory;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -59,6 +75,51 @@ class VendorType extends AbstractResourceType
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_address',
                 'constraints' => [new Valid()],
             ])
+            ->add('image', FileType::class, [
+                'mapped'=> false,
+                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.logo',
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2048k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/svg+xml',
+                        ],
+                        'mimeTypesMessage' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.invalid_logo',
+                    ])
+                ],
+            ])
+            ->add('description', TextType::class, [
+                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.description',
+            ])
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
+                /** @var UploadedFile $image */
+                $image = $event->getForm()->get('image')->getData();
+                /** @var VendorInterface $vendor */
+                $vendor = $event->getData();
+
+                //TODO: secure to avoid duplicates
+                $vendor->setSlug($this->vendorSlugGenerator->generateSlug($vendor->getCompanyName()));
+
+                //TODO: move image save to service
+                $uuid = Uuid::uuid4();
+                $filename = $uuid->toString() . '.' . $image->guessClientExtension();
+
+                try {
+                    $image->move(
+                        $_ENV['LOGO_DIRECTORY'],
+                        $filename
+                    );
+
+                    $vendorImage = $this->vendorImageFactory->create($filename, $vendor);
+                    $vendor->setImage($vendorImage);
+
+                } catch (FileException $e) {
+                    //TODO: handle exception
+                }
+            })
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
                 $token = $this->tokenStorage->getToken();
                 if (null === $token) {

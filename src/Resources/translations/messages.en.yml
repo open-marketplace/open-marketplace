@@ -15,5 +15,8 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     phone_number: "Phone number"
     company_address: "Company Address"
     postal_code: "Postal code"
+    logo: 'Logo'
+    invalid_logo: 'Please upload a valid image (jpg/png/svg)'
+    description: 'Description'
   email:
     request_profile_update: "Hey, you asked to change your company details. For security purposes, we need to verify your decision. Click on the link below if you want to make a change or ignore this message."

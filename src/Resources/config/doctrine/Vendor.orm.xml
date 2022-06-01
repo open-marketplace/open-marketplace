@@ -22,6 +22,9 @@
         <one-to-one field="image"
                      target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage"
                      mapped-by="vendor">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
         </one-to-one>
         <one-to-many field="products"
                      target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product"
