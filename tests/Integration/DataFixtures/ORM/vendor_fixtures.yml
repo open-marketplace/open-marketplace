@@ -1,0 +1,17 @@
+Sylius\Component\Addressing\Model\Country:
+    polska:
+        code: 'PL'
+        
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+    vendor_address:
+        country: '@polska'
+        city: "Warszawa"
+        postalCode: "00-999"
+        street: "Wiejska 115"
+            
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
+    vendor:
+        companyName: 'Test company name'
+        taxIdentifier: '12345657'
+        phoneNumber: '333111222'
+        vendorAddress: '@vendor_address'
