@@ -5,25 +5,24 @@ Feature: Blocking vendors
   I should be able to click Block button in vendors list
 
   Background:
-    Given There is an admin user "admin" with password "admin"
-    And I am logged in as an admin
+    Given I am logged in as an administrator
     And I am on "/admin"
 
-  @ui
+  @ui @javascript
   Scenario: Blocking vendors
-    Given There is an unblocked vendor
-    And print last response
+    Given There is a "unblocked" vendor
     When I follow "Vendors"
     And I click "Block"
     And I should see "Confirm your action"
-    And I choose "div:contains('Yes')"
+    And I choose "#confirmation-button"
+    And print current URL
     Then I should see "Vendor has been successfully blocked"
 
-  @ui
+  @ui @javascript
   Scenario: Unblocking vendors
-    Given There is a blocked vendor
+    Given There is a 'blocked' vendor
     When I follow "Vendors"
     And I click "Unblock"
     And I should see "Confirm your action"
-    And I follow "Yes"
+    And I choose "#confirmation-button"
     Then I should see "Vendor has been successfully unblocked"
