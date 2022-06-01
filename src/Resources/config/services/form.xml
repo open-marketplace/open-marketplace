@@ -8,12 +8,12 @@
             <parameter>VendorUserRegister</parameter>
             <parameter>sylius</parameter>
         </parameter>
-    </parameters>    
-    <services>        
+    </parameters>
+    <services>
         <service id="bitbag.sylius_multi_vendor_marketplace_plugin.form.vendor_type"
                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType"
         >
-            <argument>%bitbag_multi_vendor_marketplace.model.vendor.class%</argument>
+            <argument>%bitbag_sylius_multi_vendor_marketplace_plugin.model.vendor.class%</argument>
             <argument type="service" id="security.token_storage"/>
             <argument>%bitbag_sylius_organization_plugin.form.type.vendor.validation_groups%</argument>
             <tag name="form.type"/>
