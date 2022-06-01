@@ -1,3 +1,7 @@
+app_admin:
+    resource: 'routing/admin.yml'
+    prefix: /admin
+
 vendor_register:
     resource: "routes/vendor_register.yml"
     prefix: /{_locale}

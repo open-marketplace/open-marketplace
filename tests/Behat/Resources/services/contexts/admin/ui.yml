@@ -1,8 +1,0 @@
-services:
-    _defaults: { public: true }
-
-    bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_listing:
-        class: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\VendorListingContext
-        arguments:
-            - "@doctrine.orm.default_entity_manager"
-            - "@sylius.fixture.example_factory.admin_user"

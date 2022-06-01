@@ -1,12 +1,13 @@
-bitbag:
-    mvm:
-        ui:
-            marketplace: Marketplace
-            vendors: Vendors
-            id: ID
-            company_name: Company name
-            tax_id: Tax ID
-
+bitbag_sylius_multi_vendor_marketplace_plugin:
+    ui:
+        company_name: 'Company name'
+        id: 'ID'
+        marketplace: 'Marketplace'
+        product_listings: 'Product listings'
+        publishedAt: 'Published at'
+        status: 'Status'
+        tax_id: 'Tax ID'
+        vendors: 'Vendors'
 
 app:
     ui:

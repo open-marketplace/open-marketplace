@@ -1,3 +1,4 @@
 imports:
-  - { resource: "resources/customer.yml"}
-  - { resource: "resources/vendor.yml"}
+  - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/multi_vendor_market_place_product_listing.yml' }
+  - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/customer.yml"}
+  - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/vendor.yml"}
