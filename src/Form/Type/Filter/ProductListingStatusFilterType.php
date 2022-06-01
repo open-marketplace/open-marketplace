@@ -19,7 +19,7 @@ final class ProductListingStatusFilterType extends AbstractType
             [
                 'label' => false,
                 'choices' => Options::getTypeFilter(),
-                'required' => false
+                'required' => false,
             ]
         );
     }

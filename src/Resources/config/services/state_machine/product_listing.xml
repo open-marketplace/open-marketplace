@@ -5,9 +5,13 @@
     <services>
         <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing" public="true"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductListingCallbacks">
-            <argument key="$productListingRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_listing" />
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
             <argument key="$productFactory" type="service" id="sylius.custom_factory.product" />
+        </service>
+
+        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing.transition" public="true"
+                class="BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductListingStateMachineTransition">
+                <argument key="$productListingStateMachineFactory" type="service" id="SM\Factory\Factory"/>
         </service>
     </services>
 </container>
