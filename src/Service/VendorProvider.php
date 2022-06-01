@@ -35,9 +35,6 @@ class VendorProvider
         }
         /** @var Customer $customer */
         $customer = $user->getCustomer();
-//        if (null == $customer) {
-//            return null;
-//        }
         /** @var VendorInterface $vendor */
         $vendor = $customer->getVendor();      
         return $vendor;
