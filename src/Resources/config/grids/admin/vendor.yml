@@ -1,0 +1,33 @@
+sylius_grid:
+    grids:
+        bitbag_sylius_multi_vendor_marketplace_plugin_vendor:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%app.model.vendor.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                id: asc
+            fields:
+                id:
+                    type: string
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.id
+                    sortable: ~
+                companyName:
+                    type: string
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name
+                    sortable: ~
+                taxIdentifier:
+                    type: string
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_id
+                    sortable: ~
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

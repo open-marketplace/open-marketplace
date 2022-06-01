@@ -1,6 +1,14 @@
 bitbag_sylius_multi_vendor_marketplace_plugin:
-  ui:
-    product_listings: 'Product listings'
-    marketplace: 'Marketplace'
-    publishedAt: 'Published at'
-    status: 'Status'
+    ui:
+        company_name: 'Company name'
+        id: 'ID'
+        marketplace: 'Marketplace'
+        product_listings: 'Product listings'
+        publishedAt: 'Published at'
+        status: 'Status'
+        tax_id: 'Tax ID'
+        vendors: 'Vendors'
+
+app:
+    ui:
+        vendors: Vendors
