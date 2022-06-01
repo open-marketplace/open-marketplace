@@ -13,6 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,9 +35,12 @@ class VendorController extends ResourceController
         /** @var VendorInterface $vendor */
         $vendor = $this->repository->findOneBy(['slug' => $request->attributes->get('slug')]);
 
+        $paginator = $this->repository->createPaginator(['products' => $vendor->getProducts()]);
+
         return $this->render('@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_page.html.twig', [
             'vendor' => $vendor,
             'imagesDir' => '/media/image/',
+            'paginator' => $paginator,
         ]);
     }
 }

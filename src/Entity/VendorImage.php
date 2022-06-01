@@ -14,7 +14,7 @@ final class VendorImage implements VendorImageInterface
 
     public function getId(): int
     {
-        $this->getId();
+        return $this->getId();
     }
 
     public function getPath(): ?string

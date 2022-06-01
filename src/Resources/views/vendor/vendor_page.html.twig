@@ -1,25 +1,63 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    Logo:
+    <div class="ui stackable grid">
+        <div class="four wide column">
+                <div>
+                    <b>Logo:</b> <br>
                     {% if vendor.image is defined and vendor.image is not null%}
                         <img src="{{ imagesDir ~ vendor.image.path }}" alt="image broken">
                     {% endif %}
                 </div>
-                <div class="row">
-                    Vendor name:
+                <div>
+                    <b>Vendor name:</b> <br>
                     {{ vendor.companyName }}
                 </div>
-                <div class="row">
-                    Description:
+                <div>
+                    <b>Description:</b> <br>
                     {{ vendor.description}}
                 </div>
-            </div>
-            <div class="col-9">
-                Vendor's products:
+        </div>
+        <div class="twelve wide column">
+            <b>Vendor's products:</b>
+
+            {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+            {% import '@SyliusShop/Product/Box/_content.html.twig' as productCard %}
+
+            <div class="ui four cards">
+                {% for product in vendor.products %}
+                    <div class="ui fluid card" {{ sylius_test_html_attribute('product') }}>
+                        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="blurring dimmable image">
+                            <div class="ui dimmer">
+                                <div class="content">
+                                    <div class="center">
+                                        <div class="ui inverted button">{{ 'sylius.ui.view_more'|trans }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product} %}
+                        </a>
+                        <div class="content" {{ sylius_test_html_attribute('product-content') }}>
+                            <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="header sylius-product-name" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ product.name }}</a>
+
+                            {% if not product.enabledVariants.empty() %}
+                                {% set appliedPromotions = (product|sylius_resolve_variant).getAppliedPromotionsForChannel(sylius.channel) %}
+                                {% set price = money.calculatePrice(product|sylius_resolve_variant) %}
+                                {% set originalPrice = money.calculateOriginalPrice(product|sylius_resolve_variant) %}
+
+                                {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': false} %}
+
+                                {% if price != originalPrice %}
+                                    <div class="sylius-product-original-price" {{ sylius_test_html_attribute('product-original-price') }}><del>{{ originalPrice }}</del></div>
+                                {% endif %}
+                                <div class="sylius-product-price" {{ sylius_test_html_attribute('product-price') }}>{{ price }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
+    </div>
+
+
 {% endblock %}
