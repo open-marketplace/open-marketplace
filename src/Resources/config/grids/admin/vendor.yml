@@ -1,6 +1,6 @@
 sylius_grid:
     grids:
-        bitbag_sylius_mvm_plugin_vendor:
+        bitbag_sylius_multi_vendor_marketplace_plugin_vendor:
             driver:
                 name: doctrine/orm
                 options:
@@ -12,15 +12,15 @@ sylius_grid:
             fields:
                 id:
                     type: string
-                    label: bitbag.mvm.ui.id
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.id
                     sortable: ~
                 companyName:
                     type: string
-                    label: bitbag.mvm.ui.company_name
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name
                     sortable: ~
                 taxIdentifier:
                     type: string
-                    label: bitbag.mvm.ui.tax_id
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_id
                     sortable: ~
             actions:
                 main:

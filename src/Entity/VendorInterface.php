@@ -15,9 +15,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface VendorInterface extends ResourceInterface
 {
-    public function getId(): int;
+    public function getId(): ?int;
 
-    public function setId(int $id): void;
+    public function setId(?int $id): void;
 
     public function getCompanyName(): ?string;
 

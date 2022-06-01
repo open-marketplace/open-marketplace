@@ -4,6 +4,6 @@ bitbag_sylius_mvm_plugin_admin_vendor:
         except: ['show']
         section: admin
         templates: "@SyliusAdmin\\Crud"
-        grid: bitbag_sylius_mvm_plugin_vendor
+        grid: bitbag_sylius_multi_vendor_marketplace_plugin_vendor
     type: sylius.resource
 
