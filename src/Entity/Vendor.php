@@ -116,6 +116,4 @@ class Vendor implements VendorInterface
     {
         $this->blocked = $blocked;
     }
-
-
 }

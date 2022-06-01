@@ -15,7 +15,6 @@ Feature: Blocking vendors
     And I click "Block"
     And I should see "Confirm your action"
     And I choose "#confirmation-button"
-    And print current URL
     Then I should see "Vendor has been successfully blocked"
 
   @ui @javascript

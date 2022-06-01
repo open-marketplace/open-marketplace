@@ -54,6 +54,7 @@ final class VendorBlockingContext extends RawMinkContext implements Context
             throw new Exception($element . " could not be found");
         } else {
             $findName->click();
+            sleep(10);
         }
     }
 
