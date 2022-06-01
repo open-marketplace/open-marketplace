@@ -1,0 +1,5 @@
+{% extends "@SyliusShop/Account/dashboard.html.twig" %}
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+{% block subcontent %}
+   {{ include('@BitBagSyliusMultiVendorMarketplacePlugin/form/_vendor_register.html.twig') }}
+{% endblock %}

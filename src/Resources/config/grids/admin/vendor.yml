@@ -1,0 +1,65 @@
+sylius_grid:
+    templates:
+        action:
+            apply_transition_blocking: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/applyTransitionBlocking.html.twig"
+    grids:
+        bitbag_sylius_multi_vendor_marketplace_plugin_vendor:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_sylius_multi_vendor_marketplace_plugin.model.vendor.class%"
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                id: asc
+            fields:
+                id:
+                    type: string
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.id
+                    sortable: ~
+                companyName:
+                    type: string
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name
+                    sortable: ~
+                taxIdentifier:
+                    type: string
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_id
+                    sortable: ~
+                status:
+                    type: string
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
+                    sortable: ~
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    details:
+                        label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.details
+                        type: show
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+                    block:
+                        type: apply_transition_blocking
+                        label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.block
+                        icon: lock
+                        options:
+                            link:
+                                route: bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_block
+                                parameters:
+                                    id: resource.id
+                            transition: block
+                            graph: bitbag_sylius_multi_vendor_marketplace_plugin_vendor_blocking
+                    unblock:
+                        type: apply_transition_blocking
+                        label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.unblock
+                        icon: lock open
+                        options:
+                            link:
+                                route: bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_unblock
+                                parameters:
+                                    id: resource.id
+                            transition: unblock
+                            graph: bitbag_sylius_multi_vendor_marketplace_plugin_vendor_blocking

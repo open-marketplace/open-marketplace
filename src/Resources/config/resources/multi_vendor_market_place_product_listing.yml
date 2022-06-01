@@ -1,0 +1,7 @@
+sylius_resource:
+  resources:
+    bitbag_sylius_multi_vendor_marketplace_plugin.product_listing:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface

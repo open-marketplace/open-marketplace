@@ -1,5 +1,0 @@
-imports:
-    - { resource: "resources.yml" }
-    - { resource: "grids.yaml"}
-    - { resource: "state_machine.yaml"}
-    - { resource: "ui.yaml"}

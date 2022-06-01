@@ -1,0 +1,9 @@
+app_admin_product_listing:
+  resource: |
+    alias: bitbag_sylius_multi_vendor_marketplace_plugin.product_listing
+    section: admin
+    templates: '@SyliusAdmin/Crud'
+    only: ['index']
+    redirect: index
+    grid: bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing
+  type: sylius.resource
