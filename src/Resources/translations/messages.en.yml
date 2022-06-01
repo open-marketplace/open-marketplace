@@ -1,14 +1,23 @@
 bitbag_sylius_multi_vendor_marketplace_plugin:
-    ui:
-        company_name: 'Company name'
-        id: 'ID'
-        marketplace: 'Marketplace'
-        product_listings: 'Product listings'
-        publishedAt: 'Published at'
-        status: 'Status'
-        tax_id: 'Tax ID'
-        vendors: 'Vendors'
-
+  ui:
+    become_a_vendor: 'Become a Vendor'
+    product_listings: 'Product listings'
+    marketplace: 'Marketplace'
+    publishedAt: 'Published at'
+    status: 'Status'
+    vendor_dashboard: "Vendor dashboard"
+    tax_identifier: "Tax Identifier"
+    not_blank: "This field cannnot be empty"
+    company_name: "Company name"
+    country: "Country"
+    city: "City"
+    street: "Street"
+    phone_number: "Phone number"
+    company_address: "Company Address"
+    postal_code: "Postal code"   
+    id: 'ID'  
+    tax_id: 'Tax ID'
+    vendors: 'Vendors'
 app:
     ui:
         vendors: Vendors

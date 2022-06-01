@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%app.model.vendor.class%"
+                    class: "%bitbag_multi_vendor_marketplace.model.vendor.class%"
                     repository:
                         method: createListQueryBuilder
             sorting:

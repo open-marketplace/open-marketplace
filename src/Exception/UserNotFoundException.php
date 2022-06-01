@@ -9,11 +9,8 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Exception;
 
-interface CustomerInterface
+final class UserNotFoundException extends \Exception
 {
-    public function setVendor(VendorInterface $vendor): void;
-
-    public function getVendor(): ?VendorInterface;
 }
