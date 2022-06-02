@@ -37,7 +37,7 @@ class VendorProfileUpdateAction extends AbstractController
     {
         $vendor = new Vendor();
         $form = $this->createForm(VendorType::class, $vendor);
-
+        
         $form->handleRequest($this->request->getCurrentRequest());
         if ($form->isSubmitted() && $form->isValid()) {
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(),$this->vendorProvider->getLoggedVendor());

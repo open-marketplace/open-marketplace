@@ -15,7 +15,6 @@ Sylius\Component\Core\Model\ShopUser:
         customer: '@customer_oliver'
         username: "oliver@queen.com"
         usernameCanonical: "oliver@queen.com"
-
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
     vendor_address:
         country: '@polska'
@@ -23,7 +22,8 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
         postalCode: '00-999'
         street: 'Wiejska 2115'            
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
-    vendor:
+    vendor_oliver:
+        customer: '@customer_oliver'
         companyName: 'Test company name'
         taxIdentifier: '1234567'
         phoneNumber: '333111222'
