@@ -6,8 +6,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService" 
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service" >            
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="sylius.email_sender"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider"/>
+            <argument type="service" id="sylius.email_sender"/>            
         </service>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider" 
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider">

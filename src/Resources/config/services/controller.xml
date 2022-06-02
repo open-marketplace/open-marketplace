@@ -13,6 +13,7 @@
             <tag name="container.service_subscriber"/>
             <argument type="service" id="request_stack"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider"/>
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ConfirmProfileUpdateAction"
