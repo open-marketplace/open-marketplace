@@ -11,12 +11,15 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -34,13 +37,13 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class CreateProductListingCommandSpec extends ObjectBehavior
 {
     public function let(
-        ProductListingRepositoryInterface   $productListingRepository,
-        FactoryInterface      $productListingFactoryInterface,
-        TokenStorageInterface $tokenStorage,
-        FactoryInterface      $translationFactory,
-        FactoryInterface      $draftFactory,
-        FactoryInterface      $priceFactory,
-        ProductDraftRepositoryInterface    $draftRepository
+        ProductListingRepositoryInterface $productListingRepository,
+        FactoryInterface                  $productListingFactoryInterface,
+        TokenStorageInterface             $tokenStorage,
+        FactoryInterface                  $translationFactory,
+        FactoryInterface                  $draftFactory,
+        FactoryInterface                  $priceFactory,
+        ProductDraftRepositoryInterface   $draftRepository
     ): void
     {
         $this->beConstructedWith(
@@ -62,7 +65,9 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         ProductListing                    $productListing,
         TokenInterface                    $token,
         ProductTranslationInterface       $productTranslation,
-        ProductListingRepositoryInterface $productListingRepository
+        ProductListingRepositoryInterface $productListingRepository,
+        CustomerInterface                 $customer,
+        VendorInterface                   $vendor
     )
     {
         $productListingFactoryInterface->createNew()
@@ -73,6 +78,12 @@ class CreateProductListingCommandSpec extends ObjectBehavior
 
         $token->getUser()
             ->willReturn($shopUser);
+
+        $shopUser->getCustomer()
+            ->willReturn($customer);
+
+        $customer->getVendor()
+            ->willReturn($vendor);
 
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
@@ -109,7 +120,9 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         ProductListing                    $productListing,
         TokenInterface                    $token,
         ProductTranslationInterface       $productTranslation,
-        ProductListingRepositoryInterface $productListingRepository
+        ProductListingRepositoryInterface $productListingRepository,
+        CustomerInterface                 $customer,
+        VendorInterface                   $vendor
     )
     {
         $productListingFactoryInterface->createNew()
@@ -120,6 +133,12 @@ class CreateProductListingCommandSpec extends ObjectBehavior
 
         $token->getUser()
             ->willReturn($shopUser);
+
+        $shopUser->getCustomer()
+            ->willReturn($customer);
+
+        $customer->getVendor()
+            ->willReturn($vendor);
 
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
@@ -319,7 +338,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->shouldBeCalled();
 
 
-
-        $this->cloneProduct($productDraft,false);
+        $this->cloneProduct($productDraft, false);
     }
 }
