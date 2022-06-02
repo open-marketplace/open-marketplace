@@ -23,7 +23,7 @@
         "friends-of-behat/variadic-extension": "^1.3",
         "friendsofsymfony/oauth-server-bundle": "^1.6 || >2.0.0-alpha.0 ^2.0@dev",
         "lchrusciel/api-test-case": "^5.2",
-        "nelmio/alice": "^3.10",
+        "nelmio/alice": "^2.10",
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
