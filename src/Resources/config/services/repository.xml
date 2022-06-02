@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bit_bag.sylius_multi_vendor_marketplace_plugin.repository.product_repository" class="BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductRepository" public="true">
+            <argument type="service" id="sylius.manager.product"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata" public="false">
+                    <argument>%sylius.model.product.class%</argument>
+                    <factory service="sylius.manager.product" method="getClassMetadata"/>
+                </service>
+            </argument>
+            <argument type="service" id="security.token_storage"/>
+        </service>
+    </services>
+</container>

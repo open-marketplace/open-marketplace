@@ -6,7 +6,7 @@
                 <div>
                     <b>Logo:</b> <br>
                     {% if vendor.image is defined and vendor.image is not null%}
-                        <img src="{{ imagesDir ~ vendor.image.path }}" alt="image broken">
+                        <img src="{{ '/' ~ base_vendor_logo_path ~ '/' ~ vendor.image.path }}" alt="image broken">
                     {% endif %}
                 </div>
                 <div>
@@ -24,8 +24,8 @@
             {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
             {% import '@SyliusShop/Product/Box/_content.html.twig' as productCard %}
 
-            <div class="ui four cards">
-                {% for product in vendor.products %}
+            <div class="ui three cards">
+                {% for product in paginator.currentPageResults %}
                     <div class="ui fluid card" {{ sylius_test_html_attribute('product') }}>
                         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="blurring dimmable image">
                             <div class="ui dimmer">
@@ -56,6 +56,9 @@
                     </div>
                 {% endfor %}
             </div>
+            {% if paginator.haveToPaginate %}
+                {{ pagerfanta(paginator) }}
+            {% endif %}
         </div>
     </div>
 

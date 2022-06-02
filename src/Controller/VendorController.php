@@ -34,7 +34,8 @@ class VendorController extends ResourceController
         /** @var VendorInterface $vendor */
         $vendor = $this->repository->findOneBy(['slug' => $request->attributes->get('slug')]);
 
-        $paginator = $this->repository->createPaginator(['products' => $vendor->getProducts()]);
+        $productRepository = $this->container->get('bit_bag.sylius_multi_vendor_marketplace_plugin.repository.product_repository');
+        $paginator = $productRepository->findVendorProducts($vendor, $request);
 
         return $this->render('@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_page.html.twig', [
             'vendor' => $vendor,
