@@ -55,7 +55,6 @@ final class VendorType extends AbstractResourceType
             ])
 
             ->add('phoneNumber', TelType::class, [
-
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.phone_number',
             ])
             ->add('vendorAddress', VendorAddressType::class, [

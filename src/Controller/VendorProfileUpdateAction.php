@@ -24,9 +24,14 @@ class VendorProfileUpdateAction extends AbstractController
     private RequestStack $request;
 
     private VendorProfileUpdateService $vendorProfileUpdateService;
+
     private VendorProvider $vendorProvider;
 
-    public function __construct(RequestStack $request, VendorProfileUpdateService $vendorProfileUpdateService, VendorProvider $vendorProvider)
+    public function __construct(
+        RequestStack $request,
+        VendorProfileUpdateService $vendorProfileUpdateService,
+        VendorProvider $vendorProvider
+    )
     {
         $this->request = $request;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
@@ -37,10 +42,10 @@ class VendorProfileUpdateAction extends AbstractController
     {
         $vendor = new Vendor();
         $form = $this->createForm(VendorType::class, $vendor);
-        
+
         $form->handleRequest($this->request->getCurrentRequest());
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(),$this->vendorProvider->getLoggedVendor());
+            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $this->vendorProvider->getLoggedVendor());
         }
 
         return $this->redirectToRoute('vendor_profile');

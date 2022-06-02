@@ -25,9 +25,9 @@ class VendorProvider
     {
         $this->security = $security;
     }
-    
+
     public function getLoggedVendor(): VendorInterface
-    {        
+    {
         /** @var ShopUserInterface $user */
         $user = $this->security->getUser();
         if (null == $user) {
@@ -36,7 +36,8 @@ class VendorProvider
         /** @var Customer $customer */
         $customer = $user->getCustomer();
         /** @var VendorInterface $vendor */
-        $vendor = $customer->getVendor();      
+        $vendor = $customer->getVendor();
+
         return $vendor;
     }
 }

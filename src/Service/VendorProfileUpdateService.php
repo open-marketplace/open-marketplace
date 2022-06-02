@@ -17,36 +17,37 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
 {
     private EntityManagerInterface $entityManager;
 
-    private SenderInterface $sender;     
+    private SenderInterface $sender;
 
-    public function __construct(       
+    public function __construct(
         EntityManagerInterface $entityManager,
-        SenderInterface $sender,        
-    ) {       
+        SenderInterface $sender,
+    ) {
         $this->entityManager = $entityManager;
-        $this->sender = $sender;       
+        $this->sender = $sender;
     }
 
     public function createPendingVendorProfileUpdate(VendorInterface $vendorData, VendorInterface $currentVendor): void
     {
-        $pendingVendorUpdate = new VendorProfileUpdate();    
+        $pendingVendorUpdate = new VendorProfileUpdate();
         $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
         $pendingVendorUpdate->setVendor($currentVendor);
         $token = md5(mt_rand(1, 90000) . 'SALT');
-        $pendingVendorUpdate->setToken($token);        
+        $pendingVendorUpdate->setToken($token);
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
-        $user = $currentVendor->getCustomer()->getUser();
-        if (null == $user) {
-            return;
-        }
-        $this->sendEmail($user->getUsername(), $token);
-        
+        /** @var Customer $customer */
+        $customer = $currentVendor->getCustomer();
+        if(null !== $customer)
+            $user = $customer->getUser();
+        if (null !== $user) 
+            $this->sendEmail($user->getUsername(), $token);
     }
 
     private function setVendorFromData(VendorDataInterface $vendor, VendorDataInterface $data): void
@@ -55,15 +56,16 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
         $vendor->setPhoneNumber($data->getPhoneNumber());
         $newVendorAddress = $data->getVendorAddress();
-//        dd($vendor, $data);
+
         if (null == $newVendorAddress) {
             return;
-        }    
-        $vendor->getVendorAddress()->setCity($newVendorAddress->getCity());
-        $vendor->getVendorAddress()->setCountry($newVendorAddress->getCountry());
-        $vendor->getVendorAddress()->setPostalCode($newVendorAddress->getPostalCode());
-        $vendor->getVendorAddress()->setStreet($newVendorAddress->getStreet());
-       
+        }
+        if (null !== $vendor->getVendorAddress()) {
+            $vendor->getVendorAddress()->setCity($newVendorAddress->getCity());
+            $vendor->getVendorAddress()->setCountry($newVendorAddress->getCountry());
+            $vendor->getVendorAddress()->setPostalCode($newVendorAddress->getPostalCode());
+            $vendor->getVendorAddress()->setStreet($newVendorAddress->getStreet());
+        }
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
@@ -81,13 +83,13 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         }
         $this->setVendorFromData($vendor, $vendorData);
         $this->deletePendingData($vendorData);
-    }    
+    }
 
     private function deletePendingData(VendorProfileUpdateInterface $vendorData): void
-    {   
+    {
         $pendingAddressChange = $vendorData->getVendorAddress();
-//        dd($vendorData);
-        $this->entityManager->remove($pendingAddressChange);
+        if(null !== $pendingAddressChange)
+            $this->entityManager->remove($pendingAddressChange);
         $this->entityManager->remove($vendorData);
         $this->entityManager->flush();
     }

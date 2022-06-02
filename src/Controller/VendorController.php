@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
-{   
+{
     public function createAction(Request $request): Response
     {
         try {
@@ -32,19 +32,19 @@ final class VendorController extends ResourceController
             return $this->redirectToRoute('sylius_shop_login');
         }
     }
-      
+
     public function updateAction(Request $request): Response
-    {              
+    {
         /** @var ShopUser $user */
         $user = $this->getUser();
         /** @var Customer $customer */
         $customer = $user->getCustomer();
-        $vendor = $customer->getVendor();        
+        $vendor = $customer->getVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
         if (null == $pendingUpdate) {
             return parent::updateAction($request);
-        }        
-        $this->addFlash('error','sylius.user.verify_email_request');
+        }
+        $this->addFlash('error', 'sylius.user.verify_email_request');
 
         return $this->redirectToRoute('vendor_profile');
     }
