@@ -75,5 +75,20 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $this->assertEquals($vendorFormData->getCompanyName(), $pendingData->getCompanyName());
     }
     
+    public function test_vendor_data_are_updated_and_removed_correctly()
+    {
+        $this->loadFixturesFromFile('pending_data.yml');
+        $manager = $this->getEntityManager();
+
+        $currentVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier'=>'1234567']);       
+        $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor'=>$currentVendor]);
+        
+        $sender = $this->createMock(SenderInterface::class);
+        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender);
+        $updateService->updateVendorFromPendingData($pendingData);
+        $updatedVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier'=>'1234567']);
+        $this->assertEquals($currentVendor->getCompanyName(), $pendingData->getCompanyName());    
+        $this->assertEquals(null, $updatedVendor);
+    }
       
 }
