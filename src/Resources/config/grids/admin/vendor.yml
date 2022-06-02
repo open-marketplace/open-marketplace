@@ -2,6 +2,7 @@ sylius_grid:
     templates:
         action:
             apply_transition_blocking: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/applyTransitionBlocking.html.twig"
+            edit_verified_vendor: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/editVerifiedVendor.html.twig"
     grids:
         bitbag_sylius_multi_vendor_marketplace_plugin_vendor:
             driver:
@@ -38,7 +39,7 @@ sylius_grid:
                         label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.details
                         type: show
                     update:
-                        type: update
+                        type: edit_verified_vendor
                     delete:
                         type: delete
                     block:

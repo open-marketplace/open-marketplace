@@ -1,0 +1,9 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('update')), options.link.parameters|default({'id': data.id}))) %}
+
+{% if data.status == 'verified' %}
+    {{ buttons.default(path, 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.edit', data.id, 'pencil', options.class) }}
+{% endif %}
+
+

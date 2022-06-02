@@ -8,6 +8,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
         country: "Country"
         customer: 'Customer'
         details: 'Details'
+        edit: 'Edit'
         id: 'ID'
         marketplace: 'Marketplace'
         not_blank: "This field cannnot be empty"
