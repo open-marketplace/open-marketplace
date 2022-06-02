@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/constraint-mapping" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress">       
+        <property name="city">
+            <constraint name="NotBlank">
+                <option name="message">validator.message.not_blank</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="max">255</option>
+                <option name="minMessage">validator.message.minimum</option>
+                <option name="maxMessage">validator.message.maximum</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="street">
+            <constraint name="NotBlank">
+                <option name="message">validator.message.not_blank</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="max">255</option>
+                <option name="minMessage">validator.message.minimum</option>
+                <option name="maxMessage">validator.message.maximum</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="postalCode">
+            <constraint name="NotBlank">
+                <option name="message">validator.message.not_blank</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">3</option>
+                <option name="max">255</option>
+                <option name="minMessage">validator.message.minimum</option>
+                <option name="maxMessage">validator.message.maximum</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

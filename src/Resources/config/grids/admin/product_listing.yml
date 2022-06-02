@@ -21,9 +21,6 @@ sylius_grid:
         options:
           class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
       fields:
-        name:
-          type: string
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.name
         code:
           type: string
           label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.code
