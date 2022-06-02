@@ -22,6 +22,7 @@ Feature:
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
     And I click "Save and Add" button
+    Then I should see product's listing status "under_verification"
 
 
 

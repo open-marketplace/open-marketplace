@@ -97,6 +97,7 @@
 
             <div class="ui hidden divider"></div>
             <div class="ui buttons">
+                {{ form_row(form._token) }}
                 {{ form_widget(form.save) }}
                 {{ form_widget(form.saveAndAdd) }}
 {#                <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{- 'sylius.ui.create'|trans -}}</button>

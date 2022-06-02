@@ -20,6 +20,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use function PHPUnit\Framework\assertNotNull;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
@@ -73,7 +74,14 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->entityManager->flush();
     }
 
-
+    /**
+     * @Given I should see product's listing status :status
+     */
+    public function iShouldSeeProductsListingStatus($status)
+    {
+        $productListingStatus = $this->getPage()->find('css', sprintf('#details > div > table > tbody > tr > td:contains("%s")', $status));
+        assertNotNull($productListingStatus);
+    }
 
     /**
      * @Given I click :button button
