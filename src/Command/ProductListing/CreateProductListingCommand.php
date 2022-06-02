@@ -56,7 +56,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingFactoryInterface->createNew();
         $vendor = $this->tokenStorage->getToken()->getUser()->getCustomer()->getVendor();
-dd($vendor);
+
         $productDraft = $this->formatTranslation($productDraft);
 
         if ($isSend){

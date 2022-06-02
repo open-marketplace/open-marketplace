@@ -22,7 +22,6 @@ Feature:
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
     And I click "Save" button
-    And test
 
 
 
