@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductTranslation implements ProductTranslationInterface, ResourceInterface
@@ -128,5 +127,4 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
     {
         $this->locale = $locale;
     }
-
 }

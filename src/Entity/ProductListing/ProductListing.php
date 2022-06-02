@@ -14,11 +14,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Prophecy\Call\Call;
 use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Core\Model\ShopUserInterface;
 
 use Sylius\Component\Product\Model\ProductInterface;
 

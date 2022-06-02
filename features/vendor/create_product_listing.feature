@@ -1,5 +1,7 @@
 @vendor_managing_product_listings
-Feature:
+Feature:Creating a product listing.
+  As a vendor, I need to be able
+  to create a product.
 
   Background:
     Given there is an vendor user "vendor" with password "vendor"
@@ -23,9 +25,3 @@ Feature:
     And I fill in "Slug" with "product"
     And I click "Save" button
     Then I should see product's listing status "create"
-
-
-
-
-
-

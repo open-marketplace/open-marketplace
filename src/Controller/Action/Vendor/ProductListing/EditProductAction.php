@@ -83,7 +83,4 @@ class EditProductAction extends AbstractController
             ])
         );
     }
-
-
 }
-

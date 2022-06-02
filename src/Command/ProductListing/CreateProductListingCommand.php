@@ -18,9 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTrans
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage;
 
 class CreateProductListingCommand implements CreateProductListingCommandInterface
 {
@@ -151,6 +149,4 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         $this->draftRepository->save($productDraft);
     }
-
-
 }

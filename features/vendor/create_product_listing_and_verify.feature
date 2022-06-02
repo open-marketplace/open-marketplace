@@ -1,5 +1,9 @@
 @vendor_managing_product_listings
-Feature:
+Feature: Creating a product listing
+  and sending it for verification.
+  As a vendor, I must be able to create
+  a product with a submission for verification.
+
 
   Background:
     Given there is an vendor user "vendor" with password "vendor"
@@ -23,8 +27,3 @@ Feature:
     And I fill in "Slug" with "product"
     And I click "Save and Add" button
     Then I should see product's listing status "under_verification"
-
-
-
-
-

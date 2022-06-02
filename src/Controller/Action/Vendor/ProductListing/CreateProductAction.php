@@ -108,7 +108,4 @@ class CreateProductAction extends AbstractController
             ])
         );
     }
-
-
 }
-

@@ -17,3 +17,4 @@ interface ProductListingRepositoryInterface
 {
     public function save(ProductListingInterface $productListing): void;
 }
+
