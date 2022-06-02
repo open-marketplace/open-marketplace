@@ -55,8 +55,8 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     {
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingFactoryInterface->createNew();
-        $user = $this->tokenStorage->getToken()->getUser();
-
+        $vendor = $this->tokenStorage->getToken()->getUser()->getCustomer()->getVendor();
+dd($vendor);
         $productDraft = $this->formatTranslation($productDraft);
 
         if ($isSend){
@@ -65,7 +65,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         $productListing->setCode($productDraft->getCode());
         $productListing->addProductDrafts($productDraft);
-        $productListing->setVendor($user);
+        $productListing->setVendor($vendor);
 
         $productDraft->setProductListing($productListing);
         $this->productListingRepository->save($productListing);

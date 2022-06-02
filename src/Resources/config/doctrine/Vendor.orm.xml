@@ -21,5 +21,6 @@
         <one-to-one field="customer" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" inversed-by="vendor">
             <join-column name="customer_id" referenced-column-name="id" />
         </one-to-one>
+        <one-to-many field="productListings" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing" mapped-by="vendor"/>
     </entity>
 </doctrine-mapping>

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Prophecy\Call\Call;
@@ -27,8 +28,7 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
 
     protected ?string $code;
 
-//todo: refactor to VendorInterface
-    protected ShopUserInterface $vendor;
+    protected Vendor $vendor;
 
     protected \DateTimeInterface $createAt;
 
@@ -66,12 +66,12 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
         $this->code = $code;
     }
 
-    public function getVendor(): ShopUserInterface
+    public function getVendor(): Vendor
     {
         return $this->vendor;
     }
 
-    public function setVendor(ShopUserInterface $vendor): void
+    public function setVendor(Vendor $vendor): void
     {
         $this->vendor = $vendor;
     }
