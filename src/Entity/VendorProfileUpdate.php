@@ -23,7 +23,7 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
 
     private ?string $phoneNumber;
 
-    private ?VendorAddress $vendorAddress;
+    private ?VendorAddressUpdate $vendorAddress;
 
     private ?string $token;
 
@@ -82,7 +82,7 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
         return $this->vendorAddress;
     }
 
-    public function setVendorAddress(?VendorAddress $vendorAddress): void
+    public function setVendorAddress(?VendorAddressInterface $vendorAddress): void
     {
         $this->vendorAddress = $vendorAddress;
     }

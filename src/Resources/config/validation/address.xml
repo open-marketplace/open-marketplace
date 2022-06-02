@@ -12,7 +12,7 @@
                 </option>
             </constraint>
             <constraint name="Length">
-                <option name="min">4</option>
+                <option name="min">3</option>
                 <option name="max">255</option>
                 <option name="minMessage">validator.message.minimum</option>
                 <option name="maxMessage">validator.message.maximum</option>
@@ -33,7 +33,7 @@
                 </option>
             </constraint>
             <constraint name="Length">
-                <option name="min">4</option>
+                <option name="min">3</option>
                 <option name="max">255</option>
                 <option name="minMessage">validator.message.minimum</option>
                 <option name="maxMessage">validator.message.maximum</option>
@@ -54,7 +54,7 @@
                 </option>
             </constraint>
             <constraint name="Length">
-                <option name="min">4</option>
+                <option name="min">3</option>
                 <option name="max">255</option>
                 <option name="minMessage">validator.message.minimum</option>
                 <option name="maxMessage">validator.message.maximum</option>

@@ -46,15 +46,16 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     public function createPendingVendorProfileUpdate(VendorInterface $vendorData): void
     {
         $currentVendor = $this->vendorProvider->getLoggedVendor();
-        
-        $OldVendorPendingData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
-        $pendingVendorUpdate = $OldVendorPendingData;
-        if (null == $pendingVendorUpdate) {
+        dd($vendorData);
+//        $OldVendorPendingData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
+//        $pendingVendorUpdate = $OldVendorPendingData;
+//        if (null == $pendingVendorUpdate) {
             $pendingVendorUpdate = new VendorProfileUpdate();
-        }
+//        }
         $pendingVendorUpdate->setVendor($currentVendor);
         $token = md5(mt_rand(1, 90000) . 'SALT');
         $pendingVendorUpdate->setToken($token);
+        
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
         $user = $currentVendor->getCustomer()->getUser();
         if (null == $user) {
@@ -68,20 +69,24 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
         $vendor->setPhoneNumber($data->getPhoneNumber());
-
+        dd($vendor);
         $newVendorAddress = $data->getVendorAddress();
         if (null == $newVendorAddress) {
             return;
-        }
-        $vendor->setVendorAddress($newVendorAddress);
-        $oldVendorAddress = $vendor->getVendorAddress();
-        if (null == $oldVendorAddress) {
-            return;
-        }
-        $oldVendorAddress->setCity($newVendorAddress->getCity());
-        $oldVendorAddress->setCountry($newVendorAddress->getCountry());
-        $oldVendorAddress->setPostalCode($newVendorAddress->getPostalCode());
-        $oldVendorAddress->setStreet($newVendorAddress->getStreet());
+        }     
+//        dd($data->getVendorAddress()->getId());
+//        $vendor->setVendorAddress($newVendorAddress);
+//        dd($data);
+//        $oldVendorAddress = $vendor->getVendorAddress();
+//        if (null == $oldVendorAddress) {
+//            return;
+//        }
+
+        $vendor->getVendorAddress()->setCity($newVendorAddress->getCity());
+        $vendor->getVendorAddress()->setCountry($newVendorAddress->getCountry());
+        $vendor->getVendorAddress()->setPostalCode($newVendorAddress->getPostalCode());
+        $vendor->getVendorAddress()->setStreet($newVendorAddress->getStreet());
+       
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }

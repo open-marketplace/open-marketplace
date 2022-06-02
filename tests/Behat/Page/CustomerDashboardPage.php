@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page;
 
-
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
@@ -27,8 +26,8 @@ class CustomerDashboardPage extends SymfonyPage implements SymfonyPageInterface
         $sidebar = $this->getDocument()->find('css', '.grid .four .menu');
         $links = $sidebar->findAll('css', '.item');
         foreach ($links as $link){
-            if($value == $link->getText())
-            return true;
+            if($value === $link->getText())
+                return true;
         }
         return false;
     }

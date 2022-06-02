@@ -1,7 +1,7 @@
 @vendor_register
-Feature: Registration form registers vendor
+Feature: Filling vendor registration form by a customer
   In order to create new vendor account
-  As an customer
+  As a customer
   I can fill registration form
 
   Background:
@@ -10,10 +10,10 @@ Feature: Registration form registers vendor
 
   Scenario: Attempting to submit empty form
     When I am on "/en_US/vendor/register"
-    And I press "Create an account"
+    And I press "Become a Vendor"
     Then I should see "sylius-validation-error" "6" times
     
-  Scenario: Fill form with data that fail validation
+  Scenario: Filling form with data that fails validation
     When I am on "/en_US/vendor/register"
     And I fill in "vendor_companyName" with "te"
     And I fill in "vendor_taxIdentifier" with "56"
@@ -21,7 +21,7 @@ Feature: Registration form registers vendor
     And I fill in "vendor_vendorAddress_city" with "an"
     And I fill in "vendor_vendorAddress_street" with "et"
     And I fill in "vendor_vendorAddress_postalCode" with "de"
-    And I press "Create an account"
+    And I press "Become a Vendor"
     Then I should see "sylius-validation-error" "6" times
 
   Scenario: Correct completion of the form
@@ -32,5 +32,5 @@ Feature: Registration form registers vendor
     And I fill in "vendor_vendorAddress_city" with "Milan"
     And I fill in "vendor_vendorAddress_street" with "test_street"
     And I fill in "vendor_vendorAddress_postalCode" with "test_postalCode"
-    And I press "Create an account"      
-    Then I should see "Success"
+    And I press "Become a Vendor"    
+    Then I should see "Thank you for filling the Vendor registration form. Your request now will be reviewed by our administrators"

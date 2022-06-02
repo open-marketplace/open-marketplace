@@ -2,4 +2,4 @@ sylius_customer:
   resources:
     customer:
       classes:
-        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer        

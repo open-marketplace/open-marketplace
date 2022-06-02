@@ -15,9 +15,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 {
-    private int $id;
+    private ?int $id;
 
-    private Customer $customer;
+    private CustomerInterface $customer;
 
     private ?string $companyName;
 
@@ -27,12 +27,12 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 
     private ?VendorAddress $vendorAddress;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }
@@ -77,12 +77,12 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
         $this->vendorAddress = $vendorAddress;
     }
 
-    public function getCustomer(): Customer
+    public function getCustomer(): CustomerInterface
     {
         return $this->customer;
     }
 
-    public function setCustomer(Customer $customer): void
+    public function setCustomer(CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }

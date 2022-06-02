@@ -1,6 +1,1 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    customer:
-        register: 'ZAzThank you for registering, check your email to verify your account.'
+vendor_register: "Thank you for filling the Vendor registration form. Your request now will be reviewed by our administrators"

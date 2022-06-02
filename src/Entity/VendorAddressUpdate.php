@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
 
-class VendorAddress implements VendorAddressInterface
+class VendorAddressUpdate implements VendorAddressInterface
 {
     private ?int $id;
 

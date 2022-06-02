@@ -11,7 +11,27 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 interface VendorInterface extends VendorDataInterface
 {
-    public function getCustomer(): Customer;
+    public function getId(): ?int;
 
-    public function setCustomer(Customer $customer): void;
+    public function setId(?int $id): void;
+
+    public function getCompanyName(): ?string;
+
+    public function setCompanyName(?string $companyName): void;
+
+    public function getTaxIdentifier(): ?string;
+
+    public function setTaxIdentifier(?string $taxIdentifier): void;
+
+    public function getPhoneNumber(): ?string;
+
+    public function setPhoneNumber(?string $phoneNumber): void;
+
+    public function getVendorAddress(): ?VendorAddress;
+
+    public function setVendorAddress(?VendorAddress $vendorAddress): void;
+
+    public function getCustomer(): ?CustomerInterface;
+
+    public function setCustomer(CustomerInterface $customer): void;
 }

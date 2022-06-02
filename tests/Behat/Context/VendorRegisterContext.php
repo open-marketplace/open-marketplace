@@ -18,24 +18,19 @@ use function PHPUnit\Framework\assertEquals;
 
 class VendorRegisterContext extends MinkContext implements Context
 {
-
     private VendorRegisterPage $vendorRegisterPage;
 
     public function __construct(VendorRegisterPage $vendorRegisterPage)
     {
-
         $this->vendorRegisterPage = $vendorRegisterPage;
     }
+    
     /**
      * @Then I should see :itemCLass :times times
      */
     public function iShouldSeeTimes($itemCLass, $times)
     {  
-//        $this->dashboardPage->open();
-        $page = $this->getSession()->getPage();
-//        $validationMessages = $page->findAll('css', ".$arg1");
         $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount($itemCLass);
         assertEquals($times, $validationMessageCount);        
-    }
-    
+    }    
 }
