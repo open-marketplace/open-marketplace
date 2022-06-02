@@ -16,12 +16,13 @@ final class ProductRepository extends EntityRepository implements ProductReposit
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.vendor = :vendor')
             ->setParameter('vendor', $vendor)
-            ->andWhere('p.')
         ;
 
         $currentPage = $request->get('page', 1);
+        $limit = $request->get('limit', $_ENV['DEFAULT_VENDOR_PRODUCTS_LIMIT']);
 
         $pager =  $this->getPaginator($qb);
+        $pager->setMaxPerPage($limit);
         $pager->setCurrentPage($currentPage);
 
         return $pager;
