@@ -36,10 +36,9 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         return $this->id;
     }
 
-    public function setId(int $id): ProductListingPrice
+    public function setId(int $id): void
     {
         $this->id = $id;
-        return $this;
     }
 
     public function getProductDraft(): ProductDraft
@@ -47,10 +46,9 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         return $this->productDraft;
     }
 
-    public function setProductDraft(ProductDraft $productDraft): ProductListingPrice
+    public function setProductDraft(ProductDraft $productDraft): void
     {
         $this->productDraft = $productDraft;
-        return $this;
     }
 
     public function getPrice(): ?float
@@ -58,10 +56,9 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         return $this->price;
     }
 
-    public function setPrice(?float $price): ProductListingPrice
+    public function setPrice(?float $price): void
     {
         $this->price = $price;
-        return $this;
     }
 
     public function getOriginalPrice(): ?float
@@ -69,10 +66,9 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         return $this->originalPrice;
     }
 
-    public function setOriginalPrice(?float $originalPrice): ProductListingPrice
+    public function setOriginalPrice(?float $originalPrice): void
     {
         $this->originalPrice = $originalPrice;
-        return $this;
     }
 
     public function getMinimumPrice(): ?float
@@ -80,10 +76,9 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         return $this->minimumPrice;
     }
 
-    public function setMinimumPrice(?float $minimumPrice): ProductListingPrice
+    public function setMinimumPrice(?float $minimumPrice): void
     {
         $this->minimumPrice = $minimumPrice;
-        return $this;
     }
 
     public function getChannelCode(): string
@@ -91,10 +86,9 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         return $this->channelCode;
     }
 
-    public function setChannelCode(string $channelCode): ProductListingPrice
+    public function setChannelCode(string $channelCode): void
     {
         $this->channelCode = $channelCode;
-        return $this;
     }
 
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface ProductListingFactoryInterface extends FactoryInterface

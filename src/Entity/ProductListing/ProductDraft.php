@@ -13,10 +13,13 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Prophecy\Call\Call;
+use Prophecy\Prophecy\MethodProphecy;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-class ProductDraft implements ProductDraftInterface
+class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\PredictionInterface
 {
     protected ?int $id;
 
@@ -60,10 +63,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->id;
     }
 
-    public function setId(?int $id): ProductDraft
+    public function setId(?int $id): void
     {
         $this->id = $id;
-        return $this;
     }
 
     public function getCode(): string
@@ -71,10 +73,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->code;
     }
 
-    public function setCode(string $code): ProductDraft
+    public function setCode(string $code): void
     {
         $this->code = $code;
-        return $this;
     }
 
     public function isVerified(): bool
@@ -82,10 +83,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): ProductDraft
+    public function setIsVerified(bool $isVerified): void
     {
         $this->isVerified = $isVerified;
-        return $this;
     }
 
     public function getVerifiedAt(): ?\DateTimeInterface
@@ -93,10 +93,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->verifiedAt;
     }
 
-    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): ProductDraft
+    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void
     {
         $this->verifiedAt = $verifiedAt;
-        return $this;
     }
 
     public function getCreatedAt(): \DateTimeInterface
@@ -104,10 +103,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): ProductDraft
+    public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
-        return $this;
     }
 
     public function getVersionNumber(): int
@@ -115,10 +113,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->versionNumber;
     }
 
-    public function setVersionNumber(int $versionNumber): ProductDraft
+    public function setVersionNumber(int $versionNumber): void
     {
         $this->versionNumber = $versionNumber;
-        return $this;
     }
 
     public function getTranslations(): Collection
@@ -126,10 +123,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->translations;
     }
 
-    public function addTranslations(ProductTranslation $translation): ProductDraft
+    public function addTranslations(ProductTranslation $translation): void
     {
         $this->translations->add($translation);
-        return $this;
     }
 
     public function getProductListingPrice(): Collection
@@ -137,10 +133,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->productListingPrice;
     }
 
-    public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): ProductDraft
+    public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void
     {
         $this->productListingPrice->add($productListingPrice);
-        return $this;
     }
 
     public function getProductListing(): ProductListing
@@ -148,10 +143,9 @@ class ProductDraft implements ProductDraftInterface
         return $this->productListing;
     }
 
-    public function setProductListing(ProductListing $productListing): ProductDraft
+    public function setProductListing(ProductListing $productListing): void
     {
         $this->productListing = $productListing;
-        return $this;
     }
 
     public function getStatus(): string
@@ -159,16 +153,14 @@ class ProductDraft implements ProductDraftInterface
         return $this->status;
     }
 
-    public function setStatus(string $status): ProductDraft
+    public function setStatus(string $status): void
     {
         $this->status = $status;
-        return $this;
     }
 
-    public function newVersion(): ProductDraft
+    public function newVersion(): void
     {
         $this->versionNumber++;
-        return $this;
     }
 
     public function clear(): void
@@ -180,15 +172,18 @@ class ProductDraft implements ProductDraftInterface
         $this->translations = new ArrayCollection();
     }
 
-    public function addTranslationsWithKey(ProductTranslation $translation, string $key): ProductDraft
+    public function addTranslationsWithKey(ProductTranslation $translation, string $key): void
     {
         $this->translations->set($key, $translation);
-        return $this;
     }
 
-    public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): ProductDraft
+    public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void
     {
         $this->productListingPrice->set($key,$productListingPrice);
-        return $this;
+    }
+
+    public function check(array $calls, ObjectProphecy $object, MethodProphecy $method)
+    {
+        // TODO: Implement check() method.
     }
 }

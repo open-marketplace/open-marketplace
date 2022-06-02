@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductListingFactory implements ProductListingFactoryInterface
@@ -29,12 +29,7 @@ final class ProductListingFactory implements ProductListingFactoryInterface
     ): ProductListingInterface {
         $productListing = $this->createNew();
 
-        $productListing->setName($name);
         $productListing->setCode($code);
-        $productListing->setLocale($locale);
-        $productListing->setSlug($slug);
-        $productListing->setStatus(ProductListingInterface::STATUS_CREATED);
-        $productListing->setVersionNumber(0);
 
         return $productListing;
     }

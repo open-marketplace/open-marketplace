@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
@@ -19,8 +20,10 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTrans
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\Collection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -31,13 +34,13 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class CreateProductListingCommandSpec extends ObjectBehavior
 {
     public function let(
-        RepositoryInterface   $productListingRepository,
+        ProductListingRepositoryInterface   $productListingRepository,
         FactoryInterface      $productListingFactoryInterface,
         TokenStorageInterface $tokenStorage,
         FactoryInterface      $translationFactory,
         FactoryInterface      $draftFactory,
         FactoryInterface      $priceFactory,
-        RepositoryInterface   $draftRepository
+        ProductDraftRepositoryInterface    $draftRepository
     ): void
     {
         $this->beConstructedWith(
@@ -75,7 +78,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->willReturn(new ArrayCollection([$productTranslation]));
 
         $productTranslation->setProductDraft($productDraft)
-            ->shouldBeCalled();
+            ->should(new ProductListing());
 
         $productListing->setCode('code')
             ->shouldBeCalled();
@@ -122,7 +125,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->willReturn(new ArrayCollection([$productTranslation]));
 
         $productTranslation->setProductDraft($productDraft)
-            ->shouldBeCalled();
+            ->should(new ProductDraft());
 
         $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION)
             ->shouldBeCalled();
@@ -143,7 +146,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->shouldBeCalled();
 
         $productListingRepository->save($productListing)
-            ->shouldBeCalled();
+            ->should(new ProductListing());
 
         $this->create($productDraft, true);
     }
@@ -158,10 +161,10 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->willReturn(new ArrayCollection([$productTranslation]));
 
         $productTranslation->setProductDraft($productDraft)
-            ->shouldBeCalled();
+            ->should(new ProductDraft());
 
         $productDraftRepository->save($productDraft)
-            ->shouldBeCalled();
+            ->should(new ProductDraft());
 
         $this->saveEdit($productDraft, false);
     }
@@ -177,13 +180,13 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->willReturn(new ArrayCollection([$productTranslation]));
 
         $productTranslation->setProductDraft($productDraft)
-            ->shouldBeCalled();
+            ->should(new ProductDraft());
 
         $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION)
             ->shouldBeCalled();
 
         $productDraftRepository->save($productDraft)
-            ->shouldBeCalled();
+            ->should(new ProductDraft());
 
         $this->saveEdit($productDraft, true);
     }
@@ -195,12 +198,14 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         FactoryInterface             $draftFactory,
         FactoryInterface             $translationFactory,
         ProductTranslationInterface  $productTranslation,
-        ProductTranslationInterface  $newProductTranslation,
+        ProductTranslationInterface  $newTranslation,
         ProductListingPriceInterface $productListingPrice,
         ProductListingPriceInterface $newProductListingPrice,
         FactoryInterface             $priceFactory
     )
     {
+
+
         $productDraft->getProductListing()
             ->willReturn($productListing);
 
@@ -222,51 +227,55 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->setCode('test')
             ->shouldBeCalled();
 
+        $productDraft->getTranslations()
+            ->willReturn(new ArrayCollection([$productTranslation]));
+
         $translationFactory->createNew()
-            ->willReturn($newProductTranslation);
+            ->willReturn($newTranslation);
 
         $productTranslation->getName()
             ->willReturn('name');
 
-        $newProductTranslation->setName('name')
+        $newTranslation->setName('name')
             ->shouldBeCalled();
 
-        $newProductTranslation->setProductDraft($productDraft)
+        $newTranslation->setProductDraft($productDraft)
             ->shouldBeCalled();
+
         $productTranslation->getDescription()
             ->willReturn('description');
 
-        $newProductTranslation->setDescription('description')
+        $newTranslation->setDescription('description')
             ->shouldBeCalled();
 
         $productTranslation->getLocale()
             ->willReturn('locale');
 
-        $newProductTranslation->setLocale('locale')
+        $newTranslation->setLocale('locale')
             ->shouldBeCalled();
 
         $productTranslation->getMetaDescription()
             ->willReturn('metadata');
 
-        $newProductTranslation->setMetaDescription('metadata')
+        $newTranslation->setMetaDescription('metadata')
             ->shouldBeCalled();
 
         $productTranslation->getMetaKeywords()
             ->willReturn('metaKeyword');
 
-        $newProductTranslation->setMetaKeywords('metaKeyword')
+        $newTranslation->setMetaKeywords('metaKeyword')
             ->shouldBeCalled();
 
-        $newProductTranslation->setSlug($productTranslation->getSlug())
+        $newTranslation->setSlug($productTranslation->getSlug())
             ->shouldBeCalled();
 
         $productTranslation->getShortDescription()
             ->willReturn('shortDescription');
 
-        $newProductTranslation->setShortDescription('shortDescription')
+        $newTranslation->setShortDescription('shortDescription')
             ->shouldBeCalled();
 
-        $newProductDraft->addTranslationsWithKey($newProductTranslation, $newProductTranslation->getLocale())
+        $newProductDraft->addTranslationsWithKey($newTranslation, $newTranslation->getLocale())
             ->shouldBeCalled();
 
         $productDraft->getProductListingPrice()
@@ -304,7 +313,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->shouldBeCalled();
 
         $productDraft->getProductListing()
-            ->willReturn($productListing);
+            ->willReturn(new ProductListing());
 
         $newProductDraft->setProductListing($productListing)
             ->shouldBeCalled();

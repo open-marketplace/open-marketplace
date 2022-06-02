@@ -13,12 +13,15 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Prophecy\Call\Call;
+use Prophecy\Prophecy\MethodProphecy;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
 use Sylius\Component\Product\Model\ProductInterface;
 
-class ProductListing implements ProductListingInterface
+class ProductListing implements ProductListingInterface, \Prophecy\Prediction\PredictionInterface
 {
     protected int $id;
 
@@ -51,7 +54,6 @@ class ProductListing implements ProductListingInterface
     public function setId(int $id): ProductListing
     {
         $this->id = $id;
-        return $this;
     }
 
     public function getCode(): ?string
@@ -59,10 +61,9 @@ class ProductListing implements ProductListingInterface
         return $this->code;
     }
 
-    public function setCode(?string $code): ProductListingInterface
+    public function setCode(?string $code): void
     {
         $this->code = $code;
-        return $this;
     }
 
     public function getVendor(): ShopUserInterface
@@ -70,10 +71,9 @@ class ProductListing implements ProductListingInterface
         return $this->vendor;
     }
 
-    public function setVendor(ShopUserInterface $vendor): ProductListingInterface
+    public function setVendor(ShopUserInterface $vendor): void
     {
         $this->vendor = $vendor;
-        return $this;
     }
 
     public function getCreateAt(): ?\DateTimeInterface
@@ -81,10 +81,9 @@ class ProductListing implements ProductListingInterface
         return $this->createAt;
     }
 
-    public function setCreateAt(\DateTimeInterface $createAt): ProductListingInterface
+    public function setCreateAt(\DateTimeInterface $createAt): void
     {
         $this->createAt = $createAt;
-        return $this;
     }
 
     public function getVerifiedAt(): ?\DateTimeInterface
@@ -92,10 +91,9 @@ class ProductListing implements ProductListingInterface
         return $this->verifiedAt;
     }
 
-    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): ProductListingInterface
+    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void
     {
         $this->verifiedAt = $verifiedAt;
-        return $this;
     }
 
     public function getVersionNumber(): ?int
@@ -103,10 +101,9 @@ class ProductListing implements ProductListingInterface
         return $this->versionNumber;
     }
 
-    public function setVersionNumber(?int $versionNumber): ProductListingInterface
+    public function setVersionNumber(?int $versionNumber): void
     {
         $this->versionNumber = $versionNumber;
-        return $this;
     }
 
     public function getProduct(): ?ProductInterface
@@ -114,10 +111,9 @@ class ProductListing implements ProductListingInterface
         return $this->product;
     }
 
-    public function setProduct(?ProductInterface $product): ProductListingInterface
+    public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
-        return $this;
     }
 
     public function getProductDrafts(): Collection
@@ -125,9 +121,13 @@ class ProductListing implements ProductListingInterface
         return $this->productDrafts;
     }
 
-    public function addProductDrafts(ProductDraftInterface $productDrafts): ProductListingInterface
+    public function addProductDrafts(ProductDraftInterface $productDrafts): void
     {
         $this->productDrafts->add($productDrafts);
-        return $this;
+    }
+
+    public function check(array $calls, ObjectProphecy $object, MethodProphecy $method)
+    {
+        // TODO: Implement check() method.
     }
 }

@@ -17,25 +17,25 @@ interface ProductListingPriceInterface extends ResourceInterface
 {
     public function getId(): int;
 
-    public function setId(int $id): ProductListingPrice;
+    public function setId(int $id): void;
 
     public function getProductDraft(): ProductDraft;
 
-    public function setProductDraft(ProductDraft $productDraft): ProductListingPrice;
+    public function setProductDraft(ProductDraft $productDraft): void;
 
     public function getPrice(): ?float;
 
-    public function setPrice(?float $price): ProductListingPrice;
+    public function setPrice(?float $price): void;
 
     public function getOriginalPrice(): ?float;
 
-    public function setOriginalPrice(?float $originalPrice): ProductListingPrice;
+    public function setOriginalPrice(?float $originalPrice): void;
 
     public function getMinimumPrice(): ?float;
 
-    public function setMinimumPrice(?float $minimumPrice): ProductListingPrice;
+    public function setMinimumPrice(?float $minimumPrice): void;
 
     public function getChannelCode(): string;
 
-    public function setChannelCode(string $channelCode): ProductListingPrice;
+    public function setChannelCode(string $channelCode): void;
 }

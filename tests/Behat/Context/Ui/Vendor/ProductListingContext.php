@@ -44,6 +44,15 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
+     * @BeforeScenario
+     */
+    public function clearData()
+    {
+        $purger = new ORMPurger($this->entityManager);
+        $purger->purge();
+    }
+
+    /**
      * @Given there is an vendor user :username with password :password
      */
     public function thereIsAnVendorUserWithPassword($username, $password)
@@ -54,6 +63,14 @@ final class ProductListingContext extends RawMinkContext implements Context
         $user->setEmail('vendor@email.com');
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+    }
+    /**
+     * @When test
+     */
+    public function test()
+    {
+
+        var_dump($this->getPage()->getHtml());
     }
 
     /**

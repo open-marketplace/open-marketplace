@@ -15,6 +15,8 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -22,22 +24,22 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTo
 
 class CreateProductListingCommand implements CreateProductListingCommandInterface
 {
-    private RepositoryInterface $productListingRepository;
+    private ProductListingRepositoryInterface $productListingRepository;
     private FactoryInterface $productListingFactoryInterface;
     private TokenStorageInterface $tokenStorage;
     private FactoryInterface $translationFactory;
     private FactoryInterface $draftFactory;
     private FactoryInterface $priceFactory;
-    private RepositoryInterface $draftRepository;
+    private ProductDraftRepositoryInterface $draftRepository;
 
     public function __construct(
-        RepositoryInterface $productListingRepository,
+        ProductListingRepositoryInterface $productListingRepository,
         FactoryInterface $productListingFactoryInterface,
         TokenStorageInterface $tokenStorage,
         FactoryInterface $translationFactory,
         FactoryInterface $draftFactory,
         FactoryInterface $priceFactory,
-        RepositoryInterface $draftRepository
+        ProductDraftRepositoryInterface $draftRepository
     )
     {
         $this->productListingRepository = $productListingRepository;
@@ -61,10 +63,9 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
             $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
         }
 
-        $productListing
-            ->setCode($productDraft->getCode())
-            ->addProductDrafts($productDraft)
-            ->setVendor($user);
+        $productListing->setCode($productDraft->getCode());
+        $productListing->addProductDrafts($productDraft);
+        $productListing->setVendor($user);
 
         $productDraft->setProductListing($productListing);
         $this->productListingRepository->save($productListing);
@@ -87,11 +88,10 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         /** @var ProductDraftInterface $newProductDrat */
         $newProductDrat = $this->draftFactory->createNew();
 
-        $newProductDrat
-            ->setVersionNumber($productDraft->getVersionNumber())
-            ->newVersion()
-            ->setCode($productDraft->getCode())
-            ->setProductListing($productListing);
+        $newProductDrat->setVersionNumber($productDraft->getVersionNumber());
+        $newProductDrat->newVersion();
+        $newProductDrat->setCode($productDraft->getCode());
+        $newProductDrat->setProductListing($productListing);
 
         if ($isSend){
             $newProductDrat->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
@@ -113,15 +113,14 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         {
             /** @var ProductTranslationInterface $newTranslation */
             $newTranslation = $this->translationFactory->createNew();
-            $newTranslation
-                ->setName($translation->getName())
-                ->setProductDraft($newProductDrat)
-                ->setDescription($translation->getDescription())
-                ->setLocale($translation->getLocale())
-                ->setMetaDescription($translation->getMetaDescription())
-                ->setMetaKeywords($translation->getMetaKeywords())
-                ->setSlug($translation->getSlug())
-                ->setShortDescription($translation->getShortDescription());
+            $newTranslation->setName($translation->getName());
+            $newTranslation->setProductDraft($newProductDrat);
+            $newTranslation->setDescription($translation->getDescription());
+            $newTranslation->setLocale($translation->getLocale());
+            $newTranslation->setMetaDescription($translation->getMetaDescription());
+            $newTranslation->setMetaKeywords($translation->getMetaKeywords());
+            $newTranslation->setSlug($translation->getSlug());
+            $newTranslation->setShortDescription($translation->getShortDescription());
             $newProductDrat->addTranslationsWithKey($newTranslation, $newTranslation->getLocale());
         }
     }
@@ -133,12 +132,11 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         {
             /** @var ProductListingPriceInterface $newPrice */
             $newPrice = $this->priceFactory->createNew();
-            $newPrice
-                ->setChannelCode($price->getChannelCode())
-                ->setPrice($price->getPrice())
-                ->setMinimumPrice($price->getMinimumPrice())
-                ->setOriginalPrice($price->getOriginalPrice())
-                ->setProductDraft($newProductDrat);
+            $newPrice->setChannelCode($price->getChannelCode());
+            $newPrice->setPrice($price->getPrice());
+            $newPrice->setMinimumPrice($price->getMinimumPrice());
+            $newPrice->setOriginalPrice($price->getOriginalPrice());
+            $newPrice->setProductDraft($newProductDrat);
             $newProductDrat->addProductListingPriceWithKey($newPrice, $newPrice->getChannelCode());
         }
     }

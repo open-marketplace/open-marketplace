@@ -44,10 +44,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->id;
     }
 
-    public function setId(int $id): ProductTranslation
+    public function setId(int $id): void
     {
         $this->id = $id;
-        return $this;
     }
 
     public function getProductDraft(): ProductDraftInterface
@@ -55,10 +54,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->productDraft;
     }
 
-    public function setProductDraft(ProductDraftInterface $productDraft): ProductTranslation
+    public function setProductDraft(ProductDraftInterface $productDraft): void
     {
         $this->productDraft = $productDraft;
-        return $this;
     }
 
     public function getName(): ?string
@@ -66,10 +64,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->name;
     }
 
-    public function setName(?string $name): ProductTranslation
+    public function setName(?string $name): void
     {
         $this->name = $name;
-        return $this;
     }
 
     public function getSlug(): ?string
@@ -77,10 +74,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->slug;
     }
 
-    public function setSlug(?string $slug): ProductTranslation
+    public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -88,10 +84,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->description;
     }
 
-    public function setDescription(?string $description): ProductTranslation
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-        return $this;
     }
 
     public function getMetaKeywords(): ?string
@@ -99,10 +94,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->metaKeywords;
     }
 
-    public function setMetaKeywords(?string $metaKeywords): ProductTranslation
+    public function setMetaKeywords(?string $metaKeywords): void
     {
         $this->metaKeywords = $metaKeywords;
-        return $this;
     }
 
     public function getMetaDescription(): ?string
@@ -110,10 +104,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->metaDescription;
     }
 
-    public function setMetaDescription(?string $metaDescription): ProductTranslation
+    public function setMetaDescription(?string $metaDescription): void
     {
         $this->metaDescription = $metaDescription;
-        return $this;
     }
 
     public function getShortDescription(): ?string
@@ -121,10 +114,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->shortDescription;
     }
 
-    public function setShortDescription(?string $shortDescription): ProductTranslation
+    public function setShortDescription(?string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;
-        return $this;
     }
 
     public function getLocale(): ?string
@@ -132,10 +124,9 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
         return $this->locale;
     }
 
-    public function setLocale(?string $locale): ProductTranslation
+    public function setLocale(?string $locale): void
     {
         $this->locale = $locale;
-        return $this;
     }
 
 }

@@ -28,47 +28,47 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function getId(): ?int;
 
-    public function setId(int $id): ProductDraft;
+    public function setId(int $id): void;
 
     public function getCode(): string;
 
-    public function setCode(string $code): ProductDraft;
+    public function setCode(string $code): void;
 
     public function isVerified(): bool;
 
-    public function setIsVerified(bool $isVerified): ProductDraft;
+    public function setIsVerified(bool $isVerified): void;
 
     public function getVerifiedAt(): ?\DateTimeInterface;
 
-    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): ProductDraft;
+    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void;
 
     public function getCreatedAt(): \DateTimeInterface;
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): ProductDraft;
+    public function setCreatedAt(\DateTimeInterface $createdAt): void;
 
     public function getVersionNumber(): int;
 
-    public function setVersionNumber(int $versionNumber): ProductDraft;
+    public function setVersionNumber(int $versionNumber): void;
 
     public function getTranslations(): Collection;
 
-    public function addTranslations(ProductTranslation $translation): ProductDraft;
+    public function addTranslations(ProductTranslation $translation): void;
 
-    public function addTranslationsWithKey(ProductTranslation $translation, string $key): ProductDraft;
+    public function addTranslationsWithKey(ProductTranslation $translation, string $key): void;
 
     public function getProductListingPrice(): Collection;
 
-    public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): ProductDraft;
+    public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void;
 
-    public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): ProductDraft;
+    public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void;
 
     public function getProductListing(): ProductListing;
 
-    public function setProductListing(ProductListing $productListing): ProductDraft;
+    public function setProductListing(ProductListing $productListing): void;
 
     public function getStatus(): ?string;
 
-    public function setStatus(string $status): ProductDraft;
+    public function setStatus(string $status): void;
 
-    public function newVersion(): ProductDraft;
+    public function newVersion(): void;
 }

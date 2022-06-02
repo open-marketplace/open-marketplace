@@ -16,37 +16,37 @@ interface ProductTranslationInterface
 {
     public function getId(): int;
 
-    public function setId(int $id): ProductTranslation;
+    public function setId(int $id): void;
 
     public function getProductDraft(): ProductDraftInterface;
 
-    public function setProductDraft(ProductDraftInterface $productDraft): ProductTranslation;
+    public function setProductDraft(ProductDraftInterface $productDraft): void;
 
     public function getName(): ?string;
 
-    public function setName(?string $name): ProductTranslation;
+    public function setName(?string $name): void;
 
     public function getSlug(): ?string;
 
-    public function setSlug(?string $slug): ProductTranslation;
+    public function setSlug(?string $slug): void;
 
     public function getDescription(): ?string;
 
-    public function setDescription(?string $description): ProductTranslation;
+    public function setDescription(?string $description): void;
 
     public function getMetaKeywords(): ?string;
 
-    public function setMetaKeywords(?string $metaKeywords): ProductTranslation;
+    public function setMetaKeywords(?string $metaKeywords): void;
 
     public function getMetaDescription(): ?string;
 
-    public function setMetaDescription(?string $metaDescription): ProductTranslation;
+    public function setMetaDescription(?string $metaDescription): void;
 
     public function getShortDescription(): ?string;
 
-    public function setShortDescription(?string $shortDescription): ProductTranslation;
+    public function setShortDescription(?string $shortDescription): void;
 
     public function getLocale(): ?string;
 
-    public function setLocale(?string $locale): ProductTranslation;
+    public function setLocale(?string $locale): void;
 }
