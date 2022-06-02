@@ -27,9 +27,9 @@ interface VendorInterface extends VendorDataInterface
 
     public function setPhoneNumber(?string $phoneNumber): void;
 
-    public function getVendorAddress(): ?VendorAddress;
+    public function getVendorAddress(): ?VendorAddressInterface;
 
-    public function setVendorAddress(?VendorAddress $vendorAddress): void;
+    public function setVendorAddress(?VendorAddressInterface $vendorAddress): void;
 
     public function getCustomer(): ?CustomerInterface;
 

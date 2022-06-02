@@ -4,8 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService" 
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service" >
-            <argument type="service" id="security.helper"/>
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service" >            
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.email_sender"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider"/>

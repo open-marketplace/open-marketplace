@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorDataInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
@@ -23,21 +24,17 @@ use Symfony\Component\Security\Core\Security;
 
 final class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
 {
-    private Security $security;
-
     private EntityManagerInterface $entityManager;
 
     private SenderInterface $sender;
     
     private VendorProvider $vendorProvider;
 
-    public function __construct(
-        Security $security,
+    public function __construct(       
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         VendorProvider $vendorProvider
-    ) {
-        $this->security = $security;
+    ) {       
         $this->entityManager = $entityManager;
         $this->sender = $sender;
         $this->vendorProvider = $vendorProvider;
@@ -46,12 +43,9 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     public function createPendingVendorProfileUpdate(VendorInterface $vendorData): void
     {
         $currentVendor = $this->vendorProvider->getLoggedVendor();
-        dd($vendorData);
-//        $OldVendorPendingData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
-//        $pendingVendorUpdate = $OldVendorPendingData;
-//        if (null == $pendingVendorUpdate) {
-            $pendingVendorUpdate = new VendorProfileUpdate();
-//        }
+
+        $pendingVendorUpdate = new VendorProfileUpdate();    
+        $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
         $pendingVendorUpdate->setVendor($currentVendor);
         $token = md5(mt_rand(1, 90000) . 'SALT');
         $pendingVendorUpdate->setToken($token);
@@ -69,19 +63,10 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
         $vendor->setPhoneNumber($data->getPhoneNumber());
-        dd($vendor);
         $newVendorAddress = $data->getVendorAddress();
         if (null == $newVendorAddress) {
             return;
-        }     
-//        dd($data->getVendorAddress()->getId());
-//        $vendor->setVendorAddress($newVendorAddress);
-//        dd($data);
-//        $oldVendorAddress = $vendor->getVendorAddress();
-//        if (null == $oldVendorAddress) {
-//            return;
-//        }
-
+        }    
         $vendor->getVendorAddress()->setCity($newVendorAddress->getCity());
         $vendor->getVendorAddress()->setCountry($newVendorAddress->getCountry());
         $vendor->getVendorAddress()->setPostalCode($newVendorAddress->getPostalCode());

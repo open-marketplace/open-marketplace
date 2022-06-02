@@ -25,7 +25,7 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 
     private ?string $phoneNumber;
 
-    private ?VendorAddress $vendorAddress;
+    private ?VendorAddressInterface $vendorAddress;
 
     public function getId(): ?int
     {
@@ -67,12 +67,12 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function getVendorAddress(): ?VendorAddress
+    public function getVendorAddress(): ?VendorAddressInterface
     {
         return $this->vendorAddress;
     }
 
-    public function setVendorAddress(?VendorAddress $vendorAddress): void
+    public function setVendorAddress(?VendorAddressInterface $vendorAddress): void
     {
         $this->vendorAddress = $vendorAddress;
     }
