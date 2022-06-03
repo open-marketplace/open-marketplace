@@ -28,22 +28,19 @@ class VendorUpdateContext extends MinkContext
     private SharedStorageInterface $sharedStorage;
     private UserRepositoryInterface $userRepository;
     private ExampleFactoryInterface $userFactory;
-    private ObjectManager $manager;
-    private MessageBusInterface $messageBus; 
+    private ObjectManager $manager;   
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
-        ObjectManager $manager,
-        MessageBusInterface $messageBus        
+        ObjectManager $manager,       
     ) {
 
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
-        $this->manager = $manager;
-        $this->messageBus = $messageBus;       
+        $this->manager = $manager;          
     }
 
     /**
