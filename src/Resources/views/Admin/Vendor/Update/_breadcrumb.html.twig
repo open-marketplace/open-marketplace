@@ -1,0 +1,10 @@
+{% import '@SyliusAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+
+{% set breadcrumbs = [
+    { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+    { label: 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendors'|trans, url: path('bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_index') },
+    { label: resource.name|default(resource.code|default(resource.companyName)) },
+    { label: 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.edit'|trans }
+] %}
+
+{{ breadcrumb.crumble(breadcrumbs) }}

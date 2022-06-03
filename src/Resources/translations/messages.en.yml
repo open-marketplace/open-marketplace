@@ -9,6 +9,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
         customer: 'Customer'
         details: 'Details'
         edit: 'Edit'
+        edit_vendor: 'Edit vendor'
         id: 'ID'
         marketplace: 'Marketplace'
         not_blank: "This field cannnot be empty"

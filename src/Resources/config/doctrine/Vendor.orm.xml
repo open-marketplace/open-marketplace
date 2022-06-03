@@ -8,9 +8,9 @@
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="companyName" column="company_name" type="text" />
-        <field name="taxIdentifier" column="tax_identifier" type="text" />
-        <field name="phoneNumber" column="phone_number" type="text" />
+        <field name="companyName" column="company_name" type="string" />
+        <field name="taxIdentifier" column="tax_identifier" type="string" />
+        <field name="phoneNumber" column="phone_number" type="string" />
         <field name="status" column="status" type="string" />
         <field name="blocked" column="blocked" type="string" />
 
