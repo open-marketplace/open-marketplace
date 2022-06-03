@@ -13,12 +13,20 @@
             <td>{{ vendor.phoneNumber }}</td>
         </tr>
         <tr>
-            <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_address'|trans }}</strong></td>
-            <td>{{ vendor.vendorAddress }}</td>
+            <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.country'|trans }}</strong></td>
+            <td>{{ vendor.vendorAddress.country }}</td>
         </tr>
         <tr>
-            <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.status'|trans }}</strong></td>
-            <td>{{ vendor.status }}</td>
+            <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.city'|trans }}</strong></td>
+            <td>{{ vendor.vendorAddress.city }}</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.street'|trans }}</strong></td>
+            <td>{{ vendor.vendorAddress.street }}</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.postal_code'|trans }}</strong></td>
+            <td>{{ vendor.vendorAddress.postalCode }}</td>
         </tr>
     </tbody>
 </table>
