@@ -31,11 +31,12 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         SenderInterface $sender
     ) {
         $this->entityManager = $entityManager;
-        $this->sender = $sender;
+        $this->sender = $sender;       
     }
 
     public function createPendingVendorProfileUpdate(VendorInterface $vendorData, VendorInterface $currentVendor): void
     {
+        
         $pendingVendorUpdate = new VendorProfileUpdate();
         $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
         $pendingVendorUpdate->setVendor($currentVendor);
@@ -51,7 +52,7 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     }
 
     private function setVendorFromData(VendorDataInterface $vendor, VendorDataInterface $data): void
-    {
+    {        
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
         $vendor->setPhoneNumber($data->getPhoneNumber());

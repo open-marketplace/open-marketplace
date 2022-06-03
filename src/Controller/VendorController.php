@@ -34,7 +34,7 @@ final class VendorController extends ResourceController
     }
 
     public function updateAction(Request $request): Response
-    {
+    {       
         /** @var ShopUser $user */
         $user = $this->getUser();
         /** @var Customer $customer */
@@ -43,7 +43,7 @@ final class VendorController extends ResourceController
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
         if (null == $pendingUpdate) {
             return parent::updateAction($request);
-        }
+        }        
         $this->addFlash('error', 'sylius.user.verify_email_request');
 
         return $this->redirectToRoute('vendor_profile');

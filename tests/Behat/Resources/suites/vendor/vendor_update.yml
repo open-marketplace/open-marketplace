@@ -1,11 +1,13 @@
 default:
     suites:
-        customer_dashboard:
+        vendor_dashboard:
             contexts:
-                - tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor.customer_dashboard_context
+                - tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor.vendor_update_context
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.geographical
 #                - Behat\MinkExtension\Context\MinkContext
             filters:
                 tags: "@vendor_dashboard"

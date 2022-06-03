@@ -1,7 +1,7 @@
 imports: 
     - tests/Behat/Resources/suites.yml
 
-default:
+default:    
     extensions:
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
 
