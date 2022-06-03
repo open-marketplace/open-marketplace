@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page;
+namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\vendor;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
