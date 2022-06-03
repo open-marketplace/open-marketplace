@@ -28,7 +28,7 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        SenderInterface $sender,
+        SenderInterface $sender
     ) {
         $this->entityManager = $entityManager;
         $this->sender = $sender;
