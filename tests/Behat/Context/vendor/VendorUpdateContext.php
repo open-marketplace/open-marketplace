@@ -34,7 +34,7 @@ class VendorUpdateContext extends MinkContext
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
-        ObjectManager $manager,       
+        ObjectManager $manager       
     ) {
 
         $this->sharedStorage = $sharedStorage;
