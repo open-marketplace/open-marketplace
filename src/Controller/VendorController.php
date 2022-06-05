@@ -59,11 +59,6 @@ class VendorController extends ResourceController
 
     public function updateAction(Request $request): Response
     {       
-//        /** @var ShopUser $user */
-//        $user = $this->getUser();
-//        /** @var Customer $customer */
-//        $customer = $user->getCustomer();
-//        $vendor = $customer->getVendor();
         $vendor = $this->vendorProvider->getLoggedVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
         if (null == $pendingUpdate) {

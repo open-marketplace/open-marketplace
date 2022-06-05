@@ -4,9 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorProfileUpdateAction"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_profile_update_action"
-                 public="true"
-        >
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_profile_update_action">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -17,8 +15,7 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ConfirmProfileUpdateAction"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.confirm_profile_update_action"
-                 public="true" >
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.confirm_profile_update_action" >
             <call method="setContainer">
                 <argument type="service" id="service_container"/>                
             </call>
@@ -28,8 +25,7 @@
         </service>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController"
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_controller"           
-                 parent="bitbag_multi_vendor_marketplace.controller.vendor"                
-                 public="true" >
+                 parent="bitbag_multi_vendor_marketplace.controller.vendor">
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider" />
         </service>        
     </services>
