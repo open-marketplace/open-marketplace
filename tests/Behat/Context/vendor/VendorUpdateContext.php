@@ -14,13 +14,13 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\vendor;
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 use function PHPUnit\Framework\assertNotEquals;
 
 class VendorUpdateContext extends MinkContext
@@ -44,9 +44,9 @@ class VendorUpdateContext extends MinkContext
     }
 
     /**
-     * @Given there is a vendor user :vendor_user_email registered in :country_code
+     * @Given there is a vendor user :vendor_user_email registered in country :country_code
      */
-    public function thereIsAVendorUserRegisteredIn($vendor_user_email, $country_code)
+    public function thereIsAVendorUserRegisteredInCountr($vendor_user_email, $country_code)
     {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
@@ -81,4 +81,28 @@ class VendorUpdateContext extends MinkContext
         assertNotEquals(null, $pendingData);
     }
 
+    /**
+     * @Given There is pending update data with token value :token for logged in vendor
+     */
+    public function thereIsPendingUpdateDataWithTokenValueForLoggedInVendor($token)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+        $country = $this->manager->getRepository(Country::class)->findOneBy(['code'=>"PL"]);
+        $pendigUpdate = new VendorProfileUpdate();
+        $pendigUpdate->setVendorAddress(new VendorAddressUpdate());
+        $pendigUpdate->setVendor($vendor);
+        $pendigUpdate->setToken($token);
+        $pendigUpdate->setCompanyName('new Company');
+        $pendigUpdate->setTaxIdentifier('new ID');
+        $pendigUpdate->setPhoneNumber('new number');
+        $pendigUpdate->getVendorAddress()->setStreet('new street');
+        $pendigUpdate->getVendorAddress()->setCity('new city');
+        $pendigUpdate->getVendorAddress()->setPostalCode('new code');
+        $pendigUpdate->getVendorAddress()->setCountry($country);
+        
+        $this->manager->persist($pendigUpdate);
+        $this->manager->flush();
+        
+        $this->sharedStorage->set('pendingUpdate',$pendigUpdate);
+    }
 }
