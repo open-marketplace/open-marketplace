@@ -9,17 +9,19 @@
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="container.service_subscriber"/>
+            <tag name="controller.service_arguments"/>
             <argument type="service" id="request_stack"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider"/>
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ConfirmProfileUpdateAction"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.confirm_profile_update_action" >
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.confirm_profile_update_action">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>                
             </call>
             <tag name="container.service_subscriber"/>
+            <tag name="controller.service_arguments"/>
             <argument type="service" id="doctrine.orm.default_entity_manager" />    
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service"/>
         </service>
