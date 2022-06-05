@@ -40,7 +40,26 @@ class VendorController extends ResourceController
 {
     private VendorProvider $vendorProvider;
 
-    public function __construct(MetadataInterface $metadata, RequestConfigurationFactoryInterface $requestConfigurationFactory, ?ViewHandlerInterface $viewHandler, RepositoryInterface $repository, FactoryInterface $factory, NewResourceFactoryInterface $newResourceFactory, ObjectManager $manager, SingleResourceProviderInterface $singleResourceProvider, ResourcesCollectionProviderInterface $resourcesFinder, ResourceFormFactoryInterface $resourceFormFactory, RedirectHandlerInterface $redirectHandler, FlashHelperInterface $flashHelper, AuthorizationCheckerInterface $authorizationChecker, EventDispatcherInterface $eventDispatcher, ?StateMachineInterface $stateMachine, ResourceUpdateHandlerInterface $resourceUpdateHandler, ResourceDeleteHandlerInterface $resourceDeleteHandler, VendorProvider $vendorProvider)
+    public function __construct(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        ?ViewHandlerInterface $viewHandler,
+        RepositoryInterface $repository,
+        FactoryInterface $factory,
+        NewResourceFactoryInterface $newResourceFactory,
+        ObjectManager $manager,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourcesCollectionProviderInterface $resourcesFinder,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher,
+        ?StateMachineInterface $stateMachine,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
+        VendorProvider $vendorProvider
+    )
     {
         parent::__construct($metadata, $requestConfigurationFactory, $viewHandler, $repository, $factory, $newResourceFactory, $manager, $singleResourceProvider, $resourcesFinder, $resourceFormFactory, $redirectHandler, $flashHelper, $authorizationChecker, $eventDispatcher, $stateMachine, $resourceUpdateHandler, $resourceDeleteHandler);
         $this->vendorProvider = $vendorProvider;
@@ -58,12 +77,12 @@ class VendorController extends ResourceController
     }
 
     public function updateAction(Request $request): Response
-    {       
+    {
         $vendor = $this->vendorProvider->getLoggedVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
         if (null == $pendingUpdate) {
             return parent::updateAction($request);
-        }        
+        }
         $this->addFlash('error', 'sylius.user.verify_email_request');
 
         return $this->redirectToRoute('vendor_profile');

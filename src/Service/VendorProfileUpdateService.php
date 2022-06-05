@@ -31,12 +31,11 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         SenderInterface $sender
     ) {
         $this->entityManager = $entityManager;
-        $this->sender = $sender;       
+        $this->sender = $sender;
     }
 
     public function createPendingVendorProfileUpdate(VendorInterface $vendorData, VendorInterface $currentVendor): void
     {
-        
         $pendingVendorUpdate = new VendorProfileUpdate();
         $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
         $pendingVendorUpdate->setVendor($currentVendor);
@@ -45,14 +44,16 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
         /** @var Customer $customer */
         $customer = $currentVendor->getCustomer();
-        if(null !== $customer)
+        if (null !== $customer) {
             $user = $customer->getUser();
-        if (null !== $user) 
+        }
+        if (null !== $user) {
             $this->sendEmail($user->getUsername(), $token);
+        }
     }
 
     private function setVendorFromData(VendorDataInterface $vendor, VendorDataInterface $data): void
-    {        
+    {
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
         $vendor->setPhoneNumber($data->getPhoneNumber());
@@ -89,8 +90,9 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     private function deletePendingData(VendorProfileUpdateInterface $vendorData): void
     {
         $pendingAddressChange = $vendorData->getVendorAddress();
-        if(null !== $pendingAddressChange)
+        if (null !== $pendingAddressChange) {
             $this->entityManager->remove($pendingAddressChange);
+        }
         $this->entityManager->remove($vendorData);
         $this->entityManager->flush();
     }

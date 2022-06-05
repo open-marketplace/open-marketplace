@@ -31,18 +31,17 @@ class VendorProfileUpdateAction extends AbstractController
         RequestStack $request,
         VendorProfileUpdateService $vendorProfileUpdateService,
         VendorProvider $vendorProvider
-    )
-    {
+    ) {
         $this->request = $request;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
     }
 
     public function __invoke(): Response
-    {        
+    {
         $vendor = new Vendor();
         $form = $this->createForm(VendorType::class, $vendor);
-        
+
         $form->handleRequest($this->request->getCurrentRequest());
         if ($form->isSubmitted() && $form->isValid()) {
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $this->vendorProvider->getLoggedVendor());
