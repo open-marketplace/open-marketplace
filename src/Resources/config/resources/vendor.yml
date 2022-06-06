@@ -1,6 +1,6 @@
 sylius_resource:
     resources:
-        bitbag_multi_vendor_marketplace.vendor:
+        bitbag_sylius_multi_vendor_marketplace_plugin.vendor:
             classes:
                 model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor
                 interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface
