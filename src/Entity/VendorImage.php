@@ -12,7 +12,7 @@ final class VendorImage implements VendorImageInterface
 
     private ?VendorInterface $vendor;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->getId();
     }
@@ -27,7 +27,7 @@ final class VendorImage implements VendorImageInterface
         $this->path = $path;
     }
 
-    public function getVendor(): VendorInterface
+    public function getVendor(): ?VendorInterface
     {
         return $this->vendor;
     }

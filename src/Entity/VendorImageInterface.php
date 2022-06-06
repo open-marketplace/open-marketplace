@@ -12,7 +12,7 @@ interface VendorImageInterface
 
     public function setPath(?string $path): void;
 
-    public function getVendor(): VendorInterface;
+    public function getVendor(): ?VendorInterface;
 
     public function setVendor(VendorInterface $vendor): void;
 }
