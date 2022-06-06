@@ -18,6 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGeneratorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
 use Ramsey\Uuid\Uuid;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -43,17 +44,21 @@ class VendorType extends AbstractResourceType
 
     private VendorImageFactoryInterface $vendorImageFactory;
 
+    private FileUploaderInterface $fileUploader;
+
     public function __construct(
         string $dataClass,
         TokenStorageInterface $tokenStorage,
         array $validationGroups = [],
         VendorSlugGeneratorInterface $vendorSlugGenerator,
-        VendorImageFactoryInterface $vendorImageFactory
+        VendorImageFactoryInterface $vendorImageFactory,
+        FileUploaderInterface $fileUploader
     ) {
         parent::__construct($dataClass, $validationGroups);
         $this->tokenStorage = $tokenStorage;
         $this->vendorSlugGenerator = $vendorSlugGenerator;
         $this->vendorImageFactory = $vendorImageFactory;
+        $this->fileUploader = $fileUploader;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -103,14 +108,10 @@ class VendorType extends AbstractResourceType
                 //TODO: secure to avoid duplicates
                 $vendor->setSlug($this->vendorSlugGenerator->generateSlug($vendor->getCompanyName()));
 
-                //TODO: move image save to service
-                $uuid = Uuid::uuid4();
-                $filename = $uuid->toString() . '.' . $image->guessClientExtension();
-
                 try {
-                    $image->move(
-                        $_ENV['LOGO_DIRECTORY'],
-                        $filename
+                    $filename = $this->fileUploader->upload(
+                        $image,
+                        $_ENV['LOGO_DIRECTORY']
                     );
 
                     $vendorImage = $this->vendorImageFactory->create($filename, $vendor);
