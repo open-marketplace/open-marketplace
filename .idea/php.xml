@@ -43,7 +43,6 @@
       <path value="$PROJECT_DIR$/vendor/friends-of-behat/mink-debug-extension" />
       <path value="$PROJECT_DIR$/vendor/friends-of-behat/page-object-extension" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/form-extensions" />
-      <path value="$PROJECT_DIR$/vendor/sonata-project/twig-extensions" />
       <path value="$PROJECT_DIR$/vendor/friends-of-behat/mink" />
       <path value="$PROJECT_DIR$/vendor/friends-of-behat/variadic-extension" />
       <path value="$PROJECT_DIR$/vendor/willdurand/negotiation" />
@@ -255,6 +254,14 @@
       <path value="$PROJECT_DIR$/vendor/behat/behat" />
       <path value="$PROJECT_DIR$/vendor/gedmo/doctrine-extensions" />
       <path value="$PROJECT_DIR$/vendor/dmore/behat-chrome-extension" />
+      <path value="$PROJECT_DIR$/vendor/nelmio/alice" />
+      <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/vendor/openlss/lib-array2xml" />
+      <path value="$PROJECT_DIR$/vendor/coduo/php-to-string" />
+      <path value="$PROJECT_DIR$/vendor/coduo/php-matcher" />
+      <path value="$PROJECT_DIR$/vendor/lchrusciel/api-test-case" />
+      <path value="$PROJECT_DIR$/vendor/theofidry/alice-data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/aeon-php/calendar" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

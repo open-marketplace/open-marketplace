@@ -4,7 +4,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
         block: 'Block'
         city: "City"
         company_address: "Company Address"
-        company_name: 'Company name'
+        company_name: "Company name"
         country: "Country"
         customer: 'Customer'
         details: 'Details'
@@ -13,6 +13,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
         id: 'ID'
         marketplace: 'Marketplace'
         not_blank: "This field cannnot be empty"
+        pending_update_message: "You cannot change the data until you accept the previous change."
         phone_number: "Phone number"
         postal_code: "Postal code"
         product_listings: 'Product listings'
@@ -25,6 +26,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_dashboard: "Vendor dashboard"
+        vendor_profile: "Profile"
         vendors: 'Vendors'
         verified: 'Verified'
         verify: 'Verify'

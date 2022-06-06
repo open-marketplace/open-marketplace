@@ -8,11 +8,8 @@
     {{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <input type="hidden" name="_method" value="PUT" />
     {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
-{#    {{ dump(configuration.vars) }}#}
+    {{ dump() }}
 
-{#    {% if configuration.vars.templates.form is not defined %}#}
-{#        <h1>no halo</h1>#}
-{#        {% include configuration.vars.templates.form %}#}
     {% if not form._token.isRendered %}
         {{ form_row(form._token) }}
 
@@ -22,21 +19,6 @@
             {{ sylius_template_event('bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.content', _context) }}
         </div>
     {% endif %}
-{#    {% else %}#}
-{#        {{ form_widget(form) }}#}
-{#        {{ form_errors(form) }}#}
-
-{#        <div class="ui two column stackable grid">#}
-{#            {{ sylius_template_event('bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.content', _context) }}#}
-{#        </div>#}
-{#    {% endif %}#}
-
-{#    {{ form_errors(form) }}#}
-
-{#    <div class="ui two column stackable grid">#}
-{#        {{ sylius_template_event('bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.content', _context) }}#}
-{#    </div>#}
-
 
     {{ sylius_template_event([event_prefix ~ '.form', 'sylius.admin.update.form'], {'metadata': metadata, 'resource': resource, 'form': form}) }}
 

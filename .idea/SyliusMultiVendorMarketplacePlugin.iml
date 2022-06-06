@@ -37,7 +37,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/mink-debug-extension" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/page-object-extension" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/form-extensions" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/twig-extensions" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/mink" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/variadic-extension" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/willdurand/negotiation" />
@@ -249,6 +248,14 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/behat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/gedmo/doctrine-extensions" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dmore/behat-chrome-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nelmio/alice" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/masterminds/html5" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/openlss/lib-array2xml" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/coduo/php-to-string" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/coduo/php-matcher" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lchrusciel/api-test-case" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theofidry/alice-data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aeon-php/calendar" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
