@@ -19,7 +19,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_show:
 
 bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_update:
     path: /vendors/{id}/edit
-    methods: [GET]
+    methods: [GET, PUT]
     defaults:
         _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.vendor:updateAction
         _sylius:

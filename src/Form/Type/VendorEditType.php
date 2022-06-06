@@ -8,7 +8,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorAddressType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Valid;
 
 final class VendorEditType extends AbstractResourceType
 {
@@ -26,7 +25,6 @@ final class VendorEditType extends AbstractResourceType
             ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'label',
-                'constraints' => [new Valid()],
             ]);
     }
 }
