@@ -20,27 +20,27 @@
 
     <div class="ui large list grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
         <div class="item row">
-            <span class="ui label three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name'|trans }}</span>
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name'|trans }}:</span>
             {{ vendor.companyName }}
         </div>
         <div class="item row">
-            <span class="ui label three wide column ">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_identifier'|trans }}</span>
+            <span class="ui three wide column ">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_identifier'|trans }}:</span>
             {{ vendor.taxIdentifier }}            
         </div>
         <div class="item row">
-            <span class="ui label three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.phone_number'|trans }}</span>
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.phone_number'|trans }}:</span>
             {{ vendor.phoneNumber }}
         </div>
         <div class="item row">
-            <span class="ui label three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.country'|trans }}</span>
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.country'|trans }}:</span>
             {{ vendor.vendorAddress.country }}
         </div>
         <div class="item row">
-            <span class="ui label three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.city'|trans }}</span>
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.city'|trans }}:</span>
             {{ vendor.vendorAddress.city }}
         </div>
         <div class="item row">
-            <div class="ui label three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.street'|trans }}</div>
+            <div class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.street'|trans }}:</div>
             {{ vendor.vendorAddress.street }}
         </div>    
     </div>
