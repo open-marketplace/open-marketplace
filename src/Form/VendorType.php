@@ -19,7 +19,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGeneratorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
-use Ramsey\Uuid\Uuid;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -105,7 +104,6 @@ class VendorType extends AbstractResourceType
                 /** @var VendorInterface $vendor */
                 $vendor = $event->getData();
 
-                //TODO: secure to avoid duplicates
                 $vendor->setSlug($this->vendorSlugGenerator->generateSlug($vendor->getCompanyName()));
 
                 try {
@@ -118,7 +116,7 @@ class VendorType extends AbstractResourceType
                     $vendor->setImage($vendorImage);
 
                 } catch (FileException $e) {
-                    //TODO: handle exception
+                    throw new FileException('Could not get the content of the file');
                 }
             })
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {

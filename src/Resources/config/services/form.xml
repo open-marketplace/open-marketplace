@@ -21,6 +21,7 @@
             <argument key="$vendorSlugGenerator" type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_slug_generator"/>
             <argument key="$vendorImageFactory" type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_image_factory"/>
             <argument key="$fileUploader" type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.file_uploader"/>
+            <argument key="$logger" type="service" id="logger" />
             <tag name="form.type"/>
         </service>
     </services>
