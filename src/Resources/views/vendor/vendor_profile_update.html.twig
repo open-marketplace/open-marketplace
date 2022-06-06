@@ -22,8 +22,6 @@
             <div class="sub header">{{ 'sylius.ui.edit_your_personal_information'|trans }}</div>
         </h1>
 
-{#        {{ sylius_template_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}#}
-
         {{ form_row(form.companyName, sylius_test_form_attribute('companyName')) }}
         {{ form_row(form.taxIdentifier) }}
         {{ form_row(form.phoneNumber) }}
