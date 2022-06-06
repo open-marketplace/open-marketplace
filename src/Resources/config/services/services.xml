@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService" 
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_profile_update_service" >            
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="sylius.email_sender"/>            
+        </service>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider" 
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider">
+            <argument type="service" id="security.helper"/>
+        </service>
+    </services>
+</container>

@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-class Vendor implements VendorInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 {
     public const STATUS_UNVERIFIED = 'unverified';
 

@@ -3,10 +3,10 @@
     <services>
         <defaults public="true" />
         <service
-                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\CustomerDashboardContext"
-                id="tests.bitbag.sylius_organization_plugin.behat.context.customer_dashboard_context"
+                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\vendor\CustomerDashboardContext"
+                id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor.customer_dashboard_context"
         >
-            <argument type="service" id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.customer_dashboard_page" />           
+            <argument type="service" id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.vendor.customer_dashboard_page" />           
         </service>
     </services>
 </container>

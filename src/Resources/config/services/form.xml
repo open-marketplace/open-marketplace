@@ -20,8 +20,6 @@
         <service id="bit_bag.sylius_multi_vendor_marketplace_plugin.form.type.vendor_edit_type"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorEditType">
             <argument>%bitbag_sylius_multi_vendor_marketplace_plugin.model.vendor.class%</argument>
-<!--            <argument type="service" id="security.token_storage"/>-->
-<!--            <argument>%bitbag_sylius_organization_plugin.form.type.vendor.validation_groups%</argument>-->
             <tag name="form.type"/>
         </service>
     </services>
