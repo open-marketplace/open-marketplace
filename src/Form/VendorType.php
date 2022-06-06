@@ -104,19 +104,23 @@ class VendorType extends AbstractResourceType
                 /** @var VendorInterface $vendor */
                 $vendor = $event->getData();
 
-                $vendor->setSlug($this->vendorSlugGenerator->generateSlug($vendor->getCompanyName()));
+                if ($vendor->getCompanyName()) {
+                    $vendor->setSlug($this->vendorSlugGenerator->generateSlug($vendor->getCompanyName()));
+                }
 
-                try {
-                    $filename = $this->fileUploader->upload(
-                        $image,
-                        $_ENV['LOGO_DIRECTORY']
-                    );
+                if ($image) {
+                    try {
+                        $filename = $this->fileUploader->upload(
+                            $image,
+                            $_ENV['LOGO_DIRECTORY']
+                        );
 
-                    $vendorImage = $this->vendorImageFactory->create($filename, $vendor);
-                    $vendor->setImage($vendorImage);
+                        $vendorImage = $this->vendorImageFactory->create($filename, $vendor);
+                        $vendor->setImage($vendorImage);
 
-                } catch (FileException $e) {
-                    throw new FileException('Could not get the content of the file');
+                    } catch (FileException $e) {
+                        throw new FileException('Could not get the content of the file');
+                    }
                 }
             })
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {

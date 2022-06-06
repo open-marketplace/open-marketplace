@@ -22,7 +22,7 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 
     private Customer $customer;
 
-    private ?string $companyName;
+    private ?string $companyName = null;
 
     private ?string $taxIdentifier;
 
