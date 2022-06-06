@@ -26,6 +26,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $vendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier'=>"1234567"]);
         self::assertEquals('Test company name',$vendor->getCompanyName());     
     }
+    
     public function test_doesnt_update_any_vendor_data_immediately()
     {
         $this->loadFixturesFromFile('vendor.yml');
@@ -89,6 +90,5 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $updatedVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier'=>'1234567']);
         $this->assertEquals($currentVendor->getCompanyName(), $pendingData->getCompanyName());    
         $this->assertEquals(null, $updatedVendor);
-    }
-      
+    }      
 }

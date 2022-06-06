@@ -42,13 +42,12 @@
         <div class="item row">
             <div class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.street'|trans }}:</div>
             {{ vendor.vendorAddress.street }}
-        </div>    
+        </div>
+        <div class="row">
+            <a class="ui two wide column center aligned" href="{{ path('vendor_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>
+        </div>
     </div>
 
     {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'vendor': vendor}) }}
 
-    <div class="ui text menu">
-        <a href="{{ path('vendor_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>       
-
-    </div>
 {% endblock %}
