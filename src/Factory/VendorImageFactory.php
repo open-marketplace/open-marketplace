@@ -18,10 +18,10 @@ final class VendorImageFactory implements VendorImageFactoryInterface
     public function create(string $path, VendorInterface $vendor): VendorImageInterface
     {
         $vendorImage = new VendorImage();
-        
+
         $vendorImage->setPath($path);
         $vendorImage->setVendor($vendor);
-        
+
         return $vendorImage;
     }
 }

@@ -6,14 +6,17 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
 final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
-    public function findVendorProducts(VendorInterface $vendor, Request $request, ChannelInterface $channel): Pagerfanta
-    {
+    public function findVendorProducts(
+        VendorInterface $vendor,
+        Request $request,
+        ChannelInterface $channel
+    ): Pagerfanta {
         $qb = $this->createListQueryBuilder($request->get('_locale'))
             ->andWhere('o.vendor = :vendor')
             ->setParameter('vendor', $vendor)
@@ -21,16 +24,18 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
 
         if ($request->get('sorting')) {
             $key = key($request->get('sorting'));
-            $sortingOption = $request->get('sorting')[$key] === 'asc' ? 'asc' : 'desc';
+            $sortingOption = 'asc' === $request->get('sorting')[$key] ? 'asc' : 'desc';
 
             switch ($key) {
                 case 'createdAt':
                     $qb->orderBy('o.createdAt', $sortingOption)
                     ;
+
                     break;
                 case 'name':
                     $qb->orderBy('translation.name', $sortingOption)
                     ;
+
                     break;
                 case 'price':
                     $subQuery = $this->createQueryBuilder('m')
@@ -56,6 +61,7 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
                         ->setParameter('enabled', true)
                         ->orderBy('channelPricing.price', $sortingOption)
                     ;
+
                     break;
             }
         }
@@ -63,7 +69,7 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
         $currentPage = $request->get('page', 1);
         $limit = $request->get('limit', $_ENV['DEFAULT_VENDOR_PRODUCTS_LIMIT']);
 
-        $pager =  $this->getPaginator($qb);
+        $pager = $this->getPaginator($qb);
         $pager->setMaxPerPage($limit);
         $pager->setCurrentPage($currentPage);
 

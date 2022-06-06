@@ -7,5 +7,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 interface ProductInterface
 {
     public function getVendor(): ?VendorInterface;
+
     public function setVendor(?VendorInterface $vendor): void;
 }

@@ -80,7 +80,7 @@ class VendorType extends AbstractResourceType
                 'constraints' => [new Valid()],
             ])
             ->add('image', FileType::class, [
-                'mapped'=> false,
+                'mapped' => false,
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.logo',
                 'required' => false,
                 'constraints' => [
@@ -92,7 +92,7 @@ class VendorType extends AbstractResourceType
                             'image/svg+xml',
                         ],
                         'mimeTypesMessage' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.invalid_logo',
-                    ])
+                    ]),
                 ],
             ])
             ->add('description', TextType::class, [
@@ -117,7 +117,6 @@ class VendorType extends AbstractResourceType
 
                         $vendorImage = $this->vendorImageFactory->create($filename, $vendor);
                         $vendor->setImage($vendorImage);
-
                     } catch (FileException $e) {
                         throw new FileException('Could not get the content of the file');
                     }

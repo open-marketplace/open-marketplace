@@ -35,8 +35,7 @@ class TokenOwningVoter extends Voter
         $attribute,
         $subject,
         TokenInterface $token
-    )
-    {
+    ) {
         $user = $token->getUser();
 
         if (!$user instanceof ShopUserInterface || null == $subject) {

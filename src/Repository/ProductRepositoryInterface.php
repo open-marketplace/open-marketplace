@@ -11,5 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface ProductRepositoryInterface
 {
-    public function findVendorProducts(VendorInterface $vendor, Request $request, ChannelInterface $channel): Pagerfanta;
+    public function findVendorProducts(
+        VendorInterface $vendor,
+        Request $request,
+        ChannelInterface $channel
+    ): Pagerfanta;
 }

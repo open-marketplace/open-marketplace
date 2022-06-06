@@ -29,15 +29,16 @@ final class VendorSlugGenerator implements VendorSlugGeneratorInterface
         $number = 1;
         while ($this->slugExists($slug)) {
             $slug = $baseSlug . '-' . $number;
-            $number++;
+            ++$number;
         }
 
         return $slug;
     }
-    
+
     private function slugExists(string $slug): bool
     {
         $slug = $this->vendorRepository->findOneBy(['slug' => $slug]);
+
         return !(null === $slug);
     }
 }
