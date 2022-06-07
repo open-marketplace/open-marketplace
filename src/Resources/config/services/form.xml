@@ -18,9 +18,6 @@
             <argument>%bitbag_multi_vendor_marketplace.model.vendor.class%</argument>
             <argument type="service" id="security.token_storage"/>
             <argument>%bitbag_sylius_organization_plugin.form.type.vendor.validation_groups%</argument>
-            <argument key="$vendorSlugGenerator" type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_slug_generator"/>
-            <argument key="$vendorImageFactory" type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_image_factory"/>
-            <argument key="$fileUploader" type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.file_uploader"/>
             <tag name="form.type"/>
         </service>
     </services>
