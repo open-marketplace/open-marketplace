@@ -41,7 +41,8 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $vendorDataBeforeFormSubmit = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $vendorFormData = $this->createFakeUpdateFormData();
         $sender = $this->createMock(SenderInterface::class);
-        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender);
+        $remover = $this->getContainer()->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
+        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
         $updateService->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit);
 
         $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendorDataBeforeFormSubmit]);
@@ -75,7 +76,8 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $vendorFormData = $this->createFakeUpdateFormData();
         $currentVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $sender = $this->createMock(SenderInterface::class);
-        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender);
+        $remover = $this->getContainer()->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
+        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
         $updateService->createPendingVendorProfileUpdate($vendorFormData, $currentVendor);
 
         $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
@@ -91,7 +93,8 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
 
         $sender = $this->createMock(SenderInterface::class);
-        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender);
+        $remover = $this->getContainer()->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
+        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
         $updateService->updateVendorFromPendingData($pendingData);
         $updatedVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $this->assertEquals($currentVendor->getCompanyName(), $pendingData->getCompanyName());
