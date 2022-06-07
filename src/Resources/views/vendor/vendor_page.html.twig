@@ -5,8 +5,8 @@
     <div class="ui stackable grid">
         <div class="four wide column">
                 <div>
-                    {% if vendor.image is defined and vendor.image is not null%}
-                        <img src="{{ '/' ~ base_vendor_logo_path ~ '/' ~ vendor.image.path }}" alt="image broken">
+                    {% if vendor.hasImages()%}
+                        <img src="{{ '/' ~ base_vendor_logo_path ~ '/' ~ vendor.getImages[0].path }}" alt="image broken">
                     {% endif %}
                 </div>
                 <div>

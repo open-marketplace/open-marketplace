@@ -13,10 +13,12 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
+class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface, ImagesAwareInterface
 {
     private int $id;
 
@@ -34,7 +36,8 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 
     private ?string $description;
 
-    private ?VendorImageInterface $image;
+    /** @return Collection<int, ImageInterface> */
+    private Collection $images;
 
     /** @return Collection<int, ProductInterface> */
     private Collection $products;
@@ -42,6 +45,8 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->addImage(new VendorImage());
     }
 
     public function getId(): int
@@ -124,16 +129,6 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
         $this->description = $description;
     }
 
-    public function getImage(): ?VendorImageInterface
-    {
-        return $this->image;
-    }
-
-    public function setImage(VendorImageInterface $vendorImage): void
-    {
-        $this->image = $vendorImage;
-    }
-
     /** @return Collection<int, VendorImageInterface> */
     public function getProducts(): Collection
     {
@@ -152,6 +147,42 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
     {
         if (true === $this->products->contains($product)) {
             $this->products->removeElement($product);
+        }
+    }
+
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function getImagesByType(string $type): Collection
+    {
+        return $this->images->filter(function (ImageInterface $image) use ($type) {
+            return $type === $image->getType();
+        });
+    }
+
+    public function hasImages(): bool
+    {
+        return !$this->images->isEmpty();
+    }
+
+    public function hasImage(ImageInterface $image): bool
+    {
+        return $this->images->contains($image);
+    }
+
+    public function addImage(ImageInterface $image): void
+    {
+        $image->setOwner($this);
+        $this->images->add($image);
+    }
+
+    public function removeImage(ImageInterface $image): void
+    {
+        if ($this->hasImage($image)) {
+            $image->setOwner(null);
+            $this->images->removeElement($image);
         }
     }
 }

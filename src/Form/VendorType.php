@@ -61,22 +61,6 @@ class VendorType extends AbstractResourceType
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_address',
                 'constraints' => [new Valid()],
             ])
-            ->add('image', FileType::class, [
-                'mapped' => false,
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.logo',
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '2048k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/svg+xml',
-                        ],
-                        'mimeTypesMessage' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.invalid_logo',
-                    ]),
-                ],
-            ])
             ->add('description', TextType::class, [
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.description',
             ])

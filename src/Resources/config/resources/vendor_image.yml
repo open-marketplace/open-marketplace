@@ -1,0 +1,5 @@
+sylius_resource:
+  resources:
+    bitbag_multi_vendor_marketplace.vendor_image:
+      classes:
+        form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType

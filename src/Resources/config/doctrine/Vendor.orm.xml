@@ -19,13 +19,14 @@
         <one-to-one field="customer" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" inversed-by="vendor" />
         <field name="slug" column="slug" type="string" />
         <field name="description" column="description" type="string" length="2048" />
-        <one-to-one field="image"
+        <one-to-many field="images"
                      target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage"
-                     mapped-by="vendor">
+                     mapped-by="owner"
+                     orphan-removal="true">
             <cascade>
-                <cascade-persist/>
+                <cascade-all />
             </cascade>
-        </one-to-one>
+        </one-to-many>
         <one-to-many field="products"
                      target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product"
                      mapped-by="vendor">
