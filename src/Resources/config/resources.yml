@@ -1,6 +1,3 @@
 imports:
-    - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/multi_vendor_market_place_product_listing.yml' }
-    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/customer.yml" }
-    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/vendor.yml" }
-    - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/multi_vendor_market_place_product_listing.yml' }
     - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/email/activation_token.yml' }
+    - { resource: 'resources/*.yml' }
