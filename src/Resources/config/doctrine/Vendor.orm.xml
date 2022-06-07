@@ -13,6 +13,7 @@
         <field name="phoneNumber" column="phone_number" type="string" />
         <field name="status" column="status" type="string" />
         <field name="blocked" column="blocked" type="string" />
+        <field name="isEdited" column="is_edited" type="boolean" />
 
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" >
             <cascade>

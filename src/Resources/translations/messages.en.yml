@@ -26,6 +26,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_dashboard: "Vendor dashboard"
+        vendor_details: 'Vendor details'
         vendor_profile: "Profile"
         vendors: 'Vendors'
         verified: 'Verified'

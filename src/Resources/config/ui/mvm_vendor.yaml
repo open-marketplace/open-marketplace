@@ -34,10 +34,10 @@ sylius_ui:
                     template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_details.html.twig'
                     priority: 10
 
-        bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.extra_information:
+        bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.vendor_address:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_extraInformation.html.twig'
+                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_vendorAddress.html.twig'
                     priority: 10
         bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.second_column:
             blocks:

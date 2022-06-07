@@ -15,16 +15,16 @@ final class VendorEditType extends AbstractResourceType
     {
         $builder
             ->add('companyName', TextType::class, [
-                'label' => 'label',
+                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name',
             ])
             ->add('taxIdentifier', TextType::class, [
-                'label' => 'label',
+                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_identifier',
             ])
             ->add('phoneNumber', TextType::class, [
-                'label' => 'label',
+                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.phone_number',
             ])
             ->add('vendorAddress', VendorAddressType::class, [
-                'label' => 'label',
+                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_address',
             ]);
     }
 }

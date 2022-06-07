@@ -1,7 +1,9 @@
-<h4 class="ui dividing header">{{ 'sylius.ui.customer_details'|trans }}</h4>
+{% if vendor.isEdited %}
+    <span class="ui red label"><i class="exclamation icon"></i>{{ 'Vendor requested changes on 12-12-2022' }}</span>
+{% endif %}
+<h4 class="ui dividing header">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_details'|trans }}</h4>
 <div class="two fields">
     {{ form_row(form.companyName) }}
     {{ form_row(form.taxIdentifier) }}
 </div>
 {{ form_row(form.phoneNumber) }}
-{#{{ form_row(form.group) }}#}

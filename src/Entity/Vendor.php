@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 {
@@ -38,6 +39,8 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
     private string $status = self::STATUS_UNVERIFIED;
 
     private string $blocked = self::UNBLOCKED;
+
+    private bool $isEdited = false;
 
     public function getId(): ?int
     {
@@ -117,5 +120,15 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
     public function setBlocked(string $blocked): void
     {
         $this->blocked = $blocked;
+    }
+
+    public function isEdited(): bool
+    {
+        return $this->isEdited;
+    }
+
+    public function setIsEdited(bool $isEdited): void
+    {
+        $this->isEdited = $isEdited;
     }
 }
