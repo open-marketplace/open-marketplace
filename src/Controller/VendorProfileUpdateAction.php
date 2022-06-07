@@ -54,7 +54,7 @@ final class VendorProfileUpdateAction
 
         $form->handleRequest($this->request->getCurrentRequest());
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $this->vendorProvider->getLoggedVendor());
+            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $this->vendorProvider->provideCurrentVendor());
         }
 
         return new RedirectResponse($profilePath);
