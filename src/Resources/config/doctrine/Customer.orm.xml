@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" table="sylius_customer">
+    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" table="sylius_customer">
         <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" mapped-by="customer" />                       
-    </entity>
+    </mapped-superclass>
 </doctrine-mapping>

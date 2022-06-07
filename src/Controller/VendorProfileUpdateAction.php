@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
@@ -29,32 +30,41 @@ final class VendorProfileUpdateAction
     private VendorProfileUpdateService $vendorProfileUpdateService;
 
     private VendorProvider $vendorProvider;
+    
     private FormFactory $formFactory;
+    
     private Router $router;
+    
+    private VendorFactory $vendorFactory;
 
     public function __construct(
         RequestStack $request,
         VendorProfileUpdateService $vendorProfileUpdateService,
         VendorProvider $vendorProvider,
         FormFactory $formFactory,
-        Router $router
+        Router $router,
+        VendorFactory $vendorFactory
     ) {
         $this->request = $request;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
         $this->formFactory = $formFactory;
         $this->router = $router;
+        $this->vendorFactory = $vendorFactory;
     }
 
     public function __invoke(): Response
     {
         $profilePath = $this->router->generate('vendor_profile');
-        $vendor = new Vendor();
+        $vendor = $this->vendorFactory->createNew();
         $form = $this->formFactory->create(VendorType::class, $vendor);
 
         $form->handleRequest($this->request->getCurrentRequest());
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $this->vendorProvider->provideCurrentVendor());
+            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
+                $form->getData(), 
+                $this->vendorProvider->provideCurrentVendor()
+            );
         }
 
         return new RedirectResponse($profilePath);

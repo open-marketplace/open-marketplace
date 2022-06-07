@@ -1,4 +1,30 @@
-include:
-    - 'vendor.yml'
-    - 'pending_data.yml'
-    - 'channel.yml'
+Sylius\Component\Addressing\Model\Country:
+    polska:
+        code: 'PL'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer:
+    customer_oliver:
+        firstName: "John"
+        lastName: "Nowak"
+        email: "test@example.com"
+        emailCanonical: "test@example.com"
+Sylius\Component\Core\Model\ShopUser:
+    user_oliver:
+        plainPassword: "123password"
+        roles: ["ROLE_USER"]
+        enabled: "true"
+        customer: '@customer_oliver'
+        username: "oliver@queen.com"
+        usernameCanonical: "oliver@queen.com"
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+    vendor_address:
+        country: '@polska'
+        city: 'Warszawa'
+        postalCode: '00-999'
+        street: 'Wiejska 2115'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
+    vendor_oliver:
+        customer: '@customer_oliver'
+        companyName: 'Test company name'
+        taxIdentifier: '1234567'
+        phoneNumber: '333111222'
+        vendorAddress: '@vendor_address'

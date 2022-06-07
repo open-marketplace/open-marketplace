@@ -27,15 +27,15 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
 
     public function test_phpUnitLoadsFixtures()
     {
-        $this->loadFixturesFromFile('vendor.yml');
+        $this->loadFixturesFromFile('test_it_doesnt_update_any_vendor_data_immediately.yml');
         $manager = $this->getEntityManager();
         $vendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         self::assertEquals('Test company name', $vendor->getCompanyName());
     }
 
-    public function test_doesnt_update_any_vendor_data_immediately()
+    public function test_it_doesnt_update_any_vendor_data_immediately()
     {
-        $this->loadFixturesFromFile('vendor.yml');
+        $this->loadFixturesFromFile('test_it_doesnt_update_any_vendor_data_immediately.yml');
         $manager = $this->getEntityManager();
 
         $vendorDataBeforeFormSubmit = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
@@ -69,7 +69,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
 
     public function test_it_creates_pending_data_row_from_data()
     {
-        $this->loadFixturesFromFile('vendor.yml');
+        $this->loadFixturesFromFile('test_it_doesnt_update_any_vendor_data_immediately.yml');
         $manager = $this->getEntityManager();
 
         $vendorFormData = $this->createFakeUpdateFormData();
@@ -84,7 +84,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
 
     public function test_vendor_data_are_updated_and_removed_correctly()
     {
-        $this->loadFixturesFromFile('pending_data.yml');
+        $this->loadFixturesFromFile('test_vendor_data_are_updated_and_removed_correctly.yml');
         $manager = $this->getEntityManager();
 
         $currentVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);

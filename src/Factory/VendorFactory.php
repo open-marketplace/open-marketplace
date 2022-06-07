@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class VendorFactory 
@@ -22,8 +23,8 @@ final class VendorFactory
         $this->entityManager = $entityManager;
     }
 
-    public function create()
+    public function createNew():Vendor
     {
-        
+        return new Vendor();
     }
 }
