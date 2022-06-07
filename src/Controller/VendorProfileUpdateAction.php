@@ -16,37 +16,47 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
-final class VendorProfileUpdateAction extends AbstractController
+final class VendorProfileUpdateAction 
 {
     private RequestStack $request;
 
     private VendorProfileUpdateService $vendorProfileUpdateService;
 
     private VendorProvider $vendorProvider;
+    private FormFactory $formFactory;
+    private Router $router;
 
     public function __construct(
         RequestStack $request,
         VendorProfileUpdateService $vendorProfileUpdateService,
-        VendorProvider $vendorProvider
+        VendorProvider $vendorProvider,
+        FormFactory $formFactory,
+        Router $router
     ) {
         $this->request = $request;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
+        $this->formFactory = $formFactory;
+        $this->router = $router;
     }
 
     public function __invoke(): Response
     {
+        $profilePath = $this->router->generate('vendor_profile');
         $vendor = new Vendor();
-        $form = $this->createForm(VendorType::class, $vendor);
+        $form = $this->formFactory->create(VendorType::class, $vendor);
 
         $form->handleRequest($this->request->getCurrentRequest());
         if ($form->isSubmitted() && $form->isValid()) {
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $this->vendorProvider->getLoggedVendor());
         }
 
-        return $this->redirectToRoute('vendor_profile');
+        return new RedirectResponse($profilePath);
     }
 }

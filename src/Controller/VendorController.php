@@ -61,7 +61,26 @@ final class VendorController extends ResourceController
         VendorProvider $vendorProvider
     )
     {
-        parent::__construct($metadata, $requestConfigurationFactory, $viewHandler, $repository, $factory, $newResourceFactory, $manager, $singleResourceProvider, $resourcesFinder, $resourceFormFactory, $redirectHandler, $flashHelper, $authorizationChecker, $eventDispatcher, $stateMachine, $resourceUpdateHandler, $resourceDeleteHandler);
+        parent::__construct(
+            $metadata, 
+            $requestConfigurationFactory, 
+            $viewHandler, 
+            $repository, 
+            $factory, 
+            $newResourceFactory, 
+            $manager, 
+            $singleResourceProvider, 
+            $resourcesFinder, 
+            $resourceFormFactory, 
+            $redirectHandler, 
+            $flashHelper, 
+            $authorizationChecker, 
+            $eventDispatcher, 
+            $stateMachine, 
+            $resourceUpdateHandler, 
+            $resourceDeleteHandler
+        );
+        
         $this->vendorProvider = $vendorProvider;
     }
 
