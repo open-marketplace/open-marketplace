@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
+class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterface
 {
     private ?int $id;
 

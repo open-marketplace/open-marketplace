@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorDataInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
@@ -52,7 +52,7 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         }
     }
 
-    private function setVendorFromData(VendorDataInterface $vendor, VendorDataInterface $data): void
+    private function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
     {
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());

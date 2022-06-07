@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-interface VendorDataInterface
+interface VendorProfileInterface
 {
     public function getId(): ?int;
 
