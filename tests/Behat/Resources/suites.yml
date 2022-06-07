@@ -2,3 +2,4 @@ imports:
     - suites/customer_dashboard.yml
     - suites/vendor_register.yml
     - suites/ui/admin/product_listing.yml
+    - suites/vendor_page_pagination.yml
