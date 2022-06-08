@@ -22,7 +22,7 @@ final class VendorFactory
         string $taxIdentifier,
         string $phoneNumber,
         VendorAddressInterface $address
-    ) {
+    ):VendorProfileInterface {
         $vendor = $this->createNew();
         $vendor->setPhoneNumber($phoneNumber);
         $vendor->setCompanyName($companyName);

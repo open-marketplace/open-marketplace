@@ -38,7 +38,7 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         $this->remover = $remover;
     }
 
-    public function createPendingVendorProfileUpdate(VendorInterface $vendorData, VendorInterface $currentVendor): void
+    public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void
     {
         $pendingVendorUpdate = new VendorProfileUpdate();
         $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
@@ -54,21 +54,6 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         if (null !== $user) {
             $this->sendEmail($user->getUsername(), $token);
         }
-    }
-
-    public function sendEmail(string $recipientAddress, string $token): void
-    {
-        $this->sender->send('vendor_profile_update', [$recipientAddress], ['token' => $token]);
-    }
-
-    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
-    {
-        $vendor = $vendorData->getVendor();
-        if (null == $vendor) {
-            return;
-        }
-        $this->setVendorFromData($vendor, $vendorData);
-        $this->remover->removePendingData($vendorData);
     }
 
     private function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
@@ -89,5 +74,20 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         }
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
+    }
+
+    public function sendEmail(string $recipientAddress, string $token): void
+    {
+        $this->sender->send('vendor_profile_update', [$recipientAddress], ['token' => $token]);
+    }
+
+    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
+    {
+        $vendor = $vendorData->getVendor();
+        if (null == $vendor) {
+            return;
+        }
+        $this->setVendorFromData($vendor, $vendorData);
+        $this->remover->removePendingData($vendorData);
     }
 }
