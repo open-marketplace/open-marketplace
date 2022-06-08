@@ -14,17 +14,18 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 class AddressFactory
 {
-    private $entityManager;
+    private VendorAddressInterface $entityManager;
     
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
-    public function createNew():VendorAddress
+    public function createNew():VendorAddressInterface
     {
         return new VendorAddress();
     }
