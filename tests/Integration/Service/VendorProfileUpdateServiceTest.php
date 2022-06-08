@@ -14,6 +14,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Service\Remover;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Mailer\Sender\SenderInterface;
+use function ECSPrefix20211002\dd;
 
 class VendorProfileUpdateServiceTest extends JsonApiTestCase
 {
@@ -27,7 +28,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
     }
 
     public function test_phpUnitLoadsFixtures()
-    {
+    {        
         $this->loadFixturesFromFile('test_it_doesnt_update_any_vendor_data_immediately.yml');
         $manager = $this->getEntityManager();
         $vendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
@@ -42,7 +43,8 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $vendorDataBeforeFormSubmit = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $vendorFormData = $this->createFakeUpdateFormData();
         $sender = $this->createMock(SenderInterface::class);
-        $remover = new Remover($this->getEntityManager());
+//        $remover = new Remover($this->getEntityManager());
+        $remover = $this->getContainer()->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
         $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
         $updateService->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit);
 
@@ -72,8 +74,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
     public function test_it_creates_pending_data_row_from_data()
     {
         $this->loadFixturesFromFile('test_it_doesnt_update_any_vendor_data_immediately.yml');
-        $manager = $this->getEntityManager();
-
+        $manager = $this->getEntityManager();       
         $vendorFormData = $this->createFakeUpdateFormData();
         $currentVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $sender = $this->createMock(SenderInterface::class);
