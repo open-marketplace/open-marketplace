@@ -18,7 +18,7 @@
                  class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Admin\StarConversationContext">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.behat.factory.shop_user_example"/>
+            <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.behat.factory.vendor_example"/>
         </service>
     </services>

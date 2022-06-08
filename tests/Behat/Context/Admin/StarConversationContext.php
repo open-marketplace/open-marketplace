@@ -5,11 +5,11 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\ShopUserExampleFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\VendorExampleFactory;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 
 class StarConversationContext extends RawMinkContext implements Context
 {
