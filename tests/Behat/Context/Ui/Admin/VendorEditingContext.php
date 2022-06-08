@@ -9,9 +9,8 @@ use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 
-final class VendorBlockingContext extends RawMinkContext implements Context
+final class VendorEditingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
 
@@ -22,15 +21,30 @@ final class VendorBlockingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given There is a :ifBlocked vendor
+     * @Given There is a :ifVerified vendor
      */
-    public function thereIsAVendor($ifBlocked)
+    public function thereIsAVendor($ifVerified)
     {
         $vendor = new Vendor();
         $vendor->setCompanyName('vendor');
         $vendor->setTaxIdentifier('vendorTax');
         $vendor->setPhoneNumber('vendorPhone');
-        $vendor->setBlocked($ifBlocked);
+        $vendor->setStatus($ifVerified);
+        $this->entityManager->persist($vendor);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given There is a :ifVerified vendor which requested change
+     */
+    public function thereIsAVendorWhichRequestedChange($ifVerified)
+    {
+        $vendor = new Vendor();
+        $vendor->setCompanyName('vendor');
+        $vendor->setTaxIdentifier('vendorTax');
+        $vendor->setPhoneNumber('vendorPhone');
+        $vendor->setStatus($ifVerified);
+        $vendor->setEditDate('editDate');
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
@@ -41,21 +55,6 @@ final class VendorBlockingContext extends RawMinkContext implements Context
     public function iClick($buttonText)
     {
         $this->getPage()->pressButton($buttonText);
-    }
-
-    /**
-     * @When I choose :element
-     */
-    public function iChoose($element)
-    {
-        $page = $this->getSession()->getPage();
-        $findName = $page->find("css", $element);
-        if (!$findName) {
-            throw new Exception($element . " could not be found");
-        } else {
-            $findName->click();
-            sleep(10);
-        }
     }
 
     /**
