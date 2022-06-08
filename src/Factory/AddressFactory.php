@@ -24,6 +24,6 @@ class AddressFactory
     }
     public function createNew():VendorAddress
     {
-        return new Vendor();
+        return new VendorAddress();
     }
 }
