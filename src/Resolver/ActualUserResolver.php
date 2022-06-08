@@ -25,6 +25,11 @@ final class ActualUserResolver implements ActualUserResolverInterface
 
     public function resolve(): ?UserInterface
     {
-        return $this->tokenStorage->getToken()->getUser();
+        $token = $this->tokenStorage->getToken();
+        if ($token) {
+            return $token->getUser();
+        } else {
+            return null;
+        }
     }
 }

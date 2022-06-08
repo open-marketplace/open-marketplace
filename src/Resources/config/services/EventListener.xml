@@ -4,9 +4,5 @@
     <services>
         <defaults autowire="true" autoconfigure="false" />
 
-
-        <service id="app.listener.default_vendor_username" class="BitBag\SyliusMultiVendorMarketplacePlugin\EventListener\DefaultVendorUsernameORMListener">
-            <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
-        </service>
     </services>
 </container>

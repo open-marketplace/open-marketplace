@@ -6,11 +6,14 @@
         <div class="divider"> / </div>
         <a href="{{ path('mvm_vendor_conversation_index') }}" class="section">{{ 'mvm.ui.conversations_listing.breadcrumb_header'|trans }}</a>
         <div class="divider"> / </div>
+
+        {% if conversation is not null  %}
         {% if conversation.category is not null %}
             <div class="active section">{{ conversation.category.name }}</div>
         {% else %}
             {% set author = conversation.messages.first.author %}
             <div class="active section">{{ author.firstName ~ ' ' ~ author.lastName }}</div>
+        {% endif %}
         {% endif %}
     </div>
 {% endblock %}
