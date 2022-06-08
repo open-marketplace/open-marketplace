@@ -36,7 +36,7 @@ final class DefaultVendorUsernameORMListener
     {
         foreach ($entities as $vendor) {
 
-            $user = (method_exists($vendor , "getCustomer"))? $vendor->getCustomer()->getUser(): $vendor;
+            $user = (method_exists($vendor , "getCustomer")) ? $vendor->getCustomer() ? $vendor->getCustomer()->getUser(): $vendor : $vendor;
 
             if (!$user instanceof VendorInterface) {
                 continue;
