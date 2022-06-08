@@ -19,7 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class AddressFactory
 {
-    private VendorAddressInterface $entityManager;
+    private EntityManagerInterface $entityManager;
     
     public function __construct(EntityManagerInterface $entityManager)
     {
