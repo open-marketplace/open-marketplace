@@ -17,11 +17,8 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 use function ECSPrefix20211002\dd;
 
 class VendorProfileUpdateServiceTest extends JsonApiTestCase
-{
-    /**
-     * @var Remover|object|null
-     */
-    private Remover $remover;
+{  
+    private VendorProfileUpdateService $vendorProfileUpdateService;
 
     public function __construct(
         ?string $name = null,
@@ -34,7 +31,9 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
     public function setUp(): void
     {
         parent::setUp(); 
-        $this->remover = self::getContainer()->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
+        $remover = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
+        $sender = $this->createMock(SenderInterface::class);
+        $this->vendorProfileUpdateService = new VendorProfileUpdateService($this->getEntityManager(),$sender,$remover);
     }
 
     public function test_phpUnitLoadsFixtures()
@@ -52,10 +51,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
 
         $vendorDataBeforeFormSubmit = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $vendorFormData = $this->createFakeUpdateFormData();
-        $sender = $this->createMock(SenderInterface::class);
-        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $this->remover);
-        $updateService->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit);
-
+        $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit);
         $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendorDataBeforeFormSubmit]);
 
         $this->assertNotEquals($pendingData->getCompanyName(), $vendorDataBeforeFormSubmit->getCompanyName());
@@ -85,10 +81,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $manager = $this->getEntityManager();       
         $vendorFormData = $this->createFakeUpdateFormData();
         $currentVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
-        $sender = $this->createMock(SenderInterface::class);
-        $remover = new Remover($this->getEntityManager());
-        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
-        $updateService->createPendingVendorProfileUpdate($vendorFormData, $currentVendor);
+        $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($vendorFormData, $currentVendor);
 
         $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
         $this->assertEquals($vendorFormData->getCompanyName(), $pendingData->getCompanyName());
@@ -102,10 +95,8 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $currentVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
 
-        $sender = $this->createMock(SenderInterface::class);
-        $remover = new Remover($this->getEntityManager());
-        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
-        $updateService->updateVendorFromPendingData($pendingData);
+
+        $this->vendorProfileUpdateService->updateVendorFromPendingData($pendingData);
         $updatedVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $this->assertEquals($currentVendor->getCompanyName(), $pendingData->getCompanyName());
         $this->assertEquals(null, $updatedVendor);
