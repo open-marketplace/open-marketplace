@@ -1,4 +1,4 @@
-{% if vendor.status == 'unverified' %}
+{% if vendor.status == constant('BitBag\\SyliusMultiVendorMarketplacePlugin\\Entity\\VendorInterface::STATUS_UNVERIFIED') %}
     {% include "@SyliusUi/Grid/Action/applyTransition.html.twig" with {
         data: vendor,
         options: {

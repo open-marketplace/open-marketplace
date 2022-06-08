@@ -22,6 +22,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 final class VendorVerificationContext extends RawMinkContext implements Context
 {
     private AdminUserExampleFactory $adminUserExample;
+
     private EntityManagerInterface $entityManager;
 
     public function __construct(
@@ -66,7 +67,7 @@ final class VendorVerificationContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given There is an unverified vendor
+     * @Given There is an unverified Vendor
      */
     public function thereIsAnUnverifiedVendor()
     {

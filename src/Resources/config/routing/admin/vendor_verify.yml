@@ -1,6 +1,6 @@
 bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_verify:
     path: /vendors/{id}/verify
-    methods: [GET, PUT]
+    methods: [PUT]
     defaults:
         _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.vendor:applyStateMachineTransitionAction
         _sylius:
