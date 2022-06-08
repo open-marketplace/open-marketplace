@@ -8,11 +8,17 @@ interface VendorImageInterface
 {
     public function getId(): ?int;
 
+    public function getFile(): ?\SplFileInfo;
+
+    public function setFile(?\SplFileInfo $file): void;
+
+    public function hasFile(): bool;
+
     public function getPath(): ?string;
 
     public function setPath(?string $path): void;
 
-    public function getVendor(): ?VendorInterface;
+    public function getOwner(): ?Vendor;
 
-    public function setVendor(VendorInterface $vendor): void;
+    public function setOwner(Vendor $owner): void;
 }

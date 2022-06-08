@@ -57,6 +57,10 @@ class VendorType extends AbstractResourceType
             ->add('phoneNumber', TextType::class, [
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.phone_number',
             ])
+            ->add('image', VendorImageType::class, [
+                'label' => false,
+                'required' => false,
+            ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_address',
                 'constraints' => [new Valid()],

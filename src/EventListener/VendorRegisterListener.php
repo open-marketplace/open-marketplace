@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\EventListener;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGeneratorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class VendorRegisterListener
@@ -34,15 +34,16 @@ final class VendorRegisterListener
 
     public function uploadImage(ResourceControllerEvent $event): void
     {
-        /** @var ImagesAwareInterface $vendor */
+        /** @var Vendor $vendor */
         $vendor = $event->getSubject();
 
-        if ($vendor->hasImages()) {
+        if ($vendor->getImage()) {
             /** @var UploadedFile $uploadedImage */
-            $uploadedImage = ($vendor->getImages()[0])->getFile();
+            $uploadedImage = ($vendor->getImage())->getFile();
 
             $filename = $this->fileUploader->upload($uploadedImage, $_ENV['LOGO_DIRECTORY']);
-            ($vendor->getImages()[0])->setPath($filename);
+            $vendor->getImage()->setPath($filename);
+            $vendor->getImage()->setOwner($vendor);
         }
     }
 

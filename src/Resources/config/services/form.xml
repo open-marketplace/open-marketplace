@@ -27,11 +27,5 @@
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage</argument>
             <tag name="form.type"/>
         </service>
-
-        <service id="bitbag.sylius_multi_vendor_marketplace_plugin.form.extension.type.vendor"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Extension\VendorImageTypeExtension"
-        >
-            <tag name="form.type_extension" extended_type="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType"/>
-        </service>
     </services>
 </container>

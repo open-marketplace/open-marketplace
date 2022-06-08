@@ -26,10 +26,14 @@ interface VendorInterface extends VendorDataInterface
 
     public function setDescription(?string $description): void;
 
-    /** @return Collection<int, VendorImageInterface> */
+    /** @return Collection<int, ProductInterface> */
     public function getProducts(): Collection;
 
     public function addProduct(ProductInterface $product): void;
 
     public function removeProduct(ProductInterface $product): void;
+
+    public function getImage(): ?VendorImageInterface;
+
+    public function setImage(?VendorImageInterface $image): void;
 }
