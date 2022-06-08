@@ -1,0 +1,5 @@
+conversation:
+  resource: "routing/conversation.yml"
+
+conversation_vendor:
+  resource: "routing/vendor_conversation.yml"

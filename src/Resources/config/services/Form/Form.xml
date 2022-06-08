@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service id="mvm.form.type.conversation" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\ConversationType">
+            <argument type="service" id="app.actual_user_resolver" />
+            <argument type="service" id="mvm.repository.vendor" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="form.type"/>
+        </service>
+
+        <service id="mvm.form.type.conversation_message" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType">
+            <tag name="form.type" />
+        </service>
+
+    </services>
+</container>

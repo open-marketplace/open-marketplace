@@ -1,6 +1,8 @@
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
 
+    - { resource: "../../../../src/Resources/config/config.yml" }
+
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
