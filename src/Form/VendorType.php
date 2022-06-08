@@ -60,6 +60,7 @@ class VendorType extends AbstractResourceType
             ->add('image', VendorImageType::class, [
                 'label' => false,
                 'required' => false,
+                'constraints' => [new Valid(['groups' => 'VendorLogo'])],
             ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_address',

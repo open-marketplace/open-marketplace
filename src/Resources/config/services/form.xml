@@ -6,6 +6,7 @@
         <parameter key="bitbag_sylius_organization_plugin.form.type.vendor.validation_groups" type="collection">
             <parameter>Default</parameter>
             <parameter>VendorUserRegister</parameter>
+            <parameter>VendorLogo</parameter>
             <parameter>sylius</parameter>
         </parameter>
     </parameters>
