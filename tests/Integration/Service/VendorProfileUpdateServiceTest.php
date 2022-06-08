@@ -18,6 +18,11 @@ use function ECSPrefix20211002\dd;
 
 class VendorProfileUpdateServiceTest extends JsonApiTestCase
 {
+    /**
+     * @var Remover|object|null
+     */
+    private Remover $remover;
+
     public function __construct(
         ?string $name = null,
         array $data = [],
@@ -25,6 +30,11 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
     )
     {
         parent::__construct($name, $data, $dataName);
+    }
+    public function setUp(): void
+    {
+        parent::setUp(); 
+        $this->remover = self::getContainer()->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
     }
 
     public function test_phpUnitLoadsFixtures()
@@ -43,9 +53,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $vendorDataBeforeFormSubmit = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $vendorFormData = $this->createFakeUpdateFormData();
         $sender = $this->createMock(SenderInterface::class);
-//        $remover = new Remover($this->getEntityManager());
-        $remover = static::getContainer()->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
-        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
+        $updateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $this->remover);
         $updateService->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit);
 
         $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendorDataBeforeFormSubmit]);
