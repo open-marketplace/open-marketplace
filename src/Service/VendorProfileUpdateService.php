@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,13 +25,13 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
     private EntityManagerInterface $entityManager;
 
     private SenderInterface $sender;
+
     private Remover $remover;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         Remover $remover
-        
     ) {
         $this->entityManager = $entityManager;
         $this->sender = $sender;
@@ -69,7 +69,7 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         }
         $this->setVendorFromData($vendor, $vendorData);
         $this->remover->removePendingData($vendorData);
-    }    
+    }
 
     private function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
     {

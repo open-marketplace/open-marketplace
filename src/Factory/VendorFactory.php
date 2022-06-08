@@ -14,34 +14,25 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Addressing\Model\Country;
 
-final class VendorFactory 
+final class VendorFactory
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function createVendor(
-        string $compoanyName,
+        string $companyName,
         string $taxIdentifier,
         string $phoneNumber,
         VendorAddressInterface $address
-    )
-    {
+    ) {
         $vendor = $this->createNew();
         $vendor->setPhoneNumber($phoneNumber);
-        $vendor->setCompanyName($compoanyName);
+        $vendor->setCompanyName($companyName);
         $vendor->setTaxIdentifier($taxIdentifier);
         $vendor->setVendorAddress($address);
+
         return $vendor;
     }
-    
-    public function createNew():VendorProfileInterface
+
+    public function createNew(): VendorProfileInterface
     {
         return new Vendor();
     }

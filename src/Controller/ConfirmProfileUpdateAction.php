@@ -20,23 +20,22 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 
-final class ConfirmProfileUpdateAction 
+final class ConfirmProfileUpdateAction
 {
     private EntityManagerInterface $entityManager;
 
     private VendorProfileUpdateService $vendorProfileUpdateService;
-    
+
     private Security $security;
-    
+
     private Router $router;
 
     public function __construct(
-        EntityManagerInterface $entityManager, 
-        VendorProfileUpdateService $vendorProfileUpdateService, 
-        Security $security, 
+        EntityManagerInterface $entityManager,
+        VendorProfileUpdateService $vendorProfileUpdateService,
+        Security $security,
         Router $router
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->security = $security;
@@ -48,9 +47,10 @@ final class ConfirmProfileUpdateAction
         $vendorProfileUpdateData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['token' => $token]);
         $profileRoot = $this->router->generate('vendor_profile');
         $vendorIsGranted = $this->security->isGranted(TokenOwningVoter::UPDATE, $vendorProfileUpdateData);
-        if($vendorIsGranted && null !== $vendorProfileUpdateData)
+        if ($vendorIsGranted && null !== $vendorProfileUpdateData) {
             $this->vendorProfileUpdateService->updateVendorFromPendingData($vendorProfileUpdateData);
-        
+        }
+
         return new RedirectResponse($profileRoot);
     }
 }
