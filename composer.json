@@ -31,8 +31,7 @@
         "symfony/intl": "^4.4 || ^5.2",
         "symfony/web-profiler-bundle": "^4.4 || ^5.2",
         "symfony/webpack-encore-bundle": "^1.12",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "nelmio/alice": "^3.9",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",       
         "lchrusciel/api-test-case": "^5.2"
     },
     "config": {
