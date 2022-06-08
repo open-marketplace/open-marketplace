@@ -25,7 +25,6 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
     public function __construct(
         private FactoryInterface $shopUserFactory,
         private FactoryInterface $customerFactory,
-        private FactoryInterface $vendorFactory,
         private RepositoryInterface $customerGroupRepository
     ) {
         $this->faker = \Faker\Factory::create();
@@ -38,11 +37,6 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var VendorInterface $vendor */
-        $vendor = $this->vendorFactory->createNew();
-        $vendor->setCompanyName($options['company_name']);
-        $vendor->setPhoneNumber($options['phone_number']);
-        $vendor->setTaxIdentifier($options['tax_identifier']);
 
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
@@ -53,8 +47,6 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
         $customer->setGender($options['gender']);
         $customer->setPhoneNumber($options['phone_number']);
         $customer->setBirthday($options['birthday']);
-        $customer->setVendor($vendor);
-        $vendor->setCustomer($customer);
 
         /** @var ShopUserInterface $user */
         $user = $this->shopUserFactory->createNew();

@@ -6,6 +6,7 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\ShopUserExampleFactory;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\VendorExampleFactory;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
@@ -16,15 +17,19 @@ class StarConversationContext extends RawMinkContext implements Context
     private EntityManagerInterface $entityManager;
     private AdminUserExampleFactory $adminUserExampleFactory;
     private ShopUserExampleFactory $shopUserExampleFactory;
+    private VendorExampleFactory $vendorExampleFactory;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
+        EntityManagerInterface  $entityManager,
         AdminUserExampleFactory $adminUserExampleFactory,
-        ShopUserExampleFactory $shopUserExampleFactory
-    ) {
+        ShopUserExampleFactory  $shopUserExampleFactory,
+        VendorExampleFactory    $vendorExampleFactory
+    )
+    {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -60,10 +65,13 @@ class StarConversationContext extends RawMinkContext implements Context
         $user->setPlainPassword($arg2);
         $user->setEmail('vendor@email.com');
 
+        $vendor = $this->vendorExampleFactory->create();
+        $vendor->setCustomer($user->getCustomer());
+
+        $this->entityManager->persist($vendor);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
-
 
 
     /**
