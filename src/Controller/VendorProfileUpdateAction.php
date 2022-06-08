@@ -51,7 +51,7 @@ class VendorProfileUpdateAction extends AbstractController
         $loggedVendor = $this->vendorProvider->getLoggedVendor();
         if ($form->isSubmitted() && $form->isValid()) {
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $loggedVendor);
-            $loggedVendor->setIsEdited(true);
+            $loggedVendor->setEditDate((new \DateTime())->format('d-m-Y'));
             $this->manager->flush();
         }
 

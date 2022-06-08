@@ -4,8 +4,6 @@
 {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.update' %}
 
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
-{#{% block title %}{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.edit_vendor' }} | {{ vendor.companyName }}{% endblock %}#}
-
 
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 

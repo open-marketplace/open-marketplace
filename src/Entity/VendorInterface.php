@@ -43,7 +43,7 @@ interface VendorInterface extends VendorDataInterface
 
     public function setBlocked(string $blocked): void;
 
-    public function isEdited(): bool;
+    public function getEditDate(): ?string;
 
-    public function setIsEdited(bool $isEdited): void;
+    public function setEditDate(?string $editDate): void;
 }

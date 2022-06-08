@@ -40,7 +40,7 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 
     private string $blocked = self::UNBLOCKED;
 
-    private bool $isEdited = false;
+    private ?string $editDate = null;
 
     public function getId(): ?int
     {
@@ -122,13 +122,13 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
         $this->blocked = $blocked;
     }
 
-    public function isEdited(): bool
+    public function getEditDate(): ?string
     {
-        return $this->isEdited;
+        return $this->editDate;
     }
 
-    public function setIsEdited(bool $isEdited): void
+    public function setEditDate(?string $editDate): void
     {
-        $this->isEdited = $isEdited;
+        $this->editDate = $editDate;
     }
 }
