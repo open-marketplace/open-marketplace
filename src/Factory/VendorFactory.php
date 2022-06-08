@@ -29,16 +29,16 @@ final class VendorFactory
         return new Vendor();
     }
     
-    public function createVendor(
-        string $compoanyName,
-        string $taxIdentifier,
-        string $phoneNumber,
-        string $city,
-        string $street,
-        string $postalCode,
-        Country $country
-    )
-    {
-        
-    }
+//    public function createVendor(
+//        string $compoanyName,
+//        string $taxIdentifier,
+//        string $phoneNumber,
+//        string $city,
+//        string $street,
+//        string $postalCode,
+//        Country $country
+//    )
+//    {
+//        
+//    }
 }
