@@ -92,7 +92,7 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
             ->setNormalizer(
                 'birthday',
                 /** @param string|\DateTimeInterface|null $value */
-                function (Options $options, string|\DateTimeInterface|null $value) {
+                function (Options $options,  \DateTimeInterface $value) {
                     if (is_string($value)) {
                         return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
                     }
