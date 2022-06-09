@@ -20,18 +20,22 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-final class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
+class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
 {
     private EntityManagerInterface $entityManager;
 
     private SenderInterface $sender;
 
-    private Remover $remover;
+    private RemoverInterface $remover;
+    
+    private VendorProfileUpdateInterface $pendingData;
+    
+    private ?string $userEmail;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
-        Remover $remover
+        RemoverInterface $remover
     ) {
         $this->entityManager = $entityManager;
         $this->sender = $sender;
@@ -45,18 +49,20 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         $pendingVendorUpdate->setVendor($currentVendor);
         $token = md5(mt_rand(1, 90000) . 'SALT');
         $pendingVendorUpdate->setToken($token);
-        $this->setVendorFromData($pendingVendorUpdate, $vendorData);
+        
+        $this->setVendorFromData($this->getPendingData(), $vendorData);
         /** @var Customer $customer */
-        $customer = $currentVendor->getCustomer();
+        $customer = $currentVendor->getCustomer();    
         if (null !== $customer) {
             $user = $customer->getUser();
-        }
-        if (null !== $user) {
-            $this->sendEmail($user->getUsername(), $token);
+        }        
+        if (null !== $user) {            
+            $this->userEmail = $user->getUsername();           
+            $this->sendEmail($user->getUsername(), $pendingVendorUpdate->getToken() );
         }
     }
 
-    private function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
+    public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
     {
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
@@ -75,10 +81,31 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
-
-    public function sendEmail(string $recipientAddress, string $token): void
+    
+    public function getPendingData(): VendorProfileInterface
     {
-        $this->sender->send('vendor_profile_update', [$recipientAddress], ['token' => $token]);
+        return $this->pendingData;
+    }
+
+    public function sendEmail(string $emailAddress, string $token): void
+    {
+        $this->sender->send('vendor_profile_update', [$emailAddress], ['token' => $token]);
+    }
+
+    public function getToken(): string
+    {
+        return $this->getPendingData()->getToken();
+    }
+
+    public function preparePendingData(VendorProfileInterface $vendorData, VendorInterface $currentVendor)
+    {
+        $pendingVendorUpdate = new VendorProfileUpdate();
+        $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
+        $pendingVendorUpdate->setVendor($currentVendor);
+        $token = md5(mt_rand(1, 90000) . 'SALT');
+        $pendingVendorUpdate->setToken($token);
+        
+        $this->pendingData = $pendingVendorUpdate;
     }
 
     public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
