@@ -28,4 +28,16 @@ class VendorProfileUpdateServiceSpec extends ObjectBehavior
     {
         $this->shouldHaveType(VendorProfileUpdateService::class);
     }    
+    function it_gets_correct_data(     
+        VendorInterface $vendor,
+        VendorProfileInterface $vendorData,  
+    )
+    {
+        $vendor->getCompanyName()->shouldBeCalled(1);
+        $vendor->getTaxIdentifier()->shouldBeCalled(1);
+        $vendor->getPhoneNumber()->shouldBeCalled(1);
+        $vendor->getVendorAddress()->shouldBeCalled(4);
+
+        $this->setVendorFromData($vendorData, $vendor);
+    }
 }

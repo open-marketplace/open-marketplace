@@ -19,6 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterfac
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Mailer\Sender\SenderInterface;
+use Sylius\Component\User\Model\User;
 
 class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
 {
@@ -26,12 +27,8 @@ class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
 
     private SenderInterface $sender;
 
-    private RemoverInterface $remover;
-    
-    private VendorProfileUpdateInterface $pendingData;
-    
-    private ?string $userEmail;
-
+    private RemoverInterface $remover;  
+   
     public function __construct(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
@@ -47,21 +44,23 @@ class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
         $pendingVendorUpdate = new VendorProfileUpdate();
         $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
         $pendingVendorUpdate->setVendor($currentVendor);
-        $token = md5(mt_rand(1, 90000) . 'SALT');
+        $token = $this->generateToken();
         $pendingVendorUpdate->setToken($token);
         
-        $this->setVendorFromData($this->getPendingData(), $vendorData);
+        $this->setVendorFromData($pendingVendorUpdate, $vendorData);
         /** @var Customer $customer */
-        $customer = $currentVendor->getCustomer();    
+        $customer = $currentVendor->getCustomer();          
         if (null !== $customer) {
+            /** @var User $user */
             $user = $customer->getUser();
         }        
-        if (null !== $user) {            
-            $this->userEmail = $user->getUsername();           
-            $this->sendEmail($user->getUsername(), $pendingVendorUpdate->getToken() );
-        }
+        if (null !== $user)   
+            $this->sendEmail($user->getUsername(), $token );        
     }
-
+    public function generateToken(): string
+    {
+       return md5(mt_rand(1, 90000) . 'SALT');
+    }
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
     {
         $vendor->setCompanyName($data->getCompanyName());
@@ -81,31 +80,10 @@ class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
-    
-    public function getPendingData(): VendorProfileInterface
-    {
-        return $this->pendingData;
-    }
 
     public function sendEmail(string $emailAddress, string $token): void
     {
         $this->sender->send('vendor_profile_update', [$emailAddress], ['token' => $token]);
-    }
-
-    public function getToken(): string
-    {
-        return $this->getPendingData()->getToken();
-    }
-
-    public function preparePendingData(VendorProfileInterface $vendorData, VendorInterface $currentVendor)
-    {
-        $pendingVendorUpdate = new VendorProfileUpdate();
-        $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
-        $pendingVendorUpdate->setVendor($currentVendor);
-        $token = md5(mt_rand(1, 90000) . 'SALT');
-        $pendingVendorUpdate->setToken($token);
-        
-        $this->pendingData = $pendingVendorUpdate;
     }
 
     public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
