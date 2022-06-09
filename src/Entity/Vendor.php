@@ -13,7 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
@@ -34,9 +33,9 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
 
     private ?string $description;
 
-    private ?VendorImageInterface $image;
+    private ?VendorImageInterface $image = null;
 
-    /** @return Collection<int, ProductInterface> */
+    /** @var Collection<int, ProductInterface> */
     private Collection $products;
 
     public function __construct()

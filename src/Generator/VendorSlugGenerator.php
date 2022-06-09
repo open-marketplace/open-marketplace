@@ -24,7 +24,10 @@ final class VendorSlugGenerator implements VendorSlugGeneratorInterface
 
     public function generateSlug(string $companyName): string
     {
-        $baseSlug = preg_replace('/\s+/', '-', $companyName);
+        if (null == $baseSlug = preg_replace('/\s+/', '-', $companyName)) {
+            throw new \Exception('Cannot generate slug from given company name.');
+        }
+
         $slug = $baseSlug;
         $number = 1;
         while ($this->slugExists($slug)) {

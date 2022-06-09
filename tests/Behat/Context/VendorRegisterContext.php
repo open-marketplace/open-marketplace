@@ -37,5 +37,13 @@ class VendorRegisterContext extends MinkContext implements Context
         $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount($itemCLass);
         assertEquals($times, $validationMessageCount);        
     }
-    
+
+    /**
+     * @When I upload the :path image as vendor logo
+     */
+    public function iUploadTheImageAsVendorLogo(string $path)
+    {
+        $this->vendorRegisterPage->attachFile($path);
+    }
+
 }

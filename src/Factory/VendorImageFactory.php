@@ -20,7 +20,7 @@ final class VendorImageFactory implements VendorImageFactoryInterface
         $vendorImage = new VendorImage();
 
         $vendorImage->setPath($path);
-        $vendorImage->setVendor($vendor);
+        $vendorImage->setOwner($vendor);
 
         return $vendorImage;
     }

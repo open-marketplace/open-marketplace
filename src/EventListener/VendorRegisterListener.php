@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\EventListener;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGeneratorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
@@ -34,16 +34,19 @@ final class VendorRegisterListener
 
     public function uploadImage(ResourceControllerEvent $event): void
     {
-        /** @var Vendor $vendor */
+        /** @var VendorInterface $vendor */
         $vendor = $event->getSubject();
 
-        if ($vendor->getImage()) {
+        /** @var VendorImageInterface $vendorImage */
+        $vendorImage = $vendor->getImage();
+
+        if (null !== $vendorImage) {
             /** @var UploadedFile $uploadedImage */
-            $uploadedImage = ($vendor->getImage())->getFile();
+            $uploadedImage = $vendorImage->getFile();
 
             $filename = $this->fileUploader->upload($uploadedImage, $_ENV['LOGO_DIRECTORY']);
-            $vendor->getImage()->setPath($filename);
-            $vendor->getImage()->setOwner($vendor);
+            $vendorImage->setPath($filename);
+            $vendorImage->setOwner($vendor);
         }
     }
 
@@ -51,6 +54,10 @@ final class VendorRegisterListener
     {
         /** @var VendorInterface $vendor */
         $vendor = $event->getSubject();
+
+        if (null === $vendor->getCompanyName()) {
+            throw new \Exception('Company name cannot be empty.');
+        }
 
         $vendor->setSlug($this->vendorSlugGenerator->generateSlug($vendor->getCompanyName()));
     }

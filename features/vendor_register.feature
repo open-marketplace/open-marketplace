@@ -18,12 +18,13 @@ Feature: Registration form registers vendor
     And I fill in "vendor_companyName" with "te"
     And I fill in "vendor_taxIdentifier" with "56"
     And I fill in "vendor_phoneNumber" with "55"
+    And I upload the "images/invalid_logo.png" image as vendor logo
     And I fill in "vendor_description" with "ab"
     And I fill in "vendor_vendorAddress_city" with "an"
     And I fill in "vendor_vendorAddress_street" with "et"
     And I fill in "vendor_vendorAddress_postalCode" with "de"
     And I press "Create an account"
-    Then I should see "sylius-validation-error" "7" times
+    Then I should see "sylius-validation-error" "8" times
 
   Scenario: Correct completion of the form
     When I am on "/en_US/vendor/register"
@@ -35,4 +36,17 @@ Feature: Registration form registers vendor
     And I fill in "vendor_vendorAddress_street" with "test_street"
     And I fill in "vendor_vendorAddress_postalCode" with "test_postalCode"
     And I press "Create an account"      
+    Then I should see "Success"
+
+  Scenario: Correct completion of the form with logo
+    When I am on "/en_US/vendor/register"
+    And I fill in "vendor_companyName" with "testCompanyName"
+    And I fill in "vendor_taxIdentifier" with "6546546456"
+    And I fill in "vendor_phoneNumber" with "555555555"
+    And I upload the "images/valid_logo.png" image as vendor logo
+    And I fill in "vendor_description" with "description"
+    And I fill in "vendor_vendorAddress_city" with "Milan"
+    And I fill in "vendor_vendorAddress_street" with "test_street"
+    And I fill in "vendor_vendorAddress_postalCode" with "test_postalCode"
+    And I press "Create an account"
     Then I should see "Success"

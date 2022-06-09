@@ -13,6 +13,9 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
 interface VendorRepositoryInterface
 {
+    /**
+     * @return mixed
+     */
     public function findOneBy(
         array $criteria,
         ?array $orderBy = null

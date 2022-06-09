@@ -21,7 +21,7 @@ final class FileUploader implements FileUploaderInterface
     {
         try {
             $uuid = Uuid::uuid4();
-            $filename = $uuid->toString() . '.' . $file->guessClientExtension();
+            $filename = $uuid->toString() . '.' . $file->getExtension();
             $file->move($targetDirectory, $filename);
         } catch (FileException $e) {
             throw new FileException();
