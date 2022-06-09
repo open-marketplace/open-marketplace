@@ -25,11 +25,9 @@ class VendorProfileUpdateServiceSpec extends ObjectBehavior
     }    
     function it_gets_correct_data(     
         VendorInterface $vendor,
-        VendorProfileInterface $vendorData,
-        EntityManagerInterface $manager
+        VendorProfileInterface $vendorData      
     )
     {
-        $this->entityManager->flush()->shouldBeCalled(1);
         $vendor->getCompanyName()->shouldBeCalled(1);
         $vendor->getTaxIdentifier()->shouldBeCalled(1);
         $vendor->getPhoneNumber()->shouldBeCalled(1);
