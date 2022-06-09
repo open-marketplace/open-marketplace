@@ -33,11 +33,12 @@ final class AddMessageAction extends AbstractController
     private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(
-        FormFactoryInterface $formFactory,
-        FlashBagInterface $flashBag,
+        FormFactoryInterface      $formFactory,
+        FlashBagInterface         $flashBag,
         AddMessageFacadeInterface $addMessageFacade,
-        UrlGeneratorInterface $urlGenerator
-    ) {
+        UrlGeneratorInterface     $urlGenerator
+    )
+    {
         $this->formFactory = $formFactory;
         $this->flashBag = $flashBag;
         $this->addMessageFacade = $addMessageFacade;
@@ -46,7 +47,8 @@ final class AddMessageAction extends AbstractController
 
     public function __invoke(int $id, Request $request): Response
     {
-        if (!$this->isAssetsUser()) {
+        if (!$this->isAssetsUser())
+        {
             return $this->notAssetsVendorUserRedirect();
         }
         $form = $this->formFactory->create(MessageType::class);
@@ -64,7 +66,7 @@ final class AddMessageAction extends AbstractController
         }
 
         foreach ($form->getErrors() as $error) {
-            $this->flashBag->add('error', $error->getMessage());
+            $this->flashBag->add('error', $error->getMessageTemplate());
         }
 
         return new RedirectResponse($this->urlGenerator->generate($redirect, [

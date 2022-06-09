@@ -32,11 +32,12 @@ final class ConversationController extends AbstractController
     private ActualUserResolverInterface $actualUserResolver;
 
     public function __construct(
-        Environment $templatingEngine,
-        FormFactoryInterface $formFactory,
+        Environment                     $templatingEngine,
+        FormFactoryInterface            $formFactory,
         ConversationRepositoryInterface $conversationRepository,
-        ActualUserResolverInterface $actualUserResolver
-    ) {
+        ActualUserResolverInterface     $actualUserResolver
+    )
+    {
         $this->templatingEngine = $templatingEngine;
         $this->formFactory = $formFactory;
         $this->conversationRepository = $conversationRepository;
@@ -46,13 +47,16 @@ final class ConversationController extends AbstractController
     public function index(Request $request): Response
     {
         if (!$this->isAssetsUser()) {
-            return $this->notAssetsVendorUserRedirect();
+            return $this->redirectUserNotAccess();
         }
 
         $template = $request->attributes->get('_sylius')['template'];
 
         $actualUser = $this->actualUserResolver->resolve();
 
+        if (null == $actualUser) {
+            return $this->redirectUserNotAccess();
+        }
         if ($request->query->get('closed')) {
             $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_CLOSED, $actualUser);
         } else {
@@ -61,8 +65,7 @@ final class ConversationController extends AbstractController
 
         return new Response(
             $this->templatingEngine->render(
-                $template,
-                [
+                $template, [
                     'conversations' => $conversations,
                 ]
             )
@@ -80,8 +83,7 @@ final class ConversationController extends AbstractController
 
         return new Response(
             $this->templatingEngine->render(
-                $template,
-                [
+                $template, [
                     'form' => $form->createView(),
                     'conversation' => $conversation,
                 ]

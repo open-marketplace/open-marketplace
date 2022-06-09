@@ -15,8 +15,11 @@ class StarConversationContext extends RawMinkContext implements Context
 {
 
     private EntityManagerInterface $entityManager;
+
     private AdminUserExampleFactory $adminUserExampleFactory;
+
     private ShopUserExampleFactory $shopUserExampleFactory;
+
     private VendorExampleFactory $vendorExampleFactory;
 
     public function __construct(

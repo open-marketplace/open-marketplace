@@ -30,9 +30,10 @@ final class SendArchiveRequestAction extends AbstractController
 
     public function __construct(
         AddMessageFacadeInterface $addMessageFacade,
-        UrlGeneratorInterface $urlGenerator,
-        MessageFactoryInterface $messageFactory
-    ) {
+        UrlGeneratorInterface     $urlGenerator,
+        MessageFactoryInterface   $messageFactory
+    )
+    {
         $this->addMessageFacade = $addMessageFacade;
         $this->urlGenerator = $urlGenerator;
         $this->messageFactory = $messageFactory;
@@ -41,7 +42,7 @@ final class SendArchiveRequestAction extends AbstractController
     public function __invoke(int $id, Request $request): Response
     {
         if (!$this->isAssetsUser()) {
-            return $this->notAssetsVendorUserRedirect();
+            return $this->redirectUserNotAccess();
         }
         $redirect = $request->attributes->get('_sylius')['redirect'];
 
