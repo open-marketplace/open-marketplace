@@ -6,8 +6,7 @@ Feature: Verifying Vendors account
 
   @ui
   Scenario: Verifying vendors
-    Given there is an admin user "admin" with password "admin"
-    And I am logged in as an admin
+    Given I am logged in as an administrator
     And I am on "/admin"
     And There is an unverified Vendor
     When I follow "Vendors"

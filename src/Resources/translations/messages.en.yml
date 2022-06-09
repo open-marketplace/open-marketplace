@@ -28,6 +28,3 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
 app:
     ui:
         vendors: 'Vendors'
-
-
-
