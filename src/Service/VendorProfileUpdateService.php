@@ -50,12 +50,16 @@ class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
         /** @var Customer $customer */
         $customer = $currentVendor->getCustomer();          
-        if (null !== $customer) {
-            /** @var User $user */
-            $user = $customer->getUser();
-        }        
-        if (null !== $user)   
-            $this->sendEmail($user->getUsername(), $token );        
+        if (null == $customer)
+            return;
+        $user = $customer->getUser();        
+        if (null == $user)
+            return;
+        $email = $user->getUsername();
+        if (null == $email)
+            return;
+        $this->sendEmail($email, $token );       
+        
     }
     public function generateToken(): string
     {
