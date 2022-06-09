@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="bitbag.sylius_multi_vendor_marketplace_plugin.behat.factory.shop_user_example" public="true"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\ShopUserExampleFactory">
+            <argument type="service" id="sylius.factory.shop_user"/>
+            <argument type="service" id="sylius.factory.customer"/>
+            <argument type="service" id="sylius.repository.customer"/>
+        </service>
+        <service id="bitbag.sylius_multi_vendor_marketplace_plugin.behat.factory.vendor_example" public="true"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\VendorExampleFactory">
+            <argument type="service" id="mvm.factory.vendor"/>
+        </service>
+    </services>
+</container>

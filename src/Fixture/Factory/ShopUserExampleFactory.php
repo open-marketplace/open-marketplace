@@ -3,7 +3,6 @@
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory as Factory;
@@ -23,10 +22,11 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        private FactoryInterface $shopUserFactory,
-        private FactoryInterface $customerFactory,
+        private FactoryInterface    $shopUserFactory,
+        private FactoryInterface    $customerFactory,
         private RepositoryInterface $customerGroupRepository
-    ) {
+    )
+    {
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -57,7 +57,6 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
 
         return $user;
     }
-
 
     protected function configureOptions(OptionsResolver $resolver): void
     {
@@ -91,7 +90,6 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
 
                     return $value;
                 }
-            )
-        ;
+            );
     }
 }

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Resolver;
 
-
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolver;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
 use PhpSpec\ObjectBehavior;

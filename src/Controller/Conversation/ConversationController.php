@@ -47,13 +47,17 @@ final class ConversationController extends AbstractController
     {
         if (!$this->isAssetsUser())
         {
-            return $this->notAssetsVendorUserRedirect();
+            return $this->redirectUserNotAccess();
         }
 
         $template = $request->attributes->get('_sylius')['template'];
 
         $actualUser = $this->actualUserResolver->resolve();
 
+        if (null == $actualUser)
+        {
+            return $this->redirectUserNotAccess();
+        }
         if ($request->query->get('closed')) {
             $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_CLOSED, $actualUser);
         } else {

@@ -16,5 +16,5 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 interface ConversationRepositoryInterface extends RepositoryInterface
 {
-    public function findAllWithStatusAndUser(string $status, UserInterface $user): ?array;
+    public function findAllWithStatusAndUser(string $status, ?UserInterface $user): ?array;
 }

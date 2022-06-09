@@ -1,8 +1,8 @@
 imports:
-    - { resource: "resources/conversation.yml" }
-    - { resource: "resources/conversation_category.yml" }
-    - { resource: "resources/vendor.yml" }
-    - { resource: "resources/conversation_message.yml" }
-    - { resource: "resources/vendor_user.yml" }
-    - { resource: "resources/customer.yml"}
-    - { resource: "resources/multi_vendor_market_place_product_listing.yml"}
+    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/conversation.yml" }
+    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/conversation_category.yml" }
+    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/vendor.yml" }
+    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/conversation_message.yml" }
+    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/vendor_user.yml" }
+    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/customer.yml"}
+    - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/multi_vendor_market_place_product_listing.yml"}

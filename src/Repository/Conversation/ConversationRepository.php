@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ConversationRepository extends EntityRepository implements ConversationRepositoryInterface
 {
-    public function findAllWithStatusAndUser(string $status, UserInterface $user): ?array
+    public function findAllWithStatusAndUser(string $status, ?UserInterface $user): ?array
     {
         $query = $this->createQueryBuilder('c');
 

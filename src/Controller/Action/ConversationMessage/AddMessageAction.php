@@ -33,30 +33,29 @@ final class AddMessageAction extends AbstractController
     private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(
-        FormFactoryInterface $formFactory,
-        FlashBagInterface $flashBag,
+        FormFactoryInterface      $formFactory,
+        FlashBagInterface         $flashBag,
         AddMessageFacadeInterface $addMessageFacade,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface     $urlGenerator
     )
-        {
-            $this->formFactory = $formFactory;
-            $this->flashBag = $flashBag;
-            $this->addMessageFacade = $addMessageFacade;
-            $this->urlGenerator = $urlGenerator;
+    {
+        $this->formFactory = $formFactory;
+        $this->flashBag = $flashBag;
+        $this->addMessageFacade = $addMessageFacade;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function __invoke(int $id, Request $request): Response
     {
-        if (!$this->isAssetsUser())
-        {
-            return $this->notAssetsVendorUserRedirect();
+        if (!$this->isAssetsUser()) {
+            return $this->redirectUserNotAccess();
         }
         $form = $this->formFactory->create(MessageType::class);
         $redirect = $request->attributes->get('_sylius')['redirect'];
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             /** @var Message $message */
             $message = $form->getData();
             $file = $form->get('file')->getData();
@@ -66,7 +65,7 @@ final class AddMessageAction extends AbstractController
         }
 
         foreach ($form->getErrors() as $error) {
-            $this->flashBag->add('error', $error->getMessage());
+            $this->flashBag->add('error', $error->getMessageTemplate());
         }
 
         return new RedirectResponse($this->urlGenerator->generate($redirect, [

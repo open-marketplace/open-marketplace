@@ -59,7 +59,7 @@ final class CreateNewConversationAction extends AbstractController
     {
         if (!$this->isAssetsUser())
         {
-            return $this->notAssetsVendorUserRedirect();
+            return $this->redirectUserNotAccess();
         }
 
         $template = $request->attributes->get('_sylius')['template'];
@@ -84,7 +84,7 @@ final class CreateNewConversationAction extends AbstractController
         }
 
         foreach ($form->getErrors() as $error) {
-            $this->flashBag->add('error', $error->getMessage());
+            $this->flashBag->add('error', $error->getMessageTemplate());
         }
 
         return new Response(
@@ -99,7 +99,7 @@ final class CreateNewConversationAction extends AbstractController
     private function addConversationWithMessages(ConversationInterface $conversation): void
     {
         /** @var MessageInterface $message */
-        foreach ($conversation->getMessages() as $message) {
+        foreach ($conversation->getMessages()->toArray() as $message) {
             $this->addMessageFacade->createWithConversation(
                 $conversation->getId(),
                 $message,
