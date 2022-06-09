@@ -12,7 +12,11 @@
             <div class="active section">{{ conversation.category.name }}</div>
         {% else %}
             {% set author = conversation.messages.first.author %}
-            <div class="active section">{{ author.firstName ~ ' ' ~ author.lastName }}</div>
+                {% if conversation.messages.first.vendorUser is not null %}
+                    <div class="active section">{{ author.customer.firstName ~ ' ' ~ author.customer.lastName }}</div>
+                {% else %}
+                    <div class="active section">{{ author.firstName ~ ' ' ~ author.lastName }}</div>
+                {% endif %}
         {% endif %}
         {% endif %}
     </div>

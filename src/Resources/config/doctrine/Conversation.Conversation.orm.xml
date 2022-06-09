@@ -33,6 +33,6 @@
 
         <field name="status" column="status" type="string" nullable="false" />
 
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>

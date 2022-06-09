@@ -4,7 +4,6 @@
     <imports>
         <import resource="services/*.xml"/>
         <import resource="services/**/*.xml" />
-        <import resource="../../MVM/Resources/services.xml"/>
 
     </imports>
     <services>
