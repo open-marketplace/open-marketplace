@@ -35,7 +35,7 @@ final class VendorImageFactorySpec extends ObjectBehavior
         $vendorImage = new VendorImage();
 
         $vendorImage->setPath('test');
-        $vendorImage->setVendor($vendor);
+        $vendorImage->setOwner($vendor);
 
         $this->create('test', $vendor)->shouldBeLike($vendorImage);
     }

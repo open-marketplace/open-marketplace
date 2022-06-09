@@ -30,8 +30,8 @@ final class VendorImageSpec extends ObjectBehavior
 
     public function it_gets_vendor(VendorInterface $vendor): void
     {
-        $this->setVendor($vendor);
+        $this->setOwner($vendor);
 
-        $this->getVendor()->shouldReturn($vendor);
+        $this->getOwner()->shouldReturn($vendor);
     }
 }
