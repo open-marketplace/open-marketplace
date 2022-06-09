@@ -15,5 +15,4 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface MessageRepositoryInterface extends RepositoryInterface
 {
-
 }

@@ -15,5 +15,4 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 final class MessageRepository extends EntityRepository implements MessageRepositoryInterface
 {
-
 }

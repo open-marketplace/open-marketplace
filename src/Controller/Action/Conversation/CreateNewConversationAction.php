@@ -57,8 +57,7 @@ final class CreateNewConversationAction extends AbstractController
 
     public function __invoke(Request $request): Response
     {
-        if (!$this->isAssetsUser())
-        {
+        if (!$this->isAssetsUser()) {
             return $this->notAssetsVendorUserRedirect();
         }
 
@@ -89,7 +88,8 @@ final class CreateNewConversationAction extends AbstractController
 
         return new Response(
             $this->templatingEngine->render(
-                $template, [
+                $template,
+                [
                     'form' => $form->createView(),
                 ]
             )

@@ -45,8 +45,7 @@ final class ConversationController extends AbstractController
 
     public function index(Request $request): Response
     {
-        if (!$this->isAssetsUser())
-        {
+        if (!$this->isAssetsUser()) {
             return $this->notAssetsVendorUserRedirect();
         }
 
@@ -62,7 +61,8 @@ final class ConversationController extends AbstractController
 
         return new Response(
             $this->templatingEngine->render(
-                $template, [
+                $template,
+                [
                     'conversations' => $conversations,
                 ]
             )
@@ -80,7 +80,8 @@ final class ConversationController extends AbstractController
 
         return new Response(
             $this->templatingEngine->render(
-                $template, [
+                $template,
+                [
                     'form' => $form->createView(),
                     'conversation' => $conversation,
                 ]

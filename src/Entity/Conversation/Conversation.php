@@ -133,7 +133,7 @@ class Conversation implements ConversationInterface
 
     public function isClosed(): bool
     {
-        return $this->status === self::STATUS_CLOSED;
+        return self::STATUS_CLOSED === $this->status;
     }
 
     public function isOpen(): bool

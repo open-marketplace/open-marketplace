@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
@@ -16,9 +18,12 @@ class VendorExampleFactory extends AbstractExampleFactory implements ExampleFact
 
     private OptionsResolver $optionsResolver;
 
+    private FactoryInterface $vendorFactory;
+
     public function __construct(
-        private FactoryInterface $vendorFactory
+        FactoryInterface $vendorFactory
     ) {
+        $this->vendorFactory = $vendorFactory;
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -38,12 +43,11 @@ class VendorExampleFactory extends AbstractExampleFactory implements ExampleFact
         return $vendor;
     }
 
-
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('company_name', fn(Options $options): string => $this->faker->company)
-            ->setDefault('tax_identifier', fn(Options $options): string => $this->faker->phoneNumber)
-            ->setDefault('phone_number', fn(Options $options): string => $this->faker->phoneNumber);
+            ->setDefault('company_name', fn (Options $options): string => $this->faker->company)
+            ->setDefault('tax_identifier', fn (Options $options): string => $this->faker->phoneNumber)
+            ->setDefault('phone_number', fn (Options $options): string => $this->faker->phoneNumber);
     }
 }

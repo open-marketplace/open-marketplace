@@ -91,14 +91,15 @@ class Message implements MessageInterface
         $users = new ArrayCollection([
             $this->getVendorUser(),
             $this->getAdminUser(),
-            $this->getShopUser()
+            $this->getShopUser(),
         ]);
 
         foreach ($users as $user) {
-            if(null !== $user) {
+            if (null !== $user) {
                 if ($user instanceof VendorInterface) {
                     return $user->getCustomer()->getUser();
                 }
+
                 return $user;
             }
         }
@@ -111,6 +112,7 @@ class Message implements MessageInterface
     {
         if ($user instanceof AdminUserInterface) {
             $this->setAdminUser($user);
+
             return;
         }
 

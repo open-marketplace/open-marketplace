@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation;
 
-
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
@@ -33,10 +32,9 @@ final class ConversationType extends AbstractType
 
     private VendorRepositoryInterface $vendorRepository;
 
-
     public function __construct(
         ActualUserResolverInterface $actualUserResolver,
-        VendorRepositoryInterface   $vendorRepository,
+        VendorRepositoryInterface $vendorRepository
     ) {
         $this->actualUserResolver = $actualUserResolver;
         $this->vendorRepository = $vendorRepository;

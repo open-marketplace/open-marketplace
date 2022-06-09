@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory as Factory;
@@ -22,11 +23,20 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
 
     private OptionsResolver $optionsResolver;
 
+    private FactoryInterface $shopUserFactory;
+
+    private FactoryInterface $customerFactory;
+
+    private RepositoryInterface $customerGroupRepository;
+
     public function __construct(
-        private FactoryInterface $shopUserFactory,
-        private FactoryInterface $customerFactory,
-        private RepositoryInterface $customerGroupRepository
+        FactoryInterface $shopUserFactory,
+        FactoryInterface $customerFactory,
+        RepositoryInterface $customerGroupRepository
     ) {
+        $this->customerGroupRepository = $customerGroupRepository;
+        $this->customerFactory = $customerFactory;
+        $this->shopUserFactory = $shopUserFactory;
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -36,7 +46,6 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
     public function create(array $options = []): ShopUserInterface
     {
         $options = $this->optionsResolver->resolve($options);
-
 
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
@@ -58,15 +67,14 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
         return $user;
     }
 
-
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('company_name', fn(Options $options): string => $this->faker->company)
-            ->setDefault('tax_identifier', fn(Options $options): string => $this->faker->phoneNumber)
-            ->setDefault('email', fn(Options $options): string => $this->faker->email)
-            ->setDefault('first_name', fn(Options $options): string => $this->faker->firstName)
-            ->setDefault('last_name', fn(Options $options): string => $this->faker->lastName)
+            ->setDefault('company_name', fn (Options $options): string => $this->faker->company)
+            ->setDefault('tax_identifier', fn (Options $options): string => $this->faker->phoneNumber)
+            ->setDefault('email', fn (Options $options): string => $this->faker->email)
+            ->setDefault('first_name', fn (Options $options): string => $this->faker->firstName)
+            ->setDefault('last_name', fn (Options $options): string => $this->faker->lastName)
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('password', 'password123')
@@ -78,8 +86,8 @@ class ShopUserExampleFactory extends Factory implements ExampleFactoryInterface
                 'gender',
                 [CustomerComponent::UNKNOWN_GENDER, CustomerComponent::MALE_GENDER, CustomerComponent::FEMALE_GENDER]
             )
-            ->setDefault('phone_number', fn(Options $options): string => $this->faker->phoneNumber)
-            ->setDefault('birthday', fn(Options $options): \DateTime => $this->faker->dateTimeThisCentury())
+            ->setDefault('phone_number', fn (Options $options): string => $this->faker->phoneNumber)
+            ->setDefault('birthday', fn (Options $options): \DateTime => $this->faker->dateTimeThisCentury())
             ->setAllowedTypes('birthday', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer(
                 'birthday',

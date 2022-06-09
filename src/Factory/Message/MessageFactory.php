@@ -39,5 +39,4 @@ final class MessageFactory implements MessageFactoryInterface
 
         return $message;
     }
-
 }

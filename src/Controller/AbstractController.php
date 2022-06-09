@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -9,7 +11,7 @@ abstract class AbstractController extends \Symfony\Bundle\FrameworkBundle\Contro
 {
     protected function isAssetsVendorUser(): bool
     {
-        return (($this->getUser() && (method_exists($this->getUser(), 'getCustomer')) && $this->getUser()->getCustomer()->getVendor()));
+        return $this->getUser() && (method_exists($this->getUser(), 'getCustomer')) && $this->getUser()->getCustomer()->getVendor();
     }
 
     protected function notAssetsVendorUserRedirect(): RedirectResponse

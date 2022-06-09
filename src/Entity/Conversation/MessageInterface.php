@@ -55,5 +55,4 @@ interface MessageInterface extends ResourceInterface
     public function getFile(): ?UploadedFile;
 
     public function setFile(?UploadedFile $file): void;
-
 }

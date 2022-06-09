@@ -15,5 +15,4 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 final class CategoryRepository extends EntityRepository implements CategoryRepositoryInterface
 {
-
 }

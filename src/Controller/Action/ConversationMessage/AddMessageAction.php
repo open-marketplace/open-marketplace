@@ -37,18 +37,16 @@ final class AddMessageAction extends AbstractController
         FlashBagInterface $flashBag,
         AddMessageFacadeInterface $addMessageFacade,
         UrlGeneratorInterface $urlGenerator
-    )
-        {
-            $this->formFactory = $formFactory;
-            $this->flashBag = $flashBag;
-            $this->addMessageFacade = $addMessageFacade;
-            $this->urlGenerator = $urlGenerator;
+    ) {
+        $this->formFactory = $formFactory;
+        $this->flashBag = $flashBag;
+        $this->addMessageFacade = $addMessageFacade;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function __invoke(int $id, Request $request): Response
     {
-        if (!$this->isAssetsUser())
-        {
+        if (!$this->isAssetsUser()) {
             return $this->notAssetsVendorUserRedirect();
         }
         $form = $this->formFactory->create(MessageType::class);
@@ -56,7 +54,7 @@ final class AddMessageAction extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             /** @var Message $message */
             $message = $form->getData();
             $file = $form->get('file')->getData();
