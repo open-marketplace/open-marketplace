@@ -3,14 +3,20 @@
     <services>
         <defaults public="true" />  
         <service
-                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\VendorPagePaginationContext"
-                id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor_page_pagination_context"
+                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\VendorPageContext"
+                id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor_page_context"
         >
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.repository.customer"/>
             <argument type="service" id="sylius.repository.country"/>
             <argument type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.repository.vendor_repository"/>
             <argument type="service" id="sylius.custom_factory.product"/>
+            <argument type="service" id="sylius.generator.slug"/>
+            <argument type="service" id="sylius.product_variant_resolver.default"/>
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.repository.product_repository"/>
+            <argument type="service" id="sylius.factory.channel_pricing"/>
+            <argument type="service" id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.vendor_page_page"/>
         </service>
     </services>
 </container>

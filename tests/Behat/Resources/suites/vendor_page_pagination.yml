@@ -2,12 +2,16 @@ default:
     suites:
         vendor_page_pagination:
             contexts:
-                - tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor_page_pagination_context
-                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.hook.doctrine_orm
+                - tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor_page_context
+
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.locale
+
                 - sylius.behat.context.ui.shop.account
+                - sylius.behat.context.ui.shop.product
+
             filters:
-                    tags: "@vendor_page_pagination"
+                    tags: "@vendor_page_pagination&&@ui"
