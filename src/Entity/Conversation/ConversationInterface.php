@@ -24,7 +24,7 @@ interface ConversationInterface extends ResourceInterface
 
     public function setCategory(?CategoryInterface $category): void;
 
-    public function getApplicant(): UserInterface;
+    public function getApplicant(): ?UserInterface;
 
     public function setApplicant(VendorInterface $vendor): void;
 

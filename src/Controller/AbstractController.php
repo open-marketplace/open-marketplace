@@ -13,8 +13,8 @@ abstract class AbstractController extends \Symfony\Bundle\FrameworkBundle\Contro
     protected function isAssetsVendorUser(): bool
     {
         $user = $this->getUser();
-        if ($user instanceof ShopUserInterface) {
-            return (null !== $this->getUser()->getCustomer()->getVendor());
+        if ((null !== $user) && ($user instanceof ShopUserInterface)) {
+            return (null !== $user->getCustomer()->getVendor());
         }
     }
 

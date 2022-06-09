@@ -58,16 +58,18 @@ class Conversation implements ConversationInterface
         $this->category = $category;
     }
 
-    public function getApplicant(): UserInterface
+    public function getApplicant(): ?UserInterface
     {
-        return $this->getVendorUser()->getCustomer()->getUser();
+        if (null !== $this->getVendorUser()) {
+            return $this->getVendorUser()->getCustomer()->getUser();
+        } else {
+            return null;
+        }
     }
 
     public function setApplicant(VendorInterface $vendor): void
     {
         $this->setVendorUser($vendor);
-
-        $this->setShopUser($vendor->getCustomer()->getUser());
     }
 
     public function getAdminUser(): AdminUserInterface
@@ -82,13 +84,18 @@ class Conversation implements ConversationInterface
 
     public function addMessage(MessageInterface $message): void
     {
+        if (null == $this->messages) {
+            $this->messages = new ArrayCollection();
+        }
         $this->messages->add($message);
         $message->setConversation($this);
     }
 
     public function removeMessage(MessageInterface $message): void
     {
-        $this->messages->removeElement($message);
+        if (null !== $this->messages) {
+            $this->messages->removeElement($message);
+        }
     }
 
     public function getMessages(): ?Collection
