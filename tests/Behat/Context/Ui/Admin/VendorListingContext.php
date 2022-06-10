@@ -17,9 +17,9 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEmpty;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 
 final class VendorListingContext extends RawMinkContext implements Context
 {
@@ -72,7 +72,7 @@ final class VendorListingContext extends RawMinkContext implements Context
      */
     public function thereAreVendors($count)
     {
-        for ($i=0; $i<$count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             $vendor = new Vendor();
             $vendor->setCompanyName('vendor ' . $i);
             $vendor->setTaxIdentifier('vendorTax' . $i);

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\vendor;
+namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
@@ -17,30 +17,32 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use Doctrine\Persistence\ObjectManager;
+use function PHPUnit\Framework\assertNotEquals;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use function PHPUnit\Framework\assertNotEquals;
 
 class VendorUpdateContext extends MinkContext
 {
     private SharedStorageInterface $sharedStorage;
+
     private UserRepositoryInterface $userRepository;
+
     private ExampleFactoryInterface $userFactory;
-    private ObjectManager $manager;   
+
+    private ObjectManager $manager;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
-        ObjectManager $manager       
+        ObjectManager $manager
     ) {
-
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
-        $this->manager = $manager;          
+        $this->manager = $manager;
     }
 
     /**
@@ -54,11 +56,11 @@ class VendorUpdateContext extends MinkContext
 
         $this->userRepository->add($user);
         $customer = $this->sharedStorage->get('user')->getCustomer();
-        $country = $this->manager->getRepository(Country::class)->findOneBy(['code'=>$country_code]);
+        $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
         $vendor = new Vendor();
-        $vendor->setCompanyName("sdasdsa");
+        $vendor->setCompanyName('sdasdsa');
         $vendor->setCustomer($customer);
-        $vendor->setPhoneNumber("333333333");
+        $vendor->setPhoneNumber('333333333');
         $vendor->setTaxIdentifier('543455');
         $vendor->setVendorAddress(new VendorAddress());
         $vendor->getVendorAddress()->setCountry($country);
@@ -67,17 +69,17 @@ class VendorUpdateContext extends MinkContext
         $vendor->getVendorAddress()->setStreet('Tajna 13');
         $this->manager->persist($vendor);
         $this->manager->flush();
-        $this->sharedStorage->set('vendor',$vendor);        
+        $this->sharedStorage->set('vendor', $vendor);
     }
-    
+
     /**
      * @Then Pending update data should appear in database
      */
     public function pendingUpdateDataShouldAppearInDatabase()
     {
         $vendor = $this->sharedStorage->get('vendor');
-        $pendingData = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor'=>$vendor]);
-        
+        $pendingData = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
+
         assertNotEquals(null, $pendingData);
     }
 
@@ -87,7 +89,7 @@ class VendorUpdateContext extends MinkContext
     public function thereIsPendingUpdateDataWithTokenValueForLoggedInVendor($token)
     {
         $vendor = $this->sharedStorage->get('vendor');
-        $country = $this->manager->getRepository(Country::class)->findOneBy(['code'=>"PL"]);
+        $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => 'PL']);
         $pendigUpdate = new VendorProfileUpdate();
         $pendigUpdate->setVendorAddress(new VendorAddressUpdate());
         $pendigUpdate->setVendor($vendor);
@@ -99,10 +101,10 @@ class VendorUpdateContext extends MinkContext
         $pendigUpdate->getVendorAddress()->setCity('new city');
         $pendigUpdate->getVendorAddress()->setPostalCode('new code');
         $pendigUpdate->getVendorAddress()->setCountry($country);
-        
+
         $this->manager->persist($pendigUpdate);
         $this->manager->flush();
-        
-        $this->sharedStorage->set('pendingUpdate',$pendigUpdate);
+
+        $this->sharedStorage->set('pendingUpdate', $pendigUpdate);
     }
 }

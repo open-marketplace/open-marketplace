@@ -17,7 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Security;
 
-class VendorProvider
+final class VendorProvider implements VendorProviderInterface
 {
     private Security $security;
 
@@ -26,7 +26,7 @@ class VendorProvider
         $this->security = $security;
     }
 
-    public function getLoggedVendor(): VendorInterface
+    public function provideCurrentVendor(): VendorInterface
     {
         /** @var ShopUserInterface $user */
         $user = $this->security->getUser();

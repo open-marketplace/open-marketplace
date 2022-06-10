@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-interface VendorProfileUpdateInterface extends VendorDataInterface
+interface VendorProfileUpdateInterface extends VendorProfileInterface
 {
     public function getToken(): ?string;
 

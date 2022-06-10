@@ -11,16 +11,19 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
-use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class VendorProfileUpdateAction extends AbstractController
+final class VendorProfileUpdateAction
 {
     private RequestStack $request;
 
@@ -28,33 +31,50 @@ class VendorProfileUpdateAction extends AbstractController
 
     private VendorProvider $vendorProvider;
 
-    private EntityManager $manager;
+    private FormFactory $formFactory;
+
+    private Router $router;
+
+    private VendorFactory $vendorFactory;
+
+    private EntityManagerInterface $manager;
 
     public function __construct(
         RequestStack $request,
         VendorProfileUpdateService $vendorProfileUpdateService,
         VendorProvider $vendorProvider,
-        EntityManager $manager
+        FormFactory $formFactory,
+        Router $router,
+        VendorFactory $vendorFactory,
+        EntityManagerInterface $manager
     ) {
         $this->request = $request;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
+        $this->formFactory = $formFactory;
+        $this->router = $router;
+        $this->vendorFactory = $vendorFactory;
         $this->manager = $manager;
     }
 
     public function __invoke(): Response
     {
-        $vendor = new Vendor();
-        $form = $this->createForm(VendorType::class, $vendor);
+        $profilePath = $this->router->generate('vendor_profile');
+        $vendor = $this->vendorFactory->createNew();
+        $form = $this->formFactory->create(VendorType::class, $vendor);
 
         $form->handleRequest($this->request->getCurrentRequest());
-        $loggedVendor = $this->vendorProvider->getLoggedVendor();
+        $currentVendor = $this->vendorProvider->provideCurrentVendor();
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $loggedVendor);
-            $loggedVendor->setEditDate((new \DateTime())->format('d-m-Y'));
+            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
+                $form->getData(),
+                $currentVendor
+            );
+            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $currentVendor);
+            $currentVendor->setEditDate((new \DateTime())->format('d-m-Y'));
             $this->manager->flush();
         }
 
-        return $this->redirectToRoute('vendor_profile');
+        return new RedirectResponse($profilePath);
     }
 }

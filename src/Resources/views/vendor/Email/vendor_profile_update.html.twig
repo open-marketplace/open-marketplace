@@ -1,11 +1,11 @@
 {% extends '@SyliusCore/Email/layout.html.twig' %}
 
 {% block subject %}
-   Pending profile update
+   {{ 'bitbag_sylius_multi_vendor_marketplace_plugin.email.vendor_profile_update'|trans }}
 {% endblock %}
 
 {% block body %}
-   <div class="">
+   <div>
       {{ 'bitbag_sylius_multi_vendor_marketplace_plugin.email.request_profile_update_greeting' | trans }}
    </div>
    <br/>

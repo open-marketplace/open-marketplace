@@ -9,8 +9,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-interface VendorInterface extends VendorDataInterface
+interface VendorInterface extends VendorProfileInterface
 {
+    public const STATUS_UNVERIFIED = 'unverified';
+
+    public const STATUS_VERIFIED = 'verified';
+
     public function getId(): ?int;
 
     public function setId(?int $id): void;
