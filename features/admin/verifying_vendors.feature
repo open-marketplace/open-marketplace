@@ -11,5 +11,5 @@ Feature: Verifying Vendors account
     And There is an unverified Vendor
     When I follow "Vendors"
     And I follow "Details"
-    And I follow "Verify"
+    And I click "Verify"
     Then I should see "Vendor has been successfully verified"
