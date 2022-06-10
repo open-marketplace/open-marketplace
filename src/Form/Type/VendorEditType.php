@@ -28,4 +28,3 @@ final class VendorEditType extends AbstractResourceType
             ]);
     }
 }
-

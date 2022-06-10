@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterface
 {
