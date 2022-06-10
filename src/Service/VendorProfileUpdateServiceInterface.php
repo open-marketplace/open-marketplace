@@ -19,7 +19,7 @@ interface VendorProfileUpdateServiceInterface
 {
     public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void;
 
-    public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;    
+    public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;
 
     public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void;
 }
