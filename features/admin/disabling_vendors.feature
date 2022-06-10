@@ -25,3 +25,16 @@ Feature: Disabling vendors
     And I should see "Confirm your action"
     And I choose "#confirmation-button"
     Then I should see "Vendor's account has been successfully enabled"
+
+  @ui
+  Scenario: Disabling disabled vendor's account
+    Given There is a 'disabled' vendor
+    When I follow "Vendors"
+    Then I should not see "Disable" button
+
+  @ui
+  Scenario: Enabling enabled vendor's account
+    Given There is a 'enabled' vendor
+    When I follow "Vendors"
+    Then I should not see "Enable" button
+

@@ -1,7 +1,7 @@
 sylius_grid:
     templates:
         action:
-            apply_transition_blocking: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/applyTransitionBlocking.html.twig"
+            enable_disable_action: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/enableDisableButtons.html.twig"
     grids:
         bitbag_sylius_multi_vendor_marketplace_plugin_vendor:
             driver:
@@ -29,6 +29,11 @@ sylius_grid:
                     type: string
                     label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
                     sortable: ~
+                enabled:
+                    type: twig
+                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.enabled
+                    options:
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/enabled.html.twig'
             actions:
                 main:
                     create:
@@ -41,25 +46,5 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
-                    block:
-                        type: apply_transition_blocking
-                        label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.block
-                        icon: lock
-                        options:
-                            link:
-                                route: bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_block
-                                parameters:
-                                    id: resource.id
-                            transition: block
-                            graph: bitbag_sylius_multi_vendor_marketplace_plugin_vendor_blocking
-                    unblock:
-                        type: apply_transition_blocking
-                        label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.unblock
-                        icon: lock open
-                        options:
-                            link:
-                                route: bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_unblock
-                                parameters:
-                                    id: resource.id
-                            transition: unblock
-                            graph: bitbag_sylius_multi_vendor_marketplace_plugin_vendor_blocking
+                    enable_disable:
+                        type: enable_disable_action

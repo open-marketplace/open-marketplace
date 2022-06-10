@@ -17,10 +17,6 @@ class Vendor implements VendorInterface
 
     public const STATUS_VERIFIED = 'verified';
 
-    public const BLOCKED = 'blocked';
-
-    public const UNBLOCKED = 'unblocked';
-
     private ?int $id;
 
     private CustomerInterface $customer;
@@ -35,7 +31,7 @@ class Vendor implements VendorInterface
 
     private string $status = self::STATUS_UNVERIFIED;
 
-    private string $blocked = self::UNBLOCKED;
+    private bool $enabled = true;
 
     public function getId(): ?int
     {
@@ -107,13 +103,13 @@ class Vendor implements VendorInterface
         $this->status = $status;
     }
 
-    public function getBlocked(): string
+    public function isEnabled(): bool
     {
-        return $this->blocked;
+        return $this->enabled;
     }
 
-    public function setBlocked(string $blocked): void
+    public function setEnabled(bool $enabled): void
     {
-        $this->blocked = $blocked;
+        $this->enabled = $enabled;
     }
 }

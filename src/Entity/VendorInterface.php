@@ -43,7 +43,7 @@ interface VendorInterface extends ResourceInterface
 
     public function setStatus(string $status): void;
 
-    public function getBlocked(): string;
+    public function isEnabled(): bool;
 
-    public function setBlocked(string $blocked): void;
+    public function setEnabled(bool $enabled): void;
 }
