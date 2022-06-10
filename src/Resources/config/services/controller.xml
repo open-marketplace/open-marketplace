@@ -6,7 +6,6 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController"
                  id="bitbag_sylius_multi_vendor_marketplace_plugin.controller.vendor_controller"
                  parent="bitbag_sylius_multi_vendor_marketplace_plugin.controller.vendor">
-            <argument type="service" id="request_stack" />
         </service>
     </services>
 </container>

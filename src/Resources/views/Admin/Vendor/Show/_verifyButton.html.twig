@@ -1,21 +1,12 @@
-{% if vendor.status == 'unverified' %}
-    {% include "@SyliusUi/Grid/Action/applyTransition.html.twig" with {
-        data: vendor,
-        options: {
-            transition: 'verify',
-            graph: 'bitbag_sylius_multi_vendor_marketplace_plugin_vendor',
-            link: {
-                route: 'bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_verify',
-                parameters: {
-                    id: vendor.id
-                }
-            },
-            class: 'floating primary link',
-        },
-        action: {
-            label: 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.verify',
-            icon: 'thumbs up'
-        }
-    } %}
+{% if vendor.status == constant('BitBag\\SyliusMultiVendorMarketplacePlugin\\Entity\\VendorInterface::STATUS_UNVERIFIED') %}
+
+    <form action="{{ path('bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_verify', {'id': vendor.id}) }}" method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(vendor.id) }}">
+        <input type="hidden" name="_method" value="PUT">
+        <button class="ui labeled icon button primary" type="submit" >
+            <i class="thumbs up icon"></i> {{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.verify'|trans }}
+        </button>
+    </form>
+
 {% endif %}
 

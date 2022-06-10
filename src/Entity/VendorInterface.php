@@ -15,6 +15,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface VendorInterface extends ResourceInterface
 {
+    public const STATUS_UNVERIFIED = 'unverified';
+
+    public const STATUS_VERIFIED = 'verified';
+
     public function getId(): ?int;
 
     public function setId(?int $id): void;

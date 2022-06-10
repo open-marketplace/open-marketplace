@@ -26,8 +26,10 @@ sylius_grid:
                     label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_id
                     sortable: ~
                 status:
-                    type: string
+                    type: twig
                     label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
+                    options:
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/status.html.twig'
                     sortable: ~
                 enabled:
                     type: twig

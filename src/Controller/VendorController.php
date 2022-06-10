@@ -33,14 +33,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
 {
-    private RequestStack $request;
-
     public function __construct(
         MetadataInterface                    $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -58,8 +55,7 @@ final class VendorController extends ResourceController
         EventDispatcherInterface             $eventDispatcher,
         ?StateMachineInterface               $stateMachine,
         ResourceUpdateHandlerInterface       $resourceUpdateHandler,
-        ResourceDeleteHandlerInterface       $resourceDeleteHandler,
-        RequestStack                         $request
+        ResourceDeleteHandlerInterface       $resourceDeleteHandler
     )
     {
         parent::__construct(
@@ -81,8 +77,6 @@ final class VendorController extends ResourceController
             $resourceUpdateHandler,
             $resourceDeleteHandler
         );
-
-        $this->request = $request;
     }
 
     public function createAction(Request $request): Response
@@ -96,12 +90,12 @@ final class VendorController extends ResourceController
         }
     }
 
-    public function verifyVendorAction(): Response
+    public function verifyVendorAction(Request $request): Response
     {
-        $vendorId = $this->request->getCurrentRequest()->attributes->get('id');
+        $vendorId = $request->attributes->get('id');
 
         $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
-//        $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
+        $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
 
         $this->manager->flush();
 

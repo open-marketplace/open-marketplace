@@ -13,10 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 class Vendor implements VendorInterface
 {
-    public const STATUS_UNVERIFIED = 'unverified';
-
-    public const STATUS_VERIFIED = 'verified';
-
     private ?int $id;
 
     private CustomerInterface $customer;
