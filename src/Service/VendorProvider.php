@@ -39,6 +39,5 @@ final class VendorProvider implements VendorProviderInterface
         $vendor = $customer->getVendor();
 
         return $vendor;
-    } 
-  
+    }
 }

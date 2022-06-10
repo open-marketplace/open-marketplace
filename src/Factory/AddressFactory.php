@@ -22,8 +22,7 @@ class AddressFactory
         string $city,
         string $postalCode,
         Country $country
-    ): VendorAddressInterface
-    {
+    ): VendorAddressInterface {
         $address = $this->createNew();
         $address->setCountry($country);
         $address->setPostalCode($postalCode);

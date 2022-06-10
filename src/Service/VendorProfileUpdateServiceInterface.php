@@ -17,11 +17,9 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterfac
 
 interface VendorProfileUpdateServiceInterface
 {
-    public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void;   
+    public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void;
 
-    public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;   
-
-    public function sendEmail(string $emailAddress, string $token): void;  
+    public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;    
 
     public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void;
 }
