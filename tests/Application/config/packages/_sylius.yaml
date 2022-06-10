@@ -18,9 +18,9 @@ sylius_shop:
 
 winzou_state_machine:
     mvm_product_listing:
-        class: 'BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing'
+        class: 'BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft'
         property_path: status
-        graph: product_listing
+        graph: product_draft
         states:
             created: ~
             under_verification: ~
@@ -30,23 +30,23 @@ winzou_state_machine:
             send_to_verification:
                 from: ['created']
                 to: 'under_verification'
-            accept_product_listing:
+            accept_product_draft:
                 from: ['under_verification']
                 to: 'verified'
-            reject_product_listing:
+            reject_product_draft:
                 from: ['under_verification']
                 to: 'rejected'
         callbacks:
             after:
                 send_to_verification:
                     on: [ 'send_to_verification' ]
-                    do: [ '@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing', 'sendToVerify' ]
+                    do: [ '@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft', 'sendToVerify' ]
                     args: [ 'object' ]
                 accept_product_listing:
-                    on: ['accept_product_listing']
-                    do: ['@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing', 'verify']
+                    on: ['accept_product_draft']
+                    do: ['@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft', 'verify']
                     args: ['object']
                 reject_product_listing:
-                    on: [ 'reject_product_listing' ]
-                    do: [ '@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing', 'reject' ]
+                    on: [ 'reject_product_draft' ]
+                    do: [ '@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft', 'reject' ]
                     args: [ 'object' ]

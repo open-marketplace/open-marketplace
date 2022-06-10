@@ -7,20 +7,23 @@
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\ShowAction">
             <argument key="$productListingRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_listing" />
             <argument key="$twig" type="service" id="twig" />
+            <argument key="$productDraftRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_draft" />
         </service>
 
         <service id="bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.admin.product_listing.accept_action" public="true"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\AcceptAction">
             <argument key="$productListingRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_listing" />
             <argument key="$router" type="service" id="router.default" />
-            <argument key="$productListingStateMachineTransition" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing.transition" />
+            <argument key="$productListingStateMachineTransition" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft.transition" />
+            <argument key="$productDraftRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_draft" />
         </service>
 
         <service id="bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.admin.product_listing.reject_action" public="true"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\RejectAction">
             <argument key="$productListingRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_listing" />
             <argument key="$router" type="service" id="router.default" />
-            <argument key="$productListingStateMachineTransition" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing.transition" />
+            <argument key="$productListingStateMachineTransition" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft.transition" />
+            <argument key="$productDraftRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product_draft" />
         </service>
     </services>
 </container>

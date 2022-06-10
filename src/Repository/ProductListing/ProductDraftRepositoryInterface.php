@@ -12,8 +12,11 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 
 interface ProductDraftRepositoryInterface
 {
     public function save(ProductDraftInterface $productDraft): void;
+
+    public function findProductListingLatestProductDraft(ProductListingInterface $productListing): ?ProductDraftInterface;
 }

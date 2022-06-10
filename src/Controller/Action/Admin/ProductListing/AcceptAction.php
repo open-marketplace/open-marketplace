@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductListingStateMachineTransitionInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListingRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductListingTransitions;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -25,16 +27,20 @@ final class AcceptAction
 
     private RouterInterface $router;
 
-    private ProductListingStateMachineTransitionInterface $productListingStateMachineTransition;
+    private ProductDraftStateMachineTransitionInterface $productListingStateMachineTransition;
+
+    private ProductDraftRepositoryInterface $productDraftRepository;
 
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
         RouterInterface $router,
-        ProductListingStateMachineTransitionInterface $productListingStateMachineTransition
+        ProductDraftStateMachineTransitionInterface $productListingStateMachineTransition,
+        ProductDraftRepositoryInterface $productDraftRepository
     ) {
         $this->productListingRepository = $productListingRepository;
         $this->router = $router;
         $this->productListingStateMachineTransition = $productListingStateMachineTransition;
+        $this->productDraftRepository = $productDraftRepository;
     }
 
     public function __invoke(Request $request): RedirectResponse
@@ -42,7 +48,10 @@ final class AcceptAction
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
-        $this->productListingStateMachineTransition->apply($productListing, ProductListingTransitions::TRANSITION_VERIFY);
+        /** @var ProductDraftInterface $latestProductDraft */
+        $latestProductDraft = $this->productDraftRepository->findProductListingLatestProductDraft($productListing);
+
+        $this->productListingStateMachineTransition->apply($latestProductDraft, ProductDraftTransitions::TRANSITION_VERIFY);
 
         return new RedirectResponse($this->router->generate('bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_index'));
     }

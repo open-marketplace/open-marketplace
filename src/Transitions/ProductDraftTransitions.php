@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Transitions;
 
-final class ProductListingTransitions
+final class ProductDraftTransitions
 {
-    public const GRAPH = 'product_listing';
+    public const GRAPH = 'product_draft';
 
     public const TRANSITION_SEND_TO_VERIFICATION = 'send_to_verification';
 
-    public const TRANSITION_VERIFY = 'accept_product_listing';
+    public const TRANSITION_VERIFY = 'accept_product_draft';
 
-    public const TRANSITION_REJECT = 'reject_product_listing';
+    public const TRANSITION_REJECT = 'reject_product_draft';
 }

@@ -17,8 +17,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -39,9 +37,9 @@ final class ProductPriceType extends AbstractResourceType
         $this->channelPricingRepository = $channelPricingRepository;
         parent::__construct($this->dataClass, $validationGroups);
     }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $builder
             ->add('price', MoneyType::class, [
                 'label' => 'sylius.ui.price',
@@ -60,7 +58,6 @@ final class ProductPriceType extends AbstractResourceType
         ;
 
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options): void {
-
             $pricing = $event->getData();
 
             if (!$pricing instanceof $this->dataClass || !$pricing instanceof ProductListingPriceInterface) {
@@ -69,10 +66,10 @@ final class ProductPriceType extends AbstractResourceType
                 return;
             }
 
-            if (($pricing->getPrice() === null) && ($pricing->getOriginalPrice() === null)) {
+            if ((null === $pricing->getPrice()) && (null === $pricing->getOriginalPrice())) {
                 $event->setData(null);
 
-                if ($pricing->getId() !== null) {
+                if (null !== $pricing->getId()) {
                     $this->channelPricingRepository->remove($pricing);
                 }
 
@@ -91,8 +88,6 @@ final class ProductPriceType extends AbstractResourceType
         return 'bitbag_product_product';
     }
 
-
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -104,7 +99,7 @@ final class ProductPriceType extends AbstractResourceType
             ->setAllowedTypes('product_draft', ['null', ProductDraftInterface::class])
 
             ->setDefaults([
-                'label' => fn(Options $options): string => $options['channel']->getName(),
+                'label' => fn (Options $options): string => $options['channel']->getName(),
             ])
         ;
     }

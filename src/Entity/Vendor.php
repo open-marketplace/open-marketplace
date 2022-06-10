@@ -105,4 +105,3 @@ class Vendor implements VendorInterface
         $this->productListings->add($productListings);
     }
 }
-

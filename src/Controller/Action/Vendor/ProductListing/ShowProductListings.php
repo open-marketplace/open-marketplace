@@ -14,7 +14,7 @@ final class ShowProductListings extends AbstractController
     {
         return new Response(
             $this->renderView('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig', [
-                    'productListings' => $this->getUser()->getCustomer()->getVendor()->getProductListings()
+                    'productListings' => $this->getUser()->getCustomer()->getVendor()->getProductListings(),
                 ])
         );
     }

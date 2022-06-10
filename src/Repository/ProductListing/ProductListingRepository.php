@@ -22,4 +22,3 @@ class ProductListingRepository extends EntityRepository implements ProductListin
         $this->_em->flush();
     }
 }
-

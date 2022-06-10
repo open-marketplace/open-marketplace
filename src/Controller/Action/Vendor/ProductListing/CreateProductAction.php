@@ -13,8 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\Pro
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing\CreateProductListingCommandInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
@@ -33,13 +31,21 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class CreateProductAction extends AbstractController
 {
     private MetadataInterface $metadata;
+
     private RequestConfigurationFactoryInterface $requestConfigurationFactory;
+
     private NewResourceFactoryInterface $newResourceFactory;
+
     private FactoryInterface $factory;
+
     private RepositoryInterface $chanelRepository;
+
     private CreateProductListingCommandInterface $createProductListingCommand;
+
     private RedirectHandlerInterface $redirectHandler;
+
     private FlashHelperInterface $flashHelper;
+
     private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
@@ -52,8 +58,7 @@ class CreateProductAction extends AbstractController
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher
-)
-    {
+    ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->newResourceFactory = $newResourceFactory;
         $this->factory = $factory;
@@ -98,6 +103,7 @@ class CreateProductAction extends AbstractController
 
             return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index');
         }
+
         return new Response(
             $this->renderView('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/create_product.html.twig', [
                 'configuration' => $configuration,

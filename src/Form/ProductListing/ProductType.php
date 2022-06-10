@@ -23,32 +23,31 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('code', TextType::class, [
                 'label' => 'sylius.ui.code',
-                'disabled' => ($builder->getData()->getCode())
+                'disabled' => ($builder->getData()->getCode()),
                 ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ProductTranslationType::class,
                 'label' => 'sylius.form.product.translations',
                 'attr' => [
-                    'class' => 'ui styled fluid accordion'
-                    ]
+                    'class' => 'ui styled fluid accordion',
+                    ],
             ])
-            ->add('save', SubmitType::class,[
+            ->add('save', SubmitType::class, [
                 'label' => 'mvm.ui.save',
                 'attr' => [
-                    'class' => 'ui labeled icon primary button'
-                ]
+                    'class' => 'ui labeled icon primary button',
+                ],
             ])
-            ->add('saveAndAdd', SubmitType::class,[
+            ->add('saveAndAdd', SubmitType::class, [
                 'label' => 'mvm.ui.save_and_add',
                 'attr' => [
-                    'class' => 'ui labeled icon secondary button'
-                ]
+                    'class' => 'ui labeled icon secondary button',
+                ],
             ])
         ;
 
@@ -57,12 +56,12 @@ final class ProductType extends AbstractType
 
             $event->getForm()->add('productListingPrice', ChannelCollectionType::class, [
                 'entry_type' => ProductPriceType::class,
-                'entry_options' => fn(ChannelInterface $channel) => [
+                'entry_options' => fn (ChannelInterface $channel) => [
                     'channel' => $channel,
                     'product_draft' => $productDraft,
                     'required' => false,
                 ],
-                'label' => 'sylius.form.variant.price'
+                'label' => 'sylius.form.variant.price',
             ]);
         });
     }

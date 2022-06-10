@@ -24,15 +24,15 @@ sylius_grid:
         code:
           type: string
           label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.code
-        publishedAt:
-          type: datetime
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at
-        verifiedAt:
-          type: datetime
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.verified_at
-        status:
-          type: string
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
+#        publishedAt:
+#          type: datetime
+#          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at
+#        verifiedAt:
+#          type: datetime
+#          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.verified_at
+#        status:
+#          type: string
+#          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
       actions:
         item:
           details:

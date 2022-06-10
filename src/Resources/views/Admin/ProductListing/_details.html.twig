@@ -7,30 +7,30 @@
                 <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.name'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
-                        <li>{{ productListing.name }}</li>
+                        <li>{{ productDraft.code }}</li>
                     </ul>
                 </td>
             </tr>
-            <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at'|trans }}</strong></td>
-                <td>
-                    <ul class="ui bulleted list">
-                        <li>{{ productListing.publishedAt | date }}</li>
-                    </ul>
-                </td>
-            </tr>
+{#            <tr>#}
+{#                <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at'|trans }}</strong></td>#}
+{#                <td>#}
+{#                    <ul class="ui bulleted list">#}
+{#                        <li>{{ productDraft.publishedAt | date }}</li>#}
+{#                    </ul>#}
+{#                </td>#}
+{#            </tr>#}
             <tr>
                 <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.status'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
-                        <li>{{ productListing.status }}</li>
+                        <li>{{ productDraft.status }}</li>
                     </ul>
                 </td>
             </tr>
             </tbody>
         </table>
 
-        {% if productListing.status == 'under_verification' %}
+        {% if productDraft.status == 'under_verification' %}
             <div class="ui buttons">
                 {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/accept_product_listing.html.twig' %}
                 {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/reject_product_listing.html.twig' %}

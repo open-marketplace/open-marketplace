@@ -2,6 +2,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
   ui:
     become_a_vendor: 'Become a Vendor'
     product_listings: 'Product listings'
+    product_list: 'Product list'
     marketplace: 'Marketplace'
     published_at: 'Published at'
     verified_at: 'Verified at'
@@ -28,6 +29,7 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     id: 'ID'
     tax_id: 'Tax ID'
     vendors: 'Vendors'
+    manage_products: 'Manage products'
 app:
     ui:
         vendors: Vendors

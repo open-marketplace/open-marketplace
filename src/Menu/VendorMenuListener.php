@@ -31,6 +31,5 @@ final class VendorMenuListener
             ->addChild('Product List', ['route' => 'bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index'])
             ->setLabel('mvm.ui.menu.product_list')
             ->setLabelAttribute('icon', 'inbox');
-
     }
 }

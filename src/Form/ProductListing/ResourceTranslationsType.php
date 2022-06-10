@@ -38,7 +38,6 @@ class ResourceTranslationsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-
             /** @var ProductTranslationInterface[]|null[] $translations */
             $translations = $event->getData();
 
@@ -78,5 +77,4 @@ class ResourceTranslationsType extends AbstractType
     {
         return FixedCollectionType::class;
     }
-
 }

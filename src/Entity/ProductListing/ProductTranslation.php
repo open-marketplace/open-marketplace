@@ -15,7 +15,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductTranslation implements ProductTranslationInterface, ResourceInterface
 {
-
     protected int $id;
 
     protected ProductDraftInterface $productDraft;

@@ -23,11 +23,17 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class CreateProductListingCommand implements CreateProductListingCommandInterface
 {
     private ProductListingRepositoryInterface $productListingRepository;
+
     private FactoryInterface $productListingFactoryInterface;
+
     private TokenStorageInterface $tokenStorage;
+
     private FactoryInterface $translationFactory;
+
     private FactoryInterface $draftFactory;
+
     private FactoryInterface $priceFactory;
+
     private ProductDraftRepositoryInterface $draftRepository;
 
     public function __construct(
@@ -38,8 +44,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         FactoryInterface $draftFactory,
         FactoryInterface $priceFactory,
         ProductDraftRepositoryInterface $draftRepository
-    )
-    {
+    ) {
         $this->productListingRepository = $productListingRepository;
         $this->productListingFactoryInterface = $productListingFactoryInterface;
         $this->tokenStorage = $tokenStorage;
@@ -49,7 +54,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         $this->draftRepository = $draftRepository;
     }
 
-    public function create(ProductDraftInterface $productDraft,bool $isSend): void
+    public function create(ProductDraftInterface $productDraft, bool $isSend): void
     {
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingFactoryInterface->createNew();
@@ -57,7 +62,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         $productDraft = $this->formatTranslation($productDraft);
 
-        if ($isSend){
+        if ($isSend) {
             $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
         }
 
@@ -72,12 +77,12 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     private function formatTranslation(ProductDraftInterface $productDraft): ProductDraftInterface
     {
         /** @var ProductTranslationInterface $translation */
-        foreach ($productDraft->getTranslations() as $translation){
+        foreach ($productDraft->getTranslations() as $translation) {
             $translation->setProductDraft($productDraft);
         }
+
         return $productDraft;
     }
-
 
     public function cloneProduct(ProductDraftInterface $productDraft, bool $isSend): ProductDraftInterface
     {
@@ -91,7 +96,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         $newProductDrat->setCode($productDraft->getCode());
         $newProductDrat->setProductListing($productListing);
 
-        if ($isSend){
+        if ($isSend) {
             $newProductDrat->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
         }
 
@@ -107,8 +112,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     private function cloneTranslation(ProductDraftInterface $newProductDrat, ProductDraftInterface $productDraft): void
     {
         /** @var ProductTranslationInterface $translation */
-        foreach ($productDraft->getTranslations() as $translation )
-        {
+        foreach ($productDraft->getTranslations() as $translation) {
             /** @var ProductTranslationInterface $newTranslation */
             $newTranslation = $this->translationFactory->createNew();
             $newTranslation->setName($translation->getName());
@@ -126,8 +130,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     private function clonePrice(ProductDraftInterface $newProductDrat, ProductDraftInterface $productDraft): void
     {
         /** @var ProductListingPriceInterface $price */
-        foreach ($productDraft->getProductListingPrice() as $price)
-        {
+        foreach ($productDraft->getProductListingPrice() as $price) {
             /** @var ProductListingPriceInterface $newPrice */
             $newPrice = $this->priceFactory->createNew();
             $newPrice->setChannelCode($price->getChannelCode());
@@ -139,11 +142,11 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         }
     }
 
-    public function saveEdit(ProductDraftInterface $productDraft,bool $isSend): void
+    public function saveEdit(ProductDraftInterface $productDraft, bool $isSend): void
     {
         $this->formatTranslation($productDraft);
 
-        if ($isSend){
+        if ($isSend) {
             $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
         }
 

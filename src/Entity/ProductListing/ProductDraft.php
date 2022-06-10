@@ -13,11 +13,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Prophecy\Call\Call;
 use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Core\Model\ShopUserInterface;
 
 class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\PredictionInterface
 {
@@ -160,7 +157,7 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
 
     public function newVersion(): void
     {
-        $this->versionNumber++;
+        ++$this->versionNumber;
     }
 
     public function clear(): void
@@ -179,10 +176,14 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
 
     public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void
     {
-        $this->productListingPrice->set($key,$productListingPrice);
+        $this->productListingPrice->set($key, $productListingPrice);
     }
 
-    public function check(array $calls, ObjectProphecy $object, MethodProphecy $method)
+    public function check(
+        array $calls,
+        ObjectProphecy $object,
+        MethodProphecy $method
+    )
     {
         // TODO: Implement check() method.
     }

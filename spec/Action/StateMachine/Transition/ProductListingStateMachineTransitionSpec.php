@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductListingStateMachineTransition;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductListingStateMachineTransitionInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransition;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductListingTransitions;
 use PhpSpec\ObjectBehavior;
@@ -31,12 +31,12 @@ final class ProductListingStateMachineTransitionSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(ProductListingStateMachineTransition::class);
+        $this->shouldHaveType(ProductDraftStateMachineTransition::class);
     }
 
     public function it_should_implement_interface(): void
     {
-        $this->shouldImplement(ProductListingStateMachineTransitionInterface::class);
+        $this->shouldImplement(ProductDraftStateMachineTransitionInterface::class);
     }
 
     public function it_applies_transition(

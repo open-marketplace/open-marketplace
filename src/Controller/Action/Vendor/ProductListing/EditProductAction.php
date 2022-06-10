@@ -13,29 +13,22 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\Pro
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing\CreateProductListingCommandInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
-use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
-use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Resource\ResourceActions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class EditProductAction extends AbstractController
 {
     private MetadataInterface $metadata;
+
     private RequestConfigurationFactoryInterface $requestConfigurationFactory;
+
     private CreateProductListingCommandInterface $createProductListingCommand;
+
     private ProductDraftRepositoryInterface $productDraftRepository;
 
     public function __construct(
@@ -43,8 +36,7 @@ class EditProductAction extends AbstractController
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         CreateProductListingCommandInterface $createProductListingCommand,
         ProductDraftRepositoryInterface $productDraftRepository
-)
-    {
+    ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
         $this->createProductListingCommand = $createProductListingCommand;
@@ -73,6 +65,7 @@ class EditProductAction extends AbstractController
 
             return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index');
         }
+
         return new Response(
             $this->renderView('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/create_product.html.twig', [
                 'configuration' => $configuration,

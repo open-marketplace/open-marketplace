@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,12 +25,16 @@ final class ShowAction
 
     private Environment $twig;
 
+    private ProductDraftRepositoryInterface $productDraftRepository;
+
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
-        Environment $twig
+        Environment $twig,
+        ProductDraftRepositoryInterface $productDraftRepository
     ) {
         $this->productListingRepository = $productListingRepository;
         $this->twig = $twig;
+        $this->productDraftRepository = $productDraftRepository;
     }
 
     public function __invoke(Request $request): Response
@@ -36,9 +42,13 @@ final class ShowAction
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
+        /** @var ProductDraftInterface $latestProductDraft */
+        $latestProductDraft = $this->productDraftRepository->findProductListingLatestProductDraft($productListing);
+
         return new Response(
             $this->twig->render('@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig', [
                 'productListing' => $productListing,
+                'productDraft' => $latestProductDraft,
             ])
         );
     }

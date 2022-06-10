@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\ProductListingTerms;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 
 final class Options
 {
@@ -17,9 +17,9 @@ final class Options
     public static function getTypeFilter(): array
     {
         return [
-            self::STATUS_UNDER_VERIFICATION => ProductListingInterface::STATUS_UNDER_VERIFICATION,
-            self::STATUS_VERIFIED => ProductListingInterface::STATUS_VERIFIED,
-            self::STATUS_REJECTED => ProductListingInterface::STATUS_REJECTED,
+            self::STATUS_UNDER_VERIFICATION => ProductDraftInterface::STATUS_UNDER_VERIFICATION,
+            self::STATUS_VERIFIED => ProductDraftInterface::STATUS_VERIFIED,
+            self::STATUS_REJECTED => ProductDraftInterface::STATUS_REJECTED,
         ];
     }
 }

@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 
-interface ProductListingStateMachineTransitionInterface
+interface ProductDraftStateMachineTransitionInterface
 {
-    public function apply(ProductListingInterface $productListing, string $transition): void;
+    public function apply(ProductDraftInterface $productDraft, string $transition): void;
 }

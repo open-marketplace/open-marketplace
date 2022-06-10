@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-
 class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
 {
     protected int $id;
@@ -90,8 +89,6 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
     {
         $this->channelCode = $channelCode;
     }
-
-
 
     public function offsetExists($offset)
     {

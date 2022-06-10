@@ -3,15 +3,16 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing" public="true"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductListingCallbacks">
+        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft" public="true"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductDraftCallbacks">
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
             <argument key="$productFactory" type="service" id="sylius.custom_factory.product" />
+            <argument key="$productRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product" />
         </service>
 
-        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_listing.transition" public="true"
-                class="BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductListingStateMachineTransition">
-                <argument key="$productListingStateMachineFactory" type="service" id="SM\Factory\Factory"/>
+        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft.transition" public="true"
+                class="BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransition">
+                <argument key="$productDraftStateMachineFactory" type="service" id="SM\Factory\Factory"/>
         </service>
     </services>
 </container>
