@@ -11,18 +11,29 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Uploader;
 
+use Gaufrette\Adapter\Local as LocalAdapter;
+use Gaufrette\Filesystem;
+use Gaufrette\FilesystemInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class FileUploader implements FileUploaderInterface
 {
-    public function upload(UploadedFile $file, string $targetDirectory): string
+    private FilesystemInterface $filesystem;
+
+    public function __construct()
+    {
+        $adapter = new LocalAdapter($_ENV['LOGO_DIRECTORY']);
+        $this->filesystem = new Filesystem($adapter);
+    }
+
+    public function upload(UploadedFile $file): string
     {
         try {
             $uuid = Uuid::uuid4();
-            $filename = $uuid->toString() . '.' . $file->getExtension();
-            $file->move($targetDirectory, $filename);
+            $filename = $uuid->toString() . '.' . $file->guessExtension();
+            $this->filesystem->write($filename, $file->getContent());
         } catch (FileException $e) {
             throw new FileException();
         }

@@ -10,6 +10,10 @@ use PhpSpec\ObjectBehavior;
 
 final class FileUploaderSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $_ENV['LOGO_DIRECTORY'] = 'media/image/logo';
+    }
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(FileUploader::class);

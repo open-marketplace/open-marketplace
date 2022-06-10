@@ -44,7 +44,7 @@ final class VendorRegisterListener
             /** @var UploadedFile $uploadedImage */
             $uploadedImage = $vendorImage->getFile();
 
-            $filename = $this->fileUploader->upload($uploadedImage, $_ENV['LOGO_DIRECTORY']);
+            $filename = $this->fileUploader->upload($uploadedImage);
             $vendorImage->setPath($filename);
             $vendorImage->setOwner($vendor);
         }
