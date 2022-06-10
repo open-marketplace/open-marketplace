@@ -5,5 +5,5 @@ imports:
     - suites/ui/admin/product_listing.yml
     - suites/ui/admin/managing_vendors.yml
     - suites/ui/admin/verifying_vendors.yml
-    - suites/ui/admin/blocking_vendors.yml
+    - suites/ui/admin/disabling_vendors.yml
     - suites/ui/admin/editing_vendors.yml

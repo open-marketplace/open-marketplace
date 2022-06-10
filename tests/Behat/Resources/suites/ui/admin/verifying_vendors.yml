@@ -4,5 +4,7 @@ default:
             contexts:
                 - bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_verification
                 - Behat\MinkExtension\Context\MinkContext
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.hook.doctrine_orm
             filters:
                 tags: "@verifying_vendors && @ui"

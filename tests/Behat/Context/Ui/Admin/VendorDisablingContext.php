@@ -10,8 +10,9 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use function PHPUnit\Framework\assertNull;
 
-final class VendorBlockingContext extends RawMinkContext implements Context
+final class VendorDisablingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
 
@@ -22,15 +23,16 @@ final class VendorBlockingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given There is a :ifBlocked vendor
+     * @Given There is a :ifEnabled vendor
      */
-    public function thereIsAVendor($ifBlocked)
+    public function thereIsAVendor($ifEnabled)
     {
+        $flag = $ifEnabled == 'enabled' ? true : false;
         $vendor = new Vendor();
         $vendor->setCompanyName('vendor');
         $vendor->setTaxIdentifier('vendorTax');
         $vendor->setPhoneNumber('vendorPhone');
-        $vendor->setBlocked($ifBlocked);
+        $vendor->setEnabled($flag);
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
@@ -54,8 +56,18 @@ final class VendorBlockingContext extends RawMinkContext implements Context
             throw new Exception($element . " could not be found");
         } else {
             $findName->click();
-            sleep(10);
         }
+    }
+
+    /**
+     * @Then I should not see :ifEnabled button
+     */
+    public function iShouldNotSeeButton($ifEnabled)
+    {
+        $element = '#'.strtolower($ifEnabled);
+        $page = $this->getSession()->getPage();
+        $findName = $page->find("css", $element);
+        assertNull($findName);
     }
 
     /**

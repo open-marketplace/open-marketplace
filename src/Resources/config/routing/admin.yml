@@ -4,7 +4,7 @@ bitbag_multi_vendor_marketplace_vendor:
     resource: 'admin/vendor.yml'
 bitbag_multi_vendor_marketplace_vendor_verify:
     resource: "admin/vendor_verify.yml"
-bitbag_multi_vendor_marketplace_vendor_block:
-    resource: "admin/vendor_block.yml"
-bitbag_multi_vendor_marketplace_vendor_unblock:
-    resource: "admin/vendor_unblock.yml"
+bitbag_multi_vendor_marketplace_vendor_disable:
+    resource: "admin/vendor_disable.yml"
+bitbag_multi_vendor_marketplace_vendor_enable:
+    resource: "admin/vendor_enable.yml"
