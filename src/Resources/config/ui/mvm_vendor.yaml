@@ -33,19 +33,13 @@ sylius_ui:
                 content:
                     template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_details.html.twig'
                     priority: 10
-
-        bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.vendor_address:
-            blocks:
-                content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_vendorAddress.html.twig'
-                    priority: 10
         bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.second_column:
             blocks:
                 content:
                     template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_secondColumn.html.twig'
                     priority: 10
-        bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.account_credentials:
+        bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.form.vendor_address:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_accountCredentials.html.twig'
+                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_vendorAddress.html.twig'
                     priority: 10
