@@ -12,27 +12,26 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Helper\CreateProductFromDraftHelperInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Product\Factory\ProductFactoryInterface;
-use Sylius\Component\Product\Model\ProductInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class ProductDraftCallbacks
 {
     private EntityManagerInterface $entityManager;
 
-    private ProductFactoryInterface $productFactory;
+    private CreateProductFromDraftHelperInterface $createProductFromDraftHelper;
 
-    private ProductRepositoryInterface $productRepository;
+    private FlashBagInterface $session;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        ProductFactoryInterface $productFactory,
-        ProductRepositoryInterface $productRepository
+        CreateProductFromDraftHelperInterface $createProductFromDraftHelper,
+        FlashBagInterface $session
     ) {
         $this->entityManager = $entityManager;
-        $this->productFactory = $productFactory;
-        $this->productRepository = $productRepository;
+        $this->createProductFromDraftHelper = $createProductFromDraftHelper;
+        $this->session = $session;
     }
 
     public function sendToVerify(ProductDraftInterface $productDraft): void
@@ -47,10 +46,12 @@ final class ProductDraftCallbacks
         $productDraft->setVerifiedAt((new \DateTime()));
 
         if (!$productDraft->getProductListing()->getProduct()) {
-            $this->createProduct($productDraft);
+            $this->createProductFromDraftHelper->createSimpleProduct($productDraft);
+            $this->session->add('success', "bitbag_sylius_multi_vendor_marketplace_plugin.ui.product_listing_verified");
         }
 
-        $this->editProduct($productDraft);
+        // TODO: develop edit product functionality
+        // $this->editProduct($productDraft);
     }
 
     public function reject(ProductDraftInterface $productDraft): void
@@ -58,36 +59,7 @@ final class ProductDraftCallbacks
         $productDraft->setStatus(ProductDraftInterface::STATUS_REJECTED);
         $productDraft->setVerifiedAt((new \DateTime()));
         $this->entityManager->flush();
-    }
 
-    private function createProduct(ProductDraftInterface $productDraft): void
-    {
-        /** @var ProductInterface $product */
-        $product = $this->productFactory->createNew();
-        $product = $this->setProductFields($product, $productDraft);
-
-        $productDraft->getProductListing()->setProduct($product);
-        $this->productRepository->add($product);
-    }
-
-    private function editProduct(ProductDraftInterface $productDraft): void
-    {
-        $this->setProductFields($productDraft->getProductListing()->getProduct(), $productDraft);
-        $this->entityManager->flush();
-    }
-
-    private function setProductFields(ProductInterface $product, ProductDraftInterface $productDraft): ProductInterface
-    {
-        $now = new \DateTime();
-
-        $product->setCode($productDraft->getCode());
-        $product->setEnabled(true);
-        $product->setUpdatedAt($now);
-
-        if (!$product->getCreatedAt()) {
-            $product->setCreatedAt($now);
-        }
-
-        return $product;
+        $this->session->add('warning', "bitbag_sylius_multi_vendor_marketplace_plugin.ui.product_listing_rejected");
     }
 }

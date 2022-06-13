@@ -6,8 +6,8 @@
         <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft" public="true"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductDraftCallbacks">
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
-            <argument key="$productFactory" type="service" id="sylius.custom_factory.product" />
-            <argument key="$productRepository" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.repository.product" />
+            <argument key="$createProductFromDraftHelper" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.helper.create_product_from_draft_helper" />
+            <argument key="$session" type="service" id="session.flash_bag" />
         </service>
 
         <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft.transition" public="true"
