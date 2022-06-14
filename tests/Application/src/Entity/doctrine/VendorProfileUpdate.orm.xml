@@ -4,23 +4,23 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" table="bitbag_vendor">
+    <entity name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate"
+            table="bitbag_vendor_profile_update">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="companyName" column="company_name" type="text" />
         <field name="taxIdentifier" column="tax_identifier" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
-        
-        <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" >
-            <join-column name="vendor_address_id" referenced-column-name="id" on-delete="SET NULL" />
+        <field name="token" column="token" type="text" />
+        <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate" >
             <cascade>
                 <cascade-all/>
             </cascade>
-        </one-to-one>      
-        
-        <one-to-one field="customer" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer" inversed-by="vendor">
-            <join-column name="customer_id" referenced-column-name="id" />
         </one-to-one>
-    </mapped-superclass>
+        <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor">
+            <join-column name="vendor_id" referenced-column-name="id" on-delete="CASCADE"/>
+        </one-to-one>
+
+    </entity>
 </doctrine-mapping>
