@@ -19,9 +19,9 @@ interface ProductListingPriceInterface extends ResourceInterface
 
     public function setId(int $id): void;
 
-    public function getProductDraft(): ProductDraft;
+    public function getProductDraft(): ProductDraftInterface;
 
-    public function setProductDraft(ProductDraft $productDraft): void;
+    public function setProductDraft(ProductDraftInterface $productDraft): void;
 
     public function getPrice(): ?int;
 

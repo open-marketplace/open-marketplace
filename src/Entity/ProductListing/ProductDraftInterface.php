@@ -48,21 +48,23 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function setVersionNumber(int $versionNumber): void;
 
+    /** @return Collection<int|string, ProductTranslationInterface> */
     public function getTranslations(): Collection;
 
-    public function addTranslations(ProductTranslation $translation): void;
+    public function addTranslations(ProductTranslationInterface $translation): void;
 
-    public function addTranslationsWithKey(ProductTranslation $translation, string $key): void;
+    public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void;
 
+    /** @return Collection<int|string, ProductListingPriceInterface> */
     public function getProductListingPrice(): Collection;
 
     public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void;
 
     public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void;
 
-    public function getProductListing(): ProductListing;
+    public function getProductListing(): ProductListingInterface;
 
-    public function setProductListing(ProductListing $productListing): void;
+    public function setProductListing(ProductListingInterface $productListing): void;
 
     public function getStatus(): ?string;
 

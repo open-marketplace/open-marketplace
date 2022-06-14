@@ -10,5 +10,9 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactory" public="true"
                  id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_translation_factory">
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantFactory" public="true"
+                 id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_variant_factory">
+        </service>
     </services>
 </container>

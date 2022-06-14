@@ -19,4 +19,13 @@ interface ProductDraftRepositoryInterface
     public function save(ProductDraftInterface $productDraft): void;
 
     public function findProductListingLatestProductDraft(ProductListingInterface $productListing): ?ProductDraftInterface;
+
+    /**
+     * @return mixed
+     */
+    public function find(
+        int $id,
+        ?int $lockMode = null,
+        ?int $lockVersion = null
+    );
 }

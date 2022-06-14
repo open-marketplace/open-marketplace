@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductTranslationType extends AbstractType
 {
-    protected $dataClass = ProductTranslation::class;
+    protected string $dataClass = ProductTranslation::class;
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

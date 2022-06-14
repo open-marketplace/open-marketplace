@@ -32,11 +32,13 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
 
     protected int $versionNumber;
 
+    /** @var Collection<int|string, ProductTranslationInterface> */
     protected Collection $translations;
 
+    /** @var Collection<int|string, ProductListingPriceInterface> */
     protected Collection $productListingPrice;
 
-    protected ProductListing $productListing;
+    protected ProductListingInterface $productListing;
 
     public function __construct()
     {
@@ -120,7 +122,7 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
         return $this->translations;
     }
 
-    public function addTranslations(ProductTranslation $translation): void
+    public function addTranslations(ProductTranslationInterface $translation): void
     {
         $this->translations->add($translation);
     }
@@ -135,12 +137,12 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
         $this->productListingPrice->add($productListingPrice);
     }
 
-    public function getProductListing(): ProductListing
+    public function getProductListing(): ProductListingInterface
     {
         return $this->productListing;
     }
 
-    public function setProductListing(ProductListing $productListing): void
+    public function setProductListing(ProductListingInterface $productListing): void
     {
         $this->productListing = $productListing;
     }
@@ -169,7 +171,7 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
         $this->translations = new ArrayCollection();
     }
 
-    public function addTranslationsWithKey(ProductTranslation $translation, string $key): void
+    public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void
     {
         $this->translations->set($key, $translation);
     }
@@ -183,8 +185,7 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
         array $calls,
         ObjectProphecy $object,
         MethodProphecy $method
-    )
-    {
+    ) {
         // TODO: Implement check() method.
     }
 }

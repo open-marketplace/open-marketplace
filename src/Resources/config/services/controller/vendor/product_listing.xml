@@ -20,7 +20,6 @@
             <argument key="$requestConfigurationFactory" type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument key="$newResourceFactory" type="service" id="sylius.resource_controller.new_resource_factory" />
             <argument key="$factory" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.factory.product_draft" />
-            <argument key="$chanelRepository" type="service" id="sylius.repository.channel"/>
             <argument key="$createProductListingCommand" type="service" id="bitbag.command.product_listing.create"/>
             <argument key="$redirectHandler" type="service" id="sylius.resource_controller.redirect_handler"/>
             <argument key="$flashHelper" type="service" id="sylius.resource_controller.flash_helper"/>

@@ -11,8 +11,9 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactoryI
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelPricing;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTranslationInterface as BaseProductTranslationInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 
 final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelperInterface
 {
@@ -42,9 +43,13 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
 
     public function updateProduct(ProductDraftInterface $productDraft): void
     {
-        $this->updateSimpleProductProperties($productDraft->getProductListing()->getProduct(), $productDraft);
+        $product = $productDraft->getProductListing()->getProduct();
 
-        $this->entityManager->flush();
+        if ($product instanceof ProductInterface) {
+            $this->updateSimpleProductProperties($product, $productDraft);
+
+            $this->entityManager->flush();
+        }
     }
 
     private function updateSimpleProductProperties(ProductInterface $product, ProductDraftInterface $productDraft): void
@@ -53,10 +58,10 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
 
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
-            /** @var \Sylius\Component\Core\Model\ProductTranslationInterface $productTranslation */
+            /** @var BaseProductTranslationInterface $productTranslation */
             $productTranslation = $this->productTranslationRepository->findOneBy(['translatable' => $product, 'locale' => $translation->getLocale()]);
 
-            if (null !== $productTranslation) {
+            if (null != $productTranslation) {
                 $productTranslation->setName($translation->getName());
                 $productTranslation->setDescription($translation->getDescription());
                 $productTranslation->setSlug($translation->getSlug());
@@ -84,7 +89,6 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
 
         /** @var ProductListingPriceInterface $productListingPrice */
         foreach ($productDraft->getProductListingPrice() as $productListingPrice) {
-
             /** @var ChannelPricing $channelPricing */
             $channelPricing = $this->channelPricingRepository->findOneBy(['productVariant' => $productVariant, 'channelCode' => $productListingPrice->getChannelCode()]);
 

@@ -15,11 +15,11 @@ final class ProductTranslationFactory implements ProductTranslationFactoryInterf
     }
 
     public function create(
-        TranslatableInterface $translatable,
-        string $name,
-        string $description,
-        string $slug,
-        string $locale,
+        ?TranslatableInterface $translatable,
+        ?string $name,
+        ?string $description,
+        ?string $slug,
+        ?string $locale,
         ?string $shortDescription,
         ?string $metaDescription,
         ?string $metaKeywords

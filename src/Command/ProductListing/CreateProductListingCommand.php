@@ -11,14 +11,17 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class CreateProductListingCommand implements CreateProductListingCommandInterface
 {
@@ -58,7 +61,17 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     {
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingFactoryInterface->createNew();
-        $vendor = $this->tokenStorage->getToken()->getUser()->getCustomer()->getVendor();
+        /** @var TokenInterface $token */
+        $token = $this->tokenStorage->getToken();
+        /** @var ShopUserInterface $user */
+        $user = $token->getUser();
+        /** @var CustomerInterface $customer */
+        $customer = $user->getCustomer();
+        $vendor = $customer->getVendor();
+
+        if (!$vendor) {
+            throw new \Exception('Vendor not found.');
+        }
 
         $productDraft = $this->formatTranslation($productDraft);
 
@@ -113,6 +126,11 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     {
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
+            $locale = $translation->getLocale();
+            if (null === $locale) {
+                throw new \Exception('Cannot find translation locale.');
+            }
+
             /** @var ProductTranslationInterface $newTranslation */
             $newTranslation = $this->translationFactory->createNew();
             $newTranslation->setName($translation->getName());
@@ -123,7 +141,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
             $newTranslation->setMetaKeywords($translation->getMetaKeywords());
             $newTranslation->setSlug($translation->getSlug());
             $newTranslation->setShortDescription($translation->getShortDescription());
-            $newProductDrat->addTranslationsWithKey($newTranslation, $newTranslation->getLocale());
+            $newProductDrat->addTranslationsWithKey($newTranslation, $locale);
         }
     }
 

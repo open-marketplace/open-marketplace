@@ -28,6 +28,7 @@ class Vendor implements VendorInterface
 
     private ?VendorAddressInterface $vendorAddress;
 
+    /** @var Collection<int, ProductListing> */
     private Collection $productListings;
 
     public function getId(): ?int

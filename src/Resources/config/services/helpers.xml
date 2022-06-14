@@ -9,7 +9,7 @@
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
             <argument key="$channelPricingFactory" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.channel_pricing_factory" />
             <argument key="$productTranslationFactory" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_translation_factory" />
-            <argument key="$productVariantFactory" type="service" id="sylius.custom_factory.product_variant" />
+            <argument key="$productVariantFactory" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_variant_factory" />
             <argument key="$channelRepository" type="service" id="sylius.repository.channel" />
         </service>
 

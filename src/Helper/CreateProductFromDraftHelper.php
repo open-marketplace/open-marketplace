@@ -9,11 +9,12 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ChannelPricingFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\Channel;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
-use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 
 final class CreateProductFromDraftHelper implements CreateProductFromDraftHelperInterface
 {
@@ -82,7 +83,8 @@ final class CreateProductFromDraftHelper implements CreateProductFromDraftHelper
             $product->addTranslation($productTranslation);
         }
 
-        $productVariant = $this->productVariantFactory->createForProduct($product);
+        $productVariant = $this->productVariantFactory->createNew();
+        $productVariant->setProduct($product);
         $productVariant->setCode($product->getCode());
         $productVariant->setEnabled(true);
         $productVariant->setPosition(0);
@@ -108,6 +110,7 @@ final class CreateProductFromDraftHelper implements CreateProductFromDraftHelper
         }
 
         foreach ($channelPricingCodes as $channelPricingCode) {
+            /** @var Channel $channel */
             $channel = $this->channelRepository->findOneBy(['code' => $channelPricingCode]);
             if (null !== $channel) {
                 $product->addChannel($channel);

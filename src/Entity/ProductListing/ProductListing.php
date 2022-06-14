@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Prophecy\Prophecy\MethodProphecy;
@@ -24,7 +24,7 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
 
     protected ?string $code;
 
-    protected Vendor $vendor;
+    protected VendorInterface $vendor;
 
     protected \DateTimeInterface $createAt;
 
@@ -34,6 +34,7 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
 
     protected ?ProductInterface $product;
 
+    /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
 
     public function __construct()
@@ -47,11 +48,6 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
         return $this->id;
     }
 
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-    }
-
     public function getCode(): ?string
     {
         return $this->code;
@@ -62,12 +58,12 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
         $this->code = $code;
     }
 
-    public function getVendor(): Vendor
+    public function getVendor(): VendorInterface
     {
         return $this->vendor;
     }
 
-    public function setVendor(Vendor $vendor): void
+    public function setVendor(VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
     }
@@ -126,8 +122,7 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
         array $calls,
         ObjectProphecy $object,
         MethodProphecy $method
-    )
-    {
+    ) {
         // TODO: Implement check() method.
     }
 }

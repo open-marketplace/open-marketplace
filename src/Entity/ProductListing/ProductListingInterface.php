@@ -11,13 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProductListingInterface extends ResourceInterface
 {
+    public function getId(): int;
+
     public function getCreateAt(): ?\DateTimeInterface;
 
     public function setCreateAt(\DatetimeInterface $createAt): void;
@@ -40,9 +42,10 @@ interface ProductListingInterface extends ResourceInterface
 
     public function addProductDrafts(ProductDraftInterface $productDrafts): void;
 
+    /** @return Collection<int, ProductDraftInterface> */
     public function getProductDrafts(): Collection;
 
-    public function getVendor(): Vendor;
+    public function getVendor(): VendorInterface;
 
-    public function setVendor(Vendor $vendor): void;
+    public function setVendor(VendorInterface $vendor): void;
 }

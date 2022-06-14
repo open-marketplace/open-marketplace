@@ -21,9 +21,9 @@ use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -38,8 +38,6 @@ class CreateProductAction extends AbstractController
 
     private FactoryInterface $factory;
 
-    private RepositoryInterface $chanelRepository;
-
     private CreateProductListingCommandInterface $createProductListingCommand;
 
     private RedirectHandlerInterface $redirectHandler;
@@ -53,7 +51,6 @@ class CreateProductAction extends AbstractController
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         NewResourceFactoryInterface $newResourceFactory,
         FactoryInterface $factory,
-        RepositoryInterface $chanelRepository,
         CreateProductListingCommandInterface $createProductListingCommand,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
@@ -63,7 +60,6 @@ class CreateProductAction extends AbstractController
         $this->newResourceFactory = $newResourceFactory;
         $this->factory = $factory;
         $this->metadata = $metadata;
-        $this->chanelRepository = $chanelRepository;
         $this->createProductListingCommand = $createProductListingCommand;
         $this->redirectHandler = $redirectHandler;
         $this->flashHelper = $flashHelper;
@@ -99,7 +95,9 @@ class CreateProductAction extends AbstractController
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
             }
 
-            $this->createProductListingCommand->create($productDraft, $form->get('saveAndAdd')->isClicked());
+            /** @var ClickableInterface $button */
+            $button = $form->get('saveAndAdd');
+            $this->createProductListingCommand->create($productDraft, $button->isClicked());
 
             return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index');
         }

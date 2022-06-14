@@ -55,7 +55,7 @@ final class ProductDraftCallbacks
         }
 
         $this->updateProductFromDraftHelper->updateProduct($productDraft);
-        $this->session->add('success', "bitbag_sylius_multi_vendor_marketplace_plugin.ui.product_listing_verified");
+        $this->session->add('success', 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.product_listing_verified');
     }
 
     public function reject(ProductDraftInterface $productDraft): void
@@ -64,6 +64,6 @@ final class ProductDraftCallbacks
         $productDraft->setVerifiedAt((new \DateTime()));
         $this->entityManager->flush();
 
-        $this->session->add('warning', "bitbag_sylius_multi_vendor_marketplace_plugin.ui.product_listing_rejected");
+        $this->session->add('warning', 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.product_listing_rejected');
     }
 }

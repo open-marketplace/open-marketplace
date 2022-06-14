@@ -18,6 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductD
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,7 +62,9 @@ class EditProductAction extends AbstractController
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
 
-            $this->createProductListingCommand->saveEdit($productDraft, $form->get('saveAndAdd')->isClicked());
+            /** @var ClickableInterface $button */
+            $button = $form->get('saveAndAdd');
+            $this->createProductListingCommand->saveEdit($productDraft, $button->isClicked());
 
             return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index');
         }

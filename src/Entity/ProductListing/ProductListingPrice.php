@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
+class ProductListingPrice implements ProductListingPriceInterface
 {
     protected int $id;
 
-    protected ProductDraft $productDraft;
+    protected ProductDraftInterface $productDraft;
 
     protected ?int $price;
 
@@ -40,12 +40,12 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
         $this->id = $id;
     }
 
-    public function getProductDraft(): ProductDraft
+    public function getProductDraft(): ProductDraftInterface
     {
         return $this->productDraft;
     }
 
-    public function setProductDraft(ProductDraft $productDraft): void
+    public function setProductDraft(ProductDraftInterface $productDraft): void
     {
         $this->productDraft = $productDraft;
     }
@@ -88,25 +88,5 @@ class ProductListingPrice implements ProductListingPriceInterface, \ArrayAccess
     public function setChannelCode(string $channelCode): void
     {
         $this->channelCode = $channelCode;
-    }
-
-    public function offsetExists($offset)
-    {
-        // TODO: Implement offsetExists() method.
-    }
-
-    public function offsetGet($offset)
-    {
-        // TODO: Implement offsetGet() method.
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        // TODO: Implement offsetSet() method.
-    }
-
-    public function offsetUnset($offset)
-    {
-        // TODO: Implement offsetUnset() method.
     }
 }
