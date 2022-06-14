@@ -83,7 +83,6 @@ WORKDIR /var/www/tests/Application
 
 COPY tests/Application/package.json tests/Application/webpack.config.js tests/Application/yarn.lock tests/Application/.babelrc ./
 COPY tests/Application/assets ./assets
-COPY tests/Application/gulpfile.babel.js ./
 COPY --from=root_php /var/www/tests/Application/public/bundles ./public/bundles
 COPY --from=root_php /var/www/tests/Application/vendor ./vendor
 
