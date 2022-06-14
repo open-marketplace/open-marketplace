@@ -73,7 +73,7 @@ RUN set -eux; \
 WORKDIR /var/www
 
 COPY --from=root_php /var/www/vendor ./vendor
-COPY package.json webpack.config.js yarn.lock ./
+COPY package.json webpack.config.js ./
 COPY src/Resources/public ./src/Resources/public
 COPY src/Resources/assets ./src/Resources/assets
 
