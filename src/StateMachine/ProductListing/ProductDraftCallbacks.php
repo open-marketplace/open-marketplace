@@ -13,6 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Helper\CreateProductFromDraftHelperInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Helper\UpdateProductFromDraftHelperInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
@@ -24,14 +25,18 @@ final class ProductDraftCallbacks
 
     private FlashBagInterface $session;
 
+    private UpdateProductFromDraftHelperInterface $updateProductFromDraftHelper;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         CreateProductFromDraftHelperInterface $createProductFromDraftHelper,
-        FlashBagInterface $session
+        FlashBagInterface $session,
+        UpdateProductFromDraftHelperInterface $updateProductFromDraftHelper
     ) {
         $this->entityManager = $entityManager;
         $this->createProductFromDraftHelper = $createProductFromDraftHelper;
         $this->session = $session;
+        $this->updateProductFromDraftHelper = $updateProductFromDraftHelper;
     }
 
     public function sendToVerify(ProductDraftInterface $productDraft): void
@@ -47,11 +52,10 @@ final class ProductDraftCallbacks
 
         if (!$productDraft->getProductListing()->getProduct()) {
             $this->createProductFromDraftHelper->createSimpleProduct($productDraft);
-            $this->session->add('success', "bitbag_sylius_multi_vendor_marketplace_plugin.ui.product_listing_verified");
         }
 
-        // TODO: develop edit product functionality
-        // $this->editProduct($productDraft);
+        $this->updateProductFromDraftHelper->updateProduct($productDraft);
+        $this->session->add('success', "bitbag_sylius_multi_vendor_marketplace_plugin.ui.product_listing_verified");
     }
 
     public function reject(ProductDraftInterface $productDraft): void

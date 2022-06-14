@@ -63,10 +63,7 @@ final class CreateProductFromDraftHelper implements CreateProductFromDraftHelper
         $product->setCode($productDraft->getCode());
         $product->setEnabled(true);
         $product->setUpdatedAt($now);
-
-        if (!$product->getCreatedAt()) {
-            $product->setCreatedAt($now);
-        }
+        $product->setCreatedAt($now);
 
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
