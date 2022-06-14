@@ -3,7 +3,7 @@ ARG NODE_VERSION=12.13
 ARG NGINX_VERSION=1.16
 
 ########################## PHP ##########################
-FROM bitbag/sylius-php:${PHP_VERSION}-alpine AS sylius_php
+FROM bitbag/sylius-php:${PHP_VERSION}-alpine AS root_php
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
