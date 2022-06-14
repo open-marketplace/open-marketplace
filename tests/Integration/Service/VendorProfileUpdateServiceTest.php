@@ -34,7 +34,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $this->vendorProfileUpdateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
     }
 
-    public function test_phpUnitLoadsFixtures()
+    public function test_phpUnitLoadsFixtures(): void
     {
         $this->loadFixturesFromFile('test_it_doesnt_update_any_vendor_data_immediately.yml');
         $manager = $this->getEntityManager();
@@ -42,7 +42,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         self::assertEquals('Test company name', $vendor->getCompanyName());
     }
 
-    public function test_it_doesnt_update_any_vendor_data_immediately()
+    public function test_it_doesnt_update_any_vendor_data_immediately(): void
     {
         $this->loadFixturesFromFile('test_it_doesnt_update_any_vendor_data_immediately.yml');
         $manager = $this->getEntityManager();
@@ -66,7 +66,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         return $vendorData;
     }
 
-    public function test_it_creates_pending_data_row_from_data()
+    public function test_it_creates_pending_data_row_from_data(): void
     {
         $this->loadFixturesFromFile('test_it_doesnt_update_any_vendor_data_immediately.yml');
         $manager = $this->getEntityManager();
@@ -78,7 +78,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $this->assertEquals($vendorFormData->getCompanyName(), $pendingData->getCompanyName());
     }
 
-    public function test_vendor_data_are_updated_and_removed_correctly()
+    public function test_vendor_data_are_updated_and_removed_correctly(): void
     {
         $this->loadFixturesFromFile('test_vendor_data_are_updated_and_removed_correctly.yml');
         $manager = $this->getEntityManager();

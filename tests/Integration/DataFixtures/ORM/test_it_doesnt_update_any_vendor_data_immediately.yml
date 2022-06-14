@@ -1,5 +1,5 @@
 Sylius\Component\Addressing\Model\Country:
-    polska:
+    poland:
         code: 'PL'
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer:
     customer_oliver:
@@ -17,10 +17,10 @@ Sylius\Component\Core\Model\ShopUser:
         usernameCanonical: "oliver@queen.com"
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
     vendor_address:
-        country: '@polska'
-        city: 'Warszawa'
+        country: '@poland'
+        city: 'Warsaw'
         postalCode: '00-999'
-        street: 'Wiejska 2115'
+        street: 'Avenue 2115'
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
     vendor_oliver:
         customer: '@customer_oliver'
