@@ -91,7 +91,6 @@ RUN set -eux; \
 
 RUN ln -sf /var/www/tests/Application/node_modules /var/www
 
-RUN yarn run gulp
 RUN yarn encore production
 
 COPY .docker/nodejs/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
