@@ -5,6 +5,6 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate" table="bitbag_vendor_address_update">
-
     </entity>
+
 </doctrine-mapping>

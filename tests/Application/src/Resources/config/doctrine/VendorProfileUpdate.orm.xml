@@ -6,4 +6,5 @@
 
     <entity name="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate" table="bitbag_vendor_profile_update">
     </entity>
+
 </doctrine-mapping>
