@@ -14,6 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ConversationRepository extends EntityRepository implements ConversationRepositoryInterface
@@ -30,16 +31,16 @@ final class ConversationRepository extends EntityRepository implements Conversat
         return $query->getQuery()->getResult();
     }
 
-    private function determineUserForQuery(QueryBuilder $query, UserInterface $user): void
+    private function determineUserForQuery(QueryBuilder $query, ?UserInterface $user): void
     {
         $expr = $query->expr();
 
-        if ($user instanceof VendorInterface) {
+        if ($user instanceof VendorInterface ) {
             $query->andWhere($expr->eq('c.vendorUser', $user->getId()));
 
             return;
         }
-
-        $query->andWhere($expr->eq('c.shopUser', $user->getId()));
+        if($user instanceof ShopUserInterface)
+            $query->andWhere($expr->eq('c.shopUser', $user->getId()));
     }
 }
