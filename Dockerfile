@@ -80,7 +80,7 @@ WORKDIR /var/www/tests/Application
 
 # prevent the reinstallation of vendors at every changes in the source code
 
-COPY tests/Application/package.json tests/Application/webpack.config.js tests/Application/yarn.lock tests/Application/.babelrc ./
+COPY tests/Application/package.json tests/Application/webpack.config.js tests/Application/.babelrc ./
 COPY tests/Application/assets ./assets
 COPY --from=root_php /var/www/tests/Application/public/bundles ./public/bundles
 COPY --from=root_php /var/www/tests/Application/vendor ./vendor
