@@ -28,6 +28,7 @@
         <field name="code" column="code" type="string" unique="false" nullable="false" />
         <field name="isVerified" column="is_verified" type="boolean" unique="false" nullable="false" />
         <field name="verifiedAt" column="verified_at" type="datetime" unique="false" nullable="true"/>
+        <field name="publishedAt" column="published_at" type="datetime" unique="false" nullable="true"/>
         <field name="createdAt" column="created_at" type="datetime" unique="false" nullable="false"/>
         <field name="status" column="status" type="string" unique="false" nullable="false" />
         <field name="versionNumber" column="version_number" type="integer" unique="false" nullable="false" />

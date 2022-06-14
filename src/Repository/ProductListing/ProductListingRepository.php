@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ProductListingRepository extends EntityRepository implements ProductListingRepositoryInterface
@@ -20,5 +21,10 @@ class ProductListingRepository extends EntityRepository implements ProductListin
     {
         $this->_em->persist($productListing);
         $this->_em->flush();
+    }
+
+    public function createByProductDraftQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('pl');
     }
 }

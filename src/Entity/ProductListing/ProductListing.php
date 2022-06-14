@@ -26,11 +26,7 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
 
     protected VendorInterface $vendor;
 
-    protected \DateTimeInterface $createAt;
-
-    protected ?\DateTimeInterface $verifiedAt;
-
-    protected ?int $versionNumber;
+    protected \DateTimeInterface $createdAt;
 
     protected ?ProductInterface $product;
 
@@ -40,7 +36,7 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
     public function __construct()
     {
         $this->productDrafts = new ArrayCollection();
-        $this->createAt = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): int
@@ -68,34 +64,14 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
         $this->vendor = $vendor;
     }
 
-    public function getCreateAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
-    public function setCreateAt(\DateTimeInterface $createAt): void
+    public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
-        $this->createAt = $createAt;
-    }
-
-    public function getVerifiedAt(): ?\DateTimeInterface
-    {
-        return $this->verifiedAt;
-    }
-
-    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void
-    {
-        $this->verifiedAt = $verifiedAt;
-    }
-
-    public function getVersionNumber(): ?int
-    {
-        return $this->versionNumber;
-    }
-
-    public function setVersionNumber(?int $versionNumber): void
-    {
-        $this->versionNumber = $versionNumber;
+        $this->createdAt = $createdAt;
     }
 
     public function getProduct(): ?ProductInterface
@@ -116,6 +92,19 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
     public function addProductDrafts(ProductDraftInterface $productDrafts): void
     {
         $this->productDrafts->add($productDrafts);
+    }
+
+    /**
+     * @return false|mixed|ProductDraftInterface|null
+     */
+    public function getLatestDraft()
+    {
+        $productDraft = null;
+        if (!$this->productDrafts->isEmpty()) {
+            $productDraft = $this->productDrafts->last();
+        }
+
+        return $productDraft;
     }
 
     public function check(

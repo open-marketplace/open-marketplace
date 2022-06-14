@@ -20,17 +20,9 @@ interface ProductListingInterface extends ResourceInterface
 {
     public function getId(): int;
 
-    public function getCreateAt(): ?\DateTimeInterface;
+    public function getCreatedAt(): ?\DateTimeInterface;
 
-    public function setCreateAt(\DatetimeInterface $createAt): void;
-
-    public function getVerifiedAt(): ?\DateTimeInterface;
-
-    public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void;
-
-    public function getVersionNumber(): ?int;
-
-    public function setVersionNumber(?int $versionNumber): void;
+    public function setCreatedAt(\DatetimeInterface $createdAt): void;
 
     public function getProduct(): ?ProductInterface;
 

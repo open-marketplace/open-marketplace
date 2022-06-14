@@ -49,6 +49,7 @@ final class ProductDraftCallbacks
     {
         $productDraft->setStatus(ProductDraftInterface::STATUS_VERIFIED);
         $productDraft->setVerifiedAt((new \DateTime()));
+        $productDraft->setIsVerified(true);
 
         if (!$productDraft->getProductListing()->getProduct()) {
             $this->createProductFromDraftHelper->createSimpleProduct($productDraft);

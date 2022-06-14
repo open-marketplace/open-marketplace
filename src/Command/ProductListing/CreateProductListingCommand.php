@@ -77,6 +77,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         if ($isSend) {
             $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+            $productDraft->setPublishedAt(new \DateTime());
         }
 
         $productListing->setCode($productDraft->getCode());
@@ -166,6 +167,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         if ($isSend) {
             $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+            $productDraft->setPublishedAt(new \DateTime());
         }
 
         $this->draftRepository->save($productDraft);

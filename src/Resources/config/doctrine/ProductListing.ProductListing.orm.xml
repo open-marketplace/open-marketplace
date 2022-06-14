@@ -16,7 +16,7 @@
             </cascade>
         </one-to-many>
         <field name="code" column="code" type="string" unique="false" nullable="false" />
-        <field name="createAt" column="create_at" type="datetime" unique="false" nullable="true"/>
+        <field name="createdAt" column="created_at" type="datetime" unique="false" nullable="true"/>
         <many-to-one field="product" target-entity="Sylius\Component\Product\Model\ProductInterface">
             <join-column name="product_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>

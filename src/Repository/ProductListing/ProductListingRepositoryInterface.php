@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
+use Doctrine\ORM\QueryBuilder;
 
 interface ProductListingRepositoryInterface
 {
@@ -25,4 +26,6 @@ interface ProductListingRepositoryInterface
         ?int $lockMode = null,
         ?int $lockVersion = null
     );
+
+    public function createByProductDraftQueryBuilder(): QueryBuilder;
 }

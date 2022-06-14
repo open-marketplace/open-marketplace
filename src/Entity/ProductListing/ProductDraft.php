@@ -28,6 +28,8 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
 
     protected ?\DateTimeInterface $verifiedAt;
 
+    protected ?\DateTimeInterface $publishedAt;
+
     protected \DateTimeInterface $createdAt;
 
     protected int $versionNumber;
@@ -95,6 +97,16 @@ class ProductDraft implements ProductDraftInterface, \Prophecy\Prediction\Predic
     public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void
     {
         $this->verifiedAt = $verifiedAt;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?\DateTimeInterface $publishedAt): void
+    {
+        $this->publishedAt = $publishedAt;
     }
 
     public function getCreatedAt(): \DateTimeInterface

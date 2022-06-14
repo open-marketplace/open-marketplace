@@ -71,4 +71,8 @@ interface ProductDraftInterface extends ResourceInterface
     public function setStatus(string $status): void;
 
     public function newVersion(): void;
+
+    public function getPublishedAt(): ?\DateTimeInterface;
+
+    public function setPublishedAt(?\DateTimeInterface $publishedAt): void;
 }
