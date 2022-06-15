@@ -102,28 +102,28 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
     {
         $productListing = $productDraft->getProductListing();
 
-        /** @var ProductDraftInterface $newProductDrat */
-        $newProductDrat = $this->draftFactory->createNew();
+        /** @var ProductDraftInterface $newProductDraft */
+        $newProductDraft = $this->draftFactory->createNew();
 
-        $newProductDrat->setVersionNumber($productDraft->getVersionNumber());
-        $newProductDrat->newVersion();
-        $newProductDrat->setCode($productDraft->getCode());
-        $newProductDrat->setProductListing($productListing);
+        $newProductDraft->setVersionNumber($productDraft->getVersionNumber());
+        $newProductDraft->newVersion();
+        $newProductDraft->setCode($productDraft->getCode());
+        $newProductDraft->setProductListing($productListing);
 
         if ($isSend) {
-            $newProductDrat->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+            $newProductDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
         }
 
-        $this->cloneTranslation($newProductDrat, $productDraft);
+        $this->cloneTranslation($newProductDraft, $productDraft);
 
-        $this->clonePrice($newProductDrat, $productDraft);
+        $this->clonePrice($newProductDraft, $productDraft);
 
-        $newProductDrat->setProductListing($productDraft->getProductListing());
+        $newProductDraft->setProductListing($productDraft->getProductListing());
 
-        return $newProductDrat;
+        return $newProductDraft;
     }
 
-    private function cloneTranslation(ProductDraftInterface $newProductDrat, ProductDraftInterface $productDraft): void
+    private function cloneTranslation(ProductDraftInterface $newProductDraft, ProductDraftInterface $productDraft): void
     {
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
@@ -135,18 +135,18 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
             /** @var ProductTranslationInterface $newTranslation */
             $newTranslation = $this->translationFactory->createNew();
             $newTranslation->setName($translation->getName());
-            $newTranslation->setProductDraft($newProductDrat);
+            $newTranslation->setProductDraft($newProductDraft);
             $newTranslation->setDescription($translation->getDescription());
             $newTranslation->setLocale($translation->getLocale());
             $newTranslation->setMetaDescription($translation->getMetaDescription());
             $newTranslation->setMetaKeywords($translation->getMetaKeywords());
             $newTranslation->setSlug($translation->getSlug());
             $newTranslation->setShortDescription($translation->getShortDescription());
-            $newProductDrat->addTranslationsWithKey($newTranslation, $locale);
+            $newProductDraft->addTranslationsWithKey($newTranslation, $locale);
         }
     }
 
-    private function clonePrice(ProductDraftInterface $newProductDrat, ProductDraftInterface $productDraft): void
+    private function clonePrice(ProductDraftInterface $newProductDraft, ProductDraftInterface $productDraft): void
     {
         /** @var ProductListingPriceInterface $price */
         foreach ($productDraft->getProductListingPrice() as $price) {
@@ -156,8 +156,8 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
             $newPrice->setPrice($price->getPrice());
             $newPrice->setMinimumPrice($price->getMinimumPrice());
             $newPrice->setOriginalPrice($price->getOriginalPrice());
-            $newPrice->setProductDraft($newProductDrat);
-            $newProductDrat->addProductListingPriceWithKey($newPrice, $newPrice->getChannelCode());
+            $newPrice->setProductDraft($newProductDraft);
+            $newProductDraft->addProductListingPriceWithKey($newPrice, $newPrice->getChannelCode());
         }
     }
 

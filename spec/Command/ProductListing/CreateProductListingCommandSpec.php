@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
@@ -23,15 +22,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class CreateProductListingCommandSpec extends ObjectBehavior
@@ -44,8 +39,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         FactoryInterface                  $draftFactory,
         FactoryInterface                  $priceFactory,
         ProductDraftRepositoryInterface   $draftRepository
-    ): void
-    {
+    ): void {
         $this->beConstructedWith(
             $productListingRepository,
             $productListingFactoryInterface,
@@ -68,8 +62,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         ProductListingRepositoryInterface $productListingRepository,
         CustomerInterface                 $customer,
         VendorInterface                   $vendor
-    )
-    {
+    ) {
         $productListingFactoryInterface->createNew()
             ->willReturn($productListing);
 
@@ -100,7 +93,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productListing->addProductDrafts($productDraft)
             ->shouldBeCalled();
 
-        $productListing->setVendor($shopUser)
+        $productListing->setVendor($vendor)
             ->shouldBeCalled();
 
         $productDraft->setProductListing($productListing)
@@ -123,8 +116,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         ProductListingRepositoryInterface $productListingRepository,
         CustomerInterface                 $customer,
         VendorInterface                   $vendor
-    )
-    {
+    ) {
         $productListingFactoryInterface->createNew()
             ->willReturn($productListing);
 
@@ -149,6 +141,9 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION)
             ->shouldBeCalled();
 
+        $productDraft->setPublishedAt(Argument::type('DateTime'))
+            ->shouldBeCalled();
+
         $productListing->setCode('code')
             ->shouldBeCalled();
 
@@ -158,7 +153,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productListing->addProductDrafts($productDraft)
             ->shouldBeCalled();
 
-        $productListing->setVendor($shopUser)
+        $productListing->setVendor($vendor)
             ->shouldBeCalled();
 
         $productDraft->setProductListing($productListing)
@@ -174,8 +169,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         ProductDraftInterface           $productDraft,
         ProductTranslationInterface     $productTranslation,
         ProductDraftRepositoryInterface $productDraftRepository
-    )
-    {
+    ) {
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
@@ -193,8 +187,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         ProductDraftInterface           $productDraft,
         ProductTranslationInterface     $productTranslation,
         ProductDraftRepositoryInterface $productDraftRepository
-    )
-    {
+    ) {
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
@@ -202,6 +195,9 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->should(new ProductDraft());
 
         $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION)
+            ->shouldBeCalled();
+
+        $productDraft->setPublishedAt(Argument::type('DateTime'))
             ->shouldBeCalled();
 
         $productDraftRepository->save($productDraft)
@@ -216,125 +212,168 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         ProductDraftInterface        $newProductDraft,
         FactoryInterface             $draftFactory,
         FactoryInterface             $translationFactory,
-        ProductTranslationInterface  $productTranslation,
+        ProductTranslationInterface  $translation,
         ProductTranslationInterface  $newTranslation,
-        ProductListingPriceInterface $productListingPrice,
-        ProductListingPriceInterface $newProductListingPrice,
+        ProductListingPriceInterface $price,
+        ProductListingPriceInterface $newPrice,
         FactoryInterface             $priceFactory
-    )
-    {
-
-
+    ) {
+        // Clone product stubs
         $productDraft->getProductListing()
             ->willReturn($productListing);
 
         $draftFactory->createNew()
             ->willReturn($newProductDraft);
 
-        $productDraft->setVersionNumber(1)
-            ->shouldBeCalled();
-
         $productDraft->getVersionNumber()
             ->willReturn(1);
 
-        $productDraft->newVersion()
-            ->shouldBeCalled();
-
         $productDraft->getCode()
-            ->willReturn('test');
+            ->willReturn('code');
 
-        $productDraft->setCode('test')
-            ->shouldBeCalled();
 
+        // Clone translation stubs
         $productDraft->getTranslations()
-            ->willReturn(new ArrayCollection([$productTranslation]));
+            ->willReturn(new ArrayCollection([$translation->getWrappedObject()]));
 
         $translationFactory->createNew()
             ->willReturn($newTranslation);
 
-        $productTranslation->getName()
+        $translation->getName()
             ->willReturn('name');
+
+        $translation->getDescription()
+            ->willReturn('description');
+
+        $translation->getLocale()
+            ->willReturn('en_US');
+
+        $translation->getMetaDescription()
+            ->willReturn('meta description');
+
+        $translation->getMetaKeywords()
+            ->willReturn('meta keywords');
+
+        $translation->getSlug()
+            ->willReturn('slug');
+
+        $translation->getShortDescription()
+            ->willReturn('short description');
+
+
+        // Clone price stubs
+        $productDraft->getProductListingPrice()
+            ->willReturn(new ArrayCollection([$price->getWrappedObject()]));
+
+        $priceFactory->createNew()
+            ->willReturn($newPrice);
+
+        $price->getChannelCode()
+            ->willReturn('en_US');
+
+        $price->getPrice()
+            ->willReturn(10);
+
+        $price->getOriginalPrice()
+            ->willReturn(10);
+
+        $price->getMinimumPrice()
+            ->willReturn(10);
+
+        $newPrice->getChannelCode()
+            ->willReturn('en_US');
+
+
+        // Clone product mocks
+        $newProductDraft->setVersionNumber(1)
+            ->shouldBeCalled();
+
+        $newProductDraft->newVersion()
+            ->shouldBeCalled();
+
+        $newProductDraft->setCode('code')
+            ->shouldBeCalled();
+
+        $newProductDraft->setProductListing($productListing)
+            ->shouldBeCalled();
+
+
+        // Clone translation mocks
+        $translation->getName()
+            ->shouldBeCalled();
+
+        $translation->getDescription()
+            ->shouldBeCalled();
+
+        $translation->getLocale()
+            ->shouldBeCalled();
+
+        $translation->getMetaDescription()
+            ->shouldBeCalled();
+
+        $translation->getMetaKeywords()
+            ->shouldBeCalled();
+
+        $translation->getSlug()
+            ->shouldBeCalled();
+
+        $translation->getShortDescription()
+            ->shouldBeCalled();
 
         $newTranslation->setName('name')
             ->shouldBeCalled();
 
-        $newTranslation->setProductDraft($productDraft)
+        $newTranslation->setProductDraft($newProductDraft)
             ->shouldBeCalled();
-
-        $productTranslation->getDescription()
-            ->willReturn('description');
 
         $newTranslation->setDescription('description')
             ->shouldBeCalled();
 
-        $productTranslation->getLocale()
-            ->willReturn('locale');
-
-        $newTranslation->setLocale('locale')
+        $newTranslation->setLocale('en_US')
             ->shouldBeCalled();
 
-        $productTranslation->getMetaDescription()
-            ->willReturn('metadata');
-
-        $newTranslation->setMetaDescription('metadata')
+        $newTranslation->setMetaDescription('meta description')
             ->shouldBeCalled();
 
-        $productTranslation->getMetaKeywords()
-            ->willReturn('metaKeyword');
-
-        $newTranslation->setMetaKeywords('metaKeyword')
+        $newTranslation->setMetaKeywords('meta keywords')
             ->shouldBeCalled();
 
-        $newTranslation->setSlug($productTranslation->getSlug())
+        $newTranslation->setSlug('slug')
             ->shouldBeCalled();
 
-        $productTranslation->getShortDescription()
-            ->willReturn('shortDescription');
-
-        $newTranslation->setShortDescription('shortDescription')
+        $newTranslation->setShortDescription('short description')
             ->shouldBeCalled();
 
-        $newProductDraft->addTranslationsWithKey($newTranslation, $newTranslation->getLocale())
+        $newProductDraft->addTranslationsWithKey($newTranslation, 'en_US')
             ->shouldBeCalled();
 
-        $productDraft->getProductListingPrice()
-            ->willReturn(new ArrayCollection([$productListingPrice]));
 
-        $priceFactory->createNew();
-        $productListingPrice->getChannelCode()
-            ->willReturn('channelCode');
-
-        $newProductListingPrice->setChannelCode('channelCode')
+        // Clone price mocks
+        $price->getPrice()
             ->shouldBeCalled();
 
-        $productListingPrice->getPrice()
-            ->willReturn(1);
-
-        $newProductListingPrice->setPrice(1)
+        $price->getMinimumPrice()
             ->shouldBeCalled();
 
-        $productListingPrice->getMinimumPrice()
-            ->willReturn(2);
-
-        $newProductListingPrice->setMinimumPrice(2)
+        $price->getOriginalPrice()
             ->shouldBeCalled();
 
-        $productListingPrice->getOriginalPrice()
-            ->willReturn(3);
-
-        $newProductListingPrice->setOriginalPrice(3)
+        $newPrice->setChannelCode('en_US')
             ->shouldBeCalled();
 
-        $newProductListingPrice->setProductDraft($newProductDraft)
+        $newPrice->setPrice(10)
             ->shouldBeCalled();
 
-        $newProductDraft->addProductListingPriceWithKey($newProductListingPrice, $newProductListingPrice->getChannelCode())
+        $newPrice->setMinimumPrice(10)
             ->shouldBeCalled();
 
-        $productDraft->getProductListing()
-            ->willReturn(new ProductListing());
+        $newPrice->setOriginalPrice(10)
+            ->shouldBeCalled();
 
-        $newProductDraft->setProductListing($productListing)
+        $newPrice->setProductDraft($newProductDraft)
+            ->shouldBeCalled();
+
+        $newProductDraft->addProductListingPriceWithKey($newPrice, 'en_US')
             ->shouldBeCalled();
 
 
