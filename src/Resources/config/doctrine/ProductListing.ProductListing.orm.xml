@@ -9,7 +9,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" inversed-by="id"/>
+        <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" inversed-by="productListings"/>
         <one-to-many field="productDrafts" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft" mapped-by="productListing">
             <cascade>
                 <cascade-persist/>

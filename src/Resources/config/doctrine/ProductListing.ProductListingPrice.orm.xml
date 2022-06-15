@@ -10,12 +10,12 @@
             <generator strategy="AUTO" />
         </id>
 
-        <one-to-one field="productDraft" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft">
+        <many-to-one field="productDraft" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft" inversed-by="productListingPrice">
             <cascade>
                 <cascade-persist/>
                 <cascade-remove />
             </cascade>
-        </one-to-one>
+        </many-to-one>
         <field name="price" column="price" type="float" unique="false" nullable="false" />
         <field name="minimumPrice" column="minimum_price" type="float" unique="false" nullable="true" />
         <field name="originalPrice" column="original_price" type="float" unique="false" nullable="false" />
