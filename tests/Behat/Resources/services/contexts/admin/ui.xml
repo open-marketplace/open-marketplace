@@ -5,8 +5,10 @@
 
         <service id="bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.ui.admin.product_listing" public="true"
                  class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\ProductListingContext">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-            <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
+            <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager"/>
+            <argument key="$adminUserExampleFactory" type="service" id="sylius.fixture.example_factory.admin_user"/>
+            <argument key="$shopUserExampleFactory" type="service" id="sylius.fixture.example_factory.shop_user"/>
+            <argument key="$vendorFactory" type="service" id="bitbag_multi_vendor_marketplace.factory.vendor"/>
         </service>
 
         <service id="bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_listing" public="true"

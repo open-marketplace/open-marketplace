@@ -1,6 +1,6 @@
 default:
   suites:
-    ui_managing_product_listings:
+    vendor_ui_managing_product_listings:
       contexts:
         - bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.ui.vendor.product_listing
         - Behat\MinkExtension\Context\MinkContext
