@@ -40,7 +40,7 @@ final class ConversationType extends AbstractType
         $this->vendorRepository = $vendorRepository;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('category', EntityType::class, [
@@ -93,7 +93,7 @@ final class ConversationType extends AbstractType
         $conversation->setApplicant($vendor);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('data_class', Conversation::class);
     }
