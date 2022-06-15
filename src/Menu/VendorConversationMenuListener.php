@@ -25,13 +25,10 @@ final class VendorConversationMenuListener
 
     public function addConversationMenuItems(MenuBuilderEvent $event): void
     {
-        if ($this->tokenStorage->getToken()->getUser()->getCustomer()->getVendor()) {
             $menu = $event->getMenu();
-
             $menu
                 ->addChild('conversations', ['route' => 'mvm_vendor_conversation_index'])
                 ->setLabel('mvm.ui.menu.conversations')
                 ->setLabelAttribute('icon', 'inbox');
-        }
     }
 }

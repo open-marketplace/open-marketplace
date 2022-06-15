@@ -19,11 +19,12 @@ final class AdminConversationMenuListener
     {
         $menu = $event->getMenu();
 
-        $menu
-            ->getChild('customers')
-            ->addChild('conversations', ['route' => 'mvm_admin_conversation_index'])
-            ->setLabel('mvm.ui.menu.conversations')
-            ->setLabelAttribute('icon', 'inbox')
-        ;
+        $menuCustomersTab = $menu->getChild('customers');
+        if($menuCustomersTab)
+            $menuCustomersTab
+                ->addChild('conversations', ['route' => 'mvm_admin_conversation_index'])
+                ->setLabel('mvm.ui.menu.conversations')
+                ->setLabelAttribute('icon', 'inbox')
+            ;
     }
 }
