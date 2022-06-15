@@ -18,6 +18,3 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     id: 'ID'  
     tax_id: 'Tax ID'
     vendors: 'Vendors'
-app:
-    ui:
-        vendors: Vendors
