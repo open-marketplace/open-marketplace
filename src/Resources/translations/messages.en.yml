@@ -30,8 +30,3 @@ bitbag_sylius_multi_vendor_marketplace_plugin:
     tax_id: 'Tax ID'
     vendors: 'Vendors'
     manage_products: 'Manage products'
-    product_listing_verified: 'Product listing verified.'
-    product_listing_rejected: 'Product listing rejected.'
-app:
-    ui:
-        vendors: Vendors
