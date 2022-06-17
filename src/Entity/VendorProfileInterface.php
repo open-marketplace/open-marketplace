@@ -30,4 +30,8 @@ interface VendorProfileInterface
     public function getVendorAddress(): ?VendorAddressInterface;
 
     public function setVendorAddress(?VendorAddressInterface $vendorAddress): void;
+
+    public function getDescription(): ?string;
+
+    public function setDescription(?string $description): void;
 }

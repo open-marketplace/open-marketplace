@@ -36,6 +36,7 @@ class VendorProfileUpdateServiceSpec extends ObjectBehavior
         $vendor->getCompanyName()->shouldBeCalled(1);
         $vendor->getTaxIdentifier()->shouldBeCalled(1);
         $vendor->getPhoneNumber()->shouldBeCalled(1);
+        $vendor->getDescription()->shouldBeCalled();
         $vendor->getVendorAddress()->shouldBeCalled(4);
 
         $this->setVendorFromData($vendorData, $vendor);

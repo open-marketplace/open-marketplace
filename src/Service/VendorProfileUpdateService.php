@@ -73,6 +73,7 @@ class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
         $vendor->setPhoneNumber($data->getPhoneNumber());
+        $vendor->setDescription($data->getDescription());
         $newVendorAddress = $data->getVendorAddress();
 
         if (null == $newVendorAddress) {

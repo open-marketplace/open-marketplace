@@ -99,6 +99,7 @@ class VendorUpdateContext extends MinkContext
         $pendigUpdate->setCompanyName('new Company');
         $pendigUpdate->setTaxIdentifier('new ID');
         $pendigUpdate->setPhoneNumber('new number');
+        $pendigUpdate->setDescription('new description');
         $pendigUpdate->getVendorAddress()->setStreet('new street');
         $pendigUpdate->getVendorAddress()->setCity('new city');
         $pendigUpdate->getVendorAddress()->setPostalCode('new code');
