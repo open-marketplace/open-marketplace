@@ -1,0 +1,8 @@
+sylius_resource:
+    resources:
+        mvm.conversation_message:
+            driver: doctrine/orm
+            classes:
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Message
+                interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface
+                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\MessageRepository

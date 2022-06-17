@@ -11,12 +11,23 @@
     </parameters>    
     <services>        
         <service id="bitbag.sylius_multi_vendor_marketplace_plugin.form.vendor_type"
-                class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType"
-        >
+                class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType" >
             <argument>%bitbag_multi_vendor_marketplace.model.vendor.class%</argument>
             <argument type="service" id="security.token_storage"/>
             <argument>%bitbag_sylius_organization_plugin.form.type.vendor.validation_groups%</argument>
             <tag name="form.type"/>
+        </service>
+
+        <service id="mvm.form.type.conversation"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\ConversationType">
+            <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver" />
+            <argument type="service" id="bitbag_multi_vendor_marketplace.repository.vendor" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="form.type"/>
+        </service>
+
+        <service id="mvm.form.type.conversation_message" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType">
+            <tag name="form.type" />
         </service>
     </services>
 </container>

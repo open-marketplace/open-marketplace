@@ -1,0 +1,46 @@
+mvm_vendor_conversation_index:
+    path: /vendor/conversations
+    methods: [GET]
+    defaults:
+        _controller:  mvm.controller.conversation:indexAction
+        _sylius:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/index.html.twig"
+
+mvm_vendor_conversation_show:
+    path: /vendor/conversations/{id}
+    methods: [GET,POST]
+    defaults:
+        _controller: mvm.controller.conversation:showAction
+        _sylius:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/show.html.twig"
+            
+mvm_vendor_conversation_message_add:
+    path: /vendor/conversations/{id}/message/add
+    methods: [GET, POST]
+    defaults:
+        _controller: mvm.controller.add_message_action
+        _sylius:
+            redirect: mvm_vendor_conversation_show
+            mail_redirect: mvm_admin_conversation_show
+            
+mvm_vendor_conversation_create:
+    path: /vendor/conversation/create
+    methods: [GET,POST]
+    defaults:
+        _controller: mvm.controller.conversation:createAction
+        _sylius:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/create.html.twig"
+            redirect: mvm_vendor_conversation_show
+            mail_redirect: mvm_admin_conversation_show
+        
+mvm_vendor_conversation_archive:
+    path: /vendor/conversations/{id}/archive
+    methods: [PATCH]
+    defaults:
+        _controller: mvm.controller.conversation:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: mvm_conversation
+                transition: close
+            redirect: referer
+            flash: mvm.ui.conversation_successfully_closed

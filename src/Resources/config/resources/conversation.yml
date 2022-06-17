@@ -1,0 +1,10 @@
+sylius_resource:
+    resources:
+        mvm.conversation:
+            driver: doctrine/orm
+            classes:
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation
+                interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface
+                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepository
+                form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\ConversationType
