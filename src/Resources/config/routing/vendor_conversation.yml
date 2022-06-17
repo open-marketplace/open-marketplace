@@ -4,7 +4,7 @@ mvm_vendor_conversation_index:
     defaults:
         _controller: mvm.controller.conversation_controller:index
         _sylius:
-            template: "App/Conversation/User/index.html.twig"
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/index.html.twig"
 
 mvm_vendor_conversation_show:
     path: /vendor/conversations/{id}
@@ -12,7 +12,7 @@ mvm_vendor_conversation_show:
     defaults:
         _controller: mvm.controller.conversation_controller:show
         _sylius:
-            template: "App/Conversation/User/show.html.twig"
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/show.html.twig"
             
 mvm_vendor_conversation_message_add:
     path: /vendor/conversations/{id}/message/add
@@ -29,7 +29,7 @@ mvm_vendor_conversation_create:
     defaults:
         _controller: mvm.controller.create_new_conversation_action
         _sylius:
-            template: "App/Conversation/User/create.html.twig"
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/create.html.twig"
             redirect: mvm_vendor_conversation_show
             mail_redirect: mvm_admin_conversation_show
         

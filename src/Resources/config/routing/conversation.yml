@@ -20,7 +20,7 @@ mvm_admin_conversation_create:
     defaults:
         _controller: mvm.controller.create_new_conversation_action
         _sylius:
-            template: "App/Conversation/Admin/create.html.twig"
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/Admin/create.html.twig"
             redirect: mvm_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
         
@@ -30,7 +30,7 @@ mvm_admin_conversation_show:
     defaults:
         _controller: mvm.controller.conversation_controller:show
         _sylius:
-            template: "App/Conversation/Admin/show.html.twig"
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/Admin/show.html.twig"
 
 mvm_admin_conversation_archive:
     path: /admin/conversations/{id}/archive

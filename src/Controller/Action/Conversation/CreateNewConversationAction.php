@@ -27,7 +27,7 @@ use Twig\Environment;
 
 final class CreateNewConversationAction extends AbstractController
 {
-    private FormFactoryInterface $formFactory;
+//    private FormFactoryInterface $formFactory;
 
     private Environment $templatingEngine;
 

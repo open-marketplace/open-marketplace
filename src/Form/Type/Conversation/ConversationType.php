@@ -54,6 +54,7 @@ final class ConversationType extends AbstractType
             ])
             ->addEventListener(FormEvents::SUBMIT, [$this, 'onSubmit'])
             ->addEventListener(FormEvents::POST_SET_DATA, [$this, 'postSetData']);
+        //dd("a");
     }
 
     public function postSetData(FormEvent $event): void
@@ -83,7 +84,7 @@ final class ConversationType extends AbstractType
 
         $resolvedUser = $this->actualUserResolver->resolve();
 
-        if ($event->getForm()->has('vendorUser')) {
+        if ($event->getForm()->has('vendorUser') && $resolvedUser instanceof AdminUserInterface) {
             $conversation->setApplicant($event->getForm()->get('vendorUser')->getData());
             $conversation->setAdminUser($resolvedUser);
 
