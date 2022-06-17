@@ -11,8 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+
 interface VendorRepositoryInterface
 {
+    public function createListQueryBuilder(): QueryBuilder;
+
     /**
      * @return mixed
      */

@@ -1,0 +1,10 @@
+default:
+    suites:
+        customer_dashboard:
+            contexts:
+                - tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor.customer_dashboard_context
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.channel
+            filters:
+                    tags: "@customer_dashboard"

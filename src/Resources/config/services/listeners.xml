@@ -5,8 +5,7 @@
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\AccountMenuListener"
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.listener.account_menu_listener">
-
-        <tag name="kernel.event_listener" event="sylius.menu.shop.account" method="addAccountMenuItems"/>
+            <tag name="kernel.event_listener" event="sylius.menu.shop.account" method="addAccountMenuItems"/>   
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\EventListener\VendorRegisterListener"

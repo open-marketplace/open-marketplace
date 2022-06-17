@@ -15,19 +15,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
+class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterface
 {
-    private int $id;
+    protected ?int $id;
 
-    private Customer $customer;
+    protected CustomerInterface $customer;
 
-    private ?string $companyName = null;
+    protected ?string $companyName = null;
 
-    private ?string $taxIdentifier;
+    protected ?string $taxIdentifier;
 
-    private ?string $phoneNumber;
+    protected ?string $phoneNumber;
 
-    private ?VendorAddress $vendorAddress;
+    protected ?VendorAddressInterface $vendorAddress;
 
     private ?string $slug;
 
@@ -43,12 +43,12 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
         $this->products = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }
@@ -83,22 +83,22 @@ class Vendor implements VendorDataInterface, VendorInterface, ResourceInterface
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function getVendorAddress(): ?VendorAddress
+    public function getVendorAddress(): ?VendorAddressInterface
     {
         return $this->vendorAddress;
     }
 
-    public function setVendorAddress(?VendorAddress $vendorAddress): void
+    public function setVendorAddress(?VendorAddressInterface $vendorAddress): void
     {
         $this->vendorAddress = $vendorAddress;
     }
 
-    public function getCustomer(): Customer
+    public function getCustomer(): CustomerInterface
     {
         return $this->customer;
     }
 
-    public function setCustomer(Customer $customer): void
+    public function setCustomer(CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }

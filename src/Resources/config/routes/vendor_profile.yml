@@ -1,7 +1,0 @@
-vendor_profile:
-    path: /vendor/profile
-    methods: [GET, POST]
-    defaults:
-        _controller: BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController:showAction
-        _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_profile.html.twig"

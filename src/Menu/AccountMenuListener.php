@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Menu;
 
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
-class AccountMenuListener
+final class AccountMenuListener
 {
     public function addAccountMenuItems(MenuBuilderEvent $event): void
     {

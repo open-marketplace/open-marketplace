@@ -11,6 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Exception;
 
-class UserNotFoundException extends \Exception
+final class UserNotFoundException extends \Exception
 {
 }

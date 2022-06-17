@@ -2,7 +2,7 @@
     {{ sylius_template_event('sylius.shop.register.before_form') }}
 
     {{ form_start(form, {'action': path('vendor_register_form'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-   
+    <h3 class="header">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.become_a_vendor'|trans }}</h3>
     {{ form_row(form.companyName, sylius_test_form_attribute('companyName')) }}
     {{ form_row(form.taxIdentifier) }}
     {{ form_row(form.phoneNumber) }}
@@ -13,10 +13,13 @@
     <div style="display: none"> 
         {{ form_row(form.customer) }}
     </div>
+    
     {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
+    
     <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('register-button') }}>
-        {{ 'sylius.ui.create_an_account'|trans }}
+        {{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.become_a_vendor'|trans }}
     </button>
+    
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 </div>

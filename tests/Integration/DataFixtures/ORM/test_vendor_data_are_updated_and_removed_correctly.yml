@@ -1,0 +1,46 @@
+Sylius\Component\Addressing\Model\Country:
+    poland:
+        code: 'PL'
+    USA:
+        code: 'US'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer:
+    customer_oliver:
+        firstName: "John"
+        lastName: "Nowak"
+        email: "test@example.com"
+        emailCanonical: "test@example.com"
+Sylius\Component\Core\Model\ShopUser:
+    user_oliver:
+        plainPassword: "123password"
+        roles: ["ROLE_USER"]
+        enabled: "true"
+        customer: '@customer_oliver'
+        username: "oliver@queen.com"
+        usernameCanonical: "oliver@queen.com"
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+    vendor_address:
+        country: '@poland'
+        city: 'Warsaw'
+        postalCode: '00-999'
+        street: 'Avenue 2115'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
+    vendor_oliver:
+        customer: '@customer_oliver'
+        companyName: 'Test company name'
+        taxIdentifier: '1234567'
+        phoneNumber: '333111222'
+        vendorAddress: '@vendor_address'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate:
+    vendor_new_address:
+        country: '@USA'
+        city: 'Central City'
+        postalCode: '99-000'
+        street: 'Arrow Street'
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate:
+    vendor_oliver_update:
+        vendor: '@vendor_oliver'
+        companyName: 'new company'
+        taxIdentifier: 'new number'
+        phoneNumber: '999999999'
+        vendorAddress: '@vendor_new_address'
+        token: 'hardcoded'
