@@ -4,7 +4,6 @@ Feature: Creating a product listing
   As a vendor, I must be able to create
   a product with a submission for verification.
 
-
   Background:
     Given there is an vendor user "vendor" with password "vendor"
     And the store operates on a channel named "Web-US" in "USD" currency

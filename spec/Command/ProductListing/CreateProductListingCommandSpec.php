@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
@@ -81,14 +80,11 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
-        $productTranslation->setProductDraft($productDraft)
-            ->should(new ProductListing());
+        $productDraft->getCode()
+            ->willReturn('code');
 
         $productListing->setCode('code')
             ->shouldBeCalled();
-
-        $productDraft->getCode()
-            ->willReturn('code');
 
         $productListing->addProductDrafts($productDraft)
             ->shouldBeCalled();
@@ -135,8 +131,8 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
-        $productTranslation->setProductDraft($productDraft)
-            ->should(new ProductDraft());
+        $productDraft->getCode()
+            ->willReturn('code');
 
         $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION)
             ->shouldBeCalled();
@@ -146,9 +142,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
 
         $productListing->setCode('code')
             ->shouldBeCalled();
-
-        $productDraft->getCode()
-            ->willReturn('code');
 
         $productListing->addProductDrafts($productDraft)
             ->shouldBeCalled();
@@ -160,7 +153,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
             ->shouldBeCalled();
 
         $productListingRepository->save($productListing)
-            ->should(new ProductListing());
+            ->shouldBeCalled();
 
         $this->create($productDraft, true);
     }
@@ -173,15 +166,8 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
-        $productTranslation->setProductDraft($productDraft)
-            ->should(new ProductDraft());
-
-        $productDraftRepository->save($productDraft)
-            ->should(new ProductDraft());
-
         $this->saveEdit($productDraft, false);
     }
-
 
     public function it_save_product_and_send(
         ProductDraftInterface           $productDraft,
@@ -191,17 +177,11 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
-        $productTranslation->setProductDraft($productDraft)
-            ->should(new ProductDraft());
-
         $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION)
             ->shouldBeCalled();
 
         $productDraft->setPublishedAt(Argument::type('DateTime'))
             ->shouldBeCalled();
-
-        $productDraftRepository->save($productDraft)
-            ->should(new ProductDraft());
 
         $this->saveEdit($productDraft, true);
     }
@@ -231,7 +211,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->getCode()
             ->willReturn('code');
 
-
         // Clone translation stubs
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$translation->getWrappedObject()]));
@@ -260,7 +239,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $translation->getShortDescription()
             ->willReturn('short description');
 
-
         // Clone price stubs
         $productDraft->getProductListingPrice()
             ->willReturn(new ArrayCollection([$price->getWrappedObject()]));
@@ -283,7 +261,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $newPrice->getChannelCode()
             ->willReturn('en_US');
 
-
         // Clone product mocks
         $newProductDraft->setVersionNumber(1)
             ->shouldBeCalled();
@@ -296,7 +273,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
 
         $newProductDraft->setProductListing($productListing)
             ->shouldBeCalled();
-
 
         // Clone translation mocks
         $translation->getName()
@@ -347,7 +323,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $newProductDraft->addTranslationsWithKey($newTranslation, 'en_US')
             ->shouldBeCalled();
 
-
         // Clone price mocks
         $price->getPrice()
             ->shouldBeCalled();
@@ -375,7 +350,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
 
         $newProductDraft->addProductListingPriceWithKey($newPrice, 'en_US')
             ->shouldBeCalled();
-
 
         $this->cloneProduct($productDraft, false);
     }

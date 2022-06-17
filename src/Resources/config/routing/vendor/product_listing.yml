@@ -6,13 +6,6 @@ bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index:
     _sylius:
       template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig'
 
-#bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_show:
-#  path: /product-listings/{id}
-#  defaults:
-#    _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.action.vendor.product_listing.show_action
-#    _sylius:
-#      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig'
-
 bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_create_product:
   path: /product-listings/create
   methods: [GET,POST]

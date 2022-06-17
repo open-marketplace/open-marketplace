@@ -14,11 +14,9 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Prophecy\Prophecy\MethodProphecy;
-use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Component\Product\Model\ProductInterface;
 
-class ProductListing implements ProductListingInterface, \Prophecy\Prediction\PredictionInterface
+class ProductListing implements ProductListingInterface
 {
     protected int $id;
 
@@ -105,13 +103,5 @@ class ProductListing implements ProductListingInterface, \Prophecy\Prediction\Pr
         }
 
         return $productDraft;
-    }
-
-    public function check(
-        array $calls,
-        ObjectProphecy $object,
-        MethodProphecy $method
-    ) {
-        // TODO: Implement check() method.
     }
 }
