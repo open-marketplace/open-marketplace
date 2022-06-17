@@ -8,7 +8,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="sylius.fixture.example_factory.channel"/>
-            <argument type="service" id="bitbag_multi_vendor_marketplace.factory.vendor"/>
+            <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.factory.vendor"/>
         </service>
 
     </services>
