@@ -15,28 +15,24 @@ use Gaufrette\Adapter\Local as LocalAdapter;
 use Gaufrette\Filesystem;
 use Gaufrette\FilesystemInterface;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class FileUploader implements FileUploaderInterface
 {
     private FilesystemInterface $filesystem;
 
-    public function __construct()
+    public function __construct(string $publicDir)
     {
-        $adapter = new LocalAdapter($_ENV['LOGO_DIRECTORY']);
+        $uploadLogoPath = $publicDir . $_ENV['LOGO_DIRECTORY'];
+        $adapter = new LocalAdapter($uploadLogoPath, true);
         $this->filesystem = new Filesystem($adapter);
     }
 
     public function upload(UploadedFile $file): string
     {
-        try {
-            $uuid = Uuid::uuid4();
-            $filename = $uuid->toString() . '.' . $file->guessExtension();
-            $this->filesystem->write($filename, $file->getContent());
-        } catch (FileException $e) {
-            throw new FileException();
-        }
+        $uuid = Uuid::uuid4();
+        $filename = $uuid->toString() . '.' . $file->guessExtension();
+        $this->filesystem->write($filename, $file->getContent());
 
         return $filename;
     }

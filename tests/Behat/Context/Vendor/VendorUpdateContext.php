@@ -67,6 +67,8 @@ class VendorUpdateContext extends MinkContext
         $vendor->getVendorAddress()->setCity('Warsaw');
         $vendor->getVendorAddress()->setPostalCode('00-111');
         $vendor->getVendorAddress()->setStreet('Tajna 13');
+        $vendor->setSlug('vendor-slug');
+        $vendor->setDescription('description');
         $this->manager->persist($vendor);
         $this->manager->flush();
         $this->sharedStorage->set('vendor', $vendor);

@@ -12,6 +12,8 @@ final class FileUploaderSpec extends ObjectBehavior
 {
     public function let()
     {
+        $publicDir = 'public';
+        $this->beConstructedWith($publicDir);
         $_ENV['LOGO_DIRECTORY'] = 'media/image/logo';
     }
     public function it_is_initializable(): void

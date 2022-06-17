@@ -14,8 +14,10 @@
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_slug_generator"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.file_uploader"/>
 
-            <tag name="kernel.event_listener" event="bitbag_multi_vendor_marketplace.vendor.pre_register" method="generateSlug"/>
-            <tag name="kernel.event_listener" event="bitbag_multi_vendor_marketplace.vendor.pre_register" method="uploadImage"/>
+            <tag name="kernel.event_listener" event="bitbag_multi_vendor_marketplace.vendor.pre_create" method="generateSlug"/>
+            <tag name="kernel.event_listener" event="bitbag_multi_vendor_marketplace.vendor.pre_update" method="generateSlug"/>
+            <tag name="kernel.event_listener" event="bitbag_multi_vendor_marketplace.vendor.pre_create" method="uploadImage"/>
+            <tag name="kernel.event_listener" event="bitbag_multi_vendor_marketplace.vendor.pre_update" method="uploadImage"/>
         </service>
     </services>
 </container>

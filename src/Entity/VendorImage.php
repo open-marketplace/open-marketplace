@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-class VendorImage implements VendorImageInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+class VendorImage implements VendorImageInterface, ResourceInterface
 {
     protected ?int $id;
 
