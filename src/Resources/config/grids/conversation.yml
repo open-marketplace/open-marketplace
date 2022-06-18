@@ -7,7 +7,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%mvm.model.conversation.class%"
+                    class: "%bitbag_multi_vendor_marketplace.model.conversation.class%"
             fields:
                 category:
                     type: twig

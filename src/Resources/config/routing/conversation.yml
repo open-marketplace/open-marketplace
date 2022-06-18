@@ -1,6 +1,6 @@
 mvm_admin_conversation:
     resource: |
-        alias: mvm.conversation
+        alias: bitbag_multi_vendor_marketplace.conversation
         section: admin
         templates: "@SyliusAdmin\\Crud"
         except: ['show', 'update', 'bulk_delete']

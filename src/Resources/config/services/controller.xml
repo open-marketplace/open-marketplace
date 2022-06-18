@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Conversation\ConversationController"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.conversation.conversation_controller">
+            <argument type="service" id="twig" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation" />
+            <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="controller.service_arguments" />
+        </service>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation\CreateNewConversationAction"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation.create_new_conversation_action">
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument type="service" id="twig" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="router" />
+            <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation" />
+            <tag name="controller.service_arguments" />
+        </service>
+        <service id="mvm.controller.add_message_action" class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\ConversationMessage\AddMessageAction">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="session.flash_bag" />
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
+            <argument type="service" id="router"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="controller.service_arguments" />
+        </service>
+    </services>
+</container>

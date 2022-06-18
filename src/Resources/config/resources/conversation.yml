@@ -1,6 +1,6 @@
 sylius_resource:
     resources:
-        mvm.conversation:
+        bitbag_multi_vendor_marketplace.conversation:
             driver: doctrine/orm
             classes:
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController

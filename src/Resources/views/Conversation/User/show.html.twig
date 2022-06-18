@@ -11,7 +11,9 @@
         {% if conversation.category is not null %}
             <div class="active section">{{ conversation.category.name }}</div>
         {% else %}
+
             {% set author = conversation.messages.first.author %}
+
                 {% if conversation.messages.first.vendorUser is not null %}
                     <div class="active section">{{ author.customer.firstName ~ ' ' ~ author.customer.lastName }}</div>
                 {% else %}
