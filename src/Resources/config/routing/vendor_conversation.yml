@@ -40,7 +40,7 @@ mvm_vendor_conversation_archive:
         _controller: bitbag_multi_vendor_marketplace.controller.conversation:applyStateMachineTransitionAction
         _sylius:
             state_machine:
-                graph: conversation
+                graph: mvm_conversation
                 transition: close
             redirect: referer
             flash: mvm.ui.conversation_successfully_closed
