@@ -28,9 +28,13 @@
             <argument type="service" id="session.flash_bag" />
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
             <argument type="service" id="router"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+            <tag name="controller.service_arguments" />
+        </service>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation\SendArchiveRequestAction"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation.send_archive_request_action">
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
+            <argument type="service" id="api_platform.router" />
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.message.message_factory" />
             <tag name="controller.service_arguments" />
         </service>
     </services>

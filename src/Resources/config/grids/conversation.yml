@@ -1,9 +1,9 @@
 sylius_grid:
     templates:
         action:
-            archieve: "Grid/Conversation/Action/archiveConversation.html.twig"
+            archive: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Action/archiveConversation.html.twig"
     grids:
-        mvm_vendor_conversation:
+        bitbag_sylius_multi_vendor_marketplace_plugin_admin_conversation:
             driver:
                 name: doctrine/orm
                 options:
@@ -13,12 +13,12 @@ sylius_grid:
                     type: twig
                     label: mvm.ui.form.conversation.category
                     options:
-                        template: Grid/Conversation/Ui/category.html.twig
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/category.html.twig'
                 applicant:
                     type: twig
                     label: mvm.ui.grid.conversation.applicant
                     options:
-                        template: Grid/Conversation/Ui/applicant.html.twig
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/applicant.html.twig'
             filters:
                 status:
                     label: mvm.ui.status
@@ -39,6 +39,6 @@ sylius_grid:
                         type: show
                     delete:
                         type: delete
-                    archieve:
-                        type: archieve
-                        label: mvm.ui.grid.conversation.archieve
+                    archive:
+                        type: archive
+                        label: mvm.ui.grid.conversation.archive

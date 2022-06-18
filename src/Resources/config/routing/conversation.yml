@@ -5,7 +5,7 @@ mvm_admin_conversation:
         templates: "@SyliusAdmin\\Crud"
         except: ['show', 'update', 'bulk_delete']
         redirect: index
-        grid: mvm_vendor_conversation
+        grid: bitbag_sylius_multi_vendor_marketplace_plugin_admin_conversation
         permission: true
         vars:
             all:
@@ -24,21 +24,21 @@ mvm_admin_conversation_create:
             redirect: mvm_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
         
-mvm_admin_conversation_show:
+bitbag_multi_vendor_marketplace_admin_conversation_show:
     path: /admin/conversations/{id}
     methods: [GET,POST]
     defaults:
-        _controller: mvm.controller.conversation_controller:show
+        _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.conversation.conversation_controller:show
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/Admin/show.html.twig"
 
-mvm_admin_conversation_archive:
+bitbag_multi_vendor_marketplace_admin_conversation_archive:
     path: /admin/conversations/{id}/archive
     methods: [GET,POST]
     defaults:
-        _controller: mvm.controller.archive_conversation_action
+        _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation.send_archive_request_action
         _sylius:
-            redirect: mvm_admin_conversation_index
+            redirect: bitbag_multi_vendor_marketplace_admin_conversation_index
 
 mvm_admin_conversation_message_add:
     path: /admin/conversations/{id}/message/add
@@ -46,6 +46,6 @@ mvm_admin_conversation_message_add:
     defaults:
         _controller: mvm.controller.add_message_action
         _sylius:
-            redirect: mvm_admin_conversation_show
+            redirect: bitbag_multi_vendor_marketplace_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
             

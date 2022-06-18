@@ -62,9 +62,9 @@ final class AddMessageAction extends AbstractController
                 ->createWithConversation($id, $message, $file);
         }
 
-        foreach ($form->getErrors() as $error) {
-            $this->flashBag->add('error', $error->getMessageTemplate());
-        }
+//        foreach ($form->getErrors() as $error) {
+//            $this->flashBag->add('error', $error->getMessageTemplate());
+//        }
 
         return new RedirectResponse($this->urlGenerator->generate($redirect, [
             'id' => $id,

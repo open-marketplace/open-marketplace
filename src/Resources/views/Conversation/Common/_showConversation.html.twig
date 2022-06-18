@@ -72,7 +72,7 @@
                         <div class="ui icon message">
                             <i class="icon envelope middle center aligned"></i>
                             <div class="content">
-                                {% include "App/Conversation/User/Common/archiveRequestMessage.html.twig" %}
+                                {% include "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/Common/archiveRequestMessage.html.twig" %}
                             </div>
                         </div>
                     {% else %}
@@ -110,6 +110,7 @@
             {{ 'mvm.ui.conversation.your_response_header'|trans }}
         </div>
         <div class="ui form">
+
             {{ form_start(form, { 'action': messagePath, attr: { class: 'ui form' } }) }}
                 <div class="ui stackable grid">
                     <div class="column ten wide">
