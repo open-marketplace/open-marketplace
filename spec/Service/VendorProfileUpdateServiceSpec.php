@@ -61,6 +61,6 @@ final class VendorProfileUpdateServiceSpec extends ObjectBehavior
         $vendor->getUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
         $this->createPendingVendorProfileUpdate($vendorData, $vendor);
-        $sender->send(Argument::any(), Argument::any(), Argument::any())->shouldHaveBeenCalled(1);
+        $sender->send(Argument::type('string'), Argument::any(), Argument::any())->shouldHaveBeenCalled(1);
     }
 }
