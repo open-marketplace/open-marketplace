@@ -15,7 +15,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversati
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Message;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class AddMessageAction //extends AbstractController
+final class AddMessageAction
 {
     private FormFactoryInterface $formFactory;
 
@@ -61,11 +60,6 @@ final class AddMessageAction //extends AbstractController
             $this->addMessageFacade
                 ->createWithConversation($id, $message, $file);
         }
-
-        foreach ($form->getErrors() as $error) {
-            $this->flashBag->add('error', $error->getMessageTemplate());
-        }
-
         return new RedirectResponse($this->urlGenerator->generate($redirect, [
             'id' => $id,
         ]));

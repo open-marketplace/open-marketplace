@@ -18,7 +18,7 @@ mvm_vendor_conversation_message_add:
     path: /vendor/conversations/{id}/message/add
     methods: [GET, POST]
     defaults:
-        _controller: mvm.controller.add_message_action
+        _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation_message.add_message_action
         _sylius:
             redirect: mvm_vendor_conversation_show
             mail_redirect: mvm_admin_conversation_show

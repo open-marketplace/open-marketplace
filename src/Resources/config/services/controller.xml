@@ -22,7 +22,8 @@
 
             <tag name="controller.service_arguments" />
         </service>
-        <service id="mvm.controller.add_message_action" class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\ConversationMessage\AddMessageAction">
+        <service id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation_message.add_message_action"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\ConversationMessage\AddMessageAction">
             <argument type="service" id="form.factory" />
             <argument type="service" id="session.flash_bag" />
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
