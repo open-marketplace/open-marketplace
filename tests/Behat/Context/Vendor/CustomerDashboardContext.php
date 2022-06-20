@@ -28,7 +28,7 @@ class CustomerDashboardContext extends MinkContext implements Context
     /**
      * @Then I should see :arg1 inside sidebar
      */
-    public function iShouldSeeInsideSidebar($arg1)
+    public function iShouldSeeInsideSidebar($arg1): void
     {
         assertTrue($this->dashboardPage->itemWithValueExistsInsideSidebar($arg1), "Cannot find $arg1 inside sidebar");
     }

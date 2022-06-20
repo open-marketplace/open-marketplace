@@ -28,7 +28,7 @@ class VendorRegisterContext extends MinkContext implements Context
     /**
      * @Then I should see :itemCLass :times times
      */
-    public function iShouldSeeTimes($itemCLass, $times)
+    public function iShouldSeeTimes($itemCLass, $times): void
     {
         $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount($itemCLass);
         assertEquals($times, $validationMessageCount);

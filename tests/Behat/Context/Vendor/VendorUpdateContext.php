@@ -48,7 +48,7 @@ class VendorUpdateContext extends MinkContext
     /**
      * @Given there is a vendor user :vendor_user_email registered in country :country_code
      */
-    public function thereIsAVendorUserRegisteredInCountry($vendor_user_email, $country_code)
+    public function thereIsAVendorUserRegisteredInCountry($vendor_user_email, $country_code): void
     {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
@@ -86,7 +86,7 @@ class VendorUpdateContext extends MinkContext
     /**
      * @Given There is pending update data with token value :token for logged in vendor
      */
-    public function thereIsPendingUpdateDataWithTokenValueForLoggedInVendor($token)
+    public function thereIsPendingUpdateDataWithTokenValueForLoggedInVendor($token): void
     {
         $vendor = $this->sharedStorage->get('vendor');
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => 'PL']);
