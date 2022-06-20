@@ -61,7 +61,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $addressFactory = new AddressFactory();
         $address = $addressFactory->createAddress('Grand Street', 'Warsaw', '00-22', $poland);
         $vendorFactory = new VendorFactory();
-        $vendorData = $vendorFactory->createVendor('Grand Company', '221133', '0-33 221 333 111', $address);
+        $vendorData = $vendorFactory->createVendor('Grand Company', '221133', '0-33 221 333 111', $address, 'Updated description');
 
         return $vendorData;
     }

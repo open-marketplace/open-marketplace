@@ -21,13 +21,15 @@ final class VendorFactory
         string $companyName,
         string $taxIdentifier,
         string $phoneNumber,
-        VendorAddressInterface $address
+        VendorAddressInterface $address,
+        string $description
     ): VendorProfileInterface {
         $vendor = $this->createNew();
         $vendor->setPhoneNumber($phoneNumber);
         $vendor->setCompanyName($companyName);
         $vendor->setTaxIdentifier($taxIdentifier);
         $vendor->setVendorAddress($address);
+        $vendor->setDescription($description);
 
         return $vendor;
     }

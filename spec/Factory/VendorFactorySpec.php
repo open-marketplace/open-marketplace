@@ -19,6 +19,6 @@ final class VendorFactorySpec extends ObjectBehavior
     }
     function it_returns_valid_address(VendorAddressInterface $vendorAddress)
     {
-        $this->createVendor("some street", "City", "22-111", $vendorAddress)->shouldHaveType(VendorProfileInterface::class);
+        $this->createVendor("some street", "City", "22-111", $vendorAddress, 'description')->shouldHaveType(VendorProfileInterface::class);
     }
 }

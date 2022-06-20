@@ -30,6 +30,8 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
         taxIdentifier: '1234567'
         phoneNumber: '333111222'
         vendorAddress: '@vendor_address'
+        slug: 'test-company-name'
+        description: 'description'
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate:
     vendor_new_address:
         country: '@USA'
@@ -43,4 +45,5 @@ Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate:
         taxIdentifier: 'new number'
         phoneNumber: '999999999'
         vendorAddress: '@vendor_new_address'
+        description: 'updated description'
         token: 'hardcoded'
