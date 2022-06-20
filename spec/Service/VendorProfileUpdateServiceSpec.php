@@ -50,7 +50,7 @@ final class VendorProfileUpdateServiceSpec extends ObjectBehavior
         $entityManager->flush()->shouldHaveBeenCalled(1);
     }
 
-    public function it_sends_email_after_crate_pending_data(
+    public function it_sends_email_after_create_pending_data(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         RemoverInterface $remover,

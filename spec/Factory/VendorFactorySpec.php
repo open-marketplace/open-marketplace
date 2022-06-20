@@ -23,7 +23,7 @@ final class VendorFactorySpec extends ObjectBehavior
         $this->shouldHaveType(VendorFactory::class);
     }
 
-    public function it_return_vendor(): void
+    public function it_returns_vendor(): void
     {
         $this->createNew()->shouldHaveType(VendorProfileInterface::class);
     }
