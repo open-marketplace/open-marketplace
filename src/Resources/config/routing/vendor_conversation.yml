@@ -2,7 +2,7 @@ mvm_vendor_conversation_index:
     path: /vendor/conversations
     methods: [GET]
     defaults:
-        _controller:  bitbag_multi_vendor_marketplace.controller.conversation:indexAction
+        _controller:  bitbag.sylius_multi_vendor_marketplace_plugin.controller.conversation.conversation_controller:index
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/index.html.twig"
 

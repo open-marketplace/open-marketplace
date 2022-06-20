@@ -8,9 +8,7 @@
             <argument type="service" id="form.factory" />
             <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation" />
             <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver" />
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+            <argument type="service" id="request_stack"/>
             <tag name="controller.service_arguments" />
         </service>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation\CreateNewConversationAction"
@@ -21,6 +19,7 @@
             <argument type="service" id="form.factory" />
             <argument type="service" id="router" />
             <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation" />
+
             <tag name="controller.service_arguments" />
         </service>
         <service id="mvm.controller.add_message_action" class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\ConversationMessage\AddMessageAction">

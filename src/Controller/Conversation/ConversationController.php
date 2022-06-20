@@ -15,13 +15,13 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-final class ConversationController extends AbstractController
+final class ConversationController
 {
     private Environment $templatingEngine;
 
@@ -31,32 +31,31 @@ final class ConversationController extends AbstractController
 
     private ActualUserResolverInterface $actualUserResolver;
 
+    private RequestStack $requestStack;
+
     public function __construct(
         Environment                     $templatingEngine,
         FormFactoryInterface            $formFactory,
         ConversationRepositoryInterface $conversationRepository,
-        ActualUserResolverInterface     $actualUserResolver
+        ActualUserResolverInterface     $actualUserResolver,
+        RequestStack                    $requestStack
     )
     {
         $this->templatingEngine = $templatingEngine;
         $this->formFactory = $formFactory;
         $this->conversationRepository = $conversationRepository;
         $this->actualUserResolver = $actualUserResolver;
+        $this->requestStack = $requestStack;
     }
 
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        if (!$this->isAssetsUser()) {
-            return $this->redirectUserNotAccess();
-        }
-
+        $request = $this->requestStack->getCurrentRequest();
         $template = $request->attributes->get('_sylius')['template'];
 
         $actualUser = $this->actualUserResolver->resolve();
 
-        if (null == $actualUser) {
-            return $this->redirectUserNotAccess();
-        }
+
         if ($request->query->get('closed')) {
             $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_CLOSED, $actualUser);
         } else {
@@ -72,8 +71,9 @@ final class ConversationController extends AbstractController
         );
     }
 
-    public function show(int $id, Request $request): Response
+    public function show(int $id): Response
     {
+        $request = $this->requestStack->getCurrentRequest();
         $template = $request->attributes->get('_sylius')['template'];
 
         $form = $this->formFactory->create(MessageType::class);

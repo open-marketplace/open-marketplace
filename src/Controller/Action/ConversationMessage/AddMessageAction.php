@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class AddMessageAction extends AbstractController
+final class AddMessageAction //extends AbstractController
 {
     private FormFactoryInterface $formFactory;
 
@@ -62,9 +62,9 @@ final class AddMessageAction extends AbstractController
                 ->createWithConversation($id, $message, $file);
         }
 
-//        foreach ($form->getErrors() as $error) {
-//            $this->flashBag->add('error', $error->getMessageTemplate());
-//        }
+        foreach ($form->getErrors() as $error) {
+            $this->flashBag->add('error', $error->getMessageTemplate());
+        }
 
         return new RedirectResponse($this->urlGenerator->generate($redirect, [
             'id' => $id,
