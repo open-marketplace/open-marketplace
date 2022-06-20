@@ -9,7 +9,8 @@
             <parameter>sylius</parameter>
         </parameter>
     </parameters>    
-    <services>        
+    <services>
+
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType"
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.form.vendor_type">
             <argument>%bitbag_sylius_multi_vendor_marketplace_plugin.model.vendor.class%</argument>
