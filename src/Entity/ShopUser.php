@@ -15,7 +15,7 @@ use Sylius\Component\Core\Model\ShopUser as BaseShopUser;
 
 class ShopUser extends BaseShopUser implements ShopUserInterface
 {
-    private ?VendorInterface $vendor;
+    protected ?VendorInterface $vendor;
 
     public function getVendor(): ?VendorInterface
     {

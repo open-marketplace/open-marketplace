@@ -17,7 +17,7 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
 {
     protected ?int $id;
 
-    private ShopUserInterface $user;
+    protected ShopUserInterface $user;
 
     protected ?string $companyName;
 
