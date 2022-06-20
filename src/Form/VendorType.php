@@ -84,6 +84,7 @@ final class VendorType extends AbstractResourceType
         $resolver->setDefaults([
             'data_class' => Vendor::class,
             'validation_groups' => $this->validationGroups,
-        ]);
+        ])
+        ;
     }
 }
