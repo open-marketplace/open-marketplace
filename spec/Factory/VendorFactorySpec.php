@@ -18,18 +18,18 @@ use PhpSpec\ObjectBehavior;
 
 final class VendorFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(VendorFactory::class);
     }
 
-    function it_return_vendor(): void
+    public function it_return_vendor(): void
     {
         $this->createNew()->shouldHaveType(VendorProfileInterface::class);
     }
 
-    function it_returns_valid_address(VendorAddressInterface $vendorAddress): void
+    public function it_returns_valid_address(VendorAddressInterface $vendorAddress): void
     {
-        $this->createVendor("some street", "City", "22-111", $vendorAddress)->shouldHaveType(VendorProfileInterface::class);
+        $this->createVendor('some street', 'City', '22-111', $vendorAddress)->shouldHaveType(VendorProfileInterface::class);
     }
 }

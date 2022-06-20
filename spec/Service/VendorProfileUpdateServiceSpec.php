@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
@@ -22,26 +21,25 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-
 final class VendorProfileUpdateServiceSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         RemoverInterface $remover
     ): void {
         $this->beConstructedWith($entityManager, $sender, $remover);
     }
-    
-    function it_is_initializable()
+
+    public function it_is_initializable()
     {
         $this->shouldHaveType(VendorProfileUpdateService::class);
     }
 
-    function it_gets_correct_data(
+    public function it_gets_correct_data(
         EntityManagerInterface $entityManager,
         VendorInterface $vendor,
-        VendorProfileInterface $vendorData      
+        VendorProfileInterface $vendorData
     ): void {
         $vendor->getCompanyName()->shouldBeCalled(1);
         $vendor->getTaxIdentifier()->shouldBeCalled(1);
@@ -52,7 +50,7 @@ final class VendorProfileUpdateServiceSpec extends ObjectBehavior
         $entityManager->flush()->shouldHaveBeenCalled(1);
     }
 
-    function it_sends_email_after_crate_pending_data(
+    public function it_sends_email_after_crate_pending_data(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         RemoverInterface $remover,
@@ -61,7 +59,7 @@ final class VendorProfileUpdateServiceSpec extends ObjectBehavior
         ShopUser $user
     ): void {
         $vendor->getUser()->willReturn($user);
-        $user->getUsername()->willReturn("test@mail.at");
+        $user->getUsername()->willReturn('test@mail.at');
         $this->createPendingVendorProfileUpdate($vendorData, $vendor);
         $sender->send(Argument::any(), Argument::any(), Argument::any())->shouldHaveBeenCalled(1);
     }
