@@ -43,7 +43,7 @@ Feature: Filling vendor registration form by a customer
     And I fill in "vendor_companyName" with "testCompanyName"
     And I fill in "vendor_taxIdentifier" with "6546546456"
     And I fill in "vendor_phoneNumber" with "555555555"
-    And I upload the "images/valid_logo.png" image as vendor logo
+    And I attach the file "images/valid_logo.png" to "vendor_image_file"
     And I fill in "vendor_description" with "description"
     And I fill in "vendor_vendorAddress_city" with "Milan"
     And I fill in "vendor_vendorAddress_street" with "test_street"

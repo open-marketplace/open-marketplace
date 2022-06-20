@@ -27,16 +27,4 @@ class VendorRegisterPage extends SymfonyPage
         $validationMessages = $page->findAll('css', ".$messageClass");
         return count($validationMessages);
     }
-
-    public function attachFile(string $path): void
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        Assert::notEmpty($filesPath);
-
-        $this->getDocument()->attachFileToField(
-            'vendor_image_file',
-            $filesPath . $path
-        );
-    }
 }
