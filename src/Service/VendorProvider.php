@@ -14,7 +14,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
-
 use Symfony\Component\Security\Core\Security;
 
 final class VendorProvider implements VendorProviderInterface
