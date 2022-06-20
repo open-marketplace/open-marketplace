@@ -15,17 +15,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterface
 {
-    private ?int $id;
+    protected ?int $id;
 
-    private CustomerInterface $customer;
+    private ShopUserInterface $user;
 
-    private ?string $companyName;
+    protected ?string $companyName;
 
-    private ?string $taxIdentifier;
+    protected ?string $taxIdentifier;
 
-    private ?string $phoneNumber;
+    protected ?string $phoneNumber;
 
-    private ?VendorAddressInterface $vendorAddress;
+    protected ?VendorAddressInterface $vendorAddress;
 
     public function getId(): ?int
     {
@@ -77,13 +77,13 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
         $this->vendorAddress = $vendorAddress;
     }
 
-    public function getCustomer(): CustomerInterface
+    public function getUser(): ShopUserInterface
     {
-        return $this->customer;
+        return $this->user;
     }
 
-    public function setCustomer(CustomerInterface $customer): void
+    public function setUser(ShopUserInterface $user): void
     {
-        $this->customer = $customer;
+        $this->user = $user;
     }
 }

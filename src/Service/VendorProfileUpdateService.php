@@ -12,66 +12,58 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-final class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
+class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
 {
     private EntityManagerInterface $entityManager;
 
     private SenderInterface $sender;
-    private Remover $remover;
+
+    private RemoverInterface $remover;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
-        Remover $remover
-        
+        RemoverInterface $remover
     ) {
         $this->entityManager = $entityManager;
         $this->sender = $sender;
         $this->remover = $remover;
     }
 
-    public function createPendingVendorProfileUpdate(VendorInterface $vendorData, VendorInterface $currentVendor): void
+    public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void
     {
         $pendingVendorUpdate = new VendorProfileUpdate();
         $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
         $pendingVendorUpdate->setVendor($currentVendor);
-        $token = md5(mt_rand(1, 90000) . 'SALT');
+        $token = $this->generateToken();
         $pendingVendorUpdate->setToken($token);
+
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
-        /** @var Customer $customer */
-        $customer = $currentVendor->getCustomer();
-        if (null !== $customer) {
-            $user = $customer->getUser();
-        }
-        if (null !== $user) {
-            $this->sendEmail($user->getUsername(), $token);
-        }
-    }
 
-    public function sendEmail(string $recipientAddress, string $token): void
-    {
-        $this->sender->send('vendor_profile_update', [$recipientAddress], ['token' => $token]);
-    }
-
-    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
-    {
-        $vendor = $vendorData->getVendor();
-        if (null == $vendor) {
+        $user = $currentVendor->getUser();
+        if (null == $user) {
             return;
         }
-        $this->setVendorFromData($vendor, $vendorData);
-        $this->remover->removePendingData($vendorData);
-    }    
+        $email = $user->getUsername();
+        if (null == $email) {
+            return;
+        }
+        $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
+    }
 
-    private function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
+    public function generateToken(): string
+    {
+        return md5(mt_rand(1, 90000) . 'SALT');
+    }
+
+    public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
     {
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
@@ -89,5 +81,15 @@ final class VendorProfileUpdateService implements VendorProfileUpdateServiceInte
         }
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
+    }
+
+    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
+    {
+        $vendor = $vendorData->getVendor();
+        if (null == $vendor) {
+            return;
+        }
+        $this->setVendorFromData($vendor, $vendorData);
+        $this->remover->removePendingData($vendorData);
     }
 }

@@ -1,15 +1,15 @@
 Sylius\Component\Addressing\Model\Country:
-    polska:
+    poland:
         code: 'PL'
     USA:
         code: 'US'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer:
+Sylius\Component\Core\Model\Customer:
     customer_oliver:
         firstName: "John"
         lastName: "Nowak"
         email: "test@example.com"
         emailCanonical: "test@example.com"
-Sylius\Component\Core\Model\ShopUser:
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]
@@ -17,15 +17,15 @@ Sylius\Component\Core\Model\ShopUser:
         customer: '@customer_oliver'
         username: "oliver@queen.com"
         usernameCanonical: "oliver@queen.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
     vendor_address:
-        country: '@polska'
-        city: 'Warszawa'
+        country: '@poland'
+        city: 'Warsaw'
         postalCode: '00-999'
-        street: 'Wiejska 2115'
+        street: 'Avenue 2115'
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
     vendor_oliver:
-        customer: '@customer_oliver'
+        user: '@user_oliver'
         companyName: 'Test company name'
         taxIdentifier: '1234567'
         phoneNumber: '333111222'
@@ -36,7 +36,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate:
         city: 'Central City'
         postalCode: '99-000'
         street: 'Arrow Street'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate:
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate:
     vendor_oliver_update:
         vendor: '@vendor_oliver'
         companyName: 'new company'

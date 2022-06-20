@@ -11,9 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -29,11 +28,13 @@ class TokenOwningVoter extends Voter
 
         return true;
     }
+
     /*
      * This method call is ignored because phpstan force us to type hint arguments but this method in symfony 4.4
      * is declared without so type hinted arguments cause trouble
      */
-    /** @phpstan-ignore-next-line */    
+
+    /** @phpstan-ignore-next-line */
     protected function voteOnAttribute(
         $attribute,
         $subject,
@@ -57,12 +58,7 @@ class TokenOwningVoter extends Voter
 
     private function IOwnThisData(VendorProfileUpdateInterface $profileUpdate, ShopUserInterface $user): bool
     {
-        /** @var Customer $customer */
-        $customer = $user->getCustomer();
-        if (null == $customer) {
-            return false;
-        }
-        $loggedInVendor = $customer->getVendor();
+        $loggedInVendor = $user->getVendor();
         $vendorData = $profileUpdate->getVendor();
         if ($loggedInVendor === $vendorData) {
             return true;

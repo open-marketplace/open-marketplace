@@ -11,8 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -44,8 +43,8 @@ final class VendorType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('customer', EntityType::class, [
-                'class' => Customer::class,
+            ->add('user', EntityType::class, [
+                'class' => ShopUser::class,
             ])
             ->add('companyName', TextType::class, [
                 'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name',
@@ -69,15 +68,12 @@ final class VendorType extends AbstractResourceType
 
                 /** @var ShopUserInterface $user */
                 $user = $token->getUser();
-
                 if (!$user instanceof ShopUserInterface) {
                     throw new UserNotFoundException('No user found.');
                 }
 
-                /** @var CustomerInterface $customer */
-                $customer = $user->getCustomer();
                 $form = $event->getForm();
-                $form->get('customer')->setData($customer);
+                $form->get('user')->setData($user);
                 $event->setData($form);
             })
             ;

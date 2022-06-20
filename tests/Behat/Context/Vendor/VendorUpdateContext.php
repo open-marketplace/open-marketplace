@@ -48,18 +48,18 @@ class VendorUpdateContext extends MinkContext
     /**
      * @Given there is a vendor user :vendor_user_email registered in country :country_code
      */
-    public function thereIsAVendorUserRegisteredInCountr($vendor_user_email, $country_code)
+    public function thereIsAVendorUserRegisteredInCountry($vendor_user_email, $country_code)
     {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);
 
         $this->userRepository->add($user);
-        $customer = $this->sharedStorage->get('user')->getCustomer();
+
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
         $vendor = new Vendor();
         $vendor->setCompanyName('sdasdsa');
-        $vendor->setCustomer($customer);
+        $vendor->setUser($user);
         $vendor->setPhoneNumber('333333333');
         $vendor->setTaxIdentifier('543455');
         $vendor->setVendorAddress(new VendorAddress());

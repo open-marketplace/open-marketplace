@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
-use Sylius\Component\Core\Model\ShopUserInterface;
+
 use Symfony\Component\Security\Core\Security;
 
 final class VendorProvider implements VendorProviderInterface
@@ -33,10 +33,8 @@ final class VendorProvider implements VendorProviderInterface
         if (null == $user) {
             throw new UserNotFoundException();
         }
-        /** @var Customer $customer */
-        $customer = $user->getCustomer();
         /** @var VendorInterface $vendor */
-        $vendor = $customer->getVendor();
+        $vendor = $user->getVendor();
 
         return $vendor;
     }

@@ -11,30 +11,28 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
-final class VendorProfileUpdateAction 
+final class VendorProfileUpdateAction
 {
     private RequestStack $request;
 
     private VendorProfileUpdateService $vendorProfileUpdateService;
 
     private VendorProvider $vendorProvider;
-    
+
     private FormFactory $formFactory;
-    
+
     private Router $router;
-    
+
     private VendorFactory $vendorFactory;
 
     public function __construct(
@@ -62,7 +60,7 @@ final class VendorProfileUpdateAction
         $form->handleRequest($this->request->getCurrentRequest());
         if ($form->isSubmitted() && $form->isValid()) {
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
-                $form->getData(), 
+                $form->getData(),
                 $this->vendorProvider->provideCurrentVendor()
             );
         }

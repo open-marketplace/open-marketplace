@@ -25,7 +25,7 @@
         
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController"
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_controller"           
-                 parent="bitbag_multi_vendor_marketplace.controller.vendor">
+                 parent="bitbag_sylius_multi_vendor_marketplace_plugin.controller.vendor">
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_provider" />
         </service>        
     </services>

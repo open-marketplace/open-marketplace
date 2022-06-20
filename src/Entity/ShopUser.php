@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-use Sylius\Component\Core\Model\Customer as BaseCustomer;
+use Sylius\Component\Core\Model\ShopUser as BaseShopUser;
 
-class Customer extends BaseCustomer implements CustomerInterface
+class ShopUser extends BaseShopUser implements ShopUserInterface
 {
     private ?VendorInterface $vendor;
 

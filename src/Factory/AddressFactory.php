@@ -9,22 +9,30 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
-use Doctrine\ORM\EntityManagerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
+use Sylius\Component\Addressing\Model\Country;
 
 class AddressFactory
 {
-    private $entityManager;
-    
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    public function createAddress(
+        string $street,
+        string $city,
+        string $postalCode,
+        Country $country
+    ): VendorAddressInterface {
+        $address = $this->createNew();
+        $address->setCountry($country);
+        $address->setPostalCode($postalCode);
+        $address->setStreet($street);
+        $address->setCity($city);
+
+        return $address;
     }
-    public function createNew():VendorAddress
+
+    public function createNew(): VendorAddressInterface
     {
         return new VendorAddress();
     }
