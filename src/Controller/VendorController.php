@@ -14,6 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -60,7 +61,7 @@ final class VendorController extends ResourceController
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        VendorProvider $vendorProvider
+        VendorProviderInterface $vendorProvider
     ) {
         parent::__construct(
             $metadata,

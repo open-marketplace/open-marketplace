@@ -15,7 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use Sylius\Component\Addressing\Model\Country;
 
-class AddressFactory
+class AddressFactory implements AddressFactoryInterface
 {
     public function createAddress(
         string $street,

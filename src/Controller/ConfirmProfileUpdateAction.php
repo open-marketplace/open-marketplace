@@ -18,7 +18,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class ConfirmProfileUpdateAction
 {
@@ -26,9 +27,9 @@ final class ConfirmProfileUpdateAction
 
     private VendorProfileUpdateService $vendorProfileUpdateService;
 
-    private Security $security;
+    private AuthorizationCheckerInterface $security;
 
-    private Router $router;
+    private RouterInterface $router;
 
     public function __construct(
         EntityManagerInterface $entityManager,

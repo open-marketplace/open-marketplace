@@ -11,15 +11,19 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
 final class VendorProfileUpdateAction
 {
@@ -27,11 +31,11 @@ final class VendorProfileUpdateAction
 
     private VendorProfileUpdateService $vendorProfileUpdateService;
 
-    private VendorProvider $vendorProvider;
+    private VendorProviderInterface $vendorProvider;
 
-    private FormFactory $formFactory;
+    private FormFactoryInterface $formFactory;
 
-    private Router $router;
+    private RouterInterface $router;
 
     private VendorFactory $vendorFactory;
 
@@ -40,8 +44,8 @@ final class VendorProfileUpdateAction
         VendorProfileUpdateService $vendorProfileUpdateService,
         VendorProvider $vendorProvider,
         FormFactory $formFactory,
-        Router $router,
-        VendorFactory $vendorFactory
+        RouterInterface $router,
+        AddressFactoryInterface $vendorFactory
     ) {
         $this->request = $request;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
