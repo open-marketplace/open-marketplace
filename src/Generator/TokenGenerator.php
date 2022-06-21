@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Generator;
 
-class TokenGenerator implements TokenGeneratorInterface
+final class TokenGenerator implements TokenGeneratorInterface
 {
     public function generate(): string
     {

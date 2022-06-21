@@ -17,7 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGenerator;
 
-class VendorProfileUpdateFactory implements VendorProfileUpdateFactoryInterface
+final class VendorProfileUpdateFactory implements VendorProfileUpdateFactoryInterface
 {
     private TokenGenerator $tokenGenerator;
 
