@@ -44,6 +44,7 @@ class VendorProfileUpdater implements VendorProfileUpdaterInterface
     public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void
     {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
+        $token = $pendingVendorUpdate->getToken();
 
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
 
@@ -55,12 +56,7 @@ class VendorProfileUpdater implements VendorProfileUpdaterInterface
         if (null === $email) {
             return;
         }
-        $this->sender->send('vendor_profile_update', [$email], ['token' => $pendingVendorUpdate->getToken()]);
-    }
-
-    public function generateToken(): string
-    {
-        return md5(mt_rand(1, 90000) . 'SALT');
+        $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
     }
 
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void

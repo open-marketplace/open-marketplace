@@ -15,10 +15,8 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater;
-use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdaterInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover\RemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
@@ -41,35 +39,39 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         $this->shouldHaveType(VendorProfileUpdater::class);
     }
 
-    public function it_gets_correct_data(
+    public function it_saves_calls_entity_manager(
         EntityManagerInterface $entityManager,
         VendorInterface $vendor,
         VendorProfileInterface $vendorData
     ): void {
-        $vendor->getCompanyName()->shouldBeCalled(1);
-        $vendor->getTaxIdentifier()->shouldBeCalled(1);
-        $vendor->getPhoneNumber()->shouldBeCalled(1);
-        $vendor->getVendorAddress()->shouldBeCalled(4);
+        $vendorData->getCompanyName()->shouldBeCalledTimes(1);
+        $vendorData->getTaxIdentifier()->shouldBeCalledTimes(1);
+        $vendorData->getPhoneNumber()->shouldBeCalledTimes(1);
+        $vendorData->getVendorAddress()->shouldBeCalledTimes(1);
 
-        $this->setVendorFromData($vendorData, $vendor);
+        $this->setVendorFromData($vendor, $vendorData);
+
         $entityManager->flush()->shouldHaveBeenCalled(1);
+        $entityManager->persist($vendor)->shouldHaveBeenCalledTimes(1);
     }
 
     public function it_sends_email_after_create_pending_data(
-        EntityManagerInterface $entityManager,
+
         SenderInterface $sender,
-        RemoverInterface $remover,
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
         VendorProfileInterface $vendorData,
-        VendorProfileUpdateInterface $vendorDataRaw,
+        VendorProfileUpdateInterface $newPendingUpdate,
         ShopUser $user
     ): void {
-
-        $vendorProfileFactory->createWithTokenAndVendor(Argument::any(), $vendor)->willReturn($vendorDataRaw);
+        $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
+        $newPendingUpdate->getToken()->willReturn("testing-token");
+        $newPendingUpdate->setCompanyName(Argument::any())->shouldBeCalled();
+        $newPendingUpdate->setTaxIdentifier(Argument::any())->shouldBeCalled();
+        $newPendingUpdate->setPhoneNumber(Argument::any())->shouldBeCalled();
         $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
         $this->createPendingVendorProfileUpdate($vendorData, $vendor);
-        $sender->send('vendor_profile_update', ['test@mail.at'], Argument::any())->shouldHaveBeenCalled(1);
+        $sender->send('vendor_profile_update', ['test@mail.at'], ['token'=>"testing-token"])->shouldHaveBeenCalled(1);
     }
 }
