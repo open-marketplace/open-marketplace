@@ -15,13 +15,13 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGenerator;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGeneratorInterface;
 
 final class VendorProfileUpdateFactory implements VendorProfileUpdateFactoryInterface
 {
-    private TokenGenerator $tokenGenerator;
+    private TokenGeneratorInterface $tokenGenerator;
 
-    public function __construct(TokenGenerator $tokenGenerator)
+    public function __construct(TokenGeneratorInterface $tokenGenerator)
     {
         $this->tokenGenerator = $tokenGenerator;
     }

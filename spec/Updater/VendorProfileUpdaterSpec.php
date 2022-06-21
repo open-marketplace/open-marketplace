@@ -32,7 +32,7 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         $this->shouldHaveType(VendorProfileUpdaterInterface::class);
     }
 
-    public function it_saves_calls_entity_manager(
+    public function it_calls_entity_manager(
         EntityManagerInterface $entityManager,
         VendorInterface $vendor,
         VendorProfileInterface $vendorData

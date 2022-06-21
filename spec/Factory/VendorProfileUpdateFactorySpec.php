@@ -14,12 +14,12 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactory;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGenerator;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 
 final class VendorProfileUpdateFactorySpec extends ObjectBehavior
 {
-    public function let(TokenGenerator $tokenGenerator): void
+    public function let(TokenGeneratorInterface $tokenGenerator): void
     {
         $this->beConstructedWith($tokenGenerator);
     }
@@ -30,7 +30,7 @@ final class VendorProfileUpdateFactorySpec extends ObjectBehavior
     }
 
     public function it_creates_vendor_profile_update(
-        TokenGenerator $tokenGenerator,
+        TokenGeneratorInterface $tokenGenerator,
         VendorInterface $vendor
     ): void {
         $tokenGenerator->generate()->willReturn('test_token');
@@ -38,7 +38,7 @@ final class VendorProfileUpdateFactorySpec extends ObjectBehavior
     }
 
     public function it_creates_vendor_profile_update_with_valid_token(
-        TokenGenerator $tokenGenerator,
+        TokenGeneratorInterface $tokenGenerator,
         VendorInterface $vendor
     ): void {
         $tokenGenerator->generate()->willReturn('test_token');
