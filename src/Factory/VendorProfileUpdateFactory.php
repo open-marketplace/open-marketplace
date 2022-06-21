@@ -9,11 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-
-interface RemoverInterface
+class VendorProfileUpdateFactory
 {
-    public function removePendingData(VendorProfileUpdateInterface $vendorData): void;
+
 }

@@ -9,13 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileRemover\RemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 

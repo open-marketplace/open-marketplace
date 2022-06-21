@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileRemover;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use Doctrine\ORM\EntityManagerInterface;
