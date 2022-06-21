@@ -14,8 +14,8 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Service;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\RemoverInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover\RemoverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -33,7 +33,7 @@ final class VendorProfileUpdateServiceSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(VendorProfileUpdateService::class);
+        $this->shouldHaveType(VendorProfileUpdater::class);
     }
 
     public function it_gets_correct_data(

@@ -17,13 +17,13 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 class VendorProfileUpdateServiceTest extends JsonApiTestCase
 {
-    private VendorProfileUpdateService $vendorProfileUpdateService;
+    private VendorProfileUpdater $vendorProfileUpdateService;
 
     public function __construct(
         ?string $name = null,
@@ -38,7 +38,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         parent::setUp();
         $remover = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
         $sender = $this->createMock(SenderInterface::class);
-        $this->vendorProfileUpdateService = new VendorProfileUpdateService($this->getEntityManager(), $sender, $remover);
+        $this->vendorProfileUpdateService = new VendorProfileUpdater($this->getEntityManager(), $sender, $remover);
     }
 
     public function test_phpUnitLoadsFixtures(): void

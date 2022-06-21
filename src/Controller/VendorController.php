@@ -13,8 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProviderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProvider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -41,7 +40,7 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
 {
-    private VendorProvider $vendorProvider;
+    private VendorProviderInterface $vendorProvider;
 
     public function __construct(
         MetadataInterface $metadata,

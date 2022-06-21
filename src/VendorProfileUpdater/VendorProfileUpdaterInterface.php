@@ -15,11 +15,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 
-interface VendorProfileUpdateServiceInterface
+interface VendorProfileUpdaterInterface
 {
     public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void;
 
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;
 
-    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void;
+    public function updateVendorFromPendingData(VendorProfileInterface $vendorData): void;
 }

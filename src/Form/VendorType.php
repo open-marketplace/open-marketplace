@@ -43,7 +43,7 @@ final class VendorType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('user', EntityType::class, [
+            ->add('shopUser', EntityType::class, [
                 'class' => ShopUser::class,
             ])
             ->add('companyName', TextType::class, [
@@ -73,7 +73,7 @@ final class VendorType extends AbstractResourceType
                 }
 
                 $form = $event->getForm();
-                $form->get('user')->setData($user);
+                $form->get('shopUser')->setData($user);
                 $event->setData($form);
             })
             ;

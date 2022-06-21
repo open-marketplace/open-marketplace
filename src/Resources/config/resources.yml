@@ -1,3 +1,2 @@
 imports:
     - { resource: 'resources/*.yml' }
-    - { resource: 'email/*.yml'}

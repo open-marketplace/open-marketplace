@@ -12,12 +12,11 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProviderInterface;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProvider\VendorProvider;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProvider\VendorProviderInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -29,7 +28,7 @@ final class VendorProfileUpdateAction
 {
     private RequestStack $request;
 
-    private VendorProfileUpdateService $vendorProfileUpdateService;
+    private VendorProfileUpdater $vendorProfileUpdateService;
 
     private VendorProviderInterface $vendorProvider;
 
@@ -37,15 +36,15 @@ final class VendorProfileUpdateAction
 
     private RouterInterface $router;
 
-    private VendorFactory $vendorFactory;
+    private VendorFactoryInterface $vendorFactory;
 
     public function __construct(
-        RequestStack $request,
-        VendorProfileUpdateService $vendorProfileUpdateService,
-        VendorProvider $vendorProvider,
-        FormFactory $formFactory,
-        RouterInterface $router,
-        AddressFactoryInterface $vendorFactory
+        RequestStack            $request,
+        VendorProfileUpdater    $vendorProfileUpdateService,
+        VendorProvider          $vendorProvider,
+        FormFactory             $formFactory,
+        RouterInterface         $router,
+        VendorFactoryInterface $vendorFactory
     ) {
         $this->request = $request;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;

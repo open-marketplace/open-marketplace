@@ -16,11 +16,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileRemover\RemoverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover\RemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
+class VendorProfileUpdater implements VendorProfileUpdaterInterface
 {
     private EntityManagerInterface $entityManager;
 
@@ -48,7 +48,7 @@ class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
 
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
 
-        $user = $currentVendor->getUser();
+        $user = $currentVendor->getShopUser();
         if (null == $user) {
             return;
         }
@@ -84,7 +84,7 @@ class VendorProfileUpdateService implements VendorProfileUpdateServiceInterface
         $this->entityManager->flush();
     }
 
-    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
+    public function updateVendorFromPendingData(VendorProfileInterface $vendorData): void
     {
         $vendor = $vendorData->getVendor();
         if (null == $vendor) {
