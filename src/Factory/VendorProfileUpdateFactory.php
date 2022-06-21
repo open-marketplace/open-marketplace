@@ -13,17 +13,25 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGenerator;
 
 class VendorProfileUpdateFactory implements VendorProfileUpdateFactoryInterface
 {
-    public function createVendorUpdateInformationWithTokenAndVendor(
-                string $token,
+    private TokenGenerator $tokenGenerator;
+
+    public function __construct(TokenGenerator $tokenGenerator)
+    {
+        $this->tokenGenerator = $tokenGenerator;
+    }
+
+    public function createWithGeneratedTokenAndVendor(
         VendorInterface $vendor
-    ): VendorProfileUpdate {
+    ): VendorProfileUpdateInterface {
         $vendorUpdate = new VendorProfileUpdate();
         $vendorUpdate->setVendorAddress(new VendorAddressUpdate());
-        $vendorUpdate->setToken($token);
+        $vendorUpdate->setToken($this->tokenGenerator->generate());
         $vendorUpdate->setVendor($vendor);
 
         return $vendorUpdate;

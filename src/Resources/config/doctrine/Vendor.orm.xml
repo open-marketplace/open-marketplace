@@ -15,7 +15,7 @@
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" >
             <join-column name="vendor_address_id" referenced-column-name="id" on-delete="SET NULL" />
             <cascade>
-                <cascade-all/>
+                <cascade-persist/>
             </cascade>
         </one-to-one>      
         

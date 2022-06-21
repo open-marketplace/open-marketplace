@@ -9,6 +9,8 @@
             <argument type="service" id="sylius.email_sender"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.vendor_profile_update_remover.remover"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_update_factory"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.generator.token_generator"/>
+
         </service>
     </services>
 </container>

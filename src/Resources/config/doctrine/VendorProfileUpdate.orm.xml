@@ -20,7 +20,6 @@
             </cascade>
         </one-to-one>
         <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor">
-            <join-column name="vendor_id" referenced-column-name="id" on-delete="CASCADE"/>
         </one-to-one>
 
     </mapped-superclass>

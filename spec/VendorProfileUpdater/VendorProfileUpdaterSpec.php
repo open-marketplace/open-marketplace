@@ -9,26 +9,31 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Service;
+namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover\RemoverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdaterInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover\RemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-final class VendorProfileUpdateServiceSpec extends ObjectBehavior
+class VendorProfileUpdaterSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
-        RemoverInterface $remover
+        RemoverInterface $remover,
+        VendorProfileUpdateFactoryInterface $vendorProfileFactory
     ): void {
-        $this->beConstructedWith($entityManager, $sender, $remover);
+        $this->beConstructedWith($entityManager, $sender, $remover, $vendorProfileFactory);
     }
 
     public function it_is_initializable()
@@ -54,13 +59,17 @@ final class VendorProfileUpdateServiceSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         RemoverInterface $remover,
+        VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
         VendorProfileInterface $vendorData,
+        VendorProfileUpdateInterface $vendorDataRaw,
         ShopUser $user
     ): void {
-        $vendor->getUser()->willReturn($user);
+
+        $vendorProfileFactory->createWithTokenAndVendor(Argument::any(), $vendor)->willReturn($vendorDataRaw);
+        $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
         $this->createPendingVendorProfileUpdate($vendorData, $vendor);
-        $sender->send(Argument::type('string'), Argument::any(), Argument::any())->shouldHaveBeenCalled(1);
+        $sender->send('vendor_profile_update', ['test@mail.at'], Argument::any())->shouldHaveBeenCalled(1);
     }
 }

@@ -13,14 +13,14 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory;
 use PhpSpec\ObjectBehavior;
 
-final class VendorFactorySpec extends ObjectBehavior
+final class VendorProfileFactorySpec extends ObjectBehavior
 {
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(VendorFactory::class);
+        $this->shouldHaveType(VendorProfileFactory::class);
     }
 
     public function it_returns_vendor(): void

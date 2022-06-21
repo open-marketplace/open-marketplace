@@ -3,9 +3,9 @@
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 
 interface VendorProfileUpdateFactoryInterface
 {
-    public function createVendorUpdateInformationWithTokenAndVendor(string $token, VendorInterface $vendor): VendorProfileUpdate;
+    public function createWithGeneratedTokenAndVendor(VendorInterface $vendor): VendorProfileUpdateInterface;
 }

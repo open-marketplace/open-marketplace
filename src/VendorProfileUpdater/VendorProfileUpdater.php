@@ -11,11 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGenerator;
 use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover\RemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
@@ -44,20 +43,19 @@ class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
     public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void
     {
-        $token = $this->generateToken();
-        $pendingVendorUpdate = $this->profileUpdateFactory->createVendorUpdateInformationWithTokenAndVendor($token, $currentVendor);
+        $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
 
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
 
-        $user = $currentVendor->getShopUser();
-        if (null == $user) {
+        $shopUser = $currentVendor->getShopUser();
+        if (null === $shopUser) {
             return;
         }
-        $email = $user->getUsername();
-        if (null == $email) {
+        $email = $shopUser->getUsername();
+        if (null === $email) {
             return;
         }
-        $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
+        $this->sender->send('vendor_profile_update', [$email], ['token' => $pendingVendorUpdate->getToken()]);
     }
 
     public function generateToken(): string

@@ -23,7 +23,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
         street: 'Avenue 2115'
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
     vendor_oliver:
-        user: '@user_oliver'
+        shopUser: '@user_oliver'
         companyName: 'Test company name'
         taxIdentifier: '1234567'
         phoneNumber: '333111222'

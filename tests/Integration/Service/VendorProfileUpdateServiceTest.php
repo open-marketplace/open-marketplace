@@ -17,6 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Mailer\Sender\SenderInterface;
@@ -25,20 +26,13 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
 {
     private VendorProfileUpdater $vendorProfileUpdateService;
 
-    public function __construct(
-        ?string $name = null,
-        array $data = [],
-        $dataName = ''
-    ) {
-        parent::__construct($name, $data, $dataName);
-    }
-
     public function setUp(): void
     {
         parent::setUp();
-        $remover = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.service.remover');
+        $remover = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.vendor_profile_update_remover.remover');
         $sender = $this->createMock(SenderInterface::class);
-        $this->vendorProfileUpdateService = new VendorProfileUpdater($this->getEntityManager(), $sender, $remover);
+        $vendorProfileFactory = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_update_factory');
+        $this->vendorProfileUpdateService = new VendorProfileUpdater($this->getEntityManager(), $sender, $remover, $vendorProfileFactory);
     }
 
     public function test_phpUnitLoadsFixtures(): void
@@ -67,7 +61,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
         $poland = $this->getEntityManager()->getRepository(Country::class)->findOneBy(['code' => 'PL']);
         $addressFactory = new AddressFactory();
         $address = $addressFactory->createAddress('Grand Street', 'Warsaw', '00-22', $poland);
-        $vendorFactory = new VendorFactory();
+        $vendorFactory = new VendorProfileFactory();
         $vendorData = $vendorFactory->createVendor('Grand Company', '221133', '0-33 221 333 111', $address);
 
         return $vendorData;
