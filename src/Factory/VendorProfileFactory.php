@@ -15,7 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 
-final class VendorProfileFactory implements VendorFactoryInterface
+final class VendorProfileFactory implements VendorProfileFactoryInterface
 {
     public function createVendor(
         string $companyName,

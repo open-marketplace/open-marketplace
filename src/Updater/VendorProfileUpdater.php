@@ -9,30 +9,30 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGenerator;
-use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover\RemoverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-class VendorProfileUpdater implements VendorProfileUpdaterInterface
+final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 {
     private EntityManagerInterface $entityManager;
 
     private SenderInterface $sender;
 
-    private RemoverInterface $remover;
+    private ProfileUpdateRemoverInterface $remover;
 
     private VendorProfileUpdateFactoryInterface $profileUpdateFactory;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
-        RemoverInterface $remover,
+        ProfileUpdateRemoverInterface $remover,
         VendorProfileUpdateFactoryInterface $profileUpdateFactory
     ) {
         $this->entityManager = $entityManager;
@@ -49,13 +49,8 @@ class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
 
         $shopUser = $currentVendor->getShopUser();
-        if (null === $shopUser) {
-            return;
-        }
         $email = $shopUser->getUsername();
-        if (null === $email) {
-            return;
-        }
+
         $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
     }
 
@@ -79,7 +74,7 @@ class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->entityManager->flush();
     }
 
-    public function updateVendorFromPendingData(VendorProfileInterface $vendorData): void
+    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
     {
         $vendor = $vendorData->getVendor();
         if (null == $vendor) {

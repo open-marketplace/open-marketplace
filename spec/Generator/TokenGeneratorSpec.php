@@ -21,7 +21,7 @@ class TokenGeneratorSpec extends ObjectBehavior
         $this->shouldHaveType(TokenGenerator::class);
     }
 
-    public function it_generates_random_tokens()
+    public function it_generates_random_tokens(): void
     {
         $token1 = $this->generate();
         $token2 = $this->generate();

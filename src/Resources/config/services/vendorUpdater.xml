@@ -3,11 +3,11 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.vendor_profile_updater.vendor_profile_updater" >
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdater"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.updater.vendor_profile_updater" >
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.email_sender"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.vendor_profile_update_remover.remover"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.remover.profile_update_remover"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_update_factory"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.generator.token_generator"/>
 

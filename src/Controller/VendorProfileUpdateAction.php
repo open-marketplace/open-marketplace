@@ -11,12 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
-use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater;
-use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProvider\VendorProvider;
-use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProvider\VendorProviderInterface;
-use Symfony\Component\Form\FormFactory;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +23,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class VendorProfileUpdateAction
 {
-    private VendorProfileUpdater $vendorProfileUpdateService;
+    private VendorProfileUpdaterInterface $vendorProfileUpdateService;
 
     private VendorProviderInterface $vendorProvider;
 
@@ -33,14 +31,14 @@ final class VendorProfileUpdateAction
 
     private RouterInterface $router;
 
-    private VendorFactoryInterface $vendorFactory;
+    private VendorProfileFactoryInterface $vendorFactory;
 
     public function __construct(
-        VendorProfileUpdater $vendorProfileUpdateService,
-        VendorProvider $vendorProvider,
-        FormFactory $formFactory,
+        VendorProfileUpdaterInterface $vendorProfileUpdateService,
+        VendorProviderInterface $vendorProvider,
+        FormFactoryInterface $formFactory,
         RouterInterface $router,
-        VendorFactoryInterface $vendorFactory
+        VendorProfileFactoryInterface $vendorFactory
     ) {
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;

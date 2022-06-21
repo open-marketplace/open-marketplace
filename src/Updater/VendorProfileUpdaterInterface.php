@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
@@ -21,5 +21,5 @@ interface VendorProfileUpdaterInterface
 
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;
 
-    public function updateVendorFromPendingData(VendorProfileInterface $vendorData): void;
+    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void;
 }

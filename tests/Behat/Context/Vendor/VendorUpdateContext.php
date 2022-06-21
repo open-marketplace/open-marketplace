@@ -59,7 +59,7 @@ class VendorUpdateContext extends MinkContext
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
         $vendor = new Vendor();
         $vendor->setCompanyName('sdasdsa');
-        $vendor->setUser($user);
+        $vendor->setShopUser($user);
         $vendor->setPhoneNumber('333333333');
         $vendor->setTaxIdentifier('543455');
         $vendor->setVendorAddress(new VendorAddress());

@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 
-interface RemoverInterface
+interface VendorProviderInterface
 {
-    public function removePendingData(VendorProfileUpdateInterface $vendorData): void;
+    public function provideCurrentVendor(): VendorInterface;
 }

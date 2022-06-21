@@ -5,8 +5,8 @@
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorProfileUpdateAction"
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_profile_update_action">
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.vendor_profile_updater.vendor_profile_updater"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.vendor_provider.vendor_provider"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.updater.vendor_profile_updater"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.provider.vendor_provider"/>
             <argument type="service" id="form.factory"/>
             <argument type="service" id="router"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_factory"/>
@@ -16,7 +16,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ConfirmProfileUpdateAction"
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.confirm_profile_update_action">
             <argument type="service" id="doctrine.orm.default_entity_manager" />    
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.vendor_profile_updater.vendor_profile_updater"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.updater.vendor_profile_updater"/>
             <argument type="service" id="security.helper"/>
             <argument type="service" id="router"/>
             <tag name="controller.service_arguments"/>
@@ -25,7 +25,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController"
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_controller"           
                  parent="bitbag_sylius_multi_vendor_marketplace_plugin.controller.vendor">
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.vendor_provider.vendor_provider" />
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.provider.vendor_provider" />
         </service>        
     </services>
 </container>

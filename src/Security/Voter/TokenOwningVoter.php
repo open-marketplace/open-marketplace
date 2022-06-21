@@ -50,13 +50,13 @@ class TokenOwningVoter extends Voter
 
         switch ($attribute) {
             case self::UPDATE:
-                return $this->IOwnThisData($vendorUpdateData, $user);
+                return $this->doesUserOwnTheData($vendorUpdateData, $user);
             default:
                 return false;
         }
     }
 
-    private function IOwnThisData(VendorProfileUpdateInterface $profileUpdate, ShopUserInterface $user): bool
+    private function doesUserOwnTheData(VendorProfileUpdateInterface $profileUpdate, ShopUserInterface $user): bool
     {
         $loggedInVendor = $user->getVendor();
         $vendorData = $profileUpdate->getVendor();

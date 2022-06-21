@@ -16,9 +16,8 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory;
-use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdater\VendorProfileUpdater;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdater;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
@@ -29,7 +28,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $remover = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.vendor_profile_update_remover.remover');
+        $remover = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.remover.profile_update_remover');
         $sender = $this->createMock(SenderInterface::class);
         $vendorProfileFactory = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_update_factory');
         $this->vendorProfileUpdateService = new VendorProfileUpdater($this->getEntityManager(), $sender, $remover, $vendorProfileFactory);

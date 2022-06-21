@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Remover;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class Remover implements RemoverInterface
+final class ProfileUpdateRemover implements ProfileUpdateRemoverInterface
 {
     private EntityManagerInterface $entityManager;
 
