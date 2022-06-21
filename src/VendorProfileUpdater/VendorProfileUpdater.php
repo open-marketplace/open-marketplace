@@ -15,7 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProfileUpdateRemover\RemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
@@ -28,23 +28,24 @@ class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
     private RemoverInterface $remover;
 
+    private VendorProfileUpdateFactoryInterface $profileUpdateFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
-        RemoverInterface $remover
+        RemoverInterface $remover,
+        VendorProfileUpdateFactoryInterface $profileUpdateFactory
     ) {
         $this->entityManager = $entityManager;
         $this->sender = $sender;
         $this->remover = $remover;
+        $this->profileUpdateFactory = $profileUpdateFactory;
     }
 
     public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void
     {
-        $pendingVendorUpdate = new VendorProfileUpdate();
-        $pendingVendorUpdate->setVendorAddress(new VendorAddressUpdate());
-        $pendingVendorUpdate->setVendor($currentVendor);
         $token = $this->generateToken();
-        $pendingVendorUpdate->setToken($token);
+        $pendingVendorUpdate = $this->profileUpdateFactory->createVendorUpdateInformationWithTokenAndVendor($token, $currentVendor);
 
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
 

@@ -20,14 +20,13 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\VendorProvider\VendorProviderInter
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
 final class VendorProfileUpdateAction
 {
-    private RequestStack $request;
-
     private VendorProfileUpdater $vendorProfileUpdateService;
 
     private VendorProviderInterface $vendorProvider;
@@ -39,14 +38,12 @@ final class VendorProfileUpdateAction
     private VendorFactoryInterface $vendorFactory;
 
     public function __construct(
-        RequestStack            $request,
-        VendorProfileUpdater    $vendorProfileUpdateService,
-        VendorProvider          $vendorProvider,
-        FormFactory             $formFactory,
-        RouterInterface         $router,
+        VendorProfileUpdater $vendorProfileUpdateService,
+        VendorProvider $vendorProvider,
+        FormFactory $formFactory,
+        RouterInterface $router,
         VendorFactoryInterface $vendorFactory
     ) {
-        $this->request = $request;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
         $this->formFactory = $formFactory;
@@ -54,13 +51,13 @@ final class VendorProfileUpdateAction
         $this->vendorFactory = $vendorFactory;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         $profilePath = $this->router->generate('vendor_profile');
         $vendor = $this->vendorFactory->createNew();
         $form = $this->formFactory->create(VendorType::class, $vendor);
 
-        $form->handleRequest($this->request->getCurrentRequest());
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
                 $form->getData(),

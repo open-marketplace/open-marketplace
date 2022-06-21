@@ -3,9 +3,12 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorFactory"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_factory">
-            <argument type="service" id="doctrine.orm.entity_manager"/>            
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_factory">
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactory"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_update_factory">
         </service>
     </services>
 </container>

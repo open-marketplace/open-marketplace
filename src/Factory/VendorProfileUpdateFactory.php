@@ -11,31 +11,20 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 
-class VendorProfileUpdateFactory
+class VendorProfileUpdateFactory implements VendorProfileUpdateFactoryInterface
 {
-    public function createNew(): VendorProfileUpdateInterface
-    {
-        return new VendorProfileUpdate();
-    }
-
-    public function createVendorUpdateInformation(
-        string $companyName,
-        string $taxIdentifier,
-        string $phoneNumber,
-        VendorAddressInterface $address,
-        string $token,
+    public function createVendorUpdateInformationWithTokenAndVendor(
+                string $token,
         VendorInterface $vendor
     ): VendorProfileUpdate {
-        $vendorUpdate = $this->createNew();
-        $vendorUpdate->setPhoneNumber($phoneNumber);
-        $vendorUpdate->setCompanyName($companyName);
-        $vendorUpdate->setTaxIdentifier($taxIdentifier);
-        $vendorUpdate->setVendorAddress($address);
+        $vendorUpdate = new VendorProfileUpdate();
+        $vendorUpdate->setVendorAddress(new VendorAddressUpdate());
+        $vendorUpdate->setToken($token);
+        $vendorUpdate->setVendor($vendor);
 
         return $vendorUpdate;
     }
