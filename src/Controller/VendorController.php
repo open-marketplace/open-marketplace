@@ -33,58 +33,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
 {
-    private RequestStack $request;
-
-    public function __construct(
-        MetadataInterface                    $metadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ?ViewHandlerInterface                $viewHandler,
-        RepositoryInterface                  $repository,
-        FactoryInterface                     $factory,
-        NewResourceFactoryInterface          $newResourceFactory,
-        ObjectManager                        $manager,
-        SingleResourceProviderInterface      $singleResourceProvider,
-        ResourcesCollectionProviderInterface $resourcesFinder,
-        ResourceFormFactoryInterface         $resourceFormFactory,
-        RedirectHandlerInterface             $redirectHandler,
-        FlashHelperInterface                 $flashHelper,
-        AuthorizationCheckerInterface        $authorizationChecker,
-        EventDispatcherInterface             $eventDispatcher,
-        ?StateMachineInterface               $stateMachine,
-        ResourceUpdateHandlerInterface       $resourceUpdateHandler,
-        ResourceDeleteHandlerInterface       $resourceDeleteHandler,
-        RequestStack                         $request
-    )
-    {
-        parent::__construct(
-            $metadata,
-            $requestConfigurationFactory,
-            $viewHandler,
-            $repository,
-            $factory,
-            $newResourceFactory,
-            $manager,
-            $singleResourceProvider,
-            $resourcesFinder,
-            $resourceFormFactory,
-            $redirectHandler,
-            $flashHelper,
-            $authorizationChecker,
-            $eventDispatcher,
-            $stateMachine,
-            $resourceUpdateHandler,
-            $resourceDeleteHandler
-        );
-
-        $this->request = $request;
-    }
-
     public function createAction(Request $request): Response
     {
         try {
@@ -96,17 +49,17 @@ final class VendorController extends ResourceController
         }
     }
 
-    public function verifyVendorAction(): Response
+    public function verifyVendorAction(Request $request): Response
     {
-        $vendorId = $this->request->getCurrentRequest()->attributes->get('id');
+        $vendorId = $request->attributes->get('id');
 
         $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
         $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
 
         $this->manager->flush();
 
-        $this->addFlash('success', 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.vendor_verified');
+        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_verified');
 
-        return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_index');
+        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
     }
 }
