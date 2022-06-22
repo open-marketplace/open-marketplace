@@ -17,6 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationIn
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -96,7 +97,7 @@ final class ConversationType extends AbstractType
 
             return;
         }
-
+        if($resolvedUser instanceof ShopUser )
         $conversation->setShopUser($resolvedUser);
     }
 
