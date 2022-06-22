@@ -48,7 +48,7 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         $entityManager->persist($vendor)->shouldHaveBeenCalledTimes(1);
     }
 
-    public function it_sends_email_after_create_pending_data(
+    public function it_sends_email_after_creating_pending_data(
         SenderInterface $sender,
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
