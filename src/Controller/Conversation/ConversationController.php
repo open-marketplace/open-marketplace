@@ -48,9 +48,8 @@ final class ConversationController
         $this->requestStack = $requestStack;
     }
 
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $request = $this->requestStack->getCurrentRequest();
         $template = $request->attributes->get('_sylius')['template'];
 
         $actualUser = $this->actualUserResolver->resolve();
@@ -71,9 +70,8 @@ final class ConversationController
         );
     }
 
-    public function show(int $id): Response
+    public function show(int $id, Request $request): Response
     {
-        $request = $this->requestStack->getCurrentRequest();
         $template = $request->attributes->get('_sylius')['template'];
 
         $form = $this->formFactory->create(MessageType::class);

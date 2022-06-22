@@ -34,6 +34,7 @@ class Conversation implements ConversationInterface
 
     protected AdminUserInterface $adminUser;
 
+    /** @var ?Collection<int, MessageInterface>  */
     protected ?Collection $messages = null;
 
     protected string $status = self::STATUS_OPEN;
@@ -60,11 +61,7 @@ class Conversation implements ConversationInterface
 
     public function getApplicant(): ?UserInterface
     {
-        if (null !== $this->getVendorUser()) {
-            return $this->getVendorUser()->getCustomer()->getUser();
-        } else {
-            return $this->getShopUser();
-        }
+        return $this->getShopUser();
     }
 
     public function setApplicant(VendorInterface $vendor): void
@@ -98,6 +95,7 @@ class Conversation implements ConversationInterface
         }
     }
 
+    /** @return ?Collection<int, MessageInterface>  */
     public function getMessages(): ?Collection
     {
         return $this->messages;
@@ -112,7 +110,7 @@ class Conversation implements ConversationInterface
     {
         $this->status = $status;
     }
-
+    /** @param ?Collection<int, MessageInterface> $messages  */
     public function setMessages(?Collection $messages): void
     {
         $this->messages = $messages;

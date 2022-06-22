@@ -24,6 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -58,16 +59,16 @@ final class CreateNewConversationAction
         $this->addMessageFacade = $addMessageFacade;
     }
 
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
-        $template = $this->request->getCurrentRequest()->attributes->get('_sylius')['template'];
+        $template = $request->attributes->get('_sylius')['template'];
 
         $form = $this->formFactory->create(ConversationType::class);
 
-        $form->handleRequest($this->request->getCurrentRequest());
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $redirect = $this->request->getCurrentRequest()->attributes->get('_sylius')['redirect'];
+            $redirect = $request->attributes->get('_sylius')['redirect'];
 
             /** @var ConversationInterface $conversation */
             $conversation = $form->getData();
@@ -90,13 +91,14 @@ final class CreateNewConversationAction
     }
     private function addConversationWithMessages(ConversationInterface $conversation): void
     {
-        /** @var MessageInterface $message */
-        foreach ($conversation->getMessages()->toArray() as $message) {
-            $this->addMessageFacade->createWithConversation(
-                $conversation->getId(),
-                $message,
-                $message->getFile(),
-            );
-        }
+        if(null !== $conversation->getMessages())
+            /** @var MessageInterface $message */
+            foreach ($conversation->getMessages()->toArray() as $message) {
+                $this->addMessageFacade->createWithConversation(
+                    $conversation->getId(),
+                    $message,
+                    $message->getFile(),
+                );
+            }
     }
 }
