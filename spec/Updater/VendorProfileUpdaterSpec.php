@@ -56,7 +56,6 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorProfileInterface $vendorData,
         VendorProfileUpdateInterface $newPendingUpdate,
         ShopUser $user,
-        VendorAddressInterface $vendorAddress,
         VendorAddressInterface $vendorAddressUpdate
     ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
@@ -73,6 +72,6 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
         $this->createPendingVendorProfileUpdate($vendorData, $vendor);
-        $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])->shouldHaveBeenCalled(1);
+        $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])->shouldHaveBeenCalledTimes(1);
     }
 }
