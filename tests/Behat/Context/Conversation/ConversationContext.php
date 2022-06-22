@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Admin;
+namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Conversation;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
+use Behat\MinkExtension\Context\MinkContext;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\VendorExampleFactory;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -11,9 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 
-class StarConversationContext extends RawMinkContext implements Context
+class ConversationContext extends MinkContext implements Context
 {
-
     private EntityManagerInterface $entityManager;
 
     private AdminUserExampleFactory $adminUserExampleFactory;
@@ -59,7 +59,7 @@ class StarConversationContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given there is an vendor userName :arg1 with password :arg2
+     * @Given there is vendor userName :arg1 with password :arg2
      */
     public function thereIsAnVendorUsernameWithPassword2($arg1, $arg2)
     {

@@ -1,0 +1,12 @@
+default:
+  suites:
+    admin_start_conversation:
+      contexts:
+      - tests.bit_bag.sylius_multi_vendor_marketplace_plugin.behat.context.conversation.conversation_context
+      - sylius.behat.context.setup.shop_security
+      - sylius.behat.context.setup.admin_security
+      - sylius.behat.context.setup.admin_user
+      - sylius.behat.context.hook.doctrine_orm
+      - sylius.behat.context.setup.channel
+      filters:
+        tags: "@admin_start_conversation"
