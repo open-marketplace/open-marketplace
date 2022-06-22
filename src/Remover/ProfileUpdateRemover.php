@@ -23,7 +23,7 @@ final class ProfileUpdateRemover implements ProfileUpdateRemoverInterface
         $this->entityManager = $entityManager;
     }
 
-    public function removePendingData(VendorProfileUpdateInterface $vendorData): void
+    public function removePendingUpdate(VendorProfileUpdateInterface $vendorData): void
     {
         $mergedUpdate = $this->entityManager->merge($vendorData);
         $pendingAddressChange = $vendorData->getVendorAddress();
