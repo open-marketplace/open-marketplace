@@ -1,11 +1,4 @@
 bitbag_mvm_plugin_admin_vendor_enable:
     path: /vendors/{id}/enable
     methods: [PUT]
-#    defaults:
     controller: bitbag_mvm_plugin.controller.vendor_controller:enablingVendorAction
-#        _sylius:
-#            state_machine:
-#                graph: bitbag_mvm_plugin_vendor_blocking
-#                transition: unblock
-#            redirect: bitbag_mvm_plugin_admin_vendor_index
-#            flash: bitbag_mvm_plugin.ui.vendor_unblocked
