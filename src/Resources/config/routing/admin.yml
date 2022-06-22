@@ -2,3 +2,5 @@ bitbag_multi_vendor_marketplace_product_listings:
     resource: 'admin/product_listing.yml'
 bitbag_multi_vendor_marketplace_vendor:
     resource: 'admin/vendor.yml'
+bitbag_multi_vendor_marketplace_vendor_verify:
+    resource: "admin/vendor_verify.yml"

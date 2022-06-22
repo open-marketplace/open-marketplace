@@ -1,2 +1,6 @@
 vendor:
     vendor_register: "Thank you for filling the Vendor registration form. Your request now will be reviewed by our administrators"
+
+bitbag_mvm_plugin:
+    ui:
+        vendor_verified: 'Vendor has been successfully verified'

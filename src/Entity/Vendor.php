@@ -25,6 +25,8 @@ class Vendor implements VendorInterface
 
     private ?VendorAddressInterface $vendorAddress;
 
+    private string $status = self::STATUS_UNVERIFIED;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -83,5 +85,15 @@ class Vendor implements VendorInterface
     public function setCustomer(CustomerInterface $customer): void
     {
         $this->customer = $customer;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 }

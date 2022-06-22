@@ -15,6 +15,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface VendorInterface extends ResourceInterface
 {
+    public const STATUS_UNVERIFIED = 'unverified';
+
+    public const STATUS_VERIFIED = 'verified';
+
     public function getId(): ?int;
 
     public function setId(?int $id): void;
@@ -37,5 +41,9 @@ interface VendorInterface extends ResourceInterface
 
     public function getCustomer(): CustomerInterface;
 
-    public function setCustomer(CustomerInterface $customer): void;
+    public function setCustomer(Customer $customer): void;
+
+    public function getStatus(): string;
+
+    public function setStatus(string $status): void;
 }
