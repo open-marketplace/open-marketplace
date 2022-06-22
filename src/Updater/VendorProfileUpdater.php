@@ -77,7 +77,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
     public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
     {
         $vendor = $vendorData->getVendor();
-        if (null == $vendor) {
+        if (null === $vendor) {
             return;
         }
         $this->setVendorFromData($vendor, $vendorData);
