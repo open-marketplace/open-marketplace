@@ -1,6 +1,7 @@
 imports:
     - suites/customer_dashboard.yml
     - suites/vendor_register.yml
-    - suites/ui/admin/product_listing.yml 
+    - suites/ui/admin/product_listing.yml
     - suites/ui/managing_vendors.yml
     - suites/ui/verifying_vendors.yml
+    - suites/ui/disabling_vendors.yml

@@ -7,6 +7,9 @@ bitbag_mvm_plugin:
         country: "Country"
         customer: 'Customer'
         details: 'Details'
+        disable: 'Disable'
+        enable: 'Enable'
+        enabled: 'Enabled'
         id: 'ID'
         marketplace: 'Marketplace'
         not_blank: "This field cannnot be empty"
@@ -25,7 +28,3 @@ bitbag_mvm_plugin:
         verified: 'Verified'
         verify: 'Verify'
         new_vendor: 'New Vendor'
-
-app:
-    ui:
-        vendors: 'Vendors'

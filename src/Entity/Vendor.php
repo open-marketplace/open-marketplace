@@ -27,6 +27,8 @@ class Vendor implements VendorInterface
 
     private string $status = self::STATUS_UNVERIFIED;
 
+    private bool $enabled = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,5 +97,15 @@ class Vendor implements VendorInterface
     public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
     }
 }

@@ -12,6 +12,7 @@
         <field name="taxIdentifier" column="tax_identifier" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
         <field name="status" column="status" type="string" />
+        <field name="enabled" column="enabled" type="boolean" />
 
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress" >
             <cascade>

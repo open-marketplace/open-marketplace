@@ -1,4 +1,7 @@
 sylius_grid:
+    templates:
+        action:
+            enable_disable_action: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/enableDisableButtons.html.twig"
     grids:
         bitbag_mvm_plugin_admin_vendor:
             driver:
@@ -27,6 +30,12 @@ sylius_grid:
                     label: bitbag_mvm_plugin.ui.status
                     options:
                         template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/status.html.twig'
+                    sortable: ~
+                enabled:
+                    type: twig
+                    label: bitbag_mvm_plugin.ui.enabled
+                    options:
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/enabled.html.twig'
             actions:
                 main:
                     create:
@@ -39,3 +48,5 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                    enable_disable:
+                        type: enable_disable_action

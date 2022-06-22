@@ -1,0 +1,10 @@
+default:
+    suites:
+        ui_disabling_vendors:
+            contexts:
+                - bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_disabling
+                - Behat\MinkExtension\Context\MinkContext
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.hook.doctrine_orm
+            filters:
+                tags: "@disabling_vendors && @ui"

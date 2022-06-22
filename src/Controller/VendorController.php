@@ -45,4 +45,16 @@ final class VendorController extends ResourceController
 
         return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
     }
+
+    public function enablingVendorAction(Request $request): Response
+    {
+        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $request->attributes->get('id')]);
+        $currentVendor->setEnabled(!$currentVendor->isEnabled());
+        $this->manager->flush();
+
+        $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
+        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
+
+        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+    }
 }
