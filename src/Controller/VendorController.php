@@ -100,7 +100,7 @@ final class VendorController extends ResourceController
     {
         $vendor = $this->vendorProvider->provideCurrentVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
-        if (null == $pendingUpdate) {
+        if (null === $pendingUpdate) {
             return parent::updateAction($request);
         }
         $this->addFlash('error', 'sylius.user.verify_email_request');

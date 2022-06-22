@@ -23,17 +23,13 @@ final class AddressFactorySpec extends ObjectBehavior
         $this->shouldHaveType(AddressFactory::class);
     }
 
-    public function it_returns_address(): void
-    {
-        $this->createNew()->shouldHaveType(VendorAddressInterface::class);
-    }
-
     public function it_returns_valid_address(Country $country): void
     {
-        $this->createAddress('some street', 'City', '22-111', $country)->shouldHaveType(VendorAddressInterface::class);
-        $this->createAddress('some street', 'City', '22-111', $country)->getStreet()->shouldBeEqualTo('some street');
-        $this->createAddress('some street', 'City', '22-111', $country)->getCity()->shouldBeEqualTo('City');
-        $this->createAddress('some street', 'City', '22-111', $country)->getPostalCode()->shouldBeEqualTo('22-111');
-        $this->createAddress('some street', 'City', '22-111', $country)->getCountry()->shouldBeEqualTo($country);
+        $address = $this->createAddress('some street', 'City', '22-111', $country);
+        $address->getCountry()->shouldBeEqualTo($country);
+        $address->shouldHaveType(VendorAddressInterface::class);
+        $address->getStreet()->shouldBeEqualTo('some street');
+        $address->getCity()->shouldBeEqualTo('City');
+        $address->getPostalCode()->shouldBeEqualTo('22-111');
     }
 }
