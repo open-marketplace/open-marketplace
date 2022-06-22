@@ -1,10 +1,10 @@
 bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor:
     resource: |
         alias: bitbag_sylius_multi_vendor_marketplace_plugin.vendor
-        except: [show]
         section: admin
+        except: ['show']
         templates: "@SyliusAdmin\\Crud"
-        grid: bitbag_sylius_multi_vendor_marketplace_plugin_vendor
+        grid: bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor
     type: sylius.resource
 
 bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_show:

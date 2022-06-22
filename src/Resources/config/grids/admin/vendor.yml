@@ -1,10 +1,10 @@
 sylius_grid:
     grids:
-        bitbag_sylius_multi_vendor_marketplace_plugin_vendor:
+        bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%bitbag_sylius_multi_vendor_marketplace_plugin.model.vendor.class%"
+                    class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor
                     repository:
                         method: createListQueryBuilder
             sorting:
