@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
@@ -54,13 +55,21 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorInterface $vendor,
         VendorProfileInterface $vendorData,
         VendorProfileUpdateInterface $newPendingUpdate,
-        ShopUser $user
+        ShopUser $user,
+        VendorAddressInterface $vendorAddress,
+        VendorAddressInterface $vendorAddressUpdate
     ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
         $newPendingUpdate->getToken()->willReturn('testing-token');
-        $newPendingUpdate->setCompanyName(Argument::any())->shouldBeCalled();
-        $newPendingUpdate->setTaxIdentifier(Argument::any())->shouldBeCalled();
-        $newPendingUpdate->setPhoneNumber(Argument::any())->shouldBeCalled();
+        $vendorData->getCompanyName()->willReturn('testcompany');
+        $vendorData->getTaxIdentifier()->willReturn('testTaxID');
+        $vendorData->getPhoneNumber()->willReturn('testNumber');
+        $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
+
+        $newPendingUpdate->getVendorAddress()->shouldBeCalled();
+        $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
+        $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
+        $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
         $this->createPendingVendorProfileUpdate($vendorData, $vendor);

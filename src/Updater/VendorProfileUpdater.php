@@ -61,9 +61,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $vendor->setPhoneNumber($data->getPhoneNumber());
         $newVendorAddress = $data->getVendorAddress();
 
-        if (null == $newVendorAddress) {
-            return;
-        }
+
         if (null !== $vendor->getVendorAddress()) {
             $vendor->getVendorAddress()->setCity($newVendorAddress->getCity());
             $vendor->getVendorAddress()->setCountry($newVendorAddress->getCountry());
