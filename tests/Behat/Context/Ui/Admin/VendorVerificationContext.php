@@ -27,8 +27,7 @@ final class VendorVerificationContext extends RawMinkContext implements Context
     public function __construct(
         EntityManagerInterface $entityManager,
         ContainerInterface $container
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->container = $container;
     }
