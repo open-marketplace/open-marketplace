@@ -3,3 +3,4 @@ imports:
     - suites/vendor_register.yml
     - suites/ui/admin/product_listing.yml 
     - suites/ui/managing_vendors.yml
+    - suites/start_conversation.yml
