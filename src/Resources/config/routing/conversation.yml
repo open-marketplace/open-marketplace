@@ -18,10 +18,10 @@ mvm_admin_conversation_create:
     path: /admin/conversation/create
     methods: [GET,POST]
     defaults:
-        _controller: mvm.controller.create_new_conversation_action
+        _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation.create_new_conversation_action
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/Admin/create.html.twig"
-            redirect: mvm_admin_conversation_show
+            redirect: bitbag_multi_vendor_marketplace_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
         
 bitbag_multi_vendor_marketplace_admin_conversation_show:

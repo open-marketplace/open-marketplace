@@ -63,7 +63,7 @@ class Conversation implements ConversationInterface
         if (null !== $this->getVendorUser()) {
             return $this->getVendorUser()->getCustomer()->getUser();
         } else {
-            return null;
+            return $this->getShopUser();
         }
     }
 

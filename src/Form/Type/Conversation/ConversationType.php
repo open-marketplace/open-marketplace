@@ -17,6 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationIn
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -32,12 +33,16 @@ final class ConversationType extends AbstractType
 
     private VendorRepository $vendorRepository;
 
+    private UserRepositoryInterface $userRepository;
+
     public function __construct(
         ActualUserResolverInterface $actualUserResolver,
-        VendorRepository $vendorRepository
+        VendorRepository $vendorRepository,
+        UserRepositoryInterface $userRepository
     ) {
         $this->actualUserResolver = $actualUserResolver;
         $this->vendorRepository = $vendorRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -54,7 +59,6 @@ final class ConversationType extends AbstractType
             ])
             ->addEventListener(FormEvents::SUBMIT, [$this, 'onSubmit'])
             ->addEventListener(FormEvents::POST_SET_DATA, [$this, 'postSetData']);
-        //dd("a");
     }
 
     public function postSetData(FormEvent $event): void
@@ -85,13 +89,15 @@ final class ConversationType extends AbstractType
         $resolvedUser = $this->actualUserResolver->resolve();
 
         if ($event->getForm()->has('vendorUser') && $resolvedUser instanceof AdminUserInterface) {
-            $conversation->setApplicant($event->getForm()->get('vendorUser')->getData());
+            $vendor = $event->getForm()->get('vendorUser')->getData();
+            $user = $vendor->getCustomer()->getUser();
+            $conversation->setShopUser($user);
             $conversation->setAdminUser($resolvedUser);
 
             return;
         }
-        $vendor = $resolvedUser->getCustomer()->getVendor();
-        $conversation->setApplicant($vendor);
+
+        $conversation->setShopUser($resolvedUser);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
