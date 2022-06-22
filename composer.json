@@ -4,7 +4,7 @@
     "description": "Skeleton for starting Sylius plugins.",
     "license": "MIT",
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.0",
         "sylius/sylius": "~1.9.0 || ~1.10.0 || ~1.11.0"
     },
     "require-dev": {
@@ -56,17 +56,6 @@
     "autoload-dev": {
         "classmap": [
             "tests/Application/Kernel.php"
-        ]
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-update-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-create-project-cmd": [
-            "php bin/create_node_symlink.php"
         ]
     }
 }

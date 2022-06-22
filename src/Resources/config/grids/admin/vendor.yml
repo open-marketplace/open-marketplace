@@ -3,11 +3,11 @@ sylius_grid:
         action:
             enable_disable_action: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/enableDisableButtons.html.twig"
     grids:
-        bitbag_sylius_multi_vendor_marketplace_plugin_vendor:
+        bitbag_mvm_plugin_admin_vendor:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%bitbag_sylius_multi_vendor_marketplace_plugin.model.vendor.class%"
+                    class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor
                     repository:
                         method: createListQueryBuilder
             sorting:
@@ -15,25 +15,25 @@ sylius_grid:
             fields:
                 id:
                     type: string
-                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.id
+                    label: bitbag_mvm_plugin.ui.id
                     sortable: ~
                 companyName:
                     type: string
-                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name
+                    label: bitbag_mvm_plugin.ui.company_name
                     sortable: ~
                 taxIdentifier:
                     type: string
-                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_id
+                    label: bitbag_mvm_plugin.ui.tax_id
                     sortable: ~
                 status:
                     type: twig
-                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
+                    label: bitbag_mvm_plugin.ui.status
                     options:
                         template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/status.html.twig'
                     sortable: ~
                 enabled:
                     type: twig
-                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.enabled
+                    label: bitbag_mvm_plugin.ui.enabled
                     options:
                         template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/enabled.html.twig'
             actions:
@@ -42,7 +42,7 @@ sylius_grid:
                         type: create
                 item:
                     details:
-                        label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.details
+                        label: bitbag_mvm_plugin.ui.details
                         type: show
                     update:
                         type: update

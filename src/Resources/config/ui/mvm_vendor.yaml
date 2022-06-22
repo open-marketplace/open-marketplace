@@ -1,11 +1,11 @@
 sylius_ui:
     events:
-        bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.show.details:
+        bitbag_mvm_plugin.admin.vendor.show.details:
             blocks:
                 content:
                     template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_details.html.twig'
                     priority: 10
-        bitbag_sylius_multi_vendor_marketplace_plugin.admin.vendor.show.details_content:
+        bitbag_mvm_plugin.admin.vendor.show.details_content:
             blocks:
                 labels:
                     template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_detailsLabels.html.twig'
@@ -13,7 +13,3 @@ sylius_ui:
                 table:
                     template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_detailsTable.html.twig'
                     priority: 10
-
-
-
-

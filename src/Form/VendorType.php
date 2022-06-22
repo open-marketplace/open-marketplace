@@ -48,16 +48,16 @@ final class VendorType extends AbstractResourceType
                 'class' => Customer::class,
             ])
             ->add('companyName', TextType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name',
+                'label' => 'bitbag_mvm_plugin.ui.company_name',
             ])
             ->add('taxIdentifier', TextType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_identifier',
+                'label' => 'bitbag_mvm_plugin.ui.tax_identifier',
             ])
             ->add('phoneNumber', TelType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.phone_number',
+                'label' => 'bitbag_mvm_plugin.ui.phone_number',
             ])
             ->add('vendorAddress', VendorAddressType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_address',
+                'label' => 'bitbag_mvm_plugin.ui.company_address',
                 'constraints' => [new Valid()],
             ])
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {

@@ -13,8 +13,8 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\CustomerDashboardPage;
 use function PHPUnit\Framework\assertTrue;
+use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\CustomerDashboardPage;
 
 class CustomerDashboardContext extends MinkContext implements Context
 {
@@ -24,7 +24,7 @@ class CustomerDashboardContext extends MinkContext implements Context
     {
         $this->dashboardPage = $dashboardPage;
     }
-    
+
     /**
      * @Then I should see :arg1 inside sidebar
      */
