@@ -12,32 +12,32 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProvider;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\TokenOwningVoter;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class ConfirmProfileUpdateAction
 {
     private EntityManagerInterface $entityManager;
 
-    private VendorProfileUpdateService $vendorProfileUpdateService;
+    private VendorProfileUpdaterInterface $vendorProfileUpdateService;
 
-    private Security $security;
+    private AuthorizationCheckerInterface $security;
 
-    private Router $router;
+    private RouterInterface $router;
 
     private VendorProvider $vendorProvider;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        VendorProfileUpdateService $vendorProfileUpdateService,
-        Security $security,
-        Router $router,
+        VendorProfileUpdaterInterface $vendorProfileUpdateService,
+        AuthorizationCheckerInterface $security,
+        RouterInterface $router,
         VendorProvider $vendorProvider
     ) {
         $this->entityManager = $entityManager;
@@ -54,13 +54,11 @@ final class ConfirmProfileUpdateAction
         $vendorIsGranted = $this->security->isGranted(TokenOwningVoter::UPDATE, $vendorProfileUpdateData);
         if ($vendorIsGranted && null !== $vendorProfileUpdateData) {
             $this->vendorProfileUpdateService->updateVendorFromPendingData($vendorProfileUpdateData);
+
+            $loggedVendor = $this->vendorProvider->provideCurrentVendor();
+            $loggedVendor->setEditDate(null);
+            $this->entityManager->flush();
         }
-
-        $this->vendorProfileUpdateService->updateVendorFromPendingData($vendorProfileUpdateData);
-
-        $loggedVendor = $this->vendorProvider->provideCurrentVendor();
-        $loggedVendor->setEditDate(null);
-        $this->entityManager->flush();
 
         return new RedirectResponse($profileRoot);
     }

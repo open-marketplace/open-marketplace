@@ -11,9 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -51,20 +50,15 @@ class TokenOwningVoter extends Voter
 
         switch ($attribute) {
             case self::UPDATE:
-                return $this->IOwnThisData($vendorUpdateData, $user);
+                return $this->doesUserOwnTheData($vendorUpdateData, $user);
             default:
                 return false;
         }
     }
 
-    private function IOwnThisData(VendorProfileUpdateInterface $profileUpdate, ShopUserInterface $user): bool
+    private function doesUserOwnTheData(VendorProfileUpdateInterface $profileUpdate, ShopUserInterface $user): bool
     {
-        /** @var Customer $customer */
-        $customer = $user->getCustomer();
-        if (null == $customer) {
-            return false;
-        }
-        $loggedInVendor = $customer->getVendor();
+        $loggedInVendor = $user->getVendor();
         $vendorData = $profileUpdate->getVendor();
         if ($loggedInVendor === $vendorData) {
             return true;

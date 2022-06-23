@@ -1,3 +1,2 @@
 imports:
-    - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/email/activation_token.yml' }
-    - { resource: 'resources/*.yml' }
+  - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/*.yml' }

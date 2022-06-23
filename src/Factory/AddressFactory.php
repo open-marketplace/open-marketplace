@@ -15,7 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use Sylius\Component\Addressing\Model\Country;
 
-class AddressFactory
+final class AddressFactory implements AddressFactoryInterface
 {
     public function createAddress(
         string $street,
@@ -23,17 +23,12 @@ class AddressFactory
         string $postalCode,
         Country $country
     ): VendorAddressInterface {
-        $address = $this->createNew();
+        $address = new VendorAddress();
         $address->setCountry($country);
         $address->setPostalCode($postalCode);
         $address->setStreet($street);
         $address->setCity($city);
 
         return $address;
-    }
-
-    public function createNew(): VendorAddressInterface
-    {
-        return new VendorAddress();
     }
 }

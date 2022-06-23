@@ -1,7 +1,7 @@
 vendor:
     vendor_register: "Thank you for filling the Vendor registration form. Your request now will be reviewed by our administrators"
 
-bitbag_sylius_multi_vendor_marketplace_plugin:
+bitbag_mvm_plugin:
     ui:
         vendor_disabled: "Vendor's account has been successfully disabled."
         vendor_enabled: "Vendor's account has been successfully enabled."

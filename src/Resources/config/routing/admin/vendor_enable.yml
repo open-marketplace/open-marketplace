@@ -1,5 +1,4 @@
-bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_enable:
+bitbag_mvm_plugin_admin_vendor_enable:
     path: /vendors/{id}/enable
     methods: [PUT]
-    controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_controller:enablingVendorAction
-
+    controller: bitbag_mvm_plugin.controller.vendor_controller:enablingVendorAction

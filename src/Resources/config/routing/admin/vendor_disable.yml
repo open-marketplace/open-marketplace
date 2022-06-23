@@ -1,4 +1,4 @@
-bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_disable:
+bitbag_mvm_plugin_admin_vendor_disable:
     path: /vendors/{id}/disable
     methods: [PUT]
-    controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_controller:enablingVendorAction
+    controller: bitbag_mvm_plugin.controller.vendor_controller:enablingVendorAction

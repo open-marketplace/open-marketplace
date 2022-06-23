@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin;
@@ -18,7 +25,7 @@ final class VendorDisablingContext extends RawMinkContext implements Context
 
     public function __construct(
         EntityManagerInterface $entityManager
-    ){
+    ) {
         $this->entityManager = $entityManager;
     }
 
@@ -27,7 +34,7 @@ final class VendorDisablingContext extends RawMinkContext implements Context
      */
     public function thereIsAVendor($ifEnabled)
     {
-        $flag = $ifEnabled == 'enabled' ? true : false;
+        $flag = 'enabled' == $ifEnabled ? true : false;
         $vendor = new Vendor();
         $vendor->setCompanyName('vendor');
         $vendor->setTaxIdentifier('vendorTax');
@@ -51,12 +58,11 @@ final class VendorDisablingContext extends RawMinkContext implements Context
     public function iChoose($element)
     {
         $page = $this->getSession()->getPage();
-        $findName = $page->find("css", $element);
+        $findName = $page->find('css', $element);
         if (!$findName) {
-            throw new Exception($element . " could not be found");
-        } else {
-            $findName->click();
+            throw new Exception($element . ' could not be found');
         }
+        $findName->click();
     }
 
     /**
@@ -64,9 +70,9 @@ final class VendorDisablingContext extends RawMinkContext implements Context
      */
     public function iShouldNotSeeButton($ifEnabled)
     {
-        $element = '#'.strtolower($ifEnabled);
+        $element = '#' . strtolower($ifEnabled);
         $page = $this->getSession()->getPage();
-        $findName = $page->find("css", $element);
+        $findName = $page->find('css', $element);
         assertNull($findName);
     }
 

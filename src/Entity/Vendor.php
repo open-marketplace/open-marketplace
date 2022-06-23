@@ -17,7 +17,7 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
 {
     protected ?int $id;
 
-    protected CustomerInterface $customer;
+    protected ShopUserInterface $shopUser;
 
     protected ?string $companyName;
 
@@ -83,14 +83,14 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
         $this->vendorAddress = $vendorAddress;
     }
 
-    public function getCustomer(): CustomerInterface
+    public function getShopUser(): ShopUserInterface
     {
-        return $this->customer;
+        return $this->shopUser;
     }
 
-    public function setCustomer(CustomerInterface $customer): void
+    public function setShopUser(ShopUserInterface $user): void
     {
-        $this->customer = $customer;
+        $this->shopUser = $user;
     }
 
     public function getStatus(): string
