@@ -1,5 +1,4 @@
 imports:
-<<<<<<< HEAD
     - suites/vendor/customer_dashboard.yml
     - suites/vendor/vendor_register.yml
     - suites/vendor/vendor_update.yml

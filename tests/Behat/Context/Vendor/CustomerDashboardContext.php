@@ -13,8 +13,9 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
+use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\vendor\CustomerDashboardPage;
 use function PHPUnit\Framework\assertTrue;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\Vendor\CustomerDashboardPage;
+
 
 class CustomerDashboardContext extends MinkContext implements Context
 {
