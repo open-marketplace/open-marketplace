@@ -13,15 +13,16 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
-use Behat\MinkExtension\Context\RawMinkContext;
+use Behat\MinkExtension\Context\MinkContext;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 
-class StartConversationContext extends RawMinkContext implements Context
+class StartConversationContext extends MinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface  $entityManager)
+    public function __construct(EntityManagerInterface  $entityManager, ShopUserExampleFactory $shopUserExampleFactory)
     {
         $this->entityManager = $entityManager;
     }
@@ -35,19 +36,6 @@ class StartConversationContext extends RawMinkContext implements Context
         $purger->purge();
     }
 
-    /**
-     * @Given there is an admin userName :userName with password :password
-     */
-    public function thereIsAnAdminUserNameWithPassword($username, $password)
-    {
-        $user = $this->adminUserExampleFactory->create();
-        $user->setUsername($username);
-        $user->setPlainPassword($password);
-        $user->setEmail('admin@email.com');
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-    }
 
     /**
      * @Given there is an vendor userName :arg1 with password :arg2
