@@ -40,8 +40,8 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorAddressInterface $vendorAddress
     ): void {
         $vendorData->getCompanyName()->willReturn("CompanyName");
-        $vendorData->getTaxIdentifier()->willReturn("CompanyName");
-        $vendorData->getPhoneNumber()->willReturn("CompanyName");
+        $vendorData->getTaxIdentifier()->willReturn("TaxIdentifier");
+        $vendorData->getPhoneNumber()->willReturn("11339321");
         $vendorData->getVendorAddress()->willReturn($vendorAddress);
 
         $this->setVendorFromData($vendor, $vendorData);
