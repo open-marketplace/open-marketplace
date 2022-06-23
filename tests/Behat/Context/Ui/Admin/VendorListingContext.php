@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin;
@@ -10,9 +17,9 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEmpty;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 
 final class VendorListingContext extends RawMinkContext implements Context
 {
@@ -47,7 +54,6 @@ final class VendorListingContext extends RawMinkContext implements Context
         $admin->setPlainPassword($password);
         $this->entityManager->persist($admin);
         $this->entityManager->flush();
-
     }
 
     /**
@@ -66,7 +72,7 @@ final class VendorListingContext extends RawMinkContext implements Context
      */
     public function thereAreVendors($count)
     {
-        for ($i=0; $i<$count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             $vendor = new Vendor();
             $vendor->setCompanyName('vendor ' . $i);
             $vendor->setTaxIdentifier('vendorTax' . $i);

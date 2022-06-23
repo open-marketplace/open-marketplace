@@ -11,8 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -44,20 +43,21 @@ final class VendorType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('customer', EntityType::class, [
-                'class' => Customer::class,
+            ->add('shopUser', EntityType::class, [
+                'class' => ShopUser::class,
             ])
             ->add('companyName', TextType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name',
+                'label' => 'bitbag_mvm_plugin.ui.company_name',
             ])
             ->add('taxIdentifier', TextType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_identifier',
+                'label' => 'bitbag_mvm_plugin.ui.tax_identifier',
             ])
+
             ->add('phoneNumber', TelType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.phone_number',
+                'label' => 'bitbag_mvm_plugin.ui.phone_number',
             ])
             ->add('vendorAddress', VendorAddressType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_address',
+                'label' => 'bitbag_mvm_plugin.ui.company_address',
                 'constraints' => [new Valid()],
             ])
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
@@ -68,15 +68,12 @@ final class VendorType extends AbstractResourceType
 
                 /** @var ShopUserInterface $user */
                 $user = $token->getUser();
-
                 if (!$user instanceof ShopUserInterface) {
                     throw new UserNotFoundException('No user found.');
                 }
 
-                /** @var CustomerInterface $customer */
-                $customer = $user->getCustomer();
                 $form = $event->getForm();
-                $form->get('customer')->setData($customer);
+                $form->get('shopUser')->setData($user);
                 $event->setData($form);
             })
             ;
@@ -87,6 +84,7 @@ final class VendorType extends AbstractResourceType
         $resolver->setDefaults([
             'data_class' => Vendor::class,
             'validation_groups' => $this->validationGroups,
-        ]);
+        ])
+        ;
     }
 }

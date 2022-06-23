@@ -1,0 +1,4 @@
+bitbag_mvm_plugin_admin_vendor_verify:
+    path: /vendors/{id}/verify
+    methods: [PUT]
+    controller: bitbag_mvm_plugin.controller.vendor_controller:verifyVendorAction

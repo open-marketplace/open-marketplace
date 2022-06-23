@@ -1,0 +1,8 @@
+{% set map = {
+    'verified': {'color': 'teal', 'icon': 'check'},
+    'unverified': {'color': 'yellow', 'icon': 'clock'}
+} %}
+
+<span class="ui label {{ map[data].color }}">
+    <i class="icon {{ map[data].icon }}"></i> {{ data|capitalize }}
+</span>

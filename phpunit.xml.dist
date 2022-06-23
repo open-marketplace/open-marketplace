@@ -5,7 +5,7 @@
          colors="true"
          bootstrap="tests/Application/config/bootstrap.php">
     <testsuites>
-        <testsuite name="AcmeSyliusExamplePlugin Test Suite">
+        <testsuite name="BitBag SyliusMultiVendorMarketplacePlugin Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
@@ -13,10 +13,12 @@
     <php>
         <ini name="error_reporting" value="-1" />
 
-        <server name="KERNEL_CLASS_PATH" value="/tests/Application/AppKernel.php" />
-        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
-
+        <server name="KERNEL_CLASS_PATH" value="/tests/Application/Kernel.php" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true"/>
+        <server name="KERNEL_CLASS" value="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Application\Kernel"/>
+        <server name="EXPECTED_RESPONSES_DIR" value="tests\Responses\json"/>
         <env name="APP_ENV" value="test"/>
         <env name="SHELL_VERBOSITY" value="-1" />
+        
     </php>
 </phpunit>

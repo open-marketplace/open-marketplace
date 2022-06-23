@@ -1,0 +1,12 @@
+{% set path_suffix = data.enabled ? 'disable' : 'enable' %}
+{% set path = 'bitbag_mvm_plugin_admin_vendor_' ~ path_suffix %}
+{% set label = 'bitbag_mvm_plugin.ui.' ~ path_suffix %}
+{% set icon = data.enabled ? 'lock' : 'lock open'%}
+
+<form action="{{ path(path, {'id': data.id}) }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
+    <input type="hidden" name="_method" value="PUT">
+    <button id="{{ path_suffix }}" class="ui labeled icon button" type="submit"  data-requires-confirmation>
+        <i class="{{ icon }} icon"></i> {{ label|trans }}
+    </button>
+</form>
