@@ -1,13 +1,15 @@
 @admin_start_conversation
 Feature: Starting conversation by Administrator
-  @ui
-  Scenario: AdminUser start conversation
-    Given there is an admin "adminusername"
+  In order to contact with Vendor
+  As a admin i want sent message to Vendor
+
+  Background:
+    Given there is an administrator with name "admin"
     And there is an vendor userName "vendor" with password "vendor"
+
+  Scenario: AdminUser start conversation
+    Given I am logged in as an administrator
     And I am on "/admin/login"
-    When I fill in "adminusername" with "admin"
-    And I fill in "Password" with "admin"
-    And I press "Login"
     And I am on "/admin"
     When I follow "Conversations"
     And  I follow "Create"

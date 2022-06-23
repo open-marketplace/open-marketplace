@@ -18,13 +18,15 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 
-class StartConversationContext extends MinkContext implements Context
+class conversationContext extends MinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
+    private ShopUserExampleFactory $shopUserExampleFactory;
 
     public function __construct(EntityManagerInterface  $entityManager, ShopUserExampleFactory $shopUserExampleFactory)
     {
         $this->entityManager = $entityManager;
+        $this->shopUserExampleFactory = $shopUserExampleFactory;
     }
 
     /**
