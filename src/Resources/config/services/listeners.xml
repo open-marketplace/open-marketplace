@@ -9,10 +9,10 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\EventListener\VendorRegisterListener"
-                 id="bit_bag.sylius_multi_vendor_marketplace_plugin.event_listener.vendor_register_listener">
+                 id="bitbag.mvm_plugin.event_listener.vendor_register_listener">
 
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.service.vendor_slug_generator"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.file_uploader"/>
+            <argument type="service" id="bitbag.mvm_plugin.service.vendor_slug_generator"/>
+            <argument type="service" id="bitbag.mvm_plugin.uploader.file_uploader"/>
 
             <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="generateSlug"/>
             <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_update" method="generateSlug"/>

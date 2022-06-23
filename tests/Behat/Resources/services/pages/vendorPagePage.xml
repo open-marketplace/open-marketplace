@@ -3,7 +3,7 @@
     <services>        
         <service
                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\VendorPagePage"
-                id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.vendor_page_page"
+                id="tests.bitbag.mvm_plugin.behat.page.vendor_page_page"
                 parent="sylius.behat.symfony_page"
                 public="true"
         >

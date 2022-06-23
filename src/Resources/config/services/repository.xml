@@ -3,7 +3,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bit_bag.sylius_multi_vendor_marketplace_plugin.repository.product_repository"
+        <service id="bitbag.mvm_plugin.repository.product_repository"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductRepository"
                  public="true"
                  decorates="sylius.repository.product"
@@ -18,7 +18,7 @@
             <argument type="service" id="security.token_storage"/>
         </service>
 
-        <service id="bit_bag.sylius_multi_vendor_marketplace_plugin.repository.vendor_repository"
+        <service id="bitbag.mvm_plugin.repository.vendor_repository"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository"
                  public="true"
         >
