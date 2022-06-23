@@ -1,13 +1,13 @@
 Sylius\Component\Addressing\Model\Country:
     poland:
         code: 'PL'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer:
+Sylius\Component\Core\Model\Customer:
     customer_oliver:
         firstName: "John"
         lastName: "Nowak"
         email: "test@example.com"
         emailCanonical: "test@example.com"
-Sylius\Component\Core\Model\ShopUser:
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]
@@ -23,7 +23,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
         street: 'Avenue 2115'
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
     vendor_oliver:
-        customer: '@customer_oliver'
+        shopUser: '@user_oliver'
         companyName: 'Test company name'
         taxIdentifier: '1234567'
         phoneNumber: '333111222'

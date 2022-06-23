@@ -13,28 +13,28 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\TokenOwningVoter;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProfileUpdateService;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class ConfirmProfileUpdateAction
 {
     private EntityManagerInterface $entityManager;
 
-    private VendorProfileUpdateService $vendorProfileUpdateService;
+    private VendorProfileUpdaterInterface $vendorProfileUpdateService;
 
-    private Security $security;
+    private AuthorizationCheckerInterface $security;
 
-    private Router $router;
+    private RouterInterface $router;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        VendorProfileUpdateService $vendorProfileUpdateService,
-        Security $security,
-        Router $router
+        VendorProfileUpdaterInterface $vendorProfileUpdateService,
+        AuthorizationCheckerInterface $security,
+        RouterInterface $router
     ) {
         $this->entityManager = $entityManager;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;

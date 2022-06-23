@@ -14,7 +14,9 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
 use function PHPUnit\Framework\assertEquals;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\vendor\VendorRegisterPage;
+
+use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\Vendor\VendorRegisterPage;
+
 
 class VendorRegisterContext extends MinkContext implements Context
 {
@@ -28,7 +30,8 @@ class VendorRegisterContext extends MinkContext implements Context
     /**
      * @Then I should see :itemCLass :times times
      */
-    public function iShouldSeeTimes($itemCLass, $times)
+
+    public function iShouldSeeTimes($itemCLass, $times): void
     {
         $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount($itemCLass);
         assertEquals($times, $validationMessageCount);

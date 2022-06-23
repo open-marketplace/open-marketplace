@@ -15,7 +15,7 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
 {
     protected int $id;
 
-    protected ?VendorInterface $vendor;
+    protected VendorInterface $vendor;
 
     protected ?string $companyName;
 
@@ -39,12 +39,12 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
         $this->id = $id;
     }
 
-    public function getVendor(): ?VendorInterface
+    public function getVendor(): VendorInterface
     {
         return $this->vendor;
     }
 
-    public function setVendor(?VendorInterface $vendor): void
+    public function setVendor(VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
     }

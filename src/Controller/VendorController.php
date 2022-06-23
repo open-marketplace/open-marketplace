@@ -11,9 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\VendorProvider;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -31,14 +33,16 @@ use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
 {
-    private VendorProvider $vendorProvider;
+    private VendorProviderInterface $vendorProvider;
 
     public function __construct(
         MetadataInterface $metadata,
@@ -58,7 +62,7 @@ final class VendorController extends ResourceController
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        VendorProvider $vendorProvider
+        VendorProviderInterface $vendorProvider
     ) {
         parent::__construct(
             $metadata,
@@ -98,11 +102,58 @@ final class VendorController extends ResourceController
     {
         $vendor = $this->vendorProvider->provideCurrentVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
-        if (null == $pendingUpdate) {
+        if (null === $pendingUpdate) {
             return parent::updateAction($request);
         }
         $this->addFlash('error', 'sylius.user.verify_email_request');
 
         return $this->redirectToRoute('vendor_profile');
+    }
+
+    public function showAction(Request $request): Response
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::SHOW);
+        /** @var ResourceInterface $resource */
+        $resource = $this->vendorProvider->provideCurrentVendor();
+        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+
+        if ($configuration->isHtmlRequest()) {
+            return $this->render($configuration->getTemplate(ResourceActions::SHOW . '.html'), [
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+            ]);
+        }
+
+        return $this->createRestView($configuration, $resource);
+    }
+
+    public function verifyVendorAction(Request $request): Response
+    {
+        $vendorId = $request->attributes->get('id');
+
+        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
+        $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
+
+        $this->manager->flush();
+
+        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_verified');
+
+        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+    }
+
+    public function enablingVendorAction(Request $request): Response
+    {
+        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $request->attributes->get('id')]);
+        $currentVendor->setEnabled(!$currentVendor->isEnabled());
+        $this->manager->flush();
+
+        $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
+        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
+
+        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
     }
 }

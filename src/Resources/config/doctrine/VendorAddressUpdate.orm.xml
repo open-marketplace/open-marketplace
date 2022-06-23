@@ -4,16 +4,14 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate" table="bitbag_vendor_address_update">
+    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate" table="bitbag_mvm_vendor_address_update">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
         <field name="city" type="string"  />
         <field name="street" type="text" />
         <field name="postalCode" column="postal_code" type="text" />
-
         <many-to-one field="country" target-entity="Sylius\Component\Addressing\Model\Country">
-            <join-column name="country_id" referenced-column-name="id" on-delete="CASCADE"/>
         </many-to-one>
     </mapped-superclass>
 </doctrine-mapping>

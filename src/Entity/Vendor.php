@@ -19,7 +19,7 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
 {
     protected ?int $id;
 
-    protected CustomerInterface $customer;
+    protected ShopUserInterface $shopUser;
 
     protected ?string $companyName = null;
 
@@ -28,6 +28,10 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     protected ?string $phoneNumber;
 
     protected ?VendorAddressInterface $vendorAddress;
+
+    private string $status = self::STATUS_UNVERIFIED;
+
+    private bool $enabled = true;
 
     private ?string $slug;
 
@@ -93,14 +97,34 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
         $this->vendorAddress = $vendorAddress;
     }
 
-    public function getCustomer(): CustomerInterface
+    public function getShopUser(): ShopUserInterface
     {
-        return $this->customer;
+        return $this->shopUser;
     }
 
-    public function setCustomer(CustomerInterface $customer): void
+    public function setShopUser(ShopUserInterface $user): void
     {
-        $this->customer = $customer;
+        $this->shopUser = $user;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
     }
 
     public function getSlug(): ?string

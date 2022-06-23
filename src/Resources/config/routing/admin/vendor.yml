@@ -1,8 +1,18 @@
-bitbag_sylius_mvm_plugin_admin_vendor:
+bitbag_mvm_plugin_admin_vendor:
     resource: |
-        alias: bitbag_multi_vendor_marketplace.vendor
-        except: ['show']
+        alias: bitbag_mvm_plugin.vendor
         section: admin
+        except: ['show']
         templates: "@SyliusAdmin\\Crud"
-        grid: bitbag_sylius_multi_vendor_marketplace_plugin_vendor
+        grid: bitbag_mvm_plugin_admin_vendor
     type: sylius.resource
+
+bitbag_mvm_plugin_admin_vendor_show:
+    path: /vendors/{id}
+    methods: [GET]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.vendor:showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/show.html.twig'
