@@ -11,19 +11,21 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-class Vendor implements VendorInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterface
 {
-    private ?int $id;
+    protected ?int $id;
 
-    private CustomerInterface $customer;
+    protected ShopUserInterface $shopUser;
 
-    private ?string $companyName;
+    protected ?string $companyName;
 
-    private ?string $taxIdentifier;
+    protected ?string $taxIdentifier;
 
-    private ?string $phoneNumber;
+    protected ?string $phoneNumber;
 
-    private ?VendorAddressInterface $vendorAddress;
+    protected ?VendorAddressInterface $vendorAddress;
 
     private string $status = self::STATUS_UNVERIFIED;
 
@@ -79,14 +81,14 @@ class Vendor implements VendorInterface
         $this->vendorAddress = $vendorAddress;
     }
 
-    public function getCustomer(): CustomerInterface
+    public function getShopUser(): ShopUserInterface
     {
-        return $this->customer;
+        return $this->shopUser;
     }
 
-    public function setCustomer(CustomerInterface $customer): void
+    public function setShopUser(ShopUserInterface $user): void
     {
-        $this->customer = $customer;
+        $this->shopUser = $user;
     }
 
     public function getStatus(): string

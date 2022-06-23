@@ -11,9 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
-interface VendorInterface extends ResourceInterface
+interface VendorInterface extends VendorProfileInterface
 {
     public const STATUS_UNVERIFIED = 'unverified';
 
@@ -39,9 +37,9 @@ interface VendorInterface extends ResourceInterface
 
     public function setVendorAddress(?VendorAddressInterface $vendorAddress): void;
 
-    public function getCustomer(): CustomerInterface;
+    public function getShopUser(): ShopUserInterface;
 
-    public function setCustomer(Customer $customer): void;
+    public function setShopUser(ShopUserInterface $user): void;
 
     public function getStatus(): string;
 

@@ -1,0 +1,13 @@
+confirm_profile_update_link:
+    path: /vendor/profile-update/{token}
+    methods: [GET]
+    defaults:
+        _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.confirm_profile_update_action
+        _sylius:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/vendor/vendor_profile_update.html.twig"
+            form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType
+            event: update                
+            repository:
+                method: findOneByActivationToken
+                arguments:
+                    token: $token

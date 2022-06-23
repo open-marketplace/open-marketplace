@@ -1,0 +1,57 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.my_account'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.my_account'|trans }}</div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+    <h1 class="ui dividing header">
+        {{ 'sylius.ui.my_account'|trans }}
+        <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
+    </h1>
+
+    {{ sylius_template_event('sylius.shop.account.dashboard.after_content_header', {'vendor': vendor}) }}
+
+    <div class="ui large list grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
+        <div class="item row">
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name'|trans }}:</span>
+            {{ vendor.companyName }}
+        </div>
+        <div class="item row">
+            <span class="ui three wide column ">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_identifier'|trans }}:</span>
+            {{ vendor.taxIdentifier }}            
+        </div>
+        <div class="item row">
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.phone_number'|trans }}:</span>
+            {{ vendor.phoneNumber }}
+        </div>
+        <div class="item row">
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.country'|trans }}:</span>
+            {{ vendor.vendorAddress.country }}
+        </div>
+        <div class="item row">
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.postal_code'|trans }}:</span>
+            {{ vendor.vendorAddress.postalCode }}
+        </div>
+        <div class="item row">
+            <span class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.city'|trans }}:</span>
+            {{ vendor.vendorAddress.city }}
+        </div>
+        <div class="item row">
+            <div class="ui three wide column">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.street'|trans }}:</div>
+            {{ vendor.vendorAddress.street }}
+        </div>
+        <div class="row">
+            <a class="ui two wide column center aligned" href="{{ path('vendor_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>
+        </div>
+    </div>
+
+    {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'vendor': vendor}) }}
+
+{% endblock %}
