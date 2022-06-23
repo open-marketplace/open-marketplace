@@ -1,6 +1,9 @@
 sylius_grid:
+    templates:
+        action:
+            enable_disable_action: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/enableDisableButtons.html.twig"
     grids:
-        bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor:
+        bitbag_mvm_plugin_admin_vendor:
             driver:
                 name: doctrine/orm
                 options:
@@ -12,22 +15,38 @@ sylius_grid:
             fields:
                 id:
                     type: string
-                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.id
+                    label: bitbag_mvm_plugin.ui.id
                     sortable: ~
                 companyName:
                     type: string
-                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.company_name
+                    label: bitbag_mvm_plugin.ui.company_name
                     sortable: ~
                 taxIdentifier:
                     type: string
-                    label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.tax_id
+                    label: bitbag_mvm_plugin.ui.tax_id
                     sortable: ~
+                status:
+                    type: twig
+                    label: bitbag_mvm_plugin.ui.status
+                    options:
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/status.html.twig'
+                    sortable: ~
+                enabled:
+                    type: twig
+                    label: bitbag_mvm_plugin.ui.enabled
+                    options:
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/enabled.html.twig'
             actions:
                 main:
                     create:
                         type: create
                 item:
+                    details:
+                        label: bitbag_mvm_plugin.ui.details
+                        type: show
                     update:
                         type: update
                     delete:
                         type: delete
+                    enable_disable:
+                        type: enable_disable_action

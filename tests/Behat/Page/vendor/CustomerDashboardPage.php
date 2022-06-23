@@ -20,15 +20,17 @@ class CustomerDashboardPage extends SymfonyPage implements SymfonyPageInterface
     {
         return 'sylius_shop_account_dashboard';
     }
-    
+
     public function itemWithValueExistsInsideSidebar($value): bool
     {
         $sidebar = $this->getDocument()->find('css', '.grid .four .menu');
         $links = $sidebar->findAll('css', '.item');
-        foreach ($links as $link){
-            if($value === $link->getText())
+        foreach ($links as $link) {
+            if ($value === $link->getText()) {
                 return true;
+            }
         }
+
         return false;
     }
 }

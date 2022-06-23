@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
+
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -127,5 +130,32 @@ final class VendorController extends ResourceController
         }
 
         return $this->createRestView($configuration, $resource);
+    }
+
+    public function verifyVendorAction(Request $request): Response
+    {
+        $vendorId = $request->attributes->get('id');
+
+        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
+        $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
+
+        $this->manager->flush();
+
+        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_verified');
+
+        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+    }
+
+    public function enablingVendorAction(Request $request): Response
+    {
+        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $request->attributes->get('id')]);
+        $currentVendor->setEnabled(!$currentVendor->isEnabled());
+        $this->manager->flush();
+
+        $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
+        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
+
+        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+
     }
 }

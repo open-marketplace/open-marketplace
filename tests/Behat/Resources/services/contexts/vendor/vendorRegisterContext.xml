@@ -3,10 +3,17 @@
     <services>
         <defaults public="true" />  
         <service
+<<<<<<< HEAD:tests/Behat/Resources/services/contexts/vendor/vendorRegisterContext.xml
                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor\VendorRegisterContext"
                 id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor.vendor_register_context"
         >
             <argument type="service" id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.vendor.vendor_register_page" />
+=======
+                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\VendorRegisterContext"
+                id="tests.bitbag.sylius_mvm_plugin.behat.context.vendor_register_context"
+        >
+            <argument type="service" id="tests.bitbag.sylius_mvm_plugin.behat.page.vendor_register_page" />
+>>>>>>> master:tests/Behat/Resources/services/contexts/vendorRegisterContext.xml
         </service>
     </services>
 </container>

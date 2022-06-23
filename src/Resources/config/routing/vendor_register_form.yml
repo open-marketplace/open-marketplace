@@ -2,10 +2,14 @@ vendor_register_form:
   path: /vendor/register
   methods: [GET, POST]
   defaults:
-    _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_controller:createAction
+#<<<<<<< HEAD
+#    _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_controller:createAction
+#=======
+    _controller: bitbag_mvm_plugin.controller.vendor_controller:createAction
+#>>>>>>> master
     _sylius:
       template: "@BitBagSyliusMultiVendorMarketplacePlugin/vendor_register_form.html.twig"
-      form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType      
+      form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType
       redirect:
         route: sylius_shop_account_dashboard
       flash: vendor.vendor_register

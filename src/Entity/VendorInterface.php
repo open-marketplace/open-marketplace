@@ -13,6 +13,10 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 interface VendorInterface extends VendorProfileInterface
 {
+    public const STATUS_UNVERIFIED = 'unverified';
+
+    public const STATUS_VERIFIED = 'verified';
+
     public function getId(): ?int;
 
     public function setId(?int $id): void;
@@ -36,4 +40,13 @@ interface VendorInterface extends VendorProfileInterface
     public function getShopUser(): ShopUserInterface;
 
     public function setShopUser(ShopUserInterface $user): void;
+
+    public function getStatus(): string;
+
+    public function setStatus(string $status): void;
+
+    public function isEnabled(): bool;
+
+    public function setEnabled(bool $enabled): void;
+
 }

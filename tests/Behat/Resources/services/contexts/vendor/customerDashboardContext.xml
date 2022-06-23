@@ -6,7 +6,11 @@
                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor\CustomerDashboardContext"
                 id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor.customer_dashboard_context"
         >
+<<<<<<< HEAD:tests/Behat/Resources/services/contexts/vendor/customerDashboardContext.xml
             <argument type="service" id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.page.vendor.customer_dashboard_page" />           
+=======
+            <argument type="service" id="tests.bitbag.sylius_mvm_plugin.behat.page.customer_dashboard_page" />
+>>>>>>> master:tests/Behat/Resources/services/contexts/customerDashboardContext.xml
         </service>
     </services>
 </container>
