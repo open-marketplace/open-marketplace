@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
+use _PHPStan_76800bfb5\Nette\Neon\Exception;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
@@ -136,6 +137,11 @@ final class VendorController extends ResourceController
         $vendorId = $request->attributes->get('id');
 
         $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
+
+        if (null === $currentVendor) {
+            throw new Exception('Vendor not found.');
+        }
+
         $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
 
         $this->manager->flush();
@@ -148,6 +154,11 @@ final class VendorController extends ResourceController
     public function enablingVendorAction(Request $request): Response
     {
         $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $request->attributes->get('id')]);
+
+        if (null === $currentVendor) {
+            throw new Exception('Vendor not found.');
+        }
+
         $currentVendor->setEnabled(!$currentVendor->isEnabled());
         $this->manager->flush();
 
