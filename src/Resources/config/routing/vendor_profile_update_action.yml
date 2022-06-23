@@ -1,4 +1,4 @@
 vendor_profile_update_action:
     path: /vendor/profile/updateAction
     methods: [GET, POST]
-    controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_profile_update_action
+    controller: bitbag_mvm_plugin.controller.vendor_profile_update_action

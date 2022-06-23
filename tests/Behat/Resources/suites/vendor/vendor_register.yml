@@ -2,7 +2,7 @@ default:
     suites:
         vendor_register:
             contexts:
-                - tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor.vendor_register_context
+                - tests.bitbag_mvm_plugin.behat.context.vendor.vendor_register_context
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.admin_security

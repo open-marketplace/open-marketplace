@@ -17,11 +17,11 @@ bitbag_mvm_plugin_admin_vendor_show:
             permission: true
             template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/show.html.twig'
 
-bitbag_sylius_multi_vendor_marketplace_plugin_admin_vendor_update:
+bitbag_mvm_plugin_admin_vendor_update:
     path: /vendors/{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: bitbag_sylius_multi_vendor_marketplace_plugin.controller.vendor:updateAction
+        _controller: bitbag_mvm_plugin.controller.vendor:updateAction
         _sylius:
             section: admin
             permission: true

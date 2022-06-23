@@ -32,8 +32,8 @@ final class VendorType extends AbstractResourceType
     private TokenStorageInterface $tokenStorage;
 
     public function __construct(
-        string $dataClass,
         TokenStorageInterface $tokenStorage,
+        string $dataClass,
         array $validationGroups = []
     ) {
         parent::__construct($dataClass, $validationGroups);

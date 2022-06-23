@@ -29,9 +29,9 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
     {
         parent::setUp();
 
-        $remover = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.remover.profile_update_remover');
+        $remover = static::$container->get('bitbag_mvm_plugin.remover.profile_update_remover');
         $sender = $this->createMock(SenderInterface::class);
-        $vendorProfileFactory = static::$container->get('bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_update_factory');
+        $vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_update_factory');
         $this->vendorProfileUpdateService = new VendorProfileUpdater($this->getEntityManager(), $sender, $remover, $vendorProfileFactory);
     }
 
