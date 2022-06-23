@@ -15,9 +15,6 @@
         <field name="token" column="token" type="text" />
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate" >
             <join-column name="vendor_address_id" referenced-column-name="id" on-delete="SET NULL" />
-            <cascade>
-                <cascade-persist/>
-            </cascade>
         </one-to-one>
         <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor">
         </one-to-one>
