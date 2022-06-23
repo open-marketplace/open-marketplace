@@ -48,5 +48,4 @@ interface VendorInterface extends VendorProfileInterface
     public function isEnabled(): bool;
 
     public function setEnabled(bool $enabled): void;
-
 }

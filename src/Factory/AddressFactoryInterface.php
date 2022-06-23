@@ -10,9 +10,9 @@ use Sylius\Component\Addressing\Model\Country;
 interface AddressFactoryInterface
 {
     public function createAddress(
-        string  $street,
-        string  $city,
-        string  $postalCode,
+        string $street,
+        string $city,
+        string $postalCode,
         Country $country
     ): VendorAddressInterface;
 }

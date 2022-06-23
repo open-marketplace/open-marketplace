@@ -74,6 +74,7 @@ class VendorProfileUpdateServiceTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('test_vendor_data_are_updated_and_removed_correctly.yml');
         $manager = $this->getEntityManager();
+
         $currentVendor = $manager->getRepository(Vendor::class)->findOneBy(['taxIdentifier' => '1234567']);
         $pendingData = $manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $currentVendor]);
 

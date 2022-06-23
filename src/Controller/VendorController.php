@@ -11,10 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
-
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -156,6 +155,5 @@ final class VendorController extends ResourceController
         $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
 
         return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
-
     }
 }

@@ -24,14 +24,12 @@ final class MultiVendorMarketplaceMenuListener
                 ->addChild('marketplace')
                 ->setLabel('bitbag_mvm_plugin.ui.marketplace');
 
-
         $mvmRootMenuItem
             ->addChild('multi_vendor_marketplace_product_listings', [
                 'route' => 'bitbag_mvm_plugin_admin_product_listing_index',
             ])
             ->setLabel('bitbag_mvm_plugin.ui.product_listings')
             ->setLabelAttribute('icon', 'list');
-
 
         $mvmRootMenuItem
             ->addChild('vendors', [
