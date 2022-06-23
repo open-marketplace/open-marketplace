@@ -6,7 +6,7 @@ Feature: Paginating vendor products
 
   Background:
     Given the store operates on a single channel in "United States"
-    And there is a customer account
+    And there is a user "user@email.com"
     And there is a vendor
     And the vendor has 30 products
 

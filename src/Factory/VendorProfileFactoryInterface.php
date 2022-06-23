@@ -13,6 +13,7 @@ interface VendorProfileFactoryInterface
         string $companyName,
         string $taxIdentifier,
         string $phoneNumber,
+        string $description,
         VendorAddressInterface $address
     ): VendorProfileInterface;
 

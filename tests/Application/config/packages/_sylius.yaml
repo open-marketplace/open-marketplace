@@ -18,12 +18,6 @@ sylius_product:
             classes:
                 model: 'BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product'
 
-sylius_customer:
-    resources:
-        customer:
-            classes:
-                model: 'BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer'
-
 sylius_shop:
     product_grid:
         include_all_descendants: true

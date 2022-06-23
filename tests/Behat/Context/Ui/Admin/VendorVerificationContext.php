@@ -46,6 +46,8 @@ final class VendorVerificationContext extends RawMinkContext implements Context
         $vendor->setCompanyName('vendor');
         $vendor->setTaxIdentifier('vendorTax');
         $vendor->setPhoneNumber('vendorPhone');
+        $vendor->setSlug('slug');
+        $vendor->setDescription('description');
 
         $vendorAddress->setCountry($vendorCountry);
         $vendorAddress->setCity('vendorCity');
@@ -54,6 +56,7 @@ final class VendorVerificationContext extends RawMinkContext implements Context
 
         $vendor->setVendorAddress($vendorAddress);
         $vendor->setStatus('unverified');
+        $this->entityManager->persist($vendorCountry);
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }

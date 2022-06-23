@@ -14,7 +14,6 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\MinkContext;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Customer;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
@@ -26,7 +25,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -38,11 +36,10 @@ use Webmozart\Assert\Assert;
 
 class VendorPageContext extends MinkContext implements Context
 {
-    private CustomerRepositoryInterface $customerRepository;
 
     private EntityManagerInterface $entityManager;
 
-    private RepositoryInterface $repository;
+    private RepositoryInterface $countryRepository;
 
     private VendorRepositoryInterface $vendorRepository;
 
@@ -62,8 +59,7 @@ class VendorPageContext extends MinkContext implements Context
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        CustomerRepositoryInterface $customerRepository,
-        RepositoryInterface $repository,
+        RepositoryInterface $countryRepository,
         VendorRepositoryInterface $vendorRepository,
         ProductFactoryInterface $productFactory,
         SlugGeneratorInterface $slugGenerator,
@@ -73,9 +69,8 @@ class VendorPageContext extends MinkContext implements Context
         FactoryInterface $channelPricingFactory,
         VendorPagePageInterface $vendorPagePage
     ) {
-        $this->customerRepository = $customerRepository;
         $this->entityManager = $entityManager;
-        $this->repository = $repository;
+        $this->countryRepository = $countryRepository;
         $this->vendorRepository = $vendorRepository;
         $this->productFactory = $productFactory;
         $this->slugGenerator = $slugGenerator;
@@ -87,30 +82,13 @@ class VendorPageContext extends MinkContext implements Context
     }
 
     /**
-     * @Given there is a customer account
-     */
-    public function thereIsACustomerAccount()
-    {
-        $customer = new Customer();
-        $customer->setPhoneNumber('123123123');
-        $customer->setEmail('testcustomer@email.com');
-        $customer->setCreatedAt(new \DateTime());
-        $customer->setFirstName('John');
-        $customer->setLastName('Doe');
-
-        $this->entityManager->persist($customer);
-        $this->entityManager->flush();
-    }
-
-    /**
      * @Given there is a vendor
      */
     public function thereIsAVendor()
     {
-        $customer = $this->customerRepository
-            ->findOneBy(['email' => 'testcustomer@email.com']);
+        $shopUser = $this->sharedStorage->get('user');
 
-        $country = $this->repository->findOneBy(['code' => 'US']);
+        $country = $this->countryRepository->findOneBy(['code' => 'US']);
 
         $vendorAddress = new VendorAddress();
         $vendorAddress->setCity('test');
@@ -122,7 +100,7 @@ class VendorPageContext extends MinkContext implements Context
         $vendor->setSlug('test-company');
         $vendor->setDescription('test-company');
         $vendor->setCompanyName('test company');
-        $vendor->setCustomer($customer);
+        $vendor->setShopUser($shopUser);
         $vendor->setPhoneNumber('123123123');
         $vendor->setTaxIdentifier('123123123');
         $vendor->setVendorAddress($vendorAddress);
