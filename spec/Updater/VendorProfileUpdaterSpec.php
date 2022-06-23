@@ -36,12 +36,13 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
     public function it_calls_entity_manager(
         EntityManagerInterface $entityManager,
         VendorInterface $vendor,
-        VendorProfileInterface $vendorData
+        VendorProfileInterface $vendorData,
+        VendorAddressInterface $vendorAddress
     ): void {
-        $vendorData->getCompanyName()->shouldBeCalledTimes(1);
-        $vendorData->getTaxIdentifier()->shouldBeCalledTimes(1);
-        $vendorData->getPhoneNumber()->shouldBeCalledTimes(1);
-        $vendorData->getVendorAddress()->shouldBeCalledTimes(1);
+        $vendorData->getCompanyName()->willReturn("CompanyName");
+        $vendorData->getTaxIdentifier()->willReturn("CompanyName");
+        $vendorData->getPhoneNumber()->willReturn("CompanyName");
+        $vendorData->getVendorAddress()->willReturn($vendorAddress);
 
         $this->setVendorFromData($vendor, $vendorData);
 
