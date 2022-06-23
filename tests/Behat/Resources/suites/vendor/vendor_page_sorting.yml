@@ -3,7 +3,7 @@ default:
         vendor_page_sorting:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.vendor_page_context
+                - tests.bitbag.mvm_plugin.behat.context.vendor_page_context
 
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.channel

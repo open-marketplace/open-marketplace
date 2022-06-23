@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -38,7 +39,13 @@ final class ShowVendorPageAction extends AbstractController
 
     public function __invoke(Request $request): Response
     {
+        /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => $request->attributes->get('slug')]);
+
+        if (VendorInterface::STATUS_UNVERIFIED === $vendor->getStatus()) {
+            return $this->redirectToRoute('sylius_shop_homepage');
+        }
+
         $channel = $this->channelContext->getChannel();
         $paginator = $this->productRepository->findVendorProducts($vendor, $request, $channel);
 

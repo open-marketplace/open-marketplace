@@ -6,5 +6,6 @@ imports:
     - suites/ui/managing_vendors.yml
     - suites/ui/verifying_vendors.yml
     - suites/ui/disabling_vendors.yml
-    - suites/vendor_page_pagination.yml
-    - suites/vendor_page_sorting.yml
+    - suites/vendor/vendor_page_pagination.yml
+    - suites/vendor/vendor_page_sorting.yml
+    - suites/vendor/unverified_vendor_page.yml

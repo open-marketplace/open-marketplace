@@ -82,9 +82,9 @@ class VendorPageContext extends MinkContext implements Context
     }
 
     /**
-     * @Given there is a vendor
+     * @Given there is a :vendorStatus vendor
      */
-    public function thereIsAVendor()
+    public function thereIsAVendor(string $verifiedStatus)
     {
         $shopUser = $this->sharedStorage->get('user');
 
@@ -104,6 +104,15 @@ class VendorPageContext extends MinkContext implements Context
         $vendor->setPhoneNumber('123123123');
         $vendor->setTaxIdentifier('123123123');
         $vendor->setVendorAddress($vendorAddress);
+
+        switch ($verifiedStatus) {
+            case "verified":
+                $vendor->setStatus(VendorInterface::STATUS_VERIFIED);
+                break;
+            case "unverified":
+                $vendor->setStatus(VendorInterface::STATUS_UNVERIFIED);
+                break;
+        }
 
         $this->entityManager->persist($vendorAddress);
         $this->entityManager->persist($vendor);
@@ -136,7 +145,7 @@ class VendorPageContext extends MinkContext implements Context
     /**
      * @Then the first product should have name :name
      */
-    public function theFirstProductShouldHaveName($name): void
+    public function theFirstProductShouldHaveName(string $name): void
     {
         Assert::same($this->vendorPagePage->getFirstProductNameFromList(), $name);
     }
@@ -144,7 +153,7 @@ class VendorPageContext extends MinkContext implements Context
     /**
      * @Then the last product should have name :name
      */
-    public function theLastProductShouldHaveName($name): void
+    public function theLastProductShouldHaveName(string $name): void
     {
         Assert::same($this->vendorPagePage->getLastProductNameFromList(), $name);
     }
