@@ -12,7 +12,6 @@
         <field name="street" type="text" />
         <field name="postalCode" column="postal_code" type="text" />
         <many-to-one field="country" target-entity="Sylius\Component\Addressing\Model\Country">
-
         </many-to-one>
     </mapped-superclass>
 </doctrine-mapping>
