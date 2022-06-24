@@ -1,9 +1,5 @@
 {% if data.isClosed() == false %}
-<<<<<<< HEAD
-    <form action="{{ path('mvm_admin_conversation_archive', { id: data.id }) }}" method="post">
-=======
     <form action="{{ path('bitbag_multi_vendor_marketplace_admin_conversation_archive', { id: data.id }) }}" method="post">
->>>>>>> MUL11
         <input type="hidden" name="_method" value="POST">
         <button class="ui grey labeled icon button" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('archieve-button') }}>
             <i class="icon archive"></i> {{ action.label|trans }}
