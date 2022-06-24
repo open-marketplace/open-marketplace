@@ -91,7 +91,7 @@ final class ConversationType extends AbstractType
 
         if ($event->getForm()->has('vendorUser') && $resolvedUser instanceof AdminUserInterface) {
             $vendor = $event->getForm()->get('vendorUser')->getData();
-            $user = $vendor->getCustomer()->getUser();
+            $user = $vendor->getshopUser();
             $conversation->setShopUser($user);
             $conversation->setAdminUser($resolvedUser);
 
