@@ -3,23 +3,27 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
-        <service id="bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.ui.admin.product_listing" public="true"
+        <service id="bitbag.sylius_mvm_plugin.behat.context.ui.admin.product_listing" public="true"
                  class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\ProductListingContext">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
         </service>
 
-        <service id="bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_listing" public="true"
+        <service id="bitbag_mvm_plugin.behat.context.ui.admin.vendor_listing" public="true"
                  class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\VendorListingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
         </service>
-        <service id="bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.admin.start_conversation" public="true"
-                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Admin\StarConversationContext">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-            <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
-            <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.behat.factory.vendor_example"/>
+
+        <service id="bitbag_mvm_plugin.behat.context.ui.admin.vendor_verification" public="true"
+                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\VendorVerificationContext">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="service_container"/>
+        </service>
+
+        <service id="bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_disabling" public="true"
+                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin\VendorDisablingContext">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
     </services>
 </container>

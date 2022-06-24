@@ -32,7 +32,7 @@ interface MessageInterface extends ResourceInterface
 
     public function setConversation(ConversationInterface $conversation): void;
 
-    public function getAuthor(): UserInterface;
+    public function getAuthor(): ?UserInterface;
 
     public function setAuthor(UserInterface $user): void;
 

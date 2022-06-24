@@ -3,3 +3,4 @@ suites:
         namespace: BitBag\SyliusMultiVendorMarketplacePlugin
         psr4_prefix: BitBag\SyliusMultiVendorMarketplacePlugin
         src_path: src/
+

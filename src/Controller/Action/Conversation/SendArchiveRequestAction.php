@@ -20,7 +20,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class SendArchiveRequestAction extends AbstractController
+
+final class SendArchiveRequestAction
 {
     private AddMessageFacadeInterface $addMessageFacade;
 
@@ -41,12 +42,9 @@ final class SendArchiveRequestAction extends AbstractController
 
     public function __invoke(int $id, Request $request): Response
     {
-        if (!$this->isAssetsUser()) {
-            return $this->redirectUserNotAccess();
-        }
         $redirect = $request->attributes->get('_sylius')['redirect'];
 
-        /** @var MessageInterface $archiveRequestMessage */
+//        /** @var MessageInterface $archiveRequestMessage */
         $archiveRequestMessage = $this->messageFactory->createNewWithArchiveRequest();
 
         $this->addMessageFacade

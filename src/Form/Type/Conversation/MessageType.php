@@ -17,6 +17,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
@@ -36,14 +38,13 @@ final class MessageType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                       'maxSize' => '10485760',
+                        'maxSize' => '10485760',
                     ]),
                 ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'mvm.ui.form.conversation_message.submit',
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

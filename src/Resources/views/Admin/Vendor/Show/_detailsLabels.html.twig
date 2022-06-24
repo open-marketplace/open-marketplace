@@ -1,0 +1,5 @@
+{% if vendor.status == constant('BitBag\\SyliusMultiVendorMarketplacePlugin\\Entity\\VendorInterface::STATUS_VERIFIED') %}
+    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'bitbag_mvm_plugin.ui.verified'|trans }}</span>
+{% else %}
+    <span class="ui red label"><i class="remove icon"></i>{{ 'bitbag_mvm_plugin.ui.unverified'|trans }}</span>
+{% endif %}

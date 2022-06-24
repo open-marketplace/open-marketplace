@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Conversation;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Controller\AbstractController;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
@@ -20,8 +19,10 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-final class ConversationController extends AbstractController
+
+final class ConversationController
 {
     private Environment $templatingEngine;
 
@@ -35,7 +36,7 @@ final class ConversationController extends AbstractController
         Environment                     $templatingEngine,
         FormFactoryInterface            $formFactory,
         ConversationRepositoryInterface $conversationRepository,
-        ActualUserResolverInterface     $actualUserResolver
+        ActualUserResolverInterface     $actualUserResolver,
     )
     {
         $this->templatingEngine = $templatingEngine;
@@ -46,10 +47,6 @@ final class ConversationController extends AbstractController
 
     public function index(Request $request): Response
     {
-        if (!$this->isAssetsUser()) {
-            return $this->redirectUserNotAccess();
-        }
-
         $template = $request->attributes->get('_sylius')['template'];
 
         $actualUser = $this->actualUserResolver->resolve();
@@ -57,6 +54,7 @@ final class ConversationController extends AbstractController
         if (null == $actualUser) {
             return $this->redirectUserNotAccess();
         }
+
         if ($request->query->get('closed')) {
             $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_CLOSED, $actualUser);
         } else {

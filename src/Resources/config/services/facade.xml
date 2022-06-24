@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacade"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade">
+            <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver" />
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.file_uploader" />
+            <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation" />
+        </service>
+    </services>
+</container>

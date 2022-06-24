@@ -86,23 +86,19 @@ class Message implements MessageInterface
     /**
      * Use it to determine which user is assigned to conversation
      */
-    public function getAuthor(): UserInterface
+    public function getAuthor(): ?UserInterface
     {
         $users = new ArrayCollection([
-            $this->getVendorUser(),
             $this->getAdminUser(),
             $this->getShopUser(),
         ]);
 
         foreach ($users as $user) {
             if (null !== $user) {
-                if ($user instanceof VendorInterface) {
-                    return $user->getCustomer()->getUser();
-                }
-
                 return $user;
             }
         }
+        return null;
     }
 
     /**
@@ -112,11 +108,10 @@ class Message implements MessageInterface
     {
         if ($user instanceof AdminUserInterface) {
             $this->setAdminUser($user);
-
             return;
         }
-
-        $this->setVendorUser($user->getCustomer()->getVendor());
+        if ($user instanceof ShopUserInterface)
+            $this->setShopUser($user);
     }
 
     public function getShopUser(): ?ShopUserInterface

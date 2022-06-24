@@ -1,0 +1,7 @@
+sylius_mailer:
+    sender:
+        name: 'example owner name'
+        address: no-reply@example.com
+    emails:
+        vendor_profile_update:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/vendor/Email/vendor_profile_update.html.twig"

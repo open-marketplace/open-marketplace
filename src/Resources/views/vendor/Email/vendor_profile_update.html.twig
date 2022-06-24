@@ -1,0 +1,23 @@
+{% extends '@SyliusCore/Email/layout.html.twig' %}
+
+{% block subject %}
+   {{ 'bitbag_mvm_plugin.email.vendor_profile_update'|trans }}
+{% endblock %}
+
+{% block body %}
+   <div>
+      {{ 'bitbag_mvm_plugin.email.request_profile_update_greeting' | trans }}
+   </div>
+   <br/>
+   <div>
+      {{ 'bitbag_mvm_plugin.email.request_profile_update_info' | trans }}
+   </div>
+   <br />
+   <div>
+      <a href="{{ url('confirm_profile_update_link',{'token': token}) }} ">
+         {{ url('confirm_profile_update_link',{'token': token}) }}
+      </a>
+   </div>
+   
+ 
+{% endblock %}

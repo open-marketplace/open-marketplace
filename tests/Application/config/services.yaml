@@ -2,7 +2,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 imports:
     - { resource: "../../../src/Resources/config/services.xml" }
-    - { resource: "../../../features/service.xml" }
 
 parameters:
     locale: en_US

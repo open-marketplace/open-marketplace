@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation;
 
+
 use BitBag\SyliusMultiVendorMarketplacePlugin\Controller\AbstractController;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
@@ -25,18 +26,13 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-final class CreateNewConversationAction extends AbstractController
+final class CreateNewConversationAction
 {
-//    private FormFactoryInterface $formFactory;
-
+    private FormFactoryInterface $formFactory;
     private Environment $templatingEngine;
-
     private UrlGeneratorInterface $urlGenerator;
-
     private FlashBagInterface $flashBag;
-
     private AddMessageFacadeInterface $addMessageFacade;
-
     private ConversationRepositoryInterface $conversationRepository;
 
     public function __construct(
@@ -57,11 +53,6 @@ final class CreateNewConversationAction extends AbstractController
 
     public function __invoke(Request $request): Response
     {
-        if (!$this->isAssetsUser())
-        {
-            return $this->redirectUserNotAccess();
-        }
-
         $template = $request->attributes->get('_sylius')['template'];
 
         $form = $this->formFactory->create(ConversationType::class);
@@ -87,6 +78,7 @@ final class CreateNewConversationAction extends AbstractController
             $this->flashBag->add('error', $error->getMessageTemplate());
         }
 
+
         return new Response(
             $this->templatingEngine->render(
                 $template, [
@@ -98,13 +90,15 @@ final class CreateNewConversationAction extends AbstractController
 
     private function addConversationWithMessages(ConversationInterface $conversation): void
     {
-        /** @var MessageInterface $message */
-        foreach ($conversation->getMessages()->toArray() as $message) {
-            $this->addMessageFacade->createWithConversation(
-                $conversation->getId(),
-                $message,
-                $message->getFile(),
-            );
-        }
+        if(null !== $conversation->getMessages())
+            /** @var MessageInterface $message */
+            foreach ($conversation->getMessages()->toArray() as $message) {
+                $this->addMessageFacade->createWithConversation(
+                    $conversation->getId(),
+                    $message,
+                    $message->getFile(),
+                );
+            }
     }
 }
+

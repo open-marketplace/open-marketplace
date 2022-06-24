@@ -44,8 +44,11 @@ interface ConversationInterface extends ResourceInterface
 
     public function removeMessage(MessageInterface $message): void;
 
+
+    /** @return  ?Collection<int, MessageInterface>  */
     public function getMessages(): ?Collection;
 
+    /** @param ?Collection<int, MessageInterface> $messages  */
     public function setMessages(?Collection $messages): void;
 
     public function getStatus(): string;

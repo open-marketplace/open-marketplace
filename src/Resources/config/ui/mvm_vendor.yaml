@@ -1,0 +1,15 @@
+sylius_ui:
+    events:
+        bitbag_mvm_plugin.admin.vendor.show.details:
+            blocks:
+                content:
+                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_details.html.twig'
+                    priority: 10
+        bitbag_mvm_plugin.admin.vendor.show.details_content:
+            blocks:
+                labels:
+                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_detailsLabels.html.twig'
+                    priority: 20
+                table:
+                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_detailsTable.html.twig'
+                    priority: 10
