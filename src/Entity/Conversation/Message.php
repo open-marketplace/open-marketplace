@@ -83,9 +83,6 @@ class Message implements MessageInterface
         $this->filename = $filename;
     }
 
-    /**
-     * Use it to determine which user is assigned to conversation
-     */
     public function getAuthor(): ?UserInterface
     {
         $users = new ArrayCollection([
@@ -98,6 +95,7 @@ class Message implements MessageInterface
                 return $user;
             }
         }
+
         return null;
     }
 
@@ -108,10 +106,12 @@ class Message implements MessageInterface
     {
         if ($user instanceof AdminUserInterface) {
             $this->setAdminUser($user);
+
             return;
         }
-        if ($user instanceof ShopUserInterface)
+        if ($user instanceof ShopUserInterface) {
             $this->setShopUser($user);
+        }
     }
 
     public function getShopUser(): ?ShopUserInterface

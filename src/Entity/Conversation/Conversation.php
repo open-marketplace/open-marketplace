@@ -34,8 +34,7 @@ class Conversation implements ConversationInterface
 
     protected AdminUserInterface $adminUser;
 
-    /** @var ?Collection<int, MessageInterface>  */
-
+    /** @var ?Collection<int, MessageInterface> */
     protected ?Collection $messages = null;
 
     protected string $status = self::STATUS_OPEN;
@@ -95,7 +94,6 @@ class Conversation implements ConversationInterface
             $this->messages->removeElement($message);
         }
     }
-
 
     /** @return ?Collection<int, MessageInterface>  */
     public function getMessages(): ?Collection

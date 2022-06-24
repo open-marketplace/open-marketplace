@@ -19,8 +19,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
-use Symfony\Component\HttpFoundation\RequestStack;
-
 
 final class ConversationController
 {
@@ -33,12 +31,11 @@ final class ConversationController
     private ActualUserResolverInterface $actualUserResolver;
 
     public function __construct(
-        Environment                     $templatingEngine,
-        FormFactoryInterface            $formFactory,
+        Environment $templatingEngine,
+        FormFactoryInterface $formFactory,
         ConversationRepositoryInterface $conversationRepository,
-        ActualUserResolverInterface     $actualUserResolver,
-    )
-    {
+        ActualUserResolverInterface $actualUserResolver,
+        ) {
         $this->templatingEngine = $templatingEngine;
         $this->formFactory = $formFactory;
         $this->conversationRepository = $conversationRepository;
@@ -51,10 +48,6 @@ final class ConversationController
 
         $actualUser = $this->actualUserResolver->resolve();
 
-        if (null == $actualUser) {
-            return $this->redirectUserNotAccess();
-        }
-
         if ($request->query->get('closed')) {
             $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_CLOSED, $actualUser);
         } else {
@@ -63,7 +56,8 @@ final class ConversationController
 
         return new Response(
             $this->templatingEngine->render(
-                $template, [
+                $template,
+                [
                     'conversations' => $conversations,
                 ]
             )
@@ -81,7 +75,8 @@ final class ConversationController
 
         return new Response(
             $this->templatingEngine->render(
-                $template, [
+                $template,
+                [
                     'form' => $form->createView(),
                     'conversation' => $conversation,
                 ]

@@ -35,12 +35,13 @@ final class ConversationRepository extends EntityRepository implements Conversat
     {
         $expr = $query->expr();
 
-        if ($user instanceof VendorInterface ) {
+        if ($user instanceof VendorInterface) {
             $query->andWhere($expr->eq('c.vendorUser', $user->getId()));
 
             return;
         }
-        if($user instanceof ShopUserInterface)
+        if ($user instanceof ShopUserInterface) {
             $query->andWhere($expr->eq('c.shopUser', $user->getId()));
+        }
     }
 }

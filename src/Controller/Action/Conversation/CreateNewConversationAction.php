@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation;
 
-
-use BitBag\SyliusMultiVendorMarketplacePlugin\Controller\AbstractController;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
@@ -29,10 +27,15 @@ use Twig\Environment;
 final class CreateNewConversationAction
 {
     private FormFactoryInterface $formFactory;
+
     private Environment $templatingEngine;
+
     private UrlGeneratorInterface $urlGenerator;
+
     private FlashBagInterface $flashBag;
+
     private AddMessageFacadeInterface $addMessageFacade;
+
     private ConversationRepositoryInterface $conversationRepository;
 
     public function __construct(
@@ -74,14 +77,10 @@ final class CreateNewConversationAction
             ]));
         }
 
-        foreach ($form->getErrors() as $error) {
-            $this->flashBag->add('error', $error->getMessageTemplate());
-        }
-
-
         return new Response(
             $this->templatingEngine->render(
-                $template, [
+                $template,
+                [
                     'form' => $form->createView(),
                 ]
             )
@@ -90,7 +89,7 @@ final class CreateNewConversationAction
 
     private function addConversationWithMessages(ConversationInterface $conversation): void
     {
-        if(null !== $conversation->getMessages())
+        if (null !== $conversation->getMessages()) {
             /** @var MessageInterface $message */
             foreach ($conversation->getMessages()->toArray() as $message) {
                 $this->addMessageFacade->createWithConversation(
@@ -99,6 +98,6 @@ final class CreateNewConversationAction
                     $message->getFile(),
                 );
             }
+        }
     }
 }
-

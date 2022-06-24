@@ -14,12 +14,11 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
 use Sylius\Component\Core\Model\ShopUser;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -57,7 +56,6 @@ final class ConversationType extends AbstractType
             ])
             ->addEventListener(FormEvents::SUBMIT, [$this, 'onSubmit'])
             ->addEventListener(FormEvents::POST_SET_DATA, [$this, 'postSetData']);
-
     }
 
     public function postSetData(FormEvent $event): void
@@ -92,12 +90,13 @@ final class ConversationType extends AbstractType
             $user = $vendor->getshopUser();
             $conversation->setShopUser($user);
             $conversation->setAdminUser($resolvedUser);
+
             return;
         }
 
-        if($resolvedUser instanceof ShopUser )
-        $conversation->setShopUser($resolvedUser);
-
+        if ($resolvedUser instanceof ShopUser) {
+            $conversation->setShopUser($resolvedUser);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\ConversationMessage;
 
-
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Message;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType;
@@ -21,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 
 final class AddMessageAction
 {
@@ -34,12 +32,11 @@ final class AddMessageAction
     private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(
-        FormFactoryInterface      $formFactory,
-        FlashBagInterface         $flashBag,
+        FormFactoryInterface $formFactory,
+        FlashBagInterface $flashBag,
         AddMessageFacadeInterface $addMessageFacade,
-        UrlGeneratorInterface     $urlGenerator
-    )
-    {
+        UrlGeneratorInterface $urlGenerator
+    ) {
         $this->formFactory = $formFactory;
         $this->flashBag = $flashBag;
         $this->addMessageFacade = $addMessageFacade;
