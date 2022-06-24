@@ -13,4 +13,3 @@ default:
         - sylius.behat.context.hook.doctrine_orm
       filters:
         tags: '@admin_start_conversation'
-

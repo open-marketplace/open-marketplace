@@ -5,5 +5,5 @@
     </imports>
     <services>
         <defaults public="true" />
-     </services>
+    </services>
 </container>
