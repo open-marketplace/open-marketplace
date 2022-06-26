@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemover"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.remover.profile_update_remover">
+                 id="bitbag_mvm_plugin.remover.profile_update_remover">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
     </services>

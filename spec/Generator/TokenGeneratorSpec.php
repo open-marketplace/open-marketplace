@@ -14,7 +14,7 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Generator;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGenerator;
 use PhpSpec\ObjectBehavior;
 
-class TokenGeneratorSpec extends ObjectBehavior
+final class TokenGeneratorSpec extends ObjectBehavior
 {
     public function it_is_initializable(): void
     {

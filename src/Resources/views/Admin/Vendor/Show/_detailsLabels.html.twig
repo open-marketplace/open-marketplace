@@ -3,3 +3,9 @@
 {% else %}
     <span class="ui red label"><i class="remove icon"></i>{{ 'bitbag_mvm_plugin.ui.unverified'|trans }}</span>
 {% endif %}
+
+{% if vendor.enabled == true %}
+    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'bitbag_mvm_plugin.ui.enabled'|trans }}</span>
+{% else %}
+    <span class="ui red label"><i class="remove icon"></i>{{ 'bitbag_mvm_plugin.ui.disabled'|trans }}</span>
+{% endif %}

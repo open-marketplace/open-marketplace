@@ -13,6 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class VendorProfileUpdateRepository extends EntityRepository
+final class VendorProfileUpdateRepository extends EntityRepository implements VendorProfileUpdateRepositoryInterface
 {
 }
