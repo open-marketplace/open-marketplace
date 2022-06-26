@@ -21,6 +21,7 @@ bitbag_mvm_plugin:
         customer: 'Customer'
         details: 'Details'
         disable: 'Disable'
+        disabled: 'Disabled'
         edit: 'Edit'
         edit_vendor: 'Edit vendor'
         enable: 'Enable'
