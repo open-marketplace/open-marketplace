@@ -12,7 +12,7 @@
     <services>
 
         <service id="bitbag_mvm_plugin.form.vendor_type"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType">
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType">
             <argument type="service" id="security.token_storage"/>
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor</argument>
             <argument>%bitbag_mvm_plugin.form.type.vendor.validation_groups%</argument>
