@@ -16,7 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterfac
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class TokenOwningVoter extends Voter
+final class TokenOwningVoter extends Voter
 {
     public const UPDATE = 'UPDATE';
 

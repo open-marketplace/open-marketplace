@@ -25,13 +25,14 @@ final class VendorProvider implements VendorProviderInterface
         $this->security = $security;
     }
 
-    public function provideCurrentVendor(): VendorInterface
+    public function provideCurrentVendor(): ?VendorInterface
     {
         /** @var ShopUserInterface $user */
         $user = $this->security->getUser();
         if (null == $user) {
             throw new UserNotFoundException();
         }
+
         /** @var VendorInterface $vendor */
         $vendor = $user->getVendor();
 

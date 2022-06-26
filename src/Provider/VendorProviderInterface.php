@@ -15,5 +15,5 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 
 interface VendorProviderInterface
 {
-    public function provideCurrentVendor(): VendorInterface;
+    public function provideCurrentVendor(): ?VendorInterface;
 }

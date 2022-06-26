@@ -23,7 +23,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-class VendorProfileUpdaterSpec extends ObjectBehavior
+final class VendorProfileUpdaterSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $entityManager,

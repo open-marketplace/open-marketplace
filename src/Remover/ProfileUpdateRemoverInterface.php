@@ -15,5 +15,5 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterfac
 
 interface ProfileUpdateRemoverInterface
 {
-    public function removePendingUpdate(VendorProfileUpdateInterface $vendorData): void;
+    public function removePendingUpdate(VendorProfileUpdateInterface $profileUpdate): void;
 }
