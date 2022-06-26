@@ -21,7 +21,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterf
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 class VendorProfileUpdaterSpec extends ObjectBehavior
@@ -46,9 +45,9 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorProfileInterface $vendorData,
         VendorAddressInterface $vendorAddress
     ): void {
-        $vendorData->getCompanyName()->willReturn("CompanyName");
-        $vendorData->getTaxIdentifier()->willReturn("TaxIdentifier");
-        $vendorData->getPhoneNumber()->willReturn("11339321");
+        $vendorData->getCompanyName()->willReturn('CompanyName');
+        $vendorData->getTaxIdentifier()->willReturn('TaxIdentifier');
+        $vendorData->getPhoneNumber()->willReturn('11339321');
         $vendorData->getVendorAddress()->willReturn($vendorAddress);
 
         $this->setVendorFromData($vendor, $vendorData);
@@ -79,7 +78,10 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
+
         $this->createPendingVendorProfileUpdate($vendorData, $vendor);
-        $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])->shouldHaveBeenCalledTimes(1);
+
+        $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])
+            ->shouldHaveBeenCalledTimes(1);
     }
 }

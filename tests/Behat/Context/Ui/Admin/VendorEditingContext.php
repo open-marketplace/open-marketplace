@@ -14,6 +14,7 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class VendorEditingContext extends RawMinkContext implements Context
@@ -22,7 +23,7 @@ final class VendorEditingContext extends RawMinkContext implements Context
 
     public function __construct(
         EntityManagerInterface $entityManager
-    ){
+    ) {
         $this->entityManager = $entityManager;
     }
 
@@ -36,7 +37,13 @@ final class VendorEditingContext extends RawMinkContext implements Context
         $vendor->setTaxIdentifier('vendorTax');
         $vendor->setPhoneNumber('vendorPhone');
         $vendor->setStatus($ifVerified);
-        $ifRequested == 'requested' ? $vendor->setEditDate('editDate') : $vendor->setEditDate(null);
+
+        $vendor->setEditedAt(null);
+
+        if ('requested' === $ifRequested) {
+            $vendor->setEditedAt(new DateTime());
+        }
+
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }

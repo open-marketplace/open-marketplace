@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
-use Doctrine\ORM\EntityManagerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,13 +61,17 @@ final class VendorProfileUpdateAction
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
+
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
                 $form->getData(),
                 $currentVendor
             );
 
-            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate($form->getData(), $currentVendor);
-            $currentVendor->setEditDate((new \DateTime())->format('d-m-Y'));
+            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
+                $form->getData(),
+                $currentVendor
+            );
+            $currentVendor->setEditedAt(new \DateTime());
             $this->manager->flush();
         }
 

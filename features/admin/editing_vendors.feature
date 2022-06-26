@@ -1,17 +1,17 @@
 @editing_vendors
 Feature: Editing Vendors
-  In order to edit a vendor
+  In order to edit a Vendor
   As an Administrator
-  Vendor should be verified
-  And I should be able to see Vendor edit page
+  When Vendor should be verified
+  Then I should be able to see Vendor edit page
 
   Background:
     Given I am logged in as an administrator
     And I am on "/admin"
 
   @ui
-  Scenario: Editing verified vendors which requested change of profile
-    Given There is a "verified" vendor which "requested" change
+  Scenario: Editing verified Vendor who requested change of profile information
+    Given There is a "verified" Vendor who "requested" change
     When I follow "Vendors"
     And I follow "Edit"
     Then I should see "Vendor requested changes"
@@ -20,7 +20,7 @@ Feature: Editing Vendors
 
   @ui
   Scenario: Editing verified vendors which did not requested change of profile
-    Given There is a "verified" vendor which "did not requested" change
+    Given There is a "verified" Vendor who "did not requested" change
     When I follow "Vendors"
     And I follow "Edit"
     Then I should see "Vendor details"
@@ -29,13 +29,13 @@ Feature: Editing Vendors
 
   @ui
   Scenario: Editing unverified vendors which requested change of profile
-    Given There is a "unverified" vendor which "requested" change
+    Given There is a "unverified" Vendor who "requested" change
     When I follow "Vendors"
     And I should not see "Edit"
 
   @ui
   Scenario: Editing unverified vendors which did not requested change of profile
-    Given There is a "unverified" vendor which "did not requested" change
+    Given There is a "unverified" Vendor who "did not requested" change
     When I follow "Vendors"
     And I should not see "Edit"
 

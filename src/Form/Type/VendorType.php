@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
@@ -37,6 +37,7 @@ final class VendorType extends AbstractResourceType
         array $validationGroups = []
     ) {
         parent::__construct($dataClass, $validationGroups);
+
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -52,7 +53,6 @@ final class VendorType extends AbstractResourceType
             ->add('taxIdentifier', TextType::class, [
                 'label' => 'bitbag_mvm_plugin.ui.tax_identifier',
             ])
-
             ->add('phoneNumber', TelType::class, [
                 'label' => 'bitbag_mvm_plugin.ui.phone_number',
             ])
@@ -75,8 +75,7 @@ final class VendorType extends AbstractResourceType
                 $form = $event->getForm();
                 $form->get('shopUser')->setData($user);
                 $event->setData($form);
-            })
-            ;
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -84,7 +83,6 @@ final class VendorType extends AbstractResourceType
         $resolver->setDefaults([
             'data_class' => Vendor::class,
             'validation_groups' => $this->validationGroups,
-        ])
-        ;
+        ]);
     }
 }

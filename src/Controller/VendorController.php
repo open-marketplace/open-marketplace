@@ -102,9 +102,11 @@ final class VendorController extends ResourceController
     {
         $vendor = $this->vendorProvider->provideCurrentVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
+
         if (null === $pendingUpdate) {
             return parent::updateAction($request);
         }
+
         $this->addFlash('error', 'sylius.user.verify_email_request');
 
         return $this->redirectToRoute('vendor_profile');
@@ -115,6 +117,7 @@ final class VendorController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
+
         /** @var ResourceInterface $resource */
         $resource = $this->vendorProvider->provideCurrentVendor();
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
@@ -133,7 +136,7 @@ final class VendorController extends ResourceController
 
     public function verifyVendorAction(Request $request): Response
     {
-        $vendorId = $request->attributes->get('id');
+        $vendorId = $request->attributes->get('id', 0);
 
         $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
         $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
@@ -147,7 +150,7 @@ final class VendorController extends ResourceController
 
     public function enablingVendorAction(Request $request): Response
     {
-        $vendorId = $request->attributes->get('id');
+        $vendorId = $request->attributes->get('id', 0);
 
         $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
         $currentVendor->setEnabled(!$currentVendor->isEnabled());

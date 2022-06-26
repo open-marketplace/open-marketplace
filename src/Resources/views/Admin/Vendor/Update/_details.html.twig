@@ -1,9 +1,11 @@
-{% if vendor.editDate is not null %}
-    <span class="ui red label"><i class="exclamation icon"></i>{{ 'Vendor requested changes on ' ~ vendor.editDate }}</span>
+{% if vendor.editedAt is not null %}
+    <span class="ui red label"><i class="exclamation icon"></i>{{ 'Vendor requested changes on ' ~ vendor.editedAt|date("d.m.Y H:i:s") }}</span>
 {% endif %}
 <h4 class="ui dividing header">{{ 'bitbag_mvm_plugin.ui.vendor_details'|trans }}</h4>
+
 <div class="two fields">
     {{ form_row(form.companyName) }}
     {{ form_row(form.taxIdentifier) }}
 </div>
+
 {{ form_row(form.phoneNumber) }}
