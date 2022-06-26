@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
@@ -38,6 +38,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
@@ -91,7 +92,7 @@ final class VendorController extends ResourceController
     {
         try {
             return parent::createAction($request);
-        } catch (UserNotFoundException $exception) {
+        } catch (ShopUserNotFoundException $exception) {
             return $this->redirectToRoute('sylius_shop_login');
         } catch (TokenNotFoundException $exception) {
             return $this->redirectToRoute('sylius_shop_login');
@@ -101,7 +102,8 @@ final class VendorController extends ResourceController
     public function updateAction(Request $request): Response
     {
         $vendor = $this->vendorProvider->provideCurrentVendor();
-        $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
+        $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)
+            ->findOneBy(['vendor' => $vendor]);
 
         if (null === $pendingUpdate) {
             return parent::updateAction($request);
@@ -138,7 +140,13 @@ final class VendorController extends ResourceController
     {
         $vendorId = $request->attributes->get('id', 0);
 
-        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
+        $currentVendor = $this->manager->getRepository(Vendor::class)
+            ->findOneBy(['id' => $vendorId]);
+
+        if (null === $currentVendor) {
+            throw new NotFoundHttpException(sprintf('Vendor with id %d has not been found', $vendorId));
+        }
+
         $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
 
         $this->manager->flush();
@@ -152,7 +160,13 @@ final class VendorController extends ResourceController
     {
         $vendorId = $request->attributes->get('id', 0);
 
-        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
+        $currentVendor = $this->manager->getRepository(Vendor::class)
+            ->findOneBy(['id' => $vendorId]);
+
+        if (null === $currentVendor) {
+            throw new NotFoundHttpException(sprintf('Vendor with id %d has not been found', $vendorId));
+        }
+
         $currentVendor->setEnabled(!$currentVendor->isEnabled());
 
         $this->manager->flush();

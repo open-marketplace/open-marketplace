@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -69,7 +69,7 @@ final class VendorType extends AbstractResourceType
                 /** @var ShopUserInterface $user */
                 $user = $token->getUser();
                 if (!$user instanceof ShopUserInterface) {
-                    throw new UserNotFoundException('No user found.');
+                    throw new ShopUserNotFoundException('No user found.');
                 }
 
                 $form = $event->getForm();

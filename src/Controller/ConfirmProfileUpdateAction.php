@@ -57,6 +57,7 @@ final class ConfirmProfileUpdateAction
 
             $loggedVendor = $this->vendorProvider->provideCurrentVendor();
             $loggedVendor->setEditedAt(null);
+
             $this->entityManager->flush();
         }
 

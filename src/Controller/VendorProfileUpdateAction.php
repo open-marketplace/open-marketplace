@@ -71,6 +71,7 @@ final class VendorProfileUpdateAction
                 $form->getData(),
                 $currentVendor
             );
+
             $currentVendor->setEditedAt(new \DateTime());
             $this->manager->flush();
         }

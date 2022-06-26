@@ -6,7 +6,8 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserHasNoVendorContextException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProvider;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use PhpSpec\ObjectBehavior;
@@ -31,11 +32,11 @@ final class VendorProviderSpec extends ObjectBehavior
     ): void {
         $security->getUser()->willReturn(null);
 
-        $this->shouldThrow(UserNotFoundException::class)
+        $this->shouldThrow(ShopUserNotFoundException::class)
             ->during('provideCurrentVendor', []);
     }
 
-    public function it_returns_null_from_shop_user_context(
+    public function it_throws_exception_when_shop_user_has_no_vendor_context(
         Security $security,
         ShopUserInterface $shopUser
     ): void {
@@ -43,8 +44,8 @@ final class VendorProviderSpec extends ObjectBehavior
 
         $shopUser->getVendor()->willReturn(null);
 
-        $this->provideCurrentVendor()
-            ->shouldReturn(null);
+        $this->shouldThrow(ShopUserHasNoVendorContextException::class)
+            ->during('provideCurrentVendor', []);
     }
 
     public function it_returns_vendor_from_shop_user_context(

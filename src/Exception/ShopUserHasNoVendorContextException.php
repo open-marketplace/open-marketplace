@@ -9,11 +9,8 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Exception;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-
-interface VendorProviderInterface
+final class ShopUserHasNoVendorContextException extends \Exception
 {
-    public function provideCurrentVendor(): VendorInterface;
 }
