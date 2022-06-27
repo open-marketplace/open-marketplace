@@ -14,6 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -66,7 +67,7 @@ final class VendorType extends AbstractResourceType
                 'constraints' => [new Valid()],
             ])
             ->add('description', TextType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.description',
+                'label' => 'bitbag_mvm_plugin.ui.description',
             ])
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
                 $token = $this->tokenStorage->getToken();

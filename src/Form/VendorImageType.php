@@ -21,7 +21,7 @@ final class VendorImageType extends AbstractResourceType
     {
         $builder
             ->add('file', FileType::class, [
-                'label' => 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.logo',
+                'label' => 'bitbag_mvm_plugin.ui.logo',
             ])
         ;
     }

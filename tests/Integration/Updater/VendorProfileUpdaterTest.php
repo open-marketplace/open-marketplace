@@ -13,6 +13,7 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Updater;
 
 use ApiTestCase\JsonApiTestCase;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
@@ -92,7 +93,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             ->createAddress('Grand Street', 'Warsaw', '00-22', $poland);
 
         $vendorData = $this->vendorProfileFactory
-            ->createVendor('Grand Company', '221133', '0-33 221 333 111', $address);
+            ->createVendor('Grand Company', '221133', '0-33 221 333 111', 'description', $address);
 
         $this->entityManager->persist($vendorData);
         $this->entityManager->persist($address);

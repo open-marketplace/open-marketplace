@@ -18,7 +18,7 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
 {
     public function getRouteName(): string
     {
-        return 'bitbag_sylius_multi_vendor_marketplace_plugin_vendor_page_show';
+        return 'bitbag_mvm_plugin_vendor_page_show';
     }
 
     public function getFirstProductNameFromList(): string

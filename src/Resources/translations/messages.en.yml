@@ -20,6 +20,7 @@ bitbag_mvm_plugin:
         vendors: 'Vendors'
         logo: 'Logo'
         invalid_logo: 'Please upload a valid image (jpg/png/svg)'
+        description: 'Description'
         customer: 'Customer'
         details: 'Details'
         disable: 'Disable'
