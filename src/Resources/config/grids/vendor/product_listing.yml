@@ -3,7 +3,7 @@ sylius_grid:
     action:
       details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
   grids:
-    bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing:
+    bitbag_mvm_plugin_vendor_product_listing:
       driver:
         name: doctrine/orm
         options:
@@ -11,20 +11,20 @@ sylius_grid:
       fields:
         name:
           type: string
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.name
+          label: bitbag_mvm_plugin.ui.name
         publishedAt:
           type: datetime
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at
+          label: bitbag_mvm_plugin.ui.published_at
         status:
           type: string
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
+          label: bitbag_mvm_plugin.ui.status
       actions:
         item:
           details:
             type: details
-            label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.details
+            label: bitbag_mvm_plugin.ui.details
             options:
               link:
-                route: bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_show
+                route: bitbag_mvm_plugin_admin_product_listing_show
                 parameters:
                   id: resource.id

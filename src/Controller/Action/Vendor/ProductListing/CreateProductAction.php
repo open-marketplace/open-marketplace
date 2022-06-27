@@ -99,7 +99,7 @@ class CreateProductAction extends AbstractController
             $button = $form->get('saveAndAdd');
             $this->createProductListingCommand->create($productDraft, $button->isClicked());
 
-            return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index');
+            return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }
 
         return new Response(

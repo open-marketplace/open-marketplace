@@ -4,15 +4,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ChannelPricingFactory" public="true"
-                 id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.channel_pricing_factory">
+                 id="bit_bag.mvm_plugin.factory.channel_pricing_factory">
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactory" public="true"
-                 id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_translation_factory">
+                 id="bit_bag.mvm_plugin.factory.product_translation_factory">
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantFactory" public="true"
-                 id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_variant_factory">
+                 id="bit_bag.mvm_plugin.factory.product_variant_factory">
         </service>
     </services>
 </container>

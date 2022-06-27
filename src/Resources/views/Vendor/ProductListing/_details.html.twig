@@ -1,43 +1,65 @@
+<div class="ui stackable two column grid">
+    <div class="column">
+        <h1 class="ui header">
+            <div class="content">
+                {{ 'bitbag_mvm_plugin.ui.product_list'|trans }}
+                <div class="sub header">{{ 'bitbag_mvm_plugin.ui.manage_products'|trans }}</div>
+            </div>
+        </h1>
+    </div>
+    <div class="middle aligned column">
+        <a href="{{ path('bitbag_mvm_plugin_vendor_product_listing_create_product') }}" class="ui right floated blue button">
+            <i class="circle plus icon"></i>
+            {{ 'mvm.ui.create_new_product'|trans }}
+        </a>
+    </div>
+</div>
+
+<div class="ui hidden divider"></div>
+
 <div id="details" class="four wide column">
-    <h4 class="ui top attached large header">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.details'|trans }}</h4>
+    <h4 class="ui top attached large header">{{ 'bitbag_mvm_plugin.ui.details'|trans }}</h4>
     <div class="ui attached segment">
         <table class="ui very basic celled table">
             {% if productListings %}
 
             <tbody>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.name'|trans }}</strong></td>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.name'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.published_at'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.version'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.status'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.actions'|trans }}</strong></td>
             </tr>
             {% for productListing in productListings %}
-                {% set productDrat = productListing.productDrafts|last %}
+                {% set productDraft = productListing.productDrafts|last %}
             <tr>
                 <td>
                     <ul class="ui bulleted list">
-                        {{ productDrat.code }}
+                        {{ productDraft.code }}
                     </ul>
                 </td>
                 <td>
                     <ul class="ui bulleted list">
-                        {% if productDrat.publishedAt %}
-                            {{ productDrat.publishedAt | date }}
+                        {% if productDraft.publishedAt %}
+                            {{ productDraft.publishedAt | date }}
                         {% endif %}
                     </ul>
                 </td>
                 <td>
                     <ul class="ui bulleted list">
-                        {{ productDrat.versionNumber }}
+                        {{ productDraft.versionNumber }}
                     </ul>
                 </td>
                 <td>
                     <ul class="ui bulleted list">
-                        {{ productDrat.status }}
+                        {{ productDraft.status }}
                     </ul>
                 </td>
                 <td>
                     <ul class="ui bulleted list">
-                        {% if productDrat.status != 'under_verification' %}
-                            <a class="ui gray button" href="{{ path('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_edit_product',{'id': productDrat.id}) }}">edit</a>
+                        {% if productDraft.status != 'under_verification' %}
+                            <a class="ui gray button" href="{{ path('bitbag_mvm_plugin_vendor_product_listing_edit_product',{'id': productDraft.id}) }}">edit</a>
                         {% endif %}
                     </ul>
                 </td>
@@ -46,8 +68,7 @@
             </tbody>
             {% else %}
             <tbody>
-                <span class="five wide text-center"><strong class="gray text">{{ 'bitbag_sylius_multi_vendor_marketplace_plugin.ui.is_emptly'|trans }}</strong></span>
-
+                <span class="five wide text-center"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.is_emptly'|trans }}</strong></span>
             </tbody>
             {% endif %}
         </table>

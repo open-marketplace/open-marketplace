@@ -8,7 +8,7 @@
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager"/>
             <argument key="$adminUserExampleFactory" type="service" id="sylius.fixture.example_factory.admin_user"/>
             <argument key="$shopUserExampleFactory" type="service" id="sylius.fixture.example_factory.shop_user"/>
-            <argument key="$vendorFactory" type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.factory.vendor"/>
+            <argument key="$vendorFactory" type="service" id="bitbag_mvm_plugin.factory.vendor"/>
         </service>
 
         <service id="bitbag_mvm_plugin.behat.context.ui.admin.vendor_listing" public="true"

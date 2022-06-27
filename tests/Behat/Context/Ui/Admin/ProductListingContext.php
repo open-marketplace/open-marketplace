@@ -19,6 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
@@ -90,6 +91,7 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function thereAreProductListings($count)
     {
+        /** @var ShopUserInterface $user */
         $user = $this->shopUserExampleFactory->create();
         $user->setUsername('username');
         $user->setPlainPassword('password');
@@ -99,7 +101,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         /** @var Vendor $vendor */
         $vendor = $this->vendorFactory->createNew();
         $vendor->setCompanyName('vendor');
-        $vendor->setCustomer($user->getCustomer());
+        $vendor->setShopUser($user);
         $vendor->setPhoneNumber('987654321');
         $vendor->setTaxIdentifier('123456789');
         $this->entityManager->persist($vendor);

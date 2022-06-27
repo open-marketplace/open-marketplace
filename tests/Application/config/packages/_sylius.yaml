@@ -40,13 +40,13 @@ winzou_state_machine:
             after:
                 send_to_verification:
                     on: [ 'send_to_verification' ]
-                    do: [ '@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft', 'sendToVerify' ]
+                    do: [ '@bitbag_mvm_plugin.state_machine.product_draft', 'sendToVerify' ]
                     args: [ 'object' ]
                 accept_product_listing:
                     on: ['accept_product_draft']
-                    do: ['@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft', 'verify']
+                    do: ['@bitbag_mvm_plugin.state_machine.product_draft', 'verify']
                     args: ['object']
                 reject_product_listing:
                     on: [ 'reject_product_draft' ]
-                    do: [ '@bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft', 'reject' ]
+                    do: [ '@bitbag_mvm_plugin.state_machine.product_draft', 'reject' ]
                     args: [ 'object' ]

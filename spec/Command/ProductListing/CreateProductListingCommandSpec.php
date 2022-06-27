@@ -11,19 +11,18 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -59,7 +58,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         TokenInterface                    $token,
         ProductTranslationInterface       $productTranslation,
         ProductListingRepositoryInterface $productListingRepository,
-        CustomerInterface                 $customer,
         VendorInterface                   $vendor
     ) {
         $productListingFactoryInterface->createNew()
@@ -71,10 +69,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $token->getUser()
             ->willReturn($shopUser);
 
-        $shopUser->getCustomer()
-            ->willReturn($customer);
-
-        $customer->getVendor()
+        $shopUser->getVendor()
             ->willReturn($vendor);
 
         $productDraft->getTranslations()
@@ -110,7 +105,6 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         TokenInterface                    $token,
         ProductTranslationInterface       $productTranslation,
         ProductListingRepositoryInterface $productListingRepository,
-        CustomerInterface                 $customer,
         VendorInterface                   $vendor
     ) {
         $productListingFactoryInterface->createNew()
@@ -122,10 +116,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $token->getUser()
             ->willReturn($shopUser);
 
-        $shopUser->getCustomer()
-            ->willReturn($customer);
-
-        $customer->getVendor()
+        $shopUser->getVendor()
             ->willReturn($vendor);
 
         $productDraft->getTranslations()

@@ -56,12 +56,26 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
     {
         $product->setUpdatedAt(new \DateTime());
 
+        $productTranslations = $this->productTranslationRepository->findBy(['translatable' => $product]);
+        $mappedProductTranslations = [];
+
+        /** @var BaseProductTranslationInterface $productTranslation */
+        foreach ($productTranslations as $productTranslation) {
+            $mappedProductTranslations[$productTranslation->getLocale()] = $productTranslation;
+        }
+
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
-            /** @var BaseProductTranslationInterface $productTranslation */
-            $productTranslation = $this->productTranslationRepository->findOneBy(['translatable' => $product, 'locale' => $translation->getLocale()]);
+            $productTranslation = null;
+            if (!$translationLocale = $translation->getLocale()) {
+                throw new \Exception('Fatal error, translation locale not found.');
+            }
+            if (array_key_exists($translationLocale, $mappedProductTranslations)) {
+                $productTranslation = $mappedProductTranslations[$translation->getLocale()];
+                unset($mappedProductTranslations[$translation->getLocale()]);
+            }
 
-            if (null != $productTranslation) {
+            if (null !== $productTranslation) {
                 $productTranslation->setName($translation->getName());
                 $productTranslation->setDescription($translation->getDescription());
                 $productTranslation->setSlug($translation->getSlug());
@@ -83,6 +97,10 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
                 $this->entityManager->persist($productTranslation);
                 $product->addTranslation($productTranslation);
             }
+        }
+
+        foreach ($mappedProductTranslations as $deletedProductTranslation) {
+            $product->removeTranslation($deletedProductTranslation);
         }
 
         $productVariant = $this->productVariantRepository->findOneBy(['product' => $product]);

@@ -4,19 +4,19 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Helper\CreateProductFromDraftHelper" public="true"
-                 id="bit_bag.sylius_multi_vendor_marketplace_plugin.helper.create_product_from_draft_helper">
+                 id="bit_bag.mvm_plugin.helper.create_product_from_draft_helper">
             <argument key="$productFactory" type="service" id="sylius.custom_factory.product" />
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
-            <argument key="$channelPricingFactory" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.channel_pricing_factory" />
-            <argument key="$productTranslationFactory" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_translation_factory" />
-            <argument key="$productVariantFactory" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_variant_factory" />
+            <argument key="$channelPricingFactory" type="service" id="bit_bag.mvm_plugin.factory.channel_pricing_factory" />
+            <argument key="$productTranslationFactory" type="service" id="bit_bag.mvm_plugin.factory.product_translation_factory" />
+            <argument key="$productVariantFactory" type="service" id="bit_bag.mvm_plugin.factory.product_variant_factory" />
             <argument key="$channelRepository" type="service" id="sylius.repository.channel" />
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Helper\UpdateProductFromDraftHelper" public="true"
-                 id="bit_bag.sylius_multi_vendor_marketplace_plugin.helper.update_product_from_draft_helper">
+                 id="bit_bag.mvm_plugin.helper.update_product_from_draft_helper">
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
-            <argument key="$productTranslationFactory" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.factory.product_translation_factory" />
+            <argument key="$productTranslationFactory" type="service" id="bit_bag.mvm_plugin.factory.product_translation_factory" />
             <argument key="$productTranslationRepository" type="service" id="sylius.repository.product_translation" />
             <argument key="$channelPricingRepository" type="service" id="sylius.repository.channel_pricing" />
             <argument key="$productVariantRepository" type="service" id="sylius.repository.product_variant" />

@@ -11,14 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -65,9 +64,8 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         $token = $this->tokenStorage->getToken();
         /** @var ShopUserInterface $user */
         $user = $token->getUser();
-        /** @var CustomerInterface $customer */
-        $customer = $user->getCustomer();
-        $vendor = $customer->getVendor();
+
+        $vendor = $user->getVendor();
 
         if (!$vendor) {
             throw new \Exception('Vendor not found.');

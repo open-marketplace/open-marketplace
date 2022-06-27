@@ -36,19 +36,17 @@ bitbag_mvm_plugin:
         verify: 'Verify'
         new_vendor: 'New Vendor'
         manage_products: 'Manage products'
-        details: 'Details'
         name: 'Name'
         accept: 'Accept'
         reject: 'Reject'
         confirm: 'Are you sure?'
         code: 'Code'
-        verified: 'Verified'
         rejected: 'Rejected'
         under_verification: 'Under verification'
-        vendor_dashboard: "Vendor dashboard"
         published_at: 'Published at'
         verified_at: 'Verified at'
-        status: 'Status'
+        version: 'Version'
+        actions: 'Actions'
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."

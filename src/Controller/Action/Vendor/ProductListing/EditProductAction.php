@@ -66,11 +66,11 @@ class EditProductAction extends AbstractController
             $button = $form->get('saveAndAdd');
             $this->createProductListingCommand->saveEdit($productDraft, $button->isClicked());
 
-            return $this->redirectToRoute('bitbag_sylius_multi_vendor_marketplace_plugin_vendor_product_listing_index');
+            return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }
 
         return new Response(
-            $this->renderView('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/create_product.html.twig', [
+            $this->renderView('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/edit_product.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $newResource,

@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-use DateTimeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
+use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
 
 interface VendorInterface extends VendorProfileInterface

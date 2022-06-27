@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,9 +15,8 @@ final class ShowProductListings extends AbstractController
     {
         /** @var ShopUserInterface $user */
         $user = $this->getUser();
-        /** @var CustomerInterface $customer */
-        $customer = $user->getCustomer();
-        $vendor = $customer->getVendor();
+
+        $vendor = $user->getVendor();
 
         if (null === $vendor) {
             return new Response(

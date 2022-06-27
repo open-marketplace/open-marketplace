@@ -1,5 +1,14 @@
-{% extends '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/layout.html.twig' %}
+{% extends '@SyliusShop/Account/layout.html.twig' %}
 
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'bitbag_mvm_plugin.ui.product_list'|trans }}</div>
+    </div>
+{% endblock %}
 
 {% block subcontent %}
     {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/_details.html.twig' %}

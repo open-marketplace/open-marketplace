@@ -3,15 +3,15 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft" public="true"
+        <service id="bitbag_mvm_plugin.state_machine.product_draft" public="true"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductDraftCallbacks">
             <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
-            <argument key="$createProductFromDraftHelper" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.helper.create_product_from_draft_helper" />
+            <argument key="$createProductFromDraftHelper" type="service" id="bit_bag.mvm_plugin.helper.create_product_from_draft_helper" />
             <argument key="$session" type="service" id="session.flash_bag" />
-            <argument key="$updateProductFromDraftHelper" type="service" id="bit_bag.sylius_multi_vendor_marketplace_plugin.helper.update_product_from_draft_helper" />
+            <argument key="$updateProductFromDraftHelper" type="service" id="bit_bag.mvm_plugin.helper.update_product_from_draft_helper" />
         </service>
 
-        <service id="bitbag_sylius_multi_vendor_marketplace_plugin.state_machine.product_draft.transition" public="true"
+        <service id="bitbag_mvm_plugin.state_machine.product_draft.transition" public="true"
                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransition">
                 <argument key="$productDraftStateMachineFactory" type="service" id="SM\Factory\Factory"/>
         </service>

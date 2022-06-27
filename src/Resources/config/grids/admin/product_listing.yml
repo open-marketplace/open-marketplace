@@ -40,6 +40,6 @@ sylius_grid:
             label: bitbag_mvm_plugin.ui.details
             options:
               link:
-                route: bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_show
+                route: bitbag_mvm_plugin_admin_product_listing_show
                 parameters:
                   id: resource.id

@@ -44,8 +44,13 @@ class ResourceTranslationsType extends AbstractType
             $parentForm = $event->getForm()->getParent();
             Assert::notNull($parentForm);
 
+            /** @var ProductTranslationInterface $translation */
             foreach ($translations as $localeCode => $translation) {
-                if (null === $translation) {
+                if (null == $translation) {
+                    throw new \Exception('Fatal error, translation not found.');
+                }
+
+                if (null === $translation->getName()) {
                     unset($translations[$localeCode]);
 
                     continue;
