@@ -21,7 +21,7 @@ Feature: Starting conversation by Administrator
     
   Scenario: Vendor begins conversation
     Given I am logged in as "test@company.domain"
-    And I am on "/vendor/conversation/create"
+    And I am on "/en_US/vendor/conversation/create"
     And I fill in "Message" with "test Message"
     And I press "Submit"
     Then I should see "test Message"
@@ -35,7 +35,7 @@ Feature: Starting conversation by Administrator
     And I fill in "Message" with "test Message"
     And I press "Submit"
     And I am logged in as "test@company.domain"
-    And I am on "/vendor/conversations"
+    And I am on "/en_US/vendor/conversations"
     And I follow "Conversation"
     Then I should see "test Message"
 
@@ -48,9 +48,8 @@ Feature: Starting conversation by Administrator
     And I fill in "Message" with "test Message"
     And I press "Submit"
     And I am logged in as "test@company.domain"
-    And I am on "/vendor/conversations"
+    And I am on "/en_US/vendor/conversations"
     And I follow "Conversation with"
-    And print last response
     And I fill in "Message" with "second test Message"
     And I press "Submit"
     Then I should see "second test Message"
