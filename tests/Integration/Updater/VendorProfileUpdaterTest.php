@@ -95,6 +95,8 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $vendorData = $this->vendorProfileFactory
             ->createVendor('Grand Company', '221133', '0-33 221 333 111', 'description', $address);
 
+        $vendorData->setSlug('test-slug');
+
         $this->entityManager->persist($vendorData);
         $this->entityManager->persist($address);
 
