@@ -41,7 +41,6 @@ final class SendArchiveRequestAction
     {
         $redirect = $request->attributes->get('_sylius')['redirect'];
 
-//        /** @var MessageInterface $archiveRequestMessage */
         $archiveRequestMessage = $this->messageFactory->createNewWithArchiveRequest();
 
         $this->addMessageFacade

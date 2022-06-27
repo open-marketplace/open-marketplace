@@ -91,7 +91,7 @@ bitbag_mvm_plugin:
             enabled: 'Enabled'
             id: 'ID'
             marketplace: 'Marketplace'
-            not_blank: "This field cannnot be empty"
+            not_blank: "This field cannot be empty"
             phone_number: "Phone number"
             postal_code: "Postal code"
             product_listings: 'Product listings'
