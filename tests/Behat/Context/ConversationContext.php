@@ -15,15 +15,12 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -42,14 +39,13 @@ class ConversationContext extends MinkContext implements Context
     private UserRepositoryInterface $userRepository;
 
     public function __construct(
-        EntityManagerInterface  $manager,
+        EntityManagerInterface $manager,
         ExampleFactoryInterface $userFactory,
         VendorProfileFactoryInterface $vendorProfileFactory,
         AddressFactoryInterface $addressFactory,
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository
-    )
-    {
+    ) {
         $this->manager = $manager;
         $this->vendorProfileFactory = $vendorProfileFactory;
         $this->userFactory = $userFactory;
@@ -68,12 +64,12 @@ class ConversationContext extends MinkContext implements Context
         $this->sharedStorage->set('user', $user);
 
         $this->userRepository->add($user);
-        $address = $this->addressFactory->createAddress("Grand avenue","Berlin", "22-111", $country);
+        $address = $this->addressFactory->createAddress('Grand avenue', 'Berlin', '22-111', $country);
 
         $vendor = $this->vendorProfileFactory->createVendor(
-            "someCompany",
-            "TaxID",
-            "333222111",
+            'someCompany',
+            'TaxID',
+            '333222111',
             $address
         );
 
@@ -99,7 +95,6 @@ class ConversationContext extends MinkContext implements Context
         throw new PendingException();
     }
 
-
     /**
      * @return DocumentElement
      */
@@ -107,5 +102,4 @@ class ConversationContext extends MinkContext implements Context
     {
         return $this->getSession()->getPage();
     }
-
 }
