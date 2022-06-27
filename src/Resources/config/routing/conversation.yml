@@ -48,5 +48,5 @@ bitbag_mvm_plugin_admin_conversation_message_add:
         _controller: bitbag_mvm_plugin.controller.action.conversation_message.add_message_action
         _sylius:
             redirect: bitbag_mvm_plugin_admin_conversation_show
-            mail_redirect: mvm_vendor_conversation_show
+            mail_redirect: bitbag_mvm_plugin_admin_conversation_show
             

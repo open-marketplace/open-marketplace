@@ -36,7 +36,7 @@ Feature: Starting conversation by Administrator
     And I press "Submit"
     And I am logged in as "test@company.domain"
     And I am on "/vendor/conversations"
-    And I follow "Conversation from administrator"
+    And I follow "Conversation"
     Then I should see "test Message"
 
   Scenario: AdminUser begins conversation, and Vendor writes back
@@ -49,7 +49,8 @@ Feature: Starting conversation by Administrator
     And I press "Submit"
     And I am logged in as "test@company.domain"
     And I am on "/vendor/conversations"
-    And I follow "Conversation from administrator"
+    And I follow "Conversation with"
+    And print last response
     And I fill in "Message" with "second test Message"
     And I press "Submit"
     Then I should see "second test Message"

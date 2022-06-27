@@ -20,8 +20,8 @@ bitbag_mvm_plugin_vendor_conversation_message_add:
     defaults:
         _controller: bitbag_mvm_plugin.controller.action.conversation_message.add_message_action
         _sylius:
-            redirect: mvm_vendor_conversation_show
-            mail_redirect: mvm_admin_conversation_show
+            redirect: bitbag_mvm_plugin_vendor_conversation_show
+            mail_redirect: bitbag_mvm_plugin_vendor_conversation_show
             
 bitbag_mvm_plugin_vendor_conversation_create:
     path: /vendor/conversation/create

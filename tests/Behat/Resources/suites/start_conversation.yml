@@ -1,6 +1,6 @@
 default:
   suites:
-    admin_start_conversation:
+    start_conversation:
       contexts:
         - tests.bitbag_mvm_plugin.behat.context.conversation_context
         - sylius.behat.context.setup.shop_security
