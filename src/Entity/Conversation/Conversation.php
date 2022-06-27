@@ -11,12 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class Conversation implements ConversationInterface
 {
@@ -29,10 +26,6 @@ class Conversation implements ConversationInterface
     protected ?CategoryInterface $category = null;
 
     protected ?ShopUserInterface $shopUser = null;
-
-    protected ?VendorInterface $vendorUser = null;
-
-    protected AdminUserInterface $adminUser;
 
     /** @var ?Collection<int, MessageInterface> */
     protected ?Collection $messages = null;
@@ -57,26 +50,6 @@ class Conversation implements ConversationInterface
     public function setCategory(?CategoryInterface $category): void
     {
         $this->category = $category;
-    }
-
-    public function getApplicant(): ?UserInterface
-    {
-        return $this->getShopUser();
-    }
-
-    public function setApplicant(VendorInterface $vendor): void
-    {
-        $this->setVendorUser($vendor);
-    }
-
-    public function getAdminUser(): AdminUserInterface
-    {
-        return $this->adminUser;
-    }
-
-    public function setAdminUser(AdminUserInterface $adminUser): void
-    {
-        $this->adminUser = $adminUser;
     }
 
     public function addMessage(MessageInterface $message): void
@@ -125,16 +98,6 @@ class Conversation implements ConversationInterface
     public function setShopUser(?ShopUserInterface $shopUser): void
     {
         $this->shopUser = $shopUser;
-    }
-
-    public function getVendorUser(): ?VendorInterface
-    {
-        return $this->vendorUser;
-    }
-
-    public function setVendorUser(?VendorInterface $vendorUser): void
-    {
-        $this->vendorUser = $vendorUser;
     }
 
     public function isClosed(): bool

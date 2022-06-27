@@ -16,14 +16,6 @@
             <join-column name="shop_user_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
         </many-to-one>
 
-        <many-to-one field="vendorUser" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor">
-            <join-column name="vendor_user_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
-        </many-to-one>
-
-        <many-to-one field="adminUser" target-entity="Sylius\Component\Core\Model\AdminUserInterface">
-            <join-column name="admin_user_id" referenced-column-name="id" nullable="true" />
-        </many-to-one>
-
         <one-to-many field="messages" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Message" mapped-by="conversation">
             <cascade>
                 <cascade-persist/>

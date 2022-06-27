@@ -99,9 +99,6 @@ class Message implements MessageInterface
         return null;
     }
 
-    /**
-     * Use it to assign user to conservation
-     */
     public function setAuthor(UserInterface $user): void
     {
         if ($user instanceof AdminUserInterface) {

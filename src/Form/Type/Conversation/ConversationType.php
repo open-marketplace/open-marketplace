@@ -89,7 +89,6 @@ final class ConversationType extends AbstractType
             $vendor = $event->getForm()->get('vendorUser')->getData();
             $user = $vendor->getshopUser();
             $conversation->setShopUser($user);
-            $conversation->setAdminUser($resolvedUser);
 
             return;
         }

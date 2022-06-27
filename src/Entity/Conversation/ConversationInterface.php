@@ -11,12 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 interface ConversationInterface extends ResourceInterface
 {
@@ -24,21 +21,9 @@ interface ConversationInterface extends ResourceInterface
 
     public function setCategory(?CategoryInterface $category): void;
 
-    public function getApplicant(): ?UserInterface;
-
-    public function setApplicant(VendorInterface $vendor): void;
-
     public function getShopUser(): ?ShopUserInterface;
 
     public function setShopUser(?ShopUserInterface $shopUser): void;
-
-    public function getVendorUser(): ?VendorInterface;
-
-    public function setVendorUser(?VendorInterface $vendorUser): void;
-
-    public function getAdminUser(): AdminUserInterface;
-
-    public function setAdminUser(AdminUserInterface $adminUser): void;
 
     public function addMessage(MessageInterface $message): void;
 
