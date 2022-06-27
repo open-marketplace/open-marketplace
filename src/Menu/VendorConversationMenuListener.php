@@ -27,7 +27,7 @@ final class VendorConversationMenuListener
     {
         $menu = $event->getMenu();
         $menu
-                ->addChild('conversations', ['route' => 'mvm_vendor_conversation_index'])
+                ->addChild('conversations', ['route' => 'bitbag_mvm_plugin_vendor_conversation_index'])
                 ->setLabel('bitbag_mvm_plugin.ui.menu.conversations')
                 ->setLabelAttribute('icon', 'inbox');
     }

@@ -11,10 +11,10 @@
                     {% if conversation.category is not null %}
                         {{ conversation.category.name }}
                     {% else %}
-                        {{ 'mvm.ui.conversation.header'|trans }}
+                        {{ 'bitbag_mvm_plugin.ui.conversation.header'|trans }}
                     {% endif %}
                     <div class="sub header">
-                        {{ 'mvm.ui.conversation.with'|trans }}
+                        {{ 'bitbag_mvm_plugin.ui.conversation.with'|trans }}
 {#                        {{ conversation.shopUser.username }} | {{ conversation.messages|last.createdAt|date }}#}
                     </div>
                 </div>
@@ -25,7 +25,7 @@
     <div class="ui divider"></div>
 
     {% if conversation.isClosed() %}
-        {{ messages.info('mvm.ui.conversations_listing.reading_closed_conversation') }}
+        {{ messages.info('bitbag_mvm_plugin.ui.conversations_listing.reading_closed_conversation') }}
     {% endif %}
 
     <div class="ui stackable grid">
@@ -56,8 +56,8 @@
                                 <a class="ui basic label">{{ message.createdAt|date }}</a>
                                 {% if message.filename is not null %}
                                     <div class="message-attachment">
-                                        {{ 'mvm.ui.conversation.attachment'|trans }}:
-                                        <a href="{{ asset('uploads/message_files/' ~ message.filename ) }}" target="_blank">{{ 'mvm.ui.form.conversation_message.file'|trans }}</a>
+                                        {{ 'bitbag_mvm_plugin.ui.conversation.attachment'|trans }}:
+                                        <a href="{{ asset('uploads/message_files/' ~ message.filename ) }}" target="_blank">{{ 'bitbag_mvm_plugin.ui.form.conversation_message.file'|trans }}</a>
                                     </div>
                                 {% endif %}
                             </div>
@@ -72,7 +72,7 @@
                         <div class="ui icon message">
                             <i class="icon envelope middle center aligned"></i>
                             <div class="content">
-                                {% include "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/Common/archiveRequestMessage.html.twig" %}
+                                {% include "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/Common/archiveRequestMessage.html.twig" %}
                             </div>
                         </div>
                     {% else %}
@@ -92,8 +92,8 @@
                                 <a class="ui basic label">{{ message.createdAt|date }}</a>
                                 {% if message.filename is not null %}
                                     <div class="message-attachment">
-                                        {{ 'mvm.ui.conversation.attachment'|trans }}:
-                                        <a href="{{ asset('uploads/message_files/' ~ message.filename ) }}" target="_blank">{{ 'mvm.ui.form.conversation_message.file'|trans }}</a>
+                                        {{ 'bitbag_mvm_plugin.ui.conversation.attachment'|trans }}:
+                                        <a href="{{ asset('uploads/message_files/' ~ message.filename ) }}" target="_blank">{{ 'bitbag_mvm_plugin.ui.form.conversation_message.file'|trans }}</a>
                                     </div>
                                 {% endif %}
                             </div>
@@ -107,7 +107,7 @@
     {% if conversation.isOpen()  %}
         <div class="ui divider"></div>
         <div class="ui header">
-            {{ 'mvm.ui.conversation.your_response_header'|trans }}
+            {{ 'bitbag_mvm_plugin.ui.conversation.your_response_header'|trans }}
         </div>
         <div class="ui form">
 

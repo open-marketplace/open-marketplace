@@ -18,7 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Storage\MessagesStorage;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-class MessageFactorySpec extends ObjectBehavior
+final class MessageFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $conversationMessageFactory)
     {

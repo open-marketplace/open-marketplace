@@ -1,46 +1,46 @@
-mvm_vendor_conversation_index:
+bitbag_mvm_plugin_vendor_conversation_index:
     path: /vendor/conversations
     methods: [GET]
     defaults:
-        _controller:  bitbag.sylius_multi_vendor_marketplace_plugin.controller.conversation.conversation_controller:index
+        _controller:  bitbag_mvm_plugin.controller.conversation.conversation_controller:index
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/index.html.twig"
 
-mvm_vendor_conversation_show:
+bitbag_mvm_plugin_vendor_conversation_show:
     path: /vendor/conversations/{id}
     methods: [GET,POST]
     defaults:
-        _controller: 'bitbag.sylius_multi_vendor_marketplace_plugin.controller.conversation.conversation_controller:show'
+        _controller: 'bitbag_mvm_plugin.controller.conversation.conversation_controller:show'
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/show.html.twig"
             
-mvm_vendor_conversation_message_add:
+bitbag_mvm_plugin_vendor_conversation_message_add:
     path: /vendor/conversations/{id}/message/add
     methods: [GET, POST]
     defaults:
-        _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation_message.add_message_action
+        _controller: bitbag_mvm_plugin.controller.action.conversation_message.add_message_action
         _sylius:
             redirect: mvm_vendor_conversation_show
             mail_redirect: mvm_admin_conversation_show
             
-mvm_vendor_conversation_create:
+bitbag_mvm_plugin_vendor_conversation_create:
     path: /vendor/conversation/create
     methods: [GET,POST]
     defaults:
-        _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation.create_new_conversation_action
+        _controller: bitbag_mvm_plugin.controller.action.conversation.create_new_conversation_action
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/create.html.twig"
-            redirect: mvm_vendor_conversation_show
-            mail_redirect: mvm_admin_conversation_show
+            redirect: bitbag_mvm_plugin_vendor_conversation_show
+            mail_redirect: bitbag_mvm_plugin_admin_conversation_show
         
-mvm_vendor_conversation_archive:
+bitbag_mvm_plugin_vendor_conversation_archive:
     path: /vendor/conversations/{id}/archive
     methods: [PATCH]
     defaults:
-        _controller: bitbag_multi_vendor_marketplace.controller.conversation:applyStateMachineTransitionAction
+        _controller: bitbag_mvm_plugin.controller.conversation:applyStateMachineTransitionAction
         _sylius:
             state_machine:
                 graph: mvm_conversation
                 transition: close
             redirect: referer
-            flash: mvm.ui.conversation_successfully_closed
+            flash: bitbag_mvm_plugin.ui.conversation_successfully_closed

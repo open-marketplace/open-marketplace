@@ -30,18 +30,18 @@
             </h1>
         </div>
         <div class="middle aligned column">
-            <a href="{{ path('mvm_vendor_conversation_create') }}" class="ui right floated blue button">
+            <a href="{{ path('bitbag_mvm_plugin_vendor_conversation_create') }}" class="ui right floated blue button">
                 <i class="circle plus icon"></i>
                 {{ 'bitbag_mvm_plugin.ui.create_new_conversation'|trans }}
             </a>
 
             {% if app.request.query.get('closed') %}
-                <a href="{{ path('mvm_vendor_conversation_index') }}" class="ui right floated green button">
+                <a href="{{ path('bitbag_mvm_plugin_vendor_conversation_index') }}" class="ui right floated green button">
                     <i class="inbox icon"></i>
                     {{ 'bitbag_mvm_plugin.ui.open_conversations'|trans }}
                 </a>
             {% else %}
-                <a href="{{ path('mvm_vendor_conversation_index', { closed: true }) }}" class="ui right floated green button">
+                <a href="{{ path('bitbag_mvm_plugin_vendor_conversation_index', { closed: true }) }}" class="ui right floated green button">
                     <i class="archive icon"></i>
                     {{ 'bitbag_mvm_plugin.ui.closed_conversations'|trans }}
                 </a>
@@ -68,7 +68,7 @@
 
                 <div class="column fifteen wide">
                     <div class="message item">
-                        <a href="{{ path('mvm_vendor_conversation_show', { id: conversation.id }) }}">
+                        <a href="{{ path('bitbag_mvm_plugin_vendor_conversation_show', { id: conversation.id }) }}">
                             <div class="content">
                                 <div class="ui medium header">
                                     {% if conversation.category is not null %}
