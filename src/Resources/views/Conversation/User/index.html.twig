@@ -6,7 +6,7 @@
     <div class="ui breadcrumb">
         <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
         <div class="divider"> / </div>
-        <div class="active section">{{ 'mvm.ui.conversations_listing.breadcrumb_header'|trans }}</div>
+        <div class="active section">{{ 'bitbag_mvm_plugin.ui.conversations_listing.breadcrumb_header'|trans }}</div>
     </div>
 {% endblock %}
 
@@ -17,14 +17,14 @@
                 {% if app.request.query.get('closed') %}
                     <i class="icon archive"></i>
                     <div class="content">
-                        {{ 'mvm.ui.conversations_listing.listing_header_closed'|trans }}
-                        <div class="sub header">{{ 'mvm.ui.conversations_listing.your_closed_conversations'|trans }}</div>
+                        {{ 'bitbag_mvm_plugin.ui.conversations_listing.listing_header_closed'|trans }}
+                        <div class="sub header">{{ 'bitbag_mvm_plugin.ui.conversations_listing.your_closed_conversations'|trans }}</div>
                     </div>
                 {% else %}
                     <i class="icon envelope open"></i>
                     <div class="content">
-                        {{ 'mvm.ui.conversations_listing.listing_header_open'|trans }}
-                        <div class="sub header">{{ 'mvm.ui.conversations_listing.your_open_conversations'|trans }}</div>
+                        {{ 'bitbag_mvm_plugin.ui.conversations_listing.listing_header_open'|trans }}
+                        <div class="sub header">{{ 'bitbag_mvm_plugin.ui.conversations_listing.your_open_conversations'|trans }}</div>
                     </div>
                 {% endif %}
             </h1>
@@ -32,18 +32,18 @@
         <div class="middle aligned column">
             <a href="{{ path('mvm_vendor_conversation_create') }}" class="ui right floated blue button">
                 <i class="circle plus icon"></i>
-                {{ 'mvm.ui.create_new_conversation'|trans }}
+                {{ 'bitbag_mvm_plugin.ui.create_new_conversation'|trans }}
             </a>
 
             {% if app.request.query.get('closed') %}
                 <a href="{{ path('mvm_vendor_conversation_index') }}" class="ui right floated green button">
                     <i class="inbox icon"></i>
-                    {{ 'mvm.ui.open_conversations'|trans }}
+                    {{ 'bitbag_mvm_plugin.ui.open_conversations'|trans }}
                 </a>
             {% else %}
                 <a href="{{ path('mvm_vendor_conversation_index', { closed: true }) }}" class="ui right floated green button">
                     <i class="archive icon"></i>
-                    {{ 'mvm.ui.closed_conversations'|trans }}
+                    {{ 'bitbag_mvm_plugin.ui.closed_conversations'|trans }}
                 </a>
             {% endif %}
         </div>
@@ -53,9 +53,9 @@
 
     {% if conversations|length == 0 %}
         {% if app.request.query.get('closed') %}
-            {{ messages.info('mvm.ui.conversations_listing.no_closed_conversations') }}
+            {{ messages.info('bitbag_mvm_plugin.ui.conversations_listing.no_closed_conversations') }}
         {% else %}
-            {{ messages.info('mvm.ui.conversations_listing.no_open_conversations') }}
+            {{ messages.info('bitbag_mvm_plugin.ui.conversations_listing.no_open_conversations') }}
         {% endif %}
     {% endif %}
 
@@ -74,12 +74,12 @@
                                     {% if conversation.category is not null %}
                                         {{ conversation.category.name }}
                                     {% else %}
-                                        {{ 'mvm.ui.conversation.no_category'|trans }}
+                                        {{ 'bitbag_mvm_plugin.ui.conversation.no_category'|trans }}
                                     {% endif %}
                                     {% set lastMessage = conversation.messages|last.content %}
                                     {% set archiveText = constant('BitBag\\SyliusMultiVendorMarketplacePlugin\\Storage\\MessagesStorage::ARCHIVE_REQUEST_MESSAGE') %}
                                     {% if archiveText in lastMessage %}
-                                        {% set lastMessage = 'mvm.ui.conversation.archive_request_text_first_line'|trans %}
+                                        {% set lastMessage = 'bitbag_mvm_plugin.ui.conversation.archive_request_text_first_line'|trans %}
                                     {% endif %}
                                     <div class="sub header">
                                         <div class="ui two column stackable grid">

@@ -3,25 +3,25 @@ sylius_grid:
         action:
             archive: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Action/archiveConversation.html.twig"
     grids:
-        bitbag_sylius_multi_vendor_marketplace_plugin_admin_conversation:
+        bitbag_mvm_plugin_admin_conversation:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%bitbag_multi_vendor_marketplace.model.conversation.class%"
+                    class: "%bitbag_mvm_plugin.model.conversation.class%"
             fields:
                 category:
                     type: twig
-                    label: mvm.ui.form.conversation.category
+                    label: bitbag_mvm_plugin.ui.form.conversation.category
                     options:
                         template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/category.html.twig'
                 applicant:
                     type: twig
-                    label: mvm.ui.grid.conversation.applicant
+                    label: bitbag_mvm_plugin.ui.grid.conversation.applicant
                     options:
                         template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/applicant.html.twig'
             filters:
                 status:
-                    label: mvm.ui.status
+                    label: bitbag_mvm_plugin.ui.status
                     type: select
                     form_options:
                         choices:
@@ -33,7 +33,7 @@ sylius_grid:
                         type: create
                         options:
                             link:
-                                route: mvm_admin_conversation_create
+                                route: bitbag_mvm_plugin_admin_conversation_create
                 item:
                     show:
                         type: show
@@ -41,4 +41,4 @@ sylius_grid:
                         type: delete
                     archive:
                         type: archive
-                        label: mvm.ui.grid.conversation.archive
+                        label: bitbag_mvm_plugin.ui.grid.conversation.archive

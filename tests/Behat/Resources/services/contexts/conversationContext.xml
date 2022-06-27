@@ -4,10 +4,10 @@
     <services>
         <defaults public="true" />
         <service class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\ConversationContext"
-                id="tests.bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.start_conversation_context">
+                id="tests.bitbag_mvm_plugin.behat.context.conversation_context">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_factory"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_profile_factory"/>
             <argument type="service" id="bitbag.mvm.factory.address_factory"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.repository.shop_user"/>

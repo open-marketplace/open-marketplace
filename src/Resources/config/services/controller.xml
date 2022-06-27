@@ -7,7 +7,7 @@
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.conversation.conversation_controller">
             <argument type="service" id="twig" />
             <argument type="service" id="form.factory" />
-            <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.conversation" />
             <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver" />
             <argument type="service" id="request_stack"/>
             <tag name="controller.service_arguments" />
@@ -20,7 +20,7 @@
             <argument type="service" id="api_platform.router"/>
             <argument type="service" id="session.flash_bag"/>
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade"/>
-            <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.conversation"/>
             <tag name="controller.service_arguments" />
         </service>
 
@@ -42,29 +42,30 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorProfileUpdateAction"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.vendor_profile_update_action">
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.updater.vendor_profile_updater"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.provider.vendor_provider"/>
+                 id="bitbag_mvm_plugin.controller.vendor_profile_update_action">
+            <argument type="service" id="bitbag_mvm_plugin.updater.vendor_profile_updater"/>
+            <argument type="service" id="bitbag_mvm_plugin.provider.vendor_provider"/>
             <argument type="service" id="form.factory"/>
             <argument type="service" id="router"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.vendor_profile_factory"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_profile_factory"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="controller.service_arguments"/>
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ConfirmProfileUpdateAction"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.controller.confirm_profile_update_action">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />    
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.updater.vendor_profile_updater"/>
+                 id="bitbag_mvm_plugin.controller.confirm_profile_update_action">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag_mvm_plugin.updater.vendor_profile_updater"/>
             <argument type="service" id="security.helper"/>
             <argument type="service" id="router"/>
+            <argument type="service" id="bitbag_mvm_plugin.provider.vendor_provider"/>
             <tag name="controller.service_arguments"/>
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController"
                  id="bitbag_mvm_plugin.controller.vendor_controller"
                  parent="bitbag_mvm_plugin.controller.vendor">
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.provider.vendor_provider" />
-
+            <argument type="service" id="bitbag_mvm_plugin.provider.vendor_provider" />
         </service>
     </services>
 </container>

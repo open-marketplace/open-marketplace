@@ -1,6 +1,6 @@
 winzou_state_machine:
     mvm_conversation:
-        class: "%bitbag_multi_vendor_marketplace.model.conversation.class%"
+        class: "%bitbag_mvm_plugin.model.conversation.class%"
         property_path: status
         graph: mvm_conversation
         state_machine_class: "%sylius.state_machine.class%"

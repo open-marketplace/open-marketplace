@@ -26,13 +26,13 @@ final class MessageType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
-                'label' => 'mvm.ui.form.conversation.messages',
+                'label' => 'bitbag_mvm_plugin.ui.form.conversation.messages',
                 'attr' => [
                     'maxlength' => 500,
                 ],
             ])
             ->add('file', FileType::class, [
-                'label' => 'mvm.ui.form.conversation_message.file',
+                'label' => 'bitbag_mvm_plugin.ui.form.conversation_message.file',
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -41,7 +41,7 @@ final class MessageType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'mvm.ui.form.conversation_message.submit',
+                'label' => 'bitbag_mvm_plugin.ui.form.conversation_message.submit',
             ]);
     }
 

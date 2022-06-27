@@ -47,7 +47,7 @@ final class ConversationType extends AbstractType
         $builder
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'label' => 'mvm.ui.form.conversation.category',
+                'label' => 'bitbag_mvm_plugin.ui.form.conversation.category',
                 'choice_label' => 'name',
             ])
             ->add('messages', CollectionType::class, [
@@ -71,7 +71,7 @@ final class ConversationType extends AbstractType
                 ],
                 'choice_label' => 'companyName',
                 'mapped' => false,
-                'label' => 'mvm.ui.form.conversation.users',
+                'label' => 'bitbag_mvm_plugin.ui.form.conversation.users',
             ]);
 
             $form->remove('category');

@@ -13,8 +13,10 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserHasNoVendorContextException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class VendorProvider implements VendorProviderInterface
 {
@@ -27,13 +29,18 @@ final class VendorProvider implements VendorProviderInterface
 
     public function provideCurrentVendor(): VendorInterface
     {
-        /** @var ShopUserInterface $user */
+        /** @var ShopUserInterface|UserInterface|null $user */
         $user = $this->security->getUser();
-        if (null == $user) {
-            throw new UserNotFoundException();
+        if (false === $user instanceof ShopUserInterface) {
+            throw new ShopUserNotFoundException();
         }
-        /** @var VendorInterface $vendor */
+
+        /** @var VendorInterface|null $vendor */
         $vendor = $user->getVendor();
+
+        if (null === $vendor) {
+            throw new ShopUserHasNoVendorContextException();
+        }
 
         return $vendor;
     }

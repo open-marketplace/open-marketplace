@@ -14,7 +14,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class VendorRepository extends EntityRepository implements VendorRepositoryInterface
+
+final class VendorRepository extends EntityRepository implements VendorRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder
     {

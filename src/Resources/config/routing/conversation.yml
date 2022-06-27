@@ -1,11 +1,11 @@
-mvm_admin_conversation:
+bitbag_mvm_plugin:
     resource: |
-        alias: bitbag_multi_vendor_marketplace.conversation
+        alias: bitbag_mvm_plugin.conversation
         section: admin
         templates: "@SyliusAdmin\\Crud"
         except: ['show', 'update', 'bulk_delete']
         redirect: index
-        grid: bitbag_sylius_multi_vendor_marketplace_plugin_admin_conversation
+        grid: bitbag_mvm_plugin_admin_conversation
         permission: true
         vars:
             all:
@@ -14,17 +14,17 @@ mvm_admin_conversation:
     type: sylius.resource
     prefix: /admin
     
-mvm_admin_conversation_create:
+bitbag_mvm_plugin_admin_conversation_create:
     path: /admin/conversation/create
     methods: [GET,POST]
     defaults:
         _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation.create_new_conversation_action
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/Admin/create.html.twig"
-            redirect: bitbag_multi_vendor_marketplace_admin_conversation_show
+            redirect: bitbag_mvm_plugin_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
         
-bitbag_multi_vendor_marketplace_admin_conversation_show:
+bitbag_mvm_plugin_admin_conversation_show:
     path: /admin/conversations/{id}
     methods: [GET,POST]
     defaults:
@@ -32,21 +32,21 @@ bitbag_multi_vendor_marketplace_admin_conversation_show:
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/Admin/show.html.twig"
 
-bitbag_multi_vendor_marketplace_admin_conversation_archive:
+bitbag_mvm_plugin_admin_conversation_archive:
     path: /admin/conversations/{id}/archive
     methods: [GET,POST]
     defaults:
         _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation.send_archive_request_action
         _sylius:
-            redirect: bitbag_multi_vendor_marketplace_admin_conversation_index
+            redirect: bitbag_mvm_plugin_admin_conversation_index
 
 
-mvm_admin_conversation_message_add:
+bitbag_mvm_plugin_admin_conversation_message_add:
     path: /admin/conversations/{id}/message/add
     methods: [GET, POST]
     defaults:
         _controller: bitbag.sylius_multi_vendor_marketplace_plugin.controller.action.conversation_message.add_message_action
         _sylius:
-            redirect: bitbag_multi_vendor_marketplace_admin_conversation_show
+            redirect: bitbag_mvm_plugin_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
             

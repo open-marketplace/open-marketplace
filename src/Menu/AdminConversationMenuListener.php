@@ -22,8 +22,8 @@ final class AdminConversationMenuListener
         $menuCustomersTab = $menu->getChild('customers');
         if ($menuCustomersTab) {
             $menuCustomersTab
-                ->addChild('conversations', ['route' => 'bitbag_multi_vendor_marketplace_admin_conversation_index'])
-                ->setLabel('mvm.ui.menu.conversations')
+                ->addChild('conversations', ['route' => 'bitbag_mvm_plugin_admin_conversation_index'])
+                ->setLabel('bitbag_mvm_plugin.ui.menu.conversations')
                 ->setLabelAttribute('icon', 'inbox')
             ;
         }
