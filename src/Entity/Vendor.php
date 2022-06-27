@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -29,9 +30,11 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
 
     protected ?VendorAddressInterface $vendorAddress;
 
-    private string $status = self::STATUS_UNVERIFIED;
+    protected string $status = self::STATUS_UNVERIFIED;
 
-    private bool $enabled = true;
+    protected bool $enabled = true;
+
+    protected ?DateTimeInterface $editedAt = null;
 
     private ?string $slug;
 
@@ -125,6 +128,16 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
+    }
+
+    public function getEditedAt(): ?DateTimeInterface
+    {
+        return $this->editedAt;
+    }
+
+    public function setEditedAt(?DateTimeInterface $editedAt): void
+    {
+        $this->editedAt = $editedAt;
     }
 
     public function getSlug(): ?string

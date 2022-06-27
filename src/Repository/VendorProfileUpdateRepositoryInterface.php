@@ -9,8 +9,8 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Exception;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
-final class UserNotFoundException extends \Exception
+interface VendorProfileUpdateRepositoryInterface
 {
 }

@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
@@ -14,10 +21,9 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterf
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-class VendorProfileUpdaterSpec extends ObjectBehavior
+final class VendorProfileUpdaterSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $entityManager,
@@ -39,9 +45,9 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorProfileInterface $vendorData,
         VendorAddressInterface $vendorAddress
     ): void {
-        $vendorData->getCompanyName()->willReturn("CompanyName");
-        $vendorData->getTaxIdentifier()->willReturn("TaxIdentifier");
-        $vendorData->getPhoneNumber()->willReturn("11339321");
+        $vendorData->getCompanyName()->willReturn('CompanyName');
+        $vendorData->getTaxIdentifier()->willReturn('TaxIdentifier');
+        $vendorData->getPhoneNumber()->willReturn('11339321');
         $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddress);
 
@@ -75,7 +81,10 @@ class VendorProfileUpdaterSpec extends ObjectBehavior
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
         $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
+
         $this->createPendingVendorProfileUpdate($vendorData, $vendor);
-        $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])->shouldHaveBeenCalledTimes(1);
+
+        $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])
+            ->shouldHaveBeenCalledTimes(1);
     }
 }

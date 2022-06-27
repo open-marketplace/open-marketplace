@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
@@ -38,6 +38,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
@@ -91,7 +92,7 @@ final class VendorController extends ResourceController
     {
         try {
             return parent::createAction($request);
-        } catch (UserNotFoundException $exception) {
+        } catch (ShopUserNotFoundException $exception) {
             return $this->redirectToRoute('sylius_shop_login');
         } catch (TokenNotFoundException $exception) {
             return $this->redirectToRoute('sylius_shop_login');
@@ -101,10 +102,13 @@ final class VendorController extends ResourceController
     public function updateAction(Request $request): Response
     {
         $vendor = $this->vendorProvider->provideCurrentVendor();
-        $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
+        $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)
+            ->findOneBy(['vendor' => $vendor]);
+
         if (null === $pendingUpdate) {
             return parent::updateAction($request);
         }
+
         $this->addFlash('error', 'sylius.user.verify_email_request');
 
         return $this->redirectToRoute('vendor_profile');
@@ -115,6 +119,7 @@ final class VendorController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
+
         /** @var ResourceInterface $resource */
         $resource = $this->vendorProvider->provideCurrentVendor();
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
@@ -133,12 +138,13 @@ final class VendorController extends ResourceController
 
     public function verifyVendorAction(Request $request): Response
     {
-        $vendorId = $request->attributes->get('id');
+        $vendorId = $request->attributes->get('id', 0);
 
-        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
+        $currentVendor = $this->manager->getRepository(Vendor::class)
+            ->findOneBy(['id' => $vendorId]);
 
         if (null === $currentVendor) {
-            throw new \Exception('Vendor not found.');
+            throw new NotFoundHttpException(sprintf('Vendor with id %d has not been found', $vendorId));
         }
 
         $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
@@ -152,13 +158,17 @@ final class VendorController extends ResourceController
 
     public function enablingVendorAction(Request $request): Response
     {
-        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $request->attributes->get('id')]);
+        $vendorId = $request->attributes->get('id', 0);
+
+        $currentVendor = $this->manager->getRepository(Vendor::class)
+            ->findOneBy(['id' => $vendorId]);
 
         if (null === $currentVendor) {
-            throw new \Exception('Vendor not found.');
+            throw new NotFoundHttpException(sprintf('Vendor with id %d has not been found', $vendorId));
         }
 
         $currentVendor->setEnabled(!$currentVendor->isEnabled());
+
         $this->manager->flush();
 
         $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';

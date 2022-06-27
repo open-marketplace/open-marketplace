@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\UserNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,11 +32,12 @@ final class VendorType extends AbstractResourceType
     private TokenStorageInterface $tokenStorage;
 
     public function __construct(
-        string $dataClass,
         TokenStorageInterface $tokenStorage,
+        string $dataClass,
         array $validationGroups = []
     ) {
         parent::__construct($dataClass, $validationGroups);
+
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -52,7 +53,6 @@ final class VendorType extends AbstractResourceType
             ->add('taxIdentifier', TextType::class, [
                 'label' => 'bitbag_mvm_plugin.ui.tax_identifier',
             ])
-
             ->add('phoneNumber', TelType::class, [
                 'label' => 'bitbag_mvm_plugin.ui.phone_number',
             ])
@@ -77,14 +77,13 @@ final class VendorType extends AbstractResourceType
                 /** @var ShopUserInterface $user */
                 $user = $token->getUser();
                 if (!$user instanceof ShopUserInterface) {
-                    throw new UserNotFoundException('No user found.');
+                    throw new ShopUserNotFoundException('No user found.');
                 }
 
                 $form = $event->getForm();
                 $form->get('shopUser')->setData($user);
                 $event->setData($form);
-            })
-            ;
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -92,7 +91,6 @@ final class VendorType extends AbstractResourceType
         $resolver->setDefaults([
             'data_class' => Vendor::class,
             'validation_groups' => $this->validationGroups,
-        ])
-        ;
+        ]);
     }
 }

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
 
 interface VendorInterface extends VendorProfileInterface
@@ -50,6 +51,10 @@ interface VendorInterface extends VendorProfileInterface
     public function isEnabled(): bool;
 
     public function setEnabled(bool $enabled): void;
+
+    public function getEditedAt(): ?DateTimeInterface;
+
+    public function setEditedAt(?DateTimeInterface $editedAt): void;
 
     public function getSlug(): ?string;
 
