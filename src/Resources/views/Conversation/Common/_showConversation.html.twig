@@ -10,12 +10,23 @@
                 <div class="content">
                     {% if conversation.category is not null %}
                         {{ conversation.category.name }}
+                    {% endif %}
+                    {% if conversation.messages.first.adminUser is not null %}
+                        {{ 'bitbag_mvm_plugin.ui.conversation.admin_conversation'|trans }}
                     {% else %}
-                        {{ 'bitbag_mvm_plugin.ui.conversation.header'|trans }}
+                        {{ 'bitbag_mvm_plugin.ui.conversation.user_conversation'|trans }}
                     {% endif %}
                     <div class="sub header">
                         {{ 'bitbag_mvm_plugin.ui.conversation.with'|trans }}
-{#                        {{ conversation.shopUser.username }} | {{ conversation.messages|last.createdAt|date }}#}
+                        {% if conversation.messages.first.adminUser is not null %}
+                            <div>
+                                {{ 'bitbag_mvm_plugin.ui.admin'|trans }}
+                            </div>
+                        {% else %}
+                            <div>
+                                {{ conversation.messages.first.shopUser.username }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </h1>

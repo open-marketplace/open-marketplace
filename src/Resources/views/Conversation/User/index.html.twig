@@ -73,8 +73,12 @@
                                 <div class="ui medium header">
                                     {% if conversation.category is not null %}
                                         {{ conversation.category.name }}
+
+                                    {% endif %}
+                                    {% if conversation.messages.first.adminUser is not null %}
+                                        {{ 'bitbag_mvm_plugin.ui.conversation.admin_conversation'|trans }}
                                     {% else %}
-                                        {{ 'bitbag_mvm_plugin.ui.conversation.no_category'|trans }}
+                                        {{ 'bitbag_mvm_plugin.ui.conversation.user_conversation'|trans }}
                                     {% endif %}
                                     {% set lastMessage = conversation.messages|last.content %}
                                     {% set archiveText = constant('BitBag\\SyliusMultiVendorMarketplacePlugin\\Storage\\MessagesStorage::ARCHIVE_REQUEST_MESSAGE') %}

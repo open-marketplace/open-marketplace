@@ -1,5 +1,6 @@
 bitbag_mvm_plugin:
     ui:
+        admin: "Admin"
         customer: 'Customer'
         details: 'Details'
         disable: 'Disable'
@@ -52,6 +53,8 @@ bitbag_mvm_plugin:
         create_new_conversation_breadcrumb: New conversation
         create_new_conversation_header: New conversation
         conversation:
+            user_conversation: Conversation with user
+            admin_conversation: Conversation with administrator
             header: Conversation from administrator
             with: Started by
             your_response_header: "Your response:"
