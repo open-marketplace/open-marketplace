@@ -1,32 +1,59 @@
-bitbag_sylius_multi_vendor_marketplace_plugin:
-  ui:
-    become_a_vendor: 'Become a Vendor'
-    product_listings: 'Product listings'
-    product_list: 'Product list'
-    marketplace: 'Marketplace'
-    published_at: 'Published at'
-    verified_at: 'Verified at'
-    status: 'Status'
-    details: 'Details'
-    name: 'Name'
-    accept: 'Accept'
-    reject: 'Reject'
-    confirm: 'Are you sure?'
-    code: 'Code'
-    verified: 'Verified'
-    rejected: 'Rejected'
-    under_verification: 'Under verification'
-    vendor_dashboard: "Vendor dashboard"
-    tax_identifier: "Tax Identifier"
-    not_blank: "This field cannnot be empty"
-    company_name: "Company name"
-    country: "Country"
-    city: "City"
-    street: "Street"
-    phone_number: "Phone number"
-    company_address: "Company Address"
-    postal_code: "Postal code"
-    id: 'ID'
-    tax_id: 'Tax ID'
-    vendors: 'Vendors'
-    manage_products: 'Manage products'
+bitbag_mvm_plugin:
+    ui:
+        vendor_dashboard: "Vendor dashboard"
+        vendor_profile: "Profile"
+        become_a_vendor: 'Become a Vendor'
+        product_listings: 'Product listings'
+        product_list: 'Product list'
+        marketplace: 'Marketplace'
+        publishedAt: 'Published at'
+        status: 'Status'
+        tax_identifier: "Tax Identifier"
+        not_blank: "This field cannot be empty"
+        company_name: "Company name"
+        country: "Country"
+        city: "City"
+        street: "Street"
+        phone_number: "Phone number"
+        company_address: "Company Address"
+        postal_code: "Postal code"
+        pending_update_message: "You cannot change your profile information until you accept the previous change."
+        vendors: 'Vendors'
+        customer: 'Customer'
+        details: 'Details'
+        disable: 'Disable'
+        disabled: 'Disabled'
+        edit: 'Edit'
+        edit_vendor: 'Edit vendor'
+        enable: 'Enable'
+        enabled: 'Enabled'
+        id: 'ID'
+        tax_id: 'Tax ID'
+        unverified: 'Unverified'
+        vendor_address: 'Vendor address'
+        vendor_details: 'Vendor details'
+        verified: 'Verified'
+        verify: 'Verify'
+        new_vendor: 'New Vendor'
+        manage_products: 'Manage products'
+        details: 'Details'
+        name: 'Name'
+        accept: 'Accept'
+        reject: 'Reject'
+        confirm: 'Are you sure?'
+        code: 'Code'
+        verified: 'Verified'
+        rejected: 'Rejected'
+        under_verification: 'Under verification'
+        vendor_dashboard: "Vendor dashboard"
+        published_at: 'Published at'
+        verified_at: 'Verified at'
+        status: 'Status'
+    email:
+        vendor_profile_update: "Vendor profile update requested"
+        request_profile_update_greeting: "Hey, you asked to change your company details."
+        request_profile_update_info: "For security purposes, we need to verify your decision. Click on the link below if you want to make a change or ignore this message."
+        postal_code: "Postal code"
+        id: 'ID'
+        tax_id: 'Tax ID'
+        vendors: 'Vendors'

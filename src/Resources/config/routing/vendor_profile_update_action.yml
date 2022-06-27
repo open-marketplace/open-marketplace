@@ -1,0 +1,4 @@
+vendor_profile_update_action:
+    path: /vendor/profile/updateAction
+    methods: [GET, POST]
+    controller: bitbag_mvm_plugin.controller.vendor_profile_update_action

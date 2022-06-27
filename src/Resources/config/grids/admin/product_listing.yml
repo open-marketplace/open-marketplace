@@ -5,7 +5,7 @@ sylius_grid:
     filter:
       product_listing_status: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Filter/product_listing_status.html.twig'
   grids:
-    bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing:
+    bitbag_mvm_plugin_admin_product_listing:
       driver:
         name: doctrine/orm
         options:
@@ -19,25 +19,25 @@ sylius_grid:
             fields: ['code']
         status:
           type: product_listing_status
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
+          label: bitbag_mvm_plugin.ui.status
       fields:
         code:
           type: string
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.code
+          label: bitbag_mvm_plugin.ui.code
         getLatestDraft.publishedAt:
           type: datetime
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.published_at
+          label: bitbag_mvm_plugin.ui.published_at
         getLatestDraft.verifiedAt:
           type: datetime
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.verified_at
+          label: bitbag_mvm_plugin.ui.verified_at
         getLatestDraft.status:
           type: string
-          label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.status
+          label: bitbag_mvm_plugin.ui.status
       actions:
         item:
           details:
             type: details
-            label: bitbag_sylius_multi_vendor_marketplace_plugin.ui.details
+            label: bitbag_mvm_plugin.ui.details
             options:
               link:
                 route: bitbag_sylius_multi_vendor_marketplace_plugin_admin_product_listing_show

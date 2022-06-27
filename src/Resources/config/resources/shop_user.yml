@@ -1,0 +1,6 @@
+sylius_user:
+    resources:
+        shop:
+            user:
+                classes:
+                    model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser

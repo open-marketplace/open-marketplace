@@ -1,8 +1,8 @@
 default:
-  suites:
-    admin_ui_managing_product_listings:
-      contexts:
-        - bitbag.sylius_multi_vendor_marketplace_plugin.behat.context.ui.admin.product_listing
-        - Behat\MinkExtension\Context\MinkContext
-      filters:
-        tags: '@managing_product_listings&&@ui'
+    suites:
+        ui_managing_product_listings:
+            contexts:
+                - bitbag.sylius_mvm_plugin.behat.context.ui.admin.product_listing
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: '@managing_product_listings && @ui'
