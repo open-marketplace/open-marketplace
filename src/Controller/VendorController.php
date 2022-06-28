@@ -133,10 +133,11 @@ final class VendorController extends ResourceController
 
     public function verifyVendorAction(Request $request): Response
     {
+        $vendorId = $request->attributes->get('id');
 
-        $currentVendor = $this->vendorProvider->provideCurrentVendor();
-
-        $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
+        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
+        if ($currentVendor)
+            $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
 
         $this->manager->flush();
 
@@ -147,13 +148,14 @@ final class VendorController extends ResourceController
 
     public function enablingVendorAction(Request $request): Response
     {
-        $currentVendor = $this->vendorProvider->provideCurrentVendor();
-        $currentVendor->setEnabled(!$currentVendor->isEnabled());
-        $this->manager->flush();
+        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $request->attributes->get('id')]);
+        if ($currentVendor) {
+            $currentVendor->setEnabled(!$currentVendor->isEnabled());
+            $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
 
-        $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
-        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
-
+            $this->manager->flush();
+            $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
+        }
         return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
     }
 }
