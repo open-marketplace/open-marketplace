@@ -133,9 +133,9 @@ final class VendorController extends ResourceController
 
     public function verifyVendorAction(Request $request): Response
     {
-        $vendorId = $request->attributes->get('id');
 
-        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $vendorId]);
+        $currentVendor = $this->vendorProvider->provideCurrentVendor();
+
         $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
 
         $this->manager->flush();
@@ -147,7 +147,7 @@ final class VendorController extends ResourceController
 
     public function enablingVendorAction(Request $request): Response
     {
-        $currentVendor = $this->manager->getRepository(Vendor::class)->findOneBy(['id' => $request->attributes->get('id')]);
+        $currentVendor = $this->vendorProvider->provideCurrentVendor();
         $currentVendor->setEnabled(!$currentVendor->isEnabled());
         $this->manager->flush();
 
