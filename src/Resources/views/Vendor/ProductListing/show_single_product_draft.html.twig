@@ -1,0 +1,22 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.my_account'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.my_account'|trans }}</div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+    <h1 class="ui dividing header">
+        {{ 'bitbag_mvm_plugin.ui.price.product_overview'|trans }}
+        <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
+    </h1>
+    <div>
+        {{ 'bitbag_mvm_plugin.ui.price'|trans }}: {{ product_draft.productListingPrice.first.price }}
+    </div>
+
+{% endblock %}
