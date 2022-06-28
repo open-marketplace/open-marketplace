@@ -4,5 +4,7 @@ default:
             contexts:
                 - bitbag.sylius_mvm_plugin.behat.context.ui.admin.product_listing
                 - Behat\MinkExtension\Context\MinkContext
+                - bitbag.sylius_mvm_plugin.behat.context.setup.vendor
+                - sylius.behat.context.hook.doctrine_orm
             filters:
                 tags: '@managing_product_listings && @ui'

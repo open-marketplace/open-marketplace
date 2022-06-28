@@ -36,8 +36,8 @@ class EditProductAction extends AbstractController
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         CreateProductListingCommandInterface $createProductListingCommand,
-        ProductDraftRepositoryInterface $productDraftRepository
-    ) {
+        ProductDraftRepositoryInterface $productDraftRepository,
+        ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
         $this->createProductListingCommand = $createProductListingCommand;
@@ -65,6 +65,12 @@ class EditProductAction extends AbstractController
             /** @var ClickableInterface $button */
             $button = $form->get('saveAndAdd');
             $this->createProductListingCommand->saveEdit($productDraft, $button->isClicked());
+
+            if ($button->isClicked()) {
+                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved_and_sent_to_verification');
+            } else {
+                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
+            }
 
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }

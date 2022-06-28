@@ -99,6 +99,12 @@ class CreateProductAction extends AbstractController
             $button = $form->get('saveAndAdd');
             $this->createProductListingCommand->create($productDraft, $button->isClicked());
 
+            if ($button->isClicked()) {
+                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created_and_sent_to_verification');
+            } else {
+                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
+            }
+
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }
 

@@ -5,6 +5,7 @@ Feature: Rejecting product listing
 
   Background:
     Given there is an admin user "admin" with password "admin"
+    And there is an vendor user "vendor" with password "vendor"
     And I am logged in as an admin
 
   @ui
@@ -16,6 +17,7 @@ Feature: Rejecting product listing
     And I should see product's listing status "under_verification"
     And I follow "Details"
     And I should see url "#\/admin\/product-listings\/(\d+)#"
-    And I click "Reject" button
+    When I click "Reject" button
     Then I should see url "#\/admin\/product-listings\/$#"
     And I should see product's listing status "rejected"
+    And I should see "Product listing rejected."
