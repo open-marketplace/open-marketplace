@@ -1,0 +1,14 @@
+{% set userRole = '' %}
+{% for role in data.roles %}
+    {% set userRole = role %}
+{% endfor %}
+
+{% if userRole is same as 'ROLE_VENDOR' %}
+    <div>
+        {{ data.firstName }} {{ data.lastName }}
+    </div>
+{% endif %}
+<div>
+    {{ 'bitbag_mvm_plugin.ui.conversations_listing.username'|trans }}: {{ data.username }}
+</div>
+

@@ -1,2 +1,3 @@
 imports:
-  - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/*.yml' }
+    - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources/*.yml' }
+

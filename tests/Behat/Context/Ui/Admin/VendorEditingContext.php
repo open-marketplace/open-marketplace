@@ -37,7 +37,6 @@ final class VendorEditingContext extends RawMinkContext implements Context
         $vendor->setTaxIdentifier('vendorTax');
         $vendor->setPhoneNumber('vendorPhone');
         $vendor->setStatus($ifVerified);
-
         $vendor->setEditedAt(null);
 
         if ('requested' === $ifRequested) {

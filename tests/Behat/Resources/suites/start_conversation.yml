@@ -1,0 +1,15 @@
+default:
+  suites:
+    start_conversation:
+      contexts:
+        - tests.bitbag_mvm_plugin.behat.context.conversation_context
+        - sylius.behat.context.setup.shop_security
+        - sylius.behat.context.setup.admin_security
+        - sylius.behat.context.setup.admin_user
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.locale
+        - sylius.behat.context.ui.shop.account
+        - sylius.behat.context.setup.geographical
+        - sylius.behat.context.hook.doctrine_orm
+      filters:
+        tags: '@admin_start_conversation'

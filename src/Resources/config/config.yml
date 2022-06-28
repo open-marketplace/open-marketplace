@@ -1,4 +1,5 @@
 imports:
+    - { resource: "state_machine/state_machine.yml" }
     - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/services.xml' }
     - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/resources.yml' }
     - { resource: '@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/grids.yml' }

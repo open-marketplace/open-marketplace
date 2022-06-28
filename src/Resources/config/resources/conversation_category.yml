@@ -1,0 +1,8 @@
+sylius_resource:
+    resources:
+        bitbag_multi_vendor_marketplace.conversation_category:
+            driver: doctrine/orm
+            classes:
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category
+                interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\CategoryInterface
+                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\CategoryRepository
