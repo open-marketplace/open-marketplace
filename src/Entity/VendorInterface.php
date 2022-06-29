@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use DateTimeInterface;
+
 interface VendorInterface extends VendorProfileInterface
 {
     public const STATUS_UNVERIFIED = 'unverified';
@@ -48,4 +50,8 @@ interface VendorInterface extends VendorProfileInterface
     public function isEnabled(): bool;
 
     public function setEnabled(bool $enabled): void;
+
+    public function getEditedAt(): ?DateTimeInterface;
+
+    public function setEditedAt(?DateTimeInterface $editedAt): void;
 }

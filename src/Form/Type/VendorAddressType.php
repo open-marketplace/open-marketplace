@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use Sylius\Component\Addressing\Model\Country;

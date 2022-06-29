@@ -1,0 +1,10 @@
+default:
+    suites:
+        ui_editing_vendors:
+            contexts:
+                - bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_editing
+                - Behat\MinkExtension\Context\MinkContext
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.hook.doctrine_orm
+            filters:
+                tags: "@editing_vendors && @ui"

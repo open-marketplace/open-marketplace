@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProvider;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\TokenOwningVoter;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,16 +31,20 @@ final class ConfirmProfileUpdateAction
 
     private RouterInterface $router;
 
+    private VendorProvider $vendorProvider;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         VendorProfileUpdaterInterface $vendorProfileUpdateService,
         AuthorizationCheckerInterface $security,
-        RouterInterface $router
+        RouterInterface $router,
+        VendorProvider $vendorProvider
     ) {
         $this->entityManager = $entityManager;
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->security = $security;
         $this->router = $router;
+        $this->vendorProvider = $vendorProvider;
     }
 
     public function __invoke(string $token): Response
@@ -49,6 +54,11 @@ final class ConfirmProfileUpdateAction
         $vendorIsGranted = $this->security->isGranted(TokenOwningVoter::UPDATE, $vendorProfileUpdateData);
         if ($vendorIsGranted && null !== $vendorProfileUpdateData) {
             $this->vendorProfileUpdateService->updateVendorFromPendingData($vendorProfileUpdateData);
+
+            $loggedVendor = $this->vendorProvider->provideCurrentVendor();
+            $loggedVendor->setEditedAt(null);
+
+            $this->entityManager->flush();
         }
 
         return new RedirectResponse($profileRoot);

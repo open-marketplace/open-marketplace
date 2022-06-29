@@ -12,9 +12,10 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorType;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,18 +34,22 @@ final class VendorProfileUpdateAction
 
     private VendorProfileFactoryInterface $vendorFactory;
 
+    private EntityManagerInterface $manager;
+
     public function __construct(
         VendorProfileUpdaterInterface $vendorProfileUpdateService,
         VendorProviderInterface $vendorProvider,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
-        VendorProfileFactoryInterface $vendorFactory
+        VendorProfileFactoryInterface $vendorFactory,
+        EntityManagerInterface $manager
     ) {
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
         $this->formFactory = $formFactory;
         $this->router = $router;
         $this->vendorFactory = $vendorFactory;
+        $this->manager = $manager;
     }
 
     public function __invoke(Request $request): Response
@@ -55,10 +60,20 @@ final class VendorProfileUpdateAction
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $currentVendor = $this->vendorProvider->provideCurrentVendor();
+
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
                 $form->getData(),
-                $this->vendorProvider->provideCurrentVendor()
+                $currentVendor
             );
+
+            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
+                $form->getData(),
+                $currentVendor
+            );
+
+            $currentVendor->setEditedAt(new \DateTime());
+            $this->manager->flush();
         }
 
         return new RedirectResponse($profilePath);

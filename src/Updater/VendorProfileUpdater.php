@@ -41,8 +41,10 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->profileUpdateFactory = $profileUpdateFactory;
     }
 
-    public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor): void
-    {
+    public function createPendingVendorProfileUpdate(
+        VendorProfileInterface $vendorData,
+        VendorInterface $currentVendor
+    ): void {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
         $token = $pendingVendorUpdate->getToken();
 
@@ -54,8 +56,10 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
     }
 
-    public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void
-    {
+    public function setVendorFromData(
+        VendorProfileInterface $vendor,
+        VendorProfileInterface $data
+    ): void {
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
         $vendor->setPhoneNumber($data->getPhoneNumber());
@@ -64,12 +68,14 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         if (null === $newVendorAddress) {
             return;
         }
+
         if (null !== $vendor->getVendorAddress()) {
             $vendor->getVendorAddress()->setCity($newVendorAddress->getCity());
             $vendor->getVendorAddress()->setCountry($newVendorAddress->getCountry());
             $vendor->getVendorAddress()->setPostalCode($newVendorAddress->getPostalCode());
             $vendor->getVendorAddress()->setStreet($newVendorAddress->getStreet());
         }
+
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }

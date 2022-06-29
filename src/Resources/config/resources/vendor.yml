@@ -1,9 +1,10 @@
 sylius_resource:
-  resources:
-    bitbag_mvm_plugin.vendor:
-      classes:
-        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor
-        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface
-        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-        repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository
+    resources:
+        bitbag_mvm_plugin.vendor:
+            classes:
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor
+                interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository
+                form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorEditType
 
