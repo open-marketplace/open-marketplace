@@ -8,6 +8,12 @@
             <argument key="$productListingRepository" type="service" id="bitbag_mvm_plugin.repository.product_listing" />
             <argument key="$twig" type="service" id="twig" />
             <argument key="$productDraftRepository" type="service" id="bitbag_mvm_plugin.repository.product_draft" />
+            <argument key="$addMessageFacade" type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument key="$conversationRepository" type="service" id="bitbag_mvm_plugin.repository.conversation"/>
+            <argument key="$formFactory" type="service" id="form.factory"/>
+            <argument key="$router" type="service" id="router.default" />
+            <argument key="$translator" type="service" id="translator" />
+
         </service>
 
         <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.accept_action" public="true"

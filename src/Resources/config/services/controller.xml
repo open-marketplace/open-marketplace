@@ -15,7 +15,7 @@
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation\CreateNewConversationAction"
                  id="bitbag_mvm_plugin.controller.action.conversation.create_new_conversation_action">
-             <argument type="service" id="form.factory"/>
+            <argument type="service" id="form.factory"/>
             <argument type="service" id="twig"/>
             <argument type="service" id="api_platform.router"/>
             <argument type="service" id="session.flash_bag"/>

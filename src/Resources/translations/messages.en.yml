@@ -20,7 +20,7 @@ bitbag_mvm_plugin:
         publishedAt: 'Published at'
         status: 'Status'
         tax_identifier: "Tax Identifier"
-        not_blank: "This field cannnot be empty"
+        not_blank: "This field cannot be empty"
         company_name: "Company name"
         country: "Country"
         city: "City"
@@ -32,6 +32,7 @@ bitbag_mvm_plugin:
         vendors: Vendors
         open: Open
         closed: Closed
+        product_rejected_intro: "Corresponding item has been rejected "
         register:
             new_vendors: New vendors
         conversations: Conversations
