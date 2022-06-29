@@ -64,7 +64,7 @@ final class ProductDraftStateMachineTransitionSpec extends ObjectBehavior
         $stateMachine->apply(ProductDraftTransitions::TRANSITION_VERIFY)
             ->shouldBeCalled();
 
-        $this->apply($productDraft, ProductDraftTransitions::TRANSITION_VERIFY);
+        $this->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_VERIFY);
     }
 
     public function it_cannot_apply_transition(
@@ -89,6 +89,6 @@ final class ProductDraftStateMachineTransitionSpec extends ObjectBehavior
         $stateMachine->apply(ProductDraftTransitions::TRANSITION_VERIFY)
             ->shouldNotBeCalled();
 
-        $this->apply($productDraft, ProductDraftTransitions::TRANSITION_VERIFY);
+        $this->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_VERIFY);
     }
 }

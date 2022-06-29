@@ -25,11 +25,6 @@ class ProductListingPrice implements ProductListingPriceInterface
 
     protected string $channelCode;
 
-    public function __construct()
-    {
-        $this->channelCode = 'test';
-    }
-
     public function getId(): int
     {
         return $this->id;

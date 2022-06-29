@@ -17,5 +17,17 @@
                  id="bitbag_mvm_plugin.factory.vendor_profile_update_factory">
             <argument type="service" id="bitbag_mvm_plugin.generator.token_generator"/>
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ChannelPricingFactory"
+                 id="bit_bag.mvm_plugin.factory.channel_pricing_factory">
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactory"
+                 id="bit_bag.mvm_plugin.factory.product_translation_factory">
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantFactory"
+                 id="bit_bag.mvm_plugin.factory.product_variant_factory">
+        </service>
     </services>
 </container>

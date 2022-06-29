@@ -27,9 +27,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertNotEmpty;
-use function PHPUnit\Framework\assertNotNull;
+use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
@@ -85,7 +83,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->getPage()->fillField('Username', $admin->getUsername());
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
-        assertNotNull($this->getPage()->findLink('Logout'));
+        ($this->getPage()->findLink('Logout'));
     }
 
     /**
@@ -96,7 +94,6 @@ final class ProductListingContext extends RawMinkContext implements Context
         $vendor = $this->sharedStorage->get('vendor');
 
         for ($i = 0; $i < $count; ++$i) {
-
             $productListing = $this->createProductListing($vendor, 'code' . $i);
             $productDraft = $this->createProductListingDraft($productListing, 'code' . $i);
             $productTranslation = $this->createProductListingTranslation(
@@ -118,7 +115,11 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Given there is a product listing with code :code and name :name and status :status
      */
-    public function thereIsAProductListingWithCodeAndNameAndStatus(string $code, string $name, string $status)
+    public function thereIsAProductListingWithCodeAndNameAndStatus(
+        string $code,
+        string $name,
+        string $status
+    )
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -140,8 +141,8 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function iShouldSeeProductListings($count)
     {
         $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
-        assertNotEmpty($rows, 'Could not find any rows');
-        assertEquals($count, count($rows), 'Rows numbers are not equal');
+        Assert::notEmpty($rows, 'Could not find any rows');
+        Assert::eq($count, count($rows), 'Rows numbers are not equal');
     }
 
     /**
@@ -151,7 +152,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         $currentUrl = $this->getSession()->getCurrentUrl();
         $matches = preg_match($url, $currentUrl);
-        assertEquals(1, $matches);
+        Assert::eq(1, $matches);
     }
 
     /**
@@ -160,7 +161,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function iShouldSeeProductsListingStatus($status)
     {
         $productListingStatus = $this->getPage()->find('css', sprintf('table > tbody > tr > td:contains("%s")', $status));
-        assertNotNull($productListingStatus);
+        Assert::notNull($productListingStatus);
     }
 
     /**
@@ -176,7 +177,7 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function iShouldBeRedirectedTo($url)
     {
-        assertEquals($url, $this->getSession()->getCurrentUrl());
+        Assert::eq($url, $this->getSession()->getCurrentUrl());
     }
 
     /**

@@ -16,6 +16,8 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\LocaleNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\VendorNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -68,7 +70,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         $vendor = $user->getVendor();
 
         if (!$vendor) {
-            throw new \Exception('Vendor not found.');
+            throw new VendorNotFoundException('Vendor not found.');
         }
 
         $productDraft = $this->formatTranslation($productDraft);
@@ -104,7 +106,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         $newProductDraft = $this->draftFactory->createNew();
 
         $newProductDraft->setVersionNumber($productDraft->getVersionNumber());
-        $newProductDraft->newVersion();
+        $newProductDraft->incrementVersion();
         $newProductDraft->setCode($productDraft->getCode());
         $newProductDraft->setProductListing($productListing);
 
@@ -127,7 +129,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         foreach ($productDraft->getTranslations() as $translation) {
             $locale = $translation->getLocale();
             if (null === $locale) {
-                throw new \Exception('Cannot find translation locale.');
+                throw new LocaleNotFoundException('Locale not found.');
             }
 
             /** @var ProductTranslationInterface $newTranslation */

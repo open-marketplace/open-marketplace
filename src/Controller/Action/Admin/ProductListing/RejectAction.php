@@ -51,7 +51,7 @@ final class RejectAction
         /** @var ProductDraftInterface $latestProductDraft */
         $latestProductDraft = $this->productDraftRepository->findProductListingLatestProductDraft($productListing);
 
-        $this->productListingStateMachineTransition->apply($latestProductDraft, ProductDraftTransitions::TRANSITION_REJECT);
+        $this->productListingStateMachineTransition->applyIfCan($latestProductDraft, ProductDraftTransitions::TRANSITION_REJECT);
 
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
     }

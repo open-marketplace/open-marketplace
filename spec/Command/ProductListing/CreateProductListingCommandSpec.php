@@ -27,16 +27,16 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class CreateProductListingCommandSpec extends ObjectBehavior
+final class CreateProductListingCommandSpec extends ObjectBehavior
 {
     public function let(
         ProductListingRepositoryInterface $productListingRepository,
-        FactoryInterface                  $productListingFactoryInterface,
-        TokenStorageInterface             $tokenStorage,
-        FactoryInterface                  $translationFactory,
-        FactoryInterface                  $draftFactory,
-        FactoryInterface                  $priceFactory,
-        ProductDraftRepositoryInterface   $draftRepository
+        FactoryInterface $productListingFactoryInterface,
+        TokenStorageInterface $tokenStorage,
+        FactoryInterface $translationFactory,
+        FactoryInterface $draftFactory,
+        FactoryInterface $priceFactory,
+        ProductDraftRepositoryInterface $draftRepository
     ): void {
         $this->beConstructedWith(
             $productListingRepository,
@@ -50,16 +50,16 @@ class CreateProductListingCommandSpec extends ObjectBehavior
     }
 
     public function it_creates_product_listing(
-        FactoryInterface                  $productListingFactoryInterface,
-        ProductDraftInterface             $productDraft,
-        TokenStorageInterface             $tokenStorage,
-        ShopUserInterface                 $shopUser,
-        ProductListing                    $productListing,
-        TokenInterface                    $token,
-        ProductTranslationInterface       $productTranslation,
+        FactoryInterface $productListingFactoryInterface,
+        ProductDraftInterface $productDraft,
+        TokenStorageInterface $tokenStorage,
+        ShopUserInterface $shopUser,
+        ProductListing $productListing,
+        TokenInterface $token,
+        ProductTranslationInterface $productTranslation,
         ProductListingRepositoryInterface $productListingRepository,
-        VendorInterface                   $vendor
-    ) {
+        VendorInterface $vendor
+    ): void {
         $productListingFactoryInterface->createNew()
             ->willReturn($productListing);
 
@@ -97,16 +97,16 @@ class CreateProductListingCommandSpec extends ObjectBehavior
     }
 
     public function it_creates_product_listing_and_send(
-        FactoryInterface                  $productListingFactoryInterface,
-        ProductDraftInterface             $productDraft,
-        TokenStorageInterface             $tokenStorage,
-        ShopUserInterface                 $shopUser,
-        ProductListing                    $productListing,
-        TokenInterface                    $token,
-        ProductTranslationInterface       $productTranslation,
+        FactoryInterface $productListingFactoryInterface,
+        ProductDraftInterface $productDraft,
+        TokenStorageInterface $tokenStorage,
+        ShopUserInterface $shopUser,
+        ProductListing $productListing,
+        TokenInterface $token,
+        ProductTranslationInterface $productTranslation,
         ProductListingRepositoryInterface $productListingRepository,
-        VendorInterface                   $vendor
-    ) {
+        VendorInterface $vendor
+    ): void {
         $productListingFactoryInterface->createNew()
             ->willReturn($productListing);
 
@@ -150,21 +150,19 @@ class CreateProductListingCommandSpec extends ObjectBehavior
     }
 
     public function it_save_product(
-        ProductDraftInterface           $productDraft,
-        ProductTranslationInterface     $productTranslation,
-        ProductDraftRepositoryInterface $productDraftRepository
-    ) {
+        ProductDraftInterface $productDraft,
+        ProductTranslationInterface $productTranslation,
+    ): void {
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
         $this->saveEdit($productDraft, false);
     }
 
-    public function it_save_product_and_send(
-        ProductDraftInterface           $productDraft,
-        ProductTranslationInterface     $productTranslation,
-        ProductDraftRepositoryInterface $productDraftRepository
-    ) {
+    public function it_save_product_and_send_to_verification(
+        ProductDraftInterface $productDraft,
+        ProductTranslationInterface $productTranslation,
+    ): void {
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
@@ -177,18 +175,18 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $this->saveEdit($productDraft, true);
     }
 
-    public function it_clone(
-        ProductListingInterface      $productListing,
-        ProductDraftInterface        $productDraft,
-        ProductDraftInterface        $newProductDraft,
-        FactoryInterface             $draftFactory,
-        FactoryInterface             $translationFactory,
-        ProductTranslationInterface  $translation,
-        ProductTranslationInterface  $newTranslation,
+    public function it_clone_product(
+        ProductListingInterface $productListing,
+        ProductDraftInterface $productDraft,
+        ProductDraftInterface $newProductDraft,
+        FactoryInterface $draftFactory,
+        FactoryInterface $translationFactory,
+        ProductTranslationInterface $translation,
+        ProductTranslationInterface $newTranslation,
         ProductListingPriceInterface $price,
         ProductListingPriceInterface $newPrice,
-        FactoryInterface             $priceFactory
-    ) {
+        FactoryInterface $priceFactory
+    ): void {
         // Clone product stubs
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -256,7 +254,7 @@ class CreateProductListingCommandSpec extends ObjectBehavior
         $newProductDraft->setVersionNumber(1)
             ->shouldBeCalled();
 
-        $newProductDraft->newVersion()
+        $newProductDraft->incrementVersion()
             ->shouldBeCalled();
 
         $newProductDraft->setCode('code')

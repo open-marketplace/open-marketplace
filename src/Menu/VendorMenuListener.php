@@ -21,7 +21,7 @@ final class VendorMenuListener
 
         $menu
             ->addChild('Product List', ['route' => 'bitbag_mvm_plugin_vendor_product_listing_index'])
-            ->setLabel('mvm.ui.menu.product_list')
+            ->setLabel('bitbag_mvm_plugin.ui.product_list')
             ->setLabelAttribute('icon', 'inbox');
     }
 }

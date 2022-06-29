@@ -3,27 +3,30 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.show_action" public="true"
+        <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.show_action"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\ShowAction">
-            <argument key="$productListingRepository" type="service" id="bitbag_mvm_plugin.repository.product_listing" />
-            <argument key="$twig" type="service" id="twig" />
-            <argument key="$productDraftRepository" type="service" id="bitbag_mvm_plugin.repository.product_draft" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_listing" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft" />
+            <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.accept_action" public="true"
+        <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.accept_action"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\AcceptAction">
-            <argument key="$productListingRepository" type="service" id="bitbag_mvm_plugin.repository.product_listing" />
-            <argument key="$router" type="service" id="router.default" />
-            <argument key="$productListingStateMachineTransition" type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
-            <argument key="$productDraftRepository" type="service" id="bitbag_mvm_plugin.repository.product_draft" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_listing" />
+            <argument type="service" id="router.default" />
+            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft" />
+            <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.reject_action" public="true"
+        <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.reject_action"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\RejectAction">
-            <argument key="$productListingRepository" type="service" id="bitbag_mvm_plugin.repository.product_listing" />
-            <argument key="$router" type="service" id="router.default" />
-            <argument key="$productListingStateMachineTransition" type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
-            <argument key="$productDraftRepository" type="service" id="bitbag_mvm_plugin.repository.product_draft" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_listing" />
+            <argument type="service" id="router.default" />
+            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft" />
+            <tag name="controller.service_arguments" />
         </service>
     </services>
 </container>

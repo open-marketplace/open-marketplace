@@ -14,6 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Helper;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\LocaleNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -74,8 +75,9 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
             $productTranslation = null;
-            if (!$translationLocale = $translation->getLocale()) {
-                throw new \Exception('Fatal error, translation locale not found.');
+            $translationLocale = $translation->getLocale();
+            if (null === $translationLocale) {
+                throw new LocaleNotFoundException('Locale not found.');
             }
             if (array_key_exists($translationLocale, $mappedProductTranslations)) {
                 $productTranslation = $mappedProductTranslations[$translation->getLocale()];

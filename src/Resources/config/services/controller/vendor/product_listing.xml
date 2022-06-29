@@ -3,13 +3,15 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag_mvm_plugin.controller.action.vendor.product_listing.show_product_listing_index" public="true"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\ShowProductListings">
+        <service id="bitbag_mvm_plugin.controller.action.vendor.product_listing.show_product_listing_index"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\ShowProductListingsAction">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+            <tag name="controller.service_arguments" />
         </service>
-        <service id="bitbag_mvm_plugin.controller.action.vendor.product_listing.create_product_action" public="true"
+
+        <service id="bitbag_mvm_plugin.controller.action.vendor.product_listing.create_product_action"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\CreateProductAction">
             <argument type="service">
                 <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
@@ -17,18 +19,20 @@
                     <argument type="string">sylius.shop_user</argument>
                 </service>
             </argument>
-            <argument key="$requestConfigurationFactory" type="service" id="sylius.resource_controller.request_configuration_factory" />
-            <argument key="$newResourceFactory" type="service" id="sylius.resource_controller.new_resource_factory" />
-            <argument key="$factory" type="service" id="bitbag_mvm_plugin.factory.product_draft" />
-            <argument key="$createProductListingCommand" type="service" id="bitbag.command.product_listing.create"/>
-            <argument key="$redirectHandler" type="service" id="sylius.resource_controller.redirect_handler"/>
-            <argument key="$flashHelper" type="service" id="sylius.resource_controller.flash_helper"/>
-            <argument key="$eventDispatcher" type="service" id="sylius.resource_controller.event_dispatcher"/>
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
+            <argument type="service" id="sylius.resource_controller.new_resource_factory" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
+            <argument type="service" id="bitbag.command.product_listing.create"/>
+            <argument type="service" id="sylius.resource_controller.redirect_handler"/>
+            <argument type="service" id="sylius.resource_controller.flash_helper"/>
+            <argument type="service" id="sylius.resource_controller.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+            <tag name="controller.service_arguments" />
         </service>
-        <service id="bitbag_mvm_plugin.controller.action.vendor.product_listing.edit_product_action" public="true"
+
+        <service id="bitbag_mvm_plugin.controller.action.vendor.product_listing.edit_product_action"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\EditProductAction">
             <argument type="service">
                 <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
@@ -36,12 +40,13 @@
                     <argument type="string">bitbag_mvm_plugin.product_draft</argument>
                 </service>
             </argument>
-            <argument key="$requestConfigurationFactory" type="service" id="sylius.resource_controller.request_configuration_factory" />
-            <argument key="$createProductListingCommand" type="service" id="bitbag.command.product_listing.create"/>
-            <argument key="$productDraftRepository" type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
+            <argument type="service" id="bitbag.command.product_listing.create"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+            <tag name="controller.service_arguments" />
         </service>
     </services>
 </container>

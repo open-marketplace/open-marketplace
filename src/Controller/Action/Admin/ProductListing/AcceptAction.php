@@ -51,7 +51,7 @@ final class AcceptAction
         /** @var ProductDraftInterface $latestProductDraft */
         $latestProductDraft = $this->productDraftRepository->findProductListingLatestProductDraft($productListing);
 
-        $this->productListingStateMachineTransition->apply($latestProductDraft, ProductDraftTransitions::TRANSITION_VERIFY);
+        $this->productListingStateMachineTransition->applyIfCan($latestProductDraft, ProductDraftTransitions::TRANSITION_VERIFY);
 
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
     }

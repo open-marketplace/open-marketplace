@@ -47,6 +47,9 @@ bitbag_mvm_plugin:
         verified_at: 'Verified at'
         version: 'Version'
         actions: 'Actions'
+        create_new_product: 'Create Product'
+        save: 'Save'
+        save_and_add: 'Save and Add'
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."

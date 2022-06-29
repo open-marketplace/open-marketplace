@@ -4,14 +4,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="bitbag.command.product_listing.create" class="BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing\CreateProductListingCommand">
-            <argument key="$productListingRepository" type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
-            <argument key="$productListingFactoryInterface" type="service" id="bitbag_mvm_plugin.factory.product_listing" />
-            <argument key="$tokenStorage" type="service" id="security.token_storage" />
-            <argument key="$draftFactory" type="service" id="bitbag_mvm_plugin.factory.product_draft" />
-            <argument key="$priceFactory" type="service" id="bitbag_mvm_plugin.factory.product_listing_price" />
-            <argument key="$translationFactory" type="service" id="bitbag_mvm_plugin.factory.product_translation" />
-            <argument key="$draftRepository" type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
-            <tag name="maker.command" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_translation" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_price" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
         </service>
     </services>
 </container>

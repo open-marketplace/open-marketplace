@@ -12,7 +12,7 @@ Feature:Creating a product listing.
   Scenario: Creating product listing
     Given I am on "/"
     And I follow "My account"
-    And I follow "Product List"
+    And I follow "Product list"
     And I follow "Create Product"
     And I fill in "Code" with "productTest"
     And I fill in "Price" with "10"

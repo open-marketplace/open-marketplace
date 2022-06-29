@@ -43,17 +43,11 @@ class ProductDraft implements ProductDraftInterface
     public function __construct()
     {
         $this->code = '';
-
         $this->status = ProductDraftInterface::STATUS_CREATED;
-
         $this->productListingPrice = new ArrayCollection();
-
         $this->translations = new ArrayCollection();
-
         $this->isVerified = false;
-
         $this->createdAt = new \DateTime();
-
         $this->versionNumber = 1;
     }
 
@@ -167,7 +161,7 @@ class ProductDraft implements ProductDraftInterface
         $this->status = $status;
     }
 
-    public function newVersion(): void
+    public function incrementVersion(): void
     {
         ++$this->versionNumber;
     }

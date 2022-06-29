@@ -92,13 +92,11 @@ class ProductListing implements ProductListingInterface
         $this->productDrafts->add($productDrafts);
     }
 
-    /**
-     * @return false|mixed|ProductDraftInterface|null
-     */
-    public function getLatestDraft()
+    public function getLatestDraft(): ?ProductDraftInterface
     {
         $productDraft = null;
-        if (!$this->productDrafts->isEmpty()) {
+        if (!$this->productDrafts->isEmpty() && false !== $this->productDrafts->last()) {
+            /** @var ProductDraftInterface $productDraft */
             $productDraft = $this->productDrafts->last();
         }
 

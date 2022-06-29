@@ -14,7 +14,7 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Vendo
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use function PHPUnit\Framework\assertNotNull;
+use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
@@ -24,7 +24,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function iShouldSeeProductsListingStatus($status)
     {
         $productListingStatus = $this->getPage()->find('css', sprintf('#details > div > table > tbody > tr > td:contains("%s")', $status));
-        assertNotNull($productListingStatus);
+        Assert::notNull($productListingStatus);
     }
 
     /**
@@ -42,5 +42,4 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         return $this->getSession()->getPage();
     }
-
 }

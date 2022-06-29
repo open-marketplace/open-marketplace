@@ -22,7 +22,7 @@ class ProductTranslationRepository extends EntityRepository implements ProductTr
         $this->_em->flush();
     }
 
-    public function saveMore(array $productTranslations): void
+    public function saveCollection(array $productTranslations): void
     {
         foreach ($productTranslations as $productTranslation) {
             $this->_em->persist($productTranslation);
