@@ -11,6 +11,7 @@
             <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
             <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_price" />
             <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
+            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition"/>
         </service>
     </services>
 </container>

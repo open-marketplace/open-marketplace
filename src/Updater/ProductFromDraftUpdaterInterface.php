@@ -9,11 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-interface ProductRepositoryInterface
+interface ProductFromDraftUpdaterInterface
 {
-    public function save(ProductInterface $product): void;
+    public function updateProduct(ProductDraftInterface $productDraft): ProductInterface;
 }

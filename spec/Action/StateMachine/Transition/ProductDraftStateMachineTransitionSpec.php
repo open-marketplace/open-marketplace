@@ -49,22 +49,22 @@ final class ProductDraftStateMachineTransitionSpec extends ObjectBehavior
             ProductDraftTransitions::GRAPH
         )->willReturn($stateMachine);
 
-        $stateMachine->can(ProductDraftTransitions::TRANSITION_VERIFY)
+        $stateMachine->can(ProductDraftTransitions::TRANSITION_ACCEPT)
             ->willReturn(true);
 
-        $stateMachine->apply(ProductDraftTransitions::TRANSITION_VERIFY)
+        $stateMachine->apply(ProductDraftTransitions::TRANSITION_ACCEPT)
             ->willReturn(true);
 
         $productDraftStateMachineFactory->get($productDraft, ProductDraftTransitions::GRAPH)
             ->shouldBeCalled();
 
-        $stateMachine->can(ProductDraftTransitions::TRANSITION_VERIFY)
+        $stateMachine->can(ProductDraftTransitions::TRANSITION_ACCEPT)
             ->shouldBeCalled();
 
-        $stateMachine->apply(ProductDraftTransitions::TRANSITION_VERIFY)
+        $stateMachine->apply(ProductDraftTransitions::TRANSITION_ACCEPT)
             ->shouldBeCalled();
 
-        $this->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_VERIFY);
+        $this->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
     }
 
     public function it_cannot_apply_transition(
@@ -77,18 +77,18 @@ final class ProductDraftStateMachineTransitionSpec extends ObjectBehavior
             ProductDraftTransitions::GRAPH
         )->willReturn($stateMachine);
 
-        $stateMachine->can(ProductDraftTransitions::TRANSITION_VERIFY)
+        $stateMachine->can(ProductDraftTransitions::TRANSITION_ACCEPT)
             ->willReturn(false);
 
         $productDraftStateMachineFactory->get($productDraft, ProductDraftTransitions::GRAPH)
             ->shouldBeCalled();
 
-        $stateMachine->can(ProductDraftTransitions::TRANSITION_VERIFY)
+        $stateMachine->can(ProductDraftTransitions::TRANSITION_ACCEPT)
             ->shouldBeCalled();
 
-        $stateMachine->apply(ProductDraftTransitions::TRANSITION_VERIFY)
+        $stateMachine->apply(ProductDraftTransitions::TRANSITION_ACCEPT)
             ->shouldNotBeCalled();
 
-        $this->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_VERIFY);
+        $this->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
     }
 }

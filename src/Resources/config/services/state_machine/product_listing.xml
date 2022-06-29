@@ -5,10 +5,8 @@
     <services>
         <service id="bitbag_mvm_plugin.state_machine.product_draft" public="true"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductDraftCallbacks">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="bit_bag.mvm_plugin.helper.create_product_from_draft_helper" />
             <argument type="service" id="session.flash_bag" />
-            <argument type="service" id="bit_bag.mvm_plugin.helper.update_product_from_draft_helper" />
+            <argument type="service" id="bitbag_mvm_plugin.service.product_draft_service" />
         </service>
 
         <service id="bitbag_mvm_plugin.state_machine.product_draft.transition"

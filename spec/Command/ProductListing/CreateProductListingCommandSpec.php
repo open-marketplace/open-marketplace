@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
@@ -20,9 +21,9 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -36,7 +37,8 @@ final class CreateProductListingCommandSpec extends ObjectBehavior
         FactoryInterface $translationFactory,
         FactoryInterface $draftFactory,
         FactoryInterface $priceFactory,
-        ProductDraftRepositoryInterface $draftRepository
+        ProductDraftRepositoryInterface $draftRepository,
+        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition
     ): void {
         $this->beConstructedWith(
             $productListingRepository,
@@ -45,7 +47,8 @@ final class CreateProductListingCommandSpec extends ObjectBehavior
             $translationFactory,
             $draftFactory,
             $priceFactory,
-            $draftRepository
+            $draftRepository,
+            $productDraftStateMachineTransition
         );
     }
 
@@ -96,7 +99,7 @@ final class CreateProductListingCommandSpec extends ObjectBehavior
         $this->create($productDraft, false);
     }
 
-    public function it_creates_product_listing_and_send(
+    public function it_creates_product_listing_and_send_to_verification(
         FactoryInterface $productListingFactoryInterface,
         ProductDraftInterface $productDraft,
         TokenStorageInterface $tokenStorage,
@@ -104,8 +107,8 @@ final class CreateProductListingCommandSpec extends ObjectBehavior
         ProductListing $productListing,
         TokenInterface $token,
         ProductTranslationInterface $productTranslation,
-        ProductListingRepositoryInterface $productListingRepository,
-        VendorInterface $vendor
+        VendorInterface $vendor,
+        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition
     ): void {
         $productListingFactoryInterface->createNew()
             ->willReturn($productListing);
@@ -125,12 +128,6 @@ final class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->getCode()
             ->willReturn('code');
 
-        $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION)
-            ->shouldBeCalled();
-
-        $productDraft->setPublishedAt(Argument::type('DateTime'))
-            ->shouldBeCalled();
-
         $productListing->setCode('code')
             ->shouldBeCalled();
 
@@ -143,7 +140,7 @@ final class CreateProductListingCommandSpec extends ObjectBehavior
         $productDraft->setProductListing($productListing)
             ->shouldBeCalled();
 
-        $productListingRepository->save($productListing)
+        $productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION)
             ->shouldBeCalled();
 
         $this->create($productDraft, true);
@@ -162,14 +159,12 @@ final class CreateProductListingCommandSpec extends ObjectBehavior
     public function it_save_product_and_send_to_verification(
         ProductDraftInterface $productDraft,
         ProductTranslationInterface $productTranslation,
+        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition
     ): void {
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection([$productTranslation]));
 
-        $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION)
-            ->shouldBeCalled();
-
-        $productDraft->setPublishedAt(Argument::type('DateTime'))
+        $productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION)
             ->shouldBeCalled();
 
         $this->saveEdit($productDraft, true);

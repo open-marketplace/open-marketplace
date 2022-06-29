@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
@@ -20,6 +21,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\LocaleNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\VendorNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -40,6 +42,8 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
     private ProductDraftRepositoryInterface $draftRepository;
 
+    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
+
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
         FactoryInterface $productListingFactoryInterface,
@@ -47,7 +51,8 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         FactoryInterface $translationFactory,
         FactoryInterface $draftFactory,
         FactoryInterface $priceFactory,
-        ProductDraftRepositoryInterface $draftRepository
+        ProductDraftRepositoryInterface $draftRepository,
+        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition
     ) {
         $this->productListingRepository = $productListingRepository;
         $this->productListingFactoryInterface = $productListingFactoryInterface;
@@ -56,6 +61,7 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         $this->draftFactory = $draftFactory;
         $this->priceFactory = $priceFactory;
         $this->draftRepository = $draftRepository;
+        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
     }
 
     public function create(ProductDraftInterface $productDraft, bool $isSend): void
@@ -75,17 +81,17 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
 
         $productDraft = $this->formatTranslation($productDraft);
 
-        if ($isSend) {
-            $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
-            $productDraft->setPublishedAt(new \DateTime());
-        }
-
         $productListing->setCode($productDraft->getCode());
         $productListing->addProductDrafts($productDraft);
         $productListing->setVendor($vendor);
 
         $productDraft->setProductListing($productListing);
-        $this->productListingRepository->save($productListing);
+
+        if ($isSend) {
+            $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
+        } else {
+            $this->productListingRepository->save($productListing);
+        }
     }
 
     private function formatTranslation(ProductDraftInterface $productDraft): ProductDraftInterface
@@ -166,10 +172,9 @@ class CreateProductListingCommand implements CreateProductListingCommandInterfac
         $this->formatTranslation($productDraft);
 
         if ($isSend) {
-            $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
-            $productDraft->setPublishedAt(new \DateTime());
+            $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
+        } else {
+            $this->draftRepository->save($productDraft);
         }
-
-        $this->draftRepository->save($productDraft);
     }
 }

@@ -24,7 +24,7 @@ winzou_state_machine:
         states:
             created: ~
             under_verification: ~
-            verified: ~
+            accepted: ~
             rejected: ~
         transitions:
             send_to_verification:
@@ -32,7 +32,7 @@ winzou_state_machine:
                 to: 'under_verification'
             accept_product_draft:
                 from: ['under_verification']
-                to: 'verified'
+                to: 'accepted'
             reject_product_draft:
                 from: ['under_verification']
                 to: 'rejected'
@@ -44,7 +44,7 @@ winzou_state_machine:
                     args: [ 'object' ]
                 accept_product_listing:
                     on: ['accept_product_draft']
-                    do: ['@bitbag_mvm_plugin.state_machine.product_draft', 'verify']
+                    do: ['@bitbag_mvm_plugin.state_machine.product_draft', 'accept']
                     args: ['object']
                 reject_product_listing:
                     on: [ 'reject_product_draft' ]

@@ -10,3 +10,5 @@ bitbag_mvm_plugin:
         product_listing_created: 'Product listing created.'
         product_listing_saved_and_sent_to_verification: 'Product listing saved and sent to verification.'
         product_listing_saved: 'Product listing saved.'
+        product_listing_accepted: 'Product listing verified.'
+        product_listing_rejected: 'Product listing rejected.'

@@ -9,25 +9,23 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Helper;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\LocaleNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ProductNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface as BaseProductTranslationInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
-final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelperInterface
+final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
 {
     private ProductTranslationFactoryInterface $productTranslationFactory;
-
-    private EntityManagerInterface $entityManager;
 
     private EntityRepository $productTranslationRepository;
 
@@ -37,30 +35,28 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
 
     public function __construct(
         ProductTranslationFactoryInterface $productTranslationFactory,
-        EntityManagerInterface $entityManager,
         EntityRepository $productTranslationRepository,
         EntityRepository $channelPricingRepository,
         ProductVariantRepositoryInterface $productVariantRepository
     ) {
         $this->productTranslationFactory = $productTranslationFactory;
-        $this->entityManager = $entityManager;
         $this->productTranslationRepository = $productTranslationRepository;
         $this->channelPricingRepository = $channelPricingRepository;
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function updateProduct(ProductDraftInterface $productDraft): void
+    public function updateProduct(ProductDraftInterface $productDraft): ProductInterface
     {
         $product = $productDraft->getProductListing()->getProduct();
 
-        if ($product instanceof ProductInterface) {
-            $this->updateSimpleProductProperties($product, $productDraft);
-
-            $this->entityManager->flush();
+        if (!$product) {
+            throw new ProductNotFoundException('Product not found.');
         }
+
+        return $this->updateSimpleProductProperties($product, $productDraft);
     }
 
-    private function updateSimpleProductProperties(ProductInterface $product, ProductDraftInterface $productDraft): void
+    private function updateSimpleProductProperties(ProductInterface $product, ProductDraftInterface $productDraft): ProductInterface
     {
         $product->setUpdatedAt(new \DateTime());
 
@@ -103,7 +99,6 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
                     $translation->getMetaKeywords()
                 );
 
-                $this->entityManager->persist($productTranslation);
                 $product->addTranslation($productTranslation);
             }
         }
@@ -125,5 +120,7 @@ final class UpdateProductFromDraftHelper implements UpdateProductFromDraftHelper
                 $channelPricing->setMinimumPrice($productListingPrice->getMinimumPrice());
             }
         }
+
+        return $product;
     }
 }

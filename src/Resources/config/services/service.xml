@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Service\ProductDraftService"
+                 id="bitbag_mvm_plugin.service.product_draft_service">
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_from_draft_factory"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product"/>
+            <argument type="service" id="bit_bag.mvm_plugin.helper.update_product_from_draft_helper"/>
+            <tag name="controller.service_arguments"/>
+        </service>
+    </services>
+</container>

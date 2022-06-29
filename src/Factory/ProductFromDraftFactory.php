@@ -9,27 +9,21 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Helper;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ChannelPricingFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
-final class CreateProductFromDraftHelper implements CreateProductFromDraftHelperInterface
+final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
 {
     private ProductFactoryInterface $productFactory;
 
     private ProductTranslationFactoryInterface $productTranslationFactory;
-
-    private EntityManagerInterface $entityManager;
 
     private ProductVariantFactoryInterface $productVariantFactory;
 
@@ -40,28 +34,26 @@ final class CreateProductFromDraftHelper implements CreateProductFromDraftHelper
     public function __construct(
         ProductFactoryInterface $productFactory,
         ProductTranslationFactoryInterface $productTranslationFactory,
-        EntityManagerInterface $entityManager,
         ProductVariantFactoryInterface $productVariantFactory,
         ChannelPricingFactoryInterface $channelPricingFactory,
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
-        $this->entityManager = $entityManager;
         $this->productVariantFactory = $productVariantFactory;
         $this->channelPricingFactory = $channelPricingFactory;
         $this->channelRepository = $channelRepository;
     }
 
-    public function createSimpleProduct(ProductDraftInterface $productDraft): void
+    public function createSimpleProduct(ProductDraftInterface $productDraft): ProductInterface
     {
         /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
         $product = $this->setSimpleProductProperties($product, $productDraft);
 
         $productDraft->getProductListing()->setProduct($product);
-        $this->entityManager->persist($product);
-        $this->entityManager->flush();
+
+        return $product;
     }
 
     private function setSimpleProductProperties(ProductInterface $product, ProductDraftInterface $productDraft): ProductInterface
@@ -86,7 +78,6 @@ final class CreateProductFromDraftHelper implements CreateProductFromDraftHelper
                 $translation->getMetaKeywords()
             );
 
-            $this->entityManager->persist($productTranslation);
             $product->addTranslation($productTranslation);
         }
 
@@ -96,7 +87,7 @@ final class CreateProductFromDraftHelper implements CreateProductFromDraftHelper
         $productVariant->setEnabled(true);
         $productVariant->setPosition(0);
 
-        $this->entityManager->persist($productVariant);
+        $product->addVariant($productVariant);
 
         $channelPricingCodes = [];
         /** @var ProductListingPriceInterface $productListingPrice */
@@ -113,7 +104,7 @@ final class CreateProductFromDraftHelper implements CreateProductFromDraftHelper
                 $productListingPrice->getMinimumPrice(),
             );
 
-            $this->entityManager->persist($channelPricing);
+            $productVariant->addChannelPricing($channelPricing);
         }
 
         foreach ($channelPricingCodes as $channelPricingCode) {

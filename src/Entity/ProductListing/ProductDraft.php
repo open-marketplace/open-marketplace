@@ -166,15 +166,6 @@ class ProductDraft implements ProductDraftInterface
         ++$this->versionNumber;
     }
 
-    public function clear(): void
-    {
-        $this->id = null;
-
-        $this->productListingPrice = new ArrayCollection();
-
-        $this->translations = new ArrayCollection();
-    }
-
     public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void
     {
         $this->translations->set($key, $translation);

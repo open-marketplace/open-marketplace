@@ -119,8 +119,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         string $code,
         string $name,
         string $status
-    )
-    {
+    ) {
         $vendor = $this->sharedStorage->get('vendor');
 
         $productListing = $this->createProductListing($vendor, $code);
