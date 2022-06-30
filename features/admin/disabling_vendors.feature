@@ -8,23 +8,22 @@ Feature: Disabling vendors
     Given I am logged in as an administrator
     And I am on "/admin"
 
-  @ui @javascript
+  @ui
   Scenario: Disabling vendor's account
     Given There is a "enabled" vendor
     When I follow "Vendors"
     And I click "Disable"
     And I should see "Confirm your action"
-    And I choose "#confirmation-button"
     Then I should see "Vendor's account has been successfully disabled"
 
-  @ui @javascript
+  @ui
   Scenario: Enabling vendor's account
     Given There is a 'disabled' vendor
     When I follow "Vendors"
     And I click "Enable"
     And I should see "Confirm your action"
-    And I choose "#confirmation-button"
     Then I should see "Vendor's account has been successfully enabled"
+
 
   @ui
   Scenario: Disabling disabled vendor's account
