@@ -121,4 +121,9 @@ class Conversation implements ConversationInterface
     {
         $this->rejectedListingURL = $rejectedListingURL;
     }
+
+    public function getApplicant(): ?ShopUserInterface
+    {
+        return $this->shopUser;
+    }
 }

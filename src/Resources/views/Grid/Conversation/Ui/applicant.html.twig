@@ -2,7 +2,6 @@
 {% for role in data.roles %}
     {% set userRole = role %}
 {% endfor %}
-
 {% if userRole is same as 'ROLE_VENDOR' %}
     <div>
         {{ data.firstName }} {{ data.lastName }}

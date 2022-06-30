@@ -1,7 +1,7 @@
 sylius_grid:
     templates:
         action:
-            archive: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Action/archiveConversation.html.twig"
+            archiveConversation: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Action/archiveConversation.html.twig"
     grids:
         bitbag_mvm_plugin_admin_conversation:
             driver:
@@ -40,5 +40,5 @@ sylius_grid:
                     delete:
                         type: delete
                     archive:
-                        type: archive
+                        type: archiveConversation
                         label: bitbag_mvm_plugin.ui.grid.conversation.archive

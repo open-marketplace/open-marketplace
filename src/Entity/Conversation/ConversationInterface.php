@@ -46,4 +46,6 @@ interface ConversationInterface extends ResourceInterface
     public function getRejectedListingURL(): ?string;
 
     public function setRejectedListingURL(?string $rejectedListingURL): void;
+
+    public function getApplicant(): ?ShopUserInterface;
 }
