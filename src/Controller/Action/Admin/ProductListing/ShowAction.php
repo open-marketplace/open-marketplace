@@ -84,7 +84,7 @@ final class ShowAction
         $form->handleRequest($request);
         $draftViewURL = $this->router->generate(
             'bitbag_mvm_plugin_vendor_product_draft_show_product',
-            ['id'=>$latestProductDraft->getId()],
+            ['id' => $latestProductDraft->getId()],
             UrlGenerator::ABSOLUTE_URL
         );
 
@@ -99,18 +99,19 @@ final class ShowAction
 
             return new RedirectResponse($this->router->generate(
                 'bitbag_mvm_plugin_admin_product_listing_reject',
-                ['id'=>$request->attributes->get('id')]
+                ['id' => $request->attributes->get('id')]
             ));
-
         }
+
         return new Response(
             $this->twig->render('@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig', [
                 'productListing' => $productListing,
                 'productDraft' => $latestProductDraft,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ])
         );
     }
+
     private function addConversationWithMessages(ConversationInterface $conversation): void
     {
         if (null !== $conversation->getMessages()) {

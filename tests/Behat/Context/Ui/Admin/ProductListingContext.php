@@ -24,15 +24,15 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertNotEmpty;
+use function PHPUnit\Framework\assertNotNull;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertNotEmpty;
-use function PHPUnit\Framework\assertNotNull;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
@@ -145,7 +145,7 @@ final class ProductListingContext extends RawMinkContext implements Context
 //            $vendor->setTaxIdentifier('123456789');
 //            $this->entityManager->persist($vendor);
 
-        $vendor= $this->sharedStorage->get('vendor');
+        $vendor = $this->sharedStorage->get('vendor');
 
         for ($i = 0; $i < $count; ++$i) {
             $productListing = new ProductListing();
@@ -179,9 +179,7 @@ final class ProductListingContext extends RawMinkContext implements Context
             $this->entityManager->persist($productPricing);
         }
         $this->entityManager->flush();
-
     }
-
 
     /**
      * @Given there is/are :count product listing(s)

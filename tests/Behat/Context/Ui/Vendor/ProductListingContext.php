@@ -18,26 +18,27 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+use function PHPUnit\Framework\assertNotNull;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use function PHPUnit\Framework\assertNotNull;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
-    private ShopUserExampleFactory $shopUserExampleFactory;
-    private ChannelExampleFactory $channelExampleFactory;
-    private FactoryInterface $vendorFactory;
 
+    private ShopUserExampleFactory $shopUserExampleFactory;
+
+    private ChannelExampleFactory $channelExampleFactory;
+
+    private FactoryInterface $vendorFactory;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         ShopUserExampleFactory $shopUserExampleFactory,
-        ChannelExampleFactory  $channelExampleFactory,
-        FactoryInterface       $vendorFactory
-    )
-    {
+        ChannelExampleFactory $channelExampleFactory,
+        FactoryInterface $vendorFactory
+    ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->channelExampleFactory = $channelExampleFactory;
@@ -100,5 +101,4 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         return $this->getSession()->getPage();
     }
-
 }
