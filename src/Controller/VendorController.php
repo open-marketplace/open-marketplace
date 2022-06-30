@@ -160,11 +160,10 @@ final class VendorController extends ResourceController
     {
         $vendorId = (int)$request->attributes->get('id', 0);
         $vendorRepository = $this->manager->getRepository(Vendor::class);
-        $currentVendor = $vendorRepository->findOneBy(['id' => $request->attributes->get('id')]);
+        $currentVendor = $vendorRepository->findOneBy(['id' => $vendorId]);
         if ($currentVendor) {
             $currentVendor->setEnabled(!$currentVendor->isEnabled());
             $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
-
 
             $this->manager->flush();
             $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
