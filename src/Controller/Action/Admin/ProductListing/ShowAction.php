@@ -87,13 +87,12 @@ final class ShowAction
             ['id'=>$latestProductDraft->getId()],
             UrlGenerator::ABSOLUTE_URL
         );
-        $defaultIntro = $this->translator->trans('bitbag_mvm_plugin.ui.product_rejected_intro');
-        $defaultMessageValue = $defaultIntro.$draftViewURL;
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ConversationInterface $conversation */
             $conversation = $form->getData();
             $conversation->setShopUser($productListing->getVendor()->getShopUser());
+            $conversation->setRejectedListingURL($draftViewURL);
             $this->conversationRepository->add($conversation);
 
             $this->addConversationWithMessages($conversation);
@@ -108,7 +107,6 @@ final class ShowAction
             $this->twig->render('@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig', [
                 'productListing' => $productListing,
                 'productDraft' => $latestProductDraft,
-                'defaultMessageValue' =>  $defaultMessageValue,
                 'form' => $form->createView()
             ])
         );

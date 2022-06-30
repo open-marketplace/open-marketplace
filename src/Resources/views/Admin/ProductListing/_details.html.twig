@@ -38,9 +38,7 @@
                 {{ form_start(form, { attr: { class: 'ui form'}}) }}
                 <div class="ui stackable grid">
                     <div class="column ten wide">
-                        {{ form_row(form.messages.vars.prototype.content, {
-                            value: defaultMessageValue
-                        }) }}
+                        {{ form_row(form.messages.vars.prototype.content) }}
                     </div>
                     <div class="column six wide">
                         {{ form_row(form.messages.vars.prototype.file) }}

@@ -42,4 +42,8 @@ interface ConversationInterface extends ResourceInterface
     public function isClosed(): bool;
 
     public function isOpen(): bool;
+
+    public function getRejectedListingURL(): ?string;
+
+    public function setRejectedListingURL(?string $rejectedListingURL): void;
 }

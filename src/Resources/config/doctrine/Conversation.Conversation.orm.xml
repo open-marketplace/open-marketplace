@@ -25,6 +25,8 @@
 
         <field name="status" column="status" type="string" nullable="false" />
 
+        <field name="rejectedListingURL" type="string" />
+
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -23,6 +23,8 @@ class Conversation implements ConversationInterface
 
     protected ?int $id = null;
 
+    protected ?string $rejectedListingURL;
+
     protected ?CategoryInterface $category = null;
 
     protected ?ShopUserInterface $shopUser = null;
@@ -108,5 +110,15 @@ class Conversation implements ConversationInterface
     public function isOpen(): bool
     {
         return !$this->isClosed();
+    }
+
+    public function getRejectedListingURL(): ?string
+    {
+        return $this->rejectedListingURL;
+    }
+
+    public function setRejectedListingURL(?string $rejectedListingURL): void
+    {
+        $this->rejectedListingURL = $rejectedListingURL;
     }
 }
