@@ -35,15 +35,6 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @BeforeScenario
-     */
-    public function clearData()
-    {
-        $purger = new ORMPurger($this->entityManager);
-        $purger->purge();
-    }
-
-    /**
      * @Given There is an admin user :username with password :password
      */
     public function thereIsAnAdminUserWithPassword($username, $password)

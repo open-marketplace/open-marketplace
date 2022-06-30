@@ -9,15 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Service;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
-interface ProductDraftServiceInterface
+interface ProductDraftAcceptanceOperatorInterface
 {
-    public function acceptProductDraft(ProductDraftInterface $productDraft): void;
-
-    public function rejectProductDraft(ProductDraftInterface $productDraft): void;
-
-    public function sendToVerification(ProductDraftInterface $productDraft): void;
+    public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface;
 }

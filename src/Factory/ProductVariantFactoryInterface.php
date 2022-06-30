@@ -11,9 +11,16 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 
 interface ProductVariantFactoryInterface
 {
     public function createNew(): ProductVariant;
+
+    public function createNewForProduct(
+        ProductInterface $product,
+        bool $enabled,
+        int $position
+    ): ProductVariant;
 }

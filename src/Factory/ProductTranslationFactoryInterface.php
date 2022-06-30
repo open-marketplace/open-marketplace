@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslation;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
@@ -27,5 +29,10 @@ interface ProductTranslationFactoryInterface
         ?string $shortDescription,
         ?string $metaDescription,
         ?string $metaKeywords
+    ): ProductTranslation;
+
+    public function createFromProductListingTranslation(
+        ProductInterface $product,
+        ProductTranslationInterface $translation
     ): ProductTranslation;
 }

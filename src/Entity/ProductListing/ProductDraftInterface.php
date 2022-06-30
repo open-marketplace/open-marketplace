@@ -75,4 +75,10 @@ interface ProductDraftInterface extends ResourceInterface
     public function getPublishedAt(): ?\DateTimeInterface;
 
     public function setPublishedAt(?\DateTimeInterface $publishedAt): void;
+
+    public function accept(): void;
+
+    public function reject(): void;
+
+    public function sendToVerification(): void;
 }

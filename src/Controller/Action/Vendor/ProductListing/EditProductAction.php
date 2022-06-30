@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing\CreateProductListingCommandInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,20 +30,24 @@ class EditProductAction extends AbstractController
 
     private RequestConfigurationFactoryInterface $requestConfigurationFactory;
 
-    private CreateProductListingCommandInterface $createProductListingCommand;
-
     private ProductDraftRepositoryInterface $productDraftRepository;
+
+    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
+
+    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
 
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        CreateProductListingCommandInterface $createProductListingCommand,
         ProductDraftRepositoryInterface $productDraftRepository,
-        ) {
+        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
+        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory
+    ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
-        $this->createProductListingCommand = $createProductListingCommand;
         $this->productDraftRepository = $productDraftRepository;
+        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
+        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
     }
 
     public function __invoke(Request $request): Response
@@ -52,7 +58,7 @@ class EditProductAction extends AbstractController
         $newResource = $this->productDraftRepository->find($request->get('id'));
 
         if (!(ProductDraftInterface::STATUS_CREATED == $newResource->getStatus())) {
-            $newResource = $this->createProductListingCommand->cloneProduct($newResource, false);
+            $newResource = $this->productListingFromDraftFactory->createClone($newResource);
         }
 
         $form = $this->createForm(ProductType::class, $newResource);
@@ -64,11 +70,13 @@ class EditProductAction extends AbstractController
 
             /** @var ClickableInterface $button */
             $button = $form->get('saveAndAdd');
-            $this->createProductListingCommand->saveEdit($productDraft, $button->isClicked());
+            $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
 
             if ($button->isClicked()) {
+                $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
                 $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved_and_sent_to_verification');
             } else {
+                $this->productDraftRepository->save($productDraft);
                 $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
             }
 

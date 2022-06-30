@@ -88,18 +88,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
                 $productTranslation->setMetaDescription($translation->getMetaDescription());
                 $productTranslation->setMetaKeywords($translation->getMetaKeywords());
             } else {
-                $productTranslation = $this->productTranslationFactory->create(
-                    $product,
-                    $translation->getName(),
-                    $translation->getDescription(),
-                    $translation->getSlug(),
-                    $translation->getLocale(),
-                    $translation->getShortDescription(),
-                    $translation->getMetaDescription(),
-                    $translation->getMetaKeywords()
-                );
-
-                $product->addTranslation($productTranslation);
+                $this->productTranslationFactory->createFromProductListingTranslation($product, $translation);
             }
         }
 

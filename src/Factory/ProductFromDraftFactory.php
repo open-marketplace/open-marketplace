@@ -67,27 +67,10 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
 
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
-            $productTranslation = $this->productTranslationFactory->create(
-                $product,
-                $translation->getName(),
-                $translation->getDescription(),
-                $translation->getSlug(),
-                $translation->getLocale(),
-                $translation->getShortDescription(),
-                $translation->getMetaDescription(),
-                $translation->getMetaKeywords()
-            );
-
-            $product->addTranslation($productTranslation);
+            $this->productTranslationFactory->createFromProductListingTranslation($product, $translation);
         }
 
-        $productVariant = $this->productVariantFactory->createNew();
-        $productVariant->setProduct($product);
-        $productVariant->setCode($product->getCode());
-        $productVariant->setEnabled(true);
-        $productVariant->setPosition(0);
-
-        $product->addVariant($productVariant);
+        $productVariant = $this->productVariantFactory->createNewForProduct($product, true, 0);
 
         $channelPricingCodes = [];
         /** @var ProductListingPriceInterface $productListingPrice */
@@ -96,15 +79,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
                 $channelPricingCodes[] = $productListingPrice->getChannelCode();
             }
 
-            $channelPricing = $this->channelPricingFactory->create(
-                $productVariant,
-                $productListingPrice->getChannelCode(),
-                $productListingPrice->getPrice(),
-                $productListingPrice->getOriginalPrice(),
-                $productListingPrice->getMinimumPrice(),
-            );
-
-            $productVariant->addChannelPricing($channelPricing);
+            $this->channelPricingFactory->createFromProductListingPrice($productVariant, $productListingPrice);
         }
 
         foreach ($channelPricingCodes as $channelPricingCode) {

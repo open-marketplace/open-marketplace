@@ -22,13 +22,15 @@
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="sylius.resource_controller.new_resource_factory" />
             <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
-            <argument type="service" id="bitbag.command.product_listing.create"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory"/>
             <argument type="service" id="sylius.resource_controller.redirect_handler"/>
             <argument type="service" id="sylius.resource_controller.flash_helper"/>
             <argument type="service" id="sylius.resource_controller.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
             <tag name="controller.service_arguments" />
         </service>
 
@@ -41,8 +43,9 @@
                 </service>
             </argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
-            <argument type="service" id="bitbag.command.product_listing.create"/>
             <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
+            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

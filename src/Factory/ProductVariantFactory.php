@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 
 final class ProductVariantFactory implements ProductVariantFactoryInterface
@@ -18,5 +19,21 @@ final class ProductVariantFactory implements ProductVariantFactoryInterface
     public function createNew(): ProductVariant
     {
         return new ProductVariant();
+    }
+
+    public function createNewForProduct(
+        ProductInterface $product,
+        bool $enabled,
+        int $position
+    ): ProductVariant {
+        $productVariant = new ProductVariant();
+
+        $productVariant->setProduct($product);
+        $productVariant->setCode($product->getCode());
+        $productVariant->setEnabled($enabled);
+        $productVariant->setPosition($position);
+        $product->addVariant($productVariant);
+
+        return $productVariant;
     }
 }

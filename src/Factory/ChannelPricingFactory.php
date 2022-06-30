@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
@@ -35,6 +36,21 @@ final class ChannelPricingFactory implements ChannelPricingFactoryInterface
         $channelPricing->setPrice($price);
         $channelPricing->setOriginalPrice($originalPrice);
         $channelPricing->setMinimumPrice($minimumPrice);
+
+        return $channelPricing;
+    }
+
+    public function createFromProductListingPrice(ProductVariantInterface $productVariant, ProductListingPriceInterface $productListingPrice): ChannelPricing
+    {
+        $channelPricing = $this->create(
+            $productVariant,
+            $productListingPrice->getChannelCode(),
+            $productListingPrice->getPrice(),
+            $productListingPrice->getOriginalPrice(),
+            $productListingPrice->getMinimumPrice(),
+        );
+
+        $productVariant->addChannelPricing($channelPricing);
 
         return $channelPricing;
     }

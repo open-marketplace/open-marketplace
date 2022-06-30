@@ -11,40 +11,55 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Service\ProductDraftServiceInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class ProductDraftCallbacks
 {
     private FlashBagInterface $session;
 
-    private ProductDraftServiceInterface $productDraftService;
+    private ProductDraftAcceptanceOperatorInterface $productDraftService;
+
+    private ProductRepositoryInterface $productRepository;
+
+    private ProductDraftRepositoryInterface $productDraftRepository;
 
     public function __construct(
         FlashBagInterface $session,
-        ProductDraftServiceInterface $productDraftService
+        ProductDraftAcceptanceOperatorInterface $productDraftService,
+        ProductRepositoryInterface $productRepository,
+        ProductDraftRepositoryInterface $productDraftRepository
     ) {
         $this->session = $session;
         $this->productDraftService = $productDraftService;
-    }
-
-    public function sendToVerify(ProductDraftInterface $productDraft): void
-    {
-        $this->productDraftService->sendToVerification($productDraft);
+        $this->productRepository = $productRepository;
+        $this->productDraftRepository = $productDraftRepository;
     }
 
     public function accept(ProductDraftInterface $productDraft): void
     {
-        $this->productDraftService->acceptProductDraft($productDraft);
+        $product = $this->productDraftService->acceptProductDraft($productDraft);
+        $productDraft->accept();
+        $this->productRepository->save($product);
+        $this->productDraftRepository->save($productDraft);
 
         $this->session->add('success', 'bitbag_mvm_plugin.ui.product_listing_accepted');
     }
 
     public function reject(ProductDraftInterface $productDraft): void
     {
-        $this->productDraftService->rejectProductDraft($productDraft);
+        $productDraft->reject();
+        $this->productDraftRepository->save($productDraft);
 
         $this->session->add('warning', 'bitbag_mvm_plugin.ui.product_listing_rejected');
+    }
+
+    public function sendToVerify(ProductDraftInterface $productDraft): void
+    {
+        $productDraft->sendToVerification();
+        $this->productDraftRepository->save($productDraft);
     }
 }

@@ -175,4 +175,23 @@ class ProductDraft implements ProductDraftInterface
     {
         $this->productListingPrice->set($key, $productListingPrice);
     }
+
+    public function accept(): void
+    {
+        $this->setStatus(ProductDraftInterface::STATUS_VERIFIED);
+        $this->setVerifiedAt((new \DateTime()));
+        $this->setIsVerified(true);
+    }
+
+    public function reject(): void
+    {
+        $this->setStatus(ProductDraftInterface::STATUS_REJECTED);
+        $this->setVerifiedAt((new \DateTime()));
+    }
+
+    public function sendToVerification(): void
+    {
+        $this->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+        $this->setPublishedAt((new \DateTime()));
+    }
 }

@@ -48,15 +48,6 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @BeforeScenario
-     */
-    public function clearData()
-    {
-        $purger = new ORMPurger($this->entityManager);
-        $purger->purge();
-    }
-
-    /**
      * @Given there is an admin user :username with password :password
      */
     public function thereIsAnAdminUserWithPassword($username, $password)

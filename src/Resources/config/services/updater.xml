@@ -4,8 +4,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdater"
-                 id="bit_bag.mvm_plugin.helper.update_product_from_draft_helper">
-            <argument type="service" id="bit_bag.mvm_plugin.factory.product_translation_factory" />
+                 id="bitbag.mvm_plugin.updater.product_from_draft_updater">
+            <argument type="service" id="bitbag.mvm_plugin.factory.product_translation_factory" />
             <argument type="service" id="sylius.repository.product_translation" />
             <argument type="service" id="sylius.repository.channel_pricing" />
             <argument type="service" id="sylius.repository.product_variant" />

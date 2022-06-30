@@ -6,7 +6,9 @@
         <service id="bitbag_mvm_plugin.state_machine.product_draft" public="true"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductDraftCallbacks">
             <argument type="service" id="session.flash_bag" />
-            <argument type="service" id="bitbag_mvm_plugin.service.product_draft_service" />
+            <argument type="service" id="bitbag.mvm_plugin.acceptance_operator.product_draft_acceptance_operator"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
         </service>
 
         <service id="bitbag_mvm_plugin.state_machine.product_draft.transition"
