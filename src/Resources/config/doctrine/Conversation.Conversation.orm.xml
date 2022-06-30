@@ -25,7 +25,7 @@
 
         <field name="status" column="status" type="string" nullable="false" />
 
-        <field name="rejectedListingURL" type="string" />
+        <field name="rejectedListingURL" type="string" nullable="true"/>
 
     </mapped-superclass>
 
