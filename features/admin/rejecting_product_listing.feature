@@ -17,7 +17,6 @@ Feature: Rejecting product listing
     And I should see 1 product listing
     And I should see product's listing status "under_verification"
     And I follow "Details"
-    And print last response
     And I should see url "#\/admin\/product-listings\/(\d+)#"
     And I fill in "mvm_conversation[messages][__name__][content]" with "reason to reject"
     And I click "Reject" button
