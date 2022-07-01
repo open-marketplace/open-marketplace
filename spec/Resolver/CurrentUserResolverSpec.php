@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class ActualUserResolverSpec extends ObjectBehavior
+final class CurrentUserResolverSpec extends ObjectBehavior
 {
     function let(
         TokenStorageInterface $tokenStorage

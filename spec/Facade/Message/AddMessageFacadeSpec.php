@@ -40,7 +40,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         $this->shouldImplement(AddMessageFacadeInterface::class);
     }
 
-    function it_process_message_and_add_it_to_given_conversation(
+    function it_processes_message_and_add_it_to_given_conversation(
         CurrentUserResolverInterface    $actualUserResolver,
         FileUploaderInterface           $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
@@ -67,7 +67,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         $this->createWithConversation(1, $message, $file, true);
     }
 
-    function it_process_message_admin_create_not_send_file(
+    function it_processes_message_admin_create_not_send_file(
         CurrentUserResolverInterface    $actualUserResolver,
         FileUploaderInterface           $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
@@ -101,6 +101,5 @@ final class AddMessageFacadeSpec extends ObjectBehavior
                 1,
                 $message
             ]);
-
     }
 }
