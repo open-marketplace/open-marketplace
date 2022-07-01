@@ -8,6 +8,8 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="status" column="status" type="string" nullable="false" />
+
         <many-to-one field="category" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category">
             <join-column name="category_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
         </many-to-one>
@@ -22,8 +24,6 @@
                 <cascade-remove />
             </cascade>
         </one-to-many>
-
-        <field name="status" column="status" type="string" nullable="false" />
 
     </mapped-superclass>
 
