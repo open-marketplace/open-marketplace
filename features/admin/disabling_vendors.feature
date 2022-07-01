@@ -11,9 +11,6 @@ Feature: Disabling vendors
   @ui
   Scenario: Disabling vendor's account
     Given There is a "enabled" vendor
-    And I fill in "_username" with "sylius"
-    And I fill in "_password" with "sylius"
-    And I press "Login"
     When I follow "Vendors"
     And I click "Disable"
     And I should see "Confirm your action"
@@ -22,9 +19,6 @@ Feature: Disabling vendors
   @ui
   Scenario: Enabling vendor's account
     Given There is a 'disabled' vendor
-    And I fill in "_username" with "sylius"
-    And I fill in "_password" with "sylius"
-    And I press "Login"
     When I follow "Vendors"
     And I click "Enable"
     And I should see "Confirm your action"
