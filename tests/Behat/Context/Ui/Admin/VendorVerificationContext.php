@@ -54,6 +54,7 @@ final class VendorVerificationContext extends RawMinkContext implements Context
 
         $vendor->setVendorAddress($vendorAddress);
         $vendor->setStatus('unverified');
+        $this->entityManager->persist($vendorCountry);
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
