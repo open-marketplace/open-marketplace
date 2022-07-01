@@ -89,15 +89,17 @@ final class CreateNewConversationAction
 
     private function addConversationWithMessages(ConversationInterface $conversation): void
     {
-        if (null !== $conversation->getMessages()) {
-            /** @var MessageInterface $message */
-            foreach ($conversation->getMessages()->toArray() as $message) {
-                $this->addMessageFacade->createWithConversation(
-                    $conversation->getId(),
-                    $message,
-                    $message->getFile(),
-                );
-            }
+        if (null === $conversation->getMessages()) {
+            return;
+        }
+
+        /** @var MessageInterface $message */
+        foreach ($conversation->getMessages()->toArray() as $message) {
+            $this->addMessageFacade->createWithConversation(
+                $conversation->getId(),
+                $message,
+                $message->getFile(),
+            );
         }
     }
 }

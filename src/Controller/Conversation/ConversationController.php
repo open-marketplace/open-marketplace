@@ -48,11 +48,13 @@ final class ConversationController
 
         $currentUser = $this->currentUserResolver->resolve();
 
+        $status = Conversation::STATUS_OPEN;
+
         if ($request->query->get('closed')) {
-            $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_CLOSED, $currentUser);
-        } else {
-            $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_OPEN, $currentUser);
+            $status = Conversation::STATUS_CLOSED;
         }
+
+        $conversations = $this->conversationRepository->findAllWithStatusAndUser($status, $currentUser);
 
         return new Response(
             $this->templatingEngine->render(
