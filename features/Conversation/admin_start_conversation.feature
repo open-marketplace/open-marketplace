@@ -1,7 +1,7 @@
 @admin_start_conversation
 Feature: Starting conversation by Administrator
   In order to contact with Vendor
-  As a admin i want sent message to Vendor
+  As an admin I want to sent message to a Vendor
 
   Background:
     Given there is an administrator with name "admin"
@@ -11,9 +11,8 @@ Feature: Starting conversation by Administrator
 
   Scenario: AdminUser begins conversation
     Given I am logged in as an administrator
-    And I am on "/admin/login"
     And I am on "/admin"
-    When I follow "Conversations"
+    And I follow "Conversations"
     And  I follow "Create"
     And I fill in "Message" with "test Message"
     And I press "Submit"
@@ -28,7 +27,6 @@ Feature: Starting conversation by Administrator
 
   Scenario: AdminUser begins conversation, and Vendor checks if he received it
     Given I am logged in as an administrator
-    And I am on "/admin/login"
     And I am on "/admin"
     And I follow "Conversations"
     And  I follow "Create"
@@ -41,7 +39,6 @@ Feature: Starting conversation by Administrator
 
   Scenario: AdminUser begins conversation, and Vendor writes back
     Given I am logged in as an administrator
-    And I am on "/admin/login"
     And I am on "/admin"
     And I follow "Conversations"
     And  I follow "Create"
