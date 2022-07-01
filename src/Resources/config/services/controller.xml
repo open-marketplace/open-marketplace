@@ -8,7 +8,7 @@
             <argument type="service" id="twig" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="bitbag_mvm_plugin.repository.conversation" />
-            <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver" />
+            <argument type="service" id="bitbag_mvm_plugin.current_user_resolver" />
             <argument type="service" id="request_stack"/>
             <tag name="controller.service_arguments" />
         </service>
