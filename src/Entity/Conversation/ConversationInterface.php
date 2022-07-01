@@ -42,6 +42,4 @@ interface ConversationInterface extends ResourceInterface
     public function isClosed(): bool;
 
     public function isOpen(): bool;
-
-    public function getApplicant(): ShopUserInterface;
 }

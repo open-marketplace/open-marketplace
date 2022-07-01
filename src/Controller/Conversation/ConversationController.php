@@ -35,7 +35,7 @@ final class ConversationController
         FormFactoryInterface $formFactory,
         ConversationRepositoryInterface $conversationRepository,
         ActualUserResolverInterface $actualUserResolver,
-        ) {
+    ) {
         $this->templatingEngine = $templatingEngine;
         $this->formFactory = $formFactory;
         $this->conversationRepository = $conversationRepository;

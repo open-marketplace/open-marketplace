@@ -109,8 +109,4 @@ class Conversation implements ConversationInterface
     {
         return !$this->isClosed();
     }
-    public function getApplicant(): ShopUserInterface
-    {
-        return $this->shopUser;
-    }
 }
