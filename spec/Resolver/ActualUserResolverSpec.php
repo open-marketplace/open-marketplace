@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Resolver;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolver;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolver;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -28,8 +28,8 @@ final class ActualUserResolverSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(ActualUserResolver::class);
-        $this->shouldImplement(ActualUserResolverInterface::class);
+        $this->shouldHaveType(CurrentUserResolver::class);
+        $this->shouldImplement(CurrentUserResolverInterface::class);
     }
 
     function it_returns_current_user(

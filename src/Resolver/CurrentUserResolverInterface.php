@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Resolver;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-interface ActualUserResolverInterface
+interface CurrentUserResolverInterface
 {
     public function resolve(): ?UserInterface;
 }

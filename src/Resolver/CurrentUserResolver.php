@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Resolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class ActualUserResolver implements ActualUserResolverInterface
+final class CurrentUserResolver implements CurrentUserResolverInterface
 {
     private TokenStorageInterface $tokenStorage;
 

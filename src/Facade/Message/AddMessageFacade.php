@@ -14,25 +14,25 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 final class AddMessageFacade implements AddMessageFacadeInterface
 {
-    private ActualUserResolverInterface $actualUserResolver;
+    private CurrentUserResolverInterface $currentUserResolver;
 
     private FileUploaderInterface $fileUploader;
 
     private ConversationRepositoryInterface $conversationRepository;
 
     public function __construct(
-        ActualUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        CurrentUserResolverInterface    $currentUserResolver,
+        FileUploaderInterface           $fileUploader,
         ConversationRepositoryInterface $conversationRepository
     ) {
-        $this->actualUserResolver = $actualUserResolver;
+        $this->currentUserResolver = $currentUserResolver;
         $this->fileUploader = $fileUploader;
         $this->conversationRepository = $conversationRepository;
     }
@@ -43,7 +43,7 @@ final class AddMessageFacade implements AddMessageFacadeInterface
         ?UploadedFile $file = null,
         bool $stripTags = true
     ): void {
-        $currentUser = $this->actualUserResolver->resolve();
+        $currentUser = $this->currentUserResolver->resolve();
 
         if (!$currentUser) {
             throw new UserNotFoundException();

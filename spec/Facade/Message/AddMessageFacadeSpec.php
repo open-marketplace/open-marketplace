@@ -16,7 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterfa
 use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacade;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -27,8 +27,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class AddMessageFacadeSpec extends ObjectBehavior
 {
     function let(
-        ActualUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        CurrentUserResolverInterface    $actualUserResolver,
+        FileUploaderInterface           $fileUploader,
         ConversationRepositoryInterface $conversationRepository
     ) {
         $this->beConstructedWith($actualUserResolver, $fileUploader, $conversationRepository);
@@ -41,12 +41,12 @@ final class AddMessageFacadeSpec extends ObjectBehavior
     }
 
     function it_process_message_and_add_it_to_given_conversation(
-        ActualUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        CurrentUserResolverInterface    $actualUserResolver,
+        FileUploaderInterface           $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
-        UserInterface $user,
-        MessageInterface $message,
-        ConversationInterface $conversation
+        UserInterface                   $user,
+        MessageInterface                $message,
+        ConversationInterface           $conversation
     ): void {
         $file = new UploadedFile('tests/Application/public/uploads/message_files/test.txt', 'test.txt');
         $filename = 'filename';
@@ -68,12 +68,12 @@ final class AddMessageFacadeSpec extends ObjectBehavior
     }
 
     function it_process_message_admin_create_not_send_file(
-        ActualUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        CurrentUserResolverInterface    $actualUserResolver,
+        FileUploaderInterface           $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
-        AdminUserInterface $admin,
-        MessageInterface $message,
-        ConversationInterface $conversation
+        AdminUserInterface              $admin,
+        MessageInterface                $message,
+        ConversationInterface           $conversation
     ): void {
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($admin);
@@ -91,8 +91,8 @@ final class AddMessageFacadeSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_user_is_not_found(
-        ActualUserResolverInterface $actualUserResolver,
-        MessageInterface $message
+        CurrentUserResolverInterface $actualUserResolver,
+        MessageInterface             $message
     ): void {
         $actualUserResolver->resolve()->willReturn(null);
 
