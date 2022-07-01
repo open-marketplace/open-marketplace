@@ -32,7 +32,7 @@ final class ProductListingTranslationCloner implements ProductListingTranslation
             $newTranslation->setName($translation->getName());
             $newTranslation->setProductDraft($newProductDraft);
             $newTranslation->setDescription($translation->getDescription());
-            $newTranslation->setLocale($translation->getLocale());
+            $newTranslation->setLocale($locale);
             $newTranslation->setMetaDescription($translation->getMetaDescription());
             $newTranslation->setMetaKeywords($translation->getMetaKeywords());
             $newTranslation->setSlug($translation->getSlug());

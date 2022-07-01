@@ -15,7 +15,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ProductListingPricingCloner
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ProductListingTranslationClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactory;
@@ -26,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class ProductListingFromDraftFactorySpec extends ObjectBehavior
+final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 {
     public function let(
         FactoryInterface $productListingFactoryInterface,
@@ -34,7 +33,7 @@ class ProductListingFromDraftFactorySpec extends ObjectBehavior
         FactoryInterface $draftFactory,
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
         ProductListingPricingClonerInterface $productListingPricingCloner
-    ):void {
+    ): void {
         $this->beConstructedWith(
             $productListingFactoryInterface,
             $tokenStorage,
@@ -140,7 +139,7 @@ class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $this->createClone($productDraft);
     }
 
-    public function it_should_format_translations(
+    public function it_formats_translations(
         ProductDraftInterface $productDraft
     ): void {
         $productDraft->getTranslations()
