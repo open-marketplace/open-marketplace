@@ -40,7 +40,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         $this->shouldImplement(AddMessageFacadeInterface::class);
     }
 
-    function it_processes_message_and_add_it_to_given_conversation(
+    function it_processes_message_and_adds_it_to_given_conversation(
         CurrentUserResolverInterface    $actualUserResolver,
         FileUploaderInterface           $fileUploader,
         ConversationRepositoryInterface $conversationRepository,

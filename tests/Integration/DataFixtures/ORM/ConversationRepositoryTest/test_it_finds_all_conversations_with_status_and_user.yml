@@ -1,0 +1,58 @@
+Sylius\Component\Addressing\Model\Country:
+    poland:
+        code: 'PL'
+Sylius\Component\Core\Model\Customer:
+    customer_oliver:
+        firstName: "John"
+        lastName: "Nowak"
+        email: "oliver@queen.com"
+        emailCanonical: "oliver@queen.com"
+    customer_bruce:
+        firstName: "Bruce"
+        lastName: "Wayne"
+        email: "bruce.wayne@wayne.co"
+        emailCanonical: "bruce.wayne@wayne.co"
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
+    user_oliver:
+        plainPassword: "123password"
+        roles: ["ROLE_USER"]
+        enabled: "true"
+        customer: '@customer_oliver'
+    user_bruce:
+        plainPassword: "123password"
+        roles: [ "ROLE_USER" ]
+        enabled: "true"
+        customer: '@customer_bruce'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+    vendor_address:
+        country: '@poland'
+        city: 'Warsaw'
+        postalCode: '00-999'
+        street: 'Avenue 2115'
+#Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+#    vendor_address:
+#        country: '@poland'
+#        city: 'Warsaw'
+#        postalCode: '00-999'
+#        street: 'Avenue 2115'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
+    vendor_oliver:
+        shopUser: '@user_oliver'
+        companyName: 'Test company name'
+        taxIdentifier: '1234567'
+        phoneNumber: '333111222'
+        vendorAddress: '@vendor_address'
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation:
+    opened_conversation_with_oliver:
+        shopUser: '@user_oliver'
+        status: "open"
+    closed_conversation_with_oliver:
+        shopUser: '@user_oliver'
+        status: 'closed'
+    opened_conversation_with_bruce:
+        shopUser: '@user_bruce'
+        status: 'open'
+    closed_conversation_with_bruce:
+        shopUser: '@user_bruce'
+        status: 'closed'
+

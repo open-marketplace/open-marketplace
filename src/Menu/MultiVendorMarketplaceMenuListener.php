@@ -37,5 +37,10 @@ final class MultiVendorMarketplaceMenuListener
             ])
             ->setLabel('bitbag_mvm_plugin.ui.vendors')
             ->setLabelAttribute('icon', 'users');
+
+        $mvmRootMenuItem
+            ->addChild('conversations', ['route' => 'bitbag_mvm_plugin_admin_conversation_index'])
+            ->setLabel('bitbag_mvm_plugin.ui.menu.conversations')
+            ->setLabelAttribute('icon', 'inbox');
     }
 }
