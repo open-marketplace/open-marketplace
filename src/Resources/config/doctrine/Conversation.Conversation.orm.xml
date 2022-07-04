@@ -11,11 +11,11 @@
         <field name="status" column="status" type="string" nullable="false" />
 
         <many-to-one field="category" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category">
-            <join-column name="category_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
+            <join-column name="category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
         <many-to-one field="shopUser" target-entity="Sylius\Component\Core\Model\ShopUserInterface">
-            <join-column name="shop_user_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
+            <join-column name="shop_user_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
         <one-to-many field="messages" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Message" mapped-by="conversation">
