@@ -8,13 +8,15 @@ Feature: Starting conversation by Administrator
     And the store operates on a single channel in "United States"
     And the store operates in "Poland"
     And there is a vendor user "test@company.domain" registered in country "PL"
+    And vendor company name is "company"
 
   Scenario: AdminUser begins conversation
     Given I am logged in as an administrator
     And I am on "/admin"
     And I follow "Conversations"
-    And  I follow "Create"
+    And I follow "Create"
     And I fill in "Message" with "test Message"
+    And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
     Then I should see "test Message"
     
@@ -31,6 +33,7 @@ Feature: Starting conversation by Administrator
     And I follow "Conversations"
     And  I follow "Create"
     And I fill in "Message" with "test Message"
+    And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
     And I am logged in as "test@company.domain"
     And I am on "/en_US/vendor/conversations"
@@ -43,6 +46,7 @@ Feature: Starting conversation by Administrator
     And I follow "Conversations"
     And  I follow "Create"
     And I fill in "Message" with "test Message"
+    And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
     And I am logged in as "test@company.domain"
     And I am on "/en_US/vendor/conversations"
