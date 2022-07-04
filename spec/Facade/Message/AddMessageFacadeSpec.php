@@ -18,7 +18,9 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInt
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
+use phpDocumentor\Reflection\File;
 use PhpSpec\ObjectBehavior;
+use SplFileInfo;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -101,5 +103,57 @@ final class AddMessageFacadeSpec extends ObjectBehavior
                 1,
                 $message
             ]);
+    }
+    function it_not_strips_tags_when_false(
+        CurrentUserResolverInterface    $actualUserResolver,
+        FileUploaderInterface           $fileUploader,
+        ConversationRepositoryInterface $conversationRepository,
+        AdminUserInterface              $admin,
+        UserInterface                   $user,
+        MessageInterface                $message,
+        ConversationInterface           $conversation
+    ): void {
+        $messageContent = 'messageContent';
+        $actualUserResolver->resolve()->willReturn($admin);
+        $conversationRepository->find(1)->willReturn($conversation);
+        $message->getContent()->willReturn($messageContent);
+        $message->setContent(strip_tags($messageContent))->shouldNotBeCalled();
+
+        $message->setAuthor($admin)->shouldBeCalled();
+
+        $conversation->addMessage($message)->shouldBeCalled();
+
+        $conversationRepository->add($conversation)->shouldBeCalled();
+
+        $this->createWithConversation(1, $message, null, false);
+    }
+
+    function it_adds_file(
+        CurrentUserResolverInterface    $actualUserResolver,
+        FileUploaderInterface           $fileUploader,
+        ConversationRepositoryInterface $conversationRepository,
+        UserInterface                   $user,
+        MessageInterface                $message,
+        ConversationInterface           $conversation
+    ): void {
+        $file = new UploadedFile('tests/Application/public/uploads/message_files/test.txt', 'test.txt');
+        $filename = 'filename';
+        $messageContent = 'messageContent';
+        $actualUserResolver->resolve()->willReturn($user);
+        $conversationRepository->find(1)->willReturn($conversation);
+
+        $fileUploader->upload($file)->willReturn($filename);
+        $message->setFilename($filename)->shouldBeCalled();
+
+        $message->getContent()->willReturn($messageContent);
+        $message->setContent(strip_tags($messageContent))->shouldBeCalled();
+
+        $message->setAuthor($user)->shouldBeCalled();
+
+        $conversation->addMessage($message)->shouldBeCalled();
+
+        $conversationRepository->add($conversation)->shouldBeCalled();
+
+        $this->createWithConversation(1, $message, $file, true);
     }
 }
