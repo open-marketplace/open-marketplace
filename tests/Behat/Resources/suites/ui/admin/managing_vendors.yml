@@ -4,5 +4,6 @@ default:
             contexts:
                 - bitbag_mvm_plugin.behat.context.ui.admin.vendor_listing
                 - Behat\MinkExtension\Context\MinkContext
+                - sylius.behat.context.hook.doctrine_orm
             filters:
                 tags: "@managing_vendors && @ui"

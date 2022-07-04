@@ -1,0 +1,7 @@
+{% set path =  path('bitbag_mvm_plugin_admin_product_listing_reject', { 'id': productListing.id }) %}
+
+<form action="{{ path }}" method="post">
+    <button class="ui button red" data-requires-confirmation>
+        <i class="icon x"></i>{{ 'bitbag_mvm_plugin.ui.reject' | trans }}
+    </button>
+</form>

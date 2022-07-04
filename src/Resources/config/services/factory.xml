@@ -4,18 +4,46 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory"
-                 id="bitbag_mvm_plugin.factory.vendor_profile_factory"
-                 public="true">
+                 id="bitbag_mvm_plugin.factory.vendor_profile_factory">
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory"
-                 id="bitbag_mvm_plugin.factory.vendor_address_factory"
-                 public="true">
+                 id="bitbag_mvm_plugin.factory.vendor_address_factory">
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactory"
                  id="bitbag_mvm_plugin.factory.vendor_profile_update_factory">
             <argument type="service" id="bitbag_mvm_plugin.generator.token_generator"/>
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ChannelPricingFactory"
+                 id="bitbag.mvm_plugin.factory.channel_pricing_factory">
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactory"
+                 id="bitbag.mvm_plugin.factory.product_translation_factory">
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantFactory"
+                 id="bitbag.mvm_plugin.factory.product_variant_factory">
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactory"
+                 id="bitbag_mvm_plugin.factory.product_from_draft_factory">
+            <argument type="service" id="sylius.custom_factory.product" />
+            <argument type="service" id="bitbag.mvm_plugin.factory.product_translation_factory" />
+            <argument type="service" id="bitbag.mvm_plugin.factory.product_variant_factory" />
+            <argument type="service" id="bitbag.mvm_plugin.factory.channel_pricing_factory" />
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactory"
+                 id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory">
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing" />
+            <argument type="service" id="security.untracked_token_storage" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
+            <argument type="service" id="bitbag.mvm_plugin.cloner.product_listing_translation_cloner" />
+            <argument type="service" id="bitbag.mvm_plugin.cloner.product_listing_pricing_cloner" />
         </service>
     </services>
 </container>

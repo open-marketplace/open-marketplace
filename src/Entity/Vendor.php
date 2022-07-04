@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use DateTimeInterface;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterface
@@ -33,6 +35,9 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     protected bool $enabled = true;
 
     protected ?DateTimeInterface $editedAt = null;
+
+    /** @var Collection<int, ProductListing> */
+    private Collection $productListings;
 
     public function getId(): ?int
     {
@@ -122,5 +127,20 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     public function setEditedAt(?DateTimeInterface $editedAt): void
     {
         $this->editedAt = $editedAt;
+    }
+
+    public function getProductListings(): Collection
+    {
+        return $this->productListings;
+    }
+
+    public function setProductListings(Collection $productListings): void
+    {
+        $this->productListings = $productListings;
+    }
+
+    public function addProductListing(ProductListing $productListings): void
+    {
+        $this->productListings->add($productListings);
     }
 }

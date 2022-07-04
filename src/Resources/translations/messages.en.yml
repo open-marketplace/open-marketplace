@@ -4,6 +4,7 @@ bitbag_mvm_plugin:
         vendor_profile: "Profile"
         become_a_vendor: 'Become a Vendor'
         product_listings: 'Product listings'
+        product_list: 'Product list'
         marketplace: 'Marketplace'
         publishedAt: 'Published at'
         status: 'Status'
@@ -34,6 +35,21 @@ bitbag_mvm_plugin:
         verified: 'Verified'
         verify: 'Verify'
         new_vendor: 'New Vendor'
+        manage_products: 'Manage products'
+        name: 'Name'
+        accept: 'Accept'
+        reject: 'Reject'
+        confirm: 'Are you sure?'
+        code: 'Code'
+        rejected: 'Rejected'
+        under_verification: 'Under verification'
+        published_at: 'Published at'
+        verified_at: 'Verified at'
+        version: 'Version'
+        actions: 'Actions'
+        create_new_product: 'Create Product'
+        save: 'Save'
+        save_and_add: 'Save and Add'
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."
