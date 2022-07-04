@@ -29,12 +29,6 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
         city: 'Warsaw'
         postalCode: '00-999'
         street: 'Avenue 2115'
-#Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
-#    vendor_address:
-#        country: '@poland'
-#        city: 'Warsaw'
-#        postalCode: '00-999'
-#        street: 'Avenue 2115'
 BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
     vendor_oliver:
         shopUser: '@user_oliver'
