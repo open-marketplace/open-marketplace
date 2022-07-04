@@ -17,5 +17,9 @@
                  id="bitbag_mvm_plugin.factory.vendor_profile_update_factory">
             <argument type="service" id="bitbag_mvm_plugin.generator.token_generator"/>
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactory"
+                 id="bitbag.mvm_plugin.service.vendor_image_factory" >
+        </service>
     </services>
 </container>

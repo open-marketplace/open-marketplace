@@ -39,6 +39,8 @@ final class VendorDisablingContext extends RawMinkContext implements Context
         $vendor->setCompanyName('vendor');
         $vendor->setTaxIdentifier('vendorTax');
         $vendor->setPhoneNumber('vendorPhone');
+        $vendor->setSlug('slug');
+        $vendor->setDescription('description');
         $vendor->setEnabled($flag);
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();

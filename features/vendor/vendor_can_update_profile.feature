@@ -22,6 +22,7 @@ Feature: Vendor can update his company information
     And I fill in "vendor_companyName" with "Test name"
     And I fill in "vendor_taxIdentifier" with "test identifier"
     And I fill in "vendor_phoneNumber" with "test number"
+    And I fill in "vendor_description" with "description"
     And I fill in "vendor_vendorAddress_city" with "City"
     And I fill in "vendor_vendorAddress_street" with "test street"
     And I fill in "vendor_vendorAddress_postalCode" with "22-332" 

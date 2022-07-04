@@ -16,4 +16,12 @@ use Doctrine\ORM\QueryBuilder;
 interface VendorRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;
+
+    /**
+     * @return mixed
+     */
+    public function findOneBy(
+        array $criteria,
+        ?array $orderBy = null
+    );
 }

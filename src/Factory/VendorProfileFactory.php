@@ -21,12 +21,14 @@ final class VendorProfileFactory implements VendorProfileFactoryInterface
         string $companyName,
         string $taxIdentifier,
         string $phoneNumber,
+        string $description,
         VendorAddressInterface $address
     ): VendorProfileInterface {
         $vendor = $this->createNew();
         $vendor->setPhoneNumber($phoneNumber);
         $vendor->setCompanyName($companyName);
         $vendor->setTaxIdentifier($taxIdentifier);
+        $vendor->setDescription($description);
         $vendor->setVendorAddress($address);
 
         return $vendor;

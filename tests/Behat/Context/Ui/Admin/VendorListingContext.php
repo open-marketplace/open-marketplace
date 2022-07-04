@@ -77,6 +77,8 @@ final class VendorListingContext extends RawMinkContext implements Context
             $vendor->setCompanyName('vendor ' . $i);
             $vendor->setTaxIdentifier('vendorTax' . $i);
             $vendor->setPhoneNumber('vendorPhone' . $i);
+            $vendor->setSlug('vendor-' . $i);
+            $vendor->setDescription('description');
             $this->entityManager->persist($vendor);
         }
         $this->entityManager->flush();
