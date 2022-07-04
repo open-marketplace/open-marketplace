@@ -44,7 +44,7 @@ Feature: Starting conversation by Administrator
     Given I am logged in as an administrator
     And I am on "/admin"
     And I follow "Conversations"
-    And  I follow "Create"
+    And I follow "Create"
     And I fill in "Message" with "test Message"
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
@@ -54,3 +54,16 @@ Feature: Starting conversation by Administrator
     And I fill in "Message" with "second test Message"
     And I press "Submit"
     Then I should see "second test Message"
+
+  Scenario: Other vendors cannot see conversation
+    Given I am logged in as an administrator
+    And I am on "/admin"
+    And I follow "Conversations"
+    And  I follow "Create"
+    And I fill in "Message" with "test Message"
+    And I select "company" from "mvm_conversation_vendorUser"
+    And I press "Submit"
+    And there is a vendor user "second@company.domain" registered in country "PL"
+    And I am logged in as "second@company.domain"
+    And I am on "/en_US/vendor/conversations"
+    Then I should see "You have no open conversations"
