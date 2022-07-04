@@ -12,13 +12,10 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
-use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
-use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 class VendorSetupContext implements Context

@@ -18,9 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInt
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
-use phpDocumentor\Reflection\File;
 use PhpSpec\ObjectBehavior;
-use SplFileInfo;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -28,27 +26,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class AddMessageFacadeSpec extends ObjectBehavior
 {
-    function let(
-        CurrentUserResolverInterface    $actualUserResolver,
-        FileUploaderInterface           $fileUploader,
+    public function let(
+        CurrentUserResolverInterface $actualUserResolver,
+        FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository
     ) {
         $this->beConstructedWith($actualUserResolver, $fileUploader, $conversationRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(AddMessageFacade::class);
         $this->shouldImplement(AddMessageFacadeInterface::class);
     }
 
-    function it_processes_message_and_adds_it_to_given_conversation(
-        CurrentUserResolverInterface    $actualUserResolver,
-        FileUploaderInterface           $fileUploader,
+    public function it_processes_message_and_adds_it_to_given_conversation(
+        CurrentUserResolverInterface $actualUserResolver,
+        FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
-        UserInterface                   $user,
-        MessageInterface                $message,
-        ConversationInterface           $conversation
+        UserInterface $user,
+        MessageInterface $message,
+        ConversationInterface $conversation
     ): void {
         $file = new UploadedFile('tests/Application/public/uploads/message_files/test.txt', 'test.txt');
         $filename = 'filename';
@@ -69,13 +67,13 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         $this->createWithConversation(1, $message, $file, true);
     }
 
-    function it_processes_message_admin_create_not_send_file(
-        CurrentUserResolverInterface    $actualUserResolver,
-        FileUploaderInterface           $fileUploader,
+    public function it_processes_message_admin_create_not_send_file(
+        CurrentUserResolverInterface $actualUserResolver,
+        FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
-        AdminUserInterface              $admin,
-        MessageInterface                $message,
-        ConversationInterface           $conversation
+        AdminUserInterface $admin,
+        MessageInterface $message,
+        ConversationInterface $conversation
     ): void {
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($admin);
@@ -92,26 +90,27 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         $this->createWithConversation(1, $message, null, true);
     }
 
-    function it_throws_exception_if_user_is_not_found(
+    public function it_throws_exception_if_user_is_not_found(
         CurrentUserResolverInterface $actualUserResolver,
-        MessageInterface             $message
+        MessageInterface $message
     ): void {
         $actualUserResolver->resolve()->willReturn(null);
 
         $this->shouldThrow(UserNotFoundException::class)
-            ->during('createWithConversation',[
+            ->during('createWithConversation', [
                 1,
-                $message
+                $message,
             ]);
     }
-    function it_not_strips_tags_when_false(
-        CurrentUserResolverInterface    $actualUserResolver,
-        FileUploaderInterface           $fileUploader,
+
+    public function it_not_strips_tags_when_false(
+        CurrentUserResolverInterface $actualUserResolver,
+        FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
-        AdminUserInterface              $admin,
-        UserInterface                   $user,
-        MessageInterface                $message,
-        ConversationInterface           $conversation
+        AdminUserInterface $admin,
+        UserInterface $user,
+        MessageInterface $message,
+        ConversationInterface $conversation
     ): void {
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($admin);
@@ -128,13 +127,13 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         $this->createWithConversation(1, $message, null, false);
     }
 
-    function it_adds_file(
-        CurrentUserResolverInterface    $actualUserResolver,
-        FileUploaderInterface           $fileUploader,
+    public function it_adds_file(
+        CurrentUserResolverInterface $actualUserResolver,
+        FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
-        UserInterface                   $user,
-        MessageInterface                $message,
-        ConversationInterface           $conversation
+        UserInterface $user,
+        MessageInterface $message,
+        ConversationInterface $conversation
     ): void {
         $file = new UploadedFile('tests/Application/public/uploads/message_files/test.txt', 'test.txt');
         $filename = 'filename';

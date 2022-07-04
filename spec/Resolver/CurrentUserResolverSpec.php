@@ -20,19 +20,19 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class CurrentUserResolverSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         TokenStorageInterface $tokenStorage
     ): void {
         $this->beConstructedWith($tokenStorage);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(CurrentUserResolver::class);
         $this->shouldImplement(CurrentUserResolverInterface::class);
     }
 
-    function it_returns_current_user(
+    public function it_returns_current_user(
         TokenStorageInterface $tokenStorage,
         UserInterface $user,
         TokenInterface $token
@@ -47,7 +47,7 @@ final class CurrentUserResolverSpec extends ObjectBehavior
             ->shouldReturn($user);
     }
 
-    function it_returns_null_if_not_find_actual_user(
+    public function it_returns_null_if_not_find_actual_user(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token
     ): void {

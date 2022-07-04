@@ -28,8 +28,8 @@ final class AddMessageFacade implements AddMessageFacadeInterface
     private ConversationRepositoryInterface $conversationRepository;
 
     public function __construct(
-        CurrentUserResolverInterface    $currentUserResolver,
-        FileUploaderInterface           $fileUploader,
+        CurrentUserResolverInterface $currentUserResolver,
+        FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository
     ) {
         $this->currentUserResolver = $currentUserResolver;

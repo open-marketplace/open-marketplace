@@ -27,16 +27,15 @@ class ConversationRepositoryTest extends JsonApiTestCase
         $conversationRepository = static::$container->get('bitbag_mvm_plugin.repository.conversation');
         $this->loadFixturesFromFile('ConversationRepositoryTest/test_it_finds_all_conversations_with_status_and_user.yml');
 
-        $userOliver = $this->getEntityManager()->getRepository(ShopUser::class)->findOneBy(['username'=>"oliver@queen.com"]);
-        $userBruce = $this->getEntityManager()->getRepository(ShopUser::class)->findOneBy(['username'=>"oliver@queen.com"]);
+        $userOliver = $this->getEntityManager()->getRepository(ShopUser::class)->findOneBy(['username' => 'oliver@queen.com']);
+        $userBruce = $this->getEntityManager()->getRepository(ShopUser::class)->findOneBy(['username' => 'oliver@queen.com']);
         $statuses = [Conversation::STATUS_OPEN, Conversation::STATUS_CLOSED];
-        foreach($statuses as $status)
-            {
-                $oliverConversations = $conversationRepository->findAllWithStatusAndUser($status, $userOliver);
-                $bruceConversations = $conversationRepository->findAllWithStatusAndUser($status, $userBruce);
+        foreach ($statuses as $status) {
+            $oliverConversations = $conversationRepository->findAllWithStatusAndUser($status, $userOliver);
+            $bruceConversations = $conversationRepository->findAllWithStatusAndUser($status, $userBruce);
 
-                $this->assertEquals(count($oliverConversations),1);
-                $this->assertEquals(count($bruceConversations),1);
-            }
+            $this->assertEquals(count($oliverConversations), 1);
+            $this->assertEquals(count($bruceConversations), 1);
+        }
     }
 }

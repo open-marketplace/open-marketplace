@@ -36,7 +36,7 @@ final class ConversationType extends AbstractType
 
     public function __construct(
         CurrentUserResolverInterface $currentUserResolver,
-        VendorRepository             $vendorRepository,
+        VendorRepository $vendorRepository,
     ) {
         $this->currentUserResolver = $currentUserResolver;
         $this->vendorRepository = $vendorRepository;

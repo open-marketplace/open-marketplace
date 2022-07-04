@@ -31,11 +31,11 @@ final class ConversationController
     private CurrentUserResolverInterface $currentUserResolver;
 
     public function __construct(
-        Environment                     $templatingEngine,
-        FormFactoryInterface            $formFactory,
+        Environment $templatingEngine,
+        FormFactoryInterface $formFactory,
         ConversationRepositoryInterface $conversationRepository,
-        CurrentUserResolverInterface    $currentUserResolver,
-    ) {
+        CurrentUserResolverInterface $currentUserResolver,
+        ) {
         $this->templatingEngine = $templatingEngine;
         $this->formFactory = $formFactory;
         $this->conversationRepository = $conversationRepository;
