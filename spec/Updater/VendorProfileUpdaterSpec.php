@@ -48,6 +48,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $vendorData->getCompanyName()->willReturn('CompanyName');
         $vendorData->getTaxIdentifier()->willReturn('TaxIdentifier');
         $vendorData->getPhoneNumber()->willReturn('11339321');
+        $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddress);
 
         $this->setVendorFromData($vendor, $vendorData);
@@ -70,12 +71,14 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $vendorData->getCompanyName()->willReturn('testcompany');
         $vendorData->getTaxIdentifier()->willReturn('testTaxID');
         $vendorData->getPhoneNumber()->willReturn('testNumber');
+        $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
 
         $newPendingUpdate->getVendorAddress()->shouldBeCalled();
         $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
         $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
+        $newPendingUpdate->setDescription('description')->shouldBeCalled();
         $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
 

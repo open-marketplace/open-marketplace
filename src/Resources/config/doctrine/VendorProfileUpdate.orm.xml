@@ -22,5 +22,7 @@
         <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor">
         </one-to-one>
 
+        <field name="description" column="description" type="string" length="2048" />
+
     </mapped-superclass>
 </doctrine-mapping>

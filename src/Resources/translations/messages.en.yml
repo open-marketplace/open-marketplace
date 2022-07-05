@@ -19,6 +19,9 @@ bitbag_mvm_plugin:
         postal_code: "Postal code"
         pending_update_message: "You cannot change your profile information until you accept the previous change."
         vendors: 'Vendors'
+        logo: 'Logo'
+        invalid_logo: 'Please upload a valid image (jpg/png/svg)'
+        description: 'Description'
         customer: 'Customer'
         details: 'Details'
         disable: 'Disable'

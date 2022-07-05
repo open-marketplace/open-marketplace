@@ -64,4 +64,24 @@ interface VendorInterface extends VendorProfileInterface
      * @param Collection<int, ProductListing> $productListings
      */
     public function setProductListings(Collection $productListings): void;
+
+    public function getSlug(): ?string;
+
+    public function setSlug(?string $slug): void;
+
+    public function getDescription(): ?string;
+
+    public function setDescription(?string $description): void;
+
+    /** @return Collection<int, ProductInterface> */
+    public function getProducts(): Collection;
+
+    public function addProduct(ProductInterface $product): void;
+
+    public function removeProduct(ProductInterface $product): void;
+
+    public function getImage(): ?VendorImageInterface;
+
+    public function setImage(?VendorImageInterface $image): void;
+
 }
