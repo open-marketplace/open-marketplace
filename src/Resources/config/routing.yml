@@ -46,3 +46,7 @@ app_shop:
 #        requirements:
 #            _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 
+sylius_shop_checkout_complete:
+    resource: 'routing/shop/order.yml'
+    prefix: /{_locale}
+

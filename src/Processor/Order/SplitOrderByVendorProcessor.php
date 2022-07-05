@@ -11,17 +11,27 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
 
+use Doctrine\ORM\EntityManager;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\Adjustment;
 
 class SplitOrderByVendorProcessor implements OrderProcessorInterface
 {
+    private EntityManager $entityManager;
+
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public function process(OrderInterface $order): void
     {
         $orderItems = $order->getItems();
+        $vendors = [];
         foreach ($orderItems as $orderItem){
-        dd("processor");
+            dump($orderItem->getVariant()->getItem());
+//            dd($orderItem);
         }
     }
 }

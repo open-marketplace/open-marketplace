@@ -11,12 +11,29 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Order;
 
+use Doctrine\Persistence\ObjectManager;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\CoreBundle\Controller\OrderController as BaseOrderController;
+use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
+use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
+use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
+use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
+use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +43,49 @@ use Webmozart\Assert\Assert;
 
 class OrderController extends BaseOrderController
 {
+    private ResourcesCollectionProviderInterface $resourcesFinder;
+
+    public function __construct(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        ?ViewHandlerInterface $viewHandler, RepositoryInterface $repository,
+        FactoryInterface $factory, NewResourceFactoryInterface $newResourceFactory,
+        ObjectManager $manager,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourcesCollectionProviderInterface $resourcesFinder,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $eventDispatcher,
+        ?StateMachineInterface $stateMachine,
+        ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        ResourceDeleteHandlerInterface $resourceDeleteHandler
+    ) {
+        parent::__construct($metadata, $requestConfigurationFactory, $viewHandler, $repository, $factory, $newResourceFactory, $manager, $singleResourceProvider, $resourcesFinder, $resourceFormFactory, $redirectHandler, $flashHelper, $authorizationChecker, $eventDispatcher, $stateMachine, $resourceUpdateHandler, $resourceDeleteHandler);
+
+        $this->metadata = $metadata;
+        $this->requestConfigurationFactory = $requestConfigurationFactory;
+        $this->viewHandler = $viewHandler;
+        $this->repository = $repository;
+        $this->factory = $factory;
+        $this->newResourceFactory = $newResourceFactory;
+        $this->manager = $manager;
+        $this->singleResourceProvider = $singleResourceProvider;
+        $this->resourcesFinder = $resourcesFinder;
+        $this->resourceFormFactory = $resourceFormFactory;
+        $this->redirectHandler = $redirectHandler;
+        $this->flashHelper = $flashHelper;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->stateMachine = $stateMachine;
+        $this->resourceUpdateHandler = $resourceUpdateHandler;
+        $this->resourceDeleteHandler = $resourceDeleteHandler;
+    }
+
     public function updateAction(Request $request): Response
     {
+        $splitProcessor = $this->container->get('bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor');
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
@@ -35,14 +93,14 @@ class OrderController extends BaseOrderController
 
         $form = $this->resourceFormFactory->create($configuration, $resource);
         $form->handleRequest($request);
-        dump($resource);
+
         if (
             in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true)
             && $form->isSubmitted()
             && $form->isValid()
         ) {
             $resource = $form->getData();
-
+//            dd("ten controller");
             /** @var ResourceControllerEvent $event */
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
 
@@ -62,6 +120,9 @@ class OrderController extends BaseOrderController
 
             try {
                 $this->resourceUpdateHandler->handle($resource, $configuration, $this->manager);
+
+                $splitProcessor->process($resource);
+
             } catch (UpdateHandlingException $exception) {
                 if (!$configuration->isHtmlRequest()) {
                     return $this->createRestView($configuration, $form, $exception->getApiResponseCode());
@@ -90,10 +151,10 @@ class OrderController extends BaseOrderController
             if (null !== $postEventResponse) {
                 return $postEventResponse;
             }
-
+            dd($configuration);
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }
-
+        $splitProcessor->process($resource);
         if (!$configuration->isHtmlRequest()) {
             return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
@@ -111,40 +172,6 @@ class OrderController extends BaseOrderController
             $this->metadata->getName() => $resource,
             'form' => $form->createView(),
         ]);
-    }
-
-    public function summaryAction(Request $request): Response
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-//        $customer = $this->getUser();
-//        dd($this->getCurrentCart());
-//        $order = $this->repository->findByCustomer($customer->getCustomer());
-        $cart = $this->getCurrentCart();
-        $products = $cart->getItems();
-        foreach ($products as $product){
-//            dump($product->getVariant()->getProduct()->getVendor());
-        }
-        if (null !== $cart->getId()) {
-            $orderRepository = $this->getOrderRepository();
-
-            Assert::isInstanceOf($orderRepository, OrderRepositoryInterface::class);
-
-            $cart = $orderRepository->findCartForSummary($cart->getId());
-        }
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($cart));
-        }
-
-        $form = $this->resourceFormFactory->create($configuration, $cart);
-
-        return $this->render(
-            $configuration->getTemplate('summary.html'),
-            [
-                'cart' => $cart,
-                'form' => $form->createView(),
-            ]
-        );
     }
 
     public function thankYouAction(Request $request): Response
@@ -174,60 +201,5 @@ class OrderController extends BaseOrderController
             ]
         );
     }
-    public function saveAction(Request $request): Response
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-//        dd($configuration->getStateMachineGraph());
-        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        $resource = $this->getCurrentCart();
 
-        $form = $this->resourceFormFactory->create($configuration, $resource);
-
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-            $resource = $form->getData();
-
-            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
-
-            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-                throw new HttpException($event->getErrorCode(), $event->getMessage());
-            }
-            if ($event->isStopped()) {
-                $this->flashHelper->addFlashFromEvent($configuration, $event);
-
-                return $this->redirectHandler->redirectToResource($configuration, $resource);
-            }
-
-            if ($configuration->hasStateMachine()) {
-                dd(" ");
-                $this->stateMachine->apply($configuration, $resource);
-            }
-
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
-
-            $this->getEventDispatcher()->dispatch(new GenericEvent($resource), SyliusCartEvents::CART_CHANGE);
-            $this->manager->flush();
-
-            if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-            }
-
-            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
-
-            return $this->redirectHandler->redirectToResource($configuration, $resource);
-        }
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
-        }
-
-        return $this->render(
-            $configuration->getTemplate(ResourceActions::UPDATE . '.html'),
-            [
-                'configuration' => $configuration,
-                $this->metadata->getName() => $resource,
-                'form' => $form->createView(),
-                'cart' => $resource,
-            ]
-        );
-    }
 }

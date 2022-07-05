@@ -3,11 +3,8 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-<<<<<<< HEAD
         <import resource="contexts/admin/ui.xml" />
         <import resource="contexts/vendor/ui.xml" />
-=======
         <import resource="contexts/**/*.xml" />
->>>>>>> mul25
     </imports>
 </container>
