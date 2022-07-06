@@ -37,7 +37,7 @@ final class OrderCloner implements OrderClonerInterface
         /** @var AddressInterface $originalBillingAddress */
         $originalBillingAddress = $originalOrder->getBillingAddress();
         /** @var AddressInterface $originalShippingAddress */
-        $originalShippingAddress = $originalOrder->getBillingAddress();
+        $originalShippingAddress = $originalOrder->getShippingAddress();
 
         $this->addressCloner->clone($originalBillingAddress, $newBillingAddress);
         $this->addressCloner->clone($originalShippingAddress, $newShippingAddress);
@@ -45,7 +45,6 @@ final class OrderCloner implements OrderClonerInterface
         $this->entityManager->persist($newShippingAddress);
         $this->entityManager->persist($newBillingAddress);
 
-        $newOrder->setCustomer($newOrder->getCustomer());
         $newOrder->setBillingAddress($newBillingAddress);
         $newOrder->setShippingAddress($newShippingAddress);
         $newOrder->setLocaleCode($originalOrder->getLocaleCode());

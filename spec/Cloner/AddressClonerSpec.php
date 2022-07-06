@@ -12,12 +12,46 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressCloner;
+use DateTimeInterface;
+use Faker\Provider\DateTime;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Component\Core\Model\AddressInterface;
+use function PHPUnit\Framework\assertEquals;
 
-class AddressClonerSpec extends ObjectBehavior
+final class AddressClonerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(AddressCloner::class);
+    }
+
+    public function it_clones_values(
+        AddressInterface $originalAddress,
+        AddressInterface $newAddress,
+    ): void {
+        $dateTime = new \DateTime('now');
+        $originalAddress->getCreatedAt()->willReturn($dateTime);
+        $originalAddress->getFirstName()->willReturn('firsName');
+        $originalAddress->getLastName()->willReturn('lastName');
+        $originalAddress->getCity()->willReturn('city');
+        $originalAddress->getStreet()->willReturn('street');
+        $originalAddress->getCompany()->willReturn('company name');
+        $originalAddress->getPostcode()->willReturn('11-122');
+        $originalAddress->getCountryCode()->willReturn('US');
+        $originalAddress->getProvinceCode()->willReturn('code');
+        $originalAddress->getProvinceName()->willReturn('provinceName');
+
+        $this->clone($originalAddress, $newAddress);
+        $newAddress->setCreatedAt($dateTime)->shouldHaveBeenCalledTimes(1);
+        $newAddress->setFirstName('firsName')->shouldHaveBeenCalledTimes(1);
+        $newAddress->setLastName('lastName')->shouldHaveBeenCalledTimes(1);
+        $newAddress->setCity('city')->shouldHaveBeenCalledTimes(1);
+        $newAddress->setStreet('street')->shouldHaveBeenCalledTimes(1);
+        $newAddress->setCompany('company name')->shouldHaveBeenCalledTimes(1);
+        $newAddress->setPostcode('11-122')->shouldHaveBeenCalledTimes(1);
+        $newAddress->setCountryCode('US')->shouldHaveBeenCalledTimes(1);
+        $newAddress->setProvinceCode('code')->shouldHaveBeenCalledTimes(1);
+        $newAddress->setProvinceName('provinceName')->shouldHaveBeenCalledTimes(1);
     }
 }

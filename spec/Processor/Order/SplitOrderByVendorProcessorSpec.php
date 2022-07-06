@@ -16,13 +16,14 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendor
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 
-class SplitOrderByVendorProcessorSpec extends ObjectBehavior
+final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 {
-    function let(EntityManager $entityManager, OrderClonerInterface $orderCloner): void
+    public function let(EntityManager $entityManager, OrderClonerInterface $orderCloner): void
     {
         $this->beConstructedWith($entityManager, $orderCloner);
     }
-    function it_is_initializable()
+
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(SplitOrderByVendorProcessor::class);
     }
