@@ -13,7 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use DateTimeInterface;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -209,6 +208,5 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     public function setImage(?VendorImageInterface $image): void
     {
         $this->image = $image;
-
     }
 }

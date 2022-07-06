@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
-use Sylius\Component\Core\Model\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
@@ -27,9 +27,6 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
     }
 
     /**
-     * @param VendorInterface $vendor
-     * @param Request $request
-     * @param ChannelInterface $channel
      * @return Pagerfanta<object>
      */
     public function findVendorProducts(
@@ -94,6 +91,5 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
         $pager->setCurrentPage($currentPage);
 
         return $pager;
-
     }
 }

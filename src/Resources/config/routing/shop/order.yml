@@ -15,7 +15,7 @@ sylius_shop_checkout_complete:
                 graph: sylius_order_checkout
                 transition: complete
             redirect:
-                route: sylius_shop_order_pay
+                route: sylius_shop_account_order_index
                 parameters:
                     tokenValue: resource.tokenValue
             form:

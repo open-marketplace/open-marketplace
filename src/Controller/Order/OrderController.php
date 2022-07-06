@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Order;
 
 use Doctrine\Persistence\ObjectManager;
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\CoreBundle\Controller\OrderController as BaseOrderController;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -28,14 +27,11 @@ use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -48,8 +44,10 @@ class OrderController extends BaseOrderController
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ?ViewHandlerInterface $viewHandler, RepositoryInterface $repository,
-        FactoryInterface $factory, NewResourceFactoryInterface $newResourceFactory,
+        ?ViewHandlerInterface $viewHandler,
+        RepositoryInterface $repository,
+        FactoryInterface $factory,
+        NewResourceFactoryInterface $newResourceFactory,
         ObjectManager $manager,
         SingleResourceProviderInterface $singleResourceProvider,
         ResourcesCollectionProviderInterface $resourcesFinder,
@@ -100,7 +98,7 @@ class OrderController extends BaseOrderController
             && $form->isValid()
         ) {
             $resource = $form->getData();
-//            dd("ten controller");
+
             /** @var ResourceControllerEvent $event */
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
 
@@ -119,10 +117,10 @@ class OrderController extends BaseOrderController
             }
 
             try {
-                $this->resourceUpdateHandler->handle($resource, $configuration, $this->manager);
-
-                $splitProcessor->process($resource);
-
+                $orders = $splitProcessor->process($resource);
+                foreach ($orders as $order) {
+                    $this->resourceUpdateHandler->handle($order, $configuration, $this->manager);
+                }
             } catch (UpdateHandlingException $exception) {
                 if (!$configuration->isHtmlRequest()) {
                     return $this->createRestView($configuration, $form, $exception->getApiResponseCode());
@@ -151,10 +149,10 @@ class OrderController extends BaseOrderController
             if (null !== $postEventResponse) {
                 return $postEventResponse;
             }
-            dd($configuration);
+
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }
-        $splitProcessor->process($resource);
+
         if (!$configuration->isHtmlRequest()) {
             return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
@@ -201,5 +199,4 @@ class OrderController extends BaseOrderController
             ]
         );
     }
-
 }

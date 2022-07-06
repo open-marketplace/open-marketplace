@@ -11,27 +11,78 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Model\VendorOrderCollector;
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\Model\Adjustment;
+use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 
-class SplitOrderByVendorProcessor implements OrderProcessorInterface
+class SplitOrderByVendorProcessor
 {
     private EntityManager $entityManager;
 
-    public function __construct(EntityManager $entityManager)
+    private OrderClonerInterface $orderCloner;
+
+    public function __construct(EntityManager $entityManager, OrderClonerInterface $orderCloner)
     {
         $this->entityManager = $entityManager;
+        $this->orderCloner = $orderCloner;
     }
 
-    public function process(OrderInterface $order): void
+    /** @returns Array<VendorOrderCollector> */
+    public function process(OrderInterface $order): array
     {
+        /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
-        $vendors = [];
-        foreach ($orderItems as $orderItem){
-            dump($orderItem->getVariant()->getItem());
-//            dd($orderItem);
+        $vendor = $this->getVendorFromOrderItem($orderItems[0]);
+        $vendorOrders[] = new VendorOrderCollector($vendor, $order);
+
+        foreach ($orderItems as $orderItem) {
+            $productVendor = $this->getVendorFromOrderItem($orderItem);
+            if ($productVendor === $vendorOrders[0]->getVendor()) {
+                continue;
+            }
+
+            foreach ($vendorOrders as $vendorOrder) {
+                $loopVendor = $vendorOrder->getVendor();
+                if ($productVendor === $loopVendor) {
+                    $vendorOrder->getOrder()->addItem($orderItem);
+                    $order->removeItem($orderItem);
+                    $this->entityManager->persist($order);
+                    $this->entityManager->persist($vendorOrder->getOrder());
+                }
+            }
+            $newOrder = new Order();
+            $this->orderCloner->clone($order, $newOrder);
+
+            $vendorOrder = new VendorOrderCollector($vendor, $newOrder);
+            $vendorOrder->getOrder()->addItem($orderItem);
+            $order->removeItem($orderItem);
+            $this->entityManager->persist($order);
+            $this->entityManager->persist($vendorOrder->getOrder());
+            $vendorOrders[] = $vendorOrder;
         }
+        $orders = [];
+        foreach ($vendorOrders as $vendorOrder) {
+            $orders[] = $vendorOrder->getOrder();
+        }
+        $this->entityManager->flush();
+
+        return $orders;
+    }
+    private function getVendorFromOrderItem(OrderItemInterface $orderItem): VendorInterface
+    {
+        /** @var ProductVariant $variant */
+        $variant = $orderItem->getVariant();
+        /** @var ProductInterface $product */
+        $product = $variant->getProduct();
+        /** @var VendorInterface $vendor */
+        $vendor = $product->getVendor();
+
+        return $vendor;
     }
 }

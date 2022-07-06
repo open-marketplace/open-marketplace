@@ -83,5 +83,4 @@ interface VendorInterface extends VendorProfileInterface
     public function getImage(): ?VendorImageInterface;
 
     public function setImage(?VendorImageInterface $image): void;
-
 }

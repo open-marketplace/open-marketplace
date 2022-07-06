@@ -7,6 +7,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendorProcessor"
                  id="bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.mvm_plugin.cloner.order_cloner" />
 <!--            <tag name="sylius.order_processor" priority="0"/>-->
         </service>
     </services>
