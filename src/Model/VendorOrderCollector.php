@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Model;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
-class VendorOrderCollector
+class VendorOrderCollector implements VendorOrderCollectorInterface
 {
     private VendorInterface $vendor;
 

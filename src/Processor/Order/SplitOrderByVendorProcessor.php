@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 
-class SplitOrderByVendorProcessor
+class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
 {
     private EntityManager $entityManager;
 
