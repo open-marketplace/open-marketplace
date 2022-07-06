@@ -50,20 +50,22 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
             foreach ($vendorOrders as $vendorOrder) {
                 $loopVendor = $vendorOrder->getVendor();
                 if ($productVendor === $loopVendor) {
-                    $vendorOrder->getOrder()->addItem($orderItem);
-                    $order->removeItem($orderItem);
-                    $this->entityManager->persist($order);
-                    $this->entityManager->persist($vendorOrder->getOrder());
+                    $this->moveOrderItemFromOrderToAnother($orderItem, $order, $vendorOrder->getOrder());
+//                    $vendorOrder->getOrder()->addItem($orderItem);
+//                    $order->removeItem($orderItem);
+//                    $this->entityManager->persist($order);
+//                    $this->entityManager->persist($vendorOrder->getOrder());
                 }
             }
             $newOrder = new Order();
             $this->orderCloner->clone($order, $newOrder);
 
             $vendorOrder = new VendorOrderCollector($vendor, $newOrder);
-            $vendorOrder->getOrder()->addItem($orderItem);
-            $order->removeItem($orderItem);
-            $this->entityManager->persist($order);
-            $this->entityManager->persist($vendorOrder->getOrder());
+            $this->moveOrderItemFromOrderToAnother($orderItem, $order, $vendorOrder->getOrder());
+//            $vendorOrder->getOrder()->addItem($orderItem);
+//            $order->removeItem($orderItem);
+//            $this->entityManager->persist($order);
+//            $this->entityManager->persist($vendorOrder->getOrder());
             $vendorOrders[] = $vendorOrder;
         }
         $orders = [];
@@ -84,5 +86,15 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $vendor = $product->getVendor();
 
         return $vendor;
+    }
+    private function moveOrderItemFromOrderToAnother(
+        OrderItemInterface $orderItem,
+        OrderInterface $from,
+        OrderInterface $to
+    ): void{
+        $to->addItem($orderItem);
+        $from->removeItem($orderItem);
+        $this->entityManager->persist($from);
+        $this->entityManager->persist($to);
     }
 }

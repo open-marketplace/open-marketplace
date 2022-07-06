@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Model;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 interface VendorOrderCollectorInterface
 {
