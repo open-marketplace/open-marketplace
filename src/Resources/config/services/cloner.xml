@@ -12,13 +12,5 @@
                  id="bitbag.mvm_plugin.cloner.product_listing_translation_cloner">
             <argument type="service" id="bitbag_mvm_plugin.factory.product_translation" />
         </service>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderCloner"
-                 id="bitbag.mvm_plugin.cloner.order_cloner">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="bitbag.mvm_plugin.cloner.address_cloner"/>
-        </service>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressCloner"
-                 id="bitbag.mvm_plugin.cloner.address_cloner">
-        </service>
     </services>
 </container>

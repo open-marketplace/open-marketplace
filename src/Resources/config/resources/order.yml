@@ -6,3 +6,4 @@ sylius_order:
                 controller: Sylius\Bundle\CoreBundle\Controller\OrderController
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
                 form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
+

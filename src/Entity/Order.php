@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Core\Model\Order as BaseOrder;
-use Sylius\Component\Core\Model\OrderInterface;
 
 class Order extends BaseOrder implements OrderInterface
 {

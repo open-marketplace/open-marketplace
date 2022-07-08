@@ -118,6 +118,7 @@ class OrderController extends BaseOrderController
 
             try {
                 $orders = $splitProcessor->process($resource);
+
                 foreach ($orders as $order) {
                     $this->resourceUpdateHandler->handle($order, $configuration, $this->manager);
                 }

@@ -12,14 +12,15 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Model\VendorOrderCollector;
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Core\Model\Order;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\ProductVariant;
 
 class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
 {
@@ -27,55 +28,66 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     private OrderClonerInterface $orderCloner;
 
-    public function __construct(EntityManager $entityManager, OrderClonerInterface $orderCloner)
-    {
+    private OrderItemClonerInterface $orderItemCloner;
+
+    public function __construct(
+        EntityManager $entityManager,
+        OrderClonerInterface $orderCloner,
+        OrderItemClonerInterface $orderItemCloner
+    ) {
         $this->entityManager = $entityManager;
         $this->orderCloner = $orderCloner;
+        $this->orderItemCloner = $orderItemCloner;
     }
 
     /** @returns Array<VendorOrderCollector> */
     public function process(OrderInterface $order): array
     {
+        $subOrders = [];
+
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
-        $vendor = $this->getVendorFromOrderItem($orderItems[0]);
-        $vendorOrders[] = new VendorOrderCollector($vendor, $order);
-
-        foreach ($orderItems as $orderItem) {
-            $productVendor = $this->getVendorFromOrderItem($orderItem);
-            if ($productVendor === $vendorOrders[0]->getVendor()) {
-                continue;
+        foreach ($orderItems as $item) {
+            $itemVendor = $this->getVendorFromOrderItem($item);
+            if($this->vendorSuborderExits($subOrders, $itemVendor)){
+                $subOrder = $this->getVendorSuborder($subOrders, $itemVendor);
+                $this->cloneItemIntoSuborder($item, $subOrder);
             }
-
-            foreach ($vendorOrders as $vendorOrder) {
-                $loopVendor = $vendorOrder->getVendor();
-                if ($productVendor === $loopVendor) {
-                    $this->moveOrderItemFromOrderToAnother($orderItem, $order, $vendorOrder->getOrder());
-//                    $vendorOrder->getOrder()->addItem($orderItem);
-//                    $order->removeItem($orderItem);
-//                    $this->entityManager->persist($order);
-//                    $this->entityManager->persist($vendorOrder->getOrder());
-                }
+            else{
+                $newOrder = new Order();
+                $this->orderCloner->clone($order, $newOrder);
+                $newOrder->setVendor($itemVendor);
+                $this->entityManager->persist($newOrder);
+                $this->cloneItemIntoSuborder($item, $newOrder);
+                $subOrders[] = $newOrder;
             }
-            $newOrder = new Order();
-            $this->orderCloner->clone($order, $newOrder);
-
-            $vendorOrder = new VendorOrderCollector($vendor, $newOrder);
-            $this->moveOrderItemFromOrderToAnother($orderItem, $order, $vendorOrder->getOrder());
-//            $vendorOrder->getOrder()->addItem($orderItem);
-//            $order->removeItem($orderItem);
-//            $this->entityManager->persist($order);
-//            $this->entityManager->persist($vendorOrder->getOrder());
-            $vendorOrders[] = $vendorOrder;
         }
-        $orders = [];
-        foreach ($vendorOrders as $vendorOrder) {
-            $orders[] = $vendorOrder->getOrder();
-        }
-        $this->entityManager->flush();
-
-        return $orders;
+        $subOrders[] = $order;
+        return $subOrders;
     }
+    private function vendorSuborderExits($suborders, $vendor): bool
+    {
+        foreach ($suborders as $suborder){
+            if($suborder->getVendor() === $vendor)
+                return true;
+        }
+        return false;
+    }
+
+    private function getVendorSuborder($suborders, $vendor): ?OrderInterface
+    {
+        foreach ($suborders as $suborder){
+            if($suborder->getVendor() === $vendor)
+                return $suborder;
+        }
+    }
+    private function cloneItemIntoSuborder(OrderItemInterface $item, OrderInterface $order): void
+    {
+        $newItem = new OrderItem();
+        $this->orderItemCloner->clone($item, $newItem);
+        $order->addItem($newItem);
+    }
+
     private function getVendorFromOrderItem(OrderItemInterface $orderItem): VendorInterface
     {
         /** @var ProductVariant $variant */

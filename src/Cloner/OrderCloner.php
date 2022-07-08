@@ -16,17 +16,29 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\Payment;
+use Sylius\Component\Core\Model\Shipment;
 
 final class OrderCloner implements OrderClonerInterface
 {
     private EntityManagerInterface $entityManager;
 
-    private AddressCloner $addressCloner;
+    private AddressClonerInterface $addressCloner;
 
-    public function __construct(EntityManagerInterface $entityManager, AddressCloner $addressCloner)
-    {
+    private ShipmentClonerInterface $shipmentCloner;
+
+    private PaymentClonerInterface $paymentCloner;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        AddressClonerInterface $addressCloner,
+        ShipmentClonerInterface $shipmentCloner,
+        PaymentClonerInterface $paymentCloner
+    ) {
         $this->entityManager = $entityManager;
         $this->addressCloner = $addressCloner;
+        $this->shipmentCloner = $shipmentCloner;
+        $this->paymentCloner = $paymentCloner;
     }
 
     public function clone(OrderInterface $originalOrder, OrderInterface $newOrder): void
@@ -60,7 +72,19 @@ final class OrderCloner implements OrderClonerInterface
         $newOrder->setPaymentState($originalOrder->getPaymentState());
         $newOrder->setShippingState($originalOrder->getShippingState());
         $newOrder->setCustomer($originalOrder->getCustomer());
-
+        $shipments= $originalOrder->getShipments();
+        foreach ($shipments as $shipment){
+            $newShipment  = new Shipment();
+            $newShipment->setOrder($newOrder);
+            $this->shipmentCloner->clone($shipment, $newShipment);
+            $newOrder->addShipment($newShipment);
+        }
+        $payments = $originalOrder->getPayments();
+        foreach ($payments as $payment){
+            $newPayment = new Payment();
+            $this->paymentCloner->clone($payment, $newPayment);
+            $newOrder->addPayment($newPayment);
+        }
         $this->entityManager->flush();
     }
 }
