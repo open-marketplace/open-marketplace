@@ -21,6 +21,8 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Model\VendorOrderCollector;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Model\ShipmentInterface;
 
 class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
 {
@@ -44,25 +46,36 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
     public function process(OrderInterface $order): array
     {
         $subOrders = [];
-
+        $subOrders[] = $order;
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
         foreach ($orderItems as $item) {
             $itemVendor = $this->getVendorFromOrderItem($item);
             if($this->vendorSuborderExits($subOrders, $itemVendor)){
                 $subOrder = $this->getVendorSuborder($subOrders, $itemVendor);
-                $this->cloneItemIntoSuborder($item, $subOrder);
+                $this->cloneItemIntoSuborder($item, $subOrder, $subOrder->getShipments()[0]);
             }
             else{
                 $newOrder = new Order();
                 $this->orderCloner->clone($order, $newOrder);
                 $newOrder->setVendor($itemVendor);
+                $newOrder->setPrimaryOrder($order);
                 $this->entityManager->persist($newOrder);
-                $this->cloneItemIntoSuborder($item, $newOrder);
+
+                $this->cloneItemIntoSuborder($item, $newOrder, $newOrder->getShipments()[0]);
                 $subOrders[] = $newOrder;
             }
         }
-        $subOrders[] = $order;
+        foreach ($subOrders as $subOrder) {
+            $subOrder->recalculateItemsTotal();
+            $subOrder->recalculateAdjustmentsTotal();
+            $payment = $subOrder->getPayments()[0];
+            $payment->setAmount($subOrder->getTotal());
+            $this->entityManager->persist($payment);
+
+        }
+        $this->entityManager->persist($order);
+//        dd($order);
         return $subOrders;
     }
     private function vendorSuborderExits($suborders, $vendor): bool
@@ -80,11 +93,12 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
             if($suborder->getVendor() === $vendor)
                 return $suborder;
         }
+        return null;
     }
-    private function cloneItemIntoSuborder(OrderItemInterface $item, OrderInterface $order): void
+    private function cloneItemIntoSuborder(OrderItemInterface $item, OrderInterface $order, ShipmentInterface $shipment): void
     {
         $newItem = new OrderItem();
-        $this->orderItemCloner->clone($item, $newItem);
+        $this->orderItemCloner->clone($item, $newItem, $shipment);
         $order->addItem($newItem);
     }
 
@@ -98,15 +112,5 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $vendor = $product->getVendor();
 
         return $vendor;
-    }
-    private function moveOrderItemFromOrderToAnother(
-        OrderItemInterface $orderItem,
-        OrderInterface $from,
-        OrderInterface $to
-    ): void{
-        $to->addItem($orderItem);
-        $from->removeItem($orderItem);
-        $this->entityManager->persist($from);
-        $this->entityManager->persist($to);
     }
 }

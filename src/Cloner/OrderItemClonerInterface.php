@@ -12,8 +12,9 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 
 interface OrderItemClonerInterface
 {
-    public function clone(OrderItemInterface $originalItem, OrderItemInterface $newItem): void;
+    public function clone(OrderItemInterface $originalItem, OrderItemInterface $newItem, ShipmentInterface $shipment): void;
 }

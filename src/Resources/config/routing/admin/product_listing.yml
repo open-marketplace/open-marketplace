@@ -32,3 +32,21 @@ bitbag_mvm_plugin_admin_product_listing_reject:
     _sylius:
       section: admin
       permission: true
+
+sylius_admin_order_payment_complete:
+    path: /orders/{orderId}/payments/{id}/complete
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _sylius:
+            event: complete
+            permission: true
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_payment
+                transition: complete
+            redirect: referer

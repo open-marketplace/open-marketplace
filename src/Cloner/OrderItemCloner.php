@@ -11,9 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\Adjustment;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnit;
+use Sylius\Component\Core\Model\ShipmentInterface;
 
 final class OrderItemCloner implements OrderItemClonerInterface
 {
@@ -21,13 +23,19 @@ final class OrderItemCloner implements OrderItemClonerInterface
 
     private OrderItemUnitCloner $itemUnitCloner;
 
-    public function __construct(AdjustmentClonerInterface $cloner, OrderItemUnitCloner $itemUnitCloner)
-    {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(
+        AdjustmentClonerInterface $cloner,
+        OrderItemUnitCloner $itemUnitCloner,
+        EntityManagerInterface $entityManager
+    ) {
         $this->cloner = $cloner;
         $this->itemUnitCloner = $itemUnitCloner;
+        $this->entityManager = $entityManager;
     }
 
-    public function clone(OrderItemInterface $originalItem, OrderItemInterface $newItem):void
+    public function clone(OrderItemInterface $originalItem, OrderItemInterface $newItem, ShipmentInterface $shipment):void
     {
         $newItem->setOriginalUnitPrice($originalItem->getOriginalUnitPrice());
         $newItem->setProductName($originalItem->getProductName());
@@ -39,12 +47,14 @@ final class OrderItemCloner implements OrderItemClonerInterface
         foreach ($units as $unit){
             $newUnit = new OrderItemUnit($newItem);
             $this->itemUnitCloner->clone($unit, $newUnit);
+            $newUnit->setShipment($shipment);
             $newItem->addUnit($newUnit);
         }
         $adjustments = $originalItem->getAdjustments();
         foreach ($adjustments as $adjustment){
             $newAdjustment = new Adjustment();
             $this->cloner->clone($adjustment, $newAdjustment);
+            $this->entityManager->persist($newAdjustment);
             $newItem->addAdjustment($newAdjustment);
         }
     }

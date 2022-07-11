@@ -6,6 +6,10 @@
 
     <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order" table="sylius_order">
         <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" inversed-by="products" />
-        <many-to-one field="primaryOrder" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order"/>
+        <many-to-one field="primaryOrder" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order" inversed-by="subOrders">
+            <join-column on-delete="SET NULL"/>
+        </many-to-one>
+        <one-to-many field="subOrders" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order" mapped-by="primaryOrder"/>
+
     </mapped-superclass>
 </doctrine-mapping>

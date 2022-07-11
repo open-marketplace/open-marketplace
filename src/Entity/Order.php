@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\Order as BaseOrder;
 
 class Order extends BaseOrder implements OrderInterface
@@ -19,9 +21,18 @@ class Order extends BaseOrder implements OrderInterface
 
     private ?OrderInterface $primaryOrder;
 
+    /** @var ?Collection<int, OrderInterface> */
+    private ?Collection $subOrders;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->subOrders = new ArrayCollection();
+    }
     public function getVendor(): ?VendorInterface
     {
         return $this->vendor;
+        dd($this);
     }
 
     public function setVendor(?VendorInterface $vendor): void
@@ -38,4 +49,17 @@ class Order extends BaseOrder implements OrderInterface
     {
         $this->primaryOrder = $primaryOrder;
     }
+
+    public function addSubOrder(?OrderInterface $subOrder): void
+    {
+        $this->subOrders->add($subOrder);
+    }
+
+    public function getSubOrders(): ?Collection
+    {
+
+        return $this->subOrders;
+
+    }
+
 }

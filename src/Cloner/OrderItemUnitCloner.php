@@ -32,6 +32,7 @@ final class OrderItemUnitCloner
         foreach ($adjustments as $adjustment){
             $newAdjustment = new Adjustment();
             $this->cloner->clone($adjustment, $newAdjustment);
+            $newUnit->addAdjustment($newAdjustment);
         }
     }
 }
