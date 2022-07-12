@@ -75,7 +75,6 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
         }
         $this->entityManager->persist($order);
-//        dd($order);
         return $subOrders;
     }
     private function vendorSuborderExits($suborders, $vendor): bool
