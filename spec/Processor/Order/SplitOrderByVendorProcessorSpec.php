@@ -12,15 +12,19 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendorProcessor;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 
 final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 {
-    public function let(EntityManager $entityManager, OrderClonerInterface $orderCloner): void
-    {
-        $this->beConstructedWith($entityManager, $orderCloner);
+    public function let(
+        EntityManager $entityManager,
+        OrderClonerInterface $orderCloner,
+        OrderItemClonerInterface $orderItemCloner
+    ): void {
+        $this->beConstructedWith($entityManager, $orderCloner, $orderItemCloner);
     }
 
     public function it_is_initializable(): void

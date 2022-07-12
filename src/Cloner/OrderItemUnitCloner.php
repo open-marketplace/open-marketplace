@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Model\Adjustment;
 
-final class OrderItemUnitCloner
+final class OrderItemUnitCloner implements OrderItemUnitClonerInterface
 {
     private AdjustmentClonerInterface $cloner;
 

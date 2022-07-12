@@ -35,8 +35,5 @@ final class ShipmentCloner implements ShipmentClonerInterface
             $this->adjustmentCloner->clone($adjustment, $newAdjustment);
             $newShipment->addAdjustment($newAdjustment);
         }
-//        $units = $originalShipment->getUnits();
-//        foreach ($units as $unit)
-//            $newShipment->addUnit($unit);
     }
 }

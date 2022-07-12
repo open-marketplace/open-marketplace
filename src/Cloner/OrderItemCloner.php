@@ -21,13 +21,13 @@ final class OrderItemCloner implements OrderItemClonerInterface
 {
     private AdjustmentClonerInterface $cloner;
 
-    private OrderItemUnitCloner $itemUnitCloner;
+    private OrderItemUnitClonerInterface $itemUnitCloner;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
         AdjustmentClonerInterface $cloner,
-        OrderItemUnitCloner $itemUnitCloner,
+        OrderItemUnitClonerInterface $itemUnitCloner,
         EntityManagerInterface $entityManager
     ) {
         $this->cloner = $cloner;
