@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
 use Doctrine\ORM\EntityManagerInterface;
-
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -72,15 +71,16 @@ final class OrderCloner implements OrderClonerInterface
         $newOrder->setPaymentState($originalOrder->getPaymentState());
         $newOrder->setShippingState($originalOrder->getShippingState());
         $newOrder->setCustomer($originalOrder->getCustomer());
-        $shipments= $originalOrder->getShipments();
-        foreach ($shipments as $shipment){
-            $newShipment  = new Shipment();
+        $shipments = $originalOrder->getShipments();
+        foreach ($shipments as $shipment) {
+            $newShipment = new Shipment();
             $newShipment->setOrder($newOrder);
             $this->shipmentCloner->clone($shipment, $newShipment);
             $newOrder->addShipment($newShipment);
         }
         $payments = $originalOrder->getPayments();
-        foreach ($payments as $payment){
+        /** @var Payment $payment */
+        foreach ($payments as $payment) {
             $newPayment = new Payment();
             $this->paymentCloner->clone($payment, $newPayment);
             $newOrder->addPayment($newPayment);

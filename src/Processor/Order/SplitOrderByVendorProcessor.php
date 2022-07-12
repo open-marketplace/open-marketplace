@@ -17,7 +17,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\VendorOrderCollector;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -42,7 +41,6 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $this->orderItemCloner = $orderItemCloner;
     }
 
-    /** @returns Array<VendorOrderCollector> */
     public function process(OrderInterface $order): array
     {
         $subOrders = [];
@@ -51,18 +49,21 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $orderItems = $order->getItems();
         foreach ($orderItems as $item) {
             $itemVendor = $this->getVendorFromOrderItem($item);
-            if($this->vendorSuborderExits($subOrders, $itemVendor)){
+            if ($this->vendorSuborderExits($subOrders, $itemVendor)) {
                 $subOrder = $this->getVendorSuborder($subOrders, $itemVendor);
-                $this->cloneItemIntoSuborder($item, $subOrder, $subOrder->getShipments()[0]);
-            }
-            else{
+                if($subOrder) {
+                    /** @var ShipmentInterface $shipments */
+                    $shipments = $subOrder->getShipments()[0];
+                    $this->cloneItemIntoSuborder($item, $subOrder, $shipments);
+                }
+            } else {
                 $newOrder = new Order();
                 $this->orderCloner->clone($order, $newOrder);
                 $newOrder->setVendor($itemVendor);
                 $newOrder->setPrimaryOrder($order);
                 $this->entityManager->persist($newOrder);
-
-                $this->cloneItemIntoSuborder($item, $newOrder, $newOrder->getShipments()[0]);
+                if ($newOrder->getShipments()[0])
+                    $this->cloneItemIntoSuborder($item, $newOrder, $newOrder->getShipments()[0]);
                 $subOrders[] = $newOrder;
             }
         }
@@ -70,31 +71,43 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
             $subOrder->recalculateItemsTotal();
             $subOrder->recalculateAdjustmentsTotal();
             $payment = $subOrder->getPayments()[0];
-            $payment->setAmount($subOrder->getTotal());
-            $this->entityManager->persist($payment);
-
+            if ($payment) {
+                $payment->setAmount($subOrder->getTotal());
+                $this->entityManager->persist($payment);
+            }
         }
         $this->entityManager->persist($order);
+
         return $subOrders;
     }
-    private function vendorSuborderExits($suborders, $vendor): bool
+
+    private function vendorSuborderExits(array $suborders, VendorInterface $vendor): bool
     {
-        foreach ($suborders as $suborder){
-            if($suborder->getVendor() === $vendor)
+        foreach ($suborders as $suborder) {
+            if ($suborder->getVendor() === $vendor) {
                 return true;
+            }
         }
+
         return false;
     }
 
-    private function getVendorSuborder($suborders, $vendor): ?OrderInterface
+    private function getVendorSuborder(array $suborders, VendorInterface $vendor): ?OrderInterface
     {
-        foreach ($suborders as $suborder){
-            if($suborder->getVendor() === $vendor)
+        foreach ($suborders as $suborder) {
+            if ($suborder->getVendor() === $vendor) {
                 return $suborder;
+            }
         }
+
         return null;
     }
-    private function cloneItemIntoSuborder(OrderItemInterface $item, OrderInterface $order, ShipmentInterface $shipment): void
+
+    private function cloneItemIntoSuborder(
+        OrderItemInterface $item,
+        OrderInterface $order,
+        ShipmentInterface $shipment
+    ): void
     {
         $newItem = new OrderItem();
         $this->orderItemCloner->clone($item, $newItem, $shipment);

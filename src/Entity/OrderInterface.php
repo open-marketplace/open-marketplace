@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Core\Model\OrderInterface as BaseInterface;
@@ -10,8 +12,7 @@ interface OrderInterface extends BaseInterface
 
     public function setVendor(?VendorInterface $vendor): void;
 
-    public function getPrimaryOrder(): ?OrderInterface;
+    public function getPrimaryOrder(): ?self;
 
-    public function setPrimaryOrder(?OrderInterface $primaryOrder): void;
-
+    public function setPrimaryOrder(?self $primaryOrder): void;
 }

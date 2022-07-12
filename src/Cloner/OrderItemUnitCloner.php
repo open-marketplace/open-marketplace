@@ -29,7 +29,7 @@ final class OrderItemUnitCloner implements OrderItemUnitClonerInterface
         $newUnit->setCreatedAt($originalUnit->getCreatedAt());
 
         $adjustments = $originalUnit->getAdjustments();
-        foreach ($adjustments as $adjustment){
+        foreach ($adjustments as $adjustment) {
             $newAdjustment = new Adjustment();
             $this->cloner->clone($adjustment, $newAdjustment);
             $newUnit->addAdjustment($newAdjustment);

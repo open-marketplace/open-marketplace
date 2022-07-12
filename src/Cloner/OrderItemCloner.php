@@ -35,7 +35,11 @@ final class OrderItemCloner implements OrderItemClonerInterface
         $this->entityManager = $entityManager;
     }
 
-    public function clone(OrderItemInterface $originalItem, OrderItemInterface $newItem, ShipmentInterface $shipment):void
+    public function clone(
+        OrderItemInterface $originalItem,
+        OrderItemInterface $newItem,
+        ShipmentInterface $shipment
+    ): void
     {
         $newItem->setOriginalUnitPrice($originalItem->getOriginalUnitPrice());
         $newItem->setProductName($originalItem->getProductName());
@@ -44,14 +48,15 @@ final class OrderItemCloner implements OrderItemClonerInterface
         $newItem->setUnitPrice($originalItem->getUnitPrice());
         $newItem->setVersion($originalItem->getVersion());
         $units = $originalItem->getUnits();
-        foreach ($units as $unit){
+        /** @var OrderItemUnit $unit */
+        foreach ($units as $unit) {
             $newUnit = new OrderItemUnit($newItem);
             $this->itemUnitCloner->clone($unit, $newUnit);
             $newUnit->setShipment($shipment);
             $newItem->addUnit($newUnit);
         }
         $adjustments = $originalItem->getAdjustments();
-        foreach ($adjustments as $adjustment){
+        foreach ($adjustments as $adjustment) {
             $newAdjustment = new Adjustment();
             $this->cloner->clone($adjustment, $newAdjustment);
             $this->entityManager->persist($newAdjustment);

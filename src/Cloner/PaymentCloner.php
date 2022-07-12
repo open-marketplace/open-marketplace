@@ -18,10 +18,12 @@ final class PaymentCloner implements PaymentClonerInterface
     public function clone(PaymentInterface $originalPayment, PaymentInterface $newPayment): void
     {
         $newPayment->setCreatedAt($originalPayment->getCreatedAt());
-        $newPayment->setCurrencyCode($originalPayment->getCurrencyCode());
+        if (null !== $originalPayment->getCurrencyCode())
+            $newPayment->setCurrencyCode($originalPayment->getCurrencyCode());
         $newPayment->setMethod($originalPayment->getMethod());
         $newPayment->setDetails($originalPayment->getDetails());
-        $newPayment->setState($originalPayment->getState());
+        if (null !== $originalPayment->getState())
+            $newPayment->setState($originalPayment->getState());
         $newPayment->setUpdatedAt($originalPayment->getUpdatedAt());
     }
 }

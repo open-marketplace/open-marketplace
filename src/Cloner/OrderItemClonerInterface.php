@@ -16,5 +16,9 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 
 interface OrderItemClonerInterface
 {
-    public function clone(OrderItemInterface $originalItem, OrderItemInterface $newItem, ShipmentInterface $shipment): void;
+    public function clone(
+        OrderItemInterface $originalItem,
+        OrderItemInterface $newItem,
+        ShipmentInterface $shipment
+    ): void;
 }

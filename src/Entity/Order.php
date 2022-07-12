@@ -29,10 +29,10 @@ class Order extends BaseOrder implements OrderInterface
         parent::__construct();
         $this->subOrders = new ArrayCollection();
     }
+
     public function getVendor(): ?VendorInterface
     {
         return $this->vendor;
-        dd($this);
     }
 
     public function setVendor(?VendorInterface $vendor): void
@@ -50,16 +50,14 @@ class Order extends BaseOrder implements OrderInterface
         $this->primaryOrder = $primaryOrder;
     }
 
-    public function addSubOrder(?OrderInterface $subOrder): void
+    public function addSubOrder(OrderInterface $subOrder): void
     {
-        $this->subOrders->add($subOrder);
+        if($this->subOrders)
+            $this->subOrders->add($subOrder);
     }
-
+    /** @return ?Collection<int, OrderInterface> */
     public function getSubOrders(): ?Collection
     {
-
         return $this->subOrders;
-
     }
-
 }

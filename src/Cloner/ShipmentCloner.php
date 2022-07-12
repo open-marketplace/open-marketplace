@@ -30,7 +30,7 @@ final class ShipmentCloner implements ShipmentClonerInterface
         $newShipment->setCreatedAt($originalShipment->getCreatedAt());
         $newShipment->setMethod($originalShipment->getMethod());
         $adjustments = $originalShipment->getAdjustments();
-        foreach ($adjustments as $adjustment){
+        foreach ($adjustments as $adjustment) {
             $newAdjustment = new Adjustment();
             $this->adjustmentCloner->clone($adjustment, $newAdjustment);
             $newShipment->addAdjustment($newAdjustment);
