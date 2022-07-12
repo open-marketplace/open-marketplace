@@ -68,6 +68,7 @@
                     {% if row.primaryOrder is not same as NULL %}
                         {% set primary_order_token = row.primaryOrder.tokenValue %}
                         {% set primary_order_number = row.primaryOrder.number %}
+                        {% set primary_order_paymentState = row.primaryOrder.paymentState %}
                         <tr class="item">
                             <td>{{ sylius_grid_render_field(grid, definition.enabledFields['number'], row) }}</td>
                             <td>{{ sylius_grid_render_field(grid, definition.enabledFields['checkoutCompletedAt'], row) }}</td>
@@ -78,9 +79,11 @@
                                 <a href="{{ path('sylius_shop_account_order_show',{'number': primary_order_number}) }}">
                                     <button type="button">Show</button>
                                 </a>
-                                <a href="{{ path('sylius_shop_order_show',{'tokenValue': primary_order_token}) }}">
-                                    <button type="button">Pay</button>
-                                </a>
+                                {% if primary_order_paymentState is not same as "paid" %}
+                                    <a href="{{ path('sylius_shop_order_show',{'tokenValue': primary_order_token}) }}">
+                                        <button type="button">Pay</button>
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endif %}
