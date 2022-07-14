@@ -66,6 +66,7 @@
                 <tbody {{ sylius_test_html_attribute('grid-table-body') }}>
                 {% for row in data %}
                     {% if row.primaryOrder is not same as NULL %}
+
                         {% set primary_order_token = row.primaryOrder.tokenValue %}
                         {% set primary_order_number = row.primaryOrder.number %}
                         {% set primary_order_paymentState = row.primaryOrder.paymentState %}
@@ -76,12 +77,16 @@
                             <td>{{ sylius_grid_render_field(grid, definition.enabledFields['total'], row) }}</td>
                             <td>{{ sylius_grid_render_field(grid, definition.enabledFields['state'], row) }}</td>
                             <td>
-                                <a href="{{ path('sylius_shop_account_order_show',{'number': primary_order_number}) }}">
-                                    <button type="button">Show</button>
+                                <a class="ui labeled icon button" href="{{ path('sylius_shop_account_order_show',{'number':  row.number}) }}">
+                                    <i class="icon search"></i>
+                                    Show
                                 </a>
                                 {% if primary_order_paymentState is not same as "paid" %}
-                                    <a href="{{ path('sylius_shop_order_show',{'tokenValue': primary_order_token}) }}">
-                                        <button type="button">Pay</button>
+                                    <a  href="{{ path('sylius_shop_order_show',{'tokenValue': primary_order_token}) }}">
+                                        <button type="button" class="ui labeled icon button  blue ">
+                                            <i class="icon credit card alternative"></i>
+                                            Pay
+                                        </button>
                                     </a>
                                 {% endif %}
                             </td>

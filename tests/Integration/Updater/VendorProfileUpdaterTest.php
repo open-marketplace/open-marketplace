@@ -41,6 +41,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
     private EntityRepository $vendorProfileUpdateRepository;
 
+
     public function setUp(): void
     {
         parent::setUp();
@@ -52,8 +53,8 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
 
-        $this->vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_factory');
         $this->vendorAddressFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_address_factory');
+        $this->vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_factory');
 
         $remover = static::$container->get('bitbag_mvm_plugin.remover.profile_update_remover');
         $vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_update_factory');

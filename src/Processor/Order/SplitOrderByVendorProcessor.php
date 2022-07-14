@@ -50,12 +50,12 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         foreach ($orderItems as $item) {
             $itemVendor = $this->getVendorFromOrderItem($item);
             if ($this->vendorSuborderExits($subOrders, $itemVendor)) {
+                /** @var OrderInterface $subOrder */
                 $subOrder = $this->getVendorSuborder($subOrders, $itemVendor);
-                if($subOrder) {
-                    /** @var ShipmentInterface $shipments */
-                    $shipments = $subOrder->getShipments()[0];
-                    $this->cloneItemIntoSuborder($item, $subOrder, $shipments);
-                }
+                /** @var ShipmentInterface $shipments */
+                $shipments = $subOrder->getShipments()[0];
+                $this->cloneItemIntoSuborder($item, $subOrder, $shipments);
+
             } else {
                 $newOrder = new Order();
                 $this->orderCloner->clone($order, $newOrder);
@@ -106,7 +106,7 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
     private function cloneItemIntoSuborder(
         OrderItemInterface $item,
         OrderInterface $order,
-        ShipmentInterface $shipment
+        ?ShipmentInterface $shipment
     ): void
     {
         $newItem = new OrderItem();

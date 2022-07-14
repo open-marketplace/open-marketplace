@@ -19,6 +19,6 @@ interface OrderItemClonerInterface
     public function clone(
         OrderItemInterface $originalItem,
         OrderItemInterface $newItem,
-        ShipmentInterface $shipment
+        ?ShipmentInterface $shipment
     ): void;
 }
