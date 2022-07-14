@@ -103,7 +103,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
             ]);
     }
 
-    public function it_not_strips_tags_when_false(
+    public function it_doesnt_strip_tags_on_false_parameter(
         CurrentUserResolverInterface $actualUserResolver,
         FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
