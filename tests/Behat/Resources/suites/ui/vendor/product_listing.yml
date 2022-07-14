@@ -1,0 +1,12 @@
+default:
+  suites:
+    vendor_ui_managing_product_listings:
+      contexts:
+        - bitbag.mvm_plugin.behat.context.ui.vendor.product_listing
+        - Behat\MinkExtension\Context\MinkContext
+        - sylius.behat.context.setup.channel
+        - bitbag.sylius_mvm_plugin.behat.context.setup.vendor
+        - sylius.behat.context.hook.doctrine_orm
+        - sylius.behat.context.setup.shop_security
+      filters:
+        tags: '@vendor_managing_product_listings && @ui'

@@ -13,8 +13,8 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
-use function PHPUnit\Framework\assertTrue;
 use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\vendor\CustomerDashboardPage;
+use Webmozart\Assert\Assert;
 
 class CustomerDashboardContext extends MinkContext implements Context
 {
@@ -30,6 +30,6 @@ class CustomerDashboardContext extends MinkContext implements Context
      */
     public function iShouldSeeInsideSidebar($arg1): void
     {
-        assertTrue($this->dashboardPage->itemWithValueExistsInsideSidebar($arg1), "Cannot find $arg1 inside sidebar");
+        Assert::true($this->dashboardPage->itemWithValueExistsInsideSidebar($arg1), "Cannot find $arg1 inside sidebar");
     }
 }

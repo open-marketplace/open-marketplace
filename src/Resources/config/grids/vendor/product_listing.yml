@@ -1,0 +1,30 @@
+sylius_grid:
+  templates:
+    action:
+      details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
+  grids:
+    bitbag_mvm_plugin_vendor_product_listing:
+      driver:
+        name: doctrine/orm
+        options:
+          class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
+      fields:
+        name:
+          type: string
+          label: bitbag_mvm_plugin.ui.name
+        publishedAt:
+          type: datetime
+          label: bitbag_mvm_plugin.ui.published_at
+        status:
+          type: string
+          label: bitbag_mvm_plugin.ui.status
+      actions:
+        item:
+          details:
+            type: details
+            label: bitbag_mvm_plugin.ui.details
+            options:
+              link:
+                route: bitbag_mvm_plugin_admin_product_listing_show
+                parameters:
+                  id: resource.id

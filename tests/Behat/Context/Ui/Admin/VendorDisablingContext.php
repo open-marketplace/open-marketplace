@@ -17,7 +17,7 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use function PHPUnit\Framework\assertNull;
+use Webmozart\Assert\Assert;
 
 final class VendorDisablingContext extends RawMinkContext implements Context
 {
@@ -73,7 +73,7 @@ final class VendorDisablingContext extends RawMinkContext implements Context
         $element = '#' . strtolower($ifEnabled);
         $page = $this->getSession()->getPage();
         $findName = $page->find('css', $element);
-        assertNull($findName);
+        Assert::null($findName);
     }
 
     /**

@@ -1,0 +1,40 @@
+<div id="details">
+    <h4 class="ui top attached large header">{{ 'bitbag_mvm_plugin.ui.details'|trans }}</h4>
+    <div class="ui attached segment">
+        <table class="ui very basic celled table">
+            <tbody>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.name'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.code }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.published_at'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.publishedAt | date }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.status'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.status }}</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        {% if productDraft.status == 'under_verification' %}
+            <div class="ui buttons">
+                {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/accept_product_listing.html.twig' %}
+                {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/reject_product_listing.html.twig' %}
+            </div>
+        {% endif %}
+    </div>
+</div>
