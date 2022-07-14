@@ -47,7 +47,7 @@ final class CurrentUserResolverSpec extends ObjectBehavior
             ->shouldReturn($user);
     }
 
-    public function it_returns_null_if_not_find_actual_user(
+    public function it_returns_null_when_didnt_find_current_user(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token
     ): void {
