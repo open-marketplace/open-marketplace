@@ -40,3 +40,12 @@ vendor_register:
 app_vendor:
   resource: 'routing/vendor.yml'
   prefix: /{_locale}/vendor
+
+conversation:
+  resource: "routing/conversation.yml"
+
+conversation_vendor:
+  resource: "routing/vendor_conversation.yml"
+  prefix: /{_locale}
+  requirements:
+      _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$

@@ -1,2 +1,4 @@
 imports:
-  - { resource: 'grids/**/*.yml' }
+    - { resource: 'grids/**/*.yml' }
+    - { resource: 'grids/*.yml'}
+

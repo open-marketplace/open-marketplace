@@ -42,6 +42,7 @@ final class VendorVerificationContext extends RawMinkContext implements Context
 
         $vendorCountry = $this->container->get('sylius.factory.country')->createNew();
         $vendorCountry->setCode('US');
+        $this->entityManager->persist($vendorCountry);
 
         $vendor->setCompanyName('vendor');
         $vendor->setTaxIdentifier('vendorTax');

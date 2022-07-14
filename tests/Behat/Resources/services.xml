@@ -4,6 +4,6 @@
         <import resource="services/*.xml"/>
     </imports>
     <services>
-        <defaults public="true" />          
-     </services>
+        <defaults public="true" />
+    </services>
 </container>
