@@ -5,7 +5,12 @@
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\AccountMenuListener"
                  id="bitbag.sylius_mvm_plugin.listener.account_menu_listener">
-            <tag name="kernel.event_listener" event="sylius.menu.shop.account" method="addAccountMenuItems"/>   
+            <tag name="kernel.event_listener" event="sylius.menu.shop.account" method="addAccountMenuItems"/>
+        </service>
+
+        <service id="mvm.listener.vendor.menu_builder_conversation" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\VendorConversationMenuListener">
+            <argument type="service" id="security.token_storage" />
+            <tag name="kernel.event_listener" event="sylius.menu.shop.account" method="addConversationMenuItems" />
         </service>
     </services>
 </container>

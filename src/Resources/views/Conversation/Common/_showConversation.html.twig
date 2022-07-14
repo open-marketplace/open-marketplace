@@ -1,0 +1,142 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% block content %}
+    {% set messagePath = app.request.requestUri ~ "/message/add" %}
+
+    <div class="ui stackable one column grid">
+        <div class="column">
+            <h1 class="ui header">
+                <i class="ui icon edit"></i>
+                <div class="content">
+                    {% if conversation.category is not null %}
+                        {{ conversation.category.name }}
+                    {% endif %}
+                    {% if conversation.messages.first.adminUser is not null %}
+                        {{ 'bitbag_mvm_plugin.ui.conversation.admin_conversation'|trans }}
+                    {% else %}
+                        {{ 'bitbag_mvm_plugin.ui.conversation.user_conversation'|trans }}
+                    {% endif %}
+                    <div class="sub header">
+                        {{ 'bitbag_mvm_plugin.ui.conversation.with'|trans }}
+                        {% if conversation.messages.first.adminUser is not null %}
+                            <div>
+                                {{ 'bitbag_mvm_plugin.ui.admin'|trans }}
+                            </div>
+                        {% else %}
+                            <div>
+                                {{ conversation.messages.first.shopUser.username }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </h1>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    {% if conversation.isClosed() %}
+        {{ messages.info('bitbag_mvm_plugin.ui.conversations_listing.reading_closed_conversation') }}
+    {% endif %}
+
+    <div class="ui stackable grid">
+        {% for message in conversation.messages %}
+            {% if app.user is same as message.author %}
+                <div class="twelve wide column">
+                    {% if message.content|raw is same as "<span>ARCHIVE_REQUEST_MESSAGE</span>" %}
+                        <div class="ui icon message">
+                            <i class="icon envelope middle center aligned"></i>
+                            <div class="content">
+                                {% include "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/Common/archiveRequestMessage.html.twig" %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="ui icon message">
+                            <i class="icon envelope middle center aligned"></i>
+                            <div class="content">
+                                <div class="header">
+                                    {% if message.author.firstName is defined %}
+                                        {{ message.author.firstName ~ ' ' ~ message.author.lastName }}
+                                    {% else %}
+                                        {{ message.author.username }}
+                                    {% endif %}
+                                </div>
+                                <p>{{ message.content|raw }}</p>
+                            </div>
+                            <div class="created-at right top aligned">
+                                <a class="ui basic label">{{ message.createdAt|date }}</a>
+                                {% if message.filename is not null %}
+                                    <div class="message-attachment">
+                                        {{ 'bitbag_mvm_plugin.ui.conversation.attachment'|trans }}:
+                                        <a href="{{ asset('uploads/message_files/' ~ message.filename ) }}" target="_blank">{{ 'bitbag_mvm_plugin.ui.form.conversation_message.file'|trans }}</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="four wide column"><br /></div>
+            {% else %}
+                <div class="four wide column"><br /></div>
+                <div class="twelve wide column">
+                    {% if message.content|raw is same as "<span>ARCHIVE_REQUEST_MESSAGE</span>" %}
+                        <div class="ui icon message">
+                            <i class="icon envelope middle center aligned"></i>
+                            <div class="content">
+                                {% include "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/Common/archiveRequestMessage.html.twig" %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="ui icon message">
+                            <i class="icon envelope middle center aligned"></i>
+                            <div class="content">
+                                <div class="header">
+                                    {% if message.author.firstName is defined %}
+                                        {{ message.author.firstName ~ ' ' ~ message.author.lastName }}
+                                    {% else %}
+                                        {{ message.author.username }}
+                                    {% endif %}
+                                </div>
+                                <p>{{ message.content|raw }}</p>
+                            </div>
+                            <div class="created-at right top aligned">
+                                <a class="ui basic label">{{ message.createdAt|date }}</a>
+                                {% if message.filename is not null %}
+                                    <div class="message-attachment">
+                                        {{ 'bitbag_mvm_plugin.ui.conversation.attachment'|trans }}:
+                                        <a href="{{ asset('uploads/message_files/' ~ message.filename ) }}" target="_blank">{{ 'bitbag_mvm_plugin.ui.form.conversation_message.file'|trans }}</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if conversation.isOpen()  %}
+        <div class="ui divider"></div>
+        <div class="ui header">
+            {{ 'bitbag_mvm_plugin.ui.conversation.your_response_header'|trans }}
+        </div>
+        <div class="ui form">
+
+            {{ form_start(form, { 'action': messagePath, attr: { class: 'ui form' } }) }}
+                <div class="ui stackable grid">
+                    <div class="column ten wide">
+                        {{ form_row(form.content) }}
+                    </div>
+                    <div class="column six wide">
+                        {{ form_row(form.file) }}
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="button">
+                        {{ form_widget(form.submit, { attr: { class: 'ui primary button' } }) }}
+                    </div>
+                </div>
+            {{ form_end(form, { 'render_rest': false }) }}
+        </div>
+    {% endif %}
+
+{% endblock %}

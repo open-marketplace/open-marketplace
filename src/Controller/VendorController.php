@@ -168,6 +168,7 @@ final class VendorController extends ResourceController
             $this->manager->flush();
             $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
         }
+
         return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
     }
 }

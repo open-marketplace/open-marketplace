@@ -26,6 +26,18 @@
 
             <tag name="form.type"/>
         </service>
+
+        <service id="mvm.form.type.conversation"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\ConversationType">
+            <argument type="service" id="bitbag_mvm_plugin.current_user_resolver" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.vendor" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="form.type"/>
+        </service>
+
+        <service id="mvm.form.type.conversation_message" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
 
