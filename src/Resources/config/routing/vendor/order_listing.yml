@@ -1,4 +1,4 @@
-order_listing:
+bitbag_mvm_plugin_order_listing:
     path: /orders
     methods: [GET]
     defaults:

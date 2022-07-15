@@ -24,11 +24,6 @@ sylius_grid:
                     sortable: ~
                     options:
                         format: m/d/Y
-                shippingAddress:
-                    type: twig
-                    label: sylius.ui.ship_to
-                    options:
-                        template: "@SyliusShop/Account/Order/Grid/Field/address.html.twig"
                 total:
                     type: twig
                     label: sylius.ui.total
@@ -36,6 +31,12 @@ sylius_grid:
                     sortable: total
                     options:
                         template: "@SyliusShop/Account/Order/Grid/Field/total.html.twig"
+                customer:
+                    type: twig
+                    label: sylius.ui.customer
+                    sortable: customer.lastName
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
@@ -44,6 +45,70 @@ sylius_grid:
                         template: "@SyliusUi/Grid/Field/label.html.twig"
                         vars:
                             labels: "@SyliusShop/Account/Order/Label/State"
+                paymentState:
+                    type: twig
+                    label: sylius.ui.payment_state
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/PaymentState"
+                shippingState:
+                    type: twig
+                    label: sylius.ui.shipping_state
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/ShippingState"
+            filters:
+                paymentState:
+                    type: select
+                    label: sylius.ui.payment_state
+                    form_options:
+                        choices:
+                            sylius.ui.awaiting_payment: awaiting_payment
+                            sylius.ui.paid: paid
+                            sylius.ui.cancelled: cancelled
+                shippingState:
+                    type: select
+                    label: sylius.ui.shipping_state
+                    form_options:
+                        choices:
+                            sylius.ui.cancelled: cancelled
+                            sylius.ui.ready: ready
+                            sylius.ui.shipped: shipped
+                number:
+                    type: string
+                    label: sylius.ui.number
+                customer:
+                    type: string
+                    label: sylius.ui.customer
+                    options:
+                        fields: [ customer.email, customer.firstName, customer.lastName ]
+                date:
+                    type: date
+                    label: sylius.ui.date
+                    options:
+                        field: checkoutCompletedAt
+                        inclusive_to: true
+                channel:
+                    type: entity
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                total:
+                    type: money
+                    label: sylius.ui.total
+                    options:
+                        currency_field: currencyCode
+                shipping_method:
+                    type: entity
+                    label: sylius.ui.shipping_method
+                    options:
+                        fields: [ shipments.method ]
+                    form_options:
+                        class: "%sylius.model.shipping_method.class%"
             actions:
                 item:
                     show:
@@ -51,6 +116,6 @@ sylius_grid:
                         label: sylius.ui.show
                         options:
                             link:
-                                route: sylius_shop_account_order_show
+                                route: sylius_admin_order_show
                                 parameters:
-                                    number: resource.number
+                                    id: resource.id
