@@ -43,10 +43,13 @@ app_vendor:
 app_shop:
     resource: 'routing/shop.yml'
     prefix: /{_locale}
-#        requirements:
-#            _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 
 sylius_shop_checkout_complete:
     resource: 'routing/shop/order.yml'
     prefix: /{_locale}
 
+vendor_order_list:
+    resource: 'routing/vendor/order_listing.yml'
+    prefix: /{_locale}

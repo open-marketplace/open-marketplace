@@ -1,0 +1,11 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    {% include '@SyliusShop/Account/Order/Index/_breadcrumb.html.twig' %}
+{% endblock %}
+
+{% block subcontent %}
+    {{ sylius_grid_render(resources, '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/VendorOrders/vendor_orders.html.twig') }}
+{% endblock %}

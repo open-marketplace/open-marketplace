@@ -80,6 +80,26 @@ class OrderController extends BaseOrderController
         $this->resourceUpdateHandler = $resourceUpdateHandler;
         $this->resourceDeleteHandler = $resourceDeleteHandler;
     }
+    public function indexAction(Request $request): Response
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::INDEX);
+        $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
+
+        $this->eventDispatcher->dispatchMultiple(ResourceActions::INDEX, $configuration, $resources);
+
+        if ($configuration->isHtmlRequest()) {
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX . '.html'), [
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
+        }
+
+        return $this->createRestView($configuration, $resources);
+    }
 
     public function updateAction(Request $request): Response
     {
