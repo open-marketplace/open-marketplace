@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />  
+        <service
+                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\VendorPageContext"
+                id="tests.bitbag.mvm_plugin.behat.context.vendor_page_context"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="sylius.repository.country"/>
+            <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository"/>
+            <argument type="service" id="sylius.custom_factory.product"/>
+            <argument type="service" id="sylius.generator.slug"/>
+            <argument type="service" id="sylius.product_variant_resolver.default"/>
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="bitbag.mvm_plugin.repository.product_repository"/>
+            <argument type="service" id="sylius.factory.channel_pricing"/>
+            <argument type="service" id="tests.bitbag.mvm_plugin.behat.page.vendor_page_page"/>
+        </service>
+    </services>
+</container>

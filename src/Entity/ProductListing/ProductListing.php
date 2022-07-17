@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
 class ProductListing implements ProductListingInterface
 {
@@ -92,13 +92,11 @@ class ProductListing implements ProductListingInterface
         $this->productDrafts->add($productDrafts);
     }
 
-    /**
-     * @return false|mixed|ProductDraftInterface|null
-     */
-    public function getLatestDraft()
+    public function getLatestDraft(): ?ProductDraftInterface
     {
         $productDraft = null;
-        if (!$this->productDrafts->isEmpty()) {
+        if (!$this->productDrafts->isEmpty() && false !== $this->productDrafts->last()) {
+            /** @var ProductDraftInterface $productDraft */
             $productDraft = $this->productDrafts->last();
         }
 

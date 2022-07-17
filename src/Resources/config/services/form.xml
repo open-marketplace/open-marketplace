@@ -6,6 +6,7 @@
         <parameter key="bitbag_mvm_plugin.form.type.vendor.validation_groups" type="collection">
             <parameter>Default</parameter>
             <parameter>VendorUserRegister</parameter>
+            <parameter>VendorLogo</parameter>
             <parameter>sylius</parameter>
         </parameter>
     </parameters>
@@ -27,9 +28,16 @@
             <tag name="form.type"/>
         </service>
 
+        <service id="bitbag.mvm_plugin.form.type.vendor_image"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType"
+        >
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage</argument>
+            <tag name="form.type"/>
+        </service>
+
         <service id="mvm.form.type.conversation"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\ConversationType">
-            <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver" />
+            <argument type="service" id="bitbag_mvm_plugin.current_user_resolver" />
             <argument type="service" id="bitbag_mvm_plugin.repository.vendor" />
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="form.type"/>

@@ -27,19 +27,19 @@ final class AcceptAction
 
     private RouterInterface $router;
 
-    private ProductDraftStateMachineTransitionInterface $productListingStateMachineTransition;
+    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
 
     private ProductDraftRepositoryInterface $productDraftRepository;
 
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
         RouterInterface $router,
-        ProductDraftStateMachineTransitionInterface $productListingStateMachineTransition,
+        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ProductDraftRepositoryInterface $productDraftRepository
     ) {
         $this->productListingRepository = $productListingRepository;
         $this->router = $router;
-        $this->productListingStateMachineTransition = $productListingStateMachineTransition;
+        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productDraftRepository = $productDraftRepository;
     }
 
@@ -51,7 +51,7 @@ final class AcceptAction
         /** @var ProductDraftInterface $latestProductDraft */
         $latestProductDraft = $this->productDraftRepository->findProductListingLatestProductDraft($productListing);
 
-        $this->productListingStateMachineTransition->apply($latestProductDraft, ProductDraftTransitions::TRANSITION_VERIFY);
+        $this->productDraftStateMachineTransition->applyIfCan($latestProductDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
 
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
     }

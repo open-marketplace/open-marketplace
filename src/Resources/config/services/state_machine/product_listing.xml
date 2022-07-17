@@ -5,15 +5,15 @@
     <services>
         <service id="bitbag_mvm_plugin.state_machine.product_draft" public="true"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductDraftCallbacks">
-            <argument key="$entityManager" type="service" id="doctrine.orm.entity_manager" />
-            <argument key="$createProductFromDraftHelper" type="service" id="bit_bag.mvm_plugin.helper.create_product_from_draft_helper" />
-            <argument key="$session" type="service" id="session.flash_bag" />
-            <argument key="$updateProductFromDraftHelper" type="service" id="bit_bag.mvm_plugin.helper.update_product_from_draft_helper" />
+            <argument type="service" id="session.flash_bag" />
+            <argument type="service" id="bitbag.mvm_plugin.acceptance_operator.product_draft_acceptance_operator"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
         </service>
 
-        <service id="bitbag_mvm_plugin.state_machine.product_draft.transition" public="true"
+        <service id="bitbag_mvm_plugin.state_machine.product_draft.transition"
                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransition">
-                <argument key="$productDraftStateMachineFactory" type="service" id="SM\Factory\Factory"/>
+                <argument type="service" id="SM\Factory\Factory"/>
         </service>
     </services>
 </container>

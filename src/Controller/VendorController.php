@@ -139,9 +139,9 @@ final class VendorController extends ResourceController
     public function verifyVendorAction(Request $request): Response
     {
         $vendorId = $request->attributes->get('id', 0);
+        $vendorRepository = $this->manager->getRepository(Vendor::class);
 
-        $currentVendor = $this->manager->getRepository(Vendor::class)
-            ->findOneBy(['id' => $vendorId]);
+        $currentVendor = $vendorRepository->findOneBy(['id' => $vendorId]);
 
         if (null === $currentVendor) {
             throw new NotFoundHttpException(sprintf('Vendor with id %d has not been found', $vendorId));
@@ -159,20 +159,15 @@ final class VendorController extends ResourceController
     public function enablingVendorAction(Request $request): Response
     {
         $vendorId = $request->attributes->get('id', 0);
+        $vendorRepository = $this->manager->getRepository(Vendor::class);
+        $currentVendor = $vendorRepository->findOneBy(['id' => $vendorId]);
+        if ($currentVendor) {
+            $currentVendor->setEnabled(!$currentVendor->isEnabled());
+            $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
 
-        $currentVendor = $this->manager->getRepository(Vendor::class)
-            ->findOneBy(['id' => $vendorId]);
-
-        if (null === $currentVendor) {
-            throw new NotFoundHttpException(sprintf('Vendor with id %d has not been found', $vendorId));
+            $this->manager->flush();
+            $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
         }
-
-        $currentVendor->setEnabled(!$currentVendor->isEnabled());
-
-        $this->manager->flush();
-
-        $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
-        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
 
         return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
     }

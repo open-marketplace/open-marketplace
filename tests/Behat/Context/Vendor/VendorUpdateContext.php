@@ -17,11 +17,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use Doctrine\Persistence\ObjectManager;
-use function PHPUnit\Framework\assertNotEquals;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 class VendorUpdateContext extends MinkContext
 {
@@ -67,6 +67,8 @@ class VendorUpdateContext extends MinkContext
         $vendor->getVendorAddress()->setCity('Warsaw');
         $vendor->getVendorAddress()->setPostalCode('00-111');
         $vendor->getVendorAddress()->setStreet('Tajna 13');
+        $vendor->setSlug('vendor-slug');
+        $vendor->setDescription('description');
         $this->manager->persist($vendor);
         $this->manager->flush();
         $this->sharedStorage->set('vendor', $vendor);
@@ -80,7 +82,7 @@ class VendorUpdateContext extends MinkContext
         $vendor = $this->sharedStorage->get('vendor');
         $pendingData = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
 
-        assertNotEquals(null, $pendingData);
+        Assert::notEq(null, $pendingData);
     }
 
     /**
@@ -97,6 +99,7 @@ class VendorUpdateContext extends MinkContext
         $pendigUpdate->setCompanyName('new Company');
         $pendigUpdate->setTaxIdentifier('new ID');
         $pendigUpdate->setPhoneNumber('new number');
+        $pendigUpdate->setDescription('new description');
         $pendigUpdate->getVendorAddress()->setStreet('new street');
         $pendigUpdate->getVendorAddress()->setCity('new city');
         $pendigUpdate->getVendorAddress()->setPostalCode('new code');

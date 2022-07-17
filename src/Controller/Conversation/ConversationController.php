@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,31 +28,33 @@ final class ConversationController
 
     private ConversationRepositoryInterface $conversationRepository;
 
-    private ActualUserResolverInterface $actualUserResolver;
+    private CurrentUserResolverInterface $currentUserResolver;
 
     public function __construct(
         Environment $templatingEngine,
         FormFactoryInterface $formFactory,
         ConversationRepositoryInterface $conversationRepository,
-        ActualUserResolverInterface $actualUserResolver,
+        CurrentUserResolverInterface $currentUserResolver,
         ) {
         $this->templatingEngine = $templatingEngine;
         $this->formFactory = $formFactory;
         $this->conversationRepository = $conversationRepository;
-        $this->actualUserResolver = $actualUserResolver;
+        $this->currentUserResolver = $currentUserResolver;
     }
 
     public function index(Request $request): Response
     {
         $template = $request->attributes->get('_sylius')['template'];
 
-        $actualUser = $this->actualUserResolver->resolve();
+        $currentUser = $this->currentUserResolver->resolve();
+
+        $status = Conversation::STATUS_OPEN;
 
         if ($request->query->get('closed')) {
-            $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_CLOSED, $actualUser);
-        } else {
-            $conversations = $this->conversationRepository->findAllWithStatusAndUser(Conversation::STATUS_OPEN, $actualUser);
+            $status = Conversation::STATUS_CLOSED;
         }
+
+        $conversations = $this->conversationRepository->findAllWithStatusAndUser($status, $currentUser);
 
         return new Response(
             $this->templatingEngine->render(

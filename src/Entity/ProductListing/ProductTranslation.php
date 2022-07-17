@@ -33,10 +33,6 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
 
     protected ?string $locale;
 
-    public function __construct()
-    {
-    }
-
     public function getId(): int
     {
         return $this->id;

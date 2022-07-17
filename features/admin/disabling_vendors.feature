@@ -24,6 +24,7 @@ Feature: Disabling vendors
     And I should see "Confirm your action"
     Then I should see "Vendor's account has been successfully enabled"
 
+
   @ui
   Scenario: Disabling disabled vendor's account
     Given There is a 'disabled' vendor

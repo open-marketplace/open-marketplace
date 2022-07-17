@@ -11,9 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Command\ProductListing\CreateProductListingCommandInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
@@ -38,32 +41,40 @@ class CreateProductAction extends AbstractController
 
     private FactoryInterface $factory;
 
-    private CreateProductListingCommandInterface $createProductListingCommand;
-
     private RedirectHandlerInterface $redirectHandler;
 
     private FlashHelperInterface $flashHelper;
 
     private EventDispatcherInterface $eventDispatcher;
 
+    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
+
+    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
+
+    private ProductDraftRepositoryInterface $productDraftRepository;
+
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         NewResourceFactoryInterface $newResourceFactory,
         FactoryInterface $factory,
-        CreateProductListingCommandInterface $createProductListingCommand,
+        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
+        ProductDraftRepositoryInterface $productDraftRepository
     ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->newResourceFactory = $newResourceFactory;
         $this->factory = $factory;
         $this->metadata = $metadata;
-        $this->createProductListingCommand = $createProductListingCommand;
         $this->redirectHandler = $redirectHandler;
         $this->flashHelper = $flashHelper;
         $this->eventDispatcher = $eventDispatcher;
+        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
+        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
+        $this->productDraftRepository = $productDraftRepository;
     }
 
     public function __invoke(Request $request): Response
@@ -97,7 +108,15 @@ class CreateProductAction extends AbstractController
 
             /** @var ClickableInterface $button */
             $button = $form->get('saveAndAdd');
-            $this->createProductListingCommand->create($productDraft, $button->isClicked());
+            $productDraft = $this->productListingFromDraftFactory->createNew($productDraft);
+
+            if ($button->isClicked()) {
+                $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
+                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created_and_sent_to_verification');
+            } else {
+                $this->productDraftRepository->save($productDraft);
+                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
+            }
 
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }

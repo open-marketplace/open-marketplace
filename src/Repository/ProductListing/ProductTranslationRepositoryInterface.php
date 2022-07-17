@@ -17,5 +17,5 @@ interface ProductTranslationRepositoryInterface
 {
     public function save(ProductTranslationInterface $productTranslation): void;
 
-    public function saveMore(array $productTranslations): void;
+    public function saveCollection(array $productTranslations): void;
 }

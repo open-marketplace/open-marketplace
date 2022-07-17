@@ -6,5 +6,7 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.channel
+                - bitbag.sylius_mvm_plugin.behat.context.setup.vendor
+                - sylius.behat.context.hook.doctrine_orm
             filters:
                 tags: '@managing_product_listings && @ui'

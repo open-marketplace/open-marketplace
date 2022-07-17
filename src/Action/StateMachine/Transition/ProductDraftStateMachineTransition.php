@@ -24,7 +24,7 @@ final class ProductDraftStateMachineTransition implements ProductDraftStateMachi
         $this->productDraftStateMachineFactory = $productDraftStateMachineFactory;
     }
 
-    public function apply(
+    public function applyIfCan(
         ProductDraftInterface $productDraft,
         string $transition
     ): void {

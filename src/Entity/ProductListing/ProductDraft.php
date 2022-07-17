@@ -43,17 +43,11 @@ class ProductDraft implements ProductDraftInterface
     public function __construct()
     {
         $this->code = '';
-
         $this->status = ProductDraftInterface::STATUS_CREATED;
-
         $this->productListingPrice = new ArrayCollection();
-
         $this->translations = new ArrayCollection();
-
         $this->isVerified = false;
-
         $this->createdAt = new \DateTime();
-
         $this->versionNumber = 1;
     }
 
@@ -167,18 +161,9 @@ class ProductDraft implements ProductDraftInterface
         $this->status = $status;
     }
 
-    public function newVersion(): void
+    public function incrementVersion(): void
     {
         ++$this->versionNumber;
-    }
-
-    public function clear(): void
-    {
-        $this->id = null;
-
-        $this->productListingPrice = new ArrayCollection();
-
-        $this->translations = new ArrayCollection();
     }
 
     public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void
@@ -189,5 +174,24 @@ class ProductDraft implements ProductDraftInterface
     public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void
     {
         $this->productListingPrice->set($key, $productListingPrice);
+    }
+
+    public function accept(): void
+    {
+        $this->setStatus(ProductDraftInterface::STATUS_VERIFIED);
+        $this->setVerifiedAt((new \DateTime()));
+        $this->setIsVerified(true);
+    }
+
+    public function reject(): void
+    {
+        $this->setStatus(ProductDraftInterface::STATUS_REJECTED);
+        $this->setVerifiedAt((new \DateTime()));
+    }
+
+    public function sendToVerification(): void
+    {
+        $this->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+        $this->setPublishedAt((new \DateTime()));
     }
 }

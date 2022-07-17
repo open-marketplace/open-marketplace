@@ -17,4 +17,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface VendorRepositoryInterface extends RepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;
+
+    /**
+     * @return mixed
+     */
+    public function findOneBy(
+        array $criteria,
+        ?array $orderBy = null
+    );
 }

@@ -16,7 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterfa
 use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacade;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -26,22 +26,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class AddMessageFacadeSpec extends ObjectBehavior
 {
-    function let(
-        ActualUserResolverInterface $actualUserResolver,
+    public function let(
+        CurrentUserResolverInterface $actualUserResolver,
         FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository
     ) {
         $this->beConstructedWith($actualUserResolver, $fileUploader, $conversationRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(AddMessageFacade::class);
         $this->shouldImplement(AddMessageFacadeInterface::class);
     }
 
-    function it_process_message_and_add_it_to_given_conversation(
-        ActualUserResolverInterface $actualUserResolver,
+    public function it_processes_message_and_adds_it_to_given_conversation(
+        CurrentUserResolverInterface $actualUserResolver,
         FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
         UserInterface $user,
@@ -67,8 +67,8 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         $this->createWithConversation(1, $message, $file, true);
     }
 
-    function it_process_message_admin_create_not_send_file(
-        ActualUserResolverInterface $actualUserResolver,
+    public function it_processes_message_admin_create_not_send_file(
+        CurrentUserResolverInterface $actualUserResolver,
         FileUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
         AdminUserInterface $admin,
@@ -90,17 +90,69 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         $this->createWithConversation(1, $message, null, true);
     }
 
-    function it_throws_exception_if_user_is_not_found(
-        ActualUserResolverInterface $actualUserResolver,
+    public function it_throws_exception_if_user_is_not_found(
+        CurrentUserResolverInterface $actualUserResolver,
         MessageInterface $message
     ): void {
         $actualUserResolver->resolve()->willReturn(null);
 
         $this->shouldThrow(UserNotFoundException::class)
-            ->during('createWithConversation',[
+            ->during('createWithConversation', [
                 1,
-                $message
+                $message,
             ]);
+    }
 
+    public function it_doesnt_strip_tags_on_false_parameter(
+        CurrentUserResolverInterface $actualUserResolver,
+        FileUploaderInterface $fileUploader,
+        ConversationRepositoryInterface $conversationRepository,
+        AdminUserInterface $admin,
+        UserInterface $user,
+        MessageInterface $message,
+        ConversationInterface $conversation
+    ): void {
+        $messageContent = 'messageContent';
+        $actualUserResolver->resolve()->willReturn($admin);
+        $conversationRepository->find(1)->willReturn($conversation);
+        $message->getContent()->willReturn($messageContent);
+        $message->setContent(strip_tags($messageContent))->shouldNotBeCalled();
+
+        $message->setAuthor($admin)->shouldBeCalled();
+
+        $conversation->addMessage($message)->shouldBeCalled();
+
+        $conversationRepository->add($conversation)->shouldBeCalled();
+
+        $this->createWithConversation(1, $message, null, false);
+    }
+
+    public function it_adds_file(
+        CurrentUserResolverInterface $actualUserResolver,
+        FileUploaderInterface $fileUploader,
+        ConversationRepositoryInterface $conversationRepository,
+        UserInterface $user,
+        MessageInterface $message,
+        ConversationInterface $conversation
+    ): void {
+        $file = new UploadedFile('tests/Application/public/uploads/message_files/test.txt', 'test.txt');
+        $filename = 'filename';
+        $messageContent = 'messageContent';
+        $actualUserResolver->resolve()->willReturn($user);
+        $conversationRepository->find(1)->willReturn($conversation);
+
+        $fileUploader->upload($file)->willReturn($filename);
+        $message->setFilename($filename)->shouldBeCalled();
+
+        $message->getContent()->willReturn($messageContent);
+        $message->setContent(strip_tags($messageContent))->shouldBeCalled();
+
+        $message->setAuthor($user)->shouldBeCalled();
+
+        $conversation->addMessage($message)->shouldBeCalled();
+
+        $conversationRepository->add($conversation)->shouldBeCalled();
+
+        $this->createWithConversation(1, $message, $file, true);
     }
 }

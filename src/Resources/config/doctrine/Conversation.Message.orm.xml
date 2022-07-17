@@ -13,6 +13,8 @@
             <gedmo:timestampable on="create"/>
         </field>
 
+        <field name="filename" column="filename" type="string" nullable="true" />
+
         <many-to-one field="shopUser" target-entity="Sylius\Component\Core\Model\ShopUserInterface">
             <join-column name="shop_user_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
         </many-to-one>
@@ -25,15 +27,12 @@
             <join-column name="admin_user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="conversation" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation" inversed-by="messages">
+        <many-to-one field="conversation" target-entity="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation" inversed-by="messages">
             <join-column name="conversation_id" referenced-column-name="id" on-delete="CASCADE"/>
             <cascade>
                 <cascade-persist />
-                <cascade-remove />
             </cascade>
         </many-to-one>
-
-        <field name="filename" column="filename" type="string" nullable="true" />
 
     </mapped-superclass>
 

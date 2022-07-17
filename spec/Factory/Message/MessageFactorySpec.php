@@ -20,18 +20,18 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class MessageFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $conversationMessageFactory)
+    public function let(FactoryInterface $conversationMessageFactory)
     {
         $this->beConstructedWith($conversationMessageFactory);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(MessageFactory::class);
         $this->shouldImplement(MessageFactoryInterface::class);
     }
 
-    function it_create_new_message(
+    public function it_create_new_message(
         FactoryInterface $conversationMessageFactory,
         MessageInterface $message
     ): void {
@@ -40,7 +40,7 @@ final class MessageFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($message);
     }
 
-    function it_create_new_with_archive_request(
+    public function it_create_new_with_archive_request(
         FactoryInterface $conversationMessageFactory,
         MessageInterface $message
     ): void {
@@ -50,5 +50,4 @@ final class MessageFactorySpec extends ObjectBehavior
         $this->createNewWithArchiveRequest()
             ->shouldReturn($message);
     }
-
 }

@@ -15,5 +15,5 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 
 interface ProductDraftStateMachineTransitionInterface
 {
-    public function apply(ProductDraftInterface $productDraft, string $transition): void;
+    public function applyIfCan(ProductDraftInterface $productDraft, string $transition): void;
 }

@@ -8,7 +8,7 @@
             <argument type="service" id="twig" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="bitbag_mvm_plugin.repository.conversation" />
-            <argument type="service" id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver" />
+            <argument type="service" id="bitbag_mvm_plugin.current_user_resolver" />
             <argument type="service" id="request_stack"/>
             <tag name="controller.service_arguments" />
         </service>
@@ -66,6 +66,18 @@
                  id="bitbag_mvm_plugin.controller.vendor_controller"
                  parent="bitbag_mvm_plugin.controller.vendor">
             <argument type="service" id="bitbag_mvm_plugin.provider.vendor_provider" />
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ShowVendorPageAction"
+                 id="bitbag.mvm_plugin.controller.show_vendor_page_action"
+                 public="true"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository"/>
+            <argument type="service" id="bitbag.mvm_plugin.repository.product_repository"/>
+            <argument type="service" id="sylius.context.channel"/>
         </service>
     </services>
 </container>

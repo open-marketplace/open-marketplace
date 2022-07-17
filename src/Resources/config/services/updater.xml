@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdater"
+                 id="bitbag.mvm_plugin.updater.product_from_draft_updater">
+            <argument type="service" id="bitbag.mvm_plugin.factory.product_translation_factory" />
+            <argument type="service" id="sylius.repository.product_translation" />
+            <argument type="service" id="sylius.repository.channel_pricing" />
+            <argument type="service" id="sylius.repository.product_variant" />
+        </service>
+    </services>
+</container>

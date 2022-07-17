@@ -16,5 +16,4 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate as Base
 
 class VendorAddressUpdate extends BaseAddressUpdate
 {
-
 }

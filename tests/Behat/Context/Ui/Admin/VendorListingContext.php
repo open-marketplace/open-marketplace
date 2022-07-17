@@ -17,9 +17,8 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertNotEmpty;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use Webmozart\Assert\Assert;
 
 final class VendorListingContext extends RawMinkContext implements Context
 {
@@ -33,15 +32,6 @@ final class VendorListingContext extends RawMinkContext implements Context
     ) {
         $this->entityManager = $entityManager;
         $this->adminUserExample = $adminUserExample;
-    }
-
-    /**
-     * @BeforeScenario
-     */
-    public function clearData()
-    {
-        $purger = new ORMPurger($this->entityManager);
-        $purger->purge();
     }
 
     /**
@@ -77,6 +67,8 @@ final class VendorListingContext extends RawMinkContext implements Context
             $vendor->setCompanyName('vendor ' . $i);
             $vendor->setTaxIdentifier('vendorTax' . $i);
             $vendor->setPhoneNumber('vendorPhone' . $i);
+            $vendor->setSlug('vendor-' . $i);
+            $vendor->setDescription('description');
             $this->entityManager->persist($vendor);
         }
         $this->entityManager->flush();
@@ -88,8 +80,8 @@ final class VendorListingContext extends RawMinkContext implements Context
     public function iShouldSeeVendorRows($count)
     {
         $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
-        assertNotEmpty($rows, 'Could not find any rows');
-        assertEquals($count, count($rows), 'Rows numbers are not equal');
+        Assert::notEmpty($rows, 'Could not find any rows');
+        Assert::eq($count, count($rows), 'Rows numbers are not equal');
     }
 
     /**

@@ -16,7 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolverInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -30,15 +30,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ConversationType extends AbstractType
 {
-    private ActualUserResolverInterface $actualUserResolver;
+    private CurrentUserResolverInterface $currentUserResolver;
 
     private VendorRepositoryInterface $vendorRepository;
 
     public function __construct(
-        ActualUserResolverInterface $actualUserResolver,
+        CurrentUserResolverInterface $currentUserResolver,
         VendorRepository $vendorRepository,
     ) {
-        $this->actualUserResolver = $actualUserResolver;
+        $this->currentUserResolver = $currentUserResolver;
         $this->vendorRepository = $vendorRepository;
     }
 
@@ -60,7 +60,7 @@ final class ConversationType extends AbstractType
 
     public function postSetData(FormEvent $event): void
     {
-        $user = $this->actualUserResolver->resolve();
+        $user = $this->currentUserResolver->resolve();
 
         if ($user instanceof AdminUserInterface) {
             $form = $event->getForm();
@@ -83,7 +83,7 @@ final class ConversationType extends AbstractType
         /** @var ConversationInterface $conversation */
         $conversation = $event->getData();
 
-        $resolvedUser = $this->actualUserResolver->resolve();
+        $resolvedUser = $this->currentUserResolver->resolve();
 
         if ($event->getForm()->has('vendorUser') && $resolvedUser instanceof AdminUserInterface) {
             if ($event->getForm()->get('vendorUser')->getData()) {

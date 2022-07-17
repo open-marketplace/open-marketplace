@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\TranslationNotFoundException;
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
@@ -47,7 +48,7 @@ class ResourceTranslationsType extends AbstractType
             /** @var ProductTranslationInterface $translation */
             foreach ($translations as $localeCode => $translation) {
                 if (null == $translation) {
-                    throw new \Exception('Fatal error, translation not found.');
+                    throw new TranslationNotFoundException('Translation not found.');
                 }
 
                 if (null === $translation->getName()) {

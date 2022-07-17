@@ -17,7 +17,7 @@ final class ProductDraftTransitions
 
     public const TRANSITION_SEND_TO_VERIFICATION = 'send_to_verification';
 
-    public const TRANSITION_VERIFY = 'accept_product_draft';
+    public const TRANSITION_ACCEPT = 'accept_product_draft';
 
     public const TRANSITION_REJECT = 'reject_product_draft';
 }

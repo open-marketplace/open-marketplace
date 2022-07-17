@@ -14,7 +14,7 @@ sylius_grid:
                     label: bitbag_mvm_plugin.ui.form.conversation.category
                     options:
                         template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/category.html.twig'
-                applicant:
+                shopUser:
                     type: twig
                     label: bitbag_mvm_plugin.ui.grid.conversation.applicant
                     options:

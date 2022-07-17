@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
@@ -25,4 +26,6 @@ interface ChannelPricingFactoryInterface
         ?int $originalPrice,
         ?int $minimumPrice
     ): ChannelPricing;
+
+    public function createFromProductListingPrice(ProductVariantInterface $productVariant, ProductListingPriceInterface $productListingPrice): ChannelPricing;
 }

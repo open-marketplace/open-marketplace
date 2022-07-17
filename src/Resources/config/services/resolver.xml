@@ -4,8 +4,8 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\ActualUserResolver"
-                id="bitbag_sylius_multi_vendor_marketplace_plugin.actual_user_resolver">
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolver"
+                id="bitbag_mvm_plugin.current_user_resolver">
             <argument type="service" id="security.token_storage" />
         </service>
     </services>
