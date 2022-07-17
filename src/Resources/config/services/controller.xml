@@ -67,5 +67,17 @@
                  parent="bitbag_mvm_plugin.controller.vendor">
             <argument type="service" id="bitbag_mvm_plugin.provider.vendor_provider" />
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ShowVendorPageAction"
+                 id="bitbag.mvm_plugin.controller.show_vendor_page_action"
+                 public="true"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository"/>
+            <argument type="service" id="bitbag.mvm_plugin.repository.product_repository"/>
+            <argument type="service" id="sylius.context.channel"/>
+        </service>
     </services>
 </container>

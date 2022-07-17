@@ -29,7 +29,10 @@ bitbag_mvm_plugin:
         company_address: "Company Address"
         postal_code: "Postal code"
         pending_update_message: "You cannot change your profile information until you accept the previous change."
-        vendors: Vendors
+        vendors: 'Vendors'
+        logo: 'Logo'
+        invalid_logo: 'Please upload a valid image (jpg/png/svg)'
+        description: 'Description'
         open: Open
         closed: Closed
         register:
@@ -78,36 +81,7 @@ bitbag_mvm_plugin:
                 applicant: Applicant
                 archive: Archive
         menu:
-            dashboard: Dashboard
             conversations: Conversations
-            become_a_vendor: 'Become a Vendor'
-            city: "City"
-            company_address: "Company Address"
-            company_name: 'Company name'
-            country: "Country"
-            customer: 'Customer'
-            details: 'Details'
-            disable: 'Disable'
-            enable: 'Enable'
-            enabled: 'Enabled'
-            id: 'ID'
-            marketplace: 'Marketplace'
-            not_blank: "This field cannot be empty"
-            phone_number: "Phone number"
-            postal_code: "Postal code"
-            product_listings: 'Product listings'
-            publishedAt: 'Published at'
-            status: 'Status'
-            street: "Street"
-            tax_id: 'Tax ID'
-            tax_identifier: "Tax Identifier"
-            unverified: 'Unverified'
-            vendor_address: 'Vendor address'
-            vendor_dashboard: "Vendor dashboard"
-            vendors: 'Vendors'
-            verified: 'Verified'
-            verify: 'Verify'
-            new_vendor: 'New Vendor'
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_details: 'Vendor details'

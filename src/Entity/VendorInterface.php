@@ -57,6 +57,25 @@ interface VendorInterface extends VendorProfileInterface
 
     public function setEditedAt(?DateTimeInterface $editedAt): void;
 
+    public function getSlug(): ?string;
+
+    public function setSlug(?string $slug): void;
+
+    public function getDescription(): ?string;
+
+    public function setDescription(?string $description): void;
+
+    /** @return Collection<int, ProductInterface> */
+    public function getProducts(): Collection;
+
+    public function addProduct(ProductInterface $product): void;
+
+    public function removeProduct(ProductInterface $product): void;
+
+    public function getImage(): ?VendorImageInterface;
+
+    public function setImage(?VendorImageInterface $image): void;
+
     /** @return Collection<int, ProductListing> */
     public function getProductListings(): Collection;
 

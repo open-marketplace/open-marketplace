@@ -47,6 +47,8 @@ final class VendorVerificationContext extends RawMinkContext implements Context
         $vendor->setCompanyName('vendor');
         $vendor->setTaxIdentifier('vendorTax');
         $vendor->setPhoneNumber('vendorPhone');
+        $vendor->setSlug('slug');
+        $vendor->setDescription('description');
 
         $vendorAddress->setCountry($vendorCountry);
         $vendorAddress->setCity('vendorCity');

@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Uploader;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class FileUploader implements FileUploaderInterface
+final class ConversationFileUploader implements FileUploaderInterface
 {
     private string $targetDirectory;
 

@@ -24,6 +24,10 @@
             <argument type="service" id="bitbag_mvm_plugin.generator.token_generator"/>
         </service>
 
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactory"
+                 id="bitbag.mvm_plugin.service.vendor_image_factory">
+        </service>
+
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ChannelPricingFactory"
                  id="bitbag.mvm_plugin.factory.channel_pricing_factory">
         </service>
@@ -55,7 +59,6 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory" id="bitbag.mvm.factory.address_factory">
-
         </service>
     </services>
 </container>

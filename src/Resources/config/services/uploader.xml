@@ -1,12 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults autowire="false" autoconfigure="false" />
+        <service id="bitbag.mvm_plugin.uploader.file_uploader" class="BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploader">
+            <argument>%kernel.project_dir%/public/</argument>
+        </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploader"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.file_uploader">
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\ConversationFileUploader"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.conversation_file_uploader">
+            <argument>%env(MESSAGES_FILE_UPLOAD_DIRECTORY)%</argument>
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\VendorRegistrationFileUploader"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.vendor_registration_file_uploader">
             <argument>%env(MESSAGES_FILE_UPLOAD_DIRECTORY)%</argument>
         </service>
     </services>
