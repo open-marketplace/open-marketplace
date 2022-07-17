@@ -15,9 +15,12 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Sylius\Component\Core\Model\ProductInterface;
 
 interface ProductRepositoryInterface
 {
+    public function save(ProductInterface $product): void;
+
     /**
      * @return Pagerfanta<object>
      */

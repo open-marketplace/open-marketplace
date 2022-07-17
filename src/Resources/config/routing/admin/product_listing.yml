@@ -7,3 +7,28 @@ bitbag_mvm_plugin_admin_product_listing:
         redirect: index
         grid: bitbag_mvm_plugin_admin_product_listing
     type: sylius.resource
+
+bitbag_mvm_plugin_admin_product_listing_show:
+  path: /product-listings/{id}
+  defaults:
+    _controller: bitbag_mvm_plugin.controller.action.admin.product_listing.show_action
+    _sylius:
+      section: admin
+      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig'
+      permission: true
+
+bitbag_mvm_plugin_admin_product_listing_accept:
+  path: /product-listings/{id}/accept
+  defaults:
+    _controller: bitbag_mvm_plugin.controller.action.admin.product_listing.accept_action
+    _sylius:
+      section: admin
+      permission: true
+
+bitbag_mvm_plugin_admin_product_listing_reject:
+  path: /product-listings/{id}/reject
+  defaults:
+    _controller: bitbag_mvm_plugin.controller.action.admin.product_listing.reject_action
+    _sylius:
+      section: admin
+      permission: true

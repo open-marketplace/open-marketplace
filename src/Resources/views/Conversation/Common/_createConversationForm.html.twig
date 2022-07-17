@@ -1,0 +1,42 @@
+<div class="ui stackable one column grid">
+    <div class="column">
+        <h1 class="ui header">
+            <i class="icon edit"></i>
+            <div class="content">
+                {{ 'bitbag_mvm_plugin.ui.create_new_conversation_header'|trans }}
+            </div>
+        </h1>
+    </div>
+</div>
+<div class="ui divider"></div>
+
+<div class="ui form">
+    {{ form_start(form, { attr: { class: 'ui form'}}) }}
+        <div class="ui stackable grid">
+            <div class="column ten wide">
+                {% if form.category is defined %}
+                    {{ form_row(form.category) }}
+                    <br />
+                {% endif %}
+
+                {% if form.vendorUser is defined %}
+                    <label>
+                        {{ 'bitbag_mvm_plugin.ui.users'|trans }}:
+                        {{ form_widget(form.vendorUser) }}
+                    </label>
+                    <br />
+                {% endif %}
+
+                {{ form_row(form.messages.vars.prototype.content) }}
+            </div>
+            <div class="column six wide">
+                {{ form_row(form.messages.vars.prototype.file) }}
+            </div>
+            {{ form_row(form._token) }}
+            <div class="button">
+                {{ form_widget(form.messages.vars.prototype.submit, { attr: { class: 'ui primary button' }}) }}
+            </div>
+        </div>
+
+    {{ form_end(form, { 'render_rest': false }) }}
+</div>

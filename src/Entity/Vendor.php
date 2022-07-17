@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -44,6 +45,9 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
 
     /** @var Collection<int, ProductInterface> */
     private Collection $products;
+
+    /** @var Collection<int, ProductListing> */
+    private Collection $productListings;
 
     public function __construct()
     {
@@ -189,5 +193,20 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     public function setImage(?VendorImageInterface $image): void
     {
         $this->image = $image;
+    }
+
+    public function getProductListings(): Collection
+    {
+        return $this->productListings;
+    }
+
+    public function setProductListings(Collection $productListings): void
+    {
+        $this->productListings = $productListings;
+    }
+
+    public function addProductListing(ProductListing $productListings): void
+    {
+        $this->productListings->add($productListings);
     }
 }

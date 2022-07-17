@@ -1,7 +1,25 @@
 sylius_resource:
-   resources:
-      bitbag_mvm_plugin.product_listing:
-          driver: doctrine/orm
-          classes:
-              model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing
-              interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingInterface
+  resources:
+    bitbag_mvm_plugin.product_listing:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface
+
+    bitbag_mvm_plugin.product_draft:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface
+
+    bitbag_mvm_plugin.product_translation:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface
+
+    bitbag_mvm_plugin.product_listing_price:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface

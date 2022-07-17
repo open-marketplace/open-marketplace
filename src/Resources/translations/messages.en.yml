@@ -1,14 +1,26 @@
 bitbag_mvm_plugin:
     ui:
+        admin: "Admin"
+        customer: 'Customer'
+        details: 'Details'
+        disable: 'Disable'
+        disabled: 'Disabled'
+        edit: 'Edit'
+        edit_vendor: 'Edit vendor'
+        enable: 'Enable'
+        enabled: 'Enabled'
+        id: "ID"
+        tax_id: 'Tax ID'
         vendor_dashboard: "Vendor dashboard"
         vendor_profile: "Profile"
         become_a_vendor: 'Become a Vendor'
         product_listings: 'Product listings'
+        product_list: 'Product list'
         marketplace: 'Marketplace'
         publishedAt: 'Published at'
         status: 'Status'
         tax_identifier: "Tax Identifier"
-        not_blank: "This field cannot be empty"
+        not_blank: "This field cannnot be empty"
         company_name: "Company name"
         country: "Country"
         city: "City"
@@ -21,22 +33,76 @@ bitbag_mvm_plugin:
         logo: 'Logo'
         invalid_logo: 'Please upload a valid image (jpg/png/svg)'
         description: 'Description'
-        customer: 'Customer'
-        details: 'Details'
-        disable: 'Disable'
-        disabled: 'Disabled'
-        edit: 'Edit'
-        edit_vendor: 'Edit vendor'
-        enable: 'Enable'
-        enabled: 'Enabled'
-        id: 'ID'
-        tax_id: 'Tax ID'
+        open: Open
+        closed: Closed
+        register:
+            new_vendors: New vendors
+        conversations: Conversations
+        conversations_listing:
+            username: Username
+            admin_header: Conversations
+            admin_subheader: Manage your conversations
+            listing_header_open: Open conversations
+            listing_header_closed: Closed conversations
+            your_open_conversations: Manage your open conversations
+            your_closed_conversations: Manage your closed conversations
+            reading_closed_conversation: You're reading conversation, which has been closed.
+            breadcrumb_header: Conversations
+            no_open_conversations: You have no open conversations
+            no_closed_conversations: You have no closed conversations
+        users: Users
+        open_conversations: Open conversations
+        closed_conversations: Closed conversations
+        create_new_conversation: New conversation
+        create_new_conversation_breadcrumb: New conversation
+        create_new_conversation_header: New conversation
+        conversation:
+            user_conversation: Conversation with user
+            admin_conversation: Conversation with administrator
+            header: Conversation from administrator
+            with: Started by
+            your_response_header: "Your response:"
+            attachment: Attachment
+            archive_request_text_first_line: Administrator wants to archive this conversation.
+            archive_request_text_second_line: Have you solved your issue?
+            yes: Yes
+            no: No
+            no_category: Conversation from administrator
+        form:
+            conversation_message:
+                file: File
+                submit: Submit
+            conversation:
+                category: Category
+                messages: Message
+                users: User
+        grid:
+            conversation:
+                applicant: Applicant
+                archive: Archive
+        menu:
+            conversations: Conversations
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_details: 'Vendor details'
         verified: 'Verified'
         verify: 'Verify'
         new_vendor: 'New Vendor'
+        manage_products: 'Manage products'
+        name: 'Name'
+        accept: 'Accept'
+        reject: 'Reject'
+        confirm: 'Are you sure?'
+        code: 'Code'
+        rejected: 'Rejected'
+        under_verification: 'Under verification'
+        published_at: 'Published at'
+        verified_at: 'Verified at'
+        version: 'Version'
+        actions: 'Actions'
+        create_new_product: 'Create Product'
+        save: 'Save'
+        save_and_add: 'Save and Add'
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."

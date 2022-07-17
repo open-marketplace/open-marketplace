@@ -17,11 +17,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use Doctrine\Persistence\ObjectManager;
-use function PHPUnit\Framework\assertNotEquals;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 class VendorUpdateContext extends MinkContext
 {
@@ -82,7 +82,7 @@ class VendorUpdateContext extends MinkContext
         $vendor = $this->sharedStorage->get('vendor');
         $pendingData = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
 
-        assertNotEquals(null, $pendingData);
+        Assert::notEq(null, $pendingData);
     }
 
     /**

@@ -1,17 +1,45 @@
 sylius_grid:
-    grids:
-        bitbag_mvm_plugin_admin_product_listing:
-            driver:
-                name: doctrine/orm
-                options:
-                    class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing
-            fields:
-                name:
-                    type: string
-                    label: sylius.ui.name
-                publishedAt:
-                    type: datetime
-                    label: bitbag_mvm_plugin.ui.publishedAt
-                status:
-                    type: string
-                    label: bitbag_mvm_plugin.ui.status
+  templates:
+    action:
+      details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
+    filter:
+      product_listing_status: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Filter/product_listing_status.html.twig'
+  grids:
+    bitbag_mvm_plugin_admin_product_listing:
+      driver:
+        name: doctrine/orm
+        options:
+          class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
+      filters:
+        search:
+          type: string
+          form_options:
+            type: contains
+          options:
+            fields: ['code']
+        status:
+          type: product_listing_status
+          label: bitbag_mvm_plugin.ui.status
+      fields:
+        code:
+          type: string
+          label: bitbag_mvm_plugin.ui.code
+        getLatestDraft.publishedAt:
+          type: datetime
+          label: bitbag_mvm_plugin.ui.published_at
+        getLatestDraft.verifiedAt:
+          type: datetime
+          label: bitbag_mvm_plugin.ui.verified_at
+        getLatestDraft.status:
+          type: string
+          label: bitbag_mvm_plugin.ui.status
+      actions:
+        item:
+          details:
+            type: details
+            label: bitbag_mvm_plugin.ui.details
+            options:
+              link:
+                route: bitbag_mvm_plugin_admin_product_listing_show
+                parameters:
+                  id: resource.id

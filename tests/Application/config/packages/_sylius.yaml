@@ -21,3 +21,38 @@ sylius_product:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+winzou_state_machine:
+    mvm_product_listing:
+        class: 'BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft'
+        property_path: status
+        graph: product_draft
+        states:
+            created: ~
+            under_verification: ~
+            accepted: ~
+            rejected: ~
+        transitions:
+            send_to_verification:
+                from: ['created']
+                to: 'under_verification'
+            accept_product_draft:
+                from: ['under_verification']
+                to: 'accepted'
+            reject_product_draft:
+                from: ['under_verification']
+                to: 'rejected'
+        callbacks:
+            after:
+                send_to_verification:
+                    on: [ 'send_to_verification' ]
+                    do: [ '@bitbag_mvm_plugin.state_machine.product_draft', 'sendToVerify' ]
+                    args: [ 'object' ]
+                accept_product_listing:
+                    on: ['accept_product_draft']
+                    do: ['@bitbag_mvm_plugin.state_machine.product_draft', 'accept']
+                    args: ['object']
+                reject_product_listing:
+                    on: [ 'reject_product_draft' ]
+                    do: [ '@bitbag_mvm_plugin.state_machine.product_draft', 'reject' ]
+                    args: [ 'object' ]

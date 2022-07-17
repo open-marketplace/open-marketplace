@@ -16,9 +16,17 @@ use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
+
+    public function save(ProductInterface $product): void
+    {
+        $this->_em->persist($product);
+        $this->_em->flush();
+    }
+
     /**
      * @return Pagerfanta<object>
      */
