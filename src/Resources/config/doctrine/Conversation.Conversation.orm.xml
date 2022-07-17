@@ -9,6 +9,8 @@
         </id>
 
         <field name="status" column="status" type="string" nullable="false" />
+        <field name="status" column="status" type="string" nullable="false" />
+        <field name="rejectedListingURL" type="string" nullable="true"/>
 
         <many-to-one field="category" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category">
             <join-column name="category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
@@ -24,7 +26,6 @@
                 <cascade-remove />
             </cascade>
         </one-to-many>
-
     </mapped-superclass>
 
 </doctrine-mapping>

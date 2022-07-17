@@ -30,6 +30,15 @@
                     </div>
                 </div>
             </h1>
+            {% if conversation.rejectedListingURL %}
+                <div>
+                    {{ 'bitbag_mvm_plugin.ui.rejected_listing_msg'|trans }}
+                    <a href='{{ conversation.rejectedListingURL }}'>
+                        {{ conversation.rejectedListingURL }}
+                    </a>
+                </div>
+
+            {% endif %}
         </div>
     </div>
 

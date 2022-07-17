@@ -1,5 +1,6 @@
 bitbag_mvm_plugin:
     ui:
+        product_list: 'Product list'
         admin: "Admin"
         customer: 'Customer'
         details: 'Details'
@@ -15,12 +16,11 @@ bitbag_mvm_plugin:
         vendor_profile: "Profile"
         become_a_vendor: 'Become a Vendor'
         product_listings: 'Product listings'
-        product_list: 'Product list'
         marketplace: 'Marketplace'
         publishedAt: 'Published at'
         status: 'Status'
         tax_identifier: "Tax Identifier"
-        not_blank: "This field cannnot be empty"
+        not_blank: "This field cannot be empty"
         company_name: "Company name"
         country: "Country"
         city: "City"
@@ -35,6 +35,12 @@ bitbag_mvm_plugin:
         description: 'Description'
         open: Open
         closed: Closed
+        minimum: "minimum"
+        original: "original"
+        price: "Price"
+        product_rejected_intro: "Corresponding item has been rejected "
+        product_overview: "Product overview"
+        rejected_listing_msg: "This product has been rejected"
         register:
             new_vendors: New vendors
         conversations: Conversations
