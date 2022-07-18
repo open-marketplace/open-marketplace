@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-class PaymentClonerSpec extends ObjectBehavior
+final class PaymentClonerSpec extends ObjectBehavior
 {
     function it_is_initializable(): void
     {
