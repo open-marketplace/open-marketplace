@@ -11,6 +11,7 @@ sylius_resource:
       classes:
         model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
         interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface
+        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
 
     bitbag_mvm_plugin.product_translation:
       driver: doctrine/orm

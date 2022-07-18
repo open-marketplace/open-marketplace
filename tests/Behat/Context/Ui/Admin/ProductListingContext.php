@@ -21,12 +21,18 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
+use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext implements Context
@@ -35,16 +41,28 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private AdminUserExampleFactory $adminUserExampleFactory;
 
+    private ShopUserExampleFactory $shopUserExampleFactory;
+
+    private FactoryInterface $vendorFactory;
+
     private SharedStorageInterface $sharedStorage;
 
+    private UserRepositoryInterface $userRepository;
+
     public function __construct(
+        UserRepositoryInterface $userRepository,
         EntityManagerInterface $entityManager,
         AdminUserExampleFactory $adminUserExampleFactory,
+        ShopUserExampleFactory $shopUserExampleFactory,
+        FactoryInterface $vendorFactory,
         SharedStorageInterface $sharedStorage
     ) {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->shopUserExampleFactory = $shopUserExampleFactory;
+        $this->vendorFactory = $vendorFactory;
         $this->sharedStorage = $sharedStorage;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -75,6 +93,81 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
         ($this->getPage()->findLink('Logout'));
+    }
+
+    /**
+     * @Given there is a vendor user :vendor_user_email registered in country :country_code
+     */
+    public function thereIsAVendorUserRegisteredInCountry($vendor_user_email, $country_code): void
+    {
+        $user = $this->shopUserExampleFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
+
+        $this->sharedStorage->set('user', $user);
+
+        $this->userRepository->add($user);
+
+        $country = $this->entityManager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
+        $vendor = new Vendor();
+        $vendor->setCompanyName('sdasdsa');
+        $vendor->setShopUser($user);
+        $vendor->setPhoneNumber('333333333');
+        $vendor->setTaxIdentifier('543455');
+        $vendor->setVendorAddress(new VendorAddress());
+        $vendor->getVendorAddress()->setCountry($country);
+        $vendor->getVendorAddress()->setCity('Warsaw');
+        $vendor->getVendorAddress()->setPostalCode('00-111');
+        $vendor->getVendorAddress()->setStreet('Tajna 13');
+        $this->entityManager->persist($vendor);
+        $this->entityManager->flush();
+        $this->sharedStorage->set('vendor', $vendor);
+    }
+
+    /**
+     * @Given there is :arg2 product listing created by vendor
+     */
+    public function thereIsProductListingCreatedByVendor($count)
+    {
+        /** @var ShopUserInterface $user */
+        $user = $this->shopUserExampleFactory->create();
+        $user->setUsername('username');
+        $user->setPlainPassword('password');
+        $user->setEmail('vendor@email.com');
+        $this->entityManager->persist($user);
+
+        $vendor = $this->sharedStorage->get('vendor');
+
+        for ($i = 0; $i < $count; ++$i) {
+            $productListing = new ProductListing();
+            $productListing->setCode('code' . $i);
+            $productListing->setVendor($vendor);
+
+            $productDraft = new ProductDraft();
+            $productDraft->setCode('code' . $i);
+            $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+            $productDraft->setPublishedAt(new \DateTime());
+            $productDraft->setVersionNumber(0);
+            $productDraft->setProductListing($productListing);
+
+            $productTranslation = new ProductTranslation();
+            $productTranslation->setLocale('en_US');
+            $productTranslation->setSlug('product-listing-' . $i);
+            $productTranslation->setName('product-listing-' . $i);
+            $productTranslation->setDescription('product-listing-' . $i);
+            $productTranslation->setProductDraft($productDraft);
+
+            $productPricing = new ProductListingPrice();
+            $productPricing->setProductDraft($productDraft);
+            $productPricing->setPrice(1000);
+            $productPricing->setOriginalPrice(1000);
+            $productPricing->setMinimumPrice(1000);
+            $productPricing->setChannelCode('en_US');
+
+            $this->entityManager->persist($productListing);
+            $this->entityManager->persist($productDraft);
+            $this->entityManager->persist($productTranslation);
+            $this->entityManager->persist($productPricing);
+        }
+        $this->entityManager->flush();
     }
 
     /**
