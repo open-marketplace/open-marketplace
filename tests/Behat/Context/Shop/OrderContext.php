@@ -44,7 +44,6 @@ class OrderContext extends RawMinkContext implements Context
         $tableWrapper = $page->find('css',"table");
         $orders = $tableWrapper->findAll('css','.item');
         Assert::eq(count($orders),$count);
-//        dump(count($orders));
     }
 
     /**
@@ -78,27 +77,5 @@ class OrderContext extends RawMinkContext implements Context
     public function iClickButton($button)
     {
         $this->getSession()->getPage()->pressButton($button);
-    }
-
-    private function applyTransitionOnOrderCheckout(OrderInterface $order, $transition)
-    {
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
-    }
-
-    private function createOrder(
-        CustomerInterface $customer,
-        $number = null,
-        ChannelInterface $channel = null,
-        $localeCode = null
-    ) {
-        $order = $this->createCart($customer, $channel, $localeCode);
-
-        if (null !== $number) {
-            $order->setNumber($number);
-        }
-
-        $order->completeCheckout();
-
-        return $order;
     }
 }
