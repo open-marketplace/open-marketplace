@@ -59,7 +59,7 @@ final class OrderContext implements Context
         $order = $this->createDefaultOrder();
         $order->setVendor($vendor);
 
-        if(str_contains($propertyName, "createdAt") ){
+        if(str_contains($propertyName, "CompletedAt") ){
             $date = new \DateTime($value);
             $order->{'set'.ucfirst($propertyName)}($date);
         }
