@@ -62,6 +62,17 @@ sylius_grid:
                         vars:
                             labels: "@SyliusAdmin/Order/Label/ShippingState"
             filters:
+                state:
+                    type: select
+                    label: sylius.ui.state
+                    form_options:
+                        choices:
+                            sylius.ui.cancelled: cancelled
+                            sylius.ui.completed: completed
+                            sylius.ui.failed: failed
+                            sylius.ui.new: new
+                            sylius.ui.processing: processing
+                            sylius.ui.refunded: refunded
                 paymentState:
                     type: select
                     label: sylius.ui.payment_state
@@ -92,11 +103,6 @@ sylius_grid:
                     options:
                         field: checkoutCompletedAt
                         inclusive_to: true
-                total:
-                    type: money
-                    label: sylius.ui.total
-                    options:
-                        currency_field: currencyCode
                 shipping_method:
                     type: entity
                     label: sylius.ui.shipping_method
