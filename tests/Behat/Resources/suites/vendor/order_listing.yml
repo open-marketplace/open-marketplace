@@ -1,0 +1,12 @@
+default:
+    suites:
+        order_listing:
+            contexts:
+            - tests.bitbag_mvm_plugin.behat.context.vendor.vendor_update_context
+            - sylius.behat.context.setup.shop_security
+            - sylius.behat.context.hook.doctrine_orm
+            - sylius.behat.context.setup.channel
+            - sylius.behat.context.setup.user
+            - sylius.behat.context.setup.geographical
+            filters:
+                tags: "@order_listing&&@ui"
