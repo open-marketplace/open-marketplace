@@ -33,8 +33,26 @@
         {% if productDraft.status == 'under_verification' %}
             <div class="ui buttons">
                 {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/accept_product_listing.html.twig' %}
-                {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/reject_product_listing.html.twig' %}
             </div>
+            <div class="ui form">
+                {{ form_start(form, { attr: { class: 'ui form'}}) }}
+                <div class="ui stackable grid">
+                    <div class="column ten wide">
+                        {{ form_row(form.messages.vars.prototype.content) }}
+                    </div>
+                    <div class="column six wide">
+                        {{ form_row(form.messages.vars.prototype.file) }}
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="button">
+                        <input class="ui red labeled icon button" type="submit" value="{{ 'bitbag_mvm_plugin.ui.reject'|trans }}"/>
+
+                    </div>
+                </div>
+
+                {{ form_end(form, { 'render_rest': false }) }}
+            </div>
+
         {% endif %}
     </div>
 </div>

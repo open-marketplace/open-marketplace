@@ -7,7 +7,7 @@ vendor_profile_update:
     resource: "routing/vendor_profile_update.yml"
     prefix: /{_locale}
     requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$  
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 vendor_register_form:
     resource: "routing/vendor_register_form.yml"
     prefix: /{_locale}
@@ -17,7 +17,7 @@ vendor_profile_update_action:
     resource: "routing/vendor_profile_update_action.yml"
     prefix: /{_locale}
     requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$    
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 confirm_profile_update_link:
     resource: "routing/confirm_profile_update.yml"
     prefix: /{_locale}
@@ -36,17 +36,25 @@ vendor_register:
     prefix: /{_locale}
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
-app_vendor:
-  resource: 'routing/vendor.yml'
-  prefix: /{_locale}/vendor
-
 app_shop:
     resource: 'routing/shop.yml'
     prefix: /{_locale}
-#        requirements:
-#            _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 
 sylius_shop_checkout_complete:
     resource: 'routing/shop/order.yml'
     prefix: /{_locale}
 
+app_vendor:
+  resource: 'routing/vendor.yml'
+  prefix: /{_locale}/vendor
+
+conversation:
+  resource: "routing/conversation.yml"
+
+conversation_vendor:
+  resource: "routing/vendor_conversation.yml"
+  prefix: /{_locale}
+  requirements:
+      _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$

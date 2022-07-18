@@ -39,7 +39,6 @@ final class VendorEditingContext extends RawMinkContext implements Context
         $vendor->setSlug('slug');
         $vendor->setDescription('description');
         $vendor->setStatus($ifVerified);
-
         $vendor->setEditedAt(null);
 
         if ('requested' === $ifRequested) {

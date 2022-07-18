@@ -1,0 +1,44 @@
+sylius_grid:
+    templates:
+        action:
+            archiveConversation: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Action/archiveConversation.html.twig"
+    grids:
+        bitbag_mvm_plugin_admin_conversation:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_mvm_plugin.model.conversation.class%"
+            fields:
+                category:
+                    type: twig
+                    label: bitbag_mvm_plugin.ui.form.conversation.category
+                    options:
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/category.html.twig'
+                shopUser:
+                    type: twig
+                    label: bitbag_mvm_plugin.ui.grid.conversation.applicant
+                    options:
+                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/applicant.html.twig'
+            filters:
+                status:
+                    label: bitbag_mvm_plugin.ui.status
+                    type: select
+                    form_options:
+                        choices:
+                            mvm.ui.open: open
+                            mvm.ui.closed: closed
+            actions:
+                main:
+                    create:
+                        type: create
+                        options:
+                            link:
+                                route: bitbag_mvm_plugin_admin_conversation_create
+                item:
+                    show:
+                        type: show
+                    delete:
+                        type: delete
+                    archive:
+                        type: archiveConversation
+                        label: bitbag_mvm_plugin.ui.grid.conversation.archive

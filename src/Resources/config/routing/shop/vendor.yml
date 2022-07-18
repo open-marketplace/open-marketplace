@@ -1,5 +1,5 @@
 bitbag_mvm_plugin_vendor_page_show:
-  path: /vendor/{slug}
+  path: /vendors/{slug}
   methods: [GET]
   defaults:
     _controller: bitbag.mvm_plugin.controller.show_vendor_page_action

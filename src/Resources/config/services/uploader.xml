@@ -6,5 +6,15 @@
         <service id="bitbag.mvm_plugin.uploader.file_uploader" class="BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploader">
             <argument>%kernel.project_dir%/public/</argument>
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\ConversationFileUploader"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.conversation_file_uploader">
+            <argument>%env(MESSAGES_FILE_UPLOAD_DIRECTORY)%</argument>
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\VendorRegistrationFileUploader"
+                 id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.vendor_registration_file_uploader">
+            <argument>%env(MESSAGES_FILE_UPLOAD_DIRECTORY)%</argument>
+        </service>
     </services>
 </container>

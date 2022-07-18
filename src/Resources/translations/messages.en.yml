@@ -1,11 +1,22 @@
 bitbag_mvm_plugin:
     ui:
         summary_of_your_order: "Summary of your order(s)"
+        product_list: 'Product list'
+        admin: "Admin"
+        customer: 'Customer'
+        details: 'Details'
+        disable: 'Disable'
+        disabled: 'Disabled'
+        edit: 'Edit'
+        edit_vendor: 'Edit vendor'
+        enable: 'Enable'
+        enabled: 'Enabled'
+        id: "ID"
+        tax_id: 'Tax ID'
         vendor_dashboard: "Vendor dashboard"
         vendor_profile: "Profile"
         become_a_vendor: 'Become a Vendor'
         product_listings: 'Product listings'
-        product_list: 'Product list'
         marketplace: 'Marketplace'
         publishedAt: 'Published at'
         status: 'Status'
@@ -23,16 +34,61 @@ bitbag_mvm_plugin:
         logo: 'Logo'
         invalid_logo: 'Please upload a valid image (jpg/png/svg)'
         description: 'Description'
-        customer: 'Customer'
-        details: 'Details'
-        disable: 'Disable'
-        disabled: 'Disabled'
-        edit: 'Edit'
-        edit_vendor: 'Edit vendor'
-        enable: 'Enable'
-        enabled: 'Enabled'
-        id: 'ID'
-        tax_id: 'Tax ID'
+        open: Open
+        closed: Closed
+        minimum: "minimum"
+        original: "original"
+        price: "Price"
+        product_rejected_intro: "Corresponding item has been rejected "
+        product_overview: "Product overview"
+        rejected_listing_msg: "This product has been rejected"
+        register:
+            new_vendors: New vendors
+        conversations: Conversations
+        conversations_listing:
+            username: Username
+            admin_header: Conversations
+            admin_subheader: Manage your conversations
+            listing_header_open: Open conversations
+            listing_header_closed: Closed conversations
+            your_open_conversations: Manage your open conversations
+            your_closed_conversations: Manage your closed conversations
+            reading_closed_conversation: You're reading conversation, which has been closed.
+            breadcrumb_header: Conversations
+            no_open_conversations: You have no open conversations
+            no_closed_conversations: You have no closed conversations
+        users: Users
+        open_conversations: Open conversations
+        closed_conversations: Closed conversations
+        create_new_conversation: New conversation
+        create_new_conversation_breadcrumb: New conversation
+        create_new_conversation_header: New conversation
+        conversation:
+            user_conversation: Conversation with user
+            admin_conversation: Conversation with administrator
+            header: Conversation from administrator
+            with: Started by
+            your_response_header: "Your response:"
+            attachment: Attachment
+            archive_request_text_first_line: Administrator wants to archive this conversation.
+            archive_request_text_second_line: Have you solved your issue?
+            yes: Yes
+            no: No
+            no_category: Conversation from administrator
+        form:
+            conversation_message:
+                file: File
+                submit: Submit
+            conversation:
+                category: Category
+                messages: Message
+                users: User
+        grid:
+            conversation:
+                applicant: Applicant
+                archive: Archive
+        menu:
+            conversations: Conversations
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_details: 'Vendor details'

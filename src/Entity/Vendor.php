@@ -37,9 +37,6 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
 
     protected ?DateTimeInterface $editedAt = null;
 
-    /** @var Collection<int, ProductListing> */
-    private Collection $productListings;
-
     private ?string $slug;
 
     private ?string $description;
@@ -48,6 +45,9 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
 
     /** @var Collection<int, ProductInterface> */
     private Collection $products;
+
+    /** @var Collection<int, ProductListing> */
+    private Collection $productListings;
 
     public function __construct()
     {
@@ -144,6 +144,7 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
         $this->editedAt = $editedAt;
     }
 
+
     public function getProductListings(): Collection
     {
         return $this->productListings;
@@ -208,5 +209,6 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     public function setImage(?VendorImageInterface $image): void
     {
         $this->image = $image;
+
     }
 }

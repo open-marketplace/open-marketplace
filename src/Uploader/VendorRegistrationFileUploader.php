@@ -17,7 +17,7 @@ use Gaufrette\FilesystemInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class FileUploader implements FileUploaderInterface
+final class VendorRegistrationFileUploader implements FileUploaderInterface
 {
     private FilesystemInterface $filesystem;
 

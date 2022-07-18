@@ -8,6 +8,11 @@
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing" />
             <argument type="service" id="twig" />
             <argument type="service" id="bitbag_mvm_plugin.repository.product_draft" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.conversation"/>
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument type="service" id="router.default" />
+            <argument type="service" id="translator" />
             <tag name="controller.service_arguments" />
         </service>
 
