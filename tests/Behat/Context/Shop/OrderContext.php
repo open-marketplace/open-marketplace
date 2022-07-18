@@ -78,26 +78,4 @@ class OrderContext extends RawMinkContext implements Context
     {
         $this->getSession()->getPage()->pressButton($button);
     }
-
-    private function applyTransitionOnOrderCheckout(OrderInterface $order, $transition)
-    {
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
-    }
-
-    private function createOrder(
-        CustomerInterface $customer,
-        $number = null,
-        ChannelInterface $channel = null,
-        $localeCode = null
-    ) {
-        $order = $this->createCart($customer, $channel, $localeCode);
-
-        if (null !== $number) {
-            $order->setNumber($number);
-        }
-
-        $order->completeCheckout();
-
-        return $order;
-    }
 }

@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\AdjustableInterface;
 
-class AdjustmentClonerSpec extends ObjectBehavior
+final class AdjustmentClonerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -47,7 +47,6 @@ app_shop:
 sylius_shop_checkout_complete:
     resource: 'routing/shop/order.yml'
     prefix: /{_locale}
-
 vendor_order_list:
     resource: 'routing/vendor/order_listing.yml'
     prefix: /{_locale}

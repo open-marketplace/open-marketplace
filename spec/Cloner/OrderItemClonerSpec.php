@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
-class OrderItemClonerSpec extends ObjectBehavior
+final class OrderItemClonerSpec extends ObjectBehavior
 {
     public function let(
         AdjustmentClonerInterface $cloner,
