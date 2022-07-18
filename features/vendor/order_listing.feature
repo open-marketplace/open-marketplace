@@ -10,3 +10,6 @@ Feature: Vendor can update his company information
     And the store operates in "Poland"
     And there is a vendor user "test@company.domain" registered in country "PL"
     And I am logged in as "test@company.domain"
+  @ui
+  Scenario: Rendering all orders
+    Given There is order with status "new" with the seller "test@company.domain"

@@ -44,7 +44,6 @@ class OrderContext extends RawMinkContext implements Context
         $tableWrapper = $page->find('css',"table");
         $orders = $tableWrapper->findAll('css','.item');
         Assert::eq(count($orders),$count);
-//        dump(count($orders));
     }
 
     /**

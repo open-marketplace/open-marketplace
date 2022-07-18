@@ -92,11 +92,6 @@ sylius_grid:
                     options:
                         field: checkoutCompletedAt
                         inclusive_to: true
-                channel:
-                    type: entity
-                    label: sylius.ui.channel
-                    form_options:
-                        class: "%sylius.model.channel.class%"
                 total:
                     type: money
                     label: sylius.ui.total
