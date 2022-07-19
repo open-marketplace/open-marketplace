@@ -87,11 +87,7 @@ final class OrderContext implements Context
 
         return $order;
     }
-    /**
-     * @param string|null $localeCode
-     *
-     * @return OrderInterface
-     */
+
     private function createCart(
         CustomerInterface $customer,
         ChannelInterface $channel = null,
@@ -116,7 +112,7 @@ final class OrderContext implements Context
         $localeCode = $this->sharedStorage->get('locale')->getCode();
         return $this->createOrder(
             $customer,
-            null,
+            $number = null,
             $channel,
             $localeCode
         );
