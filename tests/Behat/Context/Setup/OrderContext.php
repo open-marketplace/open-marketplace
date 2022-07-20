@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\OrderRepository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
@@ -24,7 +25,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class OrderContext implements Context
+final class OrderContext extends RawMinkContext
 {
     private SharedStorageInterface $sharedStorage;
     private FactoryInterface $orderFactory;
@@ -70,6 +71,15 @@ final class OrderContext implements Context
 
         $this->orderRepository->add($order);
     }
+    /**
+     * @Given I am on order details page
+     */
+    public function iAmOnOrderDetailsPage()
+    {
+        $order = $this->sharedStorage->get('order');
+        $this->getSession()->visit("/en_US/orders/".$order->getId());
+    }
+
 
     private function createOrder(
         CustomerInterface $customer,
