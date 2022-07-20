@@ -1,5 +1,5 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
-
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 {% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
@@ -24,6 +24,7 @@
                     </div>
 
                 </div>
+            </div>
         </div>
     </h1>
     <table class="ui celled compact small table order-summary-table">
@@ -49,4 +50,7 @@
             {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/Partials/_totals.html.twig' %}
         </tfoot>
     </table>
+    <div class="ui stackable grid">
+        {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/Partials/_payments.html.twig' %}
+    </div>
 {% endblock %}
