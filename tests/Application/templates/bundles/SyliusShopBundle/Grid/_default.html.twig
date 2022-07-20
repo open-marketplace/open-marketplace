@@ -71,6 +71,7 @@
                         {% set primary_order_number = row.primaryOrder.number %}
                         {% set primary_order_paymentState = row.primaryOrder.paymentState %}
                         <tr class="item">
+                            {{ dump(row) }}
                             <td>{{ sylius_grid_render_field(grid, definition.enabledFields['number'], row) }}</td>
                             <td>{{ sylius_grid_render_field(grid, definition.enabledFields['checkoutCompletedAt'], row) }}</td>
                             <td>{{ sylius_grid_render_field(grid, definition.enabledFields['shippingAddress'], row) }}</td>

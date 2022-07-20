@@ -220,4 +220,8 @@ class OrderController extends BaseOrderController
             ]
         );
     }
+    public function applyStateMachineTransitionAction(Request $request): Response
+    {
+        return parent::applyStateMachineTransitionAction($request);
+    }
 }

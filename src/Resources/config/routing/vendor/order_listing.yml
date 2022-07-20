@@ -15,3 +15,14 @@ bitbag_mvm_plugin_vendor_order_show:
             section: admin
             permission: true
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/show.html.twig"
+bitbag_mvm_plugin_vendor_order_cancel:
+    path: /orders/{id}/cancel
+    methods: [PUT]
+    defaults:
+        _controller: bitbag.mvm_plugin.controller.order.order_controller:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: sylius_order
+                transition: cancel
+            redirect: referer
