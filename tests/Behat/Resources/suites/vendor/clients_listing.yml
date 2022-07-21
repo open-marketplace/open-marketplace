@@ -2,9 +2,14 @@ default:
     suites:
         clients_listing:
             contexts:
-            - tests.bitbag_mvm_plugin.behat.context.vendor.customer_dashboard_context
-            - sylius.behat.context.setup.shop_security
-            - sylius.behat.context.hook.doctrine_orm
-            - sylius.behat.context.setup.channel
+                - tests.bitbag_mvm_plugin.behat.context.shop.order
+                - tests.bitbag_mvm_plugin.behat.context.setup.order_context
+                - tests.bitbag_mvm_plugin.behat.context.vendor.vendor_update_context
+                - tests.bitbag_mvm_plugin.behat.context.vendor.customer_dashboard_context
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.geographical
             filters:
                 tags: "@clients_listing&&@ui"

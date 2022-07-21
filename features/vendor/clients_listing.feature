@@ -1,9 +1,8 @@
 @clients_listing
-Feature: Vendor can update his company information
-  In order to update company information
+Feature: Vendor can view his clients
+  In order to view clients
   As a Vendor
-  I want to fill update company information form
-  I want also confirm update by visiting url with token
+  I want to visit page
 
   Background:
     Given the store operates on a single channel in "United States"
@@ -12,3 +11,15 @@ Feature: Vendor can update his company information
     And I am logged in as "test@company.domain"
 
   @ui
+  Scenario: Listing customer who made order with Vendor
+    Given There is order with property "state" with value "new" made with logged in seller
+    And The Order is made by customer with first name "TestingClient"
+    And I am on "en_US/customers"
+    Then I should see "TestingClient"
+
+  @ui
+  Scenario: Not listing customers whom made order with other Vendors
+    Given There is order with property "state" with value "new" made with some seller
+    And The Order is made by customer with first name "TestingClient"
+    And I am on "en_US/customers"
+    Then I should not see "TestingClient"
