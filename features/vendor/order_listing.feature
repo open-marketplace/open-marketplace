@@ -1,9 +1,8 @@
 @order_listing
-Feature: Vendor can update his company information
-  In order to update company information
+Feature: Vendor can view orders placed with him
+  In order to view orders
   As a Vendor
-  I want to fill update company information form
-  I want also confirm update by visiting url with token
+  I want visit orders page
 
   Background:
     Given the store operates on a single channel in "United States"
