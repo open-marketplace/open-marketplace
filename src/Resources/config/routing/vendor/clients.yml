@@ -1,0 +1,7 @@
+bitbag_mvm_plugin_customer_index:
+    path: /customers
+    defaults:
+        _controller: sylius.controller.customer:indexAction
+        _sylius:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Clients/index.html.twig"
+            grid: bitbag_mvm_plugin_vendor_clients
