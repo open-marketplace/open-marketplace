@@ -24,6 +24,7 @@ use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage;
 class OrderContext extends RawMinkContext implements Context
 {
     private ShowProductPage $productPage;
+    
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
