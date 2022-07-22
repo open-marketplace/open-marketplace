@@ -18,7 +18,7 @@ Feature: Vendor can view his clients
     Then I should see "TestingClient"
 
   @ui
-  Scenario: Not listing customers whom made order with other Vendors
+  Scenario: Not listing customers who placed an order with other suppliers
     Given There is order with property "state" with value "new" made with some seller
     And The Order is made by customer with first name "TestingClient"
     And I am on "en_US/customers"
