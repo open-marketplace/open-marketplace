@@ -48,6 +48,7 @@ final class OrderItemCloner implements OrderItemClonerInterface
         $newItem->setUnitPrice($originalItem->getUnitPrice());
         $newItem->setVersion($originalItem->getVersion());
         $units = $originalItem->getUnits();
+        
         /** @var OrderItemUnit $unit */
         foreach ($units as $unit) {
             $newUnit = new OrderItemUnit($newItem);
