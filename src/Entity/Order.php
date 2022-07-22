@@ -21,8 +21,8 @@ class Order extends BaseOrder implements OrderInterface
 
     private ?OrderInterface $primaryOrder;
 
-    /** @var ?Collection<int, OrderInterface> */
-    private ?Collection $subOrders;
+    /** @var Collection<int, OrderInterface> */
+    private Collection $subOrders;
 
     public function __construct()
     {
@@ -52,11 +52,10 @@ class Order extends BaseOrder implements OrderInterface
 
     public function addSubOrder(OrderInterface $subOrder): void
     {
-        if($this->subOrders)
-            $this->subOrders->add($subOrder);
+        $this->subOrders->add($subOrder);
     }
-    /** @return ?Collection<int, OrderInterface> */
-    public function getSubOrders(): ?Collection
+    /** @return Collection<int, OrderInterface> */
+    public function getSubOrders(): Collection
     {
         return $this->subOrders;
     }

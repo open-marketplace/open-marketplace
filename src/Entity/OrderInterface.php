@@ -1,18 +1,21 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-use Sylius\Component\Core\Model\OrderInterface as BaseInterface;
+use Doctrine\Common\Collections\Collection;
 
-interface OrderInterface extends BaseInterface
+interface OrderInterface
 {
     public function getVendor(): ?VendorInterface;
 
     public function setVendor(?VendorInterface $vendor): void;
 
-    public function getPrimaryOrder(): ?self;
+    public function getPrimaryOrder(): ?OrderInterface;
 
-    public function setPrimaryOrder(?self $primaryOrder): void;
+    public function setPrimaryOrder(?OrderInterface $primaryOrder): void;
+
+    public function addSubOrder(OrderInterface $subOrder): void;
+
+    /** @return Collection<int, OrderInterface> */
+    public function getSubOrders(): Collection;
 }
