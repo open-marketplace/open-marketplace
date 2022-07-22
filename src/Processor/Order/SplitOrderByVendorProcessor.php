@@ -43,48 +43,46 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     public function process(OrderInterface $order): array
     {
-        $subOrders = [];
-        $subOrders[] = $order;
+        $secondaryOrders = [];
+        $secondaryOrders[] = $order;
+
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
         foreach ($orderItems as $item) {
             $itemVendor = $this->getVendorFromOrderItem($item);
-            if ($this->vendorSuborderExits($subOrders, $itemVendor)) {
-                /** @var OrderInterface $subOrder */
-                $subOrder = $this->getVendorSuborder($subOrders, $itemVendor);
-                /** @var ShipmentInterface $shipments */
-                $shipments = $subOrder->getShipments()[0];
-                $this->cloneItemIntoSuborder($item, $subOrder, $shipments);
-
+            if ($this->vendorSecondaryOrderExits($secondaryOrders, $itemVendor)) {
+                $this->addItemIntoSecondaryOrder($secondaryOrders, $itemVendor, $item);
             } else {
-                $newOrder = new Order();
-                $this->orderCloner->clone($order, $newOrder);
-                $newOrder->setVendor($itemVendor);
-                $newOrder->setPrimaryOrder($order);
-                $this->entityManager->persist($newOrder);
-                if ($newOrder->getShipments()[0])
-                    $this->cloneItemIntoSuborder($item, $newOrder, $newOrder->getShipments()[0]);
-                $subOrders[] = $newOrder;
+                $secondaryOrders[] = $this->generateNewSecondaryOrder($order, $itemVendor, $item);
             }
+
+            if (!$this->vendorSecondaryOrderExits($secondaryOrders, $itemVendor)) {
+                $secondaryOrders[] = $this->generateNewSecondaryOrder($order, $itemVendor, $item);
+                continue;
+            }
+            $this->addItemIntoSecondaryOrder($secondaryOrders, $itemVendor, $item);
+
+
         }
-        foreach ($subOrders as $subOrder) {
-            $subOrder->recalculateItemsTotal();
-            $subOrder->recalculateAdjustmentsTotal();
-            $payment = $subOrder->getPayments()[0];
+        foreach ($secondaryOrders as $secondaryOrder) {
+            $secondaryOrder->recalculateItemsTotal();
+            $secondaryOrder->recalculateAdjustmentsTotal();
+            $payment = $secondaryOrder->getPayments()[0];
             if ($payment) {
-                $payment->setAmount($subOrder->getTotal());
+                $payment->setAmount($secondaryOrder->getTotal());
                 $this->entityManager->persist($payment);
             }
         }
         $this->entityManager->persist($order);
+        $this->entityManager->flush();
 
-        return $subOrders;
+        return $secondaryOrders;
     }
 
-    private function vendorSuborderExits(array $suborders, VendorInterface $vendor): bool
+    private function vendorSecondaryOrderExits(array $secondaryOrders, VendorInterface $vendor): bool
     {
-        foreach ($suborders as $suborder) {
-            if ($suborder->getVendor() === $vendor) {
+        foreach ($secondaryOrders as $secondaryOrder) {
+            if ($secondaryOrder->getVendor() === $vendor) {
                 return true;
             }
         }
@@ -92,23 +90,22 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         return false;
     }
 
-    private function getVendorSuborder(array $suborders, VendorInterface $vendor): ?OrderInterface
+    private function getVendorSecondaryOrder(array $secondaryOrders, VendorInterface $vendor): ?OrderInterface
     {
-        foreach ($suborders as $suborder) {
-            if ($suborder->getVendor() === $vendor) {
-                return $suborder;
+        foreach ($secondaryOrders as $secondaryOrder) {
+            if ($secondaryOrder->getVendor() === $vendor) {
+                return $secondaryOrder;
             }
         }
 
         return null;
     }
 
-    private function cloneItemIntoSuborder(
+    private function cloneItemIntoSecondaryOrder(
         OrderItemInterface $item,
         OrderInterface $order,
         ?ShipmentInterface $shipment
-    ): void
-    {
+    ): void {
         $newItem = new OrderItem();
         $this->orderItemCloner->clone($item, $newItem, $shipment);
         $order->addItem($newItem);
@@ -124,5 +121,32 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $vendor = $product->getVendor();
 
         return $vendor;
+    }
+
+    private function generateNewSecondaryOrder(
+        OrderInterface $order,
+        VendorInterface $itemVendor,
+        OrderItemInterface $item
+    ): OrderInterface {
+        $newOrder = new Order();
+        $this->orderCloner->clone($order, $newOrder);
+        $newOrder->setVendor($itemVendor);
+        $newOrder->setPrimaryOrder($order);
+        $this->entityManager->persist($newOrder);
+        if ($newOrder->getShipments()[0]) {
+            $this->cloneItemIntoSecondaryOrder($item, $newOrder, $newOrder->getShipments()[0]);
+        }
+
+        return $newOrder;
+    }
+
+    private function addItemIntoSecondaryOrder(
+        array $secondaryOrders, VendorInterface $itemVendor, OrderItemInterface $item
+    ): void {
+        /** @var OrderInterface $secondaryOrder */
+        $secondaryOrder = $this->getVendorSecondaryOrder($secondaryOrders, $itemVendor);
+        /** @var ShipmentInterface $shipments */
+        $shipments = $secondaryOrder->getShipments()[0];
+        $this->cloneItemIntoSecondaryOrder($item, $secondaryOrder, $shipments);
     }
 }

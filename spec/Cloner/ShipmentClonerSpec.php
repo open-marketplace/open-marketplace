@@ -13,14 +13,11 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AdjustmentClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentCloner;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentClonerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\Adjustment;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\ShippingMethod;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class ShipmentClonerSpec extends ObjectBehavior
@@ -41,8 +38,7 @@ final class ShipmentClonerSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod,
         AdjustmentInterface $adjustment,
         AdjustmentClonerInterface $adjustmentCloner
-    ): void
-    {
+    ): void {
         $adjustmentCollection = new ArrayCollection([$adjustment->getWrappedObject(), $adjustment->getWrappedObject()]);
         $date = new \DateTime('now');
 
@@ -61,6 +57,5 @@ final class ShipmentClonerSpec extends ObjectBehavior
 
         $adjustmentsCount = $adjustmentCollection->count();
         $adjustmentCloner->clone($adjustment, Argument::any())->shouldHaveBeenCalledTimes($adjustmentsCount);
-
     }
 }

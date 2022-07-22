@@ -54,6 +54,7 @@ class Order extends BaseOrder implements OrderInterface
     {
         $this->secondaryOrders->add($secondaryOrder);
     }
+
     /** @return Collection<int, OrderInterface> */
     public function getSecondaryOrders(): Collection
     {

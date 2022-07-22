@@ -144,7 +144,6 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
         $this->editedAt = $editedAt;
     }
 
-
     public function getProductListings(): Collection
     {
         return $this->productListings;
@@ -209,6 +208,5 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     public function setImage(?VendorImageInterface $image): void
     {
         $this->image = $image;
-
     }
 }

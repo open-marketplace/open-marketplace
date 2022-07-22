@@ -23,6 +23,7 @@ final class FileUploaderSpec extends ObjectBehavior
         $this->beConstructedWith($publicDir);
         $_ENV['LOGO_DIRECTORY'] = 'media/image/logo';
     }
+
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(FileUploader::class);

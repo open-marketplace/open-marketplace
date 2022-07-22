@@ -22,9 +22,6 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariant;
-use Sylius\Component\Product\Factory\ProductFactory;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage;
 
 class ProductContext implements Context
 {
@@ -63,25 +60,23 @@ class ProductContext implements Context
         $this->taxonFactory = $taxonFactory;
         $this->sharedStorage = $sharedStorage;
     }
-    
+
     /**
      * @Given store has :productsCoun products from same Vendor
      */
     public function storeHasProductsFromSameVendor($productsCount)
     {
-    $this->createTaxon();
-    $vendor = $this->createDefaultVendor();
-    for ($i = 1; $i <= $productsCount; $i++) {
+        $this->createTaxon();
+        $vendor = $this->createDefaultVendor();
+        for ($i = 1; $i <= $productsCount; ++$i) {
+            $products[$i] = $this->createDefaultProduct();
+            $products[$i]->setVendor($vendor);
+            $this->vendorRepository->add($vendor);
+            $this->productRepository->add($products[$i]);
 
-        $products[$i] = $this->createDefaultProduct();
-        $products[$i]->setVendor($vendor);
-        $this->vendorRepository->add($vendor);
-        $this->productRepository->add($products[$i]);
-
-        $this->sharedStorage->set('products', $products);
+            $this->sharedStorage->set('products', $products);
         }
     }
-
 
     /**
      * @Given store has :productsCount products from different Vendors
@@ -89,7 +84,7 @@ class ProductContext implements Context
     public function storeHasProductsFromDifferentVendors($productsCount)
     {
         $this->createTaxon();
-        for ($i = 1; $i <= $productsCount; $i++) {
+        for ($i = 1; $i <= $productsCount; ++$i) {
             $vendors[$i] = $this->createDefaultVendor();
             $products[$i] = $this->createDefaultProduct();
             $products[$i]->setVendor($vendors[$i]);
@@ -106,11 +101,11 @@ class ProductContext implements Context
         $user = $userFactory->create();
         $vendor = new Vendor();
         $vendor->setShopUser($user);
-        $vendor->setCompanyName("company");
-        $vendor->setTaxIdentifier("111");
-        $vendor->setPhoneNumber("333");
-        $vendor->setSlug("SLUG");
-        $vendor->setDescription("description");
+        $vendor->setCompanyName('company');
+        $vendor->setTaxIdentifier('111');
+        $vendor->setPhoneNumber('333');
+        $vendor->setSlug('SLUG');
+        $vendor->setDescription('description');
         $this->manager->persist($user);
 
         return $vendor;
@@ -120,6 +115,7 @@ class ProductContext implements Context
     {
         $factory = $this->productExampleFactory;
         $product = $factory->create();
+
         return $product;
     }
 

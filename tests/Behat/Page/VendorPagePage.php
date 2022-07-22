@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Webmozart\Assert\Assert;
 
 class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
 {
@@ -25,6 +24,7 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
     {
         $page = $this->getDocument();
         $productsList = $page->findById('products');
+
         return $productsList->find('css', '[data-test-product]:first-child [data-test-product-content] [data-test-product-name]')->getText();
     }
 
@@ -32,6 +32,7 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
     {
         $page = $this->getDocument();
         $productsList = $page->findById('products');
+
         return $productsList->find('css', '[data-test-product]:last-child [data-test-product-content] [data-test-product-name]')->getText();
     }
 }

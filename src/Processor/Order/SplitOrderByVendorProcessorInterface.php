@@ -16,6 +16,5 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Model\VendorOrderCollector;
 
 interface SplitOrderByVendorProcessorInterface
 {
-    /** @returns Array<VendorOrderCollector> */
     public function process(OrderInterface $order): array;
 }

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressCloner;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderCloner;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\PaymentClonerInterface;
@@ -20,7 +19,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -67,11 +65,11 @@ final class OrderClonerSpec extends ObjectBehavior
 
         $addressCloner->clone(Argument::any(), Argument::any())->shouldBeCalled();
 
-        $originalOrder->getLocaleCode()->willReturn("US");
+        $originalOrder->getLocaleCode()->willReturn('US');
         $originalOrder->getChannel()->willReturn($channel);
         $originalOrder->getCheckoutCompletedAt()->willReturn($date);
         $originalOrder->getCreatedAt()->willReturn($date);
-        $originalOrder->getCurrencyCode()->willReturn("USD");
+        $originalOrder->getCurrencyCode()->willReturn('USD');
         $originalOrder->getCustomerIp()->willReturn('127.0.0.1');
         $originalOrder->getCreatedByGuest()->willReturn(false);
         $originalOrder->getNotes()->willReturn(null);
@@ -85,10 +83,10 @@ final class OrderClonerSpec extends ObjectBehavior
 
         $newOrder->setBillingAddress(Argument::any())->shouldHaveBeenCalledTimes(1);
         $newOrder->setShippingAddress(Argument::any())->shouldHaveBeenCalledTimes(1);
-        $newOrder->setLocaleCode("US")->shouldHaveBeenCalledTimes(1);
+        $newOrder->setLocaleCode('US')->shouldHaveBeenCalledTimes(1);
         $newOrder->setChannel($channel)->shouldHaveBeenCalledTimes(1);
         $newOrder->setCheckoutCompletedAt($date)->shouldHaveBeenCalledTimes(1);
-        $newOrder->setCurrencyCode("USD")->shouldHaveBeenCalledTimes(1);
+        $newOrder->setCurrencyCode('USD')->shouldHaveBeenCalledTimes(1);
         $newOrder->setCustomerIp('127.0.0.1')->shouldHaveBeenCalledTimes(1);
         $newOrder->setCreatedByGuest(false)->shouldHaveBeenCalledTimes(1);
         $newOrder->setNotes(null)->shouldHaveBeenCalledTimes(1);

@@ -29,13 +29,15 @@ final class OrderItemClonerSpec extends ObjectBehavior
         AdjustmentClonerInterface $cloner,
         OrderItemUnitClonerInterface $itemUnitCloner,
         EntityManagerInterface $entityManager,
-    ): void {
+        ): void {
         $this->beConstructedWith($cloner, $itemUnitCloner, $entityManager);
     }
-    function it_is_initializable()
+
+    public function it_is_initializable()
     {
         $this->shouldHaveType(OrderItemCloner::class);
     }
+
     public function it_clones_order_item(
         AdjustmentClonerInterface $cloner,
         OrderItemUnitClonerInterface $itemUnitCloner,
@@ -46,7 +48,7 @@ final class OrderItemClonerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         OrderItemUnitInterface $unit,
         AdjustmentInterface $adjustment,
-    ): void {
+        ): void {
         $unitCollection = new ArrayCollection([$unit->getWrappedObject()]);
         $adjustmentCollection = new ArrayCollection([$adjustment->getWrappedObject()]);
 
@@ -56,7 +58,7 @@ final class OrderItemClonerSpec extends ObjectBehavior
         $originalItem->getOriginalUnitPrice()->willReturn(111);
         $originalItem->getProductName()->willReturn('name');
         $originalItem->getVariant()->willReturn($productVariant);
-        $originalItem->getVariantName()->willReturn("variant_name");
+        $originalItem->getVariantName()->willReturn('variant_name');
         $originalItem->getUnitPrice()->willReturn(111);
         $originalItem->getVersion()->willReturn(1);
 
@@ -65,7 +67,7 @@ final class OrderItemClonerSpec extends ObjectBehavior
         $newItem->setOriginalUnitPrice(111);
         $newItem->setProductName('name');
         $newItem->setVariant($productVariant);
-        $newItem->setVariantName("variant_name");
+        $newItem->setVariantName('variant_name');
         $newItem->setUnitPrice(111);
         $newItem->setVersion(1);
     }
