@@ -1,6 +1,6 @@
 @order
 Feature: Spliting orders when cart was filled with products from different Vendors
-  As an customer
+  As a customer
   I want to be able to buy products from multiple vendors
 
   Background:
