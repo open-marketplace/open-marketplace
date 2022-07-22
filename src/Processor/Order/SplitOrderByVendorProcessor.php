@@ -56,11 +56,11 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
                 $secondaryOrders[] = $this->generateNewSecondaryOrder($order, $itemVendor, $item);
             }
 
-            if (!$this->vendorSecondaryOrderExits($secondaryOrders, $itemVendor)) {
-                $secondaryOrders[] = $this->generateNewSecondaryOrder($order, $itemVendor, $item);
-                continue;
-            }
-            $this->addItemIntoSecondaryOrder($secondaryOrders, $itemVendor, $item);
+//            if (!$this->vendorSecondaryOrderExits($secondaryOrders, $itemVendor)) {
+//                $secondaryOrders[] = $this->generateNewSecondaryOrder($order, $itemVendor, $item);
+//                continue;
+//            }
+//            $this->addItemIntoSecondaryOrder($secondaryOrders, $itemVendor, $item);
 
 
         }
