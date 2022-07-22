@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressCloner;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderCloner;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\PaymentClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentClonerInterface;
@@ -31,7 +32,7 @@ final class OrderClonerSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $entityManager,
-        AddressCloner $addressCloner,
+        AddressClonerInterface $addressCloner,
         ShipmentClonerInterface $shipmentCloner,
         PaymentClonerInterface $paymentCloner
     ): void {
@@ -45,7 +46,7 @@ final class OrderClonerSpec extends ObjectBehavior
 
     public function it_clones_all_values(
         EntityManagerInterface $entityManager,
-        AddressCloner $addressCloner,
+        AddressClonerInterface $addressCloner,
         OrderInterface $originalOrder,
         OrderInterface $newOrder,
         AddressInterface $billingAddress,
