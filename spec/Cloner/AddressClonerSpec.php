@@ -43,6 +43,7 @@ final class AddressClonerSpec extends ObjectBehavior
         $originalAddress->getProvinceName()->willReturn('provinceName');
 
         $this->clone($originalAddress, $newAddress);
+
         $newAddress->setCreatedAt($dateTime)->shouldHaveBeenCalledTimes(1);
         $newAddress->setFirstName('firsName')->shouldHaveBeenCalledTimes(1);
         $newAddress->setLastName('lastName')->shouldHaveBeenCalledTimes(1);

@@ -63,6 +63,7 @@ final class OrderClonerSpec extends ObjectBehavior
         $originalOrder->getShippingAddress()->willReturn($shippingAddress);
         $originalOrder->getShipments()->willReturn($shipmentCollection);
         $originalOrder->getPayments()->willReturn($paymentCollection);
+
         $addressCloner->clone(Argument::any(), Argument::any())->shouldBeCalled();
 
         $originalOrder->getLocaleCode()->willReturn("US");

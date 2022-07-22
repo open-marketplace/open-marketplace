@@ -14,8 +14,8 @@ interface OrderInterface
 
     public function setPrimaryOrder(?OrderInterface $primaryOrder): void;
 
-    public function addSubOrder(OrderInterface $subOrder): void;
+    public function addSecondaryOrder(OrderInterface $subOrder): void;
 
     /** @return Collection<int, OrderInterface> */
-    public function getSubOrders(): Collection;
+    public function getSecondaryOrders(): Collection;
 }
