@@ -63,6 +63,7 @@ class ProductContext implements Context
         $this->taxonFactory = $taxonFactory;
         $this->sharedStorage = $sharedStorage;
     }
+    
     /**
      * @Given store has :productsCoun products from same Vendor
      */
