@@ -56,6 +56,7 @@ final class OrderItemCloner implements OrderItemClonerInterface
             $newUnit->setShipment($shipment);
             $newItem->addUnit($newUnit);
         }
+        
         $adjustments = $originalItem->getAdjustments();
         foreach ($adjustments as $adjustment) {
             $newAdjustment = new Adjustment();
