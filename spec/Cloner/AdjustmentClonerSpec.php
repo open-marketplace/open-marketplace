@@ -22,6 +22,7 @@ final class AdjustmentClonerSpec extends ObjectBehavior
     {
         $this->shouldHaveType(AdjustmentCloner::class);
     }
+    
     public function it_clones_adjustment(
         AdjustmentInterface $originalAdjustment,
         AdjustmentInterface $newAdjustment,
