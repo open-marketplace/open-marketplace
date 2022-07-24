@@ -79,13 +79,13 @@
                             <td>
                                 <a class="ui labeled icon button" href="{{ path('sylius_shop_account_order_show',{'number':  row.number}) }}">
                                     <i class="icon search"></i>
-                                    Show
+                                    {{ "sylius.ui.show"|trans }}
                                 </a>
                                 {% if primary_order_paymentState is not same as "paid" %}
                                     <a  href="{{ path('sylius_shop_order_show',{'tokenValue': primary_order_token}) }}">
                                         <button type="button" class="ui labeled icon button  blue ">
                                             <i class="icon credit card alternative"></i>
-                                            Pay
+                                            {{ "sylius.ui.pay"|trans }}
                                         </button>
                                     </a>
                                 {% endif %}

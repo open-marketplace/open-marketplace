@@ -45,7 +45,6 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     public function process(OrderInterface $order): array
     {
-//        $this->secondaryOrders = [];
         $this->secondaryOrders[] = $order;
 
         /** @var array<OrderItemInterface> $orderItems */
@@ -60,14 +59,9 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         }
 
         foreach ($this->secondaryOrders as $secondaryOrder) {
-            $secondaryOrder->recalculateItemsTotal();
-            $secondaryOrder->recalculateAdjustmentsTotal();
-            $payment = $secondaryOrder->getPayments()[0];
-            if ($payment) {
-                $payment->setAmount($secondaryOrder->getTotal());
-                $this->entityManager->persist($payment);
-            }
+            $this->recalculatePayment($secondaryOrder);
         }
+
         $this->entityManager->persist($order);
         $this->entityManager->flush();
 
@@ -151,6 +145,17 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
     public function getSecondaryOrdersCount(): int
     {
         return count($this->secondaryOrders);
+    }
+
+    private function recalculatePayment(OrderInterface $secondaryOrder): void
+    {
+        $secondaryOrder->recalculateItemsTotal();
+        $secondaryOrder->recalculateAdjustmentsTotal();
+        $payment = $secondaryOrder->getPayments()[0];
+        if ($payment) {
+            $payment->setAmount($secondaryOrder->getTotal());
+            $this->entityManager->persist($payment);
+        }
     }
 
 
