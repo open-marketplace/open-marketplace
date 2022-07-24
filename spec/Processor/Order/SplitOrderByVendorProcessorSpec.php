@@ -13,9 +13,15 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendorProcessor;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 {
@@ -30,5 +36,26 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(SplitOrderByVendorProcessor::class);
+    }
+
+    public function it_always_create_one_secondary_order(
+        EntityManager $entityManager,
+        OrderClonerInterface $orderCloner,
+        OrderItemClonerInterface $orderItemCloner,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        \Sylius\Component\Core\Model\ProductInterface $product,
+        ProductVariantInterface $productVariant,
+        VendorInterface $vendor
+    ):void {
+
+        $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject()]);
+        $order->getItems()->willReturn($orderItemCollection);
+        $orderItem->getVariant()->willReturn($productVariant);
+        $productVariant->getProduct()->willReturn($product);
+        $product->getVendor()->willReturn($vendor);
+        $this->process($order);
+
+//        dump(count($this->getSecondaryOrders()));
     }
 }

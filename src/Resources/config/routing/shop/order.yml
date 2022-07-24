@@ -22,3 +22,12 @@ sylius_shop_checkout_complete:
                 type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
                 options:
                     validation_groups: 'sylius_checkout_complete'
+sylius_shop_account_order_index:
+    path: /account/orders
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            section: shop_account
+            template: "@SyliusShop/Account/Order/index.html.twig"
+            grid: sylius_shop_account_order

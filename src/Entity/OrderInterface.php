@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\OrderInterface as BaseOrderInterface;
 
-interface OrderInterface
+interface OrderInterface extends BaseOrderInterface
 {
     public function getVendor(): ?VendorInterface;
 

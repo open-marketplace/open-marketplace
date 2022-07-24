@@ -31,6 +31,8 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     private OrderItemClonerInterface $orderItemCloner;
 
+    private array $secondaryOrders;
+
     public function __construct(
         EntityManager $entityManager,
         OrderClonerInterface $orderCloner,
@@ -43,21 +45,21 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     public function process(OrderInterface $order): array
     {
-        $secondaryOrders = [];
-        $secondaryOrders[] = $order;
+//        $this->secondaryOrders = [];
+        $this->secondaryOrders[] = $order;
 
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
         foreach ($orderItems as $item) {
             $itemVendor = $this->getVendorFromOrderItem($item);
-            if ($this->vendorSecondaryOrderExits($secondaryOrders, $itemVendor)) {
-                $this->addItemIntoSecondaryOrder($secondaryOrders, $itemVendor, $item);
+            if ($this->vendorSecondaryOrderExits($this->secondaryOrders, $itemVendor)) {
+                $this->addItemIntoSecondaryOrder($this->secondaryOrders, $itemVendor, $item);
             } else {
-                $secondaryOrders[] = $this->generateNewSecondaryOrder($order, $itemVendor, $item);
+                $this->secondaryOrders[] = $this->generateNewSecondaryOrder($order, $itemVendor, $item);
             }
         }
 
-        foreach ($secondaryOrders as $secondaryOrder) {
+        foreach ($this->secondaryOrders as $secondaryOrder) {
             $secondaryOrder->recalculateItemsTotal();
             $secondaryOrder->recalculateAdjustmentsTotal();
             $payment = $secondaryOrder->getPayments()[0];
@@ -69,7 +71,7 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $this->entityManager->persist($order);
         $this->entityManager->flush();
 
-        return $secondaryOrders;
+        return $this->secondaryOrders;
     }
 
     private function vendorSecondaryOrderExits(array $secondaryOrders, VendorInterface $vendor): bool
@@ -142,4 +144,14 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $shipments = $secondaryOrder->getShipments()[0];
         $this->cloneItemIntoSecondaryOrder($item, $secondaryOrder, $shipments);
     }
+
+    /**
+     * @return array
+     */
+    public function getSecondaryOrdersCount(): int
+    {
+        return count($this->secondaryOrders);
+    }
+
+
 }
