@@ -11,32 +11,18 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManagerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Refresher\PaymentRefresherInterface;
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Core\Model\ShipmentInterface;
 
 class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
 {
     private EntityManager $entityManager;
 
-    private OrderClonerInterface $orderCloner;
-
-    private OrderItemClonerInterface $orderItemCloner;
-
     private array $secondaryOrders;
-
-    private OrderFactoryInterface $factory;
-
-    private OrderItemFactoryInterface $itemFactory;
 
     private OrderManagerInterface $orderManager;
 
@@ -44,18 +30,10 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     public function __construct(
         EntityManager $entityManager,
-        OrderClonerInterface $orderCloner,
-        OrderItemClonerInterface $orderItemCloner,
-        OrderFactoryInterface $factory,
-        OrderItemFactoryInterface $itemFactory,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher
     ) {
         $this->entityManager = $entityManager;
-        $this->orderCloner = $orderCloner;
-        $this->orderItemCloner = $orderItemCloner;
-        $this->factory = $factory;
-        $this->itemFactory = $itemFactory;
         $this->orderManager = $orderManager;
         $this->paymentRefresher = $paymentRefresher;
     }
@@ -101,5 +79,4 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
     {
         return count($this->secondaryOrders);
     }
-
 }

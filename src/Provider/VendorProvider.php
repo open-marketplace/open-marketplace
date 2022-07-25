@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
@@ -52,6 +51,7 @@ final class VendorProvider implements VendorProviderInterface
     {
         /** @var ProductInterface $product */
         $product = $orderItem->getProduct();
+
         return $product->getVendor();
     }
 }

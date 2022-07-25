@@ -7,10 +7,6 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendorProcessor"
                  id="bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag.mvm_plugin.cloner.order_cloner" />
-            <argument type="service" id="bitbag.mvm_plugin.cloner.order_item_cloner"/>
-            <argument type="service" id="bitbag.mvm_plugin.factory.order_factory"/>
-            <argument type="service" id="bitbag.mvm_plugin.factory.order_item_factory"/>
             <argument type="service" id="bitbag.mvm_plugin.manager.order_manager"/>
             <argument type="service" id="bitbag.mvm_plugin.refresher.payment_refresher"/>
         </service>

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\OrderItem as BaseOrderItem;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface

@@ -14,32 +14,30 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManagerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendorProcessor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Refresher\PaymentRefresherInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 {
     public function let(
         EntityManager $entityManager,
-        OrderClonerInterface $orderCloner,
-        OrderItemClonerInterface $orderItemCloner,
-        OrderFactoryInterface $factory,
-        OrderItemFactoryInterface $itemFactory,
         OrderManagerInterface $orderManager,
-        VendorProviderInterface $vendorProvider
+        PaymentRefresherInterface $paymentRefresher
     ): void {
-        $this->beConstructedWith($entityManager, $orderCloner, $orderItemCloner, $factory, $itemFactory, $orderManager, $vendorProvider);
+        $this->beConstructedWith(
+            $entityManager,
+            $orderManager,
+            $paymentRefresher
+        );
     }
 
     public function it_is_initializable(): void
@@ -50,12 +48,11 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
     public function it_always_create_at_least_one_secondary_order(
         OrderInterface $order,
         PaymentInterface $payment,
-        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface $orderItem,
+        OrderItemInterface $orderItem,
         OrderInterface $subOrder,
         VendorInterface $vendor,
-        \Sylius\Component\Core\Model\ProductInterface $product,
-        VendorProviderInterface $vendorProvider,
         OrderManagerInterface $orderManager,
+        PaymentRefresherInterface $paymentRefresher
     ): void {
         $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject()]);
         $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
@@ -63,70 +60,49 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $orderItem->getProductOwner()->willReturn($vendor);
         $order->getPayments()->willReturn($paymentCollection);
         $order->getTotal()->willReturn(100);
+        $subOrder->getVendor()->willReturn(null);
+        $order->getVendor()->willReturn(null);
         $orderManager->generateNewSecondaryOrder($order, $vendor, $orderItem)->willReturn($subOrder);
-//        $orderItem->getProductOwner()->willReturn($vendor);
+
         $this->process($order);
 
         $this->getSecondaryOrdersCount()->shouldReturn(2);
 
-        $order->recalculateItemsTotal()->shouldHaveBeenCalled();
-        $order->recalculateAdjustmentsTotal()->shouldHaveBeenCalled();
+        $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
     }
 
-//    public function it_create_2_secondary_orders_when_gets_products_from_2_vendors(
-//        OrderInterface $order,
-//        PaymentInterface $payment,
-//        OrderItemInterface $orderItem,
-//        OrderItemInterface $orderItem2,
-//        VendorInterface $vendor,
-//        VendorInterface $vendor2,
-//    ): void {
-//        $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject(),$orderItem2->getWrappedObject()]);
-//        $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
-//        $order->getItems()->willReturn($orderItemCollection);
-//
-////        $orderItem->getProductOwner()->willReturn($vendor);
-////        $orderItem2->getProductOwner()->willReturn($vendor2);
-//        $order->getPayments()->willReturn($paymentCollection);
-//        $order->getTotal()->willReturn(100);
-//        $order->getVendor()->willReturn(null);
-//
-////        $orderItem->getProductOwner()->willReturn($vendor);
-//        $this->process($order);
-//
-//        $this->getSecondaryOrdersCount()->shouldReturn(3);
-//
-//        $order->recalculateItemsTotal()->shouldHaveBeenCalled();
-//        $order->recalculateAdjustmentsTotal()->shouldHaveBeenCalled();
-//    }
-//
-//    public function it_recalculates_payment_for_each_suborder(
-//        OrderInterface $order,
-//        PaymentInterface $payment,
-//        OrderItemInterface $orderItem,
-//        OrderItemInterface $orderItem2,
-//        VendorInterface $vendor,
-//        VendorInterface $vendor2,
-//    ): void {
-//        $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject(),$orderItem2->getWrappedObject()]);
-//        $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
-//        $order->getItems()->willReturn($orderItemCollection);
-//
-//        $orderItem->getProductOwner()->willReturn($vendor);
-//        $orderItem2->getProductOwner()->willReturn($vendor2);
-//        $order->getPayments()->willReturn($paymentCollection);
-//        $order->getTotal()->willReturn(100);
-//        $order->getVendor()->willReturn(null);
-//
-//        $orderItem->getProductOwner()->willReturn($vendor);
-//        $this->process($order);
-//
-//
-////        $this->getSecondaryOrdersCount()->shouldReturn(3);
-////
-//        $order->recalculateItemsTotal()->shouldHaveBeenCalled();
-//        $order->recalculateAdjustmentsTotal()->shouldHaveBeenCalled();
-//
-//
-//    }
+    public function it_create_2_secondary_orders_for_products_from_different_vendors(
+        OrderInterface $order,
+        PaymentInterface $payment,
+        OrderItemInterface $orderItem,
+        OrderItemInterface $secondItem,
+        OrderInterface $subOrder,
+        OrderInterface $subOrder2,
+        VendorInterface $vendor,
+        VendorInterface $vendor2,
+        OrderManagerInterface $orderManager,
+        PaymentRefresherInterface $paymentRefresher
+    ): void {
+        $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject(), $secondItem->getWrappedObject()]);
+        $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
+        $order->getItems()->willReturn($orderItemCollection);
+
+        $orderItem->getProductOwner()->willReturn($vendor);
+        $secondItem->getProductOwner()->willReturn($vendor2);
+        $order->getPayments()->willReturn($paymentCollection);
+        $order->getTotal()->willReturn(100);
+
+        $order->getVendor()->willReturn(null);
+        $subOrder->getVendor()->willReturn($vendor);
+        $subOrder2->getVendor()->willReturn($vendor2);
+
+        $orderManager->generateNewSecondaryOrder($order, $vendor, $orderItem)->willReturn($subOrder);
+        $orderManager->generateNewSecondaryOrder($order, $vendor2, $secondItem)->willReturn($subOrder2);
+
+        $this->process($order);
+
+        $this->getSecondaryOrdersCount()->shouldReturn(3);
+
+        $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
+    }
 }
