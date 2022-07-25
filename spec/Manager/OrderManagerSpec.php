@@ -68,15 +68,11 @@ final class OrderManagerSpec extends ObjectBehavior
     public function it_adds_item_into_order(
         OrderInterface $order,
         OrderInterface $order2,
-        OrderInterface $newOrder,
         OrderItemInterface $orderItem,
         VendorInterface $itemVendor,
-        OrderFactoryInterface $factory,
         OrderItemFactoryInterface $itemFactory,
         ShipmentInterface $shipment,
-        OrderItemInterface $item,
         OrderItemInterface $newItem,
-        OrderManagerInterface $orderManager,
     ): void {
         $orders = [$order, $order2];
         $shipments = new ArrayCollection([$shipment->getWrappedObject()]);
