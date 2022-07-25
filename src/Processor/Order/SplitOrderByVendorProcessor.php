@@ -13,16 +13,15 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManagerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Refresher\PaymentRefresherInterface;
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
 class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
@@ -39,18 +38,26 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     private OrderItemFactoryInterface $itemFactory;
 
+    private OrderManagerInterface $orderManager;
+
+    private PaymentRefresherInterface $paymentRefresher;
+
     public function __construct(
         EntityManager $entityManager,
         OrderClonerInterface $orderCloner,
         OrderItemClonerInterface $orderItemCloner,
         OrderFactoryInterface $factory,
-        OrderItemFactoryInterface $itemFactory
+        OrderItemFactoryInterface $itemFactory,
+        OrderManagerInterface $orderManager,
+        PaymentRefresherInterface $paymentRefresher
     ) {
         $this->entityManager = $entityManager;
         $this->orderCloner = $orderCloner;
         $this->orderItemCloner = $orderItemCloner;
         $this->factory = $factory;
         $this->itemFactory = $itemFactory;
+        $this->orderManager = $orderManager;
+        $this->paymentRefresher = $paymentRefresher;
     }
 
     public function process(OrderInterface $order): array
@@ -59,17 +66,18 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
+        /** @var OrderItemInterface $item */
         foreach ($orderItems as $item) {
             $itemVendor = $item->getProductOwner();
             if ($this->vendorSecondaryOrderExits($this->secondaryOrders, $itemVendor)) {
-                $this->addItemIntoSecondaryOrder($this->secondaryOrders, $itemVendor, $item);
+                $this->orderManager->addItemIntoSecondaryOrder($this->secondaryOrders, $itemVendor, $item);
             } else {
-                $this->secondaryOrders[] = $this->generateNewSecondaryOrder($order, $itemVendor, $item);
+                $this->secondaryOrders[] = $this->orderManager->generateNewSecondaryOrder($order, $itemVendor, $item);
             }
         }
 
         foreach ($this->secondaryOrders as $secondaryOrder) {
-            $this->recalculatePayment($secondaryOrder);
+            $this->paymentRefresher->refreshPayment($secondaryOrder);
         }
 
         $this->entityManager->persist($order);
@@ -89,69 +97,9 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         return false;
     }
 
-    private function getVendorSecondaryOrder(array $secondaryOrders, VendorInterface $vendor): ?OrderInterface
-    {
-        foreach ($secondaryOrders as $secondaryOrder) {
-            if ($secondaryOrder->getVendor() === $vendor) {
-                return $secondaryOrder;
-            }
-        }
-
-        return null;
-    }
-
-    private function cloneItemIntoSecondaryOrder(
-        OrderItemInterface $item,
-        OrderInterface $order,
-        ?ShipmentInterface $shipment
-    ): void {
-        $newItem = $this->itemFactory->createNew();
-        $this->orderItemCloner->clone($item, $newItem, $shipment);
-        $order->addItem($newItem);
-    }
-
-    private function generateNewSecondaryOrder(
-        OrderInterface $order,
-        VendorInterface $itemVendor,
-        OrderItemInterface $item
-    ): OrderInterface {
-        $newOrder = $this->factory->createNew();
-        $this->orderCloner->clone($order, $newOrder);
-        $newOrder->setVendor($itemVendor);
-        $newOrder->setPrimaryOrder($order);
-        $this->entityManager->persist($newOrder);
-        if ($newOrder->getShipments()[0]) {
-            $this->cloneItemIntoSecondaryOrder($item, $newOrder, $newOrder->getShipments()[0]);
-        }
-
-        return $newOrder;
-    }
-
-    private function addItemIntoSecondaryOrder(
-        array $secondaryOrders, VendorInterface $itemVendor, OrderItemInterface $item
-    ): void {
-        /** @var OrderInterface $secondaryOrder */
-        $secondaryOrder = $this->getVendorSecondaryOrder($secondaryOrders, $itemVendor);
-        /** @var ShipmentInterface $shipments */
-        $shipments = $secondaryOrder->getShipments()[0];
-        $this->cloneItemIntoSecondaryOrder($item, $secondaryOrder, $shipments);
-    }
-
     public function getSecondaryOrdersCount(): int
     {
         return count($this->secondaryOrders);
     }
-
-    private function recalculatePayment(OrderInterface $secondaryOrder): void
-    {
-        $secondaryOrder->recalculateItemsTotal();
-        $secondaryOrder->recalculateAdjustmentsTotal();
-        $payment = $secondaryOrder->getPayments()[0];
-        if ($payment) {
-            $payment->setAmount($secondaryOrder->getTotal());
-            $this->entityManager->persist($payment);
-        }
-    }
-
 
 }

@@ -85,6 +85,7 @@ final class OrderCloner implements OrderClonerInterface
             $this->paymentCloner->clone($payment, $newPayment);
             $newOrder->addPayment($newPayment);
         }
+
         $this->entityManager->flush();
     }
 }

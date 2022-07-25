@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 

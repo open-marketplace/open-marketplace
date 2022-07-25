@@ -29,5 +29,5 @@ sylius_shop_account_order_index:
         _controller: sylius.controller.order:indexAction
         _sylius:
             section: shop_account
-            template: "@SyliusShop/Account/Order/index.html.twig"
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Shop/Order/Index.html.twig"
             grid: sylius_shop_account_order
