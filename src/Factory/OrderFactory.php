@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order;
 
-class OrderFactory implements OrderFactoryInterface
+final class OrderFactory implements OrderFactoryInterface
 {
     public function createNew(): Order
     {

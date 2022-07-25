@@ -9,16 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
 
-interface OrderItemClonerInterface
+final class OrderItemFactory implements OrderItemFactoryInterface
 {
-    public function clone(
-        OrderItemInterface $originalItem,
-        OrderItemInterface $newItem,
-        ?ShipmentInterface $shipment
-    ): void;
+    public function createNew(): OrderItemInterface
+    {
+        return new OrderItem();
+    }
 }

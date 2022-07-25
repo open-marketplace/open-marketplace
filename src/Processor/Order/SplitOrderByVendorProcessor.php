@@ -18,6 +18,9 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactory;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactory;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -32,18 +35,22 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     private array $secondaryOrders;
 
-    private OrderFactory $factory;
+    private OrderFactoryInterface $factory;
+
+    private OrderItemFactoryInterface $itemFactory;
 
     public function __construct(
         EntityManager $entityManager,
         OrderClonerInterface $orderCloner,
         OrderItemClonerInterface $orderItemCloner,
-        OrderFactory $factory
+        OrderFactoryInterface $factory,
+        OrderItemFactoryInterface $itemFactory
     ) {
         $this->entityManager = $entityManager;
         $this->orderCloner = $orderCloner;
         $this->orderItemCloner = $orderItemCloner;
         $this->factory = $factory;
+        $this->itemFactory = $itemFactory;
     }
 
     public function process(OrderInterface $order): array
@@ -98,7 +105,7 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         OrderInterface $order,
         ?ShipmentInterface $shipment
     ): void {
-        $newItem = new OrderItem();
+        $newItem = $this->itemFactory->createNew();
         $this->orderItemCloner->clone($item, $newItem, $shipment);
         $order->addItem($newItem);
     }

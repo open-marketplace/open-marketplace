@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\Adjustment;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnit;
 use Sylius\Component\Core\Model\ShipmentInterface;
 

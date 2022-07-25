@@ -71,5 +71,9 @@
                  id="bitbag.mvm_plugin.factory.order_factory">
         </service>
 
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactory"
+                 id="bitbag.mvm_plugin.factory.order_item_factory">
+        </service>
+
     </services>
 </container>
