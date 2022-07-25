@@ -60,11 +60,16 @@
 
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactory"
-                 id="bitbag.mvm_plugin.service.vendor_image_factory" />
-
+                 id="bitbag.mvm_plugin.service.vendor_image_factory" >
+        </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory" id="bitbag.mvm.factory.address_factory">
 
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactory"
+                 id="bitbag.mvm_plugin.factory.order_factory">
+        </service>
+
     </services>
 </container>

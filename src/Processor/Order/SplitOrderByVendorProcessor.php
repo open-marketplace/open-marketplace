@@ -15,12 +15,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactory;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Core\Model\OrderItem;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
 class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
@@ -33,14 +32,18 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     private array $secondaryOrders;
 
+    private OrderFactory $factory;
+
     public function __construct(
         EntityManager $entityManager,
         OrderClonerInterface $orderCloner,
-        OrderItemClonerInterface $orderItemCloner
+        OrderItemClonerInterface $orderItemCloner,
+        OrderFactory $factory
     ) {
         $this->entityManager = $entityManager;
         $this->orderCloner = $orderCloner;
         $this->orderItemCloner = $orderItemCloner;
+        $this->factory = $factory;
     }
 
     public function process(OrderInterface $order): array
@@ -50,7 +53,7 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
         foreach ($orderItems as $item) {
-            $itemVendor = $this->getVendorFromOrderItem($item);
+            $itemVendor = $item->getProductOwner();
             if ($this->vendorSecondaryOrderExits($this->secondaryOrders, $itemVendor)) {
                 $this->addItemIntoSecondaryOrder($this->secondaryOrders, $itemVendor, $item);
             } else {
@@ -100,24 +103,12 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $order->addItem($newItem);
     }
 
-    private function getVendorFromOrderItem(OrderItemInterface $orderItem): VendorInterface
-    {
-        /** @var ProductVariant $variant */
-        $variant = $orderItem->getVariant();
-        /** @var ProductInterface $product */
-        $product = $variant->getProduct();
-        /** @var VendorInterface $vendor */
-        $vendor = $product->getVendor();
-
-        return $vendor;
-    }
-
     private function generateNewSecondaryOrder(
         OrderInterface $order,
         VendorInterface $itemVendor,
         OrderItemInterface $item
     ): OrderInterface {
-        $newOrder = new Order();
+        $newOrder = $this->factory->createNew();
         $this->orderCloner->clone($order, $newOrder);
         $newOrder->setVendor($itemVendor);
         $newOrder->setPrimaryOrder($order);
