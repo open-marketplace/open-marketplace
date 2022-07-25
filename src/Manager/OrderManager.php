@@ -88,7 +88,7 @@ final class OrderManager implements OrderManagerInterface
     }
 
     private function cloneItemIntoSecondaryOrder(
-        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface $item,
+        OrderItemInterface $item,
         OrderInterface $order,
         ?ShipmentInterface $shipment
     ): void {
