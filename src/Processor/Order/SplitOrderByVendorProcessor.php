@@ -130,9 +130,6 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $this->cloneItemIntoSecondaryOrder($item, $secondaryOrder, $shipments);
     }
 
-    /**
-     * @return array
-     */
     public function getSecondaryOrdersCount(): int
     {
         return count($this->secondaryOrders);
