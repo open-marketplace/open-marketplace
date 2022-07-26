@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Order;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendorProcessorInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Controller\OrderController as BaseOrderController;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
@@ -39,7 +40,7 @@ use Webmozart\Assert\Assert;
 
 class OrderController extends BaseOrderController
 {
-    private ResourcesCollectionProviderInterface $resourcesFinder;
+    private SplitOrderByVendorProcessorInterface $splitOrderByVendorProcessor;
 
     public function __construct(
         MetadataInterface $metadata,
@@ -58,7 +59,8 @@ class OrderController extends BaseOrderController
         EventDispatcherInterface $eventDispatcher,
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
-        ResourceDeleteHandlerInterface $resourceDeleteHandler
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
+        SplitOrderByVendorProcessorInterface $splitOrderByVendorProcessor
     ) {
         parent::__construct(
             $metadata,
@@ -97,11 +99,12 @@ class OrderController extends BaseOrderController
         $this->stateMachine = $stateMachine;
         $this->resourceUpdateHandler = $resourceUpdateHandler;
         $this->resourceDeleteHandler = $resourceDeleteHandler;
+        $this->splitOrderByVendorProcessor = $splitOrderByVendorProcessor;
     }
 
     public function updateAction(Request $request): Response
     {
-        $splitProcessor = $this->container->get('bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor');
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
@@ -135,7 +138,7 @@ class OrderController extends BaseOrderController
             }
 
             try {
-                $orders = $splitProcessor->process($resource);
+                $orders = $this->splitOrderByVendorProcessor->process($resource);
 
                 foreach ($orders as $order) {
                     $this->resourceUpdateHandler->handle($order, $configuration, $this->manager);
