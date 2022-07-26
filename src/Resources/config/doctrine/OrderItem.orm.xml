@@ -15,6 +15,5 @@
                 </join-table>
             </association-override>
         </association-overrides>
-
     </mapped-superclass>
 </doctrine-mapping>

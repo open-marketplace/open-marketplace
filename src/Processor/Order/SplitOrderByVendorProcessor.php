@@ -58,7 +58,6 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
             $this->paymentRefresher->refreshPayment($secondaryOrder);
         }
 
-        $this->entityManager->persist($order);
         $this->entityManager->flush();
 
         return $this->secondaryOrders;
