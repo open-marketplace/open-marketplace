@@ -1,5 +1,6 @@
 bitbag_mvm_plugin:
     ui:
+        inventory: "Inventory"
         clients: "Clients"
         order_list: "Orders"
         summary_of_your_order: "Summary of your order(s)"

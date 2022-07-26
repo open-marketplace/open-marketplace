@@ -37,7 +37,6 @@ final class VendorMenuListener
         $menu
             ->addChild('Inventory', ['route' => 'vendor_product_variant_index'])
             ->setLabel('bitbag_mvm_plugin.ui.inventory')
-            ->setLabelAttribute('icon', 'users');
-
+            ->setLabelAttribute('icon', 'clipboard');
     }
 }
