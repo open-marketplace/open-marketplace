@@ -4,13 +4,10 @@
     {{ form_start(form, {'action': path('vendor_product_variant_update', { 'id': resource.id }), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <input type="hidden" name="_method" value="PUT" />
     {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
-{#    {% if configuration.vars.templates.form is defined %}#}
-{#        {% include configuration.vars.templates.form %}#}
-        {% if not form._token.isRendered %}
-            {{ form_row(form._token) }}
-        {% endif %}
 
-{#        {{ form_widget(form) }}#}
+    {% if not form._token.isRendered %}
+        {{ form_row(form._token) }}
+    {% endif %}
 
     <div class="ui segment">
         <div class="required field">
@@ -23,12 +20,6 @@
                     {{ 'sylius.ui.tracked'|trans }}
                 </label>
             </div>
-        </div>
-        <div class="hidden">
-
-        </div>
-        <div class="ui pointing above ignored label">
-            <p id="sylius_product_variant_tracked_help" class="help-text">If this option is enabled Sylius will keep track of the stock and will stop selling the product once stock reaches 0.</p>
         </div>
     </div>
         <button class="ui labeled icon primary button" type="submit" id="sylius_save_changes_button">
