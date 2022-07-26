@@ -21,11 +21,11 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
-#                enabled:
-#                    type: twig
-#                    label: sylius.ui.enabled
-#                    options:
-#                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
                 inventory:
                     type: twig
                     path: .
@@ -63,12 +63,13 @@ sylius_grid:
                                 parameters:
                                     productId: $productId
                 item:
-#                    update:
-#                        type: update
-#                        options:
-#                            link:
-#                                parameters:
-#                                    id: resource.id
-#                                    productId: $productId
+                    update:
+                        type: update
+                        options:
+                            link:
+                                route: vendor_product_variant_update
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId
 
 

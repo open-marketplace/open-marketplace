@@ -6,13 +6,35 @@ vendor_product_variant_index:
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
             grid: vendor_product_variant
-#            section: admin
-#            permission: true
             vars:
-#                route:
-#                    parameters:
-#                        productId: $productId
+                route:
+                    parameters:
+                        productId: $productId
                 templates:
                     breadcrumb: "@SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig"
                 icon: cubes
                 subheader: sylius.ui.manage_variants
+
+vendor_product_variant_update:
+    path: /inventory_variants/{id}
+    methods: [ GET, PUT ]
+    defaults:
+        _controller: sylius.controller.product_variant:updateAction
+        _sylius:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Product_Variants/update.html.twig"
+            grid: sylius_admin_product_variant
+            redirect:
+                route: vendor_product_variant_index
+            repository:
+                method: findOneById
+                arguments:
+                    id: $id
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                templates:
+                    form: "@SyliusAdmin/ProductVariant/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/ProductVariant/Update/_breadcrumb.html.twig"
+                    toolbar: "@SyliusAdmin/ProductVariant/Update/_toolbar.html.twig"
+
