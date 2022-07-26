@@ -18,34 +18,35 @@ use Sylius\Component\Order\Model\AdjustableInterface;
 
 final class AdjustmentClonerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(AdjustmentCloner::class);
     }
+
     public function it_clones_adjustment(
         AdjustmentInterface $originalAdjustment,
         AdjustmentInterface $newAdjustment,
         AdjustableInterface $adjustable
     ): void {
         $date = new \DateTime('now');
-        $originalAdjustment->getType()->willReturn("type");
-        $originalAdjustment->getOriginCode()->willReturn("code");
+        $originalAdjustment->getType()->willReturn('type');
+        $originalAdjustment->getOriginCode()->willReturn('code');
         $originalAdjustment->isNeutral()->willReturn(false);
         $originalAdjustment->getLabel()->willReturn('label');
         $originalAdjustment->getAdjustable()->willReturn($adjustable);
-        $originalAdjustment->getDetails()->willReturn(["details"]);
+        $originalAdjustment->getDetails()->willReturn(['details']);
         $originalAdjustment->getAmount()->willReturn(1);
         $originalAdjustment->getCreatedAt()->willReturn($date);
         $originalAdjustment->getUpdatedAt()->willReturn($date);
 
         $this->clone($originalAdjustment, $newAdjustment);
 
-        $newAdjustment->setType("type")->shouldHaveBeenCalled();
-        $newAdjustment->setOriginCode("code")->shouldHaveBeenCalled();
+        $newAdjustment->setType('type')->shouldHaveBeenCalled();
+        $newAdjustment->setOriginCode('code')->shouldHaveBeenCalled();
         $newAdjustment->setNeutral(false)->shouldHaveBeenCalled();
         $newAdjustment->setLabel('label')->shouldHaveBeenCalled();
         $newAdjustment->setAdjustable($adjustable)->shouldHaveBeenCalled();
-        $newAdjustment->setDetails(["details"])->shouldHaveBeenCalled();
+        $newAdjustment->setDetails(['details'])->shouldHaveBeenCalled();
         $newAdjustment->setAmount(1)->shouldHaveBeenCalled();
         $newAdjustment->setCreatedAt($date)->shouldHaveBeenCalled();
         $newAdjustment->setUpdatedAt($date)->shouldHaveBeenCalled();

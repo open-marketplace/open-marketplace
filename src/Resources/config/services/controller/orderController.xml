@@ -7,7 +7,6 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Order\OrderController"
                  id="bitbag.mvm_plugin.controller.order.order_controller"
                  parent="sylius.controller.order">
-<!--            <argument type="service" id="bitbag_mvm_plugin.provider.vendor_provider" />-->
         </service>
     </services>
 </container>

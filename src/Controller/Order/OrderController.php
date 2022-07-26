@@ -60,7 +60,25 @@ class OrderController extends BaseOrderController
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler
     ) {
-        parent::__construct($metadata, $requestConfigurationFactory, $viewHandler, $repository, $factory, $newResourceFactory, $manager, $singleResourceProvider, $resourcesFinder, $resourceFormFactory, $redirectHandler, $flashHelper, $authorizationChecker, $eventDispatcher, $stateMachine, $resourceUpdateHandler, $resourceDeleteHandler);
+        parent::__construct(
+            $metadata,
+            $requestConfigurationFactory,
+            $viewHandler,
+            $repository,
+            $factory,
+            $newResourceFactory,
+            $manager,
+            $singleResourceProvider,
+            $resourcesFinder,
+            $resourceFormFactory,
+            $redirectHandler,
+            $flashHelper,
+            $authorizationChecker,
+            $eventDispatcher,
+            $stateMachine,
+            $resourceUpdateHandler,
+            $resourceDeleteHandler
+        );
 
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;

@@ -14,23 +14,19 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Shop;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Webmozart\Assert\Assert;
-use Sylius\Component\Core\OrderCheckoutTransitions;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage;
+use Webmozart\Assert\Assert;
 
 class OrderContext extends RawMinkContext implements Context
 {
     private ShowProductPage $productPage;
+
     private SharedStorageInterface $sharedStorage;
 
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
-    )
-    {
+    ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
     }
@@ -41,9 +37,9 @@ class OrderContext extends RawMinkContext implements Context
     public function iShouldSeeOrders($count)
     {
         $page = $this->getSession()->getPage();
-        $tableWrapper = $page->find('css',"table");
-        $orders = $tableWrapper->findAll('css','.item');
-        Assert::eq(count($orders),$count);
+        $tableWrapper = $page->find('css', 'table');
+        $orders = $tableWrapper->findAll('css', '.item');
+        Assert::eq(count($orders), $count);
     }
 
     /**
@@ -52,9 +48,37 @@ class OrderContext extends RawMinkContext implements Context
     public function iCompleteCheckout()
     {
         $page = $this->getSession()->getPage();
-        $page->find("css","button")->press();
-
+        $page->find('css', 'button')->press();
+//        sleep(1);
     }
+
+    /**
+     * @Given I submit form
+     */
+    public function iSubmitForm()
+    {
+        $page = $this->getSession()->getPage();
+        $page->find('css', '.ui.large.primary.icon.labeled.button')->press();
+    }
+
+    /**
+     * @Given I choose shipment
+     */
+    public function iChooseShipment()
+    {
+        $page = $this->getSession()->getPage();
+        $page->find('css', '.ui.large.primary.icon.labeled.button')->press();
+    }
+
+    /**
+     * @Given I choose payment
+     */
+    public function iChoosePayment()
+    {
+        $page = $this->getSession()->getPage();
+        $page->find('css', '.ui.large.primary.icon.labeled.button')->press();
+    }
+
 
     /**
      * @Given I have :count products in cart
@@ -62,11 +86,11 @@ class OrderContext extends RawMinkContext implements Context
     public function iHaveProductsInCart($count)
     {
         $products = $this->sharedStorage->get('products');
-        for($i=1; $i<=$count; $i++) {
+        for ($i = 1; $i <= $count; ++$i) {
             $slug = $products[$i]->getSlug();
             $this->productPage->open(['slug' => $slug]);
             $this->productPage->addToCart();
-            sleep(1);
+//            sleep(1);
         }
         $this->sharedStorage->set('products', $products);
     }

@@ -27,3 +27,5 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/../../src/Resources/config/doctrine'
                 prefix: 'BitBag\SyliusMultiVendorMarketplacePlugin\Entity'
+        resolve_target_entities:
+            Sylius\Component\Core\Model\OrderItem: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem
