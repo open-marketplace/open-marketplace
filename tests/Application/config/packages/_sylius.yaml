@@ -56,6 +56,7 @@ winzou_state_machine:
                     on: [ 'reject_product_draft' ]
                     do: [ '@bitbag_mvm_plugin.state_machine.product_draft', 'reject' ]
                     args: [ 'object' ]
+
     sylius_order_payment:
         class: "%sylius.model.order.class%"
         property_path: paymentState
