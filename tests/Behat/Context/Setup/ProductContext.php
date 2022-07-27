@@ -64,7 +64,7 @@ class ProductContext implements Context
         $this->sharedStorage = $sharedStorage;
     }
     /**
-     * @Given store has :productsCoun products from same Vendor
+     * @Given store has :productsCount products from same Vendor
      */
     public function storeHasProductsFromSameVendor($productsCount)
     {
@@ -80,7 +80,6 @@ class ProductContext implements Context
         $this->sharedStorage->set('products', $products);
         }
     }
-
 
     /**
      * @Given store has :productsCount products from different Vendors
@@ -99,6 +98,21 @@ class ProductContext implements Context
         }
     }
 
+    /**
+     * @Given There is product with variant code :variant_code owned by logged in vendor
+     */
+    public function thereIsProductWithVariantCodeOwnedByLoggedInVendor($variant_code)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        $this->createTaxon();
+        $product = $this->createDefaultProduct();
+        $product->setVendor($vendor);
+        $product->getVariants()[0]->setCode($variant_code);
+        $this->productRepository->add($product);
+        $this->sharedStorage->set('product', $product);
+    }
+
     private function createDefaultVendor(): Vendor
     {
         $userFactory = $this->userExampleFactory;
@@ -115,7 +129,7 @@ class ProductContext implements Context
         return $vendor;
     }
 
-    private function createDefaultProduct()//: ProductInterface
+    private function createDefaultProduct(): ProductInterface
     {
         $factory = $this->productExampleFactory;
         $product = $factory->create();
