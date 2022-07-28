@@ -1,5 +1,5 @@
 @order_listing
-Feature: Vendor can view orders placed with him
+Feature: Vendor can see his orders
   In order to view orders
   As a Vendor
   I want to visit orders page
