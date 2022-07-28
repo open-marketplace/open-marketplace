@@ -48,7 +48,7 @@ final class OrderItemClonerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         OrderItemUnitInterface $unit,
         AdjustmentInterface $adjustment,
-        ): void {
+    ): void {
         $unitCollection = new ArrayCollection([$unit->getWrappedObject()]);
         $adjustmentCollection = new ArrayCollection([$adjustment->getWrappedObject()]);
 
