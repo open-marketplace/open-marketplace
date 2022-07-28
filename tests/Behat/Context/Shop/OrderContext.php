@@ -49,7 +49,6 @@ class OrderContext extends RawMinkContext implements Context
     {
         $page = $this->getSession()->getPage();
         $page->find('css', 'button')->press();
-//        sleep(1);
     }
 
     /**
@@ -79,7 +78,6 @@ class OrderContext extends RawMinkContext implements Context
         $page->find('css', '.ui.large.primary.icon.labeled.button')->press();
     }
 
-
     /**
      * @Given I have :count products in cart
      */
@@ -90,7 +88,6 @@ class OrderContext extends RawMinkContext implements Context
             $slug = $products[$i]->getSlug();
             $this->productPage->open(['slug' => $slug]);
             $this->productPage->addToCart();
-//            sleep(1);
         }
         $this->sharedStorage->set('products', $products);
     }
