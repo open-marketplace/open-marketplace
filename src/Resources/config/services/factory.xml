@@ -58,7 +58,22 @@
             <argument type="service" id="bitbag.mvm_plugin.cloner.product_listing_pricing_cloner" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory" id="bitbag.mvm.factory.address_factory">
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactory"
+                 id="bitbag.mvm_plugin.service.vendor_image_factory" >
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory" id="bitbag.mvm.factory.address_factory">
+
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactory"
+                 id="bitbag.mvm_plugin.factory.order_factory">
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactory"
+                 id="bitbag.mvm_plugin.factory.order_item_factory">
+        </service>
+
     </services>
 </container>

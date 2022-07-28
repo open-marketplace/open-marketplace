@@ -36,7 +36,6 @@ use Webmozart\Assert\Assert;
 
 class VendorPageContext extends MinkContext implements Context
 {
-
     private EntityManagerInterface $entityManager;
 
     private RepositoryInterface $countryRepository;
@@ -106,11 +105,13 @@ class VendorPageContext extends MinkContext implements Context
         $vendor->setVendorAddress($vendorAddress);
 
         switch ($verifiedStatus) {
-            case "verified":
+            case 'verified':
                 $vendor->setStatus(VendorInterface::STATUS_VERIFIED);
+
                 break;
-            case "unverified":
+            case 'unverified':
                 $vendor->setStatus(VendorInterface::STATUS_UNVERIFIED);
+
                 break;
         }
 

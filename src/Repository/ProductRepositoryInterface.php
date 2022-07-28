@@ -14,8 +14,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Sylius\Component\Core\Model\ProductInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 interface ProductRepositoryInterface
 {

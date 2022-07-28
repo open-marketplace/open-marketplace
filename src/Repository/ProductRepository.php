@@ -15,12 +15,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Sylius\Component\Core\Model\ProductInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
-
     public function save(ProductInterface $product): void
     {
         $this->_em->persist($product);

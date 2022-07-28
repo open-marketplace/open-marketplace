@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentCloner"
+                 id="bitbag.mvm_plugin.cloner.shipment_cloner">
+            <argument type="service" id="bitbag.mvm_plugin.cloner.adjustment_cloner"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+    </services>
+</container>

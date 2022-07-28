@@ -9,7 +9,7 @@
         </id>
 
         <field name="status" column="status" type="string" nullable="false" />
-        <field name="status" column="status" type="string" nullable="false" />
+
         <field name="rejectedListingURL" type="string" nullable="true"/>
 
         <many-to-one field="category" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category">

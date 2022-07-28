@@ -42,5 +42,6 @@
         </one-to-many>
 
         <one-to-many field="productListings" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing" mapped-by="vendor"/>
+
     </mapped-superclass>
 </doctrine-mapping>

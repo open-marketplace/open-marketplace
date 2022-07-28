@@ -144,6 +144,21 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
         $this->editedAt = $editedAt;
     }
 
+    public function getProductListings(): Collection
+    {
+        return $this->productListings;
+    }
+
+    public function setProductListings(Collection $productListings): void
+    {
+        $this->productListings = $productListings;
+    }
+
+    public function addProductListing(ProductListing $productListings): void
+    {
+        $this->productListings->add($productListings);
+    }
+
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -193,20 +208,5 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     public function setImage(?VendorImageInterface $image): void
     {
         $this->image = $image;
-    }
-
-    public function getProductListings(): Collection
-    {
-        return $this->productListings;
-    }
-
-    public function setProductListings(Collection $productListings): void
-    {
-        $this->productListings = $productListings;
-    }
-
-    public function addProductListing(ProductListing $productListings): void
-    {
-        $this->productListings->add($productListings);
     }
 }

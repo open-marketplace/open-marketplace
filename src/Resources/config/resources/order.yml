@@ -1,0 +1,12 @@
+sylius_order:
+    resources:
+        order:
+            classes:
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order
+                controller: Sylius\Bundle\CoreBundle\Controller\OrderController
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
+                form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
+        order_item:
+            classes:
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem
+

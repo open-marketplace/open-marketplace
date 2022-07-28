@@ -1,0 +1,15 @@
+default:
+    suites:
+        order:
+            contexts:
+            - tests.bitbag_mvm_plugin.behat.context.shop.order
+            - tests.bitbag_mvm_plugin.behat.context.setup.product
+            - sylius.behat.context.setup.shop_security
+            - sylius.behat.context.hook.doctrine_orm
+            - sylius.behat.context.setup.user
+            - sylius.behat.context.setup.channel
+            - sylius.behat.context.setup.customer
+            - sylius.behat.context.setup.user
+            - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@order"
