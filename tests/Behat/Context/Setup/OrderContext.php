@@ -27,10 +27,15 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class OrderContext implements Context
 {
     private SharedStorageInterface $sharedStorage;
+    
     private FactoryInterface $orderFactory;
+    
     private OrderRepository $orderRepository;
+    
     private VendorRepository $vendorRepository;
+    
     private ShopUserExampleFactory $userExampleFactory;
+    
     private EntityManagerInterface $entityManager;
 
     public function __construct(
