@@ -67,9 +67,9 @@ final class OrderContext implements Context
         if(str_contains($propertyName, "CompletedAt") ){
             $date = new \DateTime($value);
             $order->{'set'.ucfirst($propertyName)}($date);
-        }
-        else
+        } else {
             $order->{'set'.ucfirst($propertyName)}($value);
+        }
 
         $this->sharedStorage->set('order', $order);
 
