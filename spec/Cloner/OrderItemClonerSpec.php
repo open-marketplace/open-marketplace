@@ -29,7 +29,7 @@ final class OrderItemClonerSpec extends ObjectBehavior
         AdjustmentClonerInterface $cloner,
         OrderItemUnitClonerInterface $itemUnitCloner,
         EntityManagerInterface $entityManager,
-        ): void {
+    ): void {
         $this->beConstructedWith($cloner, $itemUnitCloner, $entityManager);
     }
 
