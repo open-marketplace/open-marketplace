@@ -45,7 +45,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $this->shouldHaveType(SplitOrderByVendorProcessor::class);
     }
 
-    public function it_always_create_at_least_one_secondary_order(
+    public function it_always_creates_at_least_one_secondary_order(
         OrderInterface $order,
         PaymentInterface $payment,
         OrderItemInterface $orderItem,
