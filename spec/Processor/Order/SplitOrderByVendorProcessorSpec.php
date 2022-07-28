@@ -71,7 +71,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
     }
 
-    public function it_create_2_secondary_orders_for_products_from_different_vendors(
+    public function it_creates_2_secondary_orders_for_products_from_different_vendors(
         OrderInterface $order,
         PaymentInterface $payment,
         OrderItemInterface $orderItem,
