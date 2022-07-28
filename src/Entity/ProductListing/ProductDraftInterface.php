@@ -81,4 +81,11 @@ interface ProductDraftInterface extends ResourceInterface
     public function reject(): void;
 
     public function sendToVerification(): void;
+
+    public function getImages(): Collection;
+
+    public function setImages(Collection $images): void;
+
+    public function addImage( $image): void;
+
 }

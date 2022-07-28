@@ -25,6 +25,13 @@
             </cascade>
         </many-to-one>
 
+        <one-to-many field="images" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage"
+                     mapped-by="owner">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+
+        </one-to-many>
         <one-to-many field="translations" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation" mapped-by="productDraft" index-by="locale">
             <cascade>
                 <cascade-persist/>

@@ -13,6 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Imagine\Image\ImageInterface;
 
 class ProductDraft implements ProductDraftInterface
 {
@@ -32,6 +33,11 @@ class ProductDraft implements ProductDraftInterface
 
     protected int $versionNumber;
 
+    /**
+     * @var Collection
+     */
+    protected Collection $images;
+
     /** @var Collection<int|string, ProductTranslationInterface> */
     protected Collection $translations;
 
@@ -42,6 +48,7 @@ class ProductDraft implements ProductDraftInterface
 
     public function __construct()
     {
+        $this->images = new ArrayCollection();
         $this->code = '';
         $this->status = ProductDraftInterface::STATUS_CREATED;
         $this->productListingPrice = new ArrayCollection();
@@ -193,5 +200,26 @@ class ProductDraft implements ProductDraftInterface
     {
         $this->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
         $this->setPublishedAt((new \DateTime()));
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param Collection $images
+     */
+    public function setImages(Collection $images): void
+    {
+        $this->images = $images;
+    }
+
+    public function addImage( $image): void
+    {
+        $this->images->add($image) ;
     }
 }

@@ -17,6 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFac
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -62,11 +63,22 @@ class EditProductAction extends AbstractController
         }
 
         $form = $this->createForm(ProductType::class, $newResource);
+
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
+
+            if($request->files->get('bitbag_product')['images']) {
+                foreach ($request->files->get('bitbag_product')['images'] as $imgArray){
+                    $img = $imgArray['image'];
+                    dump($img);
+                    $files = new ArrayCollection($request->files->get('bitbag_product'));
+                    $productDraft->setImages($files);
+                }
+
+            }
 
             /** @var ClickableInterface $button */
             $button = $form->get('saveAndAdd');

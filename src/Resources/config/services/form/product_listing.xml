@@ -32,5 +32,10 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
+
+        <service id="bitbag.form.type.image_type" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductDraftImageType">
+            <argument >BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage</argument>
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
