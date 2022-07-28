@@ -92,6 +92,7 @@ final class OrderContext implements Context
 
         return $order;
     }
+    
     /**
      * @param string|null $localeCode
      *
