@@ -2,7 +2,7 @@
 Feature: Vendor can see his orders
   In order to view orders
   As a Vendor
-  I want to visit orders page
+  I want to visit orders listing page
 
   Background:
     Given the store operates on a single channel in "United States"
