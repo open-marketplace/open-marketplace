@@ -17,7 +17,7 @@ interface OrderInterface extends BaseOrderInterface
 
     public function setPrimaryOrder(?self $primaryOrder): void;
 
-    public function addSecondaryOrder(self $subOrder): void;
+    public function addSecondaryOrder(self $secondaryOrder): void;
 
     /** @return Collection<int, OrderInterface> */
     public function getSecondaryOrders(): Collection;
