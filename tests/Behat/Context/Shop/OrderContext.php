@@ -99,4 +99,19 @@ class OrderContext extends RawMinkContext implements Context
     {
         $this->getSession()->getPage()->pressButton($button);
     }
+
+    /**
+     * @Then I should see :ordersCount orders on page :pageNumber
+     */
+    public function iShouldSeeOrdersOnPage($ordersCount, $pageNumber)
+    {
+        $this->visitPath("/en_US/orders?page=$pageNumber");
+        $page = $this->getSession()->getPage();
+        $table = $page->find("css", ".ui.sortable.stackable.very.basic.celled.table");
+//        dd($table->getHtml());
+        $orderRows = $table->findAll("css",".item");
+
+        Assert::count($orderRows, $ordersCount);
+    }
+
 }

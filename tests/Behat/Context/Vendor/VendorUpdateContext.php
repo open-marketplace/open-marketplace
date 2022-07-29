@@ -24,7 +24,7 @@ use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-class VendorUpdateContext implements Context//extends MinkContext
+class VendorUpdateContext implements Context
 {
     private SharedStorageInterface $sharedStorage;
 

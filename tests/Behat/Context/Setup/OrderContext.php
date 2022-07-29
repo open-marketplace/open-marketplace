@@ -76,6 +76,24 @@ final class OrderContext implements Context
         $this->orderRepository->add($order);
     }
 
+    /**
+     * @Given There is :count orders made with logged in seller
+     */
+    public function thereIsOrdersMadeWithLoggedInSeller($count)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+        $orders = [];
+
+        for ($i=0; $i<$count; $i++){
+            $orders[$i] = $this->createDefaultOrder();
+            $orders[$i]->setVendor($vendor);
+
+            $this->orderRepository->add($orders[$i]);
+        }
+        $this->sharedStorage->set('orders', $orders);
+    }
+
+
     private function createOrder(
         CustomerInterface $customer,
         ?string $number = null,
