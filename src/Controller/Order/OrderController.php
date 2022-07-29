@@ -101,6 +101,7 @@ class OrderController extends BaseOrderController
         $this->resourceDeleteHandler = $resourceDeleteHandler;
         $this->splitOrderByVendorProcessor = $splitOrderByVendorProcessor;
     }
+    
     public function indexAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

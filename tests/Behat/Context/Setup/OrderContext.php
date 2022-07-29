@@ -31,10 +31,15 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class OrderContext implements Context
 {
     private SharedStorageInterface $sharedStorage;
+    
     private FactoryInterface $orderFactory;
+    
     private OrderRepository $orderRepository;
+    
     private VendorRepository $vendorRepository;
+    
     private ShopUserExampleFactory $userExampleFactory;
+    
     private EntityManagerInterface $entityManager;
     private UserRepository $userRepository;
 
@@ -69,9 +74,9 @@ final class OrderContext implements Context
         if(str_contains($propertyName, "CompletedAt") ){
             $date = new \DateTime($value);
             $order->{'set'.ucfirst($propertyName)}($date);
-        }
-        else
+        } else {
             $order->{'set'.ucfirst($propertyName)}($value);
+        }
 
         $this->sharedStorage->set('order', $order);
 
@@ -113,6 +118,23 @@ final class OrderContext implements Context
         $this->sharedStorage->set('order', $order);
     }
 
+    /**
+     * @Given There is :count orders made with logged in seller
+     */
+    public function thereIsOrdersMadeWithLoggedInSeller($count)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+        $orders = [];
+
+        for ($i=0; $i<$count; $i++){
+            $orders[$i] = $this->createDefaultOrder();
+            $orders[$i]->setVendor($vendor);
+
+            $this->orderRepository->add($orders[$i]);
+        }
+        $this->sharedStorage->set('orders', $orders);
+    }
+
     private function createOrder(
         CustomerInterface $customer,
         ?string $number = null,
@@ -129,6 +151,7 @@ final class OrderContext implements Context
 
         return $order;
     }
+    
     /**
      * @param string|null $localeCode
      *
