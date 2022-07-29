@@ -4,8 +4,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProvider"
-                 id="bitbag_mvm_plugin.provider.vendor">
-            <argument type="service" id="security.helper"/>
+                 id="bitbag_mvm_plugin.provider.vendor" public="true">
+            <argument type="service" id="security.helper" />
         </service>
 
     </services>
