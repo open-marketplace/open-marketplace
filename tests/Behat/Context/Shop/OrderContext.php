@@ -105,13 +105,21 @@ class OrderContext extends RawMinkContext implements Context
      */
     public function iShouldSeeOrdersOnPage($ordersCount, $pageNumber)
     {
-        $this->visitPath("/en_US/orders?page=$pageNumber");
+        $paginationLimit = $this->sharedStorage->get('pagination_limit');
+        $this->visitPath("/en_US/orders?limit=$paginationLimit&page=$pageNumber");
         $page = $this->getSession()->getPage();
         $table = $page->find("css", ".ui.sortable.stackable.very.basic.celled.table");
-//        dd($table->getHtml());
         $orderRows = $table->findAll("css",".item");
 
         Assert::count($orderRows, $ordersCount);
+    }
+
+    /**
+     * @Given Pagination is set to display :paginationLimit orders per page
+     */
+    public function paginationIsSetToDisplayOrderPerPage($paginationLimit)
+    {
+        $this->sharedStorage->set('pagination_limit', $paginationLimit);
     }
 
 }

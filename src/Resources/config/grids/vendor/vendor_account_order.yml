@@ -8,7 +8,7 @@ sylius_grid:
                     repository:
                         method: findAllByVendor
                         arguments:
-                        - "expr:service('bitbag_mvm_plugin.provider.vendor_provider').provideCurrentVendor()"
+                        - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
             sorting:
                 checkoutCompletedAt: desc
             fields:

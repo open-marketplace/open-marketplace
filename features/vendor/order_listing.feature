@@ -63,17 +63,11 @@ Feature: Vendor can see his orders
     And I click "Filter"
     Then I should see "2" orders
 
-    @ui
-    Scenario: Orders list pagination
-      Given There is "15" orders made with logged in seller
-      And I am on "/en_US/orders"
-      Then I should see "10" orders on page "1"
-      And I should see 5 orders on page "2"
-
   @ui
   Scenario: Orders list pagination
-    Given There is "23" orders made with logged in seller
+    Given There is "5" orders made with logged in seller
     And I am on "/en_US/orders"
-    Then I should see "10" orders on page "1"
-    And I should see "10" orders on page "2"
-    And I should see "3" orders on page "3"
+    And Pagination is set to display "2" orders per page
+    Then I should see "2" orders on page "1"
+    And I should see "2" orders on page "2"
+    And I should see "1" orders on page "3"
