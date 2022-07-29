@@ -26,11 +26,13 @@
             <argument type="service" id="sylius.resource_controller.redirect_handler"/>
             <argument type="service" id="sylius.resource_controller.flash_helper"/>
             <argument type="service" id="sylius.resource_controller.event_dispatcher"/>
+
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
             <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition"/>
             <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
+            <argument type="service" id="sylius.image_uploader"/>
             <tag name="controller.service_arguments" />
         </service>
 
