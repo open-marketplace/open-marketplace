@@ -28,10 +28,15 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class OrderContext extends RawMinkContext
 {
     private SharedStorageInterface $sharedStorage;
+    
     private FactoryInterface $orderFactory;
+    
     private OrderRepository $orderRepository;
+    
     private VendorRepository $vendorRepository;
+    
     private ShopUserExampleFactory $userExampleFactory;
+    
     private EntityManagerInterface $entityManager;
 
     public function __construct(
@@ -63,14 +68,15 @@ final class OrderContext extends RawMinkContext
         if(str_contains($propertyName, "CompletedAt") ){
             $date = new \DateTime($value);
             $order->{'set'.ucfirst($propertyName)}($date);
-        }
-        else
+        } else {
             $order->{'set'.ucfirst($propertyName)}($value);
+        }
 
         $this->sharedStorage->set('order', $order);
 
         $this->orderRepository->add($order);
     }
+
     /**
      * @Given I am on order details page
      */
@@ -78,6 +84,23 @@ final class OrderContext extends RawMinkContext
     {
         $order = $this->sharedStorage->get('order');
         $this->getSession()->visit("/en_US/orders/".$order->getId());
+    }
+
+    /**
+     * @Given There is :count orders made with logged in seller
+     */
+    public function thereIsOrdersMadeWithLoggedInSeller($count)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+        $orders = [];
+
+        for ($i=0; $i<$count; $i++){
+            $orders[$i] = $this->createDefaultOrder();
+            $orders[$i]->setVendor($vendor);
+
+            $this->orderRepository->add($orders[$i]);
+        }
+        $this->sharedStorage->set('orders', $orders);
     }
 
 

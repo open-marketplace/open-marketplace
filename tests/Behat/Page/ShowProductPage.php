@@ -25,7 +25,7 @@ class ShowProductPage extends SymfonyPage
 
     public function addToCart(): void
     {
-        $addToCart = $this->getDocument()->find("css","button");
+        $addToCart = $this->getDocument()->find('css', 'button');
         $addToCart->click();
     }
 

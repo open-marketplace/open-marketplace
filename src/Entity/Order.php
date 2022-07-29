@@ -17,17 +17,20 @@ use Sylius\Component\Core\Model\Order as BaseOrder;
 
 class Order extends BaseOrder implements OrderInterface
 {
+    /** @var Collection<int, OrderItemInterface> */
+    protected $items;
+
     private ?VendorInterface $vendor;
 
     private ?OrderInterface $primaryOrder;
 
-    /** @var ?Collection<int, OrderInterface> */
-    private ?Collection $subOrders;
+    /** @var Collection<int, OrderInterface> */
+    private Collection $secondaryOrders;
 
     public function __construct()
     {
         parent::__construct();
-        $this->subOrders = new ArrayCollection();
+        $this->secondaryOrders = new ArrayCollection();
     }
 
     public function getVendor(): ?VendorInterface
@@ -50,14 +53,20 @@ class Order extends BaseOrder implements OrderInterface
         $this->primaryOrder = $primaryOrder;
     }
 
-    public function addSubOrder(OrderInterface $subOrder): void
+    public function addSecondaryOrder(OrderInterface $secondaryOrder): void
     {
-        if($this->subOrders)
-            $this->subOrders->add($subOrder);
+        $this->secondaryOrders->add($secondaryOrder);
     }
-    /** @return ?Collection<int, OrderInterface> */
-    public function getSubOrders(): ?Collection
+
+    /** @return Collection<int, OrderInterface> */
+    public function getSecondaryOrders(): Collection
     {
-        return $this->subOrders;
+        return $this->secondaryOrders;
+    }
+
+    /** @return Collection<int, OrderItemInterface> */
+    public function getItems(): Collection
+    {
+        return $this->items;
     }
 }
