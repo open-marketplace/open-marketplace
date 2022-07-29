@@ -36,25 +36,25 @@ vendor_register:
     prefix: /{_locale}
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+app_vendor:
+  resource: 'routing/vendor.yml'
+  prefix: /{_locale}/vendor
 app_shop:
     resource: 'routing/shop.yml'
     prefix: /{_locale}
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
-
 sylius_shop_checkout_complete:
     resource: 'routing/shop/order.yml'
     prefix: /{_locale}
-
-app_vendor:
-  resource: 'routing/vendor.yml'
-  prefix: /{_locale}/vendor
-
+vendor_order_list:
+    resource: 'routing/vendor/order_listing.yml'
+    prefix: /{_locale}
 conversation:
   resource: "routing/conversation.yml"
-
 conversation_vendor:
   resource: "routing/vendor_conversation.yml"
   prefix: /{_locale}
   requirements:
       _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+
