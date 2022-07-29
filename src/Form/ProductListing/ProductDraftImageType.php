@@ -51,6 +51,7 @@ class ProductDraftImageType extends ImageType
         parent::buildView($view, $form, $options);
 
         $view->vars['product'] = $options['product'];
+        dd($view->vars['product']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

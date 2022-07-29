@@ -51,14 +51,19 @@ final class ProductType extends AbstractType
                     'class' => 'ui labeled icon secondary button',
                 ],
             ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+                $product = $event->getData();
+                $form = $event->getForm();
+
+            })
             ->add('images', CollectionType::class, [
-                'entry_type' => ProductDraftImageType::class,
-                'entry_options' => ['product' => $options['data']],
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label' => 'sylius.form.product.images',
-                'block_name' => 'entry',
+            'entry_type' => ProductDraftImageType::class,
+            'entry_options' => ['product' => $options['data']],
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            'label' => 'sylius.form.product.images',
+            'block_name' => 'entry',
             ]);
 //            ->add('images', CollectionType::class, [
 //                'entry_type' => ProductDraftImageType::class,
