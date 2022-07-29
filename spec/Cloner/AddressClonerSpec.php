@@ -12,12 +12,8 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressCloner;
-use DateTimeInterface;
-use Faker\Provider\DateTime;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\AddressInterface;
-use function PHPUnit\Framework\assertEquals;
 
 final class AddressClonerSpec extends ObjectBehavior
 {
@@ -43,6 +39,7 @@ final class AddressClonerSpec extends ObjectBehavior
         $originalAddress->getProvinceName()->willReturn('provinceName');
 
         $this->clone($originalAddress, $newAddress);
+
         $newAddress->setCreatedAt($dateTime)->shouldHaveBeenCalledTimes(1);
         $newAddress->setFirstName('firsName')->shouldHaveBeenCalledTimes(1);
         $newAddress->setLastName('lastName')->shouldHaveBeenCalledTimes(1);

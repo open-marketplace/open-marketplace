@@ -1,6 +1,6 @@
 @order
-Feature: Spliting orders if cart was filled with products from different Vendors
-  As an customer
+Feature: Spliting orders when cart was filled with products from different Vendors
+  As a customer
   I want to be able to buy products from multiple vendors
 
   Background:
@@ -21,10 +21,10 @@ Feature: Spliting orders if cart was filled with products from different Vendors
     And I select "United States" from "sylius_checkout_address[billingAddress][countryCode]"
     And I fill in "sylius_checkout_address[billingAddress][city]" with "Test city"
     And I fill in "sylius_checkout_address[billingAddress][postcode]" with "Test code"
-    And I click "next-step"
-    And I click "next-step"
-    And I click "next-step"
-    And I complete checkout
+    And I submit form
+    And I choose shipment
+    And I choose payment
+    And I complete checkout    
     And I am on "en_US/account/orders/"
     Then I should see 3 orders
 
@@ -40,9 +40,9 @@ Feature: Spliting orders if cart was filled with products from different Vendors
     And I select "United States" from "sylius_checkout_address[billingAddress][countryCode]"
     And I fill in "sylius_checkout_address[billingAddress][city]" with "Test city"
     And I fill in "sylius_checkout_address[billingAddress][postcode]" with "Test code"
-    And I click "next-step"
-    And I click "next-step"
-    And I click "next-step"
+    And I submit form
+    And I choose shipment
+    And I choose payment
     And I complete checkout
     And I am on "en_US/account/orders/"
     Then I should see 1 orders

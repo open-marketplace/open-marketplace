@@ -6,6 +6,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentCloner"
                  id="bitbag.mvm_plugin.cloner.shipment_cloner">
             <argument type="service" id="bitbag.mvm_plugin.cloner.adjustment_cloner"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
     </services>
 </container>

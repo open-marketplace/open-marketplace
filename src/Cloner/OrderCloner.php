@@ -71,6 +71,7 @@ final class OrderCloner implements OrderClonerInterface
         $newOrder->setPaymentState($originalOrder->getPaymentState());
         $newOrder->setShippingState($originalOrder->getShippingState());
         $newOrder->setCustomer($originalOrder->getCustomer());
+
         $shipments = $originalOrder->getShipments();
         foreach ($shipments as $shipment) {
             $newShipment = new Shipment();
@@ -78,6 +79,7 @@ final class OrderCloner implements OrderClonerInterface
             $this->shipmentCloner->clone($shipment, $newShipment);
             $newOrder->addShipment($newShipment);
         }
+
         $payments = $originalOrder->getPayments();
         /** @var Payment $payment */
         foreach ($payments as $payment) {
@@ -85,6 +87,7 @@ final class OrderCloner implements OrderClonerInterface
             $this->paymentCloner->clone($payment, $newPayment);
             $newOrder->addPayment($newPayment);
         }
+
         $this->entityManager->flush();
     }
 }

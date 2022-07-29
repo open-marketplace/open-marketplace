@@ -6,4 +6,7 @@ sylius_order:
                 controller: Sylius\Bundle\CoreBundle\Controller\OrderController
                 repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\OrderRepository
                 form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
+        order_item:
+            classes:
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem
 
