@@ -21,6 +21,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         $product = $this->getProduct();
         /** @var VendorInterface $vendor */
         $vendor = $product->getVendor();
+
         return $vendor;
     }
 }

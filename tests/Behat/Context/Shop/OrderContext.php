@@ -13,12 +13,11 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+use function PHPUnit\Framework\assertStringContainsString;
+use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
-use function PHPUnit\Framework\assertContains;
-use function PHPUnit\Framework\assertStringContainsString;
-use function PHPUnit\Framework\assertStringNotContainsString;
 
 class OrderContext extends RawMinkContext implements Context
 {
@@ -111,8 +110,8 @@ class OrderContext extends RawMinkContext implements Context
         $paginationLimit = $this->sharedStorage->get('pagination_limit');
         $this->visitPath("/en_US/orders?limit=$paginationLimit&page=$pageNumber");
         $page = $this->getSession()->getPage();
-        $table = $page->find("css", ".ui.sortable.stackable.very.basic.celled.table");
-        $orderRows = $table->findAll("css",".item");
+        $table = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
+        $orderRows = $table->findAll('css', '.item');
 
         Assert::count($orderRows, $ordersCount);
     }
@@ -131,7 +130,7 @@ class OrderContext extends RawMinkContext implements Context
     public function iShouldSeeOrderWithNumber($number)
     {
         $page = $this->getSession()->getPage();
-        $header = $page->find('css','.ui.header');
+        $header = $page->find('css', '.ui.header');
         assertStringContainsString($number, $header->getText());
     }
 
@@ -141,7 +140,7 @@ class OrderContext extends RawMinkContext implements Context
     public function iShouldSeeClientWithName($name)
     {
         $page = $this->getSession()->getPage();
-        $table = $page->find('css',".ui.sortable.stackable.very.basic.celled.table");
+        $table = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
         assertStringContainsString($name, $table->getText());
     }
 
@@ -161,5 +160,4 @@ class OrderContext extends RawMinkContext implements Context
     {
         $this->visitPath('en_US/customers');
     }
-
 }
