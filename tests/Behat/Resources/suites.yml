@@ -13,3 +13,4 @@ imports:
     - suites/shop/order.yml
     - suites/vendor/order_listing.yml
     - suites/vendor/clients_listing.yml
+    - suites/vendor/order_details.yml

@@ -117,6 +117,6 @@ sylius_grid:
                         label: sylius.ui.show
                         options:
                             link:
-                                route: sylius_admin_order_show
+                                route: bitbag_mvm_plugin_vendor_order_show
                                 parameters:
                                     id: resource.id
