@@ -90,7 +90,6 @@ class OrderController extends BaseOrderController
         $this->newResourceFactory = $newResourceFactory;
         $this->manager = $manager;
         $this->singleResourceProvider = $singleResourceProvider;
-//        $this->resourcesFinder = $resourcesFinder;
         $this->resourceFormFactory = $resourceFormFactory;
         $this->redirectHandler = $redirectHandler;
         $this->flashHelper = $flashHelper;
