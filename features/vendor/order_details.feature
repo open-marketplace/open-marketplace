@@ -1,7 +1,7 @@
 @order_details
 Feature: Vendor can view order details
   In order to view order details
-  As a vendor i want visit page
+  As a vendor I want to visit page
 
   Background:
     Given the store operates on a single channel in "United States"
