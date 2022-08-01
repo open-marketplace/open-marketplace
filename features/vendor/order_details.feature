@@ -1,9 +1,7 @@
 @order_details
-Feature: Vendor can update his company information
-  In order to update company information
-  As a Vendor
-  I want to fill update company information form
-  I want also confirm update by visiting url with token
+Feature: Vendor can view order details
+  In order to view order details
+  As a vendor i want visit page
 
   Background:
     Given the store operates on a single channel in "United States"
@@ -15,4 +13,4 @@ Feature: Vendor can update his company information
   Scenario: Visiting details page
     Given There is order with property "number" with value "55" made with logged in seller
     And I am on order details page
-    Then I should see "55"
+    Then I should see order with number "55"

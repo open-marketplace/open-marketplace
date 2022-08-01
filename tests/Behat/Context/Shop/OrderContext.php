@@ -16,6 +16,8 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
+use function PHPUnit\Framework\assertContains;
+use function PHPUnit\Framework\assertStringContainsString;
 
 class OrderContext extends RawMinkContext implements Context
 {
@@ -122,4 +124,13 @@ class OrderContext extends RawMinkContext implements Context
         $this->sharedStorage->set('pagination_limit', $paginationLimit);
     }
 
+    /**
+     * @Then I should see order with number :number
+     */
+    public function iShouldSeeOrderWithNumber($number)
+    {
+        $page = $this->getSession()->getPage();
+        $header = $page->find('css','.ui.header');
+        assertStringContainsString($number, $header->getText());
+    }
 }

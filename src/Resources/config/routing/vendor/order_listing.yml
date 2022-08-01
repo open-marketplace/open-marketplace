@@ -6,6 +6,7 @@ bitbag_mvm_plugin_order_listing:
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
             grid: vendor_account_order
+
 bitbag_mvm_plugin_vendor_order_show:
     path: /orders/{id}
     methods: [GET]
@@ -15,6 +16,7 @@ bitbag_mvm_plugin_vendor_order_show:
             section: admin
             permission: true
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/show.html.twig"
+
 bitbag_mvm_plugin_vendor_order_cancel:
     path: /orders/{id}/cancel
     methods: [PUT]
