@@ -18,6 +18,7 @@ use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 use function PHPUnit\Framework\assertContains;
 use function PHPUnit\Framework\assertStringContainsString;
+use function PHPUnit\Framework\assertStringNotContainsString;
 
 class OrderContext extends RawMinkContext implements Context
 {
@@ -133,4 +134,32 @@ class OrderContext extends RawMinkContext implements Context
         $header = $page->find('css','.ui.header');
         assertStringContainsString($number, $header->getText());
     }
+
+    /**
+     * @Then I should see client with name :name
+     */
+    public function iShouldSeeClientWithName($name)
+    {
+        $page = $this->getSession()->getPage();
+        $table = $page->find('css',".ui.sortable.stackable.very.basic.celled.table");
+        assertStringContainsString($name, $table->getText());
+    }
+
+    /**
+     * @Then I should not see client with name :name
+     */
+    public function iShouldNotSeeClientWithName($name)
+    {
+        $page = $this->getSession()->getPage();
+        assertStringNotContainsString($name, $page->getText());
+    }
+
+    /**
+     * @Given I am on customers page
+     */
+    public function iAmOnCustomersPage()
+    {
+        $this->visitPath('en_US/customers');
+    }
+
 }
