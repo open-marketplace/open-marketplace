@@ -63,9 +63,4 @@ class Order extends BaseOrder implements OrderInterface
     {
         return $this->secondaryOrders;
     }
-
-//    public function getItems(): Collection
-//    {
-//        return $this->items;
-//    }
 }

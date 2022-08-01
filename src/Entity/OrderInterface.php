@@ -21,6 +21,4 @@ interface OrderInterface extends BaseOrderInterface
 
     /** @return Collection<int, OrderInterface> */
     public function getSecondaryOrders(): Collection;
-
-//    public function getItems(): Collection;
 }
