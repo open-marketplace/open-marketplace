@@ -8,7 +8,7 @@ sylius_grid:
                     repository:
                         method: createQueryBuilderByVendor
                         arguments:
-                            - "expr:service('bitbag_mvm_plugin.provider.vendor_provider').provideCurrentVendor()"
+                            - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
             sorting:
                 position: asc
             fields:
@@ -21,11 +21,6 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
-#                enabled:
-#                    type: twig
-#                    label: sylius.ui.enabled
-#                    options:
-#                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
                 inventory:
                     type: twig
                     path: .
@@ -62,13 +57,5 @@ sylius_grid:
                             link:
                                 parameters:
                                     productId: $productId
-                item:
-#                    update:
-#                        type: update
-#                        options:
-#                            link:
-#                                parameters:
-#                                    id: resource.id
-#                                    productId: $productId
 
 

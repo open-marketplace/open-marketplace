@@ -2,7 +2,4 @@ sylius_product:
     resources:
         product_variant:
             classes:
-#                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order
-#                controller: Sylius\Bundle\CoreBundle\Controller\OrderController
                 repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductVariantRepository
-#                form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType

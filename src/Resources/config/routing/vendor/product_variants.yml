@@ -6,12 +6,7 @@ vendor_product_variant_index:
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
             grid: vendor_product_variant
-#            section: admin
-#            permission: true
             vars:
-#                route:
-#                    parameters:
-#                        productId: $productId
                 templates:
                     breadcrumb: "@SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig"
                 icon: cubes
