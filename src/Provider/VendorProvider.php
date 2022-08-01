@@ -47,11 +47,4 @@ final class VendorProvider implements VendorProviderInterface
         return $vendor;
     }
 
-    public function provideVendorFromOrderItem(OrderItemInterface $orderItem): VendorInterface
-    {
-        /** @var ProductInterface $product */
-        $product = $orderItem->getProduct();
-
-        return $product->getVendor();
-    }
 }

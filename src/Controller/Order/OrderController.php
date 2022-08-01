@@ -90,7 +90,7 @@ class OrderController extends BaseOrderController
         $this->newResourceFactory = $newResourceFactory;
         $this->manager = $manager;
         $this->singleResourceProvider = $singleResourceProvider;
-        $this->resourcesFinder = $resourcesFinder;
+//        $this->resourcesFinder = $resourcesFinder;
         $this->resourceFormFactory = $resourceFormFactory;
         $this->redirectHandler = $redirectHandler;
         $this->flashHelper = $flashHelper;
@@ -101,7 +101,7 @@ class OrderController extends BaseOrderController
         $this->resourceDeleteHandler = $resourceDeleteHandler;
         $this->splitOrderByVendorProcessor = $splitOrderByVendorProcessor;
     }
-    
+
     public function indexAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -125,7 +125,6 @@ class OrderController extends BaseOrderController
 
     public function updateAction(Request $request): Response
     {
-
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);

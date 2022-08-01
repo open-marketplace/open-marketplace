@@ -20,6 +20,7 @@ class ProductVariantRepository extends BaseRepository
     public function createQueryBuilderByVendor(VendorInterface $vendor): QueryBuilder
     {
         $vendorId = $vendor->getId();
+
         return $this->createQueryBuilder('v')
             ->innerJoin('v.product', 'p')
             ->andWhere('p.vendor = :vendor')
