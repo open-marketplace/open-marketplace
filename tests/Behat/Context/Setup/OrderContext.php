@@ -84,7 +84,7 @@ final class OrderContext extends RawMinkContext
     }
 
     /**
-     * @Given There is order with property :propertyName with value :value made with some seller
+     * @Given There is order with property :propertyName with value :value made with other seller
      */
     public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller($propertyName, $value)
     {

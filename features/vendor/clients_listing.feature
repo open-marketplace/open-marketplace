@@ -18,7 +18,7 @@ Feature: Vendor can view his clients
 
   @ui
   Scenario: Not listing customers who placed an order with other suppliers
-    Given There is order with property "state" with value "new" made with some seller
+    Given There is order with property "state" with value "new" made with other seller
     And The Order is made by customer with first name "TestingClient"
     And I am on customers page
     Then I should not see client with name "TestingClient"
