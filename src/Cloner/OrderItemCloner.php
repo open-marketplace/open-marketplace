@@ -39,8 +39,7 @@ final class OrderItemCloner implements OrderItemClonerInterface
         OrderItemInterface $originalItem,
         OrderItemInterface $newItem,
         ?ShipmentInterface $shipment
-    ): void
-    {
+    ): void {
         $newItem->setOriginalUnitPrice($originalItem->getOriginalUnitPrice());
         $newItem->setProductName($originalItem->getProductName());
         $newItem->setVariant($originalItem->getVariant());
@@ -48,6 +47,7 @@ final class OrderItemCloner implements OrderItemClonerInterface
         $newItem->setUnitPrice($originalItem->getUnitPrice());
         $newItem->setVersion($originalItem->getVersion());
         $units = $originalItem->getUnits();
+
         /** @var OrderItemUnit $unit */
         foreach ($units as $unit) {
             $newUnit = new OrderItemUnit($newItem);
@@ -55,6 +55,7 @@ final class OrderItemCloner implements OrderItemClonerInterface
             $newUnit->setShipment($shipment);
             $newItem->addUnit($newUnit);
         }
+
         $adjustments = $originalItem->getAdjustments();
         foreach ($adjustments as $adjustment) {
             $newAdjustment = new Adjustment();
