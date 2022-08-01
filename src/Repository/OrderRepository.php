@@ -20,7 +20,6 @@ class OrderRepository extends BaseOrderRepository
     public function findAllByVendor(VendorInterface $vendor): QueryBuilder
     {
         $vendorId = $vendor->getId();
-
         return $this->createQueryBuilder('o')
             ->andWhere('o.vendor = :vendor')
             ->setParameter('vendor', $vendorId)
