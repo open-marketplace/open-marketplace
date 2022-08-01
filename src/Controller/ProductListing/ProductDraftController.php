@@ -79,10 +79,11 @@ class ProductDraftController extends ResourceController
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             $newResource = $form->getData();
 
-            $image = $newResource->getImages()[0];
-            $image->setOwner($newResource);
-//            dd($image);
-            $this->imageUploader->upload($image);
+            foreach ($newResource->getImages() as $image){
+                $image->setOwner($newResource);
+                $this->imageUploader->upload($image);
+            }
+
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
 

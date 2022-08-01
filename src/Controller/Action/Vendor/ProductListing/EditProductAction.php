@@ -19,6 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductD
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\ClickableInterface;
@@ -37,18 +38,22 @@ class EditProductAction extends AbstractController
 
     private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
 
+    private ImageUploaderInterface $imageUploader;
+
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ProductDraftRepositoryInterface $productDraftRepository,
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory
+        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
+        ImageUploaderInterface $imageUploader
     ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
         $this->productDraftRepository = $productDraftRepository;
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
+        $this->imageUploader = $imageUploader;
     }
 
     public function __invoke(Request $request): Response
@@ -70,14 +75,9 @@ class EditProductAction extends AbstractController
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
 
-            if($request->files->get('bitbag_product')['images']) {
-                foreach ($request->files->get('bitbag_product')['images'] as $imgArray){
-                    $img = $imgArray['image'];
-                    dump($img);
-                    $files = new ArrayCollection($request->files->get('bitbag_product'));
-                    $productDraft->setImages($files);
-                }
-
+            foreach ($productDraft->getImages() as $image){
+                $image->setOwner($newResource);
+                $this->imageUploader->upload($image);
             }
 
             /** @var ClickableInterface $button */

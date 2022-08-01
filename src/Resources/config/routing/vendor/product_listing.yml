@@ -20,8 +20,7 @@ bitbag_mvm_plugin_vendor_product_listing_edit_product:
     path: /product-listings/{id}/edit
     methods: [GET,POST]
     defaults:
-        #    _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.edit_product_action
-        _controller: bitbag_mvm_plugin.controller.product_draft:updateAction
+        _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.edit_product_action
         _sylius:
             template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/edit_product.html.twig'
             redirect:
