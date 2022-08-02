@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ProductImage;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
 final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
@@ -75,15 +75,6 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
             $this->productTranslationFactory->createFromProductListingTranslation($product, $translation);
         }
 
-        foreach ($productDraft->getImages() as $key=>$image){
-            $productImage = new ProductImage();
-            $productImage->setFile($image->getFile());
-            $productImage->setPath($image->getPath());
-
-            $productImage = $this->productImageFactory->createClone($image);
-
-            $product->addImage($productImage);
-        }
         $productVariant = $this->productVariantFactory->createNewForProduct($product, true, 0);
 
         $channelPricingCodes = [];

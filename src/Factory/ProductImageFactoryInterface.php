@@ -9,5 +9,4 @@ interface ProductImageFactoryInterface
 {
     public function createNew(): ProductImageInterface;
 
-    public function createClone(ImageInterface $originalImage): ProductImageInterface;
 }

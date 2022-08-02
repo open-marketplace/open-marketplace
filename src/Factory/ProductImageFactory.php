@@ -19,40 +19,8 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
 final class ProductImageFactory implements ProductImageFactoryInterface
 {
-    private ImageUploaderInterface $imageUploader;
-
-    private Filesystem $filesystem;
-
-    public function __construct(ImageUploaderInterface $imageUploader, Filesystem $filesystem)
-    {
-        $this->imageUploader = $imageUploader;
-        $this->filesystem = $filesystem;
-    }
-
     public function createNew(): ProductImageInterface
     {
         return new ProductImage();
     }
-
-    public function createClone(ImageInterface $originalImage): ProductImageInterface
-    {
-        $clone = new ProductImage();
-        $clone->setType($originalImage->getType());
-
-        $key = $originalImage->getPath();
-        $file = $this->filesystem->read($key);
-
-        $path = explode(".", $key)[0];
-        $fileType = explode(".", $key)[1];
-
-        $newKey = $path."1.".$fileType;
-
-
-
-        $clone->setPath($newKey);
-
-        return $clone;
-    }
-
-
 }

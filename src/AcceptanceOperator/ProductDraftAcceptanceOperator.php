@@ -13,6 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
@@ -22,12 +23,16 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
     private ProductFromDraftUpdaterInterface $productFromDraftUpdater;
 
+    private ProductDraftFilesOperatorInterface $productDraftFilesOperator;
+
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
-        ProductFromDraftUpdaterInterface $productFromDraftUpdater
+        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
+        ProductDraftFilesOperatorInterface $productDraftFilesOperator
     ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
+        $this->productDraftFilesOperator = $productDraftFilesOperator;
     }
 
     public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface
@@ -37,8 +42,6 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
             $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $cratedProduct);
             return $cratedProduct;
         }
-
-        $this->filesystem->write($newKey, $file);
 
         return $this->productFromDraftUpdater->updateProduct($productDraft);
     }

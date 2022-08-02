@@ -63,15 +63,7 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductImageFactory"
-                 id="bitbag_mvm_plugin.factory.product_image">
-            <argument type="service" id="sylius.image_uploader"/>
-            <argument type="service">
-                <service class="Gaufrette\Filesystem">
-                    <argument>%sylius.uploader.filesystem%</argument>
-                    <factory service="knp_gaufrette.filesystem_map" method="get" />
-                </service>
-            </argument>
-        </service>
+                 id="bitbag_mvm_plugin.factory.product_image"/>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductDraftImageFactory"
                  id="bitbag_mvm_plugin.factory.product_draft_image"/>
