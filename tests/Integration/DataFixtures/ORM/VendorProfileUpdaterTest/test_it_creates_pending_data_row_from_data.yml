@@ -30,4 +30,3 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
         vendorAddress: '@vendor_address'
         slug: 'test-company-name'
         description: 'description'
-        slug: 'someslug'
