@@ -18,6 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gaufrette\FilesystemInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -46,7 +47,7 @@ class EditProductAction extends AbstractController
         ProductDraftRepositoryInterface $productDraftRepository,
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        ImageUploaderInterface $imageUploader
+        ImageUploaderInterface $imageUploader,
     ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
@@ -54,6 +55,7 @@ class EditProductAction extends AbstractController
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->imageUploader = $imageUploader;
+
     }
 
     public function __invoke(Request $request): Response
@@ -67,7 +69,9 @@ class EditProductAction extends AbstractController
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);
         }
 
+
         $form = $this->createForm(ProductType::class, $newResource);
+
 
         $form->handleRequest($request);
 
@@ -78,6 +82,7 @@ class EditProductAction extends AbstractController
             foreach ($productDraft->getImages() as $image){
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
+
             }
 
             /** @var ClickableInterface $button */

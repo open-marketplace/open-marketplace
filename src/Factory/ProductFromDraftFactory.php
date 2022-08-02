@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\Channel;
+use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
@@ -31,18 +32,22 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
 
     private ChannelRepositoryInterface $channelRepository;
 
+    private ProductImageFactoryInterface $productImageFactory;
+
     public function __construct(
         ProductFactoryInterface $productFactory,
         ProductTranslationFactoryInterface $productTranslationFactory,
         ProductVariantFactoryInterface $productVariantFactory,
         ChannelPricingFactoryInterface $channelPricingFactory,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        ProductImageFactoryInterface $productImageFactory
     ) {
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->productVariantFactory = $productVariantFactory;
         $this->channelPricingFactory = $channelPricingFactory;
         $this->channelRepository = $channelRepository;
+        $this->productImageFactory = $productImageFactory;
     }
 
     public function createSimpleProduct(ProductDraftInterface $productDraft): ProductInterface
@@ -70,6 +75,15 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
             $this->productTranslationFactory->createFromProductListingTranslation($product, $translation);
         }
 
+        foreach ($productDraft->getImages() as $key=>$image){
+            $productImage = new ProductImage();
+            $productImage->setFile($image->getFile());
+            $productImage->setPath($image->getPath());
+
+            $productImage = $this->productImageFactory->createClone($image);
+
+            $product->addImage($productImage);
+        }
         $productVariant = $this->productVariantFactory->createNewForProduct($product, true, 0);
 
         $channelPricingCodes = [];

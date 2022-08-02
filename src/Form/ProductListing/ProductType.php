@@ -85,7 +85,7 @@ final class ProductType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_product';
+        return 'sylius_product';
     }
 
     public function configureOptions(OptionsResolver $resolver): void
