@@ -15,7 +15,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductImageFactoryInterface;
 use Gaufrette\Filesystem;
-use Sylius\Component\Core\Model\ProductImage;
 
 final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterface
 {
@@ -33,9 +32,10 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
     {
         foreach ($productDraft->getImages() as $image){
 
-            $clone = $this->productImageFactory->createNew();
+            $newImage = $this->productImageFactory->createNew();
 
-            $clone->setType($image->getType());
+            $newImage->setType($image->getType());
+            $newImage->setOwner($cratedProduct);
 
             $key = $image->getPath();
             $file = $this->filesystem->read($key);
@@ -47,9 +47,9 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
 
             $this->filesystem->write($newKey, $file);
 
-            $clone->setPath($newKey);
+            $newImage->setPath($newKey);
 
-            $cratedProduct->addImage($clone);
+            $cratedProduct->addImage($newImage);
         };
     }
 }
