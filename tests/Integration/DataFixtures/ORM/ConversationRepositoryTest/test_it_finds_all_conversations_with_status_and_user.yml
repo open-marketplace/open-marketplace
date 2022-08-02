@@ -36,6 +36,8 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
         taxIdentifier: '1234567'
         phoneNumber: '333111222'
         vendorAddress: '@vendor_address'
+        slug: 'someslug'
+        description: 'description'
 Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation:
     opened_conversation_with_oliver:
         shopUser: '@user_oliver'
