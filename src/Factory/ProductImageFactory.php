@@ -47,12 +47,12 @@ final class ProductImageFactory implements ProductImageFactoryInterface
 
         $newKey = $path."1.".$fileType;
 
-        $this->filesystem->write($newKey, $file);
+
 
         $clone->setPath($newKey);
 
-//        $this->imageUploader->upload($clone);
-
         return $clone;
     }
+
+
 }
