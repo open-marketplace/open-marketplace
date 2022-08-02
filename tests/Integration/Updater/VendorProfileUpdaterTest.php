@@ -52,8 +52,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
-//        $this->vendorAddressFactory = $this->getContainer()->get('bitbag_mvm_plugin.factory.vendor_address_factory');
-        $this->vendorAddressFactory = static::$container->get('test.bitbag_mvm_plugin.factory.vendor_address_factory');
+        $this->vendorAddressFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_address_factory');
         $this->vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_factory');
 
         $remover = static::$container->get('bitbag_mvm_plugin.remover.profile_update_remover');
