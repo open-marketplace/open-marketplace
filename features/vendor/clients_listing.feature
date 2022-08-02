@@ -10,15 +10,15 @@ Feature: Vendor can view his clients
     And I am logged in as "test@company.domain"
 
   @ui
-  Scenario: Listing customer who made order with Vendor
+  Scenario: Listing a customer who made order with Vendor
     Given There is order with property "state" with value "new" made with logged in seller
-    And The Order is made by customer with first name "TestingClient"
+    And The order is made by customer with first name "TestingClient"
     And I am on customers page
-    Then I should see client with name "TestingClient"
+    Then I should see customer with name "TestingClient"
 
   @ui
-  Scenario: Not listing customers who placed an order with other suppliers
+  Scenario: Not listing customers who placed an order with other vendors
     Given There is order with property "state" with value "new" made with other seller
-    And The Order is made by customer with first name "TestingClient"
+    And The order is made by customer with first name "TestingClient"
     And I am on customers page
-    Then I should not see client with name "TestingClient"
+    Then I should not see customer with name "TestingClient"

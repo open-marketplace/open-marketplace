@@ -106,7 +106,7 @@ final class OrderContext extends RawMinkContext
     }
 
     /**
-     * @Given The Order is made by customer with first name :firstName
+     * @Given The order is made by customer with first name :firstName
      */
     public function theOrderIsMadeByCustomerWithFirstName(string $firstName): void
     {

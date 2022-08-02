@@ -135,7 +135,7 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then I should see client with name :name
+     * @Then I should see customer with name :name
      */
     public function iShouldSeeClientWithName($name)
     {
@@ -145,7 +145,7 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then I should not see client with name :name
+     * @Then I should not see customer with name :name
      */
     public function iShouldNotSeeClientWithName($name)
     {
