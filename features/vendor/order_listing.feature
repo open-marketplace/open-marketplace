@@ -1,9 +1,8 @@
 @order_listing
-Feature: Vendor can update his company information
-  In order to update company information
+Feature: Vendor can see his orders
+  In order to view orders
   As a Vendor
-  I want to fill update company information form
-  I want also confirm update by visiting url with token
+  I want to visit orders listing page
 
   Background:
     Given the store operates on a single channel in "United States"
@@ -63,3 +62,12 @@ Feature: Vendor can update his company information
     And I fill in "criteria[date][to][date]" with "2022-01-02"
     And I click "Filter"
     Then I should see "2" orders
+
+  @ui
+  Scenario: Orders list pagination
+    Given There is "5" orders made with logged in seller
+    And I am on "/en_US/orders"
+    And Pagination is set to display "2" orders per page
+    Then I should see "2" orders on page "1"
+    And I should see "2" orders on page "2"
+    And I should see "1" orders on page "3"

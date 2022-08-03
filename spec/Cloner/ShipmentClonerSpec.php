@@ -15,9 +15,10 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AdjustmentClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentCloner;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\ShippingMethod;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class ShipmentClonerSpec extends ObjectBehavior
 {
@@ -34,11 +35,11 @@ final class ShipmentClonerSpec extends ObjectBehavior
     public function it_clones_shipment(
         ShipmentInterface $originalShipment,
         ShipmentInterface $newShipment,
-        ShippingMethod $shippingMethod,
-        AdjustmentInterface $adjustment
-    ): void
-    {
-        $adjustmentCollection = new ArrayCollection([$adjustment->getWrappedObject()]);
+        ShippingMethodInterface $shippingMethod,
+        AdjustmentInterface $adjustment,
+        AdjustmentClonerInterface $adjustmentCloner
+    ): void {
+        $adjustmentCollection = new ArrayCollection([$adjustment->getWrappedObject(), $adjustment->getWrappedObject()]);
         $date = new \DateTime('now');
 
         $originalShipment->getState()->willReturn('new');
@@ -47,10 +48,14 @@ final class ShipmentClonerSpec extends ObjectBehavior
         $originalShipment->getMethod()->willReturn($shippingMethod);
         $originalShipment->getAdjustments()->willReturn($adjustmentCollection);
 
-        $newShipment->setState($originalShipment->getState());
-        $newShipment->setUpdatedAt($originalShipment->getUpdatedAt());
-        $newShipment->setCreatedAt($originalShipment->getCreatedAt());
-        $newShipment->setMethod($originalShipment->getMethod());
-        $adjustments = $originalShipment->getAdjustments();
+        $this->clone($originalShipment, $newShipment);
+
+        $newShipment->setState('new')->shouldHaveBeenCalledTimes(1);
+        $newShipment->setUpdatedAt($date)->shouldHaveBeenCalledTimes(1);
+        $newShipment->setCreatedAt($date)->shouldHaveBeenCalledTimes(1);
+        $newShipment->setMethod($shippingMethod)->shouldHaveBeenCalledTimes(1);
+
+        $adjustmentsCount = $adjustmentCollection->count();
+        $adjustmentCloner->clone($adjustment, Argument::any())->shouldHaveBeenCalledTimes($adjustmentsCount);
     }
 }

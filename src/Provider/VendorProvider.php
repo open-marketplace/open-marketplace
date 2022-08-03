@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserHasNoVendorContextException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -43,5 +45,13 @@ final class VendorProvider implements VendorProviderInterface
         }
 
         return $vendor;
+    }
+
+    public function provideVendorFromOrderItem(OrderItemInterface $orderItem): VendorInterface
+    {
+        /** @var ProductInterface $product */
+        $product = $orderItem->getProduct();
+
+        return $product->getVendor();
     }
 }

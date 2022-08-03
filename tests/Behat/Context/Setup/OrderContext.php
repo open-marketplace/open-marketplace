@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
+use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\OrderRepository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
@@ -28,13 +30,18 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class OrderContext implements Context
+final class OrderContext extends RawMinkContext
 {
     private SharedStorageInterface $sharedStorage;
+    
     private FactoryInterface $orderFactory;
+    
     private OrderRepository $orderRepository;
+    
     private VendorRepository $vendorRepository;
+    
     private ShopUserExampleFactory $userExampleFactory;
+    
     private EntityManagerInterface $entityManager;
     private UserRepository $userRepository;
 
@@ -69,9 +76,9 @@ final class OrderContext implements Context
         if(str_contains($propertyName, "CompletedAt") ){
             $date = new \DateTime($value);
             $order->{'set'.ucfirst($propertyName)}($date);
-        }
-        else
+        } else {
             $order->{'set'.ucfirst($propertyName)}($value);
+        }
 
         $this->sharedStorage->set('order', $order);
 
@@ -79,6 +86,7 @@ final class OrderContext implements Context
     }
 
     /**
+<<<<<<< HEAD
      * @Given There is order with property :propertyName with value :value made with some seller
      */
     public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller($propertyName, $value)
@@ -113,6 +121,32 @@ final class OrderContext implements Context
         $this->sharedStorage->set('order', $order);
     }
 
+    /**
+     * @Given I am on order details page
+     */
+    public function iAmOnOrderDetailsPage()
+    {
+        $order = $this->sharedStorage->get('order');
+        $this->getSession()->visit("/en_US/orders/".$order->getId());
+    }
+
+    /**
+     * @Given There is :count orders made with logged in seller
+     */
+    public function thereIsOrdersMadeWithLoggedInSeller($count)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+        $orders = [];
+
+        for ($i=0; $i<$count; $i++){
+            $orders[$i] = $this->createDefaultOrder();
+            $orders[$i]->setVendor($vendor);
+
+            $this->orderRepository->add($orders[$i]);
+        }
+        $this->sharedStorage->set('orders', $orders);
+    }
+
     private function createOrder(
         CustomerInterface $customer,
         ?string $number = null,
@@ -129,11 +163,7 @@ final class OrderContext implements Context
 
         return $order;
     }
-    /**
-     * @param string|null $localeCode
-     *
-     * @return OrderInterface
-     */
+
     private function createCart(
         CustomerInterface $customer,
         ChannelInterface $channel = null,
@@ -158,7 +188,7 @@ final class OrderContext implements Context
         $localeCode = $this->sharedStorage->get('locale')->getCode();
         return $this->createOrder(
             $customer,
-            null,
+            $number = null,
             $channel,
             $localeCode
         );
