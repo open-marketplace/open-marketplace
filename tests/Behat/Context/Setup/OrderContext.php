@@ -51,7 +51,7 @@ final class OrderContext extends RawMinkContext
         ShopUserExampleFactory $userExampleFactory,
         EntityManagerInterface $entityManager,
         UserRepository $userRepository,
-        ) {
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderFactory = $orderFactory;
         $this->orderRepository = $orderRepository;
