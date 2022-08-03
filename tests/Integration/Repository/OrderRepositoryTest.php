@@ -32,7 +32,6 @@ final class OrderRepositoryTest extends JsonApiTestCase
         $queryBuilder = $this->repository->findAllByVendor($vendorOliver);
 
         $result = $queryBuilder->getQuery()->getResult();
-//        dd($result);
         self::assertEquals(1, count($result));
     }
 }
