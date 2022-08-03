@@ -26,15 +26,16 @@ class ProductDraftFilesOperatorTest extends JsonApiTestCase
         parent::setUp();
 
         $this->productFromDraftFactory = $this->getContainer()->get('bitbag_mvm_plugin.factory.product_from_draft_factory');
-        $this->uploader = $this->getContainer()->get('sylius.image_uploader');
 
         $fileSystemMap = $this->getContainer()->get('knp_gaufrette.filesystem_map');
+
         $fileAdapter = $fileSystemMap->get('sylius_image')->getAdapter();
 
-        $fileSystem = new Filesystem($fileAdapter);
+        $this->fileSystem = new Filesystem($fileAdapter);
+
         $productImageFactory = $this->getContainer()->get('bitbag_mvm_plugin.factory.product_image');
 
-        $this->productDraftFilesOperator = new ProductDraftFilesOperator($fileSystem, $productImageFactory);
+        $this->productDraftFilesOperator = new ProductDraftFilesOperator($this->fileSystem, $productImageFactory);
     }
 
     public function test_it_copies_draft_image_to_product(): void
@@ -42,25 +43,10 @@ class ProductDraftFilesOperatorTest extends JsonApiTestCase
         $this->loadFixturesFromFile('ProductDraftFilesOperatorTest/test_it_copies_draft_images_to_product.yml');
 
         $manager = $this->getEntityManager();
-        $file = new \SplFileInfo('test.png');
 
-        $image1 = new ProductDraftImage();
-        $image1->setFile($file);
-//        $image1->setPath("/test/test.txt");
-        $this->uploader->upload($image1);
-//        $image2 = new ProductDraftImage();
-//        $image2->setPath("test/path");
+        $this->create_draft_fixture_with_file();
 
-        $listing = $this->getEntityManager()->getRepository(ProductListing::class)->findAll()[0];
-
-        $draftFixture = new ProductDraft();
-        $draftFixture->setCode("FIXTURE");
-        $draftFixture->setProductListing($listing);
-        $draftFixture->addImage($image1);
-//        $draftFixture->addImage($image2);
-        $draftFixture->setIsVerified(false);
-        dd($draftFixture);
-        $draft = $manager->getRepository(ProductDraft::class)->findOneBy(['code'=>'test_draft']);
+        $draftFixture = $manager->getRepository(ProductDraft::class)->findOneBy(['code'=>'FIXTURE']);
         $cratedProduct =  $this->productFromDraftFactory->createSimpleProduct($draftFixture);
 
         $this->productDraftFilesOperator->copyFilesToProduct($draftFixture, $cratedProduct);
@@ -68,28 +54,42 @@ class ProductDraftFilesOperatorTest extends JsonApiTestCase
         $manager->persist($cratedProduct);
         $manager->flush();
 
-//        $file = $cratedProduct->getImages()[0]->getPath();
+        $product = $manager->getRepository(Product::class)->findOneBy(['code'=>"FIXTURE"]);
 
-//        self::assertEquals('path/toFile/test.png',$file);
-        $product = $manager->getRepository(Product::class)->findAll();
-//        dd($product[0]->getImages()[0]);
+        self::assertEquals(1, count($product->getImages()));
+        self::assertEquals('AA/test1.png', $product->getImages()[0]->getPath());
     }
 
-    private function create_draft_fixture_with_file()
+    private function create_draft_fixture_with_file(): void
     {
-        $image1 = new ProductDraftImage();
-        $image1->setPath("%KERNEL_DIR/FILE/test.png");
-
-        $image2 = new ProductDraftImage();
-        $image2->setPath("test/path");
+        $manager = $this->getEntityManager();
 
         $listing = $this->getEntityManager()->getRepository(ProductListing::class)->findAll()[0];
+
+        $image1 = new ProductDraftImage();
 
         $draftFixture = new ProductDraft();
         $draftFixture->setCode("FIXTURE");
         $draftFixture->setProductListing($listing);
         $draftFixture->addImage($image1);
-        $draftFixture->addImage($image2);
         $draftFixture->setIsVerified(false);
+
+        $fileInfo = new \SplFileInfo(__DIR__.'/test.png');
+        $fileObject = $fileInfo->openFile('r');
+        $file = $fileObject->fread(filesize(__DIR__.'/test.png'));
+
+        if ($this->fileSystem->has('AA/test.png'))
+            $this->fileSystem->delete('AA/test.png');
+
+        if ($this->fileSystem->has('AA/test1.png'))
+            $this->fileSystem->delete('AA/test1.png');
+
+        $this->fileSystem->write('AA/test.png', $file);
+
+        $image1->setPath('AA/test.png');
+        $image1->setOwner($draftFixture);
+
+        $manager->persist($draftFixture);
+        $manager->flush();
     }
 }
