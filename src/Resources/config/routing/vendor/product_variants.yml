@@ -1,0 +1,13 @@
+vendor_product_variant_index:
+    path: /inventory_variants
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _sylius:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
+            grid: vendor_product_variant
+            vars:
+                templates:
+                    breadcrumb: "@SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig"
+                icon: cubes
+                subheader: sylius.ui.manage_variants

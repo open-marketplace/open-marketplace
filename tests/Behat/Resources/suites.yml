@@ -12,4 +12,5 @@ imports:
     - suites/ui/admin/product_listing.yml
     - suites/shop/order.yml
     - suites/vendor/order_listing.yml
+    - suites/vendor/clients_listing.yml
     - suites/vendor/order_details.yml

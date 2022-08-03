@@ -44,17 +44,33 @@ app_shop:
     prefix: /{_locale}
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+
 sylius_shop_checkout_complete:
     resource: 'routing/shop/order.yml'
     prefix: /{_locale}
+
 vendor_order_list:
     resource: 'routing/vendor/order_listing.yml'
     prefix: /{_locale}
+
 conversation:
   resource: "routing/conversation.yml"
+
 conversation_vendor:
   resource: "routing/vendor_conversation.yml"
   prefix: /{_locale}
   requirements:
       _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+
+bitbag_mvm_plugin_customer_index:
+    resource: "routing/vendor/clients.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+
+bitbag_mvm_plugin_variants_index:
+    resource: "routing/vendor/product_variants.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 
