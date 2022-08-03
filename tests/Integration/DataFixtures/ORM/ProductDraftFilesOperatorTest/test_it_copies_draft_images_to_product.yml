@@ -1,10 +1,6 @@
 Sylius\Component\Addressing\Model\Country:
     poland:
         code: 'PL'
-#Sylius\Component\Core\Model\Channel:
-#    main_channel:
-#        name: 'Main_channel'
-#        code: 'Web-US'
 Sylius\Component\Core\Model\Customer:
     customer_oliver:
         firstName: "John"
@@ -47,35 +43,6 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing:
         createdAt: '<dateTimeBetween("-40min","-5min")>'
         code: "Test"
         vendor: '@vendor_oliver'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft:
-    draft:
-#        __construct: false
-        productListing: '@listing'
-        code: "test_draft"
-        isVerified: false
-        createdAt: '<dateTimeBetween("-40min","-5min")>'
-        status: 'new'
-        versionNumber: 1
-#        translation: '@translation'
-#        images: '[@image]'
-#        images: '<ArrayCollection(array)>'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation:
-    translation:
-        productDraft: '@draft'
-        shortDescription: "test"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage:
-    image:
-        owner: '@draft'
-        path: 'path/tofile/test.png'
-#    image2:
-#        owner: '@draft'
-#        path: 'path/tofile2/test.png'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice:
-    pricing:
-        productDraft: '@draft'
-        price: "111"
-        originalPrice: '111'
-        channelCode: 'main_channel'
 
 
 
