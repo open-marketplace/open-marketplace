@@ -30,8 +30,9 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
 
     public function copyFilesToProduct(ProductDraftInterface $productDraft, ProductInterface $cratedProduct): void
     {
+//        dd($productDraft->getImages());
         foreach ($productDraft->getImages() as $image){
-
+//            dd("kjhkjhkh");
             $newImage = $this->productImageFactory->createNew();
 
             $newImage->setType($image->getType());

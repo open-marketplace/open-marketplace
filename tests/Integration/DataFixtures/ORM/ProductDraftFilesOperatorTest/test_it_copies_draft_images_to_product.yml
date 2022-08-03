@@ -1,0 +1,81 @@
+Sylius\Component\Addressing\Model\Country:
+    poland:
+        code: 'PL'
+#Sylius\Component\Core\Model\Channel:
+#    main_channel:
+#        name: 'Main_channel'
+#        code: 'Web-US'
+Sylius\Component\Core\Model\Customer:
+    customer_oliver:
+        firstName: "John"
+        lastName: "Nowak"
+        email: "oliver@queen.com"
+        emailCanonical: "oliver@queen.com"
+    customer_bruce:
+        firstName: "Bruce"
+        lastName: "Wayne"
+        email: "bruce.wayne@wayne.co"
+        emailCanonical: "bruce.wayne@wayne.co"
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
+    user_oliver:
+        plainPassword: "123password"
+        roles: ["ROLE_USER"]
+        enabled: "true"
+        customer: '@customer_oliver'
+    user_bruce:
+        plainPassword: "123password"
+        roles: [ "ROLE_USER" ]
+        enabled: "true"
+        customer: '@customer_bruce'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+    vendor_address:
+        country: '@poland'
+        city: 'Warsaw'
+        postalCode: '00-999'
+        street: 'Avenue 2115'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
+    vendor_oliver:
+        shopUser: '@user_oliver'
+        companyName: 'Test company name'
+        taxIdentifier: '1234567'
+        phoneNumber: '333111222'
+        vendorAddress: '@vendor_address'
+        description: 'description'
+        slug: 'test-slug'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing:
+    listing:
+        createdAt: '<dateTimeBetween("-40min","-5min")>'
+        code: "Test"
+        vendor: '@vendor_oliver'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft:
+    draft:
+#        __construct: false
+        productListing: '@listing'
+        code: "test_draft"
+        isVerified: false
+        createdAt: '<dateTimeBetween("-40min","-5min")>'
+        status: 'new'
+        versionNumber: 1
+#        translation: '@translation'
+#        images: '[@image]'
+#        images: '<ArrayCollection(array)>'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation:
+    translation:
+        productDraft: '@draft'
+        shortDescription: "test"
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage:
+    image:
+        owner: '@draft'
+        path: 'path/tofile/test.png'
+#    image2:
+#        owner: '@draft'
+#        path: 'path/tofile2/test.png'
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice:
+    pricing:
+        productDraft: '@draft'
+        price: "111"
+        originalPrice: '111'
+        channelCode: 'main_channel'
+
+
+
