@@ -25,23 +25,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductDraftImageType extends ImageType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        parent::buildForm($builder, $options);
-
-        if (isset($options['product']) && $options['product'] instanceof ProductDraftInterface) {
-//            $builder
-//                ->add('productVariants', ResourceAutocompleteChoiceType::class, [
-//                    'label' => 'sylius.ui.product_variants',
-//                    'multiple' => true,
-//                    'required' => false,
-//                    'choice_name' => 'descriptor',
-//                    'choice_value' => 'code',
-//                    'resource' => 'sylius.product_variant',
-//                ])
-//            ;
-        }
-    }
 
     /**
      * @psalm-suppress MissingPropertyType
