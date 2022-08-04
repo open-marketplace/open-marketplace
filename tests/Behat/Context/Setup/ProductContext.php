@@ -64,7 +64,7 @@ class ProductContext implements Context
     /**
      * @Given store has :productsCount products from same Vendor
      */
-    public function storeHasProductsFromSameVendor($productsCount)
+    public function storeHasProductsFromSameVendor($productsCount): void
     {
         $this->createTaxon();
         $vendor = $this->createDefaultVendor();

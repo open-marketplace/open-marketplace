@@ -13,12 +13,12 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
 
-class InventoryContext extends RawMinkContext
+final class InventoryContext extends RawMinkContext
 {
     /**
      * @Given I submit inventory form
      */
-    public function iSubmitInventoryForm()
+    public function iSubmitInventoryForm(): void
     {
         $page = $this->getSession()->getPage();
         $element = $page->find('css','#sylius_save_changes_button');
@@ -28,7 +28,7 @@ class InventoryContext extends RawMinkContext
     /**
      * @Given I set tracked
      */
-    public function iSetTracked()
+    public function iSetTracked(): void
     {
         $page = $this->getSession()->getPage();
         $element = $page->find('css','#sylius_product_variant_tracked');
@@ -38,7 +38,7 @@ class InventoryContext extends RawMinkContext
     /**
      * @Given I set untracked
      */
-    public function iSetUntracked()
+    public function iSetUntracked(): void
     {
         $page = $this->getSession()->getPage();
         $element = $page->find('css','#sylius_product_variant_tracked');
