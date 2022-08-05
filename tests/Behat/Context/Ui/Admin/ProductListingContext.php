@@ -50,12 +50,12 @@ final class ProductListingContext extends RawMinkContext implements Context
     private UserRepositoryInterface $userRepository;
 
     public function __construct(
-        UserRepositoryInterface $userRepository,
         EntityManagerInterface $entityManager,
         AdminUserExampleFactory $adminUserExampleFactory,
         ShopUserExampleFactory $shopUserExampleFactory,
         FactoryInterface $vendorFactory,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        UserRepositoryInterface $userRepository
     ) {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
