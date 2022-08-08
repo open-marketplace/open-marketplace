@@ -7,11 +7,11 @@
 
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
-{% block content %}
+{% block subcontent %}
 {#    {{ dump(configuration.vars.route.parameters) }}#}
     {{ form_start(form, {'action': path('bitbag_mvm_plugin_admin_draft_attribute_create', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
-{{ dump(configuration.vars.templates.form) }}
+
     {% if configuration.vars.templates.form is defined %}
         {% include configuration.vars.templates.form %}
         {% if not form._token.isRendered %}
@@ -23,7 +23,7 @@
 
 {#    {{ sylius_template_event([event_prefix ~ '.form', 'sylius.admin.create.form'], {'metadata': metadata, 'resource': resource, 'form': form}) }}#}
 
-{#    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': index_url}} %}#}
+    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': 'bitbag_mvm_vendor_draft_attribute_index'}} %}
 
     {{ form_end(form, {'render_rest': false}) }}
 {#    {{ sylius_template_event([ 'sylius.admin.create'], _context) }}#}

@@ -47,13 +47,21 @@
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag_mvm_plugin.form.type.draftAttribute"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeType" public="true">
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeType"
+                 id="bitbag_mvm_plugin.form.type.draftAttribute"
+                 public="true">
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute</argument>
             <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
-            <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeTranslationType</argument>
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeTranslationType</argument>
             <argument type="service" id="sylius.form_registry.attribute_type"/>
             <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeTranslationType"
+                 id="bitbag_mvm_plugin.form.type.draft_attribute_translation"  public="true">
+            <tag name="form.type"/>
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation</argument>
+            <argument>%sylius.form.type.product_attribute_translation.validation_groups%</argument>
         </service>
     </services>
 </container>

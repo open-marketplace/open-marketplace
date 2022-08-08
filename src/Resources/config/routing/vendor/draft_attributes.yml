@@ -18,7 +18,7 @@ bitbag_mvm_plugin_admin_draft_attribute_create:
                 arguments:
                     type: $type
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/DraftAttributesCreate.html.twig"
-#            redirect: sylius_admin_product_attribute_update
+            redirect: bitbag_mvm_vendor_draft_attribute_index
             permission: true
             vars:
                 subheader: sylius.ui.manage_attributes_of_your_products
