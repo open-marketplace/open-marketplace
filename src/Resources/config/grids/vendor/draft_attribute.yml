@@ -46,8 +46,8 @@ sylius_grid:
                     create:
                         type: render_attribute_types
                 item:
-#                    update:
-#                        type: update
+                    update:
+                        type: update
 #                    delete:
 #                        type: delete
 #                bulk:

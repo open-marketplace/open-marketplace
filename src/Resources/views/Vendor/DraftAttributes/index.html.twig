@@ -7,19 +7,6 @@
 {% endblock %}
 
 {% block subcontent %}
-{#<div class="ui stackable two column grid">#}
-{#    <div class="middle aligned column">#}
-{#        <div class="ui right floated buttons">#}
-{#            {{ dump(definition.actionGroups.main) }}#}
-{#            {% if definition.actionGroups.main is defined %}#}
-{#                {% for action in definition.getEnabledActions('main') %}#}
-{#                    {{ sylius_grid_render_action(resources, action, null) }}#}
-{#                {% endfor %}#}
-{#            {% endif %}#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-{#    {{ dump(definition) }}#}
     {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}
     {{ sylius_grid_render(resources, '@SyliusAdmin/Grid/_default.html.twig') }}
 {% endblock %}
