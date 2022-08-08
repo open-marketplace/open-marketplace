@@ -209,4 +209,9 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     {
         $this->image = $image;
     }
+
+    public function isVerified(): bool
+    {
+        return self::STATUS_VERIFIED === $this->getStatus();
+    }
 }

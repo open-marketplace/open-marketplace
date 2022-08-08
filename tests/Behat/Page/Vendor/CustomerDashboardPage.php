@@ -23,11 +23,14 @@ class CustomerDashboardPage extends SymfonyPage implements SymfonyPageInterface
 
     public function itemWithValueExistsInsideSidebar($value): bool
     {
-        $sidebar = $this->getDocument()->find('css', '.grid .four .menu');
-        $links = $sidebar->findAll('css', '.item');
-        foreach ($links as $link) {
-            if ($value === $link->getText()) {
-                return true;
+        $sidebars = $this->getDocument()->findAll('css', '.grid .four .menu');
+        foreach ($sidebars as $sidebar)
+        {
+            $links = $sidebar->findAll('css', '.item');
+            foreach ($links as $link) {
+                if ($value === $link->getText()) {
+                    return true;
+                }
             }
         }
 
