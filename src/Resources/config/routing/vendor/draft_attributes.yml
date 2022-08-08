@@ -2,13 +2,16 @@ bitbag_mvm_vendor_draft_attribute_index:
     path: /product-attributes/index
     methods: [ GET, POST ]
     defaults:
-        _controller: bitbag_mvm_plugin.controller.draft_attribute:createAction
+        _controller: bitbag_mvm_plugin.controller.draft_attribute:indexAction
+        _sylius:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/DraftAttributes/index.html.twig"
+            grid: vendor_draft_attribute
 
-bitbag_mvm_vendor_draft_attribute_create:
+bitbag_mvm_plugin_admin_draft_attribute_create:
     path: /product-attributes/{type}/new
     methods: [GET, POST]
     defaults:
-        _controller: bitbag_mvm_plugin.controller.product_listing_attribute_extended:createAction
+        _controller: bitbag_mvm_plugin.controller.draftAttributes:createAction
         _sylius:
             factory:
                 method: createTyped
@@ -24,3 +27,12 @@ bitbag_mvm_vendor_draft_attribute_create:
                 route:
                     parameters:
                         type: $type
+
+vendor_get_attribute_types:
+    path: /attribute-types
+    methods: [GET]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.draftAttributes:getAttributeTypesAction
+        template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/DraftAttributes/attributeTypes.html.twig"
+
+
