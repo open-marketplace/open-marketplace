@@ -16,6 +16,11 @@ bitbag_mvm_plugin_vendor_order_show:
             section: admin
             permission: true
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/show.html.twig"
+            repository:
+                method: findOrderForVendor
+                arguments:
+                    - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
+                    - $id
 
 bitbag_mvm_plugin_vendor_order_cancel:
     path: /orders/{id}/cancel
