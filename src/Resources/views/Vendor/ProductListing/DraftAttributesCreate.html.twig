@@ -1,0 +1,46 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
+{% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
+
+{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
+
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
+
+{% block content %}
+{#    {{ dump(configuration.vars.route.parameters) }}#}
+    {{ form_start(form, {'action': path('bitbag_mvm_vendor_draft_attribute_create', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
+{{ dump(configuration.vars.templates.form) }}
+    {% if configuration.vars.templates.form is defined %}
+        {% include configuration.vars.templates.form %}
+        {% if not form._token.isRendered %}
+            {{ form_row(form._token) }}
+        {% endif %}
+    {% else %}
+        {{ form_widget(form) }}
+    {% endif %}
+
+{#    {{ sylius_template_event([event_prefix ~ '.form', 'sylius.admin.create.form'], {'metadata': metadata, 'resource': resource, 'form': form}) }}#}
+
+{#    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': index_url}} %}#}
+
+    {{ form_end(form, {'render_rest': false}) }}
+{#    {{ sylius_template_event([ 'sylius.admin.create'], _context) }}#}
+{% endblock %}
+
+{% block topbar %}
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.create.stylesheets'], { 'metadata': metadata }) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.create.javascripts'], { 'metadata': metadata }) }}
+{% endblock %}

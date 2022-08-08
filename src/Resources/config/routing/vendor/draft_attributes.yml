@@ -1,0 +1,26 @@
+bitbag_mvm_vendor_draft_attribute_index:
+    path: /product-attributes/index
+    methods: [ GET, POST ]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.draft_attribute:createAction
+
+bitbag_mvm_vendor_draft_attribute_create:
+    path: /product-attributes/{type}/new
+    methods: [GET, POST]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.product_listing_attribute_extended:createAction
+        _sylius:
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/DraftAttributesCreate.html.twig"
+#            redirect: sylius_admin_product_attribute_update
+            permission: true
+            vars:
+                subheader: sylius.ui.manage_attributes_of_your_products
+                templates:
+                    form: "@SyliusAdmin/ProductAttribute/_form.html.twig"
+                route:
+                    parameters:
+                        type: $type
