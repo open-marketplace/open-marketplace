@@ -46,6 +46,15 @@
         <service id="mvm.form.type.conversation_message" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType">
             <tag name="form.type" />
         </service>
+
+        <service id="bitbag_mvm_plugin.form.type.draftAttribute"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeType" public="true">
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute</argument>
+            <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
+            <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeTranslationType</argument>
+            <argument type="service" id="sylius.form_registry.attribute_type"/>
+            <tag name="form.type"/>
+        </service>
     </services>
 </container>
 

@@ -6,4 +6,7 @@ sylius_resource:
                 interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
 #                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository
-#                form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorEditType
+                form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeType
+            translation:
+                classes:
+                    model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation

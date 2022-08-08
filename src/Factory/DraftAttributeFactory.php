@@ -20,19 +20,20 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class DraftAttributeFactory implements DraftAttributeFactoryInterface
 {
-    private $attributeTypesRegistry;
+    private ServiceRegistryInterface $attributeTypesRegistry;
+    private FactoryInterface $factory;
 
-    public function __construct(ServiceRegistryInterface $attributeTypesRegistry)
+    public function __construct(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
     {
-
+        $this->factory = $factory;
         $this->attributeTypesRegistry = $attributeTypesRegistry;
     }
 
-    public function createTyped(string $type): ProductListingAttribute
+    public function createTyped(string $type): DraftAttributeInterface
     {
         /** @var AttributeTypeInterface $attributeType */
         $attributeType = $this->attributeTypesRegistry->get($type);
-        /** @var DraftAttributeInterface $attribute */
+//        /** @var DraftAttributeInterface $attribute */
         $attribute = $this->createNew();
         $attribute->setType($type);
         $attribute->setStorageType($attributeType->getStorageType());
@@ -40,8 +41,8 @@ class DraftAttributeFactory implements DraftAttributeFactoryInterface
         return $attribute;
     }
 
-    public function createNew()
+    public function createNew(): DraftAttributeInterface
     {
-        return new ProductListingAttribute();
+        return new DraftAttribute();
     }
 }

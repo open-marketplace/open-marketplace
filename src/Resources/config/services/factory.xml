@@ -77,5 +77,19 @@
                  id="bitbag.mvm_plugin.factory.order_item_factory">
         </service>
 
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\DraftAttributeFactory"
+                 id="bitbag_mvm_plugin.factory.draftAttribute" >
+            <argument type="service">
+                <service class="Sylius\Component\Resource\Factory\TranslatableFactory" public="true">
+                    <argument type="service">
+                        <service class="Sylius\Component\Resource\Factory\Factory">
+                            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute</argument>
+                        </service>
+                    </argument>
+                    <argument type="service" id="sylius.translation_locale_provider.admin"/>
+                </service>
+            </argument>
+            <argument type="service" id="sylius.registry.attribute_type"/>
+        </service>
     </services>
 </container>

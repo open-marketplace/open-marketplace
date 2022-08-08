@@ -89,7 +89,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\DraftAttributesController"
                  id="bitbag_mvm_plugin.controller.draftAttributes"
                  parent="bitbag_mvm_plugin.controller.draft_attribute">
-
+            <argument type="service" id="bitbag_mvm_plugin.factory.draftAttribute"/>
         </service>
     </services>
 </container>

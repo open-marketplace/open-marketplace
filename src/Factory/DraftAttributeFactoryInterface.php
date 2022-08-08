@@ -7,7 +7,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingAttribute\Pro
 
 interface DraftAttributeFactoryInterface
 {
-    public function createTyped(string $type): ProductListingAttribute;
+    public function createTyped(string $type): DraftAttributeInterface;
 
     public function createNew();
 }

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\DraftAttributeFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -36,6 +37,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class DraftAttributesController extends ResourceController
 {
+    private DraftAttributeFactoryInterface $draftAttributeFactory;
+
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -53,19 +56,22 @@ class DraftAttributesController extends ResourceController
         EventDispatcherInterface $eventDispatcher,
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
-        ResourceDeleteHandlerInterface $resourceDeleteHandler
+        ResourceDeleteHandlerInterface $resourceDeleteHandler,
+        DraftAttributeFactoryInterface $draftAttributeFactory
     ) {
         parent::__construct($metadata, $requestConfigurationFactory, $viewHandler, $repository, $factory, $newResourceFactory, $manager, $singleResourceProvider, $resourcesFinder, $resourceFormFactory, $redirectHandler, $flashHelper, $authorizationChecker, $eventDispatcher, $stateMachine, $resourceUpdateHandler, $resourceDeleteHandler);
+        $this->draftAttributeFactory = $draftAttributeFactory;
     }
 
     public function createAction(Request $request): Response
     {
 //        dd($this->factory);
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
+//        dd($configuration);
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
-        $newResource = $this->newResourceFactory->create($configuration, $this->factory);
-
+//        $newResource = $this->newResourceFactory->create($configuration, $this->factory);
+        $type = $request->attributes->get('type');
+        $newResource = $this->draftAttributeFactory->createTyped($type);
         $form = $this->resourceFormFactory->create($configuration, $newResource);
 
         $form->handleRequest($request);
