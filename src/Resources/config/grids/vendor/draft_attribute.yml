@@ -48,8 +48,8 @@ sylius_grid:
                 item:
                     update:
                         type: update
-#                    delete:
-#                        type: delete
+                    delete:
+                        type: delete
 #                bulk:
 #                    delete:
 #                        type: delete
