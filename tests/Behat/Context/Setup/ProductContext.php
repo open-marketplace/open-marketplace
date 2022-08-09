@@ -96,7 +96,7 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given There is product with variant code :variant_code owned by logged in vendor
+     * @Given There is a product with variant code :variant_code owned by logged in vendor
      */
     public function thereIsProductWithVariantCodeOwnedByLoggedInVendor($variant_code)
     {

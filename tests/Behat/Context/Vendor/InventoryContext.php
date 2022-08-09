@@ -26,7 +26,7 @@ final class InventoryContext extends RawMinkContext
     }
 
     /**
-     * @Given I set tracked
+     * @Given I set product as tracked
      */
     public function iSetTracked(): void
     {
@@ -36,7 +36,7 @@ final class InventoryContext extends RawMinkContext
     }
 
     /**
-     * @Given I set untracked
+     * @Given I set product as untracked
      */
     public function iSetUntracked(): void
     {
@@ -44,7 +44,4 @@ final class InventoryContext extends RawMinkContext
         $element = $page->find('css','#sylius_product_variant_tracked');
         $element->setValue(false);
     }
-
-
-
 }
