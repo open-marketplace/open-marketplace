@@ -33,8 +33,7 @@ final class VendorMenuBuilder
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
         Security $security
-    )
-    {
+    ) {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
         $this->security = $security;
