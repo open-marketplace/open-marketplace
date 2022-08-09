@@ -1,0 +1,31 @@
+
+<div class="ui segment">
+    <h3>{{ resource.code }}</h3>
+    {{ form_start(form, {'action': path('vendor_product_variant_update', { 'id': resource.id }), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    <input type="hidden" name="_method" value="PUT" />
+    {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
+
+    {% if not form._token.isRendered %}
+        {{ form_row(form._token) }}
+    {% endif %}
+
+    <div class="ui segment">
+        <div class="required field">
+            {{ form_row(form.onHand) }}
+        </div>
+        <div class="required field">
+            <div class="ui toggle checkbox checked">
+                {{ form_widget(form.tracked) }}
+                <label for="sylius_product_variant_tracked" class="required">
+                    {{ 'sylius.ui.tracked'|trans }}
+                </label>
+            </div>
+        </div>
+    </div>
+        <button class="ui labeled icon primary button" type="submit" id="sylius_save_changes_button">
+            <i class="save icon"></i> {{ 'sylius.ui.save_changes'|trans }}
+        </button>
+    <div style="display:none">
+        {{ form_end(form, {'render_rest': true}) }}
+    </div>
+</div>
