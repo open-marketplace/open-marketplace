@@ -16,7 +16,7 @@ use Webmozart\Assert\Assert;
 
 class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeValueInterface
 {
-    public function getProduct(): ?ProductDraftInterface
+    public function getDraft(): ?ProductDraftInterface
     {
         $subject = parent::getSubject();
 
@@ -26,7 +26,7 @@ class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeVa
         return $subject;
     }
 
-    public function setProduct(?ProductDraftInterface $product): void
+    public function setDraft(?ProductDraftInterface $product): void
     {
         parent::setSubject($product);
     }

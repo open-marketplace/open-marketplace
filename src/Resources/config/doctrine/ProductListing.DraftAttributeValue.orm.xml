@@ -3,7 +3,11 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue"
-                       table="bitbag_mvm_draft_attribute_value" />
+    <entity name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue"
+                       table="bitbag_mvm_draft_attribute_value" >
+        <one-to-one field="subject" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft"
+                    inversed-by="attributes">
 
+        </one-to-one>
+    </entity>
 </doctrine-mapping>
