@@ -41,4 +41,16 @@ class OrderRepository extends BaseOrderRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findOrderForVendorByCustomer(VendorInterface $vendor, string $id): QueryBuilder
+    {
+        $vendorId = $vendor->getId();
+
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'c')
+            ->andWhere('o.vendor = :vendor')
+            ->andWhere('c.id = :id')
+            ->setParameter('vendor', $vendorId)
+            ->setParameter('id', $id);
+    }
 }

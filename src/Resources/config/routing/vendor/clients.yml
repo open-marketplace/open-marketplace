@@ -19,3 +19,14 @@ bitbag_mvm_plugin_vendor_customer_show:
                 arguments:
                     - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
                     - $id
+
+bitbag_mvm_plugin_vendor_customer_order_index:
+    path: /customers/{id}/orders
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
+            grid: vendor_account_customer_orders
