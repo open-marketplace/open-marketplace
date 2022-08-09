@@ -11,8 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -44,6 +46,15 @@ final class ProductType extends AbstractType
                 'attr' => [
                     'class' => 'ui labeled icon primary button',
                 ],
+            ])
+            ->add('attributes', CollectionType::class, [
+                'entry_type' => DraftAttributeValueType::class,
+                'required' => false,
+                'prototype' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => false,
             ])
 
             ->add('saveAndAdd', SubmitType::class, [

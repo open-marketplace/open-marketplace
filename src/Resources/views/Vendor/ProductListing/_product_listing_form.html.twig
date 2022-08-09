@@ -70,6 +70,23 @@
                     </div>
                 </div>
             </div>
+
+            {% form_theme form '@SyliusAdmin/Product/Attribute/attributesCollection.html.twig' %}
+
+
+            <div class="ui attached segment" data-tab="attributes">
+                <h3 class="ui top attached header">{{ 'sylius.ui.attributes'|trans }}</h3>
+
+                <div class="ui attached segment">
+                    {{ render(url('sylius_admin_get_product_attributes')) }}
+                    <div id="attributesContainer" data-count="{{ form.attributes|length }}">
+                        {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
+                    </div>
+
+                    {{ sylius_template_event(['sylius.admin.product.edit.tab_attributes', 'sylius.admin.product.tab_attributes'], {'form': form}) }}
+                </div>
+            </div>
+
             <div class="ui attached segment">
                 {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/_imageForm.html.twig' %}
                 </div>
@@ -78,13 +95,16 @@
             </div>
             <div class="ui buttons">
                 {{ form_row(form._token) }}
-                <button type="submit" value="dafsafas">{{ 'bitbag_mvm_plugin.ui.save'|trans }}</button>
                 {{ form_widget(form.save) }}
                 {{ form_widget(form.saveAndAdd) }}
                 {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': paths.cancel|default(null)} %}
             </div>
         </div>
+
+
+
+
         {{ form_end(form) }}
-    </div>
+{#    </div>#}
 {% endblock %}
 

@@ -362,4 +362,5 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
 
         return true;
     }
+
 }
