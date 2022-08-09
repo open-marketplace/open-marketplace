@@ -80,10 +80,10 @@
                 <div class="ui attached segment">
                     {{ render(url('sylius_admin_get_product_attributes')) }}
                     <div id="attributesContainer" data-count="{{ form.attributes|length }}">
-                        {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
+                        {{ form_row(form.attributes, {'attr': {'translations': form.translations} }) }}
                     </div>
 
-                    {{ sylius_template_event(['sylius.admin.product.edit.tab_attributes', 'sylius.admin.product.tab_attributes'], {'form': form}) }}
+{#                    {{ sylius_template_event(['sylius.admin.product.edit.tab_attributes', 'sylius.admin.product.tab_attributes'], {'form': form}) }}#}
                 </div>
             </div>
 

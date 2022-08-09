@@ -56,6 +56,17 @@ vendor_get_attribute_types:
         _controller: bitbag_mvm_plugin.controller.draftAttributes:getAttributeTypesAction
         template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/DraftAttributes/attributeTypes.html.twig"
 
+bitbag_vendor_get_product_attributes:
+    path: /attributes
+    methods: [GET]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.draftAttributes:renderAttributesAction
+        template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/_attributeChoice.html.twig"
 
-
+bitbag_vendor_render_attribute_forms:
+    path: /attribute-forms
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction
+        template: "@SyliusAdmin/Product/Attribute/attributeValues.html.twig"
 
