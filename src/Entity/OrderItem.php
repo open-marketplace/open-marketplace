@@ -17,6 +17,11 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
     public function getProductOwner(): VendorInterface
     {
-        return $this->getProduct()->getVendor();
+        /** @var ProductInterface $product */
+        $product = $this->getProduct();
+        /** @var VendorInterface $vendor */
+        $vendor = $product->getVendor();
+
+        return $vendor;
     }
 }

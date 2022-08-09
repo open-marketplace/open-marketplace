@@ -15,4 +15,3 @@ imports:
     - suites/vendor/clients_listing.yml
     - suites/vendor/inventory_management.yml
     - suites/vendor/order_details.yml
-

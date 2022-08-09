@@ -9,8 +9,8 @@
                  id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.message.message_factory"
                  decorates="bitbag_multi_vendor_marketplace.factory.conversation_message" >
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.message.message_factory.inner" />
-
         </service>
+
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory"
                  id="bitbag_mvm_plugin.factory.vendor_profile_factory">
         </service>
@@ -56,12 +56,10 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactory"
-                 id="bitbag.mvm_plugin.service.vendor_image_factory" >
-        </service>
+                 id="bitbag.mvm_plugin.service.vendor_image_factory" />
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory" id="bitbag.mvm.factory.address_factory">
-
-        </service>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactory"
+                 id="bitbag.mvm.factory.address_factory"/>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductImageFactory"
                  id="bitbag_mvm_plugin.factory.product_image"/>
@@ -70,12 +68,11 @@
                  id="bitbag_mvm_plugin.factory.product_draft_image"/>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactory"
-                 id="bitbag.mvm_plugin.factory.order_factory">
-        </service>
+                 id="bitbag.mvm_plugin.factory.order_factory"/>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactory"
-                 id="bitbag.mvm_plugin.factory.order_item_factory">
-        </service>
+                 id="bitbag.mvm_plugin.factory.order_item_factory"/>
 
     </services>
 </container>
+
