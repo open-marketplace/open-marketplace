@@ -45,6 +45,7 @@ final class ProductType extends AbstractType
                     'class' => 'ui labeled icon primary button',
                 ],
             ])
+
             ->add('saveAndAdd', SubmitType::class, [
                 'label' => 'bitbag_mvm_plugin.ui.save_and_add',
                 'attr' => [
