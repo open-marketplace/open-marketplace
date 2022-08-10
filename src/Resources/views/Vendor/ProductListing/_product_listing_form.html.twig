@@ -78,7 +78,6 @@
             </div>
             <div class="ui buttons">
                 {{ form_row(form._token) }}
-                <button type="submit" value="dafsafas">{{ 'bitbag_mvm_plugin.ui.save'|trans }}</button>
                 {{ form_widget(form.save) }}
                 {{ form_widget(form.saveAndAdd) }}
                 {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': paths.cancel|default(null)} %}
