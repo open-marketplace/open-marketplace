@@ -84,4 +84,5 @@ interface VendorInterface extends VendorProfileInterface
      */
     public function setProductListings(Collection $productListings): void;
 
+    public function isVerified(): bool;
 }

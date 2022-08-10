@@ -1,5 +1,6 @@
 bitbag_mvm_plugin:
     ui:
+        draft_attributes: "Attributes"
         inventory: "Inventory"
         clients: "Clients"
         order_list: "Orders"
@@ -113,6 +114,7 @@ bitbag_mvm_plugin:
         create_new_product: 'Create Product'
         save: 'Save'
         save_and_add: 'Save and Add'
+        vendor_under_verification: "Your vendor account is under verification."
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."
@@ -121,3 +123,8 @@ bitbag_mvm_plugin:
         id: 'ID'
         tax_id: 'Tax ID'
         vendors: 'Vendors'
+    menu:
+        shop:
+            account:
+                vendor:
+                    header: "Vendor account"

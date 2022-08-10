@@ -14,28 +14,17 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository as BaseRepository;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 
 class ProductVariantRepository extends BaseRepository
 {
     public function createQueryBuilderByVendor(VendorInterface $vendor): QueryBuilder
     {
         $vendorId = $vendor->getId();
+
         return $this->createQueryBuilder('v')
             ->innerJoin('v.product', 'p')
             ->andWhere('p.vendor = :vendor')
             ->setParameter('vendor', $vendorId)
-            ;
-    }
-
-
-    public function findOneById(string $id): ProductVariantInterface
-    {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult()
             ;
     }
 }

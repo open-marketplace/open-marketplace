@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
-use Behat\MinkExtension\Context\MinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
@@ -47,9 +46,9 @@ class VendorUpdateContext implements Context
     }
 
     /**
-     * @Given there is a vendor user :vendor_user_email registered in country :country_code
+     * @Given there is a :status vendor user :vendor_user_email registered in country :country_code
      */
-    public function thereIsAVendorUserRegisteredInCountry($vendor_user_email, $country_code): void
+    public function thereIsAVendorUserRegisteredInCountry($status, $vendor_user_email, $country_code): void
     {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
@@ -70,6 +69,7 @@ class VendorUpdateContext implements Context
         $vendor->getVendorAddress()->setStreet('Tajna 13');
         $vendor->setSlug('vendor-slug');
         $vendor->setDescription('description');
+        $vendor->setStatus($status);
         $this->manager->persist($vendor);
         $this->manager->flush();
         $this->sharedStorage->set('vendor', $vendor);

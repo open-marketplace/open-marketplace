@@ -13,11 +13,11 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+use function PHPUnit\Framework\assertStringContainsString;
+use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
-use function PHPUnit\Framework\assertContains;
-use function PHPUnit\Framework\assertStringContainsString;
 
 class OrderContext extends RawMinkContext implements Context
 {
@@ -110,8 +110,8 @@ class OrderContext extends RawMinkContext implements Context
         $paginationLimit = $this->sharedStorage->get('pagination_limit');
         $this->visitPath("/en_US/orders?limit=$paginationLimit&page=$pageNumber");
         $page = $this->getSession()->getPage();
-        $table = $page->find("css", ".ui.sortable.stackable.very.basic.celled.table");
-        $orderRows = $table->findAll("css",".item");
+        $table = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
+        $orderRows = $table->findAll('css', '.item');
 
         Assert::count($orderRows, $ordersCount);
     }
@@ -130,7 +130,34 @@ class OrderContext extends RawMinkContext implements Context
     public function iShouldSeeOrderWithNumber($number)
     {
         $page = $this->getSession()->getPage();
-        $header = $page->find('css','.ui.header');
+        $header = $page->find('css', '.ui.header');
         assertStringContainsString($number, $header->getText());
+    }
+
+    /**
+     * @Then I should see customer with name :name
+     */
+    public function iShouldSeeClientWithName($name)
+    {
+        $page = $this->getSession()->getPage();
+        $table = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
+        assertStringContainsString($name, $table->getText());
+    }
+
+    /**
+     * @Then I should not see customer with name :name
+     */
+    public function iShouldNotSeeClientWithName($name)
+    {
+        $page = $this->getSession()->getPage();
+        assertStringNotContainsString($name, $page->getText());
+    }
+
+    /**
+     * @Given I am on customers page
+     */
+    public function iAmOnCustomersPage()
+    {
+        $this->visitPath('en_US/customers');
     }
 }

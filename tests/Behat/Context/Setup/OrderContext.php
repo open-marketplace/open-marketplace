@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use Behat\MinkExtension\Context\RawMinkContext;
@@ -22,7 +21,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\CustomerGroupExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -33,16 +31,17 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class OrderContext extends RawMinkContext
 {
     private SharedStorageInterface $sharedStorage;
-    
+
     private FactoryInterface $orderFactory;
-    
+
     private OrderRepository $orderRepository;
-    
+
     private VendorRepository $vendorRepository;
-    
+
     private ShopUserExampleFactory $userExampleFactory;
-    
+
     private EntityManagerInterface $entityManager;
+
     private UserRepository $userRepository;
 
     public function __construct(
@@ -73,11 +72,11 @@ final class OrderContext extends RawMinkContext
         $order = $this->createDefaultOrder();
         $order->setVendor($vendor);
 
-        if(str_contains($propertyName, "CompletedAt") ){
+        if (str_contains($propertyName, 'CompletedAt')) {
             $date = new \DateTime($value);
-            $order->{'set'.ucfirst($propertyName)}($date);
+            $order->{'set' . ucfirst($propertyName)}($date);
         } else {
-            $order->{'set'.ucfirst($propertyName)}($value);
+            $order->{'set' . ucfirst($propertyName)}($value);
         }
 
         $this->sharedStorage->set('order', $order);
@@ -86,8 +85,7 @@ final class OrderContext extends RawMinkContext
     }
 
     /**
-<<<<<<< HEAD
-     * @Given There is order with property :propertyName with value :value made with some seller
+     * @Given There is order with property :propertyName with value :value made with other seller
      */
     public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller($propertyName, $value)
     {
@@ -96,12 +94,12 @@ final class OrderContext extends RawMinkContext
         $order = $this->createDefaultOrder();
         $order->setVendor($vendor);
 
-        if(str_contains($propertyName, "CompletedAt") ){
+        if (str_contains($propertyName, 'CompletedAt')) {
             $date = new \DateTime($value);
-            $order->{'set'.ucfirst($propertyName)}($date);
+            $order->{'set' . ucfirst($propertyName)}($date);
+        } else {
+            $order->{'set' . ucfirst($propertyName)}($value);
         }
-        else
-            $order->{'set'.ucfirst($propertyName)}($value);
 
         $this->sharedStorage->set('order', $order);
 
@@ -109,7 +107,7 @@ final class OrderContext extends RawMinkContext
     }
 
     /**
-     * @Given The Order is made by customer with first name :firstName
+     * @Given The order is made by customer with first name :firstName
      */
     public function theOrderIsMadeByCustomerWithFirstName(string $firstName): void
     {
@@ -127,7 +125,7 @@ final class OrderContext extends RawMinkContext
     public function iAmOnOrderDetailsPage()
     {
         $order = $this->sharedStorage->get('order');
-        $this->getSession()->visit("/en_US/orders/".$order->getId());
+        $this->visitPath('/en_US/orders/' . $order->getId());
     }
 
     /**
@@ -138,7 +136,7 @@ final class OrderContext extends RawMinkContext
         $vendor = $this->sharedStorage->get('vendor');
         $orders = [];
 
-        for ($i=0; $i<$count; $i++){
+        for ($i = 0; $i < $count; ++$i) {
             $orders[$i] = $this->createDefaultOrder();
             $orders[$i]->setVendor($vendor);
 
@@ -184,8 +182,9 @@ final class OrderContext extends RawMinkContext
     {
         $user = $this->userExampleFactory->create();
         $customer = $user->getCustomer();
-        $channel = $this->sharedStorage->get("channel");
+        $channel = $this->sharedStorage->get('channel');
         $localeCode = $this->sharedStorage->get('locale')->getCode();
+
         return $this->createOrder(
             $customer,
             $number = null,
