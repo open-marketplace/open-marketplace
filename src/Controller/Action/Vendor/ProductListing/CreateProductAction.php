@@ -102,7 +102,6 @@ class CreateProductAction extends AbstractController
             }
             foreach ($productDraft->getAttributes() as $attribute){
                 $attribute->setSubject($productDraft);
-
             }
 
 //            dd($productDraft);

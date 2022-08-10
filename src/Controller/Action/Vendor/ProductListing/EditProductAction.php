@@ -69,15 +69,10 @@ class EditProductAction extends AbstractController
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);
         }
 
-//        dd($newResource);
-//        $newResource->setCode("fgfd");
-//        dd($newResource);
-//        dd($newResource->getAttributes()[1]);
         $form = $this->createForm(ProductType::class, $newResource);
-//        dd($form);
 
         $form->handleRequest($request);
-//        dd($form->getData());
+
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
@@ -85,7 +80,10 @@ class EditProductAction extends AbstractController
             foreach ($productDraft->getImages() as $image){
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
+            }
 
+            foreach ($productDraft->getAttributes() as $attribute){
+                $attribute->setSubject($productDraft);
             }
 
             /** @var ClickableInterface $button */

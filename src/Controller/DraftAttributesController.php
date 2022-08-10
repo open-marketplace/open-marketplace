@@ -63,7 +63,15 @@ class DraftAttributesController extends ResourceController
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
         DraftAttributeFactoryInterface $draftAttributeFactory
     ) {
-        parent::__construct($metadata, $requestConfigurationFactory, $viewHandler, $repository, $factory, $newResourceFactory, $manager, $singleResourceProvider, $resourcesFinder, $resourceFormFactory, $redirectHandler, $flashHelper, $authorizationChecker, $eventDispatcher, $stateMachine, $resourceUpdateHandler, $resourceDeleteHandler);
+        parent::__construct(
+            $metadata, $requestConfigurationFactory, $viewHandler,
+            $repository, $factory, $newResourceFactory, $manager,
+            $singleResourceProvider, $resourcesFinder, $resourceFormFactory,
+            $redirectHandler, $flashHelper, $authorizationChecker,
+            $eventDispatcher, $stateMachine, $resourceUpdateHandler,
+            $resourceDeleteHandler
+        );
+
         $this->draftAttributeFactory = $draftAttributeFactory;
     }
 
@@ -72,7 +80,7 @@ class DraftAttributesController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
-//        $newResource = $this->newResourceFactory->create($configuration, $this->factory);
+
         $type = $request->attributes->get('type');
         $newResource = $this->draftAttributeFactory->createTyped($type);
         $form = $this->resourceFormFactory->create($configuration, $newResource);
