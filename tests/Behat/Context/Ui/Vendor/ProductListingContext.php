@@ -29,19 +29,15 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private ShopUserExampleFactory $shopUserExampleFactory;
 
-    private ChannelExampleFactory $channelExampleFactory;
-
     private FactoryInterface $vendorFactory;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         ShopUserExampleFactory $shopUserExampleFactory,
-        ChannelExampleFactory $channelExampleFactory,
         FactoryInterface $vendorFactory
     ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->channelExampleFactory = $channelExampleFactory;
         $this->vendorFactory = $vendorFactory;
     }
 
@@ -70,6 +66,8 @@ final class ProductListingContext extends RawMinkContext implements Context
         $vendor = $this->vendorFactory->createNew();
         $vendor->setCompanyName('vendor');
         $vendor->setShopUser($user);
+        $vendor->setSlug('vendor-slug');
+        $vendor->setDescription('description');
         $vendor->setPhoneNumber('987654321');
         $vendor->setTaxIdentifier('123456789');
         $this->entityManager->persist($vendor);

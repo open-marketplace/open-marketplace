@@ -50,6 +50,8 @@ final class VendorContext implements Context
         $vendor = $this->vendorFactory->createNew();
         $vendor->setCompanyName('vendor');
         $vendor->setShopUser($user);
+        $vendor->setSlug('vendor-slug');
+        $vendor->setDescription('description');
         $vendor->setPhoneNumber('987654321');
         $vendor->setTaxIdentifier('123456789');
         $this->entityManager->persist($vendor);

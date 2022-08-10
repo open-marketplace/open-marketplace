@@ -70,9 +70,11 @@ class ConversationContext extends MinkContext implements Context
             'someCompany',
             'TaxID',
             '333222111',
+            'description',
             $address
         );
 
+        $vendor->setSlug('vendor-slug');
         $vendor->setShopUser($user);
         $this->manager->persist($vendor);
         $this->manager->flush();
