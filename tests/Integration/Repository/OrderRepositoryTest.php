@@ -34,4 +34,15 @@ final class OrderRepositoryTest extends JsonApiTestCase
         $result = $queryBuilder->getQuery()->getResult();
         self::assertEquals(1, count($result));
     }
+
+    public function test_it_finds_order_for_vendor(): void
+    {
+        $this->loadFixturesFromFile('OrderRepositoryTest/test_it_finds_order_for_vendor.yml');
+
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $order = $this->entityManager->getRepository(Order::class)->findOneBy(['vendor' => $vendorOliver]);
+        $result = $this->repository->findOrderForVendor($vendorOliver, $order->getId());
+
+        self::assertEquals($order->getId(), $result->getId());
+    }
 }
