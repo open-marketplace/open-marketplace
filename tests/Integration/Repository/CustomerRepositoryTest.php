@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Sylius\Component\Core\Model\Customer;
 
