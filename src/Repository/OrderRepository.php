@@ -28,7 +28,7 @@ class OrderRepository extends BaseOrderRepository
             ;
     }
 
-    public function findOrderForVendor(VendorInterface $vendor, string $id): ?OrderInterface
+    public function findOrderForVendor(VendorInterface $vendor, $id): ?OrderInterface
     {
         $vendorId = $vendor->getId();
 
