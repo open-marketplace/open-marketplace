@@ -4,7 +4,7 @@ Feature:Creating a product listing.
   to create a product.
 
   Background:
-    Given there is an vendor user "vendor" with password "vendor"
+    Given there is an "verified" vendor user "vendor" with password "vendor"
     And I am logged in as "vendor@email.com"
     And the store operates on a channel named "Web-US" in "USD" currency
 

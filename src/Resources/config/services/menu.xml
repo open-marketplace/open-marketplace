@@ -8,9 +8,11 @@
             <tag name="kernel.event_listener" method="buildMenu" event="sylius.menu.admin.main" />
         </service>
 
-        <service id="mvm.listener.vendor.menu_builder_product_list" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\VendorMenuListener">
-            <argument type="service" id="security.token_storage" />
-            <tag name="kernel.event_listener" event="sylius.menu.shop.account" method="addProductListMenuItems" />
+        <service id="bitbag_mvm_plugin.shop.menu_builder.vendor" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\VendorMenuBuilder">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="security.helper" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="bitbag_mvm_plugin.shop.vendor" />
         </service>
     </services>
 </container>

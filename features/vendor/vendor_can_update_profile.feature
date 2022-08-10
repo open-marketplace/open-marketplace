@@ -8,7 +8,7 @@ Feature: Vendor can update his company information
   Background:
     Given the store operates on a single channel in "United States"
     And the store operates in "Poland"
-    And there is a vendor user "test@company.domain" registered in country "PL"    
+    And there is a "verified" vendor user "test@company.domain" registered in country "PL"
     And I am logged in as "test@company.domain"
     
   Scenario: Navigating to form

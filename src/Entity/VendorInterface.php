@@ -83,4 +83,6 @@ interface VendorInterface extends VendorProfileInterface
      * @param Collection<int, ProductListing> $productListings
      */
     public function setProductListings(Collection $productListings): void;
+
+    public function isVerified(): bool;
 }
