@@ -60,7 +60,7 @@ final class VendorMenuBuilder
             $menu
                 ->addChild('conversations', ['route' => 'bitbag_mvm_plugin_vendor_conversation_index'])
                 ->setLabel('bitbag_mvm_plugin.ui.menu.conversations')
-                ->setLabelAttribute('icon', 'inbox');
+                ->setLabelAttribute('icon', 'envelope open');
 
             $menu
                 ->addChild('Product List', ['route' => 'bitbag_mvm_plugin_vendor_product_listing_index'])
