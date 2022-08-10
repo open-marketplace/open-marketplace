@@ -11,9 +11,27 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Sylius\Component\Attribute\Model\Attribute;
 
 class DraftAttribute extends Attribute implements DraftAttributeInterface
 {
+    protected VendorInterface $vendor;
+
+    /**
+     * @return VendorInterface
+     */
+    public function getVendor(): VendorInterface
+    {
+        return $this->vendor;
+    }
+
+    /**
+     * @param VendorInterface $vendor
+     */
+    public function setVendor(VendorInterface $vendor): void
+    {
+        $this->vendor = $vendor;
+    }
 
 }

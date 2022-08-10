@@ -55,7 +55,6 @@ class EditProductAction extends AbstractController
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->imageUploader = $imageUploader;
-
     }
 
     public function __invoke(Request $request): Response

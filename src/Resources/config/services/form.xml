@@ -67,6 +67,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType"
                  id="bitbag_mvm_plugin.form.product_listing.draft_attribute_choice_type">
             <argument type="service" id="bitbag_mvm_plugin.repository.draft_attribute"/>
+            <argument type="service" id="bitbag_mvm_plugin.provider.vendor"/>
             <tag name="form.type"/>
         </service>
 
