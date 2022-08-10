@@ -42,7 +42,7 @@ class OrderRepository extends BaseOrderRepository
             ->getOneOrNullResult();
     }
 
-    public function findOrderForVendorByCustomer(VendorInterface $vendor, string $id): QueryBuilder
+    public function findOrdersForVendorByCustomer(VendorInterface $vendor, $id): QueryBuilder
     {
         $vendorId = $vendor->getId();
 
