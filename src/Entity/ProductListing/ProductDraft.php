@@ -37,6 +37,7 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
 
     protected int $versionNumber;
 
+
     /**
      * @var Collection
      */
@@ -267,14 +268,14 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
     public function addAttribute(?AttributeValueInterface $attribute): void
     {
         /** @var ProductAttributeValueInterface $attribute */
-        Assert::isInstanceOf(
-            $attribute,
-            ProductAttributeValueInterface::class,
-            'Attribute objects added to a Product object have to implement ProductAttributeValueInterface'
-        );
+//        Assert::isInstanceOf(
+//            $attribute,
+//            ProductAttributeValueInterface::class,
+//            'Attribute objects added to a Product object have to implement ProductAttributeValueInterface'
+//        );
 
         if (!$this->hasAttribute($attribute)) {
-            $attribute->setProduct($this);
+            $attribute->setDraft($this);
             $this->attributes->add($attribute);
         }
     }
@@ -290,7 +291,7 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
 
         if ($this->hasAttribute($attribute)) {
             $this->attributes->removeElement($attribute);
-            $attribute->setProduct(null);
+            $attribute->setDraft(null);
         }
     }
 

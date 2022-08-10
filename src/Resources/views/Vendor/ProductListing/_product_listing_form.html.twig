@@ -80,7 +80,7 @@
                 <div class="ui attached segment">
                     {{ render(url('bitbag_vendor_get_product_attributes')) }}
                     <div id="attributesContainer" data-count="{{ form.attributes|length }}">
-                        {{ form_row(form.attributes, {'attr': {'translations': form.translations} }) }}
+                        {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
                     </div>
 
 {#                    {{ sylius_template_event(['sylius.admin.product.edit.tab_attributes', 'sylius.admin.product.tab_attributes'], {'form': form}) }}#}
@@ -103,8 +103,9 @@
 
 
 
+    <button class="ui labeled icon primary button" type="submit" id="sylius_save_changes_button"><i class="save icon"></i> Save changes</button>
+        {{ form_end(form, {'render_rest': true})  }}
 
-        {{ form_end(form) }}
 {#    </div>#}
 {% endblock %}
 

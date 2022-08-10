@@ -13,6 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\Pro
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
@@ -91,15 +92,20 @@ class CreateProductAction extends AbstractController
         $form = $this->createForm(ProductType::class, $newResource);
 
         $form->handleRequest($request);
+//        dd($form);
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
-
             foreach ($newResource->getImages() as $image){
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
             }
+            foreach ($productDraft->getAttributes() as $attribute){
+                $attribute->setSubject($productDraft);
 
+            }
+
+//            dd($productDraft);
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {

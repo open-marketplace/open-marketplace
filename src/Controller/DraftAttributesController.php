@@ -69,9 +69,8 @@ class DraftAttributesController extends ResourceController
 
     public function createAction(Request $request): Response
     {
-//        dd($this->factory);
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-//        dd($configuration);
+
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
 //        $newResource = $this->newResourceFactory->create($configuration, $this->factory);
         $type = $request->attributes->get('type');

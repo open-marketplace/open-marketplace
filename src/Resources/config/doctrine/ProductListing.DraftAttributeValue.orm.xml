@@ -7,7 +7,10 @@
                        table="bitbag_mvm_draft_attribute_value" >
         <many-to-one field="subject" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft"
                     inversed-by="attributes">
-
         </many-to-one>
+
+        <many-to-one field="attribute" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute">
+        </many-to-one>
+
     </entity>
 </doctrine-mapping>

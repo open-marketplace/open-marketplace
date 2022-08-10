@@ -44,7 +44,7 @@
             </cascade>
         </one-to-many>
 
-        <one-to-many field="attributes" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValueInterface"
+        <one-to-many field="attributes" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue"
                      mapped-by="subject" orphan-removal="true">
             <cascade>
                 <cascade-all />

@@ -68,5 +68,5 @@ bitbag_vendor_render_attribute_forms:
     methods: [GET]
     defaults:
         _controller: bitbag_mvm_plugin.controller.draftAttributes:renderAttributeValueFormsAction
-        template: "@SyliusAdmin/Product/Attribute/attributeValues.html.twig"
+        template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/attributeValues.html.twig"
 

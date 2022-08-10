@@ -14,20 +14,38 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
 use Webmozart\Assert\Assert;
 
-class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeValueInterface
+class DraftAttributeValue extends BaseAttributeValue //implements DraftAttributeValueInterface
 {
-    public function getDraft(): ?ProductDraftInterface
+    protected ProductDraftInterface $draft;
+
+    /**
+     * @return ProductDraftInterface
+     */
+    public function getDraft(): ProductDraftInterface
     {
-        $subject = parent::getSubject();
-
-        /** @var ProductDraftInterface|null $subject */
-        Assert::nullOrIsInstanceOf($subject, ProductDraftInterface::class);
-
-        return $subject;
+        return $this->draft;
     }
 
-    public function setDraft(?ProductDraftInterface $product): void
+    /**
+     * @param ProductDraftInterface $draft
+     */
+    public function setDraft(ProductDraftInterface $draft): void
     {
-        parent::setSubject($product);
+        $this->draft = $draft;
     }
+
+//    public function getDraft(): ?ProductDraftInterface
+//    {
+//        $subject = parent::getSubject();
+//
+//        /** @var ProductDraftInterface|null $subject */
+//        Assert::nullOrIsInstanceOf($subject, ProductDraftInterface::class);
+//
+//        return $subject;
+//    }
+//
+//    public function setDraft(?ProductDraftInterface $product): void
+//    {
+//        parent::setSubject($product);
+//    }
 }

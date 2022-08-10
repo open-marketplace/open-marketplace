@@ -12,9 +12,21 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DraftAttributeChoiceType extends AttributeChoiceType
 {
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver
+            ->setDefaults([
+                'choices' => $this->attributeRepository->findAll(),
+                'choice_value' => 'code',
+                'choice_label' => 'name',
+                'choice_translation_domain' => false,
+                'required' => false,
+            ]);
+    }
     public function getBlockPrefix(): string
     {
         return 'sylius_product_attribute_choice';
