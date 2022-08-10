@@ -28,12 +28,15 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class DraftAttributesController extends ResourceController
@@ -164,5 +167,72 @@ class DraftAttributesController extends ResourceController
         ]);
 
         return $this->render($template, ['form' => $form->createView()]);
+    }
+
+    public function renderAttributeValueFormsAction(Request $request): Response
+    {
+        $template = $request->attributes->get('template', '@SyliusAttribute/attributeValueForms.html.twig');
+
+        $form = $this->get('form.factory')->create(DraftAttributeChoiceType::class, null, [
+            'multiple' => true,
+        ]);
+        $form->handleRequest($request);
+
+        $attributes = $form->getData();
+        if (null === $attributes) {
+            throw new BadRequestHttpException();
+        }
+
+        $localeCodes = $this->get('sylius.translation_locale_provider')->getDefinedLocalesCodes();
+
+        $forms = [];
+        foreach ($attributes as $attribute) {
+            $forms[$attribute->getCode()] = $this->getAttributeFormsInAllLocales($attribute, $localeCodes);
+        }
+
+        return $this->render($template, [
+            'forms' => $forms,
+            'count' => $request->query->get('count'),
+            'metadata' => $this->metadata,
+        ]);
+    }
+
+    /**
+     * @param array|string[] $localeCodes
+     *
+     * @return array|FormView[]
+     */
+    protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes): array
+    {
+        $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
+
+        $forms = [];
+
+        if (!$attribute->isTranslatable()) {
+            array_push($localeCodes, null);
+
+            return [null => $this->createFormAndView($attributeForm, $attribute)];
+        }
+
+        foreach ($localeCodes as $localeCode) {
+            $forms[$localeCode] = $this->createFormAndView($attributeForm, $attribute);
+        }
+
+        return $forms;
+    }
+
+    private function createFormAndView(
+        $attributeForm,
+        AttributeInterface $attribute
+    ): FormView {
+        return $this
+            ->get('form.factory')
+            ->createNamed(
+                'value',
+                $attributeForm,
+                null,
+                ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()]
+            )
+            ->createView();
     }
 }

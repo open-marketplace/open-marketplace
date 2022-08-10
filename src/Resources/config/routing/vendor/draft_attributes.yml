@@ -67,6 +67,6 @@ bitbag_vendor_render_attribute_forms:
     path: /attribute-forms
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction
+        _controller: bitbag_mvm_plugin.controller.draftAttributes:renderAttributeValueFormsAction
         template: "@SyliusAdmin/Product/Attribute/attributeValues.html.twig"
 
