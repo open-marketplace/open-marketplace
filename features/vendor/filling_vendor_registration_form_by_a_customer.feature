@@ -37,6 +37,7 @@ Feature: Filling vendor registration form by a customer
     And I fill in "vendor_vendorAddress_postalCode" with "test_postalCode"
     And I press "Become a Vendor"
     Then I should see "Thank you for filling the Vendor registration form. Your request now will be reviewed by our administrators"
+    And I should see "Your vendor account is under verification."
 
   Scenario: Correct completion of the form with logo
     When I am on "/en_US/vendor/register"
@@ -50,3 +51,5 @@ Feature: Filling vendor registration form by a customer
     And I fill in "vendor_vendorAddress_postalCode" with "test_postalCode"
     And I press "Become a Vendor"
     Then I should see "Thank you for filling the Vendor registration form. Your request now will be reviewed by our administrators"
+    And I should see "Your vendor account is under verification."
+

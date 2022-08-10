@@ -1,5 +1,22 @@
 {% extends "@SyliusShop/Account/dashboard.html.twig" %}
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 {% block subcontent %}
-   {{ include('@BitBagSyliusMultiVendorMarketplacePlugin/Form/_vendorRegister.html.twig') }}
+   {% if null == app.user.vendor %}
+      {{ include('@BitBagSyliusMultiVendorMarketplacePlugin/Form/_vendorRegister.html.twig') }}
+   {% else %}
+      <div class="ui padded segment">
+         <h3 class="header">{{ 'bitbag_mvm_plugin.ui.become_a_vendor'|trans }}</h3>
+         <div class="ui icon info yellow message">
+            <i class="info circle icon"></i>
+            <div class="content">
+               <div class="header">
+                  {{ 'sylius.ui.info'|trans }}
+               </div>
+               <p>
+                  {{ 'bitbag_mvm_plugin.ui.vendor_under_verification'|trans }}
+               </p>
+            </div>
+         </div>
+      </div>
+   {% endif %}
 {% endblock %}

@@ -125,7 +125,7 @@ final class OrderContext extends RawMinkContext
     public function iAmOnOrderDetailsPage()
     {
         $order = $this->sharedStorage->get('order');
-        $this->getSession()->visit('/en_US/orders/' . $order->getId());
+        $this->visitPath('/en_US/orders/' . $order->getId());
     }
 
     /**

@@ -43,3 +43,8 @@ sylius_ui:
                 content:
                     template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_vendorAddress.html.twig'
                     priority: 10
+        sylius.shop.account.layout.menu:
+            blocks:
+                vendor:
+                    template: "@BitBagSyliusMultiVendorMarketplacePlugin/Account/Menu/_content.html.twig"
+                    priority: 7

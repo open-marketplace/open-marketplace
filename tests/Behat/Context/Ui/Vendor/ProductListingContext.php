@@ -29,19 +29,15 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private ShopUserExampleFactory $shopUserExampleFactory;
 
-    private ChannelExampleFactory $channelExampleFactory;
-
     private FactoryInterface $vendorFactory;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         ShopUserExampleFactory $shopUserExampleFactory,
-        ChannelExampleFactory $channelExampleFactory,
         FactoryInterface $vendorFactory
     ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->channelExampleFactory = $channelExampleFactory;
         $this->vendorFactory = $vendorFactory;
     }
 
@@ -55,9 +51,9 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given there is an vendor user :username with password :password
+     * @Given there is an :verified vendor user :username with password :password
      */
-    public function thereIsAnVendorUserWithPassword($username, $password)
+    public function thereIsAnVendorUserWithPassword($verified ,$username, $password)
     {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserExampleFactory->create();
@@ -68,8 +64,11 @@ final class ProductListingContext extends RawMinkContext implements Context
 
         /** @var Vendor $vendor */
         $vendor = $this->vendorFactory->createNew();
+        $vendor->setStatus($verified);
         $vendor->setCompanyName('vendor');
         $vendor->setShopUser($user);
+        $vendor->setSlug('vendor-slug');
+        $vendor->setDescription('description');
         $vendor->setPhoneNumber('987654321');
         $vendor->setTaxIdentifier('123456789');
         $this->entityManager->persist($vendor);
