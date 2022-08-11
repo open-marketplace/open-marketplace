@@ -91,7 +91,6 @@ class CreateProductAction extends AbstractController
         $form = $this->createForm(ProductType::class, $newResource);
 
         $form->handleRequest($request);
-//        dd($form);
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
@@ -103,7 +102,6 @@ class CreateProductAction extends AbstractController
                 $attribute->setSubject($productDraft);
             }
 
-//            dd($productDraft);
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {

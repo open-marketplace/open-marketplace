@@ -97,12 +97,12 @@ class DraftAttributesController extends ResourceController
         $form = $this->resourceFormFactory->create($configuration, $newResource);
 
         $form->handleRequest($request);
-//        dd($newResource);
+
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             $newResource = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
-//            dd($newResource);
+
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
             }

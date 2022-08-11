@@ -18,28 +18,18 @@ class DraftAttributeValue extends BaseAttributeValue //implements DraftAttribute
 {
     protected ProductDraftInterface $draft;
 
-    public function getDraft(): ProductDraftInterface
+    public function getDraft(): ?ProductDraftInterface
     {
-        return $this->draft;
+        $subject = parent::getSubject();
+
+        /** @var ProductDraftInterface|null $subject */
+        Assert::nullOrIsInstanceOf($subject, ProductDraftInterface::class);
+
+        return $subject;
     }
 
-    public function setDraft(ProductDraftInterface $draft): void
+    public function setDraft(?ProductDraftInterface $product): void
     {
-        $this->draft = $draft;
+        parent::setSubject($product);
     }
-
-//    public function getDraft(): ?ProductDraftInterface
-//    {
-//        $subject = parent::getSubject();
-//
-//        /** @var ProductDraftInterface|null $subject */
-//        Assert::nullOrIsInstanceOf($subject, ProductDraftInterface::class);
-//
-//        return $subject;
-//    }
-//
-//    public function setDraft(?ProductDraftInterface $product): void
-//    {
-//        parent::setSubject($product);
-//    }
 }
