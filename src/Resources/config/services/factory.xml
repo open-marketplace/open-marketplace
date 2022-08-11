@@ -86,6 +86,7 @@
                 </service>
             </argument>
             <argument type="service" id="sylius.registry.attribute_type"/>
+            <argument type="service" id="bitbag_mvm_plugin.provider.vendor"/>
         </service>
     </services>
 </container>

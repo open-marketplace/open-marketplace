@@ -6,6 +6,6 @@
 
     <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute" table="bitbag_mvm_draft_attribute">
         <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor"
-                     inversed-by="draftAttributes" />
+                      />
     </mapped-superclass>
 </doctrine-mapping>

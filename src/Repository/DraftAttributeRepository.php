@@ -12,11 +12,9 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class DraftAttributeRepository extends EntityRepository implements RepositoryInterface
+class DraftAttributeRepository extends EntityRepository
 {
     public function findVendorDraftAttributes(VendorInterface $vendor): array
     {
@@ -29,18 +27,4 @@ class DraftAttributeRepository extends EntityRepository implements RepositoryInt
             ;
     }
 
-    public function createPaginator(array $criteria = [], array $sorting = []): iterable
-    {
-        // TODO: Implement createPaginator() method.
-    }
-
-    public function add(ResourceInterface $resource): void
-    {
-        // TODO: Implement add() method.
-    }
-
-    public function remove(ResourceInterface $resource): void
-    {
-        // TODO: Implement remove() method.
-    }
 }

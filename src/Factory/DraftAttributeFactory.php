@@ -14,6 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingAttribute\ProductListingAttribute;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -21,28 +22,32 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class DraftAttributeFactory implements DraftAttributeFactoryInterface
 {
     private ServiceRegistryInterface $attributeTypesRegistry;
+
     private FactoryInterface $factory;
 
-    public function __construct(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
-    {
+    private VendorProviderInterface $vendorProvider;
+
+    public function __construct(
+        FactoryInterface $factory,
+        ServiceRegistryInterface $attributeTypesRegistry,
+        VendorProviderInterface $vendorProvider,
+    ) {
         $this->factory = $factory;
         $this->attributeTypesRegistry = $attributeTypesRegistry;
+
+        $this->vendorProvider = $vendorProvider;
     }
 
     public function createTyped(string $type): DraftAttributeInterface
     {
         /** @var AttributeTypeInterface $attributeType */
         $attributeType = $this->attributeTypesRegistry->get($type);
-//        /** @var DraftAttributeInterface $attribute */
-        $attribute = $this->createNew();
+        /** @var DraftAttributeInterface $attribute */
+        $attribute = $this->factory->createNew();
         $attribute->setType($type);
         $attribute->setStorageType($attributeType->getStorageType());
+        $attribute->setVendor($this->vendorProvider->provideCurrentVendor());
 
         return $attribute;
-    }
-
-    public function createNew(): DraftAttributeInterface
-    {
-        return new DraftAttribute();
     }
 }
