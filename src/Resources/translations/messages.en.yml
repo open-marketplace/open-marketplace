@@ -21,6 +21,10 @@ bitbag_mvm_plugin:
         become_a_vendor: 'Become a Vendor'
         product_listings: 'Product listings'
         marketplace: 'Marketplace'
+        my_vendor_account: "My vendor account"
+        manage_your_vendor_information_and_preferences: "Manage your vendor information and preferences"
+        your_vendor_profile: "Your vendor profile"
+        edit_your_vendor_information: "Edit your vendor information"
         publishedAt: 'Published at'
         status: 'Status'
         tax_identifier: "Tax Identifier"
