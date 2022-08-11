@@ -8,6 +8,10 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%bitbag_mvm_plugin.model.draft_attribute.class%"
+                    repository:
+                        method: findVendorDraftAttributesQuery
+                        arguments:
+                        - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
             sorting:
                 position: asc
             fields:

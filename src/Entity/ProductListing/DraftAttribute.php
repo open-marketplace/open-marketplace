@@ -18,20 +18,13 @@ class DraftAttribute extends Attribute implements DraftAttributeInterface
 {
     protected VendorInterface $vendor;
 
-    /**
-     * @return VendorInterface
-     */
     public function getVendor(): VendorInterface
     {
         return $this->vendor;
     }
 
-    /**
-     * @param VendorInterface $vendor
-     */
     public function setVendor(VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
     }
-
 }

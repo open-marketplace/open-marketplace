@@ -64,11 +64,22 @@ class DraftAttributesController extends ResourceController
         DraftAttributeFactoryInterface $draftAttributeFactory
     ) {
         parent::__construct(
-            $metadata, $requestConfigurationFactory, $viewHandler,
-            $repository, $factory, $newResourceFactory, $manager,
-            $singleResourceProvider, $resourcesFinder, $resourceFormFactory,
-            $redirectHandler, $flashHelper, $authorizationChecker,
-            $eventDispatcher, $stateMachine, $resourceUpdateHandler,
+            $metadata,
+            $requestConfigurationFactory,
+            $viewHandler,
+            $repository,
+            $factory,
+            $newResourceFactory,
+            $manager,
+            $singleResourceProvider,
+            $resourcesFinder,
+            $resourceFormFactory,
+            $redirectHandler,
+            $flashHelper,
+            $authorizationChecker,
+            $eventDispatcher,
+            $stateMachine,
+            $resourceUpdateHandler,
             $resourceDeleteHandler
         );
 
@@ -149,6 +160,7 @@ class DraftAttributesController extends ResourceController
             'form' => $form->createView(),
         ]);
     }
+
     public function getAttributeTypesAction(Request $request, string $template)
     {
         return $this->render(

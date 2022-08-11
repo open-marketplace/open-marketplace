@@ -18,17 +18,11 @@ class DraftAttributeValue extends BaseAttributeValue //implements DraftAttribute
 {
     protected ProductDraftInterface $draft;
 
-    /**
-     * @return ProductDraftInterface
-     */
     public function getDraft(): ProductDraftInterface
     {
         return $this->draft;
     }
 
-    /**
-     * @param ProductDraftInterface $draft
-     */
     public function setDraft(ProductDraftInterface $draft): void
     {
         $this->draft = $draft;

@@ -17,8 +17,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFac
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
-use Doctrine\Common\Collections\ArrayCollection;
-use Gaufrette\FilesystemInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -48,7 +46,7 @@ class EditProductAction extends AbstractController
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
         ImageUploaderInterface $imageUploader,
-    ) {
+        ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
         $this->productDraftRepository = $productDraftRepository;
@@ -76,12 +74,12 @@ class EditProductAction extends AbstractController
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
 
-            foreach ($productDraft->getImages() as $image){
+            foreach ($productDraft->getImages() as $image) {
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
             }
 
-            foreach ($productDraft->getAttributes() as $attribute){
+            foreach ($productDraft->getAttributes() as $attribute) {
                 $attribute->setSubject($productDraft);
             }
 

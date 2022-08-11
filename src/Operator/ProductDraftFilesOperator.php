@@ -31,7 +31,7 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
     public function copyFilesToProduct(ProductDraftInterface $productDraft, ProductInterface $cratedProduct): void
     {
 //        dd($productDraft->getImages());
-        foreach ($productDraft->getImages() as $image){
+        foreach ($productDraft->getImages() as $image) {
 //            dd("kjhkjhkh");
             $newImage = $this->productImageFactory->createNew();
 
@@ -42,16 +42,16 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
 
             $file = $this->filesystem->read($key);
 
-            $path = explode(".", $key)[0];
-            $fileType = explode(".", $key)[1];
+            $path = explode('.', $key)[0];
+            $fileType = explode('.', $key)[1];
 
-            $newKey = $path."1.".$fileType;
+            $newKey = $path . '1.' . $fileType;
 
             $this->filesystem->write($newKey, $file);
 
             $newImage->setPath($newKey);
 
             $cratedProduct->addImage($newImage);
-        };
+        }
     }
 }

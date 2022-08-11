@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingAttribute\ProductListingAttribute;
 
 interface DraftAttributeFactoryInterface
 {

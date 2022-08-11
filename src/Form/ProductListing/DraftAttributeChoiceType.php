@@ -37,6 +37,7 @@ class DraftAttributeChoiceType extends AttributeChoiceType
                 'required' => false,
             ]);
     }
+
     public function getBlockPrefix(): string
     {
         return 'sylius_product_attribute_choice';

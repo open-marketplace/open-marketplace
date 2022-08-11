@@ -12,10 +12,27 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\DraftAttributeRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use function PHPUnit\Framework\assertTrue;
 
 final class DraftAttributeContext extends RawMinkContext
 {
+    private SharedStorageInterface $sharedStorage;
+
+    private DraftAttributeRepositoryInterface $attributeRepository;
+
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        DraftAttributeRepositoryInterface $attributeRepository
+    ) {
+        $this->sharedStorage = $sharedStorage;
+        $this->attributeRepository = $attributeRepository;
+    }
+
     /**
      * @When I fill form with :code and name with :name and submit
      */
@@ -51,6 +68,72 @@ final class DraftAttributeContext extends RawMinkContext
         }
 
         assertTrue($rowWithValueExist);
+    }
+
+    /**
+     * @Given I have Attribute type :type name :name code :code
+     */
+    public function iHaveAttributeTypeNameCode($type, $name, $code)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+        $locale = $this->sharedStorage->get('locale');
+
+        $draftAttributeTranslation = new DraftAttributeTranslation();
+        $draftAttributeTranslation->setLocale($locale->getCode());
+        $draftAttributeTranslation->setName($name);
+
+        $attribute = new DraftAttribute();
+        $draftAttributeTranslation->setTranslatable($attribute);
+
+        $attribute->setTranslatable(false);
+        $attribute->setCreatedAt(new \DateTime());
+        $attribute->setVendor($vendor);
+        $attribute->setCode($code);
+        $attribute->setStorageType('text');
+        $attribute->addTranslation($draftAttributeTranslation);
+
+        $this->attributeRepository->add($attribute);
+    }
+
+    /**
+     * @Given I fill product draft form
+     */
+    public function iFillProductDraftForm()
+    {
+        $page = $this->getSession()->getPage();
+
+        $codeInput = $page->find('css','#sylius_product_code');
+        $codeInput->setValue('Testingcode');
+
+        $nameInput = $page->find('css','#sylius_product_translations_en_US_name');
+        $nameInput->setValue('TestingName');
+
+        $slugInput = $page->find('css','#sylius_product_translations_en_US_slug');
+        $slugInput->setValue('TestingSlug');
+
+        $priceInput = $page->find('css','#sylius_product_productListingPrice_WEB-US_price');
+        $priceInput->setValue(1);
+
+        $originalPriceInput = $page->find('css','#sylius_product_productListingPrice_WEB-US_originalPrice');
+        $originalPriceInput->setValue(1);
+
+        $priceInput = $page->find('css','#sylius_product_productListingPrice_WEB-US_price');
+        $priceInput->setValue(1);
+    }
+
+    /**
+     * @Given I pick attribute
+     */
+    public function iPickAttribute()
+    {
+        $page = $this->getSession()->getPage();
+
+        $wrapper = $page->find('css','.ui.fluid.action.input');
+        dd($wrapper->getHtml());
+        $wrapper->press();
+
+        $div = $page->find('css','[data-value="name"]');
+        dd($div);
     }
 
 

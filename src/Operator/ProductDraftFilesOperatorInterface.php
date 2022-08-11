@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Operator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;

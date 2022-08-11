@@ -12,13 +12,15 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class DraftAttributeRepository extends EntityRepository
+class DraftAttributeRepository extends EntityRepository implements DraftAttributeRepositoryInterface
 {
     public function findVendorDraftAttributes(VendorInterface $vendor): array
     {
         $vendorId = $vendor->getId();
+
         return $this->createQueryBuilder('o')
             ->andWhere('o.vendor = :vendor')
             ->setParameter('vendor', $vendorId)
@@ -27,4 +29,13 @@ class DraftAttributeRepository extends EntityRepository
             ;
     }
 
+    public function findVendorDraftAttributesQuery(VendorInterface $vendor): QueryBuilder
+    {
+        $vendorId = $vendor->getId();
+
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.vendor = :vendor')
+            ->setParameter('vendor', $vendorId)
+            ;
+    }
 }

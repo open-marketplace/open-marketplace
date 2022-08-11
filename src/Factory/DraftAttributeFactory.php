@@ -11,9 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListingAttribute\ProductListingAttribute;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -31,7 +29,7 @@ class DraftAttributeFactory implements DraftAttributeFactoryInterface
         FactoryInterface $factory,
         ServiceRegistryInterface $attributeTypesRegistry,
         VendorProviderInterface $vendorProvider,
-    ) {
+        ) {
         $this->factory = $factory;
         $this->attributeTypesRegistry = $attributeTypesRegistry;
 

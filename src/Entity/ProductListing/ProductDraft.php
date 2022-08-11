@@ -13,7 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Imagine\Image\ImageInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -37,10 +36,6 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
 
     protected int $versionNumber;
 
-
-    /**
-     * @var Collection
-     */
     protected Collection $images;
 
     /** @var Collection<int|string, ProductTranslationInterface> */
@@ -215,25 +210,19 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
         $this->setPublishedAt((new \DateTime()));
     }
 
-    /**
-     * @return Collection
-     */
     public function getImages(): Collection
     {
         return $this->images;
     }
 
-    /**
-     * @param Collection $images
-     */
     public function setImages(Collection $images): void
     {
         $this->images = $images;
     }
 
-    public function addImage( $image): void
+    public function addImage($image): void
     {
-        $this->images->add($image) ;
+        $this->images->add($image);
     }
 
     public function getAttributes(): Collection
@@ -363,5 +352,4 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
 
         return true;
     }
-
 }
