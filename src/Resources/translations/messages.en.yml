@@ -1,5 +1,6 @@
 bitbag_mvm_plugin:
     ui:
+        new_product_draft: "New product draft"
         draft_attributes: "Attributes"
         inventory: "Inventory"
         clients: "Clients"
