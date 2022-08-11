@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Imagine\Image\ImageInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 
 class ProductDraft implements ProductDraftInterface
 {
@@ -218,8 +218,15 @@ class ProductDraft implements ProductDraftInterface
         $this->images = $images;
     }
 
-    public function addImage( $image): void
+    public function addImage($image): void
     {
         $this->images->add($image) ;
+    }
+    public function removeImage(ImageInterface $image): void
+    {
+        if ($this->hasImage($image)) {
+            $image->setOwner(null);
+            $this->images->removeElement($image);
+        }
     }
 }
