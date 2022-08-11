@@ -15,7 +15,7 @@ Feature: Vendor can update his company information
     When I am on "/en_US/account/dashboard"
     Then I follow "Profile"
     Then I follow "Edit"
-    Then I should see "Edit your personal information"
+    Then I should see "Edit your vendor information"
 
   Scenario: Filling the form
     When I am on "/en_US/vendor/profile/update"      

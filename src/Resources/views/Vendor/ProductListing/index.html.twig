@@ -1,5 +1,7 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 
+{% block title %}{{ 'bitbag_mvm_plugin.ui.product_list'|trans }} | {{ parent() }}{% endblock %}
+
 {% block breadcrumb %}
     <div class="ui breadcrumb">
         <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
@@ -11,5 +13,5 @@
 {% endblock %}
 
 {% block subcontent %}
-    {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/_details.html.twig' %}
+    {{ sylius_grid_render(resources, '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Shop/product_listings.html.twig') }}
 {% endblock %}

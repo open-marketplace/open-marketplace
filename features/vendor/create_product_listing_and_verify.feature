@@ -22,5 +22,5 @@ Feature: Creating a product listing
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
     When I click "Save and Add" button
-    Then I should see product's listing status "under_verification"
+    Then I should see product's listing status "Under verification"
     And I should see "Product listing created and sent to verification."
