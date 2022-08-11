@@ -1,12 +1,26 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 {% set definition = resources.definition %}
-{% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'bitbag_mvm_plugin.ui.draft_attributes'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
     {% include '@SyliusShop/Account/Order/Index/_breadcrumb.html.twig' %}
 {% endblock %}
 
 {% block subcontent %}
-    {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}
+    <div class="ui stackable two column grid">
+        <div class="column">
+
+            <h1 class="ui header">
+                <i class="circular cubes icon"></i>
+                <div class="content">
+                    {{ 'bitbag_mvm_plugin.ui.draft_attributes'|trans }}
+                </div>
+            </h1>
+        </div>
+
+        {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}
+
+    </div>
+
     {{ sylius_grid_render(resources, '@SyliusAdmin/Grid/_default.html.twig') }}
 {% endblock %}
