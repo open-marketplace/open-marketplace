@@ -34,7 +34,7 @@ class CustomerRepository extends BaseCustomerRepository
         $vendorId = $vendor->getId();
 
         return $this->createQueryBuilder('c')
-            ->innerJoin('c.orders', 'o', )
+            ->innerJoin('c.orders', 'o')
             ->andWhere('o.vendor = :vendor')
             ->andWhere('c.id = :id')
             ->setParameter('vendor', $vendorId)
