@@ -21,6 +21,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFac
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -60,7 +61,8 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         TokenInterface $token,
         ShopUserInterface $user,
-        VendorInterface $vendor
+        VendorInterface $vendor,
+        ImageInterface $image
     ): void {
         $productListingFactoryInterface->createNew()
             ->willReturn($productListing);
@@ -114,6 +116,8 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
         $productDraft->getCode()
             ->willReturn('code');
+
+        $productDraft->getImages()->willReturn(new ArrayCollection([]));
 
         $newProductDraft->setVersionNumber(1)
             ->shouldBeCalled();
