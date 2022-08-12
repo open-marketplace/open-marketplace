@@ -13,8 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-
-
 interface ProductFromDraftFactoryInterface
 {
     public function createSimpleProduct(ProductDraftInterface $productDraft): ProductInterface;
