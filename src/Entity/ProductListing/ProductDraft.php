@@ -33,9 +33,6 @@ class ProductDraft implements ProductDraftInterface
 
     protected int $versionNumber;
 
-    /**
-     * @var Collection
-     */
     protected Collection $images;
 
     /** @var Collection<int|string, ProductTranslationInterface> */
