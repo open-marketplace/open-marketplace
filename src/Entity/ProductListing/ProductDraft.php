@@ -202,9 +202,6 @@ class ProductDraft implements ProductDraftInterface
         $this->setPublishedAt((new \DateTime()));
     }
 
-    /**
-     * @return Collection
-     */
     public function getImages(): Collection
     {
         return $this->images;
