@@ -170,4 +170,12 @@ class OrderContext extends RawMinkContext implements Context
         $card = $page->find('css', '.ui.fluid.card');
         assertStringContainsString($name, $card->getText());
     }
+
+    /**
+     * @Given I resend the order confirmation email as vendor
+     */
+    public function iResendTheOrderConfirmationEmailAsVendor()
+    {
+        $this->getSession()->getPage()->clickLink('Resend the order confirmation email');
+    }
 }
