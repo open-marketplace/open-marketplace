@@ -8,5 +8,4 @@ use Sylius\Component\Core\Model\ProductImageInterface;
 interface ProductImageFactoryInterface
 {
     public function createNew(): ProductImageInterface;
-
 }
