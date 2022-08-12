@@ -43,6 +43,3 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing:
         createdAt: '<dateTimeBetween("-40min","-5min")>'
         code: "Test"
         vendor: '@vendor_oliver'
-
-
-
