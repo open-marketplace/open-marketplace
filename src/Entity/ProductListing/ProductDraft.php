@@ -211,7 +211,7 @@ class ProductDraft implements ProductDraftInterface
 
     public function addImage($image): void
     {
-        $this->images->add($image) ;
+        $this->images->add($image);
     }
     
     public function removeImage(ImageInterface $image): void
