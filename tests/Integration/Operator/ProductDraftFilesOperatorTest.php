@@ -19,7 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperator;
 use Gaufrette\Filesystem;
 
-class ProductDraftFilesOperatorTest extends JsonApiTestCase
+final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 {
     public function setUp(): void
     {
@@ -82,11 +82,13 @@ class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $originalFilePathName = 'AA/test.png';
 
-        if ($this->fileSystem->has('AA/test.png'))
+        if ($this->fileSystem->has('AA/test.png')) {
             $this->fileSystem->delete('AA/test.png');
+        }
 
-        if ($this->fileSystem->has('AA/test1.png'))
+        if ($this->fileSystem->has('AA/test1.png')) {
             $this->fileSystem->delete('AA/test1.png');
+        }
 
         $this->fileSystem->write('AA/test.png', $file);
 

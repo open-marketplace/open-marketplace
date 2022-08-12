@@ -32,22 +32,18 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
 
     private ChannelRepositoryInterface $channelRepository;
 
-    private ProductImageFactoryInterface $productImageFactory;
-
     public function __construct(
         ProductFactoryInterface $productFactory,
         ProductTranslationFactoryInterface $productTranslationFactory,
         ProductVariantFactoryInterface $productVariantFactory,
         ChannelPricingFactoryInterface $channelPricingFactory,
         ChannelRepositoryInterface $channelRepository,
-        ProductImageFactoryInterface $productImageFactory
     ) {
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->productVariantFactory = $productVariantFactory;
         $this->channelPricingFactory = $channelPricingFactory;
         $this->channelRepository = $channelRepository;
-        $this->productImageFactory = $productImageFactory;
     }
 
     public function createSimpleProduct(ProductDraftInterface $productDraft): ProductInterface
