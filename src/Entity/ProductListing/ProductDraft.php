@@ -204,9 +204,6 @@ class ProductDraft implements ProductDraftInterface
         return $this->images;
     }
 
-    /**
-     * @param Collection $images
-     */
     public function setImages(Collection $images): void
     {
         $this->images = $images;
