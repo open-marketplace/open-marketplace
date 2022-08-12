@@ -213,6 +213,7 @@ class ProductDraft implements ProductDraftInterface
     {
         $this->images->add($image) ;
     }
+    
     public function removeImage(ImageInterface $image): void
     {
         if ($this->hasImage($image)) {
