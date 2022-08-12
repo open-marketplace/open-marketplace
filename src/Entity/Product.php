@@ -22,6 +22,7 @@ class Product extends BaseProduct implements ProductInterface
     {
         $this->images = new ArrayCollection();
     }
+    
     public function getVendor(): ?VendorInterface
     {
         return $this->vendor;
