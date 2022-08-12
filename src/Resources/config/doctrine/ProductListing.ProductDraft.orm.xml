@@ -30,8 +30,8 @@
             <cascade>
                 <cascade-persist/>
             </cascade>
-
         </one-to-many>
+
         <one-to-many field="translations" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation" mapped-by="productDraft" index-by="locale">
             <cascade>
                 <cascade-persist/>

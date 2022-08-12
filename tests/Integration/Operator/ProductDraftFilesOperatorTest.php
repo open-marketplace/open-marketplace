@@ -51,13 +51,15 @@ class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->productDraftFilesOperator->copyFilesToProduct($draftFixture, $cratedProduct);
 
+        $expectedFilePathKey = 'AA/test1.png';
+
         $manager->persist($cratedProduct);
         $manager->flush();
 
         $product = $manager->getRepository(Product::class)->findOneBy(['code'=>"FIXTURE"]);
 
         self::assertEquals(1, count($product->getImages()));
-        self::assertEquals('AA/test1.png', $product->getImages()[0]->getPath());
+        self::assertEquals($expectedFilePathKey, $product->getImages()[0]->getPath());
     }
 
     private function create_draft_fixture_with_file(): void
@@ -77,6 +79,8 @@ class ProductDraftFilesOperatorTest extends JsonApiTestCase
         $fileInfo = new \SplFileInfo(__DIR__.'/test.png');
         $fileObject = $fileInfo->openFile('r');
         $file = $fileObject->fread(filesize(__DIR__.'/test.png'));
+
+        $originalFilePathName = 'AA/test.png';
 
         if ($this->fileSystem->has('AA/test.png'))
             $this->fileSystem->delete('AA/test.png');
