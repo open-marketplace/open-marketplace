@@ -220,4 +220,13 @@ final class OrderContext extends RawMinkContext
 
         return $vendor;
     }
+
+    /**
+     * @Given I am on customer details page
+     */
+    public function iAmOnCustomerDetailsPage()
+    {
+        $order = $this->sharedStorage->get('order');
+        $this->visitPath('/en_US/customers/' . $order->getCustomer()->getId());
+    }
 }
