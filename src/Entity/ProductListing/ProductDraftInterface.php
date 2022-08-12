@@ -87,7 +87,7 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function setImages(Collection $images): void;
 
-    public function addImage( $image): void;
+    public function addImage($image): void;
 
     public function removeImage(ImageInterface $image): void;
 }
