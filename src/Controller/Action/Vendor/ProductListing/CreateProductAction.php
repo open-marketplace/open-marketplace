@@ -86,6 +86,7 @@ class CreateProductAction extends AbstractController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
+        /** @var ProductDraftInterface $newResource */
         $newResource = $this->newResourceFactory->create($configuration, $this->factory);
 
         $form = $this->createForm(ProductType::class, $newResource);

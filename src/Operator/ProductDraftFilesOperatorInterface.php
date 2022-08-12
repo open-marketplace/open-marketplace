@@ -18,5 +18,5 @@ interface ProductDraftFilesOperatorInterface
 {
     public function copyFilesToProduct(ProductDraftInterface $productDraft, ProductInterface $cratedProduct): void;
 
-    public function removeOldFiles(ProductInterface $productDraft): void;
+    public function removeOldFiles(ProductInterface $product): void;
 }

@@ -33,6 +33,7 @@ class ProductDraft implements ProductDraftInterface
 
     protected int $versionNumber;
 
+    /** @var Collection<int|string, ImageInterface> */
     protected Collection $images;
 
     /** @var Collection<int|string, ProductTranslationInterface> */
@@ -209,16 +210,8 @@ class ProductDraft implements ProductDraftInterface
         $this->images = $images;
     }
 
-    public function addImage($image): void
+    public function addImage(ImageInterface $image): void
     {
         $this->images->add($image);
-    }
-    
-    public function removeImage(ImageInterface $image): void
-    {
-        if ($this->hasImage($image)) {
-            $image->setOwner(null);
-            $this->images->removeElement($image);
-        }
     }
 }

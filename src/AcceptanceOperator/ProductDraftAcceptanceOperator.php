@@ -44,15 +44,13 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
             
             return $cratedProduct;
         }
-        else {
-            $product = $this->productFromDraftUpdater->updateProduct($productDraft);
 
-            $this->productDraftFilesOperator->removeOldFiles($product);
+        $product = $this->productFromDraftUpdater->updateProduct($productDraft);
 
-            $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
-            $this->entityManager->persist($product);
+        $this->productDraftFilesOperator->removeOldFiles($product);
+        $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
 
-            return $product;
-        }
+        return $product;
+
     }
 }

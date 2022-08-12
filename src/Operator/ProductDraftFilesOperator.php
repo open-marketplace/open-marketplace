@@ -36,6 +36,7 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
             $newImage->setType($image->getType());
             $newImage->setOwner($cratedProduct);
 
+            /** @var string $key */
             $key = $image->getPath();
             $nameSuffix = "1.";
 
@@ -57,12 +58,11 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
     public function removeOldFiles(ProductInterface $product): void
     {
         foreach($product->getImages() as $image){
+            /** @var string $key */
             $key = $image->getPath();
-
             if($this->filesystem->has($key)) {
                 $this->filesystem->delete($key);
             }
-            $product->removeImage($image);
         }
         $product->resetImages();
     }

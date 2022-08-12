@@ -83,11 +83,11 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function sendToVerification(): void;
 
+    /** @return  Collection<int|string, ImageInterface> */
     public function getImages(): Collection;
 
+    /** @param Collection<int|string, ImageInterface> $images */
     public function setImages(Collection $images): void;
 
-    public function addImage($image): void;
-
-    public function removeImage(ImageInterface $image): void;
+    public function addImage(ImageInterface $image): void;
 }
