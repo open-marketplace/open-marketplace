@@ -29,8 +29,7 @@
         </service>
 
         <service id="bitbag.mvm_plugin.form.type.vendor_image"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType"
-        >
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType">
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage</argument>
             <tag name="form.type"/>
         </service>
