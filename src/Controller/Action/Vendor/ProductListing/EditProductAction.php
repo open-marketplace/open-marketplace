@@ -55,7 +55,6 @@ class EditProductAction extends AbstractController
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->imageUploader = $imageUploader;
-
     }
 
     public function __invoke(Request $request): Response
@@ -69,10 +68,7 @@ class EditProductAction extends AbstractController
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);
         }
 
-
         $form = $this->createForm(ProductType::class, $newResource);
-
-
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
@@ -95,7 +91,6 @@ class EditProductAction extends AbstractController
                 $this->productDraftRepository->save($productDraft);
                 $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
             }
-
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }
 
