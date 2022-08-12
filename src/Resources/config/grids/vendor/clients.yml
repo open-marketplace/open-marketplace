@@ -48,3 +48,21 @@ sylius_grid:
                     label: sylius.ui.search
                     options:
                         fields: [email, firstName, lastName]
+            actions:
+                item:
+                    show:
+                        type: shop_show
+                        label: sylius.ui.show
+                        options:
+                            link:
+                                route: bitbag_mvm_plugin_vendor_customer_show
+                                parameters:
+                                    id: resource.id
+                    show_orders:
+                        type: shop_show
+                        label: sylius.ui.show_orders
+                        options:
+                            link:
+                                route: bitbag_mvm_plugin_vendor_customer_order_index
+                                parameters:
+                                    id: resource.id

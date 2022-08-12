@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
@@ -25,5 +26,31 @@ class OrderRepository extends BaseOrderRepository
             ->andWhere('o.vendor = :vendor')
             ->setParameter('vendor', $vendorId)
             ;
+    }
+
+    public function findOrderForVendor(VendorInterface $vendor, $id): ?OrderInterface
+    {
+        $vendorId = $vendor->getId();
+
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.vendor = :vendor')
+            ->andWhere('o.id = :id')
+            ->setParameter('vendor', $vendorId)
+            ->setParameter('id', $id)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findOrdersForVendorByCustomer(VendorInterface $vendor, $id): QueryBuilder
+    {
+        $vendorId = $vendor->getId();
+
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'c')
+            ->andWhere('o.vendor = :vendor')
+            ->andWhere('c.id = :id')
+            ->setParameter('vendor', $vendorId)
+            ->setParameter('id', $id);
     }
 }

@@ -14,3 +14,9 @@ Feature: Vendor can view order details
     Given There is order with property "number" with value "55" made with logged in seller
     And I am on order details page
     Then I should see order with number "55"
+
+  @ui
+  Scenario: Visiting details page
+    Given There is order with property "number" with value "55" made with other seller
+    And I am on order details page
+    Then the response status code should be 404

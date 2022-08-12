@@ -14,6 +14,7 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Repository
 use ApiTestCase\JsonApiTestCase;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use Sylius\Component\Core\Model\Customer;
 
 final class OrderRepositoryTest extends JsonApiTestCase
 {
@@ -30,6 +31,29 @@ final class OrderRepositoryTest extends JsonApiTestCase
 
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
         $queryBuilder = $this->repository->findAllByVendor($vendorOliver);
+
+        $result = $queryBuilder->getQuery()->getResult();
+        self::assertEquals(1, count($result));
+    }
+
+    public function test_it_finds_order_for_vendor(): void
+    {
+        $this->loadFixturesFromFile('OrderRepositoryTest/test_it_finds_order_for_vendor.yml');
+
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $order = $this->entityManager->getRepository(Order::class)->findOneBy(['vendor' => $vendorOliver]);
+        $result = $this->repository->findOrderForVendor($vendorOliver, $order->getId());
+
+        self::assertEquals($order->getId(), $result->getId());
+    }
+
+    public function test_it_finds_orders_for_vendors_customer(): void
+    {
+        $this->loadFixturesFromFile('OrderRepositoryTest/test_it_finds_orders_for_vendors_customer.yml');
+
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email'=>'test2@example.com']);
+        $queryBuilder = $this->repository->findOrdersForVendorByCustomer($vendorOliver, $customer->getId());
 
         $result = $queryBuilder->getQuery()->getResult();
         self::assertEquals(1, count($result));
