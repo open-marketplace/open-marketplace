@@ -43,8 +43,6 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private ShopUserExampleFactory $shopUserExampleFactory;
 
-    private FactoryInterface $vendorFactory;
-
     private SharedStorageInterface $sharedStorage;
 
     private UserRepositoryInterface $userRepository;
@@ -53,14 +51,12 @@ final class ProductListingContext extends RawMinkContext implements Context
         EntityManagerInterface $entityManager,
         AdminUserExampleFactory $adminUserExampleFactory,
         ShopUserExampleFactory $shopUserExampleFactory,
-        FactoryInterface $vendorFactory,
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository
     ) {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->vendorFactory = $vendorFactory;
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
     }
@@ -117,6 +113,8 @@ final class ProductListingContext extends RawMinkContext implements Context
         $vendor->getVendorAddress()->setCity('Warsaw');
         $vendor->getVendorAddress()->setPostalCode('00-111');
         $vendor->getVendorAddress()->setStreet('Tajna 13');
+        $vendor->setSlug('vendor-slug');
+        $vendor->setDescription('description');
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
         $this->sharedStorage->set('vendor', $vendor);
@@ -127,13 +125,6 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function thereIsProductListingCreatedByVendor($count)
     {
-        /** @var ShopUserInterface $user */
-        $user = $this->shopUserExampleFactory->create();
-        $user->setUsername('username');
-        $user->setPlainPassword('password');
-        $user->setEmail('vendor@email.com');
-        $this->entityManager->persist($user);
-
         $vendor = $this->sharedStorage->get('vendor');
 
         for ($i = 0; $i < $count; ++$i) {

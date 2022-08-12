@@ -8,7 +8,6 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
-            <argument type="service" id="bitbag_mvm_plugin.factory.vendor"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.repository.shop_user" />
         </service>

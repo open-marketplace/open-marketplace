@@ -11,44 +11,64 @@
 {% endblock %}
 
 {% block subcontent %}
-    <h1 class="ui dividing header">
-        {{ 'sylius.ui.my_account'|trans }}
-        <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
-    </h1>
+    <div class="ui stackable two column grid">
+        <div class="ten wide column">
+            <h1 class="ui header">
+                <i class="icon user"></i>
+                <div class="content">
+                    {{ 'bitbag_mvm_plugin.ui.my_vendor_account'|trans }}
+                    <div class="sub header">{{ 'bitbag_mvm_plugin.ui.manage_your_vendor_information_and_preferences'|trans }}</div>
+                </div>
+            </h1>
+        </div>
+        <div class="middle aligned six wide column">
+            <a href="{{ path('vendor_profile_update') }}" class="ui right floated blue button">
+                <i class="pencil icon"></i>
+                {{ 'sylius.ui.edit'|trans }}
+            </a>
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
 
     {{ sylius_template_event('sylius.shop.account.dashboard.after_content_header', {'vendor': vendor}) }}
 
-    <div class="ui large list grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
-        <div class="item row">
-            <span class="ui three wide column">{{ 'bitbag_mvm_plugin.ui.company_name'|trans }}:</span>
-            {{ vendor.companyName }}
-        </div>
-        <div class="item row">
-            <span class="ui three wide column ">{{ 'bitbag_mvm_plugin.ui.tax_identifier'|trans }}:</span>
-            {{ vendor.taxIdentifier }}
-        </div>
-        <div class="item row">
-            <span class="ui three wide column">{{ 'bitbag_mvm_plugin.ui.phone_number'|trans }}:</span>
-            {{ vendor.phoneNumber }}
-        </div>
-        <div class="item row">
-            <span class="ui three wide column">{{ 'bitbag_mvm_plugin.ui.country'|trans }}:</span>
-            {{ vendor.vendorAddress.country }}
-        </div>
-        <div class="item row">
-            <span class="ui three wide column">{{ 'bitbag_mvm_plugin.ui.postal_code'|trans }}:</span>
-            {{ vendor.vendorAddress.postalCode }}
-        </div>
-        <div class="item row">
-            <span class="ui three wide column">{{ 'bitbag_mvm_plugin.ui.city'|trans }}:</span>
-            {{ vendor.vendorAddress.city }}
-        </div>
-        <div class="item row">
-            <div class="ui three wide column">{{ 'bitbag_mvm_plugin.ui.street'|trans }}:</div>
-            {{ vendor.vendorAddress.street }}
-        </div>
-        <div class="row">
-            <a class="ui two wide column center aligned" href="{{ path('vendor_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>
+    <div class="ui grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
+        <div class="sixteen wide mobile ten wide computer column">
+            <div class="ui attached segment">
+                <table class="ui very basic celled table">
+                    <tbody>
+                    <tr>
+                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.company_name'|trans }}</strong></td>
+                        <td>{{ vendor.companyName }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.tax_identifier'|trans }}</strong></td>
+                        <td>{{ vendor.taxIdentifier }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.phone_number'|trans }}</strong></td>
+                        <td>{{ vendor.phoneNumber }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.country'|trans }}</strong></td>
+                        <td>{{ vendor.vendorAddress.country }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.postal_code'|trans }}</strong></td>
+                        <td>{{ vendor.vendorAddress.postalCode }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.city'|trans }}</strong></td>
+                        <td>{{ vendor.vendorAddress.city }}</td>
+                    </tr>
+                    <tr>
+                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.street'|trans }}</strong></td>
+                        <td>{{ vendor.vendorAddress.street }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

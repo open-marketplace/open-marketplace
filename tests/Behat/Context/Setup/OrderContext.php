@@ -11,9 +11,10 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Setup;
 
-use Behat\MinkExtension\Context\RawMinkContext;
+use Behat\Behat\Context\Context;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
+use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\OrderRepository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;

@@ -1,5 +1,6 @@
 bitbag_mvm_plugin:
     ui:
+        inventory: "Inventory"
         clients: "Clients"
         order_list: "Orders"
         summary_of_your_order: "Summary of your order(s)"
@@ -20,6 +21,10 @@ bitbag_mvm_plugin:
         become_a_vendor: 'Become a Vendor'
         product_listings: 'Product listings'
         marketplace: 'Marketplace'
+        my_vendor_account: "My vendor account"
+        manage_your_vendor_information_and_preferences: "Manage your vendor information and preferences"
+        your_vendor_profile: "Your vendor profile"
+        edit_your_vendor_information: "Edit your vendor information"
         publishedAt: 'Published at'
         status: 'Status'
         tax_identifier: "Tax Identifier"
@@ -112,6 +117,7 @@ bitbag_mvm_plugin:
         create_new_product: 'Create Product'
         save: 'Save'
         save_and_add: 'Save and Add'
+        vendor_under_verification: "Your vendor account is under verification."
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."
@@ -120,3 +126,8 @@ bitbag_mvm_plugin:
         id: 'ID'
         tax_id: 'Tax ID'
         vendors: 'Vendors'
+    menu:
+        shop:
+            account:
+                vendor:
+                    header: "Vendor account"
