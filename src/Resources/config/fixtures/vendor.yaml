@@ -1,0 +1,12 @@
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                vendor:
+                    options:
+                        random: 5
+                        custom:
+                            -   email: 'vendor@example.com'
+                                first_name: 'Mark'
+                                last_name: 'Gutenberg'
+                                password: 'sylius'

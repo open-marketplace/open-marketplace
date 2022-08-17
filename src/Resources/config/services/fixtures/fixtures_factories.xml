@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="bitbag.mvm_plugin.fixture.example_factory.vendor" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\VendorExampleFactory">
+            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_profile_factory" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_address_factory" />
+            <argument type="service" id="sylius.factory.shop_user" />
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.customer_group" />
+        </service>
+    </services>
+</container>

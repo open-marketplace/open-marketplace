@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag.mvm_plugin.fixture.vendor" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\VendorFixture" public="true">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.vendor" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+    </services>
+</container>
