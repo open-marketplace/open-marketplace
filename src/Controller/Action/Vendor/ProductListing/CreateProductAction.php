@@ -13,6 +13,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\Pro
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\VendorNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
@@ -106,9 +108,17 @@ class CreateProductAction extends AbstractController
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
             }
 
+            /** @var ShopUserInterface $user */
+            $user = $this->getUser();
+            $vendor = $user->getVendor();
+
+            if (!$vendor) {
+                throw new VendorNotFoundException('Vendor not found.');
+            }
+
             /** @var ClickableInterface $button */
             $button = $form->get('saveAndAdd');
-            $productDraft = $this->productListingFromDraftFactory->createNew($productDraft);
+            $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
 
             if ($button->isClicked()) {
                 $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);

@@ -1,0 +1,114 @@
+sylius_fixtures:
+    suites:
+        mvm:
+            listeners:
+                orm_purger: ~
+                images_purger: ~
+                logger: ~
+            fixtures:
+                locale:
+                    options:
+                        locales:
+                            - 'en_US'
+                            - 'de_DE'
+                            - 'fr_FR'
+                            - 'pl_PL'
+                            - 'es_ES'
+                            - 'es_MX'
+                            - 'pt_PT'
+                            - 'zh_CN'
+
+                currency:
+                    options:
+                        currencies:
+                            - 'EUR'
+                            - 'USD'
+                            - 'PLN'
+                            - 'CAD'
+                            - 'CNY'
+                            - 'NZD'
+                            - 'GBP'
+                            - 'AUD'
+                            - 'MXN'
+
+                geographical:
+                    options:
+                        countries:
+                            - 'US'
+                            - 'FR'
+                            - 'DE'
+                            - 'AU'
+                            - 'CA'
+                            - 'MX'
+                            - 'NZ'
+                            - 'PT'
+                            - 'ES'
+                            - 'CN'
+                            - 'GB'
+                            - 'PL'
+                        zones:
+                            US:
+                                name: 'United States of America'
+                                countries:
+                                    - 'US'
+                            WORLD:
+                                name: 'Rest of the World'
+                                countries:
+                                    - 'FR'
+                                    - 'DE'
+                                    - 'AU'
+                                    - 'CA'
+                                    - 'MX'
+                                    - 'NZ'
+                                    - 'PT'
+                                    - 'ES'
+                                    - 'CN'
+                                    - 'GB'
+                                    - 'PL'
+
+                channel:
+                    options:
+                        custom:
+                            fashion_web_store:
+                                name: 'Fashion Web Store'
+                                code: 'FASHION_WEB'
+                                locales:
+                                    - '%locale%'
+                                currencies:
+                                    - 'USD'
+                                enabled: true
+                                hostname: '%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%'
+                                theme_name: '%env(resolve:SYLIUS_FIXTURES_THEME_NAME)%'
+                                shop_billing_data:
+                                    company: 'Sylius'
+                                    tax_id: '0001112222'
+                                    country_code: 'US'
+                                    street: 'Test St. 15'
+                                    city: 'eCommerce Town'
+                                    postcode: '00 33 22'
+                                menu_taxon: 'MENU_CATEGORY'
+                                contact_phone_number: '+41 123 456 789'
+                                contact_email: 'contact@example.com'
+
+                admin_user:
+                    name: 'admin_user'
+                    options:
+                        custom:
+                            - email: 'sylius@example.com'
+                              username: 'sylius'
+                              password: 'sylius'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'John'
+                              last_name: 'Doe'
+                              avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/john.jpg'
+
+                            - email: 'api@example.com'
+                              username: 'api'
+                              password: 'sylius-api'
+                              enabled: true
+                              locale_code: '%locale%'
+                              first_name: 'Luke'
+                              last_name: 'Brushwood'
+                              api: true
+                              avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/luke.jpg'

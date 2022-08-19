@@ -48,7 +48,6 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactory"
                  id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory">
             <argument type="service" id="bitbag_mvm_plugin.factory.product_listing" />
-            <argument type="service" id="security.untracked_token_storage" />
             <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
             <argument type="service" id="bitbag.mvm_plugin.cloner.product_listing_translation_cloner" />
             <argument type="service" id="bitbag.mvm_plugin.cloner.product_listing_pricing_cloner" />

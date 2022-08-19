@@ -15,28 +15,23 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ProductListingPricingCloner
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ProductListingTranslationClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 {
     public function let(
         FactoryInterface $productListingFactoryInterface,
-        TokenStorageInterface $tokenStorage,
         FactoryInterface $draftFactory,
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
         ProductListingPricingClonerInterface $productListingPricingCloner
     ): void {
         $this->beConstructedWith(
             $productListingFactoryInterface,
-            $tokenStorage,
             $draftFactory,
             $productListingTranslationCloner,
             $productListingPricingCloner
@@ -57,22 +52,10 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         FactoryInterface $productListingFactoryInterface,
         ProductListingInterface $productListing,
         ProductDraftInterface $productDraft,
-        TokenStorageInterface $tokenStorage,
-        TokenInterface $token,
-        ShopUserInterface $user,
         VendorInterface $vendor
     ): void {
         $productListingFactoryInterface->createNew()
             ->willReturn($productListing);
-
-        $tokenStorage->getToken()
-            ->willReturn($token);
-
-        $token->getUser()
-            ->willReturn($user);
-
-        $user->getVendor()
-            ->willReturn($vendor);
 
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection());
@@ -92,7 +75,7 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $productDraft->setProductListing($productListing)
             ->shouldBeCalled();
 
-        $this->createNew($productDraft);
+        $this->createNew($productDraft, $vendor);
     }
 
     public function it_returns_product_listing_clone(
