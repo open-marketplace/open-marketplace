@@ -15,4 +15,4 @@ Feature: Resending an order confirmation email for a chosen order
     Given There is order with property "number" with value "55" made with logged in seller
     And I am on order details page
     And I resend the order confirmation email as vendor
-    Then I should be notified that the order confirmation email has been successfully resent to the customer
+    Then I should see "Order confirmation has been successfully resent to the customer."

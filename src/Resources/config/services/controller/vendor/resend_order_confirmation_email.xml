@@ -4,11 +4,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="bitbag_mvm_plugin.controller.action.vendor.resend_order_confirmation_email_action"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ResendOrderConfirmationEmailAction" public="true">
-            <argument type='service' id="sylius.repository.order" />
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ResendOrderConfirmationEmailAction">
+            <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface" />
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+            <tag name="controller.service_arguments" />
         </service>
     </services>
 </container>

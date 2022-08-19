@@ -22,15 +22,32 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ResendOrderConfirmationEmailAction
 {
+    private OrderRepositoryInterface $orderRepository;
+
+    private OrderEmailManagerInterface $orderEmailManager;
+
+    private CsrfTokenManagerInterface $csrfTokenManager;
+
+    private Session $session;
+
+    private TranslatorInterface $translator;
+
     public function __construct(
-        private OrderRepositoryInterface $orderRepository,
-        private OrderEmailManagerInterface $orderEmailManager,
-        private CsrfTokenManagerInterface $csrfTokenManager,
-        private Session $session,
-        ) {
+        OrderRepositoryInterface $orderRepository,
+        OrderEmailManagerInterface $orderEmailManager,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        Session $session,
+        TranslatorInterface $translator
+    ) {
+        $this->orderRepository = $orderRepository;
+        $this->orderEmailManager = $orderEmailManager;
+        $this->csrfTokenManager = $csrfTokenManager;
+        $this->session = $session;
+        $this->translator = $translator;
     }
 
     public function __invoke(Request $request): Response
@@ -38,13 +55,13 @@ final class ResendOrderConfirmationEmailAction
         $orderId = $request->attributes->get('id');
 
         if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($orderId, (string) $request->query->get('_csrf_token')))) {
-            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+            throw new HttpException(Response::HTTP_FORBIDDEN, $this->translator->trans('bitbag_mvm_plugin.ui.invalid_csrf'));
         }
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->find($orderId);
         if (null === $order) {
-            throw new NotFoundHttpException(sprintf('The order with id %s has not been found', $orderId));
+            throw new NotFoundHttpException($this->translator->trans('bitbag_mvm_plugin.ui.order_not_found', ['orderId' => $orderId]));
         }
 
         $this->orderEmailManager->sendConfirmationEmail($order);
