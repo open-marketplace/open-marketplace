@@ -12,7 +12,7 @@
 
         <field name="name" column="name" type="string" unique="false" nullable="true" />
         <field name="slug" column="slug" type="string" unique="false" nullable="true" />
-        <field name="description" column="description" type="string" unique="false" nullable="true" />
+        <field name="description" column="description" type="text" unique="false" nullable="true" />
         <field name="metaKeywords" column="meta_keywords" type="string" unique="false" nullable="true" />
         <field name="metaDescription" column="meta_description" type="string" unique="false" nullable="true" />
         <field name="shortDescription" column="short_description" type="string" unique="false" nullable="true" />

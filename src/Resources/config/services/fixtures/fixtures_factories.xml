@@ -26,9 +26,14 @@
 
         <service id="bitbag.mvm_plugin.fixture.example_factory.product_draft" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\ProductDraftExampleFactory">
             <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_price" />
             <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_translation" />
             <argument type="service" id="bitbag_mvm_plugin.repository.vendor" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
+            <argument type="service" id="sylius.generator.slug" />
         </service>
     </services>
 </container>
