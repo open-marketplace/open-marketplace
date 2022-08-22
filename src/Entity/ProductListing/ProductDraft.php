@@ -13,15 +13,15 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Liip\ImagineBundle\Imagine\Cache\Resolver\ResolverInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Webmozart\Assert\Assert;
 
-class ProductDraft implements AttributeSubjectInterface
+class ProductDraft implements AttributeSubjectInterface, ResourceInterface, ProductDraftInterface
 {
     protected ?int $id;
 
