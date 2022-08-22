@@ -17,7 +17,7 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DraftAttributeChoiceType extends AttributeChoiceType
+final class DraftAttributeChoiceType extends AttributeChoiceType
 {
     private VendorProviderInterface $vendorProvider;
 
