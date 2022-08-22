@@ -3,7 +3,7 @@ sylius_resource:
         bitbag_mvm_plugin.conversation:
             driver: doctrine/orm
             classes:
-                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface
                 repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepository
