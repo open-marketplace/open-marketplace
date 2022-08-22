@@ -29,7 +29,7 @@ class CustomerRepository extends BaseCustomerRepository
             ;
     }
 
-    public function findCustomerForVendor(VendorInterface $vendor, $id): ?CustomerInterface
+    public function findCustomerForVendor(VendorInterface $vendor, int $id): ?CustomerInterface
     {
         $vendorId = $vendor->getId();
 
