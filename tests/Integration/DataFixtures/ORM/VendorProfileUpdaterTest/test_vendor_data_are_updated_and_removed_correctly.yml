@@ -17,7 +17,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
         customer: '@customer_oliver'
         username: "oliver@queen.com"
         usernameCanonical: "oliver@queen.com"
-Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
     vendor_address:
         country: '@poland'
         city: 'Warsaw'
@@ -38,7 +38,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate:
         city: 'Central City'
         postalCode: '99-000'
         street: 'Arrow Street'
-Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate:
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate:
     vendor_oliver_update:
         vendor: '@vendor_oliver'
         companyName: 'new company'
