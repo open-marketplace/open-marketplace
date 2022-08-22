@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 
-class DraftAttributeValueType extends AttributeValueType
+final class DraftAttributeValueType extends AttributeValueType
 {
     public function getBlockPrefix(): string
     {

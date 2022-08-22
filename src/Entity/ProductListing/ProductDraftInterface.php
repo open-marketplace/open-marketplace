@@ -28,7 +28,7 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function getId(): ?int;
 
-    public function setId(?int $id): void;
+    public function setId(int $id): void;
 
     public function getCode(): string;
 
@@ -54,12 +54,12 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function setVersionNumber(int $versionNumber): void;
 
-    /** @return  Collection<int|string, ProductTranslationInterface> */
+    /** @return Collection<int|string, ProductTranslationInterface> */
     public function getTranslations(): Collection;
 
     public function addTranslations(ProductTranslationInterface $translation): void;
 
-    /** @return  Collection<int|string, ProductListingPriceInterface> */
+    /** @return Collection<int|string, ProductListingPriceInterface> */
     public function getProductListingPrice(): Collection;
 
     public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void;

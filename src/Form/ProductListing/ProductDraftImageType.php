@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductDraftImageType extends ImageType
+final class ProductDraftImageType extends ImageType
 {
     /**
      * @psalm-suppress MissingPropertyType

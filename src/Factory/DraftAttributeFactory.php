@@ -17,7 +17,7 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-class DraftAttributeFactory implements DraftAttributeFactoryInterface
+final class DraftAttributeFactory implements DraftAttributeFactoryInterface
 {
     private ServiceRegistryInterface $attributeTypesRegistry;
 

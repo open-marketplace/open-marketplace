@@ -41,7 +41,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class DraftAttributesController extends ResourceController
+final class DraftAttributesController extends ResourceController
 {
     private DraftAttributeFactoryInterface $draftAttributeFactory;
 
