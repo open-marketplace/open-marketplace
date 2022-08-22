@@ -15,5 +15,11 @@
             <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.product_draft" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="bitbag.mvm_plugin.fixture.order" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\OrderFixture">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.order" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

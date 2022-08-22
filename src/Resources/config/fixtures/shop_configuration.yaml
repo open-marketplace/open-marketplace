@@ -112,3 +112,42 @@ sylius_fixtures:
                               last_name: 'Brushwood'
                               api: true
                               avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/luke.jpg'
+
+                payment_method:
+                    options:
+                        custom:
+                            cash_on_delivery:
+                                code: 'cash_on_delivery'
+                                name: 'Cash on delivery'
+                                channels:
+                                    - 'FASHION_WEB'
+                            bank_transfer:
+                                code: 'bank_transfer'
+                                name: 'Bank transfer'
+                                channels:
+                                    - 'FASHION_WEB'
+                                enabled: true
+
+                shipping_method:
+                    options:
+                        custom:
+                            ups:
+                                code: 'ups'
+                                name: 'UPS'
+                                enabled: true
+                                channels:
+                                    - 'FASHION_WEB'
+                            dhl_express:
+                                code: 'dhl_express'
+                                name: 'DHL Express'
+                                channels:
+                                    - 'FASHION_WEB'
+                            fedex:
+                                code: 'fedex'
+                                name: 'FedEx'
+                                channels:
+                                    - 'FASHION_WEB'
+                shop_user:
+                    name: 'shop_user'
+                    options:
+                        random: 20

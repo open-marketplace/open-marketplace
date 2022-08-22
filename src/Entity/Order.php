@@ -20,7 +20,7 @@ class Order extends BaseOrder implements OrderInterface
     /** @var Collection<int, OrderItemInterface> */
     protected $items;
 
-    private ?VendorInterface $vendor;
+    private ?VendorInterface $vendor = null;
 
     private ?OrderInterface $primaryOrder;
 

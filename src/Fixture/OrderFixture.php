@@ -41,9 +41,11 @@ final class OrderFixture extends AbstractFixture
         for ($i = 0; $i < $options['amount']; ++$i) {
             $options = array_merge($options, ['complete_date' => array_shift($generateDates)]);
 
-            $order = $this->orderExampleFactory->create($options);
+            $orders = $this->orderExampleFactory->create($options);
 
-            $this->orderManager->persist($order);
+            foreach ($orders as $order) {
+                $this->orderManager->persist($order);
+            }
 
             if (0 === ($i % 50)) {
                 $this->orderManager->flush();
@@ -55,7 +57,7 @@ final class OrderFixture extends AbstractFixture
 
     public function getName(): string
     {
-        return 'order';
+        return 'mvm_order';
     }
 
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
