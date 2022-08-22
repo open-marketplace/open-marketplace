@@ -36,7 +36,7 @@ final class ProductListingRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_product_listings_with_latest_draft_by_vendor(): void
     {
-        $this->loadFixturesFromFile('ProductListingRepositoryTest/test_it_finds_product_listings_with_latest_draft.yml');
+        $this->loadFixturesFromFile('ProductListingRepositoryTest/test_it_finds_product_listings_with_latest_draft_by_vendor.yml');
 
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
         $queryBuilder = $this->repository->createQueryBuilderByVendor($vendorOliver);
