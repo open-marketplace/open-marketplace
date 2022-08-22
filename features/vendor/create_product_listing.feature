@@ -21,5 +21,5 @@ Feature:Creating a product listing.
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
     When I click "Save" button
-    Then I should see product's listing status "create"
+    Then I should see product's listing status "Created"
     And I should see "Product listing created."
