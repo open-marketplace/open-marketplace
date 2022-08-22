@@ -16,3 +16,5 @@ imports:
     - suites/vendor/inventory_management.yml
     - suites/vendor/order_details.yml
     - suites/vendor/draft_attribute.yml
+    - suites/vendor/customer_details.yml
+

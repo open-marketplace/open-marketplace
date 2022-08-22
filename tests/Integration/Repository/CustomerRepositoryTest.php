@@ -34,4 +34,15 @@ final class CustomerRepositoryTest extends JsonApiTestCase
         $result = $queryBuilder->getQuery()->getResult();
         self::assertEquals(1, count($result));
     }
+
+    public function test_it_finds_order_for_vendor(): void
+    {
+        $this->loadFixturesFromFile('CustomerRepositoryTest/test_it_finds_order_for_vendor.yml');
+
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => 'test2@example.com']);
+        $result = $this->repository->findCustomerForVendor($vendorOliver, (string)$customer->getId());
+
+        self::assertEquals($customer->getId(), $result->getId());
+    }
 }

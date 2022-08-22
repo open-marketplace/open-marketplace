@@ -36,8 +36,10 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
             $newImage->setType($image->getType());
             $newImage->setOwner($cratedProduct);
 
+            /** @var string $key */
             $key = $image->getPath();
 
+            /** @var string $file */
             $file = $this->filesystem->read($key);
 
             $path = explode('.', $key)[0];

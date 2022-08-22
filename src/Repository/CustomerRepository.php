@@ -14,6 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository as BaseCustomerRepository;
+use Sylius\Component\Core\Model\CustomerInterface;
 
 class CustomerRepository extends BaseCustomerRepository
 {
@@ -26,5 +27,20 @@ class CustomerRepository extends BaseCustomerRepository
             ->andWhere('o.vendor = :vendor')
             ->setParameter('vendor', $vendorId)
             ;
+    }
+
+    public function findCustomerForVendor(VendorInterface $vendor, string $id): ?CustomerInterface
+    {
+        $vendorId = $vendor->getId();
+
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.orders', 'o')
+            ->andWhere('o.vendor = :vendor')
+            ->andWhere('c.id = :id')
+            ->setParameter('vendor', $vendorId)
+            ->setParameter('id', $id)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

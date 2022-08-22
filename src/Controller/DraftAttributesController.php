@@ -14,6 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\DraftAttributeFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType;
 use Doctrine\Persistence\ObjectManager;
+use PHPStan\Type\MixedType;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
@@ -33,6 +34,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -241,11 +243,12 @@ class DraftAttributesController extends ResourceController
     }
 
     private function createFormAndView(
-        $attributeForm,
+        string $attributeForm,
         AttributeInterface $attribute
     ): FormView {
-        return $this
-            ->get('form.factory')
+        /** @var FormFactoryInterface $formFactory */
+        $formFactory = $this->get('form.factory');
+        return $formFactory
             ->createNamed(
                 'value',
                 $attributeForm,
@@ -254,4 +257,5 @@ class DraftAttributesController extends ResourceController
             )
             ->createView();
     }
+
 }

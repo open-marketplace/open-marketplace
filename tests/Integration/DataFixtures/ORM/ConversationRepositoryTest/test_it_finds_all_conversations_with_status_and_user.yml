@@ -38,7 +38,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
         vendorAddress: '@vendor_address'
         slug: 'someslug'
         description: 'description'
-Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation:
+BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation:
     opened_conversation_with_oliver:
         shopUser: '@user_oliver'
         status: "open"

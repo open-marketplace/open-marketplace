@@ -27,7 +27,7 @@
             <join-column name="admin_user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="conversation" target-entity="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation" inversed-by="messages">
+        <many-to-one field="conversation" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation" inversed-by="messages">
             <join-column name="conversation_id" referenced-column-name="id" on-delete="CASCADE"/>
             <cascade>
                 <cascade-persist />

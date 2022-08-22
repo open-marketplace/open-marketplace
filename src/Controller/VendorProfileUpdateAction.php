@@ -67,11 +67,6 @@ final class VendorProfileUpdateAction
                 $currentVendor
             );
 
-            $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
-                $form->getData(),
-                $currentVendor
-            );
-
             $currentVendor->setEditedAt(new \DateTime());
             $this->manager->flush();
         }

@@ -15,10 +15,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Webmozart\Assert\Assert;
 
-class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
+class ProductDraft implements AttributeSubjectInterface
 {
     protected ?int $id;
 
@@ -36,6 +39,7 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
 
     protected int $versionNumber;
 
+    /** @var Collection<int|string, ImageInterface> */
     protected Collection $images;
 
     /** @var Collection<int|string, ProductTranslationInterface> */
@@ -46,11 +50,7 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
 
     protected ProductListingInterface $productListing;
 
-    /**
-     * @var Collection|AttributeValueInterface[]
-     *
-     * @psalm-var Collection<array-key, AttributeValueInterface>
-     */
+    /** @var Collection<int|string, AttributeValueInterface> */
     protected Collection $attributes;
 
     public function __construct()
@@ -136,6 +136,7 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
         $this->versionNumber = $versionNumber;
     }
 
+    /** @return Collection<int|string, ProductTranslationInterface> */
     public function getTranslations(): Collection
     {
         return $this->translations;
@@ -257,11 +258,6 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
     public function addAttribute(?AttributeValueInterface $attribute): void
     {
         /** @var ProductAttributeValueInterface $attribute */
-//        Assert::isInstanceOf(
-//            $attribute,
-//            ProductAttributeValueInterface::class,
-//            'Attribute objects added to a Product object have to implement ProductAttributeValueInterface'
-//        );
 
         if (!$this->hasAttribute($attribute)) {
             $attribute->setDraft($this);
@@ -305,11 +301,14 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
 
     public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface
     {
-        if (null === $localeCode) {
-            $localeCode = $this->getTranslation()->getLocale();
-        }
+//        if (null === $localeCode) {
+//            $localeCode = $this->getTranslation()->getLocale();
+//        }
 
         foreach ($this->attributes as $attribute) {
+            if (null === $attribute->getAttribute()){
+                continue;
+            }
             if ($attribute->getAttribute()->getCode() === $attributeCode &&
                 ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode())) {
                 return $attribute;
@@ -323,19 +322,25 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
         ProductAttributeValueInterface $attributeValue,
         string $localeCode,
         ?string $fallbackLocaleCode = null
-    ): AttributeValueInterface {
-        if (!$this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode)) {
+    ): ?AttributeValueInterface {
+        $attributeCode = $attributeValue->getCode();
+        if (null === $attributeCode)
+            return null;
+        if (!$this->hasNotEmptyAttributeByCodeAndLocale($attributeCode, $localeCode)) {
             if (
                 null !== $fallbackLocaleCode &&
-                $this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode)
+                $this->hasNotEmptyAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode)
             ) {
-                return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode);
+                return $this->getAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode);
             }
 
             return $attributeValue;
         }
+        /** @var AttributeValueInterface $attributes  */
 
-        return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
+        $attributes = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
+        return $attributes;
+
     }
 
     protected function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
@@ -351,5 +356,10 @@ class ProductDraft implements ProductDraftInterface, AttributeSubjectInterface
         }
 
         return true;
+    }
+
+    protected function createTranslation(): ProductTranslationInterface
+    {
+        return new ProductTranslation();
     }
 }

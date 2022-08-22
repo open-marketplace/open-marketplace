@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\DraftAttributeRepositoryInterface;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,9 +29,11 @@ class DraftAttributeChoiceType extends AttributeChoiceType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        /** @var DraftAttributeRepositoryInterface $draftAttributeRepository */
+        $draftAttributeRepository = $this->attributeRepository;
         $resolver
             ->setDefaults([
-                'choices' => [$this->attributeRepository->findVendorDraftAttributes($this->vendorProvider->provideCurrentVendor())],
+                'choices' => [$draftAttributeRepository->findVendorDraftAttributes($this->vendorProvider->provideCurrentVendor())],
                 'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,

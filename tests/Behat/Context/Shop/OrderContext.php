@@ -160,4 +160,14 @@ class OrderContext extends RawMinkContext implements Context
     {
         $this->visitPath('en_US/customers');
     }
+
+    /**
+     * @Then I should see customer details with name :name
+     */
+    public function iShouldSeeCustomerDetailsWithName($name)
+    {
+        $page = $this->getSession()->getPage();
+        $card = $page->find('css', '.ui.fluid.card');
+        assertStringContainsString($name, $card->getText());
+    }
 }
