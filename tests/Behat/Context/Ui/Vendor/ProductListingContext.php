@@ -81,7 +81,7 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function iShouldSeeProductsListingStatus($status)
     {
-        $productListingStatus = $this->getPage()->find('css', sprintf('#details > div > table > tbody > tr > td:contains("%s")', $status));
+        $productListingStatus = $this->getPage()->find('css', sprintf('table > tbody > tr > td:contains("%s")', $status));
         Assert::notNull($productListingStatus);
     }
 

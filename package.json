@@ -1,8 +1,8 @@
 {
-  "name": "@bitbag/skeleton-plugin",
+  "name": "@bitbag/multi-vendor-marketplace",
   "version": "1.0.0",
   "description": "Skeleton for starting Sylius plugins.",
-  "repository": "git@github.com:BitBagCommerce/SyliusPluginSkeleton.git",
+  "repository": "git@github.com:BitBagCommerce/SyliusMultiVendorMarketplacePlugin.git",
   "license": "MIT",
   "private": true,
   "scripts": {

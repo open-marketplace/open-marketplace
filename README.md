@@ -1,112 +1,84 @@
 <p align="center">
     <a href="https://sylius.com" target="_blank">
         <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
+    </a>    
+    <a href="https://bitbag.io/pl" target="_blank">
+        <img src="https://bitbag.io/wp-content/themes/BitBag/dist/images/logo.svg" />
     </a>
 </p>
 
-<h1 align="center">Plugin Skeleton</h1>
+<h1 align="center">SyliusMultiVendorMarketplacePlugin</h1>
 
-<p align="center">Skeleton for starting Sylius plugins.</p>
+<p align="center">Plugin to create from sylius to multi-vendor shop</p>
 
-## Documentation
+## Installation
 
-For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, that is full of examples.
 
-## Quickstart Installation
+1. Add plugin dependencies to your `composer.json` file:
 
-1. Run `composer create-project sylius/plugin-skeleton ProjectName`.
+```php
+    "require": {
+        "bitbag/multi-vendor-marketplace": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://bitbagcommerce.repo.packagist.com/dev-mvm-customer/"
+        }
+    ],
+```
 
-2. From the plugin skeleton root directory, run the following commands:
+2. Add plugin dependencies to your `config/bundles.php` file:
 
-    ```bash
-    $ (cd tests/Application && yarn install)
-    $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
-    
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
-    ```
+```php
+return [
+    ...
 
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+    BitBag\SyliusMultiVendorMarketplacePlugin\BitBagSyliusMultiVendorMarketplacePlugin::class => ['all' => true],
+];
+```
 
-## Usage
+3. Import required config in your `config/packages/_sylius.yaml` file:
+```yaml
+# config/packages/_sylius.yaml
 
-### Running plugin tests
+imports:
+    ...
 
-  - PHPUnit
+  - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/config.yml" }
+```
 
-    ```bash
-    vendor/bin/phpunit
-    ```
+4. Import routing in your `config/routes.yaml` file:
 
-  - PHPSpec
+```yaml
 
-    ```bash
-    vendor/bin/phpspec run
-    ```
+# config/routes.yaml
+...
 
-  - Behat (non-JS scenarios)
+bitbag_mvm_plugin:
+  resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/routing.yml"
+```
 
-    ```bash
-    vendor/bin/behat --strict --tags="~@javascript"
-    ```
+5. Add MVM config in your `.env` file:
 
-  - Behat (JS scenarios)
- 
-    1. [Install Symfony CLI command](https://symfony.com/download).
- 
-    2. Start Headless Chrome:
-    
-      ```bash
-      google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
-      ```
-    
-    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
-    
-      ```bash
-      symfony server:ca:install
-      APP_ENV=test symfony server:start --port=8080 --dir=tests/Application/public --daemon
-      ```
-    
-    4. Run Behat:
-    
-      ```bash
-      vendor/bin/behat --strict --tags="@javascript"
-      ```
-    
-  - Static Analysis
-  
-    - Psalm
-    
-      ```bash
-      vendor/bin/psalm
-      ```
-      
-    - PHPStan
-    
-      ```bash
-      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
-      ```
+```
+###> MVM Config ###
+LOGO_DIRECTORY=media/image/logo/
+VENDOR_PRODUCTS_LIMITS=9,18,27
+DEFAULT_VENDOR_PRODUCTS_LIMIT=9
+MESSAGES_FILE_UPLOAD_DIRECTORY=uploads/message_files
+###> MVM Config ###
+```
 
-  - Coding Standard
-  
-    ```bash
-    vendor/bin/ecs check src
-    ```
+6. Finish the installation by updating the database schema and installing assets:
 
-### Opening Sylius with your plugin
-
-- Using `test` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=test bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=test bin/console server:run -d public)
-    ```
-    
-- Using `dev` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=dev bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=dev bin/console server:run -d public)
-    ```
+```
+$ composer install
+$ yarn install
+$ yarn encore dev
+$ bin/console assets:install 
+$ bin/console doctrine:database:create
+$ bin/console doctrine:schema:create
+$ bin/console sylius:fixtures:load
+$ symfony server:start // or symfony serve -d --no-tls
+```

@@ -17,7 +17,6 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class VendorMenuBuilder
 {
@@ -41,12 +40,14 @@ final class VendorMenuBuilder
 
     public function createMenu(array $options): ItemInterface
     {
-        /** @var ShopUserInterface|UserInterface|null $user */
+        /** @var ShopUserInterface $user */
         $user = $this->security->getUser();
         $menu = $this->factory->createItem('root');
         $menu->setLabel('bitbag_mvm_plugin.menu.shop.account.vendor.header');
 
-        if (null === $user->getVendor() || !$user->getVendor()->isVerified()) {
+        $vendor = $user->getVendor();
+
+        if (null === $vendor || !$vendor->isVerified()) {
             $menu
                 ->addChild('new', ['route' => 'vendor_register_form'])
                 ->setLabel('bitbag_mvm_plugin.ui.become_a_vendor')

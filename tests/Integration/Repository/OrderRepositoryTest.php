@@ -42,7 +42,7 @@ final class OrderRepositoryTest extends JsonApiTestCase
 
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
         $order = $this->entityManager->getRepository(Order::class)->findOneBy(['vendor' => $vendorOliver]);
-        $result = $this->repository->findOrderForVendor($vendorOliver, $order->getId());
+        $result = $this->repository->findOrderForVendor($vendorOliver, (string)$order->getId());
 
         self::assertEquals($order->getId(), $result->getId());
     }
@@ -53,7 +53,7 @@ final class OrderRepositoryTest extends JsonApiTestCase
 
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
         $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email'=>'test2@example.com']);
-        $queryBuilder = $this->repository->findOrdersForVendorByCustomer($vendorOliver, $customer->getId());
+        $queryBuilder = $this->repository->findOrdersForVendorByCustomer($vendorOliver, (string)$customer->getId());
 
         $result = $queryBuilder->getQuery()->getResult();
         self::assertEquals(1, count($result));
