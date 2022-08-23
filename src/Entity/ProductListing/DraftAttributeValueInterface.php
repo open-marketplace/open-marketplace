@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-interface DraftAttributeValueInterface
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
+
+interface DraftAttributeValueInterface extends AttributeValueInterface
 {
     public function getDraft(): ?ProductDraftInterface;
 

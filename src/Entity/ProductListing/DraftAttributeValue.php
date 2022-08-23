@@ -11,13 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Webmozart\Assert\Assert;
 
-class DraftAttributeValue extends BaseAttributeValue
+class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeValueInterface
 {
     protected ProductDraftInterface $draft;
 
@@ -31,7 +28,7 @@ class DraftAttributeValue extends BaseAttributeValue
         return $subject;
     }
 
-    public function setDraft(AttributeSubjectInterface $product): void
+    public function setDraft(?ProductDraftInterface $product): void
     {
         parent::setSubject($product);
     }

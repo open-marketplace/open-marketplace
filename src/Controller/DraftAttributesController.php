@@ -14,7 +14,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\DraftAttributeFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType;
 use Doctrine\Persistence\ObjectManager;
-use PHPStan\Type\MixedType;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
@@ -29,11 +28,14 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Sylius\Component\Core\Provider;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
@@ -163,12 +165,12 @@ final class DraftAttributesController extends ResourceController
         ]);
     }
 
-    public function getAttributeTypesAction(Request $request, string $template)
+    public function getAttributeTypesAction(Request $request, string $template): Response
     {
         return $this->render(
             $template,
             [
-                'types' => $this->get('sylius.registry.attribute_type')->all(),
+                'types' => $this->get('sylius.registry.attribute_type'),//->all(),
                 'metadata' => $this->metadata,
             ]
         );
@@ -181,9 +183,12 @@ final class DraftAttributesController extends ResourceController
 
     public function renderAttributesAction(Request $request): Response
     {
+        /** @var FormFactoryInterface $formFactory */
+        $formFactory = $this->get('form.factory');
+
         $template = $request->attributes->get('template', '@SyliusAttribute/attributeChoice.html.twig');
 
-        $form = $this->get('form.factory')->create(DraftAttributeChoiceType::class, null, [
+        $form = $formFactory->create(DraftAttributeChoiceType::class, null, [
             'multiple' => true,
         ]);
 
@@ -192,9 +197,12 @@ final class DraftAttributesController extends ResourceController
 
     public function renderAttributeValueFormsAction(Request $request): Response
     {
+        /** @var FormFactoryInterface $formFactory */
+        $formFactory = $this->get('form.factory');
+
         $template = $request->attributes->get('template', '@SyliusAttribute/attributeValueForms.html.twig');
 
-        $form = $this->get('form.factory')->create(DraftAttributeChoiceType::class, null, [
+        $form = $formFactory->create(DraftAttributeChoiceType::class, null, [
             'multiple' => true,
         ]);
         $form->handleRequest($request);
@@ -204,7 +212,9 @@ final class DraftAttributesController extends ResourceController
             throw new BadRequestHttpException();
         }
 
-        $localeCodes = $this->get('sylius.translation_locale_provider')->getDefinedLocalesCodes();
+        /** @var TranslationLocaleProviderInterface $localeProvider */
+        $localeProvider = $this->get('sylius.translation_locale_provider');
+        $localeCodes = $localeProvider->getDefinedLocalesCodes();
 
         $forms = [];
         foreach ($attributes as $attribute) {
@@ -225,7 +235,14 @@ final class DraftAttributesController extends ResourceController
      */
     protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes): array
     {
-        $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
+        /** @var FormTypeRegistry $formRegistry */
+        $formRegistry = $this->get('sylius.form_registry.attribute_type');
+
+        /** @var string $type */
+        $type = $attribute->getType();
+
+        /** @var string $attributeForm */
+        $attributeForm = $formRegistry->get($type, 'default');
 
         $forms = [];
 

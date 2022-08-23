@@ -86,6 +86,7 @@ class CreateProductAction extends AbstractController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
+        /** @var ProductDraftInterface $newResource */
         $newResource = $this->newResourceFactory->create($configuration, $this->factory);
 
         $form = $this->createForm(ProductType::class, $newResource);
@@ -94,6 +95,7 @@ class CreateProductAction extends AbstractController
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
+
             foreach ($newResource->getImages() as $image) {
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);

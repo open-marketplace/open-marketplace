@@ -13,7 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Liip\ImagineBundle\Imagine\Cache\Resolver\ResolverInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -21,7 +20,7 @@ use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Webmozart\Assert\Assert;
 
-class ProductDraft implements AttributeSubjectInterface, ResourceInterface, ProductDraftInterface
+class ProductDraft implements ResourceInterface, ProductDraftInterface
 {
     protected ?int $id;
 
@@ -50,7 +49,7 @@ class ProductDraft implements AttributeSubjectInterface, ResourceInterface, Prod
 
     protected ProductListingInterface $productListing;
 
-    /** @var Collection<int|string, AttributeValueInterface> */
+    /** @var Collection<int, AttributeValueInterface> */
     protected Collection $attributes;
 
     public function __construct()
@@ -221,13 +220,15 @@ class ProductDraft implements AttributeSubjectInterface, ResourceInterface, Prod
         $this->images = $images;
     }
 
-    public function addImage($image): void
+    public function addImage(ImageInterface $image): void
     {
         $this->images->add($image);
     }
 
     public function getAttributes(): Collection
     {
+        /** @var Collection<int, AttributeValueInterface|null> $attributes */
+        $attributes = $this->attributes;
         return $this->attributes;
     }
 
@@ -242,30 +243,35 @@ class ProductDraft implements AttributeSubjectInterface, ResourceInterface, Prod
         }
 
         $attributes = $this->attributes->filter(
-            function (ProductAttributeValueInterface $attribute) use ($baseLocaleCode) {
+            function (AttributeValueInterface $attribute) use ($baseLocaleCode) {
                 return $attribute->getLocaleCode() === $baseLocaleCode || null === $attribute->getLocaleCode();
             }
         );
 
         $attributesWithFallback = [];
+
+        /** @var DraftAttributeValueInterface $attribute */
         foreach ($attributes as $attribute) {
             $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode, $fallbackLocaleCode);
         }
 
-        return new ArrayCollection($attributesWithFallback);
+        /** @var Collection<int, AttributeValueInterface> $collection */
+        $collection = new ArrayCollection($attributesWithFallback);
+        return $collection;
     }
 
     public function addAttribute(?AttributeValueInterface $attribute): void
     {
         /** @var ProductAttributeValueInterface $attribute */
-
         if (!$this->hasAttribute($attribute)) {
-            $attribute->setDraft($this);
-            $this->attributes->add($attribute);
+            if($attribute instanceof DraftAttributeValueInterface) {
+                $attribute->setDraft($this);
+                $this->attributes->add($attribute);
+            }
         }
     }
 
-    public function removeAttribute(?AttributeValueInterface $attribute): void
+    public function removeAttribute(AttributeValueInterface $attribute): void
     {
         /** @var ProductAttributeValueInterface $attribute */
         Assert::isInstanceOf(
@@ -276,7 +282,8 @@ class ProductDraft implements AttributeSubjectInterface, ResourceInterface, Prod
 
         if ($this->hasAttribute($attribute)) {
             $this->attributes->removeElement($attribute);
-            $attribute->setDraft(null);
+            if($attribute instanceof DraftAttributeValueInterface)
+                $attribute->setDraft(null);
         }
     }
 
@@ -287,9 +294,10 @@ class ProductDraft implements AttributeSubjectInterface, ResourceInterface, Prod
 
     public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool
     {
-        $localeCode = $localeCode ?: $this->getTranslation()->getLocale();
-
         foreach ($this->attributes as $attribute) {
+            if(null === $attribute->getAttribute()){
+                continue;
+            }
             if ($attribute->getAttribute()->getCode() === $attributeCode
                 && ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode())) {
                 return true;
@@ -301,10 +309,6 @@ class ProductDraft implements AttributeSubjectInterface, ResourceInterface, Prod
 
     public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface
     {
-//        if (null === $localeCode) {
-//            $localeCode = $this->getTranslation()->getLocale();
-//        }
-
         foreach ($this->attributes as $attribute) {
             if (null === $attribute->getAttribute()){
                 continue;
@@ -319,7 +323,7 @@ class ProductDraft implements AttributeSubjectInterface, ResourceInterface, Prod
     }
 
     protected function getAttributeInDifferentLocale(
-        ProductAttributeValueInterface $attributeValue,
+        DraftAttributeValueInterface $attributeValue,
         string $localeCode,
         ?string $fallbackLocaleCode = null
     ): ?AttributeValueInterface {
