@@ -44,7 +44,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
             
             return $cratedProduct;
         }
-
+        /** @var \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $product */
         $product = $this->productFromDraftUpdater->updateProduct($productDraft);
 
         $this->productDraftFilesOperator->removeOldFiles($product);

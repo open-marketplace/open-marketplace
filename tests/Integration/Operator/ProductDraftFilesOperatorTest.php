@@ -51,7 +51,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->productDraftFilesOperator->copyFilesToProduct($draftFixture, $cratedProduct);
 
-        $expectedFilePathKey = 'AA/test1.png';
+        $expectedFilePathKey = 'AA/test-new.png';
 
         $manager->persist($cratedProduct);
         $manager->flush();
