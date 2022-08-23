@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcc
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -24,11 +25,13 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 {
     public function let(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
-        ProductFromDraftUpdaterInterface $productFromDraftUpdater
+        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
+        ProductDraftFilesOperatorInterface $filesOperator
     ): void {
         $this->beConstructedWith(
             $productFromDraftFactory,
-            $productFromDraftUpdater
+            $productFromDraftUpdater,
+            $filesOperator
         );
     }
 
@@ -62,8 +65,10 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
     public function it_updates_existing_product(
         ProductDraftInterface $productDraft,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
+        ProductDraftFilesOperatorInterface $filesOperator,
         ProductListingInterface $productListing,
-        ProductInterface $product
+        ProductInterface $product,
+        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $updatedProduct
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -72,7 +77,10 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
             ->willReturn($product);
 
         $productFromDraftUpdater->updateProduct($productDraft)
-            ->shouldBeCalled();
+            ->willReturn($updatedProduct);
+
+        $filesOperator->removeOldFiles($updatedProduct)->shouldBeCalledTimes(1);
+        $filesOperator->copyFilesToProduct($productDraft, $updatedProduct)->shouldBeCalledTimes(1);
 
         $this->acceptProductDraft($productDraft);
     }
