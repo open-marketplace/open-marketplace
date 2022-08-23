@@ -71,6 +71,9 @@ final class ResendOrderConfirmationEmailAction
             'sylius.email.order_confirmation_resent',
         );
 
-        return new RedirectResponse($request->headers->get('referer'));
+        /** @var string $referer */
+        $referer = $request->headers->get('referer');
+
+        return new RedirectResponse($referer);
     }
 }
