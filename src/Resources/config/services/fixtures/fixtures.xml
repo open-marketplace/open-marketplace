@@ -21,5 +21,17 @@
             <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.order" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="bitbag.mvm_plugin.fixture.conversation_category" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\ConversationCategoryFixture">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag_multi_vendor_marketplace.factory.conversation_category" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="bitbag.mvm_plugin.fixture.conversation" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\ConversationFixture">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.conversation" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

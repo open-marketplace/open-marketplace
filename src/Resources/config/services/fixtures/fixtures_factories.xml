@@ -51,5 +51,13 @@
             <argument type="service" id="sm.factory" />
             <argument type="service" id="bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor"/>
         </service>
+
+        <service id="bitbag.mvm_plugin.fixture.example_factory.conversation" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\ConversationExampleFactory">
+            <argument type="service" id="bitbag_mvm_plugin.factory.conversation" />
+            <argument type="service" id="bitbag_multi_vendor_marketplace.factory.conversation_message" />
+            <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository" />
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation_category" />
+        </service>
     </services>
 </container>

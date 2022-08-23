@@ -56,4 +56,8 @@ sylius_fixtures:
                         amount: 8
                         channel: 'FASHION_WEB'
 
+                conversation:
+                    options:
+                        random: 5
+
 
