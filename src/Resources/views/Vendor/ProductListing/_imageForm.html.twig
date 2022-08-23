@@ -1,0 +1,9 @@
+{% form_theme form '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/ImageTheme.html.twig' %}
+
+<div class="ui" data-tab="media">
+    <h3 class="ui top attached header">{{ 'sylius.ui.media'|trans }}</h3>
+
+    <div class="ui attached segment">
+        {{ form_row(form.images, {'label': false}) }}
+    </div>
+</div>

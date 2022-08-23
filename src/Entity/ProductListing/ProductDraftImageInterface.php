@@ -9,12 +9,10 @@
 
 declare(strict_types=1);
 
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+use Sylius\Component\Core\Model\ImageInterface;
 
-use Sylius\Component\Core\Model\OrderItemInterface as BaseOrderItemInterface;
-
-interface OrderItemInterface extends BaseOrderItemInterface
+interface ProductDraftImageInterface extends ImageInterface
 {
-    public function getProductOwner(): VendorInterface;
 }

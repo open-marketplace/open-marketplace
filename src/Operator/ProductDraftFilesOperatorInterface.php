@@ -9,11 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Operator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-interface ProductFromDraftFactoryInterface
+
+interface ProductDraftFilesOperatorInterface
 {
-    public function createSimpleProduct(ProductDraftInterface $productDraft): ProductInterface;
+    public function copyFilesToProduct(ProductDraftInterface $productDraft, ProductInterface $cratedProduct): void;
+
+    public function removeOldFiles(ProductInterface $product): void;
 }
