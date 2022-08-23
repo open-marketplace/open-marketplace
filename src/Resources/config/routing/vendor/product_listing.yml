@@ -1,10 +1,11 @@
 bitbag_mvm_plugin_vendor_product_listing_index:
-    path: /product-listings
-    methods: [GET]
-    defaults:
-        _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.show_product_listing_index
-        _sylius:
-            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig'
+  path: /product-listings
+  methods: [GET]
+  defaults:
+    _controller: bitbag_mvm_plugin.controller.product_listing:indexAction
+    _sylius:
+      template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/index.html.twig"
+      grid: bitbag_mvm_plugin_vendor_product_listing
 
 bitbag_mvm_plugin_vendor_product_listing_create_product:
     path: /product-listings/create

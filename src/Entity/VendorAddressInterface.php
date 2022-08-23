@@ -12,8 +12,9 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface VendorAddressInterface
+interface VendorAddressInterface extends ResourceInterface
 {
     public function getId(): ?int;
 

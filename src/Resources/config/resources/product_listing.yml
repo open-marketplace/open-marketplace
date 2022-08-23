@@ -4,7 +4,7 @@ sylius_resource:
       driver: doctrine/orm
       classes:
         model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
-        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface
+        repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepository
 
     bitbag_mvm_plugin.product_draft:
       driver: doctrine/orm

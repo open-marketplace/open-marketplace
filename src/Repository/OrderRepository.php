@@ -28,7 +28,7 @@ class OrderRepository extends BaseOrderRepository
             ;
     }
 
-    public function findOrderForVendor(VendorInterface $vendor, $id): ?OrderInterface
+    public function findOrderForVendor(VendorInterface $vendor, string $id): ?OrderInterface
     {
         $vendorId = $vendor->getId();
 
@@ -42,7 +42,7 @@ class OrderRepository extends BaseOrderRepository
             ->getOneOrNullResult();
     }
 
-    public function findOrdersForVendorByCustomer(VendorInterface $vendor, $id): QueryBuilder
+    public function findOrdersForVendorByCustomer(VendorInterface $vendor, string $id): QueryBuilder
     {
         $vendorId = $vendor->getId();
 

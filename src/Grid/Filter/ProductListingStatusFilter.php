@@ -22,6 +22,8 @@ final class ProductListingStatusFilter implements FilterInterface
         $data,
         array $options
     ): void {
-        $dataSource->restrict($dataSource->getExpressionBuilder()->equals('status', $data['status']));
+        if ($data['status']) {
+            $dataSource->restrict($dataSource->getExpressionBuilder()->equals('pd.status', $data['status']));
+        }
     }
 }
