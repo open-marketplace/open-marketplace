@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -39,6 +40,8 @@ class EditProductAction extends AbstractController
 
     private ImageUploaderInterface $imageUploader;
 
+    private ProductListingRepositoryInterface $productListingRepository;
+
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -46,21 +49,25 @@ class EditProductAction extends AbstractController
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
         ImageUploaderInterface $imageUploader,
-        ) {
+        ProductListingRepositoryInterface $productListingRepository
+    ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
         $this->productDraftRepository = $productDraftRepository;
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->imageUploader = $imageUploader;
+        $this->productListingRepository = $productListingRepository;
     }
 
     public function __invoke(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
+        $listing = $this->productListingRepository->find($request->get('id'));
+
         /** @var ProductDraftInterface $newResource */
-        $newResource = $this->productDraftRepository->find($request->get('id'));
+        $newResource = $this->productDraftRepository->findProductListingLatestProductDraft($listing);
 
         if (!(ProductDraftInterface::STATUS_CREATED == $newResource->getStatus())) {
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);

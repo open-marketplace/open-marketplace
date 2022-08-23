@@ -10,6 +10,8 @@ sylius_grid:
         name: doctrine/orm
         options:
           class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
+          repository:
+            method: createQueryBuilderWithLatestDraft
       filters:
         search:
           type: string
@@ -31,8 +33,10 @@ sylius_grid:
           type: datetime
           label: bitbag_mvm_plugin.ui.verified_at
         getLatestDraft.status:
-          type: string
+          type: twig
           label: bitbag_mvm_plugin.ui.status
+          options:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_status.html.twig"
       actions:
         item:
           details:

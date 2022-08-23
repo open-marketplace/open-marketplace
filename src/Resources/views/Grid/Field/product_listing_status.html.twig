@@ -1,0 +1,10 @@
+{% set map = {
+    'verified': {'color': 'teal', 'icon': 'check', 'text': 'bitbag_mvm_plugin.ui.verified'|trans},
+    'under_verification': {'color': 'yellow', 'icon': 'clock', 'text': 'bitbag_mvm_plugin.ui.under_verification'|trans},
+    'created': {'color': 'blue', 'icon': 'plus', 'text': 'sylius.ui.created'|trans},
+    'rejected': {'color': 'red', 'icon': 'ban', 'text': 'sylius.ui.rejected'|trans}
+} %}
+
+<span class="ui label {{ map[data].color }}">
+    <i class="icon {{ map[data].icon }}"></i> {{ map[data].text|capitalize }}
+</span>

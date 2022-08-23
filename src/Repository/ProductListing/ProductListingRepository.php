@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -26,5 +27,25 @@ class ProductListingRepository extends EntityRepository implements ProductListin
     public function createByProductDraftQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('pl');
+    }
+
+    public function createQueryBuilderWithLatestDraft(): QueryBuilder
+    {
+        return $this->createQueryBuilder('pl')
+            ->innerJoin('pl.productDrafts', 'pd')
+            ->leftJoin('pl.productDrafts', 'pd2', 'WITH', 'pd.id < pd2.id')
+            ->andWhere('pd2 IS NULL')
+            ;
+    }
+
+    public function createQueryBuilderByVendor(VendorInterface $vendor): QueryBuilder
+    {
+        $qb = $this->createQueryBuilderWithLatestDraft();
+        $vendorId = $vendor->getId();
+
+        return $qb
+            ->andWhere('pl.vendor = :vendor')
+            ->setParameter('vendor', $vendorId)
+            ;
     }
 }
