@@ -38,7 +38,7 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
 
             /** @var string $key */
             $key = $image->getPath();
-            $nameSuffix = "1.";
+            $nameSuffix = "-new.";
 
             $file = $this->filesystem->read($key);
 
