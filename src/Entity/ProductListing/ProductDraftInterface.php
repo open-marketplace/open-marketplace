@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\Collection;
+
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -84,6 +85,7 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function reject(): void;
 
     public function sendToVerification(): void;
+
 
     /** @return  Collection<int|string, ImageInterface> $images */
     public function getImages(): Collection;

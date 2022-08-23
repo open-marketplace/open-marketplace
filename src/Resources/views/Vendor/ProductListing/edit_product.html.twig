@@ -30,9 +30,11 @@
 {% endblock %}
 
 {% block javascripts %}
-{#    {{ parent() }}#}
-    <script src="/build/admin/admin-entry.js"></script>
-{#    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.create.javascripts'], { 'metadata': metadata }) }}#}
+
+{#    {{ parent() }}#} //TODO FRONTEND
+    <script src="/build/admin/admin-entry.js"/>
+    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.create.javascripts'], { 'metadata': metadata }) }}
+
 {% endblock %}
 
 

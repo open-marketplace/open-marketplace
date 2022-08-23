@@ -18,4 +18,6 @@ interface ProductInterface extends BaseProductInterface
     public function getVendor(): ?VendorInterface;
 
     public function setVendor(?VendorInterface $vendor): void;
+
+    public function resetImages(): void;
 }

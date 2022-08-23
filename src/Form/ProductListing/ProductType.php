@@ -65,14 +65,14 @@ final class ProductType extends AbstractType
                 $form = $event->getForm();
             })
             ->add('images', CollectionType::class, [
-            'entry_type' => ProductDraftImageType::class,
-            'entry_options' => ['product' => $options['data']],
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => true,
-            'required' => false,
-            'label' => 'sylius.form.product.images',
-            'block_name' => 'entry',
+                'entry_type' => ProductDraftImageType::class,
+                'entry_options' => ['product' => $options['data']],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => true,
+                'required' => false,
+                'label' => 'sylius.form.product.images',
+                'block_name' => 'entry',
             ])
         ;
 

@@ -101,7 +101,6 @@ class EditProductAction extends AbstractController
                 $this->productDraftRepository->save($productDraft);
                 $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
             }
-
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }
 

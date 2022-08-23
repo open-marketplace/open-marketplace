@@ -19,7 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperator;
 use Gaufrette\Filesystem;
 
-class ProductDraftFilesOperatorTest extends JsonApiTestCase
+final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 {
     public function setUp(): void
     {
@@ -51,13 +51,15 @@ class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->productDraftFilesOperator->copyFilesToProduct($draftFixture, $cratedProduct);
 
+        $expectedFilePathKey = 'AA/test1.png';
+
         $manager->persist($cratedProduct);
         $manager->flush();
 
         $product = $manager->getRepository(Product::class)->findOneBy(['code'=>"FIXTURE"]);
 
         self::assertEquals(1, count($product->getImages()));
-        self::assertEquals('AA/test1.png', $product->getImages()[0]->getPath());
+        self::assertEquals($expectedFilePathKey, $product->getImages()[0]->getPath());
     }
 
     private function create_draft_fixture_with_file(): void
@@ -78,11 +80,15 @@ class ProductDraftFilesOperatorTest extends JsonApiTestCase
         $fileObject = $fileInfo->openFile('r');
         $file = $fileObject->fread(filesize(__DIR__.'/test.png'));
 
-        if ($this->fileSystem->has('AA/test.png'))
-            $this->fileSystem->delete('AA/test.png');
+        $originalFilePathName = 'AA/test.png';
 
-        if ($this->fileSystem->has('AA/test1.png'))
+        if ($this->fileSystem->has('AA/test.png')) {
+            $this->fileSystem->delete('AA/test.png');
+        }
+
+        if ($this->fileSystem->has('AA/test1.png')) {
             $this->fileSystem->delete('AA/test1.png');
+        }
 
         $this->fileSystem->write('AA/test.png', $file);
 
