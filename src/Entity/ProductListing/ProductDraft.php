@@ -322,23 +322,25 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         ?string $fallbackLocaleCode = null
     ): ?AttributeValueInterface {
         $attributeCode = $attributeValue->getCode();
+
         if (null === $attributeCode) {
             return null;
         }
         if (!$this->hasNotEmptyAttributeByCodeAndLocale($attributeCode, $localeCode)) {
-            if (
-                null !== $fallbackLocaleCode &&
-                $this->hasNotEmptyAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode)
-            ) {
-                return $this->getAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode);
-            }
-
             return $attributeValue;
         }
-        /** @var AttributeValueInterface $attributes */
-        $attributes = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
 
-        return $attributes;
+        if (
+            null !== $fallbackLocaleCode &&
+            $this->hasNotEmptyAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode)
+        ) {
+            return $this->getAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode);
+        }
+
+        /** @var AttributeValueInterface $attributes */
+        $attribute = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
+
+        return $attribute;
     }
 
     protected function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
