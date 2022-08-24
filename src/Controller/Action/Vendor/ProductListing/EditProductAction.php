@@ -76,7 +76,6 @@ class EditProductAction extends AbstractController
         $form = $this->createForm(ProductType::class, $newResource);
 
         $form->handleRequest($request);
-
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();

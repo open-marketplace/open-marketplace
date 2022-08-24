@@ -121,8 +121,6 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
         $productDraft->getImages()->willReturn(new ArrayCollection([]));
 
-        $productDraft->getAttributes()->willReturn(new ArrayCollection([]));
-
         $newProductDraft->setVersionNumber(1)
             ->shouldBeCalled();
 
@@ -131,6 +129,8 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
         $newProductDraft->setCode('code')
             ->shouldBeCalled();
+
+        $newProductDraft->setAttributesFrom($productDraft)->shouldBeCalledOnce();
 
         $newProductDraft->setProductListing($productListing)
             ->shouldBeCalled();
