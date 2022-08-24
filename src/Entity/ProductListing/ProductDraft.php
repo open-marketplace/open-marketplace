@@ -337,7 +337,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
             return $this->getAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode);
         }
 
-        /** @var AttributeValueInterface $attributes */
+        /** @var AttributeValueInterface $attribute */
         $attribute = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
 
         return $attribute;
