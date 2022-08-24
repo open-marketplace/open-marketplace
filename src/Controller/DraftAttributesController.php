@@ -34,7 +34,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
-use Sylius\Component\Core\Provider;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -170,7 +169,7 @@ final class DraftAttributesController extends ResourceController
         return $this->render(
             $template,
             [
-                'types' => $this->get('sylius.registry.attribute_type'),//->all(),
+                'types' => $this->get('sylius.registry.attribute_type'), //->all(),
                 'metadata' => $this->metadata,
             ]
         );
@@ -265,6 +264,7 @@ final class DraftAttributesController extends ResourceController
     ): FormView {
         /** @var FormFactoryInterface $formFactory */
         $formFactory = $this->get('form.factory');
+
         return $formFactory
             ->createNamed(
                 'value',
@@ -274,5 +274,4 @@ final class DraftAttributesController extends ResourceController
             )
             ->createView();
     }
-
 }

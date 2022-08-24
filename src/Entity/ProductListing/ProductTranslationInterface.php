@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
-use Sylius\Component\Resource\Model\TranslationInterface;
-
 interface ProductTranslationInterface
 {
     public function getId(): int;

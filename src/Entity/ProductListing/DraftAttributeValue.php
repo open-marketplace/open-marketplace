@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
-use Webmozart\Assert\Assert;
 
 class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeValueInterface
 {
@@ -20,10 +19,8 @@ class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeVa
 
     public function getDraft(): ?ProductDraftInterface
     {
+        /** @var ProductDraftInterface $subject */
         $subject = parent::getSubject();
-
-        /** @var ProductDraftInterface|null $subject */
-        Assert::nullOrIsInstanceOf($subject, ProductDraftInterface::class);
 
         return $subject;
     }

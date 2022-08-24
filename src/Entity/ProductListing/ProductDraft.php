@@ -13,12 +13,9 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Webmozart\Assert\Assert;
 
 class ProductDraft implements ResourceInterface, ProductDraftInterface
 {
@@ -229,6 +226,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     {
         /** @var Collection<int, AttributeValueInterface|null> $attributes */
         $attributes = $this->attributes;
+
         return $this->attributes;
     }
 
@@ -257,33 +255,32 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
         /** @var Collection<int, AttributeValueInterface> $collection */
         $collection = new ArrayCollection($attributesWithFallback);
+
         return $collection;
     }
 
-    public function addAttribute(?AttributeValueInterface $attribute): void
+    public function addAttribute(AttributeValueInterface $attribute): void
     {
-        /** @var ProductAttributeValueInterface $attribute */
-        if (!$this->hasAttribute($attribute)) {
-            if($attribute instanceof DraftAttributeValueInterface) {
-                $attribute->setDraft($this);
-                $this->attributes->add($attribute);
-            }
+        if ($this->hasAttribute($attribute)) {
+            return;
+        }
+
+        if ($attribute instanceof DraftAttributeValueInterface) {
+            $attribute->setDraft($this);
+            $this->attributes->add($attribute);
         }
     }
 
+    /** @param DraftAttributeValueInterface $attribute */
     public function removeAttribute(AttributeValueInterface $attribute): void
     {
-        /** @var ProductAttributeValueInterface $attribute */
-        Assert::isInstanceOf(
-            $attribute,
-            ProductAttributeValueInterface::class,
-            'Attribute objects removed from a Product object have to implement ProductAttributeValueInterface'
-        );
+        if (!$this->hasAttribute($attribute)) {
+            return;
+        }
 
         if ($this->hasAttribute($attribute)) {
             $this->attributes->removeElement($attribute);
-            if($attribute instanceof DraftAttributeValueInterface)
-                $attribute->setDraft(null);
+            $attribute->setDraft(null);
         }
     }
 
@@ -295,7 +292,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool
     {
         foreach ($this->attributes as $attribute) {
-            if(null === $attribute->getAttribute()){
+            if (null === $attribute->getAttribute()) {
                 continue;
             }
             if ($attribute->getAttribute()->getCode() === $attributeCode
@@ -310,7 +307,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface
     {
         foreach ($this->attributes as $attribute) {
-            if (null === $attribute->getAttribute()){
+            if (null === $attribute->getAttribute()) {
                 continue;
             }
             if ($attribute->getAttribute()->getCode() === $attributeCode &&
@@ -328,8 +325,9 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         ?string $fallbackLocaleCode = null
     ): ?AttributeValueInterface {
         $attributeCode = $attributeValue->getCode();
-        if (null === $attributeCode)
+        if (null === $attributeCode) {
             return null;
+        }
         if (!$this->hasNotEmptyAttributeByCodeAndLocale($attributeCode, $localeCode)) {
             if (
                 null !== $fallbackLocaleCode &&
@@ -340,11 +338,10 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
             return $attributeValue;
         }
-        /** @var AttributeValueInterface $attributes  */
-
+        /** @var AttributeValueInterface $attributes */
         $attributes = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
-        return $attributes;
 
+        return $attributes;
     }
 
     protected function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool

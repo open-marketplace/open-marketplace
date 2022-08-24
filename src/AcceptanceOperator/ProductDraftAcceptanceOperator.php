@@ -15,7 +15,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOperatorInterface
@@ -30,7 +29,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductDraftFilesOperatorInterface $productDraftFilesOperator,
-    ) {
+        ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
         $this->productDraftFilesOperator = $productDraftFilesOperator;
@@ -52,6 +51,5 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
 
         return $product;
-
     }
 }
