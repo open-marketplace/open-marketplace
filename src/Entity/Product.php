@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\Product as BaseProduct;
 
@@ -31,5 +32,10 @@ class Product extends BaseProduct implements ProductInterface
     public function setVendor(?VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
+    }
+
+    public function setAttributesFrom(ProductDraftInterface $draft): void
+    {
+        $this->attributes = $draft->getAttributes();
     }
 }

@@ -85,9 +85,9 @@ class EditProductAction extends AbstractController
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
             }
-
             foreach ($productDraft->getAttributes() as $attribute) {
                 $attribute->setSubject($productDraft);
+                $productDraft->addAttribute($attribute);
             }
 
             /** @var ClickableInterface $button */

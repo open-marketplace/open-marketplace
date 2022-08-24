@@ -112,4 +112,6 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool;
 
     public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface;
+
+    public function setAttributesFrom(ProductDraftInterface $otherDraft): void;
 }

@@ -363,4 +363,12 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     {
         return new ProductTranslation();
     }
+
+    public function setAttributesFrom(ProductDraftInterface $otherDraft): void
+    {
+        $this->attributes = $otherDraft->getAttributes();
+        foreach ($otherDraft->getAttributes() as $attribute){
+            $attribute->setSubject($this);
+        }
+    }
 }
