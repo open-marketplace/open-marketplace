@@ -224,9 +224,6 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
     public function getAttributes(): Collection
     {
-        /** @var Collection<int, AttributeValueInterface|null> $attributes */
-        $attributes = $this->attributes;
-
         return $this->attributes;
     }
 
@@ -367,7 +364,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function setAttributesFrom(ProductDraftInterface $otherDraft): void
     {
         $this->attributes = $otherDraft->getAttributes();
-        foreach ($otherDraft->getAttributes() as $attribute){
+        foreach ($otherDraft->getAttributes() as $attribute) {
             $attribute->setSubject($this);
         }
     }

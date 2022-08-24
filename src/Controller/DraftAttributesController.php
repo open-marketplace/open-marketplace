@@ -30,7 +30,6 @@ use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry;
 use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -169,7 +168,8 @@ final class DraftAttributesController extends ResourceController
     public function getAttributeTypesAction(Request $request, string $template): Response
     {
         /** @var ServiceRegistryInterface $serviceRegistry */
-        $serviceRegistry =  $this->get('sylius.registry.attribute_type');
+        $serviceRegistry = $this->get('sylius.registry.attribute_type');
+
         return $this->render(
             $template,
             [
