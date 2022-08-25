@@ -79,5 +79,11 @@
             <argument type="service" id="bitbag.mvm_plugin.repository.product_repository"/>
             <argument type="service" id="sylius.context.channel"/>
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ProductListing\ProductDraftController"
+                 id="bitbag_mvm_plugin.controller.productDraft"
+                 parent="bitbag_mvm_plugin.controller.product_draft">
+            <argument type="service" id="sylius.image_uploader" />
+        </service>
     </services>
 </container>

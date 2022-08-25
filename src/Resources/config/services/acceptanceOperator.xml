@@ -7,6 +7,7 @@
                  id="bitbag.mvm_plugin.acceptance_operator.product_draft_acceptance_operator">
             <argument type="service" id="bitbag_mvm_plugin.factory.product_from_draft_factory"/>
             <argument type="service" id="bitbag.mvm_plugin.updater.product_from_draft_updater"/>
+            <argument type="service" id="bitbag_mvm_plugin.operator.product_draft_files"/>
         </service>
     </services>
 </container>

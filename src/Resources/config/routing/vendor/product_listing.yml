@@ -2,26 +2,35 @@ bitbag_mvm_plugin_vendor_product_listing_index:
   path: /product-listings
   methods: [GET]
   defaults:
-    _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.show_product_listing_index
+    _controller: bitbag_mvm_plugin.controller.product_listing:indexAction
     _sylius:
-      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_product_listing.html.twig'
+      template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/index.html.twig"
+      grid: bitbag_mvm_plugin_vendor_product_listing
 
 bitbag_mvm_plugin_vendor_product_listing_create_product:
-  path: /product-listings/create
-  methods: [GET,POST]
-  defaults:
-    _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.create_product_action
+    path: /product-listings/create
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.create_product_action
+        _sylius:
+            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/create_product.html.twig'
+            redirect:
+                route: vendor_product_variant_index
 
 bitbag_mvm_plugin_vendor_product_listing_edit_product:
-  path: /product-listings/{id}/edit
-  methods: [GET,POST]
-  defaults:
-    _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.edit_product_action
+    path: /product-listings/{id}/edit
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.edit_product_action
+        _sylius:
+            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/edit_product.html.twig'
+            redirect:
+                route: vendor_product_variant_index
 
 bitbag_mvm_plugin_vendor_product_draft_show_product:
-  path: /product-listings/{id}
-  methods: [GET,POST]
-  defaults:
-    _controller: bitbag_mvm_plugin.controller.product_draft:showAction
-    _sylius:
-      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_single_product_draft.html.twig'
+    path: /product-listings/{id}
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.product_draft:showAction
+        _sylius:
+            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_single_product_draft.html.twig'

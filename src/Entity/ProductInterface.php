@@ -11,9 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-interface ProductInterface
+use Sylius\Component\Core\Model\ProductInterface as BaseProductInterface;
+
+interface ProductInterface extends BaseProductInterface
 {
     public function getVendor(): ?VendorInterface;
 
     public function setVendor(?VendorInterface $vendor): void;
+
+    public function resetImages(): void;
 }

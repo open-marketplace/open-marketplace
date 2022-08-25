@@ -13,7 +13,9 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOperatorInterface
@@ -22,20 +24,33 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
     private ProductFromDraftUpdaterInterface $productFromDraftUpdater;
 
+    private ProductDraftFilesOperatorInterface $productDraftFilesOperator;
+
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
-        ProductFromDraftUpdaterInterface $productFromDraftUpdater
+        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
+        ProductDraftFilesOperatorInterface $productDraftFilesOperator,
     ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
+        $this->productDraftFilesOperator = $productDraftFilesOperator;
     }
 
     public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface
     {
         if (!$productDraft->getProductListing()->getProduct()) {
-            return $this->productFromDraftFactory->createSimpleProduct($productDraft);
+            $cratedProduct =  $this->productFromDraftFactory->createSimpleProduct($productDraft);
+            $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $cratedProduct);
+            
+            return $cratedProduct;
         }
 
-        return $this->productFromDraftUpdater->updateProduct($productDraft);
+        $product = $this->productFromDraftUpdater->updateProduct($productDraft);
+
+        $this->productDraftFilesOperator->removeOldFiles($product);
+        $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
+
+        return $product;
+
     }
 }

@@ -15,10 +15,10 @@ Feature: Verifying product listing
     And I am on "/admin"
     And I follow "Product listings"
     And I should see 1 product listing
-    And I should see product's listing status "under_verification"
+    And I should see product's listing status "Under verification"
     And I follow "Details"
     And I should see url "#\/admin\/product-listings\/(\d+)#"
     When I click "Accept" button
     Then I should see url "#\/admin\/product-listings\/$#"
-    And I should see product's listing status "verified"
+    And I should see product's listing status "Verified"
     And I should see "Product listing verified."
