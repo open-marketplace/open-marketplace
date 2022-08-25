@@ -15,7 +15,7 @@ use Sylius\Component\Core\Model\Product as BaseProduct;
 
 class Product extends BaseProduct implements ProductInterface
 {
-    private ?VendorInterface $vendor;
+    protected ?VendorInterface $vendor;
 
     public function getVendor(): ?VendorInterface
     {

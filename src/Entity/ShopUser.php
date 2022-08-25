@@ -26,4 +26,6 @@ class ShopUser extends BaseShopUser implements ShopUserInterface
     {
         $this->vendor = $vendor;
     }
+
+
 }
