@@ -11,21 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Model\ShopUser\ShopUserTrait;
 use Sylius\Component\Core\Model\ShopUser as BaseShopUser;
 
 class ShopUser extends BaseShopUser implements ShopUserInterface
 {
-    protected ?VendorInterface $vendor;
-
-    public function getVendor(): ?VendorInterface
-    {
-        return $this->vendor;
-    }
-
-    public function setVendor(VendorInterface $vendor): void
-    {
-        $this->vendor = $vendor;
-    }
-
-
+    use ShopUserTrait;
 }
