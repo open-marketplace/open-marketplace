@@ -27,3 +27,9 @@ sylius_resource:
                 interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdateInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
 
+        bitbag_mvm_plugin.vendor_shipping_method:
+            classes:
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethod
+                interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethodInterface
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+

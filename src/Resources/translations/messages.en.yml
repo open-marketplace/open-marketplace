@@ -41,6 +41,7 @@ bitbag_mvm_plugin:
         logo: 'Logo'
         invalid_logo: 'Please upload a valid image (jpg/png/svg)'
         description: 'Description'
+        shipping_methods: "Shipping methods"
         open: Open
         closed: Closed
         minimum: "minimum"

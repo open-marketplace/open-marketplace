@@ -42,6 +42,15 @@
         </one-to-many>
 
         <one-to-many field="productListings" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing" mapped-by="vendor"/>
-
+        <one-to-many
+                field="shippingMethods"
+                target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethod"
+                mapped-by="vendor"
+                orphan-removal="true"
+        >
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
     </mapped-superclass>
 </doctrine-mapping>

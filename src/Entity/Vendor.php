@@ -15,9 +15,8 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
-class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterface
+class Vendor implements VendorInterface
 {
     protected ?int $id;
 
@@ -49,9 +48,12 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     /** @var Collection<int, ProductListing> */
     private Collection $productListings;
 
+    private Collection $shippingMethods;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->shippingMethods = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -213,5 +215,29 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
     public function isVerified(): bool
     {
         return self::STATUS_VERIFIED === $this->getStatus();
+    }
+
+    public function getShippingMethods(): Collection
+    {
+        return $this->shippingMethods;
+    }
+
+    public function hasShippingMethod(VendorShippingMethodInterface $shippingMethod): bool
+    {
+        return $this->shippingMethods->contains($shippingMethod);
+    }
+
+    public function addShippingMethod(VendorShippingMethodInterface $shippingMethod): void
+    {
+        if (!$this->hasShippingMethod($shippingMethod)) {
+            $this->shippingMethods->add($shippingMethod);
+        }
+    }
+
+    public function removeShippingMethod(VendorShippingMethodInterface $shippingMethod): void
+    {
+        if ($this->hasShippingMethod($shippingMethod)) {
+            $this->shippingMethods->removeElement($shippingMethod);
+        }
     }
 }
