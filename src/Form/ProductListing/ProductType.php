@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -49,6 +51,21 @@ final class ProductType extends AbstractType
                     'class' => 'ui labeled icon secondary button',
                 ],
             ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+                $product = $event->getData();
+                $form = $event->getForm();
+
+            })
+            ->add('images', CollectionType::class, [
+                'entry_type' => ProductDraftImageType::class,
+                'entry_options' => ['product' => $options['data']],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => true,
+                'required' => false,
+                'label' => 'sylius.form.product.images',
+                'block_name' => 'entry',
+            ])
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
@@ -68,7 +85,7 @@ final class ProductType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_product';
+        return 'sylius_product';
     }
 
     public function configureOptions(OptionsResolver $resolver): void

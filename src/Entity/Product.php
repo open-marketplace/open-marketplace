@@ -11,12 +11,18 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\Product as BaseProduct;
 
 class Product extends BaseProduct implements ProductInterface
 {
-    private ?VendorInterface $vendor;
+    protected ?VendorInterface $vendor;
 
+    public function resetImages(): void
+    {
+        $this->images = new ArrayCollection();
+    }
+    
     public function getVendor(): ?VendorInterface
     {
         return $this->vendor;

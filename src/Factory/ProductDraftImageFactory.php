@@ -11,9 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-interface ProductFromDraftFactoryInterface
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage;
+use Sylius\Component\Core\Model\ImageInterface;
+
+final class ProductDraftImageFactory
 {
-    public function createSimpleProduct(ProductDraftInterface $productDraft): ProductInterface;
+    public function createNew(): ImageInterface
+    {
+        return new ProductDraftImage();
+    }
+
+
 }

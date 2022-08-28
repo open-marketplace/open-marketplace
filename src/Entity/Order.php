@@ -20,12 +20,12 @@ class Order extends BaseOrder implements OrderInterface
     /** @var Collection<int, OrderItemInterface> */
     protected $items;
 
-    private ?VendorInterface $vendor = null;
+    protected ?VendorInterface $vendor = null;
 
-    private ?OrderInterface $primaryOrder;
+    protected ?OrderInterface $primaryOrder;
 
     /** @var Collection<int, OrderInterface> */
-    private Collection $secondaryOrders;
+    protected Collection $secondaryOrders;
 
     public function __construct()
     {
