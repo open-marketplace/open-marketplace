@@ -49,6 +49,7 @@
             <argument type="service" id="router"/>
             <argument type="service" id="bitbag_mvm_plugin.factory.vendor_profile_factory"/>
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="sylius.image_uploader" />
             <tag name="controller.service_arguments"/>
         </service>
 

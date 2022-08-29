@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Uploader\ImageUploader;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,13 +37,16 @@ final class VendorProfileUpdateAction
 
     private EntityManagerInterface $manager;
 
+    private ImageUploader $imageUploader;
+
     public function __construct(
         VendorProfileUpdaterInterface $vendorProfileUpdateService,
         VendorProviderInterface $vendorProvider,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         VendorProfileFactoryInterface $vendorFactory,
-        EntityManagerInterface $manager
+        EntityManagerInterface $manager,
+        ImageUploader $imageUploader
     ) {
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
@@ -50,6 +54,7 @@ final class VendorProfileUpdateAction
         $this->router = $router;
         $this->vendorFactory = $vendorFactory;
         $this->manager = $manager;
+        $this->imageUploader = $imageUploader;
     }
 
     public function __invoke(Request $request): Response
@@ -60,7 +65,9 @@ final class VendorProfileUpdateAction
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-//            dd($form->getData());
+
+            $this->imageUploader->upload($form->getData()->getImage());
+            dd($form->getData()->getImage());
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
 
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
