@@ -7,6 +7,7 @@ imports:
 
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
 
+    - { resource: "../../src/Resources/config/resources/vendor.yaml"}
     - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/config.yml"}
 
 parameters:
@@ -15,3 +16,25 @@ parameters:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_order:
+    resources:
+        order:
+            classes:
+                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order
+        order_item:
+            classes:
+                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem
+
+sylius_product:
+    resources:
+        product:
+            classes:
+                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product
+
+sylius_user:
+    resources:
+        shop:
+            user:
+                classes:
+                    model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser
