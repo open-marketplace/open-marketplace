@@ -29,10 +29,9 @@ final class DraftAttributeFactory implements DraftAttributeFactoryInterface
         FactoryInterface $factory,
         ServiceRegistryInterface $attributeTypesRegistry,
         VendorProviderInterface $vendorProvider,
-        ) {
+    ) {
         $this->factory = $factory;
         $this->attributeTypesRegistry = $attributeTypesRegistry;
-
         $this->vendorProvider = $vendorProvider;
     }
 
