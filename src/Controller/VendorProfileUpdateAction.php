@@ -66,8 +66,13 @@ final class VendorProfileUpdateAction
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->imageUploader->upload($form->getData()->getImage());
-            dd($form->getData()->getImage());
+            $file = $request->files->get('vendor')['image']['file'];
+            dd($file->move(
+                './'.$vendor->getCompanyName(),
+                $file->getClientOriginalName()
+            ));
+//            $this->imageUploader->upload($form->getData()->getImage());
+//            dd($request->files->get('vendor')['image']);
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
 
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(

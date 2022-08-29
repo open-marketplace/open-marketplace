@@ -45,6 +45,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         VendorProfileInterface $vendorData,
         VendorInterface $currentVendor
     ): void {
+        dd($vendorData);
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
         $token = $pendingVendorUpdate->getToken();
 
