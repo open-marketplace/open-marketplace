@@ -96,6 +96,9 @@ final class DraftAttributesController extends ResourceController
 
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
 
+        /**
+         * This three lines uses custom factory to create attribute rest is default Sylius controller
+         */
         $type = $request->attributes->get('type');
         $newResource = $this->draftAttributeFactory->createTyped($type);
         $form = $this->resourceFormFactory->create($configuration, $newResource);
@@ -165,6 +168,9 @@ final class DraftAttributesController extends ResourceController
         ]);
     }
 
+    /**
+     * All methods bellow are responsible for render form for different attribute types
+     */
     public function getAttributeTypesAction(Request $request, string $template): Response
     {
         /** @var ServiceRegistryInterface $serviceRegistry */
