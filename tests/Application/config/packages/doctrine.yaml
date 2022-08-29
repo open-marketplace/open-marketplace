@@ -22,8 +22,3 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/src/Resources/config/doctrine'
                 prefix: 'Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity'
-            MVM:
-                is_bundle: false
-                type: xml
-                dir: '%kernel.project_dir%/../../src/Resources/config/doctrine'
-                prefix: 'BitBag\SyliusMultiVendorMarketplacePlugin\Entity'

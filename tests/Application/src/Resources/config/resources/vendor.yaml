@@ -1,5 +1,0 @@
-sylius_resource:
-    resources:
-        bitbag_mvm_plugin.vendor:
-            classes:
-                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor\Vendor
