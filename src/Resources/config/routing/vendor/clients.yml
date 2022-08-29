@@ -8,8 +8,6 @@ bitbag_mvm_plugin_customer_index:
 
 bitbag_mvm_plugin_vendor_customer_show:
     path: /customers/{id}
-    requirements:
-        id: '\d+'
     methods: [GET]
     defaults:
         id: 0

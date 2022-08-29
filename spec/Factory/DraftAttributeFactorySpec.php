@@ -16,7 +16,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\DraftAttributeFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -56,7 +55,6 @@ final class DraftAttributeFactorySpec extends ObjectBehavior
         $attribute->setType($type)->shouldBeCalledOnce();
         $attribute->setStorageType($storageType)->shouldBeCalledOnce();
         $attribute->setVendor($vendor)->shouldBeCalledOnce();
-
 
         $item = $this->createTyped($type);
 
