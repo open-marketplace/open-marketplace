@@ -4,3 +4,7 @@ sylius_resource:
       classes:
         model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage
         form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType
+    bitbag_multi_vendor_marketplace.vendor_profile_update_image:
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage
+#        form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType

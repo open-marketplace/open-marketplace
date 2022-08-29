@@ -13,16 +13,25 @@
         <field name="taxIdentifier" column="tax_identifier" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
         <field name="token" column="token" type="text" />
+        <field name="description" column="description" type="string" length="2048" />
+
         <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate" >
             <join-column name="vendor_address_id" referenced-column-name="id" on-delete="SET NULL" />
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-one>
-        <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor">
-        </one-to-one>
 
-        <field name="description" column="description" type="string" length="2048" />
+        <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" />
+
+        <one-to-one field="image"
+                    target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage"
+                    mapped-by="owner"
+                    orphan-removal="true">
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </one-to-one>
 
     </mapped-superclass>
 </doctrine-mapping>

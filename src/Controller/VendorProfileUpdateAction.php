@@ -60,6 +60,7 @@ final class VendorProfileUpdateAction
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+//            dd($form->getData());
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
 
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
