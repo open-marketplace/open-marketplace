@@ -49,7 +49,7 @@ final class RejectAction
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
         /** @var ProductDraftInterface $latestProductDraft */
-        $latestProductDraft = $this->productDraftRepository->findProductListingLatestProductDraft($productListing);
+        $latestProductDraft = $this->productDraftRepository->findLatestDraft($productListing);
 
         $this->productDraftStateMachineTransition->applyIfCan($latestProductDraft, ProductDraftTransitions::TRANSITION_REJECT);
 

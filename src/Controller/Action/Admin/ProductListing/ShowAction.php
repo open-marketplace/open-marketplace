@@ -75,7 +75,7 @@ final class ShowAction
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
         /** @var ProductDraftInterface $latestProductDraft */
-        $latestProductDraft = $this->productDraftRepository->findProductListingLatestProductDraft($productListing);
+        $latestProductDraft = $this->productDraftRepository->findLatestDraft($productListing);
 
         $conversation = new Conversation();
 

@@ -1,5 +1,5 @@
 @draft_attribute
-Feature: Vendor can create attributes for drafts
+Feature: Vendor can create attributes for product listings
 
   Background:
     Given the store operates on a single channel in "United States"
