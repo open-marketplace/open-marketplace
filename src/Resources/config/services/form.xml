@@ -47,8 +47,7 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeType"
-                 id="bitbag_mvm_plugin.form.type.draftAttribute"
-                 public="true">
+                 id="bitbag_mvm_plugin.form.type.draftAttribute">
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute</argument>
             <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeTranslationType</argument>
@@ -57,7 +56,7 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeTranslationType"
-                 id="bitbag_mvm_plugin.form.type.draft_attribute_translation"  public="true">
+                 id="bitbag_mvm_plugin.form.type.draft_attribute_translation" >
             <tag name="form.type"/>
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation</argument>
             <argument>%sylius.form.type.product_attribute_translation.validation_groups%</argument>
@@ -71,7 +70,7 @@
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeValueType"
-                 id="bitbag_mvm_plugin.form.product_listing.draft_attribute_value_type" public="true">
+                 id="bitbag_mvm_plugin.form.product_listing.draft_attribute_value_type" >
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue</argument>
             <argument>%sylius.form.type.product_attribute_value.validation_groups%</argument>
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType</argument>
