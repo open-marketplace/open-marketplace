@@ -11,13 +11,23 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
+
+use Sylius\Component\Core\Model\OrderItem;
+use Sylius\Component\Core\Model\OrderItemInterface;
 
 final class OrderItemFactory implements OrderItemFactoryInterface
 {
+    private ?string $text;
+
+    public function __construct(string $text)
+    {
+        $this->text = $text;
+    }
+
     public function createNew(): OrderItemInterface
     {
-        return new OrderItem();
+        return new $this->text();
     }
+
+
 }

@@ -41,9 +41,9 @@ interface VendorInterface extends VendorProfileInterface
 
     public function setVendorAddress(?VendorAddressInterface $vendorAddress): void;
 
-    public function getShopUser(): ShopUserInterface;
+    public function getShopUser();
 
-    public function setShopUser(ShopUserInterface $user): void;
+    public function setShopUser($user): void;
 
     public function getStatus(): string;
 
