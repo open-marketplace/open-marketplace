@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
@@ -39,6 +40,8 @@ final class VendorProfileUpdateAction
 
     private ImageUploader $imageUploader;
 
+    private VendorProfileUpdateImageFactoryInterface $imageFactory;
+
     public function __construct(
         VendorProfileUpdaterInterface $vendorProfileUpdateService,
         VendorProviderInterface $vendorProvider,
@@ -46,7 +49,8 @@ final class VendorProfileUpdateAction
         RouterInterface $router,
         VendorProfileFactoryInterface $vendorFactory,
         EntityManagerInterface $manager,
-        ImageUploader $imageUploader
+        ImageUploader $imageUploader,
+        VendorProfileUpdateImageFactoryInterface $imageFactory,
     ) {
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
@@ -55,6 +59,7 @@ final class VendorProfileUpdateAction
         $this->vendorFactory = $vendorFactory;
         $this->manager = $manager;
         $this->imageUploader = $imageUploader;
+        $this->imageFactory = $imageFactory;
     }
 
     public function __invoke(Request $request): Response
@@ -65,19 +70,19 @@ final class VendorProfileUpdateAction
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $file = $request->files->get('vendor')['image']['file'];
-            dd($file->move(
-                './'.$vendor->getCompanyName(),
-                $file->getClientOriginalName()
-            ));
-//            $this->imageUploader->upload($form->getData()->getImage());
-//            dd($request->files->get('vendor')['image']);
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
+
+            $image = $request->files->get('vendor')['image']['file'];
+            if($image){
+                $path = 'Images/'.$currentVendor->getCompanyName();
+                $image->move($path);
+                $imageEntity = $this->imageFactory->create($path);
+            }
 
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
                 $form->getData(),
-                $currentVendor
+                $currentVendor,
+                $imageEntity
             );
 
             $currentVendor->setEditedAt(new \DateTime());

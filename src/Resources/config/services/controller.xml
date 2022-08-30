@@ -50,6 +50,7 @@
             <argument type="service" id="bitbag_mvm_plugin.factory.vendor_profile_factory"/>
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="bitbag.mvm_plugin.service.vendor_profile_image_factory" />
             <tag name="controller.service_arguments"/>
         </service>
 

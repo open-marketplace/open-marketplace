@@ -13,8 +13,10 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
@@ -29,24 +31,34 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
     private VendorProfileUpdateFactoryInterface $profileUpdateFactory;
 
+    private VendorProfileUpdateImageFactoryInterface $imageFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         ProfileUpdateRemoverInterface $remover,
-        VendorProfileUpdateFactoryInterface $profileUpdateFactory
+        VendorProfileUpdateFactoryInterface $profileUpdateFactory,
+        VendorProfileUpdateImageFactoryInterface $imageFactory,
     ) {
         $this->entityManager = $entityManager;
         $this->sender = $sender;
         $this->remover = $remover;
         $this->profileUpdateFactory = $profileUpdateFactory;
+        $this->imageFactory = $imageFactory;
     }
 
     public function createPendingVendorProfileUpdate(
         VendorProfileInterface $vendorData,
-        VendorInterface $currentVendor
+        VendorInterface $currentVendor,
+        ?VendorProfileUpdateImageInterface $image
     ): void {
-        dd($vendorData);
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
+
+        if($image){
+          $image->setOwner($pendingVendorUpdate);
+          $pendingVendorUpdate->setImage($image);        }
+
+        dd($pendingVendorUpdate->getImage());
         $token = $pendingVendorUpdate->getToken();
 
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);

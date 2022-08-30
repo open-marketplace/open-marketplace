@@ -27,7 +27,7 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
 
     protected ?string $token;
 
-    protected ?VendorImageInterface $image = null;
+    protected ?VendorProfileUpdateImage $image = null;
 
     protected ?string $description;
 
@@ -111,12 +111,12 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
         $this->description = $description;
     }
 
-    public function getImage(): ?VendorImageInterface
+    public function getImage(): ?VendorProfileUpdateImage
     {
         return $this->image;
     }
 
-    public function setImage(?VendorImageInterface $image): void
+    public function setImage(?VendorProfileUpdateImage $image): void
     {
         $this->image = $image;
     }

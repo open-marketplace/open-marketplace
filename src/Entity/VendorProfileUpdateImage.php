@@ -13,7 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-class VendorProfileUpdateImage implements ResourceInterface
+class VendorProfileUpdateImage implements VendorProfileUpdateImageInterface, ResourceInterface
 {
     protected ?int $id;
 
@@ -53,12 +53,12 @@ class VendorProfileUpdateImage implements ResourceInterface
         $this->path = $path;
     }
 
-    public function getOwner(): ?VendorInterface
+    public function getOwner(): ?VendorProfileUpdateInterface
     {
         return $this->owner;
     }
 
-    public function setOwner(VendorInterface $owner): void
+    public function setOwner(VendorProfileUpdateInterface $owner): void
     {
         $this->owner = $owner;
     }

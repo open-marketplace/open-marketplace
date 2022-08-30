@@ -73,6 +73,8 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactory"
                  id="bitbag.mvm_plugin.factory.order_item_factory"/>
 
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactory"
+                 id="bitbag.mvm_plugin.service.vendor_profile_image_factory" />
     </services>
 </container>
 

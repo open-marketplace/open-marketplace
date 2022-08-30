@@ -21,8 +21,8 @@ interface VendorProfileUpdateInterface extends VendorProfileInterface
 
     public function setVendor(VendorInterface $vendor): void;
 
-    public function getImage(): ?VendorImageInterface;
+    public function getImage(): ?VendorProfileUpdateImage;
 
-    public function setImage(?VendorImageInterface $image): void;
+    public function setImage(?VendorProfileUpdateImage $image): void;
 
 }
