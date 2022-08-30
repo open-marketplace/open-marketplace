@@ -21,7 +21,7 @@ class Vendor implements VendorInterface
 {
     protected ?int $id;
 
-    protected  $shopUser;
+    protected ShopUserInterface $shopUser;
 
     protected ?string $companyName = null;
 
@@ -104,12 +104,12 @@ class Vendor implements VendorInterface
         $this->vendorAddress = $vendorAddress;
     }
 
-    public function getShopUser()
+    public function getShopUser(): ShopUserInterface
     {
         return $this->shopUser;
     }
 
-    public function setShopUser($user): void
+    public function setShopUser(ShopUserInterface $user): void
     {
         $this->shopUser = $user;
     }
