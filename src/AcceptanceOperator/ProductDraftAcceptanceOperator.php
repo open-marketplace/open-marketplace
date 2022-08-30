@@ -15,6 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagProductInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
@@ -44,7 +45,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
             
             return $cratedProduct;
         }
-
+        /** @var BitBagProductInterface $product */
         $product = $this->productFromDraftUpdater->updateProduct($productDraft);
 
         $this->productDraftFilesOperator->removeOldFiles($product);
