@@ -292,8 +292,10 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
             if (null === $attribute->getAttribute()) {
                 continue;
             }
-            if ($attribute->getAttribute()->getCode() === $attributeCode
-                && ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode())) {
+            $actualAttributeCode = $attribute->getAttribute()->getCode();
+            $actualLocaleCode = $attribute->getLocaleCode();
+            if ($actualAttributeCode === $attributeCode
+                && ($actualLocaleCode === $localeCode || null === $attribute->getLocaleCode())) {
                 return true;
             }
         }
@@ -307,8 +309,10 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
             if (null === $attribute->getAttribute()) {
                 continue;
             }
-            if ($attribute->getAttribute()->getCode() === $attributeCode &&
-                ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode())) {
+            $actualAttributeCode = $attribute->getAttribute()->getCode();
+            $actualLocaleCode = $attribute->getLocaleCode();
+            if ($actualAttributeCode === $attributeCode &&
+                ($actualLocaleCode  === $localeCode || null === $actualLocaleCode)) {
                 return $attribute;
             }
         }
