@@ -1,9 +1,0 @@
-sylius_product:
-    resources:
-        product:
-            classes:
-                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product
-        product_variant:
-            classes:
-                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductVariantRepository
-
