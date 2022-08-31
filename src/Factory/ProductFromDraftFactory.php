@@ -36,8 +36,8 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         ProductTranslationFactoryInterface $productTranslationFactory,
         ProductVariantFactoryInterface $productVariantFactory,
         ChannelPricingFactoryInterface $channelPricingFactory,
-        ChannelRepositoryInterface $channelRepository,
-        ) {
+        ChannelRepositoryInterface $channelRepository
+    ) {
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->productVariantFactory = $productVariantFactory;
