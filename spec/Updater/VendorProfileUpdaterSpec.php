@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
-
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
