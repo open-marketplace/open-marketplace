@@ -15,7 +15,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class OrderFactory implements OrderFactoryInterface
 {
-    private string $FQN;
+    private string $classFQN;
 
     public function __construct(string $FQN)
     {
