@@ -36,11 +36,16 @@
                  id="bitbag.mvm_plugin.factory.product_variant_factory">
         </service>
 
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantTranslationFactory"
+                 id="bitbag.mvm_plugin.factory.product_variant_translation_factory">
+        </service>
+
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactory"
                  id="bitbag_mvm_plugin.factory.product_from_draft_factory">
             <argument type="service" id="sylius.custom_factory.product" />
             <argument type="service" id="bitbag.mvm_plugin.factory.product_translation_factory" />
             <argument type="service" id="bitbag.mvm_plugin.factory.product_variant_factory" />
+            <argument type="service" id="bitbag.mvm_plugin.factory.product_variant_translation_factory" />
             <argument type="service" id="bitbag.mvm_plugin.factory.channel_pricing_factory" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="bitbag_mvm_plugin.factory.product_image"/>

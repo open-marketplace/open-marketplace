@@ -193,6 +193,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
             /** @var ProductInterface $product */
             $product = $this->faker->randomElement($products);
             $variant = $this->faker->randomElement($product->getVariants()->toArray());
+            $variant->setCurrentLocale($order->getLocaleCode());
 
             if (array_key_exists($variant->getCode(), $generatedItems)) {
                 /** @var OrderItemInterface $item */
