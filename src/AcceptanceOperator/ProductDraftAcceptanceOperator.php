@@ -29,8 +29,8 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $productDraftFilesOperator,
-        ) {
+        ProductDraftFilesOperatorInterface $productDraftFilesOperator
+    ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
         $this->productDraftFilesOperator = $productDraftFilesOperator;
