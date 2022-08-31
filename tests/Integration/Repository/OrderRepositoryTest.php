@@ -23,7 +23,6 @@ final class OrderRepositoryTest extends JsonApiTestCase
         parent::setUp();
         $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->repository = $this->getContainer()->get('sylius.repository.order');
-//        $this->repository = $this->entityManager->getRepository(\Sylius\Component\Core\Model\Order::class);
     }
 
     public function test_it_finds_all_customers_of_vendor(): void

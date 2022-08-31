@@ -52,8 +52,8 @@ final class ProductListingContext extends RawMinkContext implements Context
         AdminUserExampleFactory $adminUserExampleFactory,
         ShopUserExampleFactory $shopUserExampleFactory,
         SharedStorageInterface $sharedStorage,
-        UserRepositoryInterface $userRepository
-    ) {
+        UserRepositoryInterface $userRepository,
+   ) {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
         $this->shopUserExampleFactory = $shopUserExampleFactory;

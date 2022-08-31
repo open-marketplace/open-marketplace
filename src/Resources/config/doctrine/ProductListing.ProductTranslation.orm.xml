@@ -18,7 +18,7 @@
         <field name="shortDescription" column="short_description" type="string" unique="false" nullable="true" />
         <field name="locale" column="locale" type="string" unique="false" nullable="true" />
 
-        <many-to-one field="productDraft" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft" inversed-by="translations">
+        <many-to-one field="productDraft" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface" inversed-by="translations">
             <join-column name="product_draft_id" referenced-column-name="id" />
                 <cascade>
                     <cascade-persist/>

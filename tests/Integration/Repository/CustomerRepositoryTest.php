@@ -22,7 +22,6 @@ final class CustomerRepositoryTest extends JsonApiTestCase
         parent::setUp();
         $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->repository = $this->getContainer()->get('sylius.repository.customer');
-        //$this->repository = $this->entityManager->getRepository(Customer::class);
     }
 
     public function test_it_finds_all_customers_of_vendor(): void

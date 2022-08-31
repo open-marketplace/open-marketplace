@@ -37,3 +37,4 @@ sylius_user:
             user:
                 classes:
                     model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser
+                    interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface

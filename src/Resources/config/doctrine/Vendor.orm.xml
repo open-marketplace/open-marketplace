@@ -29,7 +29,7 @@
         <field name="slug" column="slug" type="string" />
         <field name="description" column="description" type="string" length="2048" />
         <one-to-one field="image"
-                    target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage"
+                    target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface"
                     mapped-by="owner"
                     orphan-removal="true">
             <cascade>
@@ -41,7 +41,7 @@
                      mapped-by="vendor">
         </one-to-many>
 
-        <one-to-many field="productListings" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing" mapped-by="vendor"/>
+        <one-to-many field="productListings" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface" mapped-by="vendor"/>
 
     </mapped-superclass>
 </doctrine-mapping>
