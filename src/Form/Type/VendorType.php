@@ -42,14 +42,14 @@ final class VendorType extends AbstractResourceType
         parent::__construct($dataClass, $validationGroups);
 
         $this->tokenStorage = $tokenStorage;
-        $this->shopUserFQN = $shopUserFQN;
+        $this->shopUserClassFQN = $shopUserClassFQN;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('shopUser', EntityType::class, [
-                'class' => $this->shopUserFQN
+                'class' => $this->shopUserClassFQN
             ])
             ->add('companyName', TextType::class, [
                 'label' => 'bitbag_mvm_plugin.ui.company_name',
