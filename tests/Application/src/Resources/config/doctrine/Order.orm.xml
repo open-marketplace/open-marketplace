@@ -5,7 +5,7 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order" table="sylius_order">
-        <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor" inversed-by="products" />
+        <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" inversed-by="products" />
         <many-to-one field="primaryOrder" target-entity="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order" inversed-by="secondaryOrders">
             <join-column on-delete="SET NULL"/>
         </many-to-one>

@@ -15,12 +15,11 @@
         <field name="originalPrice" column="original_price" type="float" unique="false" nullable="false" />
         <field name="channelCode" column="channel_code" type="string" unique="false" nullable="false" />
 
-        <many-to-one field="productDraft" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft" inversed-by="productListingPrice">
+        <many-to-one field="productDraft" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface" inversed-by="productListingPrice">
             <cascade>
                 <cascade-persist/>
                 <cascade-remove />
             </cascade>
         </many-to-one>
     </mapped-superclass>
-
 </doctrine-mapping>

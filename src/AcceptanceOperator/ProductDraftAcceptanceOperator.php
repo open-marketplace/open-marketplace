@@ -11,12 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagProductInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOperatorInterface
@@ -30,7 +29,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $productDraftFilesOperator,
+        ProductDraftFilesOperatorInterface $productDraftFilesOperator
     ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
@@ -40,9 +39,9 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
     public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface
     {
         if (!$productDraft->getProductListing()->getProduct()) {
-            $cratedProduct =  $this->productFromDraftFactory->createSimpleProduct($productDraft);
+            $cratedProduct = $this->productFromDraftFactory->createSimpleProduct($productDraft);
             $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $cratedProduct);
-            
+
             return $cratedProduct;
         }
         /** @var BitBagProductInterface $product */
@@ -52,6 +51,5 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
 
         return $product;
-
     }
 }

@@ -14,7 +14,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 
 trait ShopUserTrait
 {
-    protected ?VendorInterface $vendor;
+    protected ?VendorInterface $vendor = null;
 
     public function getVendor(): ?VendorInterface
     {
