@@ -17,7 +17,7 @@ Sylius\Component\Core\Model\Customer:
     lastName: "Kent"
     email: "test3@example.com"
     emailCanonical: "test3@example.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
   user_oliver:
     plainPassword: "123password"
     roles: ["ROLE_USER"]
@@ -54,7 +54,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
     vendorAddress: '@vendor_address'
     slug: 'oliver-queen-company'
     description: 'description'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product:
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product:
   first_product:
     vendor: '@vendor_oliver'
     code: "code"
@@ -62,7 +62,7 @@ Sylius\Component\Core\Model\ProductVariant:
   first_variant:
     product: '@first_product'
     code: "code"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order:
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order:
   bruce_order_made_with_oliver:
     currency_code: "USD"
     locale_code: "en-US"
