@@ -15,7 +15,7 @@
 
         <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" inversed-by="productListings"/>
 
-        <one-to-many field="productDrafts" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft" mapped-by="productListing">
+        <one-to-many field="productDrafts" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface" mapped-by="productListing">
             <cascade>
                 <cascade-persist/>
             </cascade>
@@ -29,5 +29,4 @@
             <index name="code" columns="code" />
         </indexes>
     </mapped-superclass>
-
 </doctrine-mapping>

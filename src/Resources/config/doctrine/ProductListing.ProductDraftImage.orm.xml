@@ -10,5 +10,4 @@
             <join-column name="owner_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
     </mapped-superclass>
-
 </doctrine-mapping>

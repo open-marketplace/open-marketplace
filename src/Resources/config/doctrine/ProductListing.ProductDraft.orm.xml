@@ -25,24 +25,23 @@
             </cascade>
         </many-to-one>
 
-        <one-to-many field="images" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage"
+        <one-to-many field="images" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImageInterface"
                      mapped-by="owner">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
 
-        <one-to-many field="translations" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation" mapped-by="productDraft" index-by="locale">
+        <one-to-many field="translations" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface" mapped-by="productDraft" index-by="locale">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
 
-        <one-to-many field="productListingPrice" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice" mapped-by="productDraft" index-by="channelCode">
+        <one-to-many field="productListingPrice" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
     </mapped-superclass>
-
 </doctrine-mapping>

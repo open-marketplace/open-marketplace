@@ -22,5 +22,4 @@
             </cascade>
         </many-to-one>
     </mapped-superclass>
-
 </doctrine-mapping>
