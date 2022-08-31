@@ -5,11 +5,10 @@
     <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage"
                        table="bitbag_mvm_product_listing_image">
 
-        <many-to-one field="owner" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft"
+        <many-to-one field="owner" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface"
                      inversed-by="images">
             <join-column name="owner_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
 
     </mapped-superclass>
-
 </doctrine-mapping>

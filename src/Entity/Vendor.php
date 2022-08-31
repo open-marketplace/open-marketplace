@@ -15,9 +15,8 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
-class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterface
+class Vendor implements VendorInterface
 {
     protected ?int $id;
 
@@ -37,17 +36,17 @@ class Vendor implements VendorProfileInterface, VendorInterface, ResourceInterfa
 
     protected ?DateTimeInterface $editedAt = null;
 
-    private ?string $slug;
+    protected ?string $slug;
 
-    private ?string $description;
+    protected ?string $description;
 
-    private ?VendorImageInterface $image = null;
+    protected ?VendorImageInterface $image = null;
 
     /** @var Collection<int, ProductInterface> */
-    private Collection $products;
+    protected Collection $products;
 
     /** @var Collection<int, ProductListing> */
-    private Collection $productListings;
+    protected Collection $productListings;
 
     public function __construct()
     {

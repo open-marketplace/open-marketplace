@@ -2,7 +2,7 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <services>
+    <services >
         <defaults autowire="false" autoconfigure="false" />
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\Message\MessageFactory"
@@ -68,10 +68,14 @@
                  id="bitbag_mvm_plugin.factory.product_draft_image"/>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactory"
-                 id="bitbag.mvm_plugin.factory.order_factory"/>
+                 id="bitbag.mvm_plugin.factory.order_factory">
+            <argument>%sylius.model.order.class%</argument>
+        </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactory"
-                 id="bitbag.mvm_plugin.factory.order_item_factory"/>
+                 id="bitbag.mvm_plugin.factory.order_item_factory">
+            <argument >%sylius.model.order_item.class%</argument>
+        </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\DraftAttributeFactory"
                  id="bitbag_mvm_plugin.factory.draftAttribute" >

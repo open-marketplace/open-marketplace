@@ -312,7 +312,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
             $actualAttributeCode = $attribute->getAttribute()->getCode();
             $actualLocaleCode = $attribute->getLocaleCode();
             if ($actualAttributeCode === $attributeCode &&
-                ($actualLocaleCode  === $localeCode || null === $actualLocaleCode)) {
+                ($actualLocaleCode === $localeCode || null === $actualLocaleCode)) {
                 return $attribute;
             }
         }

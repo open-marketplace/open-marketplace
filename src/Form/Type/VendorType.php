@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType;
@@ -32,7 +31,10 @@ final class VendorType extends AbstractResourceType
 {
     private TokenStorageInterface $tokenStorage;
 
+    private string $shopUserClassFQN;
+
     public function __construct(
+        string $shopUserClassFQN,
         TokenStorageInterface $tokenStorage,
         string $dataClass,
         array $validationGroups = []
@@ -40,13 +42,14 @@ final class VendorType extends AbstractResourceType
         parent::__construct($dataClass, $validationGroups);
 
         $this->tokenStorage = $tokenStorage;
+        $this->shopUserClassFQN = $shopUserClassFQN;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('shopUser', EntityType::class, [
-                'class' => ShopUser::class,
+                'class' => $this->shopUserClassFQN,
             ])
             ->add('companyName', TextType::class, [
                 'label' => 'bitbag_mvm_plugin.ui.company_name',

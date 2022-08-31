@@ -8,7 +8,5 @@
         </id>
 
         <field name="name" column="name" type="string" nullable="false" />
-
     </mapped-superclass>
-
 </doctrine-mapping>

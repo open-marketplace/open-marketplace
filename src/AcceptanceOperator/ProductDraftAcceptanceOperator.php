@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
@@ -28,8 +29,8 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $productDraftFilesOperator,
-        ) {
+        ProductDraftFilesOperatorInterface $productDraftFilesOperator
+    ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
         $this->productDraftFilesOperator = $productDraftFilesOperator;
@@ -44,7 +45,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
             return $cratedProduct;
         }
 
-        /** @var \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $product */
+        /** @var BitBagProductInterface $product */
         $product = $this->productFromDraftUpdater->updateProduct($productDraft);
 
         $this->productDraftFilesOperator->removeOldFiles($product);
