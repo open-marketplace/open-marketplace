@@ -13,7 +13,7 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Repository
 
 use ApiTestCase\JsonApiTestCase;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
+use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
 
 class ConversationRepositoryTest extends JsonApiTestCase
 {

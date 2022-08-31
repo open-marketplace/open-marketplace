@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
+
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
@@ -63,7 +64,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorInterface $vendor,
         VendorProfileInterface $vendorData,
         VendorProfileUpdateInterface $newPendingUpdate,
-        ShopUser $user,
+        ShopUserInterface $user,
         VendorAddressInterface $vendorAddressUpdate
     ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);

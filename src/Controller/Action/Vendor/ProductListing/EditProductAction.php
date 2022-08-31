@@ -18,8 +18,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
-use Doctrine\Common\Collections\ArrayCollection;
-use Gaufrette\FilesystemInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -82,7 +80,7 @@ class EditProductAction extends AbstractController
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
 
-            foreach ($productDraft->getImages() as $image){
+            foreach ($productDraft->getImages() as $image) {
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
             }
@@ -98,6 +96,7 @@ class EditProductAction extends AbstractController
                 $this->productDraftRepository->save($productDraft);
                 $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
             }
+
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }
 

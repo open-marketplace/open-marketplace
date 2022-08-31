@@ -11,11 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use Gaufrette\Filesystem;
-use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Core\Model\ProductImageInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
 final class ProductImageFactory implements ProductImageFactoryInterface
 {

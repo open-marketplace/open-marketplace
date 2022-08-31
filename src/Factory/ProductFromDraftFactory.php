@@ -17,8 +17,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\Channel;
-
-use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
 final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
@@ -39,7 +37,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         ProductVariantFactoryInterface $productVariantFactory,
         ChannelPricingFactoryInterface $channelPricingFactory,
         ChannelRepositoryInterface $channelRepository,
-    ) {
+        ) {
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->productVariantFactory = $productVariantFactory;

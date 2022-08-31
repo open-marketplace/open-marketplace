@@ -22,7 +22,8 @@ final class OrderRepositoryTest extends JsonApiTestCase
     {
         parent::setUp();
         $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->repository = $this->entityManager->getRepository(Order::class);
+        $this->repository = $this->getContainer()->get('sylius.repository.order');
+//        $this->repository = $this->entityManager->getRepository(\Sylius\Component\Core\Model\Order::class);
     }
 
     public function test_it_finds_all_customers_of_vendor(): void
@@ -41,7 +42,7 @@ final class OrderRepositoryTest extends JsonApiTestCase
         $this->loadFixturesFromFile('OrderRepositoryTest/test_it_finds_order_for_vendor.yml');
 
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
-        $order = $this->entityManager->getRepository(Order::class)->findOneBy(['vendor' => $vendorOliver]);
+        $order = $this->repository->findOneBy(['vendor' => $vendorOliver]);
         $result = $this->repository->findOrderForVendor($vendorOliver, (string)$order->getId());
 
         self::assertEquals($order->getId(), $result->getId());

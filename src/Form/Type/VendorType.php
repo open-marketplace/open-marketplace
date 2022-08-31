@@ -49,7 +49,7 @@ final class VendorType extends AbstractResourceType
     {
         $builder
             ->add('shopUser', EntityType::class, [
-                'class' => $this->shopUserClassFQN
+                'class' => $this->shopUserClassFQN,
             ])
             ->add('companyName', TextType::class, [
                 'label' => 'bitbag_mvm_plugin.ui.company_name',

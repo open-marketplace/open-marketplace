@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
-use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -54,7 +53,6 @@ final class ProductType extends AbstractType
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $product = $event->getData();
                 $form = $event->getForm();
-
             })
             ->add('images', CollectionType::class, [
                 'entry_type' => ProductDraftImageType::class,
