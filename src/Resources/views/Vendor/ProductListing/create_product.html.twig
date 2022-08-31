@@ -25,8 +25,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-{#    <link rel="stylesheet" href="/build/admin/admin-entry.css"/>#}
-{#    <link rel="stylesheet" href="/build/bitbag/skeleton/admin/bitbag-skeleton-admin.css">#}
     {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.create.stylesheets'], { 'metadata': metadata }) }}
 {% endblock %}
 
@@ -34,7 +32,7 @@
 {#    {{ parent() }} //TODO FRONTEND#}
     <script src="/build/bitbag/skeleton/admin/bitbag-skeleton-admin.js"></script>
     <script src="/build/admin/admin-entry.js"></script>
-{#    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.create.javascripts'], { 'metadata': metadata }) }}#}
+
 {% endblock %}
 
 
