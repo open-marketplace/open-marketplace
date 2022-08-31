@@ -31,7 +31,7 @@ final class VendorType extends AbstractResourceType
 {
     private TokenStorageInterface $tokenStorage;
 
-    private string $shopUserFQN;
+    private string $shopUserClassFQN;
 
     public function __construct(
         string $shopUserFQN,
