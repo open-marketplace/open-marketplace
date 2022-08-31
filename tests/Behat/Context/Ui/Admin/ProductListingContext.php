@@ -53,7 +53,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         ShopUserExampleFactory $shopUserExampleFactory,
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository
-    ) {
+   ) {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
         $this->shopUserExampleFactory = $shopUserExampleFactory;

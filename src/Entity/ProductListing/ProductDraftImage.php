@@ -12,9 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Sylius\Component\Core\Model\Image;
-use Sylius\Component\Core\Model\ProductImage;
 
 class ProductDraftImage extends Image implements ProductDraftImageInterface
 {
-
 }

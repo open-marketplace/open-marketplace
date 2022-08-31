@@ -69,7 +69,7 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
         $newProductDraft->setCode($productDraft->getCode());
         $newProductDraft->setProductListing($productListing);
 
-        foreach ($productDraft->getImages() as $image){
+        foreach ($productDraft->getImages() as $image) {
             $newProductDraft->addImage($image);
         }
 

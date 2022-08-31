@@ -8,7 +8,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor
+                    class: '%bitbag_mvm_plugin.model.vendor.class%'
                     repository:
                         method: createListQueryBuilder
             sorting:
