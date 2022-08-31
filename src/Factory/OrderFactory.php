@@ -24,6 +24,6 @@ final class OrderFactory implements OrderFactoryInterface
 
     public function createNew(): OrderInterface
     {
-        return new $this->FQN();
+        return new $this->classFQN();
     }
 }
