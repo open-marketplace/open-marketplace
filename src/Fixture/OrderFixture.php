@@ -41,7 +41,7 @@ final class OrderFixture extends AbstractFixture
         for ($i = 0; $i < $options['amount']; ++$i) {
             $options = array_merge($options, ['complete_date' => array_shift($generateDates)]);
 
-            $orders = $this->orderExampleFactory->create($options);
+            $orders = $this->orderExampleFactory->createArray($options);
 
             foreach ($orders as $order) {
                 $this->orderManager->persist($order);

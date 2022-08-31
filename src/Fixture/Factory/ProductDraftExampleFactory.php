@@ -121,7 +121,9 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
 
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {
-            $this->createProductListingPricing($productDraft, $channel->getCode());
+            $code = $channel->getCode();
+            if ($code === null) continue;
+            $this->createProductListingPricing($productDraft, $code);
         }
 
         $this->createTranslations($productDraft, $options);

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
@@ -29,6 +28,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -108,7 +108,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         $this->configureOptions($this->optionsResolver);
     }
 
-    public function create(array $options = []): array
+    public function createArray(array $options = []): array
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -156,7 +156,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
     ): array {
         $countryCode = $country->getCode();
 
-        $currencyCode = $channel->getBaseCurrency()->getCode();
+        $currencyCode = $channel->getBaseCurrency()?->getCode();
         $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
 
         $order = $this->orderFactory->createNew();
@@ -179,7 +179,12 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
     {
         $numberOfItems = random_int(1, 5);
         $channel = $order->getChannel();
-        $products = $this->productRepository->findLatestByChannel($channel, $order->getLocaleCode(), 100);
+        $locale = $order->getLocaleCode();
+        if ($channel === null || $locale === null) {
+            throw new \InvalidArgumentException('Order has no channel or locale code');
+        }
+
+        $products = $this->productRepository->findLatestByChannel($channel, $locale, 100);
         if (0 === count($products)) {
             throw new \InvalidArgumentException(sprintf(
                 'You have no enabled products at the channel "%s", but they are required to create an orders for that channel',
@@ -213,7 +218,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         }
     }
 
-    protected function address(OrderInterface $order, string $countryCode): void
+    protected function address(OrderInterface $order, ?string $countryCode): void
     {
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
@@ -237,6 +242,10 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         }
 
         $channel = $order->getChannel();
+        if ($channel === null) {
+            throw new \InvalidArgumentException('Order has no channel');
+        }
+
         $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
 
         if (0 === count($shippingMethods)) {
@@ -266,13 +275,16 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
             return;
         }
 
+        $channel = $order->getChannel();
+        if ($channel === null) {
+            throw new \InvalidArgumentException('Order has no channel');
+        }
+
         $paymentMethod = $this
             ->faker
-            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
+            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($channel))
         ;
 
-        /** @var ChannelInterface $channel */
-        $channel = $order->getChannel();
         Assert::notNull($paymentMethod, $this->generateInvalidSkipMessage('payment', $channel->getCode()));
 
         foreach ($order->getPayments() as $payment) {
@@ -290,6 +302,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         }
         $this->orderManager->persist($order);
 
+        /** @var \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface $order */
         $orders = $this->splitOrderByVendorProcessor->process($order);
 
         foreach ($orders as $order) {
@@ -305,7 +318,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }
 
-    protected function generateInvalidSkipMessage(string $type, string $channelCode): string
+    protected function generateInvalidSkipMessage(string $type, ?string $channelCode): string
     {
         return sprintf(
             "No enabled %s method was found for the channel '%s'. " .
