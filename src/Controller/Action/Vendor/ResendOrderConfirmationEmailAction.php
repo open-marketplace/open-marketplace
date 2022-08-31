@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -36,18 +37,22 @@ final class ResendOrderConfirmationEmailAction
 
     private TranslatorInterface $translator;
 
+    private RouterInterface $router;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         OrderEmailManagerInterface $orderEmailManager,
         CsrfTokenManagerInterface $csrfTokenManager,
         Session $session,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        RouterInterface $router
     ) {
         $this->orderRepository = $orderRepository;
         $this->orderEmailManager = $orderEmailManager;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->session = $session;
         $this->translator = $translator;
+        $this->router = $router;
     }
 
     public function __invoke(Request $request): Response
@@ -71,6 +76,6 @@ final class ResendOrderConfirmationEmailAction
             'sylius.email.order_confirmation_resent',
         );
 
-        return new RedirectResponse($request->headers->get('referer'));
+        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_order_listing'));
     }
 }
