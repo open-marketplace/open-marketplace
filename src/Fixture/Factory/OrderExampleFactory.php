@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
@@ -28,7 +29,6 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -197,7 +197,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         $numberOfItems = random_int(1, 5);
         $channel = $order->getChannel();
         $locale = $order->getLocaleCode();
-        if ($channel === null || $locale === null) {
+        if (null === $channel || null === $locale) {
             throw new \InvalidArgumentException('Order has no channel or locale code');
         }
 
@@ -259,7 +259,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         }
 
         $channel = $order->getChannel();
-        if ($channel === null) {
+        if (null === $channel) {
             throw new \InvalidArgumentException('Order has no channel');
         }
 
@@ -293,7 +293,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         }
 
         $channel = $order->getChannel();
-        if ($channel === null) {
+        if (null === $channel) {
             throw new \InvalidArgumentException('Order has no channel');
         }
 
@@ -320,6 +320,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         $this->orderManager->persist($order);
 
         /** @var \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface $order */
+        $order = $order;
         $orders = $this->splitOrderByVendorProcessor->process($order);
 
         foreach ($orders as $order) {

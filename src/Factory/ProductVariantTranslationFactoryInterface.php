@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
@@ -18,7 +20,11 @@ interface ProductVariantTranslationFactoryInterface
 {
     public function createNew(): ProductVariantTranslation;
 
-    public function create(?TranslatableInterface $translatable, ?string $name, ?string $locale): ProductVariantTranslation;
+    public function create(
+        ?TranslatableInterface $translatable,
+        ?string $name,
+        ?string $locale
+    ): ProductVariantTranslation;
 
     public function createFromProductListingTranslation(ProductVariantInterface $productVariant, ProductTranslationInterface $translation): ProductVariantTranslation;
 }
