@@ -108,11 +108,18 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         $this->configureOptions($this->optionsResolver);
     }
 
+    public function create(array $options = []): OrderInterface
+    {
+        $options = $this->optionsResolver->resolve($options);
+
+        return $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
+    }
+
     public function createArray(array $options = []): array
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $orders = $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
+        $orders = $this->createOrders($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
         foreach ($orders as $order) {
             $this->setOrderCompletedDate($order, $options['complete_date']);
             if ($options['fulfilled']) {
@@ -153,7 +160,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         CustomerInterface $customer,
         CountryInterface $country,
         \DateTimeInterface $createdAt
-    ): array {
+    ): OrderInterface {
         $countryCode = $country->getCode();
 
         $currencyCode = $channel->getBaseCurrency()?->getCode();
@@ -170,9 +177,19 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         $this->address($order, $countryCode);
         $this->selectShipping($order, $createdAt);
         $this->selectPayment($order, $createdAt);
-        $orders = $this->completeCheckout($order);
 
-        return $orders;
+        return $order;
+    }
+
+    protected function createOrders(
+        ChannelInterface $channel,
+        CustomerInterface $customer,
+        CountryInterface $country,
+        \DateTimeInterface $createdAt
+    ): array {
+        $order = $this->createOrder($channel, $customer, $country, $createdAt);
+
+        return $this->completeCheckout($order);
     }
 
     protected function generateItems(OrderInterface $order): void
