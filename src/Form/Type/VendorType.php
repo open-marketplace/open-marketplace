@@ -34,7 +34,7 @@ final class VendorType extends AbstractResourceType
     private string $shopUserClassFQN;
 
     public function __construct(
-        string $shopUserFQN,
+        string $shopUserClassFQN,
         TokenStorageInterface $tokenStorage,
         string $dataClass,
         array $validationGroups = []
