@@ -96,7 +96,7 @@ class CreateProductAction extends AbstractController
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
 
-            foreach ($newResource->getImages() as $image){
+            foreach ($newResource->getImages() as $image) {
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
             }

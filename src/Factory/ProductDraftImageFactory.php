@@ -20,6 +20,4 @@ final class ProductDraftImageFactory
     {
         return new ProductDraftImage();
     }
-
-
 }

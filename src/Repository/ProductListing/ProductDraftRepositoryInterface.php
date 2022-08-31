@@ -18,7 +18,7 @@ interface ProductDraftRepositoryInterface
 {
     public function save(ProductDraftInterface $productDraft): void;
 
-    public function findProductListingLatestProductDraft(ProductListingInterface $productListing): ?ProductDraftInterface;
+    public function findLatestDraft(ProductListingInterface $productListing): ?ProductDraftInterface;
 
     /**
      * @return mixed

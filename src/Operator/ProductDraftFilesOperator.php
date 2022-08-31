@@ -30,7 +30,7 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
 
     public function copyFilesToProduct(ProductDraftInterface $productDraft, ProductInterface $cratedProduct): void
     {
-        foreach ($productDraft->getImages() as $image){
+        foreach ($productDraft->getImages() as $image) {
             $newImage = $this->productImageFactory->createNew();
 
             $newImage->setType($image->getType());
@@ -38,14 +38,14 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
 
             /** @var string $key */
             $key = $image->getPath();
-            $nameSuffix = "-new.";
+            $nameSuffix = '-new.';
 
             $file = $this->filesystem->read($key);
 
-            $path = explode(".", $key)[0];
-            $fileType = explode(".", $key)[1];
+            $path = explode('.', $key)[0];
+            $fileType = explode('.', $key)[1];
 
-            $newKey = $path.$nameSuffix.$fileType;
+            $newKey = $path . $nameSuffix . $fileType;
 
             $this->filesystem->write($newKey, $file, true);
 
@@ -57,10 +57,10 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
 
     public function removeOldFiles(ProductInterface $product): void
     {
-        foreach($product->getImages() as $image){
+        foreach ($product->getImages() as $image) {
             /** @var string $key */
             $key = $image->getPath();
-            if($this->filesystem->has($key)) {
+            if ($this->filesystem->has($key)) {
                 $this->filesystem->delete($key);
             }
         }

@@ -9,7 +9,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Nowak"
         email: "test@example.com"
         emailCanonical: "test@example.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
+Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]
