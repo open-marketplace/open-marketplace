@@ -21,7 +21,7 @@ class VendorImage implements VendorImageInterface
 
     protected ?string $path = null;
 
-    protected ?VendorProfileInterface $owner;
+    protected ?object $owner;
 
     public function getId(): ?int
     {
@@ -67,6 +67,7 @@ class VendorImage implements VendorImageInterface
 
     public function getType(): ?string
     {
+        return 'avatar';
     }
 
     public function setType(?string $type): void

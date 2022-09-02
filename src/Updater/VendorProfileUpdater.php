@@ -12,11 +12,13 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterface;
@@ -112,25 +114,35 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
         $this->setVendorFromData($vendor, $vendorData);
         $this->addOrReplaceVendorImage($vendorData, $vendor);
+
         $this->remover->removePendingUpdate($vendorData);
+
     }
 
-    private function addOrReplaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor)
+    private function addOrReplaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void
     {
         if($vendorData->getImage()) {
             $oldImage = $vendor->getImage();
-            if($oldImage) {
-                $vendor->removeImage();
-                $this->imageUploader->remove($oldImage->getPath());
+            if(null !== $oldImage) {
+                /** @var string $path */
+                $path = $oldImage->getPath();
+                $this->imageUploader->remove($path);
                 $this->entityManager->remove($oldImage);
                 $this->entityManager->flush();
             }
 
             $image = $vendorData->getImage();
-            $imageEntity = new VendorImage();
-            $imageEntity->setPath($image->getPath());
-            $imageEntity->setOwner($vendor);
-            $vendor->setImage($imageEntity);
+
+            if($image) {
+                $imageEntity = new VendorImage();
+                $imageEntity->setPath($image->getPath());
+                $imageEntity->setOwner($vendor);
+                $vendor->setImage($imageEntity);
+
+                $image->setPath(null);
+
+                $this->entityManager->persist($image);
+            }
         }
     }
 }

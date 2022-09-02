@@ -11,11 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
 
+use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class VendorImageType extends AbstractResourceType
+final class VendorImageType extends ImageType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -28,6 +29,6 @@ final class VendorImageType extends AbstractResourceType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_multi_vendor_marketplace_vendor_image';
+        return 'sylius_avatar_image';
     }
 }

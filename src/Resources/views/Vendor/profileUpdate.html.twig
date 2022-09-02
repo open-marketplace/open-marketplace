@@ -25,7 +25,23 @@
         {{ form_row(form.companyName, sylius_test_form_attribute('companyName')) }}
         {{ form_row(form.taxIdentifier) }}
         {{ form_row(form.phoneNumber) }}
-        {{ form_row(form.image) }}
+
+
+{#        {{ form_row(form.image) }}#}
+        <div class="field" id="add-avatar">
+            {{ dump(vendor) }}
+            {% form_theme form '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/ImageTheme.html.twig' %}
+            <label>{{ 'sylius.ui.image'|trans }}</label>
+            {{ form_row(form.image, {'label': false}) }}
+        </div>
+{#        {% if vendor.image is not null %}#}
+{#            <button formaction="{{ path('sylius_admin_admin_user_remove_avatar', {'id': app.request.attributes.get('id'), '_csrf_token': csrf_token(app.request.attributes.get('id'))}) }}" type="submit" class="ui icon red labeled button">#}
+                <i class="icon trash"></i> {{ 'sylius.ui.delete'|trans }}
+{#            </button>#}
+{#        {% endif %}#}
+
+
+
         {{ form_row(form.description) }}
         {{ form_row(form.vendorAddress) }}
 
@@ -35,4 +51,10 @@
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {#    {{ parent() }}#} //TODO FRONTEND
+    <script src="/build/admin/admin-entry.js"/>
+{#    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.create.javascripts'], { 'metadata': metadata }) }}#}
 {% endblock %}

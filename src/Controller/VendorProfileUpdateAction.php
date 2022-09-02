@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType;
@@ -72,7 +73,6 @@ final class VendorProfileUpdateAction
         if ($form->isSubmitted() && $form->isValid()) {
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
 
-            //$image = $request->files->get('vendor')['image']['file'];
             $image = $vendor->getImage();
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
                 $form->getData(),

@@ -19,7 +19,7 @@ class VendorProfileUpdateImage implements VendorImageInterface
 
     protected ?string $path = null;
 
-    protected ?VendorProfileInterface $owner;
+    protected ?object $owner;
 
     public function getId(): ?int
     {
@@ -51,7 +51,7 @@ class VendorProfileUpdateImage implements VendorImageInterface
         $this->path = $path;
     }
 
-    public function getOwner(): ?VendorProfileUpdateInterface
+    public function getOwner(): ?object
     {
         return $this->owner;
     }
@@ -63,7 +63,7 @@ class VendorProfileUpdateImage implements VendorImageInterface
 
     public function getType(): ?string
     {
-        // TODO: Implement getType() method.
+        return 'image';
     }
 
     public function setType(?string $type): void
