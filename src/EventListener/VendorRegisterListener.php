@@ -16,17 +16,18 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGeneratorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class VendorRegisterListener
 {
     private VendorSlugGeneratorInterface $vendorSlugGenerator;
 
-    private FileUploaderInterface $fileUploader;
+    private ImageUploaderInterface $fileUploader;
 
     public function __construct(
         VendorSlugGeneratorInterface $vendorSlugGenerator,
-        FileUploaderInterface $fileUploader
+        ImageUploaderInterface $fileUploader
     ) {
         $this->vendorSlugGenerator = $vendorSlugGenerator;
         $this->fileUploader = $fileUploader;
@@ -41,11 +42,8 @@ final class VendorRegisterListener
         $vendorImage = $vendor->getImage();
 
         if (null !== $vendorImage) {
-            /** @var UploadedFile $uploadedImage */
-            $uploadedImage = $vendorImage->getFile();
+            $this->fileUploader->upload($vendorImage);
 
-            $filename = $this->fileUploader->upload($uploadedImage);
-            $vendorImage->setPath($filename);
             $vendorImage->setOwner($vendor);
         }
     }
