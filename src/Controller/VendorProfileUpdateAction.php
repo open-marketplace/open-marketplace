@@ -18,6 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -43,6 +44,8 @@ final class VendorProfileUpdateAction
 
     private VendorProfileUpdateImageFactoryInterface $imageFactory;
 
+//    private FlashHelperInterface $flashHelper;
+
     public function __construct(
         VendorProfileUpdaterInterface $vendorProfileUpdateService,
         VendorProviderInterface $vendorProvider,
@@ -52,6 +55,7 @@ final class VendorProfileUpdateAction
         EntityManagerInterface $manager,
         ImageUploader $imageUploader,
         VendorProfileUpdateImageFactoryInterface $imageFactory,
+//        FlashHelperInterface $flashHelper
     ) {
         $this->vendorProfileUpdateService = $vendorProfileUpdateService;
         $this->vendorProvider = $vendorProvider;
@@ -61,6 +65,7 @@ final class VendorProfileUpdateAction
         $this->manager = $manager;
         $this->imageUploader = $imageUploader;
         $this->imageFactory = $imageFactory;
+//        $this->flashHelper = $flashHelper;
     }
 
     public function __invoke(Request $request): Response
@@ -71,6 +76,7 @@ final class VendorProfileUpdateAction
         $form = $this->formFactory->create(VendorType::class, $vendor);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
 
@@ -84,7 +90,12 @@ final class VendorProfileUpdateAction
             $currentVendor->setEditedAt(new \DateTime());
             $this->manager->flush();
         }
+        if(!$form->isValid()){
+            foreach ($form->getErrors(true) as $error) {
 
+                $request->getSession()->getFlashBag()->add('error', $error->getMessage());
+            }
+        }
         return new RedirectResponse($profilePath);
     }
 }
