@@ -11,19 +11,19 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 
 final class VendorProfileUpdateImageFactory implements VendorProfileUpdateImageFactoryInterface
 {
-    public function createNew(): VendorProfileUpdateImageInterface
+    public function createNew(): VendorImageInterface
     {
         return new VendorProfileUpdateImage();
     }
 
-    public function create(string $path): VendorProfileUpdateImageInterface
+    public function create(string $path): VendorImageInterface
     {
         $vendorImage = $this->createNew();
 
@@ -31,5 +31,14 @@ final class VendorProfileUpdateImageFactory implements VendorProfileUpdateImageF
 
 
         return $vendorImage;
+    }
+
+    public function createWithFileAndOwner(ImageInterface $uploadedImage, VendorProfileInterface $vendorProfile): VendorImageInterface
+    {
+        $image = $this->createNew();
+        $image->setFile($uploadedImage->getFile());
+        $image->setOwner($vendorProfile);
+
+        return $image;
     }
 }

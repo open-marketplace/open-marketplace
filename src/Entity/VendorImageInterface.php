@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-interface VendorImageInterface
+use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface VendorImageInterface extends ImageInterface
 {
     public function getId(): ?int;
 
@@ -25,7 +28,9 @@ interface VendorImageInterface
 
     public function setPath(?string $path): void;
 
-    public function getOwner(): ?VendorInterface;
+    /** @return  object|null */
+    public function getOwner(): ?object;
 
-    public function setOwner(VendorInterface $owner): void;
+    /** @param object|null $owner */
+    public function setOwner($owner): void;
 }

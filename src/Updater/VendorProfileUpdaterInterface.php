@@ -15,10 +15,12 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use Sylius\Component\Core\Model\ImageInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface VendorProfileUpdaterInterface
 {
-    public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor, VendorProfileUpdateImageInterface $image): void;
+    public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor, ?ImageInterface $image): void;
 
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;
 

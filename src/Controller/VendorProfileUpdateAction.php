@@ -72,17 +72,12 @@ final class VendorProfileUpdateAction
         if ($form->isSubmitted() && $form->isValid()) {
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
 
-            $image = $request->files->get('vendor')['image']['file'];
-            if($image){
-                $path = 'Images/'.$currentVendor->getCompanyName();
-                $image->move($path);
-                $imageEntity = $this->imageFactory->create($path);
-            }
-
+            //$image = $request->files->get('vendor')['image']['file'];
+            $image = $vendor->getImage();
             $this->vendorProfileUpdateService->createPendingVendorProfileUpdate(
                 $form->getData(),
                 $currentVendor,
-                $imageEntity
+                $image
             );
 
             $currentVendor->setEditedAt(new \DateTime());

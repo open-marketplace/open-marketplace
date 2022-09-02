@@ -11,15 +11,21 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Uploader\ImageUploader;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 {
@@ -33,32 +39,38 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
     private VendorProfileUpdateImageFactoryInterface $imageFactory;
 
+    private ImageUploaderInterface $imageUploader;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         ProfileUpdateRemoverInterface $remover,
         VendorProfileUpdateFactoryInterface $profileUpdateFactory,
         VendorProfileUpdateImageFactoryInterface $imageFactory,
+        ImageUploader $imageUploader
     ) {
         $this->entityManager = $entityManager;
         $this->sender = $sender;
         $this->remover = $remover;
         $this->profileUpdateFactory = $profileUpdateFactory;
         $this->imageFactory = $imageFactory;
+        $this->imageUploader = $imageUploader;
     }
 
     public function createPendingVendorProfileUpdate(
         VendorProfileInterface $vendorData,
         VendorInterface $currentVendor,
-        ?VendorProfileUpdateImageInterface $image
+        ?ImageInterface $image
     ): void {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
 
         if($image){
-          $image->setOwner($pendingVendorUpdate);
-          $pendingVendorUpdate->setImage($image);        }
+            $imageEntity = $this->imageFactory->createWithFileAndOwner($image, $pendingVendorUpdate);
 
-        dd($pendingVendorUpdate->getImage());
+            $this->imageUploader->upload($imageEntity);
+            $pendingVendorUpdate->setImage($imageEntity);
+        }
+
         $token = $pendingVendorUpdate->getToken();
 
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
@@ -99,6 +111,26 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $vendor = $vendorData->getVendor();
 
         $this->setVendorFromData($vendor, $vendorData);
+        $this->addOrReplaceVendorImage($vendorData, $vendor);
         $this->remover->removePendingUpdate($vendorData);
+    }
+
+    private function addOrReplaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor)
+    {
+        if($vendorData->getImage()) {
+            $oldImage = $vendor->getImage();
+            if($oldImage) {
+                $vendor->removeImage();
+                $this->imageUploader->remove($oldImage->getPath());
+                $this->entityManager->remove($oldImage);
+                $this->entityManager->flush();
+            }
+
+            $image = $vendorData->getImage();
+            $imageEntity = new VendorImage();
+            $imageEntity->setPath($image->getPath());
+            $imageEntity->setOwner($vendor);
+            $vendor->setImage($imageEntity);
+        }
     }
 }

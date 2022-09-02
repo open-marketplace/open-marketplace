@@ -11,17 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
-class VendorProfileUpdateImage implements VendorProfileUpdateImageInterface, ResourceInterface
+class VendorProfileUpdateImage implements VendorImageInterface
 {
     protected ?int $id;
 
-    protected ?\SplFileInfo $file;
+    protected ?\SplFileInfo $file = null;
 
-    protected ?string $path;
+    protected ?string $path = null;
 
-    protected ?VendorProfileUpdateInterface $owner;
+    protected ?VendorProfileInterface $owner;
 
     public function getId(): ?int
     {
@@ -58,8 +56,18 @@ class VendorProfileUpdateImage implements VendorProfileUpdateImageInterface, Res
         return $this->owner;
     }
 
-    public function setOwner(VendorProfileUpdateInterface $owner): void
+    public function setOwner($owner): void
     {
         $this->owner = $owner;
+    }
+
+    public function getType(): ?string
+    {
+        // TODO: Implement getType() method.
+    }
+
+    public function setType(?string $type): void
+    {
+        // TODO: Implement setType() method.
     }
 }

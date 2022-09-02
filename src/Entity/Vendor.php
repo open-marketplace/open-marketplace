@@ -209,6 +209,11 @@ class Vendor implements VendorInterface
         $this->image = $image;
     }
 
+    public function removeImage(): void
+    {
+        $this->image = null;
+    }
+
     public function isVerified(): bool
     {
         return self::STATUS_VERIFIED === $this->getStatus();

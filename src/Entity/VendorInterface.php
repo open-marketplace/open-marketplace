@@ -76,6 +76,8 @@ interface VendorInterface extends VendorProfileInterface
 
     public function setImage(?VendorImageInterface $image): void;
 
+    public function removeImage(): void;
+
     /** @return Collection<int, ProductListing> */
     public function getProductListings(): Collection;
 

@@ -7,11 +7,11 @@
     <class name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage">
         <property name="file">
             <constraint name="Image">
-                <option name="minWidth">100</option>
+                <option name="minWidth">50</option>
                 <option name="minWidthMessage">validator.message.minimum_image_width</option>
                 <option name="maxWidth">300</option>
                 <option name="maxWidthMessage">validator.message.maximum_image_width</option>
-                <option name="minHeight">100</option>
+                <option name="minHeight">50</option>
                 <option name="minHeightMessage">validator.message.minimum_image_height</option>
                 <option name="maxHeight">300</option>
                 <option name="maxHeightMessage">validator.message.maximum_image_height</option>
