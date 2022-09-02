@@ -116,7 +116,6 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->addOrReplaceVendorImage($vendorData, $vendor);
 
         $this->remover->removePendingUpdate($vendorData);
-
     }
 
     private function addOrReplaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void

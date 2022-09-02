@@ -26,7 +26,6 @@
         {{ form_row(form.taxIdentifier) }}
         {{ form_row(form.phoneNumber) }}
 
-
 {#        {{ form_row(form.image) }}#}
         <div class="field" id="add-avatar">
             {{ dump(vendor) }}
@@ -40,12 +39,14 @@
 {#            </button>#}
 {#        {% endif %}#}
 
-
-
         {{ form_row(form.description) }}
         {{ form_row(form.vendorAddress) }}
 
         {{ sylius_template_event('sylius.shop.account.profile.update.form', {'vendor': vendor, 'form': form}) }}
+
+        <div style="display: none">
+            {{ form_row(form.shopUser) }}
+        </div>
 
         <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
         {{ form_row(form._token) }}
@@ -53,8 +54,3 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
-    {#    {{ parent() }}#} //TODO FRONTEND
-    <script src="/build/admin/admin-entry.js"/>
-{#    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.create.javascripts'], { 'metadata': metadata }) }}#}
-{% endblock %}

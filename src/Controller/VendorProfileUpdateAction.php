@@ -66,7 +66,8 @@ final class VendorProfileUpdateAction
     public function __invoke(Request $request): Response
     {
         $profilePath = $this->router->generate('vendor_profile');
-        $vendor = $this->vendorFactory->createNew();
+        //$vendor = $this->vendorFactory->createNew();
+        $vendor = $this->vendorProvider->provideCurrentVendor();
         $form = $this->formFactory->create(VendorType::class, $vendor);
 
         $form->handleRequest($request);
