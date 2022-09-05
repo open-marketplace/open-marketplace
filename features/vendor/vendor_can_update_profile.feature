@@ -34,3 +34,16 @@ Feature: Vendor can update his company information
     When I am on "/en_US/vendor/profile-update/simpletoken"
     Then I should see "new ID"
     And I should see "New Company"
+
+  Scenario: Filling the form with image
+    When I am on "/en_US/vendor/profile/update"
+    And I fill in "vendor_companyName" with "Test name"
+    And I fill in "vendor_taxIdentifier" with "test identifier"
+    And I fill in "vendor_phoneNumber" with "test number"
+    And I attach the file "images/valid_logo.png" to "vendor_image_file"
+    And I fill in "vendor_description" with "description"
+    And I fill in "vendor_vendorAddress_city" with "City"
+    And I fill in "vendor_vendorAddress_street" with "test street"
+    And I fill in "vendor_vendorAddress_postalCode" with "22-332"
+    And I press "Save changes"
+    Then Pending update data should appear in database
