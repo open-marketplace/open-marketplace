@@ -61,7 +61,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
     ): void {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
 
-        if ($image) {
+        if (null === $image->getPath()) {
             $imageEntity = $this->imageFactory->createWithFileAndOwner($image, $pendingVendorUpdate);
 
             $this->imageUploader->upload($imageEntity);
@@ -130,15 +130,6 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
     private function addOrReplaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void
     {
         $imageUpdate = $vendorData->getImage();
-        $oldVendorImage = $vendor->getImage();
-
-        if ($oldVendorImage) {
-            /** @var string $path */
-            $path = $oldVendorImage->getPath();
-            $this->imageUploader->remove($path);
-            $this->entityManager->remove($oldVendorImage);
-            $this->entityManager->flush();
-        }
 
         if ($imageUpdate) {
             $imageEntity = new VendorImage();

@@ -16,7 +16,7 @@
 
 {% block subcontent %}
     <div class="ui segment">
-        {{ form_start(form, {'action': path('vendor_profile_update_action'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         <h1 class="ui dividing header">
             {{ 'bitbag_mvm_plugin.ui.your_vendor_profile'|trans }}
             <div class="sub header">{{ 'bitbag_mvm_plugin.ui.edit_your_vendor_information'|trans }}</div>
@@ -26,17 +26,11 @@
         {{ form_row(form.taxIdentifier) }}
         {{ form_row(form.phoneNumber) }}
 
-{#        {{ form_row(form.image) }}#}
         <div class="field" id="add-avatar">
             {% form_theme form '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/ImageTheme.html.twig' %}
             <label>{{ 'sylius.ui.image'|trans }}</label>
             {{ form_row(form.image, {'label': false}) }}
         </div>
-        {% if vendor.image is not null %}
-            <button formaction="{{ path('vendor_remove_image') }}" type="submit" class="ui icon red labeled button">
-                <i class="icon trash"></i> {{ 'sylius.ui.delete'|trans }}
-            </button>
-        {% endif %}
 
         {{ form_row(form.description) }}
         {{ form_row(form.vendorAddress) }}
@@ -46,6 +40,7 @@
         <div style="display: none">
             {{ form_row(form.shopUser) }}
         </div>
+
 
         <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
         {{ form_row(form._token) }}

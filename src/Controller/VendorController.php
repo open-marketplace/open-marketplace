@@ -39,7 +39,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -153,7 +152,16 @@ final class VendorController extends ResourceController
             }
 
             try {
-                $this->resourceUpdateHandler->handle($resource, $configuration, $this->manager);
+                $image = $resource->getImage();
+                $this->vendorProfileUpdater->createPendingVendorProfileUpdate(
+                    $form->getData(),
+                    $vendor,
+                    $image
+                );
+
+                $vendor->setEditedAt(new \DateTime());
+                $this->manager->flush();
+
             } catch (UpdateHandlingException $exception) {
                 if (!$configuration->isHtmlRequest()) {
                     return $this->createRestView($configuration, $form, $exception->getApiResponseCode());
@@ -165,7 +173,7 @@ final class VendorController extends ResourceController
             }
 
             if ($configuration->isHtmlRequest()) {
-                $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+                //$this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
             }
 
             $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
@@ -261,14 +269,5 @@ final class VendorController extends ResourceController
         }
 
         return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
-    }
-
-    public function remove_vendor_image(Request $request): Response
-    {
-        $vendor = $this->vendorProvider->provideCurrentVendor();
-
-        $this->vendorProfileUpdater->createProfileWithoutImage($vendor);
-
-        return new RedirectResponse($this->generateUrl('vendor_profile'));
     }
 }

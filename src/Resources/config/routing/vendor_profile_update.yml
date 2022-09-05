@@ -10,15 +10,3 @@ vendor_profile_update:
             event: update
             redirect:
                 route: sylius_shop_account_dashboard
-
-vendor_remove_image:
-    path: /vendor/profile/remove_image
-    methods: [POST]
-    defaults:
-        autowire: true
-        _controller: bitbag_mvm_plugin.controller.vendor_controller:remove_vendor_image
-        _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/profileUpdate.html.twig"
-#            form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType
-#            event: update
-
