@@ -11,11 +11,12 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantTranslationFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantTranslationFactoryInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Product\Model\ProductVariantTranslation;
-use Sylius\Component\Product\Model\ProductVariant;
 
 final class ProductVariantTranslationFactorySpec extends ObjectBehavior
 {
@@ -46,5 +47,24 @@ final class ProductVariantTranslationFactorySpec extends ObjectBehavior
         $productVariantTranslation->setLocale('en');
 
         $this->create($productVariant, 'translation', 'en')->shouldBeLike($productVariantTranslation);
+    }
+
+    public function it_should_create_product_variant_translation_from_product_listing(): void
+    {
+        $productVariant = new ProductVariant();
+        $productVariantTranslation = new ProductVariantTranslation();
+
+        $productVariantTranslation->setTranslatable($productVariant);
+        $productVariantTranslation->setName('translation');
+        $productVariantTranslation->setLocale('en');
+
+        $productTranslation = new ProductTranslation();
+        $productTranslation->setName('translation');
+        $productTranslation->setLocale('en');
+
+        $this->createFromProductListingTranslation(
+            $productVariant,
+            $productTranslation, 'en'
+        )->shouldBeLike($productVariantTranslation);
     }
 }
