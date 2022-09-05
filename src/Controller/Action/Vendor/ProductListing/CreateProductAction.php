@@ -123,7 +123,7 @@ class CreateProductAction extends AbstractController
             $user = $this->getUser();
             $vendor = $user->getVendor();
 
-            if (!$vendor) {
+            if ($vendor === null) {
                 throw new VendorNotFoundException('Vendor not found.');
             }
 

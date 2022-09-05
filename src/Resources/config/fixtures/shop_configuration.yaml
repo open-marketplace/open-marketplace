@@ -18,12 +18,7 @@ sylius_fixtures:
                         locales:
                             - 'en_US'
                             - 'de_DE'
-                            - 'fr_FR'
                             - 'pl_PL'
-                            - 'es_ES'
-                            - 'es_MX'
-                            - 'pt_PT'
-                            - 'zh_CN'
 
                 currency:
                     options:
