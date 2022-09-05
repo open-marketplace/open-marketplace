@@ -112,7 +112,7 @@ final class VendorController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        
+
         $vendor = $this->vendorProvider->provideCurrentVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)
             ->findOneBy(['vendor' => $vendor]);
@@ -122,7 +122,6 @@ final class VendorController extends ResourceController
 
             return $this->redirectToRoute('vendor_profile');
         }
-
 
         $resource = $vendor;
 
@@ -269,7 +268,6 @@ final class VendorController extends ResourceController
         $vendor = $this->vendorProvider->provideCurrentVendor();
 
         $this->vendorProfileUpdater->createProfileWithoutImage($vendor);
-
 
         return new RedirectResponse($this->generateUrl('vendor_profile'));
     }

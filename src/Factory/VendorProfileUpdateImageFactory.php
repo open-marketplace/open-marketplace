@@ -29,7 +29,6 @@ final class VendorProfileUpdateImageFactory implements VendorProfileUpdateImageF
 
         $vendorImage->setPath($path);
 
-
         return $vendorImage;
     }
 

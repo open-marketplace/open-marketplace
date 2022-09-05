@@ -14,10 +14,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\EventListener;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGeneratorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class VendorRegisterListener
 {

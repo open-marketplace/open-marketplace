@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface VendorImageInterface extends ImageInterface
 {

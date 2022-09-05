@@ -18,7 +18,11 @@ use Sylius\Component\Core\Model\ImageInterface;
 
 interface VendorProfileUpdaterInterface
 {
-    public function createPendingVendorProfileUpdate(VendorProfileInterface $vendorData, VendorInterface $currentVendor, ?ImageInterface $image): void;
+    public function createPendingVendorProfileUpdate(
+        VendorProfileInterface $vendorData,
+        VendorInterface $currentVendor,
+        ?ImageInterface $image
+    ): void;
 
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;
 
