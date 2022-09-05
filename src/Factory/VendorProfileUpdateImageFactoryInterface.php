@@ -13,7 +13,6 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 
 interface VendorProfileUpdateImageFactoryInterface
 {
