@@ -161,7 +161,6 @@ final class VendorController extends ResourceController
 
                 $vendor->setEditedAt(new \DateTime());
                 $this->manager->flush();
-
             } catch (UpdateHandlingException $exception) {
                 if (!$configuration->isHtmlRequest()) {
                     return $this->createRestView($configuration, $form, $exception->getApiResponseCode());

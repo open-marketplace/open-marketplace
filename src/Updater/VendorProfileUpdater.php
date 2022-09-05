@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
@@ -57,11 +59,11 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
     public function createPendingVendorProfileUpdate(
         VendorProfileInterface $vendorData,
         VendorInterface $currentVendor,
-        ?ImageInterface $image
+        ?VendorImageInterface $image
     ): void {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
 
-        if (null === $image->getPath()) {
+        if ($image && null === $image->getPath()) {
             $imageEntity = $this->imageFactory->createWithFileAndOwner($image, $pendingVendorUpdate);
 
             $this->imageUploader->upload($imageEntity);
@@ -69,7 +71,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         }
 
         $token = $pendingVendorUpdate->getToken();
-        $currentVendor->setImage(null);
+
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
 
         $shopUser = $currentVendor->getShopUser();
@@ -114,18 +116,18 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->remover->removePendingUpdate($vendorData);
     }
 
-    public function createProfileWithoutImage(VendorInterface $vendor): void
-    {
-        $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($vendor);
-        $this->setVendorFromData($pendingVendorUpdate, $vendor);
-        $pendingVendorUpdate->setImage(null);
-
-        $token = $pendingVendorUpdate->getToken();
-        $shopUser = $vendor->getShopUser();
-        $email = $shopUser->getUsername();
-
-        $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
-    }
+//    public function createProfileWithoutImage(VendorInterface $vendor): void
+//    {
+//        $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($vendor);
+//        $this->setVendorFromData($pendingVendorUpdate, $vendor);
+//        $pendingVendorUpdate->setImage(null);
+//
+//        $token = $pendingVendorUpdate->getToken();
+//        $shopUser = $vendor->getShopUser();
+//        $email = $shopUser->getUsername();
+//
+//        $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
+//    }
 
     private function addOrReplaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void
     {

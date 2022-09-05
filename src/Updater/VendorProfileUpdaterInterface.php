@@ -11,22 +11,22 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use Sylius\Component\Core\Model\ImageInterface;
+
 
 interface VendorProfileUpdaterInterface
 {
     public function createPendingVendorProfileUpdate(
         VendorProfileInterface $vendorData,
         VendorInterface $currentVendor,
-        ?ImageInterface $image
+        ?VendorImageInterface $image
     ): void;
 
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;
 
     public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void;
 
-    public function createProfileWithoutImage(VendorInterface $vendor): void;
 }

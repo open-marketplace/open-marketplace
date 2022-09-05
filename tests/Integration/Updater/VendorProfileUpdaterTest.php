@@ -13,9 +13,9 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Updater;
 
 use ApiTestCase\JsonApiTestCase;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdater;
@@ -79,8 +79,11 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             ->findOneBy(['taxIdentifier' => '1234567']);
 
         $vendorFormData = $this->createFakeUpdateFormData();
+
+        $fakeImage = new VendorProfileUpdateImage();
+        $fakeImage->setPath('fakepath');
         $this->vendorProfileUpdater
-            ->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit, null);
+            ->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit, $fakeImage);
 
         $pendingData = $this->vendorProfileUpdateRepository
             ->findOneBy(['vendor' => $vendorDataBeforeFormSubmit]);
@@ -115,8 +118,11 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $currentVendor = $this->vendorRepository
             ->findOneBy(['taxIdentifier' => '1234567']);
 
+        $fakeImage = new VendorProfileUpdateImage();
+        $fakeImage->setPath('fakepath');
+
         $this->vendorProfileUpdater
-            ->createPendingVendorProfileUpdate($vendorFormData, $currentVendor, null);
+            ->createPendingVendorProfileUpdate($vendorFormData, $currentVendor, $fakeImage);
 
         $pendingData = $this->entityManager
             ->getRepository(VendorProfileUpdate::class)
