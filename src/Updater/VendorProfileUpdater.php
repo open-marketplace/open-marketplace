@@ -150,32 +150,9 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
             $this->entityManager->persist($imageUpdate);
         }
+
         if (null === $imageUpdate) {
             $vendor->setImage(null);
         }
-
-//        if($vendorData->getImage()) {
-//            $oldImage = $vendor->getImage();
-//            if(null !== $oldImage) {
-//                /** @var string $path */
-//                $path = $oldImage->getPath();
-//                $this->imageUploader->remove($path);
-//                $this->entityManager->remove($oldImage);
-//                $this->entityManager->flush();
-//            }
-//
-//            $image = $vendorData->getImage();
-//
-//            if($image) {
-//                $imageEntity = new VendorImage();
-//                $imageEntity->setPath($image->getPath());
-//                $imageEntity->setOwner($vendor);
-//                $vendor->setImage($imageEntity);
-//
-//                $image->setPath(null);
-//
-//                $this->entityManager->persist($image);
-//            }
-//        }
     }
 }

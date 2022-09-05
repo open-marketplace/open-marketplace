@@ -54,6 +54,8 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
         $this->vendorAddressFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_address_factory');
         $this->vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_factory');
+        $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('bitbag.mvm_plugin.service.vendor_profile_image_factory');
+        $this->imageUploader = static::$container->get('sylius.image_uploader');
 
         $remover = static::$container->get('bitbag_mvm_plugin.remover.profile_update_remover');
         $vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_update_factory');
@@ -63,7 +65,9 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             $this->entityManager,
             $senderMock,
             $remover,
-            $vendorProfileFactory
+            $vendorProfileFactory,
+            $this->vendorProfileUpdateImageFactoryInterface,
+            $this->imageUploader
         );
     }
 
@@ -76,7 +80,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
         $vendorFormData = $this->createFakeUpdateFormData();
         $this->vendorProfileUpdater
-            ->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit);
+            ->createPendingVendorProfileUpdate($vendorFormData, $vendorDataBeforeFormSubmit, null);
 
         $pendingData = $this->vendorProfileUpdateRepository
             ->findOneBy(['vendor' => $vendorDataBeforeFormSubmit]);
@@ -112,7 +116,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             ->findOneBy(['taxIdentifier' => '1234567']);
 
         $this->vendorProfileUpdater
-            ->createPendingVendorProfileUpdate($vendorFormData, $currentVendor);
+            ->createPendingVendorProfileUpdate($vendorFormData, $currentVendor, null);
 
         $pendingData = $this->entityManager
             ->getRepository(VendorProfileUpdate::class)
