@@ -14,7 +14,14 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribu
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValueInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 final class ProductDraftSpec extends ObjectBehavior
 {
@@ -124,4 +131,119 @@ final class ProductDraftSpec extends ObjectBehavior
         $this->removeAttribute($attribute);
         $this->hasAttribute($attribute)->shouldReturn(false);
     }
+
+    function it_has_no_id_by_default(): void
+    {
+        $this->getId()->shouldReturn(null);
+    }
+
+
+    function it_initializes_attribute_collection_by_default(): void
+    {
+        $this->getAttributes()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_attribute(DraftAttributeValueInterface $attribute): void
+    {
+        $attribute->setDraft($this)->shouldBeCalled();
+
+        $this->addAttribute($attribute);
+        $this->hasAttribute($attribute)->shouldReturn(true);
+    }
+
+    function it_returns_attributes_by_a_locale_without_a_base_locale(
+        DraftAttributeInterface $attribute,
+        DraftAttributeValueInterface $attributeValueEN,
+        DraftAttributeValueInterface $attributeValuePL,
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueEN->setDraft($this)->shouldBeCalled();
+        $attributeValueEN->getLocaleCode()->willReturn('en_US');
+        $attributeValueEN->getAttribute()->willReturn($attribute);
+        $attributeValueEN->getCode()->willReturn('colour');
+        $attributeValueEN->getValue()->willReturn('Blue');
+
+        $attributeValuePL->setDraft($this)->shouldBeCalled();
+        $attributeValuePL->getLocaleCode()->willReturn('pl_PL');
+        $attributeValuePL->getAttribute()->willReturn($attribute);
+        $attributeValuePL->getCode()->willReturn('colour');
+        $attributeValuePL->getValue()->willReturn('Niebieski');
+
+        $this->addAttribute($attributeValueEN);
+        $this->addAttribute($attributeValuePL);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US')
+            ->shouldIterateAs([$attributeValuePL->getWrappedObject()])
+        ;
+    }
+
+    function it_returns_attributes_by_a_base_locale_when_there_is_no_value_for_a_given_locale_or_a_fallback_locale(
+        DraftAttributeInterface $attribute,
+        DraftAttributeValueInterface $attributeValueFR,
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueFR->setDraft($this)->shouldBeCalled();
+        $attributeValueFR->getLocaleCode()->willReturn('fr_FR');
+        $attributeValueFR->getAttribute()->willReturn($attribute);
+        $attributeValueFR->getCode()->willReturn('colour');
+        $attributeValueFR->getValue()->willReturn('Bleu');
+
+        $this->addAttribute($attributeValueFR);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US', 'fr_FR')
+            ->shouldIterateAs([$attributeValueFR->getWrappedObject()])
+        ;
+    }
+
+    function it_returns_attributes_by_a_base_locale_when_there_is_an_empty_value_for_a_given_locale_or_a_fallback_locale(
+        DraftAttributeInterface $attribute,
+        DraftAttributeValueInterface $attributeValueEN,
+        DraftAttributeValueInterface $attributeValuePL,
+        DraftAttributeValueInterface $attributeValueFR,
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueEN->setDraft($this)->shouldBeCalled();
+        $attributeValueEN->getLocaleCode()->willReturn('en_US');
+        $attributeValueEN->getAttribute()->willReturn($attribute);
+        $attributeValueEN->getCode()->willReturn('colour');
+        $attributeValueEN->getValue()->willReturn('');
+
+        $attributeValuePL->setDraft($this)->shouldBeCalled();
+        $attributeValuePL->getLocaleCode()->willReturn('pl_PL');
+        $attributeValuePL->getAttribute()->willReturn($attribute);
+        $attributeValuePL->getCode()->willReturn('colour');
+        $attributeValuePL->getValue()->willReturn(null);
+
+        $attributeValueFR->setDraft($this)->shouldBeCalled();
+        $attributeValueFR->getLocaleCode()->willReturn('fr_FR');
+        $attributeValueFR->getAttribute()->willReturn($attribute);
+        $attributeValueFR->getCode()->willReturn('colour');
+        $attributeValueFR->getValue()->willReturn('Bleu');
+
+        $this->addAttribute($attributeValueEN);
+        $this->addAttribute($attributeValuePL);
+        $this->addAttribute($attributeValueFR);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US', 'fr_FR')
+            ->shouldIterateAs([$attributeValueFR->getWrappedObject()])
+        ;
+    }
+
+    function it_initializes_creation_date_by_default(): void
+    {
+        $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
+    }
+
+    function its_creation_date_is_mutable(\DateTime $creationDate): void
+    {
+        $this->setCreatedAt($creationDate);
+        $this->getCreatedAt()->shouldReturn($creationDate);
+    }
+
 }

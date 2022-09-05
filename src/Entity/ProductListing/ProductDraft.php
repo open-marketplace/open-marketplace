@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductDraft implements ResourceInterface, ProductDraftInterface
 {
-    protected ?int $id;
+    protected ?int $id = null;
 
     protected string $code;
 
