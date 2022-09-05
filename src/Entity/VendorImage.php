@@ -17,7 +17,7 @@ class VendorImage implements VendorImageInterface
 {
     protected ?int $id;
 
-    protected ?\SplFileInfo $file;
+    protected ?\SplFileInfo $file = null;
 
     protected ?string $path = null;
 

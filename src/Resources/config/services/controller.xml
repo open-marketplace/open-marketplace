@@ -69,6 +69,7 @@
                  id="bitbag_mvm_plugin.controller.vendor_controller"
                  parent="bitbag_mvm_plugin.controller.vendor">
             <argument type="service" id="bitbag_mvm_plugin.provider.vendor" />
+            <argument type="service" id="bitbag_mvm_plugin.updater.vendor_profile_updater" />
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ShowVendorPageAction"

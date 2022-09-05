@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -38,6 +39,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -47,6 +49,8 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 final class VendorController extends ResourceController
 {
     private VendorProviderInterface $vendorProvider;
+
+    private VendorProfileUpdaterInterface $vendorProfileUpdater;
 
     public function __construct(
         MetadataInterface $metadata,
@@ -66,7 +70,8 @@ final class VendorController extends ResourceController
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        VendorProviderInterface $vendorProvider
+        VendorProviderInterface $vendorProvider,
+        VendorProfileUpdaterInterface $vendorProfileUpdater
     ) {
         parent::__construct(
             $metadata,
@@ -89,6 +94,7 @@ final class VendorController extends ResourceController
         );
 
         $this->vendorProvider = $vendorProvider;
+        $this->vendorProfileUpdater = $vendorProfileUpdater;
     }
 
     public function createAction(Request $request): Response
@@ -256,5 +262,15 @@ final class VendorController extends ResourceController
         }
 
         return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+    }
+
+    public function remove_vendor_image(Request $request): Response
+    {
+        $vendor = $this->vendorProvider->provideCurrentVendor();
+
+        $this->vendorProfileUpdater->createProfileWithoutImage($vendor);
+
+
+        return new RedirectResponse($this->generateUrl('vendor_profile'));
     }
 }

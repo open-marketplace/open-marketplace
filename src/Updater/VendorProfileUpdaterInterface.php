@@ -13,10 +13,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use Sylius\Component\Core\Model\ImageInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface VendorProfileUpdaterInterface
 {
@@ -25,4 +23,6 @@ interface VendorProfileUpdaterInterface
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;
 
     public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void;
+
+    public function createProfileWithoutImage(VendorInterface $vendor): void;
 }

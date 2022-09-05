@@ -74,7 +74,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         }
 
         $token = $pendingVendorUpdate->getToken();
-
+        $currentVendor->setImage(null);
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
 
         $shopUser = $currentVendor->getShopUser();
@@ -91,6 +91,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
         $vendor->setPhoneNumber($data->getPhoneNumber());
         $vendor->setDescription($data->getDescription());
+
         $newVendorAddress = $data->getVendorAddress();
 
         if (null === $newVendorAddress) {
@@ -118,30 +119,68 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->remover->removePendingUpdate($vendorData);
     }
 
+    public function createProfileWithoutImage(VendorInterface $vendor): void
+    {
+        $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($vendor);
+        $this->setVendorFromData($pendingVendorUpdate, $vendor);
+        $pendingVendorUpdate->setImage(null);
+
+        $token = $pendingVendorUpdate->getToken();
+        $shopUser = $vendor->getShopUser();
+        $email = $shopUser->getUsername();
+
+        $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
+    }
+
     private function addOrReplaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void
     {
-        if($vendorData->getImage()) {
-            $oldImage = $vendor->getImage();
-            if(null !== $oldImage) {
-                /** @var string $path */
-                $path = $oldImage->getPath();
-                $this->imageUploader->remove($path);
-                $this->entityManager->remove($oldImage);
-                $this->entityManager->flush();
-            }
+        $imageUpdate = $vendorData->getImage();
+        $oldVendorImage = $vendor->getImage();
 
-            $image = $vendorData->getImage();
-
-            if($image) {
-                $imageEntity = new VendorImage();
-                $imageEntity->setPath($image->getPath());
-                $imageEntity->setOwner($vendor);
-                $vendor->setImage($imageEntity);
-
-                $image->setPath(null);
-
-                $this->entityManager->persist($image);
-            }
+        if($oldVendorImage){
+            /** @var string $path */
+            $path = $oldVendorImage->getPath();
+            $this->imageUploader->remove($path);
+            $this->entityManager->remove($oldVendorImage);
+            $this->entityManager->flush();
         }
+
+        if($imageUpdate) {
+            $imageEntity = new VendorImage();
+            $imageEntity->setPath($imageUpdate->getPath());
+            $imageEntity->setOwner($vendor);
+            $vendor->setImage($imageEntity);
+
+            $imageUpdate->setPath(null);
+
+            $this->entityManager->persist($imageUpdate);
+        }
+        if(null === $imageUpdate) {
+            $vendor->setImage(null);
+        }
+
+//        if($vendorData->getImage()) {
+//            $oldImage = $vendor->getImage();
+//            if(null !== $oldImage) {
+//                /** @var string $path */
+//                $path = $oldImage->getPath();
+//                $this->imageUploader->remove($path);
+//                $this->entityManager->remove($oldImage);
+//                $this->entityManager->flush();
+//            }
+//
+//            $image = $vendorData->getImage();
+//
+//            if($image) {
+//                $imageEntity = new VendorImage();
+//                $imageEntity->setPath($image->getPath());
+//                $imageEntity->setOwner($vendor);
+//                $vendor->setImage($imageEntity);
+//
+//                $image->setPath(null);
+//
+//                $this->entityManager->persist($image);
+//            }
+//        }
     }
 }
