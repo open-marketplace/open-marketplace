@@ -10,6 +10,7 @@
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
+            <argument type="service" id="router.default"/>
             <tag name="controller.service_arguments" />
         </service>
     </services>

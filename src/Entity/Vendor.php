@@ -36,17 +36,17 @@ class Vendor implements VendorInterface
 
     protected ?DateTimeInterface $editedAt = null;
 
-    private ?string $slug;
+    protected ?string $slug;
 
-    private ?string $description;
+    protected ?string $description;
 
-    private ?VendorImageInterface $image = null;
+    protected ?VendorImageInterface $image = null;
 
     /** @var Collection<int, ProductInterface> */
-    private Collection $products;
+    protected Collection $products;
 
     /** @var Collection<int, ProductListing> */
-    private Collection $productListings;
+    protected Collection $productListings;
 
     private Collection $shippingMethods;
 

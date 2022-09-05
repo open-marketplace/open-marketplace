@@ -15,3 +15,32 @@ parameters:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_order:
+    resources:
+        order:
+            classes:
+                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order
+                controller: Sylius\Bundle\CoreBundle\Controller\OrderController
+                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\OrderRepository
+                form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
+        order_item:
+            classes:
+                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem
+
+sylius_product:
+    resources:
+        product:
+            classes:
+                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product
+        product_variant:
+            classes:
+                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductVariantRepository
+
+sylius_user:
+    resources:
+        shop:
+            user:
+                classes:
+                    model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser
+                    interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface

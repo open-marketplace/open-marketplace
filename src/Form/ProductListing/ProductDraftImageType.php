@@ -13,20 +13,17 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
-use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductDraftImageType extends ImageType
 {
-    public function buildView(FormView $view, FormInterface $form, array $options): void
-    {
+    public function buildView(
+        FormView $view,
+        FormInterface $form,
+        array $options
+    ): void {
         parent::buildView($view, $form, $options);
 
         $view->vars['product'] = $options['product'];

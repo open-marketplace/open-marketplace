@@ -23,7 +23,7 @@ class ProductDraftRepository extends EntityRepository implements ProductDraftRep
         $this->_em->flush();
     }
 
-    public function findProductListingLatestProductDraft(ProductListingInterface $productListing): ?ProductDraftInterface
+    public function findLatestDraft(ProductListingInterface $productListing): ?ProductDraftInterface
     {
         return $this->createQueryBuilder('pd')
             ->andWhere('pd.productListing = :productListing')
