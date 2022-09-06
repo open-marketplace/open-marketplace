@@ -114,19 +114,6 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->remover->removePendingUpdate($vendorData);
     }
 
-//    public function createProfileWithoutImage(VendorInterface $vendor): void
-//    {
-//        $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($vendor);
-//        $this->setVendorFromData($pendingVendorUpdate, $vendor);
-//        $pendingVendorUpdate->setImage(null);
-//
-//        $token = $pendingVendorUpdate->getToken();
-//        $shopUser = $vendor->getShopUser();
-//        $email = $shopUser->getUsername();
-//
-//        $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
-//    }
-
     private function addOrReplaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void
     {
         $imageUpdate = $vendorData->getImage();

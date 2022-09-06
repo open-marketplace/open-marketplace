@@ -68,6 +68,5 @@ class VendorProfileUpdateImage implements VendorImageInterface
 
     public function setType(?string $type): void
     {
-        // TODO: Implement setType() method.
     }
 }

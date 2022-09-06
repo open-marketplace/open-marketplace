@@ -27,7 +27,6 @@ interface VendorImageInterface extends ImageInterface
 
     public function setPath(?string $path): void;
 
-    /** @return  object|null */
     public function getOwner(): ?object;
 
     /** @param object|null $owner */
