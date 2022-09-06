@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
+use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
@@ -23,7 +24,7 @@ use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-class VendorUpdateContext implements Context
+class VendorUpdateContext extends RawMinkContext
 {
     private SharedStorageInterface $sharedStorage;
 
@@ -111,4 +112,15 @@ class VendorUpdateContext implements Context
 
         $this->sharedStorage->set('pendingUpdate', $pendigUpdate);
     }
+
+    /**
+     * @Then I should get validation error
+     */
+    public function iShouldGetValidationError()
+    {
+        $page = $this->getSession()->getPage();
+        $label = $page->find('css','.ui.red.pointing.label.sylius-validation-error');
+        dd($label->getText());
+    }
+
 }
