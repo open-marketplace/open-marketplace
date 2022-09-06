@@ -37,7 +37,14 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorProfileUpdateImageFactoryInterface $imageFactory,
         ImageUploader $imageUploader
     ): void {
-        $this->beConstructedWith($entityManager, $sender, $remover, $vendorProfileFactory, $imageFactory, $imageUploader);
+        $this->beConstructedWith(
+            $entityManager,
+            $sender,
+            $remover,
+            $vendorProfileFactory,
+            $imageFactory,
+            $imageUploader
+        );
     }
 
     public function it_is_initializable()
@@ -96,7 +103,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
             ->shouldHaveBeenCalledTimes(1);
     }
 
-    public function it_create_new_image_for_new_image(
+    public function it_creates_new_image_object_for_new_image_upload(
         SenderInterface $sender,
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
