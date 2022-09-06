@@ -20,3 +20,8 @@
       </div>
    {% endif %}
 {% endblock %}
+
+{% block javascripts %}
+   {{ parent() }}
+   <script src="/build/admin/admin-entry.js"></script>
+{% endblock %}
