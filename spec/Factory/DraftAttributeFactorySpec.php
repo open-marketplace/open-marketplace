@@ -35,7 +35,7 @@ final class DraftAttributeFactorySpec extends ObjectBehavior
         $this->shouldHaveType(DraftAttributeFactory::class);
     }
 
-    function it_create_typed_attribute(
+    function it_creates_typed_attribute(
         ServiceRegistryInterface $attributeTypesRegistry,
         AttributeTypeInterface $attributeType,
         VendorProviderInterface $vendorProvider,
