@@ -172,7 +172,7 @@ final class VendorController extends ResourceController
             }
 
             if ($configuration->isHtmlRequest()) {
-                //$this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+                $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
             }
 
             $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
