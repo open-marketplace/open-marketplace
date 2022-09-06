@@ -245,5 +245,4 @@ final class ProductDraftSpec extends ObjectBehavior
         $this->setCreatedAt($creationDate);
         $this->getCreatedAt()->shouldReturn($creationDate);
     }
-
 }
