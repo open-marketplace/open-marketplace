@@ -30,18 +30,5 @@
             </argument>
             <argument type="service" id="security.token_storage"/>
         </service>
-        <service id="bitbag.mvm_plugin.repository.customer_repository"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Repository\CustomerRepository"
-                 decorates="sylius.repository.customer"
-        >
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service">
-                <service class="Doctrine\ORM\Mapping\ClassMetadata" public="false">
-                    <argument>%sylius.model.customer.class%</argument>
-                    <factory service="sylius.manager.customer" method="getClassMetadata"/>
-                </service>
-            </argument>
-            <argument type="service" id="security.token_storage"/>
-        </service>
     </services>
 </container>
