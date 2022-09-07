@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-final class VendorExtension extends AbstractExtension
+class VendorExtension extends AbstractExtension
 {
     private VendorProviderInterface $vendorProvider;
     private ObjectManager $manager;
