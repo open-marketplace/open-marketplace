@@ -56,8 +56,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $verified,
         $username,
         $password
-    )
-    {
+    ) {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserExampleFactory->create();
         $user->setUsername($username);

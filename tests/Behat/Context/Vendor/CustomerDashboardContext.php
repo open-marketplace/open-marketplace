@@ -37,8 +37,7 @@ class CustomerDashboardContext extends MinkContext implements Context
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
         ObjectManager $manager
-    )
-    {
+    ) {
         $this->dashboardPage = $dashboardPage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
@@ -68,8 +67,7 @@ class CustomerDashboardContext extends MinkContext implements Context
         $status,
         $vendor_user_email,
         $country_code
-    ): void
-    {
+    ): void {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
         $this->userRepository->add($user);

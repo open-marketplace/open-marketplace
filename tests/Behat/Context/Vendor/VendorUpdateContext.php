@@ -52,8 +52,7 @@ class VendorUpdateContext implements Context
         $status,
         $vendor_user_email,
         $country_code
-    ): void
-    {
+    ): void {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);

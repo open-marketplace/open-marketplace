@@ -55,8 +55,7 @@ final class DraftAttributeContext extends RawMinkContext
         $code,
         $name,
         $type
-    )
-    {
+    ) {
         $page = $this->getSession()->getPage();
         $gridTable = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
         $rows = $gridTable->findAll('css', '.item');
@@ -80,8 +79,7 @@ final class DraftAttributeContext extends RawMinkContext
         $type,
         $name,
         $code
-    )
-    {
+    ) {
         $vendor = $this->sharedStorage->get('vendor');
         $locale = $this->sharedStorage->get('locale');
 
