@@ -13,8 +13,8 @@ use Twig\TwigFunction;
 class VendorExtension extends AbstractExtension
 {
     private VendorProviderInterface $vendorProvider;
-    private ObjectManager $manager;
 
+    private ObjectManager $manager;
 
     public function __construct(VendorProviderInterface $vendorProvider, ObjectManager $manager)
     {
