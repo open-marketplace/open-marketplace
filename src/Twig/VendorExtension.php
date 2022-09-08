@@ -38,7 +38,7 @@ class VendorExtension extends AbstractExtension
         if (null === $pendingUpdate) {
             return true;
         }
-        
+
         return false;
     }
 }
