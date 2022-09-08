@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ProductDraftInterface extends ResourceInterface
+interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface
 {
     public const STATUS_CREATED = 'created';
 
@@ -41,6 +43,10 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function setVerifiedAt(?\DateTimeInterface $verifiedAt): void;
 
+    public function getPublishedAt(): ?\DateTimeInterface;
+
+    public function setPublishedAt(?\DateTimeInterface $publishedAt): void;
+
     public function getCreatedAt(): \DateTimeInterface;
 
     public function setCreatedAt(\DateTimeInterface $createdAt): void;
@@ -54,28 +60,24 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function addTranslations(ProductTranslationInterface $translation): void;
 
-    public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void;
-
     /** @return Collection<int|string, ProductListingPriceInterface> */
     public function getProductListingPrice(): Collection;
 
     public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void;
 
-    public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void;
-
     public function getProductListing(): ProductListingInterface;
 
     public function setProductListing(ProductListingInterface $productListing): void;
 
-    public function getStatus(): ?string;
+    public function getStatus(): string;
 
     public function setStatus(string $status): void;
 
     public function incrementVersion(): void;
 
-    public function getPublishedAt(): ?\DateTimeInterface;
+    public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void;
 
-    public function setPublishedAt(?\DateTimeInterface $publishedAt): void;
+    public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void;
 
     public function accept(): void;
 
@@ -83,11 +85,33 @@ interface ProductDraftInterface extends ResourceInterface
 
     public function sendToVerification(): void;
 
-    /** @return  Collection<int|string, ImageInterface> */
+    /** @return  Collection<int|string, ImageInterface> $images */
     public function getImages(): Collection;
 
     /** @param Collection<int|string, ImageInterface> $images */
     public function setImages(Collection $images): void;
 
     public function addImage(ImageInterface $image): void;
+
+    /** @return  Collection<int, AttributeValueInterface> */
+    public function getAttributes(): Collection;
+
+    /** @return  Collection<int, AttributeValueInterface>  */
+    public function getAttributesByLocale(
+        string $localeCode,
+        string $fallbackLocaleCode,
+        ?string $baseLocaleCode = null
+    ): Collection;
+
+    public function addAttribute(AttributeValueInterface $attribute): void;
+
+    public function removeAttribute(AttributeValueInterface $attribute): void;
+
+    public function hasAttribute(AttributeValueInterface $attribute): bool;
+
+    public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool;
+
+    public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface;
+
+    public function setAttributesFrom(self $otherDraft): void;
 }

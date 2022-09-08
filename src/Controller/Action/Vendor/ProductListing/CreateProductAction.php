@@ -100,6 +100,9 @@ class CreateProductAction extends AbstractController
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
             }
+            foreach ($productDraft->getAttributes() as $attribute) {
+                $attribute->setSubject($productDraft);
+            }
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
 

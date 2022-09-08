@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
-class ResourceTranslationsType extends AbstractType
+final class ResourceTranslationsType extends AbstractType
 {
     /** @var string[] */
     private $definedLocalesCodes;

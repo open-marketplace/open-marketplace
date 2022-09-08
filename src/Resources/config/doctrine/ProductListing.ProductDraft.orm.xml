@@ -43,5 +43,12 @@
                 <cascade-persist/>
             </cascade>
         </one-to-many>
+
+        <one-to-many field="attributes" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue"
+                     mapped-by="subject" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
     </mapped-superclass>
 </doctrine-mapping>

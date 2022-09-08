@@ -16,30 +16,35 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Setup\Factory\VendorFactoryInterface;
 
 final class VendorEditingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
 
+    private VendorFactoryInterface $vendorFactory;
+
     public function __construct(
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        VendorFactoryInterface $vendorFactory
     ) {
         $this->entityManager = $entityManager;
+        $this->vendorFactory = $vendorFactory;
     }
 
     /**
      * @Given There is a :ifVerified Vendor who :ifRequested change
      */
-    public function thereIsAVendorWhoChange($ifVerified, $ifRequested)
+    public function thereIsAVendorWhoChange($ifVerified, $ifRequested): void
     {
-        $vendor = new Vendor();
-        $vendor->setCompanyName('vendor');
-        $vendor->setTaxIdentifier('vendorTax');
-        $vendor->setPhoneNumber('vendorPhone');
-        $vendor->setSlug('slug');
-        $vendor->setDescription('description');
-        $vendor->setStatus($ifVerified);
-        $vendor->setEditedAt(null);
+        $vendor = $this->vendorFactory->createVendor(
+            'vendor',
+            'vendorTax',
+            'vendorPhone',
+            'slug',
+            'description',
+            $ifVerified
+        );
 
         if ('requested' === $ifRequested) {
             $vendor->setEditedAt(new DateTime());
