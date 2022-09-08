@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use Sylius\Component\Core\Model\ProductInterface as BaseProductInterface;
 
 interface ProductInterface extends BaseProductInterface
@@ -20,4 +21,6 @@ interface ProductInterface extends BaseProductInterface
     public function setVendor(?VendorInterface $vendor): void;
 
     public function resetImages(): void;
+
+    public function setAttributesFrom(ProductDraftInterface $draft): void;
 }

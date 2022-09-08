@@ -44,6 +44,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
             return $cratedProduct;
         }
+
         /** @var BitBagProductInterface $product */
         $product = $this->productFromDraftUpdater->updateProduct($productDraft);
 
