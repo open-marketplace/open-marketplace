@@ -21,7 +21,7 @@ trait OrderTrait
     /** @var Collection<int, OrderItemInterface> */
     protected $items;
 
-    protected ?VendorInterface $vendor;
+    protected ?VendorInterface $vendor = null;
 
     protected ?OrderInterface $primaryOrder;
 
