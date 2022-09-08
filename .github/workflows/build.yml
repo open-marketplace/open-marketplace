@@ -155,7 +155,7 @@ jobs:
 
         -
             name: Run ECS
-            run: vendor/bin/ecs check src
+            run: vendor/bin/ecs check src spec tests
 
         -
             name: Run PHPSpec

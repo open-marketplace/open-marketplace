@@ -17,15 +17,14 @@ use PhpSpec\ObjectBehavior;
 
 final class ProductDraftImageFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductDraftImageFactory::class);
     }
 
-    function it_creates_valid_image(): void
+    public function it_creates_valid_image(): void
     {
         $image = $this->createNew();
         $image->shouldBeAnInstanceOf(ProductDraftImageInterface::class);
     }
-
 }
