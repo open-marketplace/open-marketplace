@@ -40,6 +40,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface as BitBagOrderInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
@@ -319,7 +320,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements Exampl
         }
         $this->orderManager->persist($order);
 
-        /** @var \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface $order */
+        /** @var BitBagOrderInterface $order */
         $order = $order;
         $orders = $this->splitOrderByVendorProcessor->process($order);
 

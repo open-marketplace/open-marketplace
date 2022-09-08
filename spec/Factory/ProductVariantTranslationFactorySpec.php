@@ -12,11 +12,14 @@ declare(strict_types=1);
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantTranslationFactory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductVariantTranslationFactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslation;
+use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 
 final class ProductVariantTranslationFactorySpec extends ObjectBehavior
 {
@@ -30,41 +33,35 @@ final class ProductVariantTranslationFactorySpec extends ObjectBehavior
         $this->shouldImplement(ProductVariantTranslationFactoryInterface::class);
     }
 
-    public function it_should_create_empty_vendor_image(): void
+    public function it_should_create_empty_product_variant_translation(): void
     {
-        $vendorImage = new ProductVariantTranslation();
-
-        $this->createNew()->shouldBeLike($vendorImage);
+        $this->createNew()->shouldHaveType(ProductVariantTranslation::class);
     }
 
-    public function it_should_create_product_variant_translation_with_data(): void
-    {
-        $productVariant = new ProductVariant();
-        $productVariantTranslation = new ProductVariantTranslation();
+    public function it_should_create_product_variant_translation_with_data(
+        ProductVariantInterface $productVariant
+    ): void {
 
-        $productVariantTranslation->setTranslatable($productVariant);
-        $productVariantTranslation->setName('translation');
-        $productVariantTranslation->setLocale('en');
-
-        $this->create($productVariant, 'translation', 'en')->shouldBeLike($productVariantTranslation);
+        $translation = $this->create($productVariant, 'translation', 'en');
+        $translation->getName()->shouldReturn('translation');
+        $translation->getLocale()->shouldReturn('en');
+        $translation->getTranslatable()->shouldReturn($productVariant);
     }
 
-    public function it_should_create_product_variant_translation_from_product_listing(): void
-    {
-        $productVariant = new ProductVariant();
-        $productVariantTranslation = new ProductVariantTranslation();
+    public function it_should_create_product_variant_translation_from_product_listing(
+        ProductVariantInterface $productVariant,
+        ProductTranslationInterface $productTranslation
+    ): void {
+        $productTranslation->getName()->willReturn('translation');
+        $productTranslation->getLocale()->willReturn('en');
 
-        $productVariantTranslation->setTranslatable($productVariant);
-        $productVariantTranslation->setName('translation');
-        $productVariantTranslation->setLocale('en');
-
-        $productTranslation = new ProductTranslation();
-        $productTranslation->setName('translation');
-        $productTranslation->setLocale('en');
-
-        $this->createFromProductListingTranslation(
+        $productVariantTranslation = $this->createFromProductListingTranslation(
             $productVariant,
-            $productTranslation, 'en'
-        )->shouldBeLike($productVariantTranslation);
+            $productTranslation
+        );
+
+        $productVariantTranslation->getName()->shouldReturn('translation');
+        $productVariantTranslation->getLocale()->shouldReturn('en');
+        $productVariantTranslation->getTranslatable()->shouldReturn($productVariant);
     }
 }
