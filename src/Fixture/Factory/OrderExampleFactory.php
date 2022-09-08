@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface as BitBagOrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
@@ -40,7 +41,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface as BitBagOrderInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
