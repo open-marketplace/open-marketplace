@@ -27,6 +27,8 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
 
     private ProductVariantFactoryInterface $productVariantFactory;
 
+    private ProductVariantTranslationFactoryInterface $productVariantTranslationFactory;
+
     private ChannelPricingFactoryInterface $channelPricingFactory;
 
     private ChannelRepositoryInterface $channelRepository;
@@ -35,12 +37,14 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         ProductFactoryInterface $productFactory,
         ProductTranslationFactoryInterface $productTranslationFactory,
         ProductVariantFactoryInterface $productVariantFactory,
+        ProductVariantTranslationFactoryInterface $productVariantTranslationFactory,
         ChannelPricingFactoryInterface $channelPricingFactory,
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->productFactory = $productFactory;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->productVariantFactory = $productVariantFactory;
+        $this->productVariantTranslationFactory = $productVariantTranslationFactory;
         $this->channelPricingFactory = $channelPricingFactory;
         $this->channelRepository = $channelRepository;
     }
@@ -72,6 +76,11 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         }
 
         $productVariant = $this->productVariantFactory->createNewForProduct($product, true, 0);
+
+        /** @var ProductTranslationInterface $translation */
+        foreach ($productDraft->getTranslations() as $translation) {
+            $this->productVariantTranslationFactory->createFromProductListingTranslation($productVariant, $translation);
+        }
 
         $channelPricingCodes = [];
         /** @var ProductListingPriceInterface $productListingPrice */

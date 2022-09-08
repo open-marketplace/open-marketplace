@@ -26,7 +26,7 @@ class ProductListing implements ProductListingInterface
 
     protected \DateTimeInterface $createdAt;
 
-    protected ?ProductInterface $product;
+    protected ?ProductInterface $product = null;
 
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;

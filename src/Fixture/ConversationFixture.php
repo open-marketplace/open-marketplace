@@ -9,11 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
+use Sylius\Bundle\CoreBundle\Fixture\AbstractResourceFixture;
 
-interface OrderFactoryInterface
+final class ConversationFixture extends AbstractResourceFixture
 {
-    public function createNew(): OrderInterface;
+    public function getName(): string
+    {
+        return 'conversation';
+    }
 }
