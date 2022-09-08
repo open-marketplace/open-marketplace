@@ -10,6 +10,7 @@ bitbag_mvm_plugin_vendor_customer_show:
     path: /customers/{id}
     methods: [GET]
     defaults:
+        id: 0
         _controller: sylius.controller.customer:showAction
         _sylius:
             permission: true

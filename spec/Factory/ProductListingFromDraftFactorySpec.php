@@ -13,6 +13,7 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ProductListingPricingClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ProductListingTranslationClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValueInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
@@ -85,7 +86,8 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         ProductDraftInterface $productDraft,
         ProductDraftInterface $newProductDraft,
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
-        ProductListingPricingClonerInterface $productListingPricingCloner
+        ProductListingPricingClonerInterface $productListingPricingCloner,
+        DraftAttributeValueInterface $attributeValue,
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -109,6 +111,8 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
         $newProductDraft->setCode('code')
             ->shouldBeCalled();
+
+        $newProductDraft->setAttributesFrom($productDraft)->shouldBeCalledOnce();
 
         $newProductDraft->setProductListing($productListing)
             ->shouldBeCalled();

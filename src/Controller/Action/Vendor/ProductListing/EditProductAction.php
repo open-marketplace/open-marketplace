@@ -69,13 +69,13 @@ class EditProductAction extends AbstractController
         /** @var ProductDraftInterface $newResource */
         $newResource = $this->productDraftRepository->findLatestDraft($listing);
 
-        if (!(ProductDraftInterface::STATUS_CREATED == $newResource->getStatus())) {
+        if (!(ProductDraftInterface::STATUS_CREATED === $newResource->getStatus())) {
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);
         }
 
         $form = $this->createForm(ProductType::class, $newResource);
-        $form->handleRequest($request);
 
+        $form->handleRequest($request);
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             /** @var ProductDraftInterface $productDraft */
             $productDraft = $form->getData();
@@ -83,6 +83,10 @@ class EditProductAction extends AbstractController
             foreach ($productDraft->getImages() as $image) {
                 $image->setOwner($newResource);
                 $this->imageUploader->upload($image);
+            }
+            foreach ($productDraft->getAttributes() as $attribute) {
+                $attribute->setSubject($productDraft);
+                $productDraft->addAttribute($attribute);
             }
 
             /** @var ClickableInterface $button */

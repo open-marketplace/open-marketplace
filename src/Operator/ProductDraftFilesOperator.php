@@ -40,6 +40,7 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
             $key = $image->getPath();
             $nameSuffix = '-new.';
 
+            /** @var string $file */
             $file = $this->filesystem->read($key);
 
             $path = explode('.', $key)[0];
