@@ -13,8 +13,8 @@ use Twig\TwigFunction;
 class VendorExtension extends AbstractExtension
 {
     private VendorProviderInterface $vendorProvider;
-    private ObjectManager $manager;
 
+    private ObjectManager $manager;
 
     public function __construct(VendorProviderInterface $vendorProvider, ObjectManager $manager)
     {
@@ -25,11 +25,11 @@ class VendorExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('is_update_pending', [$this, 'is_update_pending']),
+            new TwigFunction('is_pending_vendor_profile_update', [$this, 'is_pending_vendor_profile_update']),
         ];
     }
 
-    public function is_update_pending(): bool
+    public function is_pending_vendor_profile_update(): bool
     {
         $vendor = $this->vendorProvider->provideCurrentVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)

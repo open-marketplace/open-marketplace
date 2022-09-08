@@ -22,7 +22,7 @@
             </h1>
         </div>
         <div class="middle aligned six wide column">
-            {% if is_update_pending() is same as true %}
+            {% if is_pending_vendor_profile_update() is same as true %}
                 <a href="{{ path('vendor_profile_update') }}" class="ui right floated blue button">
                     <i class="pencil icon"></i>
                     {{ 'sylius.ui.edit'|trans }}
@@ -37,7 +37,7 @@
 
     <div class="ui grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
         <div class="sixteen wide mobile ten wide computer column">
-            {% if is_update_pending() is same as true %}
+            {% if is_pending_vendor_profile_update() is same as true %}
                 <div class="ui attached segment">
                     <table class="ui very basic celled table">
                         <tbody>
