@@ -22,10 +22,12 @@
             </h1>
         </div>
         <div class="middle aligned six wide column">
-            <a href="{{ path('vendor_profile_update') }}" class="ui right floated blue button">
-                <i class="pencil icon"></i>
-                {{ 'sylius.ui.edit'|trans }}
-            </a>
+            {% if is_pending_vendor_profile_update() is same as true %}
+                <a href="{{ path('vendor_profile_update') }}" class="ui right floated blue button">
+                    <i class="pencil icon"></i>
+                    {{ 'sylius.ui.edit'|trans }}
+                </a>
+            {% endif %}
         </div>
     </div>
 
@@ -35,43 +37,49 @@
 
     <div class="ui grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
         <div class="sixteen wide mobile ten wide computer column">
-            <div class="ui attached segment">
-                <table class="ui very basic celled table">
-                    <tbody>
-                    <tr>
-                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.company_name'|trans }}</strong></td>
-                        <td>{{ vendor.companyName }}</td>
-                    </tr>
-                    <tr>
-                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.tax_identifier'|trans }}</strong></td>
-                        <td>{{ vendor.taxIdentifier }}</td>
-                    </tr>
-                    <tr>
-                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.phone_number'|trans }}</strong></td>
-                        <td>{{ vendor.phoneNumber }}</td>
-                    </tr>
-                    <tr>
-                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.country'|trans }}</strong></td>
-                        <td>{{ vendor.vendorAddress.country }}</td>
-                    </tr>
-                    <tr>
-                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.postal_code'|trans }}</strong></td>
-                        <td>{{ vendor.vendorAddress.postalCode }}</td>
-                    </tr>
-                    <tr>
-                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.city'|trans }}</strong></td>
-                        <td>{{ vendor.vendorAddress.city }}</td>
-                    </tr>
-                    <tr>
-                        <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.street'|trans }}</strong></td>
-                        <td>{{ vendor.vendorAddress.street }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            {% if is_pending_vendor_profile_update() is same as true %}
+                <div class="ui attached segment">
+                    <table class="ui very basic celled table">
+                        <tbody>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.company_name'|trans }}</strong></td>
+                            <td>{{ vendor.companyName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.tax_identifier'|trans }}</strong></td>
+                            <td>{{ vendor.taxIdentifier }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.phone_number'|trans }}</strong></td>
+                            <td>{{ vendor.phoneNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.country'|trans }}</strong></td>
+                            <td>{{ vendor.vendorAddress.country }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.postal_code'|trans }}</strong></td>
+                            <td>{{ vendor.vendorAddress.postalCode }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.city'|trans }}</strong></td>
+                            <td>{{ vendor.vendorAddress.city }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.street'|trans }}</strong></td>
+                            <td>{{ vendor.vendorAddress.street }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="ui info message">
+                    <div class="header">
+                        {{ 'bitbag_mvm_plugin.ui.pending_update_message'|trans }}
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
-
     {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'vendor': vendor}) }}
-
 {% endblock %}

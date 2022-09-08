@@ -61,6 +61,42 @@
         <service id="mvm.form.type.conversation_message" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType">
             <tag name="form.type" />
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeType"
+                 id="bitbag_mvm_plugin.form.type.draftAttribute">
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute</argument>
+            <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeTranslationType</argument>
+            <argument type="service" id="sylius.form_registry.attribute_type"/>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeTranslationType"
+                 id="bitbag_mvm_plugin.form.type.draft_attribute_translation" >
+            <tag name="form.type"/>
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation</argument>
+            <argument>%sylius.form.type.product_attribute_translation.validation_groups%</argument>
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType"
+                 id="bitbag_mvm_plugin.form.product_listing.draft_attribute_choice_type">
+            <argument type="service" id="bitbag_mvm_plugin.repository.draft_attribute"/>
+            <argument type="service" id="bitbag_mvm_plugin.provider.vendor"/>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeValueType"
+                 id="bitbag_mvm_plugin.form.product_listing.draft_attribute_value_type" >
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue</argument>
+            <argument>%sylius.form.type.product_attribute_value.validation_groups%</argument>
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType</argument>
+            <argument type="service" id="bitbag_mvm_plugin.repository.draft_attribute"/>
+            <argument type="service" id="sylius.repository.locale"/>
+            <argument type="service" id="sylius.form_registry.attribute_type"/>
+            <tag name="form.type"/>
+        </service>
+
+
     </services>
 </container>
 

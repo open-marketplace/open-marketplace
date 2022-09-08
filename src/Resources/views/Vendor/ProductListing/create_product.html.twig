@@ -25,14 +25,14 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
     {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.create.stylesheets'], { 'metadata': metadata }) }}
 {% endblock %}
 
 {% block javascripts %}
-{#    {{ parent() }}#} //TODO FRONTEND
-    <script src="/build/admin/admin-entry.js"/>
-    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.create.javascripts'], { 'metadata': metadata }) }}
+{#    {{ parent() }} //TODO FRONTEND#}
+    <script src="/build/bitbag/skeleton/admin/bitbag-skeleton-admin.js"></script>
+    <script src="/build/admin/admin-entry.js"></script>
+
 {% endblock %}
 
 
