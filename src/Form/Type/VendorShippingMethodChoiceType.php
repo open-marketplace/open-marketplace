@@ -12,17 +12,22 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethod;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethodInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function Clue\StreamFilter\fun;
 
 final class VendorShippingMethodChoiceType extends AbstractType
 {
@@ -39,22 +44,22 @@ final class VendorShippingMethodChoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options): void {
-                $shippingMethods = $event->getData();
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options): void {
+                /** @var VendorInterface $vendor */
+                $vendor = $options['vendor'];
+                /** @var ChannelInterface $channel */
+                $channel = $options['channel'];
 
-                $vendorShippingMethods = [];
-
-                foreach ($shippingMethods as $shippingMethod) {
-                    /** @var VendorShippingMethodInterface $vendorShippingMethod */
-                    $vendorShippingMethod = $this->vendorShippingMethodFactory->createNew();
-                    $vendorShippingMethod->setVendor($options['vendor']);
-                    $vendorShippingMethod->setShippingMethod($shippingMethod);
-                    $vendorShippingMethod->setChannelCode($options['channel']->getCode());
-                    $vendorShippingMethods[] = $vendorShippingMethod;
+                $data = [];
+                /** @var VendorShippingMethod $method */
+                foreach ($vendor->getShippingMethods() as $method) {
+                    if ($method->getChannelCode() === $channel->getCode()) {
+                        $data[] = $method->getShippingMethod();
+                    }
                 }
-
-                $event->setData($vendorShippingMethods);
-            });
+                $event->setData($data);
+            })
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

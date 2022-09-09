@@ -48,6 +48,7 @@ class Vendor implements VendorInterface
     /** @var Collection<int, ProductListing> */
     protected Collection $productListings;
 
+    /** @var Collection<int, VendorShippingMethodInterface> */
     private Collection $shippingMethods;
 
     public function __construct()
