@@ -76,9 +76,6 @@ final class ResendOrderConfirmationEmailAction
             'sylius.email.order_confirmation_resent',
         );
 
-        /** @var string $referer */
-        $referer = $request->headers->get('bitbag_mvm_plugin_order_listing');
-
-        return new RedirectResponse($referer);
+        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_order_listing'));
     }
 }
