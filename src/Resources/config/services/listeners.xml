@@ -10,7 +10,6 @@
             <argument type="service" id="sylius.image_uploader"/>
 
             <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="generateSlug"/>
-            <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_update" method="generateSlug"/>
             <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="uploadImage"/>
             <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_update" method="uploadImage"/>
         </service>

@@ -76,3 +76,13 @@ Feature: Vendor can update his company information
     Then I should see "The file is too large"
     And I should see "Allowed maximum size is"
 
+  Scenario: Updating vendor logo
+    When I am on "/en_US/vendor/profile/update"
+    And I attach the file "images/valid_logo.png" to "vendor_image_file"
+#    And I fill in "vendor_description" with "description"
+#    And I fill in "vendor_vendorAddress_city" with "City"
+#    And I fill in "vendor_vendorAddress_street" with "test street"
+#    And I fill in "vendor_vendorAddress_postalCode" with "22-332"
+    And I press "Save changes"
+    Then I should see "The file is too large"
+    And I should see "Allowed maximum size is"
