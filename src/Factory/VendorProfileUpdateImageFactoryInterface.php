@@ -18,7 +18,5 @@ interface VendorProfileUpdateImageFactoryInterface
 {
     public function createNew(): VendorImageInterface;
 
-    public function create(string $path): VendorImageInterface;
-
     public function createWithFileAndOwner(VendorImageInterface $uploadedImage, VendorProfileInterface $vendorProfile): VendorImageInterface;
 }

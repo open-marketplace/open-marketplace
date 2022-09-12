@@ -61,3 +61,18 @@ Feature: Vendor can update his company information
     And I press "Save changes"
     Then I should see "The image width is too small"
     And I should see "Minimum width expected is 100px."
+
+  Scenario: Filling the form with image that fails size validation
+    When I am on "/en_US/vendor/profile/update"
+    And I fill in "vendor_companyName" with "Test name"
+    And I fill in "vendor_taxIdentifier" with "test identifier"
+    And I fill in "vendor_phoneNumber" with "test number"
+    And I attach the file "images/too_big_image.jpg" to "vendor_image_file"
+    And I fill in "vendor_description" with "description"
+    And I fill in "vendor_vendorAddress_city" with "City"
+    And I fill in "vendor_vendorAddress_street" with "test street"
+    And I fill in "vendor_vendorAddress_postalCode" with "22-332"
+    And I press "Save changes"
+    Then I should see "The file is too large"
+    And I should see "Allowed maximum size is"
+

@@ -22,15 +22,6 @@ final class VendorProfileUpdateImageFactory implements VendorProfileUpdateImageF
         return new VendorProfileUpdateImage();
     }
 
-    public function create(string $path): VendorImageInterface
-    {
-        $vendorImage = $this->createNew();
-
-        $vendorImage->setPath($path);
-
-        return $vendorImage;
-    }
-
     public function createWithFileAndOwner(VendorImageInterface $uploadedImage, VendorProfileInterface $vendorProfile): VendorImageInterface
     {
         $image = $this->createNew();
