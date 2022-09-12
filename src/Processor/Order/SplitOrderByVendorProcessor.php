@@ -40,6 +40,8 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     public function process(OrderInterface $order): array
     {
+        $this->secondaryOrders = [];
+
         $this->secondaryOrders[] = $order;
 
         /** @var array<OrderItemInterface> $orderItems */

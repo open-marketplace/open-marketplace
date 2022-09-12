@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
-use Sylius\Component\Core\Model\OrderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 
 final class OrderFactory implements OrderFactoryInterface
 {

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Model\Product;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -30,5 +31,10 @@ trait ProductTrait
     public function setVendor(?VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
+    }
+
+    public function setAttributesFrom(ProductDraftInterface $draft): void
+    {
+        $this->attributes = $draft->getAttributes();
     }
 }

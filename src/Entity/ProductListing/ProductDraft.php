@@ -13,11 +13,13 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-class ProductDraft implements ProductDraftInterface
+class ProductDraft implements ResourceInterface, ProductDraftInterface
 {
-    protected ?int $id;
+    protected ?int $id = null;
 
     protected string $code;
 
@@ -44,6 +46,9 @@ class ProductDraft implements ProductDraftInterface
 
     protected ProductListingInterface $productListing;
 
+    /** @var Collection<int, AttributeValueInterface> */
+    protected Collection $attributes;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -54,6 +59,7 @@ class ProductDraft implements ProductDraftInterface
         $this->isVerified = false;
         $this->createdAt = new \DateTime();
         $this->versionNumber = 1;
+        $this->attributes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +132,7 @@ class ProductDraft implements ProductDraftInterface
         $this->versionNumber = $versionNumber;
     }
 
+    /** @return Collection<int|string, ProductTranslationInterface> */
     public function getTranslations(): Collection
     {
         return $this->translations;
@@ -213,5 +220,158 @@ class ProductDraft implements ProductDraftInterface
     public function addImage(ImageInterface $image): void
     {
         $this->images->add($image);
+    }
+
+    public function getAttributes(): Collection
+    {
+        return $this->attributes;
+    }
+
+    public function getAttributesByLocale(
+        string $localeCode,
+        string $fallbackLocaleCode,
+        ?string $baseLocaleCode = null
+    ): Collection {
+        if (null === $baseLocaleCode || $baseLocaleCode === $fallbackLocaleCode) {
+            $baseLocaleCode = $fallbackLocaleCode;
+            $fallbackLocaleCode = null;
+        }
+
+        $attributes = $this->attributes->filter(
+            function (AttributeValueInterface $attribute) use ($baseLocaleCode) {
+                return $attribute->getLocaleCode() === $baseLocaleCode || null === $attribute->getLocaleCode();
+            }
+        );
+
+        $attributesWithFallback = [];
+
+        /** @var DraftAttributeValueInterface $attribute */
+        foreach ($attributes as $attribute) {
+            $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode, $fallbackLocaleCode);
+        }
+
+        /** @var Collection<int, AttributeValueInterface> $collection */
+        $collection = new ArrayCollection($attributesWithFallback);
+
+        return $collection;
+    }
+
+    public function addAttribute(AttributeValueInterface $attribute): void
+    {
+        if ($this->hasAttribute($attribute)) {
+            return;
+        }
+
+        if ($attribute instanceof DraftAttributeValueInterface) {
+            $attribute->setDraft($this);
+            $this->attributes->add($attribute);
+        }
+    }
+
+    /** @param DraftAttributeValueInterface $attribute */
+    public function removeAttribute(AttributeValueInterface $attribute): void
+    {
+        if (!$this->hasAttribute($attribute)) {
+            return;
+        }
+
+        if ($this->hasAttribute($attribute)) {
+            $this->attributes->removeElement($attribute);
+            $attribute->setDraft(null);
+        }
+    }
+
+    public function hasAttribute(AttributeValueInterface $attribute): bool
+    {
+        return $this->attributes->contains($attribute);
+    }
+
+    public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool
+    {
+        foreach ($this->attributes as $attribute) {
+            if (null === $attribute->getAttribute()) {
+                continue;
+            }
+            $actualAttributeCode = $attribute->getAttribute()->getCode();
+            $actualLocaleCode = $attribute->getLocaleCode();
+            if ($actualAttributeCode === $attributeCode
+                && ($actualLocaleCode === $localeCode || null === $attribute->getLocaleCode())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface
+    {
+        foreach ($this->attributes as $attribute) {
+            if (null === $attribute->getAttribute()) {
+                continue;
+            }
+            $actualAttributeCode = $attribute->getAttribute()->getCode();
+            $actualLocaleCode = $attribute->getLocaleCode();
+            if ($actualAttributeCode === $attributeCode &&
+                ($actualLocaleCode === $localeCode || null === $actualLocaleCode)) {
+                return $attribute;
+            }
+        }
+
+        return null;
+    }
+
+    protected function getAttributeInDifferentLocale(
+        DraftAttributeValueInterface $attributeValue,
+        string $localeCode,
+        ?string $fallbackLocaleCode = null
+    ): ?AttributeValueInterface {
+        $attributeCode = $attributeValue->getCode();
+
+        if (null === $attributeCode) {
+            return null;
+        }
+        if (!$this->hasNotEmptyAttributeByCodeAndLocale($attributeCode, $localeCode)) {
+            return $attributeValue;
+        }
+
+        if (
+            null !== $fallbackLocaleCode &&
+            $this->hasNotEmptyAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode)
+        ) {
+            return $this->getAttributeByCodeAndLocale($attributeCode, $fallbackLocaleCode);
+        }
+
+        /** @var AttributeValueInterface $attribute */
+        $attribute = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
+
+        return $attribute;
+    }
+
+    protected function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
+    {
+        $attributeValue = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
+        if (null === $attributeValue) {
+            return false;
+        }
+
+        $value = $attributeValue->getValue();
+        if ('' === $value || null === $value || [] === $value) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function createTranslation(): ProductTranslationInterface
+    {
+        return new ProductTranslation();
+    }
+
+    public function setAttributesFrom(ProductDraftInterface $otherDraft): void
+    {
+        $this->attributes = $otherDraft->getAttributes();
+        foreach ($otherDraft->getAttributes() as $attribute) {
+            $attribute->setSubject($this);
+        }
     }
 }

@@ -16,17 +16,12 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ProductListingTranslationCl
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\VendorNotFoundException;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryInterface
 {
     private FactoryInterface $productListingFactoryInterface;
-
-    private TokenStorageInterface $tokenStorage;
 
     private FactoryInterface $draftFactory;
 
@@ -36,32 +31,20 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
 
     public function __construct(
         FactoryInterface $productListingFactoryInterface,
-        TokenStorageInterface $tokenStorage,
         FactoryInterface $draftFactory,
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
         ProductListingPricingClonerInterface $productListingPricingCloner
     ) {
         $this->productListingFactoryInterface = $productListingFactoryInterface;
-        $this->tokenStorage = $tokenStorage;
         $this->draftFactory = $draftFactory;
         $this->productListingTranslationCloner = $productListingTranslationCloner;
         $this->productListingPricingCloner = $productListingPricingCloner;
     }
 
-    public function createNew(ProductDraftInterface $productDraft): ProductDraftInterface
+    public function createNew(ProductDraftInterface $productDraft, VendorInterface $vendor): ProductDraftInterface
     {
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingFactoryInterface->createNew();
-        /** @var TokenInterface $token */
-        $token = $this->tokenStorage->getToken();
-        /** @var ShopUserInterface $user */
-        $user = $token->getUser();
-
-        $vendor = $user->getVendor();
-
-        if (!$vendor) {
-            throw new VendorNotFoundException('Vendor not found.');
-        }
 
         $productDraft = $this->formatTranslation($productDraft);
 
@@ -89,6 +72,8 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
         foreach ($productDraft->getImages() as $image) {
             $newProductDraft->addImage($image);
         }
+
+        $newProductDraft->setAttributesFrom($productDraft);
 
         $this->productListingTranslationCloner->cloneTranslation($newProductDraft, $productDraft);
 
