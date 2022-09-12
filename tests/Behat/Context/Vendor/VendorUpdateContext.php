@@ -155,7 +155,7 @@ class VendorUpdateContext extends RawMinkContext
     }
 
     /**
-     * @Then Image should be updated
+     * @Then Logo should be updated
      */
     public function imageShouldBeUpdated()
     {

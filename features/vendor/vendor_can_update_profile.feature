@@ -62,7 +62,7 @@ Feature: Vendor can update his company information
     Then I should see "The image width is too small"
     And I should see "Minimum width expected is 100px."
 
-  Scenario: Filling the form with image that fails file size validation
+  Scenario: Filling the form with logo that fails file size validation
     When I am on "/en_US/vendor/profile/update"
     And I fill in "vendor_companyName" with "Test name"
     And I fill in "vendor_taxIdentifier" with "test identifier"
@@ -82,4 +82,4 @@ Feature: Vendor can update his company information
     And I attach the file "images/valid_logo.png" to "vendor_image_file"
     And I press "Save changes"
     And I visit confirmation page
-    Then Image should be updated
+    Then Logo should be updated
