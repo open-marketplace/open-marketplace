@@ -16,7 +16,9 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -34,16 +36,20 @@ class VendorUpdateContext extends RawMinkContext
 
     private ObjectManager $manager;
 
+    private VendorImageFactoryInterface $vendorImageFactory;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
-        ObjectManager $manager
+        ObjectManager $manager,
+        VendorImageFactoryInterface $vendorImageFactory,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
         $this->manager = $manager;
+        $this->vendorImageFactory = $vendorImageFactory;
     }
 
     /**
@@ -123,4 +129,43 @@ class VendorUpdateContext extends RawMinkContext
         dd($label->getText());
     }
 
+    /**
+     * @Given vendor have logo attached to profile
+     */
+    public function vendorHaveLogoAttachedToProfile()
+    {
+        /** @var VendorInterface $vendor */
+        $vendor = $this->sharedStorage->get('vendor');
+        $path = 'path/to/file.png';
+        $image = $this->vendorImageFactory->create($path, $vendor);
+        $vendor->setImage($image);
+        $this->sharedStorage->set('path', $path);
+    }
+
+    /**
+     * @When I visit confirmation page
+     */
+    public function iVisitConfirmationPage()
+    {
+        $repository = $this->manager->getRepository(VendorProfileUpdate::class);
+        $updateData = $repository->findAll();
+        $token = $updateData[0]->getToken();
+        $session = $this->getSession();
+        $session->visit("/en_US/vendor/profile-update/".$token);
+    }
+
+    /**
+     * @Then Image should be updated
+     */
+    public function imageShouldBeUpdated()
+    {
+        $oldImagePath = $this->sharedStorage->get('path');
+        $session = $this->getSession();
+        $session->visit('/en_US/vendors/vendor-slug');
+
+        $page = $session->getPage();
+        $logo = $page->find('css','#vendor_logo');
+        $newPath = $logo->getAttribute('src');
+        Assert::notEq($oldImagePath, $newPath);
+    }
 }
