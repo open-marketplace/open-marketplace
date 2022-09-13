@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;

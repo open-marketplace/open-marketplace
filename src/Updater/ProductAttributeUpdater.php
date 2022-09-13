@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslation;
@@ -35,6 +36,7 @@ final class ProductAttributeUpdater implements ProductAttributeUpdaterInterface
             $this->entityManager->remove($translation);
         }
 
+        /** @var DraftAttributeTranslationInterface $draftTranslation */
         foreach ($draftTranslations as $draftTranslation) {
             $productAttributeTranslation = new ProductAttributeTranslation();
             $productAttributeTranslation->setTranslatable($productAttribute);

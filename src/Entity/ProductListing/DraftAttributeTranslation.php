@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Sylius\Component\Attribute\Model\AttributeTranslation;
-use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 
 class DraftAttributeTranslation extends AttributeTranslation implements DraftAttributeTranslationInterface
 {

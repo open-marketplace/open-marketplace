@@ -11,13 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Converter;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValueInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslation;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 
@@ -41,23 +43,24 @@ final class AttributesConverter
         $attributes = $this->extractAttributesFromValues($attributeValues);
 
         $oldProductAttributeValues = $product->getAttributes();
-        foreach($oldProductAttributeValues as $oldProductAttributeValue){
+        foreach ($oldProductAttributeValues as $oldProductAttributeValue) {
             $this->entityManager->remove($oldProductAttributeValue);
-
         }
 
+        /** @var DraftAttributeInterface $draftAttribute */
         foreach ($attributes as $draftAttribute) {
-            if(!$draftAttribute->getProductAttribute()) {
+            if (!$draftAttribute->getProductAttribute()) {
                 $newProductAttribute = $this->productAttributeFactory->createClone($draftAttribute);
                 $draftAttribute->setProductAttribute($newProductAttribute);
                 $this->entityManager->persist($newProductAttribute);
+                $this->cloneTranslations($draftAttribute);
             }
-
-            $this->cloneTranslations($draftAttribute);
         }
 
         foreach ($attributeValues as $attributeValue) {
-            $productAttribute = $attributeValue->getAttribute()->getProductAttribute();
+            /** @var DraftAttributeInterface $draftAttribute */
+            $draftAttribute = $attributeValue->getAttribute();
+            $productAttribute = $draftAttribute->getProductAttribute();
             $newProductAttributeValue = new ProductAttributeValue();
             $newProductAttributeValue->setSubject($product);
             $newProductAttributeValue->setAttribute($productAttribute);
@@ -70,34 +73,34 @@ final class AttributesConverter
         $this->entityManager->flush();
     }
 
-    private function cloneTranslations($draftAttribute): void
+    private function cloneTranslations(DraftAttributeInterface $draftAttribute): void
     {
         $translations = $draftAttribute->getTranslations();
+        /** @var DraftAttributeTranslationInterface $translation */
         foreach ($translations as $translation) {
-            if (!$translation->getProductAttributeTranslation()) {
-                $newTranslation = new ProductAttributeTranslation();
-                $newTranslation->setLocale($translation->getLocale());
-                $newTranslation->setName($translation->getName());
-                $newTranslation->setTranslatable($draftAttribute->getProductAttribute());
-                $translation->setProductAttributeTranslation($newTranslation);
-                $this->entityManager->persist($newTranslation);
-            }
+            $newTranslation = new ProductAttributeTranslation();
+            $newTranslation->setLocale($translation->getLocale());
+            $newTranslation->setName($translation->getName());
+            $newTranslation->setTranslatable($draftAttribute->getProductAttribute());
+            $this->entityManager->persist($newTranslation);
         }
     }
 
     /**
-     * @return array<int, DraftAttributeInterface>
-     * @param $productDraftAttributeValues Collection<int, DraftAttributeValueInterface>
+     * @param  Collection<int, AttributeValueInterface> $productDraftAttributeValues
+     *
+     * @return array<int, AttributeInterface|null>
      */
     private function extractAttributesFromValues(Collection $productDraftAttributeValues): array
     {
         $attributes = [];
         foreach ($productDraftAttributeValues as $attributeValue) {
             $attribute = $attributeValue->getAttribute();
-            if(!in_array($attribute,$attributes)) {
+            if (!in_array($attribute, $attributes)) {
                 $attributes[] = $attribute;
             }
         }
+
         return $attributes;
     }
 }
