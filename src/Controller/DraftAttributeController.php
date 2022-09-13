@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -39,8 +40,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class DraftAttributeController extends ResourceController
 {
-
-    private ProductAttributeUpdater $productAttributeUpdater;
+    private ProductAttributeUpdaterInterface $productAttributeUpdater;
 
     public function __construct(
         MetadataInterface $metadata,
@@ -60,13 +60,26 @@ final class DraftAttributeController extends ResourceController
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        ProductAttributeUpdater $productAttributeUpdater
+        ProductAttributeUpdaterInterface $productAttributeUpdater
     ) {
         parent::__construct(
-            $metadata, $requestConfigurationFactory, $viewHandler, $repository, $factory,
-            $newResourceFactory, $manager, $singleResourceProvider, $resourcesFinder,
-            $resourceFormFactory, $redirectHandler, $flashHelper, $authorizationChecker,
-            $eventDispatcher, $stateMachine, $resourceUpdateHandler, $resourceDeleteHandler
+            $metadata,
+            $requestConfigurationFactory,
+            $viewHandler,
+            $repository,
+            $factory,
+            $newResourceFactory,
+            $manager,
+            $singleResourceProvider,
+            $resourcesFinder,
+            $resourceFormFactory,
+            $redirectHandler,
+            $flashHelper,
+            $authorizationChecker,
+            $eventDispatcher,
+            $stateMachine,
+            $resourceUpdateHandler,
+            $resourceDeleteHandler
         );
         $this->productAttributeUpdater = $productAttributeUpdater;
     }
@@ -87,7 +100,7 @@ final class DraftAttributeController extends ResourceController
         ) {
             $resource = $form->getData();
             $productAttribute = $resource->getProductAttribute();
-            if($productAttribute) {
+            if ($productAttribute) {
                 $this->productAttributeUpdater->update($resource, $productAttribute);
             }
 

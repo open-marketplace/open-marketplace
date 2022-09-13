@@ -13,12 +13,10 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Attribute\Factory\AttributeFactory;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslation;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class ProductAttributeUpdater
+final class ProductAttributeUpdater implements ProductAttributeUpdaterInterface
 {
     private EntityManagerInterface $entityManager;
 

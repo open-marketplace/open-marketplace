@@ -16,7 +16,4 @@ use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 
 interface DraftAttributeTranslationInterface extends BaseAttributeTranslationInterface
 {
-    public function getProductAttributeTranslation(): ?ProductAttributeTranslationInterface;
-
-    public function setProductAttributeTranslation(?ProductAttributeTranslationInterface $productAttributeTranslation): void;
 }
