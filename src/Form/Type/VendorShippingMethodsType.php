@@ -18,6 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -71,12 +72,14 @@ final class VendorShippingMethodsType extends AbstractResourceType
                     $channels = $event->getData()['channels'];
                     foreach ($channels as $key => $shippingMethods) {
                         foreach ($shippingMethods as $code) {
-                            /** @var VendorShippingMethodInterface $vendorShippingMethod */
+                            /** @var ShippingMethodInterface $shippingMethod */
+                            $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $code]);
+
                             $vendorShippingMethod = $this
                                 ->vendorShippingMethodFactory
                                 ->createNewWithChannelCodeShippingAndVendor(
                                     $key,
-                                    $this->shippingMethodRepository->findOneBy(['code' => $code]),
+                                    $shippingMethod,
                                     $vendor
                                 );
                             $vendor->addShippingMethod($vendorShippingMethod);
