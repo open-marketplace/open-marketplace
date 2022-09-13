@@ -40,6 +40,12 @@ final class AttributesConverter
         $attributeValues = $productDraft->getAttributes();
         $attributes = $this->extractAttributesFromValues($attributeValues);
 
+        $oldProductAttributeValues = $product->getAttributes();
+        foreach($oldProductAttributeValues as $oldProductAttributeValue){
+            $this->entityManager->remove($oldProductAttributeValue);
+
+        }
+
         foreach ($attributes as $draftAttribute) {
             if(!$draftAttribute->getProductAttribute()) {
                 $newProductAttribute = $this->productAttributeFactory->createClone($draftAttribute);
