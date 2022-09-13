@@ -34,7 +34,10 @@ final class VendorProfileUpdateImageFactorySpec extends ObjectBehavior
         VendorImageInterface $uploadedImage,
         VendorProfileInterface $vendorProfile
     ): void {
-        $this->createWithFileAndOwner($uploadedImage, $vendorProfile)->shouldBeAnInstanceOf(VendorProfileUpdateImage::class);
-        $this->createWithFileAndOwner($uploadedImage, $vendorProfile)->shouldImplement(VendorImageInterface::class);
+        $imageEntity = $this->createWithFileAndOwner($uploadedImage, $vendorProfile);
+        $imageEntity->shouldBeAnInstanceOf(VendorProfileUpdateImage::class);
+        $imageEntity->shouldImplement(VendorImageInterface::class);
+
+        $imageEntity->getOwner()->shouldBe($vendorProfile);
     }
 }
