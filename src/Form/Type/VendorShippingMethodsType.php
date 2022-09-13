@@ -13,13 +13,12 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethodInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorShippingMethodFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -28,13 +27,13 @@ final class VendorShippingMethodsType extends AbstractResourceType
 {
     private ShippingMethodRepositoryInterface $shippingMethodRepository;
 
-    private FactoryInterface $vendorShippingMethodFactory;
+    private VendorShippingMethodFactoryInterface $vendorShippingMethodFactory;
 
     private EntityManagerInterface $entityManager;
 
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        FactoryInterface $vendorShippingMethodFactory,
+        VendorShippingMethodFactoryInterface $vendorShippingMethodFactory,
         EntityManagerInterface $entityManager,
         string $dataClass,
         array $validationGroups = []
@@ -73,10 +72,13 @@ final class VendorShippingMethodsType extends AbstractResourceType
                     foreach ($channels as $key => $shippingMethods) {
                         foreach ($shippingMethods as $code) {
                             /** @var VendorShippingMethodInterface $vendorShippingMethod */
-                            $vendorShippingMethod = $this->vendorShippingMethodFactory->createNew();
-                            $vendorShippingMethod->setChannelCode($key);
-                            $vendorShippingMethod->setShippingMethod($this->shippingMethodRepository->findOneBy(['code' => $code]));
-                            $vendorShippingMethod->setVendor($vendor);
+                            $vendorShippingMethod = $this
+                                ->vendorShippingMethodFactory
+                                ->createNewWithChannelCodeShippingAndVendor(
+                                    $key,
+                                    $this->shippingMethodRepository->findOneBy(['code' => $code]),
+                                    $vendor
+                                );
                             $vendor->addShippingMethod($vendorShippingMethod);
                         }
                     }

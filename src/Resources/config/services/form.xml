@@ -34,7 +34,6 @@
         <service id="bitbag_mvm_plugin.form.vendor_shipping_method_choice_type"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorShippingMethodChoiceType">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_shipping_method" />
             <tag name="form.type" />
         </service>
 
