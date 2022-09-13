@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverter;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverterInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
@@ -27,13 +28,13 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
     private ProductDraftFilesOperatorInterface $productDraftFilesOperator;
 
-    private AttributesConverter $attributesConverter;
+    private AttributesConverterInterface $attributesConverter;
 
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductDraftFilesOperatorInterface $productDraftFilesOperator,
-        AttributesConverter $attributesConverter
+        AttributesConverterInterface $attributesConverter
     ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;

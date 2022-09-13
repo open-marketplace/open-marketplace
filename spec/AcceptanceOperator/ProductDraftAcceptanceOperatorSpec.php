@@ -13,6 +13,8 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperator;
 use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverter;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverterInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
@@ -26,12 +28,14 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
     public function let(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $filesOperator
+        ProductDraftFilesOperatorInterface $filesOperator,
+        AttributesConverterInterface $attributesConverter
     ): void {
         $this->beConstructedWith(
             $productFromDraftFactory,
             $productFromDraftUpdater,
-            $filesOperator
+            $filesOperator,
+            $attributesConverter
         );
     }
 

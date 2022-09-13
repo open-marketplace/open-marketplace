@@ -34,6 +34,7 @@ final class ProductAttributeUpdater implements ProductAttributeUpdaterInterface
 
         foreach ($productAttribute->getTranslations() as $translation) {
             $this->entityManager->remove($translation);
+            $this->entityManager->flush();
         }
 
         /** @var DraftAttributeTranslationInterface $draftTranslation */

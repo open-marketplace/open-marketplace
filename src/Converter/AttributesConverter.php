@@ -23,7 +23,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslation;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 
-final class AttributesConverter
+final class AttributesConverter implements AttributesConverterInterface
 {
     private ProductAttributeFactoryInterface $productAttributeFactory;
 
