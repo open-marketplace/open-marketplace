@@ -12,7 +12,11 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface as BaseAttributeTranslationInterface;
+use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 
 interface DraftAttributeTranslationInterface extends BaseAttributeTranslationInterface
 {
+    public function getProductAttributeTranslation(): ?ProductAttributeTranslationInterface;
+
+    public function setProductAttributeTranslation(?ProductAttributeTranslationInterface $productAttributeTranslation): void;
 }

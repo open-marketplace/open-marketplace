@@ -5,7 +5,8 @@
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverter"
                  id="bitbag.mvm_plugin.attributes_converter">
-
+            <argument type="service" id="bitbag.mvm_plugin.product_attribute_factory"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
     </services>
 </container>

@@ -6,6 +6,10 @@
 
     <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation"
                        table="bitbag_mvm_draft_attribute_translation">
+        <one-to-one field="productAttributeTranslation" target-entity="Sylius\Component\Product\Model\ProductAttributeTranslation">
+            <join-column name="productAttributeTranslation_id" on-delete="SET NULL"/>
+
+        </one-to-one>
 
     </mapped-superclass>
 </doctrine-mapping>

@@ -46,7 +46,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         if (!$productDraft->getProductListing()->getProduct()) {
             $cratedProduct = $this->productFromDraftFactory->createSimpleProduct($productDraft);
             $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $cratedProduct);
-
+            $this->attributesConverter->convert($productDraft, $cratedProduct);
             return $cratedProduct;
         }
 
@@ -55,7 +55,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
         $this->productDraftFilesOperator->removeOldFiles($product);
         $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
-
+        $this->attributesConverter->convert($productDraft, $product);
         return $product;
     }
 }

@@ -96,6 +96,11 @@
             <argument type="service" id="sylius.registry.attribute_type"/>
             <argument type="service" id="bitbag_mvm_plugin.provider.vendor"/>
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactory"
+                 id="bitbag.mvm_plugin.product_attribute_factory">
+
+        </service>
     </services>
 </container>
 
