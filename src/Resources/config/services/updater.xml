@@ -10,5 +10,10 @@
             <argument type="service" id="sylius.repository.channel_pricing" />
             <argument type="service" id="sylius.repository.product_variant" />
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater"
+                 id="bitbag_mvm_plugin.updater.product_attribute_updater">
+
+        </service>
     </services>
 </container>
