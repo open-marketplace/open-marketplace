@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverter;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverterInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
