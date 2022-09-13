@@ -17,6 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -42,7 +43,7 @@ final class AcceptAction
         $this->productDraftRepository = $productDraftRepository;
     }
 
-    public function __invoke(Request $request)//: RedirectResponse
+    public function __invoke(Request $request): RedirectResponse
     {
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
@@ -52,7 +53,6 @@ final class AcceptAction
 
         $this->productDraftStateMachineTransition->applyIfCan($latestProductDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
 
-        return new \Symfony\Component\HttpFoundation\Response('<html></html>');
-        //return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
+        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
     }
 }
