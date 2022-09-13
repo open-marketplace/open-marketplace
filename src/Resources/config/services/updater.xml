@@ -13,7 +13,7 @@
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater"
                  id="bitbag_mvm_plugin.updater.product_attribute_updater">
-
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
     </services>
 </container>
