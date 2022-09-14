@@ -4,7 +4,7 @@
 <div class="ui buttons">
     <div class="ui labeled icon floating dropdown  link button" tabindex="0">
         <i class="angle down icon"></i>
-        <span class="text">Show</span>
+        <span class="text">{{ 'sylius.ui.show'|trans }}</span>
         <div class="menu" tabindex="-1">
             {% if data.latestDraft.status != 'under_verification' %}
             <a href="{{ path('bitbag_mvm_plugin_vendor_product_listing_edit_product', {'id': data.id }) }}"
