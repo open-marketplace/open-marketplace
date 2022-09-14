@@ -12,5 +12,17 @@
                  id="bitbag.mvm_plugin.cloner.product_listing_translation_cloner">
             <argument type="service" id="bitbag_mvm_plugin.factory.product_translation" />
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeTranslationCloner"
+                 id="bitbag_mvm_plugin.cloner.attribute_translation">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_attribute_translation"/>
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeValueCloner"
+                 id="bitbag_mvm_plugin.cloner.attribute_value">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+
+        </service>
     </services>
 </container>

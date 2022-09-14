@@ -11,18 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Converter;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeTranslationClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeValueClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Extractor\AttributesExtractorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslationFactoryInterface;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Product\Model\ProductAttributeTranslation;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 
 final class AttributesConverter implements AttributesConverterInterface
@@ -31,20 +28,24 @@ final class AttributesConverter implements AttributesConverterInterface
 
     private EntityManagerInterface $entityManager;
 
-    private ProductAttributeTranslationFactoryInterface $attributeTranslationFactory;
-
     private AttributesExtractorInterface $attributesExtractor;
+
+    private AttributeTranslationClonerInterface $attributeTranslationCloner;
+
+    private AttributeValueClonerInterface $attributeValueCloner;
 
     public function __construct(
         ProductAttributeFactoryInterface $productAttributeFactory,
         EntityManagerInterface $entityManager,
-        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
-        AttributesExtractorInterface $attributesExtractor
+        AttributesExtractorInterface $attributesExtractor,
+        AttributeTranslationClonerInterface $attributeTranslationCloner,
+        AttributeValueClonerInterface $attributeValueCloner
     ) {
         $this->productAttributeFactory = $productAttributeFactory;
         $this->entityManager = $entityManager;
-        $this->attributeTranslationFactory = $attributeTranslationFactory;
         $this->attributesExtractor = $attributesExtractor;
+        $this->attributeTranslationCloner = $attributeTranslationCloner;
+        $this->attributeValueCloner = $attributeValueCloner;
     }
 
     public function convert(ProductDraftInterface $productDraft, ProductInterface $product): void
@@ -63,36 +64,12 @@ final class AttributesConverter implements AttributesConverterInterface
                 $newProductAttribute = $this->productAttributeFactory->createClone($draftAttribute);
                 $draftAttribute->setProductAttribute($newProductAttribute);
                 $this->entityManager->persist($newProductAttribute);
-                $this->cloneTranslations($draftAttribute);
+                $this->attributeTranslationCloner->clone($draftAttribute);
             }
         }
 
-        foreach ($attributeValues as $attributeValue) {
-            /** @var DraftAttributeInterface $draftAttribute */
-            $draftAttribute = $attributeValue->getAttribute();
-            $productAttribute = $draftAttribute->getProductAttribute();
-            $newProductAttributeValue = new ProductAttributeValue();
-            $newProductAttributeValue->setSubject($product);
-            $newProductAttributeValue->setAttribute($productAttribute);
-            $newProductAttributeValue->setLocaleCode($attributeValue->getLocaleCode());
-            $newProductAttributeValue->setValue($attributeValue->getValue());
-            $this->entityManager->persist($newProductAttributeValue);
-            $this->entityManager->flush();
-        }
+        $this->attributeValueCloner->clone($productDraft, $product);
 
         $this->entityManager->flush();
-    }
-
-    private function cloneTranslations(DraftAttributeInterface $draftAttribute): void
-    {
-        $translations = $draftAttribute->getTranslations();
-        /** @var DraftAttributeTranslationInterface $translation */
-        foreach ($translations as $translation) {
-            $newTranslation = $this->attributeTranslationFactory->create();
-            $newTranslation->setLocale($translation->getLocale());
-            $newTranslation->setName($translation->getName());
-            $newTranslation->setTranslatable($draftAttribute->getProductAttribute());
-            $this->entityManager->persist($newTranslation);
-        }
     }
 }
