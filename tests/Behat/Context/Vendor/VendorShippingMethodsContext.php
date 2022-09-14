@@ -13,6 +13,8 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+use Sylius\Component\Core\Model\ChannelInterface;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertStringContainsString;
 
 class VendorShippingMethodsContext extends RawMinkContext implements Context
@@ -26,45 +28,54 @@ class VendorShippingMethodsContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then I should see :name shipping method
+     * @Then I should see :name shipping method in :channel channel
      */
-    public function iShouldSeeShippingMethod(string $name): void
+    public function iShouldSeeShippingMethod(string $name, ChannelInterface $channel): void
     {
         $page = $this->getSession()->getPage();
-        $select = $page->find('css', sprintf('input[value=%s]', $name));
+        $channelTag = sprintf('#vendor_shipping_methods_channels_%s', $channel->getCode());
+        $channelSection = $page->find('css', $channelTag);
+        $input = $channelSection->find('css', sprintf('input[value=%s]', $name));
 
-        assertStringContainsString($name, $select->getAttribute('value'));
+        assertNotNull($input);
+        assertStringContainsString($name, $input->getAttribute('value'));
     }
 
     /**
-     * @Then I enable :name shipping method
+     * @Then I enable :name shipping method in :channel channel
      */
-    public function iEnableShippingMethod(string $name): void
+    public function iEnableShippingMethod(string $name, ChannelInterface $channel): void
     {
         $page = $this->getSession()->getPage();
-        $select = $page->find('css', sprintf('input[value=%s]', $name));
-        $select->check();
+        $channelTag = sprintf('#vendor_shipping_methods_channels_%s', $channel->getCode());
+        $channelSection = $page->find('css', $channelTag);
+        $input = $channelSection->find('css', sprintf('input[value=%s]', $name));
+        $input->check();
     }
 
     /**
-     * @Then I should see :name enabled shipping method
+     * @Then I should see :name enabled shipping method in :channel channel
      */
-    public function iShouldSeeEnabledShippingMethod(string $name): void
+    public function iShouldSeeEnabledShippingMethod(string $name, ChannelInterface $channel): void
     {
         $page = $this->getSession()->getPage();
-        $select = $page->find('css', sprintf('input[value=%s][checked=checked]', $name));
+        $channelTag = sprintf('#vendor_shipping_methods_channels_%s', $channel->getCode());
+        $channelSection = $page->find('css', $channelTag);
+        $input = $channelSection->find('css', sprintf('input[value=%s][checked=checked]', $name));
 
-        assertStringContainsString($name, $select->getAttribute('value'));
+        assertStringContainsString($name, $input->getAttribute('value'));
     }
 
     /**
-     * @Then I should see :name disabled shipping method
+     * @Then I should see :name disabled shipping method in :channel channel
      */
-    public function iShouldSeeDisabledShippingMethod(string $name): void
+    public function iShouldSeeDisabledShippingMethod(string $name, ChannelInterface $channel): void
     {
         $page = $this->getSession()->getPage();
-        $select = $page->find('css', sprintf('input[value=%s]:not([checked=checked])', $name));
+        $channelTag = sprintf('#vendor_shipping_methods_channels_%s', $channel->getCode());
+        $channelSection = $page->find('css', $channelTag);
+        $input = $channelSection->find('css', sprintf('input[value=%s]:not([checked=checked])', $name));
 
-        assertStringContainsString($name, $select->getAttribute('value'));
+        assertStringContainsString($name, $input->getAttribute('value'));
     }
 }
