@@ -12,10 +12,11 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 
 interface ProductListingFromDraftFactoryInterface
 {
-    public function createNew(ProductDraftInterface $productDraft): ProductDraftInterface;
+    public function createNew(ProductDraftInterface $productDraft, VendorInterface $vendor): ProductDraftInterface;
 
     public function createClone(ProductDraftInterface $productDraft): ProductDraftInterface;
 

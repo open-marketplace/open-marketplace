@@ -251,6 +251,6 @@ $ yarn encore dev
 $ bin/console assets:install 
 $ bin/console doctrine:database:create
 $ bin/console doctrine:schema:create
-$ bin/console sylius:fixtures:load
+$ bin/console sylius:fixtures:load mvm
 $ symfony server:start // or symfony serve -d --no-tls
 ```

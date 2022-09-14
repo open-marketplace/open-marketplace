@@ -13,6 +13,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\Pro
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\VendorNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
@@ -120,10 +122,18 @@ class CreateProductAction extends AbstractController
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
             }
 
+            /** @var ShopUserInterface $user */
+            $user = $this->getUser();
+            $vendor = $user->getVendor();
+
+            if (null === $vendor) {
+                throw new VendorNotFoundException('Vendor not found.');
+            }
+
             /** @var ClickableInterface $button */
             $button = $form->get('save');
             $productDraft = $this->productListingFromDraftFactory->createNew($productDraft);
-
+          
             $this->productDraftRepository->save($productDraft);
             $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
 

@@ -1,0 +1,63 @@
+sylius_fixtures:
+    suites:
+        mvm:
+            fixtures:
+                vendor:
+                    options:
+                        custom:
+                            -   email: 'vendor@example.com'
+                                first_name: 'Mark'
+                                last_name: 'Gutenberg'
+                                password: 'sylius'
+                            -   email: 'vendor2@example.com'
+                                first_name: 'Antony'
+                                last_name: 'Kernel'
+                                password: 'sylius'
+                            -   email: 'vendor3@example.com'
+                                first_name: 'John'
+                                last_name: 'Green'
+                                password: 'sylius'
+                            -   email: 'vendor4@example.com'
+                                first_name: 'Clark'
+                                last_name: 'Mendez'
+                                password: 'sylius'
+                accepted_product_draft:
+                    name: 'product_draft'
+                    options:
+                        amount: 20
+                        added: ~
+                        accepted: ~
+                added_product_draft:
+                    name: 'product_draft'
+                    options:
+                        amount: 20
+                        added: ~
+                product_draft:
+                    name: 'product_draft'
+                    options:
+                        amount: 10
+                rejected_product_draft:
+                    name: 'product_draft'
+                    options:
+                        amount: 10
+                        added: ~
+                        rejected: ~
+
+                fulfilled_order:
+                    name: 'mvm_order'
+                    options:
+                        amount: 12
+                        channel: 'FASHION_WEB'
+                        fulfilled: true
+
+                new_order:
+                    name: 'mvm_order'
+                    options:
+                        amount: 8
+                        channel: 'FASHION_WEB'
+
+                conversation:
+                    options:
+                        random: 5
+
+
