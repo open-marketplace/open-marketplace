@@ -1,0 +1,22 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% if data.latestDraft.status != 'under_verification' %}
+<div class="ui buttons">
+    <div class="ui labeled icon floating dropdown  link button" tabindex="0">
+        <i class="angle down icon"></i>
+        <span class="text">Show</span>
+        <div class="menu" tabindex="-1">
+            {% if data.latestDraft.status != 'under_verification' %}
+            <a href="{{ path('bitbag_mvm_plugin_vendor_product_listing_edit_product', {'id': data.id }) }}"
+               class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}</a>
+            {% endif %}
+            {% if data.latestDraft.status != 'under_verification' and data.latestDraft.status != 'verified' %}
+            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_send_for_verification', {'id': data.id }) }}" method="post">
+                <button class="item send-for-verification" data-requires-confirmation>
+                    <i class="paper plane icon"></i>{{ 'bitbag_mvm_plugin.ui.send_for_verification'|trans }}</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}

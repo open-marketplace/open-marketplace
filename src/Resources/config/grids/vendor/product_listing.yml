@@ -46,11 +46,6 @@ sylius_grid:
               link:
                 route: bitbag_mvm_plugin_vendor_product_listing_create_product
         item:
-          update:
-            type: edit_product
-            label: sylius.ui.edit
-            options:
-              link:
-                route: bitbag_mvm_plugin_vendor_product_listing_edit_product
-                parameters:
-                  id: resource.id
+          dropdown:
+            type: product_listing_dropdown
+
