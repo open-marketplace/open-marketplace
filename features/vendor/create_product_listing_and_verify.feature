@@ -21,8 +21,8 @@ Feature: Creating a product listing
     And I fill in "Minimum price" with "30"
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
-    And I click "Save" button
+    And I click "Save draft" button
     And I follow "Product list"
     And I click "Send for verification" button
     Then I should see product's listing status "Under verification"
-    And I should see "Product listing created and sent to verification."
+    And I should see "Product listing sent to verification."

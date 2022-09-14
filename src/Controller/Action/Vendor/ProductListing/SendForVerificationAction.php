@@ -16,12 +16,12 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class SendForVerificationAction extends AbstractController
+final class SendForVerificationAction
 {
     private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
 
@@ -31,17 +31,21 @@ class SendForVerificationAction extends AbstractController
 
     private RouterInterface $router;
 
+    private Session $session;
+
     public function __construct(
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ProductDraftRepositoryInterface $productDraftRepository,
         ProductListingRepositoryInterface $productListingRepository,
-        RouterInterface $router
+        RouterInterface $router,
+        Session $session
     )
     {
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productDraftRepository = $productDraftRepository;
         $this->productListingRepository = $productListingRepository;
         $this->router = $router;
+        $this->session = $session;
     }
 
     public function __invoke(Request $request): RedirectResponse
@@ -53,7 +57,10 @@ class SendForVerificationAction extends AbstractController
             $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
         }
 
-        $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created_and_sent_to_verification');
+        $this->session->getFlashBag()->add(
+            'success',
+            'bitbag_mvm_plugin.ui.product_listing_sent_to_verification',
+        );
 
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_vendor_product_listing_index'));
     }

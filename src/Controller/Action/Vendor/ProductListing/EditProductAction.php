@@ -88,8 +88,6 @@ class EditProductAction extends AbstractController
                 $productDraft->addAttribute($attribute);
             }
 
-            /** @var ClickableInterface $button */
-            $button = $form->get('save');
             $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
 
             $this->productDraftRepository->save($productDraft);
