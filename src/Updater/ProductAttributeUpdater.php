@@ -13,6 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslationFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslation;
@@ -21,9 +22,14 @@ final class ProductAttributeUpdater implements ProductAttributeUpdaterInterface
 {
     private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
+    private ProductAttributeTranslationFactoryInterface $attributeTranslationFactory;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory
+    ) {
         $this->entityManager = $entityManager;
+        $this->attributeTranslationFactory = $attributeTranslationFactory;
     }
 
     public function update(DraftAttributeInterface $draftAttribute, ProductAttributeInterface $productAttribute): void
@@ -32,14 +38,15 @@ final class ProductAttributeUpdater implements ProductAttributeUpdaterInterface
 
         $draftTranslations = $draftAttribute->getTranslations();
 
-        foreach ($productAttribute->getTranslations() as $translation) {
+        $productAttributeTranslations = $productAttribute->getTranslations();
+        foreach ($productAttributeTranslations as $translation) {
             $this->entityManager->remove($translation);
             $this->entityManager->flush();
         }
 
         /** @var DraftAttributeTranslationInterface $draftTranslation */
         foreach ($draftTranslations as $draftTranslation) {
-            $productAttributeTranslation = new ProductAttributeTranslation();
+            $productAttributeTranslation = $this->attributeTranslationFactory->create();
             $productAttributeTranslation->setTranslatable($productAttribute);
             $productAttributeTranslation->setLocale($draftTranslation->getLocale());
             $productAttributeTranslation->setName($draftTranslation->getName());

@@ -11,19 +11,122 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslationFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use Mockery\Matcher\AnyArgs;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 
 final class ProductAttributeUpdaterSpec extends ObjectBehavior
 {
     public function let(
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory
     ): void {
-        $this->beConstructedWith($entityManager);
+        $this->beConstructedWith($entityManager, $attributeTranslationFactory);
     }
-    function it_is_initializable()
+
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductAttributeUpdater::class);
     }
+
+    public function it_doesent_clean_translation_when_product_dont_have_them(
+        DraftAttributeInterface $draftAttribute,
+        EntityManagerInterface $entityManager,
+        ProductAttributeInterface $productAttribute,
+        ProductAttributeTranslationInterface $productAttributeTranslation,
+        DraftAttributeTranslationInterface $draftAttributeTranslation,
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
+    ): void {
+        $productPosition = 5;
+        $draftAttributeTranslationCollection = new ArrayCollection([$draftAttributeTranslation->getWrappedObject()]);
+        $productAttributeTranslationCollection = new ArrayCollection([]);
+
+        $productAttribute->getPosition()->willReturn($productPosition);
+        $draftAttribute->getTranslations()->willReturn($draftAttributeTranslationCollection);
+        $productAttribute->getTranslations()->willReturn($productAttributeTranslationCollection);
+
+        $attributeTranslationFactory->create()->willReturn($productAttributeTranslation);
+
+        $productAttribute->setPosition($productPosition)->shouldBeCalledOnce();
+
+        $this->update($draftAttribute, $productAttribute);
+
+        $entityManager->flush()->shouldNotBeCalled();
+    }
+
+    public function it_cleans_translation_before_appending_new(
+        DraftAttributeInterface $draftAttribute,
+        EntityManagerInterface $entityManager,
+        ProductAttributeInterface $productAttribute,
+        ProductAttributeTranslationInterface $productAttributeTranslation,
+        ProductAttributeTranslationInterface $firstProductAttributeTranslation,
+        ProductAttributeTranslationInterface $secondProductAttributeTranslation,
+        DraftAttributeTranslationInterface $draftAttributeTranslation,
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
+    ): void {
+        $productPosition = 5;
+        $draftAttributeTranslationCollection = new ArrayCollection([$draftAttributeTranslation->getWrappedObject()]);
+        $productAttributeTranslationCollection = new ArrayCollection([
+            $firstProductAttributeTranslation->getWrappedObject(),
+            $secondProductAttributeTranslation->getWrappedObject()
+        ]);
+
+        $productAttribute->getPosition()->willReturn($productPosition);
+        $draftAttribute->getTranslations()->willReturn($draftAttributeTranslationCollection);
+        $productAttribute->getTranslations()->willReturn($productAttributeTranslationCollection);
+
+        $attributeTranslationFactory->create()->willReturn($productAttributeTranslation);
+
+        $productAttribute->setPosition($productPosition)->shouldBeCalledOnce();
+
+        $this->update($draftAttribute, $productAttribute);
+
+        $entityManager->remove($firstProductAttributeTranslation)->shouldHaveBeenCalledOnce();
+        $entityManager->remove($secondProductAttributeTranslation)->shouldHaveBeenCalledOnce();
+        $entityManager->flush()->shouldHaveBeenCalledTimes(2);
+    }
+
+    public function it_updates_translations(
+        DraftAttributeInterface $draftAttribute,
+        EntityManagerInterface $entityManager,
+        ProductAttributeInterface $productAttribute,
+        ProductAttributeTranslationInterface $productAttributeTranslation,
+        ProductAttributeTranslationInterface $firstProductAttributeTranslation,
+        ProductAttributeTranslationInterface $secondProductAttributeTranslation,
+        DraftAttributeTranslationInterface $draftAttributeTranslation,
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
+    ): void {
+        $productPosition = 5;
+        $draftAttributeTranslationCollection = new ArrayCollection([$draftAttributeTranslation->getWrappedObject()]);
+        $productAttributeTranslationCollection = new ArrayCollection([
+            $firstProductAttributeTranslation->getWrappedObject(),
+            $secondProductAttributeTranslation->getWrappedObject()
+        ]);
+
+        $draftAttributeTranslation->getLocale()->willReturn('pl_PL');
+        $draftAttributeTranslation->getName()->willReturn('name');
+        $productAttribute->getPosition()->willReturn($productPosition);
+        $draftAttribute->getTranslations()->willReturn($draftAttributeTranslationCollection);
+        $productAttribute->getTranslations()->willReturn($productAttributeTranslationCollection);
+
+        $attributeTranslationFactory->create()->willReturn($productAttributeTranslation);
+
+        $productAttribute->setPosition($productPosition)->shouldBeCalledOnce();
+
+        $this->update($draftAttribute, $productAttribute);
+
+        $productAttributeTranslation->setTranslatable($productAttribute)->shouldHaveBeenCalledOnce();
+        $productAttributeTranslation->setLocale('pl_PL')->shouldHaveBeenCalledOnce();
+        $productAttributeTranslation->setName('name')->shouldHaveBeenCalledOnce();
+        $entityManager->persist($productAttributeTranslation)->shouldHaveBeenCalledOnce();
+    }
+
 }

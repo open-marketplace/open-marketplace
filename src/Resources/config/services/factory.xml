@@ -99,7 +99,10 @@
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactory"
                  id="bitbag.mvm_plugin.product_attribute_factory">
+        </service>
 
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslationFactory"
+                 id="bitbag_mvm_plugin.factory.product_attribute_translation">
         </service>
     </services>
 </container>
