@@ -24,6 +24,7 @@ final class AttributesConverterSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($productAttributeFactory, $entityManager);
     }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(AttributesConverter::class);

@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribu
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslationFactoryInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -29,12 +30,16 @@ final class AttributesConverter implements AttributesConverterInterface
 
     private EntityManagerInterface $entityManager;
 
+    private ProductAttributeTranslationFactoryInterface $attributeTranslationFactory;
+
     public function __construct(
         ProductAttributeFactoryInterface $productAttributeFactory,
         EntityManagerInterface $entityManager,
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory
     ) {
         $this->productAttributeFactory = $productAttributeFactory;
         $this->entityManager = $entityManager;
+        $this->attributeTranslationFactory = $attributeTranslationFactory;
     }
 
     public function convert(ProductDraftInterface $productDraft, ProductInterface $product): void
@@ -78,7 +83,7 @@ final class AttributesConverter implements AttributesConverterInterface
         $translations = $draftAttribute->getTranslations();
         /** @var DraftAttributeTranslationInterface $translation */
         foreach ($translations as $translation) {
-            $newTranslation = new ProductAttributeTranslation();
+            $newTranslation = $this->attributeTranslationFactory->create();
             $newTranslation->setLocale($translation->getLocale());
             $newTranslation->setName($translation->getName());
             $newTranslation->setTranslatable($draftAttribute->getProductAttribute());
