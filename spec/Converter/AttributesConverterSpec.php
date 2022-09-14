@@ -14,10 +14,17 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Converter;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeTranslationClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeValueClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverter;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValueInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Extractor\AttributesExtractorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 
 final class AttributesConverterSpec extends ObjectBehavior
 {
@@ -37,8 +44,71 @@ final class AttributesConverterSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(AttributesConverter::class);
+    }
+
+    public function it_doesnt_link_draft_to_product_attribute_when_linked(
+        ProductDraftInterface $productDraft,
+        AttributeValueClonerInterface $attributeValueCloner,
+        EntityManagerInterface $entityManager,
+        DraftAttributeInterface $draftAttribute,
+        DraftAttributeValueInterface $draftAttributeValue,
+        ProductInterface $product,
+        ProductAttributeInterface $productAttribute,
+        AttributesExtractorInterface $attributesExtractor,
+    ) {
+        $draftAttributesCollection = new ArrayCollection([$draftAttributeValue->getWrappedObject()]);
+        $productDraft->getAttributes()->willReturn($draftAttributesCollection);
+
+        $product->getAttributes()->willReturn(new ArrayCollection([]));
+
+        $attributesExtractor->extract($draftAttributesCollection)->willReturn([$draftAttribute]);
+
+        $draftAttribute->getProductAttribute()->willReturn($productAttribute);
+
+        $this->convert($productDraft, $product);
+
+        $entityManager->persist(Argument::any())->shouldNotHaveBeenCalled();
+
+        $attributeValueCloner->clone($productDraft, $product)->shouldHaveBeenCalledOnce();
+
+        $entityManager->flush()->shouldHaveBeenCalledOnce();
+    }
+
+    public function it_links_draft_with_product_attribute(
+        ProductDraftInterface $productDraft,
+        ProductAttributeFactoryInterface $productAttributeFactory,
+        AttributeValueClonerInterface $attributeValueCloner,
+        EntityManagerInterface $entityManager,
+        DraftAttributeInterface $draftAttribute,
+        DraftAttributeValueInterface $draftAttributeValue,
+        ProductInterface $product,
+        ProductAttributeInterface $productAttribute,
+        ProductAttributeInterface $newProductAttribute,
+        AttributesExtractorInterface $attributesExtractor,
+        AttributeTranslationClonerInterface $attributeTranslationCloner
+    ) {
+        $draftAttributesCollection = new ArrayCollection([$draftAttributeValue->getWrappedObject()]);
+        $productDraft->getAttributes()->willReturn($draftAttributesCollection);
+
+        $product->getAttributes()->willReturn(new ArrayCollection([]));
+
+        $attributesExtractor->extract($draftAttributesCollection)->willReturn([$draftAttribute]);
+
+        $draftAttribute->getProductAttribute()->willReturn(null);
+
+        $productAttributeFactory->createClone($draftAttribute)->willReturn($newProductAttribute);
+
+        $draftAttribute->setProductAttribute($newProductAttribute)->shouldBeCalledOnce();
+        $entityManager->persist($newProductAttribute)->shouldBeCalledOnce();
+        $attributeTranslationCloner->clone($draftAttribute)->shouldBeCalledOnce();
+
+        $this->convert($productDraft, $product);
+
+        $attributeValueCloner->clone($productDraft, $product)->shouldHaveBeenCalledOnce();
+
+        $entityManager->flush()->shouldHaveBeenCalledOnce();
     }
 }

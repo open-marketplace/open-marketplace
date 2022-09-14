@@ -16,11 +16,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribu
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeValueFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Product\Model\ProductAttributeValue;
 
 final class AttributeValueCloner implements AttributeValueClonerInterface
 {
     private EntityManagerInterface $entityManager;
+
     private ProductAttributeValueFactoryInterface $attributeValueFactory;
 
     public function __construct(
