@@ -48,5 +48,17 @@
             <tag name="controller.service_arguments" />
 
         </service>
+
+        <service id="bitbag_mvm_plugin.controller.action.vendor.product_listing.send_for_verification"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\SendForVerificationAction">
+            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
+            <argument type="service" id="router.default" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="controller.service_arguments" />
+        </service>
     </services>
 </container>

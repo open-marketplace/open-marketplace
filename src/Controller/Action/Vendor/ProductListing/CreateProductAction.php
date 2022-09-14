@@ -121,16 +121,11 @@ class CreateProductAction extends AbstractController
             }
 
             /** @var ClickableInterface $button */
-            $button = $form->get('saveAndAdd');
+            $button = $form->get('save');
             $productDraft = $this->productListingFromDraftFactory->createNew($productDraft);
 
-            if ($button->isClicked()) {
-                $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
-                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created_and_sent_to_verification');
-            } else {
-                $this->productDraftRepository->save($productDraft);
-                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
-            }
+            $this->productDraftRepository->save($productDraft);
+            $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
 
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }
