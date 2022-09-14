@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeTranslationClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslationFactoryInterface;
@@ -27,9 +28,11 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $entityManager,
-        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory
+        AttributeTranslationClonerInterface $attributeTranslationCloner,
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
+
     ): void {
-        $this->beConstructedWith($entityManager, $attributeTranslationFactory);
+        $this->beConstructedWith($entityManager, $attributeTranslationCloner, $attributeTranslationFactory);
     }
 
     public function it_is_initializable(): void
@@ -103,6 +106,7 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
         ProductAttributeTranslationInterface $secondProductAttributeTranslation,
         DraftAttributeTranslationInterface $draftAttributeTranslation,
         ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
+        AttributeTranslationClonerInterface $attributeTranslationCloner
     ): void {
         $productPosition = 5;
         $draftAttributeTranslationCollection = new ArrayCollection([$draftAttributeTranslation->getWrappedObject()]);
@@ -123,10 +127,6 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
 
         $this->update($draftAttribute, $productAttribute);
 
-        $productAttributeTranslation->setTranslatable($productAttribute)->shouldHaveBeenCalledOnce();
-        $productAttributeTranslation->setLocale('pl_PL')->shouldHaveBeenCalledOnce();
-        $productAttributeTranslation->setName('name')->shouldHaveBeenCalledOnce();
-        $entityManager->persist($productAttributeTranslation)->shouldHaveBeenCalledOnce();
+        $attributeTranslationCloner->clone($draftAttribute)->shouldHaveBeenCalledOnce();
     }
-
 }

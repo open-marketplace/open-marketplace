@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Converter;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeTranslationClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeValueClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverter;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Extractor\AttributesExtractorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
@@ -21,8 +24,17 @@ final class AttributesConverterSpec extends ObjectBehavior
     public function let(
         ProductAttributeFactoryInterface $productAttributeFactory,
         EntityManagerInterface $entityManager,
+        AttributesExtractorInterface $attributesExtractor,
+        AttributeTranslationClonerInterface $attributeTranslationCloner,
+        AttributeValueClonerInterface $attributeValueCloner
     ): void {
-        $this->beConstructedWith($productAttributeFactory, $entityManager);
+        $this->beConstructedWith(
+            $productAttributeFactory,
+            $entityManager,
+            $attributesExtractor,
+            $attributeTranslationCloner,
+            $attributeValueCloner
+        );
     }
 
     function it_is_initializable()
