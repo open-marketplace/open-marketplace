@@ -22,7 +22,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeValueCloner"
                  id="bitbag_mvm_plugin.cloner.attribute_value">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_attribute"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_attribute_value"/>
 
         </service>
     </services>
