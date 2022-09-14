@@ -21,7 +21,6 @@ final class ProductAttributeFactory implements ProductAttributeFactoryInterface
     {
         $productAttribute = new ProductAttribute();
         $productAttribute->setTranslatable($draftAttribute->isTranslatable());
-//        $productAttribute->setName($draftAttribute->getName());
         $productAttribute->setStorageType($draftAttribute->getStorageType());
         $productAttribute->setConfiguration($draftAttribute->getConfiguration());
         $productAttribute->setCode($draftAttribute->getCode());
