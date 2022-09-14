@@ -15,6 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Extractor\AttributesExtractorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslationFactoryInterface;
 use Doctrine\Common\Collections\Collection;
@@ -32,20 +33,24 @@ final class AttributesConverter implements AttributesConverterInterface
 
     private ProductAttributeTranslationFactoryInterface $attributeTranslationFactory;
 
+    private AttributesExtractorInterface $attributesExtractor;
+
     public function __construct(
         ProductAttributeFactoryInterface $productAttributeFactory,
         EntityManagerInterface $entityManager,
-        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
+        AttributesExtractorInterface $attributesExtractor
     ) {
         $this->productAttributeFactory = $productAttributeFactory;
         $this->entityManager = $entityManager;
         $this->attributeTranslationFactory = $attributeTranslationFactory;
+        $this->attributesExtractor = $attributesExtractor;
     }
 
     public function convert(ProductDraftInterface $productDraft, ProductInterface $product): void
     {
         $attributeValues = $productDraft->getAttributes();
-        $attributes = $this->extractAttributesFromValues($attributeValues);
+        $attributes = $this->attributesExtractor->extract($attributeValues);
 
         $oldProductAttributeValues = $product->getAttributes();
         foreach ($oldProductAttributeValues as $oldProductAttributeValue) {
@@ -89,23 +94,5 @@ final class AttributesConverter implements AttributesConverterInterface
             $newTranslation->setTranslatable($draftAttribute->getProductAttribute());
             $this->entityManager->persist($newTranslation);
         }
-    }
-
-    /**
-     * @param  Collection<int, AttributeValueInterface> $productDraftAttributeValues
-     *
-     * @return array<int, AttributeInterface|null>
-     */
-    private function extractAttributesFromValues(Collection $productDraftAttributeValues): array
-    {
-        $attributes = [];
-        foreach ($productDraftAttributeValues as $attributeValue) {
-            $attribute = $attributeValue->getAttribute();
-            if (!in_array($attribute, $attributes)) {
-                $attributes[] = $attribute;
-            }
-        }
-
-        return $attributes;
     }
 }

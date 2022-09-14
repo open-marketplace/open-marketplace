@@ -8,6 +8,7 @@
             <argument type="service" id="bitbag.mvm_plugin.product_attribute_factory"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="bitbag_mvm_plugin.factory.product_attribute_translation"/>
+            <argument type="service" id="bitbag_mvm_plugin.extractor.attributes"/>
         </service>
     </services>
 </container>
