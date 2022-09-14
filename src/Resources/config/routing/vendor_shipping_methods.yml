@@ -2,7 +2,6 @@ vendor_shipping_methods:
   path: /vendor/shipping-methods
   methods: [GET, POST]
   defaults:
-    autowire: true
     _controller: bitbag_mvm_plugin.controller.vendor_controller:updateAction
     _sylius:
       template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/shipping_methods.html.twig"
