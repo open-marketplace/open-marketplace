@@ -14,30 +14,35 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeValueFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 
 final class AttributeValueCloner implements AttributeValueClonerInterface
 {
     private EntityManagerInterface $entityManager;
+    private ProductAttributeValueFactoryInterface $attributeValueFactory;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        ProductAttributeValueFactoryInterface $attributeValueFactory
+    ) {
         $this->entityManager = $entityManager;
+        $this->attributeValueFactory = $attributeValueFactory;
     }
 
     public function clone(ProductDraftInterface $productDraft, ProductInterface $product): void
     {
         $attributeValues = $productDraft->getAttributes();
-        foreach ($attributeValues as $attributeValue) {
+        foreach ($attributeValues as $draftAttributeValue) {
             /** @var DraftAttributeInterface $draftAttribute */
-            $draftAttribute = $attributeValue->getAttribute();
+            $draftAttribute = $draftAttributeValue->getAttribute();
             $productAttribute = $draftAttribute->getProductAttribute();
-            $newProductAttributeValue = new ProductAttributeValue();
+            $newProductAttributeValue = $this->attributeValueFactory->create();
             $newProductAttributeValue->setSubject($product);
             $newProductAttributeValue->setAttribute($productAttribute);
-            $newProductAttributeValue->setLocaleCode($attributeValue->getLocaleCode());
-            $newProductAttributeValue->setValue($attributeValue->getValue());
+            $newProductAttributeValue->setLocaleCode($draftAttributeValue->getLocaleCode());
+            $newProductAttributeValue->setValue($draftAttributeValue->getValue());
             $this->entityManager->persist($newProductAttributeValue);
         }
     }

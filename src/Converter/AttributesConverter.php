@@ -19,8 +19,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Extractor\AttributesExtractorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Product\Model\ProductAttributeValue;
 
 final class AttributesConverter implements AttributesConverterInterface
 {

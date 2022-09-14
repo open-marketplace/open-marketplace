@@ -24,8 +24,8 @@ final class AttributeTranslationCloner implements AttributeTranslationClonerInte
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory)
-    {
+        ProductAttributeTranslationFactoryInterface $attributeTranslationFactory
+    ) {
         $this->entityManager = $entityManager;
         $this->attributeTranslationFactory = $attributeTranslationFactory;
     }
