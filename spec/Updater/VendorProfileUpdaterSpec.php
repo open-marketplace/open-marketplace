@@ -155,4 +155,3 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
             ->shouldHaveBeenCalledTimes(1);
     }
 }
-}
