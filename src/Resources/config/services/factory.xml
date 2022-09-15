@@ -97,6 +97,7 @@
             <argument type="service" id="bitbag_mvm_plugin.provider.vendor"/>
         </service>
 
+
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactory"
                  id="bitbag.mvm_plugin.product_attribute_factory">
         </service>
@@ -109,8 +110,14 @@
                  id="bitbag_mvm_plugin.factory.product_attribute">
 
         </service>
+
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeValueFactory"
                  id="bitbag_mvm_plugin.factory.product_attribute_value">
+
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorShippingMethodFactory"
+                 id="bitbag_mvm_plugin.factory.vendor_shipping_method">
 
         </service>
     </services>

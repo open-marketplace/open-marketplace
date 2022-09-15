@@ -22,6 +22,21 @@
             <tag name="form.type"/>
         </service>
 
+        <service id="bitbag_mvm_plugin.form.vendor_shipping_methods_type"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorShippingMethodsType">
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_shipping_method" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service id="bitbag_mvm_plugin.form.vendor_shipping_method_choice_type"
+                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorShippingMethodChoiceType">
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <tag name="form.type" />
+        </service>
+
         <service id="bitbag_mvm_plugin.form.type.vendor_edit_type"
                  class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorEditType">
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor</argument>

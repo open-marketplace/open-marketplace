@@ -91,6 +91,26 @@ sylius_fixtures:
                                 menu_taxon: 'MENU_CATEGORY'
                                 contact_phone_number: '+41 123 456 789'
                                 contact_email: 'contact@example.com'
+                            fashion_web_store_eu:
+                                name: 'Fashion Web Store EU'
+                                code: 'FASHION_WEB_EU'
+                                locales:
+                                    - '%locale%'
+                                currencies:
+                                    - 'EUR'
+                                enabled: true
+                                hostname: '%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%'
+                                theme_name: '%env(resolve:SYLIUS_FIXTURES_THEME_NAME)%'
+                                shop_billing_data:
+                                    company: 'Sylius'
+                                    tax_id: '0001112222'
+                                    country_code: 'US'
+                                    street: 'Test St. 15'
+                                    city: 'eCommerce Town'
+                                    postcode: '00 33 22'
+                                menu_taxon: 'MENU_CATEGORY'
+                                contact_phone_number: '+41 123 456 789'
+                                contact_email: 'contact@example.com'
 
                 admin_user:
                     name: 'admin_user'
@@ -123,6 +143,7 @@ sylius_fixtures:
                                 name: 'Cash on delivery'
                                 channels:
                                     - 'FASHION_WEB'
+                                    - 'FASHION_WEB_EU'
                             bank_transfer:
                                 code: 'bank_transfer'
                                 name: 'Bank transfer'
@@ -139,11 +160,12 @@ sylius_fixtures:
                                 enabled: true
                                 channels:
                                     - 'FASHION_WEB'
+                                    - 'FASHION_WEB_EU'
                             dhl_express:
                                 code: 'dhl_express'
                                 name: 'DHL Express'
                                 channels:
-                                    - 'FASHION_WEB'
+                                    - 'FASHION_WEB_EU'
                             fedex:
                                 code: 'fedex'
                                 name: 'FedEx'
