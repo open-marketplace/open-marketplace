@@ -56,6 +56,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_factory');
         $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('bitbag.mvm_plugin.service.vendor_profile_image_factory');
         $this->imageUploader = static::$container->get('sylius.image_uploader');
+        $this->vendorLogoOperator = static::$container->get('bitbag_mvm_plugin.operator.vendor_logo');
 
         $remover = static::$container->get('bitbag_mvm_plugin.remover.profile_update_remover');
         $vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_update_factory');
@@ -67,7 +68,8 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             $remover,
             $vendorProfileFactory,
             $this->vendorProfileUpdateImageFactoryInterface,
-            $this->imageUploader
+            $this->imageUploader,
+            $this->vendorLogoOperator
         );
     }
 
