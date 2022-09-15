@@ -25,6 +25,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterf
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Finder\SplFileInfo;
@@ -92,13 +93,17 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
         $imageFromForm->getFile()->willReturn(null);
+        $imageFromForm->getPath()->willReturn('path/to/file');
         $newPendingUpdate->getVendorAddress()->shouldBeCalled();
+
         $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
         $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
 
+
         $vendor->getShopUser()->willReturn($user);
+
         $user->getUsername()->willReturn('test@mail.at');
 
         $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm);
@@ -140,7 +145,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
-
+        $imageFromForm->getPath()->willReturn('path/to/file');
         $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
 
@@ -149,4 +154,5 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])
             ->shouldHaveBeenCalledTimes(1);
     }
+}
 }
