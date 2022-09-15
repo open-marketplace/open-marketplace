@@ -218,6 +218,7 @@ class Vendor implements VendorInterface
         return self::STATUS_VERIFIED === $this->getStatus();
     }
 
+    /** @return Collection<int, VendorShippingMethodInterface> */
     public function getShippingMethods(): Collection
     {
         return $this->shippingMethods;
