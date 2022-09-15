@@ -134,23 +134,6 @@ final class VendorController extends ResourceController
         ) {
             $resource = $form->getData();
 
-            /** @var ResourceControllerEvent $event */
-            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
-
-            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-                throw new HttpException($event->getErrorCode(), $event->getMessage());
-            }
-            if ($event->isStopped()) {
-                $this->flashHelper->addFlashFromEvent($configuration, $event);
-
-                $eventResponse = $event->getResponse();
-                if (null !== $eventResponse) {
-                    return $eventResponse;
-                }
-
-                return $this->redirectHandler->redirectToResource($configuration, $resource);
-            }
-
             try {
                 $image = $resource->getImage();
                 $this->vendorProfileUpdater->createPendingVendorProfileUpdate(

@@ -13,5 +13,10 @@
             </argument>
             <argument type="service" id="bitbag_mvm_plugin.factory.product_image"/>
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Operator\VendorLogoOperator"
+                 id="bitbag_mvm_plugin.operator.vendor_logo">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
     </services>
 </container>
