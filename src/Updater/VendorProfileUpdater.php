@@ -73,10 +73,13 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
             $this->entityManager->persist($imageEntity);
         }
 
+        $this->entityManager->persist($pendingVendorUpdate);
+
         $token = $pendingVendorUpdate->getToken();
 
         $this->setVendorFromData($pendingVendorUpdate, $vendorData);
 
+        $this->entityManager->flush();
         $shopUser = $currentVendor->getShopUser();
         $email = $shopUser->getUsername();
 

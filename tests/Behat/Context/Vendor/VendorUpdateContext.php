@@ -87,6 +87,7 @@ class VendorUpdateContext extends RawMinkContext
      */
     public function pendingUpdateDataShouldAppearInDatabase()
     {
+//        dd(" ");
         $vendor = $this->sharedStorage->get('vendor');
         $pendingData = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
 

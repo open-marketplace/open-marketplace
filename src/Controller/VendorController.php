@@ -32,6 +32,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -131,7 +132,6 @@ final class VendorController extends ResourceController
             && $form->isValid()
         ) {
             $resource = $form->getData();
-
             try {
                 $image = $resource->getImage();
                 $this->vendorProfileUpdater->createPendingVendorProfileUpdate(
