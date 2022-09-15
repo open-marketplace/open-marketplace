@@ -73,6 +73,10 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
             $this->entityManager->persist($imageEntity);
         }
 
+        if ($image && !$image->getPath()) {
+            $currentVendor->setImage(null);
+        }
+
         $this->entityManager->persist($pendingVendorUpdate);
 
         $token = $pendingVendorUpdate->getToken();

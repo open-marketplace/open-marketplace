@@ -139,6 +139,8 @@ final class VendorController extends ResourceController
                     $vendor,
                     $image
                 );
+                $this->manager->remove($image);
+                $this->manager->flush();
 
                 $vendor->setEditedAt(new \DateTime());
                 $this->manager->flush();
@@ -156,7 +158,7 @@ final class VendorController extends ResourceController
                 $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
             }
 
-            $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+            //$postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
                 if ($configuration->getParameters()->get('return_content', false)) {
@@ -166,10 +168,10 @@ final class VendorController extends ResourceController
                 return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
             }
 
-            $postEventResponse = $postEvent->getResponse();
-            if (null !== $postEventResponse) {
-                return $postEventResponse;
-            }
+//            $postEventResponse = $postEvent->getResponse();
+//            if (null !== $postEventResponse) {
+//                return $postEventResponse;
+//            }
 
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }
@@ -178,11 +180,11 @@ final class VendorController extends ResourceController
             return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
 
-        $initializeEvent = $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
-        $initializeEventResponse = $initializeEvent->getResponse();
-        if (null !== $initializeEventResponse) {
-            return $initializeEventResponse;
-        }
+//        $initializeEvent = $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
+//        $initializeEventResponse = $initializeEvent->getResponse();
+//        if (null !== $initializeEventResponse) {
+//            return $initializeEventResponse;
+//        }
 
         return $this->render($configuration->getTemplate(ResourceActions::UPDATE . '.html'), [
             'configuration' => $configuration,
