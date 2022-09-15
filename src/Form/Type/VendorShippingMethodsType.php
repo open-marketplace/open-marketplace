@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethodInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorShippingMethodFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
