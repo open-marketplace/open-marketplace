@@ -4,8 +4,11 @@
 
 
         {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_attributes.html.twig' %}
+        <div class="ui hidden divider"></div>
         {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_media.html.twig' %}
+        <div class="ui hidden divider"></div>
         {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_more_details.html.twig' %}
+        <div class="ui hidden divider"></div>
 
         {% if productDraft.status == 'under_verification' %}
             <div class="ui buttons">
