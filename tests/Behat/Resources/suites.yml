@@ -18,4 +18,5 @@ imports:
     - suites/vendor/draft_attribute.yml
     - suites/vendor/customer_details.yml
     - suites/vendor/customer_details.yml
+    - suites/vendor/shipping_methods.yml
 
