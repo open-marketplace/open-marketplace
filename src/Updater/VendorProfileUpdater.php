@@ -65,7 +65,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         ?VendorImageInterface $image
     ): void {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
-        //dd($image);
+
         if ($image->getFile()) {
             $imageEntity = $this->imageFactory->createWithFileAndOwner($image, $pendingVendorUpdate);
 

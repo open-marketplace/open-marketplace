@@ -17,6 +17,7 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Operator\VendorLogoOperator"
                  id="bitbag_mvm_plugin.operator.vendor_logo">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag.mvm_plugin.service.vendor_image_factory"/>
         </service>
     </services>
 </container>

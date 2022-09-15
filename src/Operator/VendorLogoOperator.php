@@ -14,15 +14,19 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Operator;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class VendorLogoOperator implements VendorLogoOperatorInterface
 {
     private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    private VendorImageFactoryInterface $vendorImageFactory;
+
+    public function __construct(EntityManagerInterface $entityManager, VendorImageFactoryInterface $vendorImageFactory)
     {
         $this->entityManager = $entityManager;
+        $this->vendorImageFactory = $vendorImageFactory;
     }
 
     public function replaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void
@@ -30,9 +34,9 @@ final class VendorLogoOperator implements VendorLogoOperatorInterface
         $imageUpdate = $vendorData->getImage();
 
         if ($imageUpdate) {
-            $imageEntity = new VendorImage();
-            if($vendor->getImage()) {
-                $imageEntity = $vendor->getImage();
+            $imageEntity = $vendor->getImage();
+            if(!$vendor->getImage()) {
+                $imageEntity = $this->vendorImageFactory->createNew();
             }
             $imageEntity->setPath($imageUpdate->getPath());
             $imageEntity->setOwner($vendor);

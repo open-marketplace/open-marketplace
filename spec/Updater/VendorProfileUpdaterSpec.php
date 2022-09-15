@@ -20,12 +20,14 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInt
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\VendorLogoOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Mailer\Sender\SenderInterface;
+use Symfony\Component\Finder\SplFileInfo;
 
 final class VendorProfileUpdaterSpec extends ObjectBehavior
 {
@@ -35,7 +37,8 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         ProfileUpdateRemoverInterface $remover,
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorProfileUpdateImageFactoryInterface $imageFactory,
-        ImageUploader $imageUploader
+        ImageUploader $imageUploader,
+        VendorLogoOperatorInterface $vendorLogoOperator
     ): void {
         $this->beConstructedWith(
             $entityManager,
@@ -43,7 +46,8 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
             $remover,
             $vendorProfileFactory,
             $imageFactory,
-            $imageUploader
+            $imageUploader,
+            $vendorLogoOperator
         );
     }
 
@@ -87,7 +91,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $vendorData->getPhoneNumber()->willReturn('testNumber');
         $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
-        $imageFromForm->getPath()->willReturn('fakepath');
+        $imageFromForm->getFile()->willReturn(null);
         $newPendingUpdate->getVendorAddress()->shouldBeCalled();
         $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
         $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
@@ -114,7 +118,8 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorImageInterface $imageFromForm,
         VendorProfileUpdateImageFactoryInterface $imageFactory,
         VendorImageInterface $newImage,
-        ImageUploader $imageUploader
+        ImageUploader $imageUploader,
+        SplFileInfo $fileInfo
     ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
         $newPendingUpdate->getToken()->willReturn('testing-token');
@@ -124,7 +129,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
 
-        $imageFromForm->getPath()->willReturn(null);
+        $imageFromForm->getFile()->willReturn($fileInfo);
         $imageFactory->createWithFileAndOwner($imageFromForm, $newPendingUpdate)->willReturn($newImage);
         $imageUploader->upload($newImage);
         $newPendingUpdate->setImage($newImage)->shouldBeCalledOnce();
