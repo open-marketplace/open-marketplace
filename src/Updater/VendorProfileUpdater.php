@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
@@ -66,7 +65,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
     ): void {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
 
-        if ($image->getFile()) {
+        if ($image && $image->getFile()) {
             $imageEntity = $this->imageFactory->createWithFileAndOwner($image, $pendingVendorUpdate);
 
             $this->imageUploader->upload($imageEntity);

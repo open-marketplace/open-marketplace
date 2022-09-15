@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Operator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
@@ -34,10 +34,12 @@ final class VendorLogoOperator implements VendorLogoOperatorInterface
         $imageUpdate = $vendorData->getImage();
 
         if ($imageUpdate) {
+            /** @var VendorImageInterface $imageEntity */
             $imageEntity = $vendor->getImage();
-            if(!$vendor->getImage()) {
+            if (!$vendor->getImage()) {
                 $imageEntity = $this->vendorImageFactory->createNew();
             }
+
             $imageEntity->setPath($imageUpdate->getPath());
             $imageEntity->setOwner($vendor);
             $vendor->setImage($imageEntity);
