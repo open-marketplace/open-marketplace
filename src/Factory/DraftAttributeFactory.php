@@ -47,4 +47,9 @@ final class DraftAttributeFactory implements DraftAttributeFactoryInterface
 
         return $attribute;
     }
+
+    public function createNew(): DraftAttributeInterface
+    {
+        return $this->factory->createNew();
+    }
 }
