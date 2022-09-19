@@ -32,3 +32,11 @@ bitbag_mvm_plugin_admin_product_listing_reject:
     _sylius:
       section: admin
       permission: true
+
+bitbag_mvm_plugin_admin_product_listing_resore_visibility:
+    path: /product-listings-restore-visibility/{id}
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.product_listing.change_visibility_action
+        _sylius:
+            section: admin
+            permission: true

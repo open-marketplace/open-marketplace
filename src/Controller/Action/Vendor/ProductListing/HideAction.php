@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing;
+namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-final class ChangeVisibilityAction
+final class HideAction
 {
     private ProductListingRepositoryInterface $productListingRepository;
 
@@ -41,7 +41,7 @@ final class ChangeVisibilityAction
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
-        $newStatus = !$productListing->isHidden();
+        $newStatus = true;
         $productListing->setHidden($newStatus);
 
         $product = $productListing->getProduct();
@@ -54,7 +54,7 @@ final class ChangeVisibilityAction
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
 
-        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
+        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_vendor_product_listing_index'));
     }
 
 }

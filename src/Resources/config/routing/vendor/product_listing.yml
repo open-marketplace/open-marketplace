@@ -41,11 +41,11 @@ bitbag_mvm_plugin_vendor_product_listing_send_for_verification:
     defaults:
         _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.send_for_verification
 
-bitbag_mvm_plugin_vendor_product_listing_switch_visibility:
-    path: /product-listings-switch-visibility/{id}
+bitbag_mvm_plugin_vendor_product_listing_hide_action:
+    path: /product-listings-hide/{id}
     methods: [GET]
     defaults:
-        _controller: bitbag_mvm_plugin.controller.product_listing.change_visibility_action
+        _controller: bitbag_mvm_plugin.controller.product_listing.hide_action
         _sylius:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/index.html.twig"
             redirect:

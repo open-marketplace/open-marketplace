@@ -1,0 +1,9 @@
+{% set path =  path('bitbag_mvm_plugin_admin_product_listing_resore_visibility', { 'id': data.id }) %}
+
+{%  if data.hidden == true %}
+    <form action="{{ path }}" method="post">
+        <button class="ui button orange" data-requires-confirmation>
+            <i class="icon check"></i>{{ 'bitbag_mvm_plugin.ui.restore_visibility' | trans }}
+        </button>
+    </form>
+{% endif %}
