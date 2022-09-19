@@ -18,7 +18,7 @@ trait ProductTrait
 {
     protected ?VendorInterface $vendor;
 
-    protected bool $hidden;
+    protected bool $hidden = false;
 
     public function isHidden(): bool
     {

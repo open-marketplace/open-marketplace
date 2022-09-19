@@ -46,7 +46,7 @@ final class HideAction
 
         $product = $productListing->getProduct();
 
-        if($product) {
+        if ($product) {
             $product->setHidden($newStatus);
             $this->entityManager->persist($product);
         }
@@ -56,5 +56,4 @@ final class HideAction
 
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_vendor_product_listing_index'));
     }
-
 }

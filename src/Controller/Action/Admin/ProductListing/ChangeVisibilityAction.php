@@ -46,7 +46,7 @@ final class ChangeVisibilityAction
 
         $product = $productListing->getProduct();
 
-        if($product) {
+        if ($product) {
             $product->setHidden($newStatus);
             $this->entityManager->persist($product);
         }
@@ -56,5 +56,4 @@ final class ChangeVisibilityAction
 
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
     }
-
 }

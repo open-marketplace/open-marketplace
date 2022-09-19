@@ -13,7 +13,7 @@
 
             {% if data.hidden == false %}
             <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_hide_action', {'id': data.id }) }}" method="get">
-                <button class="item row" data-requires-confirmation><i class="edit icon"></i>{{ 'sylius.ui.hide'|trans }}</button>
+                <button class="item row" data-requires-confirmation><i class="edit icon"></i>{{ 'bitbag_mvm_plugin.ui.hide'|trans }}</button>
             </form>
             {% endif %}
             {% if data.latestDraft.status != 'under_verification' and data.latestDraft.status != 'verified' %}

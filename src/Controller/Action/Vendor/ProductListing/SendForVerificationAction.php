@@ -18,8 +18,8 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductL
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\RouterInterface;
 
 final class SendForVerificationAction
 {
@@ -39,8 +39,7 @@ final class SendForVerificationAction
         ProductListingRepositoryInterface $productListingRepository,
         RouterInterface $router,
         Session $session
-    )
-    {
+    ) {
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productDraftRepository = $productDraftRepository;
         $this->productListingRepository = $productListingRepository;
@@ -51,6 +50,7 @@ final class SendForVerificationAction
     public function __invoke(Request $request): RedirectResponse
     {
         $listing = $this->productListingRepository->find($request->get('id'));
+        /** @var ProductDraftInterface $productDraft */
         $productDraft = $this->productDraftRepository->findLatestDraft($listing);
 
         if (ProductDraftInterface::STATUS_CREATED === $productDraft->getStatus()) {
