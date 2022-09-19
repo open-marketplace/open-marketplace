@@ -7,5 +7,9 @@ vendor_shipping_methods:
       template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/shipping_methods.html.twig"
       form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorShippingMethodsType
       event: update
+      repository:
+        method: findOneById
+        arguments:
+          id: "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor().getId()"
       redirect:
         route: sylius_shop_account_dashboard
