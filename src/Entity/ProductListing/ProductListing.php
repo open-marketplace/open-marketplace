@@ -31,6 +31,19 @@ class ProductListing implements ProductListingInterface
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
 
+    protected bool $hidden = false;
+
+
+    public function isHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
+    }
+
     public function __construct()
     {
         $this->productDrafts = new ArrayCollection();

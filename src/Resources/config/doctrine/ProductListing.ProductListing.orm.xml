@@ -12,6 +12,7 @@
 
         <field name="code" column="code" type="string" unique="false" nullable="false" />
         <field name="createdAt" column="created_at" type="datetime" unique="false" nullable="true"/>
+        <field name="hidden" column="hidden" type="boolean"/>
 
         <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" inversed-by="productListings"/>
 
