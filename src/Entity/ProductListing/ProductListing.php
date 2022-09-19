@@ -16,7 +16,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-
 class ProductListing implements ProductListingInterface
 {
     protected int $id;
