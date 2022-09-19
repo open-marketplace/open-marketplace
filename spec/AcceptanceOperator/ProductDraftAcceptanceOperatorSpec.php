@@ -13,13 +13,14 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperator;
 use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ProductInterface;
+
 
 final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 {
@@ -68,7 +69,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftFilesOperatorInterface $filesOperator,
         ProductListingInterface $productListing,
         ProductInterface $product,
-        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $updatedProduct
+        ProductInterface $updatedProduct
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
