@@ -49,7 +49,7 @@ class Vendor implements VendorInterface
     protected Collection $productListings;
 
     /** @var Collection<int, VendorShippingMethodInterface> */
-    private Collection $shippingMethods;
+    protected Collection $shippingMethods;
 
     public function __construct()
     {
