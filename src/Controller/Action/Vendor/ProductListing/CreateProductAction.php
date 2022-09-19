@@ -130,7 +130,7 @@ class CreateProductAction extends AbstractController
                 throw new VendorNotFoundException('Vendor not found.');
             }
 
-            $productDraft = $this->productListingFromDraftFactory->createNew($productDraft);
+            $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
 
             $this->productDraftRepository->save($productDraft);
             $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');

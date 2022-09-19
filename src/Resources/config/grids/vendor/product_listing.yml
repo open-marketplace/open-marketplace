@@ -26,6 +26,8 @@ sylius_grid:
         code:
           type: string
           label: bitbag_mvm_plugin.ui.code
+        hidden:
+          type: string
         getLatestDraft.publishedAt:
           type: datetime
           label: bitbag_mvm_plugin.ui.published_at

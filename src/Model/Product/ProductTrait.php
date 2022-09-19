@@ -18,6 +18,18 @@ trait ProductTrait
 {
     protected ?VendorInterface $vendor;
 
+    protected bool $hidden;
+
+    public function isHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
+    }
+
     public function resetImages(): void
     {
         $this->images = new ArrayCollection();

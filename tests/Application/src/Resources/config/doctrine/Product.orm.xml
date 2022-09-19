@@ -5,6 +5,9 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product" table="sylius_product">
+
+        <field name="hidden" type="boolean"/>
+
         <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" inversed-by="products" />
     </mapped-superclass>
 </doctrine-mapping>

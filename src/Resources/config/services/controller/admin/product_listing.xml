@@ -34,9 +34,6 @@
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\ChangeVisibilityAction"
-                 id="bitbag_mvm_plugin.controller.product_listing.change_visibility_action">
-            <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
-        </service>
+
     </services>
 </container>
