@@ -43,8 +43,6 @@ class ProductListing implements ProductListingInterface
         $this->deleted = $deleted;
     }
 
-
-
     public function __construct()
     {
         $this->productDrafts = new ArrayCollection();
