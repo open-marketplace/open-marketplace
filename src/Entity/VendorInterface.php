@@ -85,4 +85,13 @@ interface VendorInterface extends VendorProfileInterface
     public function setProductListings(Collection $productListings): void;
 
     public function isVerified(): bool;
+
+    /** @return Collection<int, VendorShippingMethodInterface> */
+    public function getShippingMethods(): Collection;
+
+    public function hasShippingMethod(VendorShippingMethodInterface $shippingMethod): bool;
+
+    public function addShippingMethod(VendorShippingMethodInterface $shippingMethod): void;
+
+    public function removeShippingMethod(VendorShippingMethodInterface $shippingMethod): void;
 }
