@@ -17,7 +17,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFac
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -89,17 +88,10 @@ class EditProductAction extends AbstractController
                 $productDraft->addAttribute($attribute);
             }
 
-            /** @var ClickableInterface $button */
-            $button = $form->get('saveAndAdd');
             $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
 
-            if ($button->isClicked()) {
-                $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
-                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved_and_sent_to_verification');
-            } else {
-                $this->productDraftRepository->save($productDraft);
-                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
-            }
+            $this->productDraftRepository->save($productDraft);
+            $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
 
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }
