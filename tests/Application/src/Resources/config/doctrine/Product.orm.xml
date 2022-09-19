@@ -6,7 +6,7 @@
 
     <mapped-superclass name="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product" table="sylius_product">
 
-        <field name="hidden" type="boolean"/>
+        <field name="deleted" type="boolean"/>
 
         <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" inversed-by="products" />
     </mapped-superclass>

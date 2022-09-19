@@ -24,7 +24,7 @@ interface ProductInterface extends BaseProductInterface
 
     public function setAttributesFrom(ProductDraftInterface $draft): void;
 
-    public function isHidden(): bool;
+    public function isDeleted(): bool;
 
-    public function setHidden(bool $hidden): void;
+    public function setDeleted(bool $deleted): void;
 }

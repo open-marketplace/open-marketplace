@@ -11,9 +11,9 @@
                class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}</a>
             {% endif %}
 
-            {% if data.hidden == false %}
-            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_hide_action', {'id': data.id }) }}" method="get">
-                <button class="item row" data-requires-confirmation><i class="edit icon"></i>{{ 'bitbag_mvm_plugin.ui.hide'|trans }}</button>
+            {% if data.deleted == false %}
+            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_delete_action', {'id': data.id }) }}" method="post">
+                <button class="item row" data-requires-confirmation><i class="edit icon"></i>{{ 'sylius.ui.delete'|trans }}</button>
             </form>
             {% endif %}
             {% if data.latestDraft.status != 'under_verification' and data.latestDraft.status != 'verified' %}

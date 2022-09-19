@@ -59,8 +59,8 @@
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\HideAction"
-                 id="bitbag_mvm_plugin.controller.product_listing.hide_action">
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\DeleteAction"
+                 id="bitbag_mvm_plugin.controller.product_listing.delete_action">
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
             <argument type="service" id="router.default"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>

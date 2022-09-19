@@ -9,7 +9,7 @@ sylius_grid:
         options:
           class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
           repository:
-            method: createQueryBuilderByVendor
+            method: createQueryBuilderByVendorAndDeleted
             arguments:
               - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
       filters:
@@ -26,7 +26,7 @@ sylius_grid:
         code:
           type: string
           label: bitbag_mvm_plugin.ui.code
-        hidden:
+        deleted:
           type: string
         getLatestDraft.publishedAt:
           type: datetime

@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-final class HideAction
+final class DeleteAction
 {
     private ProductListingRepositoryInterface $productListingRepository;
 
@@ -42,12 +42,13 @@ final class HideAction
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
         $newStatus = true;
-        $productListing->setHidden($newStatus);
+        $productListing->setDeleted($newStatus);
 
         $product = $productListing->getProduct();
 
         if ($product) {
-            $product->setHidden($newStatus);
+            $product->setDeleted($newStatus);
+            $product->setEnabled(false);
             $this->entityManager->persist($product);
         }
 

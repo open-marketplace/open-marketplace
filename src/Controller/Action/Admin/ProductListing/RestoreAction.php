@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-final class ChangeVisibilityAction
+final class RestoreAction
 {
     private ProductListingRepositoryInterface $productListingRepository;
 
@@ -41,13 +41,14 @@ final class ChangeVisibilityAction
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
-        $newStatus = !$productListing->isHidden();
-        $productListing->setHidden($newStatus);
+        $newStatus = !$productListing->isDeleted();
+        $productListing->setDeleted($newStatus);
 
         $product = $productListing->getProduct();
 
         if ($product) {
-            $product->setHidden($newStatus);
+            $product->setDeleted($newStatus);
+            $product->setEnabled(true);
             $this->entityManager->persist($product);
         }
 

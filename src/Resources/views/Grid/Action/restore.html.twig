@@ -1,0 +1,9 @@
+{% set path =  path('bitbag_mvm_plugin_admin_product_listing_restore', { 'id': data.id }) %}
+
+{%  if data.deleted == true %}
+    <form action="{{ path }}" method="post">
+        <button class="ui button orange" data-requires-confirmation>
+            <i class="icon trash"></i>{{ 'bitbag_mvm_plugin.ui.restore' | trans }}
+        </button>
+    </form>
+{% endif %}

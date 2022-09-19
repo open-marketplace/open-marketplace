@@ -2,7 +2,7 @@ sylius_grid:
   templates:
     action:
       details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
-      restore_visibility: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/restore_visibility.html.twig'
+      restore: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/restore.html.twig'
     filter:
       product_listing_status: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Filter/product_listing_status.html.twig'
   grids:
@@ -49,5 +49,4 @@ sylius_grid:
                 parameters:
                   id: resource.id
           restore_visibility:
-            type: restore_visibility
-            label: "dsadsa"
+            type: restore

@@ -1,6 +1,6 @@
 @product_visibility_admin
 Feature: Restoring product listing visibility
-  As a administrator i can resore visibility of product listing hidden by vendor
+  As a administrator i can restore product listing deleted by vendor
 
   Background:
     Given there is an admin user "admin" with password "admin"
@@ -15,6 +15,6 @@ Feature: Restoring product listing visibility
     And This product listing visibility is hidden
     And I am on "/admin"
     And I follow "Product listings"
-    Then I should see "Restore visibility"
-    And I click "Restore visibility"
-    Then I should not see "Restore visibility"
+    Then I should see "Restore"
+    And I click "Restore"
+    Then I should not see "Restore"

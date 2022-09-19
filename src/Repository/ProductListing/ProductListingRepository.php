@@ -48,4 +48,17 @@ class ProductListingRepository extends EntityRepository implements ProductListin
             ->setParameter('vendor', $vendorId)
             ;
     }
+
+    public function createQueryBuilderByVendorAndDeleted(VendorInterface $vendor): QueryBuilder
+    {
+        $qb = $this->createQueryBuilderWithLatestDraft();
+        $vendorId = $vendor->getId();
+
+        return $qb
+            ->andWhere('pl.vendor = :vendor')
+            ->andWhere('pl.deleted = :notDeleted')
+            ->setParameter('notDeleted', false)
+            ->setParameter('vendor', $vendorId)
+            ;
+    }
 }

@@ -31,17 +31,19 @@ class ProductListing implements ProductListingInterface
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
 
-    protected bool $hidden = false;
+    protected bool $deleted = false;
 
-    public function isHidden(): bool
+    public function isDeleted(): bool
     {
-        return $this->hidden;
+        return $this->deleted;
     }
 
-    public function setHidden(bool $hidden): void
+    public function setDeleted(bool $deleted): void
     {
-        $this->hidden = $hidden;
+        $this->deleted = $deleted;
     }
+
+
 
     public function __construct()
     {

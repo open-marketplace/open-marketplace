@@ -41,7 +41,7 @@ interface ProductListingInterface extends ResourceInterface
 
     public function setVendor(VendorInterface $vendor): void;
 
-    public function isHidden(): bool;
+    public function isDeleted(): bool;
 
-    public function setHidden(bool $hidden): void;
+    public function setDeleted(bool $deleted): void;
 }
