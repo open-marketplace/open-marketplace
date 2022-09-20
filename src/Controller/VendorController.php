@@ -158,7 +158,6 @@ final class VendorController extends ResourceController
                 $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
             }
 
-
             if (!$configuration->isHtmlRequest()) {
                 if ($configuration->getParameters()->get('return_content', false)) {
                     return $this->createRestView($configuration, $resource, Response::HTTP_OK);
