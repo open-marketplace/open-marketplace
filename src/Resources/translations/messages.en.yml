@@ -1,5 +1,7 @@
 bitbag_mvm_plugin:
     ui:
+        unhide: 'Restore visibility'
+        hide: 'Hide'
         new_product_draft: "New product draft"
         draft_attributes: "Attributes"
         inventory: "Inventory"

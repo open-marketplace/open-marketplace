@@ -26,10 +26,22 @@ class ProductListing implements ProductListingInterface
 
     protected \DateTimeInterface $createdAt;
 
+    protected bool $hidden = false;
+
     protected ?ProductInterface $product = null;
 
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
+
+    public function isHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
+    }
 
     public function __construct()
     {
