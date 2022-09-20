@@ -83,3 +83,10 @@ Feature: Vendor can update his company information
     And I press "Save changes"
     And I visit confirmation page
     Then Logo should be updated
+
+  Scenario: Confirmation that form is initialized with right data
+    Given there is a "verified" vendor user "test2@company.domain" registered in country "PL"
+    And I am logged in as "test2@company.domain"
+    And Vendor company name is "Wayne co." tax ID is "testID" phone number is "333 222 000"
+    And I am on "/en_US/vendor/profile/update"
+    Then I should see "Wayne co." "testID" "333 222 000" as default form values

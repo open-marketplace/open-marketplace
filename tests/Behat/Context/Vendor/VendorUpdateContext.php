@@ -168,4 +168,37 @@ class VendorUpdateContext extends RawMinkContext
         $newPath = $logo->getAttribute('src');
         Assert::notEq($oldImagePath, $newPath);
     }
+
+    /**
+     * @Given Vendor company name is :companyName tax ID is :taxId phone number is :phoneNumber
+     */
+    public function vendorCompanyNameIsTaxIdIsPhoneNumberIs($companyName, $taxId, $phoneNumber)
+    {
+        /** @var VendorInterface $vendor */
+        $vendor = $this->sharedStorage->get('vendor');
+        $vendor->setCompanyName($companyName);
+        $vendor->setTaxIdentifier($taxId);
+        $vendor->setPhoneNumber($phoneNumber);
+
+        $this->manager->persist($vendor);
+        $this->manager->flush();
+        $this->sharedStorage->set('vendor',$vendor);
+    }
+
+    /**
+     * @Then I should see :companyName :taxId :phoneNumber as default form values
+     */
+    public function iShouldSeeAsDefaultFormValues($companyName, $taxId, $phoneNumber)
+    {
+        $page = $this->getSession()->getPage();
+        $companyNameInput = $page->find('css',"#vendor_companyName");
+        $taxIdInput = $page->find('css',"#vendor_taxIdentifier");
+        $phoneNumberInput = $page->find('css',"#vendor_phoneNumber");
+
+        Assert::eq($companyName, $companyNameInput->getAttribute('value'));
+        Assert::eq($taxId, $taxIdInput->getAttribute('value'));
+        Assert::eq($phoneNumber, $phoneNumberInput->getAttribute('value'));
+    }
+
+
 }
