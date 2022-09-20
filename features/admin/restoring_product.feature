@@ -1,4 +1,4 @@
-@product_visibility_admin
+@product_removal_admin
 Feature: Restoring product listing visibility
   As a administrator i can restore product listing deleted by vendor
 

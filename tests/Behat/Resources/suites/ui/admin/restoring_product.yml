@@ -10,4 +10,4 @@ default:
                 - bitbag.sylius_mvm_plugin.behat.context.setup.vendor
                 - sylius.behat.context.hook.doctrine_orm
             filters:
-                tags: '@product_visibility_admin && @ui'
+                tags: '@product_removal_admin && @ui'

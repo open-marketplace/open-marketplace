@@ -1,4 +1,4 @@
-@product_visibility_vendor
+@product_removal_vendor
 Feature: Hiding product listing visibility
   As a vendor i can hide product listing
 
