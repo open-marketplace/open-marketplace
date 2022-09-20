@@ -89,4 +89,4 @@ Feature: Vendor can update his company information
     And I am logged in as "test2@company.domain"
     And Vendor company name is "Wayne co." tax ID is "testID" phone number is "333 222 000"
     And I am on "/en_US/vendor/profile/update"
-    Then I should see "Wayne co." "testID" "333 222 000" as default form values
+    Then I should see form initialized with "Wayne co." "testID" "333 222 000"

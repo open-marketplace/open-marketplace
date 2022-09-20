@@ -186,7 +186,7 @@ class VendorUpdateContext extends RawMinkContext
     }
 
     /**
-     * @Then I should see :companyName :taxId :phoneNumber as default form values
+     * @Then I should see form initialized with :companyName :taxId :phoneNumber
      */
     public function iShouldSeeAsDefaultFormValues($companyName, $taxId, $phoneNumber)
     {
