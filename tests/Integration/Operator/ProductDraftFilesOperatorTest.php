@@ -46,8 +46,8 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->create_draft_fixture_with_file();
 
-        $draftFixture = $manager->getRepository(ProductDraft::class)->findOneBy(['code'=>'FIXTURE']);
-        $cratedProduct =  $this->productFromDraftFactory->createSimpleProduct($draftFixture);
+        $draftFixture = $manager->getRepository(ProductDraft::class)->findOneBy(['code' => 'FIXTURE']);
+        $cratedProduct = $this->productFromDraftFactory->createSimpleProduct($draftFixture);
 
         $this->productDraftFilesOperator->copyFilesToProduct($draftFixture, $cratedProduct);
 
@@ -56,9 +56,9 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
         $manager->persist($cratedProduct);
         $manager->flush();
 
-        $product = $manager->getRepository(Product::class)->findOneBy(['code'=>"FIXTURE"]);
+        $product = $manager->getRepository(Product::class)->findOneBy(['code' => 'FIXTURE']);
 
-        self::assertEquals(1, count($product->getImages()));
+        self::assertCount(1, $product->getImages());
         self::assertEquals($expectedFilePathKey, $product->getImages()[0]->getPath());
     }
 
@@ -71,14 +71,14 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
         $image1 = new ProductDraftImage();
 
         $draftFixture = new ProductDraft();
-        $draftFixture->setCode("FIXTURE");
+        $draftFixture->setCode('FIXTURE');
         $draftFixture->setProductListing($listing);
         $draftFixture->addImage($image1);
         $draftFixture->setIsVerified(false);
 
-        $fileInfo = new \SplFileInfo(__DIR__.'/test.png');
+        $fileInfo = new \SplFileInfo(__DIR__ . '/test.png');
         $fileObject = $fileInfo->openFile('r');
-        $file = $fileObject->fread(filesize(__DIR__.'/test.png'));
+        $file = $fileObject->fread(filesize(__DIR__ . '/test.png'));
 
         $originalFilePathName = 'AA/test.png';
 

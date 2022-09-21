@@ -26,16 +26,16 @@ final class DraftAttributeFactorySpec extends ObjectBehavior
         FactoryInterface $factory,
         ServiceRegistryInterface $attributeTypesRegistry,
         VendorProviderInterface $vendorProvider,
-    ): void {
+        ): void {
         $this->beConstructedWith($factory, $attributeTypesRegistry, $vendorProvider);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(DraftAttributeFactory::class);
     }
 
-    function it_creates_typed_attribute(
+    public function it_creates_typed_attribute(
         ServiceRegistryInterface $attributeTypesRegistry,
         AttributeTypeInterface $attributeType,
         VendorProviderInterface $vendorProvider,

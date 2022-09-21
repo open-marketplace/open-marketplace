@@ -19,7 +19,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManager;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManagerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
@@ -34,7 +33,7 @@ final class OrderManagerSpec extends ObjectBehavior
         OrderItemClonerInterface $orderItemCloner,
         OrderItemFactoryInterface $itemFactory
     ): void {
-        $this->beConstructedWith( $factory, $cloner, $entityManager, $orderItemCloner, $itemFactory   );
+        $this->beConstructedWith($factory, $cloner, $entityManager, $orderItemCloner, $itemFactory);
     }
 
     public function it_is_initializable(): void
@@ -52,7 +51,7 @@ final class OrderManagerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         OrderItemInterface $item,
         OrderItemInterface $newItem,
-    ): void {
+        ): void {
         $factory->createNew()->willReturn($newOrder);
         $itemFactory->createNew()->willReturn($newItem);
         $shipmentCollection = new ArrayCollection([$shipment->getWrappedObject()]);
@@ -73,7 +72,7 @@ final class OrderManagerSpec extends ObjectBehavior
         OrderItemFactoryInterface $itemFactory,
         ShipmentInterface $shipment,
         OrderItemInterface $newItem,
-    ): void {
+        ): void {
         $orders = [$order, $order2];
         $shipments = new ArrayCollection([$shipment->getWrappedObject()]);
         $itemFactory->createNew()->willReturn($newItem);
@@ -84,6 +83,5 @@ final class OrderManagerSpec extends ObjectBehavior
         $order->addItem($newItem)->shouldBeCalledOnce();
 
         $this->addItemIntoSecondaryOrder($orders, $itemVendor, $orderItem);
-
     }
 }
