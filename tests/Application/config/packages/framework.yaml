@@ -4,5 +4,3 @@ framework:
     csrf_protection: true
     session:
         handler_id: ~
-    assets:
-
