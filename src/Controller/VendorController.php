@@ -101,17 +101,79 @@ final class VendorController extends ResourceController
 
     public function updateAction(Request $request): Response
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+
         $vendor = $this->vendorProvider->provideCurrentVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)
             ->findOneBy(['vendor' => $vendor]);
 
-        if (null === $pendingUpdate) {
-            return parent::updateAction($request);
+        if (null !== $pendingUpdate) {
+            $this->addFlash('error', 'sylius.user.verify_email_request');
+
+            return $this->redirectToRoute('vendor_profile');
         }
 
-        $this->addFlash('error', 'sylius.user.verify_email_request');
+        $resource = $vendor;
 
-        return $this->redirectToRoute('vendor_profile');
+        $form = $this->resourceFormFactory->create($configuration, $resource);
+
+        $form->handleRequest($request);
+        if (
+            in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true)
+            && $form->isSubmitted()
+            && $form->isValid()
+        ) {
+            $resource = $form->getData();
+
+            try {
+                $image = $resource->getImage();
+                $this->vendorProfileUpdater->createPendingVendorProfileUpdate(
+                    $form->getData(),
+                    $vendor,
+                    $image
+                );
+                $this->manager->remove($image);
+                $this->manager->flush();
+
+                $vendor->setEditedAt(new \DateTime());
+                $this->manager->flush();
+            } catch (UpdateHandlingException $exception) {
+                if (!$configuration->isHtmlRequest()) {
+                    return $this->createRestView($configuration, $form, $exception->getApiResponseCode());
+                }
+
+                $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
+
+                return $this->redirectHandler->redirectToReferer($configuration);
+            }
+
+            if ($configuration->isHtmlRequest()) {
+                $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+            }
+
+            if (!$configuration->isHtmlRequest()) {
+                if ($configuration->getParameters()->get('return_content', false)) {
+                    return $this->createRestView($configuration, $resource, Response::HTTP_OK);
+                }
+
+                return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
+            }
+
+            return $this->redirectHandler->redirectToResource($configuration, $resource);
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
+        }
+
+        return $this->render($configuration->getTemplate(ResourceActions::UPDATE . '.html'), [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'resource' => $resource,
+            $this->metadata->getName() => $resource,
+            'form' => $form->createView(),
+        ]);
     }
 
     public function showAction(Request $request): Response
