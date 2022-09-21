@@ -35,7 +35,7 @@ final class VendorContext implements Context
     }
 
     /**
-     * @Given there is a vendor user :username with password :password
+     * @Given there is an vendor user :username with password :password
      */
     public function thereIsAnVendorUserWithPassword(string $username, string $password)
     {
