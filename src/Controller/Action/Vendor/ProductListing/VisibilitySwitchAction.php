@@ -44,7 +44,7 @@ final class VisibilitySwitchAction
         $listing->setHidden(!$currentVisibility);
         $product = $listing->getProduct();
 
-        if($product) {
+        if ($product) {
             $product->setEnabled($currentVisibility);
             $this->entityManager->persist($product);
         }
