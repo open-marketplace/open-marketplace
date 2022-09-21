@@ -21,7 +21,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperator
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
 use PhpSpec\ObjectBehavior;
 
-
 final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 {
     public function let(

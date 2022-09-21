@@ -73,8 +73,6 @@ final class ConversationType extends AbstractType
                 'mapped' => false,
                 'label' => 'bitbag_mvm_plugin.ui.form.conversation.users',
             ]);
-
-            $form->remove('category');
         }
     }
 

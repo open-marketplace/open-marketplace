@@ -1,0 +1,25 @@
+sylius_grid:
+    templates:
+#        action:
+#            details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
+#            restore: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/restore.html.twig'
+#        filter:
+#            product_listing_status: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Filter/product_listing_status.html.twig'
+    grids:
+        conversation_category:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_multi_vendor_marketplace.model.conversation_category.class%"
+            fields:
+                name:
+                    type: string
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    edit:
+                        type: update
+                    delete:
+                        type: delete

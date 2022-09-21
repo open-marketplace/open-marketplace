@@ -56,6 +56,9 @@ vendor_order_list:
 conversation:
   resource: "routing/conversation.yml"
 
+conversation_category:
+    resource: "routing/admin/conversation_category.yml"
+
 conversation_vendor:
   resource: "routing/vendor_conversation.yml"
   prefix: /{_locale}
