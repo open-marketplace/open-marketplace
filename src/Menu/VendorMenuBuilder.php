@@ -87,6 +87,11 @@ final class VendorMenuBuilder
                 ->addChild('Attributes', ['route' => 'bitbag_mvm_vendor_draft_attribute_index'])
                 ->setLabel('bitbag_mvm_plugin.ui.draft_attributes')
                 ->setLabelAttribute('icon', 'clipboard');
+
+            $menu
+                ->addChild('Shipping', ['route' => 'vendor_shipping_methods'])
+                ->setLabel('bitbag_mvm_plugin.ui.shipping_methods')
+                ->setLabelAttribute('icon', 'shipping');
         }
 
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);

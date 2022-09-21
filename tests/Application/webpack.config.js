@@ -1,7 +1,7 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
 
-const [bitbagSkeletonShop, bitbagSkeletonAdmin] = require('../../webpack.config.js')
+const [bitbagSkeletonShop, bitbagSkeletonAdmin] = require('../../webpack.config.js');
 
 const syliusBundles = path.resolve(__dirname, '../../vendor/sylius/sylius/src/Sylius/Bundle/');
 const uiBundleScripts = path.resolve(syliusBundles, 'UiBundle/Resources/private/js/');
@@ -15,7 +15,7 @@ Encore
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enableSourceMaps(!Encore.isProduction())
-  .enableVersioning(Encore.isProduction())
+  .enableVersioning()
   .enableSassLoader();
 
 const shopConfig = Encore.getWebpackConfig();
@@ -35,7 +35,7 @@ Encore
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enableSourceMaps(!Encore.isProduction())
-  .enableVersioning(Encore.isProduction())
+  .enableVersioning()
   .enableSassLoader();
 
 const adminConfig = Encore.getWebpackConfig();
