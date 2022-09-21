@@ -38,6 +38,13 @@
     <div class="ui grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
         <div class="sixteen wide mobile ten wide computer column">
             {% if is_pending_vendor_profile_update() is same as true %}
+            {% else %}
+                <div class="ui info message">
+                    <div class="header">
+                        {{ 'bitbag_mvm_plugin.ui.pending_update_message'|trans }}
+                    </div>
+                </div>
+            {% endif %}
                 <div class="ui attached segment">
                     <table class="ui very basic celled table">
                         <tbody>
@@ -72,13 +79,6 @@
                         </tbody>
                     </table>
                 </div>
-            {% else %}
-                <div class="ui info message">
-                    <div class="header">
-                        {{ 'bitbag_mvm_plugin.ui.pending_update_message'|trans }}
-                    </div>
-                </div>
-            {% endif %}
         </div>
     </div>
     {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'vendor': vendor}) }}
