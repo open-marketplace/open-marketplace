@@ -1,0 +1,12 @@
+{
+  "entrypoints": {
+    "bitbag-skeleton-admin": {
+      "css": [
+        "/build/bitbag/skeleton/admin/bitbag-skeleton-admin.css"
+      ],
+      "js": [
+        "/build/bitbag/skeleton/admin/bitbag-skeleton-admin.js"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "entrypoints": {
+    "bitbag-skeleton-shop": {
+      "css": [
+        "/build/bitbag/skeleton/shop/bitbag-skeleton-shop.css"
+      ],
+      "js": [
+        "/build/bitbag/skeleton/shop/bitbag-skeleton-shop.js"
+      ]
+    }
+  }
+}
