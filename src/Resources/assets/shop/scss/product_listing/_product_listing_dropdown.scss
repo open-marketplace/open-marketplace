@@ -2,6 +2,8 @@
   background: white;
   border: none;
   padding: 0.7857142rem 1.14285714rem !important;
+  width: 100%;
+  text-align: left;
 }
 
 .send-for-verification:hover {
@@ -9,5 +11,21 @@
 }
 
 .send-for-verification i{
+  margin-right: 0.78rem;
+}
+
+.MVM_Button {
+  background: white;
+  border: none;
+  padding: 0.7857142rem 1.14285714rem !important;
+  width: 100%;
+  text-align: left;
+}
+
+.MVM_Button:hover {
+  background: rgba(34,36,38,.1);
+}
+
+.MVM_Button i{
   margin-right: 0.78rem;
 }
