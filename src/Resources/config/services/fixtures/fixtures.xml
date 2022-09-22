@@ -24,7 +24,7 @@
 
         <service id="bitbag.mvm_plugin.fixture.conversation_category" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\ConversationCategoryFixture">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag_multi_vendor_marketplace.factory.conversation_category" />
+            <argument type="service" id="bitbag_mvm_plugin.factory.conversation_category" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
