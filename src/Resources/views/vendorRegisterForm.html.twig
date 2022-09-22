@@ -3,20 +3,11 @@
 {% block subcontent %}
    {% if null == app.user.vendor %}
       {{ include('@BitBagSyliusMultiVendorMarketplacePlugin/Form/_vendorRegister.html.twig') }}
+   {% elseif app.user.vendor.verified %}
+      {%  set vars = {messageTranslationKey: 'bitbag_mvm_plugin.ui.vendor_verification_accepted'} %}
+      {%  include '@BitBagSyliusMultiVendorMarketplacePlugin/_Alert/infoMessage.html.twig' with vars %}
    {% else %}
-      <div class="ui padded segment">
-         <h3 class="header">{{ 'bitbag_mvm_plugin.ui.become_a_vendor'|trans }}</h3>
-         <div class="ui icon info yellow message">
-            <i class="info circle icon"></i>
-            <div class="content">
-               <div class="header">
-                  {{ 'sylius.ui.info'|trans }}
-               </div>
-               <p>
-                  {{ 'bitbag_mvm_plugin.ui.vendor_under_verification'|trans }}
-               </p>
-            </div>
-         </div>
-      </div>
+      {%  set vars = {messageTranslationKey: 'bitbag_mvm_plugin.ui.vendor_under_verification'} %}
+      {%  include '@BitBagSyliusMultiVendorMarketplacePlugin/_Alert/infoMessage.html.twig' with vars %}
    {% endif %}
 {% endblock %}
