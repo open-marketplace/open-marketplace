@@ -40,8 +40,11 @@
             {% if is_pending_vendor_profile_update() == false %}
                 <div class="ui info  yellow  message">
                     <div class="header">
-                        {{ 'bitbag_mvm_plugin.ui.pending_update_message'|trans }}
+                        {{ 'sylius.ui.info'|trans }}
                     </div>
+                    <p>
+                        {{ 'bitbag_mvm_plugin.ui.pending_update_message'|trans }}
+                    </p>
                 </div>
             {% endif %}
                 <div class="ui attached segment">
