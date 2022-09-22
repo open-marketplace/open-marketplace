@@ -63,8 +63,11 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Given there is an :verified vendor user :username with password :password
      */
-    public function thereIsAnVendorUserWithPassword($verified ,$username, $password)
-    {
+    public function thereIsAnVendorUserWithPassword(
+        $verified,
+        $username,
+        $password
+    ) {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserExampleFactory->create();
         $user->setUsername($username);
@@ -186,7 +189,6 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         $page = $this->getPage();
         $dropdown = $page->find('css','.ui.labeled.icon.floating.dropdown.link.button');
-        dd($dropdown->getHtml());
     }
 
 }
