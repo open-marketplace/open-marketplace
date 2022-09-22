@@ -26,6 +26,8 @@ class ProductListing implements ProductListingInterface
 
     protected \DateTimeInterface $createdAt;
 
+    protected bool $hidden = false;
+
     protected ?ProductInterface $product = null;
 
     /** @var Collection<int, ProductDraftInterface> */
@@ -41,6 +43,16 @@ class ProductListing implements ProductListingInterface
     public function setDeleted(bool $deleted): void
     {
         $this->deleted = $deleted;
+    }
+
+    public function isHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
     }
 
     public function __construct()

@@ -50,10 +50,10 @@ final class SendForVerificationAction
     public function __invoke(Request $request): RedirectResponse
     {
         $listing = $this->productListingRepository->find($request->get('id'));
-        /** @var ProductDraftInterface $productDraft */
+
         $productDraft = $this->productDraftRepository->findLatestDraft($listing);
 
-        if (ProductDraftInterface::STATUS_CREATED === $productDraft->getStatus()) {
+        if (null != $productDraft && ProductDraftInterface::STATUS_CREATED === $productDraft->getStatus()) {
             $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
         }
 

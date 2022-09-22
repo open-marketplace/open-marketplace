@@ -44,4 +44,8 @@ interface ProductListingInterface extends ResourceInterface
     public function isDeleted(): bool;
 
     public function setDeleted(bool $deleted): void;
+
+    public function isHidden(): bool;
+
+    public function setHidden(bool $hidden): void;
 }

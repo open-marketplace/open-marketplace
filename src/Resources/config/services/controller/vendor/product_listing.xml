@@ -22,7 +22,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition"/>
             <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
             <argument type="service" id="sylius.image_uploader"/>
             <tag name="controller.service_arguments" />
@@ -38,7 +37,6 @@
             </argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
-            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition"/>
             <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory"/>
             <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
@@ -59,11 +57,20 @@
             <tag name="controller.service_arguments" />
         </service>
 
+
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\DeleteAction"
                  id="bitbag_mvm_plugin.controller.product_listing.delete_action">
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
             <argument type="service" id="router.default"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing\VisibilitySwitchAction"
+                 id="bitbag_mvm_plugin.controller.visibility_switch_action">
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="router.default" />
             <tag name="controller.service_arguments" />
         </service>
     </services>

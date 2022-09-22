@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\VendorNotFoundException;
@@ -50,8 +49,6 @@ class CreateProductAction extends AbstractController
 
     private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
 
-    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
-
     private ProductDraftRepositoryInterface $productDraftRepository;
 
     private ImageUploaderInterface $imageUploader;
@@ -65,7 +62,6 @@ class CreateProductAction extends AbstractController
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
-        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ProductDraftRepositoryInterface $productDraftRepository,
         ImageUploaderInterface $imageUploader
     ) {
@@ -77,7 +73,6 @@ class CreateProductAction extends AbstractController
         $this->flashHelper = $flashHelper;
         $this->eventDispatcher = $eventDispatcher;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
-        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productDraftRepository = $productDraftRepository;
         $this->imageUploader = $imageUploader;
     }
