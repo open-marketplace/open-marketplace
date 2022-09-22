@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
@@ -32,8 +31,6 @@ class EditProductAction extends AbstractController
 
     private ProductDraftRepositoryInterface $productDraftRepository;
 
-    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
-
     private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
 
     private ImageUploaderInterface $imageUploader;
@@ -44,7 +41,6 @@ class EditProductAction extends AbstractController
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ProductDraftRepositoryInterface $productDraftRepository,
-        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
         ImageUploaderInterface $imageUploader,
         ProductListingRepositoryInterface $productListingRepository
@@ -52,7 +48,6 @@ class EditProductAction extends AbstractController
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
         $this->productDraftRepository = $productDraftRepository;
-        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->imageUploader = $imageUploader;
         $this->productListingRepository = $productListingRepository;

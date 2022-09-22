@@ -48,8 +48,11 @@ class VendorUpdateContext implements Context
     /**
      * @Given there is a :status vendor user :vendor_user_email registered in country :country_code
      */
-    public function thereIsAVendorUserRegisteredInCountry($status, $vendor_user_email, $country_code): void
-    {
+    public function thereIsAVendorUserRegisteredInCountry(
+        $status,
+        $vendor_user_email,
+        $country_code
+    ): void {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);

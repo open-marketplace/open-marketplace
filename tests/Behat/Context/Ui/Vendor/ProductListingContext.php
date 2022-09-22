@@ -23,6 +23,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
@@ -63,8 +64,11 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Given there is an :verified vendor user :username with password :password
      */
-    public function thereIsAnVendorUserWithPassword($verified ,$username, $password)
-    {
+    public function thereIsAnVendorUserWithPassword(
+        $verified,
+        $username,
+        $password
+    ) {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserExampleFactory->create();
         $user->setUsername($username);
