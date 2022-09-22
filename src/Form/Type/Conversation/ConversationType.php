@@ -47,6 +47,7 @@ final class ConversationType extends AbstractType
         $builder
             ->add('category', EntityType::class, [
                 'class' => Category::class,
+                'required'=> false,
                 'label' => 'bitbag_mvm_plugin.ui.form.conversation.category',
                 'choice_label' => 'name',
             ])
