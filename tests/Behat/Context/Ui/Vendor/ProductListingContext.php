@@ -24,7 +24,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
@@ -86,7 +85,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $vendor->setTaxIdentifier('123456789');
         $this->entityManager->persist($vendor);
 
-        $this->sharedStorage->set('vendor',$vendor);
+        $this->sharedStorage->set('vendor', $vendor);
         $this->entityManager->flush();
     }
 
@@ -95,7 +94,7 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function thisProductListingVisibilityIsHidden()
     {
-        $productListing = $this->sharedStorage->get('product_listing'.'0');
+        $productListing = $this->sharedStorage->get('product_listing' . '0');
         $productListing->setHidden(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
@@ -164,7 +163,7 @@ final class ProductListingContext extends RawMinkContext implements Context
             $this->entityManager->persist($productTranslation);
             $this->entityManager->persist($productPricing);
 
-            $this->sharedStorage->set('product_listing'.$i, $productListing);
+            $this->sharedStorage->set('product_listing' . $i, $productListing);
         }
 
         $this->entityManager->flush();
@@ -175,12 +174,11 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function productListingStatusIs($arg1)
     {
-        $draft = $this->entityManager->getRepository(ProductDraft::class)->findOneBy(['code'=>'code0']);
+        $draft = $this->entityManager->getRepository(ProductDraft::class)->findOneBy(['code' => 'code0']);
         $draft->setStatus(ProductDraftInterface::STATUS_CREATED);
         $this->entityManager->persist($draft);
         $this->entityManager->flush();
     }
-
 
     /**
      * @Then I should see dropdown with hide option
@@ -188,7 +186,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function iShouldSeeDropdownWithHideOption()
     {
         $page = $this->getPage();
-        $dropdown = $page->find('css','.ui.labeled.icon.floating.dropdown.link.button');
+        $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
+        Assert::notNull($dropdown);
     }
-
 }

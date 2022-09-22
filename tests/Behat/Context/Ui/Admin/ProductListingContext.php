@@ -156,7 +156,7 @@ final class ProductListingContext extends RawMinkContext implements Context
             $this->entityManager->persist($productTranslation);
             $this->entityManager->persist($productPricing);
 
-            $this->sharedStorage->set('product_listing'.$i, $productListing);
+            $this->sharedStorage->set('product_listing' . $i, $productListing);
         }
 
         $this->entityManager->flush();
@@ -328,12 +328,11 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function thisProductListingVisibilityIsHidden()
     {
-        $productListing = $this->sharedStorage->get('product_listing'.'0');
+        $productListing = $this->sharedStorage->get('product_listing' . '0');
         $productListing->setHidden(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
     }
-
 
     /**
      * @When I click :buttonText
@@ -342,5 +341,4 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         $this->getPage()->pressButton($buttonText);
     }
-
 }
