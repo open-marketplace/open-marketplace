@@ -30,8 +30,8 @@
 
 {% block javascripts %}
 {#    {{ parent() }} //TODO FRONTEND#}
-    <script src="/build/bitbag/skeleton/admin/bitbag-skeleton-admin.js"></script>
-    <script src="/build/admin/admin-entry.js"></script>
+
+    <script src="{{ asset('build/admin/admin-entry.js') }}"></script>
 
 {% endblock %}
 
