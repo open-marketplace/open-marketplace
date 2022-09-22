@@ -37,9 +37,8 @@
 
     <div class="ui grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
         <div class="sixteen wide mobile ten wide computer column">
-            {% if is_pending_vendor_profile_update() is same as true %}
-            {% else %}
-                <div class="ui info message">
+            {% if is_pending_vendor_profile_update() == false %}
+                <div class="ui info  yellow  message">
                     <div class="header">
                         {{ 'bitbag_mvm_plugin.ui.pending_update_message'|trans }}
                     </div>
