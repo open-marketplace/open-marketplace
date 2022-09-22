@@ -3,6 +3,7 @@ bitbag_mvm_plugin:
         conversation_categories: 'Conversation categories'
         restore_visibility: 'Restore visibility'
         restore: 'Restore'
+        unhide: 'Restore visibility'
         hide: 'Hide'
         new_product_draft: "New product draft"
         draft_attributes: "Attributes"

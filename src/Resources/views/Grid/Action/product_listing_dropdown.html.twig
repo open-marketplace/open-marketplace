@@ -8,7 +8,8 @@
         <div class="menu" tabindex="-1">
             {% if data.latestDraft.status != 'under_verification' %}
             <a href="{{ path('bitbag_mvm_plugin_vendor_product_listing_edit_product', {'id': data.id }) }}"
-               class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}</a>
+               class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}
+            </a>
             {% endif %}
 
             {% if data.deleted == false %}
@@ -16,6 +17,18 @@
                 <button class="item MVM_Button" data-requires-confirmation><i class="trash icon"></i>{{ 'sylius.ui.delete'|trans }}</button>
             </form>
             {% endif %}
+
+            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_switch_visibility', {'id': data.id }) }}" method="post">
+                <button id="hide" class="item MVM_Button" data-requires-confirmation>
+                    <i class="low vision icon"></i>
+                    {% if data.hidden == false %}
+                    {{ 'bitbag_mvm_plugin.ui.hide'|trans }}
+                    {% else %}
+                    {{ 'bitbag_mvm_plugin.ui.unhide'|trans }}
+                    {% endif %}
+                </button>
+            </form>
+
             {% if data.latestDraft.status != 'under_verification' and data.latestDraft.status != 'verified' %}
             <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_send_for_verification', {'id': data.id }) }}" method="post">
                 <button class="item send-for-verification" data-requires-confirmation>

@@ -21,4 +21,5 @@ imports:
     - suites/vendor/customer_details.yml
     - suites/vendor/shipping_methods.yml
     - suites/ui/vendor/product_delete_vendor.yml
+    - suites/vendor/hiding_product_listing.yml
 
