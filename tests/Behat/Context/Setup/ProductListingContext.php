@@ -44,7 +44,6 @@ final class ProductListingContext extends RawMinkContext implements Context
         SharedStorageInterface $sharedStorage,
         ProductDraftAcceptanceOperator $acceptanceOperator
     ) {
-
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
         $this->entityManager = $entityManager;
@@ -72,7 +71,7 @@ final class ProductListingContext extends RawMinkContext implements Context
 
         $productTranslation = new ProductTranslation();
         $productTranslation->setLocale('en_US');
-        $productTranslation->setSlug('product-listing-slug' );
+        $productTranslation->setSlug('product-listing-slug');
         $productTranslation->setName('product-listing-');
         $productTranslation->setDescription('product-listing-');
         $productTranslation->setProductDraft($productDraft);
@@ -97,12 +96,12 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function thisProductListingHasStatusAccepted()
     {
-        $draft = $this->entityManager->getRepository(ProductDraft::class)->findOneBy(['code'=>'code']);
+        $draft = $this->entityManager->getRepository(ProductDraft::class)->findOneBy(['code' => 'code']);
         $newProduct = $this->acceptanceOperator->acceptProductDraft($draft);
-        $draft->setStatus("verified");
+        $draft->setStatus('verified');
         $this->entityManager->persist($newProduct);
         $this->entityManager->flush();
-        $listing = $this->entityManager->getRepository(ProductListing::class)->findOneBy(['code'=>'code']);
+        $listing = $this->entityManager->getRepository(ProductListing::class)->findOneBy(['code' => 'code']);
     }
 
     /**
@@ -111,7 +110,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function iClickButton($id)
     {
         $page = $this->getSession()->getPage();
-        $button = $page->find('css','#'.$id);
+        $button = $page->find('css', '#' . $id);
         $button->press();
     }
 
@@ -123,6 +122,4 @@ final class ProductListingContext extends RawMinkContext implements Context
         $status = $this->getSession()->getStatusCode();
         Assert::eq($status, 404);
     }
-
-
 }

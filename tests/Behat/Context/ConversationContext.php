@@ -109,7 +109,6 @@ class ConversationContext extends MinkContext implements Context
         $this->manager->flush();
     }
 
-
     /**
      * @return DocumentElement
      */
