@@ -26,7 +26,7 @@ class ProductListing implements ProductListingInterface
 
     protected \DateTimeInterface $createdAt;
 
-    protected bool $hidden = false;
+    protected bool $enabled = true;
 
     protected ?ProductInterface $product = null;
 
@@ -45,14 +45,14 @@ class ProductListing implements ProductListingInterface
         $this->deleted = $deleted;
     }
 
-    public function isHidden(): bool
+    public function isEnabled(): bool
     {
-        return $this->hidden;
+        return $this->enabled;
     }
 
-    public function setHidden(bool $hidden): void
+    public function setEnabled(bool $enabled): void
     {
-        $this->hidden = $hidden;
+        $this->enabled = $enabled;
     }
 
     public function __construct()
