@@ -15,10 +15,10 @@
             <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_switch_visibility', {'id': data.id }) }}" method="post">
                 <button id="hide" class="row" data-requires-confirmation>
                     <i class="low vision icon"></i>
-                    {% if data.hidden == false %}
-                    {{ 'bitbag_mvm_plugin.ui.hide'|trans }}
+                    {% if data.enabled == true %}
+                    {{ 'bitbag_mvm_plugin.ui.enable'|trans }}
                     {% else %}
-                    {{ 'bitbag_mvm_plugin.ui.unhide'|trans }}
+                    {{ 'bitbag_mvm_plugin.ui.disable'|trans }}
                     {% endif %}
                 </button>
             </form>

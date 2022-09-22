@@ -42,7 +42,7 @@ bitbag_mvm_plugin_vendor_product_listing_send_for_verification:
         _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.send_for_verification
 
 bitbag_mvm_plugin_vendor_product_listing_switch_visibility:
-    path: /product-listings/{id}/visibility_switch
+    path: /product-listings/{id}/enable
     methods: [POST]
     defaults:
         _controller: bitbag_mvm_plugin.controller.visibility_switch_action
