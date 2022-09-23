@@ -74,7 +74,6 @@ final class AttributesConverterSpec extends ObjectBehavior
 
         $attributeValueCloner->clone($productDraft, $product)->shouldHaveBeenCalledOnce();
 
-        $entityManager->flush()->shouldHaveBeenCalledOnce();
     }
 
     public function it_links_draft_with_product_attribute(
@@ -109,6 +108,5 @@ final class AttributesConverterSpec extends ObjectBehavior
 
         $attributeValueCloner->clone($productDraft, $product)->shouldHaveBeenCalledOnce();
 
-        $entityManager->flush()->shouldHaveBeenCalledOnce();
     }
 }

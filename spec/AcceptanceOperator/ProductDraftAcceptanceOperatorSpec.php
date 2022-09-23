@@ -19,6 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListi
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 
@@ -28,13 +29,15 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductDraftFilesOperatorInterface $filesOperator,
-        AttributesConverterInterface $attributesConverter
+        AttributesConverterInterface $attributesConverter,
+        EntityManagerInterface $entityManager
     ): void {
         $this->beConstructedWith(
             $productFromDraftFactory,
             $productFromDraftUpdater,
             $filesOperator,
-            $attributesConverter
+            $attributesConverter,
+            $entityManager
         );
     }
 
