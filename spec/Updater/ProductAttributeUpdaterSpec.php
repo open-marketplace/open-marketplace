@@ -40,7 +40,7 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
         $this->shouldHaveType(ProductAttributeUpdater::class);
     }
 
-    public function it_doesent_clean_translation_when_product_dont_have_them(
+    public function it_doesent_clean_translation_when_product_doesnt_have_them(
         DraftAttributeInterface $draftAttribute,
         EntityManagerInterface $entityManager,
         ProductAttributeInterface $productAttribute,
