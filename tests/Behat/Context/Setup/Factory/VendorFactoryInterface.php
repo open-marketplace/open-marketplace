@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Setup\Factory;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;

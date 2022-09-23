@@ -3,10 +3,11 @@ vendor:
 
 bitbag_mvm_plugin:
     ui:
+        vendor_updated: "Confirmation email has been sent"
         vendor_disabled: "Vendor's account has been successfully disabled."
         vendor_enabled: "Vendor's account has been successfully enabled."
         vendor_verified: 'Vendor has been successfully verified.'
-        product_listing_created_and_sent_to_verification: 'Product listing created and sent to verification.'
+        product_listing_sent_to_verification: 'Product listing sent to verification.'
         product_listing_created: 'Product listing created.'
         product_listing_saved_and_sent_to_verification: 'Product listing saved and sent to verification.'
         product_listing_saved: 'Product listing saved.'

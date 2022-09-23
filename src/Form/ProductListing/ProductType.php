@@ -39,9 +39,9 @@ final class ProductType extends AbstractType
                     ],
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.save',
+                'label' => 'bitbag_mvm_plugin.ui.save_draft',
                 'attr' => [
-                    'class' => 'ui labeled icon primary button',
+                    'class' => 'ui primary big button',
                 ],
             ])
             ->add('attributes', CollectionType::class, [
@@ -54,12 +54,6 @@ final class ProductType extends AbstractType
                 'label' => false,
             ])
 
-            ->add('saveAndAdd', SubmitType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.save_and_add',
-                'attr' => [
-                    'class' => 'ui labeled icon secondary button',
-                ],
-            ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $product = $event->getData();
                 $form = $event->getForm();
