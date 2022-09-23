@@ -9,3 +9,4 @@ framework:
                 json_manifest_path: '%kernel.project_dir%/public/build/bitbag/skeleton/shop/manifest.json'
             skeleton_admin:
                 json_manifest_path: '%kernel.project_dir%/public/build/bitbag/skeleton/admin/manifest.json'
+        json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'

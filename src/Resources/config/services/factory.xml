@@ -101,6 +101,9 @@
             <argument type="service" id="bitbag_mvm_plugin.provider.vendor"/>
         </service>
 
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorShippingMethodFactory"
+                 id="bitbag_mvm_plugin.factory.vendor_shipping_method">
+        </service>
     </services>
 </container>
 

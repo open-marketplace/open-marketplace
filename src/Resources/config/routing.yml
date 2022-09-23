@@ -74,3 +74,9 @@ draft_attributes:
     prefix: /{_locale}
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+
+vendor_shipping_methods:
+  resource: "routing/vendor_shipping_methods.yml"
+  prefix: /{_locale}
+  requirements:
+    _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$

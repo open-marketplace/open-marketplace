@@ -11,14 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\VendorNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
@@ -29,7 +27,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -52,8 +49,6 @@ class CreateProductAction extends AbstractController
 
     private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
 
-    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
-
     private ProductDraftRepositoryInterface $productDraftRepository;
 
     private ImageUploaderInterface $imageUploader;
@@ -67,7 +62,6 @@ class CreateProductAction extends AbstractController
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
-        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ProductDraftRepositoryInterface $productDraftRepository,
         ImageUploaderInterface $imageUploader
     ) {
@@ -79,7 +73,6 @@ class CreateProductAction extends AbstractController
         $this->flashHelper = $flashHelper;
         $this->eventDispatcher = $eventDispatcher;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
-        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->productDraftRepository = $productDraftRepository;
         $this->imageUploader = $imageUploader;
     }
@@ -130,17 +123,10 @@ class CreateProductAction extends AbstractController
                 throw new VendorNotFoundException('Vendor not found.');
             }
 
-            /** @var ClickableInterface $button */
-            $button = $form->get('saveAndAdd');
             $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
 
-            if ($button->isClicked()) {
-                $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
-                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created_and_sent_to_verification');
-            } else {
-                $this->productDraftRepository->save($productDraft);
-                $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
-            }
+            $this->productDraftRepository->save($productDraft);
+            $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
 
             return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
         }

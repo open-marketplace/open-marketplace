@@ -1,0 +1,4 @@
+sylius_grid:
+  templates:
+    action:
+      product_listing_dropdown: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_listing_dropdown.html.twig"

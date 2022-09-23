@@ -41,7 +41,6 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
     private EntityRepository $vendorProfileUpdateRepository;
 
-
     public function setUp(): void
     {
         parent::setUp();

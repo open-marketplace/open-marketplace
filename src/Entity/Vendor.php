@@ -48,9 +48,13 @@ class Vendor implements VendorInterface
     /** @var Collection<int, ProductListing> */
     protected Collection $productListings;
 
+    /** @var Collection<int, VendorShippingMethodInterface> */
+    protected Collection $shippingMethods;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->shippingMethods = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,5 +221,30 @@ class Vendor implements VendorInterface
     public function isVerified(): bool
     {
         return self::STATUS_VERIFIED === $this->getStatus();
+    }
+
+    /** @return Collection<int, VendorShippingMethodInterface> */
+    public function getShippingMethods(): Collection
+    {
+        return $this->shippingMethods;
+    }
+
+    public function hasShippingMethod(VendorShippingMethodInterface $shippingMethod): bool
+    {
+        return $this->shippingMethods->contains($shippingMethod);
+    }
+
+    public function addShippingMethod(VendorShippingMethodInterface $shippingMethod): void
+    {
+        if (!$this->hasShippingMethod($shippingMethod)) {
+            $this->shippingMethods->add($shippingMethod);
+        }
+    }
+
+    public function removeShippingMethod(VendorShippingMethodInterface $shippingMethod): void
+    {
+        if ($this->hasShippingMethod($shippingMethod)) {
+            $this->shippingMethods->removeElement($shippingMethod);
+        }
     }
 }

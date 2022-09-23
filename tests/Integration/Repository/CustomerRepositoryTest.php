@@ -28,20 +28,20 @@ final class CustomerRepositoryTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('CustomerRepositoryTest/test_it_finds_all_customers_of_vendor.yml');
 
-        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $queryBuilder = $this->repository->findVendorCustomers($vendorOliver);
 
         $result = $queryBuilder->getQuery()->getResult();
-        self::assertEquals(1, count($result));
+        self::assertCount(1, $result);
     }
 
     public function test_it_finds_order_for_vendor(): void
     {
         $this->loadFixturesFromFile('CustomerRepositoryTest/test_it_finds_order_for_vendor.yml');
 
-        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => 'test2@example.com']);
-        $result = $this->repository->findCustomerForVendor($vendorOliver, (string)$customer->getId());
+        $result = $this->repository->findCustomerForVendor($vendorOliver, (string) $customer->getId());
 
         self::assertEquals($customer->getId(), $result->getId());
     }

@@ -16,12 +16,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Product\Model\ProductAssociationInterface;
-use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Product\Model\ProductOptionInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface;
 
 final class ProductDraftSpec extends ObjectBehavior
 {
@@ -50,7 +44,7 @@ final class ProductDraftSpec extends ObjectBehavior
         DraftAttributeValueInterface $attributeValuePL,
         DraftAttributeValueInterface $attributeValueEN,
         DraftAttributeInterface $attribute,
-    ): void {
+        ): void {
         $attribute->getCode()->willReturn('colour');
 
         $attributeValuePL->setDraft($this)->shouldBeCalled();
@@ -68,10 +62,10 @@ final class ProductDraftSpec extends ObjectBehavior
         $this->addAttribute($attributeValuePL);
         $this->addAttribute($attributeValueEN);
 
-        $this->getAttributesByLocale('pl_PL',"en_US")->shouldIterateAs([$attributeValuePL->getWrappedObject()]);
+        $this->getAttributesByLocale('pl_PL', 'en_US')->shouldIterateAs([$attributeValuePL->getWrappedObject()]);
     }
 
-    function it_returns_attributes_by_a_fallback_locale_when_there_is_no_value_for_a_given_locale(
+    public function it_returns_attributes_by_a_fallback_locale_when_there_is_no_value_for_a_given_locale(
         DraftAttributeInterface $attribute,
         DraftAttributeValueInterface $attributeValueEN,
     ): void {
@@ -91,11 +85,11 @@ final class ProductDraftSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_attributes_by_a_fallback_locale_when_there_is_an_empty_value_for_a_given_locale(
+    public function it_returns_attributes_by_a_fallback_locale_when_there_is_an_empty_value_for_a_given_locale(
         DraftAttributeInterface $attribute,
         DraftAttributeValueInterface $attributeValueEN,
         DraftAttributeValueInterface $attributeValuePL,
-    ): void {
+        ): void {
         $attribute->getCode()->willReturn('colour');
 
         $attributeValueEN->setDraft($this)->shouldBeCalled();
@@ -119,7 +113,7 @@ final class ProductDraftSpec extends ObjectBehavior
         ;
     }
 
-    function it_removes_attribute(DraftAttributeValueInterface $attribute): void
+    public function it_removes_attribute(DraftAttributeValueInterface $attribute): void
     {
         $attribute->setDraft($this)->shouldBeCalled();
 
@@ -132,18 +126,17 @@ final class ProductDraftSpec extends ObjectBehavior
         $this->hasAttribute($attribute)->shouldReturn(false);
     }
 
-    function it_has_no_id_by_default(): void
+    public function it_has_no_id_by_default(): void
     {
         $this->getId()->shouldReturn(null);
     }
 
-
-    function it_initializes_attribute_collection_by_default(): void
+    public function it_initializes_attribute_collection_by_default(): void
     {
         $this->getAttributes()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_attribute(DraftAttributeValueInterface $attribute): void
+    public function it_adds_attribute(DraftAttributeValueInterface $attribute): void
     {
         $attribute->setDraft($this)->shouldBeCalled();
 
@@ -151,11 +144,11 @@ final class ProductDraftSpec extends ObjectBehavior
         $this->hasAttribute($attribute)->shouldReturn(true);
     }
 
-    function it_returns_attributes_by_a_locale_without_a_base_locale(
+    public function it_returns_attributes_by_a_locale_without_a_base_locale(
         DraftAttributeInterface $attribute,
         DraftAttributeValueInterface $attributeValueEN,
         DraftAttributeValueInterface $attributeValuePL,
-    ): void {
+        ): void {
         $attribute->getCode()->willReturn('colour');
 
         $attributeValueEN->setDraft($this)->shouldBeCalled();
@@ -179,7 +172,7 @@ final class ProductDraftSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_attributes_by_a_base_locale_when_there_is_no_value_for_a_given_locale_or_a_fallback_locale(
+    public function it_returns_attributes_by_a_base_locale_when_there_is_no_value_for_a_given_locale_or_a_fallback_locale(
         DraftAttributeInterface $attribute,
         DraftAttributeValueInterface $attributeValueFR,
     ): void {
@@ -199,12 +192,12 @@ final class ProductDraftSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_attributes_by_a_base_locale_when_there_is_an_empty_value_for_a_given_locale_or_a_fallback_locale(
+    public function it_returns_attributes_by_a_base_locale_when_there_is_an_empty_value_for_a_given_locale_or_a_fallback_locale(
         DraftAttributeInterface $attribute,
         DraftAttributeValueInterface $attributeValueEN,
         DraftAttributeValueInterface $attributeValuePL,
         DraftAttributeValueInterface $attributeValueFR,
-    ): void {
+        ): void {
         $attribute->getCode()->willReturn('colour');
 
         $attributeValueEN->setDraft($this)->shouldBeCalled();
@@ -235,12 +228,12 @@ final class ProductDraftSpec extends ObjectBehavior
         ;
     }
 
-    function it_initializes_creation_date_by_default(): void
+    public function it_initializes_creation_date_by_default(): void
     {
         $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);
     }
 
-    function its_creation_date_is_mutable(\DateTime $creationDate): void
+    public function its_creation_date_is_mutable(\DateTime $creationDate): void
     {
         $this->setCreatedAt($creationDate);
         $this->getCreatedAt()->shouldReturn($creationDate);
