@@ -178,8 +178,7 @@ class VendorUpdateContext extends RawMinkContext
         $companyName,
         $taxId,
         $phoneNumber
-    )
-    {
+    ) {
         /** @var VendorInterface $vendor */
         $vendor = $this->sharedStorage->get('vendor');
         $vendor->setCompanyName($companyName);
@@ -198,8 +197,7 @@ class VendorUpdateContext extends RawMinkContext
         $companyName,
         $taxId,
         $phoneNumber
-    )
-    {
+    ) {
         $page = $this->getSession()->getPage();
         $companyNameInput = $page->find('css', '#vendor_companyName');
         $taxIdInput = $page->find('css', '#vendor_taxIdentifier');
