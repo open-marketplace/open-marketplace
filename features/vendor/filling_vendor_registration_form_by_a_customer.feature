@@ -9,12 +9,12 @@ Feature: Filling vendor registration form by a customer
     And I am a logged in customer
 
   Scenario: Attempting to submit empty form
-    When I am on "/en_US/vendor/register"
+    When I am on "/en_US/account/vendor/register"
     And I press "Become a Vendor"
     Then I should see "sylius-validation-error" "7" times
     
   Scenario: Filling form with data that fails validation
-    When I am on "/en_US/vendor/register"
+    When I am on "/en_US/account/vendor/register"
     And I fill in "vendor_companyName" with "te"
     And I fill in "vendor_taxIdentifier" with "56"
     And I fill in "vendor_phoneNumber" with "55"
@@ -27,7 +27,7 @@ Feature: Filling vendor registration form by a customer
     Then I should see "sylius-validation-error" "8" times
 
   Scenario: Correct completion of the form
-    When I am on "/en_US/vendor/register"
+    When I am on "/en_US/account/vendor/register"
     And I fill in "vendor_companyName" with "testCompanyName"
     And I fill in "vendor_taxIdentifier" with "6546546456"
     And I fill in "vendor_phoneNumber" with "555555555"
@@ -40,7 +40,7 @@ Feature: Filling vendor registration form by a customer
     And I should see "Your vendor account is under verification."
 
   Scenario: Correct completion of the form with logo
-    When I am on "/en_US/vendor/register"
+    When I am on "/en_US/account/vendor/register"
     And I fill in "vendor_companyName" with "testCompanyName"
     And I fill in "vendor_taxIdentifier" with "6546546456"
     And I fill in "vendor_phoneNumber" with "555555555"

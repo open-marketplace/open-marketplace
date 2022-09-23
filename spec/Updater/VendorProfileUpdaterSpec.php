@@ -16,7 +16,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
@@ -25,7 +24,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterf
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Finder\SplFileInfo;
@@ -84,7 +82,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         ShopUserInterface $user,
         VendorAddressInterface $vendorAddressUpdate,
         VendorImageInterface $imageFromForm,
-    ): void {
+        ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
         $newPendingUpdate->getToken()->willReturn('testing-token');
         $vendorData->getCompanyName()->willReturn('testcompany');
@@ -100,7 +98,6 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
-
 
         $vendor->getShopUser()->willReturn($user);
 

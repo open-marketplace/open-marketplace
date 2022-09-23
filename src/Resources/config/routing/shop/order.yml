@@ -22,6 +22,7 @@ sylius_shop_checkout_complete:
                 type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
                 options:
                     validation_groups: 'sylius_checkout_complete'
+#            prefix: account/
 sylius_shop_account_order_index:
     path: /account/orders
     methods: [GET]

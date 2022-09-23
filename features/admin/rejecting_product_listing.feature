@@ -24,5 +24,5 @@ Feature: Rejecting product listing
     Then I should see url "#\/admin\/product-listings\/$#"
     And I should see product's listing status "Rejected"
     And I am logged in as "test@company.domain"
-    And I am on "/en_US/vendor/conversations"
+    And I am on "/en_US/account/vendor/conversations"
     And I should see "reason to reject"

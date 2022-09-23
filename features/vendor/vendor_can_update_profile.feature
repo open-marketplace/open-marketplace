@@ -18,7 +18,7 @@ Feature: Vendor can update his company information
     Then I should see "Edit your vendor information"
 
   Scenario: Filling the form
-    When I am on "/en_US/vendor/profile/update"
+    When I am on "/en_US/account/vendor/profile/update"
     And I fill in "vendor_companyName" with "Test name"
     And I fill in "vendor_taxIdentifier" with "test identifier"
     And I fill in "vendor_phoneNumber" with "test number"
@@ -30,13 +30,13 @@ Feature: Vendor can update his company information
     Then Pending update data should appear in database
 
   Scenario: Visiting confirmation link
-    Given There is pending update data with token value "simpletoken" for logged in vendor
-    When I am on "/en_US/vendor/profile-update/simpletoken"
+    Given There is pending update data with token value "simpletoken" for logged in vendor 
+    When I am on "/en_US/account/vendor/profile-update/simpletoken"
     Then I should see "new ID"
     And I should see "New Company"
 
   Scenario: Filling the form with logo
-    When I am on "/en_US/vendor/profile/update"
+    When I am on "/en_US/account/vendor/profile/update"
     And I fill in "vendor_companyName" with "Test name"
     And I fill in "vendor_taxIdentifier" with "test identifier"
     And I fill in "vendor_phoneNumber" with "test number"
@@ -49,7 +49,7 @@ Feature: Vendor can update his company information
     Then Pending update data should appear in database
 
   Scenario: Filling the form with logo that fails validation
-    When I am on "/en_US/vendor/profile/update"
+    When I am on "/en_US/account/vendor/profile/update"
     And I fill in "vendor_companyName" with "Test name"
     And I fill in "vendor_taxIdentifier" with "test identifier"
     And I fill in "vendor_phoneNumber" with "test number"
@@ -63,7 +63,7 @@ Feature: Vendor can update his company information
     And I should see "Minimum width expected is 100px."
 
   Scenario: Filling the form with logo that fails file size validation
-    When I am on "/en_US/vendor/profile/update"
+    When I am on "/en_US/account/vendor/profile/update"
     And I fill in "vendor_companyName" with "Test name"
     And I fill in "vendor_taxIdentifier" with "test identifier"
     And I fill in "vendor_phoneNumber" with "test number"
@@ -78,7 +78,7 @@ Feature: Vendor can update his company information
 
   Scenario: Updating vendor logo
     Given vendor have logo attached to profile
-    When I am on "/en_US/vendor/profile/update"
+    When I am on "/en_US/account/vendor/profile/update"
     And I attach the file "images/valid_logo.png" to "vendor_image_file"
     And I press "Save changes"
     And I visit confirmation page
@@ -88,5 +88,5 @@ Feature: Vendor can update his company information
     Given there is a "verified" vendor user "test2@company.domain" registered in country "PL"
     And I am logged in as "test2@company.domain"
     And Vendor company name is "Wayne co." tax ID is "testID" phone number is "333 222 000"
-    And I am on "/en_US/vendor/profile/update"
+    And I am on "/en_US/account/vendor/profile/update"
     Then I should see form initialized with "Wayne co." "testID" "333 222 000"

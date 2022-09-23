@@ -13,14 +13,14 @@ Feature: Vendor can see his customer's orders
   @ui
   Scenario: Seeing customers orders from customers
     Given There is order with property "state" with value "new" made with logged in seller
-    And I am on "/en_US/customers"
+    And I am on "/en_US/account/vendor/customers"
     And I follow "Show orders"
     Then I should see "1" orders
 
   @ui
   Scenario: Seeing customers orders from customer details
     Given There is order with property "state" with value "new" made with logged in seller
-    And I am on "/en_US/customers"
+    And I am on "/en_US/account/vendor/customers"
     And I follow "Show"
     And I follow "Show orders"
     Then I should see "1" orders

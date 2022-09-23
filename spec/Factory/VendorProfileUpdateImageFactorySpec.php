@@ -14,28 +14,27 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactory;
 use PhpSpec\ObjectBehavior;
 
 final class VendorProfileUpdateImageFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(VendorProfileUpdateImageFactory::class);
     }
 
-    function it_creates_new_vendor_image(): void
+    public function it_creates_new_vendor_image(): void
     {
         $this->createNew()->shouldBeAnInstanceOf(VendorProfileUpdateImage::class);
     }
 
-    function it_creates_initialized_image(
+    public function it_creates_initialized_image(
         VendorImageInterface $uploadedImage,
         VendorProfileInterface $vendorProfile
     ): void {
         $imageEntity = $this->createWithFileAndOwner($uploadedImage, $vendorProfile);
-        
+
         $imageEntity->shouldBeAnInstanceOf(VendorProfileUpdateImage::class);
         $imageEntity->shouldImplement(VendorImageInterface::class);
         $imageEntity->getOwner()->shouldBe($vendorProfile);
