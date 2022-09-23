@@ -13,7 +13,6 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Operator;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\VendorLogoOperator;
@@ -31,6 +30,7 @@ final class VendorLogoOperatorSpec extends ObjectBehavior
             $vendorImageFactory
         );
     }
+
     public function it_is_initializable()
     {
         $this->shouldHaveType(VendorLogoOperator::class);

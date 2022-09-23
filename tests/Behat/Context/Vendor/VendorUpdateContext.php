@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
-use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
@@ -44,7 +43,7 @@ class VendorUpdateContext extends RawMinkContext
         ExampleFactoryInterface $userFactory,
         ObjectManager $manager,
         VendorImageFactoryInterface $vendorImageFactory,
-    ) {
+        ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
@@ -128,7 +127,7 @@ class VendorUpdateContext extends RawMinkContext
     public function iShouldGetValidationError()
     {
         $page = $this->getSession()->getPage();
-        $label = $page->find('css','.ui.red.pointing.label.sylius-validation-error');
+        $label = $page->find('css', '.ui.red.pointing.label.sylius-validation-error');
         dd($label->getText());
     }
 
@@ -154,7 +153,7 @@ class VendorUpdateContext extends RawMinkContext
         $updateData = $repository->findAll();
         $token = $updateData[0]->getToken();
         $session = $this->getSession();
-        $session->visit("/en_US/account/vendor/profile-update/".$token);
+        $session->visit('/en_US/account/vendor/profile-update/' . $token);
     }
 
     /**
@@ -167,7 +166,7 @@ class VendorUpdateContext extends RawMinkContext
         $session->visit('/en_US/vendors/vendor-slug');
 
         $page = $session->getPage();
-        $logo = $page->find('css','#vendor_logo');
+        $logo = $page->find('css', '#vendor_logo');
         $newPath = $logo->getAttribute('src');
         Assert::notEq($oldImagePath, $newPath);
     }
@@ -175,7 +174,11 @@ class VendorUpdateContext extends RawMinkContext
     /**
      * @Given Vendor company name is :companyName tax ID is :taxId phone number is :phoneNumber
      */
-    public function vendorCompanyNameIsTaxIdIsPhoneNumberIs($companyName, $taxId, $phoneNumber)
+    public function vendorCompanyNameIsTaxIdIsPhoneNumberIs(
+        $companyName,
+        $taxId,
+        $phoneNumber
+    )
     {
         /** @var VendorInterface $vendor */
         $vendor = $this->sharedStorage->get('vendor');
@@ -185,23 +188,25 @@ class VendorUpdateContext extends RawMinkContext
 
         $this->manager->persist($vendor);
         $this->manager->flush();
-        $this->sharedStorage->set('vendor',$vendor);
+        $this->sharedStorage->set('vendor', $vendor);
     }
 
     /**
      * @Then I should see form initialized with :companyName :taxId :phoneNumber
      */
-    public function iShouldSeeAsDefaultFormValues($companyName, $taxId, $phoneNumber)
+    public function iShouldSeeAsDefaultFormValues(
+        $companyName,
+        $taxId,
+        $phoneNumber
+    )
     {
         $page = $this->getSession()->getPage();
-        $companyNameInput = $page->find('css',"#vendor_companyName");
-        $taxIdInput = $page->find('css',"#vendor_taxIdentifier");
-        $phoneNumberInput = $page->find('css',"#vendor_phoneNumber");
+        $companyNameInput = $page->find('css', '#vendor_companyName');
+        $taxIdInput = $page->find('css', '#vendor_taxIdentifier');
+        $phoneNumberInput = $page->find('css', '#vendor_phoneNumber');
 
         Assert::eq($companyName, $companyNameInput->getAttribute('value'));
         Assert::eq($taxId, $taxIdInput->getAttribute('value'));
         Assert::eq($phoneNumber, $phoneNumberInput->getAttribute('value'));
     }
-
-
 }
