@@ -34,3 +34,9 @@ bitbag_mvm_plugin_vendor_product_draft_show_product:
         _controller: bitbag_mvm_plugin.controller.product_draft:showAction
         _sylius:
             template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_single_product_draft.html.twig'
+
+bitbag_mvm_plugin_vendor_product_listing_send_for_verification:
+    path: /product-listings/{id}/send-for-verification
+    methods: [POST]
+    defaults:
+        _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.send_for_verification

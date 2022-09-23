@@ -9,6 +9,6 @@ Feature: Vendor can create attributes for product listings
 
   @ui
   Scenario: Creating text type attribute
-    Given I am on "/en_US/product-attributes/text/new"
+    Given  I am on "/en_US/account/vendor/product-attributes/text/new"
     And I fill form with "code" and name with "name" and submit
     Then I should see attribute with "code" and "name" type "Text"

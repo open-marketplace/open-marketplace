@@ -11,10 +11,9 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Setup;
 
-use Behat\Behat\Context\Context;
+use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
-use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\OrderRepository;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
@@ -52,7 +51,7 @@ final class OrderContext extends RawMinkContext
         ShopUserExampleFactory $userExampleFactory,
         EntityManagerInterface $entityManager,
         UserRepository $userRepository,
-    ) {
+        ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderFactory = $orderFactory;
         $this->orderRepository = $orderRepository;
@@ -125,7 +124,7 @@ final class OrderContext extends RawMinkContext
     public function iAmOnOrderDetailsPage()
     {
         $order = $this->sharedStorage->get('order');
-        $this->visitPath('/en_US/orders/' . $order->getId());
+        $this->visitPath('/en_US/account/vendor/orders/' . $order->getId());
     }
 
     /**
@@ -227,6 +226,6 @@ final class OrderContext extends RawMinkContext
     public function iAmOnCustomerDetailsPage()
     {
         $order = $this->sharedStorage->get('order');
-        $this->visitPath('/en_US/customers/' . $order->getCustomer()->getId());
+        $this->visitPath('/en_US/account/vendor/customers/' . $order->getCustomer()->getId());
     }
 }

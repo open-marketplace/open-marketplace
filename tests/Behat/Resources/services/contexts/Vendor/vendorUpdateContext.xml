@@ -8,7 +8,8 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
-            <argument type="service" id="sylius.manager.shop_user" />             
+            <argument type="service" id="sylius.manager.shop_user" />
+            <argument type="service" id="bitbag.mvm_plugin.service.vendor_image_factory"/>
         </service>
     </services>
 </container>

@@ -49,7 +49,7 @@ class Vendor implements VendorInterface
     protected Collection $productListings;
 
     /** @var Collection<int, VendorShippingMethodInterface> */
-    private Collection $shippingMethods;
+    protected Collection $shippingMethods;
 
     public function __construct()
     {
@@ -213,11 +213,17 @@ class Vendor implements VendorInterface
         $this->image = $image;
     }
 
+    public function removeImage(): void
+    {
+        $this->image = null;
+    }
+
     public function isVerified(): bool
     {
         return self::STATUS_VERIFIED === $this->getStatus();
     }
 
+    /** @return Collection<int, VendorShippingMethodInterface> */
     public function getShippingMethods(): Collection
     {
         return $this->shippingMethods;

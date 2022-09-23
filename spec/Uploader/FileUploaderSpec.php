@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 
 final class FileUploaderSpec extends ObjectBehavior
 {
-//.   @todo
+    //.   @todo
 //    public function let()
 //    {
 //        $publicDir = 'public';

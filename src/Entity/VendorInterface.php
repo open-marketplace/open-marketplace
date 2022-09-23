@@ -72,9 +72,9 @@ interface VendorInterface extends VendorProfileInterface
 
     public function removeProduct(ProductInterface $product): void;
 
-    public function getImage(): ?VendorImageInterface;
-
     public function setImage(?VendorImageInterface $image): void;
+
+    public function removeImage(): void;
 
     /** @return Collection<int, ProductListing> */
     public function getProductListings(): Collection;
@@ -86,6 +86,7 @@ interface VendorInterface extends VendorProfileInterface
 
     public function isVerified(): bool;
 
+    /** @return Collection<int, VendorShippingMethodInterface> */
     public function getShippingMethods(): Collection;
 
     public function hasShippingMethod(VendorShippingMethodInterface $shippingMethod): bool;
