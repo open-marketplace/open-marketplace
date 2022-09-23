@@ -6,5 +6,8 @@
 
     <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute" table="bitbag_mvm_draft_attribute">
         <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor"/>
+        <one-to-one field="productAttribute" target-entity="Sylius\Component\Product\Model\ProductAttribute">
+            <join-column on-delete="SET NULL"/>
+        </one-to-one>
     </mapped-superclass>
 </doctrine-mapping>

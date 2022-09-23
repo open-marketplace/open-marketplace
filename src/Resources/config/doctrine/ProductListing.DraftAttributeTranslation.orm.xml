@@ -6,6 +6,5 @@
 
     <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation"
                        table="bitbag_mvm_draft_attribute_translation">
-
     </mapped-superclass>
 </doctrine-mapping>

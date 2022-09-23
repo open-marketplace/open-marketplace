@@ -11,6 +11,12 @@
             <argument type="service" id="sylius.repository.product_variant" />
         </service>
 
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater"
+                 id="bitbag_mvm_plugin.updater.product_attribute_updater">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag_mvm_plugin.cloner.attribute_translation"/>
+        </service>
+
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdater"
                  id="bitbag_mvm_plugin.updater.vendor_profile_updater"
                  public="true">
@@ -22,5 +28,6 @@
             <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="bitbag_mvm_plugin.operator.vendor_logo"/>
         </service>
+
     </services>
 </container>
