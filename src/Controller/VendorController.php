@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -31,6 +32,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
+use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -44,6 +46,8 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 final class VendorController extends ResourceController
 {
     private VendorProviderInterface $vendorProvider;
+
+    private VendorProfileUpdaterInterface $vendorProfileUpdater;
 
     public function __construct(
         MetadataInterface $metadata,
@@ -63,7 +67,8 @@ final class VendorController extends ResourceController
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        VendorProviderInterface $vendorProvider
+        VendorProviderInterface $vendorProvider,
+        VendorProfileUpdaterInterface $vendorProfileUpdater
     ) {
         parent::__construct(
             $metadata,
@@ -86,6 +91,7 @@ final class VendorController extends ResourceController
         );
 
         $this->vendorProvider = $vendorProvider;
+        $this->vendorProfileUpdater = $vendorProfileUpdater;
     }
 
     public function createAction(Request $request): Response
@@ -99,7 +105,7 @@ final class VendorController extends ResourceController
         }
     }
 
-    public function updateAction(Request $request): Response
+    public function customUpdateAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);

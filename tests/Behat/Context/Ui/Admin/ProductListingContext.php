@@ -14,7 +14,11 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
@@ -25,6 +29,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTrans
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\DraftAttributeFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
@@ -45,18 +50,22 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private UserRepositoryInterface $userRepository;
 
+    private DraftAttributeFactoryInterface $draftAttributeFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         AdminUserExampleFactory $adminUserExampleFactory,
         ShopUserExampleFactory $shopUserExampleFactory,
         SharedStorageInterface $sharedStorage,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        DraftAttributeFactoryInterface $draftAttributeFactory
     ) {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
+        $this->draftAttributeFactory = $draftAttributeFactory;
     }
 
     /**
@@ -318,5 +327,83 @@ final class ProductListingContext extends RawMinkContext implements Context
         $productPricing->setChannelCode($channelCode);
 
         return $productPricing;
+    }
+
+    /**
+     * @Given There is attribute with code :code
+     */
+    public function thereIsAttributeWithCode($code)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        /** @var DraftAttribute $attribute */
+        $attribute = $this->draftAttributeFactory->createNew();
+        $attribute->setType('text');
+        $attribute->setStorageType('text');
+        $attribute->setCode($code);
+        $attribute->setVendor($vendor);
+
+        $translation = new DraftAttributeTranslation();
+        $translation->setLocale('en_US');
+        $translation->setTranslatable($attribute);
+        $translation->setName('attribute');
+
+        $attribute->addTranslation($translation);
+        $this->sharedStorage->set('attribute', $attribute);
+
+        $this->entityManager->persist($attribute);
+    }
+
+    /**
+     * @Given there is a product listing with code :code and name :name and status :status with attribute and image
+     */
+    public function thereIsAProductListingWithCodeAndNameAndStatusWithAttributeAndImage(
+        $code,
+        $name,
+        $status
+    ) {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        $attribute = $this->sharedStorage->get('attribute');
+
+        $attributeValue = new DraftAttributeValue();
+        $attributeValue->setAttribute($attribute);
+        $attributeValue->setLocaleCode('en_US');
+        $attributeValue->setValue('attribute_testing_value');
+
+        $productListing = $this->createProductListing($vendor, $code);
+        /** @var ProductDraftInterface $productDraft */
+        $productDraft = $this->createProductListingDraft($productListing, $code, $status);
+        $productDraft->addAttribute($attributeValue);
+        $productTranslation = $this->createProductListingTranslation($productDraft, $name);
+        $productPricing = $this->createProductListingPricing($productDraft);
+
+        $draftImage = new ProductDraftImage();
+        $draftImage->setOwner($productDraft);
+        $draftImage->setPath('path/to/file');
+
+        $productDraft->addImage($draftImage);
+
+        $this->entityManager->persist($productListing);
+        $this->entityManager->persist($productDraft);
+        $this->entityManager->persist($productTranslation);
+        $this->entityManager->persist($productPricing);
+        $this->entityManager->persist($attributeValue);
+        $this->entityManager->persist($draftImage);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Then I should see image
+     */
+    public function iShouldSeeImage()
+    {
+        $page = $this->getSession()->getPage();
+
+        $mediaContainer = $page->find('css', '#media');
+        $image = $mediaContainer->find('css', 'img');
+        $imagePath = $image->getAttribute('src');
+
+        Assert::contains($imagePath, 'path/to/file', 'no image found');
     }
 }

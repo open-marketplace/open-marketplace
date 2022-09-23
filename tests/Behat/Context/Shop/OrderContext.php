@@ -108,7 +108,7 @@ class OrderContext extends RawMinkContext implements Context
     public function iShouldSeeOrdersOnPage($ordersCount, $pageNumber)
     {
         $paginationLimit = $this->sharedStorage->get('pagination_limit');
-        $this->visitPath("/en_US/orders?limit=$paginationLimit&page=$pageNumber");
+        $this->visitPath("/en_US/account/vendor/orders?limit=$paginationLimit&page=$pageNumber");
         $page = $this->getSession()->getPage();
         $table = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
         $orderRows = $table->findAll('css', '.item');
@@ -158,7 +158,7 @@ class OrderContext extends RawMinkContext implements Context
      */
     public function iAmOnCustomersPage()
     {
-        $this->visitPath('en_US/customers');
+        $this->visitPath('en_US/account/vendor/customers');
     }
 
     /**
