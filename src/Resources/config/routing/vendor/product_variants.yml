@@ -4,7 +4,7 @@ vendor_product_variant_index:
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Inventory/index.html.twig"
             grid: vendor_product_variant
             vars:
                 route:
