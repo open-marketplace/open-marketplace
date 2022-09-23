@@ -49,7 +49,7 @@ final class AttributesConverterSpec extends ObjectBehavior
         $this->shouldHaveType(AttributesConverter::class);
     }
 
-    public function it_doesnt_link_draft_to_product_attribute_when_linked(
+    public function it_doesnt_link_draft_to_product_attribute_when_it_is_already_linked(
         ProductDraftInterface $productDraft,
         AttributeValueClonerInterface $attributeValueCloner,
         EntityManagerInterface $entityManager,
