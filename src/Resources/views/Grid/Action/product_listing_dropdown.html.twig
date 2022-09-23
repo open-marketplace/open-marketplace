@@ -13,7 +13,7 @@
             {% endif %}
 
             <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_switch_visibility', {'id': data.id }) }}" method="post">
-                <button id="hide" class="row" data-requires-confirmation>
+                <button id="enable" class="row" data-requires-confirmation>
                     <i class="low vision icon"></i>
                     {% if data.enabled == true %}
                     {{ 'bitbag_mvm_plugin.ui.enable'|trans }}
