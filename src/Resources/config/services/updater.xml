@@ -10,5 +10,17 @@
             <argument type="service" id="sylius.repository.channel_pricing" />
             <argument type="service" id="sylius.repository.product_variant" />
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdater"
+                 id="bitbag_mvm_plugin.updater.vendor_profile_updater"
+                 public="true">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="sylius.email_sender"/>
+            <argument type="service" id="bitbag_mvm_plugin.remover.profile_update_remover"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_profile_update_factory"/>
+            <argument type="service" id="bitbag.mvm_plugin.service.vendor_profile_image_factory" />
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="bitbag_mvm_plugin.operator.vendor_logo"/>
+        </service>
     </services>
 </container>

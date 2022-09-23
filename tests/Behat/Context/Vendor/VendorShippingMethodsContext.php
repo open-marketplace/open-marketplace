@@ -13,9 +13,9 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
-use Sylius\Component\Core\Model\ChannelInterface;
 use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertStringContainsString;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 class VendorShippingMethodsContext extends RawMinkContext implements Context
 {
