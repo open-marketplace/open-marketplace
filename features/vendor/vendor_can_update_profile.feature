@@ -18,7 +18,7 @@ Feature: Vendor can update his company information
     Then I should see "Edit your vendor information"
 
   Scenario: Filling the form
-    When I am on "/en_US/vendor/profile/update"      
+    When I am on "/en_US/account/vendor/profile/update"
     And I fill in "vendor_companyName" with "Test name"
     And I fill in "vendor_taxIdentifier" with "test identifier"
     And I fill in "vendor_phoneNumber" with "test number"
@@ -31,6 +31,6 @@ Feature: Vendor can update his company information
     
   Scenario: Visiting confirmation link
     Given There is pending update data with token value "simpletoken" for logged in vendor 
-    When I am on "/en_US/vendor/profile-update/simpletoken"
+    When I am on "/en_US/account/vendor/profile-update/simpletoken"
     Then I should see "new ID"
     And I should see "New Company"
