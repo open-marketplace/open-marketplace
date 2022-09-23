@@ -15,9 +15,8 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\DraftAttributeRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use function PHPUnit\Framework\assertTrue;
+use Sylius\Behat\Service\SharedStorageInterface;
 
 final class DraftAttributeContext extends RawMinkContext
 {
@@ -45,20 +44,23 @@ final class DraftAttributeContext extends RawMinkContext
         $nameInput = $page->find('css', '#sylius_product_attribute_translations_en_US_name');
         $nameInput->setValue($name);
 
-        $submitButton = $page->find('css','.ui.labeled.icon.primary.button');
+        $submitButton = $page->find('css', '.ui.labeled.icon.primary.button');
         $submitButton->press();
     }
 
     /**
      * @Then I should see attribute with :arg1 and :arg2 type :type
      */
-    public function iShouldSeeAttributeWithAnd($code, $name, $type)
-    {
+    public function iShouldSeeAttributeWithAnd(
+        $code,
+        $name,
+        $type
+    ) {
         $page = $this->getSession()->getPage();
-        $gridTable = $page->find('css','.ui.sortable.stackable.very.basic.celled.table');
-        $rows = $gridTable->findAll('css','.item');
-        foreach ($rows as $row){
-            if(
+        $gridTable = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
+        $rows = $gridTable->findAll('css', '.item');
+        foreach ($rows as $row) {
+            if (
                 str_contains($row->getText(), $code) &&
                 str_contains($row->getText(), $name) &&
                 str_contains($row->getText(), $type)
@@ -73,8 +75,11 @@ final class DraftAttributeContext extends RawMinkContext
     /**
      * @Given I have Attribute type :type name :name code :code
      */
-    public function iHaveAttributeTypeNameCode($type, $name, $code)
-    {
+    public function iHaveAttributeTypeNameCode(
+        $type,
+        $name,
+        $code
+    ) {
         $vendor = $this->sharedStorage->get('vendor');
         $locale = $this->sharedStorage->get('locale');
 
@@ -102,22 +107,22 @@ final class DraftAttributeContext extends RawMinkContext
     {
         $page = $this->getSession()->getPage();
 
-        $codeInput = $page->find('css','#sylius_product_code');
+        $codeInput = $page->find('css', '#sylius_product_code');
         $codeInput->setValue('Testingcode');
 
-        $nameInput = $page->find('css','#sylius_product_translations_en_US_name');
+        $nameInput = $page->find('css', '#sylius_product_translations_en_US_name');
         $nameInput->setValue('TestingName');
 
-        $slugInput = $page->find('css','#sylius_product_translations_en_US_slug');
+        $slugInput = $page->find('css', '#sylius_product_translations_en_US_slug');
         $slugInput->setValue('TestingSlug');
 
-        $priceInput = $page->find('css','#sylius_product_productListingPrice_WEB-US_price');
+        $priceInput = $page->find('css', '#sylius_product_productListingPrice_WEB-US_price');
         $priceInput->setValue(1);
 
-        $originalPriceInput = $page->find('css','#sylius_product_productListingPrice_WEB-US_originalPrice');
+        $originalPriceInput = $page->find('css', '#sylius_product_productListingPrice_WEB-US_originalPrice');
         $originalPriceInput->setValue(1);
 
-        $priceInput = $page->find('css','#sylius_product_productListingPrice_WEB-US_price');
+        $priceInput = $page->find('css', '#sylius_product_productListingPrice_WEB-US_price');
         $priceInput->setValue(1);
     }
 
@@ -128,13 +133,11 @@ final class DraftAttributeContext extends RawMinkContext
     {
         $page = $this->getSession()->getPage();
 
-        $wrapper = $page->find('css','.ui.fluid.action.input');
+        $wrapper = $page->find('css', '.ui.fluid.action.input');
         dd($wrapper->getHtml());
         $wrapper->press();
 
-        $div = $page->find('css','[data-value="name"]');
+        $div = $page->find('css', '[data-value="name"]');
         dd($div);
     }
-
-
 }

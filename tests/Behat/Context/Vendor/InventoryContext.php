@@ -21,7 +21,7 @@ final class InventoryContext extends RawMinkContext
     public function iSubmitInventoryForm(): void
     {
         $page = $this->getSession()->getPage();
-        $element = $page->find('css','#sylius_save_changes_button');
+        $element = $page->find('css', '#sylius_save_changes_button');
         $element->press();
     }
 
@@ -31,7 +31,7 @@ final class InventoryContext extends RawMinkContext
     public function iSetTracked(): void
     {
         $page = $this->getSession()->getPage();
-        $element = $page->find('css','#sylius_product_variant_tracked');
+        $element = $page->find('css', '#sylius_product_variant_tracked');
         $element->setValue(true);
     }
 
@@ -41,7 +41,7 @@ final class InventoryContext extends RawMinkContext
     public function iSetUntracked(): void
     {
         $page = $this->getSession()->getPage();
-        $element = $page->find('css','#sylius_product_variant_tracked');
+        $element = $page->find('css', '#sylius_product_variant_tracked');
         $element->setValue(false);
     }
 }

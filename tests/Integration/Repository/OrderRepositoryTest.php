@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use Sylius\Component\Core\Model\Customer;
 
@@ -29,20 +28,20 @@ final class OrderRepositoryTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('OrderRepositoryTest/test_it_finds_all_vendor_orders.yml');
 
-        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $queryBuilder = $this->repository->findAllByVendor($vendorOliver);
 
         $result = $queryBuilder->getQuery()->getResult();
-        self::assertEquals(1, count($result));
+        self::assertCount(1, $result);
     }
 
     public function test_it_finds_order_for_vendor(): void
     {
         $this->loadFixturesFromFile('OrderRepositoryTest/test_it_finds_order_for_vendor.yml');
 
-        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $order = $this->repository->findOneBy(['vendor' => $vendorOliver]);
-        $result = $this->repository->findOrderForVendor($vendorOliver, (string)$order->getId());
+        $result = $this->repository->findOrderForVendor($vendorOliver, (string) $order->getId());
 
         self::assertEquals($order->getId(), $result->getId());
     }
@@ -51,11 +50,11 @@ final class OrderRepositoryTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('OrderRepositoryTest/test_it_finds_orders_for_vendors_customer.yml');
 
-        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
-        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email'=>'test2@example.com']);
-        $queryBuilder = $this->repository->findOrdersForVendorByCustomer($vendorOliver, (string)$customer->getId());
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => 'test2@example.com']);
+        $queryBuilder = $this->repository->findOrdersForVendorByCustomer($vendorOliver, (string) $customer->getId());
 
         $result = $queryBuilder->getQuery()->getResult();
-        self::assertEquals(1, count($result));
+        self::assertCount(1, $result);
     }
 }
