@@ -13,11 +13,7 @@ vendor_register_form:
     prefix: /{_locale}/account
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
-vendor_profile_update_action:
-    resource: "routing/vendor_profile_update_action.yml"
-    prefix: /{_locale}/account
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+
 confirm_profile_update_link:
     resource: "routing/confirm_profile_update.yml"
     prefix: /{_locale}/account

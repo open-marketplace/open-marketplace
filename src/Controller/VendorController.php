@@ -16,6 +16,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -31,6 +32,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
+use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -44,6 +46,8 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 final class VendorController extends ResourceController
 {
     private VendorProviderInterface $vendorProvider;
+
+    private VendorProfileUpdaterInterface $vendorProfileUpdater;
 
     public function __construct(
         MetadataInterface $metadata,
@@ -63,7 +67,8 @@ final class VendorController extends ResourceController
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        VendorProviderInterface $vendorProvider
+        VendorProviderInterface $vendorProvider,
+        VendorProfileUpdaterInterface $vendorProfileUpdater
     ) {
         parent::__construct(
             $metadata,
@@ -86,6 +91,7 @@ final class VendorController extends ResourceController
         );
 
         $this->vendorProvider = $vendorProvider;
+        $this->vendorProfileUpdater = $vendorProfileUpdater;
     }
 
     public function createAction(Request $request): Response
@@ -101,17 +107,79 @@ final class VendorController extends ResourceController
 
     public function updateAction(Request $request): Response
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+
         $vendor = $this->vendorProvider->provideCurrentVendor();
         $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)
             ->findOneBy(['vendor' => $vendor]);
 
-        if (null === $pendingUpdate) {
-            return parent::updateAction($request);
+        if (null !== $pendingUpdate) {
+            $this->addFlash('error', 'sylius.user.verify_email_request');
+
+            return $this->redirectToRoute('vendor_profile');
         }
 
-        $this->addFlash('error', 'sylius.user.verify_email_request');
+        $resource = $vendor;
 
-        return $this->redirectToRoute('vendor_profile');
+        $form = $this->resourceFormFactory->create($configuration, $resource);
+
+        $form->handleRequest($request);
+        if (
+            in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true)
+            && $form->isSubmitted()
+            && $form->isValid()
+        ) {
+            $resource = $form->getData();
+
+            try {
+                $image = $resource->getImage();
+                $this->vendorProfileUpdater->createPendingVendorProfileUpdate(
+                    $form->getData(),
+                    $vendor,
+                    $image
+                );
+                $this->manager->remove($image);
+                $this->manager->flush();
+
+                $vendor->setEditedAt(new \DateTime());
+                $this->manager->flush();
+            } catch (UpdateHandlingException $exception) {
+                if (!$configuration->isHtmlRequest()) {
+                    return $this->createRestView($configuration, $form, $exception->getApiResponseCode());
+                }
+
+                $this->flashHelper->addErrorFlash($configuration, $exception->getFlash());
+
+                return $this->redirectHandler->redirectToReferer($configuration);
+            }
+
+            if ($configuration->isHtmlRequest()) {
+                $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+            }
+
+            if (!$configuration->isHtmlRequest()) {
+                if ($configuration->getParameters()->get('return_content', false)) {
+                    return $this->createRestView($configuration, $resource, Response::HTTP_OK);
+                }
+
+                return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
+            }
+
+            return $this->redirectHandler->redirectToResource($configuration, $resource);
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
+        }
+
+        return $this->render($configuration->getTemplate(ResourceActions::UPDATE . '.html'), [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'resource' => $resource,
+            $this->metadata->getName() => $resource,
+            'form' => $form->createView(),
+        ]);
     }
 
     public function showAction(Request $request): Response
