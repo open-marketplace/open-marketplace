@@ -12,10 +12,13 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
+use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -23,7 +26,7 @@ use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-class VendorUpdateContext implements Context
+class VendorUpdateContext extends RawMinkContext
 {
     private SharedStorageInterface $sharedStorage;
 
@@ -33,16 +36,20 @@ class VendorUpdateContext implements Context
 
     private ObjectManager $manager;
 
+    private VendorImageFactoryInterface $vendorImageFactory;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
-        ObjectManager $manager
+        ObjectManager $manager,
+        VendorImageFactoryInterface $vendorImageFactory,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
         $this->manager = $manager;
+        $this->vendorImageFactory = $vendorImageFactory;
     }
 
     /**
@@ -114,4 +121,87 @@ class VendorUpdateContext implements Context
 
         $this->sharedStorage->set('pendingUpdate', $pendigUpdate);
     }
+
+    /**
+     * @Then I should get validation error
+     */
+    public function iShouldGetValidationError()
+    {
+        $page = $this->getSession()->getPage();
+        $label = $page->find('css','.ui.red.pointing.label.sylius-validation-error');
+        dd($label->getText());
+    }
+
+    /**
+     * @Given vendor have logo attached to profile
+     */
+    public function vendorHaveLogoAttachedToProfile()
+    {
+        /** @var VendorInterface $vendor */
+        $vendor = $this->sharedStorage->get('vendor');
+        $path = 'path/to/file.png';
+        $image = $this->vendorImageFactory->create($path, $vendor);
+        $vendor->setImage($image);
+        $this->sharedStorage->set('path', $path);
+    }
+
+    /**
+     * @When I visit confirmation page
+     */
+    public function iVisitConfirmationPage()
+    {
+        $repository = $this->manager->getRepository(VendorProfileUpdate::class);
+        $updateData = $repository->findAll();
+        $token = $updateData[0]->getToken();
+        $session = $this->getSession();
+        $session->visit("/en_US/vendor/profile-update/".$token);
+    }
+
+    /**
+     * @Then Logo should be updated
+     */
+    public function imageShouldBeUpdated()
+    {
+        $oldImagePath = $this->sharedStorage->get('path');
+        $session = $this->getSession();
+        $session->visit('/en_US/vendors/vendor-slug');
+
+        $page = $session->getPage();
+        $logo = $page->find('css','#vendor_logo');
+        $newPath = $logo->getAttribute('src');
+        Assert::notEq($oldImagePath, $newPath);
+    }
+
+    /**
+     * @Given Vendor company name is :companyName tax ID is :taxId phone number is :phoneNumber
+     */
+    public function vendorCompanyNameIsTaxIdIsPhoneNumberIs($companyName, $taxId, $phoneNumber)
+    {
+        /** @var VendorInterface $vendor */
+        $vendor = $this->sharedStorage->get('vendor');
+        $vendor->setCompanyName($companyName);
+        $vendor->setTaxIdentifier($taxId);
+        $vendor->setPhoneNumber($phoneNumber);
+
+        $this->manager->persist($vendor);
+        $this->manager->flush();
+        $this->sharedStorage->set('vendor',$vendor);
+    }
+
+    /**
+     * @Then I should see form initialized with :companyName :taxId :phoneNumber
+     */
+    public function iShouldSeeAsDefaultFormValues($companyName, $taxId, $phoneNumber)
+    {
+        $page = $this->getSession()->getPage();
+        $companyNameInput = $page->find('css',"#vendor_companyName");
+        $taxIdInput = $page->find('css',"#vendor_taxIdentifier");
+        $phoneNumberInput = $page->find('css',"#vendor_phoneNumber");
+
+        Assert::eq($companyName, $companyNameInput->getAttribute('value'));
+        Assert::eq($taxId, $taxIdInput->getAttribute('value'));
+        Assert::eq($phoneNumber, $phoneNumberInput->getAttribute('value'));
+    }
+
+
 }

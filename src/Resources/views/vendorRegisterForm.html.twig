@@ -11,3 +11,8 @@
       {%  include '@BitBagSyliusMultiVendorMarketplacePlugin/_Alert/infoMessage.html.twig' with vars %}
    {% endif %}
 {% endblock %}
+
+{% block javascripts %}
+   {{ parent() }}
+   <script src="/build/admin/admin-entry.js"></script>
+{% endblock %}
