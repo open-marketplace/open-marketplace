@@ -9,6 +9,7 @@
             <argument type="service" id="bitbag.mvm_plugin.updater.product_from_draft_updater"/>
             <argument type="service" id="bitbag_mvm_plugin.operator.product_draft_files"/>
             <argument type="service" id="bitbag.mvm_plugin.attributes_converter"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
     </services>
 </container>
