@@ -123,6 +123,7 @@ bitbag_mvm_plugin:
         save_draft: 'Save draft'
         send_for_verification: 'Send for verification'
         vendor_under_verification: "Your vendor account is under verification."
+        vendor_verification_accepted: "Request to become a Vendor has been granted by the Administrator."
         order_not_found: "The order with id orderId has not been found"
         invalid_csrf: "Invalid csrf token."
     email:

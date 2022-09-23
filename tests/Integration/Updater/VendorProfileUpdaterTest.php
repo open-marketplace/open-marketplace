@@ -13,7 +13,6 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Updater;
 
 use ApiTestCase\JsonApiTestCase;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
@@ -40,7 +39,6 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
     private EntityRepository $vendorRepository;
 
     private EntityRepository $vendorProfileUpdateRepository;
-
 
     public function setUp(): void
     {
