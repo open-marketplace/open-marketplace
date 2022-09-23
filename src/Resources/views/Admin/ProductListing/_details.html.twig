@@ -9,6 +9,42 @@
         <div class="ui hidden divider"></div>
         {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_more_details.html.twig' %}
         <div class="ui hidden divider"></div>
+        <table class="ui very basic celled table">
+            <tbody>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.id'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.id }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.name'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.code }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.published_at'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.publishedAt | date }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.status'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.status }}</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
         {% if productDraft.status == 'under_verification' %}
             <div class="ui buttons">
