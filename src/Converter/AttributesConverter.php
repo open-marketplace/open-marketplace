@@ -68,6 +68,5 @@ final class AttributesConverter implements AttributesConverterInterface
 
         $this->attributeValueCloner->clone($productDraft, $product);
 
-//        $this->entityManager->flush();
     }
 }
