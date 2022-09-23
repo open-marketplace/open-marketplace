@@ -91,7 +91,6 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
 
         $entityManager->remove($firstProductAttributeTranslation)->shouldHaveBeenCalledOnce();
         $entityManager->remove($secondProductAttributeTranslation)->shouldHaveBeenCalledOnce();
-
     }
 
     public function it_updates_translations(
