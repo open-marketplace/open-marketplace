@@ -15,11 +15,11 @@ Feature: Vendor can hide his products from customers
     And I am on "/en_US/product-listing-slug"
     Then I should see "product-listing-"
     And I am on "/en_US/vendor/product-listings"
-    And I click "hide" button
+    And I click "enable" button
     And I am on "/en_US/product-listing-slug"
     Then I should be notified no page exits
     And I am on "/en_US/vendor/product-listings"
-    And I click "hide" button
+    And I click "enable" button
     And I am on "/en_US/product-listing-slug"
     Then I should see "product-listing-"
 
