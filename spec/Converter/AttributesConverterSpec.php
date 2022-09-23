@@ -58,7 +58,7 @@ final class AttributesConverterSpec extends ObjectBehavior
         ProductInterface $product,
         ProductAttributeInterface $productAttribute,
         AttributesExtractorInterface $attributesExtractor,
-    ) {
+        ) {
         $draftAttributesCollection = new ArrayCollection([$draftAttributeValue->getWrappedObject()]);
         $productDraft->getAttributes()->willReturn($draftAttributesCollection);
 

@@ -14,14 +14,12 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeValueCloner;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValueInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeValueFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
@@ -50,8 +48,8 @@ final class AttributeValueClonerSpec extends ObjectBehavior
         ProductAttributeValueFactoryInterface $attributeValueFactory
     ): void {
         $firstAttribute->getAttribute()->willReturn($draftAttribute);
-        $firstAttribute->getLocaleCode()->willReturn("pl_PL");
-        $firstAttribute->getValue()->willReturn("name");
+        $firstAttribute->getLocaleCode()->willReturn('pl_PL');
+        $firstAttribute->getValue()->willReturn('name');
 
         $draftAttributeCollection = new ArrayCollection([$firstAttribute->getWrappedObject()]);
         $productDraft->getAttributes()->willReturn($draftAttributeCollection);
@@ -63,8 +61,8 @@ final class AttributeValueClonerSpec extends ObjectBehavior
 
         $newProductAttributeValue->setSubject($product)->shouldHaveBeenCalledOnce();
         $newProductAttributeValue->setAttribute($productAttribute)->shouldHaveBeenCalledOnce();
-        $newProductAttributeValue->setLocaleCode("pl_PL")->shouldHaveBeenCalledOnce();
-        $newProductAttributeValue->setValue("name")->shouldHaveBeenCalledOnce();
+        $newProductAttributeValue->setLocaleCode('pl_PL')->shouldHaveBeenCalledOnce();
+        $newProductAttributeValue->setValue('name')->shouldHaveBeenCalledOnce();
         $entityManager->persist($newProductAttributeValue)->shouldHaveBeenCalledOnce();
     }
 }

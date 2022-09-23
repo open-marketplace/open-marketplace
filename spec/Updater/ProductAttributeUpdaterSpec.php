@@ -18,9 +18,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslatio
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
-use Mockery\Matcher\AnyArgs;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 
@@ -30,8 +28,7 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         AttributeTranslationClonerInterface $attributeTranslationCloner,
         ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
-
-    ): void {
+        ): void {
         $this->beConstructedWith($entityManager, $attributeTranslationCloner, $attributeTranslationFactory);
     }
 
@@ -47,7 +44,7 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
         ProductAttributeTranslationInterface $productAttributeTranslation,
         DraftAttributeTranslationInterface $draftAttributeTranslation,
         ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
-    ): void {
+        ): void {
         $productPosition = 5;
         $draftAttributeTranslationCollection = new ArrayCollection([$draftAttributeTranslation->getWrappedObject()]);
         $productAttributeTranslationCollection = new ArrayCollection([]);
@@ -74,12 +71,12 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
         ProductAttributeTranslationInterface $secondProductAttributeTranslation,
         DraftAttributeTranslationInterface $draftAttributeTranslation,
         ProductAttributeTranslationFactoryInterface $attributeTranslationFactory,
-    ): void {
+        ): void {
         $productPosition = 5;
         $draftAttributeTranslationCollection = new ArrayCollection([$draftAttributeTranslation->getWrappedObject()]);
         $productAttributeTranslationCollection = new ArrayCollection([
             $firstProductAttributeTranslation->getWrappedObject(),
-            $secondProductAttributeTranslation->getWrappedObject()
+            $secondProductAttributeTranslation->getWrappedObject(),
         ]);
 
         $productAttribute->getPosition()->willReturn($productPosition);
@@ -112,7 +109,7 @@ final class ProductAttributeUpdaterSpec extends ObjectBehavior
         $draftAttributeTranslationCollection = new ArrayCollection([$draftAttributeTranslation->getWrappedObject()]);
         $productAttributeTranslationCollection = new ArrayCollection([
             $firstProductAttributeTranslation->getWrappedObject(),
-            $secondProductAttributeTranslation->getWrappedObject()
+            $secondProductAttributeTranslation->getWrappedObject(),
         ]);
 
         $draftAttributeTranslation->getLocale()->willReturn('pl_PL');

@@ -43,20 +43,19 @@ final class AttributeTranslationClonerSpec extends ObjectBehavior
         DraftAttributeTranslationInterface $draftAttributeTranslation,
         ProductAttributeTranslationInterface $newProductAttributeTranslation
     ): void {
-
         $draftAttributeCollection = new ArrayCollection([$draftAttributeTranslation->getWrappedObject()]);
 
         $draftAttribute->getTranslations()->willReturn($draftAttributeCollection);
-        $draftAttributeTranslation->getLocale()->willReturn("pl_PL");
-        $draftAttributeTranslation->getName()->willReturn("name");
+        $draftAttributeTranslation->getLocale()->willReturn('pl_PL');
+        $draftAttributeTranslation->getName()->willReturn('name');
         $draftAttribute->getProductAttribute()->willReturn($productAttribute);
 
         $attributeTranslationFactory->create()->willReturn($newProductAttributeTranslation);
 
         $this->clone($draftAttribute);
 
-        $newProductAttributeTranslation->setLocale("pl_PL")->shouldHaveBeenCalledOnce();
-        $newProductAttributeTranslation->setName("name")->shouldHaveBeenCalledOnce();
+        $newProductAttributeTranslation->setLocale('pl_PL')->shouldHaveBeenCalledOnce();
+        $newProductAttributeTranslation->setName('name')->shouldHaveBeenCalledOnce();
         $newProductAttributeTranslation->setTranslatable($productAttribute)->shouldHaveBeenCalledOnce();
     }
 }

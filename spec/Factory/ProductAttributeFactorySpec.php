@@ -14,12 +14,11 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Model\ProductAttribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 
 final class ProductAttributeFactorySpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(ProductAttributeFactoryInterface::class);
     }
@@ -27,11 +26,10 @@ final class ProductAttributeFactorySpec extends ObjectBehavior
     public function it_returns_valid_object(
         DraftAttributeInterface $draftAttribute,
         ProductAttributeInterface $productAttribute,
-    ): void  {
-
+    ): void {
         $draftAttribute->isTranslatable()->willReturn(true);
         $draftAttribute->getStorageType()->willReturn('text');
-        $draftAttribute->getConfiguration()->willReturn(['min'=>2,'max'=>4]);
+        $draftAttribute->getConfiguration()->willReturn(['min' => 2, 'max' => 4]);
         $draftAttribute->getCode()->willReturn('code');
         $draftAttribute->getType()->willReturn('text');
         $draftAttribute->getPosition()->willReturn(2);
