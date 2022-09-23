@@ -59,8 +59,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         DraftAttributeFactoryInterface $draftAttributeFactory
-   ) {
-
+    ) {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
@@ -347,7 +346,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $translation = new DraftAttributeTranslation();
         $translation->setLocale('en_US');
         $translation->setTranslatable($attribute);
-        $translation->setName("attribute");
+        $translation->setName('attribute');
 
         $attribute->addTranslation($translation);
         $this->sharedStorage->set('attribute', $attribute);
@@ -355,11 +354,14 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->entityManager->persist($attribute);
     }
 
-
     /**
      * @Given there is a product listing with code :code and name :name and status :status with attribute and image
      */
-    public function thereIsAProductListingWithCodeAndNameAndStatusWithAttributeAndImage($code, $name, $status)
+    public function thereIsAProductListingWithCodeAndNameAndStatusWithAttributeAndImage(
+        $code,
+        $name,
+        $status
+    )
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -368,7 +370,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $attributeValue = new DraftAttributeValue();
         $attributeValue->setAttribute($attribute);
         $attributeValue->setLocaleCode('en_US');
-        $attributeValue->setValue("attribute_testing_value");
+        $attributeValue->setValue('attribute_testing_value');
 
         $productListing = $this->createProductListing($vendor, $code);
         /** @var ProductDraftInterface $productDraft */
@@ -400,10 +402,9 @@ final class ProductListingContext extends RawMinkContext implements Context
         $page = $this->getSession()->getPage();
 
         $mediaContainer = $page->find('css', '#media');
-        $image = $mediaContainer->find('css','img');
+        $image = $mediaContainer->find('css', 'img');
         $imagePath = $image->getAttribute('src');
 
-        Assert::contains($imagePath,'path/to/file', "no image found");
+        Assert::contains($imagePath, 'path/to/file', 'no image found');
     }
-
 }
