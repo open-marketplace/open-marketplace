@@ -87,4 +87,53 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 
         $this->acceptProductDraft($productDraft);
     }
+
+    public function it_converts_attributes_to_existing_product(
+        ProductDraftInterface $productDraft,
+        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
+        ProductDraftFilesOperatorInterface $filesOperator,
+        ProductListingInterface $productListing,
+        ProductInterface $product,
+        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $updatedProduct,
+        AttributesConverterInterface $attributesConverter
+    ): void {
+        $productDraft->getProductListing()
+            ->willReturn($productListing);
+
+        $productListing->getProduct()
+            ->willReturn($product);
+
+        $productFromDraftUpdater->updateProduct($productDraft)
+            ->willReturn($updatedProduct);
+
+        $filesOperator->removeOldFiles($updatedProduct)->shouldBeCalledTimes(1);
+        $filesOperator->copyFilesToProduct($productDraft, $updatedProduct)->shouldBeCalledTimes(1);
+
+        $attributesConverter->convert($productDraft, $updatedProduct);
+        $this->acceptProductDraft($productDraft);
+    }
+
+    public function it_converts_attributes_to_new_product(
+        ProductDraftInterface $productDraft,
+        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
+        ProductFromDraftFactoryInterface $productFromDraftFactory,
+        ProductDraftFilesOperatorInterface $filesOperator,
+        ProductListingInterface $productListing,
+        ProductInterface $product,
+        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $newProduct,
+        AttributesConverterInterface $attributesConverter
+    ): void {
+        $productDraft->getProductListing()
+            ->willReturn($productListing);
+
+        $productListing->getProduct()
+            ->willReturn(null);
+
+        $productFromDraftUpdater->updateProduct($productDraft)
+            ->willReturn(null);
+
+        $productFromDraftFactory->createSimpleProduct($productDraft)->willReturn($newProduct);
+        $attributesConverter->convert($productDraft, $newProduct);
+        $this->acceptProductDraft($productDraft);
+    }
 }
