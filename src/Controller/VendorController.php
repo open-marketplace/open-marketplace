@@ -105,7 +105,7 @@ final class VendorController extends ResourceController
         }
     }
 
-    public function updateAction(Request $request): Response
+    public function customUpdateAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);

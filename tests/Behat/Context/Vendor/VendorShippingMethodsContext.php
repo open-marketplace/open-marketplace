@@ -59,6 +59,7 @@ class VendorShippingMethodsContext extends RawMinkContext implements Context
     public function iShouldSeeEnabledShippingMethod(string $name, ChannelInterface $channel): void
     {
         $page = $this->getSession()->getPage();
+        dd($this->getSession()->getCurrentUrl());
         $channelTag = sprintf('#vendor_shipping_methods_channels_%s', $channel->getCode());
         $channelSection = $page->find('css', $channelTag);
         $input = $channelSection->find('css', sprintf('input[value=%s][checked=checked]', $name));
