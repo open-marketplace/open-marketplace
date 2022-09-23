@@ -361,8 +361,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $code,
         $name,
         $status
-    )
-    {
+    ) {
         $vendor = $this->sharedStorage->get('vendor');
 
         $attribute = $this->sharedStorage->get('attribute');
