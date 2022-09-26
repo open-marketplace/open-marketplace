@@ -52,6 +52,7 @@ bitbag_mvm_plugin:
         product_rejected_intro: "Corresponding item has been rejected "
         product_overview: "Product overview"
         rejected_listing_msg: "This product has been rejected"
+        more: "More"
         register:
             new_vendors: New vendors
         conversations: Conversations
