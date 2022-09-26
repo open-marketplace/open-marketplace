@@ -375,8 +375,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $code,
         $name,
         $status
-    )
-    {
+    ) {
         $vendor = $this->sharedStorage->get('vendor');
 
         $attribute = $this->sharedStorage->get('attribute');
@@ -408,7 +407,6 @@ final class ProductListingContext extends RawMinkContext implements Context
 
         $this->entityManager->flush();
     }
-
 
     /**
      * @When I click :buttonText
