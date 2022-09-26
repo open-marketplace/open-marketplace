@@ -4,7 +4,15 @@
 {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
 
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
-
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.attributes'|trans }}</div>
+    </div>
+{% endblock %}
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block subcontent %}
