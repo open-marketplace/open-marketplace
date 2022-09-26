@@ -1,5 +1,5 @@
 bitbag_mvm_plugin_customer_index:
-    path: /customers
+    path: /vendor/customers
     defaults:
         _controller: sylius.controller.customer:indexAction
         _sylius:
@@ -7,7 +7,7 @@ bitbag_mvm_plugin_customer_index:
             grid: bitbag_mvm_plugin_vendor_clients
 
 bitbag_mvm_plugin_vendor_customer_show:
-    path: /customers/{id}
+    path: /vendor/customers/{id}
     methods: [GET]
     defaults:
         id: 0
@@ -22,7 +22,7 @@ bitbag_mvm_plugin_vendor_customer_show:
                     - $id
 
 bitbag_mvm_plugin_vendor_customer_order_index:
-    path: /customers/{id}/orders
+    path: /vendor/customers/{id}/orders
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:indexAction

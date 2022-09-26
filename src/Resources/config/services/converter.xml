@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverter"
+                 id="bitbag.mvm_plugin.attributes_converter">
+            <argument type="service" id="bitbag.mvm_plugin.product_attribute_factory"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag_mvm_plugin.extractor.attributes"/>
+            <argument type="service" id="bitbag_mvm_plugin.cloner.attribute_translation"/>
+            <argument type="service" id="bitbag_mvm_plugin.cloner.attribute_value"/>
+        </service>
+    </services>
+</container>

@@ -6,7 +6,11 @@
     {{ form_row(form.companyName, sylius_test_form_attribute('companyName')) }}
     {{ form_row(form.taxIdentifier) }}
     {{ form_row(form.phoneNumber) }}
-    {{ form_row(form.image) }}
+    <div class="field" id="add-avatar">
+        {% form_theme form '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/ImageTheme.html.twig' %}
+        <label>{{ 'sylius.ui.image'|trans }}</label>
+        {{ form_row(form.image, {'label': false}) }}
+    </div>
     {{ form_row(form.description) }}
     {{ form_row(form.vendorAddress) }}
 

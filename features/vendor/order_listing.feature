@@ -14,14 +14,15 @@ Feature: Vendor can see his orders
   Scenario: Rendering all orders
     Given There is order with property "state" with value "new" made with logged in seller
     And There is order with property "state" with value "completed" made with logged in seller
-    And I am on "/en_US/orders"
+    And I am on "/en_US/account/vendor/orders"
     Then I should see "2" orders
+
 
   @ui
   Scenario: Filtering by state
     Given There is order with property "state" with value "new" made with logged in seller
     And There is order with property "state" with value "completed" made with logged in seller
-    And I am on "/en_US/orders"
+    And I am on "/en_US/account/vendor/orders"
     And I select "New" from "criteria[state]"
     And I click "Filter"
     Then I should see "1" orders
@@ -31,7 +32,7 @@ Feature: Vendor can see his orders
     Given There is order with property "paymentState" with value "awaiting_payment" made with logged in seller
     And There is order with property "paymentState" with value "paid" made with logged in seller
     And There is order with property "paymentState" with value "cancelled" made with logged in seller
-    And I am on "/en_US/orders"
+    And I am on "/en_US/account/vendor/orders"
     And I select "Cancelled" from "criteria[paymentState]"
     And I click "Filter"
     Then I should see "1" orders
@@ -44,7 +45,7 @@ Feature: Vendor can see his orders
     Given There is order with property "shippingState" with value "ready" made with logged in seller
     And There is order with property "shippingState" with value "shipped" made with logged in seller
     And There is order with property "shippingState" with value "cancelled" made with logged in seller
-    And I am on "/en_US/orders"
+    And I am on "/en_US/account/vendor/orders"
     And I select "Ready" from "criteria[shippingState]"
     And I click "Filter"
     Then I should see "1" orders
@@ -57,7 +58,7 @@ Feature: Vendor can see his orders
     Given There is order with property "checkoutCompletedAt" with value "2022-01-01" made with logged in seller
     And There is order with property "checkoutCompletedAt" with value "2022-01-02" made with logged in seller
     And There is order with property "checkoutCompletedAt" with value "2022-01-03" made with logged in seller
-    And I am on "/en_US/orders"
+    And I am on "/en_US/account/vendor/orders"
     And I fill in "criteria[date][from][date]" with "2022-01-01"
     And I fill in "criteria[date][to][date]" with "2022-01-02"
     And I click "Filter"
@@ -66,7 +67,7 @@ Feature: Vendor can see his orders
   @ui
   Scenario: Orders list pagination
     Given There is "5" orders made with logged in seller
-    And I am on "/en_US/orders"
+    And I am on "/en_US/account/vendor/orders"
     And Pagination is set to display "2" orders per page
     Then I should see "2" orders on page "1"
     And I should see "2" orders on page "2"
