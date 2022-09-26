@@ -53,7 +53,6 @@ final class VendorMenuBuilder
                 ->setLabel('bitbag_mvm_plugin.ui.become_a_vendor')
                 ->setLabelAttribute('icon', 'star');
         } else {
-
             $menu
                 ->addChild('Attributes', ['route' => 'bitbag_mvm_vendor_draft_attribute_index'])
                 ->setLabel('bitbag_mvm_plugin.ui.draft_attributes')
@@ -73,7 +72,7 @@ final class VendorMenuBuilder
                 ->addChild('Order List', ['route' => 'bitbag_mvm_plugin_order_listing'])
                 ->setLabel('bitbag_mvm_plugin.ui.order_list')
                 ->setLabelAttribute('icon', 'suitcase');
-            
+
             $menu
                 ->addChild('Clients', ['route' => 'bitbag_mvm_plugin_customer_index'])
                 ->setLabel('bitbag_mvm_plugin.ui.clients')
