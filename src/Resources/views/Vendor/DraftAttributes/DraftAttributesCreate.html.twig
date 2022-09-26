@@ -1,0 +1,55 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
+{% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
+
+{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.attributes'|trans }}</div>
+    </div>
+{% endblock %}
+
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
+
+{% block subcontent %}
+
+    {{ form_start(form, {'action': path('bitbag_mvm_plugin_admin_draft_attribute_create', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
+
+    {% if configuration.vars.templates.form is defined %}
+        {% include configuration.vars.templates.form %}
+        {% if not form._token.isRendered %}
+            {{ form_row(form._token) }}
+        {% endif %}
+    {% else %}
+        {{ form_widget(form) }}
+    {% endif %}
+
+
+    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': 'bitbag_mvm_vendor_draft_attribute_index'}} %}
+
+    {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}
+
+{% block topbar %}
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.create.stylesheets'], { 'metadata': metadata }) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.create.javascripts'], { 'metadata': metadata }) }}
+{% endblock %}

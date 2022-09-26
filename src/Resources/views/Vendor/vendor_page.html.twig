@@ -6,7 +6,7 @@
         <div class="four wide column">
                 <div>
                     {% if vendor.getImage is not null %}
-                        <img src="{{ '/' ~ base_vendor_logo_path ~ vendor.getImage.path }}" alt="image broken">
+                        <img id="vendor_logo" src="{{ '/media/image/' ~ vendor.getImage.path }}" alt="image broken">
                     {% endif %}
                 </div>
                 <div>

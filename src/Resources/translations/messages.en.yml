@@ -40,7 +40,7 @@ bitbag_mvm_plugin:
         phone_number: "Phone number"
         company_address: "Company Address"
         postal_code: "Postal code"
-        pending_update_message: "You cannot change your profile information until you accept the previous change."
+        pending_update_message: "Your profile has been edited. Please approve the changes by clicking on the link in the email sent to you."
         vendors: 'Vendors'
         logo: 'Logo'
         invalid_logo: 'Please upload a valid image (jpg/png/svg)'
@@ -54,6 +54,7 @@ bitbag_mvm_plugin:
         product_rejected_intro: "Corresponding item has been rejected "
         product_overview: "Product overview"
         rejected_listing_msg: "This product has been rejected"
+        more: "More"
         register:
             new_vendors: New vendors
         conversations: Conversations
