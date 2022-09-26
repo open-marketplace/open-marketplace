@@ -3,7 +3,13 @@
 {% block title %}{{ 'bitbag_mvm_plugin.ui.draft_attributes'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
-    {% include '@SyliusShop/Account/Order/Index/_breadcrumb.html.twig' %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.attributes'|trans }}</div>
+    </div>
 {% endblock %}
 
 {% block subcontent %}
