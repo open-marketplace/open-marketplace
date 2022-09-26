@@ -27,6 +27,13 @@ final class MultiVendorMarketplaceMenuListener
         $mvmRootMenuItem
             ->addChild('multi_vendor_marketplace_product_listings', [
                 'route' => 'bitbag_mvm_plugin_admin_product_listing_index',
+                'routeParameters' => [
+                    'criteria' => [
+                        'status'=>[
+                            'status' => 'under_verification'
+                            ]
+                        ]
+                ]
             ])
             ->setLabel('bitbag_mvm_plugin.ui.product_listings')
             ->setLabelAttribute('icon', 'list');
