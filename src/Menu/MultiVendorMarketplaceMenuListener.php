@@ -29,11 +29,11 @@ final class MultiVendorMarketplaceMenuListener
                 'route' => 'bitbag_mvm_plugin_admin_product_listing_index',
                 'routeParameters' => [
                     'criteria' => [
-                        'status'=>[
-                            'status' => 'under_verification'
-                            ]
-                        ]
-                ]
+                        'status' => [
+                            'status' => 'under_verification',
+                            ],
+                        ],
+                ],
             ])
             ->setLabel('bitbag_mvm_plugin.ui.product_listings')
             ->setLabelAttribute('icon', 'list');
