@@ -31,17 +31,17 @@ final class ProductListingRepositoryTest extends JsonApiTestCase
         $queryBuilder = $this->repository->createQueryBuilderWithLatestDraft();
 
         $result = $queryBuilder->getQuery()->getResult();
-        self::assertEquals(3, count($result));
+        self::assertCount(3, $result);
     }
 
     public function test_it_finds_product_listings_with_latest_draft_by_vendor(): void
     {
         $this->loadFixturesFromFile('ProductListingRepositoryTest/test_it_finds_product_listings_with_latest_draft_by_vendor.yml');
 
-        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug'=>'oliver-queen-company']);
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $queryBuilder = $this->repository->createQueryBuilderByVendor($vendorOliver);
 
         $result = $queryBuilder->getQuery()->getResult();
-        self::assertEquals(2, count($result));
+        self::assertCount(2, $result);
     }
 }
