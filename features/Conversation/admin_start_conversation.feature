@@ -9,6 +9,7 @@ Feature: Starting conversation by Administrator
     And the store operates in "Poland"
     And there is a vendor user "test@company.domain" registered in country "PL"
     And vendor company name is "company"
+    And there is conversation category "test category"
 
   Scenario: AdminUser begins conversation
     Given I am logged in as an administrator
@@ -32,6 +33,7 @@ Feature: Starting conversation by Administrator
     And I am on "/admin"
     And I follow "Conversations"
     And  I follow "Create"
+    And I select "test category" from "mvm_conversation[category]"
     And I fill in "Message" with "test Message"
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
@@ -39,6 +41,7 @@ Feature: Starting conversation by Administrator
     And I am on "/en_US/account/vendor/conversations"
     And I follow "Conversation"
     Then I should see "test Message"
+    And I should see "test category"
 
   Scenario: AdminUser begins conversation, and Vendor writes back
     Given I am logged in as an administrator

@@ -46,7 +46,7 @@
             <argument type="service" id="bitbag_multi_vendor_marketplace.factory.conversation_message" />
             <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository" />
             <argument type="service" id="sylius.repository.admin_user" />
-            <argument type="service" id="bitbag_multi_vendor_marketplace.repository.conversation_category" />
+            <argument type="service" id="bitbag_mvm_plugin.repository.conversation_category" />
         </service>
     </services>
 </container>

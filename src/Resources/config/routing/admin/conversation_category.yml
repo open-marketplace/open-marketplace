@@ -1,0 +1,9 @@
+bitbag_mvm_conversation_category:
+    resource: |
+        alias: bitbag_mvm_plugin.conversation_category
+        section: admin
+        except: ['show']
+        templates: "@SyliusAdmin\\Crud"
+        grid: conversation_category
+    type: sylius.resource
+    prefix: /admin

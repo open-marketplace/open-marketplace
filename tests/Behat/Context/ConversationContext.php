@@ -14,6 +14,7 @@ namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\MinkContext;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory;
@@ -95,6 +96,17 @@ class ConversationContext extends MinkContext implements Context
     public function iSelectVariant($arg1)
     {
         throw new PendingException();
+    }
+
+    /**
+     * @Given there is conversation category :categoryName
+     */
+    public function thereIsConversationCategory($categoryName)
+    {
+        $category = new Category();
+        $category->setName($categoryName);
+        $this->manager->persist($category);
+        $this->manager->flush();
     }
 
     /**

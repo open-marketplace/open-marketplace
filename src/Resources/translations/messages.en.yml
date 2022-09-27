@@ -1,5 +1,6 @@
 bitbag_mvm_plugin:
     ui:
+        conversation_categories: 'Conversation categories'
         restored: "Product successfully restored"
         removed: "Product successfully removed"
         remove: "Remove"
@@ -105,6 +106,7 @@ bitbag_mvm_plugin:
                 archive: Archive
         menu:
             conversations: Conversations
+            conversation_categories: Conversation categories
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_details: 'Vendor details'
