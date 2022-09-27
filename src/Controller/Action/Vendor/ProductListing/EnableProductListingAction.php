@@ -41,11 +41,11 @@ final class EnableProductListingAction
 
         $enableState = $listing->isEnabled();
 
-        $listing->setEnabled(!$currentVisibility);
+        $listing->setEnabled(!$enableState);
         $product = $listing->getProduct();
 
         if ($product) {
-            $product->setEnabled($currentVisibility);
+            $product->setEnabled($enableState);
             $this->entityManager->persist($product);
         }
         $this->entityManager->persist($listing);
