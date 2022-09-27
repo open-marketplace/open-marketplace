@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\ProductInterface;
 
 class ProductListing implements ProductListingInterface
 {
@@ -32,6 +32,18 @@ class ProductListing implements ProductListingInterface
 
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
+
+    protected bool $removed = false;
+
+    public function isRemoved(): bool
+    {
+        return $this->removed;
+    }
+
+    public function setRemoved(bool $removed): void
+    {
+        $this->removed = $removed;
+    }
 
     public function isEnabled(): bool
     {

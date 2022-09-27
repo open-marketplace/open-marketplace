@@ -8,6 +8,7 @@ imports:
     - suites/ui/admin/managing_vendors.yml
     - suites/ui/admin/verifying_vendors.yml
     - suites/ui/admin/disabling_vendors.yml
+    - suites/ui/admin/restoring_product.yml
     - suites/ui/admin/editing_vendors.yml
     - suites/ui/admin/product_listing.yml
     - suites/shop/order.yml
@@ -19,5 +20,6 @@ imports:
     - suites/vendor/customer_details.yml
     - suites/vendor/customer_details.yml
     - suites/vendor/shipping_methods.yml
+    - suites/ui/vendor/product_delete_vendor.yml
     - suites/vendor/enable_product_listing.yml
 

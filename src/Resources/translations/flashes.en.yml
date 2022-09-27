@@ -3,6 +3,10 @@ vendor:
 
 bitbag_mvm_plugin:
     ui:
+        enabled: "Product successfully enabled"
+        disabled: "Product successfully disabled"
+        restored: "Product successfully restored"
+        removed: "Product successfully removed"
         vendor_updated: "Confirmation email has been sent"
         vendor_disabled: "Vendor's account has been successfully disabled."
         vendor_enabled: "Vendor's account has been successfully enabled."

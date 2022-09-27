@@ -6,18 +6,26 @@
     <div class="ui breadcrumb">
         <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
         <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.my_account'|trans }}</div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'bitbag_mvm_plugin.ui.product_list'|trans }}</div>
     </div>
 {% endblock %}
 
-{% block subcontent %}
-    {% set productDraft = product_draft%}
-    <div class="full height ui" id="wrapper">
+{% set productDraft = product_draft %}
 
-        <h1 class="ui dividing header">
-            {{ 'bitbag_mvm_plugin.ui.product_overview'|trans }}
-            <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
-        </h1>
+{% block subcontent %}
+
+{#    <div class="ui header">#}
+{#        {{ 'sylius.ui.product'|trans }} {{ productDraft.code }}#}
+
+    {% set productDraft = product_draft%}
+{#    <div class="full height ui" id="wrapper">#}
+
+{#        <h1 class="ui dividing header">#}
+{#            {{ 'bitbag_mvm_plugin.ui.product_overview'|trans }}#}
+{#            <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>#}
+{#        </h1>#}
 
         {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_attributes.html.twig' %}
         <div class="ui hidden divider"></div>
@@ -62,9 +70,9 @@
             </tr>
             </tbody>
         </table>
-    </div>
+</div>
 {% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('build/admin/admin-entry.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/admin/admin-entry.css') }}"/>
 {% endblock %}
