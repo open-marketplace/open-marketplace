@@ -1,6 +1,6 @@
 @hiding_product
 Feature: Vendor can hide his products from customers
-  As a Vendor I can set products to hidden status
+  As a Vendor I can disable product
 
   Background:
     Given the store operates on a single channel in "United States"
