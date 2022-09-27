@@ -1,5 +1,5 @@
 @hiding_product
-Feature: Vendor can hide his products from customers
+Feature: Vendor can disable his products
   As a Vendor I can disable product
 
   Background:
