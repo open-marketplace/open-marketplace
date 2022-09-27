@@ -60,6 +60,7 @@ final class RemoveAction
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
         $this->flashBag->set('success', 'bitbag_mvm_plugin.ui.removed');
+
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_vendor_product_listing_index'));
     }
 }

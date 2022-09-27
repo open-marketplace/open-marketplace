@@ -60,6 +60,7 @@ final class RestoreAction
         $this->entityManager->flush();
 
         $this->flashBag->set('success', 'bitbag_mvm_plugin.ui.restored');
+
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
     }
 }
