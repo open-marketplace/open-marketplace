@@ -23,7 +23,7 @@ Feature: Starting conversation by Administrator
     
   Scenario: Vendor begins conversation
     Given I am logged in as "test@company.domain"
-    And I am on "/en_US/vendor/conversation/create"
+    And I am on "/en_US/account/vendor/conversation/create"
     And I fill in "Message" with "test Message"
     And I press "Submit"
     Then I should see "test Message"
@@ -38,7 +38,7 @@ Feature: Starting conversation by Administrator
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
     And I am logged in as "test@company.domain"
-    And I am on "/en_US/vendor/conversations"
+    And I am on "/en_US/account/vendor/conversations"
     And I follow "Conversation"
     Then I should see "test Message"
     And I should see "test category"
@@ -52,7 +52,7 @@ Feature: Starting conversation by Administrator
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
     And I am logged in as "test@company.domain"
-    And I am on "/en_US/vendor/conversations"
+    And I am on "/en_US/account/vendor/conversations"
     And I follow "Conversation with"
     And I fill in "Message" with "second test Message"
     And I press "Submit"
@@ -68,5 +68,5 @@ Feature: Starting conversation by Administrator
     And I press "Submit"
     And there is a vendor user "second@company.domain" registered in country "PL"
     And I am logged in as "second@company.domain"
-    And I am on "/en_US/vendor/conversations"
+    And I am on "/en_US/account/vendor/conversations"
     Then I should see "You have no open conversations"

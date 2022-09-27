@@ -11,11 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverterInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOperatorInterface
@@ -26,14 +28,22 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
     private ProductDraftFilesOperatorInterface $productDraftFilesOperator;
 
+    private AttributesConverterInterface $attributesConverter;
+
+    private EntityManagerInterface $entityManager;
+
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $productDraftFilesOperator
+        ProductDraftFilesOperatorInterface $productDraftFilesOperator,
+        AttributesConverterInterface $attributesConverter,
+        EntityManagerInterface $entityManager
     ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
         $this->productDraftFilesOperator = $productDraftFilesOperator;
+        $this->attributesConverter = $attributesConverter;
+        $this->entityManager = $entityManager;
     }
 
     public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface
@@ -41,6 +51,8 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         if (!$productDraft->getProductListing()->getProduct()) {
             $cratedProduct = $this->productFromDraftFactory->createSimpleProduct($productDraft);
             $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $cratedProduct);
+            $this->attributesConverter->convert($productDraft, $cratedProduct);
+            $this->entityManager->flush();
 
             return $cratedProduct;
         }
@@ -50,6 +62,8 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
         $this->productDraftFilesOperator->removeOldFiles($product);
         $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
+        $this->attributesConverter->convert($productDraft, $product);
+        $this->entityManager->flush();
 
         return $product;
     }

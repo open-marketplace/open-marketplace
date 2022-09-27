@@ -1,10 +1,10 @@
 vendor_product_variant_index:
-    path: /inventory_variants
+    path: vendor/inventory_variants
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Inventory/index.html.twig"
             grid: vendor_product_variant
             vars:
                 route:
@@ -16,7 +16,7 @@ vendor_product_variant_index:
                 subheader: sylius.ui.manage_variants
 
 vendor_product_variant_update:
-    path: /inventory_variants/{id}
+    path: vendor/inventory_variants/{id}
     methods: [ GET, PUT ]
     defaults:
         _controller: sylius.controller.product_variant:updateAction

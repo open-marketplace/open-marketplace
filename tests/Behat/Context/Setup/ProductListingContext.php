@@ -105,7 +105,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then I click :id button
+     * @Then I click button with id :id
      */
     public function iClickButton($id)
     {

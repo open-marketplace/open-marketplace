@@ -7,12 +7,10 @@
                  id="bitbag.mvm_plugin.event_listener.vendor_register_listener">
 
             <argument type="service" id="bitbag.mvm_plugin.service.vendor_slug_generator"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.vendor_registration_file_uploader"/>
+            <argument type="service" id="sylius.image_uploader"/>
 
             <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="generateSlug"/>
-            <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_update" method="generateSlug"/>
             <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="uploadImage"/>
-            <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_update" method="uploadImage"/>
         </service>
     </services>
 </container>

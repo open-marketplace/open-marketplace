@@ -187,6 +187,6 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         $page = $this->getPage();
         $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
-        dd($dropdown->getHtml());
+        Assert::notNull($dropdown);
     }
 }

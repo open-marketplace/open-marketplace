@@ -1,0 +1,17 @@
+default:
+    suites:
+        enable_product:
+            contexts:
+                - bitbag_mvm_plugin.behat.context.setup.product_listing
+                - tests.bitbag_mvm_plugin.behat.context.shop.order
+                - tests.bitbag_mvm_plugin.behat.context.setup.order_context
+                - tests.bitbag_mvm_plugin.behat.context.vendor.vendor_update_context
+                - tests.bitbag_mvm_plugin.behat.context.setup.product
+                - Behat\MinkExtension\Context\MinkContext
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.geographical
+            filters:
+                tags: "@enable_product && @ui"

@@ -26,33 +26,33 @@ class ProductListing implements ProductListingInterface
 
     protected \DateTimeInterface $createdAt;
 
-    protected bool $hidden = false;
+    protected bool $enabled = true;
 
     protected ?ProductInterface $product = null;
 
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
 
-    protected bool $deleted = false;
+    protected bool $removed = false;
 
-    public function isDeleted(): bool
+    public function isRemoved(): bool
     {
-        return $this->deleted;
+        return $this->removed;
     }
 
-    public function setDeleted(bool $deleted): void
+    public function setRemoved(bool $removed): void
     {
-        $this->deleted = $deleted;
+        $this->removed = $removed;
     }
 
-    public function isHidden(): bool
+    public function isEnabled(): bool
     {
-        return $this->hidden;
+        return $this->enabled;
     }
 
-    public function setHidden(bool $hidden): void
+    public function setEnabled(bool $enabled): void
     {
-        $this->hidden = $hidden;
+        $this->enabled = $enabled;
     }
 
     public function __construct()

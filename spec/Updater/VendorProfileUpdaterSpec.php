@@ -13,15 +13,20 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\VendorLogoOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Mailer\Sender\SenderInterface;
+use Symfony\Component\Finder\SplFileInfo;
 
 final class VendorProfileUpdaterSpec extends ObjectBehavior
 {
@@ -29,9 +34,20 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         ProfileUpdateRemoverInterface $remover,
-        VendorProfileUpdateFactoryInterface $vendorProfileFactory
+        VendorProfileUpdateFactoryInterface $vendorProfileFactory,
+        VendorProfileUpdateImageFactoryInterface $imageFactory,
+        ImageUploader $imageUploader,
+        VendorLogoOperatorInterface $vendorLogoOperator
     ): void {
-        $this->beConstructedWith($entityManager, $sender, $remover, $vendorProfileFactory);
+        $this->beConstructedWith(
+            $entityManager,
+            $sender,
+            $remover,
+            $vendorProfileFactory,
+            $imageFactory,
+            $imageUploader,
+            $vendorLogoOperator
+        );
     }
 
     public function it_is_initializable()
@@ -64,7 +80,48 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorProfileInterface $vendorData,
         VendorProfileUpdateInterface $newPendingUpdate,
         ShopUserInterface $user,
-        VendorAddressInterface $vendorAddressUpdate
+        VendorAddressInterface $vendorAddressUpdate,
+        VendorImageInterface $imageFromForm,
+        ): void {
+        $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
+        $newPendingUpdate->getToken()->willReturn('testing-token');
+        $vendorData->getCompanyName()->willReturn('testcompany');
+        $vendorData->getTaxIdentifier()->willReturn('testTaxID');
+        $vendorData->getPhoneNumber()->willReturn('testNumber');
+        $vendorData->getDescription()->willReturn('description');
+        $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
+        $imageFromForm->getFile()->willReturn(null);
+        $imageFromForm->getPath()->willReturn('path/to/file');
+        $newPendingUpdate->getVendorAddress()->shouldBeCalled();
+
+        $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
+        $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
+        $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
+        $newPendingUpdate->setDescription('description')->shouldBeCalled();
+
+        $vendor->getShopUser()->willReturn($user);
+
+        $user->getUsername()->willReturn('test@mail.at');
+
+        $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm);
+
+        $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])
+            ->shouldHaveBeenCalledTimes(1);
+    }
+
+    public function it_creates_new_image_object_for_new_image_upload(
+        SenderInterface $sender,
+        VendorProfileUpdateFactoryInterface $vendorProfileFactory,
+        VendorInterface $vendor,
+        VendorProfileInterface $vendorData,
+        VendorProfileUpdateInterface $newPendingUpdate,
+        ShopUserInterface $user,
+        VendorAddressInterface $vendorAddressUpdate,
+        VendorImageInterface $imageFromForm,
+        VendorProfileUpdateImageFactoryInterface $imageFactory,
+        VendorImageInterface $newImage,
+        ImageUploader $imageUploader,
+        SplFileInfo $fileInfo
     ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
         $newPendingUpdate->getToken()->willReturn('testing-token');
@@ -74,15 +131,22 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
 
+        $imageFromForm->getFile()->willReturn($fileInfo);
+        $imageFactory->createWithFileAndOwner($imageFromForm, $newPendingUpdate)->willReturn($newImage);
+        $imageUploader->upload($newImage);
+        $newPendingUpdate->setImage($newImage)->shouldBeCalledOnce();
+
         $newPendingUpdate->getVendorAddress()->shouldBeCalled();
+
         $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
         $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
+        $imageFromForm->getPath()->willReturn('path/to/file');
         $vendor->getShopUser()->willReturn($user);
         $user->getUsername()->willReturn('test@mail.at');
 
-        $this->createPendingVendorProfileUpdate($vendorData, $vendor);
+        $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm);
 
         $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])
             ->shouldHaveBeenCalledTimes(1);
