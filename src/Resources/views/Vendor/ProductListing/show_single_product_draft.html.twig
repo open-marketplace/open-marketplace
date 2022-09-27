@@ -11,47 +11,60 @@
 {% endblock %}
 
 {% block subcontent %}
-    <h1 class="ui dividing header">
-        {{ 'bitbag_mvm_plugin.ui.product_overview'|trans }}
-        <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
-    </h1>
+    {% set productDraft = product_draft%}
+    <div class="full height ui" id="wrapper">
 
-    <div id="more-details" class="ui styled fluid">
-        {% for translation in product_draft.translations %}
-            <div class="title">
-                <i class="{{ translation.locale|slice(-2)|lower }} flag"></i>
-                {{ translation.locale|sylius_locale_name }}
-            </div>
-            <div class="ui content">
-                <table class="ui very basic celled table">
-                    <tbody>
-                    <tr>
-                        <td class="three wide"><strong class="gray text">{{ 'sylius.ui.name'|trans }}</strong></td>
-                        <td>{{ translation.name }}</td>
-                    </tr>
-                    <tr>
-                        <td class="three wide"><strong class="gray text">{{ 'sylius.ui.slug'|trans }}</strong></td>
-                        <td>{{ translation.slug }}</td>
-                    </tr>
-                    <tr>
-                        <td class="three wide"><strong class="gray text">{{ 'sylius.ui.description'|trans }}</strong></td>
-                        <td>{{ translation.description|nl2br }}</td>
-                    </tr>
-                    <tr>
-                        <td class="three wide"><strong class="gray text">{{ 'sylius.ui.meta_keywords'|trans }}</strong></td>
-                        <td>{{ translation.metaKeywords }}</td>
-                    </tr>
-                    <tr>
-                        <td class="three wide"><strong class="gray text">{{ 'sylius.ui.meta_description'|trans }}</strong></td>
-                        <td>{{ translation.metaDescription }}</td>
-                    </tr>
-                    <tr>
-                        <td class="three wide"><strong class="gray text">{{ 'sylius.ui.short_description'|trans }}</strong></td>
-                        <td>{{ translation.shortDescription }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        {% endfor %}
+        <h1 class="ui dividing header">
+            {{ 'bitbag_mvm_plugin.ui.product_overview'|trans }}
+            <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
+        </h1>
+
+        {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_attributes.html.twig' %}
+        <div class="ui hidden divider"></div>
+        {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_media.html.twig' %}
+        <div class="ui hidden divider"></div>
+        {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_more_details.html.twig' %}
+        <div class="ui hidden divider"></div>
+
+        <table class="ui very celled table">
+            <tbody>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.id'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.id }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.name'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.code }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.published_at'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.publishedAt | date }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.status'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.status }}</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('build/admin/admin-entry.css') }}">
 {% endblock %}
