@@ -19,5 +19,5 @@ imports:
     - suites/vendor/customer_details.yml
     - suites/vendor/customer_details.yml
     - suites/vendor/shipping_methods.yml
-    - suites/vendor/hiding_product_listing.yml
+    - suites/vendor/enable_product_listing.yml
 

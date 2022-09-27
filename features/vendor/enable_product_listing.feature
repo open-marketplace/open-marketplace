@@ -1,4 +1,4 @@
-@hiding_product
+@enable_product
 Feature: Vendor can disable his products
   As a Vendor I can disable product
 
