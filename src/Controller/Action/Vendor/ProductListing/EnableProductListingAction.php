@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-final class VisibilitySwitchAction
+final class EnableProductListingAction
 {
     private ProductListingRepositoryInterface $productListingRepository;
 
@@ -39,13 +39,13 @@ final class VisibilitySwitchAction
     {
         $listing = $this->productListingRepository->find($request->get('id'));
 
-        $currentVisibility = $listing->isEnabled();
+        $enableState = $listing->isEnabled();
 
-        $listing->setEnabled(!$currentVisibility);
+        $listing->setEnabled(!$enableState);
         $product = $listing->getProduct();
 
         if ($product) {
-            $product->setEnabled($currentVisibility);
+            $product->setEnabled($enableState);
             $this->entityManager->persist($product);
         }
         $this->entityManager->persist($listing);

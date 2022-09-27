@@ -1,6 +1,6 @@
-@hiding_product
-Feature: Vendor can hide his products from customers
-  As a Vendor I can set products to hidden status
+@enable_product
+Feature: Vendor can disable his products
+  As a Vendor I can disable product
 
   Background:
     Given the store operates on a single channel in "United States"
@@ -9,7 +9,7 @@ Feature: Vendor can hide his products from customers
     And I am logged in as "test@company.domain"
 
   @ui
-  Scenario: Setting a product listing as hidden check if product disappeared and restoring visibility
+  Scenario: Setting a product listing as disabled, checking if product disappeared and enabling back product
     Given There is a product listing accepted by administrator created by vendor
     And This product listing has status accepted
     And I am on "/en_US/product-listing-slug"

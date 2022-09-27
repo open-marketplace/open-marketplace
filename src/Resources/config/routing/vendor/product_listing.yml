@@ -41,7 +41,6 @@ bitbag_mvm_plugin_vendor_product_listing_send_for_verification:
     defaults:
         _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.send_for_verification
 
-
 bitbag_mvm_plugin_vendor_product_listing_delete_action:
     path: /product-listings-hide/{id}
     methods: [POST]
@@ -52,9 +51,8 @@ bitbag_mvm_plugin_vendor_product_listing_delete_action:
             redirect:
                 route: vendor_product_variant_index
 
-bitbag_mvm_plugin_vendor_product_listing_switch_visibility:
+bitbag_mvm_plugin_vendor_product_listing_enable:
     path: /product-listings/{id}/enable
     methods: [POST]
     defaults:
-        _controller: bitbag_mvm_plugin.controller.visibility_switch_action
-
+        _controller: bitbag_mvm_plugin.controller.enable_product_listing_action

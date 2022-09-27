@@ -1,6 +1,6 @@
 default:
     suites:
-        hiding_product:
+        enable_product:
             contexts:
                 - bitbag_mvm_plugin.behat.context.setup.product_listing
                 - tests.bitbag_mvm_plugin.behat.context.shop.order
@@ -14,4 +14,4 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.geographical
             filters:
-                tags: "@hiding_product && @ui"
+                tags: "@enable_product && @ui"
