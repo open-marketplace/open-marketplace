@@ -15,7 +15,6 @@
         <field name="removed" column="deleted" type="boolean"/>
         <field name="enabled" type="boolean"/>
 
-
         <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" inversed-by="productListings"/>
 
         <one-to-many field="productDrafts" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface" mapped-by="productListing">

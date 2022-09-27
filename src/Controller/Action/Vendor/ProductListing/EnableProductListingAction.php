@@ -15,6 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductL
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 final class EnableProductListingAction
@@ -25,14 +26,18 @@ final class EnableProductListingAction
 
     private RouterInterface $router;
 
+    private FlashBagInterface $flashBag;
+
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
         EntityManagerInterface $entityManager,
-        RouterInterface $router
+        RouterInterface $router,
+        FlashBagInterface $flashBag
     ) {
         $this->productListingRepository = $productListingRepository;
         $this->entityManager = $entityManager;
         $this->router = $router;
+        $this->flashBag = $flashBag;
     }
 
     public function __invoke(Request $request): RedirectResponse
@@ -48,6 +53,10 @@ final class EnableProductListingAction
             $product->setEnabled($enableState);
             $this->entityManager->persist($product);
         }
+
+        $msgString = $enableState ? 'bitbag_mvm_plugin.ui.enabled' : 'bitbag_mvm_plugin.ui.disabled';
+
+        $this->flashBag->set('success', $msgString);
         $this->entityManager->persist($listing);
         $this->entityManager->flush();
 

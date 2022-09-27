@@ -14,12 +14,12 @@
 
             {% if data.removed == false %}
             <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_remove_action', {'id': data.id }) }}" method="post">
-                <button class="item MVM_Button" data-requires-confirmation><i class="trash icon"></i>{{ 'bitbag_mvm_plugin.ui.remove'|trans }}</button>
+                <button class="item require_confirmation_button" data-requires-confirmation><i class="trash icon"></i>{{ 'bitbag_mvm_plugin.ui.remove'|trans }}</button>
             </form>
             {% endif %}
 
             <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_enable', {'id': data.id }) }}" method="post">
-                <button id="enable" class="item MVM_Button" data-requires-confirmation>
+                <button id="enable" class="item require_confirmation_button" data-requires-confirmation>
                     <i class="low vision icon"></i>
                     {% if data.enabled == true %}
                     {{ 'bitbag_mvm_plugin.ui.enable'|trans }}
