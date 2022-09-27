@@ -39,7 +39,7 @@ final class VisibilitySwitchAction
     {
         $listing = $this->productListingRepository->find($request->get('id'));
 
-        $currentVisibility = $listing->isEnabled();
+        $enableState = $listing->isEnabled();
 
         $listing->setEnabled(!$currentVisibility);
         $product = $listing->getProduct();
