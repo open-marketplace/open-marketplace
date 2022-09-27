@@ -8,8 +8,21 @@
         <div class="menu" tabindex="-1">
             {% if data.latestDraft.status != 'under_verification' %}
             <a href="{{ path('bitbag_mvm_plugin_vendor_product_listing_edit_product', {'id': data.id }) }}"
-               class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}</a>
+               class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}
+            </a>
             {% endif %}
+
+            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_enable', {'id': data.id }) }}" method="post">
+                <button id="enable" class="row" data-requires-confirmation>
+                    <i class="low vision icon"></i>
+                    {% if data.enabled == true %}
+                    {{ 'bitbag_mvm_plugin.ui.enable'|trans }}
+                    {% else %}
+                    {{ 'bitbag_mvm_plugin.ui.disable'|trans }}
+                    {% endif %}
+                </button>
+            </form>
+
             {% if data.latestDraft.status != 'under_verification' and data.latestDraft.status != 'verified' %}
             <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_send_for_verification', {'id': data.id }) }}" method="post">
                 <button class="item send-for-verification" data-requires-confirmation>

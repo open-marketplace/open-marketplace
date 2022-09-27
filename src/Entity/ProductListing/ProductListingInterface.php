@@ -40,4 +40,8 @@ interface ProductListingInterface extends ResourceInterface
     public function getVendor(): VendorInterface;
 
     public function setVendor(VendorInterface $vendor): void;
+
+    public function isEnabled(): bool;
+
+    public function setEnabled(bool $enabled): void;
 }

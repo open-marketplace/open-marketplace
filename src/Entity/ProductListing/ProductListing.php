@@ -26,10 +26,22 @@ class ProductListing implements ProductListingInterface
 
     protected \DateTimeInterface $createdAt;
 
+    protected bool $enabled = true;
+
     protected ?ProductInterface $product = null;
 
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
+    }
 
     public function __construct()
     {
