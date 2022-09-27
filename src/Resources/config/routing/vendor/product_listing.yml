@@ -45,4 +45,4 @@ bitbag_mvm_plugin_vendor_product_listing_switch_visibility:
     path: /product-listings/{id}/enable
     methods: [POST]
     defaults:
-        _controller: bitbag_mvm_plugin.controller.visibility_switch_action
+        _controller: bitbag_mvm_plugin.controller.enable_product_listing_action
