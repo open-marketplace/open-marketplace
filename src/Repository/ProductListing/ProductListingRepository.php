@@ -56,8 +56,8 @@ class ProductListingRepository extends EntityRepository implements ProductListin
 
         return $qb
             ->andWhere('pl.vendor = :vendor')
-            ->andWhere('pl.deleted = :notDeleted')
-            ->setParameter('notDeleted', false)
+            ->andWhere('pl.removed = :notRemoved')
+            ->setParameter('notRemoved', false)
             ->setParameter('vendor', $vendorId)
             ;
     }

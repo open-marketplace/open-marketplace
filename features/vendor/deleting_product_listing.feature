@@ -12,6 +12,6 @@ Feature: Hiding product listing visibility
     Given there is 1 product listing created by vendor
     And Product listing status is "Created"
     And I am on "/en_US/account/vendor/product-listings"
-    Then I should see "Delete"
-    And I click "Delete" button
-    Then I should not see "Delete"
+    Then I should see "Remove"
+    And I click "Remove" button
+    Then I should see "There are no results to display"

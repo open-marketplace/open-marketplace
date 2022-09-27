@@ -16,9 +16,11 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductL
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-final class DeleteAction
+final class RemoveAction
 {
     private ProductListingRepositoryInterface $productListingRepository;
 
@@ -26,14 +28,18 @@ final class DeleteAction
 
     private EntityManagerInterface $entityManager;
 
+    private FlashBagInterface $flashBag;
+
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
         RouterInterface $router,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        FlashBag $flashBag
     ) {
         $this->productListingRepository = $productListingRepository;
         $this->router = $router;
         $this->entityManager = $entityManager;
+        $this->flashBag = $flashBag;
     }
 
     public function __invoke(Request $request): RedirectResponse
@@ -42,19 +48,18 @@ final class DeleteAction
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
         $newStatus = true;
-        $productListing->setDeleted($newStatus);
+        $productListing->setRemoved($newStatus);
 
         $product = $productListing->getProduct();
 
         if ($product) {
-            $product->setDeleted($newStatus);
             $product->setEnabled(false);
             $this->entityManager->persist($product);
         }
 
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
-
+        $this->flashBag->set('success', 'bitbag_mvm_plugin.ui.removed');
         return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_vendor_product_listing_index'));
     }
 }

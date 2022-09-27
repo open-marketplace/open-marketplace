@@ -33,16 +33,16 @@ class ProductListing implements ProductListingInterface
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
 
-    protected bool $deleted = false;
+    protected bool $removed = false;
 
-    public function isDeleted(): bool
+    public function isRemoved(): bool
     {
-        return $this->deleted;
+        return $this->removed;
     }
 
-    public function setDeleted(bool $deleted): void
+    public function setRemoved(bool $removed): void
     {
-        $this->deleted = $deleted;
+        $this->removed = $removed;
     }
 
     public function isEnabled(): bool

@@ -12,9 +12,9 @@
             </a>
             {% endif %}
 
-            {% if data.deleted == false %}
-            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_delete_action', {'id': data.id }) }}" method="post">
-                <button class="item MVM_Button" data-requires-confirmation><i class="trash icon"></i>{{ 'sylius.ui.delete'|trans }}</button>
+            {% if data.removed == false %}
+            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_remove_action', {'id': data.id }) }}" method="post">
+                <button class="item MVM_Button" data-requires-confirmation><i class="trash icon"></i>{{ 'bitbag_mvm_plugin.ui.remove'|trans }}</button>
             </form>
             {% endif %}
 

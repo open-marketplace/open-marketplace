@@ -1,5 +1,8 @@
 bitbag_mvm_plugin:
     ui:
+        restored: "Product successfully restored"
+        removed: "Product successfully removed"
+        remove: "Remove"
         restore_visibility: 'Restore visibility'
         restore: 'Restore'
         new_product_draft: "New product draft"

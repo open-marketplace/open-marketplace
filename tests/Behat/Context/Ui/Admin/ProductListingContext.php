@@ -333,7 +333,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given This product listing visibility is hidden
+     * @Given This product listing visibility is removed
      */
     public function thisProductListingVisibilityIsHidden()
     {
