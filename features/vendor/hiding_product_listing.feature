@@ -9,7 +9,7 @@ Feature: Vendor can hide his products from customers
     And I am logged in as "test@company.domain"
 
   @ui
-  Scenario: Setting a product listing as hidden check if product disappeared and restoring visibility
+  Scenario: Setting a product listing as disabled, checking if product disappeared and enabling back product
     Given There is a product listing accepted by administrator created by vendor
     And This product listing has status accepted
     And I am on "/en_US/product-listing-slug"
