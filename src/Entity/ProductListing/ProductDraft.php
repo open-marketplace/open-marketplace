@@ -426,7 +426,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         return $this->getTaxons()->contains($taxon);
     }
 
-    public function getMainTaxon(): ?TaxonInterface
+    public function getMainTaxon(): TaxonInterface|null
     {
         return $this->mainTaxon;
     }
