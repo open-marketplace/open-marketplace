@@ -15,6 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagP
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperator;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
@@ -26,14 +27,18 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
     private ProductDraftFilesOperatorInterface $productDraftFilesOperator;
 
+    private ProductDraftTaxonsOperator $productDraftTaxonsOperator;
+
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $productDraftFilesOperator
+        ProductDraftFilesOperatorInterface $productDraftFilesOperator,
+        ProductDraftTaxonsOperator $productDraftTaxonsOperator
     ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
         $this->productDraftFilesOperator = $productDraftFilesOperator;
+        $this->productDraftTaxonsOperator = $productDraftTaxonsOperator;
     }
 
     public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface
@@ -41,6 +46,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         if (!$productDraft->getProductListing()->getProduct()) {
             $cratedProduct = $this->productFromDraftFactory->createSimpleProduct($productDraft);
             $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $cratedProduct);
+            $this->productDraftTaxonsOperator->copyTaxonsToProduct($productDraft, $cratedProduct);
 
             return $cratedProduct;
         }
@@ -50,6 +56,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
         $this->productDraftFilesOperator->removeOldFiles($product);
         $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
+        $this->productDraftTaxonsOperator->updateTaxonsInProduct($productDraft, $product);
 
         return $product;
     }
