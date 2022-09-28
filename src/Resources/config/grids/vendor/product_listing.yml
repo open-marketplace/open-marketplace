@@ -30,13 +30,15 @@ sylius_grid:
           type: datetime
           label: bitbag_mvm_plugin.ui.published_at
         getLatestDraft.verifiedAt:
-          type: datetime
+          type: twig
           label: bitbag_mvm_plugin.ui.verified_at
+          options:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_verified_at.html.twig"
         getLatestDraft.status:
           type: twig
           label: bitbag_mvm_plugin.ui.status
           options:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_status.html.twig"
+             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_status.html.twig"
       actions:
         main:
           create:
