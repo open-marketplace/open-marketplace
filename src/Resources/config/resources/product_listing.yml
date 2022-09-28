@@ -30,3 +30,10 @@ sylius_resource:
       driver: doctrine/orm
       classes:
         model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage
+
+    bitbag_mvm_plugin.product_draft_taxons:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftTaxon
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftTaxonInterface
+        repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftTaxonRepository
