@@ -50,7 +50,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     /** @var Collection<int, AttributeValueInterface> */
     protected Collection $attributes;
 
-    protected ?TaxonInterface $mainTaxon;
+    protected TaxonInterface|null $mainTaxon;
 
     /** @var Collection<array-key, ProductDraftTaxonInterface> */
     protected $productDraftTaxons;
