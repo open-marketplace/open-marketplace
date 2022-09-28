@@ -66,6 +66,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         $this->createdAt = new \DateTime();
         $this->versionNumber = 1;
         $this->attributes = new ArrayCollection();
+        $this->mainTaxon = null;
         $this->productDraftTaxons = new ArrayCollection();
     }
 
