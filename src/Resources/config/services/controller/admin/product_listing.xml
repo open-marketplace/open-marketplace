@@ -33,5 +33,14 @@
             <argument type="service" id="bitbag_mvm_plugin.repository.product_draft" />
             <tag name="controller.service_arguments" />
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\RestoreAction"
+                 id="bitbag_mvm_plugin.controller.product_listing.restore_action">
+            <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
+            <argument type="service" id="router.default"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="session.flash_bag"/>
+            <tag name="controller.service_arguments" />
+        </service>
     </services>
 </container>

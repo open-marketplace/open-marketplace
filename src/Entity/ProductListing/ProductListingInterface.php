@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProductListingInterface extends ResourceInterface
@@ -40,4 +40,12 @@ interface ProductListingInterface extends ResourceInterface
     public function getVendor(): VendorInterface;
 
     public function setVendor(VendorInterface $vendor): void;
+
+    public function isRemoved(): bool;
+
+    public function setRemoved(bool $deleted): void;
+
+    public function isEnabled(): bool;
+
+    public function setEnabled(bool $enabled): void;
 }

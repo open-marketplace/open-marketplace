@@ -18,6 +18,18 @@ trait ProductTrait
 {
     protected ?VendorInterface $vendor;
 
+    protected bool $deleted = false;
+
+    public function isDeleted(): bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): void
+    {
+        $this->deleted = $deleted;
+    }
+
     public function resetImages(): void
     {
         $this->images = new ArrayCollection();

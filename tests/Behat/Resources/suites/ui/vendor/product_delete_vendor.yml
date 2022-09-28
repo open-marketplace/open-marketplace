@@ -1,0 +1,12 @@
+default:
+    suites:
+        restoring_visibility:
+            contexts:
+            - bitbag.mvm_plugin.behat.context.ui.vendor.product_listing
+            - Behat\MinkExtension\Context\MinkContext
+            - sylius.behat.context.setup.shop_security
+            - sylius.behat.context.setup.channel
+            - bitbag.sylius_mvm_plugin.behat.context.setup.vendor
+            - sylius.behat.context.hook.doctrine_orm
+            filters:
+                tags: '@product_removal_vendor && @ui'

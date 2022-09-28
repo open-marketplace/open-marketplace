@@ -25,4 +25,8 @@ interface ProductInterface extends BaseProductInterface
     public function setVendor(?VendorInterface $vendor): void;
 
     public function setAttributesFrom(ProductDraftInterface $draft): void;
+
+    public function isDeleted(): bool;
+
+    public function setDeleted(bool $deleted): void;
 }
