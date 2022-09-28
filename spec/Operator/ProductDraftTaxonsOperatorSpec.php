@@ -7,7 +7,6 @@
  * an email on hello@bitbag.io.
  */
 
-
 declare(strict_types=1);
 
 namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Operator;
@@ -20,9 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperato
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
-use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -55,8 +52,7 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
         ProductDraftTaxonInterface $productDraftTaxon,
         ProductTaxonInterface $productTaxon,
         FactoryInterface $productTaxonFactory
-    )
-    {
+    ) {
         $productDraft->getMainTaxon()->willReturn($taxon);
         $productTaxonFactory->createNew()->willReturn($productTaxon);
         $productDraftTaxon->getTaxon()->willReturn($taxon);
