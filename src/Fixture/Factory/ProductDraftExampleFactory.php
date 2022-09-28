@@ -15,6 +15,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\Pro
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductDraftImageFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
@@ -26,10 +27,14 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -57,6 +62,12 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
 
     private SlugGeneratorInterface $slugGenerator;
 
+    private FileLocatorInterface $fileLocator;
+
+    private ImageUploaderInterface $imageUploader;
+
+    private ProductDraftImageFactoryInterface $draftImageFactory;
+
     public function __construct(
         FactoryInterface $productDraftFactory,
         FactoryInterface $productListingPriceFactory,
@@ -66,8 +77,11 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
         ChannelRepositoryInterface $channelRepository,
         RepositoryInterface $localeRepository,
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        SlugGeneratorInterface $slugGenerator
-    ) {
+        SlugGeneratorInterface $slugGenerator,
+        ImageUploaderInterface $imageUploader,
+        ProductDraftImageFactoryInterface $draftImageFactory,
+        FileLocatorInterface $fileLocator,
+        ) {
         $this->productDraftFactory = $productDraftFactory;
         $this->productListingPriceFactory = $productListingPriceFactory;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
@@ -81,6 +95,9 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
+        $this->fileLocator = $fileLocator;
+        $this->imageUploader = $imageUploader;
+        $this->draftImageFactory = $draftImageFactory;
     }
 
     protected function configureOptions(OptionsResolver $resolver): void
@@ -105,6 +122,7 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
             ->setDefault('added', false)
             ->setDefault('accepted', false)
             ->setDefault('rejected', false)
+            ->setDefault('images', [])
         ;
     }
 
@@ -129,6 +147,8 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
         }
 
         $this->createTranslations($productDraft, $options);
+
+        $this->createRandomImage($productDraft, $options);
 
         if (true === $options['added']) {
             $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
@@ -182,5 +202,32 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
         foreach ($locales as $locale) {
             yield $locale->getCode();
         }
+    }
+
+    private function createRandomImage(ProductDraftInterface $product, array $options): void
+    {
+        if (!count($options['images'])) {
+            return;
+        }
+
+        $randomNumber = random_int(0, count($options['images']) - 1);
+
+        $image = $options['images'][$randomNumber];
+
+        $imagePath = $image['path'];
+        $imageType = $image['type'] ?? null;
+        /** @var string $imagePath */
+        $imagePath =  $this->fileLocator->locate($imagePath);
+        $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
+
+        /** @var ImageInterface $productImage */
+        $productImage = $this->draftImageFactory->createNew();
+        $productImage->setFile($uploadedImage);
+        $productImage->setType($imageType);
+
+        $this->imageUploader->upload($productImage);
+
+        $product->addImage($productImage);
+        $productImage->setOwner($product);
     }
 }

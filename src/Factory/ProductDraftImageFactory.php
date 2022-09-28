@@ -14,7 +14,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage;
 use Sylius\Component\Core\Model\ImageInterface;
 
-final class ProductDraftImageFactory
+final class ProductDraftImageFactory implements ProductDraftImageFactoryInterface
 {
     public function createNew(): ImageInterface
     {
