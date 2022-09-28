@@ -16,7 +16,6 @@ use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Payment;
-use Sylius\Component\Core\Model\Shipment;
 
 final class OrderCloner implements OrderClonerInterface
 {
@@ -24,19 +23,15 @@ final class OrderCloner implements OrderClonerInterface
 
     private AddressClonerInterface $addressCloner;
 
-    private ShipmentClonerInterface $shipmentCloner;
-
     private PaymentClonerInterface $paymentCloner;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         AddressClonerInterface $addressCloner,
-        ShipmentClonerInterface $shipmentCloner,
         PaymentClonerInterface $paymentCloner
     ) {
         $this->entityManager = $entityManager;
         $this->addressCloner = $addressCloner;
-        $this->shipmentCloner = $shipmentCloner;
         $this->paymentCloner = $paymentCloner;
     }
 
@@ -71,14 +66,6 @@ final class OrderCloner implements OrderClonerInterface
         $newOrder->setPaymentState($originalOrder->getPaymentState());
         $newOrder->setShippingState($originalOrder->getShippingState());
         $newOrder->setCustomer($originalOrder->getCustomer());
-
-        $shipments = $originalOrder->getShipments();
-        foreach ($shipments as $shipment) {
-            $newShipment = new Shipment();
-            $newShipment->setOrder($newOrder);
-            $this->shipmentCloner->clone($shipment, $newShipment);
-            $newOrder->addShipment($newShipment);
-        }
 
         $payments = $originalOrder->getPayments();
         /** @var Payment $payment */

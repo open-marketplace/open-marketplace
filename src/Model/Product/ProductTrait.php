@@ -23,6 +23,11 @@ trait ProductTrait
         $this->images = new ArrayCollection();
     }
 
+    public function hasVendor(): bool
+    {
+        return isset($this->vendor);
+    }
+
     public function getVendor(): ?VendorInterface
     {
         return $this->vendor;

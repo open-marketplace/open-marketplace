@@ -11,18 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Core\Model\Product as BaseProduct;
+use Sylius\Component\Core\Model\Shipment as BaseShipment;
 
-class Product extends BaseProduct implements ProductInterface
+class Shipment extends BaseShipment implements ShipmentInterface
 {
     private ?VendorInterface $vendor;
-
-    public function resetImages(): void
-    {
-        $this->images = new ArrayCollection();
-    }
 
     public function hasVendor(): bool
     {
@@ -37,10 +30,5 @@ class Product extends BaseProduct implements ProductInterface
     public function setVendor(?VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
-    }
-
-    public function setAttributesFrom(ProductDraftInterface $draft): void
-    {
-        $this->attributes = $draft->getAttributes();
     }
 }

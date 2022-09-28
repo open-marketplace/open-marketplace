@@ -13,27 +13,41 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Manager;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Helper\OrderVendorHelperInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ShipmentInterface;
 
 final class OrderManagerSpec extends ObjectBehavior
 {
     public function let(
         OrderFactoryInterface $factory,
         OrderClonerInterface $cloner,
+        ShipmentClonerInterface $shipmentCloner,
         EntityManager $entityManager,
         OrderItemClonerInterface $orderItemCloner,
-        OrderItemFactoryInterface $itemFactory
+        OrderItemFactoryInterface $itemFactory,
+        OrderVendorHelperInterface $vendorHelper
     ): void {
-        $this->beConstructedWith($factory, $cloner, $entityManager, $orderItemCloner, $itemFactory);
+        $this
+            ->beConstructedWith(
+                $factory,
+                $cloner,
+                $shipmentCloner,
+                $entityManager,
+                $orderItemCloner,
+                $itemFactory,
+                $vendorHelper
+            )
+        ;
     }
 
     public function it_is_initializable(): void
@@ -49,13 +63,12 @@ final class OrderManagerSpec extends ObjectBehavior
         OrderFactoryInterface $factory,
         OrderItemFactoryInterface $itemFactory,
         ShipmentInterface $shipment,
-        OrderItemInterface $item,
         OrderItemInterface $newItem,
-        ): void {
+        OrderVendorHelperInterface $vendorHelper
+    ): void {
         $factory->createNew()->willReturn($newOrder);
         $itemFactory->createNew()->willReturn($newItem);
-        $shipmentCollection = new ArrayCollection([$shipment->getWrappedObject()]);
-        $newOrder->getShipments()->willReturn($shipmentCollection);
+        $vendorHelper->getShipmentByVendor($order, $itemVendor)->willReturn($shipment);
 
         $this->generateNewSecondaryOrder($order, $itemVendor, $orderItem)->shouldReturn($newOrder);
 
