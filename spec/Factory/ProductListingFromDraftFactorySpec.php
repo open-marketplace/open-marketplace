@@ -21,7 +21,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFac
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductListingFromDraftFactorySpec extends ObjectBehavior
@@ -88,7 +87,7 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
         ProductListingPricingClonerInterface $productListingPricingCloner,
         DraftAttributeValueInterface $attributeValue,
-    ): void {
+        ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
 

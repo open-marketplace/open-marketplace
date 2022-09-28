@@ -18,5 +18,5 @@ interface ProductDraftTaxonsOperatorInterface
 {
     public function copyTaxonsToProduct(ProductDraftInterface $productDraft, ProductInterface $product): ?ProductInterface;
 
-    public function updateTaxonsInProduct(ProductDraftInterface $productDraft, ProductInterface $product): ProductInterface;
+    public function updateTaxonsInProduct(ProductDraftInterface $productDraft, ProductInterface $product): void;
 }

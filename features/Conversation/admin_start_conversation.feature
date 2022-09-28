@@ -9,6 +9,7 @@ Feature: Starting conversation by Administrator
     And the store operates in "Poland"
     And there is a vendor user "test@company.domain" registered in country "PL"
     And vendor company name is "company"
+    And there is conversation category "test category"
 
   Scenario: AdminUser begins conversation
     Given I am logged in as an administrator
@@ -22,7 +23,7 @@ Feature: Starting conversation by Administrator
     
   Scenario: Vendor begins conversation
     Given I am logged in as "test@company.domain"
-    And I am on "/en_US/vendor/conversation/create"
+    And I am on "/en_US/account/vendor/conversation/create"
     And I fill in "Message" with "test Message"
     And I press "Submit"
     Then I should see "test Message"
@@ -32,13 +33,15 @@ Feature: Starting conversation by Administrator
     And I am on "/admin"
     And I follow "Conversations"
     And  I follow "Create"
+    And I select "test category" from "mvm_conversation[category]"
     And I fill in "Message" with "test Message"
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
     And I am logged in as "test@company.domain"
-    And I am on "/en_US/vendor/conversations"
+    And I am on "/en_US/account/vendor/conversations"
     And I follow "Conversation"
     Then I should see "test Message"
+    And I should see "test category"
 
   Scenario: AdminUser begins conversation, and Vendor writes back
     Given I am logged in as an administrator
@@ -49,7 +52,7 @@ Feature: Starting conversation by Administrator
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
     And I am logged in as "test@company.domain"
-    And I am on "/en_US/vendor/conversations"
+    And I am on "/en_US/account/vendor/conversations"
     And I follow "Conversation with"
     And I fill in "Message" with "second test Message"
     And I press "Submit"
@@ -65,5 +68,5 @@ Feature: Starting conversation by Administrator
     And I press "Submit"
     And there is a vendor user "second@company.domain" registered in country "PL"
     And I am logged in as "second@company.domain"
-    And I am on "/en_US/vendor/conversations"
+    And I am on "/en_US/account/vendor/conversations"
     Then I should see "You have no open conversations"

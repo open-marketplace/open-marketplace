@@ -27,6 +27,13 @@ final class MultiVendorMarketplaceMenuListener
         $mvmRootMenuItem
             ->addChild('multi_vendor_marketplace_product_listings', [
                 'route' => 'bitbag_mvm_plugin_admin_product_listing_index',
+                'routeParameters' => [
+                    'criteria' => [
+                        'status' => [
+                            'status' => 'under_verification',
+                            ],
+                        ],
+                ],
             ])
             ->setLabel('bitbag_mvm_plugin.ui.product_listings')
             ->setLabelAttribute('icon', 'list');
@@ -41,6 +48,11 @@ final class MultiVendorMarketplaceMenuListener
         $mvmRootMenuItem
             ->addChild('conversations', ['route' => 'bitbag_mvm_plugin_admin_conversation_index'])
             ->setLabel('bitbag_mvm_plugin.ui.menu.conversations')
+            ->setLabelAttribute('icon', 'inbox');
+
+        $mvmRootMenuItem
+            ->addChild('conversations_category', ['route' => 'bitbag_mvm_plugin_admin_conversation_category_index'])
+            ->setLabel('bitbag_mvm_plugin.ui.menu.conversation_categories')
             ->setLabelAttribute('icon', 'inbox');
     }
 }

@@ -32,8 +32,12 @@ class CustomerDashboardContext extends MinkContext implements Context
 
     private ObjectManager $manager;
 
-    public function __construct(CustomerDashboardPage $dashboardPage, UserRepositoryInterface $userRepository, ExampleFactoryInterface $userFactory, ObjectManager $manager)
-    {
+    public function __construct(
+        CustomerDashboardPage $dashboardPage,
+        UserRepositoryInterface $userRepository,
+        ExampleFactoryInterface $userFactory,
+        ObjectManager $manager
+    ) {
         $this->dashboardPage = $dashboardPage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
@@ -56,12 +60,14 @@ class CustomerDashboardContext extends MinkContext implements Context
         Assert::true($this->dashboardPage->itemWithValueDoesntExistsInsideSidebar($arg1), "Found $arg1 inside sidebar");
     }
 
-
     /**
      * @Given there is a :status vendor user :vendor_user_email registered in country :country_code
      */
-    public function thereIsAVendorUserRegisteredInCountry($status, $vendor_user_email, $country_code): void
-    {
+    public function thereIsAVendorUserRegisteredInCountry(
+        $status,
+        $vendor_user_email,
+        $country_code
+    ): void {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
         $this->userRepository->add($user);
@@ -83,5 +89,4 @@ class CustomerDashboardContext extends MinkContext implements Context
         $this->manager->persist($vendor);
         $this->manager->flush();
     }
-
 }

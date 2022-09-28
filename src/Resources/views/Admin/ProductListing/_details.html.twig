@@ -1,8 +1,22 @@
 <div id="details">
     <h4 class="ui top attached large header">{{ 'bitbag_mvm_plugin.ui.details'|trans }}</h4>
     <div class="ui attached segment">
+        {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_attributes.html.twig' %}
+        <div class="ui hidden divider"></div>
+        {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_media.html.twig' %}
+        <div class="ui hidden divider"></div>
+        {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/details/_more_details.html.twig' %}
+        <div class="ui hidden divider"></div>
         <table class="ui very basic celled table">
             <tbody>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.id'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.id }}</li>
+                    </ul>
+                </td>
+            </tr>
             <tr>
                 <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.name'|trans }}</strong></td>
                 <td>
@@ -68,6 +82,7 @@
         <div class="ui attached segment">
             <div class="ui stackable grid">
                 <div class="column ten wide">
+                    {{ form_row(form.category) }}
                     {{ form_row(form.messages.vars.prototype.content) }}
                 </div>
                 <div class="column six wide">
@@ -76,7 +91,7 @@
                 {{ form_row(form._token) }}
             </div>
         </div>
-            <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
         <div class="button" style="display: inline-block">
             <input class="ui red labeled icon button" type="submit" value="{{ 'bitbag_mvm_plugin.ui.reject'|trans }}"/>
         </div>

@@ -51,6 +51,7 @@ final class SendForVerificationAction
     {
         $listing = $this->productListingRepository->find($request->get('id'));
 
+        /** @var ProductDraftInterface $productDraft */
         $productDraft = $this->productDraftRepository->findLatestDraft($listing);
 
         if (null != $productDraft && ProductDraftInterface::STATUS_CREATED === $productDraft->getStatus()) {

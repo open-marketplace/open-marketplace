@@ -2,6 +2,7 @@ sylius_grid:
   templates:
     action:
       details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
+      restore: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/restore.html.twig'
     filter:
       product_listing_status: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Filter/product_listing_status.html.twig'
   grids:
@@ -12,6 +13,8 @@ sylius_grid:
           class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
           repository:
             method: createQueryBuilderWithLatestDraft
+      sorting:
+        id: desc
       filters:
         search:
           type: string
@@ -23,18 +26,26 @@ sylius_grid:
           type: product_listing_status
           label: bitbag_mvm_plugin.ui.status
       fields:
+        id:
+          type: string
+          label: bitbag_mvm_plugin.ui.id
+          sortable: ~
         code:
           type: string
           label: bitbag_mvm_plugin.ui.code
+          sortable: ~
         getLatestDraft.publishedAt:
           type: datetime
           label: bitbag_mvm_plugin.ui.published_at
+          sortable: ~
         getLatestDraft.verifiedAt:
           type: datetime
           label: bitbag_mvm_plugin.ui.verified_at
+          sortable: ~
         getLatestDraft.status:
           type: twig
           label: bitbag_mvm_plugin.ui.status
+          sortable: ~
           options:
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_status.html.twig"
       actions:
@@ -47,3 +58,5 @@ sylius_grid:
                 route: bitbag_mvm_plugin_admin_product_listing_show
                 parameters:
                   id: resource.id
+          restore_visibility:
+            type: restore

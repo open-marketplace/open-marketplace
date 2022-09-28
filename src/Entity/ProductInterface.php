@@ -23,4 +23,8 @@ interface ProductInterface extends BaseProductInterface
     public function resetImages(): void;
 
     public function setAttributesFrom(ProductDraftInterface $draft): void;
+
+    public function isDeleted(): bool;
+
+    public function setDeleted(bool $deleted): void;
 }

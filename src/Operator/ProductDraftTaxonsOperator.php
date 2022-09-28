@@ -48,7 +48,7 @@ class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInterface
         return $product;
     }
 
-    public function updateTaxonsInProduct(ProductDraftInterface $productDraft, ProductInterface $product): ProductInterface
+    public function updateTaxonsInProduct(ProductDraftInterface $productDraft, ProductInterface $product): void
     {
         if (null != $product->getMainTaxon()) {
             $product->setMainTaxon(null);
@@ -62,7 +62,5 @@ class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInterface
         }
 
         $this->copyTaxonsToProduct($productDraft, $product);
-
-        return $product;
     }
 }
