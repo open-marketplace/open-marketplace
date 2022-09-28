@@ -217,7 +217,7 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
         $imagePath = $image['path'];
         $imageType = $image['type'] ?? null;
         /** @var string $imagePath */
-        $imagePath =  $this->fileLocator->locate($imagePath);
+        $imagePath = $this->fileLocator->locate($imagePath);
         $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
         /** @var ImageInterface $productImage */
