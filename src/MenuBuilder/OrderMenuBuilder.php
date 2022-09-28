@@ -17,7 +17,6 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
