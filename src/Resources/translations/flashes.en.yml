@@ -3,6 +3,7 @@ vendor:
 
 bitbag_mvm_plugin:
     ui:
+        shipping_method_updated: "Shipping methods updated"
         enabled: "Product successfully enabled"
         disabled: "Product successfully disabled"
         restored: "Product successfully restored"

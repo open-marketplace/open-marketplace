@@ -51,6 +51,7 @@ final class ProductDraftFixture extends AbstractFixture
                 ->booleanNode('added')->defaultValue(false)->end()
                 ->booleanNode('accepted')->defaultValue(false)->end()
                 ->booleanNode('rejected')->defaultValue(false)->end()
+                ->arrayNode('images')->variablePrototype()->end()->end()
             ->end()
         ;
     }

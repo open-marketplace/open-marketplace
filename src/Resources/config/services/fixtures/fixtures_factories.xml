@@ -23,6 +23,9 @@
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
             <argument type="service" id="sylius.generator.slug" />
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.product_draft_image"/>
+            <argument type="service" id="file_locator"/>
         </service>
 
         <service id="bitbag.mvm_plugin.fixture.example_factory.order" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\OrderExampleFactory">
