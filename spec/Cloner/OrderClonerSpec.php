@@ -15,7 +15,6 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderCloner;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\PaymentClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentClonerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
