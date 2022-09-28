@@ -9,26 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Model\Shipment\ShipmentTrait;
 use Sylius\Component\Core\Model\Shipment as BaseShipment;
 
 class Shipment extends BaseShipment implements ShipmentInterface
 {
-    private ?VendorInterface $vendor;
-
-    public function hasVendor(): bool
-    {
-        return isset($this->vendor);
-    }
-
-    public function getVendor(): ?VendorInterface
-    {
-        return $this->vendor;
-    }
-
-    public function setVendor(?VendorInterface $vendor): void
-    {
-        $this->vendor = $vendor;
-    }
+    use ShipmentTrait;
 }

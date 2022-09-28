@@ -16,11 +16,10 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Shipment;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Helper\OrderVendorHelperInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
@@ -38,7 +37,7 @@ final class OrderManager implements OrderManagerInterface
 
     private OrderItemFactoryInterface $itemFactory;
 
-    private OrderVendorHelperInterface $orderVendorHelper;
+    private ShipmentFactoryInterface $shipmentFactory;
 
     public function __construct(
         OrderFactoryInterface $factory,
@@ -47,7 +46,7 @@ final class OrderManager implements OrderManagerInterface
         EntityManager $entityManager,
         OrderItemClonerInterface $orderItemCloner,
         OrderItemFactoryInterface $itemFactory,
-        OrderVendorHelperInterface $orderVendorHelper
+        ShipmentFactoryInterface $shipmentFactory
     ) {
         $this->factory = $factory;
         $this->cloner = $cloner;
@@ -55,7 +54,7 @@ final class OrderManager implements OrderManagerInterface
         $this->entityManager = $entityManager;
         $this->orderItemCloner = $orderItemCloner;
         $this->itemFactory = $itemFactory;
-        $this->orderVendorHelper = $orderVendorHelper;
+        $this->shipmentFactory = $shipmentFactory;
     }
 
     public function generateNewSecondaryOrder(
@@ -72,9 +71,12 @@ final class OrderManager implements OrderManagerInterface
         $this->entityManager->persist($newOrder);
         $this->entityManager->flush();
 
-        /** @var ShipmentInterface $shipment */
-        $shipment = $this->orderVendorHelper->getShipmentByVendor($order, $itemVendor);
-        $newShipment = new Shipment();
+        $shipment = $order->getShipmentByVendor($itemVendor);
+        if (null === $shipment) {
+            return $newOrder;
+        }
+
+        $newShipment = $this->shipmentFactory->createNew();
         $newShipment->setOrder($newOrder);
         $this->shipmentCloner->clone($shipment, $newShipment);
         $newOrder->addShipment($newShipment);

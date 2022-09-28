@@ -16,13 +16,13 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Helper\OrderVendorHelperInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\VendorShippingMethodsResolverInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
+use Webmozart\Assert\Assert;
 
 final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, OrderShipmentByVendorProcessorInterface
 {
@@ -32,18 +32,14 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
     private FactoryInterface $shipmentFactory;
 
-    private OrderVendorHelperInterface $orderVendorHelper;
-
     public function __construct(
         VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver,
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
-        FactoryInterface $shipmentFactory,
-        OrderVendorHelperInterface $orderVendorHelper
+        FactoryInterface $shipmentFactory
     ) {
         $this->defaultVendorShippingMethodResolver = $defaultVendorShippingMethodResolver;
         $this->defaultShippingMethodResolver = $defaultShippingMethodResolver;
         $this->shipmentFactory = $shipmentFactory;
-        $this->orderVendorHelper = $orderVendorHelper;
     }
 
     /**
@@ -51,6 +47,8 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
      */
     public function process(BaseOrderInterface $order): void
     {
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         if (BaseOrderInterface::STATE_CART !== $order->getState()) {
             return;
         }
@@ -61,7 +59,7 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
             return;
         }
 
-        if (false === $this->orderVendorHelper->orderHasVendorItems($order)) {
+        if (false === $order->orderHasVendorItems()) {
             return;
         }
 
@@ -76,7 +74,7 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
     private function removeShipmentsWithMissingVendors(OrderInterface $order): void
     {
-        $vendors = $this->orderVendorHelper->getVendorsFromOrder($order);
+        $vendors = $order->getVendorsFromOrder();
         /** @var ShipmentInterface $shipment */
         foreach ($order->getShipments() as $shipment) {
             if (false === in_array($shipment->getVendor(), $vendors)) {
@@ -87,14 +85,14 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
     private function addShipmentsPerVendor(OrderInterface $order): void
     {
-        $vendors = $this->orderVendorHelper->getVendorsFromOrder($order);
+        $vendors = $order->getVendorsFromOrder();
 
-        if (false === $this->orderVendorHelper->orderHasShipmentWithoutVendor($order)) {
+        if (false === $order->orderHasShipmentWithoutVendor()) {
             $this->addShipment($order, null);
         }
 
         foreach ($vendors as $vendor) {
-            if ($this->orderVendorHelper->orderHasVendorShipment($order, $vendor)) {
+            if ($order->orderHasVendorShipment($vendor)) {
                 continue;
             }
 
@@ -143,9 +141,9 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
             if (null === $itemUnit->getShipment()) {
                 $shipment = null;
                 if ($product->hasVendor()) {
-                    $shipment = $this->orderVendorHelper->getShipmentByVendor($order, $product->getVendor());
+                    $shipment = $order->getShipmentByVendor($product->getVendor());
                 } else {
-                    $shipment = $this->orderVendorHelper->getShipmentWithoutVendor($order);
+                    $shipment = $order->getShipmentWithoutVendor();
                 }
 
                 $shipment?->addUnit($itemUnit);
@@ -155,7 +153,7 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
     private function removeShipmentWithoutVendorIfEmpty(OrderInterface $order): void
     {
-        $shipment = $this->orderVendorHelper->getShipmentWithoutVendor($order);
+        $shipment = $order->getShipmentWithoutVendor();
 
         if (null !== $shipment) {
             if ($shipment->getUnits()->isEmpty()) {

@@ -19,8 +19,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShipmentType extends AbstractType
 {
-    public function __construct(private string $dataClass)
+    private string $dataClass;
+
+    public function __construct(string $dataClass)
     {
+        $this->dataClass = $dataClass;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -44,3 +44,10 @@ sylius_user:
                 classes:
                     model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser
                     interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface
+
+sylius_shipping:
+    resources:
+        shipment:
+            classes:
+                model: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Shipment
+                interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface
