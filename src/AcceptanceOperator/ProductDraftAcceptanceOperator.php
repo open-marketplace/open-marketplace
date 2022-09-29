@@ -17,6 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperator;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -33,7 +34,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
     private EntityManagerInterface $entityManager;
 
-    private ProductDraftTaxonsOperator $productDraftTaxonsOperator;
+    private ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator;
 
     public function __construct(
         ProductFromDraftFactoryInterface $productFromDraftFactory,
@@ -41,7 +42,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         ProductDraftFilesOperatorInterface $productDraftFilesOperator,
         AttributesConverterInterface $attributesConverter,
         EntityManagerInterface $entityManager,
-        ProductDraftTaxonsOperator $productDraftTaxonsOperator
+        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
     ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
