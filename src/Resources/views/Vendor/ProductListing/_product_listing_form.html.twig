@@ -83,7 +83,29 @@
                     </div>
                 </div>
             </div>
-            {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/_imageForm.html.twig' %}
+                {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/_imageForm.html.twig' %}
+                <div class="ui tab active segments" data-tab="taxonomy">
+                    <h3 class="ui top attached header">{{ 'sylius.ui.taxonomy'|trans }}</h3>
+
+                    <div class="ui attached segment">
+                        {{ form_row(form.mainTaxon, {
+                            'remote_url': path('bitbag_mvm_plugin_ajax_taxon_by_name_phrase'),
+                            'load_edit_url': path('bitbag_mvm_plugin_ajax_taxon_by_code')
+                        }) }}
+
+                        <h4>{{ 'sylius.ui.product_taxon'|trans }}</h4>
+                        <div id="sylius-product-taxonomy-tree"
+                             data-tree-root-nodes-url="{{ path('bitbag_mvm_plugin_ajax_taxon_root_nodes') }}"
+                             data-tree-leafs-url="{{ path('bitbag_mvm_plugin_ajax_taxon_leafs') }}"
+                        >
+                            {{ form_widget(form.productDraftTaxons) }}
+
+                            <div class="ui inverted dimmer">
+                                <div class="ui loader"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="sixteen wide column right aligned">
                 {{ form_row(form._token) }}
@@ -92,4 +114,3 @@
         </div>
       {{ form_end(form, {'render_rest': true})  }}
 {% endblock %}
-

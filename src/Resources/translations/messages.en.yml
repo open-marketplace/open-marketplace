@@ -134,6 +134,7 @@ bitbag_mvm_plugin:
         vendor_verification_accepted: "Request to become a Vendor has been granted by the Administrator."
         order_not_found: "The order with id orderId has not been found"
         invalid_csrf: "Invalid csrf token."
+        rejection_details: "Rejection details"
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."

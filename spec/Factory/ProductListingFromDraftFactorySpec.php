@@ -113,6 +113,9 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
         $newProductDraft->setAttributesFrom($productDraft)->shouldBeCalledOnce();
 
+        $newProductDraft->setProductTaxonsFrom($productDraft)
+            ->shouldBeCalled();
+
         $newProductDraft->setProductListing($productListing)
             ->shouldBeCalled();
 

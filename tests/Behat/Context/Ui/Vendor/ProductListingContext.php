@@ -189,4 +189,13 @@ final class ProductListingContext extends RawMinkContext implements Context
         $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
         Assert::notNull($dropdown);
     }
+
+    /**
+     * @Given I choose main taxon :taxon
+     */
+    public function iChooseMainTaxon($taxon)
+    {
+        $page = $this->getPage();
+        $page->findById('sylius_product_mainTaxon')->setValue($taxon);
+    }
 }

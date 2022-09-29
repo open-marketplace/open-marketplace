@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface
@@ -114,4 +115,22 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface;
 
     public function setAttributesFrom(self $otherDraft): void;
+
+    public function setProductTaxonsFrom(self $otherDraft): void;
+
+    /** @return Collection<array-key, ProductDraftTaxonInterface> */
+    public function getProductDraftTaxons(): Collection;
+
+    public function addProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): void;
+
+    public function removeProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): void;
+
+    /** @return Collection<array-key, ?TaxonInterface> */
+    public function getTaxons(): Collection;
+
+    public function hasTaxon(TaxonInterface $taxon): bool;
+
+    public function getMainTaxon(): ?TaxonInterface;
+
+    public function setMainTaxon(?TaxonInterface $mainTaxon): void;
 }
