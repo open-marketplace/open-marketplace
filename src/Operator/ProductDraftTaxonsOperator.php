@@ -18,7 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInterface
+final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInterface
 {
     private EntityManagerInterface $entityManager;
 
@@ -58,7 +58,6 @@ class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInterface
         foreach ($productTaxons as $productTaxon) {
             $product->removeProductTaxon($productTaxon);
             $this->entityManager->remove($productTaxon);
-            $this->entityManager->flush();
         }
 
         $this->copyTaxonsToProduct($productDraft, $product);

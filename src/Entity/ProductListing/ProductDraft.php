@@ -53,7 +53,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     protected TaxonInterface|null $mainTaxon;
 
     /** @var Collection<array-key, ProductDraftTaxonInterface> */
-    protected $productDraftTaxons;
+    protected Collection $productDraftTaxons;
 
     public function __construct()
     {

@@ -1,7 +1,7 @@
 @vendor_managing_product_listings
 Feature:Creating a product listing.
   As a vendor, I need to be able
-  to create a product.
+  to create a product attached to taxons.
 
   Background:
     Given there is an "verified" vendor user "vendor" with password "vendor"

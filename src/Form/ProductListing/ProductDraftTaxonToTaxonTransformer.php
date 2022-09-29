@@ -21,11 +21,20 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 final class ProductDraftTaxonToTaxonTransformer implements DataTransformerInterface
 {
+    private FactoryInterface $productDraftTaxonFactory;
+
+    private RepositoryInterface $productDraftTaxonRepository;
+
+    private ProductDraftInterface $productDraft;
+
     public function __construct(
-        private FactoryInterface $productDraftTaxonFactory,
-        private RepositoryInterface $productDraftTaxonRepository,
-        private ProductDraftInterface $productDraft,
+        FactoryInterface $productDraftTaxonFactory,
+        RepositoryInterface $productDraftTaxonRepository,
+        ProductDraftInterface $productDraft,
         ) {
+        $this->productDraftTaxonFactory = $productDraftTaxonFactory;
+        $this->productDraftTaxonRepository = $productDraftTaxonRepository;
+        $this->productDraft = $productDraft;
     }
 
     public function transform(mixed $value): ?TaxonInterface

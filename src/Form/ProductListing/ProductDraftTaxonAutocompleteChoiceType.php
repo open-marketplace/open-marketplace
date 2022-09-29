@@ -22,8 +22,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductDraftTaxonAutocompleteChoiceType extends AbstractType
 {
-    public function __construct(private FactoryInterface $productDraftTaxonFactory, private RepositoryInterface $productDraftTaxonRepository)
+    private FactoryInterface $productDraftTaxonFactory;
+
+    private RepositoryInterface $productDraftTaxonRepository;
+
+    public function __construct(FactoryInterface $productDraftTaxonFactory, RepositoryInterface $productDraftTaxonRepository)
     {
+        $this->productDraftTaxonFactory = $productDraftTaxonFactory;
+        $this->productDraftTaxonRepository = $productDraftTaxonRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

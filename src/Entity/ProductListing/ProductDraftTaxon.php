@@ -15,17 +15,13 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 class ProductDraftTaxon implements ProductDraftTaxonInterface
 {
-    /** @var mixed */
-    protected $id;
+    protected mixed $id;
 
-    /** @var ProductDraftInterface|null */
-    protected $productDraft;
+    protected ProductDraftInterface|null $productDraft;
 
-    /** @var TaxonInterface|null */
-    protected $taxon;
+    protected TaxonInterface|null $taxon;
 
-    /** @var int|null */
-    protected $position;
+    protected int|null $position;
 
     public function getId(): mixed
     {

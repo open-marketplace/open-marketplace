@@ -19,7 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperator;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
@@ -32,7 +32,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftFilesOperatorInterface $filesOperator,
         AttributesConverterInterface $attributesConverter,
         EntityManagerInterface $entityManager,
-        ProductDraftTaxonsOperator $productDraftTaxonsOperator
+        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
     ): void {
         $this->beConstructedWith(
             $productFromDraftFactory,
@@ -58,8 +58,8 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftInterface $productDraft,
         ProductFromDraftFactoryInterface $productFromDraftFactory,
         ProductListingInterface $productListing,
-        ProductDraftTaxonsOperator $productDraftTaxonsOperator,
-        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $product
+        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator,
+        ProductInterface $product
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -83,7 +83,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductListingInterface $productListing,
         ProductInterface $product,
         ProductInterface $updatedProduct,
-        ProductDraftTaxonsOperator $productDraftTaxonsOperator
+        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -109,7 +109,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftFilesOperatorInterface $filesOperator,
         ProductListingInterface $productListing,
         ProductInterface $product,
-        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $updatedProduct,
+        ProductInterface $updatedProduct,
         AttributesConverterInterface $attributesConverter
     ): void {
         $productDraft->getProductListing()
@@ -135,7 +135,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftFilesOperatorInterface $filesOperator,
         ProductListingInterface $productListing,
         ProductInterface $product,
-        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $newProduct,
+        ProductInterface $newProduct,
         AttributesConverterInterface $attributesConverter
     ): void {
         $productDraft->getProductListing()
