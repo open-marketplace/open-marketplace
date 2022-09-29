@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CTaxation%255CModel%255CTaxCategoryInterface
+
+return [PHP_INT_MAX, []];

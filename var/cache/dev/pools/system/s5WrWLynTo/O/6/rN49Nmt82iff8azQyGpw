@@ -1,0 +1,31 @@
+<?php //subresource_operations_ddc0723c8db0f311287337c1ac284cf1
+
+return [PHP_INT_MAX, [
+    'api_zones_members_get_subresource' => [
+        'property' => 'members',
+        'collection' => true,
+        'resource_class' => 'Sylius\\Component\\Addressing\\Model\\ZoneMember',
+        'shortNames' => [
+            'ZoneMember',
+            'Zone',
+        ],
+        'identifiers' => [
+            'code' => [
+                'Sylius\\Component\\Addressing\\Model\\Zone',
+                'code',
+                true,
+            ],
+        ],
+        'operation_name' => 'members_get_subresource',
+        'route_name' => 'api_zones_members_get_subresource',
+        'path' => '/admin/zones/{code}/members.{_format}',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+        'stateless' => null,
+    ],
+]];

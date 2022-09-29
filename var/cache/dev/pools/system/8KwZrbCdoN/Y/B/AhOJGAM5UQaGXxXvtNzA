@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CPayment%255CModel%255CPayment
+
+return [PHP_INT_MAX, []];

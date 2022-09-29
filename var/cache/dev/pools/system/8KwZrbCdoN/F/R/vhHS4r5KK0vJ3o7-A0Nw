@@ -1,0 +1,3 @@
+<?php //Sylius%255CBundle%255CUserBundle%255CForm%255CModel%255CPasswordReset
+
+return [PHP_INT_MAX, []];

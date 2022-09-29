@@ -1,0 +1,3 @@
+<?php //Symfony%255CComponent%255CSecurity%255CCore%255CEncoder%255CEncoderAwareInterface
+
+return [PHP_INT_MAX, []];

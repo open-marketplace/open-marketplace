@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CLocale%255CModel%255CLocalesAwareInterface%2523removeLocale
+
+return [PHP_INT_MAX, []];

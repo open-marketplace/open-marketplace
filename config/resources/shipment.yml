@@ -1,0 +1,6 @@
+sylius_shipping:
+    resources:
+        shipment:
+            classes:
+                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Shipment
+                interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface

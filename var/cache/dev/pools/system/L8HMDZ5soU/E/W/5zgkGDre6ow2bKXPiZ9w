@@ -1,0 +1,916 @@
+<?php //resource_metadata_35dd2162da07db50f73d651a26355680
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata' => [
+            'shortName' => [
+                'Order',
+            ],
+            'itemOperations' => [
+                [
+                    'admin_get' => [
+                        'method' => 'GET',
+                        'path' => '/admin/orders/{tokenValue}',
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_get' => [
+                        'method' => 'GET',
+                        'path' => '/shop/orders/{tokenValue}',
+                        'normalization_context' => [
+                            'groups' => 'shop:cart:read',
+                        ],
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_delete' => [
+                        'method' => 'DELETE',
+                        'path' => '/shop/orders/{tokenValue}',
+                        'openapi_context' => [
+                            'summary' => 'Deletes cart',
+                        ],
+                        'normalization_context' => [
+                            'groups' => 'shop:order:read',
+                        ],
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'admin_cancel' => [
+                        'method' => 'PATCH',
+                        'path' => '/admin/orders/{tokenValue}/cancel',
+                        'input' => [
+                            'class' => null,
+                        ],
+                        'controller' => 'Sylius\\Bundle\\ApiBundle\\Applicator\\OrderStateMachineTransitionApplicatorInterface:cancel',
+                        'denormalization_context' => [
+                            'groups' => 'admin:order:update',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Cancels Order',
+                        ],
+                        'output' => null,
+                        'deserialize' => false,
+                        'validate' => false,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'json' => [
+                                'application/merge-patch+json',
+                                'application/merge-patch+json',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_add_item' => [
+                        'method' => 'POST',
+                        'path' => '/shop/orders/{tokenValue}/items',
+                        'messenger' => 'input',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Cart\\AddItemToCart',
+                            'name' => 'AddItemToCart',
+                        ],
+                        'normalization_context' => [
+                            'groups' => 'shop:cart:read',
+                        ],
+                        'denormalization_context' => [
+                            'groups' => 'shop:cart:add_item',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Adds Item to cart',
+                        ],
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_select_shipping_method' => [
+                        'method' => 'PATCH',
+                        'validation_groups' => [
+                            'sylius',
+                        ],
+                        'path' => '/shop/orders/{tokenValue}/shipments/{shipmentId}',
+                        'messenger' => 'input',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Checkout\\ChooseShippingMethod',
+                            'name' => 'ChooseShippingMethod',
+                        ],
+                        'denormalization_context' => [
+                            'groups' => 'shop:cart:select_shipping_method',
+                        ],
+                        'normalization_context' => [
+                            'groups' => 'shop:cart:read',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Selects shipping methods for particular shipment',
+                            'parameters' => [
+                                [
+                                    'name' => 'tokenValue',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                                [
+                                    'name' => 'shipmentId',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'json' => [
+                                'application/merge-patch+json',
+                                'application/merge-patch+json',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_select_payment_method' => [
+                        'method' => 'PATCH',
+                        'path' => '/shop/orders/{tokenValue}/payments/{paymentId}',
+                        'messenger' => 'input',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Checkout\\ChoosePaymentMethod',
+                            'name' => 'ChoosePaymentMethod',
+                        ],
+                        'denormalization_context' => [
+                            'groups' => 'shop:cart:select_payment_method',
+                        ],
+                        'normalization_context' => [
+                            'groups' => 'shop:cart:read',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Selects payment methods for particular payment',
+                            'parameters' => [
+                                [
+                                    'name' => 'tokenValue',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                                [
+                                    'name' => 'paymentId',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'json' => [
+                                'application/merge-patch+json',
+                                'application/merge-patch+json',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_account_change_payment_method' => [
+                        'method' => 'PATCH',
+                        'path' => '/shop/account/orders/{tokenValue}/payments/{paymentId}',
+                        'messenger' => 'input',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Account\\ChangePaymentMethod',
+                            'name' => 'ChangePaymentMethod',
+                        ],
+                        'denormalization_context' => [
+                            'groups' => 'shop:order:account:change_payment_method',
+                        ],
+                        'normalization_context' => [
+                            'groups' => 'shop:order:account:read',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Change the payment method as logged shop user',
+                            'parameters' => [
+                                [
+                                    'name' => 'tokenValue',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                                [
+                                    'name' => 'paymentId',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'json' => [
+                                'application/merge-patch+json',
+                                'application/merge-patch+json',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'get_configuration' => [
+                        'method' => 'GET',
+                        'controller' => 'Sylius\\Bundle\\ApiBundle\\Controller\\Payment\\GetPaymentConfiguration',
+                        'path' => '/shop/orders/{tokenValue}/payments/{paymentId}/configuration',
+                        'openapi_context' => [
+                            'summary' => 'Retrieve payment method configuration',
+                            'parameters' => [
+                                [
+                                    'name' => 'tokenValue',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                                [
+                                    'name' => 'paymentId',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_complete' => [
+                        'method' => 'PATCH',
+                        'path' => '/shop/orders/{tokenValue}/complete',
+                        'validation_groups' => [
+                            'sylius',
+                            'sylius_checkout_complete',
+                        ],
+                        'messenger' => 'input',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Checkout\\CompleteOrder',
+                            'name' => 'CompleteOrder',
+                        ],
+                        'denormalization_context' => [
+                            'groups' => 'shop:cart:complete',
+                        ],
+                        'normalization_context' => [
+                            'groups' => 'shop:cart:read',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Completes checkout',
+                        ],
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'json' => [
+                                'application/merge-patch+json',
+                                'application/merge-patch+json',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_remove_item' => [
+                        'method' => 'DELETE',
+                        'path' => '/shop/orders/{tokenValue}/items/{itemId}',
+                        'messenger' => 'input',
+                        'controller' => 'Sylius\\Bundle\\ApiBundle\\Controller\\DeleteOrderItemAction',
+                        'write' => false,
+                        'denormalization_context' => [
+                            'groups' => 'shop:cart:remove_item',
+                        ],
+                        'openapi_context' => [
+                            'parameters' => [
+                                [
+                                    'name' => 'tokenValue',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                                [
+                                    'name' => 'itemId',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_change_quantity' => [
+                        'method' => 'PATCH',
+                        'path' => '/shop/orders/{tokenValue}/items/{orderItemId}',
+                        'messenger' => 'input',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Cart\\ChangeItemQuantityInCart',
+                            'name' => 'ChangeItemQuantityInCart',
+                        ],
+                        'denormalization_context' => [
+                            'groups' => 'shop:cart:change_quantity',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Changes quantity of order item',
+                            'parameters' => [
+                                [
+                                    'name' => 'tokenValue',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                                [
+                                    'name' => 'orderItemId',
+                                    'in' => 'path',
+                                    'required' => true,
+                                    'schema' => [
+                                        'type' => 'string',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'json' => [
+                                'application/merge-patch+json',
+                                'application/merge-patch+json',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_put' => [
+                        'method' => 'PUT',
+                        'path' => '/shop/orders/{tokenValue}',
+                        'messenger' => 'input',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Checkout\\UpdateCart',
+                            'name' => 'UpdateCart',
+                        ],
+                        'denormalization_context' => [
+                            'groups' => 'shop:cart:update',
+                        ],
+                        'normalization_context' => [
+                            'groups' => 'shop:cart:read',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Addresses cart to given location, logged in Customer does not have to provide an email. Applies coupon to cart.',
+                        ],
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'collectionOperations' => [
+                [
+                    'admin_get' => [
+                        'method' => 'GET',
+                        'path' => 'admin/orders',
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_post' => [
+                        'method' => 'POST',
+                        'path' => '/shop/orders',
+                        'messenger' => 'input',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Cart\\PickupCart',
+                            'name' => 'PickupCart',
+                        ],
+                        'denormalization_context' => [
+                            'groups' => 'shop:order:create',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Pickups a new cart. Provided locale code has to be one of available for a particular channel.',
+                        ],
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_get' => [
+                        'method' => 'GET',
+                        'path' => '/shop/orders',
+                        'normalization_context' => [
+                            'groups' => [
+                                'shop:order:read',
+                            ],
+                        ],
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'subresourceOperations' => [
+                [
+                    'items_get_subresource' => [
+                        'method' => 'GET',
+                        'path' => '/shop/orders/{tokenValue}/items',
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shipments_get_subresource' => [
+                        'method' => 'GET',
+                        'path' => '/admin/orders/{tokenValue}/shipments',
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'payments_get_subresource' => [
+                        'method' => 'GET',
+                        'path' => '/admin/orders/{tokenValue}/payments',
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'adjustments_get_subresource' => [
+                        'method' => 'GET',
+                        'path' => '/shop/orders/{tokenValue}/adjustments',
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'payments_methods_get_subresource' => [
+                        'method' => 'GET',
+                        'path' => '/shop/orders/{tokenValue}/payments/{payments}/methods',
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shipments_methods_get_subresource' => [
+                        'method' => 'GET',
+                        'path' => '/shop/orders/{tokenValue}/shipments/{shipments}/methods',
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'items_adjustments_get_subresource' => [
+                        'method' => 'GET',
+                        'path' => '/shop/orders/{tokenValue}/items/{items}/adjustments',
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'graphql' => [
+                [
+                    'item_query' => [],
+                    'collection_query' => [],
+                    'delete' => [],
+                    'update' => [],
+                    'create' => [],
+                ],
+            ],
+            'attributes' => [
+                [
+                    'normalization_context' => [
+                        'groups' => [
+                            'admin:order:read',
+                        ],
+                    ],
+                    'validation_groups' => 'sylius',
+                    'input' => null,
+                    'output' => null,
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

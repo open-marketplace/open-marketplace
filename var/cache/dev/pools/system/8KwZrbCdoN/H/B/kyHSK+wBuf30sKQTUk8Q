@@ -1,0 +1,3 @@
+<?php //Sylius%255CBundle%255CApiBundle%255CCommand%255CAccount%255CResendVerificationEmail%2523setShopUserId
+
+return [PHP_INT_MAX, []];

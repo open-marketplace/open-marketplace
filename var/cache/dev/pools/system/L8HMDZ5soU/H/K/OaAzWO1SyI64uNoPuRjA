@@ -1,0 +1,208 @@
+<?php //resource_metadata_da4174dcecc2293d51113303d7ac16cd
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata' => [
+            'shortName' => [
+                'Payment',
+            ],
+            'itemOperations' => [
+                [
+                    'admin_get' => [
+                        'method' => 'GET',
+                        'path' => '/admin/payments/{id}',
+                        'normalization_context' => [
+                            'groups' => 'admin:payment:read',
+                        ],
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'shop_get' => [
+                        'method' => 'GET',
+                        'path' => '/shop/payments/{id}',
+                        'normalization_context' => [
+                            'groups' => 'shop:payment:read',
+                        ],
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                    'admin_complete' => [
+                        'method' => 'PATCH',
+                        'input' => [
+                            'class' => null,
+                        ],
+                        'path' => '/admin/payments/{id}/complete',
+                        'controller' => 'Sylius\\Bundle\\ApiBundle\\Applicator\\PaymentStateMachineTransitionApplicatorInterface:complete',
+                        'openapi_context' => [
+                            'summary' => 'Completes Payment',
+                        ],
+                        'output' => null,
+                        'deserialize' => false,
+                        'validate' => false,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'json' => [
+                                'application/merge-patch+json',
+                                'application/merge-patch+json',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'collectionOperations' => [
+                [
+                    'admin_get' => [
+                        'method' => 'GET',
+                        'path' => '/admin/payments',
+                        'filters' => [
+                            'sylius.api.search_payment_filter',
+                        ],
+                        'normalization_context' => [
+                            'groups' => 'admin:payment:read',
+                        ],
+                        'input' => null,
+                        'output' => null,
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'subresourceOperations' => [
+                [
+                    'methods_get_subresource' => [
+                        'method' => 'GET',
+                        'path' => '/shop/payments/{id}/methods',
+                        'normalization_context' => [
+                            'groups' => 'shop:payment:read',
+                        ],
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'graphql' => [
+                [
+                    'item_query' => [],
+                    'collection_query' => [],
+                    'delete' => [],
+                    'update' => [],
+                    'create' => [],
+                ],
+            ],
+            'attributes' => [
+                [
+                    'validation_groups' => 'sylius',
+                    'order' => [
+                        'createdAt' => 'DESC',
+                    ],
+                    'input' => null,
+                    'output' => null,
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

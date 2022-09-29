@@ -1,0 +1,3 @@
+<?php //Serializable%2523serialize
+
+return [PHP_INT_MAX, []];

@@ -1,0 +1,3 @@
+<?php //Sylius%255CBundle%255CApiBundle%255CCommand%255CCheckout%255CChooseShippingMethod%2523getOrderTokenValue
+
+return [PHP_INT_MAX, []];

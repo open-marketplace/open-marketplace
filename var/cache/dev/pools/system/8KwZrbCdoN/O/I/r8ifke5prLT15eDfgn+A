@@ -1,0 +1,3 @@
+<?php //Sylius%255CBundle%255CApiBundle%255CCommand%255CCustomerEmailAwareInterface%2523getEmail
+
+return [PHP_INT_MAX, []];

@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CCore%255CModel%255COrderItem%2523getTaxTotal
+
+return [PHP_INT_MAX, []];

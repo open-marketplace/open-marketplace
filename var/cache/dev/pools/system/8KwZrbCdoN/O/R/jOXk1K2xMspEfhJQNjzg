@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CResource%255CModel%255CTimestampableInterface%2523getCreatedAt
+
+return [PHP_INT_MAX, []];

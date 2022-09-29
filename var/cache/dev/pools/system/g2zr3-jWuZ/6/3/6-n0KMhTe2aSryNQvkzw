@@ -1,0 +1,74 @@
+<?php //property_metadata_9d88a7192a427860eb43e11bac3682bb
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata')),
+        clone ($p['Symfony\\Component\\PropertyInfo\\Type'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\PropertyInfo\\Type')),
+        clone ($p['ApiPlatform\\Core\\Metadata\\Property\\SubresourceMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Property\\SubresourceMetadata')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata' => [
+            'type' => [
+                $o[1],
+            ],
+            'readable' => [
+                true,
+            ],
+            'writable' => [
+                true,
+            ],
+            'readableLink' => [
+                false,
+            ],
+            'writableLink' => [
+                false,
+            ],
+            'required' => [
+                false,
+            ],
+            'identifier' => [
+                false,
+            ],
+            'attributes' => [
+                [],
+            ],
+            'subresource' => [
+                $o[2],
+            ],
+            'initializable' => [
+                false,
+            ],
+        ],
+        'Symfony\\Component\\PropertyInfo\\Type' => [
+            'builtinType' => [
+                1 => 'object',
+            ],
+            'nullable' => [
+                1 => false,
+            ],
+            'class' => [
+                1 => 'Sylius\\Component\\Core\\Model\\ShippingMethod',
+            ],
+            'collection' => [
+                1 => false,
+            ],
+            'collectionKeyType' => [
+                1 => [],
+            ],
+            'collectionValueType' => [
+                1 => [],
+            ],
+        ],
+        'ApiPlatform\\Core\\Metadata\\Property\\SubresourceMetadata' => [
+            'resourceClass' => [
+                2 => 'Sylius\\Component\\Core\\Model\\ShippingMethod',
+            ],
+            'collection' => [
+                2 => true,
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

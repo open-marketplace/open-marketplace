@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CCore%255CModel%255CProductImagesAwareInterface%2523getImagesByType
+
+return [PHP_INT_MAX, []];

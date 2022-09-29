@@ -1,40 +1,47 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
-const pluginName = 'skeleton';
 
-const getConfig = (pluginName, type) => {
-    Encore.reset();
+const syliusBundles = path.resolve(__dirname, 'vendor/sylius/sylius/src/Sylius/Bundle/');
+const uiBundleScripts = path.resolve(syliusBundles, 'UiBundle/Resources/private/js/');
+const uiBundleResources = path.resolve(syliusBundles, 'UiBundle/Resources/private/');
 
-    Encore
-        .setOutputPath(`public/build/bitbag/${pluginName}/${type}/`)
-        .setPublicPath(`/build/bitbag/${pluginName}/${type}/`)
-        .addEntry(`bitbag-${pluginName}-${type}`, path.resolve(__dirname, `./src/Resources/assets/${type}/entry.js`))
-        .disableSingleRuntimeChunk()
-        .cleanupOutputBeforeBuild()
-        .enableSourceMaps(!Encore.isProduction())
-        .enableSassLoader();
-
-    const config = Encore.getWebpackConfig();
-    config.name = `bitbag-${pluginName}-${type}`;
-
-    return config;
-}
-
+// Shop config
 Encore
-    .setOutputPath(`src/Resources/public/`)
-    .setPublicPath(`/public/`)
-    .addEntry(`bitbag-${pluginName}-shop`, path.resolve(__dirname, `./src/Resources/assets/shop/entry.js`))
-    .addEntry(`bitbag-${pluginName}-admin`, path.resolve(__dirname, `./src/Resources/assets/admin/entry.js`))
-    .cleanupOutputBeforeBuild()
-    .disableSingleRuntimeChunk()
-    .enableSassLoader();
+  .setOutputPath('public/build/shop/')
+  .setPublicPath('/build/shop')
+  .addEntry('shop-entry', './assets/shop/entry.js')
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .enableSassLoader();
 
-const distConfig = Encore.getWebpackConfig();
-distConfig.name = `bitbag-plugin-dist`;
+const shopConfig = Encore.getWebpackConfig();
+
+shopConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
+shopConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
+shopConfig.resolve.alias['sylius/bundle'] = syliusBundles;
+shopConfig.name = 'shop';
 
 Encore.reset();
 
-const shopConfig = getConfig(pluginName, 'shop')
-const adminConfig = getConfig(pluginName, 'admin')
+// Admin config
+Encore
+  .setOutputPath('public/build/admin/')
+  .setPublicPath('/build/admin')
+  .addEntry('admin-entry', './assets/admin/entry.js')
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .enableSassLoader();
 
-module.exports = [shopConfig, adminConfig, distConfig];
+const adminConfig = Encore.getWebpackConfig();
+
+adminConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
+adminConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
+adminConfig.resolve.alias['sylius/bundle'] = syliusBundles;
+adminConfig.externals = Object.assign({}, adminConfig.externals, { window: 'window', document: 'document' });
+adminConfig.name = 'admin';
+
+module.exports = [shopConfig, adminConfig];

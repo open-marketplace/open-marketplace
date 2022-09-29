@@ -1,0 +1,14 @@
+validator:
+  message:    
+    organization_name: "Company Name"
+    tax_identifier: "Tax Identifier"
+    not_blank: "This field cannot be empty"
+    minimum: "Required length: {{ limit }} characters."
+    maximum: 'This field cannot be longer than {{ limit }}'
+    vendor_dashboard: "Vendor Dashboard"
+    maximum_file_size: 'The file is too large ({{ size }} {{ suffix }}). Allowed maximum size is {{ limit }} {{ suffix }}.'
+    image_mime_type: 'The mime type of the file is invalid ({{ type }}). Allowed mime types are {{ types }}.'
+    minimum_image_width: 'The image width is too small ({{ width }}px). Minimum width expected is {{ min_width }}px.'
+    minimum_image_height: 'The image height is too small ({{ height }}px). Minimum height expected is {{ min_height }}px.'
+    maximum_image_width: 'The image width is too big ({{ width }}px). Allowed maximum width is {{ max_width }}px.'
+    maximum_image_height: 'The image height is too big ({{ height }}px). Allowed maximum height is {{ max_height }}px.'

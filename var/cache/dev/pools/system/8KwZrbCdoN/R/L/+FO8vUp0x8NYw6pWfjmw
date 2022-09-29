@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CInventory%255CModel%255CStockableInterface%2523getOnHold
+
+return [PHP_INT_MAX, []];

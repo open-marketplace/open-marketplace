@@ -1,0 +1,31 @@
+<?php //subresource_operations_9d25107a6773427bd324e8313cb72ca4
+
+return [PHP_INT_MAX, [
+    'api_shipments_methods_get_subresource' => [
+        'property' => 'method',
+        'collection' => true,
+        'resource_class' => 'Sylius\\Component\\Core\\Model\\ShippingMethod',
+        'shortNames' => [
+            'ShippingMethod',
+            'Shipment',
+        ],
+        'identifiers' => [
+            'id' => [
+                'BitBag\\SyliusMultiVendorMarketplacePlugin\\Entity\\Shipment',
+                'id',
+                true,
+            ],
+        ],
+        'operation_name' => 'methods_get_subresource',
+        'route_name' => 'api_shipments_methods_get_subresource',
+        'path' => '/shop/shipments/{id}/methods',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+        'stateless' => null,
+    ],
+]];

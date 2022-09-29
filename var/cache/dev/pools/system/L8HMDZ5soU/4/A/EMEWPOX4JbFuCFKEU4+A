@@ -1,0 +1,126 @@
+<?php //resource_metadata_e62fcd6453043cba98387aeba12b941d
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Resource\\ResourceMetadata' => [
+            'shortName' => [
+                'VerifyCustomerAccount',
+            ],
+            'description' => [
+                '',
+            ],
+            'itemOperations' => [
+                [
+                    'shop_verify_customer_account' => [
+                        'method' => 'PATCH',
+                        'path' => '/account-verification-requests/{token}',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Account\\VerifyCustomerAccount',
+                            'name' => 'VerifyCustomerAccount',
+                        ],
+                        'status' => 202,
+                        'denormalization_context' => [
+                            'groups' => 'shop:account_verification:update',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Verifies Customer account',
+                        ],
+                        'output' => [
+                            'class' => null,
+                        ],
+                        'stateless' => null,
+                        'input_formats' => [
+                            'json' => [
+                                'application/merge-patch+json',
+                                'application/merge-patch+json',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'collectionOperations' => [
+                [
+                    'shop_resend_verification_email' => [
+                        'method' => 'POST',
+                        'path' => '/account-verification-requests',
+                        'input' => [
+                            'class' => 'Sylius\\Bundle\\ApiBundle\\Command\\Account\\ResendVerificationEmail',
+                            'name' => 'ResendVerificationEmail',
+                        ],
+                        'status' => 202,
+                        'denormalization_context' => [
+                            'groups' => 'shop:resend_verification_email:create',
+                        ],
+                        'openapi_context' => [
+                            'summary' => 'Resends verification email',
+                        ],
+                        'security' => 'is_granted("ROLE_USER")',
+                        'output' => [
+                            'class' => null,
+                        ],
+                        'stateless' => null,
+                        'input_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                        'output_formats' => [
+                            'jsonld' => [
+                                'application/ld+json',
+                            ],
+                            'json' => [
+                                'application/json',
+                            ],
+                            'html' => [
+                                'text/html',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'graphql' => [
+                [
+                    'item_query' => [],
+                    'collection_query' => [],
+                    'delete' => [],
+                    'update' => [],
+                    'create' => [],
+                ],
+            ],
+            'attributes' => [
+                [
+                    'route_prefix' => 'shop',
+                    'messenger' => 'input',
+                    'validation_groups' => 'sylius',
+                    'output' => [
+                        'class' => null,
+                    ],
+                    'input' => null,
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

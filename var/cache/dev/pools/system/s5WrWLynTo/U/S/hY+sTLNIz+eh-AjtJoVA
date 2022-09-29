@@ -1,0 +1,31 @@
+<?php //subresource_operations_79f205e094470fc7423fe932b44a84d7
+
+return [PHP_INT_MAX, [
+    'api_order_items_adjustments_get_subresource' => [
+        'property' => 'adjustments',
+        'collection' => true,
+        'resource_class' => 'Sylius\\Component\\Core\\Model\\Adjustment',
+        'shortNames' => [
+            'Adjustment',
+            'OrderItem',
+        ],
+        'identifiers' => [
+            'id' => [
+                'BitBag\\SyliusMultiVendorMarketplacePlugin\\Entity\\OrderItem',
+                'id',
+                true,
+            ],
+        ],
+        'operation_name' => 'adjustments_get_subresource',
+        'route_name' => 'api_order_items_adjustments_get_subresource',
+        'path' => '/admin/order-items/{id}/adjustments',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+        'stateless' => null,
+    ],
+]];

@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CPromotion%255CModel%255CPromotionRule%2523getPromotion
+
+return [PHP_INT_MAX, []];

@@ -1,0 +1,3 @@
+<?php //Sylius%255CBundle%255CApiBundle%255CCommand%255CAccount%255CResetPassword%2524resetPasswordToken
+
+return [PHP_INT_MAX, []];

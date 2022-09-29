@@ -1,0 +1,62 @@
+<?php //property_metadata_ab4a540c22330d3bb29b28f02b336023
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata')),
+        clone ($p['Symfony\\Component\\PropertyInfo\\Type'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\PropertyInfo\\Type')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata' => [
+            'type' => [
+                $o[1],
+            ],
+            'readable' => [
+                true,
+            ],
+            'writable' => [
+                true,
+            ],
+            'readableLink' => [
+                false,
+            ],
+            'writableLink' => [
+                false,
+            ],
+            'required' => [
+                false,
+            ],
+            'identifier' => [
+                false,
+            ],
+            'attributes' => [
+                [],
+            ],
+            'initializable' => [
+                false,
+            ],
+        ],
+        'Symfony\\Component\\PropertyInfo\\Type' => [
+            'builtinType' => [
+                1 => 'object',
+            ],
+            'nullable' => [
+                1 => false,
+            ],
+            'class' => [
+                1 => 'Sylius\\Component\\Locale\\Model\\Locale',
+            ],
+            'collection' => [
+                1 => false,
+            ],
+            'collectionKeyType' => [
+                1 => [],
+            ],
+            'collectionValueType' => [
+                1 => [],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

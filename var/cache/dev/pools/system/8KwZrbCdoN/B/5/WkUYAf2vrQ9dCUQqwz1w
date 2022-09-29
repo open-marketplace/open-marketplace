@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CPromotion%255CGenerator%255CPromotionCouponGeneratorInstruction%2523getUsageLimit
+
+return [PHP_INT_MAX, []];

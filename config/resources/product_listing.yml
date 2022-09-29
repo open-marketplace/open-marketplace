@@ -1,0 +1,39 @@
+sylius_resource:
+  resources:
+    bitbag_mvm_plugin.product_listing:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
+        repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepository
+
+    bitbag_mvm_plugin.product_draft:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface
+        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+        form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType
+
+    bitbag_mvm_plugin.product_translation:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslation
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface
+
+    bitbag_mvm_plugin.product_listing_price:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPrice
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface
+
+    bitbag_mvm_plugin.product_draft_image:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage
+
+    bitbag_mvm_plugin.product_draft_taxons:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftTaxon
+        interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftTaxonInterface
+        repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftTaxonRepository

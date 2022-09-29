@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CChannel%255CModel%255CChannelAwareInterface%2523getChannel
+
+return [PHP_INT_MAX, []];

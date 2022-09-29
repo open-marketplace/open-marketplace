@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CProduct%255CModel%255CProductOptionValue%2523setValue
+
+return [PHP_INT_MAX, []];

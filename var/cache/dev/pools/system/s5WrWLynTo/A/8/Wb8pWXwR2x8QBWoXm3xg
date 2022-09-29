@@ -1,0 +1,31 @@
+<?php //subresource_operations_da4174dcecc2293d51113303d7ac16cd
+
+return [PHP_INT_MAX, [
+    'api_payments_methods_get_subresource' => [
+        'property' => 'method',
+        'collection' => true,
+        'resource_class' => 'Sylius\\Component\\Core\\Model\\PaymentMethod',
+        'shortNames' => [
+            'PaymentMethod',
+            'Payment',
+        ],
+        'identifiers' => [
+            'id' => [
+                'Sylius\\Component\\Core\\Model\\Payment',
+                'id',
+                true,
+            ],
+        ],
+        'operation_name' => 'methods_get_subresource',
+        'route_name' => 'api_payments_methods_get_subresource',
+        'path' => '/shop/payments/{id}/methods',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+        'stateless' => null,
+    ],
+]];

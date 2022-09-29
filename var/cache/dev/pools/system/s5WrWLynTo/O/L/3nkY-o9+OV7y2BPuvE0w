@@ -1,0 +1,31 @@
+<?php //subresource_operations_1f22cd177263147b2b7d8d5731ccf81b
+
+return [PHP_INT_MAX, [
+    'api_countries_provinces_get_subresource' => [
+        'property' => 'provinces',
+        'collection' => true,
+        'resource_class' => 'Sylius\\Component\\Addressing\\Model\\Province',
+        'shortNames' => [
+            'Province',
+            'Country',
+        ],
+        'identifiers' => [
+            'code' => [
+                'Sylius\\Component\\Addressing\\Model\\Country',
+                'code',
+                true,
+            ],
+        ],
+        'operation_name' => 'provinces_get_subresource',
+        'route_name' => 'api_countries_provinces_get_subresource',
+        'path' => '/admin/countries/{code}/provinces',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+        'stateless' => null,
+    ],
+]];

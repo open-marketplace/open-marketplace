@@ -1,0 +1,3 @@
+<?php //SyliusLabs%255CPolyfill%255CSymfony%255CSecurity%255CCore%255CUser%255CAdvancedUserInterface%2523isAccountNonLocked
+
+return [PHP_INT_MAX, []];

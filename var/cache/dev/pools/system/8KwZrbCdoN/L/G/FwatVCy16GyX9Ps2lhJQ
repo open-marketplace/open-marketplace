@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CCore%255CModel%255CShippingMethodInterface%2523getZone
+
+return [PHP_INT_MAX, []];

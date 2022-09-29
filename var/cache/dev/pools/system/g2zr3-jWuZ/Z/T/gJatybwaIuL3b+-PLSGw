@@ -1,0 +1,69 @@
+<?php //property_metadata_30b81ac1fd98cb78b7ed935435c08de6
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata')),
+        clone ($p['Symfony\\Component\\PropertyInfo\\Type'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\PropertyInfo\\Type')),
+        clone $p['Symfony\\Component\\PropertyInfo\\Type'],
+        clone $p['Symfony\\Component\\PropertyInfo\\Type'],
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata' => [
+            'type' => [
+                $o[1],
+            ],
+            'readable' => [
+                false,
+            ],
+            'writable' => [
+                true,
+            ],
+            'required' => [
+                false,
+            ],
+            'identifier' => [
+                false,
+            ],
+            'initializable' => [
+                false,
+            ],
+        ],
+        'Symfony\\Component\\PropertyInfo\\Type' => [
+            'builtinType' => [
+                1 => 'array',
+                'int',
+                'object',
+            ],
+            'nullable' => [
+                1 => false,
+                false,
+                false,
+            ],
+            'collection' => [
+                1 => true,
+                false,
+                false,
+            ],
+            'collectionKeyType' => [
+                1 => [
+                    $o[2],
+                ],
+                [],
+                [],
+            ],
+            'collectionValueType' => [
+                1 => [
+                    $o[3],
+                ],
+                [],
+                [],
+            ],
+            'class' => [
+                3 => 'Sylius\\Component\\Core\\Model\\ProductImageInterface',
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

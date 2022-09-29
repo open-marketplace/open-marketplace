@@ -1,0 +1,3 @@
+<?php //Sylius%255CComponent%255CCore%255CModel%255CChannelInterface%2523getDefaultLocale
+
+return [PHP_INT_MAX, []];

@@ -1,0 +1,3 @@
+<?php //Doctrine%255CCommon%255CComparable
+
+return [PHP_INT_MAX, []];

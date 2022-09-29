@@ -1,0 +1,79 @@
+<?php //property_metadata_ace2a7369c17ae3774bc35a6273e015c
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata')),
+        clone ($p['Symfony\\Component\\PropertyInfo\\Type'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\PropertyInfo\\Type')),
+        clone $p['Symfony\\Component\\PropertyInfo\\Type'],
+        clone $p['Symfony\\Component\\PropertyInfo\\Type'],
+    ],
+    null,
+    [
+        'ApiPlatform\\Core\\Metadata\\Property\\PropertyMetadata' => [
+            'type' => [
+                $o[1],
+            ],
+            'readable' => [
+                true,
+            ],
+            'writable' => [
+                true,
+            ],
+            'readableLink' => [
+                false,
+            ],
+            'writableLink' => [
+                false,
+            ],
+            'required' => [
+                false,
+            ],
+            'identifier' => [
+                false,
+            ],
+            'attributes' => [
+                [],
+            ],
+            'initializable' => [
+                false,
+            ],
+        ],
+        'Symfony\\Component\\PropertyInfo\\Type' => [
+            'builtinType' => [
+                1 => 'object',
+                'int',
+                'object',
+            ],
+            'nullable' => [
+                1 => false,
+                false,
+                false,
+            ],
+            'class' => [
+                1 => 'Doctrine\\Common\\Collections\\Collection',
+                3 => 'Sylius\\Component\\Core\\Model\\CatalogPromotionScope',
+            ],
+            'collection' => [
+                1 => true,
+                false,
+                false,
+            ],
+            'collectionKeyType' => [
+                1 => [
+                    $o[2],
+                ],
+                [],
+                [],
+            ],
+            'collectionValueType' => [
+                1 => [
+                    $o[3],
+                ],
+                [],
+                [],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];
