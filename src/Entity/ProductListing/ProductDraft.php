@@ -390,7 +390,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     {
         $translation = $this->getTranslationByLocale($locale);
 
-        return $translation ? $translation->getName() : '' ;
+        return $translation ? $translation->getName() : '';
     }
 
     public function getSlug(string $locale): ?string
