@@ -7,6 +7,7 @@
                  id="bitbag_mvm_plugin.twig.extension.vendor_extension">
             <argument type="service" id="bitbag_mvm_plugin.provider.vendor" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="sylius.context.locale" />
             <tag name="twig.extension" />
         </service>
     </services>
