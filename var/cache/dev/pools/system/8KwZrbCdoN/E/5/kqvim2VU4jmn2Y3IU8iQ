@@ -1,3 +1,0 @@
-<?php //%5BC%5DSylius%255CBundle%255CApiBundle%255CCommand%255CCheckout%255CChoosePaymentMethod
-
-return [PHP_INT_MAX, 1664453016];

@@ -1,3 +1,0 @@
-<?php //Sylius%255CBundle%255CApiBundle%255CCommand%255CAccount%255CRequestResetPasswordToken%2523setLocaleCode
-
-return [PHP_INT_MAX, []];

@@ -132,7 +132,7 @@ class CreateProductAction extends AbstractController
         }
 
         return new Response(
-            $this->renderView('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/create_product.html.twig', [
+            $this->renderView('Vendor/ProductListing/create_product.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $newResource,

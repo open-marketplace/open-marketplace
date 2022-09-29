@@ -1,3 +1,0 @@
-<?php //Sylius%255CBundle%255CApiBundle%255CCommand%255COrderTokenValueAwareInterface%2523setOrderTokenValue
-
-return [PHP_INT_MAX, []];

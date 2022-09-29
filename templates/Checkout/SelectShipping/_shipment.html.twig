@@ -1,0 +1,33 @@
+<div class="ui segment">
+    <div class="ui dividing header">{{ shipment.vendor.companyName }}</div>
+    <div class="ui fluid stackable items">
+        {{ form_errors(form.method) }}
+
+        <table id="sylius-cart-items" class="ui very basic celled table">
+            <thead>
+            <tr>
+                <th>{{ 'sylius.ui.item'|trans }}</th>
+                <th>{{ 'sylius.ui.unit_price'|trans }}</th>
+                <th>{{ 'sylius.ui.qty'|trans }}</th>
+                <th class="right aligned">{{ 'sylius.ui.total'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, unit in shipment.units %}
+                {% include 'Checkout/SelectShipping/_itemUnit.html.twig'
+                    with {'unit': unit} %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="ui divider"></div>
+
+        {% for key, choice_form in form.method %}
+            {% set fee = form.method.vars.shipping_costs[choice_form.vars.value] %}
+            {% set method = form.method.vars.choices[key].data %}
+            {% include '@SyliusShop/Checkout/SelectShipping/_choice.html.twig' with {'form': choice_form, 'method': method, 'fee': fee} %}
+        {% else %}
+            {% include '@SyliusShop/Checkout/SelectShipping/_unavailable.html.twig' %}
+        {% endfor %}
+    </div>
+</div>

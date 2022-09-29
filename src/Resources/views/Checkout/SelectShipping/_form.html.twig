@@ -1,7 +1,0 @@
-<div class="ui unmargined">
-    {% for key, shipment in order.shipments %}
-        {% include '@BitBagSyliusMultiVendorMarketplacePlugin/Checkout/SelectShipping/_shipment.html.twig' with {'form': form.shipments[key]} %}
-    {% else %}
-        {% include '@SyliusShop/Checkout/SelectShipping/_unavailable.html.twig' %}
-    {% endfor %}
-</div>

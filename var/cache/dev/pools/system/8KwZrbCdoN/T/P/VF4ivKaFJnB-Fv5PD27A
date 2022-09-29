@@ -1,3 +1,0 @@
-<?php //%5BC%5DSylius%255CBundle%255CApiBundle%255CCommand%255CAccount%255CResetPassword%2524newPassword
-
-return [PHP_INT_MAX, 1664453015];

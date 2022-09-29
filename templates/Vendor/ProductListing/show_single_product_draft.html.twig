@@ -1,0 +1,78 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.my_account'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'bitbag_mvm_plugin.ui.product_list'|trans }}</div>
+    </div>
+{% endblock %}
+
+{% set productDraft = product_draft %}
+
+{% block subcontent %}
+
+{#    <div class="ui header">#}
+{#        {{ 'sylius.ui.product'|trans }} {{ productDraft.code }}#}
+
+    {% set productDraft = product_draft%}
+{#    <div class="full height ui" id="wrapper">#}
+
+{#        <h1 class="ui dividing header">#}
+{#            {{ 'bitbag_mvm_plugin.ui.product_overview'|trans }}#}
+{#            <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>#}
+{#        </h1>#}
+
+        {% include 'Admin/ProductListing/details/_attributes.html.twig' %}
+        <div class="ui hidden divider"></div>
+        {% include 'Admin/ProductListing/details/_media.html.twig' %}
+        <div class="ui hidden divider"></div>
+        {% include 'Admin/ProductListing/details/_more_details.html.twig' %}
+        <div class="ui hidden divider"></div>
+
+        <table class="ui very celled table">
+            <tbody>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.id'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.id }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.name'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.code }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.published_at'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.publishedAt | date }}</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.status'|trans }}</strong></td>
+                <td>
+                    <ul class="ui bulleted list">
+                        <li>{{ productDraft.status }}</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/admin/admin-entry.css') }}"/>
+{% endblock %}

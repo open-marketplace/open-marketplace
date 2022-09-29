@@ -4,7 +4,7 @@ bitbag_mvm_plugin_vendor_product_listing_index:
   defaults:
     _controller: bitbag_mvm_plugin.controller.product_listing:indexAction
     _sylius:
-      template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/index.html.twig"
+      template: "Vendor/ProductListing/index.html.twig"
       grid: bitbag_mvm_plugin_vendor_product_listing
 
 bitbag_mvm_plugin_vendor_product_listing_create_product:
@@ -13,7 +13,7 @@ bitbag_mvm_plugin_vendor_product_listing_create_product:
     defaults:
         _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.create_product_action
         _sylius:
-            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/create_product.html.twig'
+            template: 'Vendor/ProductListing/create_product.html.twig'
             redirect:
                 route: vendor_product_variant_index
 
@@ -23,7 +23,7 @@ bitbag_mvm_plugin_vendor_product_listing_edit_product:
     defaults:
         _controller: bitbag_mvm_plugin.controller.action.vendor.product_listing.edit_product_action
         _sylius:
-            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/edit_product.html.twig'
+            template: 'Vendor/ProductListing/edit_product.html.twig'
             redirect:
                 route: vendor_product_variant_index
 
@@ -33,7 +33,7 @@ bitbag_mvm_plugin_vendor_product_draft_show_product:
     defaults:
         _controller: bitbag_mvm_plugin.controller.product_draft:showAction
         _sylius:
-            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/show_single_product_draft.html.twig'
+            template: 'Vendor/ProductListing/show_single_product_draft.html.twig'
 
 bitbag_mvm_plugin_vendor_product_listing_send_for_verification:
     path: /product-listings/{id}/send-for-verification
@@ -47,7 +47,7 @@ bitbag_mvm_plugin_vendor_product_listing_remove_action:
     defaults:
         _controller: bitbag_mvm_plugin.controller.product_listing.remove_action
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/ProductListing/index.html.twig"
+            template: "Vendor/ProductListing/index.html.twig"
             redirect:
                 route: vendor_product_variant_index
 

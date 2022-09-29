@@ -1,3 +1,0 @@
-<?php //%5BC%5DSymfony%255CComponent%255CSecurity%255CCore%255CEncoder%255CEncoderAwareInterface%2523getEncoderName
-
-return [PHP_INT_MAX, 1664453015];

@@ -20,7 +20,7 @@ bitbag_mvm_plugin_admin_conversation_create:
     defaults:
         _controller: bitbag_mvm_plugin.controller.action.conversation.create_new_conversation_action
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Conversation/create.html.twig"
+            template: "Admin/Conversation/create.html.twig"
             redirect: bitbag_mvm_plugin_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
         
@@ -30,7 +30,7 @@ bitbag_mvm_plugin_admin_conversation_show:
     defaults:
         _controller: bitbag_mvm_plugin.controller.conversation.conversation_controller:show
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Conversation/show.html.twig"
+            template: "Admin/Conversation/show.html.twig"
 
 bitbag_mvm_plugin_admin_conversation_archive:
     path: /admin/conversations/{id}/archive

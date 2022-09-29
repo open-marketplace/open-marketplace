@@ -1,0 +1,116 @@
+{% block subcontent %}
+    {{ form_start(form, { 'attr': {'class': 'ui loadable form dirtylisten'}}) }}
+        {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
+        <div class="ui stackable grid sylius-tabular-form">
+            <div class="sixteen wide column">
+                <div>
+                    <div class="ui tab active" data-tab="details">
+                        <div class="ui segments">
+                            <div class="ui segment">
+                                <h3>{{ 'sylius.ui.details'|trans }}</h3>
+                            </div>
+                            <div class="ui segment">
+                                {{ form_label(form.code)}}
+                                {{ form_widget(form.code) }}
+                            </div>
+                        </div>
+                        <div class="ui segments">
+                            <div class="ui segment">
+                                <h3>{{ 'sylius.ui.pricing'|trans }}</h3>
+                            </div>
+                            <div class="ui segment">
+                                <div class="ui styled fluid accordion">
+                                    {% for channel, prices in form.productListingPrice %}
+                                        <div id="sylius_product_variant_channelPricings" data-locale="{{ channel }}">
+                                            <div class="title {% if loop.first %}active{% endif %}">
+                                                <i class="dropdown icon"></i>
+                                                {{ prices.vars.name }}
+                                            </div>
+                                            <div class="ui content {% if loop.first %}active{% endif %}">
+                                                <div class="ui info message">
+                                                    {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
+                                                </div>
+                                                {% for price in prices %}
+                                                    <div class="field">
+                                                        {{ form_label(price) }}
+                                                        <div class="ui labeled input">
+                                                            {{ form_widget(price) }}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui segments">
+                            <div class="ui segment">
+                                <h3>{{ 'sylius.ui.translations'|trans }}</h3>
+                            </div>
+                            <div class="ui segment">
+                                <div class="ui styled fluid accordion">
+                                    {% for index, translations in form.translations %}
+                                        {% set flag = translations.vars.name|split('_')[1]|lower %}
+                                        <div data-locale="{{ translations.vars.name }}">
+                                            <div class="title {% if index == "en_US" %}active{% endif %}">
+                                                <i class="dropdown icon"></i>
+                                                <i class="{{ flag }} flag"></i>
+                                                {{ translations.vars.name }}
+                                            </div>
+                                            <div class="ui content {% if index == "en_US" %}active{% endif %}">
+                                                {% for translation in translations %}
+                                                    {{ form_label(translation) }}
+                                                    {{ form_widget(translation) }}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% form_theme form '@SyliusAdmin/Product/Attribute/attributesCollection.html.twig' %}
+            <div class="ui tab active segments" data-tab="attributes">
+                <div class="ui segment">
+                    <h3>{{ 'sylius.ui.attributes'|trans }}</h3>
+                </div>
+                <div class="ui segment">
+                    {{ render(url('bitbag_vendor_get_product_attributes')) }}
+                    <div id="attributesContainer" data-count="{{ form.attributes|length }}">
+                        {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
+                    </div>
+                </div>
+            </div>
+                {% include 'Vendor/ProductListing/_imageForm.html.twig' %}
+                <div class="ui tab active segments" data-tab="taxonomy">
+                    <h3 class="ui top attached header">{{ 'sylius.ui.taxonomy'|trans }}</h3>
+
+                    <div class="ui attached segment">
+                        {{ form_row(form.mainTaxon, {
+                            'remote_url': path('bitbag_mvm_plugin_ajax_taxon_by_name_phrase'),
+                            'load_edit_url': path('bitbag_mvm_plugin_ajax_taxon_by_code')
+                        }) }}
+
+                        <h4>{{ 'sylius.ui.product_taxon'|trans }}</h4>
+                        <div id="sylius-product-taxonomy-tree"
+                             data-tree-root-nodes-url="{{ path('bitbag_mvm_plugin_ajax_taxon_root_nodes') }}"
+                             data-tree-leafs-url="{{ path('bitbag_mvm_plugin_ajax_taxon_leafs') }}"
+                        >
+                            {{ form_widget(form.productDraftTaxons) }}
+
+                            <div class="ui inverted dimmer">
+                                <div class="ui loader"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide column right aligned">
+                {{ form_row(form._token) }}
+                {{ form_widget(form.save) }}
+            </div>
+        </div>
+      {{ form_end(form, {'render_rest': true})  }}
+{% endblock %}

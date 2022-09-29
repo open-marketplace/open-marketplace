@@ -1,3 +1,0 @@
-<?php //Stringable%2523__toString
-
-return [PHP_INT_MAX, []];

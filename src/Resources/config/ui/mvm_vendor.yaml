@@ -3,48 +3,48 @@ sylius_ui:
         bitbag_mvm_plugin.admin.vendor.show.details:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_details.html.twig'
+                    template: 'Admin/Vendor/Show/_details.html.twig'
                     priority: 10
         bitbag_mvm_plugin.admin.vendor.show.details_content:
             blocks:
                 labels:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_detailsLabels.html.twig'
+                    template: 'Admin/Vendor/Show/_detailsLabels.html.twig'
                     priority: 20
                 table:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Show/_detailsTable.html.twig'
+                    template: 'Admin/Vendor/Show/_detailsTable.html.twig'
                     priority: 10
         bitbag_mvm_plugin.admin.vendor.form:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_content.html.twig'
+                    template: 'Admin/Vendor/Update/_content.html.twig'
                     priority: 10
         bitbag_mvm_plugin.admin.vendor.form.content:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_columns.html.twig'
+                    template: 'Admin/Vendor/Update/_columns.html.twig'
                     priority: 10
         bitbag_mvm_plugin.admin.vendor.form.first_column:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_firstColumn.html.twig'
+                    template: 'Admin/Vendor/Update/_firstColumn.html.twig'
                     priority: 10
         bitbag_mvm_plugin.admin.vendor.form.vendor_details:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_details.html.twig'
+                    template: 'Admin/Vendor/Update/_details.html.twig'
                     priority: 10
         bitbag_mvm_plugin.admin.vendor.form.second_column:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_secondColumn.html.twig'
+                    template: 'Admin/Vendor/Update/_secondColumn.html.twig'
                     priority: 10
         bitbag_mvm_plugin.admin.vendor.form.vendor_address:
             blocks:
                 content:
-                    template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/Update/_vendorAddress.html.twig'
+                    template: 'Admin/Vendor/Update/_vendorAddress.html.twig'
                     priority: 10
         sylius.shop.account.layout.menu:
             blocks:
                 vendor:
-                    template: "@BitBagSyliusMultiVendorMarketplacePlugin/Account/Menu/_content.html.twig"
+                    template: "Account/Menu/_content.html.twig"
                     priority: 7

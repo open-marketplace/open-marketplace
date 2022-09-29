@@ -1,7 +1,7 @@
 sylius_grid:
     templates:
         action:
-            archiveConversation: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Action/archiveConversation.html.twig"
+            archiveConversation: "Grid/Conversation/Action/archiveConversation.html.twig"
     grids:
         bitbag_mvm_plugin_admin_conversation:
             driver:
@@ -13,12 +13,12 @@ sylius_grid:
                     type: twig
                     label: bitbag_mvm_plugin.ui.form.conversation.category
                     options:
-                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/category.html.twig'
+                        template: 'Grid/Conversation/Ui/category.html.twig'
                 shopUser:
                     type: twig
                     label: bitbag_mvm_plugin.ui.grid.conversation.applicant
                     options:
-                        template: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Conversation/Ui/applicant.html.twig'
+                        template: 'Grid/Conversation/Ui/applicant.html.twig'
             filters:
                 status:
                     label: bitbag_mvm_plugin.ui.status

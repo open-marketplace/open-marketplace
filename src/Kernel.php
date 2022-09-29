@@ -120,7 +120,7 @@ final class Kernel extends BaseKernel
 
     private function loadContainerConfiguration(LoaderInterface $loader, string $confDir): void
     {
-        $loader->load($confDir . '/config' . self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir . '/{config}' . self::CONFIG_EXTS, 'glob');
         $loader->load($confDir . '/{packages}/*' . self::CONFIG_EXTS, 'glob');
         $loader->load($confDir . '/{packages}/' . $this->environment . '/**/*' . self::CONFIG_EXTS, 'glob');
         $loader->load($confDir . '/{services}' . self::CONFIG_EXTS, 'glob');
@@ -132,5 +132,6 @@ final class Kernel extends BaseKernel
         $routes->import($confDir . '/{routes}/*' . self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir . '/{routes}/' . $this->environment . '/**/*' . self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir . '/{routes}' . self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($confDir . '/{routing}' . self::CONFIG_EXTS, '/', 'glob');
     }
 }

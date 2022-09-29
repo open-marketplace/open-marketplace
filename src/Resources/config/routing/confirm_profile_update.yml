@@ -4,7 +4,7 @@ confirm_profile_update_link:
     defaults:
         _controller: bitbag_mvm_plugin.controller.confirm_profile_update_action
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/profileUpdate.html.twig"
+            template: "Vendor/profileUpdate.html.twig"
             form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType
             event: update                
             repository:
