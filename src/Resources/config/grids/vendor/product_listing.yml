@@ -26,12 +26,19 @@ sylius_grid:
         code:
           type: string
           label: bitbag_mvm_plugin.ui.code
-        getLatestDraft.publishedAt:
-          type: datetime
-          label: bitbag_mvm_plugin.ui.published_at
+
+        name:
+          type: twig
+          label: bitbag_mvm_plugin.ui.name
+          path: getLatestDraft
+          options:
+              template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_product_name.html.twig"
+
         getLatestDraft.verifiedAt:
-          type: datetime
+          type: twig
           label: bitbag_mvm_plugin.ui.verified_at
+          options:
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_verified_at.html.twig"
         getLatestDraft.status:
           type: twig
           label: bitbag_mvm_plugin.ui.status

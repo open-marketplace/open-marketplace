@@ -133,4 +133,8 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function getMainTaxon(): ?TaxonInterface;
 
     public function setMainTaxon(?TaxonInterface $mainTaxon): void;
+
+    public function getName(string $locale): ?string;
+
+    public function getSlug(string $locale): ?string;
 }

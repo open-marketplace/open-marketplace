@@ -436,4 +436,29 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     {
         $this->mainTaxon = $mainTaxon;
     }
+
+    public function getTranslationByLocale(string $locale): ?ProductTranslationInterface
+    {
+        foreach ($this->getTranslations() as $translation) {
+            if ($translation->getLocale() == $locale) {
+                return $translation;
+            }
+        }
+
+        return null;
+    }
+
+    public function getName(string $locale): ?string
+    {
+        $translation = $this->getTranslationByLocale($locale);
+
+        return $translation?->getName();
+    }
+
+    public function getSlug(string $locale): ?string
+    {
+        $translation = $this->getTranslationByLocale($locale);
+
+        return $translation?->getSlug();
+    }
 }
