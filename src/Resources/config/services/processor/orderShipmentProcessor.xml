@@ -9,7 +9,6 @@
             <argument type="service" id="bitbag_mvm_plugin.vendor_shipping_methods_resolver" />
             <argument type="service" id="sylius.shipping_method_resolver.default" />
             <argument type="service" id="sylius.factory.shipment"/>
-            <argument type="service" id="bitbag_mvm_plugin.helper.order_vendor_helper"/>
         </service>
     </services>
 </container>

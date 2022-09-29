@@ -127,6 +127,7 @@
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactory"
                  id="bitbag_mvm_plugin.factory.shipment">
+            <argument>%sylius.model.shipment.class%</argument>
         </service>
     </services>
 </container>
