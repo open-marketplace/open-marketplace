@@ -19,5 +19,11 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="bitbag.mvm_plugin.service.vendor_image_factory"/>
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperator"
+                 id="bitbag_mvm_plugin.operator.product_draft_taxons">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="sylius.factory.product_taxon" />
+        </service>
     </services>
 </container>

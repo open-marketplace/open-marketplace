@@ -7,5 +7,6 @@ default:
         - sylius.behat.context.setup.channel
         - sylius.behat.context.hook.doctrine_orm
         - sylius.behat.context.setup.shop_security
+        - sylius.behat.context.setup.taxonomy
       filters:
         tags: '@vendor_managing_product_listings && @ui'

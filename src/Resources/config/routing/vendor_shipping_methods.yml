@@ -11,5 +11,7 @@ vendor_shipping_methods:
         method: findOneById
         arguments:
           id: "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor().getId()"
+      flash: bitbag_mvm_plugin.ui.shipping_method_updated
       redirect:
-        route: sylius_shop_account_dashboard
+        route: vendor_shipping_methods
+

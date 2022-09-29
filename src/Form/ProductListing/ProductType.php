@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -53,7 +54,10 @@ final class ProductType extends AbstractType
                 'by_reference' => true,
                 'label' => false,
             ])
-
+            ->add('mainTaxon', TaxonAutocompleteChoiceType::class, [
+                'label' => 'sylius.form.product.main_taxon',
+                'required' => false,
+            ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $product = $event->getData();
                 $form = $event->getForm();
@@ -73,15 +77,22 @@ final class ProductType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $productDraft = $event->getData();
 
-            $event->getForm()->add('productListingPrice', ChannelCollectionType::class, [
-                'entry_type' => ProductPriceType::class,
-                'entry_options' => fn (ChannelInterface $channel) => [
-                    'channel' => $channel,
-                    'product_draft' => $productDraft,
+            $event->getForm()
+                ->add('productListingPrice', ChannelCollectionType::class, [
+                    'entry_type' => ProductPriceType::class,
+                    'entry_options' => fn (ChannelInterface $channel) => [
+                        'channel' => $channel,
+                        'product_draft' => $productDraft,
+                        'required' => false,
+                    ],
+                    'label' => 'sylius.form.variant.price',
+                ])
+                ->add('productDraftTaxons', ProductDraftTaxonAutocompleteChoiceType::class, [
+                    'label' => 'sylius.form.product.taxons',
+                    'productDraft' => $productDraft,
+                    'multiple' => true,
                     'required' => false,
-                ],
-                'label' => 'sylius.form.variant.price',
-            ]);
+                ]);
         });
     }
 

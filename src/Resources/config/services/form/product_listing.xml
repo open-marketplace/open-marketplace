@@ -37,5 +37,10 @@
             <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage</argument>
             <tag name="form.type" />
         </service>
+        <service id="bitbag.form.type.taxonomy" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductDraftTaxonAutocompleteChoiceType">
+            <argument type="service" id="bitbag.mvm_plugin.factory.product_taxon" />
+            <argument type="service" id="bitbag.mvm_plugin.repository.product_taxon" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

@@ -27,21 +27,93 @@ sylius_fixtures:
                         amount: 20
                         added: ~
                         accepted: ~
+                        images:
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
                 added_product_draft:
                     name: 'product_draft'
                     options:
                         amount: 20
                         added: ~
+                        images:
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
                 product_draft:
                     name: 'product_draft'
                     options:
                         amount: 10
+                        images:
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
                 rejected_product_draft:
                     name: 'product_draft'
                     options:
                         amount: 10
                         added: ~
                         rejected: ~
+                        images:
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_03.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_01.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
+                            - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
 
                 fulfilled_order:
                     name: 'mvm_order'

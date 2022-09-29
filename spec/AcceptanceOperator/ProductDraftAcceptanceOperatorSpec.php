@@ -19,6 +19,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperatorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
@@ -30,14 +31,16 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductDraftFilesOperatorInterface $filesOperator,
         AttributesConverterInterface $attributesConverter,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
     ): void {
         $this->beConstructedWith(
             $productFromDraftFactory,
             $productFromDraftUpdater,
             $filesOperator,
             $attributesConverter,
-            $entityManager
+            $entityManager,
+            $productDraftTaxonsOperator
         );
     }
 
@@ -54,7 +57,9 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
     public function it_creates_new_product(
         ProductDraftInterface $productDraft,
         ProductFromDraftFactoryInterface $productFromDraftFactory,
-        ProductListingInterface $productListing
+        ProductListingInterface $productListing,
+        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator,
+        ProductInterface $product
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -63,6 +68,9 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
             ->willReturn(null);
 
         $productFromDraftFactory->createSimpleProduct($productDraft)
+            ->willReturn($product);
+
+        $productDraftTaxonsOperator->copyTaxonsToProduct($productDraft, $product)
             ->shouldBeCalled();
 
         $this->acceptProductDraft($productDraft);
@@ -74,7 +82,8 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftFilesOperatorInterface $filesOperator,
         ProductListingInterface $productListing,
         ProductInterface $product,
-        ProductInterface $updatedProduct
+        ProductInterface $updatedProduct,
+        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -88,6 +97,9 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $filesOperator->removeOldFiles($updatedProduct)->shouldBeCalledTimes(1);
         $filesOperator->copyFilesToProduct($productDraft, $updatedProduct)->shouldBeCalledTimes(1);
 
+        $productDraftTaxonsOperator->updateTaxonsInProduct($productDraft, $updatedProduct)
+            ->shouldBeCalled();
+
         $this->acceptProductDraft($productDraft);
     }
 
@@ -97,7 +109,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftFilesOperatorInterface $filesOperator,
         ProductListingInterface $productListing,
         ProductInterface $product,
-        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $updatedProduct,
+        ProductInterface $updatedProduct,
         AttributesConverterInterface $attributesConverter
     ): void {
         $productDraft->getProductListing()
@@ -123,7 +135,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftFilesOperatorInterface $filesOperator,
         ProductListingInterface $productListing,
         ProductInterface $product,
-        \BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface $newProduct,
+        ProductInterface $newProduct,
         AttributesConverterInterface $attributesConverter
     ): void {
         $productDraft->getProductListing()

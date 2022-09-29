@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductDraft implements ResourceInterface, ProductDraftInterface
@@ -49,6 +50,11 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     /** @var Collection<int, AttributeValueInterface> */
     protected Collection $attributes;
 
+    protected TaxonInterface|null $mainTaxon;
+
+    /** @var Collection<array-key, ProductDraftTaxonInterface> */
+    protected Collection $productDraftTaxons;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -60,6 +66,8 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         $this->createdAt = new \DateTime();
         $this->versionNumber = 1;
         $this->attributes = new ArrayCollection();
+        $this->mainTaxon = null;
+        $this->productDraftTaxons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -373,6 +381,60 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         foreach ($otherDraft->getAttributes() as $attribute) {
             $attribute->setSubject($this);
         }
+    }
+
+    /** @return Collection<array-key, ProductDraftTaxonInterface> */
+    public function getProductDraftTaxons(): Collection
+    {
+        return $this->productDraftTaxons;
+    }
+
+    public function setProductTaxonsFrom(ProductDraftInterface $otherDraft): void
+    {
+        $this->productDraftTaxons = $otherDraft->getProductDraftTaxons();
+    }
+
+    public function addProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): void
+    {
+        if (!$this->hasProductDraftTaxon($productDraftTaxons)) {
+            $this->productDraftTaxons->add($productDraftTaxons);
+            $productDraftTaxons->setProductDraft($this);
+        }
+    }
+
+    public function removeProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): void
+    {
+        if ($this->hasProductDraftTaxon($productDraftTaxons)) {
+            $this->productDraftTaxons->removeElement($productDraftTaxons);
+        }
+    }
+
+    public function hasProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): bool
+    {
+        return $this->productDraftTaxons->contains($productDraftTaxons);
+    }
+
+    /** @return Collection<array-key, ?TaxonInterface> */
+    public function getTaxons(): Collection
+    {
+        return $this->productDraftTaxons->map(function (ProductDraftTaxonInterface $productDraftTaxons): ?TaxonInterface {
+            return $productDraftTaxons->getTaxon();
+        });
+    }
+
+    public function hasTaxon(TaxonInterface $taxon): bool
+    {
+        return $this->getTaxons()->contains($taxon);
+    }
+
+    public function getMainTaxon(): TaxonInterface|null
+    {
+        return $this->mainTaxon;
+    }
+
+    public function setMainTaxon(?TaxonInterface $mainTaxon): void
+    {
+        $this->mainTaxon = $mainTaxon;
     }
 
     public function getTranslationByLocale(string $locale): ?ProductTranslationInterface

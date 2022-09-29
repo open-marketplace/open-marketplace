@@ -9,6 +9,7 @@
             <argument type="service" id="sylius.repository.product_translation" />
             <argument type="service" id="sylius.repository.channel_pricing" />
             <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater"

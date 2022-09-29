@@ -75,6 +75,8 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
 
         $newProductDraft->setAttributesFrom($productDraft);
 
+        $newProductDraft->setProductTaxonsFrom($productDraft);
+
         $this->productListingTranslationCloner->cloneTranslation($newProductDraft, $productDraft);
 
         $this->productListingPricingCloner->clonePrice($newProductDraft, $productDraft);

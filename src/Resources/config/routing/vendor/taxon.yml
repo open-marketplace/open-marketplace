@@ -1,0 +1,71 @@
+bitbag_mvm_plugin_ajax_taxon_root_nodes:
+  path: /root-nodes
+  methods: [GET]
+  defaults:
+    _controller: sylius.controller.taxon:indexAction
+    _format: json
+    _sylius:
+      serialization_groups: [Autocomplete]
+      permission: true
+      repository:
+        method: findRootNodes
+
+bitbag_mvm_plugin_ajax_taxon_leafs:
+  path: /leafs
+  methods: [GET]
+  defaults:
+    _controller: sylius.controller.taxon:indexAction
+    _format: json
+    _sylius:
+      serialization_groups: [Autocomplete]
+      permission: true
+      repository:
+        method: findChildren
+        arguments:
+          parentCode: $parentCode
+
+bitbag_mvm_plugin_ajax_taxon_by_code:
+  path: /leaf
+  methods: [GET]
+  defaults:
+    _controller: sylius.controller.taxon:indexAction
+    _format: json
+    _sylius:
+      serialization_groups: [Autocomplete]
+      permission: true
+      repository:
+        method: findBy
+        arguments: [code: $code]
+
+bitbag_mvm_plugin_ajax_taxon_by_name_phrase:
+  path: /search
+  methods: [GET]
+  defaults:
+    _controller: sylius.controller.taxon:indexAction
+    _format: json
+    _sylius:
+      serialization_groups: [Autocomplete]
+      permission: true
+      repository:
+        method: findByNamePart
+        arguments:
+          phrase: expr:service('request_stack').getCurrentRequest().query.get('phrase', '')
+          locale: null
+          limit: 25
+
+bitbag_mvm_plugin_ajax_generate_taxon_slug:
+  path: /generate-slug/
+  methods: [GET]
+  defaults:
+    _controller: sylius.controller.taxon_slug:generateAction
+    _format: json
+
+bitbag_mvm_plugin_ajax_taxon_move:
+  path: /{id}/move
+  methods: [PUT]
+  defaults:
+    _controller: sylius.controller.taxon:updateAction
+    _format: json
+    _sylius:
+      permission: true
+      form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType
