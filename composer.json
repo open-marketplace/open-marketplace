@@ -59,7 +59,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Tests\\BitBag\\SyliusMultiVendorMarketplacePlugin\\": ["tests/"]
         },
         "classmap": [
             "src/Kernel.php"

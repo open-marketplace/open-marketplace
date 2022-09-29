@@ -50,6 +50,11 @@ final class Kernel extends BaseKernel
         }
     }
 
+    private function isTestEnvironment(): bool
+    {
+        return 0 === strpos($this->getEnvironment(), 'test');
+    }
+
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         foreach ($this->getConfigurationDirectories() as $confDir) {
@@ -94,11 +99,6 @@ final class Kernel extends BaseKernel
                 yield new $class();
             }
         }
-    }
-
-    private function isTestEnvironment(): bool
-    {
-        return 0 === strpos($this->getEnvironment(), 'test');
     }
 
     /**

@@ -15,10 +15,10 @@
 
         <server name="KERNEL_CLASS_PATH" value="/tests/Application/Kernel.php" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true"/>
-        <server name="KERNEL_CLASS" value="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Application\Kernel"/>
+        <server name="KERNEL_CLASS" value="App\Kernel"/>
         <server name="EXPECTED_RESPONSES_DIR" value="tests\Responses\json"/>
         <env name="APP_ENV" value="test"/>
         <env name="SHELL_VERBOSITY" value="-1" />
-        
+
     </php>
 </phpunit>
