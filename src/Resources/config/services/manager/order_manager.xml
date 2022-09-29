@@ -7,9 +7,11 @@
                  id="bitbag.mvm_plugin.manager.order_manager">
             <argument type="service" id="bitbag.mvm_plugin.factory.order_factory"/>
             <argument type="service" id="bitbag.mvm_plugin.cloner.order_cloner"/>
+            <argument type="service" id="bitbag.mvm_plugin.cloner.shipment_cloner"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="bitbag.mvm_plugin.cloner.order_item_cloner"/>
             <argument type="service" id="bitbag.mvm_plugin.factory.order_item_factory"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.shipment"/>
         </service>
 
     </services>

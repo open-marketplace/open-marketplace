@@ -124,6 +124,10 @@
                  id="bitbag_mvm_plugin.factory.vendor_shipping_method">
 
         </service>
+
+        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactory"
+                 id="bitbag_mvm_plugin.factory.shipment">
+        </service>
     </services>
 </container>
 

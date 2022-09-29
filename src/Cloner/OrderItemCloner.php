@@ -53,6 +53,7 @@ final class OrderItemCloner implements OrderItemClonerInterface
             $newUnit = new OrderItemUnit($newItem);
             $this->itemUnitCloner->clone($unit, $newUnit);
             $newUnit->setShipment($shipment);
+            $this->entityManager->persist($newUnit);
             $newItem->addUnit($newUnit);
         }
 

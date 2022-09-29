@@ -12,6 +12,8 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Model\Order;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -63,5 +65,86 @@ trait OrderTrait
     public function getSecondaryOrders(): Collection
     {
         return $this->secondaryOrders;
+    }
+
+    public function hasVendorItems(): bool
+    {
+        foreach ($this->getItems() as $item) {
+            if (null === $item->getVariant() || null === $item->getVariant()?->getProduct()) {
+                continue;
+            }
+
+            $product = $item->getVariant()?->getProduct();
+            if ($product->hasVendor()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasVendorShipment(VendorInterface $vendor): bool
+    {
+        /** @var ShipmentInterface $shipment */
+        foreach ($this->getShipments() as $shipment) {
+            if ($shipment->hasVendor() && $shipment->getVendor() === $vendor) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasShipmentWithoutVendor(): bool
+    {
+        /** @var ShipmentInterface $shipment */
+        foreach ($this->getShipments() as $shipment) {
+            if (false === $shipment->hasVendor()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getVendorsFromOrderItems(): array
+    {
+        $vendors = [];
+
+        foreach ($this->getItems() as $item) {
+            /** @var ProductInterface $product */
+            $product = $item->getVariant()?->getProduct();
+            $vendor = $product->getVendor();
+
+            if (null !== $vendor && false === in_array($vendor, $vendors)) {
+                $vendors[] = $vendor;
+            }
+        }
+
+        return $vendors;
+    }
+
+    public function getShipmentByVendor(?VendorInterface $vendor): ?ShipmentInterface
+    {
+        /** @var ShipmentInterface $shipment */
+        foreach ($this->getShipments() as $shipment) {
+            if ($shipment->hasVendor() && $shipment->getVendor() === $vendor) {
+                return $shipment;
+            }
+        }
+
+        return null;
+    }
+
+    public function getShipmentWithoutVendor(): ?ShipmentInterface
+    {
+        /** @var ShipmentInterface $shipment */
+        foreach ($this->getShipments() as $shipment) {
+            if (false === $shipment->hasVendor()) {
+                return $shipment;
+            }
+        }
+
+        return null;
     }
 }

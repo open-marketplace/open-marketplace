@@ -11,22 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use Sylius\Component\Core\Model\ProductInterface as BaseProductInterface;
+use Sylius\Component\Core\Model\ShipmentInterface as BaseShipmentInterface;
 
-interface ProductInterface extends BaseProductInterface
+interface ShipmentInterface extends BaseShipmentInterface
 {
-    public function resetImages(): void;
-
     public function hasVendor(): bool;
 
     public function getVendor(): ?VendorInterface;
 
     public function setVendor(?VendorInterface $vendor): void;
-
-    public function setAttributesFrom(ProductDraftInterface $draft): void;
-
-    public function isDeleted(): bool;
-
-    public function setDeleted(bool $deleted): void;
 }

@@ -33,4 +33,5 @@ sylius_resource:
                 model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethod
                 interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethodInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorShippingMethodRepository
 

@@ -32,3 +32,21 @@ sylius_shop_account_order_index:
             section: shop_account
             template: "@BitBagSyliusMultiVendorMarketplacePlugin/Shop/Order/Index.html.twig"
             grid: sylius_shop_account_order
+
+sylius_shop_checkout_select_shipping:
+    path: /checkout/select-shipping
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            event: select_shipping
+            flash: false
+            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Checkout/selectShipping.html.twig"
+            form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Checkout\SelectShippingType
+            repository:
+                method: findCartForSelectingShipping
+                arguments:
+                    - "expr:service('sylius.context.cart').getCart().getId()"
+            state_machine:
+                graph: sylius_order_checkout
+                transition: select_shipping

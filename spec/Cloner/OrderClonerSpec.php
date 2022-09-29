@@ -13,8 +13,8 @@ namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderCloner;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\PaymentClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentClonerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
@@ -31,15 +31,15 @@ final class OrderClonerSpec extends ObjectBehavior
     public function let(
         EntityManagerInterface $entityManager,
         AddressClonerInterface $addressCloner,
-        ShipmentClonerInterface $shipmentCloner,
         PaymentClonerInterface $paymentCloner
     ): void {
-        $this->beConstructedWith($entityManager, $addressCloner, $shipmentCloner, $paymentCloner);
+        $this->beConstructedWith($entityManager, $addressCloner, $paymentCloner);
     }
 
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(OrderCloner::class);
+        $this->shouldImplement(OrderClonerInterface::class);
     }
 
     public function it_clones_all_values(
