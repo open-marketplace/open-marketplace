@@ -67,7 +67,7 @@ trait OrderTrait
         return $this->secondaryOrders;
     }
 
-    public function orderHasVendorItems(): bool
+    public function hasVendorItems(): bool
     {
         foreach ($this->getItems() as $item) {
             if (null === $item->getVariant() || null === $item->getVariant()?->getProduct()) {
@@ -83,7 +83,7 @@ trait OrderTrait
         return false;
     }
 
-    public function orderHasVendorShipment(VendorInterface $vendor): bool
+    public function hasVendorShipment(VendorInterface $vendor): bool
     {
         /** @var ShipmentInterface $shipment */
         foreach ($this->getShipments() as $shipment) {
@@ -95,7 +95,7 @@ trait OrderTrait
         return false;
     }
 
-    public function orderHasShipmentWithoutVendor(): bool
+    public function hasShipmentWithoutVendor(): bool
     {
         /** @var ShipmentInterface $shipment */
         foreach ($this->getShipments() as $shipment) {
@@ -107,7 +107,7 @@ trait OrderTrait
         return false;
     }
 
-    public function getVendorsFromOrder(): array
+    public function getVendorsFromOrderItems(): array
     {
         $vendors = [];
 
