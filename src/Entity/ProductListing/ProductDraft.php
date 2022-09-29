@@ -386,17 +386,17 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         return null;
     }
 
-    public function getName(string $locale): string
+    public function getName(string $locale): ?string
     {
         $translation = $this->getTranslationByLocale($locale);
 
-        return $translation->getName() ?? '';
+        return $translation ? $translation->getName() : '' ;
     }
 
-    public function getSlug(string $locale): string
+    public function getSlug(string $locale): ?string
     {
         $translation = $this->getTranslationByLocale($locale);
 
-        return $translation->getSlug() ?? '';
+        return $translation ? $translation->getSlug() : '';
     }
 }
