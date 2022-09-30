@@ -167,6 +167,7 @@ class VendorUpdateContext extends RawMinkContext
 
         $page = $session->getPage();
         $logo = $page->find('css', '#vendor_logo');
+
         $newPath = $logo->getAttribute('src');
         Assert::notEq($oldImagePath, $newPath);
     }
