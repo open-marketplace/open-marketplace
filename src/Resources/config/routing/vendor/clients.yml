@@ -3,7 +3,7 @@ bitbag_mvm_plugin_customer_index:
     defaults:
         _controller: sylius.controller.customer:indexAction
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Clients/index.html.twig"
+            template: "Vendor/Clients/index.html.twig"
             grid: bitbag_mvm_plugin_vendor_clients
 
 bitbag_mvm_plugin_vendor_customer_show:
@@ -14,7 +14,7 @@ bitbag_mvm_plugin_vendor_customer_show:
         _controller: sylius.controller.customer:showAction
         _sylius:
             permission: true
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Clients/show.html.twig"
+            template: "Vendor/Clients/show.html.twig"
             repository:
                 method: findCustomerForVendor
                 arguments:
@@ -29,5 +29,5 @@ bitbag_mvm_plugin_vendor_customer_order_index:
         _sylius:
             section: admin
             permission: true
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
+            template: "Vendor/Order/index.html.twig"
             grid: vendor_account_customer_orders

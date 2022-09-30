@@ -1,7 +1,7 @@
 sylius_grid:
   templates:
     action:
-      edit_product: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/edit_product_listing.html.twig"
+      edit_product: "Grid/Action/edit_product_listing.html.twig"
   grids:
     bitbag_mvm_plugin_vendor_product_listing:
       driver:
@@ -43,7 +43,7 @@ sylius_grid:
           type: twig
           label: bitbag_mvm_plugin.ui.status
           options:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_status.html.twig"
+            template: "Grid/Field/product_listing_status.html.twig"
       actions:
         main:
           create:

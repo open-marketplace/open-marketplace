@@ -4,7 +4,7 @@ bitbag_mvm_plugin_vendor_conversation_index:
     defaults:
         _controller:  bitbag_mvm_plugin.controller.conversation.conversation_controller:index
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/index.html.twig"
+            template: "Conversation/User/index.html.twig"
 
 bitbag_mvm_plugin_vendor_conversation_show:
     path: /vendor/conversations/{id}
@@ -12,7 +12,7 @@ bitbag_mvm_plugin_vendor_conversation_show:
     defaults:
         _controller: 'bitbag_mvm_plugin.controller.conversation.conversation_controller:show'
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/show.html.twig"
+            template: "Conversation/User/show.html.twig"
             
 bitbag_mvm_plugin_vendor_conversation_message_add:
     path: /vendor/conversations/{id}/message/add
@@ -29,7 +29,7 @@ bitbag_mvm_plugin_vendor_conversation_create:
     defaults:
         _controller: bitbag_mvm_plugin.controller.action.conversation.create_new_conversation_action
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Conversation/User/create.html.twig"
+            template: "Conversation/User/create.html.twig"
             redirect: bitbag_mvm_plugin_vendor_conversation_show
             mail_redirect: bitbag_mvm_plugin_admin_conversation_show
         

@@ -4,4 +4,4 @@ vendor_profile:
     defaults:
         _controller: bitbag_mvm_plugin.controller.vendor_controller:showAction
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/profile.html.twig"
+            template: "Vendor/profile.html.twig"

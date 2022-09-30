@@ -4,7 +4,7 @@ bitbag_mvm_plugin_order_listing:
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/index.html.twig"
+            template: "Vendor/Order/index.html.twig"
             grid: vendor_account_order
 
 bitbag_mvm_plugin_vendor_order_show:
@@ -15,7 +15,7 @@ bitbag_mvm_plugin_vendor_order_show:
         _sylius:
             section: admin
             permission: true
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/Order/show.html.twig"
+            template: "Vendor/Order/show.html.twig"
             repository:
                 method: findOrderForVendor
                 arguments:

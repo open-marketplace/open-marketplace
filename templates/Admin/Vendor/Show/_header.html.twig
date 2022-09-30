@@ -1,0 +1,16 @@
+<div id="header" class="ui stackable two column grid">
+    <div class="column">
+        <h1 class="ui header">
+            <i class="circular cube icon"></i>
+            <div class="content">
+                <span>{{ vendor.companyName }}</span>
+            </div>
+        </h1>
+        {% include "Admin/Vendor/Show/_breadcrumb.html.twig" %}
+    </div>
+    <div class="middle aligned column">
+        <div class="ui right floated buttons">
+                {% include 'Admin/Vendor/Show/_verifyButton.html.twig' %}
+        </div>
+    </div>
+</div>

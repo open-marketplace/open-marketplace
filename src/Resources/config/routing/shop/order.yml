@@ -30,7 +30,7 @@ sylius_shop_account_order_index:
         _controller: sylius.controller.order:indexAction
         _sylius:
             section: shop_account
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Shop/Order/Index.html.twig"
+            template: "Shop/Order/Index.html.twig"
             grid: sylius_shop_account_order
 
 sylius_shop_checkout_select_shipping:
@@ -41,7 +41,7 @@ sylius_shop_checkout_select_shipping:
         _sylius:
             event: select_shipping
             flash: false
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Checkout/selectShipping.html.twig"
+            template: "Checkout/selectShipping.html.twig"
             form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Checkout\SelectShippingType
             repository:
                 method: findCartForSelectingShipping

@@ -17,7 +17,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperator;
 use Gaufrette\Filesystem;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product;
 
 final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 {

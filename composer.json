@@ -1,11 +1,12 @@
 {
     "name": "bitbag/multi-vendor-marketplace",
-    "type": "sylius-plugin",
+    "type": "project",
     "description": "Multi-Vendor Marketplace Universe",
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "sylius/sylius": "~1.11.0"
+        "sylius/sylius": "~1.11.0",
+        "symfony/webpack-encore-bundle": "^1.15"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -33,25 +34,39 @@
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/intl": "^4.4 || ^5.2",
         "symfony/web-profiler-bundle": "^4.4 || ^5.2",
-        "symfony/webpack-encore-bundle": "^1.12"
+        "phpstan/extension-installer": "^1.0",
+        "stripe/stripe-php": "^6.43",
+        "sylius-labs/coding-standard": "^4.0"
+
     },
     "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
         "sort-packages": true,
         "allow-plugins": {
             "symfony/thanks": false,
             "dealerdirect/phpcodesniffer-composer-installer": false,
-            "phpstan/extension-installer": false
+            "phpstan/extension-installer": false,
+            "symfony/flex": false
         }
     },
     "autoload": {
         "psr-4": {
             "BitBag\\SyliusMultiVendorMarketplacePlugin\\": "src/",
-            "Tests\\BitBag\\SyliusMultiVendorMarketplacePlugin\\": ["tests/Application/src/", "tests/"]
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "Tests\\BitBag\\SyliusMultiVendorMarketplacePlugin\\": ["tests/"]
+        },
         "classmap": [
-            "tests/Application/Kernel.php"
+            "src/Kernel.php"
         ]
+    },
+    "prefer-stable": true,
+    "scripts": {
+
     }
 }

@@ -49,7 +49,7 @@ final class ShowVendorPageAction extends AbstractController
         $channel = $this->channelContext->getChannel();
         $paginator = $this->productRepository->findVendorProducts($vendor, $request, $channel);
 
-        return $this->render('@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/vendor_page.html.twig', [
+        return $this->render('Vendor/vendor_page.html.twig', [
             'vendor' => $vendor,
             'paginator' => $paginator,
         ]);

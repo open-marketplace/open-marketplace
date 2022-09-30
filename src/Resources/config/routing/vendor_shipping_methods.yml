@@ -4,7 +4,7 @@ vendor_shipping_methods:
   defaults:
     _controller: bitbag_mvm_plugin.controller.vendor_controller:updateAction
     _sylius:
-      template: "@BitBagSyliusMultiVendorMarketplacePlugin/Vendor/shipping_methods.html.twig"
+      template: "Vendor/shipping_methods.html.twig"
       form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorShippingMethodsType
       event: update
       repository:

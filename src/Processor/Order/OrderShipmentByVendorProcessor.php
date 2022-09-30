@@ -59,7 +59,7 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
             return;
         }
 
-        if (false === $order->orderHasVendorItems()) {
+        if (false === $order->hasVendorItems()) {
             return;
         }
 
@@ -74,7 +74,7 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
     private function removeShipmentsWithMissingVendors(OrderInterface $order): void
     {
-        $vendors = $order->getVendorsFromOrder();
+        $vendors = $order->getVendorsFromOrderItems();
         /** @var ShipmentInterface $shipment */
         foreach ($order->getShipments() as $shipment) {
             if (false === in_array($shipment->getVendor(), $vendors)) {
@@ -85,14 +85,14 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
     private function addShipmentsPerVendor(OrderInterface $order): void
     {
-        $vendors = $order->getVendorsFromOrder();
+        $vendors = $order->getVendorsFromOrderItems();
 
-        if (false === $order->orderHasShipmentWithoutVendor()) {
+        if (false === $order->hasShipmentWithoutVendor()) {
             $this->addShipment($order, null);
         }
 
         foreach ($vendors as $vendor) {
-            if ($order->orderHasVendorShipment($vendor)) {
+            if ($order->hasVendorShipment($vendor)) {
                 continue;
             }
 

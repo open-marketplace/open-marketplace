@@ -1,0 +1,34 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% set definition = resources.definition %}
+{% block title %}{{ 'bitbag_mvm_plugin.ui.draft_attributes'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.attributes'|trans }}</div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+    <div class="ui stackable two column grid">
+        <div class="column">
+
+            <h1 class="ui header">
+                <i class="circular cubes icon"></i>
+                <div class="content">
+                    {{ 'bitbag_mvm_plugin.ui.draft_attributes'|trans }}
+
+                </div>
+            </h1>
+
+        </div>
+
+        {% include 'Vendor/DraftAttributes/_menu.html.twig' %}
+
+    </div>
+
+    {{ sylius_grid_render(resources, '@SyliusAdmin/Grid/_default.html.twig') }}
+{% endblock %}

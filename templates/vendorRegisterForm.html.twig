@@ -1,0 +1,18 @@
+{% extends "@SyliusShop/Account/dashboard.html.twig" %}
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+{% block subcontent %}
+   {% if null == app.user.vendor %}
+      {{ include('Form/_vendorRegister.html.twig') }}
+   {% elseif app.user.vendor.verified %}
+      {%  set vars = {messageTranslationKey: 'bitbag_mvm_plugin.ui.vendor_verification_accepted'} %}
+      {%  include '_Alert/infoMessage.html.twig' with vars %}
+   {% else %}
+      {%  set vars = {messageTranslationKey: 'bitbag_mvm_plugin.ui.vendor_under_verification'} %}
+      {%  include '_Alert/infoMessage.html.twig' with vars %}
+   {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+   {{ parent() }}
+   <script src="/build/admin/admin-entry.js"></script>
+{% endblock %}

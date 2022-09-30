@@ -15,7 +15,7 @@ bitbag_mvm_plugin_admin_vendor_show:
         _sylius:
             section: admin
             permission: true
-            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/show.html.twig'
+            template: 'Admin/Vendor/show.html.twig'
 
 bitbag_mvm_plugin_admin_vendor_update:
     path: /vendors/{id}/edit
@@ -25,4 +25,4 @@ bitbag_mvm_plugin_admin_vendor_update:
         _sylius:
             section: admin
             permission: true
-            template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/Vendor/update.html.twig'
+            template: 'Admin/Vendor/update.html.twig'

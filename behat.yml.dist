@@ -31,9 +31,9 @@ default:
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension:
-            bootstrap: tests/Application/config/bootstrap.php
+            bootstrap: config/bootstrap.php
             kernel:
-                class: Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Application\Kernel
+                class: App\Kernel
 
         FriendsOfBehat\VariadicExtension: ~
 

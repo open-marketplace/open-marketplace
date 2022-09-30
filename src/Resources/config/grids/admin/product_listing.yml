@@ -1,10 +1,10 @@
 sylius_grid:
   templates:
     action:
-      details: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/product_details.html.twig'
-      restore: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Action/restore.html.twig'
+      details: 'Grid/Action/product_details.html.twig'
+      restore: 'Grid/Action/restore.html.twig'
     filter:
-      product_listing_status: '@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Filter/product_listing_status.html.twig'
+      product_listing_status: 'Grid/Filter/product_listing_status.html.twig'
   grids:
     bitbag_mvm_plugin_admin_product_listing:
       driver:
@@ -47,7 +47,7 @@ sylius_grid:
           label: bitbag_mvm_plugin.ui.status
           sortable: ~
           options:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_status.html.twig"
+            template: "Grid/Field/product_listing_status.html.twig"
       actions:
         item:
           details:

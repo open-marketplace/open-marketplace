@@ -1,0 +1,12 @@
+framework:
+    assets:
+        packages:
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+            skeleton_shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/skeleton/shop/manifest.json'
+            skeleton_admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/skeleton/admin/manifest.json'
+        json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'

@@ -14,7 +14,7 @@ bitbag_mvm_plugin_admin_product_listing_show:
     _controller: bitbag_mvm_plugin.controller.action.admin.product_listing.show_action
     _sylius:
       section: admin
-      template: '@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig'
+      template: 'Admin/ProductListing/show_product_listing.html.twig'
       permission: true
 
 bitbag_mvm_plugin_admin_product_listing_accept:

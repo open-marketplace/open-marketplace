@@ -104,7 +104,7 @@ final class ShowAction
         }
 
         return new Response(
-            $this->twig->render('@BitBagSyliusMultiVendorMarketplacePlugin/Admin/ProductListing/show_product_listing.html.twig', [
+            $this->twig->render('Admin/ProductListing/show_product_listing.html.twig', [
                 'productListing' => $productListing,
                 'productDraft' => $latestProductDraft,
                 'form' => $form->createView(),
