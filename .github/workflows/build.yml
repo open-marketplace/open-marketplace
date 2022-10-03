@@ -75,7 +75,7 @@ jobs:
 
         -
             name: Run webserver
-            run: (cd tests/Application && symfony server:start --port=8080 --dir=public --daemon)
+            run: (symfony server:start --port=8080 --dir=public --daemon)
 
         -
             name: Get Composer cache directory
