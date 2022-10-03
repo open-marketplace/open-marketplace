@@ -85,7 +85,7 @@ final class ConversationController
 
         if (!$this->authorizationChecker->isGranted(ConversationOwningVoter::UPDATE, $conversation)) {
             throw new AccessDeniedException();
-        };
+        }
 
         return new Response(
             $this->templatingEngine->render(
