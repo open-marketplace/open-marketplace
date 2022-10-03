@@ -11,19 +11,67 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
 
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\VendorShippingMethodsResolverInterface;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
+use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 final class ShipmentFactory implements ShipmentFactoryInterface
 {
     private string $shipmentFQN;
 
-    public function __construct(string $orderFQN)
-    {
+    private VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver;
+
+    private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver;
+
+    public function __construct(
+        string $orderFQN,
+        VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver,
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
+    ) {
         $this->shipmentFQN = $orderFQN;
+        $this->defaultVendorShippingMethodResolver = $defaultVendorShippingMethodResolver;
+        $this->defaultShippingMethodResolver = $defaultShippingMethodResolver;
     }
 
     public function createNew(): ShipmentInterface
     {
         return new $this->shipmentFQN();
+    }
+
+    public function createNewWithOrder(OrderInterface $order): ShipmentInterface
+    {
+        $shipment = $this->createNew();
+        $shipment->setOrder($order);
+
+        return $shipment;
+    }
+
+    public function tryCreateNewWithOrderVendorAndDefaultShipment(
+        OrderInterface $order,
+        ?VendorInterface $vendor,
+    ): ?ShipmentInterface {
+        $shipment = $this->createNewWithOrder($order);
+
+        try {
+            if (null !== $vendor) {
+                $shipment->setVendor($vendor);
+
+                $defaultVendorShippingMethod = $this
+                    ->defaultVendorShippingMethodResolver
+                    ->getDefaultShippingMethod($vendor, $order->getChannel());
+                $defaultShippingMethod = $defaultVendorShippingMethod->getShippingMethod();
+            } else {
+                $defaultShippingMethod = $this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment);
+            }
+
+            $shipment->setMethod($defaultShippingMethod);
+
+            return $shipment;
+        } catch (UnresolvedDefaultShippingMethodException) {
+            return null;
+        }
     }
 }

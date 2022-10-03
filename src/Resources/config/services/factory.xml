@@ -128,6 +128,8 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactory"
                  id="bitbag_mvm_plugin.factory.shipment">
             <argument>%sylius.model.shipment.class%</argument>
+            <argument type="service" id="bitbag_mvm_plugin.vendor_shipping_methods_resolver" />
+            <argument type="service" id="sylius.shipping_method_resolver.default" />
         </service>
     </services>
 </container>

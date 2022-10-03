@@ -20,7 +20,7 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Helper\OrderVendorHelperInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
@@ -35,7 +35,7 @@ final class OrderManagerSpec extends ObjectBehavior
         EntityManager $entityManager,
         OrderItemClonerInterface $orderItemCloner,
         OrderItemFactoryInterface $itemFactory,
-        OrderVendorHelperInterface $vendorHelper
+        ShipmentFactoryInterface $shipmentFactory
     ): void {
         $this
             ->beConstructedWith(
@@ -45,7 +45,7 @@ final class OrderManagerSpec extends ObjectBehavior
                 $entityManager,
                 $orderItemCloner,
                 $itemFactory,
-                $vendorHelper
+                $shipmentFactory
             )
         ;
     }
@@ -63,12 +63,18 @@ final class OrderManagerSpec extends ObjectBehavior
         OrderFactoryInterface $factory,
         OrderItemFactoryInterface $itemFactory,
         ShipmentInterface $shipment,
+        ShipmentInterface $newShipment,
         OrderItemInterface $newItem,
-        OrderVendorHelperInterface $vendorHelper
+        ShipmentFactoryInterface $shipmentFactory,
+        ShipmentClonerInterface $shipmentCloner
     ): void {
         $factory->createNew()->willReturn($newOrder);
         $itemFactory->createNew()->willReturn($newItem);
-        $vendorHelper->getShipmentByVendor($order, $itemVendor)->willReturn($shipment);
+        $order->getShipmentByVendor($itemVendor)->willReturn($shipment);
+        $shipmentFactory->createNew()->willReturn($newShipment);
+        $newShipment->setOrder($newOrder)->shouldBeCalled();
+        $shipmentCloner->clone($shipment, $newShipment)->shouldBeCalled();
+        $newOrder->addShipment($newShipment)->shouldBeCalled();
 
         $this->generateNewSecondaryOrder($order, $itemVendor, $orderItem)->shouldReturn($newOrder);
 

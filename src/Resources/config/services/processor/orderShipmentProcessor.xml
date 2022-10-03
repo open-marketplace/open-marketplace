@@ -6,9 +6,8 @@
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\OrderShipmentByVendorProcessor"
                  decorates="sylius.order_processing.order_shipment_processor"
                  id="bitbag.mvm_plugin.processor.order.order_shipment_by_vendor_processor">
-            <argument type="service" id="bitbag_mvm_plugin.vendor_shipping_methods_resolver" />
-            <argument type="service" id="sylius.shipping_method_resolver.default" />
-            <argument type="service" id="sylius.factory.shipment"/>
+            <argument type="service" id="bitbag_mvm_plugin.factory.shipment"/>
+            <argument type="service" id="bitbag_mvm_plugin.calculator.shipment_units_recalculator"/>
         </service>
     </services>
 </container>
