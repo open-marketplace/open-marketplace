@@ -125,25 +125,25 @@ jobs:
                     ${{ runner.os }}-node-${{ matrix.node }}-yarn-
         -
             name: Install JS dependencies
-            run: (cd tests/Application && yarn install)
+            run: yarn install
 
         -
             name: Prepare test application database
             run: |
-                (cd tests/Application && bin/console doctrine:database:create -vvv)
-                (cd tests/Application && bin/console doctrine:schema:create -vvv)
+                (bin/console doctrine:database:create -vvv)
+                (bin/console doctrine:schema:create -vvv)
         -
             name: Prepare test application assets
             run: |
-                (cd tests/Application && bin/console assets:install public -vvv)
-                (cd tests/Application && yarn encore prod)
+                (bin/console assets:install public -vvv)
+                (yarn encore prod)
         -
             name: Prepare test application cache
-            run: (cd tests/Application && bin/console cache:warmup -vvv)
+            run: (bin/console cache:warmup -vvv)
 
         -
             name: Load fixtures in test application
-            run: (cd tests/Application && bin/console sylius:fixtures:load -n mvm)
+            run: (bin/console sylius:fixtures:load -n mvm)
 
         -
             name: Validate composer.json
@@ -151,7 +151,7 @@ jobs:
 
         -
             name: Validate database schema
-            run: (cd tests/Application && bin/console doctrine:schema:validate)
+            run: (bin/console doctrine:schema:validate)
 
         -
             name: Run PHPStan
