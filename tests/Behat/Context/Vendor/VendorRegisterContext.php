@@ -32,6 +32,6 @@ class VendorRegisterContext extends MinkContext implements Context
     {
         $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount($itemCLass);
 //        dd()
-        Assert::eq($times, $validationMessageCount,"expected $times got $validationMessageCount");
+        Assert::eq($times, $validationMessageCount, "expected $times got $validationMessageCount");
     }
 }

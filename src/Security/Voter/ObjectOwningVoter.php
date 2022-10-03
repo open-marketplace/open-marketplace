@@ -40,7 +40,6 @@ final class ObjectOwningVoter extends Voter
         $subject,
         TokenInterface $token
     ) {
-
         $user = $token->getUser();
         if (!$user instanceof ShopUserInterface || null == $subject) {
             return false;
@@ -60,6 +59,7 @@ final class ObjectOwningVoter extends Voter
     private function doesUserOwnTheData(object $data, ShopUserInterface $user): bool
     {
         $loggedInVendor = $user->getVendor();
+        /** @phpstan-ignore-next-line */
         $vendorData = $data->getVendor();
         if ($loggedInVendor === $vendorData) {
             return true;

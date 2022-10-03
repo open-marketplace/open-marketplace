@@ -70,10 +70,11 @@ trait OrderTrait
     public function hasVendorItems(): bool
     {
         foreach ($this->getItems() as $item) {
+            /** @phpstan-ignore-next-line */
             if (null === $item->getVariant() || null === $item->getVariant()?->getProduct()) {
                 continue;
             }
-
+            /** @phpstan-ignore-next-line */
             $product = $item->getVariant()?->getProduct();
             if ($product->hasVendor()) {
                 return true;
@@ -113,6 +114,7 @@ trait OrderTrait
 
         foreach ($this->getItems() as $item) {
             /** @var ProductInterface $product */
+            /** @phpstan-ignore-next-line */
             $product = $item->getVariant()?->getProduct();
             $vendor = $product->getVendor();
 

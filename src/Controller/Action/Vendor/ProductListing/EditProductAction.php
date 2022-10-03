@@ -72,7 +72,6 @@ class EditProductAction extends AbstractController
         /** @var ProductDraftInterface $newResource */
         $newResource = $this->productDraftRepository->findLatestDraft($listing);
 
-
         if (!(ProductDraftInterface::STATUS_CREATED === $newResource->getStatus())) {
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);
         }

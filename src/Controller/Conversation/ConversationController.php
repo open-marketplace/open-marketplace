@@ -16,7 +16,6 @@ use BitBag\OpenMarketplace\Form\Type\Conversation\MessageType;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Security\Voter\ConversationOwningVoter;
-use BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
