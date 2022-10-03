@@ -13,6 +13,7 @@ namespace BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter;
 
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -60,7 +61,8 @@ final class ConversationOwningVoter extends Voter
     private function doesUserOwnConversation(ConversationInterface $conversation, ShopUserInterface $user): bool
     {
         $conversationUser = $conversation->getApplicant();
-        if ($user === $conversationUser) {
+        if ($user === $conversationUser ||
+            $user instanceof AdminUserInterface ) {
             return true;
         }
 
