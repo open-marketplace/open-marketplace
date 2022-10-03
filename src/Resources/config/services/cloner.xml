@@ -23,7 +23,36 @@
                  id="bitbag_mvm_plugin.cloner.attribute_value">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="bitbag_mvm_plugin.factory.product_attribute_value"/>
+        </service>
 
+        <service class="BitBag\OpenMarketplace\Cloner\ShipmentCloner"
+                 id="bitbag.mvm_plugin.cloner.shipment_cloner">
+            <argument type="service" id="bitbag.mvm_plugin.cloner.adjustment_cloner"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Cloner\PaymentCloner"
+                 id="bitbag.mvm_plugin.cloner.payment_cloner">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Cloner\OrderItemUnitCloner"
+                 id="bitbag.mvm_plugin.cloner.order_item_unit_cloner">
+            <argument type="service" id="bitbag.mvm_plugin.cloner.adjustment_cloner"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Cloner\OrderCloner"
+                 id="bitbag.mvm_plugin.cloner.order_cloner">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag.mvm_plugin.cloner.address_cloner"/>
+            <argument type="service" id="bitbag.mvm_plugin.cloner.payment_cloner"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Cloner\AdjustmentCloner"
+                 id="bitbag.mvm_plugin.cloner.adjustment_cloner">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Cloner\AddressCloner"
+                 id="bitbag.mvm_plugin.cloner.address_cloner">
         </service>
     </services>
 </container>

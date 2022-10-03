@@ -16,6 +16,7 @@
     <div class="ui stackable two column grid">
         <div class="column">
             <h1 class="ui header">
+
                 {% if app.request.query.get('closed') %}
                     <i class="icon archive"></i>
                     <div class="content">
@@ -83,7 +84,7 @@
                                         {{ 'bitbag_mvm_plugin.ui.conversation.user_conversation'|trans }}
                                     {% endif %}
                                     {% set lastMessage = conversation.messages|last.content %}
-                                    {% set archiveText = constant('BitBag\\SyliusMultiVendorMarketplacePlugin\\Storage\\MessagesStorage::ARCHIVE_REQUEST_MESSAGE') %}
+                                    {% set archiveText = constant('BitBag\\OpenMarketplace\\Storage\\MessagesStorage::ARCHIVE_REQUEST_MESSAGE') %}
                                     {% if archiveText in lastMessage %}
                                         {% set lastMessage = 'bitbag_mvm_plugin.ui.conversation.archive_request_text_first_line'|trans %}
                                     {% endif %}
