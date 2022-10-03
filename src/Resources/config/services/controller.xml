@@ -71,12 +71,6 @@
             <argument type="service" id="sylius.context.channel"/>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Controller\ProductListing\ProductDraftController"
-                 id="open_marketplace.controller.productDraft"
-                 parent="open_marketplace.controller.product_draft">
-            <argument type="service" id="sylius.image_uploader" />
-        </service>
-
         <service class="BitBag\OpenMarketplace\Controller\DraftAttributesController"
                  id="open_marketplace.controller.draftAttributes"
                  parent="open_marketplace.controller.draft_attribute">
@@ -214,11 +208,5 @@
             <argument type="service" id="bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor"/>
         </service>
 
-<!--        <service class="BitBag\OpenMarketplace\Controller\DraftAttributeController"-->
-<!--                 id="open_marketplace.draft_attribute_controller"-->
-<!--                 parent="open_marketplace.controller.draft_attribute">-->
-<!--            <argument type="service" id="open_marketplace.updater.product_attribute_updater"/>-->
-<!--            <argument type="service" id="bitbag.mvm_plugin.security.voter.object_owning_voter"/>-->
-<!--        </service>-->
     </services>
 </container>

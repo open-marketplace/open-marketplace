@@ -61,7 +61,6 @@ final class ConversationOwningVoter extends Voter
     {
         $conversationUser = $conversation->getApplicant();
         if ($user === $conversationUser) {
-            dd($conversationUser, $user);
             return true;
         }
 
