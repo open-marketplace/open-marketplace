@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Fixture\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\CategoryRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Repository\Conversation\CategoryRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;

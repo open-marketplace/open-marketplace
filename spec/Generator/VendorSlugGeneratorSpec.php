@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Generator;
+namespace spec\BitBag\OpenMarketplace\Generator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGenerator;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\VendorSlugGeneratorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Generator\VendorSlugGenerator;
+use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
+use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 
 final class VendorSlugGeneratorSpec extends ObjectBehavior

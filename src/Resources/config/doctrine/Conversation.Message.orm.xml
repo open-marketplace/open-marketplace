@@ -2,7 +2,7 @@
 
 <doctrine-mapping xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping" xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Message" table="bitbag_mvm_conversation_message">
+    <mapped-superclass name="BitBag\OpenMarketplace\Entity\Conversation\Message" table="bitbag_mvm_conversation_message">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -19,7 +19,7 @@
             <join-column name="shop_user_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
         </many-to-one>
 
-        <many-to-one field="vendorUser" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface">
+        <many-to-one field="vendorUser" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface">
             <join-column name="vendor_user_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
         </many-to-one>
 
@@ -27,7 +27,7 @@
             <join-column name="admin_user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="conversation" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface" inversed-by="messages">
+        <many-to-one field="conversation" target-entity="BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface" inversed-by="messages">
             <join-column name="conversation_id" referenced-column-name="id" on-delete="CASCADE"/>
             <cascade>
                 <cascade-persist />

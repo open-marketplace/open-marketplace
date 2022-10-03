@@ -4,8 +4,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Shipment" table="sylius_shipment">
-        <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface">
+    <mapped-superclass name="BitBag\OpenMarketplace\Entity\Shipment" table="sylius_shipment">
+        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface">
             <join-column name="vendor_id" referenced-column-name="id" />
         </many-to-one>
     </mapped-superclass>

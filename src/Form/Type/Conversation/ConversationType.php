@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation;
+namespace BitBag\OpenMarketplace\Form\Type\Conversation;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\Category;
+use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
+use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
+use BitBag\OpenMarketplace\Repository\VendorRepository;
+use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

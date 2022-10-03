@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace Tests\BitBag\OpenMarketplace\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\ShopUser\ShopUserTrait;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Model\ShopUser\ShopUserTrait;
 use Sylius\Component\Core\Model\ShopUser as BaseShopUser;
 
 class ShopUser extends BaseShopUser implements ShopUserInterface

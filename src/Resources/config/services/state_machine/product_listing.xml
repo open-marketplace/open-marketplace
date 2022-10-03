@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="bitbag_mvm_plugin.state_machine.product_draft" public="true"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing\ProductDraftCallbacks">
+                 class="BitBag\OpenMarketplace\StateMachine\ProductListing\ProductDraftCallbacks">
             <argument type="service" id="session.flash_bag" />
             <argument type="service" id="bitbag.mvm_plugin.acceptance_operator.product_draft_acceptance_operator"/>
             <argument type="service" id="bitbag_mvm_plugin.repository.product"/>
@@ -12,7 +12,7 @@
         </service>
 
         <service id="bitbag_mvm_plugin.state_machine.product_draft.transition"
-                class="BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransition">
+                class="BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransition">
                 <argument type="service" id="SM\Factory\Factory"/>
         </service>
     </services>

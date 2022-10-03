@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
+namespace BitBag\OpenMarketplace\Cloner;
 
 use Sylius\Component\Core\Model\AddressInterface;
 

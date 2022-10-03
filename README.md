@@ -34,7 +34,7 @@
 return [
     ...
 
-    BitBag\SyliusMultiVendorMarketplacePlugin\BitBagSyliusMultiVendorMarketplacePlugin::class => ['all' => true],
+    BitBag\OpenMarketplace\BitBagSyliusMultiVendorMarketplacePlugin::class => ['all' => true],
 ];
 ```
 
@@ -74,7 +74,7 @@ sylius_user:
       user:
         classes:
           model: App\Entity\ShopUser
-          interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface
+          interface: BitBag\OpenMarketplace\Entity\ShopUserInterface
 
 ```
 
@@ -99,8 +99,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\Order\OrderTrait;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Model\Order\OrderTrait;
 use Sylius\Component\Core\Model\Order as BaseOrder;
 
 class Order extends BaseOrder implements OrderInterface
@@ -116,8 +116,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\OrderItem\OrderItemTrait;
+use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Model\OrderItem\OrderItemTrait;
 use Sylius\Component\Core\Model\OrderItem as BaseOrderItem;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface
@@ -133,8 +133,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\ShopUser\ShopUserTrait;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Model\ShopUser\ShopUserTrait;
 use Sylius\Component\Core\Model\ShopUser as BaseShopUser;
 
 class ShopUser extends BaseShopUser implements ShopUserInterface
@@ -150,8 +150,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\Product\ProductTrait;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Model\Product\ProductTrait;
 use Sylius\Component\Core\Model\Product as BaseProduct;
 
 class Product extends BaseProduct implements ProductInterface
@@ -171,7 +171,7 @@ Mapping (Annotations)
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="App\Entity\Order" table="sylius_order">
-        <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" inversed-by="products" />
+        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="products" />
         <many-to-one field="primaryOrder" target-entity="App\Entity\Order" inversed-by="secondaryOrders">
             <join-column on-delete="SET NULL"/>
         </many-to-one>
@@ -213,7 +213,7 @@ Mapping (Annotations)
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="App\Entity\Product" table="sylius_product">
-        <many-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" inversed-by="products" />
+        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="products" />
     </mapped-superclass>
 </doctrine-mapping>
 ```
@@ -227,7 +227,7 @@ Mapping (Annotations)
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="App\Entity\ShopUser" table="sylius_shop_user">
-        <one-to-one field="vendor" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface" mapped-by="shopUser" />
+        <one-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" mapped-by="shopUser" />
     </mapped-superclass>
 </doctrine-mapping>
 ```

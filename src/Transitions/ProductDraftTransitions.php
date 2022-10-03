@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Transitions;
+namespace BitBag\OpenMarketplace\Transitions;
 
 final class ProductDraftTransitions
 {

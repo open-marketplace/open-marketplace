@@ -7,7 +7,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Nowak"
         email: "test@example.com"
         emailCanonical: "test@example.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
+BitBag\OpenMarketplace\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]
@@ -15,13 +15,13 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
         customer: '@customer_oliver'
         username: "oliver@queen.com"
         usernameCanonical: "oliver@queen.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+BitBag\OpenMarketplace\Entity\VendorAddress:
     vendor_address:
         country: '@poland'
         city: 'Warsaw'
         postalCode: '00-999'
         street: 'Avenue 2115'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
+BitBag\OpenMarketplace\Entity\Vendor:
     vendor_oliver:
         shopUser: '@user_oliver'
         companyName: 'Test company name'

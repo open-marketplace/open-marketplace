@@ -3,41 +3,41 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag.form.type.product" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType">
+        <service id="bitbag.form.type.product" class="BitBag\OpenMarketplace\Form\ProductListing\ProductType">
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag.form.type.sylius_product_associations" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductAssociationsType">
+        <service id="bitbag.form.type.sylius_product_associations" class="BitBag\OpenMarketplace\Form\ProductListing\ProductAssociationsType">
             <argument type="service" id="sylius.repository.product_association_type"/>
             <argument type="service" id="sylius.form.type.data_transformer.products_to_product_associations"/>
             <tag name="form.type"/>
         </service>
 
-        <service id="bitbag.form.type.bitbag_resorce_translations" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ResourceTranslationsType">
+        <service id="bitbag.form.type.bitbag_resorce_translations" class="BitBag\OpenMarketplace\Form\ProductListing\ResourceTranslationsType">
             <argument type="service" id="sylius.translation_locale_provider.admin"/>
             <tag name="form.type"/>
         </service>
 
-        <service id="bitbag.form.type.bitbag_translations" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductTranslationType">
+        <service id="bitbag.form.type.bitbag_translations" class="BitBag\OpenMarketplace\Form\ProductListing\ProductTranslationType">
             <tag name="form.type"/>
         </service>
 
-        <service id="bitbag.form.type.channel_pricing" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductPriceType">
+        <service id="bitbag.form.type.channel_pricing" class="BitBag\OpenMarketplace\Form\ProductListing\ProductPriceType">
             <argument>%sylius.form.type.channel_pricing.validation_groups%</argument>
             <argument type="service" id="sylius.repository.channel_pricing" />
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag.form.type.channel_collection_type" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ChannelCollectionType">
+        <service id="bitbag.form.type.channel_collection_type" class="BitBag\OpenMarketplace\Form\ProductListing\ChannelCollectionType">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag.form.type.image_type" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductDraftImageType">
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage</argument>
+        <service id="bitbag.form.type.image_type" class="BitBag\OpenMarketplace\Form\ProductListing\ProductDraftImageType">
+            <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage</argument>
             <tag name="form.type" />
         </service>
-        <service id="bitbag.form.type.taxonomy" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductDraftTaxonAutocompleteChoiceType">
+        <service id="bitbag.form.type.taxonomy" class="BitBag\OpenMarketplace\Form\ProductListing\ProductDraftTaxonAutocompleteChoiceType">
             <argument type="service" id="bitbag.mvm_plugin.factory.product_taxon" />
             <argument type="service" id="bitbag.mvm_plugin.repository.product_taxon" />
             <tag name="form.type" />

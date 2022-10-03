@@ -21,4 +21,4 @@ doctrine:
                 is_bundle: false
                 type: xml
                 dir: '%kernel.project_dir%/src/Resources/config/doctrine'
-                prefix: 'Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity'
+                prefix: 'Tests\BitBag\OpenMarketplace\Entity'

@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="bitbag.form.type.shipping_method_choice"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Checkout\ShippingMethodChoiceType">
+                 class="BitBag\OpenMarketplace\Form\Type\Checkout\ShippingMethodChoiceType">
             <argument type="service" id="bitbag_mvm_plugin.vendor_shipping_methods_resolver" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
             <argument type="service" id="sylius.repository.shipping_method" />
@@ -12,14 +12,14 @@
         </service>
 
         <service id="bitbag.form.type.checkout_select_shipping"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Checkout\SelectShippingType">
+                 class="BitBag\OpenMarketplace\Form\Type\Checkout\SelectShippingType">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.form.type.checkout_select_shipping.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="bitbag.form.type.checkout_shipment"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Checkout\ShipmentType">
+                 class="BitBag\OpenMarketplace\Form\Type\Checkout\ShipmentType">
             <argument>%sylius.model.shipment.class%</argument>
             <argument>%sylius.form.type.checkout_shipment.validation_groups%</argument>
             <tag name="form.type" />

@@ -3,7 +3,7 @@
     <services>
         <defaults public="true" />
         <service
-                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor\DraftAttributeContext"
+                class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\DraftAttributeContext"
                 id="tests.bitbag_mvm_plugin.behat.context.draft_attribute_context" >
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="bitbag_mvm_plugin.repository.draft_attribute"/>

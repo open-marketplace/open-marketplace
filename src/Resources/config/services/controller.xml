@@ -3,7 +3,7 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Conversation\ConversationController"
+        <service class="BitBag\OpenMarketplace\Controller\Conversation\ConversationController"
                  id="bitbag_mvm_plugin.controller.conversation.conversation_controller">
             <argument type="service" id="twig" />
             <argument type="service" id="form.factory" />
@@ -14,7 +14,7 @@
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation\CreateNewConversationAction"
+        <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\CreateNewConversationAction"
                  id="bitbag_mvm_plugin.controller.action.conversation.create_new_conversation_action">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="twig"/>
@@ -26,7 +26,7 @@
         </service>
 
         <service id="bitbag_mvm_plugin.controller.action.conversation_message.add_message_action"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\ConversationMessage\AddMessageAction">
+                 class="BitBag\OpenMarketplace\Controller\Action\ConversationMessage\AddMessageAction">
             <argument type="service" id="form.factory" />
             <argument type="service" id="session.flash_bag" />
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
@@ -34,7 +34,7 @@
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation\SendArchiveRequestAction"
+        <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\SendArchiveRequestAction"
                  id="bitbag_mvm_plugin.controller.action.conversation.send_archive_request_action">
             <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
             <argument type="service" id="api_platform.router" />
@@ -42,7 +42,7 @@
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ConfirmProfileUpdateAction"
+        <service class="BitBag\OpenMarketplace\Controller\ConfirmProfileUpdateAction"
                  id="bitbag_mvm_plugin.controller.confirm_profile_update_action">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="bitbag_mvm_plugin.updater.vendor_profile_updater"/>
@@ -52,14 +52,14 @@
             <tag name="controller.service_arguments"/>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController"
+        <service class="BitBag\OpenMarketplace\Controller\VendorController"
                  id="bitbag_mvm_plugin.controller.vendor_controller"
                  parent="bitbag_mvm_plugin.controller.vendor">
             <argument type="service" id="bitbag_mvm_plugin.provider.vendor" />
             <argument type="service" id="bitbag_mvm_plugin.updater.vendor_profile_updater" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ShowVendorPageAction"
+        <service class="BitBag\OpenMarketplace\Controller\Action\Vendor\ShowVendorPageAction"
                  id="bitbag.mvm_plugin.controller.show_vendor_page_action"
                  public="true"
         >
@@ -71,20 +71,20 @@
             <argument type="service" id="sylius.context.channel"/>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ProductListing\ProductDraftController"
+        <service class="BitBag\OpenMarketplace\Controller\ProductListing\ProductDraftController"
                  id="bitbag_mvm_plugin.controller.productDraft"
                  parent="bitbag_mvm_plugin.controller.product_draft">
             <argument type="service" id="sylius.image_uploader" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\DraftAttributesController"
+        <service class="BitBag\OpenMarketplace\Controller\DraftAttributesController"
                  id="bitbag_mvm_plugin.controller.draftAttributes"
                  parent="bitbag_mvm_plugin.controller.draft_attribute">
             <argument type="service" id="bitbag_mvm_plugin.factory.draftAttribute"/>
             <argument type="service" id="bitbag.mvm_plugin.security.voter.object_owning_voter"/>
         </service>
 
-<!--        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\DraftAttributeController"-->
+<!--        <service class="BitBag\OpenMarketplace\Controller\DraftAttributeController"-->
 <!--                 id="bitbag_mvm_plugin.draft_attribute_controller"-->
 <!--                 parent="bitbag_mvm_plugin.controller.draft_attribute">-->
 <!--            <argument type="service" id="bitbag_mvm_plugin.updater.product_attribute_updater"/>-->

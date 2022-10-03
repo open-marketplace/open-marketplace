@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\MenuBuilder;
+namespace BitBag\OpenMarketplace\MenuBuilder;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;

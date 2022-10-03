@@ -4,7 +4,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="bitbag.mvm_plugin.fixture.example_factory.vendor" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\VendorExampleFactory">
+        <service id="bitbag.mvm_plugin.fixture.example_factory.vendor" class="BitBag\OpenMarketplace\Fixture\Factory\VendorExampleFactory">
             <argument type="service" id="bitbag_mvm_plugin.factory.vendor_profile_factory" />
             <argument type="service" id="bitbag_mvm_plugin.factory.vendor_address_factory" />
             <argument type="service" id="sylius.factory.shop_user" />
@@ -13,7 +13,7 @@
             <argument type="service" id="sylius.repository.customer_group" />
         </service>
 
-        <service id="bitbag.mvm_plugin.fixture.example_factory.product_draft" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\ProductDraftExampleFactory">
+        <service id="bitbag.mvm_plugin.fixture.example_factory.product_draft" class="BitBag\OpenMarketplace\Fixture\Factory\ProductDraftExampleFactory">
             <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
             <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_price" />
             <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory" />
@@ -28,7 +28,7 @@
             <argument type="service" id="file_locator"/>
         </service>
 
-        <service id="bitbag.mvm_plugin.fixture.example_factory.order" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\OrderExampleFactory">
+        <service id="bitbag.mvm_plugin.fixture.example_factory.order" class="BitBag\OpenMarketplace\Fixture\Factory\OrderExampleFactory">
             <argument type="service" id="bitbag.mvm_plugin.factory.order_factory" />
             <argument type="service" id="bitbag.mvm_plugin.factory.order_item_factory" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
@@ -44,7 +44,7 @@
             <argument type="service" id="bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor"/>
         </service>
 
-        <service id="bitbag.mvm_plugin.fixture.example_factory.conversation" class="BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\ConversationExampleFactory">
+        <service id="bitbag.mvm_plugin.fixture.example_factory.conversation" class="BitBag\OpenMarketplace\Fixture\Factory\ConversationExampleFactory">
             <argument type="service" id="bitbag_mvm_plugin.factory.conversation" />
             <argument type="service" id="bitbag_multi_vendor_marketplace.factory.conversation_message" />
             <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository" />

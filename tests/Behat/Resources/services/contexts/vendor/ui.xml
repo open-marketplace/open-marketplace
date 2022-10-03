@@ -4,7 +4,7 @@
     <services>
 
         <service id="bitbag.mvm_plugin.behat.context.ui.vendor.product_listing" public="true"
-                 class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Vendor\ProductListingContext">
+                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Vendor\ProductListingContext">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="bitbag_mvm_plugin.factory.vendor"/>

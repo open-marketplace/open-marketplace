@@ -4,11 +4,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="bitbag_mvm_plugin.menu.multi_vendor_marketplace_menu_listener"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\MultiVendorMarketplaceMenuListener">
+                 class="BitBag\OpenMarketplace\Menu\MultiVendorMarketplaceMenuListener">
             <tag name="kernel.event_listener" method="buildMenu" event="sylius.menu.admin.main" />
         </service>
 
-        <service id="bitbag_mvm_plugin.shop.menu_builder.vendor" class="BitBag\SyliusMultiVendorMarketplacePlugin\Menu\VendorMenuBuilder">
+        <service id="bitbag_mvm_plugin.shop.menu_builder.vendor" class="BitBag\OpenMarketplace\Menu\VendorMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="security.helper" />

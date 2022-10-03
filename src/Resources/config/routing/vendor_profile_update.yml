@@ -6,7 +6,7 @@ vendor_profile_update:
         _controller: bitbag_mvm_plugin.controller.vendor_controller:customUpdateAction
         _sylius:        
             template: "Vendor/profileUpdate.html.twig"
-            form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType
+            form: BitBag\OpenMarketplace\Form\Type\VendorType
             event: update
             flash: bitbag_mvm_plugin.ui.vendor_updated
             redirect:

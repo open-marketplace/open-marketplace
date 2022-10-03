@@ -3,7 +3,7 @@
     <services>
         <defaults public="true" />
         <service
-                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor\InventoryContext"
+                class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\InventoryContext"
                 id="tests.bitbag_mvm_plugin.behat.context.vendor.inventory_context" >
         </service>
     </services>

@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.show_action"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\ShowAction">
+                 class="BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing\ShowAction">
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing" />
             <argument type="service" id="twig" />
             <argument type="service" id="bitbag_mvm_plugin.repository.product_draft" />
@@ -17,7 +17,7 @@
         </service>
 
         <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.accept_action"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\AcceptAction">
+                 class="BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing\AcceptAction">
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing" />
             <argument type="service" id="router.default" />
             <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
@@ -26,7 +26,7 @@
         </service>
 
         <service id="bitbag_mvm_plugin.controller.action.admin.product_listing.reject_action"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\RejectAction">
+                 class="BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing\RejectAction">
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing" />
             <argument type="service" id="router.default" />
             <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
@@ -34,7 +34,7 @@
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Admin\ProductListing\RestoreAction"
+        <service class="BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing\RestoreAction"
                  id="bitbag_mvm_plugin.controller.product_listing.restore_action">
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
             <argument type="service" id="router.default"/>

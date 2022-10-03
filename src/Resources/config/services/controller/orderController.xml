@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Order\OrderController"
+        <service class="BitBag\OpenMarketplace\Controller\Order\OrderController"
                  id="bitbag.mvm_plugin.controller.order.order_controller"
                  parent="sylius.controller.order">
             <argument type="service" id="bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor"/>

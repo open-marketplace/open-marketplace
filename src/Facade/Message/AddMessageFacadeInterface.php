@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message;
+namespace BitBag\OpenMarketplace\Facade\Message;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface AddMessageFacadeInterface

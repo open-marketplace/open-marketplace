@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
+namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 

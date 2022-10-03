@@ -2,7 +2,7 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service
-                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage"
+                class="Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage"
                 id="tests.bitbag.mvm_plugin.behat.page.show_product_page"
                 parent="sylius.behat.symfony_page"
                 public="true" >

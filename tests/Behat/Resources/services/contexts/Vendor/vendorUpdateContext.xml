@@ -3,7 +3,7 @@
     <services>
         <defaults public="true" />
         <service
-                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor\VendorUpdateContext"
+                class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\VendorUpdateContext"
                 id="tests.bitbag_mvm_plugin.behat.context.vendor.vendor_update_context" >
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.shop_user" />

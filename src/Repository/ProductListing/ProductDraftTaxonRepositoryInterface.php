@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

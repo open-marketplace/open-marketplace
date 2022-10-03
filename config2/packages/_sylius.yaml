@@ -20,34 +20,34 @@ sylius_order:
     resources:
         order:
             classes:
-                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order
+                model: BitBag\OpenMarketplace\Entity\Order
                 controller: Sylius\Bundle\CoreBundle\Controller\OrderController
-                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\OrderRepository
+                repository: BitBag\OpenMarketplace\Repository\OrderRepository
                 form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
         order_item:
             classes:
-                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem
+                model: BitBag\OpenMarketplace\Entity\OrderItem
 
 sylius_product:
     resources:
         product:
             classes:
-                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product
+                model: BitBag\OpenMarketplace\Entity\Product
         product_variant:
             classes:
-                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductVariantRepository
+                repository: BitBag\OpenMarketplace\Repository\ProductVariantRepository
 
 sylius_user:
     resources:
         shop:
             user:
                 classes:
-                    model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser
-                    interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface
+                    model: BitBag\OpenMarketplace\Entity\ShopUser
+                    interface: BitBag\OpenMarketplace\Entity\ShopUserInterface
 
 sylius_shipping:
     resources:
         shipment:
             classes:
-                model: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Shipment
-                interface: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface
+                model: BitBag\OpenMarketplace\Entity\Shipment
+                interface: BitBag\OpenMarketplace\Entity\ShipmentInterface

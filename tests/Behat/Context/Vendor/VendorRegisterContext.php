@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\Vendor\VendorRegisterPage;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\VendorRegisterPage;
 use Webmozart\Assert\Assert;
 
 class VendorRegisterContext extends MinkContext implements Context

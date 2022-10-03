@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
+namespace spec\BitBag\OpenMarketplace\Processor\Order;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethodInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Helper\OrderVendorHelperInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\OrderShipmentByVendorProcessor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\OrderShipmentByVendorProcessorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\VendorShippingMethodsResolverInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Entity\ShipmentInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
+use BitBag\OpenMarketplace\Helper\OrderVendorHelperInterface;
+use BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessor;
+use BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessorInterface;
+use BitBag\OpenMarketplace\Resolver\VendorShippingMethodsResolverInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;

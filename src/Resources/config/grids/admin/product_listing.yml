@@ -10,7 +10,7 @@ sylius_grid:
       driver:
         name: doctrine/orm
         options:
-          class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
+          class: BitBag\OpenMarketplace\Entity\ProductListing\ProductListing
           repository:
             method: createQueryBuilderWithLatestDraft
       sorting:

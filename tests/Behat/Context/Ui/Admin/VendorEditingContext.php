@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Ui\Admin;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\Vendor;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Setup\Factory\VendorFactoryInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Context\Setup\Factory\VendorFactoryInterface;
 
 final class VendorEditingContext extends RawMinkContext implements Context
 {

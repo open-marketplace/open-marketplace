@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Generator;
+namespace BitBag\OpenMarketplace\Generator;
 
 interface VendorSlugGeneratorInterface
 {

@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
+namespace BitBag\OpenMarketplace\AcceptanceOperator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 interface ProductDraftAcceptanceOperatorInterface

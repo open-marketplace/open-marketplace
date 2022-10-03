@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
+namespace BitBag\OpenMarketplace\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\DraftAttributeFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\ObjectOwningVoter;
+use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType;
+use BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;

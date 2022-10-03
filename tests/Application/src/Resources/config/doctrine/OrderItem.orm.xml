@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItem" table="sylius_order_item">
+    <mapped-superclass name="Tests\BitBag\OpenMarketplace\Entity\OrderItem" table="sylius_order_item">
         <association-overrides>
             <association-override name="order">
                 <join-table name="sylius_order">
