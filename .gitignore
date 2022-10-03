@@ -31,6 +31,7 @@
 .env.local
 .env.local.php
 /public/bundles
+
 /var/
 ###< symfony/framework-bundle ###
 

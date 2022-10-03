@@ -13,8 +13,10 @@ namespace BitBag\OpenMarketplace\Security\Voter;
 
 use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ConversationOwningVoter extends Voter
 {
@@ -42,7 +44,7 @@ final class ConversationOwningVoter extends Voter
     ) {
         $user = $token->getUser();
 
-        if (!$user instanceof ShopUserInterface || null == $subject) {
+        if (null === $user || null === $subject) {
             return false;
         }
 
@@ -51,16 +53,19 @@ final class ConversationOwningVoter extends Voter
 
         switch ($attribute) {
             case self::UPDATE:
+
                 return $this->doesUserOwnConversation($conversation, $user);
             default:
                 return false;
         }
     }
 
-    private function doesUserOwnConversation(ConversationInterface $conversation, ShopUserInterface $user): bool
+    private function doesUserOwnConversation(ConversationInterface $conversation, UserInterface $user): bool
     {
         $conversationUser = $conversation->getApplicant();
-        if ($user === $conversationUser) {
+
+        if ($user === $conversationUser ||
+            $user instanceof AdminUserInterface ) {
             return true;
         }
 
