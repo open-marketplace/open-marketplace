@@ -129,6 +129,10 @@
                  id="bitbag_mvm_plugin.factory.shipment">
             <argument>%sylius.model.shipment.class%</argument>
         </service>
+
+        <service id="bitbag.mvm_plugin.factory.product_taxon" class="Sylius\Component\Resource\Factory\Factory" public="true">
+            <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon</argument>
+        </service>
     </services>
 </container>
 
