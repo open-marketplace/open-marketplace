@@ -44,7 +44,7 @@
             <tag name="form.type"/>
         </service>
 
-        <service id="bitbag.mvm_plugin.form.type.vendor_image"
+        <service id="open_marketplace.form.type.vendor_image"
                  class="BitBag\OpenMarketplace\Form\VendorImageType">
             <argument>BitBag\OpenMarketplace\Entity\VendorImage</argument>
             <tag name="form.type"/>
@@ -154,8 +154,8 @@
         </service>
 
         <service id="bitbag.form.type.taxonomy" class="BitBag\OpenMarketplace\Form\ProductListing\ProductDraftTaxonAutocompleteChoiceType">
-            <argument type="service" id="bitbag.mvm_plugin.factory.product_taxon" />
-            <argument type="service" id="bitbag.mvm_plugin.repository.product_taxon" />
+            <argument type="service" id="open_marketplace.factory.product_taxon" />
+            <argument type="service" id="open_marketplace.repository.product_taxon" />
             <tag name="form.type" />
         </service>
     </services>

@@ -25,7 +25,7 @@ final class MultiVendorMarketplaceMenuListener
                 ->setLabel('open_marketplace.ui.marketplace');
 
         $mvmRootMenuItem
-            ->addChild('multi_vendor_marketplace_product_listings', [
+            ->addChild('open_marketplace_product_listings', [
                 'route' => 'open_marketplace_admin_product_listing_index',
                 'routeParameters' => [
                     'criteria' => [

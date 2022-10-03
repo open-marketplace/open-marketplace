@@ -3,7 +3,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
-        <service id="bitbag.sylius_mvm_plugin.behat.context.ui.admin.product_listing" public="true"
+        <service id="open_marketplace.behat.context.ui.admin.product_listing" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\ProductListingContext">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
@@ -25,12 +25,12 @@
             <argument type="service" id="service_container"/>
         </service>
 
-        <service id="bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_disabling" public="true"
+        <service id="open_marketplace.behat.context.ui.admin.vendor_disabling" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorDisablingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
-        <service id="bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_editing" public="true"
+        <service id="open_marketplace.behat.context.ui.admin.vendor_editing" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorEditingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="tests.open_marketplace.behat.context.setup.factory.vendor_factory"/>

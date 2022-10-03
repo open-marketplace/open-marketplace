@@ -3,7 +3,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag.mvm_plugin.repository.product_repository"
+        <service id="open_marketplace.repository.product_repository"
                  class="BitBag\OpenMarketplace\Repository\ProductRepository"
                  decorates="sylius.repository.product" >
             <argument type="service" id="sylius.manager.product"/>
@@ -16,7 +16,7 @@
             <argument type="service" id="security.token_storage"/>
         </service>
 
-        <service id="bitbag.mvm_plugin.repository.vendor_repository"
+        <service id="open_marketplace.repository.vendor_repository"
                  class="BitBag\OpenMarketplace\Repository\VendorRepository"
                  public="true" >
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
@@ -49,7 +49,7 @@
             </argument>
         </service>
 
-        <service id="bitbag.mvm_plugin.repository.product_taxon" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepository" public="true">
+        <service id="open_marketplace.repository.product_taxon" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepository" public="true">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata">

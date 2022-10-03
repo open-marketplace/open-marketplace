@@ -6,9 +6,9 @@
         <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\ProductContext"
                  id="tests.open_marketplace.behat.context.setup.product" public="true">
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
-            <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository"/>
+            <argument type="service" id="open_marketplace.repository.vendor_repository"/>
             <argument type="service" id="sylius.repository.product_variant"/>
-            <argument type="service" id="bitbag.mvm_plugin.repository.product_repository"/>
+            <argument type="service" id="open_marketplace.repository.product_repository"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.product"/>
             <argument type="service" id="sylius.fixture.example_factory.taxon"/>

@@ -4,9 +4,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\OpenMarketplace\EventListener\VendorRegisterListener"
-                 id="bitbag.mvm_plugin.event_listener.vendor_register_listener">
+                 id="open_marketplace.event_listener.vendor_register_listener">
 
-            <argument type="service" id="bitbag.mvm_plugin.service.vendor_slug_generator"/>
+            <argument type="service" id="open_marketplace.service.vendor_slug_generator"/>
             <argument type="service" id="sylius.image_uploader"/>
 
             <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="generateSlug"/>

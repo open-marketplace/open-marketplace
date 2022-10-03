@@ -10,7 +10,7 @@
             <argument type="service" id="open_marketplace.factory.vendor"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
-            <argument type="service" id="bitbag.mvm_plugin.acceptance_operator.product_draft_acceptance_operator"/>
+            <argument type="service" id="open_marketplace.acceptance_operator.product_draft_acceptance_operator"/>
         </service>
 
     </services>

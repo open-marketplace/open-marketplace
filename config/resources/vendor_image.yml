@@ -1,10 +1,10 @@
 sylius_resource:
   resources:
-    bitbag_multi_vendor_marketplace.vendor_image:
+    bitbag_open_marketplace.vendor_image:
       classes:
         model: BitBag\OpenMarketplace\Entity\VendorImage
         interface: BitBag\OpenMarketplace\Entity\VendorImageInterface
         form: BitBag\OpenMarketplace\Form\VendorImageType
-    bitbag_multi_vendor_marketplace.vendor_profile_update_image:
+    bitbag_open_marketplace.vendor_profile_update_image:
       classes:
         model: BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage

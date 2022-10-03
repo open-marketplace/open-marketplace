@@ -53,7 +53,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
         $this->vendorAddressFactory = static::$container->get('open_marketplace.factory.vendor_address_factory');
         $this->vendorProfileFactory = static::$container->get('open_marketplace.factory.vendor_profile_factory');
-        $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('bitbag.mvm_plugin.service.vendor_profile_image_factory');
+        $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('open_marketplace.service.vendor_profile_image_factory');
         $this->imageUploader = static::$container->get('sylius.image_uploader');
         $this->vendorLogoOperator = static::$container->get('open_marketplace.operator.vendor_logo');
 

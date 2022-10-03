@@ -4,8 +4,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\OpenMarketplace\Converter\AttributesConverter"
-                 id="bitbag.mvm_plugin.attributes_converter">
-            <argument type="service" id="bitbag.mvm_plugin.product_attribute_factory"/>
+                 id="open_marketplace.attributes_converter">
+            <argument type="service" id="open_marketplace.product_attribute_factory"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="open_marketplace.extractor.attributes"/>
             <argument type="service" id="open_marketplace.cloner.attribute_translation"/>

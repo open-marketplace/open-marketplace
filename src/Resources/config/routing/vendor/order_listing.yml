@@ -26,7 +26,7 @@ open_marketplace_vendor_order_cancel:
     path: /vendor/orders/{id}/cancel
     methods: [PUT]
     defaults:
-        _controller: bitbag.mvm_plugin.controller.order.order_controller:applyStateMachineTransitionAction
+        _controller: open_marketplace.controller.order.order_controller:applyStateMachineTransitionAction
         _sylius:
             permission: true
             state_machine:

@@ -5,9 +5,9 @@
         <defaults autowire="false" autoconfigure="false" />
 
         <service class="BitBag\OpenMarketplace\Facade\Message\AddMessageFacade"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade">
+                 id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade">
             <argument type="service" id="open_marketplace.current_user_resolver" />
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.uploader.conversation_file_uploader" />
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.uploader.conversation_file_uploader" />
             <argument type="service" id="open_marketplace.repository.conversation" />
         </service>
     </services>

@@ -6,9 +6,9 @@
         <defaults autowire="false" autoconfigure="false" />
 
         <service class="BitBag\OpenMarketplace\Factory\Message\MessageFactory"
-                 id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.message.message_factory"
-                 decorates="bitbag_multi_vendor_marketplace.factory.conversation_message" >
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.message.message_factory.inner" />
+                 id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory"
+                 decorates="bitbag_open_marketplace.factory.conversation_message" >
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory.inner" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileFactory"
@@ -25,28 +25,28 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ChannelPricingFactory"
-                 id="bitbag.mvm_plugin.factory.channel_pricing_factory">
+                 id="open_marketplace.factory.channel_pricing_factory">
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ProductTranslationFactory"
-                 id="bitbag.mvm_plugin.factory.product_translation_factory">
+                 id="open_marketplace.factory.product_translation_factory">
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ProductVariantFactory"
-                 id="bitbag.mvm_plugin.factory.product_variant_factory">
+                 id="open_marketplace.factory.product_variant_factory">
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ProductVariantTranslationFactory"
-                 id="bitbag.mvm_plugin.factory.product_variant_translation_factory">
+                 id="open_marketplace.factory.product_variant_translation_factory">
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ProductFromDraftFactory"
                  id="open_marketplace.factory.product_from_draft_factory">
             <argument type="service" id="sylius.custom_factory.product" />
-            <argument type="service" id="bitbag.mvm_plugin.factory.product_translation_factory" />
-            <argument type="service" id="bitbag.mvm_plugin.factory.product_variant_factory" />
-            <argument type="service" id="bitbag.mvm_plugin.factory.product_variant_translation_factory" />
-            <argument type="service" id="bitbag.mvm_plugin.factory.channel_pricing_factory" />
+            <argument type="service" id="open_marketplace.factory.product_translation_factory" />
+            <argument type="service" id="open_marketplace.factory.product_variant_factory" />
+            <argument type="service" id="open_marketplace.factory.product_variant_translation_factory" />
+            <argument type="service" id="open_marketplace.factory.channel_pricing_factory" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="open_marketplace.factory.product_image"/>
         </service>
@@ -55,12 +55,12 @@
                  id="open_marketplace.factory.product_listing_from_draft_factory">
             <argument type="service" id="open_marketplace.factory.product_listing" />
             <argument type="service" id="open_marketplace.factory.product_draft" />
-            <argument type="service" id="bitbag.mvm_plugin.cloner.product_listing_translation_cloner" />
-            <argument type="service" id="bitbag.mvm_plugin.cloner.product_listing_pricing_cloner" />
+            <argument type="service" id="open_marketplace.cloner.product_listing_translation_cloner" />
+            <argument type="service" id="open_marketplace.cloner.product_listing_pricing_cloner" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorImageFactory"
-                 id="bitbag.mvm_plugin.service.vendor_image_factory" />
+                 id="open_marketplace.service.vendor_image_factory" />
 
         <service class="BitBag\OpenMarketplace\Factory\AddressFactory"
                  id="bitbag.mvm.factory.address_factory"/>
@@ -72,18 +72,18 @@
                  id="open_marketplace.factory.product_draft_image"/>
 
         <service class="BitBag\OpenMarketplace\Factory\OrderFactory"
-                 id="bitbag.mvm_plugin.factory.order_factory">
+                 id="open_marketplace.factory.order_factory">
             <argument>%sylius.model.order.class%</argument>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\OrderItemFactory"
-                id="bitbag.mvm_plugin.factory.order_item_factory">
+                id="open_marketplace.factory.order_item_factory">
             <argument >%sylius.model.order_item.class%</argument>
         </service>
 
 
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactory"
-                 id="bitbag.mvm_plugin.service.vendor_profile_image_factory" />
+                 id="open_marketplace.service.vendor_profile_image_factory" />
 
         <service class="BitBag\OpenMarketplace\Factory\DraftAttributeFactory"
                  id="open_marketplace.factory.draftAttribute" >
@@ -103,7 +103,7 @@
 
 
         <service class="BitBag\OpenMarketplace\Factory\ProductAttributeFactory"
-                 id="bitbag.mvm_plugin.product_attribute_factory">
+                 id="open_marketplace.product_attribute_factory">
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ProductAttributeTranslationFactory"
@@ -130,7 +130,7 @@
             <argument>%sylius.model.shipment.class%</argument>
         </service>
 
-        <service id="bitbag.mvm_plugin.factory.product_taxon" class="Sylius\Component\Resource\Factory\Factory" public="true">
+        <service id="open_marketplace.factory.product_taxon" class="Sylius\Component\Resource\Factory\Factory" public="true">
             <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon</argument>
         </service>
     </services>

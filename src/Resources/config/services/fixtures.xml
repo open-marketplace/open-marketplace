@@ -4,33 +4,33 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="true"/>
-        <service id="bitbag.mvm_plugin.fixture.vendor" class="BitBag\OpenMarketplace\Fixture\VendorFixture">
+        <service id="open_marketplace.fixture.vendor" class="BitBag\OpenMarketplace\Fixture\VendorFixture">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.vendor" />
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="bitbag.mvm_plugin.fixture.product_draft" class="BitBag\OpenMarketplace\Fixture\ProductDraftFixture">
+        <service id="open_marketplace.fixture.product_draft" class="BitBag\OpenMarketplace\Fixture\ProductDraftFixture">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.product_draft" />
+            <argument type="service" id="open_marketplace.fixture.example_factory.product_draft" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="bitbag.mvm_plugin.fixture.order" class="BitBag\OpenMarketplace\Fixture\OrderFixture">
+        <service id="open_marketplace.fixture.order" class="BitBag\OpenMarketplace\Fixture\OrderFixture">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.order" />
+            <argument type="service" id="open_marketplace.fixture.example_factory.order" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="bitbag.mvm_plugin.fixture.conversation_category" class="BitBag\OpenMarketplace\Fixture\ConversationCategoryFixture">
+        <service id="open_marketplace.fixture.conversation_category" class="BitBag\OpenMarketplace\Fixture\ConversationCategoryFixture">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="open_marketplace.factory.conversation_category" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="bitbag.mvm_plugin.fixture.conversation" class="BitBag\OpenMarketplace\Fixture\ConversationFixture">
+        <service id="open_marketplace.fixture.conversation" class="BitBag\OpenMarketplace\Fixture\ConversationFixture">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag.mvm_plugin.fixture.example_factory.conversation" />
+            <argument type="service" id="open_marketplace.fixture.example_factory.conversation" />
             <tag name="sylius_fixtures.fixture" />
         </service>
     </services>

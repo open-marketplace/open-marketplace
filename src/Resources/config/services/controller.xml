@@ -20,7 +20,7 @@
             <argument type="service" id="twig"/>
             <argument type="service" id="api_platform.router"/>
             <argument type="service" id="session.flash_bag"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade"/>
             <argument type="service" id="open_marketplace.repository.conversation"/>
             <tag name="controller.service_arguments" />
         </service>
@@ -29,16 +29,16 @@
                  class="BitBag\OpenMarketplace\Controller\Action\ConversationMessage\AddMessageAction">
             <argument type="service" id="form.factory" />
             <argument type="service" id="session.flash_bag" />
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade" />
             <argument type="service" id="router"/>
             <tag name="controller.service_arguments" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\SendArchiveRequestAction"
                  id="open_marketplace.controller.action.conversation.send_archive_request_action">
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade" />
             <argument type="service" id="api_platform.router" />
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.message.message_factory" />
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory" />
             <tag name="controller.service_arguments" />
         </service>
 
@@ -60,14 +60,14 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Controller\Action\Vendor\ShowVendorPageAction"
-                 id="bitbag.mvm_plugin.controller.show_vendor_page_action"
+                 id="open_marketplace.controller.show_vendor_page_action"
                  public="true"
         >
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository"/>
-            <argument type="service" id="bitbag.mvm_plugin.repository.product_repository"/>
+            <argument type="service" id="open_marketplace.repository.vendor_repository"/>
+            <argument type="service" id="open_marketplace.repository.product_repository"/>
             <argument type="service" id="sylius.context.channel"/>
         </service>
 
@@ -75,7 +75,7 @@
                  id="open_marketplace.controller.draftAttributes"
                  parent="open_marketplace.controller.draft_attribute">
             <argument type="service" id="open_marketplace.factory.draftAttribute"/>
-            <argument type="service" id="bitbag.mvm_plugin.security.voter.object_owning_voter"/>
+            <argument type="service" id="open_marketplace.security.voter.object_owning_voter"/>
         </service>
 
         <service id="open_marketplace.controller.action.admin.product_listing.show_action"
@@ -85,7 +85,7 @@
             <argument type="service" id="open_marketplace.repository.product_draft" />
             <argument type="service" id="open_marketplace.repository.conversation"/>
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade"/>
             <argument type="service" id="router.default" />
             <argument type="service" id="translator" />
             <tag name="controller.service_arguments" />
@@ -203,9 +203,9 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Controller\Order\OrderController"
-                 id="bitbag.mvm_plugin.controller.order.order_controller"
+                 id="open_marketplace.controller.order.order_controller"
                  parent="sylius.controller.order">
-            <argument type="service" id="bitbag.mvm_plugin.processor.order.split_order_by_vendor_processor"/>
+            <argument type="service" id="open_marketplace.processor.order.split_order_by_vendor_processor"/>
         </service>
 
     </services>
