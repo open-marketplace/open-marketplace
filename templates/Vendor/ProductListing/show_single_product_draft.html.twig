@@ -8,7 +8,7 @@
         <div class="divider"> / </div>
         <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
         <div class="divider"> / </div>
-        <div class="active section">{{ 'bitbag_mvm_plugin.ui.product_list'|trans }}</div>
+        <div class="active section">{{ 'open_marketplace.ui.product_list'|trans }}</div>
     </div>
 {% endblock %}
 
@@ -23,7 +23,7 @@
 {#    <div class="full height ui" id="wrapper">#}
 
 {#        <h1 class="ui dividing header">#}
-{#            {{ 'bitbag_mvm_plugin.ui.product_overview'|trans }}#}
+{#            {{ 'open_marketplace.ui.product_overview'|trans }}#}
 {#            <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>#}
 {#        </h1>#}
 
@@ -37,7 +37,7 @@
         <table class="ui very celled table">
             <tbody>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.id'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.id'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         <li>{{ productDraft.id }}</li>
@@ -45,7 +45,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.name'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.name'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         <li>{{ productDraft.code }}</li>
@@ -53,7 +53,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.published_at'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.published_at'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         <li>{{ productDraft.publishedAt | date }}</li>
@@ -61,7 +61,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.status'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.status'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         <li>{{ productDraft.status }}</li>

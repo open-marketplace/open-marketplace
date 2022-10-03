@@ -1,10 +1,10 @@
 {% if vendor.status == constant('BitBag\\SyliusMultiVendorMarketplacePlugin\\Entity\\VendorInterface::STATUS_UNVERIFIED') %}
 
-    <form action="{{ path('bitbag_mvm_plugin_admin_vendor_verify', {'id': vendor.id}) }}" method="post">
+    <form action="{{ path('open_marketplace_admin_vendor_verify', {'id': vendor.id}) }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(vendor.id) }}">
         <input type="hidden" name="_method" value="PUT">
         <button class="ui labeled icon button primary" type="submit" >
-            <i class="thumbs up icon"></i> {{ 'bitbag_mvm_plugin.ui.verify'|trans }}
+            <i class="thumbs up icon"></i> {{ 'open_marketplace.ui.verify'|trans }}
         </button>
     </form>
 

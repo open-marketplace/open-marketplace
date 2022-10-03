@@ -2,6 +2,6 @@ vendor_profile:
     path: /vendor/profile
     methods: [GET]
     defaults:
-        _controller: bitbag_mvm_plugin.controller.vendor_controller:showAction
+        _controller: open_marketplace.controller.vendor_controller:showAction
         _sylius:
             template: "Vendor/profile.html.twig"

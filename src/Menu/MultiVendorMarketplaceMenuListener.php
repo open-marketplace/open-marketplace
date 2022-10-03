@@ -22,11 +22,11 @@ final class MultiVendorMarketplaceMenuListener
         $mvmRootMenuItem =
             $menu
                 ->addChild('marketplace')
-                ->setLabel('bitbag_mvm_plugin.ui.marketplace');
+                ->setLabel('open_marketplace.ui.marketplace');
 
         $mvmRootMenuItem
             ->addChild('multi_vendor_marketplace_product_listings', [
-                'route' => 'bitbag_mvm_plugin_admin_product_listing_index',
+                'route' => 'open_marketplace_admin_product_listing_index',
                 'routeParameters' => [
                     'criteria' => [
                         'status' => [
@@ -35,24 +35,24 @@ final class MultiVendorMarketplaceMenuListener
                         ],
                 ],
             ])
-            ->setLabel('bitbag_mvm_plugin.ui.product_listings')
+            ->setLabel('open_marketplace.ui.product_listings')
             ->setLabelAttribute('icon', 'list');
 
         $mvmRootMenuItem
             ->addChild('vendors', [
-                'route' => 'bitbag_mvm_plugin_admin_vendor_index',
+                'route' => 'open_marketplace_admin_vendor_index',
             ])
-            ->setLabel('bitbag_mvm_plugin.ui.vendors')
+            ->setLabel('open_marketplace.ui.vendors')
             ->setLabelAttribute('icon', 'users');
 
         $mvmRootMenuItem
-            ->addChild('conversations', ['route' => 'bitbag_mvm_plugin_admin_conversation_index'])
-            ->setLabel('bitbag_mvm_plugin.ui.menu.conversations')
+            ->addChild('conversations', ['route' => 'open_marketplace_admin_conversation_index'])
+            ->setLabel('open_marketplace.ui.menu.conversations')
             ->setLabelAttribute('icon', 'inbox');
 
         $mvmRootMenuItem
-            ->addChild('conversations_category', ['route' => 'bitbag_mvm_plugin_admin_conversation_category_index'])
-            ->setLabel('bitbag_mvm_plugin.ui.menu.conversation_categories')
+            ->addChild('conversations_category', ['route' => 'open_marketplace_admin_conversation_category_index'])
+            ->setLabel('open_marketplace.ui.menu.conversation_categories')
             ->setLabelAttribute('icon', 'inbox');
     }
 }

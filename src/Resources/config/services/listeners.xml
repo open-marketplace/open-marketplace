@@ -9,8 +9,8 @@
             <argument type="service" id="bitbag.mvm_plugin.service.vendor_slug_generator"/>
             <argument type="service" id="sylius.image_uploader"/>
 
-            <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="generateSlug"/>
-            <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="uploadImage"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="generateSlug"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadImage"/>
         </service>
     </services>
 </container>

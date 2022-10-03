@@ -5,7 +5,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft" table="bitbag_mvm_product_draft">
+    <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft" table="bitbag_open_marketplace_product_draft">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

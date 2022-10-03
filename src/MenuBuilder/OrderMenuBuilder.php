@@ -60,7 +60,7 @@ final class OrderMenuBuilder
         ) {
             $menu
                 ->addChild('cancel', [
-                    'route' => 'bitbag_mvm_plugin_vendor_order_cancel',
+                    'route' => 'open_marketplace_vendor_order_cancel',
                     'routeParameters' => [
                         'id' => $order->getId(),
                         '_csrf_token' => $this->csrfTokenManager->getToken((string) $order->getId())->getValue(),

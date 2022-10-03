@@ -1,6 +1,6 @@
 sylius_resource:
     resources:
-        bitbag_mvm_plugin.draft_attribute:
+        open_marketplace.draft_attribute:
             classes:
                 model: BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute
                 interface: BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface
@@ -10,6 +10,6 @@ sylius_resource:
             translation:
                 classes:
                     model: BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation
-        bitbag_mvm_plugin.draft_attribute_value:
+        open_marketplace.draft_attribute_value:
             classes:
                 model: BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue

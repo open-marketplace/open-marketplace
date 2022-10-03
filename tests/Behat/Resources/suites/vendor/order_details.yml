@@ -2,9 +2,9 @@ default:
     suites:
         order_details:
             contexts:
-                - tests.bitbag_mvm_plugin.behat.context.shop.order
-                - tests.bitbag_mvm_plugin.behat.context.setup.order_context
-                - tests.bitbag_mvm_plugin.behat.context.vendor.vendor_update_context
+                - tests.open_marketplace.behat.context.shop.order
+                - tests.open_marketplace.behat.context.setup.order_context
+                - tests.open_marketplace.behat.context.vendor.vendor_update_context
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.hook.doctrine_orm

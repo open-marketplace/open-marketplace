@@ -1,12 +1,12 @@
 sylius_resource:
   resources:
-    bitbag_mvm_plugin.product_listing:
+    open_marketplace.product_listing:
       driver: doctrine/orm
       classes:
         model: BitBag\OpenMarketplace\Entity\ProductListing\ProductListing
         repository: BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepository
 
-    bitbag_mvm_plugin.product_draft:
+    open_marketplace.product_draft:
       driver: doctrine/orm
       classes:
         model: BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft
@@ -14,24 +14,24 @@ sylius_resource:
         controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
         form: BitBag\OpenMarketplace\Form\ProductListing\ProductType
 
-    bitbag_mvm_plugin.product_translation:
+    open_marketplace.product_translation:
       driver: doctrine/orm
       classes:
         model: BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation
         interface: BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface
 
-    bitbag_mvm_plugin.product_listing_price:
+    open_marketplace.product_listing_price:
       driver: doctrine/orm
       classes:
         model: BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice
         interface: BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface
 
-    bitbag_mvm_plugin.product_draft_image:
+    open_marketplace.product_draft_image:
       driver: doctrine/orm
       classes:
         model: BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage
 
-    bitbag_mvm_plugin.product_draft_taxons:
+    open_marketplace.product_draft_taxons:
       driver: doctrine/orm
       classes:
         model: BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon

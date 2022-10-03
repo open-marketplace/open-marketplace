@@ -96,9 +96,9 @@ class EditProductAction extends AbstractController
             $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
 
             $this->productDraftRepository->save($productDraft);
-            $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
+            $this->addFlash('success', 'open_marketplace.ui.product_listing_saved');
 
-            return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
+            return $this->redirectToRoute('open_marketplace_vendor_product_listing_index');
         }
 
         return new Response(

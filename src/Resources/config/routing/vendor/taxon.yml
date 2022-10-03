@@ -1,4 +1,4 @@
-bitbag_mvm_plugin_ajax_taxon_root_nodes:
+open_marketplace_ajax_taxon_root_nodes:
   path: /root-nodes
   methods: [GET]
   defaults:
@@ -10,7 +10,7 @@ bitbag_mvm_plugin_ajax_taxon_root_nodes:
       repository:
         method: findRootNodes
 
-bitbag_mvm_plugin_ajax_taxon_leafs:
+open_marketplace_ajax_taxon_leafs:
   path: /leafs
   methods: [GET]
   defaults:
@@ -24,7 +24,7 @@ bitbag_mvm_plugin_ajax_taxon_leafs:
         arguments:
           parentCode: $parentCode
 
-bitbag_mvm_plugin_ajax_taxon_by_code:
+open_marketplace_ajax_taxon_by_code:
   path: /leaf
   methods: [GET]
   defaults:
@@ -37,7 +37,7 @@ bitbag_mvm_plugin_ajax_taxon_by_code:
         method: findBy
         arguments: [code: $code]
 
-bitbag_mvm_plugin_ajax_taxon_by_name_phrase:
+open_marketplace_ajax_taxon_by_name_phrase:
   path: /search
   methods: [GET]
   defaults:
@@ -53,14 +53,14 @@ bitbag_mvm_plugin_ajax_taxon_by_name_phrase:
           locale: null
           limit: 25
 
-bitbag_mvm_plugin_ajax_generate_taxon_slug:
+open_marketplace_ajax_generate_taxon_slug:
   path: /generate-slug/
   methods: [GET]
   defaults:
     _controller: sylius.controller.taxon_slug:generateAction
     _format: json
 
-bitbag_mvm_plugin_ajax_taxon_move:
+open_marketplace_ajax_taxon_move:
   path: /{id}/move
   methods: [PUT]
   defaults:

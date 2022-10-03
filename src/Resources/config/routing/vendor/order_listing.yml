@@ -1,4 +1,4 @@
-bitbag_mvm_plugin_order_listing:
+open_marketplace_order_listing:
     path: /vendor/orders
     methods: [GET]
     defaults:
@@ -7,7 +7,7 @@ bitbag_mvm_plugin_order_listing:
             template: "Vendor/Order/index.html.twig"
             grid: vendor_account_order
 
-bitbag_mvm_plugin_vendor_order_show:
+open_marketplace_vendor_order_show:
     path: /vendor/orders/{id}
     methods: [GET]
     defaults:
@@ -19,10 +19,10 @@ bitbag_mvm_plugin_vendor_order_show:
             repository:
                 method: findOrderForVendor
                 arguments:
-                    - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
+                    - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
                     - $id
 
-bitbag_mvm_plugin_vendor_order_cancel:
+open_marketplace_vendor_order_cancel:
     path: /vendor/orders/{id}/cancel
     methods: [PUT]
     defaults:

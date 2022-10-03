@@ -1,11 +1,11 @@
 {% if vendor.status == constant('BitBag\\SyliusMultiVendorMarketplacePlugin\\Entity\\VendorInterface::STATUS_VERIFIED') %}
-    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'bitbag_mvm_plugin.ui.verified'|trans }}</span>
+    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'open_marketplace.ui.verified'|trans }}</span>
 {% else %}
-    <span class="ui red label"><i class="remove icon"></i>{{ 'bitbag_mvm_plugin.ui.unverified'|trans }}</span>
+    <span class="ui red label"><i class="remove icon"></i>{{ 'open_marketplace.ui.unverified'|trans }}</span>
 {% endif %}
 
 {% if vendor.enabled == true %}
-    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'bitbag_mvm_plugin.ui.enabled'|trans }}</span>
+    <span class="ui teal label"><i class="checkmark icon"></i>{{ 'open_marketplace.ui.enabled'|trans }}</span>
 {% else %}
-    <span class="ui red label"><i class="remove icon"></i>{{ 'bitbag_mvm_plugin.ui.disabled'|trans }}</span>
+    <span class="ui red label"><i class="remove icon"></i>{{ 'open_marketplace.ui.disabled'|trans }}</span>
 {% endif %}

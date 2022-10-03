@@ -7,11 +7,11 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%bitbag_mvm_plugin.model.draft_attribute.class%"
+                    class: "%open_marketplace.model.draft_attribute.class%"
                     repository:
                         method: findVendorDraftAttributesQuery
                         arguments:
-                        - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
+                        - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
             sorting:
                 position: asc
             fields:

@@ -4,7 +4,7 @@
     <services>
 
         <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\ProductContext"
-                 id="tests.bitbag_mvm_plugin.behat.context.setup.product" public="true">
+                 id="tests.open_marketplace.behat.context.setup.product" public="true">
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository"/>
             <argument type="service" id="sylius.repository.product_variant"/>

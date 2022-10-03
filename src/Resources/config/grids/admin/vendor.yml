@@ -4,11 +4,11 @@ sylius_grid:
             enable_vendor_action: "Grid/Action/enableVendor.html.twig"
             edit_vendor: "Grid/Action/editVendor.html.twig"
     grids:
-        bitbag_mvm_plugin_admin_vendor:
+        open_marketplace_admin_vendor:
             driver:
                 name: doctrine/orm
                 options:
-                    class: '%bitbag_mvm_plugin.model.vendor.class%'
+                    class: '%open_marketplace.model.vendor.class%'
                     repository:
                         method: createListQueryBuilder
             sorting:
@@ -16,31 +16,31 @@ sylius_grid:
             fields:
                 id:
                     type: string
-                    label: bitbag_mvm_plugin.ui.id
+                    label: open_marketplace.ui.id
                     sortable: ~
                 companyName:
                     type: string
-                    label: bitbag_mvm_plugin.ui.company_name
+                    label: open_marketplace.ui.company_name
                     sortable: ~
                 taxIdentifier:
                     type: string
-                    label: bitbag_mvm_plugin.ui.tax_id
+                    label: open_marketplace.ui.tax_id
                     sortable: ~
                 status:
                     type: twig
-                    label: bitbag_mvm_plugin.ui.status
+                    label: open_marketplace.ui.status
                     options:
                         template: 'Grid/status.html.twig'
                     sortable: ~
                 enabled:
                     type: twig
-                    label: bitbag_mvm_plugin.ui.enabled
+                    label: open_marketplace.ui.enabled
                     options:
                         template: 'Grid/Field/enabled.html.twig'
             actions:
                 item:
                     details:
-                        label: bitbag_mvm_plugin.ui.details
+                        label: open_marketplace.ui.details
                         type: show
                     update:
                         type: edit_vendor

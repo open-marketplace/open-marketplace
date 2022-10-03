@@ -3,7 +3,7 @@
 <doctrine-mapping xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="BitBag\OpenMarketplace\Entity\Conversation\Conversation" table="bitbag_mvm_conversation">
+    <mapped-superclass name="BitBag\OpenMarketplace\Entity\Conversation\Conversation" table="bitbag_open_marketplace_conversation">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

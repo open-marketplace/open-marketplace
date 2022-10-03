@@ -5,8 +5,8 @@
         <defaults public="true" />
 
         <service id="bitbag.mvm_plugin.fixture.example_factory.vendor" class="BitBag\OpenMarketplace\Fixture\Factory\VendorExampleFactory">
-            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_profile_factory" />
-            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_address_factory" />
+            <argument type="service" id="open_marketplace.factory.vendor_profile_factory" />
+            <argument type="service" id="open_marketplace.factory.vendor_address_factory" />
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.repository.country" />
@@ -14,17 +14,17 @@
         </service>
 
         <service id="bitbag.mvm_plugin.fixture.example_factory.product_draft" class="BitBag\OpenMarketplace\Fixture\Factory\ProductDraftExampleFactory">
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_draft" />
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_price" />
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory" />
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_translation" />
-            <argument type="service" id="bitbag_mvm_plugin.repository.vendor" />
+            <argument type="service" id="open_marketplace.factory.product_draft" />
+            <argument type="service" id="open_marketplace.factory.product_listing_price" />
+            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory" />
+            <argument type="service" id="open_marketplace.factory.product_translation" />
+            <argument type="service" id="open_marketplace.repository.vendor" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.locale" />
-            <argument type="service" id="bitbag_mvm_plugin.state_machine.product_draft.transition" />
+            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="sylius.image_uploader"/>
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_draft_image"/>
+            <argument type="service" id="open_marketplace.factory.product_draft_image"/>
             <argument type="service" id="file_locator"/>
         </service>
 
@@ -45,11 +45,11 @@
         </service>
 
         <service id="bitbag.mvm_plugin.fixture.example_factory.conversation" class="BitBag\OpenMarketplace\Fixture\Factory\ConversationExampleFactory">
-            <argument type="service" id="bitbag_mvm_plugin.factory.conversation" />
+            <argument type="service" id="open_marketplace.factory.conversation" />
             <argument type="service" id="bitbag_multi_vendor_marketplace.factory.conversation_message" />
             <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository" />
             <argument type="service" id="sylius.repository.admin_user" />
-            <argument type="service" id="bitbag_mvm_plugin.repository.conversation_category" />
+            <argument type="service" id="open_marketplace.repository.conversation_category" />
         </service>
     </services>
 </container>

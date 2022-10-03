@@ -29,7 +29,7 @@
             <argument type="service" id="security.token_storage"/>
         </service>
 
-        <service id="bitbag_mvm_plugin.repository.product" class="BitBag\OpenMarketplace\Repository\ProductRepository">
+        <service id="open_marketplace.repository.product" class="BitBag\OpenMarketplace\Repository\ProductRepository">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata">
@@ -39,7 +39,7 @@
             </argument>
         </service>
 
-        <service id="bitbag_mvm_plugin.repository.product_draft" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepository">
+        <service id="open_marketplace.repository.product_draft" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepository">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata">
@@ -59,7 +59,7 @@
             </argument>
         </service>
 
-        <service id="bitbag_mvm_plugin.repository.product_translation" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductTranslationRepository">
+        <service id="open_marketplace.repository.product_translation" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductTranslationRepository">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata">

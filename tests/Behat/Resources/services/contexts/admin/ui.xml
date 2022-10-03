@@ -10,16 +10,16 @@
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="bitbag_mvm_plugin.factory.draftAttribute"/>
+            <argument type="service" id="open_marketplace.factory.draftAttribute"/>
         </service>
 
-        <service id="bitbag_mvm_plugin.behat.context.ui.admin.vendor_listing" public="true"
+        <service id="open_marketplace.behat.context.ui.admin.vendor_listing" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorListingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
         </service>
 
-        <service id="bitbag_mvm_plugin.behat.context.ui.admin.vendor_verification" public="true"
+        <service id="open_marketplace.behat.context.ui.admin.vendor_verification" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorVerificationContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="service_container"/>
@@ -33,7 +33,7 @@
         <service id="bitbag_sylius_mvm_plugin.behat.context.ui.admin.vendor_editing" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorEditingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="tests.bitbag_mvm_plugin.behat.context.setup.factory.vendor_factory"/>
+            <argument type="service" id="tests.open_marketplace.behat.context.setup.factory.vendor_factory"/>
         </service>
 
     </services>

@@ -48,7 +48,7 @@ final class ConversationType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'required' => false,
-                'label' => 'bitbag_mvm_plugin.ui.form.conversation.category',
+                'label' => 'open_marketplace.ui.form.conversation.category',
                 'choice_label' => 'name',
             ])
             ->add('messages', CollectionType::class, [
@@ -72,7 +72,7 @@ final class ConversationType extends AbstractType
                 ],
                 'choice_label' => 'companyName',
                 'mapped' => false,
-                'label' => 'bitbag_mvm_plugin.ui.form.conversation.users',
+                'label' => 'open_marketplace.ui.form.conversation.users',
             ]);
         }
     }

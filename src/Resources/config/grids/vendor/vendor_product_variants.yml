@@ -8,7 +8,7 @@ sylius_grid:
                     repository:
                         method: createQueryBuilderByVendor
                         arguments:
-                            - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
+                            - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
             sorting:
                 position: asc
             fields:

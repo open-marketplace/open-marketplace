@@ -3,15 +3,15 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag_mvm_plugin.state_machine.product_draft" public="true"
+        <service id="open_marketplace.state_machine.product_draft" public="true"
                  class="BitBag\OpenMarketplace\StateMachine\ProductListing\ProductDraftCallbacks">
             <argument type="service" id="session.flash_bag" />
             <argument type="service" id="bitbag.mvm_plugin.acceptance_operator.product_draft_acceptance_operator"/>
-            <argument type="service" id="bitbag_mvm_plugin.repository.product"/>
-            <argument type="service" id="bitbag_mvm_plugin.repository.product_draft"/>
+            <argument type="service" id="open_marketplace.repository.product"/>
+            <argument type="service" id="open_marketplace.repository.product_draft"/>
         </service>
 
-        <service id="bitbag_mvm_plugin.state_machine.product_draft.transition"
+        <service id="open_marketplace.state_machine.product_draft.transition"
                 class="BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransition">
                 <argument type="service" id="SM\Factory\Factory"/>
         </service>

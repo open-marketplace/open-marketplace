@@ -1,4 +1,4 @@
-bitbag_mvm_plugin_vendor_page_show:
+open_marketplace_vendor_page_show:
   path: vendors/{slug}
   methods: [GET]
   defaults:

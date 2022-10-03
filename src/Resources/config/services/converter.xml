@@ -7,9 +7,9 @@
                  id="bitbag.mvm_plugin.attributes_converter">
             <argument type="service" id="bitbag.mvm_plugin.product_attribute_factory"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="bitbag_mvm_plugin.extractor.attributes"/>
-            <argument type="service" id="bitbag_mvm_plugin.cloner.attribute_translation"/>
-            <argument type="service" id="bitbag_mvm_plugin.cloner.attribute_value"/>
+            <argument type="service" id="open_marketplace.extractor.attributes"/>
+            <argument type="service" id="open_marketplace.cloner.attribute_translation"/>
+            <argument type="service" id="open_marketplace.cloner.attribute_value"/>
         </service>
     </services>
 </container>

@@ -5,24 +5,24 @@
     <services>
         <service class="BitBag\OpenMarketplace\Cloner\ProductListingPricingCloner"
                  id="bitbag.mvm_plugin.cloner.product_listing_pricing_cloner">
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_price" />
+            <argument type="service" id="open_marketplace.factory.product_listing_price" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Cloner\ProductListingTranslationCloner"
                  id="bitbag.mvm_plugin.cloner.product_listing_translation_cloner">
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_translation" />
+            <argument type="service" id="open_marketplace.factory.product_translation" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Cloner\AttributeTranslationCloner"
-                 id="bitbag_mvm_plugin.cloner.attribute_translation">
+                 id="open_marketplace.cloner.attribute_translation">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_attribute_translation"/>
+            <argument type="service" id="open_marketplace.factory.product_attribute_translation"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Cloner\AttributeValueCloner"
-                 id="bitbag_mvm_plugin.cloner.attribute_value">
+                 id="open_marketplace.cloner.attribute_value">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_attribute_value"/>
+            <argument type="service" id="open_marketplace.factory.product_attribute_value"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Cloner\ShipmentCloner"

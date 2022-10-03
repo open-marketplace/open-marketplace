@@ -59,8 +59,8 @@ final class RestoreAction
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
 
-        $this->flashBag->set('success', 'bitbag_mvm_plugin.ui.restored');
+        $this->flashBag->set('success', 'open_marketplace.ui.restored');
 
-        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
+        return new RedirectResponse($this->router->generate('open_marketplace_admin_product_listing_index'));
     }
 }

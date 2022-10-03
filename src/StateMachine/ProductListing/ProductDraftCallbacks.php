@@ -46,7 +46,7 @@ final class ProductDraftCallbacks
         $this->productRepository->save($product);
         $this->productDraftRepository->save($productDraft);
 
-        $this->session->add('success', 'bitbag_mvm_plugin.ui.product_listing_accepted');
+        $this->session->add('success', 'open_marketplace.ui.product_listing_accepted');
     }
 
     public function reject(ProductDraftInterface $productDraft): void
@@ -54,7 +54,7 @@ final class ProductDraftCallbacks
         $productDraft->reject();
         $this->productDraftRepository->save($productDraft);
 
-        $this->session->add('warning', 'bitbag_mvm_plugin.ui.product_listing_rejected');
+        $this->session->add('warning', 'open_marketplace.ui.product_listing_rejected');
     }
 
     public function sendToVerify(ProductDraftInterface $productDraft): void

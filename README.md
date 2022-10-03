@@ -85,7 +85,7 @@ sylius_user:
 # config/routes.yaml
 ...
 
-bitbag_mvm_plugin:
+open_marketplace:
   resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/routing.yml"
 ```
 

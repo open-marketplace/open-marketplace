@@ -60,13 +60,13 @@ final class ResendOrderConfirmationEmailAction
         $orderId = $request->attributes->get('id');
 
         if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($orderId, (string) $request->query->get('_csrf_token')))) {
-            throw new HttpException(Response::HTTP_FORBIDDEN, $this->translator->trans('bitbag_mvm_plugin.ui.invalid_csrf'));
+            throw new HttpException(Response::HTTP_FORBIDDEN, $this->translator->trans('open_marketplace.ui.invalid_csrf'));
         }
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->find($orderId);
         if (null === $order) {
-            throw new NotFoundHttpException($this->translator->trans('bitbag_mvm_plugin.ui.order_not_found', ['orderId' => $orderId]));
+            throw new NotFoundHttpException($this->translator->trans('open_marketplace.ui.order_not_found', ['orderId' => $orderId]));
         }
 
         $this->orderEmailManager->sendConfirmationEmail($order);
@@ -76,6 +76,6 @@ final class ResendOrderConfirmationEmailAction
             'sylius.email.order_confirmation_resent',
         );
 
-        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_order_listing'));
+        return new RedirectResponse($this->router->generate('open_marketplace_order_listing'));
     }
 }

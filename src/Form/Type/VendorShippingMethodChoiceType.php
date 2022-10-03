@@ -77,6 +77,6 @@ final class VendorShippingMethodChoiceType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_mvm_plugin_shipping_method_choice';
+        return 'open_marketplace_shipping_method_choice';
     }
 }

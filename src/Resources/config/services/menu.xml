@@ -3,16 +3,16 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag_mvm_plugin.menu.multi_vendor_marketplace_menu_listener"
+        <service id="open_marketplace.menu.multi_vendor_marketplace_menu_listener"
                  class="BitBag\OpenMarketplace\Menu\MultiVendorMarketplaceMenuListener">
             <tag name="kernel.event_listener" method="buildMenu" event="sylius.menu.admin.main" />
         </service>
 
-        <service id="bitbag_mvm_plugin.shop.menu_builder.vendor" class="BitBag\OpenMarketplace\Menu\VendorMenuBuilder">
+        <service id="open_marketplace.shop.menu_builder.vendor" class="BitBag\OpenMarketplace\Menu\VendorMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="security.helper" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="bitbag_mvm_plugin.shop.vendor" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="open_marketplace.shop.vendor" />
         </service>
     </services>
 </container>

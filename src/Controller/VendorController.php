@@ -219,9 +219,9 @@ final class VendorController extends ResourceController
 
         $this->manager->flush();
 
-        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_verified');
+        $this->addFlash('success', 'open_marketplace.ui.vendor_verified');
 
-        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+        return $this->redirectToRoute('open_marketplace_admin_vendor_index');
     }
 
     public function enablingVendorAction(Request $request): Response
@@ -234,9 +234,9 @@ final class VendorController extends ResourceController
             $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
 
             $this->manager->flush();
-            $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
+            $this->addFlash('success', 'open_marketplace.ui.vendor_' . $messageSuffix);
         }
 
-        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+        return $this->redirectToRoute('open_marketplace_admin_vendor_index');
     }
 }

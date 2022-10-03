@@ -2,8 +2,8 @@ default:
     suites:
         draft_attribute:
             contexts:
-                - tests.bitbag_mvm_plugin.behat.context.draft_attribute_context
-                - tests.bitbag_mvm_plugin.behat.context.vendor.vendor_update_context
+                - tests.open_marketplace.behat.context.draft_attribute_context
+                - tests.open_marketplace.behat.context.vendor.vendor_update_context
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.locale

@@ -3,8 +3,8 @@
     <services>
         <defaults public="true" />
         <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\VendorRegisterContext"
-                id="tests.bitbag_mvm_plugin.behat.context.vendor.vendor_register_context">
-            <argument type="service" id="tests.bitbag_mvm_plugin.behat.page.vendor.vendor_register_page" />
+                id="tests.open_marketplace.behat.context.vendor.vendor_register_context">
+            <argument type="service" id="tests.open_marketplace.behat.page.vendor.vendor_register_page" />
 
         </service>
     </services>

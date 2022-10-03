@@ -5,6 +5,6 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation"
-                       table="bitbag_mvm_draft_attribute_translation">
+                       table="bitbag_open_marketplace_draft_attribute_translation">
     </mapped-superclass>
 </doctrine-mapping>

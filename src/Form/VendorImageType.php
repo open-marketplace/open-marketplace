@@ -21,7 +21,7 @@ final class VendorImageType extends ImageType
     {
         $builder
             ->add('file', FileType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.logo',
+                'label' => 'open_marketplace.ui.logo',
             ])
         ;
     }

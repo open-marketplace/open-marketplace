@@ -40,7 +40,7 @@ final class ProductType extends AbstractType
                     ],
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.save_draft',
+                'label' => 'open_marketplace.ui.save_draft',
                 'attr' => [
                     'class' => 'ui primary big button',
                 ],

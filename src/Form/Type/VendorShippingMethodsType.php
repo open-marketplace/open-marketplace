@@ -59,7 +59,7 @@ final class VendorShippingMethodsType extends AbstractResourceType
                     'vendor' => $options['data'],
                 ],
                 'mapped' => false,
-                'label' => 'bitbag_mvm_plugin.ui.shipping_methods',
+                'label' => 'open_marketplace.ui.shipping_methods',
             ])->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
                 /** @var VendorInterface $vendor */
                 $vendor = $options['data'];

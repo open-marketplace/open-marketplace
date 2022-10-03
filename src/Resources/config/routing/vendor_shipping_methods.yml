@@ -2,7 +2,7 @@ vendor_shipping_methods:
   path: /vendor/shipping-methods
   methods: [GET, POST]
   defaults:
-    _controller: bitbag_mvm_plugin.controller.vendor_controller:updateAction
+    _controller: open_marketplace.controller.vendor_controller:updateAction
     _sylius:
       template: "Vendor/shipping_methods.html.twig"
       form: BitBag\OpenMarketplace\Form\Type\VendorShippingMethodsType
@@ -10,8 +10,8 @@ vendor_shipping_methods:
       repository:
         method: findOneById
         arguments:
-          id: "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor().getId()"
-      flash: bitbag_mvm_plugin.ui.shipping_method_updated
+          id: "expr:service('open_marketplace.provider.vendor').provideCurrentVendor().getId()"
+      flash: open_marketplace.ui.shipping_method_updated
       redirect:
         route: vendor_shipping_methods
 

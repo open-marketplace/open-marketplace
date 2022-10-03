@@ -25,7 +25,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
     {
         parent::setUp();
 
-        $this->productFromDraftFactory = $this->getContainer()->get('bitbag_mvm_plugin.factory.product_from_draft_factory');
+        $this->productFromDraftFactory = $this->getContainer()->get('open_marketplace.factory.product_from_draft_factory');
 
         $fileSystemMap = $this->getContainer()->get('knp_gaufrette.filesystem_map');
 
@@ -33,7 +33,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->fileSystem = new Filesystem($fileAdapter);
 
-        $productImageFactory = $this->getContainer()->get('bitbag_mvm_plugin.factory.product_image');
+        $productImageFactory = $this->getContainer()->get('open_marketplace.factory.product_image');
 
         $this->productDraftFilesOperator = new ProductDraftFilesOperator($this->fileSystem, $productImageFactory);
     }

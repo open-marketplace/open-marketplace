@@ -60,9 +60,9 @@ final class SendForVerificationAction
 
         $this->session->getFlashBag()->add(
             'success',
-            'bitbag_mvm_plugin.ui.product_listing_sent_to_verification',
+            'open_marketplace.ui.product_listing_sent_to_verification',
         );
 
-        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_vendor_product_listing_index'));
+        return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
     }
 }

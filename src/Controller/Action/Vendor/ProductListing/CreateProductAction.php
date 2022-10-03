@@ -126,9 +126,9 @@ class CreateProductAction extends AbstractController
             $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
 
             $this->productDraftRepository->save($productDraft);
-            $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
+            $this->addFlash('success', 'open_marketplace.ui.product_listing_created');
 
-            return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
+            return $this->redirectToRoute('open_marketplace_vendor_product_listing_index');
         }
 
         return new Response(

@@ -6,7 +6,7 @@ sylius_grid:
     filter:
       product_listing_status: 'Grid/Filter/product_listing_status.html.twig'
   grids:
-    bitbag_mvm_plugin_admin_product_listing:
+    open_marketplace_admin_product_listing:
       driver:
         name: doctrine/orm
         options:
@@ -24,27 +24,27 @@ sylius_grid:
             fields: ['code']
         status:
           type: product_listing_status
-          label: bitbag_mvm_plugin.ui.status
+          label: open_marketplace.ui.status
       fields:
         id:
           type: string
-          label: bitbag_mvm_plugin.ui.id
+          label: open_marketplace.ui.id
           sortable: ~
         code:
           type: string
-          label: bitbag_mvm_plugin.ui.code
+          label: open_marketplace.ui.code
           sortable: ~
         getLatestDraft.publishedAt:
           type: datetime
-          label: bitbag_mvm_plugin.ui.published_at
+          label: open_marketplace.ui.published_at
           sortable: ~
         getLatestDraft.verifiedAt:
           type: datetime
-          label: bitbag_mvm_plugin.ui.verified_at
+          label: open_marketplace.ui.verified_at
           sortable: ~
         getLatestDraft.status:
           type: twig
-          label: bitbag_mvm_plugin.ui.status
+          label: open_marketplace.ui.status
           sortable: ~
           options:
             template: "Grid/Field/product_listing_status.html.twig"
@@ -52,10 +52,10 @@ sylius_grid:
         item:
           details:
             type: details
-            label: bitbag_mvm_plugin.ui.details
+            label: open_marketplace.ui.details
             options:
               link:
-                route: bitbag_mvm_plugin_admin_product_listing_show
+                route: open_marketplace_admin_product_listing_show
                 parameters:
                   id: resource.id
           restore_visibility:

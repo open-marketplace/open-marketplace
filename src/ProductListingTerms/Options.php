@@ -15,11 +15,11 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 
 final class Options
 {
-    public const STATUS_UNDER_VERIFICATION = 'bitbag_mvm_plugin.ui.under_verification';
+    public const STATUS_UNDER_VERIFICATION = 'open_marketplace.ui.under_verification';
 
-    public const STATUS_VERIFIED = 'bitbag_mvm_plugin.ui.verified';
+    public const STATUS_VERIFIED = 'open_marketplace.ui.verified';
 
-    public const STATUS_REJECTED = 'bitbag_mvm_plugin.ui.rejected';
+    public const STATUS_REJECTED = 'open_marketplace.ui.rejected';
 
     public static function getTypeFilter(): array
     {

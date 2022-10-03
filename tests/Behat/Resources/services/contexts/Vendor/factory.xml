@@ -4,7 +4,7 @@
         <defaults public="true" />
         <service
                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\Factory\VendorFactory"
-                id="tests.bitbag_mvm_plugin.behat.context.setup.factory.vendor_factory" >
+                id="tests.open_marketplace.behat.context.setup.factory.vendor_factory" >
         </service>
     </services>
 </container>

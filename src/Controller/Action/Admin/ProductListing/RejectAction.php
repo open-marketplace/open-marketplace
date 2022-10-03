@@ -53,6 +53,6 @@ final class RejectAction
 
         $this->productDraftStateMachineTransition->applyIfCan($latestProductDraft, ProductDraftTransitions::TRANSITION_REJECT);
 
-        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_admin_product_listing_index'));
+        return new RedirectResponse($this->router->generate('open_marketplace_admin_product_listing_index'));
     }
 }

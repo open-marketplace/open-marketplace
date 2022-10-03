@@ -14,8 +14,8 @@ default:
         - sylius.behat.context.setup.user
         - sylius.behat.context.setup.zone
 
-        - tests.bitbag_mvm_plugin.behat.context.vendor.vendor_shipping_methods_context
-        - tests.bitbag_mvm_plugin.behat.context.vendor.vendor_update_context
+        - tests.open_marketplace.behat.context.vendor.vendor_shipping_methods_context
+        - tests.open_marketplace.behat.context.vendor.vendor_update_context
         - Behat\MinkExtension\Context\MinkContext
       filters:
         tags: "@shipping_methods&&@ui"

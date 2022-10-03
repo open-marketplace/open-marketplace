@@ -4,7 +4,7 @@
         <defaults public="true" />
         <service
                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\VendorShippingMethodsContext"
-                id="tests.bitbag_mvm_plugin.behat.context.vendor.vendor_shipping_methods_context" >
+                id="tests.open_marketplace.behat.context.vendor.vendor_shipping_methods_context" >
         </service>
     </services>
 </container>

@@ -83,7 +83,7 @@ final class ShowAction
 
         $form->handleRequest($request);
         $draftViewURL = $this->router->generate(
-            'bitbag_mvm_plugin_vendor_product_draft_show_product',
+            'open_marketplace_vendor_product_draft_show_product',
             ['id' => $latestProductDraft->getId()],
             UrlGenerator::ABSOLUTE_URL
         );
@@ -98,7 +98,7 @@ final class ShowAction
             $this->addConversationWithMessages($conversation);
 
             return new RedirectResponse($this->router->generate(
-                'bitbag_mvm_plugin_admin_product_listing_reject',
+                'open_marketplace_admin_product_listing_reject',
                 ['id' => $request->attributes->get('id')]
             ));
         }

@@ -3,7 +3,7 @@
     <services>
         <defaults public="true" />
         <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\OrderContext"
-                 id="tests.bitbag_mvm_plugin.behat.context.setup.order_context">
+                 id="tests.open_marketplace.behat.context.setup.order_context">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.factory.order" />
             <argument type="service" id="sylius.repository.order" />

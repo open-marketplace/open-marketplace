@@ -1,4 +1,4 @@
-bitbag_mvm_plugin_admin_vendor_disable:
+open_marketplace_admin_vendor_disable:
     path: /vendors/{id}/disable
     methods: [PUT]
-    controller: bitbag_mvm_plugin.controller.vendor_controller:enablingVendorAction
+    controller: open_marketplace.controller.vendor_controller:enablingVendorAction

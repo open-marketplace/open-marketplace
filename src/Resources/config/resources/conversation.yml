@@ -1,6 +1,6 @@
 sylius_resource:
     resources:
-        bitbag_mvm_plugin.conversation:
+        open_marketplace.conversation:
             driver: doctrine/orm
             classes:
                 model: BitBag\OpenMarketplace\Entity\Conversation\Conversation

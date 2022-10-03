@@ -4,24 +4,24 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\OpenMarketplace\Operator\ProductDraftFilesOperator"
-                 id="bitbag_mvm_plugin.operator.product_draft_files">
+                 id="open_marketplace.operator.product_draft_files">
             <argument type="service">
                 <service class="Gaufrette\Filesystem">
                     <argument>%sylius.uploader.filesystem%</argument>
                     <factory service="knp_gaufrette.filesystem_map" method="get" />
                 </service>
             </argument>
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_image"/>
+            <argument type="service" id="open_marketplace.factory.product_image"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Operator\VendorLogoOperator"
-                 id="bitbag_mvm_plugin.operator.vendor_logo">
+                 id="open_marketplace.operator.vendor_logo">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="bitbag.mvm_plugin.service.vendor_image_factory"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperator"
-                 id="bitbag_mvm_plugin.operator.product_draft_taxons">
+                 id="open_marketplace.operator.product_draft_taxons">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.factory.product_taxon" />
         </service>

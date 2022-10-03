@@ -1,6 +1,6 @@
 sylius_resource:
     resources:
-        bitbag_mvm_plugin.vendor:
+        open_marketplace.vendor:
             driver: doctrine/orm
             classes:
                 model: BitBag\OpenMarketplace\Entity\Vendor
@@ -9,26 +9,26 @@ sylius_resource:
                 repository: BitBag\OpenMarketplace\Repository\VendorRepository
                 form: BitBag\OpenMarketplace\Form\Type\VendorEditType
 
-        bitbag_mvm_plugin.vendor_profile_update:
+        open_marketplace.vendor_profile_update:
             classes:
                 model: BitBag\OpenMarketplace\Entity\VendorProfileUpdate
                 interface: BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: BitBag\OpenMarketplace\Repository\VendorProfileUpdateRepository
 
-        bitbag_mvm_plugin.vendor_address:
+        open_marketplace.vendor_address:
             classes:
                 model: BitBag\OpenMarketplace\Entity\VendorAddress
                 interface: BitBag\OpenMarketplace\Entity\VendorAddressInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
 
-        bitbag_mvm_plugin.vendor_address_update:
+        open_marketplace.vendor_address_update:
             classes:
                 model: BitBag\OpenMarketplace\Entity\VendorAddressUpdate
                 interface: BitBag\OpenMarketplace\Entity\VendorAddressUpdateInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
 
-        bitbag_mvm_plugin.vendor_shipping_method:
+        open_marketplace.vendor_shipping_method:
             classes:
                 model: BitBag\OpenMarketplace\Entity\VendorShippingMethod
                 interface: BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface
