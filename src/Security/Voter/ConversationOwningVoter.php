@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Security\Voter;
 
-
 use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
