@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Menu;
 
+use Knp\Menu\Util\MenuManipulator;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 final class MultiVendorMarketplaceMenuListener
@@ -54,5 +55,9 @@ final class MultiVendorMarketplaceMenuListener
             ->addChild('conversations_category', ['route' => 'open_marketplace_admin_conversation_category_index'])
             ->setLabel('open_marketplace.ui.menu.conversation_categories')
             ->setLabelAttribute('icon', 'inbox');
+
+
+        $manipulator = new MenuManipulator();
+        $manipulator->moveChildToPosition($menu, $mvmRootMenuItem,0);
     }
 }
