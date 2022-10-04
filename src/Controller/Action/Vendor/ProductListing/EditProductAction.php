@@ -16,12 +16,15 @@ use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFac
 use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\ObjectOwningVoter;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class EditProductAction extends AbstractController
 {
@@ -37,13 +40,16 @@ class EditProductAction extends AbstractController
 
     private ProductListingRepositoryInterface $productListingRepository;
 
+    private AuthorizationCheckerInterface $authorizationChecker;
+
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ProductDraftRepositoryInterface $productDraftRepository,
         ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
         ImageUploaderInterface $imageUploader,
-        ProductListingRepositoryInterface $productListingRepository
+        ProductListingRepositoryInterface $productListingRepository,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
@@ -51,6 +57,7 @@ class EditProductAction extends AbstractController
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->imageUploader = $imageUploader;
         $this->productListingRepository = $productListingRepository;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Request $request): Response
@@ -59,8 +66,12 @@ class EditProductAction extends AbstractController
 
         $listing = $this->productListingRepository->find($request->get('id'));
 
+        if (!$this->authorizationChecker->isGranted(ObjectOwningVoter::OWNIT, $listing)) {
+            throw new AccessDeniedException();
+        }
         /** @var ProductDraftInterface $newResource */
         $newResource = $this->productDraftRepository->findLatestDraft($listing);
+
 
         if (!(ProductDraftInterface::STATUS_CREATED === $newResource->getStatus())) {
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);

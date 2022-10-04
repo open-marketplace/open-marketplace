@@ -40,6 +40,7 @@
             <argument type="service" id="bitbag_mvm_plugin.factory.product_listing_from_draft_factory"/>
             <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="bitbag_mvm_plugin.repository.product_listing"/>
+            <argument type="service" id="security.authorization_checker"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

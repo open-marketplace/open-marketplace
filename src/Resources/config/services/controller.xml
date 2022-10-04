@@ -9,7 +9,8 @@
             <argument type="service" id="form.factory" />
             <argument type="service" id="bitbag_mvm_plugin.repository.conversation" />
             <argument type="service" id="bitbag_mvm_plugin.current_user_resolver" />
-            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.authorization_checker"/>
+
             <tag name="controller.service_arguments" />
         </service>
 
@@ -80,12 +81,8 @@
                  id="bitbag_mvm_plugin.controller.draftAttributes"
                  parent="bitbag_mvm_plugin.controller.draft_attribute">
             <argument type="service" id="bitbag_mvm_plugin.factory.draftAttribute"/>
+            <argument type="service" id="bitbag.mvm_plugin.security.voter.object_owning_voter"/>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\DraftAttributeController"
-                 id="bitbag_mvm_plugin.draft_attribute_controller"
-                 parent="bitbag_mvm_plugin.controller.draft_attribute">
-            <argument type="service" id="bitbag_mvm_plugin.updater.product_attribute_updater"/>
-        </service>
     </services>
 </container>
