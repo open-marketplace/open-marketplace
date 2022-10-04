@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Generator;
+namespace spec\BitBag\OpenMarketplace\Generator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGenerator;
+use BitBag\OpenMarketplace\Generator\TokenGenerator;
 use PhpSpec\ObjectBehavior;
 
 final class TokenGeneratorSpec extends ObjectBehavior

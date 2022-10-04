@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition;
+namespace BitBag\OpenMarketplace\Action\StateMachine\Transition;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use SM\Factory\FactoryInterface;
 
 final class ProductDraftStateMachineTransition implements ProductDraftStateMachineTransitionInterface

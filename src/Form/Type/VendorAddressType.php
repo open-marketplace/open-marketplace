@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
+namespace BitBag\OpenMarketplace\Form\Type;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
+use BitBag\OpenMarketplace\Entity\VendorAddress;
 use Sylius\Component\Addressing\Model\Country;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -26,16 +26,16 @@ final class VendorAddressType extends AbstractType
         $builder
             ->add('country', EntityType::class, [
                 'class' => Country::class,
-                'label' => 'bitbag_mvm_plugin.ui.country',
+                'label' => 'open_marketplace.ui.country',
             ])
             ->add('city', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.city',
+                'label' => 'open_marketplace.ui.city',
             ])
             ->add('street', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.street',
+                'label' => 'open_marketplace.ui.street',
             ])
             ->add('postalCode', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.postal_code',
+                'label' => 'open_marketplace.ui.postal_code',
             ])
         ;
     }

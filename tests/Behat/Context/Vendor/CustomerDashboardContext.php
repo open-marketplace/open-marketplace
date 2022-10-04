@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
+use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorAddress;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\vendor\CustomerDashboardPage;
+use Tests\BitBag\OpenMarketplace\Behat\Page\vendor\CustomerDashboardPage;
 use Webmozart\Assert\Assert;
 
 class CustomerDashboardContext extends MinkContext implements Context

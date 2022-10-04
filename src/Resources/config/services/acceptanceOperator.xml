@@ -3,14 +3,14 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperator"
-                 id="bitbag.mvm_plugin.acceptance_operator.product_draft_acceptance_operator">
-            <argument type="service" id="bitbag_mvm_plugin.factory.product_from_draft_factory"/>
-            <argument type="service" id="bitbag.mvm_plugin.updater.product_from_draft_updater"/>
-            <argument type="service" id="bitbag_mvm_plugin.operator.product_draft_files"/>
-            <argument type="service" id="bitbag.mvm_plugin.attributes_converter"/>
+        <service class="BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperator"
+                 id="open_marketplace.acceptance_operator.product_draft_acceptance_operator">
+            <argument type="service" id="open_marketplace.factory.product_from_draft_factory"/>
+            <argument type="service" id="open_marketplace.updater.product_from_draft_updater"/>
+            <argument type="service" id="open_marketplace.operator.product_draft_files"/>
+            <argument type="service" id="open_marketplace.attributes_converter"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="bitbag_mvm_plugin.operator.product_draft_taxons"/>
+            <argument type="service" id="open_marketplace.operator.product_draft_taxons"/>
         </service>
     </services>
 </container>

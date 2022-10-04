@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Generator;
+namespace BitBag\OpenMarketplace\Generator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 
 final class VendorSlugGenerator implements VendorSlugGeneratorInterface
 {

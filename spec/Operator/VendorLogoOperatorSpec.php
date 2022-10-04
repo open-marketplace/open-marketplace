@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Operator;
+namespace spec\BitBag\OpenMarketplace\Operator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\VendorLogoOperator;
+use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
+use BitBag\OpenMarketplace\Operator\VendorLogoOperator;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 

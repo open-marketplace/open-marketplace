@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
+namespace BitBag\OpenMarketplace\Processor\Order;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
 
 interface SplitOrderByVendorProcessorInterface
 {

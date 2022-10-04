@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%bitbag_mvm_plugin.model.conversation_category.class%"
+                    class: "%open_marketplace.model.conversation_category.class%"
             fields:
                 name:
                     type: string

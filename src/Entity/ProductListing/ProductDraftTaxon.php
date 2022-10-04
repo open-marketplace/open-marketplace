@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
+namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 use Sylius\Component\Core\Model\TaxonInterface;
 

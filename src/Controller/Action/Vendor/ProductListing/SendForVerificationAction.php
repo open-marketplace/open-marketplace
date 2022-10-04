@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
+namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
+use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -60,9 +60,9 @@ final class SendForVerificationAction
 
         $this->session->getFlashBag()->add(
             'success',
-            'bitbag_mvm_plugin.ui.product_listing_sent_to_verification',
+            'open_marketplace.ui.product_listing_sent_to_verification',
         );
 
-        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_vendor_product_listing_index'));
+        return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
     }
 }

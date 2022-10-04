@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeValueFactoryInterface;
+use BitBag\OpenMarketplace\Factory\ProductAttributeValueFactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
+namespace BitBag\OpenMarketplace\Form\ProductListing;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
@@ -40,7 +40,7 @@ final class ProductType extends AbstractType
                     ],
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.save_draft',
+                'label' => 'open_marketplace.ui.save_draft',
                 'attr' => [
                     'class' => 'ui primary big button',
                 ],

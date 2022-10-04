@@ -1,9 +1,9 @@
-{% set path =  path('bitbag_mvm_plugin_admin_product_listing_restore', { 'id': data.id }) %}
+{% set path =  path('open_marketplace_admin_product_listing_restore', { 'id': data.id }) %}
 
 {%  if data.removed == true %}
     <form action="{{ path }}" method="post">
         <button class="ui button orange" data-requires-confirmation>
-            <i class="icon trash"></i>{{ 'bitbag_mvm_plugin.ui.restore' | trans }}
+            <i class="icon trash"></i>{{ 'open_marketplace.ui.restore' | trans }}
         </button>
     </form>
 {% endif %}

@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\MinkContext;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Category;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactory;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\Category;
+use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
+use BitBag\OpenMarketplace\Factory\VendorProfileFactory;
+use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;

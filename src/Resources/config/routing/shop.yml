@@ -1,2 +1,2 @@
-bitbag_multi_vendor_marketplace_vendor:
+bitbag_open_marketplace_vendor:
   resource: 'shop/vendor.yml'

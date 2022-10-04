@@ -2,9 +2,9 @@
 
 {% set breadcrumbs = [
     { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
-    { label: 'bitbag_mvm_plugin.ui.vendors'|trans, url: path('bitbag_mvm_plugin_admin_vendor_index') },
+    { label: 'open_marketplace.ui.vendors'|trans, url: path('open_marketplace_admin_vendor_index') },
     { label: resource.name|default(resource.code|default(resource.companyName)) },
-    { label: 'bitbag_mvm_plugin.ui.edit'|trans }
+    { label: 'open_marketplace.ui.edit'|trans }
 ] %}
 
 {{ breadcrumb.crumble(breadcrumbs) }}

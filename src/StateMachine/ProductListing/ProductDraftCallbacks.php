@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\StateMachine\ProductListing;
+namespace BitBag\OpenMarketplace\StateMachine\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductRepositoryInterface;
+use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\ProductRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class ProductDraftCallbacks
@@ -46,7 +46,7 @@ final class ProductDraftCallbacks
         $this->productRepository->save($product);
         $this->productDraftRepository->save($productDraft);
 
-        $this->session->add('success', 'bitbag_mvm_plugin.ui.product_listing_accepted');
+        $this->session->add('success', 'open_marketplace.ui.product_listing_accepted');
     }
 
     public function reject(ProductDraftInterface $productDraft): void
@@ -54,7 +54,7 @@ final class ProductDraftCallbacks
         $productDraft->reject();
         $this->productDraftRepository->save($productDraft);
 
-        $this->session->add('warning', 'bitbag_mvm_plugin.ui.product_listing_rejected');
+        $this->session->add('warning', 'open_marketplace.ui.product_listing_rejected');
     }
 
     public function sendToVerify(ProductDraftInterface $productDraft): void

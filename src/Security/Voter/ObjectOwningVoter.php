@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter;
+namespace BitBag\OpenMarketplace\Security\Voter;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -40,7 +40,6 @@ final class ObjectOwningVoter extends Voter
         $subject,
         TokenInterface $token
     ) {
-
         $user = $token->getUser();
         if (!$user instanceof ShopUserInterface || null == $subject) {
             return false;
@@ -60,6 +59,7 @@ final class ObjectOwningVoter extends Voter
     private function doesUserOwnTheData(object $data, ShopUserInterface $user): bool
     {
         $loggedInVendor = $user->getVendor();
+        /** @phpstan-ignore-next-line */
         $vendorData = $data->getVendor();
         if ($loggedInVendor === $vendorData) {
             return true;

@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ProductTranslationRepository extends EntityRepository implements ProductTranslationRepositoryInterface

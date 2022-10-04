@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
+namespace BitBag\OpenMarketplace\Processor\Order;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManagerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Refresher\PaymentRefresherInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Manager\OrderManagerInterface;
+use BitBag\OpenMarketplace\Refresher\PaymentRefresherInterface;
 use Doctrine\ORM\EntityManager;
 
 class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page;
+namespace Tests\BitBag\OpenMarketplace\Behat\Page;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
@@ -17,7 +17,7 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
 {
     public function getRouteName(): string
     {
-        return 'bitbag_mvm_plugin_vendor_page_show';
+        return 'open_marketplace_vendor_page_show';
     }
 
     public function getFirstProductNameFromList(): string

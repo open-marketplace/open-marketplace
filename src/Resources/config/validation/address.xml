@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <constraint-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/constraint-mapping" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress">       
+    <class name="BitBag\OpenMarketplace\Entity\VendorAddress">
         <property name="city">
             <constraint name="NotBlank">
                 <option name="message">validator.message.not_blank</option>

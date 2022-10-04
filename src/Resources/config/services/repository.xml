@@ -3,10 +3,9 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag.mvm_plugin.repository.product_repository"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductRepository"
-                 decorates="sylius.repository.product"
-        >
+        <service id="open_marketplace.repository.product_repository"
+                 class="BitBag\OpenMarketplace\Repository\ProductRepository"
+                 decorates="sylius.repository.product" >
             <argument type="service" id="sylius.manager.product"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata" public="false">
@@ -17,18 +16,57 @@
             <argument type="service" id="security.token_storage"/>
         </service>
 
-        <service id="bitbag.mvm_plugin.repository.vendor_repository"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepository"
-                 public="true"
-        >
+        <service id="open_marketplace.repository.vendor_repository"
+                 class="BitBag\OpenMarketplace\Repository\VendorRepository"
+                 public="true" >
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata" public="false">
-                    <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor</argument>
+                    <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
                     <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
                 </service>
             </argument>
             <argument type="service" id="security.token_storage"/>
+        </service>
+
+        <service id="open_marketplace.repository.product" class="BitBag\OpenMarketplace\Repository\ProductRepository">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>%sylius.model.product.class%</argument>
+                    <factory service="sylius.manager.product" method="getClassMetadata"/>
+                </service>
+            </argument>
+        </service>
+
+        <service id="open_marketplace.repository.product_draft" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepository">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft</argument>
+                    <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
+                </service>
+            </argument>
+        </service>
+
+        <service id="open_marketplace.repository.product_taxon" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepository" public="true">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon</argument>
+                    <factory service="doctrine.orm.default_entity_manager" method="getClassMetadata"/>
+                </service>
+            </argument>
+        </service>
+
+        <service id="open_marketplace.repository.product_translation" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductTranslationRepository">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductListing</argument>
+                    <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
+                </service>
+            </argument>
         </service>
     </services>
 </container>

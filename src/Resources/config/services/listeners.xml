@@ -3,14 +3,14 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\EventListener\VendorRegisterListener"
-                 id="bitbag.mvm_plugin.event_listener.vendor_register_listener">
+        <service class="BitBag\OpenMarketplace\EventListener\VendorRegisterListener"
+                 id="open_marketplace.event_listener.vendor_register_listener">
 
-            <argument type="service" id="bitbag.mvm_plugin.service.vendor_slug_generator"/>
+            <argument type="service" id="open_marketplace.service.vendor_slug_generator"/>
             <argument type="service" id="sylius.image_uploader"/>
 
-            <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="generateSlug"/>
-            <tag name="kernel.event_listener" event="bitbag_mvm_plugin.vendor.pre_create" method="uploadImage"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="generateSlug"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadImage"/>
         </service>
     </services>
 </container>

@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Checkout;
+namespace BitBag\OpenMarketplace\Form\Type\Checkout;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\VendorShippingMethodsResolverInterface;
+use BitBag\OpenMarketplace\Resolver\VendorShippingMethodsResolverInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;

@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
+namespace BitBag\OpenMarketplace\AcceptanceOperator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverterInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface as BitBagProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
+use BitBag\OpenMarketplace\Converter\AttributesConverterInterface;
+use BitBag\OpenMarketplace\Entity\ProductInterface as BitBagProductInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Factory\ProductFromDraftFactoryInterface;
+use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperatorInterface;
+use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperatorInterface;
+use BitBag\OpenMarketplace\Updater\ProductFromDraftUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 

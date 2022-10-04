@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
+namespace BitBag\OpenMarketplace\Updater;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeTranslationClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Cloner\AttributeTranslationClonerInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 

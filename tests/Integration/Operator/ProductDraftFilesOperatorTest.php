@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Operator;
+namespace Tests\BitBag\OpenMarketplace\Integration\Operator;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImage;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperator;
+use BitBag\OpenMarketplace\Entity\Product;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
+use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperator;
 use Gaufrette\Filesystem;
 
 final class ProductDraftFilesOperatorTest extends JsonApiTestCase
@@ -25,7 +25,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
     {
         parent::setUp();
 
-        $this->productFromDraftFactory = $this->getContainer()->get('bitbag_mvm_plugin.factory.product_from_draft_factory');
+        $this->productFromDraftFactory = $this->getContainer()->get('open_marketplace.factory.product_from_draft_factory');
 
         $fileSystemMap = $this->getContainer()->get('knp_gaufrette.filesystem_map');
 
@@ -33,7 +33,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->fileSystem = new Filesystem($fileAdapter);
 
-        $productImageFactory = $this->getContainer()->get('bitbag_mvm_plugin.factory.product_image');
+        $productImageFactory = $this->getContainer()->get('open_marketplace.factory.product_image');
 
         $this->productDraftFilesOperator = new ProductDraftFilesOperator($this->fileSystem, $productImageFactory);
     }

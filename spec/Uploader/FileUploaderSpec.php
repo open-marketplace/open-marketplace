@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Uploader;
+namespace spec\BitBag\OpenMarketplace\Uploader;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploader;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
+use BitBag\OpenMarketplace\Uploader\FileUploader;
+use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
 use PhpSpec\ObjectBehavior;
 
 final class FileUploaderSpec extends ObjectBehavior

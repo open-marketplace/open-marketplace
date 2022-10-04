@@ -2,4 +2,4 @@ sylius_customer:
     resources:
         customer:
             classes:
-                repository: BitBag\SyliusMultiVendorMarketplacePlugin\Repository\CustomerRepository
+                repository: BitBag\OpenMarketplace\Repository\CustomerRepository

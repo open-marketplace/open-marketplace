@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
+namespace BitBag\OpenMarketplace\Updater;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 
 interface VendorProfileUpdaterInterface
 {

@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Model\Shipment;
+namespace BitBag\OpenMarketplace\Model\Shipment;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 trait ShipmentTrait
 {

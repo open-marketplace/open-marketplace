@@ -1,7 +1,7 @@
 vendor:
     vendor_register: "Thank you for filling the Vendor registration form. Your request now will be reviewed by our administrators"
 
-bitbag_mvm_plugin:
+open_marketplace:
     ui:
         shipping_method_updated: "Shipping methods updated"
         enabled: "Product successfully enabled"

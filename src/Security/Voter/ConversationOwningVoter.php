@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter;
+namespace BitBag\OpenMarketplace\Security\Voter;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ConversationOwningVoter extends Voter
 {
@@ -43,7 +43,7 @@ final class ConversationOwningVoter extends Voter
     ) {
         $user = $token->getUser();
 
-        if (!$user instanceof ShopUserInterface || null == $subject) {
+        if (null === $user || null === $subject) {
             return false;
         }
 
@@ -58,15 +58,15 @@ final class ConversationOwningVoter extends Voter
         }
     }
 
-    private function doesUserOwnConversation(ConversationInterface $conversation, ShopUserInterface $user): bool
+    private function doesUserOwnConversation(ConversationInterface $conversation, UserInterface $user): bool
     {
         $conversationUser = $conversation->getApplicant();
+
         if ($user === $conversationUser ||
-            $user instanceof AdminUserInterface ) {
+            $user instanceof AdminUserInterface) {
             return true;
         }
 
         return false;
     }
 }
-

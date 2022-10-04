@@ -4,7 +4,7 @@
                     xmlns="http://symfony.com/schema/dic/constraint-mapping" 
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping 
                     http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage">
+    <class name="BitBag\OpenMarketplace\Entity\VendorImage">
         <property name="file">
             <constraint name="Image">
                 <option name="minWidth">100</option>

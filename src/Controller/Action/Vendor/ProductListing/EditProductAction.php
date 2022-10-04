@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
+namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\ObjectOwningVoter;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
+use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -72,7 +72,6 @@ class EditProductAction extends AbstractController
         /** @var ProductDraftInterface $newResource */
         $newResource = $this->productDraftRepository->findLatestDraft($listing);
 
-
         if (!(ProductDraftInterface::STATUS_CREATED === $newResource->getStatus())) {
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);
         }
@@ -96,9 +95,9 @@ class EditProductAction extends AbstractController
             $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
 
             $this->productDraftRepository->save($productDraft);
-            $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
+            $this->addFlash('success', 'open_marketplace.ui.product_listing_saved');
 
-            return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
+            return $this->redirectToRoute('open_marketplace_vendor_product_listing_index');
         }
 
         return new Response(

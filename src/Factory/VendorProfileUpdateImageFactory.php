@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage;
+use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage;
 
 final class VendorProfileUpdateImageFactory implements VendorProfileUpdateImageFactoryInterface
 {

@@ -30,6 +30,7 @@
 .env.local
 .env.local.php
 /public/bundles
+/public/uploads/message_files
 /var/
 ###< symfony/framework-bundle ###
 

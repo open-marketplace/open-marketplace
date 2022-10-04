@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
+namespace BitBag\OpenMarketplace\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,16 +21,16 @@ final class VendorEditType extends AbstractResourceType
     {
         $builder
             ->add('companyName', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.company_name',
+                'label' => 'open_marketplace.ui.company_name',
             ])
             ->add('taxIdentifier', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.tax_identifier',
+                'label' => 'open_marketplace.ui.tax_identifier',
             ])
             ->add('phoneNumber', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.phone_number',
+                'label' => 'open_marketplace.ui.phone_number',
             ])
             ->add('vendorAddress', VendorAddressType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.vendor_address',
+                'label' => 'open_marketplace.ui.vendor_address',
             ]);
     }
 }

@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
+namespace BitBag\OpenMarketplace\Form\Type;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorShippingMethodFactoryInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Factory\VendorShippingMethodFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -59,7 +59,7 @@ final class VendorShippingMethodsType extends AbstractResourceType
                     'vendor' => $options['data'],
                 ],
                 'mapped' => false,
-                'label' => 'bitbag_mvm_plugin.ui.shipping_methods',
+                'label' => 'open_marketplace.ui.shipping_methods',
             ])->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
                 /** @var VendorInterface $vendor */
                 $vendor = $options['data'];
