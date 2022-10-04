@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactory;
+use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage;
+use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactory;
 use PhpSpec\ObjectBehavior;
 
 final class VendorProfileUpdateImageFactorySpec extends ObjectBehavior

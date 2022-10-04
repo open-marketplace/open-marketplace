@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
+namespace BitBag\OpenMarketplace\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
+use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
+use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -139,7 +139,9 @@ final class VendorController extends ResourceController
                     $vendor,
                     $image
                 );
-                $this->manager->remove($image);
+                if ($image) {
+                    $this->manager->remove($image);
+                }
                 $this->manager->flush();
 
                 $vendor->setEditedAt(new \DateTime());
@@ -219,9 +221,9 @@ final class VendorController extends ResourceController
 
         $this->manager->flush();
 
-        $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_verified');
+        $this->addFlash('success', 'open_marketplace.ui.vendor_verified');
 
-        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+        return $this->redirectToRoute('open_marketplace_admin_vendor_index');
     }
 
     public function enablingVendorAction(Request $request): Response
@@ -234,9 +236,9 @@ final class VendorController extends ResourceController
             $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
 
             $this->manager->flush();
-            $this->addFlash('success', 'bitbag_mvm_plugin.ui.vendor_' . $messageSuffix);
+            $this->addFlash('success', 'open_marketplace.ui.vendor_' . $messageSuffix);
         }
 
-        return $this->redirectToRoute('bitbag_mvm_plugin_admin_vendor_index');
+        return $this->redirectToRoute('open_marketplace_admin_vendor_index');
     }
 }

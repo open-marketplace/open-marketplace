@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message;
+namespace spec\BitBag\OpenMarketplace\Facade\Message;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacade;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Facade\Message\AddMessageFacade;
+use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
+use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
+use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
+use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -48,7 +48,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         MessageInterface $message,
         ConversationInterface $conversation
     ): void {
-        $file = new UploadedFile('tests/Application/public/uploads/message_files/test.txt', 'test.txt');
+        $file = new UploadedFile('public/uploads/message_files/test.txt', 'test.txt');
         $filename = 'filename';
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($user);
@@ -135,7 +135,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         MessageInterface $message,
         ConversationInterface $conversation
     ): void {
-        $file = new UploadedFile('tests/Application/public/uploads/message_files/test.txt', 'test.txt');
+        $file = new UploadedFile('public/uploads/message_files/test.txt', 'test.txt');
         $filename = 'filename';
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($user);

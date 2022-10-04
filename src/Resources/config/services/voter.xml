@@ -3,9 +3,19 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\TokenOwningVoter"
-                 id="BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\TokenOwningVoter">
+        <service class="BitBag\OpenMarketplace\Security\Voter\TokenOwningVoter"
+                 id="BitBag\OpenMarketplace\Security\Voter\TokenOwningVoter">
             <tag name="security.voter" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter"
+            id="open_marketplace.security.voter.object_owning_voter">
+            <tag name="security.voter" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Security\Voter\ConversationOwningVoter"
+            id="bit_bag.sylius_open_marketplace_plugin.security.voter.conversation_owning_voter">
+            <tag name="security.voter"/>
         </service>
     </services>
 </container>

@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
+namespace spec\BitBag\OpenMarketplace\Updater;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeTranslationClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeTranslationFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdater;
+use BitBag\OpenMarketplace\Cloner\AttributeTranslationClonerInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslationInterface;
+use BitBag\OpenMarketplace\Factory\ProductAttributeTranslationFactoryInterface;
+use BitBag\OpenMarketplace\Updater\ProductAttributeUpdater;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;

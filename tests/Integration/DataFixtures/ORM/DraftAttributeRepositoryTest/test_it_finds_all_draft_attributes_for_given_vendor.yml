@@ -26,7 +26,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Wayne"
         email: "test2@example.com"
         emailCanonical: "test@example.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
+BitBag\OpenMarketplace\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]
@@ -41,7 +41,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
         customer: '@customer_bruce'
         username: "bruce@wayne.com"
         usernameCanonical: "bruce@wayne.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+BitBag\OpenMarketplace\Entity\VendorAddress:
     oliver_vendor_address:
         country: '@poland'
         city: 'Warsaw'
@@ -52,7 +52,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
         city: 'Poznan'
         postalCode: '61-512'
         street: 'Umultowska 54'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
+BitBag\OpenMarketplace\Entity\Vendor:
     vendor_oliver:
         shopUser: '@user_oliver'
         companyName: 'Test company name'
@@ -69,7 +69,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
         vendorAddress: '@bruce_vendor_address'
         slug: 'bruce-wayne-company'
         description: 'description'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation:
+BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
     translation1:
         translatable: '@first_olivers_attribute'
         name: 'name1'
@@ -82,7 +82,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTr
         translatable: '@first_bruces_attribute'
         name: 'name3'
         locale: '@locale'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute:
+BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
     first_olivers_attribute:
         addTranslation: '@translation1'
         currentLocale: '@locale'

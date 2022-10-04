@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
+use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
 use Sylius\Component\Addressing\Model\Country;
 
 interface AddressFactoryInterface

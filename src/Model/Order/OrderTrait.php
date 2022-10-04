@@ -8,13 +8,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Model\Order;
+namespace BitBag\OpenMarketplace\Model\Order;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Entity\ShipmentInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -70,10 +70,11 @@ trait OrderTrait
     public function hasVendorItems(): bool
     {
         foreach ($this->getItems() as $item) {
+            /** @phpstan-ignore-next-line */
             if (null === $item->getVariant() || null === $item->getVariant()?->getProduct()) {
                 continue;
             }
-
+            /** @phpstan-ignore-next-line */
             $product = $item->getVariant()?->getProduct();
             if ($product->hasVendor()) {
                 return true;
@@ -113,6 +114,7 @@ trait OrderTrait
 
         foreach ($this->getItems() as $item) {
             /** @var ProductInterface $product */
+            /** @phpstan-ignore-next-line */
             $product = $item->getVariant()?->getProduct();
             $vendor = $product->getVendor();
 

@@ -1,3 +1,6 @@
 framework:
     validation:
         enable_annotations: true
+        mapping:
+            paths:
+            - '%kernel.project_dir%/src/Resources/config/validation/'

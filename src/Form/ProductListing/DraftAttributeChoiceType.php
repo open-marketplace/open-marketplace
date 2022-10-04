@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing;
+namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\DraftAttributeRepositoryInterface;
+use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Repository\DraftAttributeRepositoryInterface;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

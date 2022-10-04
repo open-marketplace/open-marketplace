@@ -3,7 +3,7 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="bitbag_mvm_plugin.form.type.vendor.validation_groups" type="collection">
+        <parameter key="open_marketplace.form.type.vendor.validation_groups" type="collection">
             <parameter>Default</parameter>
             <parameter>VendorUserRegister</parameter>
             <parameter>VendorLogo</parameter>
@@ -12,91 +12,152 @@
     </parameters>
     <services>
 
-        <service id="bitbag_mvm_plugin.form.vendor_type"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorType">
+        <service id="open_marketplace.form.vendor_type"
+                 class="BitBag\OpenMarketplace\Form\Type\VendorType">
             <argument>%sylius.model.shop_user.class%</argument>
             <argument type="service" id="security.token_storage"/>
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor</argument>
-            <argument>%bitbag_mvm_plugin.form.type.vendor.validation_groups%</argument>
+            <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
+            <argument>%open_marketplace.form.type.vendor.validation_groups%</argument>
 
             <tag name="form.type"/>
         </service>
 
-        <service id="bitbag_mvm_plugin.form.vendor_shipping_methods_type"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorShippingMethodsType">
+        <service id="open_marketplace.form.vendor_shipping_methods_type"
+                 class="BitBag\OpenMarketplace\Form\Type\VendorShippingMethodsType">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="bitbag_mvm_plugin.factory.vendor_shipping_method" />
+            <argument type="service" id="open_marketplace.factory.vendor_shipping_method" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor</argument>
+            <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
             <tag name="form.type"/>
         </service>
 
-        <service id="bitbag_mvm_plugin.form.vendor_shipping_method_choice_type"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorShippingMethodChoiceType">
+        <service id="open_marketplace.form.vendor_shipping_method_choice_type"
+                 class="BitBag\OpenMarketplace\Form\Type\VendorShippingMethodChoiceType">
             <argument type="service" id="sylius.repository.shipping_method" />
             <tag name="form.type" />
         </service>
 
-        <service id="bitbag_mvm_plugin.form.type.vendor_edit_type"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\VendorEditType">
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor</argument>
+        <service id="open_marketplace.form.type.vendor_edit_type"
+                 class="BitBag\OpenMarketplace\Form\Type\VendorEditType">
+            <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
 
             <tag name="form.type"/>
         </service>
 
-        <service id="bitbag.mvm_plugin.form.type.vendor_image"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType">
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage</argument>
+        <service id="open_marketplace.form.type.vendor_image"
+                 class="BitBag\OpenMarketplace\Form\VendorImageType">
+            <argument>BitBag\OpenMarketplace\Entity\VendorImage</argument>
             <tag name="form.type"/>
         </service>
 
         <service id="mvm.form.type.conversation"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\ConversationType">
-            <argument type="service" id="bitbag_mvm_plugin.current_user_resolver" />
-            <argument type="service" id="bitbag_mvm_plugin.repository.vendor" />
+                 class="BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType">
+            <argument type="service" id="open_marketplace.current_user_resolver" />
+            <argument type="service" id="open_marketplace.repository.vendor" />
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="form.type"/>
         </service>
 
-        <service id="mvm.form.type.conversation_message" class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType">
+        <service id="mvm.form.type.conversation_message" class="BitBag\OpenMarketplace\Form\Type\Conversation\MessageType">
             <tag name="form.type" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeType"
-                 id="bitbag_mvm_plugin.form.type.draftAttribute">
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute</argument>
+        <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeType"
+                 id="open_marketplace.form.type.draftAttribute">
+            <argument>BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute</argument>
             <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeTranslationType</argument>
+            <argument>BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeTranslationType</argument>
             <argument type="service" id="sylius.form_registry.attribute_type"/>
             <tag name="form.type"/>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeTranslationType"
-                 id="bitbag_mvm_plugin.form.type.draft_attribute_translation" >
+        <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeTranslationType"
+                 id="open_marketplace.form.type.draft_attribute_translation" >
             <tag name="form.type"/>
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation</argument>
+            <argument>BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation</argument>
             <argument>%sylius.form.type.product_attribute_translation.validation_groups%</argument>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType"
-                 id="bitbag_mvm_plugin.form.product_listing.draft_attribute_choice_type">
-            <argument type="service" id="bitbag_mvm_plugin.repository.draft_attribute"/>
-            <argument type="service" id="bitbag_mvm_plugin.provider.vendor"/>
+        <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType"
+                 id="open_marketplace.form.product_listing.draft_attribute_choice_type">
+            <argument type="service" id="open_marketplace.repository.draft_attribute"/>
+            <argument type="service" id="open_marketplace.provider.vendor"/>
             <tag name="form.type"/>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeValueType"
-                 id="bitbag_mvm_plugin.form.product_listing.draft_attribute_value_type" >
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue</argument>
+        <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeValueType"
+                 id="open_marketplace.form.product_listing.draft_attribute_value_type" >
+            <argument>BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue</argument>
             <argument>%sylius.form.type.product_attribute_value.validation_groups%</argument>
-            <argument>BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\DraftAttributeChoiceType</argument>
-            <argument type="service" id="bitbag_mvm_plugin.repository.draft_attribute"/>
+            <argument>BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType</argument>
+            <argument type="service" id="open_marketplace.repository.draft_attribute"/>
             <argument type="service" id="sylius.repository.locale"/>
             <argument type="service" id="sylius.form_registry.attribute_type"/>
             <tag name="form.type"/>
         </service>
 
+        <service id="bitbag.form.type.shipping_method_choice"
+                 class="BitBag\OpenMarketplace\Form\Type\Checkout\ShippingMethodChoiceType">
+            <argument type="service" id="open_marketplace.vendor_shipping_methods_resolver" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <tag name="form.type" />
+        </service>
 
+        <service id="bitbag.form.type.checkout_select_shipping"
+                 class="BitBag\OpenMarketplace\Form\Type\Checkout\SelectShippingType">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.form.type.checkout_select_shipping.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="bitbag.form.type.checkout_shipment"
+                 class="BitBag\OpenMarketplace\Form\Type\Checkout\ShipmentType">
+            <argument>%sylius.model.shipment.class%</argument>
+            <argument>%sylius.form.type.checkout_shipment.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="bitbag.form.type.product" class="BitBag\OpenMarketplace\Form\ProductListing\ProductType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="bitbag.form.type.sylius_product_associations" class="BitBag\OpenMarketplace\Form\ProductListing\ProductAssociationsType">
+            <argument type="service" id="sylius.repository.product_association_type"/>
+            <argument type="service" id="sylius.form.type.data_transformer.products_to_product_associations"/>
+            <tag name="form.type"/>
+        </service>
+
+        <service id="bitbag.form.type.bitbag_resorce_translations" class="BitBag\OpenMarketplace\Form\ProductListing\ResourceTranslationsType">
+            <argument type="service" id="sylius.translation_locale_provider.admin"/>
+            <tag name="form.type"/>
+        </service>
+
+        <service id="bitbag.form.type.bitbag_translations" class="BitBag\OpenMarketplace\Form\ProductListing\ProductTranslationType">
+            <tag name="form.type"/>
+        </service>
+
+        <service id="bitbag.form.type.channel_pricing" class="BitBag\OpenMarketplace\Form\ProductListing\ProductPriceType">
+            <argument>%sylius.form.type.channel_pricing.validation_groups%</argument>
+            <argument type="service" id="sylius.repository.channel_pricing" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="bitbag.form.type.channel_collection_type" class="BitBag\OpenMarketplace\Form\ProductListing\ChannelCollectionType">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="bitbag.form.type.image_type" class="BitBag\OpenMarketplace\Form\ProductListing\ProductDraftImageType">
+            <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="bitbag.form.type.taxonomy" class="BitBag\OpenMarketplace\Form\ProductListing\ProductDraftTaxonAutocompleteChoiceType">
+            <argument type="service" id="open_marketplace.factory.product_taxon" />
+            <argument type="service" id="open_marketplace.repository.product_taxon" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
 

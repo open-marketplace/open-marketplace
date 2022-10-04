@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation;
+namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\ConversationType;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
+use BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType;
+use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

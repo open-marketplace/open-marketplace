@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
+namespace spec\BitBag\OpenMarketplace\Provider;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserHasNoVendorContextException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProvider;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Exception\ShopUserHasNoVendorContextException;
+use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
+use BitBag\OpenMarketplace\Provider\VendorProvider;
+use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Security;
 

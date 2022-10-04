@@ -2,7 +2,7 @@ sylius_shop_checkout_complete:
     path: /checkout/complete
     methods: [GET, PUT]
     defaults:
-        _controller: bitbag.mvm_plugin.controller.order.order_controller:updateAction
+        _controller: open_marketplace.controller.order.order_controller:updateAction
         _sylius:
             event: complete
             flash: false
@@ -42,7 +42,7 @@ sylius_shop_checkout_select_shipping:
             event: select_shipping
             flash: false
             template: "Checkout/selectShipping.html.twig"
-            form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Checkout\SelectShippingType
+            form: BitBag\OpenMarketplace\Form\Type\Checkout\SelectShippingType
             repository:
                 method: findCartForSelectingShipping
                 arguments:

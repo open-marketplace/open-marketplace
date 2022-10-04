@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page;
+namespace Tests\BitBag\OpenMarketplace\Behat\Page;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use DMore\ChromeDriver\ChromeDriver;

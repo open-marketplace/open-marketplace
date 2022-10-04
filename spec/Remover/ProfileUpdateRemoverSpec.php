@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Remover;
+namespace spec\BitBag\OpenMarketplace\Remover;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemover;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterface;
+use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Remover\ProfileUpdateRemover;
+use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 

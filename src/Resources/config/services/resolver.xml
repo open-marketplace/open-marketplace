@@ -4,14 +4,14 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolver"
-                id="bitbag_mvm_plugin.current_user_resolver">
+        <service class="BitBag\OpenMarketplace\Resolver\CurrentUserResolver"
+                id="open_marketplace.current_user_resolver">
             <argument type="service" id="security.token_storage" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\VendorShippingMethodsResolver"
-                id="bitbag_mvm_plugin.vendor_shipping_methods_resolver">
-            <argument type="service" id="bitbag_mvm_plugin.repository.vendor_shipping_method" />
+        <service class="BitBag\OpenMarketplace\Resolver\VendorShippingMethodsResolver"
+                id="open_marketplace.vendor_shipping_methods_resolver">
+            <argument type="service" id="open_marketplace.repository.vendor_shipping_method" />
             <argument type="service" id="sylius.shipping_methods_resolver" />
         </service>
     </services>

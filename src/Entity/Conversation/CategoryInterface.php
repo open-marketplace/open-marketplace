@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation;
+namespace BitBag\OpenMarketplace\Entity\Conversation;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 

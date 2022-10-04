@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation;
+namespace BitBag\OpenMarketplace\Form\Type\Conversation;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Message;
+use BitBag\OpenMarketplace\Entity\Conversation\Message;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,13 +26,13 @@ final class MessageType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.form.conversation.messages',
+                'label' => 'open_marketplace.ui.form.conversation.messages',
                 'attr' => [
                     'maxlength' => 500,
                 ],
             ])
             ->add('file', FileType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.form.conversation_message.file',
+                'label' => 'open_marketplace.ui.form.conversation_message.file',
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -41,7 +41,7 @@ final class MessageType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.form.conversation_message.submit',
+                'label' => 'open_marketplace.ui.form.conversation_message.submit',
             ]);
     }
 

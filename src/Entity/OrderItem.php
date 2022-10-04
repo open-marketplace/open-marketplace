@@ -9,10 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace BitBag\OpenMarketplace\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\OrderItem\OrderItemTrait;
+use BitBag\OpenMarketplace\Model\OrderItem\OrderItemTrait;
 use Sylius\Component\Core\Model\OrderItem as BaseOrderItem;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface

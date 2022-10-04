@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture;
+namespace BitBag\OpenMarketplace\Fixture;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory\OrderExampleFactory;
+use BitBag\OpenMarketplace\Fixture\Factory\OrderExampleFactory;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;

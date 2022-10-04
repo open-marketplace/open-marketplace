@@ -17,7 +17,7 @@ Sylius\Component\Core\Model\Customer:
     lastName: "Kent"
     email: "test3@example.com"
     emailCanonical: "test3@example.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
+BitBag\OpenMarketplace\Entity\ShopUser:
   user_oliver:
     plainPassword: "123password"
     roles: ["ROLE_USER"]
@@ -39,13 +39,13 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser:
     customer: '@customer_clark'
     username: "clark@kent.com"
     usernameCanonical: "clark@kent.com"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress:
+BitBag\OpenMarketplace\Entity\VendorAddress:
   vendor_address:
     country: '@poland'
     city: 'Warsaw'
     postalCode: '00-999'
     street: 'Avenue 2115'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
+BitBag\OpenMarketplace\Entity\Vendor:
   vendor_oliver:
     shopUser: '@user_oliver'
     companyName: 'Test company name'
@@ -54,7 +54,7 @@ BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor:
     vendorAddress: '@vendor_address'
     slug: 'oliver-queen-company'
     description: 'description'
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Product:
+BitBag\OpenMarketplace\Entity\Product:
   first_product:
     vendor: '@vendor_oliver'
     code: "code"
@@ -62,7 +62,7 @@ Sylius\Component\Core\Model\ProductVariant:
   first_variant:
     product: '@first_product'
     code: "code"
-BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Order:
+BitBag\OpenMarketplace\Entity\Order:
   bruce_order_made_with_oliver:
     currency_code: "USD"
     locale_code: "en-US"

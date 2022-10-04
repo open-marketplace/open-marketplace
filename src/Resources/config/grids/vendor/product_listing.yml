@@ -3,15 +3,15 @@ sylius_grid:
     action:
       edit_product: "Grid/Action/edit_product_listing.html.twig"
   grids:
-    bitbag_mvm_plugin_vendor_product_listing:
+    open_marketplace_vendor_product_listing:
       driver:
         name: doctrine/orm
         options:
-          class: BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing
+          class: BitBag\OpenMarketplace\Entity\ProductListing\ProductListing
           repository:
             method: createQueryBuilderByVendorAndDeleted
             arguments:
-              - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
+              - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
       filters:
         search:
           type: string
@@ -21,37 +21,37 @@ sylius_grid:
             fields: [ 'code' ]
         status:
           type: product_listing_status
-          label: bitbag_mvm_plugin.ui.status
+          label: open_marketplace.ui.status
       fields:
         code:
           type: string
-          label: bitbag_mvm_plugin.ui.code
+          label: open_marketplace.ui.code
 
         name:
           type: twig
-          label: bitbag_mvm_plugin.ui.name
+          label: open_marketplace.ui.name
           path: getLatestDraft
           options:
-              template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_product_name.html.twig"
+              template: "Grid/Field/product_listing_product_name.html.twig"
 
         getLatestDraft.verifiedAt:
           type: twig
-          label: bitbag_mvm_plugin.ui.verified_at
+          label: open_marketplace.ui.verified_at
           options:
-            template: "@BitBagSyliusMultiVendorMarketplacePlugin/Grid/Field/product_listing_verified_at.html.twig"
+            template: "Grid/Field/product_listing_verified_at.html.twig"
         getLatestDraft.status:
           type: twig
-          label: bitbag_mvm_plugin.ui.status
+          label: open_marketplace.ui.status
           options:
             template: "Grid/Field/product_listing_status.html.twig"
       actions:
         main:
           create:
             type: create
-            label: bitbag_mvm_plugin.ui.create_new_product
+            label: open_marketplace.ui.create_new_product
             options:
               link:
-                route: bitbag_mvm_plugin_vendor_product_listing_create_product
+                route: open_marketplace_vendor_product_listing_create_product
         item:
           dropdown:
             type: product_listing_dropdown

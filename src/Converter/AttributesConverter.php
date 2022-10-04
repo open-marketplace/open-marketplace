@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Converter;
+namespace BitBag\OpenMarketplace\Converter;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeTranslationClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AttributeValueClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Extractor\AttributesExtractorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Cloner\AttributeTranslationClonerInterface;
+use BitBag\OpenMarketplace\Cloner\AttributeValueClonerInterface;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Extractor\AttributesExtractorInterface;
+use BitBag\OpenMarketplace\Factory\ProductAttributeFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class AttributesConverter implements AttributesConverterInterface

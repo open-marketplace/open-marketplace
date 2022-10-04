@@ -9,10 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace BitBag\OpenMarketplace\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\Shipment\ShipmentTrait;
+use BitBag\OpenMarketplace\Model\Shipment\ShipmentTrait;
 use Sylius\Component\Core\Model\Shipment as BaseShipment;
 
 class Shipment extends BaseShipment implements ShipmentInterface

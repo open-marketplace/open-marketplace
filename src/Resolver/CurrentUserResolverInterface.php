@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Resolver;
+namespace BitBag\OpenMarketplace\Resolver;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 

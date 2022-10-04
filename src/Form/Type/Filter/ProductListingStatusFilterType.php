@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Filter;
+namespace BitBag\OpenMarketplace\Form\Type\Filter;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\ProductListingTerms\Options;
+use BitBag\OpenMarketplace\ProductListingTerms\Options;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;

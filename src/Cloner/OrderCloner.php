@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
+namespace BitBag\OpenMarketplace\Cloner;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\Address;

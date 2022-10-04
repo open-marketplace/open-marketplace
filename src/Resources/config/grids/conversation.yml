@@ -3,25 +3,25 @@ sylius_grid:
         action:
             archiveConversation: "Grid/Conversation/Action/archiveConversation.html.twig"
     grids:
-        bitbag_mvm_plugin_admin_conversation:
+        open_marketplace_admin_conversation:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%bitbag_mvm_plugin.model.conversation.class%"
+                    class: "%open_marketplace.model.conversation.class%"
             fields:
                 category:
                     type: twig
-                    label: bitbag_mvm_plugin.ui.form.conversation.category
+                    label: open_marketplace.ui.form.conversation.category
                     options:
                         template: 'Grid/Conversation/Ui/category.html.twig'
                 shopUser:
                     type: twig
-                    label: bitbag_mvm_plugin.ui.grid.conversation.applicant
+                    label: open_marketplace.ui.grid.conversation.applicant
                     options:
                         template: 'Grid/Conversation/Ui/applicant.html.twig'
             filters:
                 status:
-                    label: bitbag_mvm_plugin.ui.status
+                    label: open_marketplace.ui.status
                     type: select
                     form_options:
                         choices:
@@ -33,7 +33,7 @@ sylius_grid:
                         type: create
                         options:
                             link:
-                                route: bitbag_mvm_plugin_admin_conversation_create
+                                route: open_marketplace_admin_conversation_create
                 item:
                     show:
                         type: show
@@ -41,4 +41,4 @@ sylius_grid:
                         type: delete
                     archive:
                         type: archiveConversation
-                        label: bitbag_mvm_plugin.ui.grid.conversation.archive
+                        label: open_marketplace.ui.grid.conversation.archive

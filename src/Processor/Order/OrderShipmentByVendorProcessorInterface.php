@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
+namespace BitBag\OpenMarketplace\Processor\Order;
 
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 

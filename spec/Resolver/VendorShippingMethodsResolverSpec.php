@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Resolver;
+namespace spec\BitBag\OpenMarketplace\Resolver;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethodInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorShippingMethodRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\VendorShippingMethodsResolver;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\VendorShippingMethodsResolverInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\ShipmentInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
+use BitBag\OpenMarketplace\Repository\VendorShippingMethodRepositoryInterface;
+use BitBag\OpenMarketplace\Resolver\VendorShippingMethodsResolver;
+use BitBag\OpenMarketplace\Resolver\VendorShippingMethodsResolverInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;

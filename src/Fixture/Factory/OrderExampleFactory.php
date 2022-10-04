@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Fixture\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface as BitBagOrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendorProcessorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductRepositoryInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface as BitBagOrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Factory\OrderFactoryInterface;
+use BitBag\OpenMarketplace\Factory\OrderItemFactoryInterface;
+use BitBag\OpenMarketplace\Processor\Order\SplitOrderByVendorProcessorInterface;
+use BitBag\OpenMarketplace\Repository\ProductRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;

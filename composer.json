@@ -53,13 +53,13 @@
     },
     "autoload": {
         "psr-4": {
-            "BitBag\\SyliusMultiVendorMarketplacePlugin\\": "src/",
+            "BitBag\\OpenMarketplace\\": "src/",
             "App\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\BitBag\\SyliusMultiVendorMarketplacePlugin\\": ["tests/"]
+            "Tests\\BitBag\\OpenMarketplace\\": ["tests/"]
         },
         "classmap": [
             "src/Kernel.php"

@@ -3,7 +3,7 @@ default:
         unverified_vendor_page:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - tests.bitbag.mvm_plugin.behat.context.vendor_page_context
+                - tests.open_marketplace.behat.context.vendor_page_context
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.user

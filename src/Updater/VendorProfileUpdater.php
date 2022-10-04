@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
+namespace BitBag\OpenMarketplace\Updater;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateImageFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\VendorLogoOperatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Remover\ProfileUpdateRemoverInterface;
+use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
+use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
+use BitBag\OpenMarketplace\Operator\VendorLogoOperatorInterface;
+use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;

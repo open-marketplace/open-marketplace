@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
+namespace BitBag\OpenMarketplace\Repository;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 interface VendorShippingMethodRepositoryInterface

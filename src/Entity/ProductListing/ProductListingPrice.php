@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
+namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 class ProductListingPrice implements ProductListingPriceInterface
 {

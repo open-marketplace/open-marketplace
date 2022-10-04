@@ -1,6 +1,6 @@
-bitbag_mvm_conversation_category:
+bitbag_open_marketplace_conversation_category:
     resource: |
-        alias: bitbag_mvm_plugin.conversation_category
+        alias: open_marketplace.conversation_category
         section: admin
         except: ['show']
         templates: "@SyliusAdmin\\Crud"

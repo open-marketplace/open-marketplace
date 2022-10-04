@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory\Message;
+namespace BitBag\OpenMarketplace\Factory\Message;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface MessageFactoryInterface extends FactoryInterface

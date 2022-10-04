@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor;
+namespace BitBag\OpenMarketplace\Controller\Action\Vendor;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Repository\ProductRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

@@ -17,7 +17,7 @@
 
 {% block subcontent %}
 
-    {{ form_start(form, {'action': path('bitbag_mvm_plugin_draft_attribute_update', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {{ form_start(form, {'action': path('open_marketplace_draft_attribute_update', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
 
     {% if configuration.vars.templates.form is defined %}
@@ -30,7 +30,7 @@
     {% endif %}
 
 
-    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': 'bitbag_mvm_vendor_draft_attribute_index'}} %}
+    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': 'bitbag_open_marketplace_vendor_draft_attribute_index'}} %}
 
     {{ form_end(form, {'render_rest': false}) }}
 

@@ -8,7 +8,7 @@ sylius_grid:
                     repository:
                         method: findOrdersForVendorByCustomer
                         arguments:
-                        - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
+                        - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
                         - $id
             sorting:
                 checkoutCompletedAt: desc
@@ -113,6 +113,6 @@ sylius_grid:
                         label: sylius.ui.show
                         options:
                             link:
-                                route: bitbag_mvm_plugin_vendor_order_show
+                                route: open_marketplace_vendor_order_show
                                 parameters:
                                     id: resource.id

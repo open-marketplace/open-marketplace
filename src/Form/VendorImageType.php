@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form;
+namespace BitBag\OpenMarketplace\Form;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -21,7 +21,7 @@ final class VendorImageType extends ImageType
     {
         $builder
             ->add('file', FileType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.logo',
+                'label' => 'open_marketplace.ui.logo',
             ])
         ;
     }

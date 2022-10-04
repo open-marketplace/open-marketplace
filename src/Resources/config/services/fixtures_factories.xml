@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="open_marketplace.fixture.example_factory.vendor" class="BitBag\OpenMarketplace\Fixture\Factory\VendorExampleFactory">
+            <argument type="service" id="open_marketplace.factory.vendor_profile_factory" />
+            <argument type="service" id="open_marketplace.factory.vendor_address_factory" />
+            <argument type="service" id="sylius.factory.shop_user" />
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.customer_group" />
+        </service>
+
+        <service id="open_marketplace.fixture.example_factory.product_draft" class="BitBag\OpenMarketplace\Fixture\Factory\ProductDraftExampleFactory">
+            <argument type="service" id="open_marketplace.factory.product_draft" />
+            <argument type="service" id="open_marketplace.factory.product_listing_price" />
+            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory" />
+            <argument type="service" id="open_marketplace.factory.product_translation" />
+            <argument type="service" id="open_marketplace.repository.vendor" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
+            <argument type="service" id="sylius.generator.slug" />
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="open_marketplace.factory.product_draft_image"/>
+            <argument type="service" id="file_locator"/>
+        </service>
+
+        <service id="open_marketplace.fixture.example_factory.order" class="BitBag\OpenMarketplace\Fixture\Factory\OrderExampleFactory">
+            <argument type="service" id="open_marketplace.factory.order_factory" />
+            <argument type="service" id="open_marketplace.factory.order_item_factory" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.manager.order" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="open_marketplace.processor.order.split_order_by_vendor_processor"/>
+        </service>
+
+        <service id="open_marketplace.fixture.example_factory.conversation" class="BitBag\OpenMarketplace\Fixture\Factory\ConversationExampleFactory">
+            <argument type="service" id="open_marketplace.factory.conversation" />
+            <argument type="service" id="bitbag_open_marketplace.factory.conversation_message" />
+            <argument type="service" id="open_marketplace.repository.vendor_repository" />
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="open_marketplace.repository.conversation_category" />
+        </service>
+    </services>
+</container>

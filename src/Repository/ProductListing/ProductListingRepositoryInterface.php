@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use Doctrine\ORM\QueryBuilder;
 
 interface ProductListingRepositoryInterface
