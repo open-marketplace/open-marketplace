@@ -56,8 +56,7 @@ final class MultiVendorMarketplaceMenuListener
             ->setLabel('open_marketplace.ui.menu.conversation_categories')
             ->setLabelAttribute('icon', 'inbox');
 
-
         $manipulator = new MenuManipulator();
-        $manipulator->moveChildToPosition($menu, $mvmRootMenuItem,0);
+        $manipulator->moveChildToPosition($menu, $mvmRootMenuItem, 0);
     }
 }
