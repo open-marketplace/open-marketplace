@@ -1,0 +1,14 @@
+{% set item = secondaryOrder.items|last  %}
+{% for shipment in order.shipments %}
+    {% if shipment.vendor is same as item.productOwner %}
+    {% set state = shipment.state %}
+    <div class="ui small icon message">
+        <i class="truck icon"></i>
+        <div class="content">
+            <div class="header" id="sylius-shipping-method" {{ sylius_test_html_attribute('shipping-method') }}>
+                {{ shipment.method }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}

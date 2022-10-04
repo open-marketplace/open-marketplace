@@ -1,0 +1,2 @@
+open_marketplace:
+  resource: "../src/Resources/config/routing.yml"
