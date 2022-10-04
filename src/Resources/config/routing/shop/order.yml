@@ -15,7 +15,7 @@ sylius_shop_checkout_complete:
                 graph: sylius_order_checkout
                 transition: complete
             redirect:
-                route: sylius_shop_account_order_index
+                route: sylius_shop_order_pay
                 parameters:
                     tokenValue: resource.tokenValue
             form:
@@ -50,3 +50,11 @@ sylius_shop_checkout_select_shipping:
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_shipping
+
+sylius_shop_order_thank_you:
+    path: /thank-you
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.order.order_controller:thankYouAction
+        _sylius:
+            template: "Checkout/thankYou.html.twig"
