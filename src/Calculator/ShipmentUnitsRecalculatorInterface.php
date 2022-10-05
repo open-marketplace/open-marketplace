@@ -9,9 +9,9 @@ declare(strict_types=1);
  * an email on hello@bitbag.io.
  */
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Calculator;
+namespace BitBag\OpenMarketplace\Calculator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
 
 interface ShipmentUnitsRecalculatorInterface
 {

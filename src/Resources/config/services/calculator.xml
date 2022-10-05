@@ -3,7 +3,7 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Calculator\ShipmentUnitsRecalculator"
+        <service class="BitBag\OpenMarketplace\Calculator\ShipmentUnitsRecalculator"
                  id="open_marketplace.calculator.shipment_units_recalculator">
         </service>
     </services>
