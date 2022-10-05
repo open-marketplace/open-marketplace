@@ -22,8 +22,8 @@ administrator. After sending for verification editing product is blocked.
 
 Then it is up to the admin to decide whether the product list is rejected or
 the product becomes available to the customer in the market, the admin can view
-list of products sent for verification in the administration panel via the product listings tab(1). Each product listing has a detail page
-where admin can view product details and decide whether or not to accept(2).
+list of products sent for verification in the administration panel via the product listings tab (1). Each product listing has a detail page
+where admin can view product details and decide whether or not to accept (2).
 
 ![admin_product_view](images/admin_product_view.png)
 
@@ -51,7 +51,7 @@ administrator once again.
 ## Adding attributes
 
 In order to add attribute to product listing vendor have to create it 
-first, by filling form(1) available from attributes management page(2).
+first, by filling form (1) available from attributes management page (2).
 
 ![attributes](images/attributes.png)
 
