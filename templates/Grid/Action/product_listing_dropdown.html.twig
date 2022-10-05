@@ -4,35 +4,35 @@
 <div class="ui buttons">
     <div class="ui labeled icon floating dropdown  link button" tabindex="0">
         <i class="angle down icon"></i>
-        <span class="text">{{ 'bitbag_mvm_plugin.ui.more'|trans }}</span>
+        <span class="text">{{ 'open_marketplace.ui.more'|trans }}</span>
         <div class="menu" tabindex="-1">
             {% if data.latestDraft.status != 'under_verification' %}
-            <a href="{{ path('bitbag_mvm_plugin_vendor_product_listing_edit_product', {'id': data.id }) }}"
+            <a href="{{ path('open_marketplace_vendor_product_listing_edit_product', {'id': data.id }) }}"
                class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}
             </a>
             {% endif %}
 
             {% if data.removed == false %}
-            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_remove_action', {'id': data.id }) }}" method="post">
-                <button class="item require_confirmation_button" data-requires-confirmation><i class="trash icon"></i>{{ 'bitbag_mvm_plugin.ui.remove'|trans }}</button>
+            <form action="{{ path('open_marketplace_vendor_product_listing_remove_action', {'id': data.id }) }}" method="post">
+                <button class="item require_confirmation_button" data-requires-confirmation><i class="trash icon"></i>{{ 'open_marketplace.ui.remove'|trans }}</button>
             </form>
             {% endif %}
 
-            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_enable', {'id': data.id }) }}" method="post">
+            <form action="{{ path('open_marketplace_vendor_product_listing_enable', {'id': data.id }) }}" method="post">
                 <button id="enable" class="item require_confirmation_button" data-requires-confirmation>
                     <i class="low vision icon"></i>
                     {% if data.enabled == true %}
-                    {{ 'bitbag_mvm_plugin.ui.enable'|trans }}
+                    {{ 'open_marketplace.ui.enable'|trans }}
                     {% else %}
-                    {{ 'bitbag_mvm_plugin.ui.disable'|trans }}
+                    {{ 'open_marketplace.ui.disable'|trans }}
                     {% endif %}
                 </button>
             </form>
 
             {% if data.latestDraft.status != 'under_verification' and data.latestDraft.status != 'verified' %}
-            <form action="{{ path('bitbag_mvm_plugin_vendor_product_listing_send_for_verification', {'id': data.id }) }}" method="post">
+            <form action="{{ path('open_marketplace_vendor_product_listing_send_for_verification', {'id': data.id }) }}" method="post">
                 <button class="item send-for-verification" data-requires-confirmation>
-                    <i class="paper plane icon"></i>{{ 'bitbag_mvm_plugin.ui.send_for_verification'|trans }}</button>
+                    <i class="paper plane icon"></i>{{ 'open_marketplace.ui.send_for_verification'|trans }}</button>
             </form>
             {% endif %}
         </div>

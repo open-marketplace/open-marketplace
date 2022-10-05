@@ -1,7 +1,7 @@
-bitbag_mvm_plugin_vendor_page_show:
+open_marketplace_vendor_page_show:
   path: vendors/{slug}
   methods: [GET]
   defaults:
-    _controller: bitbag.mvm_plugin.controller.show_vendor_page_action
+    _controller: open_marketplace.controller.show_vendor_page_action
     _sylius:
       template: "Vendor/vendor_page.html.twig"

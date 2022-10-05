@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Resolver;
+namespace spec\BitBag\OpenMarketplace\Resolver;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolver;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
+use BitBag\OpenMarketplace\Resolver\CurrentUserResolver;
+use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

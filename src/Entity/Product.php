@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace BitBag\OpenMarketplace\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Model\Product\ProductTrait;
+use BitBag\OpenMarketplace\Model\Product\ProductTrait;
 use Sylius\Component\Core\Model\Product as BaseProduct;
 
 class Product extends BaseProduct implements ProductInterface

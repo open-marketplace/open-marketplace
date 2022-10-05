@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Manager;
+namespace BitBag\OpenMarketplace\Manager;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderItemClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\ShipmentClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\OrderItemFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactoryInterface;
+use BitBag\OpenMarketplace\Cloner\OrderClonerInterface;
+use BitBag\OpenMarketplace\Cloner\OrderItemClonerInterface;
+use BitBag\OpenMarketplace\Cloner\ShipmentClonerInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Factory\OrderFactoryInterface;
+use BitBag\OpenMarketplace\Factory\OrderItemFactoryInterface;
+use BitBag\OpenMarketplace\Factory\ShipmentFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Core\Model\ShipmentInterface;
 

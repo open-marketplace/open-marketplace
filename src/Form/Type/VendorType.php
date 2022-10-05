@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type;
+namespace BitBag\OpenMarketplace\Form\Type;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\VendorImageType;
+use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
+use BitBag\OpenMarketplace\Form\VendorImageType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -52,13 +52,13 @@ final class VendorType extends AbstractResourceType
                 'class' => $this->shopUserClassFQN,
             ])
             ->add('companyName', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.company_name',
+                'label' => 'open_marketplace.ui.company_name',
             ])
             ->add('taxIdentifier', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.tax_identifier',
+                'label' => 'open_marketplace.ui.tax_identifier',
             ])
             ->add('phoneNumber', TelType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.phone_number',
+                'label' => 'open_marketplace.ui.phone_number',
             ])
             ->add('image', VendorImageType::class, [
                 'label' => false,
@@ -66,11 +66,11 @@ final class VendorType extends AbstractResourceType
                 'constraints' => [new Valid(['groups' => 'VendorLogo'])],
             ])
             ->add('vendorAddress', VendorAddressType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.company_address',
+                'label' => 'open_marketplace.ui.company_address',
                 'constraints' => [new Valid()],
             ])
             ->add('description', TextType::class, [
-                'label' => 'bitbag_mvm_plugin.ui.description',
+                'label' => 'open_marketplace.ui.description',
             ])
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
                 $token = $this->tokenStorage->getToken();

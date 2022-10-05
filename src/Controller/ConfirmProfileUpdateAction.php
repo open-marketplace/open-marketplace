@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
+namespace BitBag\OpenMarketplace\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProvider;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Security\Voter\TokenOwningVoter;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
+use BitBag\OpenMarketplace\Provider\VendorProvider;
+use BitBag\OpenMarketplace\Security\Voter\TokenOwningVoter;
+use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;

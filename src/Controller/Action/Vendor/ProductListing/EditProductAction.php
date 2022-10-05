@@ -9,19 +9,22 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
+namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
+use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class EditProductAction extends AbstractController
 {
@@ -37,13 +40,16 @@ class EditProductAction extends AbstractController
 
     private ProductListingRepositoryInterface $productListingRepository;
 
+    private AuthorizationCheckerInterface $authorizationChecker;
+
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ProductDraftRepositoryInterface $productDraftRepository,
         ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
         ImageUploaderInterface $imageUploader,
-        ProductListingRepositoryInterface $productListingRepository
+        ProductListingRepositoryInterface $productListingRepository,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->metadata = $metadata;
@@ -51,6 +57,7 @@ class EditProductAction extends AbstractController
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->imageUploader = $imageUploader;
         $this->productListingRepository = $productListingRepository;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Request $request): Response
@@ -59,6 +66,9 @@ class EditProductAction extends AbstractController
 
         $listing = $this->productListingRepository->find($request->get('id'));
 
+        if (!$this->authorizationChecker->isGranted(ObjectOwningVoter::OWNIT, $listing)) {
+            throw new AccessDeniedException();
+        }
         /** @var ProductDraftInterface $newResource */
         $newResource = $this->productDraftRepository->findLatestDraft($listing);
 
@@ -85,9 +95,9 @@ class EditProductAction extends AbstractController
             $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
 
             $this->productDraftRepository->save($productDraft);
-            $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_saved');
+            $this->addFlash('success', 'open_marketplace.ui.product_listing_saved');
 
-            return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
+            return $this->redirectToRoute('open_marketplace_vendor_product_listing_index');
         }
 
         return new Response(

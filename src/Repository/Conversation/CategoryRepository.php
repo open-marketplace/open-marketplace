@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation;
+namespace BitBag\OpenMarketplace\Repository\Conversation;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 

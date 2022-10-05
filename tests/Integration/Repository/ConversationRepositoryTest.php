@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Repository;
+namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUser;
+use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
+use BitBag\OpenMarketplace\Entity\ShopUser;
 
 class ConversationRepositoryTest extends JsonApiTestCase
 {
@@ -24,7 +24,7 @@ class ConversationRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_all_conversations_with_status_and_user(): void
     {
-        $conversationRepository = static::$container->get('bitbag_mvm_plugin.repository.conversation');
+        $conversationRepository = static::$container->get('open_marketplace.repository.conversation');
         $this->loadFixturesFromFile('ConversationRepositoryTest/test_it_finds_all_conversations_with_status_and_user.yml');
 
         $userOliver = $this->getEntityManager()->getRepository(ShopUser::class)->findOneBy(['username' => 'oliver@queen.com']);

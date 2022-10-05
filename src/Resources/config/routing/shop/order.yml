@@ -1,8 +1,8 @@
 sylius_shop_checkout_complete:
-    path: /complete
+    path: /checkout/complete
     methods: [GET, PUT]
     defaults:
-        _controller: bitbag.mvm_plugin.controller.order.order_controller:updateAction
+        _controller: open_marketplace.controller.order.order_controller:updateAction
         _sylius:
             event: complete
             flash: false
@@ -15,7 +15,7 @@ sylius_shop_checkout_complete:
                 graph: sylius_order_checkout
                 transition: complete
             redirect:
-                route: sylius_shop_account_order_index
+                route: sylius_shop_order_pay
                 parameters:
                     tokenValue: resource.tokenValue
             form:
@@ -42,7 +42,7 @@ sylius_shop_checkout_select_shipping:
             event: select_shipping
             flash: false
             template: "Checkout/selectShipping.html.twig"
-            form: BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Checkout\SelectShippingType
+            form: BitBag\OpenMarketplace\Form\Type\Checkout\SelectShippingType
             repository:
                 method: findCartForSelectingShipping
                 arguments:
@@ -50,3 +50,11 @@ sylius_shop_checkout_select_shipping:
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_shipping
+
+sylius_shop_order_thank_you:
+    path: /thank-you
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.order.order_controller:thankYouAction
+        _sylius:
+            template: "Checkout/thankYou.html.twig"

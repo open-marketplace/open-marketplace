@@ -2,7 +2,7 @@ default:
     suites:
         ui_managing_vendors:
             contexts:
-                - bitbag_mvm_plugin.behat.context.ui.admin.vendor_listing
+                - open_marketplace.behat.context.ui.admin.vendor_listing
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.hook.doctrine_orm
             filters:

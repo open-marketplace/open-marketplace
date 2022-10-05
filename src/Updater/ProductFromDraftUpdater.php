@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Updater;
+namespace BitBag\OpenMarketplace\Updater;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\LocaleNotFoundException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ProductNotFoundException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductTranslationFactoryInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Exception\LocaleNotFoundException;
+use BitBag\OpenMarketplace\Exception\ProductNotFoundException;
+use BitBag\OpenMarketplace\Factory\ProductTranslationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ProductInterface;

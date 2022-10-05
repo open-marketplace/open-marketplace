@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductDraftImageFactory;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImageInterface;
+use BitBag\OpenMarketplace\Factory\ProductDraftImageFactory;
 use PhpSpec\ObjectBehavior;
 
 final class ProductDraftImageFactorySpec extends ObjectBehavior

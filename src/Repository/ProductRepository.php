@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Repository;
+namespace BitBag\OpenMarketplace\Repository;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;

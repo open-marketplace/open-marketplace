@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace BitBag\OpenMarketplace\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListing;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
 use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
 

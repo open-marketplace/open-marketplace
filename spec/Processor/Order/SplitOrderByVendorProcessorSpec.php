@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
+namespace spec\BitBag\OpenMarketplace\Processor\Order;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderItemInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Manager\OrderManagerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\SplitOrderByVendorProcessor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Refresher\PaymentRefresherInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Manager\OrderManagerInterface;
+use BitBag\OpenMarketplace\Processor\Order\SplitOrderByVendorProcessor;
+use BitBag\OpenMarketplace\Refresher\PaymentRefresherInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;

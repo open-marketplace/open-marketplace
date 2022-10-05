@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Repository;
+namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
+use BitBag\OpenMarketplace\Entity\Vendor;
 
 class DraftAttributeRepositoryTest extends JsonApiTestCase
 {

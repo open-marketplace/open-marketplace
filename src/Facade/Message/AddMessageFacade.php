@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message;
+namespace BitBag\OpenMarketplace\Facade\Message;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\ConversationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\MessageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Uploader\FileUploaderInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
+use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
+use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 

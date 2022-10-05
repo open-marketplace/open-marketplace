@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
+namespace BitBag\OpenMarketplace\Cloner;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductListingPricingCloner implements ProductListingPricingClonerInterface

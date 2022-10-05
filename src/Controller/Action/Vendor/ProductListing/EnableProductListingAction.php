@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
+namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,12 +54,12 @@ final class EnableProductListingAction
             $this->entityManager->persist($product);
         }
 
-        $msgString = $enableState ? 'bitbag_mvm_plugin.ui.enabled' : 'bitbag_mvm_plugin.ui.disabled';
+        $msgString = $enableState ? 'open_marketplace.ui.enabled' : 'open_marketplace.ui.disabled';
 
         $this->flashBag->set('success', $msgString);
         $this->entityManager->persist($listing);
         $this->entityManager->flush();
 
-        return new RedirectResponse($this->router->generate('bitbag_mvm_plugin_vendor_product_listing_index'));
+        return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
     }
 }

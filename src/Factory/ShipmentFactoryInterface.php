@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\ShipmentInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 interface ShipmentFactoryInterface
 {

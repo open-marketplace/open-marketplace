@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
+namespace spec\BitBag\OpenMarketplace\Cloner;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderCloner;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\OrderClonerInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\PaymentClonerInterface;
+use BitBag\OpenMarketplace\Cloner\AddressClonerInterface;
+use BitBag\OpenMarketplace\Cloner\OrderCloner;
+use BitBag\OpenMarketplace\Cloner\OrderClonerInterface;
+use BitBag\OpenMarketplace\Cloner\PaymentClonerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;

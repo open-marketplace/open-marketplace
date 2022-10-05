@@ -25,10 +25,12 @@
 /node_modules
 
 ###> symfony/framework-bundle ###
-/.env.*.local
-/.env.local
-/.env.local.php
+
+.env.*.local
+.env.local
+.env.local.php
 /public/bundles
+/public/uploads/message_files
 /var/
 ###< symfony/framework-bundle ###
 

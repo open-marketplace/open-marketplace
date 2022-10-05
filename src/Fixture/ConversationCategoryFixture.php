@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture;
+namespace BitBag\OpenMarketplace\Fixture;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\CategoryInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\CategoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;

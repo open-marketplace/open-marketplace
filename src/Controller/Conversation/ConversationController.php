@@ -9,15 +9,18 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Conversation;
+namespace BitBag\OpenMarketplace\Controller\Conversation;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Conversation\Conversation;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\Type\Conversation\MessageType;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\Conversation\ConversationRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\CurrentUserResolverInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
+use BitBag\OpenMarketplace\Form\Type\Conversation\MessageType;
+use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
+use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
+use BitBag\OpenMarketplace\Security\Voter\ConversationOwningVoter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
 
 final class ConversationController
@@ -30,16 +33,20 @@ final class ConversationController
 
     private CurrentUserResolverInterface $currentUserResolver;
 
+    private AuthorizationCheckerInterface $authorizationChecker;
+
     public function __construct(
         Environment $templatingEngine,
         FormFactoryInterface $formFactory,
         ConversationRepositoryInterface $conversationRepository,
         CurrentUserResolverInterface $currentUserResolver,
-        ) {
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->templatingEngine = $templatingEngine;
         $this->formFactory = $formFactory;
         $this->conversationRepository = $conversationRepository;
         $this->currentUserResolver = $currentUserResolver;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function index(Request $request): Response
@@ -74,6 +81,10 @@ final class ConversationController
 
         /** @var Conversation $conversation */
         $conversation = $this->conversationRepository->find($id);
+
+        if (!$this->authorizationChecker->isGranted(ConversationOwningVoter::UPDATE, $conversation)) {
+            throw new AccessDeniedException();
+        }
 
         return new Response(
             $this->templatingEngine->render(

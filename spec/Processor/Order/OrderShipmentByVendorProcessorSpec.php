@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order;
+namespace spec\BitBag\OpenMarketplace\Processor\Order;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Calculator\ShipmentUnitsRecalculatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShipmentInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\OrderShipmentByVendorProcessor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Processor\Order\OrderShipmentByVendorProcessorInterface;
+use BitBag\OpenMarketplace\Calculator\ShipmentUnitsRecalculatorInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\ShipmentInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Factory\ShipmentFactoryInterface;
+use BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessor;
+use BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;

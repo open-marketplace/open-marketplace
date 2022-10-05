@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller;
+namespace BitBag\OpenMarketplace\Controller;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductAttributeUpdaterInterface;
+use BitBag\OpenMarketplace\Updater\ProductAttributeUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;

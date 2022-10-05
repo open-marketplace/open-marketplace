@@ -3,9 +3,9 @@
     <services>
         <defaults public="true" />
         <service
-                class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor\CustomerDashboardContext"
-                id="tests.bitbag_mvm_plugin.behat.context.vendor.customer_dashboard_context" >
-            <argument type="service" id="tests.bitbag_mvm_plugin.behat.page.vendor.customer_dashboard_page" />
+                class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\CustomerDashboardContext"
+                id="tests.open_marketplace.behat.context.vendor.customer_dashboard_context" >
+            <argument type="service" id="tests.open_marketplace.behat.page.vendor.customer_dashboard_page" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />

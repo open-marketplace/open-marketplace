@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
+namespace BitBag\OpenMarketplace\Provider;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 interface VendorProviderInterface
 {

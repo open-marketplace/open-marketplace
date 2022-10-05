@@ -2,8 +2,8 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
-        <service class="Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\Vendor\CustomerDashboardPage"
-                id="tests.bitbag_mvm_plugin.behat.page.vendor.customer_dashboard_page"
+        <service class="Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\CustomerDashboardPage"
+                id="tests.open_marketplace.behat.page.vendor.customer_dashboard_page"
                 parent="sylius.behat.symfony_page">
         </service>     
     </services>

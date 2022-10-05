@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Updater;
+namespace Tests\BitBag\OpenMarketplace\Integration\Updater;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\AddressFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdater;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\VendorProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage;
+use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
+use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
+use BitBag\OpenMarketplace\Updater\VendorProfileUpdater;
+use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\Country;
@@ -51,14 +51,14 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
-        $this->vendorAddressFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_address_factory');
-        $this->vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_factory');
-        $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('bitbag.mvm_plugin.service.vendor_profile_image_factory');
+        $this->vendorAddressFactory = static::$container->get('open_marketplace.factory.vendor_address_factory');
+        $this->vendorProfileFactory = static::$container->get('open_marketplace.factory.vendor_profile_factory');
+        $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('open_marketplace.service.vendor_profile_image_factory');
         $this->imageUploader = static::$container->get('sylius.image_uploader');
-        $this->vendorLogoOperator = static::$container->get('bitbag_mvm_plugin.operator.vendor_logo');
+        $this->vendorLogoOperator = static::$container->get('open_marketplace.operator.vendor_logo');
 
-        $remover = static::$container->get('bitbag_mvm_plugin.remover.profile_update_remover');
-        $vendorProfileFactory = static::$container->get('bitbag_mvm_plugin.factory.vendor_profile_update_factory');
+        $remover = static::$container->get('open_marketplace.remover.profile_update_remover');
+        $vendorProfileFactory = static::$container->get('open_marketplace.factory.vendor_profile_update_factory');
 
         $senderMock = $this->createMock(SenderInterface::class);
         $this->vendorProfileUpdater = new VendorProfileUpdater(

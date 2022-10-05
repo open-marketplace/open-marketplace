@@ -2,7 +2,7 @@
     {{ sylius_template_event('sylius.shop.register.before_form') }}
 
     {{ form_start(form, {'action': path('vendor_register_form'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-    <h3 class="header">{{ 'bitbag_mvm_plugin.ui.become_a_vendor'|trans }}</h3>
+    <h3 class="header">{{ 'open_marketplace.ui.become_a_vendor'|trans }}</h3>
     {{ form_row(form.companyName, sylius_test_form_attribute('companyName')) }}
     {{ form_row(form.taxIdentifier) }}
     {{ form_row(form.phoneNumber) }}
@@ -21,7 +21,7 @@
     {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
 
     <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('register-button') }}>
-        {{ 'bitbag_mvm_plugin.ui.become_a_vendor'|trans }}
+        {{ 'open_marketplace.ui.become_a_vendor'|trans }}
     </button>
 
     {{ form_row(form._token) }}

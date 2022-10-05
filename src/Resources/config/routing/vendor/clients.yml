@@ -1,12 +1,12 @@
-bitbag_mvm_plugin_customer_index:
+open_marketplace_customer_index:
     path: /vendor/customers
     defaults:
         _controller: sylius.controller.customer:indexAction
         _sylius:
             template: "Vendor/Clients/index.html.twig"
-            grid: bitbag_mvm_plugin_vendor_clients
+            grid: open_marketplace_vendor_clients
 
-bitbag_mvm_plugin_vendor_customer_show:
+open_marketplace_vendor_customer_show:
     path: /vendor/customers/{id}
     methods: [GET]
     defaults:
@@ -18,10 +18,10 @@ bitbag_mvm_plugin_vendor_customer_show:
             repository:
                 method: findCustomerForVendor
                 arguments:
-                    - "expr:service('bitbag_mvm_plugin.provider.vendor').provideCurrentVendor()"
+                    - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
                     - $id
 
-bitbag_mvm_plugin_vendor_customer_order_index:
+open_marketplace_vendor_customer_order_index:
     path: /vendor/customers/{id}/orders
     methods: [GET]
     defaults:

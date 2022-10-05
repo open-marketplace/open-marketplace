@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\MenuBuilder;
+namespace BitBag\OpenMarketplace\MenuBuilder;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -60,7 +60,7 @@ final class OrderMenuBuilder
         ) {
             $menu
                 ->addChild('cancel', [
-                    'route' => 'bitbag_mvm_plugin_vendor_order_cancel',
+                    'route' => 'open_marketplace_vendor_order_cancel',
                     'routeParameters' => [
                         'id' => $order->getId(),
                         '_csrf_token' => $this->csrfTokenManager->getToken((string) $order->getId())->getValue(),

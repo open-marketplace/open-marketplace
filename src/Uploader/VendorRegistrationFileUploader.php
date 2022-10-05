@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Uploader;
+namespace BitBag\OpenMarketplace\Uploader;
 
 use Gaufrette\Adapter\Local as LocalAdapter;
 use Gaufrette\Filesystem;

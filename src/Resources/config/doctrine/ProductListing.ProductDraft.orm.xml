@@ -5,7 +5,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraft" table="bitbag_mvm_product_draft">
+    <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft" table="bitbag_open_marketplace_product_draft">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -18,40 +18,40 @@
         <field name="status" column="status" type="string" unique="false" nullable="false" />
         <field name="versionNumber" column="version_number" type="integer" unique="false" nullable="false" />
 
-        <many-to-one field="productListing" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface" inversed-by="productDrafts">
+        <many-to-one field="productListing" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface" inversed-by="productDrafts">
             <join-column name="product_listing_id" referenced-column-name="id"/>
             <cascade>
                 <cascade-persist />
             </cascade>
         </many-to-one>
 
-        <one-to-many field="images" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftImageInterface"
+        <one-to-many field="images" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImageInterface"
                      mapped-by="owner">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
 
-        <one-to-many field="translations" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface" mapped-by="productDraft" index-by="locale">
+        <one-to-many field="translations" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface" mapped-by="productDraft" index-by="locale">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
 
-        <one-to-many field="productListingPrice" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
+        <one-to-many field="productListingPrice" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
 
-        <one-to-many field="attributes" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeValue"
+        <one-to-many field="attributes" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue"
                      mapped-by="subject" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
 
-        <one-to-many field="productDraftTaxons" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftTaxonInterface"
+        <one-to-many field="productDraftTaxons" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface"
                      mapped-by="productDraft" orphan-removal="true">
             <cascade>
                 <cascade-all />

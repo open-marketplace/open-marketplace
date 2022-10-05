@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Fixture\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductTranslationInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductDraftImageFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\VendorRepositoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Transitions\ProductDraftTransitions;
+use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Factory\ProductDraftImageFactoryInterface;
+use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
+use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;

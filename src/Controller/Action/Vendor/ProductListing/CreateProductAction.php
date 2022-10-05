@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ProductListing;
+namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\VendorNotFoundException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductListingFromDraftFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Form\ProductListing\ProductType;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\ProductListing\ProductDraftRepositoryInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Exception\VendorNotFoundException;
+use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
+use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
@@ -126,9 +126,9 @@ class CreateProductAction extends AbstractController
             $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
 
             $this->productDraftRepository->save($productDraft);
-            $this->addFlash('success', 'bitbag_mvm_plugin.ui.product_listing_created');
+            $this->addFlash('success', 'open_marketplace.ui.product_listing_created');
 
-            return $this->redirectToRoute('bitbag_mvm_plugin_vendor_product_listing_index');
+            return $this->redirectToRoute('open_marketplace_vendor_product_listing_index');
         }
 
         return new Response(

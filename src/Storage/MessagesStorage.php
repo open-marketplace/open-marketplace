@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Storage;
+namespace BitBag\OpenMarketplace\Storage;
 
 final class MessagesStorage
 {

@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Cloner;
+namespace spec\BitBag\OpenMarketplace\Cloner;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Cloner\AddressCloner;
+use BitBag\OpenMarketplace\Cloner\AddressCloner;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
 

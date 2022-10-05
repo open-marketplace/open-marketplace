@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing;
+namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 

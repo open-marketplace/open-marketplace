@@ -9,18 +9,18 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator;
+namespace spec\BitBag\OpenMarketplace\AcceptanceOperator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperator;
-use BitBag\SyliusMultiVendorMarketplacePlugin\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Converter\AttributesConverterInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductListingInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ProductFromDraftFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftFilesOperatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Operator\ProductDraftTaxonsOperatorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Updater\ProductFromDraftUpdaterInterface;
+use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperator;
+use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
+use BitBag\OpenMarketplace\Converter\AttributesConverterInterface;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Factory\ProductFromDraftFactoryInterface;
+use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperatorInterface;
+use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperatorInterface;
+use BitBag\OpenMarketplace\Updater\ProductFromDraftUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 

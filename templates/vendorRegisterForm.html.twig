@@ -4,10 +4,10 @@
    {% if null == app.user.vendor %}
       {{ include('Form/_vendorRegister.html.twig') }}
    {% elseif app.user.vendor.verified %}
-      {%  set vars = {messageTranslationKey: 'bitbag_mvm_plugin.ui.vendor_verification_accepted'} %}
+      {%  set vars = {messageTranslationKey: 'open_marketplace.ui.vendor_verification_accepted'} %}
       {%  include '_Alert/infoMessage.html.twig' with vars %}
    {% else %}
-      {%  set vars = {messageTranslationKey: 'bitbag_mvm_plugin.ui.vendor_under_verification'} %}
+      {%  set vars = {messageTranslationKey: 'open_marketplace.ui.vendor_under_verification'} %}
       {%  include '_Alert/infoMessage.html.twig' with vars %}
    {% endif %}
 {% endblock %}

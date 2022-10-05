@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Repository;
+namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\Vendor;
 use Sylius\Component\Core\Model\Customer;
 
 final class OrderRepositoryTest extends JsonApiTestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Twig;
+namespace BitBag\OpenMarketplace\Twig;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
+use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Locale\Context\CompositeLocaleContext;
 use Twig\Extension\AbstractExtension;

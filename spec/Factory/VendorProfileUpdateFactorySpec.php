@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorProfileUpdateFactory;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Generator\TokenGeneratorInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactory;
+use BitBag\OpenMarketplace\Generator\TokenGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 
 final class VendorProfileUpdateFactorySpec extends ObjectBehavior

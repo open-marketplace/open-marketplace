@@ -1,10 +1,10 @@
 <div id="details">
-    <h4 class="ui top attached large header">{{ 'bitbag_mvm_plugin.ui.details'|trans }}</h4>
+    <h4 class="ui top attached large header">{{ 'open_marketplace.ui.details'|trans }}</h4>
     <div class="ui attached segment">
         <table class="ui very basic celled table">
             <tbody>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.id'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.id'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         <li>{{ productDraft.id }}</li>
@@ -12,7 +12,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.name'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.name'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         <li>{{ productDraft.code }}</li>
@@ -20,7 +20,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.published_at'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.published_at'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         <li>{{ productDraft.publishedAt | date }}</li>
@@ -28,7 +28,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="five wide"><strong class="gray text">{{ 'bitbag_mvm_plugin.ui.status'|trans }}</strong></td>
+                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.status'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         <li>{{ productDraft.status }}</li>
@@ -75,7 +75,7 @@
 
 {% if productDraft.status == 'under_verification' %}
     <div class="ui divider"></div>
-    <h4 class="ui top attached large header">{{ 'bitbag_mvm_plugin.ui.rejection_details'|trans }}</h4>
+    <h4 class="ui top attached large header">{{ 'open_marketplace.ui.rejection_details'|trans }}</h4>
     <div class="ui form" style="position: relative">
         {{ form_start(form, { attr: { class: 'ui form'}}) }}
         <div class="ui attached segment">
@@ -92,7 +92,7 @@
         </div>
         <div class="ui hidden divider"></div>
         <div class="button" style="display: inline-block">
-            <input class="ui red labeled icon button" type="submit" value="{{ 'bitbag_mvm_plugin.ui.reject'|trans }}"/>
+            <input class="ui red labeled icon button" type="submit" value="{{ 'open_marketplace.ui.reject'|trans }}"/>
         </div>
         {{ form_end(form, { 'render_rest': false }) }}
         {% include 'Grid/Action/accept_product_listing.html.twig' %}

@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Operator;
+namespace BitBag\OpenMarketplace\Operator;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\ProductDraftTaxonInterface;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

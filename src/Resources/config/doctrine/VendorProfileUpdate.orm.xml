@@ -4,8 +4,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate"
-            table="bitbag_mvm_vendor_profile_update">
+    <mapped-superclass name="BitBag\OpenMarketplace\Entity\VendorProfileUpdate"
+            table="bitbag_open_marketplace_vendor_profile_update">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -15,7 +15,7 @@
         <field name="token" column="token" type="text" />
         <field name="description" column="description" type="string" length="2048" />
 
-        <one-to-one field="vendorAddress" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdateInterface" >
+        <one-to-one field="vendorAddress" target-entity="BitBag\OpenMarketplace\Entity\VendorAddressUpdateInterface" >
 
             <join-column name="vendor_address_id" referenced-column-name="id" on-delete="SET NULL" />
             <cascade>
@@ -24,7 +24,7 @@
         </one-to-one>
 
         <one-to-one field="image"
-                    target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdateImage"
+                    target-entity="BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage"
                     mapped-by="owner"
                     orphan-removal="true">
             <cascade>
@@ -32,7 +32,7 @@
             </cascade>
         </one-to-one>
 
-        <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface">
+        <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface">
         </one-to-one>
 
     </mapped-superclass>

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\MenuBuilder;
+namespace BitBag\OpenMarketplace\MenuBuilder;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -41,7 +41,7 @@ final class CustomerMenuBuilder
         $customer = $options['customer'];
         $menu
             ->addChild('order_index', [
-                'route' => 'bitbag_mvm_plugin_vendor_customer_order_index',
+                'route' => 'open_marketplace_vendor_customer_order_index',
                 'routeParameters' => ['id' => $customer->getId()],
             ])
             ->setAttribute('type', 'show')

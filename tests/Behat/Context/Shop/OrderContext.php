@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Shop;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Page\ShowProductPage;
+use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 
 class OrderContext extends RawMinkContext implements Context

@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation;
+namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
 
 use ApiPlatform\Core\Api\UrlGeneratorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Facade\Message\AddMessageFacadeInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\Message\MessageFactoryInterface;
+use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
+use BitBag\OpenMarketplace\Factory\Message\MessageFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

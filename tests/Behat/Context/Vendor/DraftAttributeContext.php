@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttribute;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ProductListing\DraftAttributeTranslation;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Repository\DraftAttributeRepositoryInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation;
+use BitBag\OpenMarketplace\Repository\DraftAttributeRepositoryInterface;
 use function PHPUnit\Framework\assertTrue;
 use Sylius\Behat\Service\SharedStorageInterface;
 

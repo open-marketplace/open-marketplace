@@ -2,7 +2,7 @@ default:
     suites:
         ui_verifying_vendors:
             contexts:
-                - bitbag_mvm_plugin.behat.context.ui.admin.vendor_verification
+                - open_marketplace.behat.context.ui.admin.vendor_verification
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.hook.doctrine_orm

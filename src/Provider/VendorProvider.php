@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Provider;
+namespace BitBag\OpenMarketplace\Provider;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\ShopUserInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserHasNoVendorContextException;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Exception\ShopUserNotFoundException;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Exception\ShopUserHasNoVendorContextException;
+use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 

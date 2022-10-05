@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace BitBag\OpenMarketplace\Entity;
 
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;

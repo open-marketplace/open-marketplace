@@ -2,7 +2,7 @@ default:
     suites:
         customer_dashboard:
             contexts:
-                - tests.bitbag_mvm_plugin.behat.context.vendor.customer_dashboard_context
+                - tests.open_marketplace.behat.context.vendor.customer_dashboard_context
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.channel

@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Entity;
+namespace spec\BitBag\OpenMarketplace\Entity;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImage;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorImageInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorImage;
+use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 
 final class VendorImageSpec extends ObjectBehavior

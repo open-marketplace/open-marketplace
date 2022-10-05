@@ -3,89 +3,210 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Conversation\ConversationController"
-                 id="bitbag_mvm_plugin.controller.conversation.conversation_controller">
+        <service class="BitBag\OpenMarketplace\Controller\Conversation\ConversationController"
+                 id="open_marketplace.controller.conversation.conversation_controller">
             <argument type="service" id="twig" />
             <argument type="service" id="form.factory" />
-            <argument type="service" id="bitbag_mvm_plugin.repository.conversation" />
-            <argument type="service" id="bitbag_mvm_plugin.current_user_resolver" />
-            <argument type="service" id="request_stack"/>
+            <argument type="service" id="open_marketplace.repository.conversation" />
+            <argument type="service" id="open_marketplace.current_user_resolver" />
+            <argument type="service" id="security.authorization_checker"/>
+
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation\CreateNewConversationAction"
-                 id="bitbag_mvm_plugin.controller.action.conversation.create_new_conversation_action">
+        <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\CreateNewConversationAction"
+                 id="open_marketplace.controller.action.conversation.create_new_conversation_action">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="twig"/>
             <argument type="service" id="api_platform.router"/>
             <argument type="service" id="session.flash_bag"/>
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade"/>
-            <argument type="service" id="bitbag_mvm_plugin.repository.conversation"/>
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument type="service" id="open_marketplace.repository.conversation"/>
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag_mvm_plugin.controller.action.conversation_message.add_message_action"
-                 class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\ConversationMessage\AddMessageAction">
+        <service id="open_marketplace.controller.action.conversation_message.add_message_action"
+                 class="BitBag\OpenMarketplace\Controller\Action\ConversationMessage\AddMessageAction">
             <argument type="service" id="form.factory" />
             <argument type="service" id="session.flash_bag" />
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade" />
             <argument type="service" id="router"/>
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Conversation\SendArchiveRequestAction"
-                 id="bitbag_mvm_plugin.controller.action.conversation.send_archive_request_action">
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.facade.message.add_message_facade" />
+        <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\SendArchiveRequestAction"
+                 id="open_marketplace.controller.action.conversation.send_archive_request_action">
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade" />
             <argument type="service" id="api_platform.router" />
-            <argument type="service" id="bitbag.sylius_multi_vendor_marketplace_plugin.factory.message.message_factory" />
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory" />
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ConfirmProfileUpdateAction"
-                 id="bitbag_mvm_plugin.controller.confirm_profile_update_action">
+        <service class="BitBag\OpenMarketplace\Controller\ConfirmProfileUpdateAction"
+                 id="open_marketplace.controller.confirm_profile_update_action">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag_mvm_plugin.updater.vendor_profile_updater"/>
+            <argument type="service" id="open_marketplace.updater.vendor_profile_updater"/>
             <argument type="service" id="security.helper"/>
             <argument type="service" id="router"/>
-            <argument type="service" id="bitbag_mvm_plugin.provider.vendor"/>
+            <argument type="service" id="open_marketplace.provider.vendor"/>
             <tag name="controller.service_arguments"/>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\VendorController"
-                 id="bitbag_mvm_plugin.controller.vendor_controller"
-                 parent="bitbag_mvm_plugin.controller.vendor">
-            <argument type="service" id="bitbag_mvm_plugin.provider.vendor" />
-            <argument type="service" id="bitbag_mvm_plugin.updater.vendor_profile_updater" />
+        <service class="BitBag\OpenMarketplace\Controller\VendorController"
+                 id="open_marketplace.controller.vendor_controller"
+                 parent="open_marketplace.controller.vendor">
+            <argument type="service" id="open_marketplace.provider.vendor" />
+            <argument type="service" id="open_marketplace.updater.vendor_profile_updater" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\Action\Vendor\ShowVendorPageAction"
-                 id="bitbag.mvm_plugin.controller.show_vendor_page_action"
+        <service class="BitBag\OpenMarketplace\Controller\Action\Vendor\ShowVendorPageAction"
+                 id="open_marketplace.controller.show_vendor_page_action"
                  public="true"
         >
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <argument type="service" id="bitbag.mvm_plugin.repository.vendor_repository"/>
-            <argument type="service" id="bitbag.mvm_plugin.repository.product_repository"/>
+            <argument type="service" id="open_marketplace.repository.vendor_repository"/>
+            <argument type="service" id="open_marketplace.repository.product_repository"/>
             <argument type="service" id="sylius.context.channel"/>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\ProductListing\ProductDraftController"
-                 id="bitbag_mvm_plugin.controller.productDraft"
-                 parent="bitbag_mvm_plugin.controller.product_draft">
-            <argument type="service" id="sylius.image_uploader" />
+        <service class="BitBag\OpenMarketplace\Controller\DraftAttributesController"
+                 id="open_marketplace.controller.draftAttributes"
+                 parent="open_marketplace.controller.draft_attribute">
+            <argument type="service" id="open_marketplace.factory.draftAttribute"/>
+            <argument type="service" id="open_marketplace.security.voter.object_owning_voter"/>
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\DraftAttributesController"
-                 id="bitbag_mvm_plugin.controller.draftAttributes"
-                 parent="bitbag_mvm_plugin.controller.draft_attribute">
-            <argument type="service" id="bitbag_mvm_plugin.factory.draftAttribute"/>
+        <service id="open_marketplace.controller.action.admin.product_listing.show_action"
+                 class="BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing\ShowAction">
+            <argument type="service" id="open_marketplace.repository.product_listing" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="open_marketplace.repository.product_draft" />
+            <argument type="service" id="open_marketplace.repository.conversation"/>
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument type="service" id="router.default" />
+            <argument type="service" id="translator" />
+            <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Controller\DraftAttributeController"
-                 id="bitbag_mvm_plugin.draft_attribute_controller"
-                 parent="bitbag_mvm_plugin.controller.draft_attribute">
-            <argument type="service" id="bitbag_mvm_plugin.updater.product_attribute_updater"/>
+        <service id="open_marketplace.controller.action.admin.product_listing.accept_action"
+                 class="BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing\AcceptAction">
+            <argument type="service" id="open_marketplace.repository.product_listing" />
+            <argument type="service" id="router.default" />
+            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
+            <argument type="service" id="open_marketplace.repository.product_draft" />
+            <tag name="controller.service_arguments" />
         </service>
+
+        <service id="open_marketplace.controller.action.admin.product_listing.reject_action"
+                 class="BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing\RejectAction">
+            <argument type="service" id="open_marketplace.repository.product_listing" />
+            <argument type="service" id="router.default" />
+            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
+            <argument type="service" id="open_marketplace.repository.product_draft" />
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing\RestoreAction"
+                 id="open_marketplace.controller.product_listing.restore_action">
+            <argument type="service" id="open_marketplace.repository.product_listing"/>
+            <argument type="service" id="router.default"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="session.flash_bag"/>
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="open_marketplace.controller.action.vendor.product_listing.create_product_action"
+                 class="BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing\CreateProductAction">
+            <argument type="service">
+                <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
+                    <factory service="sylius.resource_registry" method="get" />
+                    <argument type="string">sylius.shop_user</argument>
+                </service>
+            </argument>
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
+            <argument type="service" id="sylius.resource_controller.new_resource_factory" />
+            <argument type="service" id="open_marketplace.factory.product_draft" />
+            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory"/>
+            <argument type="service" id="sylius.resource_controller.redirect_handler"/>
+            <argument type="service" id="sylius.resource_controller.flash_helper"/>
+            <argument type="service" id="sylius.resource_controller.event_dispatcher"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <argument type="service" id="open_marketplace.repository.product_draft"/>
+            <argument type="service" id="sylius.image_uploader"/>
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="open_marketplace.controller.action.vendor.product_listing.edit_product_action"
+                 class="BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing\EditProductAction">
+            <argument type="service">
+                <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
+                    <factory service="sylius.resource_registry" method="get" />
+                    <argument type="string">open_marketplace.product_draft</argument>
+                </service>
+            </argument>
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
+            <argument type="service" id="open_marketplace.repository.product_draft"/>
+            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory"/>
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="open_marketplace.repository.product_listing"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="controller.service_arguments" />
+
+        </service>
+
+        <service id="open_marketplace.controller.action.vendor.product_listing.send_for_verification"
+                 class="BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing\SendForVerificationAction">
+            <argument type="service" id="open_marketplace.state_machine.product_draft.transition"/>
+            <argument type="service" id="open_marketplace.repository.product_draft"/>
+            <argument type="service" id="open_marketplace.repository.product_listing"/>
+            <argument type="service" id="router.default" />
+            <argument type="service" id="session" />
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing\RemoveAction"
+                 id="open_marketplace.controller.product_listing.remove_action">
+            <argument type="service" id="open_marketplace.repository.product_listing"/>
+            <argument type="service" id="router.default"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="session.flash_bag"/>
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing\EnableProductListingAction"
+                 id="open_marketplace.controller.enable_product_listing_action">
+            <argument type="service" id="open_marketplace.repository.product_listing"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="router.default" />
+            <argument type="service" id="session.flash_bag"/>
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="open_marketplace.controller.action.vendor.resend_order_confirmation_email_action"
+                 class="BitBag\OpenMarketplace\Controller\Action\Vendor\ResendOrderConfirmationEmailAction">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface" />
+            <argument type="service" id="security.csrf.token_manager" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="router.default"/>
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Controller\Order\OrderController"
+                 id="open_marketplace.controller.order.order_controller"
+                 parent="sylius.controller.order">
+            <argument type="service" id="open_marketplace.processor.order.split_order_by_vendor_processor"/>
+        </service>
+
     </services>
 </container>

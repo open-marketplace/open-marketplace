@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Behat\Context\Vendor;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddress;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorAddressUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorProfileUpdate;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\VendorImageFactoryInterface;
+use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorAddress;
+use BitBag\OpenMarketplace\Entity\VendorAddressUpdate;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
+use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -167,6 +167,7 @@ class VendorUpdateContext extends RawMinkContext
 
         $page = $session->getPage();
         $logo = $page->find('css', '#vendor_logo');
+
         $newPath = $logo->getAttribute('src');
         Assert::notEq($oldImagePath, $newPath);
     }

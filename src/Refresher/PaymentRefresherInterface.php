@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusMultiVendorMarketplacePlugin\Refresher;
+namespace BitBag\OpenMarketplace\Refresher;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
 
 interface PaymentRefresherInterface
 {

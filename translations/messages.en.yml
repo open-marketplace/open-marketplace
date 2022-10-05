@@ -1,4 +1,4 @@
-bitbag_mvm_plugin:
+open_marketplace:
     ui:
         conversation_categories: 'Conversation categories'
         restored: "Product successfully restored"
