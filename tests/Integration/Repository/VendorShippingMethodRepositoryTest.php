@@ -9,10 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusMultiVendorMarketplacePlugin\Integration\Repository;
+namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Vendor;
+
+use BitBag\OpenMarketplace\Entity\Vendor;
 use Sylius\Component\Core\Model\Channel;
 
 class VendorShippingMethodRepositoryTest extends JsonApiTestCase
@@ -21,7 +22,7 @@ class VendorShippingMethodRepositoryTest extends JsonApiTestCase
     {
         parent::setUp();
         $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->repository = $this->getContainer()->get('bitbag_mvm_plugin.repository.vendor_shipping_method');
+        $this->repository = $this->getContainer()->get('open_marketplace.repository.vendor_shipping_method');
     }
 
     public function test_it_finds_all_enabled_shipping_methods_for_vendor_and_channel(): void
