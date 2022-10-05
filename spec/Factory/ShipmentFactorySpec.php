@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\SyliusMultiVendorMarketplacePlugin\Factory;
+namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\OrderInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\Shipment;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Entity\VendorShippingMethodInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactory;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Factory\ShipmentFactoryInterface;
-use BitBag\SyliusMultiVendorMarketplacePlugin\Resolver\VendorShippingMethodsResolverInterface;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\Shipment;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
+use BitBag\OpenMarketplace\Factory\ShipmentFactory;
+use BitBag\OpenMarketplace\Factory\ShipmentFactoryInterface;
+use BitBag\OpenMarketplace\Resolver\VendorShippingMethodsResolverInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\ChannelInterface;
