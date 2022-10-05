@@ -1,7 +1,7 @@
 ## Product listing creation
 
 Registered vendor can create product listing by visiting 
-Product listings index page (1).
+Product listings page (1).
 And click create product button (2).
 
 ![product_listing_inex](images/product_listing_index.png)
@@ -9,7 +9,7 @@ And click create product button (2).
 Then vendor user have to fill up product listing form.
 
 In order to add attribute to product vendor have to 
- [create attribute](#adding-attributes) first.
+[create attribute](#adding-attributes) first.
 
 ![product_form](images/product_form.png)
 
@@ -20,12 +20,12 @@ administrator. After sending for verification editing product is blocked.
 
 ![status](images/status.png)
 
-Then it is up to administrator if product listing become rejected or 
-product available for customer in marketplace, administrator can access
-product listing sent to verification in admin panel by visiting
-product listings tab. Every product listing have details page
-where administrator can view potential product and decide if he 
-rejects or accepts.
+Then it is up to the admin to decide whether the product list is rejected or
+the product becomes available to the customer in the market, the admin can view
+list of products sent for verification in the administration panel via the product listings tab(1). Each product listing has a detail page
+where admin can view product details and decide whether or not to accept(2).
+
+![admin_product_view](images/admin_product_view.png)
 
 ## Product listing verification
 
