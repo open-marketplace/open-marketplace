@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusMultiVendorMarketplacePlugin\Calculator\ShipmentUnitsRecalculator"
-                 id="bitbag_mvm_plugin.calculator.shipment_units_recalculator">
+                 id="open_marketplace.calculator.shipment_units_recalculator">
         </service>
     </services>
 </container>
