@@ -1,3 +1,10 @@
-<a class="" href="{{ path('sylius_shop_product_show',{'slug':  data.getSlug(current_locale()) }) }}">
-    {{ data.getName(current_locale())  }}
-</a>
+{% set product = data.productListing.product %}
+{% if product is same as null%}
+    <a class="" href="{{ path('open_marketplace_vendor_product_draft_show_product',{'id':  data.id }) }}">
+        {{ data.getName(current_locale())  }}
+    </a>
+{% else %}
+    <a class="" href="{{ path('sylius_shop_product_show',{'slug':  data.getSlug(current_locale()) }) }}">
+        {{ data.getName(current_locale())  }}
+    </a>
+{% endif %}
