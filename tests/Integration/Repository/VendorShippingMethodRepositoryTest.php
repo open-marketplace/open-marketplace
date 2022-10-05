@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-
 use BitBag\OpenMarketplace\Entity\Vendor;
 use Sylius\Component\Core\Model\Channel;
 
