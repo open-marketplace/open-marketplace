@@ -1,6 +1,8 @@
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
 
+    - { resource: "@BitBagSyliusCmsPlugin/Resources/config/config.yml" }
+
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
 

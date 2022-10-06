@@ -6,6 +6,9 @@ twig:
         base_vendor_logo_path: '%env(LOGO_DIRECTORY)%'
         vendor_products_limits: '%env(VENDOR_PRODUCTS_LIMITS)%'
         default_vendor_products_limit: '%env(DEFAULT_VENDOR_PRODUCTS_LIMIT)%'
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+        - '@BitBagSyliusCmsPlugin/Form/ckeditor_widget.html.twig'
 
 services:
     _defaults:
