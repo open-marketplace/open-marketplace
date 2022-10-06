@@ -8,6 +8,8 @@
 
         <field name="deleted" type="boolean"/>
 
-        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="products" />
+        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="products" >
+            <join-column name="vendor_id" on-delete="CASCADE"/>
+        </many-to-one>
     </mapped-superclass>
 </doctrine-mapping>

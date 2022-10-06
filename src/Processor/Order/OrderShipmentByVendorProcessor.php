@@ -11,35 +11,27 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Processor\Order;
 
+use BitBag\OpenMarketplace\Calculator\ShipmentUnitsRecalculatorInterface;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\OrderItemInterface;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Resolver\VendorShippingMethodsResolverInterface;
+use BitBag\OpenMarketplace\Factory\ShipmentFactoryInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
-use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, OrderShipmentByVendorProcessorInterface
 {
-    private VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver;
+    private ShipmentFactoryInterface $shipmentFactory;
 
-    private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver;
-
-    private FactoryInterface $shipmentFactory;
+    private ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator;
 
     public function __construct(
-        VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver,
-        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
-        FactoryInterface $shipmentFactory
+        ShipmentFactoryInterface $shipmentFactory,
+        ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator
     ) {
-        $this->defaultVendorShippingMethodResolver = $defaultVendorShippingMethodResolver;
-        $this->defaultShippingMethodResolver = $defaultShippingMethodResolver;
         $this->shipmentFactory = $shipmentFactory;
+        $this->shipmentUnitsRecalculator = $shipmentUnitsRecalculator;
     }
 
     /**
@@ -67,7 +59,7 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
         $this->addShipmentsPerVendor($order);
 
-        $this->recalculateShipmentUnits($order);
+        $this->shipmentUnitsRecalculator->recalculateShipmentUnits($order);
 
         $this->removeShipmentWithoutVendorIfEmpty($order);
     }
@@ -102,52 +94,14 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
     private function addShipment(OrderInterface $order, ?VendorInterface $vendor): void
     {
-        try {
-            /** @var ShipmentInterface $shipment */
-            $shipment = $this->shipmentFactory->createNew();
-            $shipment->setOrder($order);
-            $defaultShippingMethod = null;
+        /** @var ShipmentInterface $shipment */
+        $shipment = $this
+                ->shipmentFactory
+                ->tryCreateNewWithOrderVendorAndDefaultShipment($order, $vendor)
+            ;
 
-            if (null !== $vendor) {
-                $shipment->setVendor($vendor);
-
-                $defaultVendorShippingMethod = $this
-                    ->defaultVendorShippingMethodResolver
-                    ->getDefaultShippingMethod($vendor, $order->getChannel());
-                $defaultShippingMethod = $defaultVendorShippingMethod->getShippingMethod();
-            } else {
-                $defaultShippingMethod = $this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment);
-            }
-
-            $shipment->setMethod($defaultShippingMethod);
+        if (null !== $shipment) {
             $order->addShipment($shipment);
-        } catch (UnresolvedDefaultShippingMethodException) {
-        }
-    }
-
-    private function recalculateShipmentUnits(OrderInterface $order): void
-    {
-        foreach ($order->getShipments() as $shipment) {
-            foreach ($shipment->getUnits() as $unit) {
-                $shipment->removeUnit($unit);
-            }
-        }
-
-        foreach ($order->getItemUnits() as $itemUnit) {
-            /** @var OrderItemInterface $orderItem */
-            $orderItem = $itemUnit->getOrderItem();
-            /** @var ProductInterface $product */
-            $product = $orderItem->getVariant()?->getProduct();
-            if (null === $itemUnit->getShipment()) {
-                $shipment = null;
-                if ($product->hasVendor()) {
-                    $shipment = $order->getShipmentByVendor($product->getVendor());
-                } else {
-                    $shipment = $order->getShipmentWithoutVendor();
-                }
-
-                $shipment?->addUnit($itemUnit);
-            }
         }
     }
 

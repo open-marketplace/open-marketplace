@@ -48,3 +48,8 @@ sylius_ui:
                 vendor:
                     template: "Account/Menu/_content.html.twig"
                     priority: 7
+        sylius.admin.layout.topbar_right:
+            blocks:
+                brand:
+                    template: "Admin/Toolbar/brand.html.twig"
+                    priority: 30

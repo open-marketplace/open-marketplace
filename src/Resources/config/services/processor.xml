@@ -13,9 +13,8 @@
         <service class="BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessor"
                  decorates="sylius.order_processing.order_shipment_processor"
                  id="open_marketplace.processor.order.order_shipment_by_vendor_processor">
-            <argument type="service" id="open_marketplace.vendor_shipping_methods_resolver" />
-            <argument type="service" id="sylius.shipping_method_resolver.default" />
-            <argument type="service" id="sylius.factory.shipment"/>
+            <argument type="service" id="open_marketplace.factory.shipment" />
+            <argument type="service" id="open_marketplace.calculator.shipment_units_recalculator" />
         </service>
     </services>
 </container>
