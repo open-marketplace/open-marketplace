@@ -5,3 +5,5 @@ webpack_encore:
         admin: '%kernel.project_dir%/public/build/admin'
         cms_shop: '%kernel.project_dir%/public/build/bitbag/cms/shop'
         cms_admin: '%kernel.project_dir%/public/build/bitbag/cms/admin'
+        wishlist_shop: '%kernel.project_dir%/public/build/bitbag/wishlist/shop'
+        wishlist_admin: '%kernel.project_dir%/public/build/bitbag/wishlist/admin'
