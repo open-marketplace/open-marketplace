@@ -1,7 +1,7 @@
 {
-    "name": "bitbag/multi-vendor-marketplace",
+    "name": "bitbag/open-marketplace",
     "type": "project",
-    "description": "Multi-Vendor Marketplace Universe",
+    "description": "BitBag Multi-Vendor Marketplace Universe",
     "license": "MIT",
     "require": {
         "php": "^8.0",
