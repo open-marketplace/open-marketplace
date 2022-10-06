@@ -55,6 +55,6 @@ sylius_shop_order_thank_you:
     path: /thank-you
     methods: [GET]
     defaults:
-        _controller: open_marketplace.order.order_controller:thankYouAction
+        _controller: open_marketplace.controller.order.order_controller:thankYouAction
         _sylius:
             template: "Checkout/thankYou.html.twig"
