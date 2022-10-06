@@ -1,0 +1,58 @@
+$base-box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.04);
+$base-border-radius: 8px;
+$base-color: #339ae8;
+.toolbar-brand {
+  background-color: #000;
+  border-radius: 8px;
+  color: #fff;
+  padding:10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.toolbar-brand:hover {
+  background-color: #454545;
+  color: #fff;
+}
+.stats .ui.basic.active.button {
+  color: $base-color !important;
+}
+a {
+  color: #339ae8;
+}
+.ui.primary.button {
+  background-color: $base-color;
+}
+#sidebar.ui.sidebar.vertical.menu .item.active {
+  font-weight: inherit !important;
+  background: $base-color !important;
+  border-radius: 0px 99px 99px 0px !important;
+}
+.ui.primary.button:hover, .ui.primary.button:focus {
+  background-color: #42a3ee;
+}
+.sylius-grid-table-wrapper .ui.sortable.table thead th.sorted {
+  color: $base-color;
+}
+.ui.styled.accordion {
+  box-shadow: $base-box-shadow;
+  border-radius: $base-border-radius;
+}
+.ui.segment, .ui.attached.segment {
+  box-shadow: $base-box-shadow;
+  border-radius: $base-border-radius;
+}
+.ui.form .field > input:focus, .ui.form .field > textarea:focus {
+  border-color: rgba(66, 154, 232, 0.4);
+}
+.ui.toggle.checkbox input:checked ~ .box:before, .ui.toggle.checkbox input:checked ~ label:before, .ui.toggle.checkbox input:focus:checked ~ .box:before, .ui.toggle.checkbox input:focus:checked ~ label:before {
+  background-color: $base-color !important;
+}
+.ui.teal.labels .label, .ui.teal.label {
+  background-color: $base-color !important;
+  border-color: $base-color !important;
+  color: #FFFFFF !important;
+}
+.ui.header .circular.icon {
+  color: $base-color;
+  background: rgba(51, 154, 232, 0.1);
+}
