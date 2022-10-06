@@ -44,7 +44,5 @@ sylius_grid:
                         type: show
                     update:
                         type: edit_vendor
-                    enable_disable:
-                        type: enable_vendor_action
                     delete:
                         type: delete
