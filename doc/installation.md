@@ -6,22 +6,21 @@ We work on stable, supported and up-to-date versions of packages. We recommend y
 
 | Package       | Version |
 |---------------|---------|
-| PHP           | 8.0     |
-| sylius/sylius | 1.11.0  |
+| PHP           | \>8.0   |
+| sylius/sylius | 1.11.x  |
 | MySQL         | \>= 5.7 |
 
 ----
 
 The Open Marketplace application can serve as a foundation for your custom e-commerce marketplace application.
 
-Before creating your application, make sure you use PHP 8.0 and have Composer installed
+Before creating your application, make sure you use at least PHP 8.0 and have Composer installed
 
 ### 1. Create project
 
 ```diff
 $ composer create-project bitbag/open-marketplace project
 $ cd project
-$ composer install 
 ```
 
 Open Marketplace as an application based on Sylius is using environment variables which configure connection
@@ -60,6 +59,14 @@ $ symfony server:start // or symfony serve -d --no-tls
 $ bin/console sylius:fixtures:load open_marketplace
 ```
 ### 5. Run tests
+
+Creating database for your test environment.
+
+```diff
+$ bin/console doctrine:database:create --env=test
+$ bin/console doctrine:schema:create --env=test
+```
+
 **a)** PHPUnit
 
 ```diff
@@ -83,7 +90,7 @@ vendor/bin/phpstan analyse -c phpstan.neon -l 8 src/
 vendor/bin/behat 
 ```
 
-**d)** Coding Standard
+**e)** Coding Standard
 
 ```diff
 vendor/bin/ecs check src

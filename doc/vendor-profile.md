@@ -3,7 +3,7 @@
 ### Becoming a vendor 
 
 ---
-Firstly, you need to register as a user. For this you have to click `Register` button and complete the form
+Firstly, you need to register as a user. For this you have to click `Register` button and complete the form:
 
 ![registration.png](images/registration.png)
 
@@ -24,7 +24,6 @@ in their row and click `Verify` button. After this, an email will be sent to ven
 Now vendor can see their panel which contains many features such as attributes, product list, inventory,
 orders, clients, shipping methods, [conversations](conversations.md), profile.
 
-![vendor-panel.png](images/vendor-panel.png)
 
 ### Editing vendor profile
 

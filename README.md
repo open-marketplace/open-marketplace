@@ -7,250 +7,131 @@
     </a>
 </p>
 
-<h1 align="center">SyliusMultiVendorMarketplacePlugin</h1>
+# BitBag OpenMarketplace
 
-<p align="center">Plugin to create from sylius to multi-vendor shop</p>
-
-## Installation
+----
 
 
-1. Add plugin dependencies to your `composer.json` file:
 
-```php
-    "require": {
-        "bitbag/multi-vendor-marketplace": "dev-master"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://bitbagcommerce.repo.packagist.com/dev-mvm-customer/"
-        }
-    ],
-```
+<p>
+ <img align="left" src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
+</p>
 
-2. Add plugin dependencies to your `config/bundles.php` file:
+At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us to work  together, feel free to reach out. You will find out more about our professional services, technologies, and contact details at [https://bitbag.io/](https://bitbag.io/contact-us/).
 
-```php
-return [
-    ...
+Like what we do? Want to join us? Check out our job listings on our [career page](https://bitbag.io/career/?utm_source=github&utm_medium=referral&utm_campaign=career). Not familiar with Symfony & Sylius yet, but still want to start with us? Join our [academy](https://bitbag.io/pl/akademia?utm_source=github&utm_medium=url&utm_campaign=akademia)!
 
-    BitBag\OpenMarketplace\BitBagSyliusMultiVendorMarketplacePlugin::class => ['all' => true],
-];
-```
+## Table of Content
 
-3. Import required config in your `config/packages/_sylius.yaml` file:
-```yaml
-# config/packages/_sylius.yaml
+***
 
-imports:
-    ...
+* [Overview](#overview)
+* [Support](#we-are-here-to-help)
+* [About us](#about-us)
+    * [Community](#community)
+* [Our best plugins](#our-best-plugins)
+* [License](#license)
+* [Contact](#contact)
 
-  - { resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/config.yml" }
-```
+# Overview
 
-```yaml
-# config/packages/_sylius.yaml
+----
+This app allows you to create your own marketplace.
 
-...
+- [Installation](./doc/installation.md)
+- [Vendor profile](./doc/vendor-profile.md)
+- [Conversations](./doc/conversations.md)
+- [Product Listing](./doc/product-listing.md)
+- [Product Attributes](./doc/product-attributes.md)
+- [Shipment](./doc/shipment.md)
+- [Orders](./doc/orders.md)
+- [Checkout](./doc/checkout.md)
+- [Clients](./doc/clients.md)
 
-sylius_order:
-  resources:
-    order:
-      classes:
-        model: App\Entity\Order
-    order_item:
-      classes:
-        model: App\Entity\OrderItem
+## We are here to help
+This **open-source project was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin, or need any assistance with your Sylius project - let us know!
 
-sylius_product:
-  resources:
-    product:
-      classes:
-        model: App\Entity\Product
-
-sylius_user:
-  resources:
-    shop:
-      user:
-        classes:
-          model: App\Entity\ShopUser
-          interface: BitBag\OpenMarketplace\Entity\ShopUserInterface
-
-```
-
-4. Import routing in your `config/routes.yaml` file:
-
-```yaml
-
-# config/routes.yaml
-...
-
-open_marketplace:
-  resource: "@BitBagSyliusMultiVendorMarketplacePlugin/Resources/config/routing.yml"
-```
+[![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/)
 
 
-5. Extend `Product`,`Order`,`OrderItem` and `ShopUser` (including Doctrine mapping)::
+# About us
 
-```php
-<?php
+---
 
-declare(strict_types=1);
+BitBag is a company of people who **love what they do** and do it right. We fulfill the eCommerce technology stack with **Sylius**, Shopware, Akeneo, and Pimcore for PIM, eZ Platform for CMS, and VueStorefront for PWA. Our goal is to provide real digital transformation with an agile solution that scales with the **clients’ needs**. Our main area of expertise includes eCommerce consulting and development for B2C, B2B, and Multi-vendor Marketplaces.</br>
+We are advisers in the first place. We start each project with a diagnosis of problems, and an analysis of the needs and **goals** that the client wants to achieve.</br>
+We build **unforgettable**, consistent digital customer journeys on top of the **best technologies**. Based on a detailed analysis of the goals and needs of a given organization, we create dedicated systems and applications that let businesses grow.<br>
+Our team is fluent in **Polish, English, German and, French**. That is why our cooperation with clients from all over the world is smooth.
 
-namespace App\Entity;
+**Some numbers from BitBag regarding Sylius:**
+- 50+ **experts** including consultants, UI/UX designers, Sylius trained front-end and back-end developers,
+- 120+ projects **delivered** on top of Sylius,
+- 25+ **countries** of BitBag’s customers,
+- 4+ **years** in the Sylius ecosystem.
 
-use BitBag\OpenMarketplace\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Model\Order\OrderTrait;
-use Sylius\Component\Core\Model\Order as BaseOrder;
+**Our services:**
+- Business audit/Consulting in the field of **strategy** development,
+- Data/shop **migration**,
+- Headless **eCommerce**,
+- Personalized **software** development,
+- **Project** maintenance and long term support,
+- Technical **support**.
 
-class Order extends BaseOrder implements OrderInterface
-{
-    use OrderTrait;
-}
-```
+**Key clients:** Mollie, Guave, P24, Folkstar, i-LUNCH, Elvi Project, WestCoast Gifts.
 
-```php
-<?php
+---
 
-declare(strict_types=1);
+If you need some help with Sylius development, don't be hesitated to contact us directly. You can fill the form on [this site](https://bitbag.io/contact-us/) or send us an e-mail at hello@bitbag.io!
 
-namespace App\Entity;
+---
 
-use BitBag\OpenMarketplace\Entity\OrderItemInterface;
-use BitBag\OpenMarketplace\Model\OrderItem\OrderItemTrait;
-use Sylius\Component\Core\Model\OrderItem as BaseOrderItem;
+[![](https://bitbag.io/wp-content/uploads/2021/08/sylius-badges-transparent-wide.png)](https://bitbag.io/contact-us/)
 
-class OrderItem extends BaseOrderItem implements OrderItemInterface
-{
-    use OrderItemTrait;
-}
-```
+## Community
 
-```php
-<?php
+----
 
-declare(strict_types=1);
+For online communication, we invite you to chat with us & other users on [Sylius Slack](https://sylius-devs.slack.com/).
 
-namespace App\Entity;
+# Our best plugins
 
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Model\ShopUser\ShopUserTrait;
-use Sylius\Component\Core\Model\ShopUser as BaseShopUser;
+---
 
-class ShopUser extends BaseShopUser implements ShopUserInterface
-{
-    use ShopUserTrait;
-}
-```
 
-```php
-<?php
 
-declare(strict_types=1);
+| BitBag's Plugin | GitHub | Sylius' Store|
+| ------ | ------ | ------|
+| ACL Plugin | *Private. Available after the purchasing.*| https://plugins.sylius.com/plugin/access-control-layer-plugin/|
+| Braintree Plugin | https://github.com/BitBagCommerce/SyliusBraintreePlugin |https://plugins.sylius.com/plugin/braintree-plugin/|
+| CMS Plugin | https://github.com/BitBagCommerce/SyliusCmsPlugin | https://plugins.sylius.com/plugin/cmsplugin/|
+| Elasticsearch Plugin | https://github.com/BitBagCommerce/SyliusElasticsearchPlugin | https://plugins.sylius.com/plugin/2004/|
+| Mailchimp Plugin | https://github.com/BitBagCommerce/SyliusMailChimpPlugin | https://plugins.sylius.com/plugin/mailchimp/ |
+| Multisafepay Plugin | https://github.com/BitBagCommerce/SyliusMultiSafepayPlugin |
+| Wishlist Plugin | https://github.com/BitBagCommerce/SyliusWishlistPlugin | https://plugins.sylius.com/plugin/wishlist-plugin/|
 
-namespace App\Entity;
+**If you need an overview of Sylius' capabilities, schedule a consultation with our expert.**
 
-use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Model\Product\ProductTrait;
-use Sylius\Component\Core\Model\Product as BaseProduct;
+[![](https://bitbag.io/wp-content/uploads/2020/10/button_free_consulatation-1.png)](https://bitbag.io/contact-us/)
 
-class Product extends BaseProduct implements ProductInterface
-{
-    use ProductTrait;
-}
-```
+## Additional resources for developers
 
-Mapping (Annotations)
-```xml
-<!-- ../confog/doctrine/Order.orm.xmls -->
+---
+To learn more about our contribution workflow and more, we encourage you to use the following resources:
+* [Sylius Documentation](https://docs.sylius.com/en/latest/)
+* [Sylius Contribution Guide](https://docs.sylius.com/en/latest/contributing/)
+* [Sylius Online Course](https://sylius.com/online-course/)
 
-<?xml version="1.0" encoding="UTF-8" ?>
-<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+## License
 
-    <mapped-superclass name="App\Entity\Order" table="sylius_order">
-        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="products" />
-        <many-to-one field="primaryOrder" target-entity="App\Entity\Order" inversed-by="secondaryOrders">
-            <join-column on-delete="SET NULL"/>
-        </many-to-one>
-        <one-to-many field="secondaryOrders" target-entity="App\Entity\Order" mapped-by="primaryOrder"/>
-    </mapped-superclass>
-</doctrine-mapping>
-```
+---
 
-```xml
-<!-- ../confog/doctrine/OrderItem.orm.xmls -->
+This project's source code is completely free and released under the terms of the MIT license.
 
-<?xml version="1.0" encoding="UTF-8" ?>
-<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
-    <mapped-superclass name="App\Entity\OrderItem" table="sylius_order_item">
-        <association-overrides>
-            <association-override name="order">
-                <join-table name="sylius_order">
-                    <join-columns>
-                        <join-column name="order_id" nullable="false" on-delete="CASCADE" />
-                    </join-columns>
-                </join-table>
-            </association-override>
-        </association-overrides>
-    </mapped-superclass>
-</doctrine-mapping>
-```
+## Contact
 
-```xml
-<!-- ../confog/doctrine/Product.orm.xmls -->
+---
+If you want to contact us, the best way is to fill the form on [our website](https://bitbag.io/contact-us/) or send us an e-mail to hello@bitbag.io with your question(s). We guarantee that we answer as soon as we can!
 
-<?xml version="1.0" encoding="UTF-8" ?>
-<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
-    <mapped-superclass name="App\Entity\Product" table="sylius_product">
-        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="products" />
-    </mapped-superclass>
-</doctrine-mapping>
-```
-
-```xml
-<!-- ../confog/doctrine/ShopUser.orm.xmls -->
-
-<?xml version="1.0" encoding="UTF-8" ?>
-<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <mapped-superclass name="App\Entity\ShopUser" table="sylius_shop_user">
-        <one-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" mapped-by="shopUser" />
-    </mapped-superclass>
-</doctrine-mapping>
-```
-5. Add MVM config in your `.env` file:
-
-```
-###> MVM Config ###
-LOGO_DIRECTORY=media/image/logo/
-VENDOR_PRODUCTS_LIMITS=9,18,27
-DEFAULT_VENDOR_PRODUCTS_LIMIT=9
-MESSAGES_FILE_UPLOAD_DIRECTORY=uploads/message_files
-###> MVM Config ###
-```
-
-6. Finish the installation by updating the database schema and installing assets:
-
-```
-$ composer install
-$ yarn install
-$ yarn encore dev
-$ bin/console assets:install 
-$ bin/console doctrine:database:create
-$ bin/console doctrine:schema:create
-$ bin/console sylius:fixtures:load mvm
-$ symfony server:start // or symfony serve -d --no-tls
-```
+[![](https://bitbag.io/wp-content/uploads/2021/08/badges-bitbag.png)](https://bitbag.io/contact-us/)
