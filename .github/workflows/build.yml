@@ -143,7 +143,7 @@ jobs:
 
         -
             name: Load fixtures in test application
-            run: (bin/console sylius:fixtures:load -n mvm)
+            run: (bin/console sylius:fixtures:load -n open_marketplace)
 
         -
             name: Validate composer.json
