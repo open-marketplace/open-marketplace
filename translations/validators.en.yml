@@ -13,3 +13,4 @@ validator:
     maximum_image_width: 'The image width is too big ({{ width }}px). Allowed maximum width is {{ max_width }}px.'
     maximum_image_height: 'The image height is too big ({{ height }}px). Allowed maximum height is {{ max_height }}px.'
     slug_invalid: 'This is not valid slug'
+    code_vendor_unique: "User cannot have multiple products with same code"

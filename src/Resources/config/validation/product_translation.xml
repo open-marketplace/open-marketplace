@@ -5,6 +5,15 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                     http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>locale</value>
+                <value>slug</value>
+            </option>
+            <option name="errorPath">slug</option>
+            <option name="message">sylius.product.slug.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.product.name.not_blank</option>
@@ -18,15 +27,6 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">
-                <value>locale</value>
-                <value>slug</value>
-            </option>
-            <option name="errorPath">slug</option>
-            <option name="message">sylius.product.slug.unique</option>
-            <option name="groups">sylius</option>
-        </constraint>
         <property name="slug">
             <constraint name="Regex">
                 <option name="message">validator.message.slug_invalid</option>

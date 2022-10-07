@@ -119,6 +119,7 @@
         </service>
 
         <service id="bitbag.form.type.product" class="BitBag\OpenMarketplace\Form\ProductListing\ProductType">
+            <argument type="service" id="open_marketplace.provider.vendor"/>
             <tag name="form.type" />
         </service>
 

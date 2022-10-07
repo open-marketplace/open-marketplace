@@ -2,11 +2,6 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft">
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">code</option>
-            <option name="message">sylius.product.code.unique</option>
-            <option name="groups">sylius</option>
-        </constraint>
         <property name="code">
             <constraint name="Length">
                 <option name="min">2</option>

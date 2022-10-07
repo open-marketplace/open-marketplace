@@ -247,4 +247,10 @@ class Vendor implements VendorInterface
             $this->shippingMethods->removeElement($shippingMethod);
         }
     }
+
+    public function __toString(): string
+    {
+        /**  @phpstan-ignore-next-line */
+        return $this->getCompanyName();
+    }
 }
