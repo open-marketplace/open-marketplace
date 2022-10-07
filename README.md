@@ -41,12 +41,12 @@ This app allows you to create your own marketplace.
 - [Installation](./doc/installation.md)
 - [Vendor profile](./doc/vendor-profile.md)
 - [Conversations](./doc/conversations.md)
-- [Product Listing](./doc/product-listing.md)
-- [Product Attributes](./doc/product-attributes.md)
-- [Shipment](./doc/shipment.md)
-- [Orders](./doc/orders.md)
-- [Checkout](./doc/checkout.md)
-- [Clients](./doc/clients.md)
+- [Product Listing](./doc/product_listings.md)
+- [Shipment](./doc/manage_shipping_methods.md)
+- [Order Process](./doc/order_process.md)
+- [Order management](./doc/menage_orders.md)
+- [Conversations](./doc/conversations.md)
+
 
 ## We are here to help
 This **open-source project was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin, or need any assistance with your Sylius project - let us know!
