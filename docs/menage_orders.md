@@ -20,12 +20,16 @@ If you want see more details about order you can click show button(1) in actions
 
 In order details view you can see order info (1) and items (2).
 
-![Order Info](order_info.png)
+![Order basic data](order_info.png)
 
 Below is information about shipping method (1).
 
+![Shipping information](shipping_info.png)
+
 After that is information about payments (1).
 
-You can also resend confirmation email to customer (1)
+![Payments information](payments_info.png)
 
-![Clients show button](clients_details.png)
+You can also resend confirmation email to client (1).
+
+![Resend email to client](resend_email.png)
