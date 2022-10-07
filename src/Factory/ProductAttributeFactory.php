@@ -25,7 +25,7 @@ final class ProductAttributeFactory implements ProductAttributeFactoryInterface
         $productAttribute->setConfiguration($draftAttribute->getConfiguration());
         $vendor = $draftAttribute->getVendor();
         $vendorID = $vendor->getId();
-        $productAttribute->setCode($draftAttribute->getCode()."-".$vendorID);
+        $productAttribute->setCode($draftAttribute->getCode() . '-' . $vendorID);
         $productAttribute->setType($draftAttribute->getType());
         $productAttribute->setPosition($draftAttribute->getPosition());
 

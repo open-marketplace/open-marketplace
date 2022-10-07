@@ -66,7 +66,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
 
         $vendor = $productDraft->getProductListing()->getVendor();
         $vendorID = $vendor->getId();
-        $product->setCode($productDraft->getCode()."-".$vendorID);
+        $product->setCode($productDraft->getCode() . '-' . $vendorID);
         $product->setEnabled(true);
         $product->setUpdatedAt($now);
         $product->setCreatedAt($now);
