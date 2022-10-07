@@ -9,3 +9,4 @@ Clients you will find in vendor menu in your account (1).
 On this section you will find yours clients list with basic data of each one.
 
 ![Customers in vendor menu](manage_clients.png)
+
