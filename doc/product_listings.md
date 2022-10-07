@@ -58,3 +58,14 @@ first, by filling form (1) available from attributes management page (2).
 Then every attribute created by vendor can be added to product listing. 
 
 ![adding_attribute](images/adding_attribute.png)
+
+### Inventory tab
+This tab displays all accepted products of vendor, every product can
+be set to tracking mode.
+
+![inventory](img/invenory.png)
+
+If product is set to tracked application will not allow buy product when
+quantity reaches 0,
+
+![inventory_tracker_message](img/inventory_guard.png)
