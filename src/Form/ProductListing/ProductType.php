@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
@@ -22,6 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 final class ProductType extends AbstractType
 {
@@ -38,6 +40,7 @@ final class ProductType extends AbstractType
                 'attr' => [
                     'class' => 'ui styled fluid accordion',
                     ],
+                'constraints' => [new Valid(['groups' => 'sylius'])],
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'open_marketplace.ui.save_draft',
@@ -105,6 +108,7 @@ final class ProductType extends AbstractType
     {
         $resolver->setDefaults([
             'compound' => true,
+            'validation_groups' => 'sylius',
         ]);
     }
 }
