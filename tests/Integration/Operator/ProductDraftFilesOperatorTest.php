@@ -56,7 +56,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
         $manager->persist($cratedProduct);
         $manager->flush();
 
-        $product = $manager->getRepository(Product::class)->findOneBy(['code' => 'FIXTURE']);
+        $product = $manager->getRepository(Product::class)->findOneBy(['code' => 'FIXTURE' . '-' . $draftFixture->getProductListing()->getVendor()->getId()]);
 
         self::assertCount(1, $product->getImages());
         self::assertEquals($expectedFilePathKey, $product->getImages()[0]->getPath());

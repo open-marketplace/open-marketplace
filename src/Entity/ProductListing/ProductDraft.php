@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -23,6 +24,8 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     protected ?int $id = null;
 
     protected string $code;
+
+    protected ?VendorInterface $vendor = null;
 
     protected bool $isVerified;
 
@@ -159,6 +162,16 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void
     {
         $this->productListingPrice->add($productListingPrice);
+    }
+
+    public function getVendor(): ?VendorInterface
+    {
+        return $this->vendor;
+    }
+
+    public function setVendor(?VendorInterface $vendor): void
+    {
+        $this->vendor = $vendor;
     }
 
     public function getProductListing(): ProductListingInterface

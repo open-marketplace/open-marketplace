@@ -10,8 +10,7 @@
                                 <h3>{{ 'sylius.ui.details'|trans }}</h3>
                             </div>
                             <div class="ui segment">
-                                {{ form_label(form.code)}}
-                                {{ form_widget(form.code) }}
+                                {{ form_row(form.code) }}
                             </div>
                         </div>
                         <div class="ui segments">
@@ -35,6 +34,7 @@
                                                         {{ form_label(price) }}
                                                         <div class="ui labeled input">
                                                             {{ form_widget(price) }}
+                                                            {{ form_errors(price) }}
                                                         </div>
                                                     </div>
                                                 {% endfor %}
@@ -62,6 +62,7 @@
                                                 {% for translation in translations %}
                                                     {{ form_label(translation) }}
                                                     {{ form_widget(translation) }}
+                                                    {{ form_errors(translation) }}
                                                 {% endfor %}
                                             </div>
                                         </div>
@@ -112,5 +113,8 @@
                 {{ form_widget(form.save) }}
             </div>
         </div>
+    <div style="display: none">
+        {{ form_row(form.vendor) }}
+    </div>
       {{ form_end(form, {'render_rest': true})  }}
 {% endblock %}

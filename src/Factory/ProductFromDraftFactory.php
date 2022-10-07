@@ -64,7 +64,9 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
     {
         $now = new \DateTime();
 
-        $product->setCode($productDraft->getCode());
+        $vendor = $productDraft->getProductListing()->getVendor();
+        $vendorID = $vendor->getId();
+        $product->setCode($productDraft->getCode() . '-' . $vendorID);
         $product->setEnabled(true);
         $product->setUpdatedAt($now);
         $product->setCreatedAt($now);

@@ -25,6 +25,10 @@
             </cascade>
         </many-to-one>
 
+        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="productListings">
+            <join-column name="vendor_id" on-delete="SET NULL"/>
+        </many-to-one>
+
         <one-to-many field="images" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImageInterface"
                      mapped-by="owner">
             <cascade>
