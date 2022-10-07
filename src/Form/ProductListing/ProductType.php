@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
