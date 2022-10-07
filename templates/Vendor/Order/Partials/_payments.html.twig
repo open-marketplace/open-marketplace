@@ -1,6 +1,6 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 {% if order.hasPayments %}
-    <div class="eight wide column" id="payment-state">
+    <div class="ui segment" id="payment-state">
         {% include '@SyliusAdmin/Order/Label/PaymentState/' ~ order.paymentState ~ '.html.twig' with { 'value': 'sylius.ui.' ~ order.paymentState, 'attached': true } %}
         <h3 class="ui dividing header">{{ 'sylius.ui.payments'|trans }}</h3>
         <div class="ui relaxed divided list" id="sylius-payments">
