@@ -4,7 +4,7 @@ When a customer buys products from different vendors, they can choose the shippi
 
 the photo below shows the available shipping methods for the company "Company" (1) and for the company "Second Company" (2)
 
-![Shipping methods for each vendor](shipping_methods_for_each_vendor.png)
+![Shipping methods for each vendor](images/shipping_methods_for_each_vendor.png)
 
 When customer place order each vendor will have separate order from this customer.
 
