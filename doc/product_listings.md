@@ -23,7 +23,7 @@ administrator. After sending for verification editing product is blocked.
 Then it is up to the admin to decide whether the product list is rejected or
 the product becomes available to the customer in the market, the admin can view
 list of products sent for verification in the administration panel via the product listings tab (1). Each product listing has a detail page
-where admin can view product details and decide whether or not to accept (2).
+where admin can view product details and decide whether to accept (2).
 
 ![admin_product_view](images/admin_product_view.png)
 
@@ -43,6 +43,10 @@ where admin can view product details and decide whether or not to accept (2).
     If administrator accepts product listing it become converted to product
     available for customers.
 
+    #### Details view
+    
+    ![details_view](images/details.png)
+
 ## Product listing versioning
 
 Any changes made after accepting product have to be accepted by
@@ -59,13 +63,13 @@ Then every attribute created by vendor can be added to product listing.
 
 ![adding_attribute](images/adding_attribute.png)
 
-### Inventory tab
+## Inventory tab
 This tab displays all accepted products of vendor, every product can
 be set to tracking mode.
 
-![inventory](img/invenory.png)
+![inventory](images/inventory.png)
 
 If product is set to tracked application will not allow buy product when
 quantity reaches 0,
 
-![inventory_tracker_message](img/inventory_guard.png)
+![inventory_tracker_message](images/inventory_guard.png)
