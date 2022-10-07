@@ -26,12 +26,6 @@
             </constraint>
         </property>
 
-        <property name="price">
-            <constraint name="Positive">
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-
         <property name="attributes">
             <constraint name="Valid" />
         </property>
