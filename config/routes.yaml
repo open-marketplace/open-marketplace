@@ -1,2 +1,8 @@
 open_marketplace:
     resource: "../src/Resources/config/routing.yml"
+
+bitbag_sylius_cms_plugin:
+    resource: "@BitBagSyliusCmsPlugin/Resources/config/routing.yml"
+
+bitbag_sylius_wishlist_plugin:
+    resource: "@BitBagSyliusWishlistPlugin/Resources/config/routing.yml"

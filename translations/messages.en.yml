@@ -26,6 +26,7 @@ open_marketplace:
         tax_id: 'Tax ID'
         vendor_dashboard: "Vendor dashboard"
         vendor_profile: "Profile"
+        vendor: 'Vendor'
         become_a_vendor: 'Become a Vendor'
         product_listings: 'Product listings'
         marketplace: 'Marketplace'
