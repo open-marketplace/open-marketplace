@@ -1,2 +1,15 @@
 @import "./attributes/attributes";
 @import "./product_listing/product_listing_dropdown";
+$base-box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.04);
+$base-border-radius: 8px;
+body.pushable .pusher {
+  background-color: #fbfbfb;
+}
+.ui.cards > .card, .ui.card, .ui.segment, .ui.vertical.menu {
+  box-shadow: $base-box-shadow ;
+  border-radius: $base-border-radius;
+}
+
+.ui.segment {
+  border: 1px solid rgba(123,126,130, 0.15);
+}

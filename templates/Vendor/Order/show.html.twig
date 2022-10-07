@@ -59,7 +59,15 @@
         </tfoot>
     </table>
     <div class="ui stackable grid">
-        {% include 'Vendor/Order/Partials/_payments.html.twig' %}
-        {% include 'Vendor/Order/Partials/_resendEmail.html.twig' %}
+        <div class="ten wide column">
+            <div class="ui segments">
+                {% include 'Vendor/Order/Partials/_payments.html.twig' %}
+            </div>
+        </div>
+        <div class="six wide column">
+            <div class="ui segments">
+                {% include 'Vendor/Order/Partials/_resendEmail.html.twig' %}
+            </div>
+        </div>
     </div>
 {% endblock %}

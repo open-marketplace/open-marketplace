@@ -1,10 +1,12 @@
 {
-    "name": "bitbag/multi-vendor-marketplace",
+    "name": "bitbag/open-marketplace",
     "type": "project",
-    "description": "Multi-Vendor Marketplace Universe",
+    "description": "BitBag Multi-Vendor Marketplace Universe",
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "bitbag/cms-plugin": "^3.2",
+        "bitbag/wishlist-plugin": "^2.0",
         "sylius/sylius": "~1.11.0",
         "symfony/webpack-encore-bundle": "^1.15"
     },

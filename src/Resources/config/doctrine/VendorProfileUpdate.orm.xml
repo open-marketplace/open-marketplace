@@ -33,6 +33,7 @@
         </one-to-one>
 
         <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface">
+            <join-column name="vendor_id" on-delete="SET NULL" />
         </one-to-one>
 
     </mapped-superclass>
