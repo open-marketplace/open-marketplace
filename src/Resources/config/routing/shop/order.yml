@@ -30,8 +30,8 @@ sylius_shop_account_order_index:
         _controller: sylius.controller.order:indexAction
         _sylius:
             section: shop_account
-            template: "Shop/Order/Index.html.twig"
-            grid: sylius_shop_account_order
+            template: "@SyliusShop/Account/Order/index.html.twig"
+            grid: sylius_shop_account_orderr
 
 sylius_shop_checkout_select_shipping:
     path: /checkout/select-shipping

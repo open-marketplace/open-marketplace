@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
+use Sylius\Component\Order\Model\OrderInterface as OrderInterfaceAlias;
 
 class OrderRepository extends BaseOrderRepository
 {
@@ -52,5 +53,18 @@ class OrderRepository extends BaseOrderRepository
             ->andWhere('c.id = :id')
             ->setParameter('vendor', $vendorId)
             ->setParameter('id', $id);
+    }
+
+    public function createByCustomerAndChannelIdAndSecondaryQueryBuilder($customerId, $channelId): QueryBuilder
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.customer = :customerId')
+            ->andWhere('o.channel = :channelId')
+            ->andWhere('o.state != :state')
+            ->andWhere('o.primaryOrder is NULL' )
+            ->setParameter('customerId', $customerId)
+            ->setParameter('channelId', $channelId)
+            ->setParameter('state', OrderInterfaceAlias::STATE_CART)
+            ;
     }
 }
