@@ -55,13 +55,13 @@ class OrderRepository extends BaseOrderRepository
             ->setParameter('id', $id);
     }
 
-    public function createByCustomerAndChannelIdAndSecondaryQueryBuilder($customerId, $channelId): QueryBuilder
+    public function createByCustomerAndChannelIdAndSecondaryQueryBuilder(int $customerId, int $channelId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.customer = :customerId')
             ->andWhere('o.channel = :channelId')
             ->andWhere('o.state != :state')
-            ->andWhere('o.primaryOrder is NULL' )
+            ->andWhere('o.primaryOrder is NULL')
             ->setParameter('customerId', $customerId)
             ->setParameter('channelId', $channelId)
             ->setParameter('state', OrderInterfaceAlias::STATE_CART)
