@@ -27,6 +27,7 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 
 # Table of Content
 
+***
 
 * [Overview](#overview)
 * [Customization](#customization)
@@ -39,6 +40,7 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 
 # Overview
 
+----
 This app allows you to create your own marketplace.
 
 - [Installation](./doc/installation.md)
@@ -53,13 +55,18 @@ This app allows you to create your own marketplace.
 
 ## Customization
 
+---
+
 Our project is highly customisable, [here](./doc/how-to-customize.md) is our guide on how to do it.
 
 ## Contribution
 
+---
 Every contribution is meaningful, kudos to everyone who helped us with developing this project!
 
 ## We are here to help
+
+---
 
 This **open-source project was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin, or need any assistance with your Sylius project - let us know!
 
@@ -70,11 +77,17 @@ If you want to participate in the development, you can do it by submitting [pull
 
 ## About BitBag
 
+---
+
 BitBag is a company of people who **love what they do** and do it right. We fulfill the eCommerce technology stack with **Sylius**, Shopware, Akeneo, and Pimcore for PIM, eZ Platform for CMS, and VueStorefront for PWA. Our goal is to provide real digital transformation with an agile solution that scales with the **clients’ needs**. Our main area of expertise includes eCommerce consulting and development for B2C, B2B, and Multi-vendor Marketplaces.</br>
+
+
 
 If you need some help with Sylius development, don't be hesitated to contact us directly. You can fill the form on [this site](https://bitbag.io/contact-us/) or send us an e-mail at hello@bitbag.io!
 
 ## License
+
+---
 
 This project's source code is completely free and released under the terms of the MIT license.
 
@@ -82,10 +95,13 @@ This project's source code is completely free and released under the terms of th
 
 ## Authors
 
+---
+
 See the full list of contributors [here](https://github.com/BitBagCommerce/OpenMarketplace/contributors).
 
 ## Contact
 
+---
 If you want to contact us, the best way is to fill the form on [our website](https://bitbag.io/contact-us/) or send us an e-mail to hello@bitbag.io with your question(s). We guarantee that we answer as soon as we can!
 
 [![](https://bitbag.io/wp-content/uploads/2021/08/badges-bitbag.png)](https://bitbag.io/contact-us/)

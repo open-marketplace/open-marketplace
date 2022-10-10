@@ -75,7 +75,7 @@
                  id="open_marketplace.controller.draftAttributes"
                  parent="open_marketplace.controller.draft_attribute">
             <argument type="service" id="open_marketplace.factory.draftAttribute"/>
-            <argument type="service" id="open_marketplace.security.voter.object_owning_voter"/>
+            <argument type="service" id="open_marketplace.updater.product_attribute_updater"/>
         </service>
 
         <service id="open_marketplace.controller.action.admin.product_listing.show_action"

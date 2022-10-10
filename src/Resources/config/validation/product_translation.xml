@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                    http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>locale</value>
+                <value>slug</value>
+            </option>
+            <option name="errorPath">slug</option>
+            <option name="message">sylius.product.slug.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.product.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.product.name.min_length</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.product.name.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="slug">
+            <constraint name="Regex">
+                <option name="message">validator.message.slug_invalid</option>
+                <option name="pattern">/^[a-z0-9]+(?:-[a-z0-9]+)*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="message">sylius.product.slug.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.product.slug.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

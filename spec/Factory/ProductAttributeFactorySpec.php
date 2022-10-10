@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\ProductAttributeFactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -26,7 +27,10 @@ final class ProductAttributeFactorySpec extends ObjectBehavior
     public function it_returns_valid_object(
         DraftAttributeInterface $draftAttribute,
         ProductAttributeInterface $productAttribute,
+        VendorInterface $vendor
     ): void {
+        $draftAttribute->getVendor()->willReturn($vendor);
+        $vendor->getId()->willReturn(1);
         $draftAttribute->isTranslatable()->willReturn(true);
         $draftAttribute->getStorageType()->willReturn('text');
         $draftAttribute->getConfiguration()->willReturn(['min' => 2, 'max' => 4]);
@@ -38,6 +42,6 @@ final class ProductAttributeFactorySpec extends ObjectBehavior
 
         $productAttribute->isTranslatable()->shouldBe(true);
         $productAttribute->getStorageType()->shouldBe('text');
-        $productAttribute->getCode()->shouldBe('code');
+        $productAttribute->getCode()->shouldBe('code-1');
     }
 }

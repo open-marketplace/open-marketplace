@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -137,4 +138,8 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function getName(string $locale): ?string;
 
     public function getSlug(string $locale): ?string;
+
+    public function getVendor(): ?VendorInterface;
+
+    public function setVendor(?VendorInterface $vendor): void;
 }
