@@ -3,7 +3,7 @@
 
 sylius_grid:
     grids:
-        sylius_shop_account_orderr:
+        open_marketplace_account_order:
             driver:
                 name: doctrine/orm
                 options:

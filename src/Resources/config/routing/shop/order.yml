@@ -31,7 +31,7 @@ sylius_shop_account_order_index:
         _sylius:
             section: shop_account
             template: "@SyliusShop/Account/Order/index.html.twig"
-            grid: sylius_shop_account_orderr
+            grid: open_marketplace_account_order
 
 sylius_shop_checkout_select_shipping:
     path: /checkout/select-shipping
