@@ -7,12 +7,12 @@ Vendor can see conversation started by them or the administrator directly under 
 
 ![conversations-vendor.png](images/conversations-vendor.png)
 
-Under chosen conversation, they can see administrator messages or replies, and respond with a message and optionally with a file. 
+Under chosen conversation, vendor can see administrator messages or replies, and respond with a message and optionally submit with a file. 
 
 ![conversation-vendor.png](images/conversation-vendor.png)
 
 Vendor can start a conversation with administrator by clicking `New conversation` button.
-The conversation form contains choosing category of the conversation, message and file field. 
+The conversation form contains chosen category of the conversation, message and file field. 
 
 ![new-conversation-vendor.png](images/new-conversation-vendor.png)
 ![conversation-form-vendor.png](images/conversation-form-vendor.png)
