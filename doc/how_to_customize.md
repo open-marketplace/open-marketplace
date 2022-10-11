@@ -1,6 +1,6 @@
 # How to customize BitBag OpenMarketplace
 
-Bitbag Open Marketplace is created on the sylius of e-commerce platforms.
+BitBag Open Marketplace is created on the sylius of e-commerce platform.
 
 [sylius documentation](https://docs.sylius.com/en/latest/index.html#)
 
@@ -93,4 +93,9 @@ List of all states machines can be obtained
 
 ```php bin/console debug:winzou:state-machine```
 
+
+### Customizing templates 
+
+Views added by BitBag OpenMarketplace located in templates directory can be overwritten directly,
+to customize sylius views see [sylius customizing template guide](https://sylius-older.readthedocs.io/en/latest/customization/template.html)
 
