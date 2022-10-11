@@ -7,9 +7,6 @@
 
 
 
-<p>
- <img align="left" src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
-</p>
 
 OpenMarketplace is an Open Source Marketplace platform based on Sylius. 
 In BitBag we are committed to providing best shopping experience for vendors and customers.
