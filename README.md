@@ -38,7 +38,7 @@ Looking for a professional team to build a MVM for your business on top of open-
 - [Order Process](./doc/order_process.md)
 - [Order management](./doc/manage_orders.md)
 - [Conversations](./doc/conversations.md)
-- [Customization](./doc/how-to-customize.md)
+- [Customization](./doc/how_to_customize.md)
 
 ## Customization
 
