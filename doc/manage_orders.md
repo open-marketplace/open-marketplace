@@ -24,12 +24,12 @@ In order details view you can see order info (1) and items (2).
 
 Below there is information about shipping method (1).
 
-![Shipping information](shipping_info.png)
+![Shipping information](images/shipping_info.png)
 
 Next information about payments (1).
 
-![Payments information](payments_info.png)
+![Payments information](images/payments_info.png)
 
 You can also resend confirmation email to client (1).
 
-![Resend email to client](resend_email.png)
+![Resend email to client](images/resend_email.png)
