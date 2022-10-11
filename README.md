@@ -50,7 +50,7 @@ Every contribution is meaningful, kudos to everyone who helped us with developin
 
 ## We are here to help
 
-This **open-source project was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin, or need any assistance with your Sylius project - let us know! For community support, join the official [Sylius Slack].(https://sylius-slackin.herokuapp.com/)
+This **open-source project was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin, or need any assistance with your Sylius project - let us know! For community support, join the official [Sylius Slack](https://sylius-slackin.herokuapp.com/).
 
 [![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/)
 
