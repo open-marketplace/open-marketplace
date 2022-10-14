@@ -15,6 +15,12 @@ Encore
   .addEntry('shop-entry', './assets/shop/entry.js')
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
+  .copyFiles({
+    from: 'vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private/img',
+    to: '../../assets/shop/img/[path][name].[ext]',
+    includeSubdirectories: true,
+    pattern: /.*/,
+  })
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction())
   .enableSassLoader();
