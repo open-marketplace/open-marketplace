@@ -54,11 +54,6 @@ final class VendorMenuBuilder
                 ->setLabelAttribute('icon', 'star');
         } else {
             $menu
-                ->addChild('Attributes', ['route' => 'bitbag_open_marketplace_vendor_draft_attribute_index'])
-                ->setLabel('open_marketplace.ui.draft_attributes')
-                ->setLabelAttribute('icon', 'clipboard');
-
-            $menu
                 ->addChild('Product List', ['route' => 'open_marketplace_vendor_product_listing_index'])
                 ->setLabel('open_marketplace.ui.product_list')
                 ->setLabelAttribute('icon', 'inbox');
@@ -67,6 +62,11 @@ final class VendorMenuBuilder
                 ->addChild('Inventory', ['route' => 'vendor_product_variant_index'])
                 ->setLabel('open_marketplace.ui.inventory')
                 ->setLabelAttribute('icon', 'clipboard');
+
+            $menu
+                ->addChild('Attributes', ['route' => 'bitbag_open_marketplace_vendor_draft_attribute_index'])
+                ->setLabel('open_marketplace.ui.draft_attributes')
+                ->setLabelAttribute('icon', 'tag');
 
             $menu
                 ->addChild('Order List', ['route' => 'open_marketplace_order_listing'])
@@ -84,13 +84,13 @@ final class VendorMenuBuilder
                 ->setLabelAttribute('icon', 'shipping');
 
             $menu
-                ->addChild('conversations', ['route' => 'open_marketplace_vendor_conversation_index'])
-                ->setLabel('open_marketplace.ui.menu.conversations')
-                ->setLabelAttribute('icon', 'envelope open');
-            $menu
-                ->addChild('newes', ['route' => 'vendor_profile'])
+                ->addChild('Profile', ['route' => 'vendor_profile'])
                 ->setLabel('open_marketplace.ui.vendor_profile')
                 ->setLabelAttribute('icon', 'pencil');
+            $menu
+                ->addChild('Conversations', ['route' => 'open_marketplace_vendor_conversation_index'])
+                ->setLabel('open_marketplace.ui.menu.conversations')
+                ->setLabelAttribute('icon', 'envelope open');
         }
 
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);
