@@ -2,7 +2,7 @@
 {% set path = 'open_marketplace_admin_vendor_' ~ path_suffix %}
 {% set label = 'open_marketplace.ui.' ~ path_suffix %}
 {% set icon = data.enabled ? 'lock' : 'lock open'%}
-{% set color = data.enabled ? 'yellow' : 'green'%}
+{% set color = data.enabled ? 'yellow' : 'primary'%}
 
 <form action="{{ path(path, {'id': data.id}) }}" method="post">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">

@@ -16,7 +16,6 @@
     <div class="ui stackable two column grid">
         <div class="column">
             <h1 class="ui header">
-
                 {% if app.request.query.get('closed') %}
                     <i class="icon archive"></i>
                     <div class="content">
@@ -53,6 +52,18 @@
     </div>
 
     <div class="ui divider"></div>
+
+    {% if account_disabled %}
+        <div class="ui info red message">
+            <div class="header">
+                {{ 'sylius.ui.info'|trans }}
+            </div>
+            <p>
+                {{ 'open_marketplace.ui.your_account_has_been_disabled'|trans }}
+            </p>
+        </div>
+        <div class="ui divider"></div>
+    {% endif %}
 
     {% if conversations|length == 0 %}
         {% if app.request.query.get('closed') %}

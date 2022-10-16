@@ -20,7 +20,7 @@ Feature: Starting conversation by Administrator
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
     Then I should see "test Message"
-    
+
   Scenario: Vendor begins conversation
     Given I am logged in as "test@company.domain"
     And I am on "/en_US/account/vendor/conversation/create"

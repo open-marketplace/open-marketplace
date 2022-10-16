@@ -113,6 +113,7 @@ open_marketplace:
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_details: 'Vendor details'
+        show_product_listings: 'Show product listings'
         verified: 'Accepted'
         verify: 'Verify'
         new_vendor: 'New Vendor'
@@ -140,6 +141,7 @@ open_marketplace:
         invalid_csrf: "Invalid csrf token."
         rejection_details: "Rejection details"
         no_media_uploaded: "No media uploaded."
+        your_account_has_been_disabled: "Your vendor account has been disabled. Please contact administrators for more information."
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Menu;
 
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
@@ -46,6 +47,15 @@ final class VendorMenuBuilder
         $menu->setLabel('open_marketplace.menu.shop.account.vendor.header');
 
         $vendor = $user->getVendor();
+
+        if ($vendor->isEnabled() === false) {
+            $menu
+                ->addChild('Conversations', ['route' => 'open_marketplace_vendor_conversation_index'])
+                ->setLabel('open_marketplace.ui.menu.conversations')
+                ->setLabelAttribute('icon', 'envelope open');
+
+            return $menu;
+        }
 
         if (null === $vendor || !$vendor->isVerified()) {
             $menu
