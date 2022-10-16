@@ -17,7 +17,7 @@ open_marketplace_admin_draft_attribute_create:
                 method: createTyped
                 arguments:
                     type: $type
-            template: "Vendor/DraftAttributes/DraftAttributesCreate.html.twig"
+            template: "Vendor/DraftAttributes/create.html.twig"
             redirect: bitbag_open_marketplace_vendor_draft_attribute_index
             permission: true
             vars:
