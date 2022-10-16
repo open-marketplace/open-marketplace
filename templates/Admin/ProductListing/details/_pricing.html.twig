@@ -13,7 +13,7 @@
             <tbody>
                 {% for channelPricing in productDraft.productListingPrice %}
                     {% set channel = get_channel(channelPricing.channelCode) %}
-                    
+
                     <tr>
                         <td class="five wide gray text">
                             <strong>{{ channelPricing.channelCode|sylius_channel_name }} </strong>

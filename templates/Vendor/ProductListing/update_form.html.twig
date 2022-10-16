@@ -30,10 +30,7 @@
 {% endblock %}
 
 {% block javascripts %}
-
-{#    {{ parent() }}#} //TODO FRONTEND
-    <script src="{{ asset('build/admin/admin-entry.js') }}"></script>
-
+    {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
 {% endblock %}
 
 
