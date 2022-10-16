@@ -21,7 +21,7 @@ vendor_product_variant_update:
     defaults:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
-            template: "Vendor/Product_Variants/update.html.twig"
+            template: "Vendor/Inventory/update.html.twig"
             grid: sylius_admin_product_variant
             redirect:
                 route: vendor_product_variant_index
