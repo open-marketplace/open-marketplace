@@ -13,13 +13,15 @@
             </thead>
             <tbody>
                 {% for channelPricing in productDraft.productListingPrice %}
+                    {% set channel = get_channel(channelPricing.channelCode) %}
+
                     <tr>
                         <td class="five wide gray text">
                             <strong>{{ channelPricing.channelCode|sylius_channel_name }} </strong>
                         </td>
-                        <td>{{ money.format(channelPricing.price, 'PLN') }}</td>
+                        <td>{{ money.format(channelPricing.price, channel.baseCurrency.code) }}</td>
                         {% if channelPricing.originalPrice != null %}
-                            <td>{{ money.format(channelPricing.originalPrice, 'PLN') }}</td>
+                            <td>{{ money.format(channelPricing.originalPrice, channel.baseCurrency.code) }}</td>
                         {% else %}
                             <td>-</td>
                         {% endif %}
