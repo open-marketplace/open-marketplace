@@ -1,8 +1,0 @@
-{% set path =  path('open_marketplace_admin_product_listing_accept', { 'id': productListing.id }) %}
-<div style="display: inline-block; position: absolute; bottom: 0; left: 12vh" >
-    <form action="{{ path }}" method="post">
-        <button class="ui button green" style="display: inline-block;" data-requires-confirmation>
-            <i class="icon check"></i>{{ 'open_marketplace.ui.accept' | trans }}
-        </button>
-    </form>
-</div>

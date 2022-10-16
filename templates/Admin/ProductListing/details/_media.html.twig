@@ -1,21 +1,27 @@
-
-<div id="media" class="ui styled fluid accordion">
-    <div class="title">
-        <i class="dropdown icon"></i>
-        {{ 'sylius.ui.media'|trans }}
+{% if productDraft.images|length == 0 %}
+    <div id="media" class="ui styled fluid">
+        <h4 class="ui top attached large header">{{ 'sylius.ui.media'|trans }}</h4>
+        <div class="ui attached segment">
+            {{ 'open_marketplace.ui.no_media_uploaded'|trans }}
+        </div>
     </div>
-    <div class="content">
-        {% if productDraft.images|length >= 1 %}
+{% else %}
+    <div id="media" class="ui styled fluid accordion">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            {{ 'sylius.ui.media'|trans }}
+        </div>
+        <div class="content">
             <div class="ui small images">
                 {% for image in productDraft.images %}
                     {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('assets/admin/img/200x200.png') %}
                     <div class="ui image">
-                        <a href="{{ image.path|imagine_filter('sylius_admin_product_original') }}" data-lightbox="sylius-product-image">
+                        <a href="{{ image.path|imagine_filter('sylius_admin_product_original') }}" data-lightbox="sylius-product-image" target="_blank">
                             <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_admin_product_large_thumbnail') }}"  />
                         </a>
                     </div>
                 {% endfor %}
             </div>
-        {% endif %}
+        </div>
     </div>
-</div>
+{% endif %}

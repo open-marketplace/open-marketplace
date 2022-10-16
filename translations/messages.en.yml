@@ -8,6 +8,8 @@ open_marketplace:
         restore: 'Restore'
         new_product_draft: "New product draft"
         draft_attributes: "Attributes"
+        no_draft_attributes: "No attributes set."
+        no_draft_taxons: "No taxons set."
         inventory: "Inventory"
         clients: "Customers"
         order_list: "Orders"
@@ -111,7 +113,7 @@ open_marketplace:
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_details: 'Vendor details'
-        verified: 'Verified'
+        verified: 'Accepted'
         verify: 'Verify'
         new_vendor: 'New Vendor'
         manage_products: 'Manage products'
@@ -121,6 +123,7 @@ open_marketplace:
         confirm: 'Are you sure?'
         code: 'Code'
         rejected: 'Rejected'
+        created: 'Created'
         under_verification: 'Under verification'
         published_at: 'Published at'
         verified_at: 'Verified at'
@@ -136,6 +139,7 @@ open_marketplace:
         order_not_found: "The order with id orderId has not been found"
         invalid_csrf: "Invalid csrf token."
         rejection_details: "Rejection details"
+        no_media_uploaded: "No media uploaded."
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."
