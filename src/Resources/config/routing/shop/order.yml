@@ -23,6 +23,7 @@ sylius_shop_checkout_complete:
                 options:
                     validation_groups: 'sylius_checkout_complete'
 #            prefix: account/
+
 sylius_shop_account_order_index:
     path: /account/orders
     methods: [GET]
@@ -32,6 +33,20 @@ sylius_shop_account_order_index:
             section: shop_account
             template: "@SyliusShop/Account/Order/index.html.twig"
             grid: open_marketplace_account_order
+
+sylius_shop_account_order_show:
+    path: /account/orders/{number}
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.controller.order.order_controller:showAction
+        _sylius:
+            section: shop_account
+            template: "@SyliusShop/Account/Order/show.html.twig"
+            repository:
+                method: findOneByNumberAndCustomer
+                arguments:
+                    - $number
+                    - "expr:service('sylius.context.customer').getCustomer()"
 
 sylius_shop_checkout_select_shipping:
     path: /checkout/select-shipping

@@ -61,7 +61,7 @@ class OrderRepository extends BaseOrderRepository
             ->andWhere('o.customer = :customerId')
             ->andWhere('o.channel = :channelId')
             ->andWhere('o.state != :state')
-            ->andWhere('o.primaryOrder is NULL')
+            ->andWhere('o.primaryOrder is NOT NULL')
             ->setParameter('customerId', $customerId)
             ->setParameter('channelId', $channelId)
             ->setParameter('state', OrderInterfaceAlias::STATE_CART)
