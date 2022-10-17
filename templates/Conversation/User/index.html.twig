@@ -85,14 +85,16 @@
                         <a href="{{ path('open_marketplace_vendor_conversation_show', { id: conversation.id }) }}">
                             <div class="content">
                                 <div class="ui medium header">
-                                    {% if conversation.category is not null %}
-                                        {{ conversation.category.name }}
-
-                                    {% endif %}
-                                    {% if conversation.messages.first.adminUser is not null %}
-                                        {{ 'open_marketplace.ui.conversation.admin_conversation'|trans }}
+                                    {% if app.user.vendor is not null %}
+                                        {{ 'open_marketplace.ui.conversation.admin_conversation'|trans }}:
                                     {% else %}
-                                        {{ 'open_marketplace.ui.conversation.user_conversation'|trans }}
+                                        {{ 'open_marketplace.ui.conversation.user_conversation'|trans }}:
+                                    {% endif %}
+
+                                    {% if conversation.category is not null %}
+                                        {{ conversation.category.name|lower }}
+                                    {% else %}
+                                        {{ 'open_marketplace.ui.conversation.no_subject'|trans|lower }}
                                     {% endif %}
                                     {% set lastMessage = conversation.messages|last.content %}
                                     {% set archiveText = constant('BitBag\\OpenMarketplace\\Storage\\MessagesStorage::ARCHIVE_REQUEST_MESSAGE') %}

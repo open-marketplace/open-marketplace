@@ -60,6 +60,9 @@ class VendorUpdateContext extends RawMinkContext
         $country_code
     ): void {
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
+        $user->setVerifiedAt(new \DateTime());
+        $user->addRole('ROLE_USER');
+        $user->addRole('ROLE_VENDOR');
 
         $this->sharedStorage->set('user', $user);
 
@@ -67,7 +70,7 @@ class VendorUpdateContext extends RawMinkContext
 
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
         $vendor = new Vendor();
-        $vendor->setCompanyName('sdasdsa');
+        $vendor->setCompanyName('Test');
         $vendor->setShopUser($user);
         $vendor->setPhoneNumber('333333333');
         $vendor->setTaxIdentifier('543455');
@@ -75,7 +78,7 @@ class VendorUpdateContext extends RawMinkContext
         $vendor->getVendorAddress()->setCountry($country);
         $vendor->getVendorAddress()->setCity('Warsaw');
         $vendor->getVendorAddress()->setPostalCode('00-111');
-        $vendor->getVendorAddress()->setStreet('Tajna 13');
+        $vendor->getVendorAddress()->setStreet('Secret 13');
         $vendor->setSlug('vendor-slug');
         $vendor->setDescription('description');
         $vendor->setStatus($status);

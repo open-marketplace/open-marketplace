@@ -72,6 +72,9 @@ final class ProductListingContext extends RawMinkContext implements Context
         $user->setUsername($username);
         $user->setPlainPassword($password);
         $user->setEmail('vendor@email.com');
+        $user->setVerifiedAt(new \DateTime());
+        $user->addRole('ROLE_USER');
+        $user->addRole('ROLE_VENDOR');
         $this->entityManager->persist($user);
 
         /** @var Vendor $vendor */

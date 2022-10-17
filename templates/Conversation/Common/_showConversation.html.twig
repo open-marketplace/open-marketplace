@@ -8,13 +8,13 @@
             <h1 class="ui header">
                 <i class="ui icon edit"></i>
                 <div class="content">
-                    {% if conversation.category is not null %}
-                        {{ conversation.category.name }}
-                    {% endif %}
-                    {% if conversation.messages.first.adminUser is not null %}
-                        {{ 'open_marketplace.ui.conversation.admin_conversation'|trans }}
+                    {% if app.user.vendor is not defined %}
+                        {{ 'open_marketplace.ui.conversation.user_conversation'|trans }}:
                     {% else %}
-                        {{ 'open_marketplace.ui.conversation.user_conversation'|trans }}
+                        {{ 'open_marketplace.ui.conversation.admin_conversation'|trans }}:
+                    {% endif %}
+                    {% if conversation.category is not null %}
+                        {{ conversation.category.name|lower }}
                     {% endif %}
                     <div class="sub header">
                         {{ 'open_marketplace.ui.conversation.with'|trans }}
@@ -37,7 +37,6 @@
                         {{ conversation.rejectedListingURL }}
                     </a>
                 </div>
-
             {% endif %}
         </div>
     </div>

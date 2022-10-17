@@ -48,7 +48,7 @@ final class VendorMenuBuilder
 
         $vendor = $user->getVendor();
 
-        if ($vendor->isEnabled() === false) {
+        if ($vendor !== null && $vendor->isEnabled() === false) {
             $menu
                 ->addChild('Conversations', ['route' => 'open_marketplace_vendor_conversation_index'])
                 ->setLabel('open_marketplace.ui.menu.conversations')

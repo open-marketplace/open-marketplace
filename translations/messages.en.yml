@@ -14,7 +14,7 @@ open_marketplace:
         clients: "Customers"
         order_list: "Orders"
         summary_of_your_order: "Summary of your order(s)"
-        product_list: 'Product list'
+        product_list: 'Product listings'
         admin: "Admin"
         customer: 'Customer'
         details: 'Details'
@@ -84,8 +84,9 @@ open_marketplace:
         create_new_conversation_breadcrumb: New thread
         create_new_conversation_header: New thread
         conversation:
-            user_conversation: ''
-            admin_conversation: ''
+            user_conversation: Thread with user
+            admin_conversation: Thread with administrator
+            no_subject: No subject
             header: Message from administrator
             with: Started by
             your_response_header: "Your response:"
@@ -117,7 +118,7 @@ open_marketplace:
         verified: 'Accepted'
         verify: 'Verify'
         new_vendor: 'New Vendor'
-        manage_products: 'Manage products'
+        manage_products: 'Manage product listings'
         name: 'Name'
         accept: 'Accept'
         reject: 'Reject'
@@ -130,7 +131,7 @@ open_marketplace:
         verified_at: 'Verified at'
         version: 'Version'
         actions: 'Actions'
-        create_new_product: 'Create Product'
+        create_new_product: 'Create Product listing'
         save: 'Save'
         save_and_add: 'Save and Add'
         save_draft: 'Save draft'

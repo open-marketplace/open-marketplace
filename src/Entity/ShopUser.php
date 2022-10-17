@@ -20,11 +20,6 @@ class ShopUser extends BaseShopUser implements ShopUserInterface
 
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        if ($this->getVendor() !== null && $this->getVendor()->isEnabled()) {
-            $roles[] = 'ROLE_VENDOR';
-        }
-
-        return $roles;
+        return $this->roles;
     }
 }
