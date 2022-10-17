@@ -68,7 +68,7 @@ final class ConversationController
                 $template,
                 [
                     'conversations' => $conversations,
-                    'account_disabled' => $currentUser->getVendor()->isEnabled() === false,
+                    'account_disabled' => false === $currentUser->getVendor()->isEnabled(),
                 ]
             )
         );

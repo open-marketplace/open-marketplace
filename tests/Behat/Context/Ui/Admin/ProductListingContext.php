@@ -35,10 +35,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
-use Sylius\Component\Core\Model\Channel;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Currency\Model\Currency;
-use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 

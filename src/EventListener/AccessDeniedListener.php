@@ -18,8 +18,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
 
 class AccessDeniedListener implements EventSubscriberInterface
@@ -56,28 +56,27 @@ class AccessDeniedListener implements EventSubscriberInterface
 
         $currentRequest = $this->requestStack->getCurrentRequest();
         $uriParts = explode('/', $currentRequest->getRequestUri());
-        if ($uriParts[0] === "") {
+        if ('' === $uriParts[0]) {
             array_shift($uriParts);
         }
 
-        if ($uriParts < 4) {
+        if (4 > $uriParts) {
             return;
         }
 
-        if ($uriParts[1] !== 'account' || $uriParts[2] !== 'vendor' || $uriParts[3] === 'conversations') {
+        if ('account' !== $uriParts[1] || 'vendor' !== $uriParts[2] || 'conversations' === $uriParts[3]) {
             return;
         }
 
         try {
             $currentVendor = $this->vendorProvider->provideCurrentVendor();
-            if ($currentVendor->isEnabled() === false) {
+            if (false === $currentVendor->isEnabled()) {
                 $event->setResponse(new RedirectResponse(
                     $this->router->generate('open_marketplace_vendor_conversation_index')
                 ));
                 $event->stopPropagation();
             }
         } catch (ShopUserHasNoVendorContextException|ShopUserNotFoundException $e) {
-
         }
     }
 }

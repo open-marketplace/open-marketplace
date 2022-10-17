@@ -132,7 +132,7 @@ class OrderController extends BaseOrderController
         /** @var OrderInterface $resource */
         $resource = $this->findOr404($configuration);
 
-        if ($resource->getPrimaryOrder() === null) {
+        if (null === $resource->getPrimaryOrder()) {
             return $this->redirectToRoute('sylius_shop_account_order_index');
         }
 
