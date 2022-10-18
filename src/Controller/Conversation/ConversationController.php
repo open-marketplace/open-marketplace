@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Conversation;
 
 use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\MessageType;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
@@ -53,6 +55,7 @@ final class ConversationController
     {
         $template = $request->attributes->get('_sylius')['template'];
 
+        /** @var ShopUserInterface $currentUser */
         $currentUser = $this->currentUserResolver->resolve();
 
         $status = Conversation::STATUS_OPEN;
@@ -63,12 +66,15 @@ final class ConversationController
 
         $conversations = $this->conversationRepository->findAllWithStatusAndUser($status, $currentUser);
 
+        /** @var VendorInterface $vendor */
+        $vendor = $currentUser->getVendor();
+
         return new Response(
             $this->templatingEngine->render(
                 $template,
                 [
                     'conversations' => $conversations,
-                    'account_disabled' => false === $currentUser->getVendor()->isEnabled(),
+                    'account_disabled' => false === $vendor->isEnabled(),
                 ]
             )
         );

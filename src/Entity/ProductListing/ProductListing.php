@@ -118,7 +118,10 @@ class ProductListing implements ProductListingInterface
 
     public function getAnyTranslationName(): ?string
     {
-        return $this->getLatestDraft()->getAnyTranslationName();
+        /** @var ProductDraftInterface $latestDraft */
+        $latestDraft = $this->getLatestDraft();
+
+        return $latestDraft->getAnyTranslationName();
     }
 
     public function getLatestDraft(): ?ProductDraftInterface

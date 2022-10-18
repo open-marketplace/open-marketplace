@@ -16,6 +16,7 @@ use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -54,13 +55,15 @@ class AccessDeniedListener implements EventSubscriberInterface
             return;
         }
 
+        /** @var Request $currentRequest */
         $currentRequest = $this->requestStack->getCurrentRequest();
+
         $uriParts = explode('/', $currentRequest->getRequestUri());
         if ('' === $uriParts[0]) {
             array_shift($uriParts);
         }
 
-        if (4 > $uriParts) {
+        if (4 > count($uriParts)) {
             return;
         }
 
