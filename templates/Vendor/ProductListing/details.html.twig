@@ -71,5 +71,5 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/admin/admin-entry.css') }}"/>
+    {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
 {% endblock %}
