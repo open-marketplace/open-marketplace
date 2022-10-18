@@ -8,6 +8,7 @@
             <argument type="service" id="open_marketplace.provider.vendor" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.repository.channel" />
             <tag name="twig.extension" />
         </service>
     </services>

@@ -13,7 +13,7 @@ open_marketplace_vendor_conversation_show:
         _controller: 'open_marketplace.controller.conversation.conversation_controller:show'
         _sylius:
             template: "Conversation/User/show.html.twig"
-            
+
 open_marketplace_vendor_conversation_message_add:
     path: /vendor/conversations/{id}/message/add
     methods: [GET, POST]
@@ -22,7 +22,7 @@ open_marketplace_vendor_conversation_message_add:
         _sylius:
             redirect: open_marketplace_vendor_conversation_show
             mail_redirect: open_marketplace_vendor_conversation_show
-            
+
 open_marketplace_vendor_conversation_create:
     path: /vendor/conversation/create
     methods: [GET,POST]
@@ -32,7 +32,7 @@ open_marketplace_vendor_conversation_create:
             template: "Conversation/User/create.html.twig"
             redirect: open_marketplace_vendor_conversation_show
             mail_redirect: open_marketplace_admin_conversation_show
-        
+
 open_marketplace_vendor_conversation_archive:
     path: /vendor/conversations/{id}/archive
     methods: [PATCH]

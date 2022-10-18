@@ -65,4 +65,4 @@ sylius_grid:
                             link:
                                 route: sylius_shop_order_show
                                 parameters:
-                                    tokenValue: resource.tokenValue
+                                    tokenValue: resource.primaryOrder.tokenValue

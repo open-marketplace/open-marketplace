@@ -4,4 +4,4 @@ sylius_mailer:
         address: no-reply@example.com
     emails:
         vendor_profile_update:
-            template: "Vendor/Email/profileUpdate.html.twig"
+            template: "Vendor/Email/profile_update.html.twig"

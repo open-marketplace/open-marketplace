@@ -35,11 +35,13 @@
     }) }}
 
     {{ form_widget(form.wishlists) }}
-
-    <button type="submit" class="ui large right floated primary icon labeled button">
-        <i class="cart icon"></i>
-        {{ 'sylius.ui.add_to_cart'|trans }}
-    </button>
+    <br />
+    {% if product.getVendor() is null or product.getVendor().isEnabled() %}
+        <button type="submit" class="ui large right floated primary icon labeled button">
+            <i class="cart icon"></i>
+            {{ 'sylius.ui.add_to_cart'|trans }}
+        </button>
+    {% endif %}
 
     <button
             id="{{ form.addToWishlist.vars.id }}"

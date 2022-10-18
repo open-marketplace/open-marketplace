@@ -2,6 +2,7 @@
 @import "./product_listing/product_listing_dropdown";
 $base-box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.04);
 $base-border-radius: 8px;
+$base-color: #339ae8;
 body.pushable .pusher {
   background-color: #fbfbfb;
 }
@@ -12,4 +13,12 @@ body.pushable .pusher {
 
 .ui.segment {
   border: 1px solid rgba(123,126,130, 0.15);
+}
+
+.ui.label.teal {
+  background-color: #0ab727 !important;
+}
+
+.ui.label.blue {
+  background-color: #28afff !important;
 }

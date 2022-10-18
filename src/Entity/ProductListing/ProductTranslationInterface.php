@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 interface ProductTranslationInterface
 {
-    public function getId(): int;
+    public function getId(): ?int;
 
     public function setId(int $id): void;
 

@@ -13,6 +13,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorAddress;
 use Doctrine\Persistence\ObjectManager;
@@ -68,13 +69,17 @@ class CustomerDashboardContext extends MinkContext implements Context
         $vendor_user_email,
         $country_code
     ): void {
+        /** @var ShopUserInterface $user */
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
+        $user->setVerifiedAt(new \DateTime());
+        $user->addRole('ROLE_USER');
+        $user->addRole('ROLE_VENDOR');
 
         $this->userRepository->add($user);
 
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
         $vendor = new Vendor();
-        $vendor->setCompanyName('sdasdsa');
+        $vendor->setCompanyName('Test');
         $vendor->setShopUser($user);
         $vendor->setPhoneNumber('333333333');
         $vendor->setTaxIdentifier('543455');
@@ -82,10 +87,12 @@ class CustomerDashboardContext extends MinkContext implements Context
         $vendor->getVendorAddress()->setCountry($country);
         $vendor->getVendorAddress()->setCity('Warsaw');
         $vendor->getVendorAddress()->setPostalCode('00-111');
-        $vendor->getVendorAddress()->setStreet('Tajna 13');
+        $vendor->getVendorAddress()->setStreet('Secret 13');
         $vendor->setSlug('vendor-slug');
         $vendor->setDescription('description');
         $vendor->setStatus($status);
+        $vendor->setEnabled(true);
+        $user->setVendor($vendor);
         $this->manager->persist($vendor);
         $this->manager->flush();
     }

@@ -13,7 +13,7 @@ open_marketplace:
                 subheader: open_marketplace.ui.conversations_listing.admin_subheader
     type: sylius.resource
     prefix: /admin
-    
+
 open_marketplace_admin_conversation_create:
     path: /admin/conversation/create
     methods: [GET,POST]
@@ -23,7 +23,7 @@ open_marketplace_admin_conversation_create:
             template: "Admin/Conversation/create.html.twig"
             redirect: open_marketplace_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
-        
+
 open_marketplace_admin_conversation_show:
     path: /admin/conversations/{id}
     methods: [GET,POST]
@@ -49,4 +49,4 @@ open_marketplace_admin_conversation_message_add:
         _sylius:
             redirect: open_marketplace_admin_conversation_show
             mail_redirect: open_marketplace_admin_conversation_show
-            
+

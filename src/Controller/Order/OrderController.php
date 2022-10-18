@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Order;
 
+use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Processor\Order\SplitOrderByVendorProcessorInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Controller\OrderController as BaseOrderController;
@@ -120,6 +121,33 @@ class OrderController extends BaseOrderController
         }
 
         return $this->createRestView($configuration, $resources);
+    }
+
+    public function showAction(Request $request): Response
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::SHOW);
+
+        /** @var OrderInterface $resource */
+        $resource = $this->findOr404($configuration);
+
+        if (null === $resource->getPrimaryOrder()) {
+            return $this->redirectToRoute('sylius_shop_account_order_index');
+        }
+
+        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+
+        if ($configuration->isHtmlRequest()) {
+            return $this->render($configuration->getTemplate(ResourceActions::SHOW . '.html'), [
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+            ]);
+        }
+
+        return $this->createRestView($configuration, $resource);
     }
 
     public function updateAction(Request $request): Response

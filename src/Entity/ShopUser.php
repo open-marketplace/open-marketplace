@@ -17,4 +17,14 @@ use Sylius\Component\Core\Model\ShopUser as BaseShopUser;
 class ShopUser extends BaseShopUser implements ShopUserInterface
 {
     use ShopUserTrait;
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        if (null !== $this->getVendor() && $this->getVendor()->isVerified() && $this->getVendor()->isEnabled()) {
+            $roles[] = 'ROLE_VENDOR';
+        }
+
+        return array_unique($roles);
+    }
 }

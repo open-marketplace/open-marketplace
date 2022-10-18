@@ -96,12 +96,10 @@ class EditProductAction extends AbstractController
 
             $this->productDraftRepository->save($productDraft);
             $this->addFlash('success', 'open_marketplace.ui.product_listing_saved');
-
-            return $this->redirectToRoute('open_marketplace_vendor_product_listing_index');
         }
 
         return new Response(
-            $this->renderView('Vendor/ProductListing/edit_product.html.twig', [
+            $this->renderView('Vendor/ProductListing/update_form.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $newResource,

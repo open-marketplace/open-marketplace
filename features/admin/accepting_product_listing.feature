@@ -7,6 +7,7 @@ Feature: Verifying product listing
   Background:
     Given there is an admin user "admin" with password "admin"
     And there is an vendor user "vendor" with password "vendor"
+    And the store operates on a channel named "Web-US" in "USD" currency
     And I am logged in as an admin
 
   @ui
@@ -20,5 +21,5 @@ Feature: Verifying product listing
     And I should see url "#\/admin\/product-listings\/(\d+)#"
     When I click "Accept" button
     Then I should see url "#\/admin\/product-listings\/$#"
-    And I should see product's listing status "Verified"
-    And I should see "Product listing verified."
+    And I should see product's listing status "Accepted"
+    And I should see "Product listing accepted."

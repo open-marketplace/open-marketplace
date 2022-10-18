@@ -12,5 +12,15 @@
             <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="generateSlug"/>
             <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadImage"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\EventListener\AccessDeniedListener"
+                 id="open_marketplace.event_listener.access_denied_listener">
+
+            <argument type="service" id="open_marketplace.provider.vendor"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="router"/>
+
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        </service>
     </services>
 </container>

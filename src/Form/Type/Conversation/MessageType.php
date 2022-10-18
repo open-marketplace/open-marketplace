@@ -30,6 +30,7 @@ final class MessageType extends AbstractType
                 'attr' => [
                     'maxlength' => 500,
                 ],
+                'required' => true,
             ])
             ->add('file', FileType::class, [
                 'label' => 'open_marketplace.ui.form.conversation_message.file',

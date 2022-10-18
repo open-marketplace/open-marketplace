@@ -142,4 +142,6 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function getVendor(): ?VendorInterface;
 
     public function setVendor(?VendorInterface $vendor): void;
+
+    public function getAnyTranslationName(): ?string;
 }

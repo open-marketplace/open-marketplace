@@ -7,7 +7,7 @@
     {{ form_row(form.taxIdentifier) }}
     {{ form_row(form.phoneNumber) }}
     <div class="field" id="add-avatar">
-        {% form_theme form 'Vendor/ProductListing/ImageTheme.html.twig' %}
+        {% form_theme form 'Vendor/ProductListing/form/theme/image_theme.html.twig' %}
         <label>{{ 'sylius.ui.image'|trans }}</label>
         {{ form_row(form.image, {'label': false}) }}
     </div>

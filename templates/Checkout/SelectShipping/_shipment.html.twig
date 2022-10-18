@@ -13,9 +13,16 @@
             </tr>
             </thead>
             <tbody>
+            {% set items = [] %}
             {% for key, unit in shipment.units %}
-                {% include 'Checkout/SelectShipping/_itemUnit.html.twig'
-                    with {'unit': unit} %}
+                {% set orderItem = unit.orderItem %}
+                {% if orderItem not in items %}
+                    {% set items = items|merge([orderItem]) %}
+                {% endif %}
+            {% endfor %}
+
+            {% for item in items %}
+                {% include 'Checkout/SelectShipping/_itemUnit.html.twig' with {'item': item} %}
             {% endfor %}
             </tbody>
         </table>

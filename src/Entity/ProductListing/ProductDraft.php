@@ -474,4 +474,15 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
         return $translation?->getSlug();
     }
+
+    public function getAnyTranslationName(): ?string
+    {
+        foreach ($this->translations as $translation) {
+            if (null !== $translation->getName()) {
+                return $translation->getName();
+            }
+        }
+
+        return null;
+    }
 }

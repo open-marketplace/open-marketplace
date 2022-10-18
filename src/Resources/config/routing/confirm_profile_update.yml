@@ -4,9 +4,9 @@ confirm_profile_update_link:
     defaults:
         _controller: open_marketplace.controller.confirm_profile_update_action
         _sylius:
-            template: "Vendor/profileUpdate.html.twig"
+            template: "Vendor/profile_update.html.twig"
             form: BitBag\OpenMarketplace\Form\Type\VendorType
-            event: update                
+            event: update
             repository:
                 method: findOneByActivationToken
                 arguments:

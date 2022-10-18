@@ -1,6 +1,6 @@
 open_marketplace:
     ui:
-        conversation_categories: 'Conversation categories'
+        conversation_categories: 'Message categories'
         restored: "Product successfully restored"
         removed: "Product successfully removed"
         remove: "Remove"
@@ -8,11 +8,13 @@ open_marketplace:
         restore: 'Restore'
         new_product_draft: "New product draft"
         draft_attributes: "Attributes"
+        no_draft_attributes: "No attributes set."
+        no_draft_taxons: "No taxons set."
         inventory: "Inventory"
-        clients: "Clients"
+        clients: "Customers"
         order_list: "Orders"
         summary_of_your_order: "Summary of your order(s)"
-        product_list: 'Product list'
+        product_list: 'Product listings'
         admin: "Admin"
         customer: 'Customer'
         details: 'Details'
@@ -62,37 +64,38 @@ open_marketplace:
         more: "More"
         register:
             new_vendors: New vendors
-        conversations: Conversations
+        conversations: Messages
         conversations_listing:
             username: Username
-            admin_header: Conversations
-            admin_subheader: Manage your conversations
-            listing_header_open: Open conversations
-            listing_header_closed: Closed conversations
-            your_open_conversations: Manage your open conversations
-            your_closed_conversations: Manage your closed conversations
-            reading_closed_conversation: You're reading conversation, which has been closed.
-            breadcrumb_header: Conversations
-            no_open_conversations: You have no open conversations
-            no_closed_conversations: You have no closed conversations
+            admin_header: Messages
+            admin_subheader: Manage your messages
+            listing_header_open: Open threads
+            listing_header_closed: Closed threads
+            your_open_conversations: Manage your open threads
+            your_closed_conversations: Manage your closed threads
+            reading_closed_conversation: You're reading thread, which has been closed.
+            breadcrumb_header: Messages
+            no_open_conversations: You have no open threads
+            no_closed_conversations: You have no closed threads
         users: Users
-        open_conversations: Open conversations
-        closed_conversations: Closed conversations
-        create_new_conversation: New conversation
-        create_new_conversation_breadcrumb: New conversation
-        create_new_conversation_header: New conversation
+        open_conversations: Open threads
+        closed_conversations: Closed threads
+        create_new_conversation: New thread
+        create_new_conversation_breadcrumb: New thread
+        create_new_conversation_header: New thread
         conversation:
-            user_conversation: Conversation with user
-            admin_conversation: Conversation with administrator
-            header: Conversation from administrator
+            user_conversation: Thread with user
+            admin_conversation: Thread with administrator
+            no_subject: No subject
+            header: Message from administrator
             with: Started by
             your_response_header: "Your response:"
             attachment: Attachment
-            archive_request_text_first_line: Administrator wants to archive this conversation.
+            archive_request_text_first_line: Administrator wants to archive this thread.
             archive_request_text_second_line: Have you solved your issue?
             yes: Yes
             no: No
-            no_category: Conversation from administrator
+            no_category: Message from administrator
         form:
             conversation_message:
                 file: File
@@ -106,27 +109,29 @@ open_marketplace:
                 applicant: Applicant
                 archive: Archive
         menu:
-            conversations: Conversations
-            conversation_categories: Conversation categories
+            conversations: Messages
+            conversation_categories: Message categories
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_details: 'Vendor details'
-        verified: 'Verified'
+        show_product_listings: 'Show product listings'
+        verified: 'Accepted'
         verify: 'Verify'
         new_vendor: 'New Vendor'
-        manage_products: 'Manage products'
+        manage_products: 'Manage product listings'
         name: 'Name'
         accept: 'Accept'
         reject: 'Reject'
         confirm: 'Are you sure?'
         code: 'Code'
         rejected: 'Rejected'
+        created: 'Created'
         under_verification: 'Under verification'
         published_at: 'Published at'
         verified_at: 'Verified at'
         version: 'Version'
         actions: 'Actions'
-        create_new_product: 'Create Product'
+        create_new_product: 'Create Product listing'
         save: 'Save'
         save_and_add: 'Save and Add'
         save_draft: 'Save draft'
@@ -136,6 +141,9 @@ open_marketplace:
         order_not_found: "The order with id orderId has not been found"
         invalid_csrf: "Invalid csrf token."
         rejection_details: "Rejection details"
+        no_media_uploaded: "No media uploaded."
+        your_account_has_been_disabled: "Your vendor account has been disabled. Please contact administrators for more information."
+        view_orders: "View your orders"
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."

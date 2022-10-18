@@ -15,25 +15,21 @@
         <div class="divider"> / </div>
         <a href="{{ path('open_marketplace_vendor_product_listing_index') }}" class="section">{{ 'open_marketplace.ui.product_list'|trans }}</a>
         <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.edit'|trans }}</div>
+        <div class="active section">{{ 'sylius.ui.new'|trans }}</div>
     </div>
 {% endblock %}
 
 {% block subcontent %}
-    {{ include('Vendor/ProductListing/_product_listing_form.html.twig') }}
+    {{ include('Vendor/ProductListing/_form.html.twig') }}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-
     {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.create.stylesheets'], { 'metadata': metadata }) }}
 {% endblock %}
 
 {% block javascripts %}
-
-{#    {{ parent() }}#} //TODO FRONTEND
-    <script src="{{ asset('build/admin/admin-entry.js') }}"></script>
-
+    {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
 {% endblock %}
 
 

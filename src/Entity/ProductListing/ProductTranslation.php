@@ -15,7 +15,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductTranslation implements ProductTranslationInterface, ResourceInterface
 {
-    protected int $id;
+    protected ?int $id = null;
 
     protected ProductDraftInterface $productDraft;
 
@@ -33,7 +33,7 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
 
     protected ?string $locale;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

@@ -1,2 +1,2 @@
 imports:
-    - { resource: "ui/mvm_vendor.yaml" }
+    - { resource: "ui/vendor.yaml" }

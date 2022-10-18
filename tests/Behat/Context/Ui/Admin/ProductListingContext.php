@@ -158,7 +158,7 @@ final class ProductListingContext extends RawMinkContext implements Context
             $productPricing->setPrice(1000);
             $productPricing->setOriginalPrice(1000);
             $productPricing->setMinimumPrice(1000);
-            $productPricing->setChannelCode('en_US');
+            $productPricing->setChannelCode('web_us');
 
             $this->entityManager->persist($productListing);
             $this->entityManager->persist($productDraft);
@@ -320,7 +320,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         int $price = 1000,
         int $originalPrice = 1000,
         int $minimumPrice = 1000,
-        string $channelCode = 'en_US'
+        string $channelCode = 'web_us'
     ): ProductListingPriceInterface {
         $productPricing = new ProductListingPrice();
         $productPricing->setProductDraft($productDraft);
@@ -390,6 +390,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $productDraft = $this->createProductListingDraft($productListing, $code, $status);
         $productDraft->addAttribute($attributeValue);
         $productTranslation = $this->createProductListingTranslation($productDraft, $name);
+
         $productPricing = $this->createProductListingPricing($productDraft);
 
         $draftImage = new ProductDraftImage();

@@ -34,6 +34,8 @@ interface ProductListingInterface extends ResourceInterface
 
     public function addProductDrafts(ProductDraftInterface $productDrafts): void;
 
+    public function getAnyTranslationName(): ?string;
+
     /** @return Collection<int, ProductDraftInterface> */
     public function getProductDrafts(): Collection;
 
