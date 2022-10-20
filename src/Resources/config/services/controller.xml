@@ -123,7 +123,7 @@
             <argument type="service">
                 <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
                     <factory service="sylius.resource_registry" method="get" />
-                    <argument type="string">sylius.shop_user</argument>
+                    <argument type="string">open_marketplace.product_draft</argument>
                 </service>
             </argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
