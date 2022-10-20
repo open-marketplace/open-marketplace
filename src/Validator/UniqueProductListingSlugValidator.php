@@ -15,11 +15,11 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTranslationInterface as SyliusProductTranslationInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Sylius\Component\Core\Model\ProductTranslationInterface as SyliusProductTranslationInterface;
 
 final class UniqueProductListingSlugValidator extends ConstraintValidator
 {
