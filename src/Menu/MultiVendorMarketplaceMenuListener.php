@@ -28,13 +28,6 @@ final class MultiVendorMarketplaceMenuListener
         $mvmRootMenuItem
             ->addChild('open_marketplace_product_listings', [
                 'route' => 'open_marketplace_admin_product_listing_index',
-                'routeParameters' => [
-                    'criteria' => [
-                        'status' => [
-                            'status' => 'under_verification',
-                            ],
-                        ],
-                ],
             ])
             ->setLabel('open_marketplace.ui.product_listings')
             ->setLabelAttribute('icon', 'list');
