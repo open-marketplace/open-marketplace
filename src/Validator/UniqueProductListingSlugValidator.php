@@ -14,10 +14,12 @@ namespace BitBag\OpenMarketplace\Validator;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Sylius\Component\Core\Model\ProductTranslationInterface as SyliusProductTranslationInterface;
 
 final class UniqueProductListingSlugValidator extends ConstraintValidator
 {
@@ -30,7 +32,7 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
     }
 
     /** @var ProductTranslationInterface */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof UniqueProductListingSlugConstraint) {
             throw new UnexpectedTypeException($constraint, UniqueProductListingSlugConstraint::class);
@@ -41,11 +43,13 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, UniqueProductListingSlugConstraint::class);
         }
 
+        /** @var SyliusProductTranslationInterface|null $existingProductTranslation */
         $existingProductTranslation = $this->productTranslationRepository->findOneBy(['slug' => $value->getSlug()]);
         if (null === $existingProductTranslation) {
             return;
         }
 
+        /** @var ProductInterface $existingProduct */
         $existingProduct = $existingProductTranslation->getTranslatable();
         $currentProduct = $value->getProductDraft()->getProductListing()->getProduct();
 
