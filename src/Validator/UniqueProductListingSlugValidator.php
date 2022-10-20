@@ -37,12 +37,12 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
         }
 
         $slug = trim($value->getSlug());
-        if (strlen($slug) === 0) {
+        if (0 === strlen($slug)) {
             throw new UnexpectedTypeException($constraint, UniqueProductListingSlugConstraint::class);
         }
 
         $existingProductTranslation = $this->productTranslationRepository->findOneBy(['slug' => $value->getSlug()]);
-        if ($existingProductTranslation === null) {
+        if (null === $existingProductTranslation) {
             return;
         }
 
@@ -56,6 +56,5 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
                 ->setCode(UniqueEntity::NOT_UNIQUE_ERROR)
                 ->addViolation();
         }
-
     }
 }
