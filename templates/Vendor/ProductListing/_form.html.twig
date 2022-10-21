@@ -1,5 +1,5 @@
 {% block subcontent %}
-    {{ form_start(form, { 'attr': {'class': 'ui loadable form dirtylisten'}}) }}
+    {{ form_start(form, { 'attr': {'class': 'ui form dirtylisten'}}) }}
         {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
         <div class="ui stackable grid sylius-tabular-form">
             <div class="sixteen wide column">
@@ -94,15 +94,17 @@
                             'load_edit_url': path('open_marketplace_ajax_taxon_by_code')
                         }) }}
 
-                        <h4>{{ 'sylius.ui.product_taxon'|trans }}</h4>
-                        <div id="sylius-product-taxonomy-tree"
-                             data-tree-root-nodes-url="{{ path('open_marketplace_ajax_taxon_root_nodes') }}"
-                             data-tree-leafs-url="{{ path('open_marketplace_ajax_taxon_leafs') }}"
-                        >
-                            {{ form_widget(form.productDraftTaxons) }}
+                        <div style="margin-top: 20px;">
+                            <h4>{{ 'sylius.ui.product_taxon'|trans }}:</h4>
+                            <div id="sylius-product-taxonomy-tree" style="margin-left: 16px; margin-top: 20px;"
+                                 data-tree-root-nodes-url="{{ path('open_marketplace_ajax_taxon_root_nodes') }}"
+                                 data-tree-leafs-url="{{ path('open_marketplace_ajax_taxon_leafs') }}"
+                            >
+                                {{ form_widget(form.productDraftTaxons) }}
 
-                            <div class="ui inverted dimmer">
-                                <div class="ui loader"></div>
+                                <div class="ui inverted dimmer">
+                                    <div class="ui loader"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

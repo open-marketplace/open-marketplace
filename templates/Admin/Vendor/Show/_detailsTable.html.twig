@@ -4,6 +4,12 @@
             <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.company_name'|trans }}</strong></td>
             <td>{{ vendor.companyName }}</td>
         </tr>
+        {% if vendor.image is not null %}
+            <tr>
+                <td class="five wide top aligned"><strong class="gray text">{{ 'open_marketplace.ui.logo'|trans }}</strong></td>
+                <td><img class="ui image" src="{{ asset('media/image/' ~ vendor.image.path) }}" /></td>
+            </tr>
+        {% endif %}
         <tr>
             <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.tax_id'|trans }}</strong></td>
             <td> {{ vendor.taxIdentifier }} </td>

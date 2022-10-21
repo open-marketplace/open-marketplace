@@ -6,7 +6,8 @@ open_marketplace:
         remove: "Remove"
         restore_visibility: 'Restore visibility'
         restore: 'Restore'
-        new_product_draft: "New product draft"
+        new_product_draft: "New Product Listing"
+        edit_product_draft: "Edit Product Listing"
         draft_attributes: "Attributes"
         no_draft_attributes: "No attributes set."
         no_draft_taxons: "No taxons set."

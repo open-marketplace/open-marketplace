@@ -2,11 +2,13 @@
 {% for role in data.roles %}
     {% set userRole = role %}
 {% endfor %}
-{% if userRole is same as 'ROLE_VENDOR' %}
-    <div>
-        {{ data.firstName }} {{ data.lastName }}
-    </div>
-{% endif %}
+<div>
+    {% if userRole is same as 'ROLE_VENDOR' %}
+        {{ data.vendor.companyName }}
+    {% else %}
+        {{ data.customer.firstName }} {{ data.customer.lastName }}
+    {% endif %}
+</div>
 <div>
     {{ 'open_marketplace.ui.conversations_listing.username'|trans }}: {{ data.username }}
 </div>

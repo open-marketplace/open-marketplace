@@ -1,6 +1,6 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
 {% set event_prefix = metadata.applicationName ~ '.vendor.' ~ metadata.name ~ '.create' %}
 
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}

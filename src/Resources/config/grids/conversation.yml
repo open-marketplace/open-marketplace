@@ -27,6 +27,12 @@ sylius_grid:
                         choices:
                             mvm.ui.open: open
                             mvm.ui.closed: closed
+                createdAt:
+                    type: date
+                    label: sylius.ui.date
+                    options:
+                        field: messages.createdAt
+                        inclusive_to: true
             actions:
                 main:
                     create:
