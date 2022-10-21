@@ -32,6 +32,7 @@ open_marketplace:
         vendor: 'Vendor'
         become_a_vendor: 'Become a Vendor'
         product_listings: 'Product listings'
+        product_listing: 'Product listing'
         marketplace: 'Marketplace'
         my_vendor_account: "My vendor account"
         manage_your_vendor_information_and_preferences: "Manage your vendor information and preferences"
@@ -112,6 +113,8 @@ open_marketplace:
         menu:
             conversations: Messages
             conversation_categories: Message categories
+        new_conversation_category: 'New conversation category'
+        edit_conversation_category: 'Edit conversation category'
         unverified: 'Unverified'
         vendor_address: 'Vendor address'
         vendor_details: 'Vendor details'
