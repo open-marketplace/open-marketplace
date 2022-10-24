@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<p align="center">
+<p>
   <a href="https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1ij1t41wx-HfAR6~URm3OAcqm0jc423Q">
      <img src="https://img.shields.io/badge/chat-on%20slack-e51670.svg" alt="Chat">
   </a>
