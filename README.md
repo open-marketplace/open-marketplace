@@ -68,9 +68,9 @@ If you want to participate in the development, you can do it by submitting [pull
 
 ## About BitBag
 
-BitBag is a company of people who **love what they do** and do it right. We fulfill the eCommerce technology stack with **Sylius**, Shopware, Akeneo, and Pimcore for PIM, eZ Platform for CMS, and VueStorefront for PWA. Our goal is to provide real digital transformation with an agile solution that scales with the **clients’ needs**. Our main area of expertise includes eCommerce consulting and development for B2C, B2B, and Multi-vendor Marketplaces.</br>
+BitBag is a Software House working on digital commerce projects on top of best open-source technologies, such as Sylius, Shopware, Pimcore, Symfony and Vue Storefront. We work with worldwide companies who see eCommerce as an important factor of their strategy.
 
-If you need some help with Sylius development, don't be hesitated to contact us directly. You can fill the form on [this site](https://bitbag.io/contact-us/) or send us an e-mail at hello@bitbag.io!
+If you are one of those merchants and need help within the above-mentioned technology stack, contact us directly. We could be the right people to do the job. You can fill the form on [this site](https://bitbag.io/contact-us/) or send us an e-mail at hello@bitbag.io.
 
 ## License
 
