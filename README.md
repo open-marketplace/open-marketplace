@@ -82,6 +82,6 @@ See the full list of contributors [here](https://github.com/BitBagCommerce/OpenM
 
 ## Contact
 
-If you want to contact us, the best way is to fill the form on [our website](https://bitbag.io/contact-us/) or send us an e-mail to hello@bitbag.io with your question(s). We guarantee that we answer as soon as we can!
+You can contact us using the contact form on [our website](https://bitbag.io/contact-us/) or send us an e-mail to hello@bitbag.io with your question(s). We are also active on the [community Slack](https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1ij1t41wx-HfAR6~URm3OAcqm0jc423Q).
 
 [![](https://bitbag.io/wp-content/uploads/2021/08/badges-bitbag.png)](https://bitbag.io/contact-us/)
