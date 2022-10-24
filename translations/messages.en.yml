@@ -148,6 +148,8 @@ open_marketplace:
         no_media_uploaded: "No media uploaded."
         your_account_has_been_disabled: "Your vendor account has been disabled. Please contact administrators for more information."
         view_orders: "View your orders"
+        footer_signature: BitBag OpenMarketplace - an open-source MVM based on Symfony & Sylius.
+
     email:
         vendor_profile_update: "Vendor profile update requested"
         request_profile_update_greeting: "Hey, you asked to change your company details."
