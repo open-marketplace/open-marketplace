@@ -5,9 +5,15 @@
 </p>
 
 <p>
-  <a href="https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1ij1t41wx-HfAR6~URm3OAcqm0jc423Q">
-     <img src="https://img.shields.io/badge/chat-on%20slack-e51670.svg" alt="Chat">
-  </a>
+    <a href="https://github.com/BitBagCommerce/OpenMarketplace/actions">
+        <img src="https://img.shields.io/github/workflow/status/BitBagCommerce/OpenMarketplace/Build" alt="Build">
+    </a>
+    <a href="https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1ij1t41wx-HfAR6~URm3OAcqm0jc423Q">
+        <img src="https://img.shields.io/badge/chat-on%20slack-e51670.svg" alt="Chat">
+    </a>
+    <a href="https://bitbag.io/contact-us">
+        <img src="https://img.shields.io/badge/support-contact%20author-blue" alt="Contact">
+    </a>
 </p>
 
 BitBag OpenMarketplace is the first open source marketplace platform. The solution is based on Sylius, Symfony and Semantic UI meaning it is fully compatible with each. The platform is highly customisable project made using full-stack BDD with Behat and PHPSpec.
