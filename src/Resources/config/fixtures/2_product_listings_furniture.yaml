@@ -1,0 +1,396 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "good-and-better@example.com"
+                                code: "green_commode"
+                                name: "Green commode"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "green_stylish_sofa"
+                                name: "Green stylish sofa"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "modern_lamp"
+                                name: "Modern white lamp"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "retro_commode"
+                                name: "Retro-style commode"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "modern_kitchen_design"
+                                name: "Modern kitchen design"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "rotating_stool"
+                                name: "Rotating stool"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "minimal_design_commode"
+                                name: "Minimal design commode"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "gray_soft_sofa"
+                                name: "Gray softy sofa"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "artisan_table"
+                                name: "Artisan design coffee table"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "glassy_vase"
+                                name: "Simple glassy vase"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "white_narrow_commode"
+                                name: "White narrow commode"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "subset_of_copper_lamps"
+                                name: "Subset of copper lamps"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "basic_gray_lamp"
+                                name: "Basic gray lamp"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "royal_marriage_bed"
+                                name: "Royal marriage bed"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "bar_stools"
+                                name: "Set of bar stools"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "retro_commode_2"
+                                name: "Retro-stylished commode"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "modern_darky_brown_table"
+                                name: "Modern darky-brown table"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "stylish_armchair"
+                                name: "Stylish armchair"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/18.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "little_things_commode"
+                                name: "\"Little things\" commode"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/19.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "green_wide_sofa"
+                                name: "Green wide sofa"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/20.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "wall_cabinet"
+                                name: "Whitey-brown wall cabinet"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/21.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "comfortable_upholstered_chair"
+                                name: "Comfortable upholstered chair"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/22.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "white_minimal_desk"
+                                name: "White minimal desk"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/23.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "hanging_bathroom_cabinet"
+                                name: "Hanging bathroom cabinet"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/24.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "hanging_bathroom_cabinet_set"
+                                name: "Hanging bathroom cabinet set"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/25.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "retro_cabinet"
+                                name: "Retro cabinet"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/26.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "modern_dark_chair"
+                                name: "Modern dark chair"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/27.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "stylish_artisan_table"
+                                name: "Stylish artisan table"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/28.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "retro_armchair"
+                                name: "Retro armchair"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/29.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "decorative_flower"
+                                name: "Decorative flower"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/furniture/30.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'furniture'

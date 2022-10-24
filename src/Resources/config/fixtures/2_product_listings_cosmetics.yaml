@@ -1,0 +1,227 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "health@example.com"
+                                code: "perfume_storage_bottle"
+                                name: "Perfume storage bottle"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "makeup_kit"
+                                name: "Complete makeup kit"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "im_fabulous_body_oil"
+                                name: "\"I'm Fabulous\" body oil"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "ginger_white_toilet_water"
+                                name: "\"Ginger White\" toilet water"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "salt_bath_set"
+                                name: "Salt bath set"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "eyeshadows_multicolor"
+                                name: "Eyeshadows - multicolor"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "sweet_orange_toilet_water"
+                                name: "\"Sweet Orange\" toilet water"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "necessaire_body_lotion"
+                                name: "\"Necessaire\" body lotion"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "pure_music_toilet_water"
+                                name: "\"Pure Music\" Toilet water"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "perfume_tester_bottle_20ml"
+                                name: "Perfume tester bottle (20 ml)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "perfume_tester_bottle_35ml"
+                                name: "Perfume tester bottle (35 ml)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "eczema_treatment_bcd"
+                                name: "Eczema Treatment BCD"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "nora_pain_relief_1000_500mg"
+                                name: "Nora Pain Relief CBD (1000+500mg)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "nora_pain_relief_500mg_3pcs"
+                                name: "Nora Pain Relief CBD (500mg, 3 pcs)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "cbd_oil_pack"
+                                name: "CBD Oil pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "perfume_storage_bottles_pack"
+                                name: "Perfume storage bottles pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'
+
+                            -   vendor: "health@example.com"
+                                code: "ordinary_cosmetics_pack"
+                                name: "Ordinary Cosmetics pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/cosmetics/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'cosmetics'

@@ -1,0 +1,18 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                shop_user:
+                    name: 'shop_user'
+                    options:
+                       random: 20
+
+                customer_group:
+                    options:
+                        custom:
+                            retail:
+                                code: 'retail'
+                                name: 'Retail'
+                            wholesale:
+                                code: 'wholesale'
+                                name: 'Wholesale'

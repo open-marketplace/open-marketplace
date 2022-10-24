@@ -19,7 +19,7 @@ class DraftAttribute extends Attribute implements DraftAttributeInterface
 {
     protected VendorInterface $vendor;
 
-    protected ?ProductAttributeInterface $productAttribute;
+    protected ?ProductAttributeInterface $productAttribute = null;
 
     public function getProductAttribute(): ?ProductAttributeInterface
     {

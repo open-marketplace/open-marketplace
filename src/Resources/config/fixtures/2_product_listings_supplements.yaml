@@ -1,0 +1,19 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "health@example.com"
+                                code: "oats_2_1"
+                                name: "Good protein oats pack10"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'

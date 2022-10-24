@@ -1,0 +1,30 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            listeners:
+                orm_purger: ~
+                images_purger: ~
+                logger: ~
+            fixtures:
+                admin_user:
+                    name: 'admin_user'
+                    options:
+                        custom:
+                            -   email: 'bitbag@example.com'
+                                username: 'bitbag'
+                                password: 'password'
+                                enabled: true
+                                locale_code: '%locale%'
+                                first_name: 'Bruce'
+                                last_name: 'Wayne'
+                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/john.jpg'
+
+                            -   email: 'api@example.com'
+                                username: 'api'
+                                password: 'password'
+                                enabled: true
+                                locale_code: '%locale%'
+                                first_name: 'Luke'
+                                last_name: 'Skywalker'
+                                api: true
+                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/luke.jpg'

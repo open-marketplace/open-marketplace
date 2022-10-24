@@ -5,6 +5,12 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute" table="bitbag_open_marketplace_draft_attribute">
+        <attribute-overrides>
+            <attribute-override name="code">
+                <field column="code" type="string" unique="false" />
+            </attribute-override>
+        </attribute-overrides>
+
         <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\Vendor"/>
         <one-to-one field="productAttribute" target-entity="Sylius\Component\Product\Model\ProductAttribute">
             <join-column on-delete="SET NULL"/>

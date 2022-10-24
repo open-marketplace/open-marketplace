@@ -26,6 +26,7 @@ final class VendorFixture extends AbstractResourceFixture
         $resourceNode
             ->children()
                 ->scalarNode('email')->cannotBeEmpty()->end()
+                ->scalarNode('company_name')->cannotBeEmpty()->end()
                 ->scalarNode('first_name')->cannotBeEmpty()->end()
                 ->scalarNode('last_name')->cannotBeEmpty()->end()
                 ->scalarNode('gender')->end()

@@ -1,0 +1,26 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                draft_attribute:
+                    options:
+                        custom:
+                            -   vendor: 'good-and-better@example.com'
+                                code: 'test'
+                                name: 'Test'
+                                type: 'text'
+
+                            -   vendor: 'camille@example.com'
+                                code: 'test'
+                                name: 'Test'
+                                type: 'text'
+
+                            -   vendor: 'lisa-comp@example.com'
+                                code: 'test'
+                                name: 'Test'
+                                type: 'text'
+
+                            -   vendor: 'health@example.com'
+                                code: 'test'
+                                name: 'Test'
+                                type: 'text'

@@ -1,0 +1,7 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                similar_product_association:
+                    options:
+                        amount: 3

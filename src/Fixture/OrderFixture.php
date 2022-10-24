@@ -57,7 +57,7 @@ final class OrderFixture extends AbstractFixture
 
     public function getName(): string
     {
-        return 'mvm_order';
+        return 'open_marketplace_order';
     }
 
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void

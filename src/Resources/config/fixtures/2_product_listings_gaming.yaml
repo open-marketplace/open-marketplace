@@ -1,0 +1,383 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "lisa-comp@example.com"
+                                code: "pc_collectible_figurine"
+                                name: "PC collectible figurine"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/1.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "gaming_under_desk_lightning"
+                                name: "Gaming under-desk lightning"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/2.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "white_gaming_console_figurine"
+                                name: "White gaming console figurine"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/3.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "gummy_black_pad"
+                                name: "Gummy black pad"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/4.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_mechanical_keyboard"
+                                name: "BetterGG Mechanical keyboard"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/5.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "pc_station_lightning"
+                                name: "PC station lightning"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/6.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_microphone_with_stand"
+                                name: "BetterGG microphone with stand"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/7.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "gaming_chair_collective_figurine"
+                                name: "Gaming chair collective figuring"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/8.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_gaming_chair_orange"
+                                name: "BetterGG gaming chair (orange)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/9.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_gaming_chair_blue"
+                                name: "BetterGG Gaming chair (blue)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/10.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "gamingg_room_keyboard"
+                                name: "GaminGGRoom keyboard"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/11.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "white_gaming_pad"
+                                name: "White gaming pad"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/12.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "black_gaming_pad_pair"
+                                name: "Black gaming pad (pair)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/13.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "white_gaming_pad_pair"
+                                name: "White gaming pad (pair)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/14.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_two_keyboards_set"
+                                name: "BetterGG two mechanical keyboards"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/15.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_white_mechanical_keyboard"
+                                name: "BetterGG white mechanical keyboard"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/16.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "gamingg_room_chair_blue"
+                                name: "GaminGGRoom chair (blue)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/17.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "gamingg_room_pad"
+                                name: "GaminGGRoom pad (black)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/18.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "GaminGGRoom pad (white)"
+                                name: "\"No name\" Mobile5"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/19.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "gamingg_room_console"
+                                name: "GaminGGRoom console"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/20.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "black_n_white_pads"
+                                name: "Black'n'White pads set"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/21.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_gaming_station"
+                                name: "BetterGG gaming station"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/22.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_pc_station_lighting"
+                                name: "BetterGG PC station lighting"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/23.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "gamingg_room_gaming_station"
+                                name: "GaminGGRoom gaming station"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/24.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_chair_red"
+                                name: "BetterGG gaming chair (red)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/25.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_mini_keyboard"
+                                name: "BetterGG mini keyboard"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/26.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_mono_keyboard"
+                                name: "BetterGG mono keyboard"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/27.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_colorful_keyboard"
+                                name: "BetterGG colorful keyboard"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/28.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "better_gg_upper_color_keyboard"
+                                name: "BetterGG upper color keyboard"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gaming/29.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'gaming'

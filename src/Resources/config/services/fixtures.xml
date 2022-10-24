@@ -10,9 +10,9 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="open_marketplace.fixture.product_draft" class="BitBag\OpenMarketplace\Fixture\ProductDraftFixture">
+        <service id="open_marketplace.fixture.product_listing" class="BitBag\OpenMarketplace\Fixture\ProductListingFixture">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="open_marketplace.fixture.example_factory.product_draft" />
+            <argument type="service" id="open_marketplace.fixture.example_factory.product_listing" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
@@ -31,6 +31,12 @@
         <service id="open_marketplace.fixture.conversation" class="BitBag\OpenMarketplace\Fixture\ConversationFixture">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="open_marketplace.fixture.example_factory.conversation" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="open_marketplace.fixture.attribute" class="BitBag\OpenMarketplace\Fixture\AttributeFixture">
+            <argument type="service" id="open_marketplace.fixture.example_factory.attribute" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="sylius_fixtures.fixture" />
         </service>
     </services>

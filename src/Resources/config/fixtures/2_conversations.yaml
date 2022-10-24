@@ -1,0 +1,7 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                conversation:
+                    options:
+                        random: 5

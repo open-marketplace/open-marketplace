@@ -1,0 +1,251 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            listeners:
+                orm_purger: ~
+                images_purger: ~
+                logger: ~
+            fixtures:
+                locale:
+                    options:
+                        locales:
+                            - 'en_US'
+
+                currency:
+                    options:
+                        currencies:
+                            - 'USD'
+
+                geographical:
+                    options:
+                        countries:
+                            - 'US'
+                            - 'FR'
+                            - 'DE'
+                            - 'AU'
+                            - 'CA'
+                            - 'MX'
+                            - 'NZ'
+                            - 'PT'
+                            - 'ES'
+                            - 'CN'
+                            - 'GB'
+                            - 'PL'
+                        zones:
+                            US:
+                                name: 'United States of America'
+                                countries:
+                                    - 'US'
+                            WORLD:
+                                name: 'Rest of the World'
+                                countries:
+                                    - 'FR'
+                                    - 'DE'
+                                    - 'AU'
+                                    - 'CA'
+                                    - 'MX'
+                                    - 'NZ'
+                                    - 'PT'
+                                    - 'ES'
+                                    - 'CN'
+                                    - 'GB'
+                                    - 'PL'
+                taxon_tree:
+                    name: taxon
+                    options:
+                        custom:
+                            category:
+                                code: 'menu_category'
+                                name: 'Category'
+                                translations:
+                                    en_US:
+                                        name: 'Category'
+                                        slug: 'category'
+                                children:
+                                    -   code: 'clothes'
+                                        name: 'Clothes'
+                                        translations:
+                                            en_US:
+                                                name: 'Clothes'
+                                                slug: 'clothes'
+                                        children:
+                                            -   code: 'clothes_men'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Men'
+                                                        slug: 'clothes/man'
+
+                                            -   code: 'clothes_women'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Women'
+                                                        slug: 'clothes/women'
+
+                                    -   code: 'for_home'
+                                        name: 'For home'
+                                        translations:
+                                            en_US:
+                                                name: 'For home'
+                                                slug: 'for-home'
+                                        children:
+                                            -   code: 'gardening'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Gardening'
+                                                        slug: 'for-home/gardening'
+
+                                            -   code: 'living'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Living'
+                                                        slug: 'for-home/living'
+
+                                            -   code: 'furniture'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Furniture'
+                                                        slug: 'for-home/furniture'
+
+                                            -   code: 'hardware'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Hardware'
+                                                        slug: 'for-home/hardware'
+
+                                    -   code: 'electronics'
+                                        name: 'Electronics'
+                                        slug: 'electronics'
+                                        translations:
+                                            en_US:
+                                                name: 'Electronics'
+                                        children:
+                                            -   code: 'pcs'
+                                                translations:
+                                                    en_US:
+                                                        name: 'PCs'
+                                                        slug: 'electronics/pcs'
+
+                                            -   code: 'mobile_phones'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Mobile phones'
+                                                        slug: 'electronics/mobile-phones'
+
+                                            -   code: 'gaming'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Gaming'
+                                                        slug: 'electronics/gaming'
+
+                                    -   code: 'health_and_beauty'
+                                        name: 'Health & Beauty'
+                                        translations:
+                                            en_US:
+                                                name: 'Health & Beauty'
+                                                slug: 'health-and-beauty'
+                                        children:
+                                            -   code: 'cosmetics'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Cosmetics'
+                                                        slug: 'health-and-beauty/cosmetics'
+
+                                            -   code: 'supplements'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Supplements'
+                                                        slug: 'health-and-beauty/supplements'
+
+                                            -   code: 'vegan_food'
+                                                translations:
+                                                    en_US:
+                                                        name: 'Vegan food'
+                                                        slug: 'health-and-beauty/vegan-food'
+
+                channel:
+                    options:
+                        custom:
+                            open_marketplace:
+                                name: 'BitBag OpenMarketplace'
+                                code: 'open-marketplace'
+                                locales:
+                                    - '%locale%'
+                                currencies:
+                                    - 'USD'
+                                enabled: true
+                                hostname: '%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%'
+                                theme_name: '%env(resolve:SYLIUS_FIXTURES_THEME_NAME)%'
+                                shop_billing_data:
+                                    company: 'BitBag OpenMarketplace'
+                                    tax_id: '1234567890'
+                                    country_code: 'PL'
+                                    street: 'The Good, 15'
+                                    city: 'Marketplace Universe'
+                                    postcode: '12-345'
+                                menu_taxon: 'menu_category'
+                                contact_phone_number: '+41 123 456 789'
+                                contact_email: 'contact@bitbag.io'
+
+                payment_method:
+                    options:
+                        custom:
+                            cash_on_delivery:
+                                code: 'cash_on_delivery'
+                                name: 'Cash on delivery'
+                                channels:
+                                    - 'open-marketplace'
+                            bank_transfer:
+                                code: 'bank_transfer'
+                                name: 'Bank transfer'
+                                channels:
+                                    - 'open-marketplace'
+                                enabled: true
+
+                shipping_method:
+                    options:
+                        custom:
+                            ups:
+                                code: 'ups'
+                                name: 'UPS'
+                                enabled: true
+                                channels:
+                                    - 'open-marketplace'
+                            dhl_express:
+                                code: 'dhl_express'
+                                name: 'DHL Express'
+                                enabled: true
+                                channels:
+                                    - 'open-marketplace'
+                            fedex:
+                                code: 'fedex'
+                                name: 'FedEx'
+                                enabled: true
+                                channels:
+                                    - 'open-marketplace'
+
+                tax_category:
+                    options:
+                        custom:
+                            clothing:
+                                code: 'clothing'
+                                name: 'Clothing'
+                            other:
+                                code: 'other'
+                                name: 'Other'
+
+                tax_rate:
+                    options:
+                        custom:
+                            clothing_tax:
+                                code: 'clothing_sales_tax_7'
+                                name: 'Clothing Sales Tax 7%'
+                                zone: 'US'
+                                category: 'clothing'
+                                amount: 0.07
+
+                            default_sales_tax:
+                                code: 'sales_tax_20'
+                                name: 'Sales Tax 20%'
+                                zone: 'US'
+                                category: 'other'
+                                amount: 0.2

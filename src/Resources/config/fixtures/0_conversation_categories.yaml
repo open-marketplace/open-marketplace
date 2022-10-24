@@ -1,0 +1,13 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                conversation_category:
+                    options:
+                        categories:
+                            - 'Proposition of a new taxon'
+                            - 'My account is blocked'
+                            - 'Problems with my product listing'
+                            - 'Issues with the order'
+                            - 'Product listing rejection'
+                            - 'Other'

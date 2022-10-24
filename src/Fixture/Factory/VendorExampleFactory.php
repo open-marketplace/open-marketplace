@@ -112,7 +112,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
             ->setDefault('email', fn (Options $options): string => $this->faker->email)
             ->setDefault('first_name', fn (Options $options): string => $this->faker->firstName)
             ->setDefault('last_name', fn (Options $options): string => $this->faker->lastName)
-            ->setDefault('password', 'password123')
+            ->setDefault('password', 'password')
             ->setDefault('customer_group', LazyOption::randomOneOrNull($this->customerGroupRepository, 100))
             ->setAllowedTypes('customer_group', ['null', 'string', CustomerGroupInterface::class])
             ->setNormalizer('customer_group', LazyOption::findOneBy($this->customerGroupRepository, 'code'))

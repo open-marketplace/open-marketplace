@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Cloner;
 
-use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 
 final class AdjustmentCloner implements AdjustmentClonerInterface
 {

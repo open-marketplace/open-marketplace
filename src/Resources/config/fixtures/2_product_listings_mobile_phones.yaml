@@ -1,0 +1,214 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "lisa-comp@example.com"
+                                code: "pink_mobile_cover"
+                                name: "Pink mobile cover"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/1.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_alpha_1"
+                                name: "TeleMoBB Alpha 1"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/2.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_alpha_2"
+                                name: "TeleMoBB Alpha 2"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/3.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_delta_1"
+                                name: "Tele MoBB delta 1"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/4.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_delta_2"
+                                name: "TeleMoBB delta 2"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/5.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_oxy_1"
+                                name: "TeleMoBB oxy 1"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/6.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_oxy_2"
+                                name: "TeleMoBB oxy 2"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/7.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_table_1"
+                                name: "TeleMoBB table 1"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/8.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_zixy_1"
+                                name: "TeleMoBB zixy 1"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/9.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobb_zixy_2"
+                                name: "TeleMoBB zixy 2"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/10.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "zixy_cover"
+                                name: "Zixy phone cover"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/11.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "zixy_display_cover"
+                                name: "Zixy display cover"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/12.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "zixy_display_anti_crush"
+                                name: "Zixy display anti-crush"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/13.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "oxy_cover_black"
+                                name: "Oxy cover black"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/14.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mobile_be_ready_set"
+                                name: "Mobile \"Be ready\" set"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/15.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "zixy_anti_tap_marks_cover"
+                                name: "Zixy anti-tap marks cover"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/mobile_phones/16.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'mobile_phones'

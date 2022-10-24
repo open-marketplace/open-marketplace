@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Cloner;
 
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Order\Model\Adjustment;
+use Sylius\Component\Core\Model\Adjustment;
 
 final class OrderItemUnitCloner implements OrderItemUnitClonerInterface
 {
