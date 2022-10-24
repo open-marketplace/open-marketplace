@@ -1,0 +1,102 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            listeners:
+                catalog_promotion_processor_executor: ~
+            fixtures:
+                promotion:
+                    options:
+                        custom:
+                            christmas:
+                                code: 'christmas'
+                                name: 'Christmas'
+                                channels:
+                                    - 'open-marketplace'
+                                coupon_based: true
+                                coupons:
+                                    -   code: 'CHRISTMAS_SALE'
+                                        expires_at: 'December 24'
+                                        usage_limit: 10
+                                        per_customer_usage_limit: 1
+                            new_year:
+                                code: 'new_year'
+                                name: 'New Year'
+                                usage_limit: 10
+                                priority: 2
+                                starts_at: '-7 day'
+                                ends_at: '7 day'
+                                channels:
+                                    - 'open-marketplace'
+                                rules:
+                                    -   type: 'item_total'
+                                        configuration:
+                                            open-marketplace:
+                                                amount: 100.00
+                                actions:
+                                    -   type: 'order_fixed_discount'
+                                        configuration:
+                                            open-marketplace:
+                                                amount: 10.00
+
+                catalog_promotion:
+                    options:
+                        custom:
+                            winter:
+                                code: 'winter'
+                                name: 'Winter sale'
+                                channels:
+                                    - 'open-marketplace'
+                                priority: 1
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
+                                            amount: 0.5
+                            spring:
+                                code: 'spring'
+                                name: 'Spring sale'
+                                channels:
+                                    - 'open-marketplace'
+                                priority: 3
+                                scopes:
+                                    -   type: 'for_taxons'
+                                        configuration:
+                                            taxons:
+                                                - 'clothes'
+                                actions:
+                                    -   type: 'fixed_discount'
+                                        configuration:
+                                            open-marketplace:
+                                                amount: 3.00
+                            summer:
+                                code: 'summer'
+                                name: 'Summer sale'
+                                channels:
+                                    - 'open-marketplace'
+                                exclusive: true
+                                priority: 4
+                                scopes:
+                                    -   type: 'for_taxons'
+                                        configuration:
+                                            taxons:
+                                                - 'vegan-food'
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
+                                            amount: 0.5
+                            autumn:
+                                code: 'autumn'
+                                name: 'Autumn sale'
+                                start_date: '2 days'
+                                end_date: '10 days'
+                                channels:
+                                    - 'open-marketplace'
+                                priority: 2
+                                scopes:
+                                    -   type: 'for_taxons'
+                                        configuration:
+                                            taxons:
+                                                - 'gaming'
+                                actions:
+                                    -   type: 'percentage_discount'
+                                        configuration:
+                                            amount: 0.5

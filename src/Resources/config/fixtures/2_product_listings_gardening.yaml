@@ -1,0 +1,357 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "good-and-better@example.com"
+                                code: "herbstation_terrarium"
+                                name: "Herbstation_terrarium"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "shaolin_monk_decorative_figure"
+                                name: "Shaolin Monk decorative figure"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "hanging_chair_with_pillows"
+                                name: "Hanging chair with pillows set"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "random_set_of_plants"
+                                name: "Random set of plants"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "garden_swing"
+                                name: "Garden swing"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "leprechaun_figure"
+                                name: "Leprechaun figure"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "gardening_set"
+                                name: "Gardening set"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "garden_chair"
+                                name: "Garden chair (olive-gray)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "wheelbarrow"
+                                name: "Wheelbarrow"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "random_mini_plants"
+                                name: "Random mini plants"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "mini_aloes_plant"
+                                name: "Mini aloes plant"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "plant_decorative_furniture"
+                                name: "Plant decorative furniture"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "leprechaun_figure_2"
+                                name: "Leprechaun decorative figure"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "white_flowerpot"
+                                name: "Flowerpot (white)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "decorative_watering_can"
+                                name: "Decorative watering can"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "Coppery flowerpots"
+                                name: "Good & Better - Jar of shells6"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "plastic_watering_can"
+                                name: "Plastic watering can"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "random_plant_seeds"
+                                name: "Random plant seeds (pack)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/18.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "aluminium_flowerpot"
+                                name: "Aluminium flowerpot"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/19.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "flower_soil"
+                                name: "Flower soil"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/20.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "set_of_footrest"
+                                name: "Set of three footrests"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/21.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "decorative_flowerpot"
+                                name: "Decorative flowerpot"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/22.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "garden_sprinkler"
+                                name: "Garden sprinkler"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/23.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "rubber_boots"
+                                name: "Rubber boots"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/24.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "decorative_lantern"
+                                name: "Decorative lantern"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/25.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "decorative_hanging_flowerpot"
+                                name: "Decorative hanging flowerpot"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/26.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "balcony_flowerpot"
+                                name: "Balcony flowerpot"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/gardening/27.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'gardening'

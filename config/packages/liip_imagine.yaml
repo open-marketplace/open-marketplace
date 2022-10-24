@@ -4,3 +4,8 @@ liip_imagine:
             web_path:
                 web_root: "%kernel.project_dir%/public"
                 cache_prefix: "media/cache"
+
+    filter_sets:
+        open_marketplace_fixture_size:
+            filters:
+                thumbnail: { size: [800, 600], mode: outbound }

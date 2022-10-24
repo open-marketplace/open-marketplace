@@ -1,0 +1,396 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "health@example.com"
+                                code: "chocolate_cocoa_balls"
+                                name: "Chocolate and cocoa balls pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "chocolate_cookies"
+                                name: "Chocolate cookies pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "crispy_fruit_cake_recipe"
+                                name: "Crispy fruit cake recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_portioned_meal_recipe"
+                                name: "Vegan portioned meal recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "pumpkin_seeds"
+                                name: "Pumpkin seeds pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "almond_seeds_pack"
+                                name: "Almond seeds pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "keto_vegan_protein_shake"
+                                name: "Keto Vegan protein shake"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "yokos_banana_coconut_shake"
+                                name: "Yokos banana & coconut shake"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_dessert_recipe"
+                                name: "Vegan dessert recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_ingredients_pack"
+                                name: "Vegan ingredients pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "avocado"
+                                name: "Avocado pcs"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "dried_fruit_mix"
+                                name: "Dried fruit mix"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_burger_recipe"
+                                name: "Vegan burger recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "oat_milk"
+                                name: "Oat-only milk"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "salty_bagels_pack"
+                                name: "Salty bagels pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "itallian_nuts_pack"
+                                name: "Itallian nuts pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "nature_zen_proteins"
+                                name: "Nature zen proteins"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_chocolate_recipe"
+                                name: "Vegan chocolate recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/18.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "cashew_butter_500"
+                                name: "Cashew butter 500g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/19.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_tacos_recipe"
+                                name: "Vegan tacos recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/20.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "delicacies_mix"
+                                name: "Delicacies mix"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/21.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_strawberry_dessert_recipe"
+                                name: "Vegan strawberry dessert recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/22.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_crispy_breakfast_recipe"
+                                name: "Vegan crispy breakfast recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/23.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "vegan_mega_sandwitch recipe"
+                                name: "Vegan mega swndwitch recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/24.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "pistachios_pack"
+                                name: "Pistachios pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/25.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "oats_pack"
+                                name: "Good protein oats pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/26.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "plant_based_2cheese_pizza"
+                                name: "Plant-based 2-cheese pizza"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/27.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "brune_kitchen_cookies_pack"
+                                name: "Brune kitchen cookies pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/28.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "keto_vegan_dinner_recipe"
+                                name: "Keto-vegan dinner recipe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/29.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'
+
+                            -   vendor: "health@example.com"
+                                code: "blueberry_pack"
+                                name: "Blueberry pack"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/vegan_food/30.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'vegan_food'

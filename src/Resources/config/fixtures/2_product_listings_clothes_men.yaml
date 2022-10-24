@@ -1,0 +1,292 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "camille@example.com"
+                                code: "black_suit_with_modern_bag"
+                                name: "Black suit with modern bag"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "nice_salmon_coloured_coat"
+                                name: "Nice salmon-coloured coat"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "clean_dark_t_shirt"
+                                name: "Clean dark t-shirt"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "red_hoodie"
+                                name: "Red hoodie"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "elegant_azure_shirt"
+                                name: "Elegant azure shirt"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "blue_perfect_jeans"
+                                name: "Perfect blue jeans"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "blue_original_jeans"
+                                name: "Original blue jeans"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "polo_shirt_pack"
+                                name: "Polo shirt pack - 6 pcs"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "lorus_watch_gold"
+                                name: "Lorus watch - gold edition"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "white_elegant_shirt"
+                                name: "White elegant shirt"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "light_cotton_sweater"
+                                name: "Light sweater 100% cotton"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "dark_jeans"
+                                name: "Dark original jeans"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "brown_sneakers"
+                                name: "Brown leather sneakers"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "patterned_chemise"
+                                name: "Men patterned chemise"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "mid_season_jacket"
+                                name: "Mid-season jacket"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "elegant_vest"
+                                name: "Elegant men vest"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "elegant_style_footwear"
+                                name: "Elegant-style footwear"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "heaven_bag_1_1"
+                                name: "\"Heaven\" Blue Bag_1"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/18.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "regular_men_socks"
+                                name: "Regular men socks"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/19.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "elegant_men_shoes"
+                                name: "Elegant men shoes"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/20.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "jeans_jacket"
+                                name: "Blue-jeans jacket"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/21.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'
+
+                            -   vendor: "camille@example.com"
+                                code: "clean_black_t_shirt"
+                                name: "Clean black t-shirt"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_men/22.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_men'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_men'

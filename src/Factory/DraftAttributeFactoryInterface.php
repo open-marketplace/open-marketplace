@@ -12,9 +12,13 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface DraftAttributeFactoryInterface extends FactoryInterface
 {
-    public function createTyped(string $type): DraftAttributeInterface;
+    public function createTyped(
+        string $type,
+        VendorInterface $vendor
+    ): DraftAttributeInterface;
 }

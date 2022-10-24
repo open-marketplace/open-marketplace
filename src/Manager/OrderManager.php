@@ -65,6 +65,7 @@ final class OrderManager implements OrderManagerInterface
         /** @var OrderInterface $newOrder */
         $newOrder = $this->factory->createNew();
         $this->cloner->clone($order, $newOrder);
+
         $newOrder->setVendor($itemVendor);
         $newOrder->setPrimaryOrder($order);
 

@@ -98,7 +98,6 @@
                 </service>
             </argument>
             <argument type="service" id="sylius.registry.attribute_type"/>
-            <argument type="service" id="open_marketplace.provider.vendor"/>
         </service>
 
 

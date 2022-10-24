@@ -1,0 +1,292 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "good-and-better@example.com"
+                                code: "shovel"
+                                name: "Shovel"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "50_hp_petrol_lawn_mower"
+                                name: "50 HP petrol lawn mower"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "30_hp_petrol_chainsaw"
+                                name: "30 HP petrol chainsaw"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "lawn_trimmer"
+                                name: "Lawn trimmer"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "centimeter_tape_measure"
+                                name: "Centimeter tape measure"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "shovel_2"
+                                name: "Hard shovel"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "mini_shovel"
+                                name: "Mini shovel"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "garden_knife"
+                                name: "Garden knife"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "garden_hammer"
+                                name: "Garden hammer"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "angle_grinder"
+                                name: "Angle grinder"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "axe"
+                                name: "Axe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "screwdriver"
+                                name: "Screwdriver"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "angle_grinder_2"
+                                name: "Angle grinder (softener)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "mini_secateurs"
+                                name: "Mini secateurs"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "grinding_machine"
+                                name: "Grinding machine"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "scissors"
+                                name: "Scissors"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "shredding_knife"
+                                name: "Shredding knife"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "small_vice"
+                                name: "Small vide"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/18.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "gardening_shoulder"
+                                name: "Gardening shoulder"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/19.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "regular_axe"
+                                name: "Regular axe"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/20.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "sprinkler_ending"
+                                name: "Sprinkler ending"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/21.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "screw"
+                                name: "Screw"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/hardware/22.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'hardware'

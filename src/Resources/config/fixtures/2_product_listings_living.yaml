@@ -1,0 +1,344 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "good-and-better@example.com"
+                                code: "tea_tableware"
+                                name: "Tea tableware"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "soap_container"
+                                name: "Soap refilling container"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "pillow_of_patterns"
+                                name: "Pillow of patterns"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "bread_container"
+                                name: "Bread container"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "moisturising_set"
+                                name: "Moisturising set"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "photo_frame_pack"
+                                name: "Photo frames pack (6 pcs)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "sweetie_mug"
+                                name: "Sweetie mug"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "a_small_lounge_suite"
+                                name: "A small lounge suite"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "a_wicker_lounge_suite"
+                                name: "A wicker lounge suite"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "plantie_pillow"
+                                name: "Plantie pillow"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "decorative_vase"
+                                name: "Decorative vase"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "wicker_pad"
+                                name: "Good & Better - Jar of shells7"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "360_n_mug"
+                                name: "360N mug"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "little_retro_chest"
+                                name: "Little retro chest"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "set_of_pillows"
+                                name: "Set of pillows"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "blocky_calendar"
+                                name: "Blocky calendar"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "home_plant_pot"
+                                name: "Home plant pot"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "stylish_lamp"
+                                name: "Stylish lamp"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/18.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "clay_vase"
+                                name: "Clay vase"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/19.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "horizontally_stripped_pillows"
+                                name: "Horizontally stripped pillows (2 pcs)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/20.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "gray_lamp"
+                                name: "Gray home lamp"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/21.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "linen_threads"
+                                name: "Linen threads (6 pcs)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/22.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "champagne_toast_candle"
+                                name: "Champagne toast candle"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/23.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "gramophone"
+                                name: "Gramophone"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/24.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "jar_of_shells"
+                                name: "Jar of shells"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/25.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'
+
+                            -   vendor: "good-and-better@example.com"
+                                code: "two_white_mugs"
+                                name: "Two white mugs"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/living/25.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'for_home'
+                                taxons:
+                                    - 'for_home'
+                                    - 'living'

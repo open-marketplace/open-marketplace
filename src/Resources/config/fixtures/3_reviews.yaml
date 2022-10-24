@@ -1,0 +1,7 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_review:
+                    options:
+                        random: 40

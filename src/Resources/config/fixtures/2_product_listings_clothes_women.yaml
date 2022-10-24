@@ -1,0 +1,292 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "camille@example.com"
+                                code: "elegant_golden_watch"
+                                name: "Elegant golden watch"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "suede_high_heels_blue"
+                                name: "Suede high heels (blue)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "elegant_womens_shirt_and_skirt"
+                                name: "Elegant women's shirt and skirt"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "leather_boots_with_a_zipper"
+                                name: "Leather boots with a zipper"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "the_usual_sneakers"
+                                name: "The usual sneakers"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "mid_season_coat"
+                                name: "Mid-season coat"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "leather_high_heels_creamy"
+                                name: "Leather high heels (creamy)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "cotton_knitted_sweater"
+                                name: "Knitted sweater 100% cotton"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "elegant_jacket"
+                                name: "Elegant jacket"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "standard_ripped_jeans"
+                                name: "Standard ripped jeans"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "handers_for_dresses"
+                                name: "Hangers for a dresses (10 pcs)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "bone_peace_shirt"
+                                name: "Bone-peace shirt"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "horizontally_stripped_t_shirt"
+                                name: "Horizontally stripped t-shirt"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "simple_pink_bag"
+                                name: "Simple pink bag"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "flowerful_skirt"
+                                name: "Flowerful skirt"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "styled_sunglasses"
+                                name: "Good-styled sunglasses"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "elegant_silver_watch"
+                                name: "Elegant silver watch"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "stylish_salmon_coloured_hat"
+                                name: "Stylish salmon-coloured hat"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/18.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "minimal_stylish_watch"
+                                name: "Minimal stylish watch"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/19.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "pearl_stylished_bag"
+                                name: "Pearl-stylished bag"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/20.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "blue_simple_bag"
+                                name: "Blue simple bag"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/21.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'
+
+                            -   vendor: "camille@example.com"
+                                code: "women_top_pack"
+                                name: "Women top pack (5 pcs)"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/clothes_women/22.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'clothes_women'
+                                taxons:
+                                    - 'clothes'
+                                    - 'clothes_women'

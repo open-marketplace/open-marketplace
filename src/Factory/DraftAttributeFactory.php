@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -23,27 +23,25 @@ final class DraftAttributeFactory implements DraftAttributeFactoryInterface
 
     private FactoryInterface $factory;
 
-    private VendorProviderInterface $vendorProvider;
-
     public function __construct(
         FactoryInterface $factory,
-        ServiceRegistryInterface $attributeTypesRegistry,
-        VendorProviderInterface $vendorProvider,
-        ) {
+        ServiceRegistryInterface $attributeTypesRegistry
+    ) {
         $this->factory = $factory;
         $this->attributeTypesRegistry = $attributeTypesRegistry;
-        $this->vendorProvider = $vendorProvider;
     }
 
-    public function createTyped(string $type): DraftAttributeInterface
-    {
+    public function createTyped(
+        string $type,
+        VendorInterface $vendor
+    ): DraftAttributeInterface {
         /** @var AttributeTypeInterface $attributeType */
         $attributeType = $this->attributeTypesRegistry->get($type);
         /** @var DraftAttributeInterface $attribute */
         $attribute = $this->factory->createNew();
         $attribute->setType($type);
         $attribute->setStorageType($attributeType->getStorageType());
-        $attribute->setVendor($this->vendorProvider->provideCurrentVendor());
+        $attribute->setVendor($vendor);
 
         return $attribute;
     }

@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Controller;
 
 use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType;
+use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter;
 use BitBag\OpenMarketplace\Updater\ProductAttributeUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -53,6 +54,8 @@ final class DraftAttributesController extends ResourceController
 
     private ProductAttributeUpdaterInterface $productAttributeUpdater;
 
+    private VendorProviderInterface $vendorProvider;
+
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -72,7 +75,8 @@ final class DraftAttributesController extends ResourceController
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
         DraftAttributeFactoryInterface $draftAttributeFactory,
-        ProductAttributeUpdaterInterface $productAttributeUpdater
+        ProductAttributeUpdaterInterface $productAttributeUpdater,
+        VendorProviderInterface $vendorProvider
     ) {
         parent::__construct(
             $metadata,
@@ -96,6 +100,7 @@ final class DraftAttributesController extends ResourceController
 
         $this->draftAttributeFactory = $draftAttributeFactory;
         $this->productAttributeUpdater = $productAttributeUpdater;
+        $this->vendorProvider = $vendorProvider;
     }
 
     public function updateAction(Request $request): Response
@@ -200,7 +205,8 @@ final class DraftAttributesController extends ResourceController
          * This three lines uses custom factory to create attribute rest is default Sylius controller
          */
         $type = $request->attributes->get('type');
-        $newResource = $this->draftAttributeFactory->createTyped($type);
+        $currentVendor = $this->vendorProvider->provideCurrentVendor();
+        $newResource = $this->draftAttributeFactory->createTyped($type, $currentVendor);
         $form = $this->resourceFormFactory->create($configuration, $newResource);
 
         $form->handleRequest($request);

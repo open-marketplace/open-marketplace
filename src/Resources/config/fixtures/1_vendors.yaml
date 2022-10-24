@@ -1,0 +1,28 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                vendor:
+                    options:
+                        custom:
+                            -   email: 'camille@example.com'
+                                company_name: 'Camille Fashion House'
+                                first_name: 'Antonio'
+                                last_name: 'Loren'
+                                password: 'password'
+                            -   email: 'good-and-better@example.com'
+                                company_name: 'Good & Better'
+                                first_name: 'John'
+                                last_name: 'Smith'
+                                password: 'password'
+                            -   email: 'lisa-comp@example.com'
+                                company_name: 'Computers, Chips and Mobile'
+                                first_name: 'Lisa'
+                                last_name: 'Werner'
+                                password: 'password'
+                            -   email: 'health@example.com'
+                                company_name: 'Health & Style'
+                                first_name: 'Clark'
+                                last_name: 'Van der Bite'
+                                password: 'password'
+

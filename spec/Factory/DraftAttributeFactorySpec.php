@@ -56,7 +56,7 @@ final class DraftAttributeFactorySpec extends ObjectBehavior
         $attribute->setStorageType($storageType)->shouldBeCalledOnce();
         $attribute->setVendor($vendor)->shouldBeCalledOnce();
 
-        $item = $this->createTyped($type);
+        $item = $this->createTyped($type, $vendor);
 
         $item->shouldBeAnInstanceOf(DraftAttributeInterface::class);
     }

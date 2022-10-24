@@ -12,22 +12,25 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\ProductDraftImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
-use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use Faker\Factory;
 use Faker\Generator;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
-use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -35,14 +38,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
-final class ProductDraftExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+final class ProductListingExampleFactory implements ExampleFactoryInterface
 {
     private Generator $faker;
-
-    private OptionsResolver $optionsResolver;
 
     private FactoryInterface $productDraftFactory;
 
@@ -52,11 +52,15 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
 
     private FactoryInterface $productTranslationFactory;
 
-    private VendorRepositoryInterface $vendorRepository;
+    private EntityRepository $shopUserRepository;
 
     private ChannelRepositoryInterface $channelRepository;
 
     private RepositoryInterface $localeRepository;
+
+    private RepositoryInterface $draftAttributeRepository;
+
+    private RepositoryInterface $taxonRepository;
 
     private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
 
@@ -73,9 +77,11 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
         FactoryInterface $productListingPriceFactory,
         ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
         FactoryInterface $productTranslationFactory,
-        VendorRepositoryInterface $vendorRepository,
+        EntityRepository $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
         RepositoryInterface $localeRepository,
+        RepositoryInterface $draftAttributeRepository,
+        RepositoryInterface $taxonRepository,
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         SlugGeneratorInterface $slugGenerator,
         ImageUploaderInterface $imageUploader,
@@ -86,56 +92,36 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
         $this->productListingPriceFactory = $productListingPriceFactory;
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->productTranslationFactory = $productTranslationFactory;
-        $this->vendorRepository = $vendorRepository;
+        $this->shopUserRepository = $shopUserRepository;
         $this->channelRepository = $channelRepository;
         $this->localeRepository = $localeRepository;
+        $this->draftAttributeRepository = $draftAttributeRepository;
+        $this->taxonRepository = $taxonRepository;
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
         $this->slugGenerator = $slugGenerator;
         $this->faker = Factory::create();
-        $this->optionsResolver = new OptionsResolver();
 
-        $this->configureOptions($this->optionsResolver);
         $this->fileLocator = $fileLocator;
         $this->imageUploader = $imageUploader;
         $this->draftImageFactory = $draftImageFactory;
     }
 
-    protected function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver
-            ->setDefault('name', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
-            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
-            ->setDefault('slug', fn (Options $options): string => $this->slugGenerator->generate($options['name']))
-            ->setDefault('description', function (Options $options): string {
-                /** @var string $paragraphs */
-                $paragraphs = $this->faker->paragraphs(3, true);
-
-                return $paragraphs;
-            })
-            ->setDefault('amount', 20)
-            ->setDefault('vendor', LazyOption::randomOne($this->vendorRepository))
-            ->setDefault('added', false)
-            ->setDefault('accepted', false)
-            ->setDefault('rejected', false)
-            ->setDefault('images', [])
-        ;
-    }
-
     public function create(array $options = []): ProductDraftInterface
     {
-        $options = $this->optionsResolver->resolve($options);
-
         /** @var ProductDraftInterface $productDraft */
         $productDraft = $this->productDraftFactory->createNew();
 
         $productDraft->setCode($options['code']);
 
-        $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $options['vendor']);
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $this->shopUserRepository->findOneBy(['username' => $options['vendor']]);
+        Assert::notNull($shopUser);
+
+        /** @var VendorInterface $vendor */
+        $vendor = $shopUser->getVendor();
+        Assert::notNull($vendor);
+
+        $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
 
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {
@@ -147,20 +133,12 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
         }
 
         $this->createTranslations($productDraft, $options);
-
+        $this->createAttributes($productDraft, $vendor, $options);
         $this->createRandomImage($productDraft, $options);
+        $this->attachToTaxons($productDraft, $options);
 
-        if (true === $options['added']) {
-            $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
-        }
-
-        if (true === $options['accepted']) {
-            $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
-        }
-
-        if (true === $options['rejected']) {
-            $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_REJECT);
-        }
+        $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
+        $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
 
         return $productDraft;
     }
@@ -185,13 +163,44 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
             $productDraftTranslation = $this->productTranslationFactory->createNew();
             $productDraftTranslation->setLocale($localeCode);
             $productDraftTranslation->setName($options['name']);
-            $productDraftTranslation->setSlug($options['slug']);
-            $productDraftTranslation->setDescription($options['description']);
-            $productDraftTranslation->setShortDescription(null);
+            $productDraftTranslation->setSlug($this->slugGenerator->generate($options['name']));
+
+            /** @var string $description */
+            $description = $this->faker->paragraphs(3, true);
+            $productDraftTranslation->setDescription($description);
+
+            /** @var string $shortDescription */
+            $shortDescription = substr($this->faker->paragraphs(1, true), 0, 254) . '.';
+            $productDraftTranslation->setShortDescription($shortDescription);
             $productDraftTranslation->setMetaDescription(null);
             $productDraftTranslation->setMetaKeywords(null);
             $productDraftTranslation->setProductDraft($productDraft);
             $productDraft->addTranslations($productDraftTranslation);
+        }
+    }
+
+    private function createAttributes(
+        ProductDraftInterface $productDraft,
+        VendorInterface $vendor,
+        array $options
+    ): void {
+        if (!isset($options['attributes'])) {
+            return;
+        }
+
+        foreach ($options['attributes'] as $attributeData) {
+            /** @var DraftAttributeInterface $attribute */
+            $attribute = $this->draftAttributeRepository->findOneBy([
+                'code' => $attributeData['code'],
+                'vendor' => $vendor->getId(),
+            ]);
+
+            $attributeValue = new DraftAttributeValue();
+            $attributeValue->setAttribute($attribute);
+            $attributeValue->setSubject($productDraft);
+            $attributeValue->setValue($attributeData['value']);
+
+            $productDraft->addAttribute($attributeValue);
         }
     }
 
@@ -210,24 +219,49 @@ final class ProductDraftExampleFactory extends AbstractExampleFactory implements
             return;
         }
 
-        $randomNumber = random_int(0, count($options['images']) - 1);
+        $i = 0;
+        foreach ($options['images'] as $imagePath) {
+            $imageType = 0 === $i ? 'main' : '';
 
-        $image = $options['images'][$randomNumber];
+            /** @var string $imagePath */
+            $imagePath = $this->fileLocator->locate($imagePath);
+            $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
-        $imagePath = $image['path'];
-        $imageType = $image['type'] ?? null;
-        /** @var string $imagePath */
-        $imagePath = $this->fileLocator->locate($imagePath);
-        $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
+            /** @var ImageInterface $productImage */
+            $productImage = $this->draftImageFactory->createNew();
+            $productImage->setFile($uploadedImage);
+            $productImage->setType($imageType);
 
-        /** @var ImageInterface $productImage */
-        $productImage = $this->draftImageFactory->createNew();
-        $productImage->setFile($uploadedImage);
-        $productImage->setType($imageType);
+            $this->imageUploader->upload($productImage);
 
-        $this->imageUploader->upload($productImage);
+            $product->addImage($productImage);
+            $productImage->setOwner($product);
 
-        $product->addImage($productImage);
-        $productImage->setOwner($product);
+            ++$i;
+        }
+    }
+
+    private function attachToTaxons(ProductDraftInterface $productDraft, array $options): void
+    {
+        if (isset($options['main_taxon'])) {
+            /** @var TaxonInterface $taxon */
+            $taxon = $this->taxonRepository->findOneBy(['code' => $options['main_taxon']]);
+            $productDraft->setMainTaxon($taxon);
+        }
+
+        if (!isset($options['taxons'])) {
+            return;
+        }
+
+        foreach ($options['taxons'] as $taxonCode) {
+            /** @var TaxonInterface $taxon */
+            $taxon = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
+
+            $productDraftTaxon = new ProductDraftTaxon();
+            $productDraftTaxon->setProductDraft($productDraft);
+            $productDraftTaxon->setTaxon($taxon);
+
+            $productDraft->addProductDraftTaxon($productDraftTaxon);
+        }
     }
 }

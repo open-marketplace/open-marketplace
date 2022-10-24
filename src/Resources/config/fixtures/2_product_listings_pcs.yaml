@@ -1,0 +1,292 @@
+sylius_fixtures:
+    suites:
+        open_marketplace:
+            fixtures:
+                product_listing:
+                    options:
+                        custom:
+                            -   vendor: "lisa-comp@example.com"
+                                code: "all_in_one_1"
+                                name: "All-in-one no. 1"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/1.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "personal_laptop_128gb"
+                                name: "Personal laptop 128 GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/2.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "personal_laptop_256gb"
+                                name: "Personal laptop 256 GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/3.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "personal_laptop_512gb"
+                                name: "Personal laptop 512GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/4.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "all_in_one_2"
+                                name: "All-in-one set no. 2"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/5.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "personal_laptop_1tb"
+                                name: "Personal laptop 1TB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/6.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "personal_laptop_64gb"
+                                name: "Personal laptop 64GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/7.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "all_in_one_3"
+                                name: "All-in-one no. 3"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/8.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "personal_laptop_16gb"
+                                name: "Personal laptop 16GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/9.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "all_in_one_4"
+                                name: "All-in-one no. 4"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/10.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "lightweight_personal_laptop_16gb"
+                                name: "Lightweight personal laptop 16GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/11.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "lightweight_personal_laptop_32gb"
+                                name: "Lightweight personal laptop 32GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/12.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "pc_gaming_workstation"
+                                name: "PC Gaming workstation"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/13.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "lightweight_personal_laptop_64gb"
+                                name: "Lightweight personal laptop 64GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/14.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "all_in_one_5"
+                                name: "All in one no. 5"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/15.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "lightweight_personal_laptop_128gb"
+                                name: "Lightweight personal laptop 128GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/16.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "pc_macro_station"
+                                name: "PC Macro station"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/17.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "lightweight_personal_laptop_256gb"
+                                name: "Lightweight personal laptop 256GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/18.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "lightweight_personal_laptop_512gb"
+                                name: "Lightweight personal laptop 512GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/19.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "lightweight_personal_laptop_1tb"
+                                name: "Lightweight personal laptop 1TB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/20.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "mini_personal_laptop_32gb"
+                                name: "Mini personal laptop 32GB"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/21.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
+
+                            -   vendor: "lisa-comp@example.com"
+                                code: "toys_for_geeks"
+                                name: "Toy set for geeks"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/pcs/22.jpeg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'electronics'
+                                taxons:
+                                    - 'electronics'
+                                    - 'pcs'
