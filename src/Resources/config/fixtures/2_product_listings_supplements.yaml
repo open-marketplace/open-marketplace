@@ -6,10 +6,270 @@ sylius_fixtures:
                     options:
                         custom:
                             -   vendor: "health@example.com"
-                                code: "oats_2_1"
-                                name: "Good protein oats pack10"
+                                code: "no_cow_raspberry_truffle"
+                                name: "NO COW raspberry truffle"
                                 images:
                                     - "%kernel.project_dir%/var/fixtures/images/supplements/1.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "cardamom_package"
+                                name: "Cardamom package"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/2.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "kushqueen_gummies"
+                                name: "Kushqueen gummies"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/3.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "jellybee_collagen_250"
+                                name: "JellyBee colagen 250g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/4.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "jellybee_colagen_500"
+                                name: "JellyBee colagen 500g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/5.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "vit_d3_omega"
+                                name: "Vit D3 + Omega"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/6.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "protein_essential_shake"
+                                name: "Protein essential shake"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/7.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "energy_vitamins_set_250"
+                                name: "Energy vitamins set 250g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/8.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "energy_vitamins_set_750"
+                                name: "Energy vitamins set 3x250g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/9.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "energy_vitamins_set_500"
+                                name: "Energy vitamins set 500g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/10.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "energy_vitamins_set_1000"
+                                name: "Energy vitamins set 1000g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/11.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "em_protein_shake"
+                                name: "EM protein shake"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/12.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "vit_c_1000"
+                                name: "Vit. C 1000"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/13.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "magnesium7_3x_250"
+                                name: "Magnesium 7, 3x250g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/14.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "organic_rice_proteins_250"
+                                name: "Organic rice proteins 250g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/15.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "organic_rice_proteins_500g"
+                                name: "Organic rice proteins 500g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/16.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "cashew_butter_300"
+                                name: "Cashew butter 300g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/17.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "organic_chips_paprica_onion_70"
+                                name: "Organic Crave paprica & onion 70g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/18.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "organic_chips_paprica_onion_120"
+                                name: "Organic Crave paprica & onion 120g"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/19.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "owyn_proteins_35"
+                                name: "OWYN proteins 35"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/20.jpg"
+                                attributes:
+                                    -   code: "test"
+                                        value: "test"
+                                main_taxon: 'health_and_beauty'
+                                taxons:
+                                    - 'health_and_beauty'
+                                    - 'supplements'
+
+                            -   vendor: "health@example.com"
+                                code: "xoxo_healthy_sweets"
+                                name: "XOXO healthy sweets"
+                                images:
+                                    - "%kernel.project_dir%/var/fixtures/images/supplements/21.jpg"
                                 attributes:
                                     -   code: "test"
                                         value: "test"
