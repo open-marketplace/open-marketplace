@@ -70,7 +70,7 @@ If you want to participate in the development, you can do it by submitting [pull
 
 BitBag is a Software House working on digital commerce projects on top of best open-source technologies, such as Sylius, Shopware, Pimcore, Symfony and Vue Storefront. We work with worldwide companies who see eCommerce as an important factor of their strategy.
 
-If you are one of those merchants and need help within the above-mentioned technology stack, contact us directly. We could be the right people to do the job. You can fill the form on [this site](https://bitbag.io/contact-us/) or send us an e-mail at hello@bitbag.io.
+If you think we could help your business within the above-mentioned technology stack, contact us directly. We could be the right people to do the job. Fill the form on [this site](https://bitbag.io/contact-us/) or send us an e-mail at hello@bitbag.io.
 
 ## License
 
