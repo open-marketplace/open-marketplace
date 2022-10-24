@@ -14,7 +14,9 @@ We work on stable, supported and up-to-date versions of packages. We recommend y
 
 The Open Marketplace application can serve as a foundation for your custom e-commerce marketplace application.
 
-Before creating your application, make sure you use at least PHP 8.0 and have Composer installed
+Before creating your application, make sure you use at least PHP 8.0 and have Composer installed.
+
+**Be aware. The project has currently a strong reference to Sylius eCommerce platform. If you have not discovered the solution yet, it is worth at least taking a look at the official Sylius documentation.**
 
 ### 1. Create project
 
@@ -58,6 +60,11 @@ $ symfony server:start // or symfony serve -d --no-tls
 ```diff
 $ bin/console sylius:fixtures:load open_marketplace
 ```
+
+**Note: If you do not want to use our mockup data and prefer a clean installation instead, follow the Sylius installation guide [here](https://docs.sylius.com/en/latest/getting-started-with-sylius/installation.html#project-setup:~:text=To%20launch%20a%20Sylius%20application%20initial%20data%20has%20to%20be%20set%20up%3A%20an%20administrator%20account%20and%20base%20locale.%20Run%20the%20Sylius%20installation%20command%20to%20do%20that.).**
+
+## Optional steps
+
 ### 5. Run tests
 
 Creating database for your test environment.
