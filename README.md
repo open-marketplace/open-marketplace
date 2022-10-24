@@ -4,6 +4,12 @@
     </a>
 </p>
 
+<p align="center">
+  <a href="https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1ij1t41wx-HfAR6~URm3OAcqm0jc423Q">
+     <img src="https://img.shields.io/badge/chat-on%20slack-e51670.svg" alt="Chat">
+  </a>
+</p>
+
 BitBag OpenMarketplace is the first open source marketplace platform. The solution is based on Sylius, Symfony and Semantic UI meaning it is fully compatible with each. The platform is highly customisable project made using full-stack BDD with Behat and PHPSpec.
 
 Like what we do? Give us a star!
