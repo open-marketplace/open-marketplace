@@ -14,7 +14,9 @@ We work on stable, supported and up-to-date versions of packages. We recommend y
 
 The Open Marketplace application can serve as a foundation for your custom e-commerce marketplace application.
 
-Before creating your application, make sure you use at least PHP 8.0 and have Composer installed
+Before creating your application, make sure you use at least PHP 8.0 and have Composer installed.
+
+**Be aware. The project has currently a strong reference to Sylius eCommerce platform. If you have not discovered the solution yet, it is worth at least taking a look at the official Sylius documentation.**
 
 ### 1. Create project
 
