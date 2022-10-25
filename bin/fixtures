@@ -1,0 +1,20 @@
+#!/bin/bash
+
+BLUE='\033[1;33m'
+NO_COLOR='\033[0m' # No Color
+FILE=var/fixtures/images.zip
+if [ ! -f "$FILE" ]; then
+  printf "\n${BLUE}Fetching fixture images from BitBag server...${NO_COLOR}\n\n"
+  mkdir -p var/fixtures
+  wget -O var/fixtures/images.zip https://demo.open-marketplace.io/images.zip -q --show-progress
+fi
+
+DIR=var/fixtures/images
+if [ ! -d "$DIR" ]; then
+  printf "\n${BLUE}Unpacking ZIP${NO_COLOR}\n\n"
+  mkdir -p var/fixtures/images
+  unzip var/fixtures/images.zip -d var/fixtures/images > /dev/null 2>&1
+fi
+
+printf "\n${BLUE}Reloading fixtures${NO_COLOR}\n\n"
+bin/console sylius:fixtures:load -n open_marketplace
