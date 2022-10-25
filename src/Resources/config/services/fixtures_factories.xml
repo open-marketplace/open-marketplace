@@ -11,6 +11,8 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.customer_group" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.repository.channel" />
         </service>
 
         <service id="open_marketplace.fixture.example_factory.product_listing" class="BitBag\OpenMarketplace\Fixture\Factory\ProductListingExampleFactory">
