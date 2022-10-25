@@ -170,7 +170,8 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
             $productDraftTranslation->setDescription($description);
 
             /** @var string $shortDescription */
-            $shortDescription = substr($this->faker->paragraphs(1, true), 0, 254) . '.';
+            $shortDescription = $this->faker->paragraphs(1, true);
+            $shortDescription = substr($shortDescription, 0, 254) . '.';
             $productDraftTranslation->setShortDescription($shortDescription);
             $productDraftTranslation->setMetaDescription(null);
             $productDraftTranslation->setMetaKeywords(null);

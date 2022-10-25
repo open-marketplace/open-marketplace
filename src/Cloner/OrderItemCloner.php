@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Cloner;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\Adjustment;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnit;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -58,6 +59,8 @@ final class OrderItemCloner implements OrderItemClonerInterface
         }
 
         $adjustments = $originalItem->getAdjustments();
+
+        /** @var AdjustmentInterface $adjustment */
         foreach ($adjustments as $adjustment) {
             $newAdjustment = new Adjustment();
             $this->cloner->clone($adjustment, $newAdjustment);

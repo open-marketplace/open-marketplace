@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Cloner;
 
 use Sylius\Component\Core\Model\Adjustment;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
 final class ShipmentCloner implements ShipmentClonerInterface
@@ -31,6 +32,8 @@ final class ShipmentCloner implements ShipmentClonerInterface
         $newShipment->setMethod($originalShipment->getMethod());
 
         $adjustments = $originalShipment->getAdjustments();
+
+        /** @var AdjustmentInterface $adjustment */
         foreach ($adjustments as $adjustment) {
             $newAdjustment = new Adjustment();
             $this->adjustmentCloner->clone($adjustment, $newAdjustment);
