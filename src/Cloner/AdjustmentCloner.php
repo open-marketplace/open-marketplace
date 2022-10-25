@@ -21,7 +21,6 @@ final class AdjustmentCloner implements AdjustmentClonerInterface
         $newAdjustment->setOriginCode($originalAdjustment->getOriginCode());
         $newAdjustment->setNeutral($originalAdjustment->isNeutral());
         $newAdjustment->setLabel($originalAdjustment->getLabel());
-        $newAdjustment->setAdjustable($originalAdjustment->getAdjustable());
         $newAdjustment->setDetails($originalAdjustment->getDetails());
         $newAdjustment->setAmount($originalAdjustment->getAmount());
         $newAdjustment->setCreatedAt($originalAdjustment->getCreatedAt());

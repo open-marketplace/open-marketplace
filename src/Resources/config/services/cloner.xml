@@ -38,6 +38,7 @@
         <service class="BitBag\OpenMarketplace\Cloner\OrderItemUnitCloner"
                  id="open_marketplace.cloner.order_item_unit_cloner">
             <argument type="service" id="open_marketplace.cloner.adjustment_cloner"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Cloner\OrderItemCloner"

@@ -33,7 +33,6 @@ final class AdjustmentClonerSpec extends ObjectBehavior
         $originalAdjustment->getOriginCode()->willReturn('code');
         $originalAdjustment->isNeutral()->willReturn(false);
         $originalAdjustment->getLabel()->willReturn('label');
-        $originalAdjustment->getAdjustable()->willReturn($adjustable);
         $originalAdjustment->getDetails()->willReturn(['details']);
         $originalAdjustment->getAmount()->willReturn(1);
         $originalAdjustment->getCreatedAt()->willReturn($date);
@@ -45,7 +44,6 @@ final class AdjustmentClonerSpec extends ObjectBehavior
         $newAdjustment->setOriginCode('code')->shouldHaveBeenCalled();
         $newAdjustment->setNeutral(false)->shouldHaveBeenCalled();
         $newAdjustment->setLabel('label')->shouldHaveBeenCalled();
-        $newAdjustment->setAdjustable($adjustable)->shouldHaveBeenCalled();
         $newAdjustment->setDetails(['details'])->shouldHaveBeenCalled();
         $newAdjustment->setAmount(1)->shouldHaveBeenCalled();
         $newAdjustment->setCreatedAt($date)->shouldHaveBeenCalled();
