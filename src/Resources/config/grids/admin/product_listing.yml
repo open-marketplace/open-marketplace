@@ -48,7 +48,7 @@ sylius_grid:
         vendor:
           type: twig
           label: open_marketplace.ui.vendor
-          sortable: ~
+          sortable: vendor.companyName
           options:
             template: "Grid/Field/product_listing_vendor.html.twig"
         getLatestDraft.publishedAt:
