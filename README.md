@@ -54,7 +54,7 @@ Looking for a professional team to build a MVM for your business on top of open-
 
 ## Customization
 
-Our project is highly customisable, [here](./doc/how-to-customize.md) is our guide on how to do it.
+Our project is highly customisable, [here](./doc/how_to_customize.md) is our guide on how to do it.
 
 ## Contribution
 
