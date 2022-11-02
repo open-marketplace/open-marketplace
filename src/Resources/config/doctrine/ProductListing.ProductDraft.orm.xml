@@ -19,7 +19,7 @@
         <field name="versionNumber" column="version_number" type="integer" unique="false" nullable="false" />
 
         <many-to-one field="productListing" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface" inversed-by="productDrafts">
-            <join-column name="product_listing_id" referenced-column-name="id"/>
+            <join-column name="product_listing_id" referenced-column-name="id" on-delete="CASCADE"/>
             <cascade>
                 <cascade-persist />
             </cascade>

@@ -20,6 +20,9 @@
 
         <one-to-one field="latestDraft" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface">
             <join-column name="latest_draft_id" nullable="true" on-delete="SET NULL" />
+            <cascade>
+                <cascade-remove />
+            </cascade>
         </one-to-one>
 
         <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="productListings">
@@ -29,9 +32,10 @@
             </cascade>
         </many-to-one>
 
-        <one-to-many field="productDrafts" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface" mapped-by="productListing">
+        <one-to-many field="productDrafts" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface" mapped-by="productListing" >
             <cascade>
                 <cascade-persist/>
+                <cascade-remove/>
             </cascade>
         </one-to-many>
 
