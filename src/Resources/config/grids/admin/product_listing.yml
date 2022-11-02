@@ -51,15 +51,15 @@ sylius_grid:
           sortable: vendor.companyName
           options:
             template: "Grid/Field/product_listing_vendor.html.twig"
-        getLatestDraft.publishedAt:
+        publishedAt:
           type: datetime
           label: open_marketplace.ui.published_at
           sortable: ~
-        getLatestDraft.verifiedAt:
+        lastVerifiedAt:
           type: datetime
           label: open_marketplace.ui.verified_at
           sortable: ~
-        getLatestDraft.status:
+        verificationStatus:
           type: twig
           label: open_marketplace.ui.status
           sortable: ~

@@ -11,9 +11,12 @@
         </id>
 
         <field name="code" column="code" type="string" unique="false" nullable="false" />
-        <field name="createdAt" column="created_at" type="datetime" unique="false" nullable="true"/>
+        <field name="publishedAt" column="published_at" type="datetime" nullable="true"/>
+        <field name="lastVerifiedAt" column="last_verified_at" type="datetime" nullable="true"/>
+        <field name="createdAt" column="created_at" type="datetime" nullable="true"/>
         <field name="removed" column="deleted" type="boolean"/>
         <field name="enabled" type="boolean"/>
+        <field name="verificationStatus" type="string"/>
 
         <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="productListings">
             <join-column name="vendor_id" on-delete="SET NULL"/>

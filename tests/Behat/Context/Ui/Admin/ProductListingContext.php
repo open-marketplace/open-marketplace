@@ -141,10 +141,9 @@ final class ProductListingContext extends RawMinkContext implements Context
 
             $productDraft = new ProductDraft();
             $productDraft->setCode('code' . $i);
-            $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
-            $productDraft->setPublishedAt(new \DateTime());
             $productDraft->setVersionNumber(0);
             $productDraft->setProductListing($productListing);
+            $productListing->sendToVerification($productDraft);
 
             $productTranslation = new ProductTranslation();
             $productTranslation->setLocale('en_US');
@@ -188,6 +187,9 @@ final class ProductListingContext extends RawMinkContext implements Context
                 'product-listing-' . $i
             );
             $productPricing = $this->createProductListingPricing($productDraft);
+
+            $productListing->setPublishedAt($productDraft->getPublishedAt());
+            $productListing->setVerificationStatus($productDraft->getStatus());
 
             $this->entityManager->persist($productListing);
             $this->entityManager->persist($productDraft);

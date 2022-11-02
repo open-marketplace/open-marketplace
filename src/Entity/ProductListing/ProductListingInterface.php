@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use DatetimeInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -20,34 +21,54 @@ interface ProductListingInterface extends ResourceInterface
 {
     public function getId(): int;
 
-    public function getCreatedAt(): ?\DateTimeInterface;
-
-    public function setCreatedAt(\DatetimeInterface $createdAt): void;
-
-    public function getProduct(): ?ProductInterface;
-
-    public function setProduct(?ProductInterface $product): void;
-
     public function getCode(): ?string;
 
     public function setCode(?string $code): void;
 
-    public function addProductDrafts(ProductDraftInterface $productDrafts): void;
+    public function isEnabled(): bool;
 
-    public function getAnyTranslationName(): ?string;
-
-    /** @return Collection<int, ProductDraftInterface> */
-    public function getProductDrafts(): Collection;
-
-    public function getVendor(): VendorInterface;
-
-    public function setVendor(VendorInterface $vendor): void;
+    public function setEnabled(bool $enabled): void;
 
     public function isRemoved(): bool;
 
     public function setRemoved(bool $deleted): void;
 
-    public function isEnabled(): bool;
+    public function getVerificationStatus(): string;
 
-    public function setEnabled(bool $enabled): void;
+    public function setVerificationStatus(string $verificationStatus): void;
+
+    public function getVendor(): VendorInterface;
+
+    public function setVendor(VendorInterface $vendor): void;
+
+    /** @return Collection<int, ProductDraftInterface> */
+    public function getProductDrafts(): Collection;
+
+    public function getProduct(): ?ProductInterface;
+
+    public function setProduct(?ProductInterface $product): void;
+
+    public function getPublishedAt(): ?DateTimeInterface;
+
+    public function setPublishedAt(DatetimeInterface $publishedAt): void;
+
+    public function getLastVerifiedAt(): ?DateTimeInterface;
+
+    public function setLastVerifiedAt(DateTimeInterface $lastVerifiedAt): void;
+
+    public function getCreatedAt(): ?DateTimeInterface;
+
+    public function setCreatedAt(DatetimeInterface $createdAt): void;
+
+    public function addProductDrafts(ProductDraftInterface $productDrafts): void;
+
+    public function getAnyTranslationName(): ?string;
+
+    public function getLatestDraft(): ?ProductDraftInterface;
+
+    public function sendToVerification(ProductDraftInterface $productDraft): void;
+
+    public function accept(ProductDraftInterface $productDraft): void;
+
+    public function reject(ProductDraftInterface $productDraft): void;
 }

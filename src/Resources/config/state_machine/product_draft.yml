@@ -23,7 +23,7 @@ winzou_state_machine:
             after:
                 send_to_verification:
                     on: [ 'send_to_verification' ]
-                    do: [ '@open_marketplace.state_machine.product_draft', 'sendToVerify' ]
+                    do: [ '@open_marketplace.state_machine.product_draft', 'sendToVerification' ]
                     args: [ 'object' ]
                 accept_product_listing:
                     on: ['accept_product_draft']

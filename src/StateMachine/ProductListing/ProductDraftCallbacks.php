@@ -13,8 +13,7 @@ namespace BitBag\OpenMarketplace\StateMachine\ProductListing;
 
 use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\OpenMarketplace\Repository\ProductRepositoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class ProductDraftCallbacks
@@ -23,43 +22,45 @@ final class ProductDraftCallbacks
 
     private ProductDraftAcceptanceOperatorInterface $productDraftService;
 
-    private ProductRepositoryInterface $productRepository;
-
-    private ProductDraftRepositoryInterface $productDraftRepository;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
         FlashBagInterface $session,
         ProductDraftAcceptanceOperatorInterface $productDraftService,
-        ProductRepositoryInterface $productRepository,
-        ProductDraftRepositoryInterface $productDraftRepository
+        EntityManagerInterface $entityManager
     ) {
         $this->session = $session;
         $this->productDraftService = $productDraftService;
-        $this->productRepository = $productRepository;
-        $this->productDraftRepository = $productDraftRepository;
+        $this->entityManager = $entityManager;
+    }
+
+    public function sendToVerification(ProductDraftInterface $productDraft): void
+    {
+        $productListing = $productDraft->getProductListing();
+        $productListing->sendToVerification($productDraft);
+
+        $this->entityManager->flush();
+
+        $this->session->add('warning', 'open_marketplace.ui.product_listing_sent_to_verification');
     }
 
     public function accept(ProductDraftInterface $productDraft): void
     {
         $product = $this->productDraftService->acceptProductDraft($productDraft);
-        $productDraft->accept();
-        $this->productRepository->save($product);
-        $this->productDraftRepository->save($productDraft);
+
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
 
         $this->session->add('success', 'open_marketplace.ui.product_listing_accepted');
     }
 
     public function reject(ProductDraftInterface $productDraft): void
     {
-        $productDraft->reject();
-        $this->productDraftRepository->save($productDraft);
+        $productListing = $productDraft->getProductListing();
+        $productListing->reject($productDraft);
+
+        $this->entityManager->flush();
 
         $this->session->add('warning', 'open_marketplace.ui.product_listing_rejected');
-    }
-
-    public function sendToVerify(ProductDraftInterface $productDraft): void
-    {
-        $productDraft->sendToVerification();
-        $this->productDraftRepository->save($productDraft);
     }
 }

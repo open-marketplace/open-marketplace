@@ -53,14 +53,15 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
     public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface
     {
-        if (!$productDraft->getProductListing()->getProduct()) {
-            $cratedProduct = $this->productFromDraftFactory->createSimpleProduct($productDraft);
-            $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $cratedProduct);
-            $this->productDraftTaxonsOperator->copyTaxonsToProduct($productDraft, $cratedProduct);
-            $this->attributesConverter->convert($productDraft, $cratedProduct);
-            $this->entityManager->flush();
+        $productListing = $productDraft->getProductListing();
+        if (!$productListing->getProduct()) {
+            $product = $this->productFromDraftFactory->createSimpleProduct($productDraft);
+            $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
+            $this->productDraftTaxonsOperator->copyTaxonsToProduct($productDraft, $product);
+            $this->attributesConverter->convert($productDraft, $product);
+            $productListing->accept($productDraft);
 
-            return $cratedProduct;
+            return $product;
         }
 
         /** @var BitBagProductInterface $product */
@@ -70,7 +71,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
         $this->productDraftTaxonsOperator->updateTaxonsInProduct($productDraft, $product);
         $this->attributesConverter->convert($productDraft, $product);
-        $this->entityManager->flush();
+        $productListing->accept($productDraft);
 
         return $product;
     }
