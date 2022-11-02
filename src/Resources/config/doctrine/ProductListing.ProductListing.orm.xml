@@ -18,6 +18,10 @@
         <field name="enabled" type="boolean"/>
         <field name="verificationStatus" type="string"/>
 
+        <one-to-one field="latestDraft" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface">
+            <join-column name="latest_draft_id" nullable="true" on-delete="SET NULL" />
+        </one-to-one>
+
         <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="productListings">
             <join-column name="vendor_id" on-delete="SET NULL"/>
             <cascade>

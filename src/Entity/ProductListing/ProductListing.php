@@ -31,6 +31,8 @@ class ProductListing implements ProductListingInterface
 
     protected VendorInterface $vendor;
 
+    protected ?ProductDraftInterface $latestDraft = null;
+
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
 
@@ -103,14 +105,33 @@ class ProductListing implements ProductListingInterface
         $this->vendor = $vendor;
     }
 
+    public function getLatestDraft(): ?ProductDraftInterface
+    {
+        if (null === $this->latestDraft) {
+            $lastDraft = $this->getProductDrafts()->last();
+
+            return $lastDraft ?: null;
+        }
+
+        return $this->latestDraft;
+    }
+
+    private function reattachLatestDraft(): void
+    {
+        $this->latestDraft = $this->getProductDrafts()->last() ?: null;
+    }
+
     public function getProductDrafts(): Collection
     {
         return $this->productDrafts;
     }
 
-    public function addProductDrafts(ProductDraftInterface $productDrafts): void
+    public function addProductDraft(ProductDraftInterface $productDraft): void
     {
-        $this->productDrafts->add($productDrafts);
+        $productDraft->setProductListing($this);
+
+        $this->productDrafts->add($productDraft);
+        $this->reattachLatestDraft();
     }
 
     public function getProduct(): ?ProductInterface
@@ -159,17 +180,6 @@ class ProductListing implements ProductListingInterface
         $latestDraft = $this->getLatestDraft();
 
         return $latestDraft->getAnyTranslationName();
-    }
-
-    public function getLatestDraft(): ?ProductDraftInterface
-    {
-        $productDraft = null;
-        if (!$this->productDrafts->isEmpty() && false !== $this->productDrafts->last()) {
-            /** @var ProductDraftInterface $productDraft */
-            $productDraft = $this->productDrafts->last();
-        }
-
-        return $productDraft;
     }
 
     public function sendToVerification(ProductDraftInterface $productDraft): void

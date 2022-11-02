@@ -42,7 +42,7 @@ sylius_grid:
         anyTranslationName:
           type: twig
           label: sylius.ui.name
-          sortable: ~
+          sortable: latestDraft.translations.name
           options:
             template: "Grid/Field/product_listing_name.html.twig"
         vendor:

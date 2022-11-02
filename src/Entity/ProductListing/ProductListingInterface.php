@@ -60,7 +60,7 @@ interface ProductListingInterface extends ResourceInterface
 
     public function setCreatedAt(DatetimeInterface $createdAt): void;
 
-    public function addProductDrafts(ProductDraftInterface $productDrafts): void;
+    public function addProductDraft(ProductDraftInterface $productDraft): void;
 
     public function getAnyTranslationName(): ?string;
 
