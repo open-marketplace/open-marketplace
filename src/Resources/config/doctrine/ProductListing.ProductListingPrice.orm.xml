@@ -16,6 +16,7 @@
         <field name="channelCode" column="channel_code" type="string" unique="false" nullable="false" />
 
         <many-to-one field="productDraft" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface" inversed-by="productListingPrice">
+            <join-column name="product_draft_id" nullable="false" on-delete="CASCADE" />
             <cascade>
                 <cascade-persist/>
                 <cascade-remove />
