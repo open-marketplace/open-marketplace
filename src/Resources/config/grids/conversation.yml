@@ -25,8 +25,8 @@ sylius_grid:
                     type: select
                     form_options:
                         choices:
-                            mvm.ui.open: open
-                            mvm.ui.closed: closed
+                            open_marketplace.ui.open: open
+                            open_marketplace.ui.closed: closed
                 createdAt:
                     type: date
                     label: sylius.ui.date
