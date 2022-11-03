@@ -1,0 +1,55 @@
+#!/bin/bash
+
+clear
+rm -Rf var/cache/*
+APP_ENV=${APP_ENV} APP_DEBUG=${APP_DEBUG} bin/console cache:clear
+if [[ $? -ne 0 ]];
+then
+    exit $?;
+fi
+
+APP_ENV=${APP_ENV} APP_DEBUG=${APP_DEBUG} bin/console doctrine:database:create --if-not-exists
+APP_ENV=${APP_ENV} APP_DEBUG=${APP_DEBUG} bin/console doctrine:schema:update --force --dump-sql
+if [[ $? -ne 0 ]];
+then
+    exit $?;
+fi
+
+APP_ENV=${APP_ENV} APP_DEBUG=${APP_DEBUG} bin/console doctrine:schema:validate
+if [[ $? -ne 0 ]];
+then
+    exit $?;
+fi
+
+vendor/bin/ecs check spec src tests
+if [[ $? -ne 0 ]];
+then
+    exit $?;
+fi
+
+vendor/bin/phpstan analyse -c phpstan.neon -l 8 src/
+if [[ $? -ne 0 ]];
+then
+    exit $?;
+fi
+
+vendor/bin/phpspec run
+if [[ $? -ne 0 ]];
+then
+    exit $?;
+fi
+
+bin/console doctrine:schema:update --force --dump-sql --env=test
+if [[ $? -ne 0 ]];
+then
+    exit $?;
+fi
+
+vendor/bin/phpunit --colors=always
+if [[ $? -ne 0 ]];
+then
+    exit $?;
+fi
+
+vendor/bin/behat
+exit $?;

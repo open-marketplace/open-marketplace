@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -22,38 +23,26 @@ class ProductListing implements ProductListingInterface
 
     protected ?string $code;
 
-    protected VendorInterface $vendor;
-
-    protected \DateTimeInterface $createdAt;
-
     protected bool $enabled = true;
 
-    protected ?ProductInterface $product = null;
+    protected bool $removed = false;
+
+    protected string $verificationStatus = ProductDraftInterface::STATUS_CREATED;
+
+    protected VendorInterface $vendor;
+
+    protected ?ProductDraftInterface $latestDraft = null;
 
     /** @var Collection<int, ProductDraftInterface> */
     protected Collection $productDrafts;
 
-    protected bool $removed = false;
+    protected ?ProductInterface $product = null;
 
-    public function isRemoved(): bool
-    {
-        return $this->removed;
-    }
+    protected ?DateTimeInterface $publishedAt = null;
 
-    public function setRemoved(bool $removed): void
-    {
-        $this->removed = $removed;
-    }
+    protected ?DateTimeInterface $lastVerifiedAt = null;
 
-    public function isEnabled(): bool
-    {
-        return $this->enabled;
-    }
-
-    public function setEnabled(bool $enabled): void
-    {
-        $this->enabled = $enabled;
-    }
+    protected DateTimeInterface $createdAt;
 
     public function __construct()
     {
@@ -76,6 +65,36 @@ class ProductListing implements ProductListingInterface
         $this->code = $code;
     }
 
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
+    }
+
+    public function isRemoved(): bool
+    {
+        return $this->removed;
+    }
+
+    public function setRemoved(bool $removed): void
+    {
+        $this->removed = $removed;
+    }
+
+    public function getVerificationStatus(): string
+    {
+        return $this->verificationStatus;
+    }
+
+    public function setVerificationStatus(string $verificationStatus): void
+    {
+        $this->verificationStatus = $verificationStatus;
+    }
+
     public function getVendor(): VendorInterface
     {
         return $this->vendor;
@@ -86,14 +105,33 @@ class ProductListing implements ProductListingInterface
         $this->vendor = $vendor;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getLatestDraft(): ?ProductDraftInterface
     {
-        return $this->createdAt;
+        if (null === $this->latestDraft) {
+            $lastDraft = $this->getProductDrafts()->last();
+
+            return $lastDraft ?: null;
+        }
+
+        return $this->latestDraft;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): void
+    private function reattachLatestDraft(): void
     {
-        $this->createdAt = $createdAt;
+        $this->latestDraft = $this->getProductDrafts()->last() ?: null;
+    }
+
+    public function getProductDrafts(): Collection
+    {
+        return $this->productDrafts;
+    }
+
+    public function addProductDraft(ProductDraftInterface $productDraft): void
+    {
+        $productDraft->setProductListing($this);
+
+        $this->productDrafts->add($productDraft);
+        $this->reattachLatestDraft();
     }
 
     public function getProduct(): ?ProductInterface
@@ -106,14 +144,34 @@ class ProductListing implements ProductListingInterface
         $this->product = $product;
     }
 
-    public function getProductDrafts(): Collection
+    public function getPublishedAt(): ?DateTimeInterface
     {
-        return $this->productDrafts;
+        return $this->publishedAt;
     }
 
-    public function addProductDrafts(ProductDraftInterface $productDrafts): void
+    public function setPublishedAt(DateTimeInterface $publishedAt): void
     {
-        $this->productDrafts->add($productDrafts);
+        $this->publishedAt = $publishedAt;
+    }
+
+    public function getLastVerifiedAt(): ?DateTimeInterface
+    {
+        return $this->lastVerifiedAt;
+    }
+
+    public function setLastVerifiedAt(DateTimeInterface $lastVerifiedAt): void
+    {
+        $this->lastVerifiedAt = $lastVerifiedAt;
+    }
+
+    public function getCreatedAt(): ?DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 
     public function getAnyTranslationName(): ?string
@@ -124,14 +182,27 @@ class ProductListing implements ProductListingInterface
         return $latestDraft->getAnyTranslationName();
     }
 
-    public function getLatestDraft(): ?ProductDraftInterface
+    public function sendToVerification(ProductDraftInterface $productDraft): void
     {
-        $productDraft = null;
-        if (!$this->productDrafts->isEmpty() && false !== $this->productDrafts->last()) {
-            /** @var ProductDraftInterface $productDraft */
-            $productDraft = $this->productDrafts->last();
-        }
+        $productDraft->sendToVerification();
 
-        return $productDraft;
+        $this->verificationStatus = $productDraft->getStatus();
+        $this->publishedAt = $productDraft->getPublishedAt();
+    }
+
+    public function accept(ProductDraftInterface $productDraft): void
+    {
+        $productDraft->accept();
+
+        $this->verificationStatus = $productDraft->getStatus();
+        $this->lastVerifiedAt = $productDraft->getVerifiedAt();
+    }
+
+    public function reject(ProductDraftInterface $productDraft): void
+    {
+        $productDraft->reject();
+
+        $this->verificationStatus = $productDraft->getStatus();
+        $this->lastVerifiedAt = $productDraft->getVerifiedAt();
     }
 }

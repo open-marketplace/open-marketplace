@@ -67,6 +67,9 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->getProduct()
             ->willReturn(null);
 
+        $productListing->accept($productDraft)
+            ->shouldBeCalledOnce();
+
         $productFromDraftFactory->createSimpleProduct($productDraft)
             ->willReturn($product);
 
@@ -90,6 +93,9 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 
         $productListing->getProduct()
             ->willReturn($product);
+
+        $productListing->accept($productDraft)
+            ->shouldBeCalledOnce();
 
         $productFromDraftUpdater->updateProduct($productDraft)
             ->willReturn($updatedProduct);
@@ -118,6 +124,9 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->getProduct()
             ->willReturn($product);
 
+        $productListing->accept($productDraft)
+            ->shouldBeCalledOnce();
+
         $productFromDraftUpdater->updateProduct($productDraft)
             ->willReturn($updatedProduct);
 
@@ -143,6 +152,9 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 
         $productListing->getProduct()
             ->willReturn(null);
+
+        $productListing->accept($productDraft)
+            ->shouldBeCalledOnce();
 
         $productFromDraftUpdater->updateProduct($productDraft)
             ->willReturn(null);

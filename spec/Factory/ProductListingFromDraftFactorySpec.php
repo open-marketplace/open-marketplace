@@ -67,7 +67,7 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $productListing->setCode('code')
             ->shouldBeCalled();
 
-        $productListing->addProductDrafts($productDraft)
+        $productListing->addProductDraft($productDraft)
             ->shouldBeCalled();
 
         $productListing->setVendor($vendor)

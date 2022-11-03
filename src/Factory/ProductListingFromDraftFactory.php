@@ -49,7 +49,7 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
         $productDraft = $this->formatTranslation($productDraft);
 
         $productListing->setCode($productDraft->getCode());
-        $productListing->addProductDrafts($productDraft);
+        $productListing->addProductDraft($productDraft);
         $productListing->setVendor($vendor);
 
         $productDraft->setProductListing($productListing);
@@ -63,6 +63,7 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
 
         /** @var ProductDraftInterface $newProductDraft */
         $newProductDraft = $this->draftFactory->createNew();
+        $productListing->addProductDraft($newProductDraft);
 
         $newProductDraft->setVersionNumber($productDraft->getVersionNumber());
         $newProductDraft->incrementVersion();
@@ -80,8 +81,6 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
         $this->productListingTranslationCloner->cloneTranslation($newProductDraft, $productDraft);
 
         $this->productListingPricingCloner->clonePrice($newProductDraft, $productDraft);
-
-        $newProductDraft->setProductListing($productDraft->getProductListing());
 
         return $newProductDraft;
     }

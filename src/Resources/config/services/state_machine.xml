@@ -7,8 +7,7 @@
                  class="BitBag\OpenMarketplace\StateMachine\ProductListing\ProductDraftCallbacks">
             <argument type="service" id="session.flash_bag" />
             <argument type="service" id="open_marketplace.acceptance_operator.product_draft_acceptance_operator"/>
-            <argument type="service" id="open_marketplace.repository.product"/>
-            <argument type="service" id="open_marketplace.repository.product_draft"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
         <service id="open_marketplace.state_machine.product_draft.transition"
