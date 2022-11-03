@@ -48,7 +48,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         MessageInterface $message,
         ConversationInterface $conversation
     ): void {
-        $file = new UploadedFile('public/uploads/message_files/test.txt', 'test.txt');
+        $file = new UploadedFile('spec/Facade/Message/testfiles/test.txt', 'test.txt');
         $filename = 'filename';
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($user);
@@ -135,7 +135,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         MessageInterface $message,
         ConversationInterface $conversation
     ): void {
-        $file = new UploadedFile('public/uploads/message_files/test.txt', 'test.txt');
+        $file = new UploadedFile('spec/Facade/Message/testfiles/test.txt', 'test.txt');
         $filename = 'filename';
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($user);
