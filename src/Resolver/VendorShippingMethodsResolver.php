@@ -17,20 +17,18 @@ use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
 use BitBag\OpenMarketplace\Repository\VendorShippingMethodRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
+use Webmozart\Assert\Assert;
 
 final class VendorShippingMethodsResolver implements VendorShippingMethodsResolverInterface
 {
     private VendorShippingMethodRepositoryInterface $vendorShippingMethodRepository;
 
-    private ShippingMethodsResolverInterface $shippingMethodsResolver;
-
-    public function __construct(
-        VendorShippingMethodRepositoryInterface $vendorShippingMethodRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
-    ) {
+    public function __construct(VendorShippingMethodRepositoryInterface $vendorShippingMethodRepository)
+    {
         $this->vendorShippingMethodRepository = $vendorShippingMethodRepository;
-        $this->shippingMethodsResolver = $shippingMethodsResolver;
     }
 
     public function getDefaultShippingMethod(
@@ -49,11 +47,11 @@ final class VendorShippingMethodsResolver implements VendorShippingMethodsResolv
         return $shippingMethods[0];
     }
 
-    public function getSupportedMethods(ShipmentInterface $subject): array
+    public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
-        if (false === $subject->hasVendor()) {
-            return $this->shippingMethodsResolver->getSupportedMethods($subject);
-        }
+        /** @var ShipmentInterface $subject */
+        Assert::isInstanceOf($subject, ShipmentInterface::class);
+        Assert::true($this->supports($subject));
 
         /** @var VendorInterface $vendor */
         $vendor = $subject->getVendor();
@@ -61,9 +59,9 @@ final class VendorShippingMethodsResolver implements VendorShippingMethodsResolv
         $channel = $subject->getOrder()?->getChannel();
 
         $vendorShippingMethods = $this
-                ->vendorShippingMethodRepository
-                ->findEnabledForChannel($vendor, $channel)
-            ;
+            ->vendorShippingMethodRepository
+            ->findEnabledForChannel($vendor, $channel)
+        ;
 
         $shippingMethods = [];
         /** @var VendorShippingMethodInterface $vendorShippingMethod */
@@ -72,5 +70,13 @@ final class VendorShippingMethodsResolver implements VendorShippingMethodsResolv
         }
 
         return $shippingMethods;
+    }
+
+    public function supports(ShippingSubjectInterface $subject): bool
+    {
+        return $subject instanceof ShipmentInterface &&
+            $subject->hasVendor() &&
+            null !== $subject->getOrder() &&
+            null !== $subject->getOrder()->getChannel();
     }
 }

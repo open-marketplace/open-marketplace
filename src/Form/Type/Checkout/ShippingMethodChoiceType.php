@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -29,14 +30,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodChoiceType extends AbstractType
 {
-    private VendorShippingMethodsResolverInterface $shippingMethodsResolver;
+    private ShippingMethodsResolverInterface $shippingMethodsResolver;
 
     private ServiceRegistryInterface $calculators;
 
     private RepositoryInterface $repository;
 
     public function __construct(
-        VendorShippingMethodsResolverInterface $shippingMethodsResolver,
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
