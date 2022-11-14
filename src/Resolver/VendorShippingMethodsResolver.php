@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class VendorShippingMethodsResolver implements VendorShippingMethodsResolverInterface
@@ -47,9 +46,11 @@ final class VendorShippingMethodsResolver implements VendorShippingMethodsResolv
         return $shippingMethods[0];
     }
 
+    /**
+     * @param ShipmentInterface $subject
+     */
     public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
-        /** @var ShipmentInterface $subject */
         Assert::isInstanceOf($subject, ShipmentInterface::class);
         Assert::true($this->supports($subject));
 
@@ -66,7 +67,9 @@ final class VendorShippingMethodsResolver implements VendorShippingMethodsResolv
         $shippingMethods = [];
         /** @var VendorShippingMethodInterface $vendorShippingMethod */
         foreach ($vendorShippingMethods as $vendorShippingMethod) {
-            $shippingMethods[] = $vendorShippingMethod->getShippingMethod();
+            /** @var ShippingMethodInterface $shippingMethod */
+            $shippingMethod = $vendorShippingMethod->getShippingMethod();
+            $shippingMethods[] = $shippingMethod;
         }
 
         return $shippingMethods;
