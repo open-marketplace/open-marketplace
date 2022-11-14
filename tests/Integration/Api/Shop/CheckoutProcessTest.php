@@ -42,7 +42,6 @@ final class CheckoutProcessTest extends JsonApiTestCase
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'shop/checkout/add_item_second_product_variant_response', Response::HTTP_CREATED);
 
-
         // add address information
         $this->client->request('PUT', '/api/v2/shop/orders/' . $token, [], [], self::CONTENT_TYPE_HEADER, json_encode([
             'email' => 'test@bigbag.com',
@@ -87,7 +86,6 @@ final class CheckoutProcessTest extends JsonApiTestCase
         ]));
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'shop/checkout/change_default_shipping_method_for_second_shipment_response', Response::HTTP_OK);
-
 
         $this->client->request('PATCH', '/api/v2/shop/orders/' . $token . '/payments/' . $lastData['payments'][0]['id'], [], [], ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'], json_encode([
             'paymentMethod' => '/api/v2/shop/payment-methods/CASH_ON_DELIVERY',
