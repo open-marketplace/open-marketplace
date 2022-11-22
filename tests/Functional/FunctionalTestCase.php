@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\OpenMarketplace\Integration\Api;
+namespace Tests\BitBag\OpenMarketplace\Functional;
 
 use Sylius\Tests\Api\JsonApiTestCase as BaseJsonApiTestCase;
 
-abstract class JsonApiTestCase extends BaseJsonApiTestCase
+abstract class FunctionalTestCase extends BaseJsonApiTestCase
 {
     public const CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
