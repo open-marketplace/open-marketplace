@@ -21,7 +21,7 @@ final class VendorRegistrationTest extends JsonApiTestCase
 
     public function test_vendor_success_registration()
     {
-        $this->loadFixturesFromFile('VendorRegistrationTest/test_vendor_basic_registration.yml');
+        $this->loadFixturesFromFile('Shop/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -41,21 +41,21 @@ final class VendorRegistrationTest extends JsonApiTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/success_registration_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/success_registration_response', Response::HTTP_CREATED);
     }
 
     public function test_vendor_unauthorized_registration()
     {
-        $this->loadFixturesFromFile('VendorRegistrationTest/test_vendor_basic_registration.yml');
+        $this->loadFixturesFromFile('Shop/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], self::CONTENT_TYPE_HEADER, json_encode([]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/unauthorized_registration_response', Response::HTTP_UNAUTHORIZED);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/unauthorized_registration_response', Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_existed_vendor_registration()
     {
-        $this->loadFixturesFromFiles(['VendorRegistrationTest/test_vendor_basic_registration.yml', 'VendorRegistrationTest/test_existed_vendor_registration.yml']);
+        $this->loadFixturesFromFiles(['Shop/VendorRegistrationTest/test_vendor_basic_registration.yml', 'Shop/VendorRegistrationTest/test_existed_vendor_registration.yml']);
 
         $loginData = $this->logInShopUser('test@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -75,12 +75,12 @@ final class VendorRegistrationTest extends JsonApiTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/existed_vendor_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/existed_vendor_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function test_not_blank_validation_rules()
     {
-        $this->loadFixturesFromFile('VendorRegistrationTest/test_vendor_basic_registration.yml');
+        $this->loadFixturesFromFile('Shop/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -89,12 +89,12 @@ final class VendorRegistrationTest extends JsonApiTestCase
 
         $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/not_blank_validation_errors_response', Response::HTTP_BAD_REQUEST);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/not_blank_validation_errors_response', Response::HTTP_BAD_REQUEST);
     }
 
     public function test_not_blank_address_fields_validation_rules()
     {
-        $this->loadFixturesFromFile('VendorRegistrationTest/test_vendor_basic_registration.yml');
+        $this->loadFixturesFromFile('Shop/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -110,12 +110,12 @@ final class VendorRegistrationTest extends JsonApiTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/not_blank_address_fields_validation_errors_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/not_blank_address_fields_validation_errors_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function test_wrong_iri_for_country_error()
     {
-        $this->loadFixturesFromFile('VendorRegistrationTest/test_vendor_basic_registration.yml');
+        $this->loadFixturesFromFile('Shop/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -135,12 +135,12 @@ final class VendorRegistrationTest extends JsonApiTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/wrong_iri_for_country_field_error_response', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/wrong_iri_for_country_field_error_response', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     public function test_not_existed_country()
     {
-        $this->loadFixturesFromFile('VendorRegistrationTest/test_vendor_basic_registration.yml');
+        $this->loadFixturesFromFile('Shop/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -160,12 +160,12 @@ final class VendorRegistrationTest extends JsonApiTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/not_existed_country_field_error_response', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/not_existed_country_field_error_response', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     public function test_min_length_validation_rules()
     {
-        $this->loadFixturesFromFile('VendorRegistrationTest/test_vendor_basic_registration.yml');
+        $this->loadFixturesFromFile('Shop/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -185,12 +185,12 @@ final class VendorRegistrationTest extends JsonApiTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/min_length_validation_errors_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/min_length_validation_errors_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function test_max_length_validation_rules()
     {
-        $this->loadFixturesFromFile('VendorRegistrationTest/test_vendor_basic_registration.yml');
+        $this->loadFixturesFromFile('Shop/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
         $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
@@ -213,6 +213,6 @@ final class VendorRegistrationTest extends JsonApiTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/VendorRegistrationTest/max_length_validation_errors_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse($response, 'Shop/VendorRegistrationTest/max_length_validation_errors_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
