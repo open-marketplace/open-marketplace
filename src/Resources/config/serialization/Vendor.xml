@@ -26,5 +26,17 @@
         <attribute name="companyName">
             <group>shop:vendor:read</group>
         </attribute>
+        <attribute name="taxIdentifier">
+            <group>shop:vendor:read</group>
+        </attribute>
+        <attribute name="phoneNumber">
+            <group>shop:vendor:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>shop:vendor:read</group>
+        </attribute>
+        <attribute name="vendorAddress">
+            <group>shop:vendor:read</group>
+        </attribute>
     </class>
 </serializer>
