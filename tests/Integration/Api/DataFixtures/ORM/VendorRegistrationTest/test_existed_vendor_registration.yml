@@ -1,0 +1,15 @@
+BitBag\OpenMarketplace\Entity\VendorAddress:
+    oliver_vendor_address:
+        country: '@poland'
+        city: 'Warsaw'
+        postalCode: '00-999'
+        street: 'Avenue 2115'
+BitBag\OpenMarketplace\Entity\Vendor:
+    vendor_oliver:
+        shopUser: '@user_oliver'
+        companyName: 'Test company name'
+        taxIdentifier: '1234567'
+        phoneNumber: '333111222'
+        vendorAddress: '@oliver_vendor_address'
+        slug: 'oliver-queen-company'
+        description: 'description'

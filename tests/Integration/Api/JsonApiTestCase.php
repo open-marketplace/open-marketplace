@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Integration\Api;
 
-use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
+use Sylius\Tests\Api\JsonApiTestCase as BaseJsonApiTestCase;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
