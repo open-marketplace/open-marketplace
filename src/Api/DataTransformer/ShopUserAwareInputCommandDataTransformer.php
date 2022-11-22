@@ -32,8 +32,7 @@ final class ShopUserAwareInputCommandDataTransformer implements CommandDataTrans
         $object,
         string $to,
         array $context = []
-    )
-    {
+    ) {
         if (null !== $object->getShopUser()) {
             return $object;
         }

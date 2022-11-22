@@ -31,8 +31,7 @@ final class VendorSlugAwareInputCommandDataTransformer implements CommandDataTra
         $object,
         string $to,
         array $context = []
-    )
-    {
+    ) {
         if (null === $object->getCompanyName()) {
             return $object;
         }
