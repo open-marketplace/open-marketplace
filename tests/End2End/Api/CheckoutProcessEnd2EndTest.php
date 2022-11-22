@@ -9,48 +9,110 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\OpenMarketplace\Integration\Api\Shop;
+namespace Tests\BitBag\OpenMarketplace\End2End\Api;
 
 use Symfony\Component\HttpFoundation\Response;
-use Tests\BitBag\OpenMarketplace\Integration\Api\JsonApiTestCase;
+use Tests\BitBag\OpenMarketplace\End2End\End2EndTestCase;
 
-final class CheckoutProcessEnd2EndTest extends JsonApiTestCase
+final class CheckoutProcessEnd2EndTest extends End2EndTestCase
 {
     public function test_it_for_shipment_methods_for_multiple_vendors_during_order(): void
     {
-        $this->loadFixturesFromFile('Shop/CheckoutProcessEnd2EndTest/test_it_for_shipment_methods_for_multiple_vendors.yml');
+        $this->loadFixturesFromFile('CheckoutProcessEnd2EndTest/test_it_for_shipment_methods_for_multiple_vendors.yml');
 
+        $token = $this->createCartAndCheckResponse();
+        $this->addProductsToCartAndCheckResponse($token);
+        $extractedOrderResponse = $this->fillAddressInformationAndCheckResponse($token);
+        $this->checkAvailableShippingMethods($token, $extractedOrderResponse['shipments']);
+        $this->changeDefaultShippingMethodAndCheckResponse($token, (string) $extractedOrderResponse['shipments'][1]['id']);
+        $this->selectPaymentMethodAndCheckResponse($token, (string) $extractedOrderResponse['payments'][0]['id']);
+        $this->completeCheckoutAndCheckResponse($token);
+    }
+
+    private function createCartAndCheckResponse(): string
+    {
         $response = $this->executeCreateCartRequest();
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/create_order_response', Response::HTTP_CREATED);
+        $this->assertResponse(
+            $response,
+            'CheckoutProcessEnd2EndTest/create_order_response',
+            Response::HTTP_CREATED
+        );
 
-        $token = $this->extractTokenValue($response);
+        return $this->extractTokenValue($response);
+    }
 
-        $response = $this->executeAddFirstCartItemRequest($token);
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/add_item_first_product_variant_response', Response::HTTP_CREATED);
+    private function addProductsToCartAndCheckResponse(string $token): void
+    {
+        $response = $this->executeAddCartItemRequest($token, [
+            'productVariant' => '/api/v2/shop/product-variants/olivier_1_1',
+            'quantity' => 3,
+        ]);
+        $this->assertResponse(
+            $response,
+            'CheckoutProcessEnd2EndTest/add_item_first_product_variant_response',
+            Response::HTTP_CREATED
+        );
 
-        $response = $this->executeAddSecondCartItemRequest($token);
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/add_item_second_product_variant_response', Response::HTTP_CREATED);
+        $response = $this->executeAddCartItemRequest($token, [
+            'productVariant' => '/api/v2/shop/product-variants/bruce_1_1',
+            'quantity' => 1,
+        ]);
+        $this->assertResponse(
+            $response,
+            'CheckoutProcessEnd2EndTest/add_item_second_product_variant_response',
+            Response::HTTP_CREATED
+        );
+    }
 
+    private function fillAddressInformationAndCheckResponse(string $token): array
+    {
         $response = $this->executeAddAddressInformationToOrderRequest($token);
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/add_addresses_information_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $response,
+            'CheckoutProcessEnd2EndTest/add_addresses_information_response',
+            Response::HTTP_OK
+        );
 
-        $shipmentsIds = $this->extractShipmentsIds($response);
-        $paymentId = $this->extractPaymentId($response);
+        return $this->extractResponse($response);
+    }
 
-        $response = $this->executeGetShipmentMethodsRequest($token, $shipmentsIds[0]);
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/get_first_shipment_available_shipping_methods_response', Response::HTTP_OK);
+    private function checkAvailableShippingMethods(string $token, array $shipments): void
+    {
+        $response = $this->executeGetShipmentMethodsRequest($token, (string) $shipments[0]['id']);
+        $this->assertResponse($response, 'CheckoutProcessEnd2EndTest/get_first_shipment_available_shipping_methods_response', Response::HTTP_OK);
 
-        $response = $this->executeGetShipmentMethodsRequest($token, $shipmentsIds[1]);
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/get_second_shipment_available_shipping_methods_response', Response::HTTP_OK);
+        $response = $this->executeGetShipmentMethodsRequest($token, (string) $shipments[1]['id']);
+        $this->assertResponse($response, 'CheckoutProcessEnd2EndTest/get_second_shipment_available_shipping_methods_response', Response::HTTP_OK);
+    }
 
-        $response = $this->executeChangeDefaultShippingMethodRequest($token, $shipmentsIds[1]);
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/change_default_shipping_method_for_second_shipment_response', Response::HTTP_OK);
+    private function changeDefaultShippingMethodAndCheckResponse(string $token, $shipmentId): void
+    {
+        $response = $this->executeChangeDefaultShippingMethodRequest($token, $shipmentId);
+        $this->assertResponse(
+            $response,
+            'CheckoutProcessEnd2EndTest/change_default_shipping_method_for_second_shipment_response',
+            Response::HTTP_OK
+        );
+    }
 
+    private function selectPaymentMethodAndCheckResponse(string $token, string $paymentId): void
+    {
         $response = $this->executeSelectPaymentMethodRequest($token, $paymentId);
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/select_payment_method_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $response,
+            'CheckoutProcessEnd2EndTest/select_payment_method_response',
+            Response::HTTP_OK
+        );
+    }
 
+    private function completeCheckoutAndCheckResponse(string $token): void
+    {
         $response = $this->executeCompleteCheckoutRequest($token);
-        $this->assertResponse($response, 'Shop/CheckoutProcessEnd2EndTest/complete_checkout_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $response,
+            'CheckoutProcessEnd2EndTest/complete_checkout_response',
+            Response::HTTP_OK
+        );
     }
 
     private function executeCreateCartRequest(): Response
@@ -74,7 +136,7 @@ final class CheckoutProcessEnd2EndTest extends JsonApiTestCase
         return $data['tokenValue'];
     }
 
-    private function executeAddFirstCartItemRequest(string $token): Response
+    private function executeAddCartItemRequest(string $token, array $data): Response
     {
         $this->client->request(
             'POST',
@@ -82,27 +144,7 @@ final class CheckoutProcessEnd2EndTest extends JsonApiTestCase
             [],
             [],
             self::CONTENT_TYPE_HEADER,
-            json_encode([
-                'productVariant' => '/api/v2/shop/product-variants/olivier_1_1',
-                'quantity' => 3,
-            ])
-        );
-
-        return $this->client->getResponse();
-    }
-
-    private function executeAddSecondCartItemRequest(string $token): Response
-    {
-        $this->client->request(
-            'POST',
-            '/api/v2/shop/orders/' . $token . '/items',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER,
-            json_encode([
-                'productVariant' => '/api/v2/shop/product-variants/bruce_1_1',
-                'quantity' => 1,
-            ])
+            json_encode($data)
         );
 
         return $this->client->getResponse();
@@ -141,22 +183,9 @@ final class CheckoutProcessEnd2EndTest extends JsonApiTestCase
         return $this->client->getResponse();
     }
 
-    private function extractShipmentsIds(Response $response): array
+    private function extractResponse(Response $response): array
     {
-        $data = json_decode($response->getContent(), true);
-        $shipmentsIds = [];
-        foreach ($data['shipments'] as $shipment) {
-            $shipmentsIds[] = (string) $shipment['id'];
-        }
-
-        return $shipmentsIds;
-    }
-
-    private function extractPaymentId(Response $response): string
-    {
-        $data = json_decode($response->getContent(), true);
-
-        return (string) $data['payments'][0]['id'];
+        return json_decode($response->getContent(), true);
     }
 
     private function executeGetShipmentMethodsRequest(string $token, string $shipmentsIds): Response
