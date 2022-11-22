@@ -1,24 +1,20 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Integration\Api;
 
-use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
+use Sylius\Tests\Api\JsonApiTestCase as BaseJsonApiTestCase;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
-    public const CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'];
-
     public function __construct(
         ?string $name = null,
         array $data = [],

@@ -61,7 +61,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\BitBag\\OpenMarketplace\\": ["tests/"]
+            "Tests\\BitBag\\OpenMarketplace\\": ["tests/"],
+            "Sylius\\Tests\\Api\\": ["vendor/sylius/sylius/tests/Api/"]
         },
         "classmap": [
             "src/Kernel.php"
