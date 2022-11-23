@@ -56,17 +56,6 @@ class VendorShippingMethodsResolverSpec extends ObjectBehavior
         ;
     }
 
-    public function it_returns_default_shipping_methods_for_shipment_without_vendor(
-        ShipmentInterface $subject,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
-    ): void {
-        $subject->hasVendor()->willReturn(false);
-
-        $shippingMethodsResolver->getSupportedMethods($subject)->shouldBeCalled();
-
-        $this->getSupportedMethods($subject);
-    }
-
     public function it_returns_default_shipping_methods_for_shipment_with_vendor(
         ShipmentInterface $subject,
         ShippingMethodsResolverInterface $shippingMethodsResolver,

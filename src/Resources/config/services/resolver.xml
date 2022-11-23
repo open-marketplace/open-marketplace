@@ -12,7 +12,7 @@
         <service class="BitBag\OpenMarketplace\Resolver\VendorShippingMethodsResolver"
                 id="open_marketplace.vendor_shipping_methods_resolver">
             <argument type="service" id="open_marketplace.repository.vendor_shipping_method" />
-            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <tag name="sylius.shipping_method_resolver" type="vendor_shipping_methods_resolver" label="open_marketplace.vendor_shipping_methods_resolver" priority="1" />
         </service>
     </services>
 </container>

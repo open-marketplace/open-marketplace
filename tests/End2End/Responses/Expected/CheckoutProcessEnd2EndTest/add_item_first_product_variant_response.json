@@ -1,0 +1,53 @@
+{
+    "@context": "\/api\/v2\/contexts\/Order",
+    "@id": "\/api\/v2\/shop\/orders\/@string@",
+    "@type": "Order",
+    "payments": [
+        {
+            "@id": "\/api\/v2\/shop\/payments\/@integer@",
+            "@type": "Payment",
+            "id": "@integer@",
+            "method": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY"
+        }
+    ],
+    "shipments": {
+        "1": {
+            "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+            "@type": "Shipment",
+            "id": "@integer@",
+            "method": "\/api\/v2\/shop\/shipping-methods\/ups",
+            "vendor": {
+                "@type": "Vendor",
+                "id": "@integer@",
+                "slug": "oliver-queen-company"
+            }
+        }
+    },
+    "currencyCode": "USD",
+    "localeCode": "en_US",
+    "checkoutState": "cart",
+    "paymentState": "cart",
+    "shippingState": "cart",
+    "tokenValue": "@string@",
+    "id": "@integer@",
+    "items": [
+        {
+            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@type": "OrderItem",
+            "variant": "\/api\/v2\/shop\/product-variants\/olivier_1_1",
+            "productName": "olivier_first_product",
+            "id": "@integer@",
+            "quantity": 3,
+            "unitPrice": 10,
+            "originalUnitPrice": 15,
+            "total": 30,
+            "discountedUnitPrice": 10,
+            "subtotal": 30
+        }
+    ],
+    "itemsTotal": 30,
+    "total": 35,
+    "taxTotal": 0,
+    "shippingTotal": 5,
+    "orderPromotionTotal": 0
+}

@@ -7,4 +7,4 @@ framework:
         handler_id: ~
     serializer:
         mapping:
-            paths: [ '%kernel.project_dir%/config/serialization' ]
+            paths: [ '%kernel.project_dir%/config/serialization', '%kernel.project_dir%/src/Resources/config/serialization' ]
