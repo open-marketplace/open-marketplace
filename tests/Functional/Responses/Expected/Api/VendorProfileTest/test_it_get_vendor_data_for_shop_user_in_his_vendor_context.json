@@ -1,0 +1,18 @@
+{
+    "@context": "\/api\/v2\/contexts\/Vendor",
+    "@id": "\/api\/v2\/shop\/account\/vendors\/@integer@",
+    "@type": "Vendor",
+    "id": "@integer@",
+    "companyName": "Wayne Enterprises, Inc.",
+    "taxIdentifier": "1234567",
+    "phoneNumber": "555123123",
+    "vendorAddress": {
+        "@type": "VendorAddress",
+        "country": "\/api\/v2\/shop\/countries\/US",
+        "city": "Arkham City",
+        "street": "Avenue 2115",
+        "postalCode": "00000"
+    },
+    "slug": "Wayne-Enterprises-Inc",
+    "description": "description"
+}
