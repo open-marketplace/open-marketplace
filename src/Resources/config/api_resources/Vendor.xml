@@ -37,6 +37,17 @@
                     <attribute name="groups">shop:vendor:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="shop_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/account/vendors/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:vendor:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:vendor:read</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
     </resource>
 </resources>
