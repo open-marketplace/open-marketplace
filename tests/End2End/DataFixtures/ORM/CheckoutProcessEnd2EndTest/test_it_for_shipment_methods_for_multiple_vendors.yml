@@ -4,7 +4,7 @@ Sylius\Component\Addressing\Model\Country:
 Sylius\Component\Addressing\Model\Zone:
     pl:
         code: 'PL'
-        name: 'Polska'
+        name: 'Poland'
         type: 'country'
         scope: 'all'
 Sylius\Component\Addressing\Model\ZoneMember:
