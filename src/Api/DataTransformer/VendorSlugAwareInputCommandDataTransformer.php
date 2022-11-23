@@ -17,9 +17,11 @@ use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 
 final class VendorSlugAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
-    public function __construct(
-        private VendorSlugGeneratorInterface $vendorSlugGenerator
-    ) {
+    private VendorSlugGeneratorInterface $vendorSlugGenerator;
+
+    public function __construct(VendorSlugGeneratorInterface $vendorSlugGenerator)
+    {
+        $this->vendorSlugGenerator = $vendorSlugGenerator;
     }
 
     /**

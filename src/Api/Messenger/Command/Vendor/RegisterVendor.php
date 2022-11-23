@@ -23,41 +23,41 @@ class RegisterVendor implements ShopUserAwareInterface, VendorSlugAwareInterface
      *
      * @var string
      */
-    public $companyName;
+    private $companyName;
 
     /**
      * @psalm-immutable
      *
      * @var string
      */
-    public $taxIdentifier;
+    private $taxIdentifier;
 
     /**
      * @psalm-immutable
      *
      * @var string
      */
-    public $phoneNumber;
+    private $phoneNumber;
 
     /**
      * @psalm-immutable
      *
      * @var string
      */
-    public $description;
+    private $description;
 
     /**
      * @psalm-immutable
      *
      * @var VendorAddress
      */
-    public $vendorAddress;
+    private $vendorAddress;
 
     /** @var string|null */
-    public $slug;
+    private $slug;
 
     /** @var ShopUserInterface|null */
-    public $shopUser;
+    private $shopUser;
 
     public function __construct(
         string $companyName,
@@ -76,6 +76,26 @@ class RegisterVendor implements ShopUserAwareInterface, VendorSlugAwareInterface
     public function getCompanyName(): string
     {
         return $this->companyName;
+    }
+
+    public function getTaxIdentifier(): string
+    {
+        return $this->taxIdentifier;
+    }
+
+    public function getPhoneNumber(): string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getVendorAddress(): VendorAddress
+    {
+        return $this->vendorAddress;
     }
 
     public function getSlug(): ?string

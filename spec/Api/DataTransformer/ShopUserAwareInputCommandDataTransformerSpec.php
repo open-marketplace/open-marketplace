@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
@@ -12,7 +19,7 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
-class ShopUserAwareInputCommandDataTransformerSpec extends ObjectBehavior
+final class ShopUserAwareInputCommandDataTransformerSpec extends ObjectBehavior
 {
     public function let(
         UserContextInterface $userContext

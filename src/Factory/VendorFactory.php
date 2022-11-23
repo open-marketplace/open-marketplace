@@ -13,17 +13,13 @@ namespace BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class VendorFactory implements VendorFactoryInterface
+final class VendorFactory implements FactoryInterface
 {
-    /** @return Vendor */
+    /** @return VendorInterface */
     public function createNew()
     {
         return new Vendor();
-    }
-
-    public function createVendor(): VendorInterface
-    {
-        return $this->createNew();
     }
 }

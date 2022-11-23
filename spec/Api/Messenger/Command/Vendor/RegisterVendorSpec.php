@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
@@ -28,28 +35,27 @@ class RegisterVendorSpec extends ObjectBehavior
 
     public function it_has_company_name(): void
     {
-        $this->companyName->shouldReturn('companyName');
         $this->getCompanyName()->shouldReturn('companyName');
     }
 
     public function it_has_tax_identifier(): void
     {
-        $this->taxIdentifier->shouldReturn('taxIdentifier');
+        $this->getTaxIdentifier()->shouldReturn('taxIdentifier');
     }
 
     public function it_has_phone_number(): void
     {
-        $this->phoneNumber->shouldReturn('phoneNumber');
+        $this->getPhoneNumber()->shouldReturn('phoneNumber');
     }
 
     public function it_has_description(): void
     {
-        $this->description->shouldReturn('description');
+        $this->getDescription()->shouldReturn('description');
     }
 
     public function it_has_vendor_address(VendorAddress $vendorAddress): void
     {
-        $this->vendorAddress->shouldReturn($vendorAddress);
+        $this->getVendorAddress()->shouldReturn($vendorAddress);
     }
 
     public function it_has_slug(): void

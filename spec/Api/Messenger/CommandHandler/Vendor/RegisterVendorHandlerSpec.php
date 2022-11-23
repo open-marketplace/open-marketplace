@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
@@ -8,11 +15,11 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler;
 use BitBag\OpenMarketplace\Api\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Entity\ShopUser;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorAddress;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class RegisterVendorHandlerSpec extends ObjectBehavior
 {
@@ -26,27 +33,32 @@ class RegisterVendorHandlerSpec extends ObjectBehavior
     public function it_is_initializable()
     {
         $this->shouldHaveType(RegisterVendorHandler::class);
-        $this->shouldImplement(MessageHandlerInterface::class);
     }
 
     public function it_creates_a_vendor_for_current_shop_user(
         VendorProviderInterface $vendorProvider,
         ObjectManager $manager,
-        VendorInterface $vendor
+        VendorInterface $vendor,
+        ShopUserInterface $shopUser,
+        RegisterVendor $command,
+        VendorAddress $vendorAddress
     ): void {
-        $command = new RegisterVendor('companyName', 'taxIdentifier', 'phoneNumber', 'description', new VendorAddress());
-        $command->setSlug('slug');
-        $shopUser = new ShopUser();
-        $command->setShopUser($shopUser);
+        $command->getCompanyName()->willReturn('companyName');
+        $command->getTaxIdentifier()->willReturn('taxIdentifier');
+        $command->getPhoneNumber()->willReturn('phoneNumber');
+        $command->getDescription()->willReturn('description');
+        $command->getVendorAddress()->willReturn($vendorAddress);
+        $command->getSlug()->willReturn('slug');
+        $command->getShopUser()->willReturn($shopUser);
 
         $vendorProvider->provide($shopUser)->willReturn($vendor);
 
-        $vendor->setCompanyName($command->companyName)->shouldBeCalled();
-        $vendor->setTaxIdentifier($command->taxIdentifier)->shouldBeCalled();
-        $vendor->setPhoneNumber($command->phoneNumber)->shouldBeCalled();
-        $vendor->setDescription($command->description)->shouldBeCalled();
-        $vendor->setVendorAddress($command->vendorAddress)->shouldBeCalled();
-        $vendor->setSlug($command->slug)->shouldBeCalled();
+        $vendor->setCompanyName('companyName')->shouldBeCalled();
+        $vendor->setTaxIdentifier('taxIdentifier')->shouldBeCalled();
+        $vendor->setPhoneNumber('phoneNumber')->shouldBeCalled();
+        $vendor->setDescription('description')->shouldBeCalled();
+        $vendor->setVendorAddress($vendorAddress)->shouldBeCalled();
+        $vendor->setSlug('slug')->shouldBeCalled();
 
         $manager->persist($vendor)->shouldBeCalled();
 

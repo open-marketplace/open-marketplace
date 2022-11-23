@@ -5,9 +5,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler">
+        <service class="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler"
+                 id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.register_vendor_handler">
             <argument type="service" id="open_marketplace.api.provider.vendor" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />

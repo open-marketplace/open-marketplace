@@ -13,36 +13,42 @@ namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor;
 use BitBag\OpenMarketplace\Api\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class RegisterVendorHandler implements MessageHandlerInterface
+final class RegisterVendorHandler
 {
-    public function __construct(
-        private VendorProviderInterface $vendorProvider,
-        private ObjectManager $manager
-    ) {
+    private VendorProviderInterface $vendorProvider;
+
+    private ObjectManager $manager;
+
+    public function __construct(VendorProviderInterface $vendorProvider, ObjectManager $manager)
+    {
+        $this->vendorProvider = $vendorProvider;
+        $this->manager = $manager;
     }
 
     public function __invoke(RegisterVendor $command): VendorInterface
     {
-        if (!$command->shopUser) {
+        if (!$command->getShopUser()) {
             throw new \DomainException('Shop user should be set');
         }
 
-        if (!$command->slug) {
+        if (!$command->getSlug()) {
             throw new \DomainException('Slug should be set');
         }
 
-        $vendor = $this->vendorProvider->provide($command->shopUser);
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $command->getShopUser();
+        $vendor = $this->vendorProvider->provide($shopUser);
 
-        $vendor->setCompanyName($command->companyName);
-        $vendor->setTaxIdentifier($command->taxIdentifier);
-        $vendor->setPhoneNumber($command->phoneNumber);
-        $vendor->setDescription($command->description);
-        $vendor->setVendorAddress($command->vendorAddress);
-        $vendor->setSlug($command->slug);
+        $vendor->setCompanyName($command->getCompanyName());
+        $vendor->setTaxIdentifier($command->getTaxIdentifier());
+        $vendor->setPhoneNumber($command->getPhoneNumber());
+        $vendor->setDescription($command->getDescription());
+        $vendor->setVendorAddress($command->getVendorAddress());
+        $vendor->setSlug($command->getSlug());
 
         $this->manager->persist($vendor);
 
