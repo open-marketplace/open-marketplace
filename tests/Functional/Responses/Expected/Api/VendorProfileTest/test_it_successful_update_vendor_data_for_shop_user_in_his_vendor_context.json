@@ -1,8 +1,8 @@
 {
     "@context": "\/api\/v2\/contexts\/Vendor",
-    "@id": "\/api\/v2\/shop\/account\/vendors\/%integer%",
+    "@id": "\/api\/v2\/shop\/account\/vendors\/@integer@",
     "@type": "Vendor",
-    "id": "%integer%",
+    "id": "@integer@",
     "companyName": "Wayne Enterprises",
     "taxIdentifier": "345",
     "phoneNumber": "123456789",

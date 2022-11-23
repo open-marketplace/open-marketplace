@@ -40,6 +40,10 @@
 
             <itemOperation name="shop_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="validation_groups">
+                    <attribute>Default</attribute>
+                    <attribute>VendorUser</attribute>
+                </attribute>
                 <attribute name="path">/shop/account/vendors/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:vendor:update</attribute>

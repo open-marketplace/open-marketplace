@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
+use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -37,18 +38,18 @@ final class VendorSlugEventSubscriber implements EventSubscriberInterface
 
     public function generateSlug(ViewEvent $event): void
     {
-        $vendor = $event->getControllerResult();
+        $vendorSlugAware = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
         if (
-            !$vendor instanceof VendorInterface ||
+            !$vendorSlugAware instanceof VendorInterface ||
             !in_array($method, [Request::METHOD_POST, Request::METHOD_PUT], true)
         ) {
             return;
         }
 
-        $slug = $this->vendorSlugGenerator->generateSlug($vendor->getCompanyName());
-        $vendor->setSlug($slug);
+        $slug = $this->vendorSlugGenerator->generateSlug($vendorSlugAware->getCompanyName());
+        $vendorSlugAware->setSlug($slug);
 
         $event->setControllerResult($slug);
     }

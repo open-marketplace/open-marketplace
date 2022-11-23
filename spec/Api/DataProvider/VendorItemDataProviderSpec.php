@@ -22,7 +22,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class VendorItemDataProviderSpec extends ObjectBehavior
+final class VendorItemDataProviderSpec extends ObjectBehavior
 {
     public function let(
         UserContextInterface $userContext,
