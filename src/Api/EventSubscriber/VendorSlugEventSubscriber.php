@@ -42,15 +42,14 @@ final class VendorSlugEventSubscriber implements EventSubscriberInterface
         $method = $event->getRequest()->getMethod();
 
         if (
-            !$vendorSlugAware instanceof VendorInterface ||
-            !in_array($method, [Request::METHOD_POST, Request::METHOD_PUT], true)
+            !($vendorSlugAware instanceof VendorInterface || $vendorSlugAware instanceof VendorSlugAwareInterface) ||
+            !in_array($method, [Request::METHOD_POST, Request::METHOD_PUT], true) ||
+            empty($vendorSlugAware->getCompanyName())
         ) {
             return;
         }
 
         $slug = $this->vendorSlugGenerator->generateSlug($vendorSlugAware->getCompanyName());
         $vendorSlugAware->setSlug($slug);
-
-        $event->setControllerResult($slug);
     }
 }

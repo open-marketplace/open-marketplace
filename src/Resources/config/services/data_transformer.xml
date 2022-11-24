@@ -8,10 +8,5 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
-        <service class="BitBag\OpenMarketplace\Api\DataTransformer\VendorSlugAwareInputCommandDataTransformer"
-                 id="bit_bag.open_marketplace.api.data_transformer.vendor_slug_aware_input_command_data_transformer">
-            <argument type="service" id="open_marketplace.service.vendor_slug_generator" />
-            <tag name="sylius.api.command_data_transformer" />
-        </service>
     </services>
 </container>

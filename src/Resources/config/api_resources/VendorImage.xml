@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%bitbag_open_marketplace.model.vendor_image.class%" shortName="VendorImage">
+
+        <collectionOperations>
+            <collectionOperation name="shop_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/shop/account/vendor_images</attribute>
+                <attribute name="controller">bit_bag.open_marketplace.api.controller.upload_vendor_image_action</attribute>
+                <attribute name="deserialize">false</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="multipart/form-data">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="file">
+                                            <attribute name="type">string</attribute>
+                                            <attribute name="format">binary</attribute>
+                                        </attribute>
+                                        <attribute name="owner">
+                                            <attribute name="type">string</attribute>
+                                            <attribute name="format">iri-reference</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:vendor_image:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendor_images/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:vendor_image:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shop/account/vendor_images/{id}</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="path" required="true" />
+        <property name="owner" required="true" />
+    </resource>
+</resources>

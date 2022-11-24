@@ -11,8 +11,10 @@
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:shipment:read</group>
+            <group>shop:customer:read</group>
             <group>shop:vendor:read</group>
             <group>shop:vendor:create</group>
+            <group>shop:vendor_image:read</group>
         </attribute>
         <attribute name="slug">
             <group>admin:order:read</group>
@@ -20,6 +22,7 @@
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:shipment:read</group>
+            <group>shop:customer:read</group>
             <group>shop:vendor:read</group>
             <group>shop:vendor:create</group>
         </attribute>
@@ -42,6 +45,9 @@
         <attribute name="vendorAddress">
             <group>shop:vendor:read</group>
             <group>shop:vendor:update</group>
+        </attribute>
+        <attribute name="image">
+            <group>shop:vendor:read</group>
         </attribute>
     </class>
 </serializer>

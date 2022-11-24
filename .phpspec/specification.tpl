@@ -13,7 +13,7 @@ namespace %namespace%;
 
 %imports%
 
-class %name% extends ObjectBehavior
+final class %name% extends ObjectBehavior
 {
     function it_is_initializable()
     {

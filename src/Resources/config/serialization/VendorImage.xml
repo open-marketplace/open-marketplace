@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="BitBag\OpenMarketplace\Entity\VendorImage">
+        <attribute name="id">
+            <group>shop:vendor_image:read</group>
+            <group>shop:vendor:read</group>
+        </attribute>
+        <attribute name="path">
+            <group>shop:vendor_image:read</group>
+            <group>shop:vendor:read</group>
+        </attribute>
+        <attribute name="owner">
+            <group>shop:vendor_image:read</group>
+        </attribute>
+    </class>
+</serializer>

@@ -209,5 +209,12 @@
             <argument type="service" id="open_marketplace.processor.order.split_order_by_vendor_processor"/>
         </service>
 
+        <service class="BitBag\OpenMarketplace\Api\Controller\UploadVendorImageAction"
+                 id="bit_bag.open_marketplace.api.controller.upload_vendor_image_action" public="true">
+            <argument type="service" id="open_marketplace.service.vendor_image_factory" />
+            <argument type="service" id="bitbag_open_marketplace.repository.vendor_image" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="api_platform.iri_converter" />
+        </service>
     </services>
 </container>

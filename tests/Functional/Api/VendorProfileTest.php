@@ -80,7 +80,7 @@ final class VendorProfileTest extends FunctionalTestCase
                 'street' => 'Wall St. 1',
                 'postalCode' => '12123',
             ],
-        ]));
+        ], JSON_THROW_ON_ERROR));
         $response = $this->client->getResponse();
 
         $this->assertEquals('Wayne-Enterprises', $vendor->getSlug());
@@ -107,6 +107,61 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    public function test_not_blank_validation_rules()
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header, json_encode([
+            'companyName' => '',
+            'taxIdentifier' => '',
+            'phoneNumber' => '',
+            'description' => '',
+            'vendorAddress' => [
+                'city' => '',
+                'street' => '',
+                'postalCode' => '',
+            ],
+        ]));
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/VendorProfileTest/test_not_blank_validation_rules', Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function test_wrong_iri_for_country_error()
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header, json_encode([
+            'vendorAddress' => [
+                'country' => 'PL',
+            ],
+        ]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/invalid_iri_response', Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    public function test_not_existed_country()
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header, json_encode([
+            'vendorAddress' => [
+                'country' => '/api/v2/shop/countries/RO',
+            ],
+        ]));
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/VendorProfileTest/not_existed_country_field_error_response', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     private function getHeaderForLoginShopUser(string $email): array

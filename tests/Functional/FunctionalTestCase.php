@@ -15,6 +15,9 @@ use Sylius\Tests\Api\JsonApiTestCase as BaseJsonApiTestCase;
 
 abstract class FunctionalTestCase extends BaseJsonApiTestCase
 {
+    /** @var string */
+    protected $filesPath;
+
     public function __construct(
         ?string $name = null,
         array $data = [],
@@ -24,5 +27,11 @@ abstract class FunctionalTestCase extends BaseJsonApiTestCase
 
         $this->dataFixturesPath = __DIR__ . '/DataFixtures/ORM';
         $this->expectedResponsesPath = __DIR__ . '/Responses/Expected';
+        $this->filesPath = __DIR__ . '/Resources/files';
+    }
+
+    public function getFilePath(string $fileName): string
+    {
+        return $this->filesPath . '/' . $fileName;
     }
 }
