@@ -18,9 +18,10 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 
-final class VendorItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
+final class VendorAccountItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     private UserContextInterface $userContext;
+
     private VendorRepositoryInterface $vendorRepository;
 
     public function __construct(
@@ -31,8 +32,16 @@ final class VendorItemDataProvider implements RestrictedDataProviderInterface, I
         $this->vendorRepository = $vendorRepository;
     }
 
-    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
-    {
+    public function getItem(
+        string $resourceClass,
+        $id,
+        string $operationName = null,
+        array $context = []
+    ) {
+        if (!is_string($operationName) || !str_starts_with($operationName, 'shop_account')) {
+            return $this->vendorRepository->find($id);
+        }
+
         /** @var ShopUserInterface|null $user */
         $user = $this->userContext->getUser();
 
@@ -47,8 +56,11 @@ final class VendorItemDataProvider implements RestrictedDataProviderInterface, I
         return null;
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
-    {
+    public function supports(
+        string $resourceClass,
+        string $operationName = null,
+        array $context = []
+    ): bool {
         return is_a($resourceClass, VendorInterface::class, true);
     }
 }

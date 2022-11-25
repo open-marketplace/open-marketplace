@@ -13,7 +13,7 @@ namespace spec\BitBag\OpenMarketplace\Api\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use BitBag\OpenMarketplace\Api\DataProvider\VendorItemDataProvider;
+use BitBag\OpenMarketplace\Api\DataProvider\VendorAccountItemDataProvider;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
@@ -22,7 +22,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class VendorItemDataProviderSpec extends ObjectBehavior
+final class VendorAccountItemDataProviderSpec extends ObjectBehavior
 {
     public function let(
         UserContextInterface $userContext,
@@ -33,7 +33,7 @@ final class VendorItemDataProviderSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(VendorItemDataProvider::class);
+        $this->shouldHaveType(VendorAccountItemDataProvider::class);
         $this->shouldImplement(RestrictedDataProviderInterface::class);
         $this->shouldImplement(ItemDataProviderInterface::class);
     }
@@ -43,12 +43,75 @@ final class VendorItemDataProviderSpec extends ObjectBehavior
         $this->supports(Vendor::class)->shouldReturn(true);
     }
 
-    public function it_provides_null_when_shop_user_is_not_in_vendor_context(
+    public function it_provides_vendor_for_not_account_operation_and_without_user_context(
+        UserContextInterface $userContext,
+        VendorInterface $vendor,
+        VendorRepositoryInterface $vendorRepository
+    ): void {
+        $userContext->getUser()->willReturn(null);
+
+        $vendorRepository->find(1)->willReturn($vendor);
+
+        $this
+            ->getItem(
+                VendorInterface::class,
+                1,
+                Request::METHOD_GET,
+                [],
+            )
+            ->shouldReturn($vendor)
+        ;
+    }
+
+    public function it_provides_vendor_for_not_account_operation_and_shop_user_without_vendor_context(
+        UserContextInterface $userContext,
+        ShopUserInterface $user,
+        VendorInterface $vendor,
+        VendorRepositoryInterface $vendorRepository
+    ): void {
+        $userContext->getUser()->willReturn($user);
+        $user->getVendor()->willReturn(null);
+
+        $vendorRepository->find(1)->willReturn($vendor);
+
+        $this
+            ->getItem(
+                VendorInterface::class,
+                1,
+                Request::METHOD_GET,
+                [],
+            )
+            ->shouldReturn($vendor)
+        ;
+    }
+
+    public function it_provides_vendor_for_not_account_operation_and_user_with_other_vendor_context(
+        UserContextInterface $userContext,
+        ShopUserInterface $user,
+        VendorInterface $vendor,
+        VendorRepositoryInterface $vendorRepository
+    ): void {
+        $userContext->getUser()->willReturn($user);
+        $user->getVendor()->willReturn($vendor);
+        $vendor->getId()->willReturn(1);
+
+        $vendorRepository->find(1)->willReturn($vendor);
+
+        $this
+            ->getItem(
+                VendorInterface::class,
+                1,
+                Request::METHOD_GET,
+                [],
+            )
+            ->shouldReturn($vendor);
+    }
+
+    public function it_provides_null_for_account_operation_and_shop_user_without_vendor_context(
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorRepositoryInterface $vendorRepository
-    ): void
-    {
+    ): void {
         $userContext->getUser()->willReturn($user);
         $user->getVendor()->willReturn(null);
 
@@ -58,20 +121,19 @@ final class VendorItemDataProviderSpec extends ObjectBehavior
             ->getItem(
                 VendorInterface::class,
                 1,
-                Request::METHOD_GET,
+                'shop_account_get',
                 [],
             )
             ->shouldReturn(null)
         ;
     }
 
-    public function it_provides_null_when_logged_in_shop_user_try_to_get_another_vendor(
+    public function it_provides_null_for_account_operation_and_user_with_other_vendor_context(
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
         VendorRepositoryInterface $vendorRepository
-    ): void
-    {
+    ): void {
         $userContext->getUser()->willReturn($user);
         $user->getVendor()->willReturn($vendor);
         $vendor->getId()->willReturn(1);
@@ -82,20 +144,19 @@ final class VendorItemDataProviderSpec extends ObjectBehavior
             ->getItem(
                 VendorInterface::class,
                 2,
-                Request::METHOD_GET,
+                'shop_account_get',
                 [],
             )
             ->shouldReturn(null)
         ;
     }
 
-    public function it_provides_vendor_when_logged_in_shop_user_getting_vendor_from_his_context(
+    public function it_provides_vendor_for_user_with_same_vendor_context(
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
         VendorRepositoryInterface $vendorRepository
-    ): void
-    {
+    ): void {
         $userContext->getUser()->willReturn($user);
         $user->getVendor()->willReturn($vendor);
         $vendor->getId()->willReturn(1);
@@ -106,7 +167,7 @@ final class VendorItemDataProviderSpec extends ObjectBehavior
             ->getItem(
                 VendorInterface::class,
                 1,
-                Request::METHOD_GET,
+                'shop_account_get',
                 [],
             )
             ->shouldReturn($vendor)

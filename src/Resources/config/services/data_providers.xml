@@ -5,8 +5,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service class="BitBag\OpenMarketplace\Api\DataProvider\VendorItemDataProvider"
-                 id="bit_bag.open_marketplace.api.data_provider.vendor_item_data_provider">
+        <service class="BitBag\OpenMarketplace\Api\DataProvider\VendorAccountItemDataProvider"
+                 id="bit_bag.open_marketplace.api.data_provider.vendor_account_item_data_provider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <argument type="service" id="open_marketplace.repository.vendor_repository" />
             <tag name="api_platform.item_data_provider" />

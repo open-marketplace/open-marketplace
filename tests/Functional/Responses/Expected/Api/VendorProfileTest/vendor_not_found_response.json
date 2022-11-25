@@ -1,0 +1,4 @@
+{
+    "code": 500,
+    "message": "Item not found for \u0022\/api\/v2\/shop\/account\/vendors\/@integer@\u0022."
+}

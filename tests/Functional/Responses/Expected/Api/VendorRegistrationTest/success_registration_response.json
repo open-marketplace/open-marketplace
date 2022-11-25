@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Vendor",
-    "@id": "\/api\/v2\/shop\/account\/vendors\/@integer@",
+    "@id": "\/api\/v2\/shop\/vendors\/@integer@",
     "@type": "Vendor",
     "id": "@integer@",
     "companyName": "Wayland Corp",
@@ -14,5 +14,6 @@
         "postalCode": "12-123"
     },
     "slug": "Wayland-Corp",
-    "description": "Wayland Corp Desc"
+    "description": "Wayland Corp Desc",
+    "image": null
 }

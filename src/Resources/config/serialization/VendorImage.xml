@@ -8,10 +8,12 @@
         <attribute name="id">
             <group>shop:vendor_image:read</group>
             <group>shop:vendor:read</group>
+            <group>shop_account:vendor:read</group>
         </attribute>
         <attribute name="path">
             <group>shop:vendor_image:read</group>
             <group>shop:vendor:read</group>
+            <group>shop_account:vendor:read</group>
         </attribute>
         <attribute name="owner">
             <group>shop:vendor_image:read</group>

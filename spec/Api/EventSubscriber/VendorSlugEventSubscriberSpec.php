@@ -25,23 +25,23 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 final class VendorSlugEventSubscriberSpec extends ObjectBehavior
 {
     public function let(
-         VendorSlugGeneratorInterface $vendorSlugGenerator
+        VendorSlugGeneratorInterface $vendorSlugGenerator
     ): void {
         $this->beConstructedWith($vendorSlugGenerator);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(VendorSlugEventSubscriber::class);
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_generates_slug_for_vendor_with_company_name_and_empty_slug(
+    public function it_generates_slug_for_vendor_with_company_name_and_empty_slug(
         VendorSlugGeneratorInterface $vendorSlugGenerator,
         VendorInterface $vendor,
         HttpKernelInterface $kernel,
         Request $request,
-    ): void {
+        ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
         $vendor->getCompanyName()->willReturn('Wayne Enterprises');
@@ -59,12 +59,12 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_generates_slug_for_vendor_slug_aware_with_company_name_and_empty_slug(
+    public function it_generates_slug_for_vendor_slug_aware_with_company_name_and_empty_slug(
         VendorSlugGeneratorInterface $vendorSlugGenerator,
         VendorSlugAwareInterface $vendorSlugAware,
         HttpKernelInterface $kernel,
         Request $request,
-    ): void {
+        ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
         $vendorSlugAware->getCompanyName()->willReturn('Wayne Enterprises');
@@ -82,12 +82,12 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_generates_new_slug_for_vendor_with_slug_and_company_name(
+    public function it_generates_new_slug_for_vendor_with_slug_and_company_name(
         VendorSlugGeneratorInterface $vendorSlugGenerator,
         VendorInterface $vendor,
         HttpKernelInterface $kernel,
         Request $request,
-    ): void {
+        ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
         $vendor->getCompanyName()->willReturn('Wayne Enterprises');
@@ -105,12 +105,12 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_does_nothing_if_the_vendor_has_no_company_name(
+    public function it_does_nothing_if_the_vendor_has_no_company_name(
         VendorSlugGeneratorInterface $vendorSlugGenerator,
         VendorSlugAwareInterface $vendor,
         HttpKernelInterface $kernel,
         Request $request,
-    ): void {
+        ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
         $vendor->getCompanyName()->willReturn(null);
@@ -126,12 +126,12 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_does_nothing_if_the_vendor_has_empty_company_name(
+    public function it_does_nothing_if_the_vendor_has_empty_company_name(
         VendorSlugGeneratorInterface $vendorSlugGenerator,
         VendorSlugAwareInterface $vendor,
         HttpKernelInterface $kernel,
         Request $request,
-    ): void {
+        ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
         $vendor->getCompanyName()->willReturn('');

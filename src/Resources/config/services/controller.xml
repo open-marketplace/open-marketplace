@@ -215,6 +215,7 @@
             <argument type="service" id="bitbag_open_marketplace.repository.vendor_image" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="validator" />
         </service>
     </services>
 </container>

@@ -13,7 +13,8 @@
             <group>shop:shipment:read</group>
             <group>shop:customer:read</group>
             <group>shop:vendor:read</group>
-            <group>shop:vendor:create</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:create</group>
             <group>shop:vendor_image:read</group>
         </attribute>
         <attribute name="slug">
@@ -24,30 +25,33 @@
             <group>shop:shipment:read</group>
             <group>shop:customer:read</group>
             <group>shop:vendor:read</group>
-            <group>shop:vendor:create</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:create</group>
         </attribute>
         <attribute name="companyName">
             <group>shop:vendor:read</group>
-            <group>shop:vendor:update</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
         <attribute name="taxIdentifier">
-            <group>shop:vendor:read</group>
-            <group>shop:vendor:update</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
         <attribute name="phoneNumber">
-            <group>shop:vendor:read</group>
-            <group>shop:vendor:update</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
         <attribute name="description">
-            <group>shop:vendor:read</group>
-            <group>shop:vendor:update</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
         <attribute name="vendorAddress">
-            <group>shop:vendor:read</group>
-            <group>shop:vendor:update</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
         <attribute name="image">
             <group>shop:vendor:read</group>
+            <group>shop_account:vendor:read</group>
         </attribute>
     </class>
 </serializer>

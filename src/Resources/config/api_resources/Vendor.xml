@@ -7,7 +7,7 @@
     <resource class="%open_marketplace.model.vendor.class%" shortName="Vendor">
 
         <collectionOperations>
-            <collectionOperation name="shop_post">
+            <collectionOperation name="shop_account_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="validation_groups">
                     <attribute>Default</attribute>
@@ -18,10 +18,10 @@
                     <attribute name="summary">Registers as a new vendor</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:vendor:create</attribute>
+                    <attribute name="groups">shop_account:vendor:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:vendor:read</attribute>
+                    <attribute name="groups">shop_account:vendor:read</attribute>
                 </attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor</attribute>
@@ -32,13 +32,21 @@
         <itemOperations>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendors/{id}</attribute>
+                <attribute name="path">/shop/vendors/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:vendor:read</attribute>
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="shop_put">
+            <itemOperation name="shop_account_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendors/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:vendor:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_account_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="validation_groups">
                     <attribute>Default</attribute>
@@ -46,10 +54,10 @@
                 </attribute>
                 <attribute name="path">/shop/account/vendors/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:vendor:update</attribute>
+                    <attribute name="groups">shop_account:vendor:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:vendor:read</attribute>
+                    <attribute name="groups">shop_account:vendor:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

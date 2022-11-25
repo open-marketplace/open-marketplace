@@ -7,7 +7,7 @@
     <resource class="%bitbag_open_marketplace.model.vendor_image.class%" shortName="VendorImage">
 
         <collectionOperations>
-            <collectionOperation name="shop_post">
+            <collectionOperation name="shop_account_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/account/vendor_images</attribute>
                 <attribute name="controller">bit_bag.open_marketplace.api.controller.upload_vendor_image_action</attribute>
@@ -42,13 +42,14 @@
         <itemOperations>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendor_images/{id}</attribute>
+                <attribute name="path">/shop/vendor_images/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:vendor_image:read</attribute>
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="shop_delete">
+            <itemOperation name="shop_account_delete">
+                <attribute name="security">is_granted("VENDOR_IMAGE_DELETE", object)</attribute>
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/account/vendor_images/{id}</attribute>
             </itemOperation>
