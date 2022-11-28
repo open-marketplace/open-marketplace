@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%open_marketplace.model.draft_attribute.class%" shortName="DraftAttribute">
+
+        <collectionOperations>
+            <collectionOperation name="shop_account_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="validation_groups">
+                    <attribute>Default</attribute>
+                </attribute>
+                <attribute name="path">/shop/account/draft-attributes</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop_account:draft_attribute:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:draft_attribute:read</attribute>
+                </attribute>
+            </collectionOperation>
+            <collectionOperation name="shop_account_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/draft-attributes</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:draft_attribute:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="shop_account_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/draft-attributes/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:draft_attribute:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_account_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="validation_groups">
+                    <attribute>Default</attribute>
+                </attribute>
+                <attribute name="path">/shop/account/draft-attributes/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop_account:draft_attribute:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:draft_attribute:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_account_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shop/account/draft-attributes/{id}</attribute>
+            </itemOperation>
+        </itemOperations>
+    </resource>
+</resources>

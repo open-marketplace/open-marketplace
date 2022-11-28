@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute">
+        <attribute name="id">
+            <group>shop_account:draft_attribute:read</group>
+        </attribute>
+        <attribute name="vendor">
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+        </attribute>
+        <attribute name="type">
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+        </attribute>
+        <attribute name="position">
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+            <group>shop_account:draft_attribute:update</group>
+        </attribute>
+        <attribute name="configuration">
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+            <group>shop_account:draft_attribute:update</group>
+        </attribute>
+        <attribute name="translations">
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+            <group>shop_account:draft_attribute:update</group>
+        </attribute>
+    </class>
+</serializer>
