@@ -1,0 +1,43 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "taxIdentifier: This field cannot be longer than 255\ncompanyName: This field cannot be longer than 255\nphoneNumber: This field cannot be longer than 255\ndescription: This field cannot be longer than 2048\nvendorAddress.city: This field cannot be longer than 255\nvendorAddress.street: This field cannot be longer than 255\nvendorAddress.postalCode: This field cannot be longer than 255",
+    "violations": [
+        {
+            "propertyPath": "taxIdentifier",
+            "message": "This field cannot be longer than 255",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "companyName",
+            "message": "This field cannot be longer than 255",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "phoneNumber",
+            "message": "This field cannot be longer than 255",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "description",
+            "message": "This field cannot be longer than 2048",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.city",
+            "message": "This field cannot be longer than 255",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.street",
+            "message": "This field cannot be longer than 255",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.postalCode",
+            "message": "This field cannot be longer than 255",
+            "code": "@string@"
+        }
+    ]
+}

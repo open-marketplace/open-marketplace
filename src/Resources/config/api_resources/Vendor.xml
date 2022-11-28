@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%open_marketplace.model.vendor.class%" shortName="Vendor">
+
+        <collectionOperations>
+            <collectionOperation name="shop_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="validation_groups">
+                    <attribute>Default</attribute>
+                    <attribute>VendorUserRegister</attribute>
+                </attribute>
+                <attribute name="path">/shop/account/vendors</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Registers as a new vendor</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:vendor:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:vendor:read</attribute>
+                </attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor</attribute>
+                <attribute name="status">201</attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendors/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:vendor:read</attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+    </resource>
+</resources>

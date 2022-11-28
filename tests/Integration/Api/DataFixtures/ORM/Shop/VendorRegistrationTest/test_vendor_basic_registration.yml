@@ -1,0 +1,43 @@
+Sylius\Component\Addressing\Model\Country:
+    poland:
+        code: 'PL'
+Sylius\Component\Addressing\Model\Zone:
+    pl:
+        code: 'PL'
+        name: 'Polska'
+        type: 'country'
+        scope: 'all'
+Sylius\Component\Addressing\Model\ZoneMember:
+    zone_member_pl:
+        code: 'PL'
+        belongsTo: '@pl'
+Sylius\Component\Currency\Model\Currency:
+    dollar:
+        code: 'USD'
+Sylius\Component\Locale\Model\Locale:
+    locale:
+        createdAt: '<dateTimeBetween("-200 days", "now")>'
+        code: 'pl_PL'
+Sylius\Component\Core\Model\Channel:
+    channel:
+        code: "CODE"
+        name: "name"
+        defaultLocale: '@locale'
+        locales: [ '@locale' ]
+        taxCalculationStrategy: 'order_items_based'
+        baseCurrency: '@dollar'
+        enabled: true
+Sylius\Component\Core\Model\Customer:
+    customer_oliver:
+        firstName: "John"
+        lastName: "Nowak"
+        email: "test@example.com"
+        emailCanonical: "test@example.com"
+BitBag\OpenMarketplace\Entity\ShopUser:
+    user_oliver:
+        plainPassword: "123password"
+        roles: ["ROLE_USER"]
+        enabled: "true"
+        customer: '@customer_oliver'
+        username: "oliver@queen.com"
+        usernameCanonical: "oliver@queen.com"

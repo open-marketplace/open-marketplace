@@ -11,6 +11,10 @@
             <argument type="service" id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory.inner" />
         </service>
 
+        <service class="BitBag\OpenMarketplace\Factory\VendorFactory"
+                 id="open_marketplace.factory.vendor_factory">
+        </service>
+
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileFactory"
                  id="open_marketplace.factory.vendor_profile_factory">
         </service>

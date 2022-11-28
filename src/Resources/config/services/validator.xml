@@ -9,5 +9,12 @@
 
             <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing.translation"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Api\Validator\UniqueShopUserVendorValidator"
+                 id="bitbag.sylius_open_marketplace_plugin.validator.unique_shop_user_vendor">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+
+            <tag name="validator.constraint_validator" alias="bitbag.sylius_open_marketplace_plugin.validator.unique_shop_user_vendor"/>
+        </service>
     </services>
 </container>
