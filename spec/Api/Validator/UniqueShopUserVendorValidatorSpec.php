@@ -22,14 +22,14 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class UniqueShopUserVendorValidatorSpec extends ObjectBehavior
+final class UniqueShopUserVendorValidatorSpec extends ObjectBehavior
 {
     public function let(UserContextInterface $userContext): void
     {
         $this->beConstructedWith($userContext);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(UniqueShopUserVendorValidator::class);
         $this->shouldImplement(ConstraintValidatorInterface::class);

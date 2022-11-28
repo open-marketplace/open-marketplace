@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
-use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor;
+use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendorInterface;
 use BitBag\OpenMarketplace\Api\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
@@ -29,7 +29,7 @@ final class RegisterVendorHandler
         $this->manager = $manager;
     }
 
-    public function __invoke(RegisterVendor $command): VendorInterface
+    public function __invoke(RegisterVendorInterface $command): VendorInterface
     {
         if (!$command->getShopUser()) {
             throw new \DomainException('Shop user should be set');

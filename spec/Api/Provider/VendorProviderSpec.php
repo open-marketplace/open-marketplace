@@ -18,7 +18,7 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-class VendorProviderSpec extends ObjectBehavior
+final class VendorProviderSpec extends ObjectBehavior
 {
     public function let(
         FactoryInterface $vendorFactory
@@ -26,7 +26,7 @@ class VendorProviderSpec extends ObjectBehavior
         $this->beConstructedWith($vendorFactory);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(VendorProvider::class);
         $this->shouldImplement(VendorProviderInterface::class);

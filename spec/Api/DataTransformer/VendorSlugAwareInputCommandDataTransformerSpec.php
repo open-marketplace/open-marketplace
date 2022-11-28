@@ -25,7 +25,7 @@ final class VendorSlugAwareInputCommandDataTransformerSpec extends ObjectBehavio
         $this->beConstructedWith($vendorSlugGenerator);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(VendorSlugAwareInputCommandDataTransformer::class);
         $this->shouldImplement(CommandDataTransformerInterface::class);
