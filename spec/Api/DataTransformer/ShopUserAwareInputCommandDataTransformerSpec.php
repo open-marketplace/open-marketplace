@@ -27,7 +27,7 @@ final class ShopUserAwareInputCommandDataTransformerSpec extends ObjectBehavior
         $this->beConstructedWith($userContext);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ShopUserAwareInputCommandDataTransformer::class);
         $this->shouldImplement(CommandDataTransformerInterface::class);

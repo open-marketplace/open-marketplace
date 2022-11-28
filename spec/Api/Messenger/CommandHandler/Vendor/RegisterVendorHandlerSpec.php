@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor;
+use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendorInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler;
 use BitBag\OpenMarketplace\Api\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Entity\ShopUser;
@@ -21,7 +22,7 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 
-class RegisterVendorHandlerSpec extends ObjectBehavior
+final class RegisterVendorHandlerSpec extends ObjectBehavior
 {
     public function let(
         VendorProviderInterface $vendorProvider,
@@ -30,7 +31,7 @@ class RegisterVendorHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($vendorProvider, $manager);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(RegisterVendorHandler::class);
     }
@@ -40,7 +41,7 @@ class RegisterVendorHandlerSpec extends ObjectBehavior
         ObjectManager $manager,
         VendorInterface $vendor,
         ShopUserInterface $shopUser,
-        RegisterVendor $command,
+        RegisterVendorInterface $command,
         VendorAddress $vendorAddress
     ): void {
         $command->getCompanyName()->willReturn('companyName');

@@ -11,12 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Api\Messenger\Command\ShopUserAwareInterface;
-use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorAddress;
 
-class RegisterVendor implements ShopUserAwareInterface, VendorSlugAwareInterface
+final class RegisterVendor implements RegisterVendorInterface
 {
     /**
      * @psalm-immutable

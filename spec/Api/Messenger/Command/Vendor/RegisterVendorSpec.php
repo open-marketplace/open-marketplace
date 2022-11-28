@@ -18,7 +18,7 @@ use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorAddress;
 use PhpSpec\ObjectBehavior;
 
-class RegisterVendorSpec extends ObjectBehavior
+final class RegisterVendorSpec extends ObjectBehavior
 {
     public function let(
         VendorAddress $vendorAddress
@@ -26,7 +26,7 @@ class RegisterVendorSpec extends ObjectBehavior
         $this->beConstructedWith('companyName', 'taxIdentifier', 'phoneNumber', 'description', $vendorAddress);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(RegisterVendor::class);
         $this->shouldImplement(ShopUserAwareInterface::class);
