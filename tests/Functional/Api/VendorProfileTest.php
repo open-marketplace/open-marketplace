@@ -258,15 +258,6 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->assertResponse($response, 'Api/VendorProfileTest/test_not_blank_vendor_image_owner_validation_rule', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    private function getHeaderForLoginShopUser(string $email): array
-    {
-        $loginData = $this->logInShopUser($email);
-        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
-    }
-
     private function getUploadedFile(): UploadedFile
     {
         $fileName = 'avatar.png';

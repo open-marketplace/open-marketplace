@@ -34,4 +34,13 @@ abstract class FunctionalTestCase extends BaseJsonApiTestCase
     {
         return $this->filesPath . '/' . $fileName;
     }
+
+    protected function getHeaderForLoginShopUser(string $email): array
+    {
+        $loginData = $this->logInShopUser($email);
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
+
+        return array_merge($header, self::CONTENT_TYPE_HEADER);
+    }
 }

@@ -19,6 +19,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">shop_account:draft_attribute:read</attribute>
                 </attribute>
+                <attribute name="security_post_denormalize">is_granted("VENDOR_AWARE_OBJECT_CREATE", object)</attribute>
             </collectionOperation>
             <collectionOperation name="shop_account_get">
                 <attribute name="method">GET</attribute>

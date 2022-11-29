@@ -9,7 +9,6 @@
             <group>shop_account:draft_attribute:read</group>
         </attribute>
         <attribute name="vendor">
-            <group>shop_account:draft_attribute:create</group>
             <group>shop_account:draft_attribute:read</group>
         </attribute>
         <attribute name="code">
@@ -17,6 +16,10 @@
             <group>shop_account:draft_attribute:read</group>
         </attribute>
         <attribute name="type">
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+        </attribute>
+        <attribute name="storageType">
             <group>shop_account:draft_attribute:create</group>
             <group>shop_account:draft_attribute:read</group>
         </attribute>
