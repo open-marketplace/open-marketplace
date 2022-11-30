@@ -210,7 +210,7 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Api\Controller\UploadVendorImageAction"
-                 id="bit_bag.open_marketplace.api.controller.upload_vendor_image_action" public="true">
+                 id="bitbag.open_marketplace.api.controller.upload_vendor_image_action" public="true">
             <argument type="service" id="open_marketplace.service.vendor_image_factory" />
             <argument type="service" id="bitbag_open_marketplace.repository.vendor_image" />
             <argument type="service" id="sylius.image_uploader" />

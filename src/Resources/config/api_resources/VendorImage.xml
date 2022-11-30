@@ -28,6 +28,9 @@
                         </attribute>
                     </attribute>
                 </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop_account:vendor_image:create</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:vendor_image:read</attribute>
                 </attribute>

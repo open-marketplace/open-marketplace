@@ -46,7 +46,7 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->assertEquals('Wayne-Enterprises-Inc', $data['user']['vendor']['slug']);
     }
 
-    public function test_it_get_vendor_data_for_shop_user_in_his_vendor_context()
+    public function test_it_gets_vendor_data_for_shop_user_in_his_vendor_context()
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
@@ -54,7 +54,7 @@ final class VendorProfileTest extends FunctionalTestCase
 
         $this->client->request('GET', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header);
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/VendorProfileTest/test_it_get_vendor_data_for_shop_user_in_his_vendor_context', Response::HTTP_OK);
+        $this->assertResponse($response, 'Api/VendorProfileTest/test_it_gets_vendor_data_for_shop_user_in_his_vendor_context', Response::HTTP_OK);
     }
 
     public function test_it_get_vendor_not_found_when_shop_user_is_not_in_vendor_context()

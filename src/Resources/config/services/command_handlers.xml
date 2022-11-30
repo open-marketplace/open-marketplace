@@ -6,9 +6,18 @@
 >
     <services>
         <service class="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler"
-                 id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.register_vendor_handler">
+                 id="bitbag.open_marketplace.api.messenger.command_handler.vendor.register_vendor_handler">
             <argument type="service" id="open_marketplace.api.provider.vendor" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorImageHandler"
+                 id="bitbag.open_marketplace.api.messenger.command_handler.vendor.upload_vendor_image_handler">
+            <argument type="service" id="open_marketplace.service.vendor_image_factory" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag_open_marketplace.repository.vendor_image" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

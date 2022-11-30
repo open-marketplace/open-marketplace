@@ -8,5 +8,15 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
+        <service class="BitBag\OpenMarketplace\Api\DataTransformer\VendorImageFileAwareCommandDataTransformer"
+                 id="bitbag.open_marketplace.api.data_transformer.vendor_image_file_aware_command_data_transformer">
+            <argument type="service" id="request_stack" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Api\DataTransformer\VendorImageOwnerAwareCommandDataTransformer"
+                 id="bitbag.open_marketplace.api.data_transformer.vendor_image_owner_aware_command_data_transformer">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
     </services>
 </container>

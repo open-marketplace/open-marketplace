@@ -13,23 +13,24 @@ namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class UploadVendorImageHandler
 {
+    private VendorImageFactoryInterface $vendorImageFactory;
+
     private ImageUploaderInterface $imageUploader;
 
     private ObjectManager $manager;
 
     private RepositoryInterface $vendorImageRepository;
 
-    public function __construct(
-        ImageUploaderInterface $imageUploader,
-        ObjectManager $manager,
-        RepositoryInterface $vendorImageRepository
-    ) {
+    public function __construct(VendorImageFactoryInterface $vendorImageFactory, ImageUploaderInterface $imageUploader, ObjectManager $manager, RepositoryInterface $vendorImageRepository)
+    {
+        $this->vendorImageFactory = $vendorImageFactory;
         $this->imageUploader = $imageUploader;
         $this->manager = $manager;
         $this->vendorImageRepository = $vendorImageRepository;
@@ -41,8 +42,25 @@ final class UploadVendorImageHandler
             throw new \DomainException('File should be set');
         }
 
-        if (!$command->getOwner()) {
+        $owner = $command->getOwner();
+        if (!$owner) {
             throw new \DomainException('Owner should be set');
         }
+
+        $image = $this->vendorImageFactory->createNew();
+        $image->setOwner($owner);
+
+        $oldImage = $owner->getImage();
+        if (null !== $oldImage) {
+            $this->vendorImageRepository->remove($oldImage);
+        }
+        $owner->setImage($image);
+
+        $this->imageUploader->upload($image);
+
+        $this->manager->persist($owner);
+        $this->manager->persist($image);
+
+        return $image;
     }
 }

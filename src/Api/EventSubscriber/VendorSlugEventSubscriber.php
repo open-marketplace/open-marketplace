@@ -39,13 +39,19 @@ final class VendorSlugEventSubscriber implements EventSubscriberInterface
     public function generateSlug(ViewEvent $event): void
     {
         $vendorSlugAware = $event->getControllerResult();
-        $method = $event->getRequest()->getMethod();
-
-        if (
-            !($vendorSlugAware instanceof VendorInterface || $vendorSlugAware instanceof VendorSlugAwareInterface) ||
-            !in_array($method, [Request::METHOD_POST, Request::METHOD_PUT], true) ||
-            empty($vendorSlugAware->getCompanyName())
+        if (!$vendorSlugAware instanceof VendorInterface &&
+            !$vendorSlugAware instanceof VendorSlugAwareInterface
         ) {
+            return;
+        }
+
+        if (empty($vendorSlugAware->getCompanyName())) {
+            return;
+        }
+
+
+        $method = $event->getRequest()->getMethod();
+        if (!in_array($method, [Request::METHOD_POST, Request::METHOD_PUT], true)) {
             return;
         }
 
