@@ -1,0 +1,22 @@
+{
+    "@context": "\/api\/v2\/contexts\/DraftAttribute",
+    "@id": "\/api\/v2\/shop\/account\/draft-attributes\/@integer@",
+    "@type": "DraftAttribute",
+    "vendor": "\/api\/v2\/shop\/vendors\/@integer@",
+    "id": "@integer@",
+    "code": "attribute_bruce_1",
+    "type": "text",
+    "configuration": {
+        "min": 2
+    },
+    "storageType": "text",
+    "position": 0,
+    "translations": {
+        "en_US": {
+            "@type": "DraftAttributeTranslation",
+            "id": "@integer@",
+            "name": "attribute_bruce_1_us",
+            "locale": "en_US"
+        }
+    }
+}

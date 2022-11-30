@@ -39,7 +39,7 @@ final class VendorAwareEventSubscriberSpec extends ObjectBehavior
         VendorAwareInterface $resource,
         HttpKernelInterface $kernel,
         Request $request,
-    ): void {
+        ): void {
         $vendorContext->getVendor()->shouldNotBeCalled();
         $resource->setVendor($vendor)->shouldNotBeCalled();
 
@@ -57,7 +57,7 @@ final class VendorAwareEventSubscriberSpec extends ObjectBehavior
         VendorAwareInterface $resource,
         HttpKernelInterface $kernel,
         Request $request,
-    ): void {
+        ): void {
         $request->getMethod()->willReturn(Request::METHOD_GET);
         $vendorContext->getVendor()->willReturn($vendor);
         $resource->setVendor($vendor)->shouldNotBeCalled();
@@ -76,7 +76,7 @@ final class VendorAwareEventSubscriberSpec extends ObjectBehavior
         VendorAwareInterface $resource,
         HttpKernelInterface $kernel,
         Request $request,
-    ): void {
+        ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
         $vendorContext->getVendor()->willReturn(null);
         $resource->setVendor($vendor)->shouldNotBeCalled();

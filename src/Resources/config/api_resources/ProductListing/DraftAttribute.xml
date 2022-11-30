@@ -10,7 +10,7 @@
             <collectionOperation name="shop_account_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="validation_groups">
-                    <attribute>Default</attribute>
+                    <attribute>ApiDraftAttribute</attribute>
                 </attribute>
                 <attribute name="path">/shop/account/draft-attributes</attribute>
                 <attribute name="denormalization_context">
@@ -37,12 +37,13 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">shop_account:draft_attribute:read</attribute>
                 </attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_READ", object)</attribute>
             </itemOperation>
 
             <itemOperation name="shop_account_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="validation_groups">
-                    <attribute>Default</attribute>
+                    <attribute>ApiDraftAttribute</attribute>
                 </attribute>
                 <attribute name="path">/shop/account/draft-attributes/{id}</attribute>
                 <attribute name="denormalization_context">
@@ -51,11 +52,13 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">shop_account:draft_attribute:read</attribute>
                 </attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_UPDATE", object)</attribute>
             </itemOperation>
 
             <itemOperation name="shop_account_delete">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/account/draft-attributes/{id}</attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_DELETE", object)</attribute>
             </itemOperation>
         </itemOperations>
     </resource>

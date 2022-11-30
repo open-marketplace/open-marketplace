@@ -16,6 +16,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 
 final class VendorAwareExtension implements ContextAwareQueryCollectionExtensionInterface, QueryItemExtensionInterface
@@ -33,7 +34,7 @@ final class VendorAwareExtension implements ContextAwareQueryCollectionExtension
         string $resourceClass,
         string $operationName = null,
         array $context = [],
-    ): void {
+        ): void {
         $this->filterByVendorIfApply($resourceClass, $operationName, $queryBuilder);
     }
 
@@ -44,18 +45,15 @@ final class VendorAwareExtension implements ContextAwareQueryCollectionExtension
         array $identifiers,
         string $operationName = null,
         array $context = []
-    ) {
+    ): void {
         $this->filterByVendorIfApply($resourceClass, $operationName, $queryBuilder);
     }
 
-    /**
-     * @param string $resourceClass
-     * @param string|null $operationName
-     * @param QueryBuilder $queryBuilder
-     * @return void
-     */
-    public function filterByVendorIfApply(string $resourceClass, ?string $operationName, QueryBuilder $queryBuilder): void
-    {
+    public function filterByVendorIfApply(
+        string $resourceClass,
+        ?string $operationName,
+        QueryBuilder $queryBuilder
+    ): void {
         if (!is_a($resourceClass, VendorAwareInterface::class, true)) {
             return;
         }
@@ -65,9 +63,19 @@ final class VendorAwareExtension implements ContextAwareQueryCollectionExtension
         }
 
         if (null === $vendor = $this->vendorContext->getVendor()) {
-            return;
+            $this->filterForEmptyResult($queryBuilder);
+        } else {
+            $this->filterByVendor($queryBuilder, $vendor);
         }
+    }
 
+    public function filterForEmptyResult(QueryBuilder $queryBuilder): void
+    {
+        $queryBuilder->andWhere('1=0');
+    }
+
+    public function filterByVendor(QueryBuilder $queryBuilder, ?VendorInterface $vendor): void
+    {
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder

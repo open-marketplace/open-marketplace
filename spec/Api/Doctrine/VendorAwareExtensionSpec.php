@@ -54,14 +54,14 @@ final class VendorAwareExtensionSpec extends ObjectBehavior
         $this->applyToCollection($queryBuilder, $queryNameGenerator, VendorAwareInterface::class, 'get', []);
     }
 
-    public function it_does_nothing_for_collection_when_current_user_is_not_vendor_context(
+    public function it_prevents_returning_any_records_for_collection_when_current_user_is_not_vendor_context(
         VendorContextInterface $vendorContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $vendorContext->getVendor()->willReturn(null);
         $vendorContext->getVendor()->shouldBeCalled();
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $queryBuilder->andWhere('1=0')->shouldBeCalled();
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, VendorAwareInterface::class, 'shop_account_get', []);
     }
@@ -71,7 +71,7 @@ final class VendorAwareExtensionSpec extends ObjectBehavior
         VendorInterface $vendor,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-    ): void {
+        ): void {
         $vendorContext->getVendor()->willReturn($vendor);
 
         $vendorContext->getVendor()->shouldBeCalled();
@@ -106,14 +106,14 @@ final class VendorAwareExtensionSpec extends ObjectBehavior
         $this->applyToItem($queryBuilder, $queryNameGenerator, VendorAwareInterface::class, ['id'], 'get', []);
     }
 
-    public function it_does_nothing_for_item_when_current_user_is_not_vendor_context(
+    public function it_prevents_returning_record_when_current_user_is_not_vendor_context(
         VendorContextInterface $vendorContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $vendorContext->getVendor()->willReturn(null);
         $vendorContext->getVendor()->shouldBeCalled();
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $queryBuilder->andWhere('1=0')->shouldBeCalled();
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, VendorAwareInterface::class, ['id'], 'shop_account_get', []);
     }
@@ -123,7 +123,7 @@ final class VendorAwareExtensionSpec extends ObjectBehavior
         VendorInterface $vendor,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-    ): void {
+        ): void {
         $vendorContext->getVendor()->willReturn($vendor);
 
         $vendorContext->getVendor()->shouldBeCalled();

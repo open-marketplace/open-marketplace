@@ -20,6 +20,13 @@ final class VendorAwareVoter extends Voter
 {
     private VendorContextInterface $vendorContext;
 
+    private array $supportedAttributes = [
+        'VENDOR_AWARE_OBJECT_CREATE',
+        'VENDOR_AWARE_OBJECT_READ',
+        'VENDOR_AWARE_OBJECT_UPDATE',
+        'VENDOR_AWARE_OBJECT_DELETE',
+    ];
+
     public function __construct(VendorContextInterface $vendorContext)
     {
         $this->vendorContext = $vendorContext;
@@ -27,7 +34,7 @@ final class VendorAwareVoter extends Voter
 
     protected function supports(string $attribute, $subject): bool
     {
-        $supportsAttribute = in_array($attribute, ['VENDOR_AWARE_OBJECT_CREATE']);
+        $supportsAttribute = in_array($attribute, $this->supportedAttributes);
 
         $supportsSubject = $subject instanceof VendorAwareInterface;
 
@@ -37,10 +44,13 @@ final class VendorAwareVoter extends Voter
     /**
      * @param VendorAwareInterface $subject
      */
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
-    {
+    protected function voteOnAttribute(
+        string $attribute,
+        $subject,
+        TokenInterface $token
+    ): bool {
         if (
-            'VENDOR_AWARE_OBJECT_CREATE' === $attribute &&
+            in_array($attribute, $this->supportedAttributes) &&
             null === $this->vendorContext->getVendor()
         ) {
             return false;
@@ -49,4 +59,3 @@ final class VendorAwareVoter extends Voter
         return true;
     }
 }
-

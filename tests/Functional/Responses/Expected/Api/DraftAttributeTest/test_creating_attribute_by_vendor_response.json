@@ -1,0 +1,20 @@
+{
+    "@context": "\/api\/v2\/contexts\/DraftAttribute",
+    "@id": "\/api\/v2\/shop\/account\/draft-attributes\/@integer@",
+    "@type": "DraftAttribute",
+    "vendor": "\/api\/v2\/shop\/vendors\/@integer@",
+    "id": "@integer@",
+    "code": "test",
+    "type": "text",
+    "configuration": [],
+    "storageType": "text",
+    "position": 1,
+    "translations": {
+        "en_US": {
+            "@type": "DraftAttributeTranslation",
+            "id": "@integer@",
+            "name": "test",
+            "locale": "en_US"
+        }
+    }
+}

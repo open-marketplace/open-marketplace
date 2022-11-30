@@ -1,0 +1,33 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "code: This field cannot be empty\ntype: This field cannot be empty\nstorageType: This field cannot be empty\ntranslations[].locale: This field cannot be empty\ntranslations[].name: This field cannot be empty",
+    "violations": [
+        {
+            "propertyPath": "code",
+            "message": "This field cannot be empty",
+            "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+        },
+        {
+            "propertyPath": "type",
+            "message": "This field cannot be empty",
+            "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+        },
+        {
+            "propertyPath": "storageType",
+            "message": "This field cannot be empty",
+            "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+        },
+        {
+            "propertyPath": "translations[].locale",
+            "message": "This field cannot be empty",
+            "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+        },
+        {
+            "propertyPath": "translations[].name",
+            "message": "This field cannot be empty",
+            "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+        }
+    ]
+}
