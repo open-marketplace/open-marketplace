@@ -9,8 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
+namespace BitBag\OpenMarketplace\Entity;
 
-interface UploadVendorImageInterface extends VendorImageFileAwareInterface, VendorImageOwnerAwareInterface
+use Ramsey\Uuid\UuidInterface;
+
+interface UuidAwareInterface
 {
+    public function getUuid(): ?UuidInterface;
+
+    public function setUuid(?UuidInterface $uuid): void;
 }

@@ -14,8 +14,9 @@ namespace BitBag\OpenMarketplace\Api\DataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\VendorImageOwnerAwareInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 
-final class VendorImageOwnerAwareCommandDataTransformer
+final class VendorImageOwnerAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     private UserContextInterface $userContext;
 
@@ -50,6 +51,7 @@ final class VendorImageOwnerAwareCommandDataTransformer
         return $object;
     }
 
+    /** @param object $object */
     public function supportsTransformation($object): bool
     {
         return $object instanceof VendorImageOwnerAwareInterface;

@@ -4,17 +4,17 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\OpenMarketplace\Api\DataTransformer\ShopUserAwareInputCommandDataTransformer"
-                 id="bitbag.open_marketplace.api.data_transformer.shop_user_aware_input_command_data_transformer">
+                 id="bitbag.open_marketplace.api.data_transformer.shop_user_aware_input_command">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
         <service class="BitBag\OpenMarketplace\Api\DataTransformer\VendorImageFileAwareCommandDataTransformer"
-                 id="bitbag.open_marketplace.api.data_transformer.vendor_image_file_aware_command_data_transformer">
+                 id="bitbag.open_marketplace.api.data_transformer.vendor_image_file_aware_command">
             <argument type="service" id="request_stack" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
         <service class="BitBag\OpenMarketplace\Api\DataTransformer\VendorImageOwnerAwareCommandDataTransformer"
-                 id="bitbag.open_marketplace.api.data_transformer.vendor_image_owner_aware_command_data_transformer">
+                 id="bitbag.open_marketplace.api.data_transformer.vendor_image_owner_aware_command">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius.api.command_data_transformer" />
         </service>

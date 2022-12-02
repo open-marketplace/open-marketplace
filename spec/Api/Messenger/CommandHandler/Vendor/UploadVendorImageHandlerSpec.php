@@ -11,12 +11,17 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
+use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImageInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorImageHandler;
+use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class UploadVendorImageHandlerSpec extends ObjectBehavior
 {
@@ -32,5 +37,88 @@ final class UploadVendorImageHandlerSpec extends ObjectBehavior
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(UploadVendorImageHandler::class);
+    }
+
+    public function it_creates_vendor_image(
+        VendorImageFactoryInterface $vendorImageFactory,
+        ImageUploaderInterface $imageUploader,
+        ObjectManager $manager,
+        UploadVendorImageInterface $command,
+        VendorInterface $owner,
+        VendorImageInterface $vendorImage
+    ): void {
+        $file = new UploadedFile(__FILE__, 'test');
+        $command->getFile()->willReturn($file);
+        $command->getOwner()->willReturn($owner);
+        $owner->getImage()->willReturn(null);
+
+        $vendorImageFactory->createNew()->willReturn($vendorImage);
+
+        $vendorImage->setFile($file)->shouldBeCalled();
+        $vendorImage->setOwner($owner)->shouldBeCalled();
+        $owner->setImage($vendorImage)->shouldBeCalled();
+        $imageUploader->upload($vendorImage)->shouldBeCalled();
+
+        $manager->persist(Argument::any())->shouldBeCalledTimes(2);
+
+        $this($command)->shouldReturn($vendorImage);
+    }
+
+    public function it_removes_previous_image(
+        VendorImageFactoryInterface $vendorImageFactory,
+        RepositoryInterface $vendorImageRepository,
+        UploadVendorImageInterface $command,
+        VendorInterface $owner,
+        VendorImageInterface $previousImage,
+        VendorImageInterface $vendorImage
+    ): void {
+        $file = new UploadedFile(__FILE__, 'test');
+        $command->getFile()->willReturn($file);
+        $command->getOwner()->willReturn($owner);
+        $owner->getImage()->willReturn($previousImage);
+
+        $vendorImageFactory->createNew()->willReturn($vendorImage);
+
+        $vendorImage->setFile($file)->shouldBeCalled();
+        $vendorImage->setOwner($owner)->shouldBeCalled();
+        $owner->setImage($vendorImage)->shouldBeCalled();
+
+        $vendorImageRepository->remove(Argument::any())->shouldBeCalled();
+
+        $this($command)->shouldReturn($vendorImage);
+    }
+
+    public function it_throws_exception_on_empty_file(
+        VendorImageFactoryInterface $vendorImageFactory,
+        RepositoryInterface $vendorImageRepository,
+        UploadVendorImageInterface $command,
+        VendorInterface $owner,
+        VendorImageInterface $previousImage,
+        VendorImageInterface $vendorImage
+    ): void {
+        $command->getFile()->willReturn(null);
+
+        $this
+            ->shouldThrow(\DomainException::class)
+            ->during('__invoke', [$command])
+        ;
+    }
+
+    public function it_throws_exception_on_empty_owner(
+        VendorImageFactoryInterface $vendorImageFactory,
+        RepositoryInterface $vendorImageRepository,
+        UploadVendorImageInterface $command,
+        VendorInterface $owner,
+        VendorImageInterface $previousImage,
+        VendorImageInterface $vendorImage
+    ): void {
+        $file = new UploadedFile(__FILE__, 'test');
+        $command->getFile()->willReturn($file);
+        $command->getOwner()->willReturn(null);
+
+        $this
+            ->shouldThrow(\DomainException::class)
+            ->during('__invoke', [$command])
+        ;
     }
 }

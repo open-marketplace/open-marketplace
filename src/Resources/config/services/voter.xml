@@ -19,7 +19,7 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Api\Security\Voter\VendorImageVoter"
-            id="bitbag.open_marketplace.api.security.voter.vendor_image_voter">
+            id="bitbag.open_marketplace.api.security.voter.vendor_image">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="security.voter"/>
         </service>

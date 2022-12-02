@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
 use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorImage;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
@@ -28,6 +29,7 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->entityManager = static::getContainer()->get('doctrine.orm.entity_manager');
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
         $this->customerRepository = $this->entityManager->getRepository(Customer::class);
+        $this->vendorImageRepository = $this->entityManager->getRepository(VendorImage::class);
 
         $this->loadFixturesFromFile('Api/VendorProfileTest/vendor_profile.yml');
     }
@@ -50,9 +52,10 @@ final class VendorProfileTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
+        /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendors/' . (string) $vendor->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/VendorProfileTest/test_it_gets_vendor_data_for_shop_user_in_his_vendor_context', Response::HTTP_OK);
     }
@@ -61,9 +64,10 @@ final class VendorProfileTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
+        /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }
@@ -72,9 +76,10 @@ final class VendorProfileTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
 
+        /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }
@@ -86,7 +91,7 @@ final class VendorProfileTest extends FunctionalTestCase
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
             'companyName' => 'Wayne Enterprises',
             'taxIdentifier' => '345',
             'phoneNumber' => '123456789',
@@ -108,9 +113,10 @@ final class VendorProfileTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
+        /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header);
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }
@@ -119,9 +125,10 @@ final class VendorProfileTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
 
+        /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header);
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }
@@ -133,7 +140,7 @@ final class VendorProfileTest extends FunctionalTestCase
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
             'companyName' => '',
             'taxIdentifier' => '',
             'phoneNumber' => '',
@@ -155,7 +162,7 @@ final class VendorProfileTest extends FunctionalTestCase
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
             'vendorAddress' => [
                 'country' => 'PL',
             ],
@@ -172,7 +179,7 @@ final class VendorProfileTest extends FunctionalTestCase
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
             'vendorAddress' => [
                 'country' => '/api/v2/shop/countries/RO',
             ],
@@ -185,77 +192,80 @@ final class VendorProfileTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var VendorInterface $vendor */
-        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
-
-        $this->client->request('POST', '/api/v2/shop/account/vendor_images', [
-            'owner' => '/api/v2/shop/account/vendors/' . $vendor->getId(),
-        ], [
+        $this->client->request('POST', '/api/v2/shop/account/vendor_images', [], [
             'file' => $this->getUploadedFile(),
-        ], $header);
+        ], $header, json_encode([]));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/VendorProfileTest/test_vendor_image_upload_successfully', Response::HTTP_CREATED);
     }
 
-    public function test_prevent_image_upload_from_other_vendor_context()
-    {
-        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
-        $otherVendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-
-        $this->client->request('POST', '/api/v2/shop/account/vendor_images', [
-            'owner' => '/api/v2/shop/account/vendors/' . $otherVendor->getId(),
-        ], [
-            'file' => $this->getUploadedFile(),
-        ], $header);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/VendorProfileTest/vendor_not_found_response', Response::HTTP_INTERNAL_SERVER_ERROR);
-    }
-
     public function test_prevent_image_upload_from_user_without_vendor_context()
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
-        $otherVendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendor_images', [
-            'owner' => '/api/v2/shop/account/vendors/' . $otherVendor->getId(),
-        ], [
+        $this->client->request('POST', '/api/v2/shop/account/vendor_images', [], [
             'file' => $this->getUploadedFile(),
-        ], $header);
+        ], $header, json_encode([]));
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/VendorProfileTest/vendor_not_found_response', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse($response, 'Api/VendorProfileTest/test_prevent_image_upload_from_user_without_vendor_context_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function test_not_blank_vendor_image_file_validation_rule()
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var VendorInterface $vendor */
-        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
-
-        $this->client->request('POST', '/api/v2/shop/account/vendor_images', [
-            'owner' => '/api/v2/shop/account/vendors/' . $vendor->getId(),
-        ], [], $header);
+        $this->client->request('POST', '/api/v2/shop/account/vendor_images', [], [], $header, json_encode([]));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/VendorProfileTest/test_not_blank_vendor_image_file_validation_rule', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    public function test_not_blank_vendor_image_owner_validation_rule()
+    public function test_it_denies_access_on_delete_vendor_image_by_different_vendor()
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
         /** @var VendorInterface $vendor */
-        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
+        /** @var VendorImage $vendorImage */
+        $vendorImage = $this->vendorImageRepository->findOneBy(['owner' => $vendor]);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendor_images', [], [
-            'file' => $this->getUploadedFile(),
-        ], $header);
-
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor_images/' . $vendorImage->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/VendorProfileTest/test_not_blank_vendor_image_owner_validation_rule', Response::HTTP_UNPROCESSABLE_ENTITY);
+
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_it_denies_access_on_delete_vendor_image_by_user_without_vendor_context()
+    {
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
+        /** @var VendorImage $vendorImage */
+        $vendorImage = $this->vendorImageRepository->findOneBy(['owner' => $vendor]);
+
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor_images/' . $vendorImage->getUuid()->toString(), [], [], $header);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_it_deletes_vendor_image_by_right_owner()
+    {
+        $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
+        /** @var VendorImage $vendorImage */
+        $vendorImage = $this->vendorImageRepository->findOneBy(['owner' => $vendor]);
+
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor_images/' . $vendorImage->getUuid()->toString(), [], [], $header);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+        $this->assertEmpty($response->getContent());
     }
 
     private function getHeaderForLoginShopUser(string $email): array

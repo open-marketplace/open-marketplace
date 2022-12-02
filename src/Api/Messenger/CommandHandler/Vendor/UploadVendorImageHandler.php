@@ -28,8 +28,12 @@ final class UploadVendorImageHandler
 
     private RepositoryInterface $vendorImageRepository;
 
-    public function __construct(VendorImageFactoryInterface $vendorImageFactory, ImageUploaderInterface $imageUploader, ObjectManager $manager, RepositoryInterface $vendorImageRepository)
-    {
+    public function __construct(
+        VendorImageFactoryInterface $vendorImageFactory,
+        ImageUploaderInterface $imageUploader,
+        ObjectManager $manager,
+        RepositoryInterface $vendorImageRepository
+    ) {
         $this->vendorImageFactory = $vendorImageFactory;
         $this->imageUploader = $imageUploader;
         $this->manager = $manager;
@@ -48,6 +52,7 @@ final class UploadVendorImageHandler
         }
 
         $image = $this->vendorImageFactory->createNew();
+        $image->setFile($command->getFile());
         $image->setOwner($owner);
 
         $oldImage = $owner->getImage();

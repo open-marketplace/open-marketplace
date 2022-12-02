@@ -14,6 +14,10 @@ namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
 use BitBag\OpenMarketplace\Api\DataTransformer\VendorImageFileAwareCommandDataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\VendorImageFileAwareInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\FileBag;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class VendorImageFileAwareCommandDataTransformerSpec extends ObjectBehavior
@@ -29,9 +33,36 @@ final class VendorImageFileAwareCommandDataTransformerSpec extends ObjectBehavio
         $this->shouldHaveType(VendorImageFileAwareCommandDataTransformer::class);
     }
 
-    public function is_supports_shop_user_aware_interface(
+    public function it_supports_shop_user_aware_interface(
         VendorImageFileAwareInterface $vendorImageFileAware
     ): void {
         $this->supportsTransformation($vendorImageFileAware)->shouldReturn(true);
+    }
+
+    public function it_does_nothing_when_there_is_no_file_in_request(
+        VendorImageFileAwareInterface $vendorImageFileAware,
+        RequestStack $requestStack,
+        Request $request,
+        ): void {
+        $request->files = new FileBag();
+        $requestStack->getCurrentRequest()->willReturn($request);
+
+        $vendorImageFileAware->setFile(Argument::any())->shouldNotBeCalled();
+
+        $this->transform($vendorImageFileAware, '');
+    }
+
+    public function it_sets_the_file_when_there_is_one_in_request(
+        VendorImageFileAwareInterface $vendorImageFileAware,
+        RequestStack $requestStack,
+        Request $request
+    ): void {
+        $file = new UploadedFile(__FILE__, 'test');
+        $request->files = new FileBag(['file' => $file]);
+        $requestStack->getCurrentRequest()->willReturn($request);
+
+        $vendorImageFileAware->setFile($file)->shouldBeCalled();
+
+        $this->transform($vendorImageFileAware, '');
     }
 }

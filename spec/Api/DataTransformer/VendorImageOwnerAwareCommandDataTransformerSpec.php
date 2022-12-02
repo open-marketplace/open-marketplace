@@ -13,8 +13,12 @@ namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\DataTransformer\VendorImageOwnerAwareCommandDataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\VendorImageOwnerAwareInterface;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 final class VendorImageOwnerAwareCommandDataTransformerSpec extends ObjectBehavior
 {
@@ -29,9 +33,50 @@ final class VendorImageOwnerAwareCommandDataTransformerSpec extends ObjectBehavi
         $this->shouldHaveType(VendorImageOwnerAwareCommandDataTransformer::class);
     }
 
-    public function is_supports_shop_user_aware_interface(
+    public function it_supports_shop_user_aware_interface(
         VendorImageOwnerAwareInterface $ownerAware
     ): void {
         $this->supportsTransformation($ownerAware)->shouldReturn(true);
+    }
+
+    public function it_does_nothing_when_owner_already_exist(
+        VendorImageOwnerAwareInterface $ownerAware,
+        UserContextInterface $userContext,
+        VendorInterface $vendor,
+        UserInterface $user,
+        ): void {
+        $ownerAware->getOwner()->willReturn($vendor);
+
+        $ownerAware->setOwner(Argument::any())->shouldNotBeCalled();
+
+        $this->transform($ownerAware, '');
+    }
+
+    public function it_does_nothing_when_there_is_no_shop_user_context(
+        VendorImageOwnerAwareInterface $ownerAware,
+        UserContextInterface $userContext,
+        UserInterface $user
+    ): void {
+        $userContext->getUser()->willReturn($user);
+        $ownerAware->getOwner()->willReturn(null);
+
+        $ownerAware->setOwner(Argument::any())->shouldNotBeCalled();
+
+        $this->transform($ownerAware, '');
+    }
+
+    public function it_sets_owner_when_there_is_shop_user_context(
+        VendorImageOwnerAwareInterface $ownerAware,
+        UserContextInterface $userContext,
+        ShopUserInterface $user,
+        VendorInterface $vendor
+    ): void {
+        $user->getVendor()->willReturn($vendor);
+        $userContext->getUser()->willReturn($user);
+        $ownerAware->getOwner()->willReturn(null);
+
+        $ownerAware->setOwner($vendor)->shouldBeCalled();
+
+        $this->transform($ownerAware, '');
     }
 }

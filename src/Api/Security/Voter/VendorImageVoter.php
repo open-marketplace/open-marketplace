@@ -45,8 +45,11 @@ final class VendorImageVoter extends Voter
     /**
      * @param VendorImageInterface $subject
      */
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
-    {
+    protected function voteOnAttribute(
+        string $attribute,
+        $subject,
+        TokenInterface $token
+    ): bool {
         if (self::DELETE === $attribute) {
             return $this->voteOnDelete($attribute, $subject);
         }

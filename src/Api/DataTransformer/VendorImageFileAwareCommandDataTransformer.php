@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\VendorImageFileAwareInterface;
+use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class VendorImageFileAwareCommandDataTransformer
+final class VendorImageFileAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     private RequestStack $requestStack;
 
@@ -34,7 +36,10 @@ final class VendorImageFileAwareCommandDataTransformer
         string $to,
         array $context = []
     ) {
-        $files = $this->requestStack->getCurrentRequest()->files;
+        /** @var Request $request */
+        $request = $this->requestStack->getCurrentRequest();
+
+        $files = $request->files;
 
         if (null === $file = $files->get('file')) {
             return $object;
@@ -47,6 +52,7 @@ final class VendorImageFileAwareCommandDataTransformer
         return $object;
     }
 
+    /** @param object $object */
     public function supportsTransformation($object): bool
     {
         return $object instanceof VendorImageFileAwareInterface;

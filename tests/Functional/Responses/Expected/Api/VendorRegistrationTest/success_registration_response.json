@@ -1,8 +1,8 @@
 {
     "@context": "\/api\/v2\/contexts\/Vendor",
-    "@id": "\/api\/v2\/shop\/vendors\/@integer@",
+    "@id": "\/api\/v2\/shop\/vendors\/@string@",
     "@type": "Vendor",
-    "id": "@integer@",
+    "uuid": "@string@",
     "companyName": "Wayland Corp",
     "taxIdentifier": "345",
     "phoneNumber": "123456789",

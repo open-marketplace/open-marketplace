@@ -9,8 +9,10 @@
         <collectionOperations>
             <collectionOperation name="shop_account_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="validation_groups">
+                    <attribute>ApiUploadVendorImage</attribute>
+                </attribute>
                 <attribute name="path">/shop/account/vendor_images</attribute>
-                <attribute name="deserialize">false</attribute>
                 <attribute name="openapi_context">
                     <attribute name="requestBody">
                         <attribute name="content">
@@ -43,7 +45,7 @@
         <itemOperations>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/vendor_images/{id}</attribute>
+                <attribute name="path">/shop/vendor_images/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:vendor_image:read</attribute>
                 </attribute>
@@ -52,11 +54,12 @@
             <itemOperation name="shop_account_delete">
                 <attribute name="security">is_granted("VENDOR_IMAGE_DELETE", object)</attribute>
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/shop/account/vendor_images/{id}</attribute>
+                <attribute name="path">/shop/account/vendor_images/{uuid}</attribute>
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" identifier="false" writable="false" />
+        <property name="uuid" identifier="true" writable="false" />
         <property name="path" required="true" />
         <property name="owner" required="true" />
     </resource>

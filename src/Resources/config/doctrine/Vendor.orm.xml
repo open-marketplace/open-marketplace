@@ -8,6 +8,8 @@
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+
+        <field name="uuid" type="uuid" />
         <field name="companyName" column="company_name" type="text" />
         <field name="taxIdentifier" column="tax_identifier" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />

@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class UploadVendorImage implements UploadVendorImageInterface
 {
-    private ?UploadedFile $file;
+    private ?UploadedFile $file = null;
 
-    private VendorInterface $owner;
+    private ?VendorInterface $owner = null;
 
     public function getFile(): ?UploadedFile
     {
@@ -40,8 +40,3 @@ final class UploadVendorImage implements UploadVendorImageInterface
         $this->owner = $owner;
     }
 }
-
-
-
-
-

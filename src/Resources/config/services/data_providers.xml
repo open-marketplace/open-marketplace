@@ -6,7 +6,7 @@
 >
     <services>
         <service class="BitBag\OpenMarketplace\Api\DataProvider\VendorAccountItemDataProvider"
-                 id="bitbag.open_marketplace.api.data_provider.vendor_account_item_data_provider">
+                 id="bitbag.open_marketplace.api.data_provider.vendor_account_item">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <argument type="service" id="open_marketplace.repository.vendor_repository" />
             <tag name="api_platform.item_data_provider" />

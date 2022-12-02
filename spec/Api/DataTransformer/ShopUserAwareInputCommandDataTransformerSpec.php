@@ -33,7 +33,7 @@ final class ShopUserAwareInputCommandDataTransformerSpec extends ObjectBehavior
         $this->shouldImplement(CommandDataTransformerInterface::class);
     }
 
-    public function is_supports_shop_user_aware_interface(
+    public function it_supports_shop_user_aware_interface(
         ShopUserAwareInterface $shopUserAware
     ): void {
         $this->supportsTransformation($shopUserAware)->shouldReturn(true);

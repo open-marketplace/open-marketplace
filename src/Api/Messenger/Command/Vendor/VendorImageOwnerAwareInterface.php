@@ -12,8 +12,9 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 
-interface VendorImageOwnerAwareInterface
+interface VendorImageOwnerAwareInterface extends CommandAwareDataTransformerInterface
 {
     public function getOwner(): ?VendorInterface;
 

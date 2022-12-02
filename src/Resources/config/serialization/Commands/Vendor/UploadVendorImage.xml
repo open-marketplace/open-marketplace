@@ -3,8 +3,5 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImage">
-        <attribute name="file">
-            <group>shop_account:vendor_image:create</group>
-        </attribute>
     </class>
 </serializer>

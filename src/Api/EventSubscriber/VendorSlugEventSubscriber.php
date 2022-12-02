@@ -49,7 +49,6 @@ final class VendorSlugEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-
         $method = $event->getRequest()->getMethod();
         if (!in_array($method, [Request::METHOD_POST, Request::METHOD_PUT], true)) {
             return;

@@ -11,9 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
+use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-interface VendorImageFileAwareInterface
+interface VendorImageFileAwareInterface extends CommandAwareDataTransformerInterface
 {
     public function getFile(): ?UploadedFile;
 
