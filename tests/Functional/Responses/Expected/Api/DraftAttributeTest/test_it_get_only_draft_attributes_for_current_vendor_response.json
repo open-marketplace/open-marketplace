@@ -6,7 +6,7 @@
         {
             "@id": "\/api\/v2\/shop\/account\/draft-attributes\/@integer@",
             "@type": "DraftAttribute",
-            "vendor": "\/api\/v2\/shop\/vendors\/@integer@",
+            "vendor": "\/api\/v2\/shop\/vendors\/@string@",
             "id": "@integer@",
             "code": "attribute_bruce_1",
             "type": "text",

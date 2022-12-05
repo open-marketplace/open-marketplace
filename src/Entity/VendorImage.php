@@ -11,9 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity;
 
-class VendorImage implements VendorImageInterface
+use Ramsey\Uuid\UuidInterface;
+
+class VendorImage implements VendorImageInterface, UuidAwareInterface
 {
     protected ?int $id;
+
+    protected ?UuidInterface $uuid = null;
 
     protected ?\SplFileInfo $file = null;
 
@@ -24,6 +28,16 @@ class VendorImage implements VendorImageInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 
     public function getFile(): ?\SplFileInfo

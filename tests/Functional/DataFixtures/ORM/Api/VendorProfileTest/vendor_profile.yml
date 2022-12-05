@@ -95,3 +95,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_address_peter'
         slug: 'Weyland-Corp'
         description: 'description'
+BitBag\OpenMarketplace\Entity\VendorImage:
+    vendor_image_peter:
+        owner: "@vendor_peter"
+        path: "/dummy/file/path"

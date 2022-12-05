@@ -9,8 +9,8 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Api\Provider\VendorProvider"
-                 id="open_marketplace.api.provider.vendor">
-            <argument type="service" id="open_marketplace.factory.vendor_factory" />
+                 id="bitbag.open_marketplace.api.provider.vendor">
+            <argument type="service" id="bitbag.open_marketplace.factory.vendor" />
         </service>
 
     </services>

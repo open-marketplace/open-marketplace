@@ -193,7 +193,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 

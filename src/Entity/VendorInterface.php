@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
 use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
 
-interface VendorInterface extends VendorProfileInterface
+interface VendorInterface extends VendorProfileInterface, UuidAwareInterface
 {
     public const STATUS_UNVERIFIED = 'unverified';
 
