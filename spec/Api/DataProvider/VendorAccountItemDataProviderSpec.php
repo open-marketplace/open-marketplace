@@ -19,6 +19,7 @@ use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use PhpSpec\ObjectBehavior;
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -46,16 +47,17 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
     public function it_provides_vendor_for_not_account_operation_and_without_user_context(
         UserContextInterface $userContext,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository
+        VendorRepositoryInterface $vendorRepository,
+        UuidInterface $uuid
     ): void {
         $userContext->getUser()->willReturn(null);
 
-        $vendorRepository->find(1)->willReturn($vendor);
+        $vendorRepository->findOneBy(['uuid' => $uuid])->willReturn($vendor);
 
         $this
             ->getItem(
                 VendorInterface::class,
-                1,
+                $uuid,
                 Request::METHOD_GET,
                 [],
             )
@@ -67,17 +69,18 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository
+        VendorRepositoryInterface $vendorRepository,
+        UuidInterface $uuid
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getVendor()->willReturn(null);
 
-        $vendorRepository->find(1)->willReturn($vendor);
+        $vendorRepository->findOneBy(['uuid' => $uuid])->willReturn($vendor);
 
         $this
             ->getItem(
                 VendorInterface::class,
-                1,
+                $uuid,
                 Request::METHOD_GET,
                 [],
             )
@@ -89,18 +92,19 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository
+        VendorRepositoryInterface $vendorRepository,
+        UuidInterface $uuid
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getVendor()->willReturn($vendor);
-        $vendor->getId()->willReturn(1);
+        $vendor->getUuid()->willReturn($uuid);
 
-        $vendorRepository->find(1)->willReturn($vendor);
+        $vendorRepository->findOneBy(['uuid' => $uuid])->willReturn($vendor);
 
         $this
             ->getItem(
                 VendorInterface::class,
-                1,
+                $uuid,
                 Request::METHOD_GET,
                 [],
             )
@@ -110,17 +114,18 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
     public function it_provides_null_for_account_operation_and_shop_user_without_vendor_context(
         UserContextInterface $userContext,
         ShopUserInterface $user,
-        VendorRepositoryInterface $vendorRepository
+        VendorRepositoryInterface $vendorRepository,
+        UuidInterface $uuid
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getVendor()->willReturn(null);
 
-        $vendorRepository->find(1)->shouldNotBeCalled();
+        $vendorRepository->findOneBy(['uuid' => $uuid])->shouldNotBeCalled();
 
         $this
             ->getItem(
                 VendorInterface::class,
-                1,
+                $uuid,
                 'shop_account_get',
                 [],
             )
@@ -132,18 +137,20 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository
+        VendorRepositoryInterface $vendorRepository,
+        UuidInterface $uuid
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getVendor()->willReturn($vendor);
-        $vendor->getId()->willReturn(1);
+        $vendor->getUuid()->willReturn($uuid);
+        $uuid->equals($uuid)->willReturn(false);
 
-        $vendorRepository->find(2)->shouldNotBeCalled();
+        $vendorRepository->findOneBy(['uuid' => $uuid])->shouldNotBeCalled();
 
         $this
             ->getItem(
                 VendorInterface::class,
-                2,
+                $uuid,
                 'shop_account_get',
                 [],
             )
@@ -155,18 +162,20 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository
+        VendorRepositoryInterface $vendorRepository,
+        UuidInterface $uuid
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getVendor()->willReturn($vendor);
-        $vendor->getId()->willReturn(1);
+        $vendor->getUuid()->willReturn($uuid);
+        $uuid->equals($uuid)->willReturn(true);
 
-        $vendorRepository->find('1')->willReturn($vendor);
+        $vendorRepository->findOneBy(['uuid' => $uuid])->willReturn($vendor);
 
         $this
             ->getItem(
                 VendorInterface::class,
-                1,
+                $uuid,
                 'shop_account_get',
                 [],
             )

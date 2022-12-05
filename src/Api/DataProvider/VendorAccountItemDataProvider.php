@@ -16,6 +16,7 @@ use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 
 final class VendorAccountItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
@@ -32,6 +33,9 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
         $this->vendorRepository = $vendorRepository;
     }
 
+    /**
+     * @param UuidInterface $id
+     */
     public function getItem(
         string $resourceClass,
         $id,
@@ -39,18 +43,11 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
         array $context = []
     ) {
         if (!is_string($operationName) || !str_starts_with($operationName, 'shop_account')) {
-            return $this->vendorRepository->find($id);
+            return $this->vendorRepository->findOneBy(['uuid' => $id]);
         }
 
-        /** @var ShopUserInterface|null $user */
-        $user = $this->userContext->getUser();
-
-        if (
-            $user instanceof ShopUserInterface &&
-            null !== $user->getVendor() &&
-            $id === $user->getVendor()->getId()
-        ) {
-            return $this->vendorRepository->find($id);
+        if ($this->isRequestedByRightVendor($id)) {
+            return $this->vendorRepository->findOneBy(['uuid' => $id]);
         }
 
         return null;
@@ -62,5 +59,24 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
         array $context = []
     ): bool {
         return is_a($resourceClass, VendorInterface::class, true);
+    }
+
+    public function isRequestedByRightVendor(UuidInterface $uuid): bool
+    {
+        /** @var ShopUserInterface|null $user */
+        $user = $this->userContext->getUser();
+
+        if (!$user instanceof ShopUserInterface) {
+            return false;
+        }
+
+        if (null === $user->getVendor()) {
+            return false;
+        }
+
+        /** @var UuidInterface $userVendorUuid */
+        $userVendorUuid = $user->getVendor()->getUuid();
+
+        return $uuid->equals($userVendorUuid);
     }
 }

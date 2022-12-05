@@ -7,5 +7,8 @@
                  id="open_marketplace.service.vendor_slug_generator" >
             <argument key="$vendorRepository" type="service" id="open_marketplace.repository.vendor_repository" />
         </service>
+        <service class="Ramsey\Uuid\Doctrine\UuidGenerator"
+                 id="bitbag.open_marketplace.ramsey.uuid_doctrine.uuid_generator" >
+        </service>
     </services>
 </container>

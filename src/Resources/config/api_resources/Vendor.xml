@@ -32,7 +32,7 @@
         <itemOperations>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/vendors/{id}</attribute>
+                <attribute name="path">/shop/vendors/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:vendor:read</attribute>
                 </attribute>
@@ -40,7 +40,7 @@
 
             <itemOperation name="shop_account_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendors/{id}</attribute>
+                <attribute name="path">/shop/account/vendors/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop_account:vendor:read</attribute>
                 </attribute>
@@ -52,7 +52,7 @@
                     <attribute>Default</attribute>
                     <attribute>VendorUser</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/vendors/{id}</attribute>
+                <attribute name="path">/shop/account/vendors/{uuid}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop_account:vendor:update</attribute>
                 </attribute>
@@ -61,5 +61,8 @@
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="uuid" identifier="true" writable="false" />
     </resource>
 </resources>

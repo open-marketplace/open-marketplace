@@ -8,7 +8,7 @@
     <a href="https://github.com/BitBagCommerce/OpenMarketplace/actions">
         <img src="https://img.shields.io/github/workflow/status/BitBagCommerce/OpenMarketplace/Build" alt="Build">
     </a>
-    <a href="https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1ij1t41wx-HfAR6~URm3OAcqm0jc423Q">
+    <a href="https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1ks2kfsqe-w_J2uqgTMNEAYQS0xa8Q8Q">
         <img src="https://img.shields.io/badge/chat-on%20slack-e51670.svg" alt="Chat">
     </a>
     <a href="https://bitbag.io/contact-us">

@@ -37,9 +37,9 @@
             "id": "@integer@",
             "method": "\/api\/v2\/shop\/shipping-methods\/ups",
             "vendor": {
-                "@id": "\/api\/v2\/shop\/vendors\/@integer@",
+                "@id": "\/api\/v2\/shop\/vendors\/@string@",
                 "@type": "Vendor",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "slug": "oliver-queen-company"
             }
         },
@@ -49,9 +49,9 @@
             "id": "@integer@",
             "method": "\/api\/v2\/shop\/shipping-methods\/ups",
             "vendor": {
-                "@id": "\/api\/v2\/shop\/vendors\/@integer@",
+                "@id": "\/api\/v2\/shop\/vendors\/@string@",
                 "@type": "Vendor",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "slug": "bruce-wayne-company"
             }
         }
