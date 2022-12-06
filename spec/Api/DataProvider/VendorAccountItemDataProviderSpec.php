@@ -32,7 +32,7 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         $this->beConstructedWith($userContext, $vendorRepository);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(VendorAccountItemDataProvider::class);
         $this->shouldImplement(RestrictedDataProviderInterface::class);
