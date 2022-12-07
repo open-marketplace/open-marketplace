@@ -12,7 +12,7 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorFactory"
-                 id="open_marketplace.factory.vendor_factory">
+                 id="bitbag.open_marketplace.factory.vendor">
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileFactory"

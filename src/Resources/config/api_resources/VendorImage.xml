@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%bitbag_open_marketplace.model.vendor_image.class%" shortName="VendorImage">
+
+        <collectionOperations>
+            <collectionOperation name="shop_account_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="validation_groups">
+                    <attribute>ApiUploadVendorImage</attribute>
+                </attribute>
+                <attribute name="path">/shop/account/vendor_images</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="multipart/form-data">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="file">
+                                            <attribute name="type">string</attribute>
+                                            <attribute name="format">binary</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop_account:vendor_image:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:vendor_image:read</attribute>
+                </attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImage</attribute>
+                <attribute name="status">201</attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/vendor_images/{uuid}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:vendor_image:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_account_delete">
+                <attribute name="security">is_granted("VENDOR_IMAGE_DELETE", object)</attribute>
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shop/account/vendor_images/{uuid}</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="uuid" identifier="true" writable="false" />
+        <property name="path" required="true" />
+        <property name="owner" required="true" />
+    </resource>
+</resources>

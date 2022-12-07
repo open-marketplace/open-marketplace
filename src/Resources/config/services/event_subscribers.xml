@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service class="BitBag\OpenMarketplace\Api\EventSubscriber\VendorSlugEventSubscriber"
+                 id="bitbag.open_marketplace.api.event_subscriber.vendor_slug">
+            <argument type="service" id="open_marketplace.service.vendor_slug_generator" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Doctrine\ORM\Subscriber\UuidSubscriber"
+                 id="bitbag.open_marketplace.doctrine.orm.subscriber.uuid">
+            <argument type="service" id="bitbag.open_marketplace.ramsey.uuid_doctrine.uuid_generator" />
+            <tag name="doctrine.event_subscriber" />
+        </service>
+    </services>
+</container>

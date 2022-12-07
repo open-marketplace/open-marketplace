@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "file: This field cannot be empty",
+    "violations": [
+        {
+            "propertyPath": "file",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        }
+    ]
+}

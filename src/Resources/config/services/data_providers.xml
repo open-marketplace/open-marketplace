@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service class="BitBag\OpenMarketplace\Api\DataProvider\VendorAccountItemDataProvider"
+                 id="bitbag.open_marketplace.api.data_provider.vendor_account_item">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="open_marketplace.repository.vendor_repository" />
+            <tag name="api_platform.item_data_provider" />
+        </service>
+    </services>
+</container>

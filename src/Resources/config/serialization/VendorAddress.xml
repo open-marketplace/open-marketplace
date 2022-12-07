@@ -6,20 +6,24 @@
 >
     <class name="BitBag\OpenMarketplace\Entity\VendorAddress">
         <attribute name="country">
-            <group>shop:vendor:create</group>
-            <group>shop:vendor:read</group>
+            <group>shop_account:vendor:create</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
         <attribute name="city">
-            <group>shop:vendor:create</group>
-            <group>shop:vendor:read</group>
+            <group>shop_account:vendor:create</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
         <attribute name="street">
-            <group>shop:vendor:create</group>
-            <group>shop:vendor:read</group>
+            <group>shop_account:vendor:create</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
         <attribute name="postalCode">
-            <group>shop:vendor:create</group>
-            <group>shop:vendor:read</group>
+            <group>shop_account:vendor:create</group>
+            <group>shop_account:vendor:read</group>
+            <group>shop_account:vendor:update</group>
         </attribute>
     </class>
 </serializer>

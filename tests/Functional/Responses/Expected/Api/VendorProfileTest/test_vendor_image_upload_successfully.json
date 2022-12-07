@@ -1,0 +1,12 @@
+{
+    "@context": "\/api\/v2\/contexts\/VendorImage",
+    "@id": "\/api\/v2\/shop\/vendor_images\/@string@",
+    "@type": "VendorImage",
+    "uuid": "@string@",
+    "path": "@string@\/avatar.png",
+    "owner": {
+        "@id": "\/api\/v2\/shop\/vendors\/@string@",
+        "@type": "Vendor",
+        "uuid": "@string@"
+    }
+}

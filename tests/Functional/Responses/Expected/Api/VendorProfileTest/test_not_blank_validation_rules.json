@@ -1,0 +1,50 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "taxIdentifier: This field cannot be empty\ntaxIdentifier: Required length: 3 characters.\ncompanyName: This field cannot be empty\ncompanyName: Required length: 3 characters.\nphoneNumber: This field cannot be empty\nphoneNumber: Required length: 3 characters.\ndescription: This field cannot be empty\ndescription: Required length: 3 characters.",
+
+
+    "violations": [
+        {
+            "propertyPath": "taxIdentifier",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "taxIdentifier",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "companyName",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "companyName",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "phoneNumber",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "phoneNumber",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "description",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "description",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        }
+    ]
+}

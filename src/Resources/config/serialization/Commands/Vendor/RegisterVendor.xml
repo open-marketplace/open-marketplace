@@ -4,19 +4,19 @@
 >
     <class name="BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor">
         <attribute name="companyName">
-            <group>shop:vendor:create</group>
+            <group>shop_account:vendor:create</group>
         </attribute>
         <attribute name="taxIdentifier">
-            <group>shop:vendor:create</group>
+            <group>shop_account:vendor:create</group>
         </attribute>
         <attribute name="phoneNumber">
-            <group>shop:vendor:create</group>
+            <group>shop_account:vendor:create</group>
         </attribute>
         <attribute name="description">
-            <group>shop:vendor:create</group>
+            <group>shop_account:vendor:create</group>
         </attribute>
         <attribute name="vendorAddress">
-            <group>shop:vendor:create</group>
+            <group>shop_account:vendor:create</group>
         </attribute>
     </class>
 </serializer>

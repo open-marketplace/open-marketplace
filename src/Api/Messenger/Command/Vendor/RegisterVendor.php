@@ -16,46 +16,19 @@ use BitBag\OpenMarketplace\Entity\VendorAddress;
 
 final class RegisterVendor implements RegisterVendorInterface
 {
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    private $companyName;
+    private string $companyName;
 
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    private $taxIdentifier;
+    private string $taxIdentifier;
 
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    private $phoneNumber;
+    private string $phoneNumber;
 
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    private $description;
+    private string $description;
 
-    /**
-     * @psalm-immutable
-     *
-     * @var VendorAddress
-     */
-    private $vendorAddress;
+    private VendorAddress $vendorAddress;
 
-    /** @var string|null */
-    private $slug;
+    private ?string $slug = null;
 
-    /** @var ShopUserInterface|null */
-    private $shopUser;
+    private ?ShopUserInterface $shopUser = null;
 
     public function __construct(
         string $companyName,
