@@ -12,6 +12,9 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation;
+use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslationInterface;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\OpenMarketplace\Functional\FunctionalTestCase;
@@ -24,6 +27,7 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $this->entityManager = static::getContainer()->get('doctrine.orm.entity_manager');
         $this->draftAttributeRepository = $this->entityManager->getRepository(DraftAttribute::class);
+        $this->draftAttributeTranslationRepository = $this->entityManager->getRepository(DraftAttributeTranslation::class);
 
         $this->loadFixturesFromFile('Api/DraftAttributeTest/draft_attribute.yml');
     }
@@ -41,11 +45,12 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }
@@ -54,11 +59,12 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }
@@ -67,11 +73,12 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/DraftAttributeTest/test_it_get_attribute_by_owner_vendor_response', Response::HTTP_OK);
     }
@@ -87,7 +94,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'position' => 1,
             'configuration' => [],
             'translations' => [
-                [
+                'en_US' => [
                     'locale' => 'en_US',
                     'name' => 'test',
                 ],
@@ -109,7 +116,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'position' => 1,
             'configuration' => [],
             'translations' => [
-                [
+                'en_US' => [
                     'locale' => 'en_US',
                     'name' => 'test',
                 ],
@@ -129,7 +136,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'type' => '',
             'storageType' => '',
             'translations' => [
-                [
+                'en_US' => [
                     'locale' => '',
                     'name' => '',
                 ],
@@ -144,11 +151,12 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
             'configuration' => [
                 'min' => 2,
             ],
@@ -162,11 +170,12 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
             'configuration' => [
                 'min' => 2,
             ],
@@ -180,11 +189,12 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
             'configuration' => [
                 'min' => 2,
             ],
@@ -194,15 +204,64 @@ final class DraftAttributeTest extends FunctionalTestCase
         $this->assertResponse($response, 'Api/DraftAttributeTest/test_it_update_attribute_by_vendor_owner_response', Response::HTTP_OK);
     }
 
+    public function test_it_update_attribute_translation_by_vendor_owner(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var DraftAttributeInterface $draftAttribute */
+        $draftAttribute = $this->draftAttributeRepository->findOneBy([
+            'code' => 'attribute_bruce_1',
+        ]);
+
+        /** @var DraftAttributeTranslationInterface $draftAttributeTranslation */
+        $draftAttributeTranslation = $this->draftAttributeTranslationRepository->findOneBy([
+            'translatable' => $draftAttribute,
+            'locale' => 'en_US',
+            'name' => 'attribute_bruce_1_us',
+        ]);
+
+        $this->client->request('PUT', '/api/v2/shop/account/draft-attribute-translations/' . $draftAttributeTranslation->getUuid()->toString(), [], [], $header, json_encode([
+            'name' => 'changed translation name',
+        ]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/DraftAttributeTest/test_it_update_attribute_translation_by_vendor_owner_response', Response::HTTP_OK);
+    }
+
+    public function test_it_prevent_update_attribute_translation_by_other_vendor(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+
+        /** @var DraftAttributeInterface $draftAttribute */
+        $draftAttribute = $this->draftAttributeRepository->findOneBy([
+            'code' => 'attribute_bruce_1',
+        ]);
+
+        /** @var DraftAttributeTranslationInterface $draftAttributeTranslation */
+        $draftAttributeTranslation = $this->draftAttributeTranslationRepository->findOneBy([
+            'translatable' => $draftAttribute,
+            'locale' => 'en_US',
+            'name' => 'attribute_bruce_1_us',
+        ]);
+
+        $this->client->request('PUT', '/api/v2/shop/account/draft-attribute-translations/' . $draftAttributeTranslation->getUuid()->toString(), [], [], $header, json_encode([
+            'name' => 'changed translation name',
+        ]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
+    }
+
     public function test_it_prevents_delete_attribute_by_user_without_vendor_context(): void
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('DELETE', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header);
+        $this->client->request('DELETE', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
@@ -212,11 +271,12 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('DELETE', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header);
+        $this->client->request('DELETE', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
@@ -226,11 +286,12 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
+        /** @var DraftAttributeInterface $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('DELETE', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(), [], [], $header);
+        $this->client->request('DELETE', '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
