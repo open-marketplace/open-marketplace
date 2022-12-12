@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%open_marketplace.model.product_draft.class%" shortName="ProductDraft">
+        <collectionOperations>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="shop_account_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/product-drafts/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:product_draft:read</attribute>
+                </attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_READ", object)</attribute>
+            </itemOperation>
+        </itemOperations>
+    </resource>
+</resources>

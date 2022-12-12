@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -22,39 +23,24 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 final class CreateProductListing implements CreateProductListingInterface
 {
-    /**
-     * @var string
-     */
-    private $code;
+    private string $code;
 
-    /**
-     * @var array<int|string, ImageInterface>
-     */
-    private $images;
+    /** @var array<int|string, ImageInterface> */
+    private array $images;
 
-    /**
-     * @var array<int|string, ProductTranslationInterface>
-     */
-    private $translations;
+    /** @var array<int|string, ProductTranslationInterface> */
+    private array $translations;
 
-    /** @var array<int|string, ProductListingPriceInterface>
-     */
-    private $productListingPrice;
+    /** @var array<int|string, ProductListingPriceInterface> */
+    private array $productListingPrice;
 
-    /**
-     * @var array<int, AttributeValueInterface>
-     */
-    protected $attributes;
+    /** @var array<int, AttributeValueInterface> */
+    protected array $attributes;
 
-    /**
-     * @var TaxonInterface|null
-     */
-    protected $mainTaxon;
+    protected ?TaxonInterface $mainTaxon;
 
-    /**
-     * @var array<array-key, ProductDraftTaxonInterface>
-     */
-    protected $productDraftTaxons;
+    /** @var array<array-key, ProductDraftTaxonInterface> */
+    protected array $productDraftTaxons;
 
     private VendorInterface $vendor;
 
@@ -89,9 +75,7 @@ final class CreateProductListing implements CreateProductListingInterface
         return $this->images;
     }
 
-    /**
-     * @return array<int|string, ProductTranslationInterface>
-     */
+    /** @return array<int|string, ProductTranslationInterface> */
     public function getTranslations(): array
     {
         return $this->translations;

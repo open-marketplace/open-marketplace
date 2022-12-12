@@ -20,9 +20,50 @@
                 </attribute>
                 <attribute name="security_post_denormalize">is_granted("VENDOR_AWARE_OBJECT_CREATE", object)</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListing</attribute>
+                <attribute name="input">BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft</attribute>
                 <attribute name="status">201</attribute>
             </collectionOperation>
+            <collectionOperation name="shop_account_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/product-listings</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:product_listing:read</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="shop_account_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/product-listings/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:product_listing:read</attribute>
+                </attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_READ", object)</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_account_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="validation_groups">
+                    <attribute>ApiProductListing</attribute>
+                </attribute>
+                <attribute name="path">/shop/account/product-listings/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop_account:product_listing:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop_account:product_listing:read</attribute>
+                </attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_UPDATE", object)</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListing</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_account_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shop/account/product-listings/{id}</attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_DELETE", object)</attribute>
+            </itemOperation>
+        </itemOperations>
     </resource>
 </resources>

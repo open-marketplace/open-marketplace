@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -40,44 +41,47 @@ final class CreateProductListingHandler
         $this->imageUploader = $imageUploader;
     }
 
-    public function __invoke(CreateProductListingInterface $command): ProductListingInterface
+    public function __invoke(ProductDraftInterface $productDraft): ProductListingInterface
     {
-        $productDraft = $this->productDraftFactory->createNew();
+//        /** @var ProductDraftInterface $productDraft */
+//        $productDraft = $this->productDraftFactory->createNew();
+//
+//        $productDraft->setCode($command->getCode());
+//
+//        foreach ($command->getImages() as $productImage) {
+//            $productDraft->addImage($productImage);
+//            $productImage->setOwner($productDraft);
+//            $this->imageUploader->upload($productImage);
+//        }
+//
+//        foreach ($productDraft->getTranslations() as $translation) {
+//            $productDraft->addTranslation($translation);
+//        }
+//
+//        foreach ($command->getProductListingPrice() as $price) {
+//            $productDraft->addProductListingPrice($price);
+//        }
+//
+//        foreach ($command->getProductListingPrice() as $price) {
+//            $productDraft->addProductListingPrice($price);
+//        }
+//
+//        foreach ($command->getAttributes() as $attribute) {
+//            $productDraft->addAttribute($attribute);
+//            $attribute->setSubject($productDraft);
+//        }
+//
+//        $productDraft->setMainTaxon($command->getMainTaxon());
+//
+//        foreach ($command->getProductDraftTaxons() as $productDraftTaxon) {
+//            $productDraft->addProductDraftTaxon($productDraftTaxon);
+//        }
 
-        $productDraft->setCode($command->getCode());
+        $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $productDraft->getVendor());
+        $productListing = $productDraft->getProductListing();
 
-        foreach ($command->getImages() as $productImage) {
-            $productDraft->addImage($productImage);
-            $productImage->setOwner($productDraft);
-            $this->imageUploader->upload($productImage);
-        }
-
-        foreach ($command->getTranslations() as $translation) {
-            $productDraft->addTranslations($translation);
-        }
-
-        foreach ($command->getProductListingPrice() as $price) {
-            $productDraft->addProductListingPrice($price);
-        }
-
-        foreach ($command->getProductListingPrice() as $price) {
-            $productDraft->addProductListingPrice($price);
-        }
-
-        foreach ($command->getAttributes() as $attribute) {
-            $productDraft->addAttribute($attribute);
-            $attribute->setSubject($productDraft);
-        }
-
-        $productDraft->setMainTaxon($command->getMainTaxon());
-
-        foreach ($command->getProductDraftTaxons() as $productDraftTaxon) {
-            $productDraft->addProductDraftTaxon($productDraftTaxon);
-        }
-
-        $productListing = $this->productListingFromDraftFactory->createNew($productDraft, $command->getVendor());
-
-        $this->manager->persist($productDraft);
         $this->manager->persist($productListing);
+
+        return $productListing;
     }
 }

@@ -21,5 +21,14 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+        <service class="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\CreateProductListingHandler"
+                 id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.create_product_listing">
+            <argument type="service" id="bitbag.open_marketplace.factory.product_draft" />
+            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="sylius.image_uploader" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
     </services>
 </container>

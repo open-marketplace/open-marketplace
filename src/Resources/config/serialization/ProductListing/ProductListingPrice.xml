@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice">
+        <attribute name="id">
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="price">
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="originalPrice">
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="minimumPrice">
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="channelCode">
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+    </class>
+</serializer>

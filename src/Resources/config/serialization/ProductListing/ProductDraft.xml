@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft">
+        <attribute name="id">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="isVerified">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="status">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="verifiedAt">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="publishedAt">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="images">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="translations">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="productListingPrice">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="attributes">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="mainTaxon">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+        <attribute name="productDraftTaxons">
+            <group>shop_account:product_draft:read</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:create</group>
+        </attribute>
+    </class>
+</serializer>

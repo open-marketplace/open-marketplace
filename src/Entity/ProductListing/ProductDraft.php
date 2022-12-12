@@ -149,7 +149,13 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         return $this->translations;
     }
 
-    public function addTranslations(ProductTranslationInterface $translation): void
+    /** @param Collection<int|string, ProductTranslationInterface> $translations */
+    public function setTranslations(Collection $translations): void
+    {
+        $this->translations = $translations;
+    }
+
+    public function addTranslation(ProductTranslationInterface $translation): void
     {
         $this->translations->add($translation);
     }
@@ -164,12 +170,12 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         $this->productListingPrice->add($productListingPrice);
     }
 
-    public function getVendor(): ?VendorInterface
+    public function getVendor(): VendorInterface
     {
         return $this->vendor;
     }
 
-    public function setVendor(?VendorInterface $vendor): void
+    public function setVendor(VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
     }
@@ -199,7 +205,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         ++$this->versionNumber;
     }
 
-    public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void
+    public function addTranslationWithKey(ProductTranslationInterface $translation, string $key): void
     {
         $this->translations->set($key, $translation);
     }

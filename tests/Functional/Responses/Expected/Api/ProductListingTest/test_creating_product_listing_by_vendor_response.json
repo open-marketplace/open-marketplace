@@ -1,0 +1,24 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductListing",
+    "@id": "\/api\/v2\/shop\/account\/product-listings\/1533",
+    "@type": "ProductListing",
+    "id": 1533,
+    "code": "",
+    "enabled": true,
+    "verificationStatus": "created",
+    "latestDraft": {
+        "@id": "\/api\/v2\/shop\/account\/product-drafts\/1863",
+        "@type": "ProductDraft",
+        "id": 1863,
+        "code": "",
+        "status": "created",
+        "images": [],
+        "translations": [],
+        "productListingPrice": [],
+        "attributes": [],
+        "mainTaxon": null,
+        "productDraftTaxons": []
+    },
+    "product": null,
+    "lastVerifiedAt": null
+}

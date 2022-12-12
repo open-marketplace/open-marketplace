@@ -18,5 +18,10 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
+        <service class="BitBag\OpenMarketplace\Api\DataTransformer\ResourceIdAwareCommandDataTransformer"
+                 id="bitbag.open_marketplace.api.data_transformer.resource_id_aware_command">
+            <argument type="service" id="request_stack" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
     </services>
 </container>

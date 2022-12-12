@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation">
+        <attribute name="id">
+            <group>shop:draft_product_translation:read</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="locale">
+            <group>shop:draft_product_translation:read</group>
+            <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="name">
+            <group>shop:draft_product_translation:read</group>
+            <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="slug">
+            <group>shop:draft_product_translation:read</group>
+            <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="description">
+            <group>shop:draft_product_translation:read</group>
+            <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="metaKeywords">
+            <group>shop:draft_product_translation:read</group>
+            <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="metaDescription">
+            <group>shop:draft_product_translation:read</group>
+            <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+        <attribute name="shortDescription">
+            <group>shop:draft_product_translation:read</group>
+            <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+        </attribute>
+    </class>
+</serializer>
