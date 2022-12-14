@@ -10,6 +10,11 @@
             <argument type="service" id="open_marketplace.service.vendor_slug_generator" />
             <tag name="kernel.event_subscriber" />
         </service>
+        <service class="BitBag\OpenMarketplace\Api\EventSubscriber\VendorAwareEventSubscriber"
+                 id="bitbag.open_marketplace.api.event_subscriber.vendor_aware">
+            <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />
+            <tag name="kernel.event_subscriber" />
+        </service>
         <service class="BitBag\OpenMarketplace\Doctrine\ORM\Subscriber\UuidSubscriber"
                  id="bitbag.open_marketplace.doctrine.orm.subscriber.uuid">
             <argument type="service" id="bitbag.open_marketplace.ramsey.uuid_doctrine.uuid_generator" />

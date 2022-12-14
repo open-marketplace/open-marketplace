@@ -1,0 +1,28 @@
+{
+    "@context": "\/api\/v2\/contexts\/DraftAttribute",
+    "@id": "\/api\/v2\/shop\/account\/draft-attributes",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/account\/draft-attributes\/@string@",
+            "@type": "DraftAttribute",
+            "vendor": "\/api\/v2\/shop\/vendors\/@string@",
+            "uuid": "@string@",
+            "code": "attribute_bruce_1",
+            "type": "text",
+            "configuration": [],
+            "storageType": "text",
+            "position": "@integer@",
+            "translations": {
+                "en_US": {
+                    "@id": "/api/v2/shop/account/draft-attribute-translations/@string@",
+                    "@type": "DraftAttributeTranslation",
+                    "uuid": "@string@",
+                    "name": "attribute_bruce_1_us",
+                    "locale": "en_US"
+                }
+            }
+        }
+    ],
+    "hydra:totalItems": 1
+}

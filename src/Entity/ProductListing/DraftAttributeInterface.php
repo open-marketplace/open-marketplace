@@ -11,16 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
+use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 
-interface DraftAttributeInterface extends AttributeInterface
+interface DraftAttributeInterface extends AttributeInterface, VendorAwareInterface, UuidAwareInterface
 {
-    public function getVendor(): VendorInterface;
-
-    public function setVendor(VendorInterface $vendor): void;
-
     public function getProductAttribute(): ?ProductAttributeInterface;
 
     public function setProductAttribute(?ProductAttributeInterface $productAttribute): void;

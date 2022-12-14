@@ -11,8 +11,20 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Component\Attribute\Model\AttributeTranslation;
 
 class DraftAttributeTranslation extends AttributeTranslation implements DraftAttributeTranslationInterface
 {
+    protected ?UuidInterface $uuid = null;
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
+    }
 }

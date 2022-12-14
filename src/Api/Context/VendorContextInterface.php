@@ -9,14 +9,11 @@
 
 declare(strict_types=1);
 
-namespace %namespace%;
+namespace BitBag\OpenMarketplace\Api\Context;
 
-%imports%
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 
-final class %name% extends ObjectBehavior
+interface VendorContextInterface
 {
-    public function it_is_initializable(): void
-    {
-        $this->shouldHaveType(%subject_class%::class);
-    }
+    public function getVendor(): ?VendorInterface;
 }

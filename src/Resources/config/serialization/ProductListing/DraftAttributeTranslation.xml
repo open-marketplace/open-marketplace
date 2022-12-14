@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation">
+        <attribute name="uuid">
+            <group>shop_account:draft_attribute_translation:read</group>
+            <group>shop_account:draft_attribute:read</group>
+        </attribute>
+        <attribute name="name">
+            <group>shop_account:draft_attribute_translation:read</group>
+            <group>shop_account:draft_attribute_translation:update</group>
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+        </attribute>
+        <attribute name="locale">
+            <group>shop_account:draft_attribute_translation:read</group>
+            <group>shop_account:draft_attribute_translation:update</group>
+            <group>shop_account:draft_attribute:create</group>
+            <group>shop_account:draft_attribute:read</group>
+        </attribute>
+    </class>
+</serializer>
