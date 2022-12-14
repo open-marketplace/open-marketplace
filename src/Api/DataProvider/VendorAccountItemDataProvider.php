@@ -13,23 +13,22 @@ namespace BitBag\OpenMarketplace\Api\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Ramsey\Uuid\UuidInterface;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 
 final class VendorAccountItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    private UserContextInterface $userContext;
+    private VendorContextInterface $vendorContext;
 
     private VendorRepositoryInterface $vendorRepository;
 
     public function __construct(
-        UserContextInterface $userContext,
+        VendorContextInterface $vendorContext,
         VendorRepositoryInterface $vendorRepository
     ) {
-        $this->userContext = $userContext;
+        $this->vendorContext = $vendorContext;
         $this->vendorRepository = $vendorRepository;
     }
 
@@ -63,19 +62,14 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
 
     public function isRequestedByRightVendor(UuidInterface $uuid): bool
     {
-        /** @var ShopUserInterface|null $user */
-        $user = $this->userContext->getUser();
+        $vendor = $this->vendorContext->getVendor();
 
-        if (!$user instanceof ShopUserInterface) {
-            return false;
-        }
-
-        if (null === $user->getVendor()) {
+        if (null === $vendor) {
             return false;
         }
 
         /** @var UuidInterface $userVendorUuid */
-        $userVendorUuid = $user->getVendor()->getUuid();
+        $userVendorUuid = $vendor->getUuid();
 
         return $uuid->equals($userVendorUuid);
     }

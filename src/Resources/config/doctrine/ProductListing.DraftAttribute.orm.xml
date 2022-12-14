@@ -5,6 +5,8 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute" table="bitbag_open_marketplace_draft_attribute">
+        <field name="uuid" type="uuid" />
+
         <attribute-overrides>
             <attribute-override name="code">
                 <field column="code" type="string" unique="false" />

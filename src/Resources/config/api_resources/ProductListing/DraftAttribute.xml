@@ -33,7 +33,7 @@
         <itemOperations>
             <itemOperation name="shop_account_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/draft-attributes/{id}</attribute>
+                <attribute name="path">/shop/account/draft-attributes/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop_account:draft_attribute:read</attribute>
                 </attribute>
@@ -45,7 +45,7 @@
                 <attribute name="validation_groups">
                     <attribute>ApiDraftAttribute</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/draft-attributes/{id}</attribute>
+                <attribute name="path">/shop/account/draft-attributes/{uuid}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop_account:draft_attribute:update</attribute>
                 </attribute>
@@ -57,9 +57,12 @@
 
             <itemOperation name="shop_account_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/shop/account/draft-attributes/{id}</attribute>
+                <attribute name="path">/shop/account/draft-attributes/{uuid}</attribute>
                 <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_DELETE", object)</attribute>
             </itemOperation>
         </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="uuid" identifier="true" writable="false" />
     </resource>
 </resources>

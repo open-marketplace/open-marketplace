@@ -1,0 +1,8 @@
+{
+    "@context": "\/api\/v2\/contexts\/DraftAttributeTranslation",
+    "@id": "\/api\/v2\/shop\/account\/draft-attribute-translations\/@string@",
+    "@type": "DraftAttributeTranslation",
+    "uuid": "@string@",
+    "name": "changed translation name",
+    "locale": "en_US"
+}

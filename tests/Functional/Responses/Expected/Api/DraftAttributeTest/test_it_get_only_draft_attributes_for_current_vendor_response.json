@@ -4,10 +4,10 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/shop\/account\/draft-attributes\/@integer@",
+            "@id": "\/api\/v2\/shop\/account\/draft-attributes\/@string@",
             "@type": "DraftAttribute",
             "vendor": "\/api\/v2\/shop\/vendors\/@string@",
-            "id": "@integer@",
+            "uuid": "@string@",
             "code": "attribute_bruce_1",
             "type": "text",
             "configuration": [],
@@ -15,8 +15,9 @@
             "position": "@integer@",
             "translations": {
                 "en_US": {
+                    "@id": "/api/v2/shop/account/draft-attribute-translations/@string@",
                     "@type": "DraftAttributeTranslation",
-                    "id": "@integer@",
+                    "uuid": "@string@",
                     "name": "attribute_bruce_1_us",
                     "locale": "en_US"
                 }

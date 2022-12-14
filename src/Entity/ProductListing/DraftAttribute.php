@@ -12,11 +12,14 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 
 class DraftAttribute extends Attribute implements DraftAttributeInterface
 {
+    protected ?UuidInterface $uuid = null;
+
     protected VendorInterface $vendor;
 
     protected ?ProductAttributeInterface $productAttribute = null;
@@ -39,5 +42,15 @@ class DraftAttribute extends Attribute implements DraftAttributeInterface
     public function setVendor(VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
+    }
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 }
