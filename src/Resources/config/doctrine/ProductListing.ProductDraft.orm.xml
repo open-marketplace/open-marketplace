@@ -42,7 +42,7 @@
             </cascade>
         </one-to-many>
 
-        <one-to-many field="productListingPrice" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
+        <one-to-many field="productListingPrices" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
             <cascade>
                 <cascade-persist/>
             </cascade>

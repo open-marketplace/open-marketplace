@@ -9,10 +9,14 @@
             <group>shop_account:product_listing:read</group>
         </attribute>
         <attribute name="taxon">
+            <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="position">
+            <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
     </class>
 </serializer>

@@ -11,101 +11,43 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 final class UpdateProductListing implements UpdateProductListingInterface
 {
-    private ?string $listingId;
+    private ?ProductDraft $productDraft = null;
+    private ?VendorInterface $vendor = null;
+    private ?ProductListingInterface $productListing = null;
 
-    /**
-     * @var array<int|string, ImageInterface>|null
-     */
-    private ?array $images;
-
-    /**
-     * @var array<int|string, ProductTranslationInterface>|null
-     */
-    private ?array $translations;
-
-    /** @var array<int|string, ProductListingPriceInterface>|null
-     */
-    private ?array $productListingPrice;
-
-    /**
-     * @var array<int, AttributeValueInterface>|null
-     */
-    protected ?array $attributes;
-
-    protected ?TaxonInterface $mainTaxon;
-
-    /**
-     * @var array<array-key, ProductDraftTaxonInterface>|null
-     */
-    protected ?array $productDraftTaxons;
-
-    public function __construct(
-        ?array $images,
-        ?array $translations,
-        ?array $productListingPrice,
-        ?array $attributes,
-        ?TaxonInterface $mainTaxon,
-        ?array $productDraftTaxons
-    ) {
-        $this->images = $images;
-        $this->translations = $translations;
-        $this->productListingPrice = $productListingPrice;
-        $this->attributes = $attributes;
-        $this->mainTaxon = $mainTaxon;
-        $this->productDraftTaxons = $productDraftTaxons;
+    public function getProductDraft(): ?ProductDraft
+    {
+        return $this->productDraft;
     }
 
-    public function getImages(): ?array
+    public function setProductDraft(ProductDraft $productDraft): void
     {
-        return $this->images;
+        $this->productDraft = $productDraft;
     }
 
-    public function getTranslations(): ?array
+    public function getVendor(): VendorInterface
     {
-        return $this->translations;
+        return $this->vendor;
     }
 
-    public function getProductListingPrice(): ?array
+    public function setVendor(VendorInterface $vendor): void
     {
-        return $this->productListingPrice;
+        $this->vendor = $vendor;
     }
 
-    public function getAttributes(): ?array
+    public function getProductListing(): ?ProductListingInterface
     {
-        return $this->attributes;
+        return $this->productListing;
     }
 
-    public function getMainTaxon(): ?TaxonInterface
+    public function setProductListing(ProductListingInterface $productListing): void
     {
-        return $this->mainTaxon;
-    }
-
-    public function getProductDraftTaxons(): ?array
-    {
-        return $this->productDraftTaxons;
-    }
-
-    public function getResourceId(): ?string
-    {
-        return $this->listingId;
-    }
-
-    public function setResourceId(?string $resourceId): void
-    {
-        $this->listingId = $resourceId;
-    }
-
-    public function getResourceIdAttributeKey(): string
-    {
-        return 'id';
+        $this->productListing = $productListing;
     }
 }

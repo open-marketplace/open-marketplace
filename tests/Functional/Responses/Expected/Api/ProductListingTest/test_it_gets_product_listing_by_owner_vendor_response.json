@@ -3,51 +3,54 @@
     "@id": "\/api\/v2\/shop\/account\/product-listings\/@integer@",
     "@type": "ProductListing",
     "id": "@integer@",
-    "code": "test",
+    "code": "product_listing_bruce_1",
     "enabled": true,
     "verificationStatus": "created",
     "latestDraft": {
         "@id": "\/api\/v2\/shop\/account\/product-drafts\/@integer@",
         "@type": "ProductDraft",
         "id": "@integer@",
-        "code": "test",
+        "code": "product_draft_bruce_1",
         "status": "created",
+        "verifiedAt": null,
+        "publishedAt": null,
         "images": [
             {
                 "@type": "ProductDraftImage",
                 "id": "@integer@",
-                "path": "@string@\/product1.png"
+                "path": "\/dummy\/file\/path"
             }
         ],
-        "translations": [
-            {
+        "translations": {
+            "en_US": {
                 "@id": "\/api\/v2\/shop\/account\/draft-product-translations\/@integer@",
                 "@type": "DraftProductTranslation",
                 "id": "@integer@",
-                "name": "Test",
-                "description": "Test description",
-                "metaKeywords": "Test metaKeywords",
-                "metaDescription": "Test metaDescription",
-                "shortDescription": "Test shortDescription",
+                "name": "product_draft_bruce_1_translations_us",
+                "slug": "product_draft_bruce_1_translations_us",
+                "description": null,
+                "metaKeywords": null,
+                "metaDescription": null,
+                "shortDescription": null,
                 "locale": "en_US"
             }
-        ],
-        "productListingPrices": [
-            {
+        },
+        "productListingPrices": {
+            "CODE": {
                 "@type": "ProductListingPrice",
                 "id": "@integer@",
                 "price": 100,
-                "originalPrice": 110,
-                "minimumPrice": 80,
+                "originalPrice": 80,
+                "minimumPrice": 90,
                 "channelCode": "CODE"
             }
-        ],
+        },
         "attributes": [
             {
                 "@type": "DraftAttributeValue",
                 "id": "@integer@",
                 "attribute": "\/api\/v2\/shop\/account\/draft-attributes\/@integer@",
-                "value": "example text value"
+                "value": "example value"
             }
         ],
         "mainTaxon": "\/api\/v2\/shop\/taxons\/CATEGORY",
@@ -56,7 +59,7 @@
                 "@type": "ProductDraftTaxon",
                 "id": "@integer@",
                 "taxon": "\/api\/v2\/shop\/taxons\/MUG",
-                "position": 2
+                "position": 1
             }
         ]
     },

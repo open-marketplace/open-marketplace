@@ -13,36 +13,43 @@
             <group>shop:draft_product_translation:read</group>
             <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="name">
             <group>shop:draft_product_translation:read</group>
             <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="slug">
             <group>shop:draft_product_translation:read</group>
             <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="description">
             <group>shop:draft_product_translation:read</group>
             <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="metaKeywords">
             <group>shop:draft_product_translation:read</group>
             <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="metaDescription">
             <group>shop:draft_product_translation:read</group>
             <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="shortDescription">
             <group>shop:draft_product_translation:read</group>
             <group>shop_account:product_listing:create</group>
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
     </class>
 </serializer>

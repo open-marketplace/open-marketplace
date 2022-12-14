@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Api\Messenger\Command\ResourceIdAwareInterface;
+use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
 
-interface UpdateProductListingInterface extends ResourceIdAwareInterface
+interface UpdateProductListingInterface extends ProductDraftAwareInterface, ProductListingAwareInterface, VendorAwareInterface
 {
 
 }

@@ -12,6 +12,26 @@
                     <attribute>ApiProductListing</attribute>
                 </attribute>
                 <attribute name="path">/shop/account/product-listings</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="multipart/form-data">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="images[]">
+                                            <attribute name="type">array</attribute>
+                                            <attribute name="items">
+                                                <attribute name="type">file</attribute>
+                                                <attribute name="format">binary</attribute>
+                                            </attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop_account:product_listing:create</attribute>
                 </attribute>
@@ -20,7 +40,7 @@
                 </attribute>
                 <attribute name="security_post_denormalize">is_granted("VENDOR_AWARE_OBJECT_CREATE", object)</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft</attribute>
+                <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListing</attribute>
                 <attribute name="status">201</attribute>
             </collectionOperation>
             <collectionOperation name="shop_account_get">
@@ -48,6 +68,26 @@
                     <attribute>ApiProductListing</attribute>
                 </attribute>
                 <attribute name="path">/shop/account/product-listings/{id}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="multipart/form-data">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="images[]">
+                                            <attribute name="type">array</attribute>
+                                            <attribute name="items">
+                                                <attribute name="type">file</attribute>
+                                                <attribute name="format">binary</attribute>
+                                            </attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop_account:product_listing:update</attribute>
                 </attribute>

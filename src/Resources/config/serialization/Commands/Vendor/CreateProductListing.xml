@@ -3,25 +3,7 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListing">
-        <attribute name="code">
-            <group>shop_account:product_listing:create</group>
-        </attribute>
-        <attribute name="images">
-            <group>shop_account:product_listing:create</group>
-        </attribute>
-        <attribute name="translations">
-            <group>shop_account:product_listing:create</group>
-        </attribute>
-        <attribute name="productListingPrice">
-            <group>shop_account:product_listing:create</group>
-        </attribute>
-        <attribute name="attributes">
-            <group>shop_account:product_listing:create</group>
-        </attribute>
-        <attribute name="mainTaxon">
-            <group>shop_account:product_listing:create</group>
-        </attribute>
-        <attribute name="productDraftTaxons">
+        <attribute name="productDraft">
             <group>shop_account:product_listing:create</group>
         </attribute>
     </class>

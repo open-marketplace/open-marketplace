@@ -67,7 +67,7 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function addTranslation(ProductTranslationInterface $translation): void;
 
     /** @return Collection<int|string, ProductListingPriceInterface> */
-    public function getProductListingPrice(): Collection;
+    public function getProductListingPrices(): Collection;
 
     public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void;
 
@@ -98,6 +98,8 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function setImages(Collection $images): void;
 
     public function addImage(ImageInterface $image): void;
+
+    public function removeImage(ImageInterface $image): void;
 
     /** @return  Collection<int, AttributeValueInterface> */
     public function getAttributes(): Collection;

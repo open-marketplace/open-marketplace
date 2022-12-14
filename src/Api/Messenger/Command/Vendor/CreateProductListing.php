@@ -11,108 +11,27 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 
 final class CreateProductListing implements CreateProductListingInterface
 {
-    private string $code;
+    private ?ProductDraft $productDraft = null;
+    private ?VendorInterface $vendor = null;
 
-    /** @var array<int|string, ImageInterface> */
-    private array $images;
-
-    /** @var array<int|string, ProductTranslationInterface> */
-    private array $translations;
-
-    /** @var array<int|string, ProductListingPriceInterface> */
-    private array $productListingPrice;
-
-    /** @var array<int, AttributeValueInterface> */
-    protected array $attributes;
-
-    protected ?TaxonInterface $mainTaxon;
-
-    /** @var array<array-key, ProductDraftTaxonInterface> */
-    protected array $productDraftTaxons;
-
-    private VendorInterface $vendor;
-
-    public function __construct(
-        string $code,
-        array $images,
-        array $translations,
-        array $productListingPrice,
-        array $attributes,
-        ?TaxonInterface $mainTaxon,
-        array $productDraftTaxons
-    ) {
-        $this->code = $code;
-        $this->images = $images;
-        $this->translations = $translations;
-        $this->productListingPrice = $productListingPrice;
-        $this->attributes = $attributes;
-        $this->mainTaxon = $mainTaxon;
-        $this->productDraftTaxons = $productDraftTaxons;
+    public function getProductDraft(): ?ProductDraft
+    {
+        return $this->productDraft;
     }
 
-    public function getCode(): string
+    public function setProductDraft(ProductDraft $productDraft): void
     {
-        return $this->code;
-    }
-
-    /**
-     * @return array<int|string, ImageInterface>
-     */
-    public function getImages(): array
-    {
-        return $this->images;
-    }
-
-    /** @return array<int|string, ProductTranslationInterface> */
-    public function getTranslations(): array
-    {
-        return $this->translations;
-    }
-
-    /**
-     * @return array<int|string, ProductListingPriceInterface>
-     */
-    public function getProductListingPrice(): array
-    {
-        return $this->productListingPrice;
-    }
-
-    /**
-     * @return array<int, AttributeValueInterface>
-     */
-    public function getAttributes(): array
-    {
-        return $this->attributes;
-    }
-
-    public function getMainTaxon(): ?TaxonInterface
-    {
-        return $this->mainTaxon;
-    }
-
-    /**
-     * @return array<array-key, ProductDraftTaxonInterface>
-     */
-    public function getProductDraftTaxons(): array
-    {
-        return $this->productDraftTaxons;
+        $this->productDraft = $productDraft;
     }
 
     public function getVendor(): VendorInterface
     {
-        return $this->getVendor();
+        return $this->vendor;
     }
 
     public function setVendor(VendorInterface $vendor): void

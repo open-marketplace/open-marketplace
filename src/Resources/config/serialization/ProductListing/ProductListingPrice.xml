@@ -7,22 +7,27 @@
     <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice">
         <attribute name="id">
             <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="price">
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="originalPrice">
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="minimumPrice">
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="channelCode">
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
     </class>
 </serializer>

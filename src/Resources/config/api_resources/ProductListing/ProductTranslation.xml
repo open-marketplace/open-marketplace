@@ -10,13 +10,13 @@
         </collectionOperations>
 
         <itemOperations>
-<!--            <itemOperation name="shop_get">-->
-<!--                <attribute name="method">GET</attribute>-->
-<!--                <attribute name="path">/shop/account/draft-product-translations/{id}</attribute>-->
-<!--                <attribute name="normalization_context">-->
-<!--                    <attribute name="groups">shop:draft_product_translation:read</attribute>-->
-<!--                </attribute>-->
-<!--            </itemOperation>-->
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/draft-product-translations/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:draft_product_translation:read</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
     </resource>
 </resources>

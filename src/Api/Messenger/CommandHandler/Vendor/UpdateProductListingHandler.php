@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
+use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
@@ -21,65 +22,37 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class UpdateProductListingHandler
 {
-    private FactoryInterface $productDraftFactory;
-
-    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
-
     private ObjectManager $manager;
 
     private ImageUploaderInterface $imageUploader;
 
     public function __construct(
-        FactoryInterface $productDraftFactory,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
         ObjectManager $manager,
         ImageUploaderInterface $imageUploader
     ) {
-        $this->productDraftFactory = $productDraftFactory;
-        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
         $this->manager = $manager;
         $this->imageUploader = $imageUploader;
     }
 
-    public function __invoke(CreateProductListingInterface $command): ProductListingInterface
+    public function __invoke(UpdateProductListingInterface $updateProductListing): ProductListingInterface
     {
-        /** @var ProductDraftInterface $productDraft */
-        $productDraft = $this->productDraftFactory->createNew();
+        $newProductDraft = $updateProductListing->getProductDraft();
+        $productListing = $updateProductListing->getProductListing();
+        $previousProductDraft = $productListing->getLatestDraft();
 
-        $productDraft->setCode($command->getCode());
+        $newProductDraft->setVersionNumber($previousProductDraft->getVersionNumber());
+        $newProductDraft->incrementVersion();
+        $newProductDraft->setCode($previousProductDraft->getCode());
 
-        foreach ($command->getImages() as $productImage) {
-            $productDraft->addImage($productImage);
-            $productImage->setOwner($productDraft);
+        foreach ($newProductDraft->getImages() as $productImage) {
+            $productImage->setOwner($newProductDraft);
             $this->imageUploader->upload($productImage);
         }
 
-        foreach ($command->getTranslations() as $translation) {
-            $productDraft->addTranslation($translation);
-        }
+        $productListing->addProductDraft($newProductDraft);
 
-        foreach ($command->getProductListingPrice() as $price) {
-            $productDraft->addProductListingPrice($price);
-        }
-
-        foreach ($command->getProductListingPrice() as $price) {
-            $productDraft->addProductListingPrice($price);
-        }
-
-        foreach ($command->getAttributes() as $attribute) {
-            $productDraft->addAttribute($attribute);
-            $attribute->setSubject($productDraft);
-        }
-
-        $productDraft->setMainTaxon($command->getMainTaxon());
-
-        foreach ($command->getProductDraftTaxons() as $productDraftTaxon) {
-            $productDraft->addProductDraftTaxon($productDraftTaxon);
-        }
-
-        $productListing = $this->productListingFromDraftFactory->createNew($productDraft, $command->getVendor());
-
-        $this->manager->persist($productDraft);
         $this->manager->persist($productListing);
+
+        return $productListing;
     }
 }

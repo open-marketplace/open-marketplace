@@ -99,7 +99,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
         $productVariant = $this->productVariantRepository->findOneBy(['product' => $product]);
 
         /** @var ProductListingPriceInterface $productListingPrice */
-        foreach ($productDraft->getProductListingPrice() as $productListingPrice) {
+        foreach ($productDraft->getProductListingPrices() as $productListingPrice) {
             /** @var ChannelPricing $channelPricing */
             $channelPricing = $this->channelPricingRepository->findOneBy(['productVariant' => $productVariant, 'channelCode' => $productListingPrice->getChannelCode()]);
 

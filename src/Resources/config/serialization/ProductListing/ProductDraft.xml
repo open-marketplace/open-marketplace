@@ -11,8 +11,8 @@
         </attribute>
         <attribute name="code">
             <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
         </attribute>
         <attribute name="isVerified">
             <group>shop_account:product_draft:read</group>
@@ -32,33 +32,39 @@
         </attribute>
         <attribute name="images">
             <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="translations">
             <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
-        <attribute name="productListingPrice">
+        <attribute name="productListingPrices">
             <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="attributes">
             <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="mainTaxon">
             <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
         <attribute name="productDraftTaxons">
             <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:create</group>
+            <group>shop_account:product_listing:read</group>
+            <group>shop_account:product_listing:update</group>
         </attribute>
     </class>
 </serializer>

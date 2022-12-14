@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\OpenMarketplace\Functional\FunctionalTestCase;
 
@@ -32,73 +33,74 @@ final class ProductListingTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/ProductListingTest/product_listings.yml');
     }
 
-//    public function test_it_get_only_product_listings_for_current_vendor(): void
-//    {
-//        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
-//
-//        $this->client->request('GET', '/api/v2/shop/account/product-listings', [], [], $header);
-//        $response = $this->client->getResponse();
-//        $this->assertResponse($response, 'Api/ProductListingTest/test_it_get_only_product_listings_for_current_vendor_response', Response::HTTP_OK);
-//    }
-//
-//    public function test_it_prevents_to_get_different_vendor_product_listing(): void
-//    {
-//        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
-//
-//        /** @var ProductListing $productListing */
-//        $productListing = $this->productListingRepository->findOneBy([
-//            'code' => 'product_listing_peter_1',
-//        ]);
-//
-//        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
-//        $response = $this->client->getResponse();
-//        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
-//    }
-//
-//    public function test_it_prevents_to_get_product_listing_by_user_without_vendor_context(): void
-//    {
-//        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
-//
-//        /** @var ProductListing $productListing */
-//        $productListing = $this->productListingRepository->findOneBy([
-//            'code' => 'product_listing_peter_1',
-//        ]);
-//
-//        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
-//        $response = $this->client->getResponse();
-//        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
-//    }
-//
-//    public function test_it_get_product_listing_by_owner_vendor(): void
-//    {
-//        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
-//
-//        /** @var ProductListing $productListing */
-//        $productListing = $this->productListingRepository->findOneBy([
-//            'code' => 'product_listing_bruce_1',
-//        ]);
-//
-//        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
-//        $response = $this->client->getResponse();
-//        $this->assertResponse($response, 'Api/ProductListingTest/test_it_get_product_listing_by_owner_vendor_response', Response::HTTP_OK);
-//    }
-//
-//    public function test_it_prevents_creating_product_listing_by_user_without_vendor_context(): void
-//    {
-//        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
-//
-//        $this->client->request('POST', '/api/v2/shop/account/product-listings', [], [], $header, json_encode([
-//            'code' => 'test',
-//            'images' => [],
-//            'translations' => [],
-//            'productListingPrice' => [],
-//            'attributes' => [],
-//            'productDraftTaxons' => [],
-//        ]));
-//
-//        $response = $this->client->getResponse();
-//        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
-//    }
+    public function test_it_gets_only_product_listings_for_current_vendor(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        $this->client->request('GET', '/api/v2/shop/account/product-listings', [], [], $header);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/ProductListingTest/test_it_gets_only_product_listings_for_current_vendor_response', Response::HTTP_OK);
+    }
+
+    public function test_it_prevents_to_get_different_vendor_product_listing(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_peter_1',
+        ]);
+
+        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    public function test_it_prevents_to_get_product_listing_by_user_without_vendor_context(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_peter_1',
+        ]);
+
+        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    public function test_it_gets_product_listing_by_owner_vendor(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_bruce_1',
+        ]);
+
+        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/ProductListingTest/test_it_gets_product_listing_by_owner_vendor_response', Response::HTTP_OK);
+    }
+    public function test_it_prevents_creating_product_listing_by_user_without_vendor_context(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
+
+        $this->client->request('POST', '/api/v2/shop/account/product-listings', [], [], $header, json_encode([
+            'productDraft' => [
+                'code' => 'test',
+                'images' => [],
+                'translations' => [],
+                'productListingPrices' => [],
+                'attributes' => [],
+                'productDraftTaxons' => [],
+            ]
+        ]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
+    }
 
     public function test_creating_product_listing_by_vendor(): void
     {
@@ -106,44 +108,202 @@ final class ProductListingTest extends FunctionalTestCase
 
         /** @var Taxon $mainTaxon */
         $mainTaxon = $this->taxonRepository->findOneBy(['code' => 'CATEGORY']);
+        /** @var Taxon $additionalTaxon */
         $additionalTaxon = $this->taxonRepository->findOneBy(['code' => 'MUG']);
 
-        /** @var DraftAttribute $mainTaxon */
+        /** @var DraftAttribute $draftAttribute */
         $draftAttribute = $this->draftAttributeRepository->findOneBy([
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('POST', '/api/v2/shop/account/product-listings', [], [], $header, json_encode([
-            'code' => 'test',
-//            'images' => [],
-            'translations' => [
-                'en_US' => [
-                    'locale' => 'en_US',
-                    'name' => 'Test',
-                    'description' => 'Test description',
-                    'metaKeywords' => 'Test metaKeywords',
-                    'metaDescription' => 'Test metaDescription',
-                    'shortDescription' => 'Test shortDescription',
+        $this->client->request('POST', '/api/v2/shop/account/product-listings', [], [
+            'images' => [
+                $this->getUploadedProductImageFile(),
+            ]
+        ], $header, json_encode([
+            'productDraft' => [
+                'code' => 'test',
+                'translations' => [
+                    'en_US' => [
+                        'locale' => 'en_US',
+                        'name' => 'Test',
+                        'description' => 'Test description',
+                        'metaKeywords' => 'Test metaKeywords',
+                        'metaDescription' => 'Test metaDescription',
+                        'shortDescription' => 'Test shortDescription',
+                    ],
+                ],
+                'productListingPrices' => [
+                    [
+                        'channelCode' => 'CODE',
+                        'price' => 100,
+                        'originalPrice' => 110,
+                        'minimumPrice' => 80,
+                    ]
+                ],
+                'attributes' => [
+                    [
+                        'attribute' => '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(),
+                        'value' => 'example text value',
+                    ]
+                ],
+                'mainTaxon' => '/api/v2/shop/taxons/' . $mainTaxon->getCode(),
+                'productDraftTaxons' => [
+                    [
+                        'taxon' => '/api/v2/shop/taxons/' . $additionalTaxon->getCode(),
+                        'position' => 2,
+                    ]
                 ],
             ],
-//            'productListingPrice' => [
-//                [
-//                    'channelCode' => 'CODE',
-//                    'price' => 100,
-//                    'originalPrice' => 110,
-//                    'minimumPrice' => 80,
-//                ]
-//            ],
-//            'attributes' => [
-//                '/api/v2/shop/account/draft-attributes/' . $draftAttribute,
-//            ],
-//            'mainTaxon' => '/api/v2/shop/product-taxons/' . $mainTaxon->getId(),
-//            'productDraftTaxons' => [
-//                '/api/v2/shop/product-taxons/' . $additionalTaxon->getId(),
-//            ],
         ]));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/ProductListingTest/test_creating_product_listing_by_vendor_response', Response::HTTP_CREATED);
+    }
+
+    public function test_validates_not_blank_product_draft_when_creating_product_listing(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        $this->client->request('POST', '/api/v2/shop/account/product-listings', [], [], $header, json_encode([]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/ProductListingTest/test_it_validates_not_blank_product_draft_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function test_it_prevents_updating_product_listing_by_user_without_vendor_context(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_bruce_1',
+        ]);
+
+        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header, json_encode([
+            'productDraft' => [
+                'images' => [],
+                'translations' => [],
+                'productListingPrices' => [],
+                'attributes' => [],
+                'productDraftTaxons' => [],
+            ]
+        ]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    public function test_it_prevents_updating_product_listing_by_other_vendor(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_peter_1',
+        ]);
+
+        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header, json_encode([
+            'productDraft' => [
+                'images' => [],
+                'translations' => [],
+                'productListingPrices' => [],
+                'attributes' => [],
+                'productDraftTaxons' => [],
+            ]
+        ]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    public function test_update_product_listing_by_vendor(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_bruce_1',
+        ]);
+
+        /** @var Taxon $mainTaxon */
+        $replacementMainTaxon = $this->taxonRepository->findOneBy(['code' => 'SECOND_CATEGORY']);
+
+        /** @var Taxon $additionalTaxon */
+        $replacementAdditionalTaxon = $this->taxonRepository->findOneBy(['code' => 'HAT']);
+
+        /** @var DraftAttribute $draftAttribute */
+        $draftAttribute = $this->draftAttributeRepository->findOneBy([
+            'code' => 'attribute_bruce_1',
+        ]);
+
+        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [
+            'images' => [
+                $this->getUploadedProductImageFile(),
+            ]
+        ], $header, json_encode([
+            'productDraft' => [
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Changed name',
+                        'metaKeywords' => 'Test metaKeywords',
+                        'metaDescription' => 'Test metaDescription',
+                        'shortDescription' => 'Test shortDescription',
+                    ],
+                ],
+                'productListingPrices' => [
+                    [
+                        'channelCode' => 'CODE',
+                        'price' => 120,
+                        'originalPrice' => 110,
+                        'minimumPrice' => 115,
+                    ]
+                ],
+                'attributes' => [
+                    [
+                        'attribute' => '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(),
+                        'value' => 'changed value',
+                    ]
+                ],
+                'mainTaxon' => '/api/v2/shop/taxons/' . $replacementMainTaxon->getCode(),
+                'productDraftTaxons' => [
+                    [
+                        'taxon' => '/api/v2/shop/taxons/' . $replacementAdditionalTaxon->getCode(),
+                        'position' => 2,
+                    ]
+                ],
+            ],
+        ]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/ProductListingTest/test_update_product_listing_by_vendor_response', Response::HTTP_OK);
+    }
+
+    public function test_validates_not_blank_product_draft_when_updating_product_listing(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_bruce_1',
+        ]);
+
+        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header, json_encode([]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/ProductListingTest/test_it_validates_not_blank_product_draft_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    private function getUploadedProductImageFile(): UploadedFile
+    {
+        $fileName = 'product1.png';
+
+        $file = new UploadedFile(
+            $this->getFilePath($fileName),
+            $fileName,
+            'image/png',
+        );
+
+        return $file;
     }
 }
