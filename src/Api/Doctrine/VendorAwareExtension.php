@@ -33,7 +33,7 @@ final class VendorAwareExtension implements ContextAwareQueryCollectionExtension
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = [],
+        array $context = []
     ): void {
         $this->filterByVendorIfApply($resourceClass, $operationName, $queryBuilder);
     }
