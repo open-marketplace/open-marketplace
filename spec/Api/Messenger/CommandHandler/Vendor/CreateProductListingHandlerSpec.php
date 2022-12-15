@@ -33,6 +33,7 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($productListingFromDraftFactory, $manager, $imageUploader);
     }
+
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(CreateProductListingHandler::class);

@@ -15,5 +15,4 @@ use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
 
 interface CreateProductListingInterface extends ProductDraftAwareInterface, VendorAwareInterface
 {
-
 }

@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\ResourceIdAwareInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
@@ -27,10 +28,17 @@ final class ResourceIdAwareCommandDataTransformer implements CommandDataTransfor
 
     /**
      * @param ResourceIdAwareInterface $object
+     *
+     * @return ResourceIdAwareInterface
      */
-    public function transform($object, string $to, array $context = [])
-    {
-        $attributes = $this->requestStack->getCurrentRequest()->attributes;
+    public function transform(
+        $object,
+        string $to,
+        array $context = []
+    ) {
+        /** @var Request $request */
+        $request = $this->requestStack->getCurrentRequest();
+        $attributes = $request->attributes;
 
         $attributeKey = $object->getResourceIdAttributeKey();
         Assert::true($attributes->has($attributeKey), 'Path does not have resource id');
@@ -43,9 +51,9 @@ final class ResourceIdAwareCommandDataTransformer implements CommandDataTransfor
         return $object;
     }
 
+    /** @param ResourceIdAwareInterface $object */
     public function supportsTransformation($object): bool
     {
         return $object instanceof ResourceIdAwareInterface;
     }
-
 }

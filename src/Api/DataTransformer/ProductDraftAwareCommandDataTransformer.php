@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class ProductDraftAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     private RequestStack $requestStack;
+
     private ProductDraftImageFactoryInterface $draftImageFactory;
 
     public function __construct(

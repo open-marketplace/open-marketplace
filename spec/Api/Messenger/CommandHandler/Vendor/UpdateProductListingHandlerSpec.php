@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
-use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
-use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListing;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UpdateProductListingHandler;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
@@ -20,8 +18,8 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use PhpSpec\ObjectBehavior;
 use Doctrine\Persistence\ObjectManager;
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -34,6 +32,7 @@ final class UpdateProductListingHandlerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($manager, $imageUploader);
     }
+
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(UpdateProductListingHandler::class);

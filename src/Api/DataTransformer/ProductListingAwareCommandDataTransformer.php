@@ -11,12 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\DataTransformer;
 
-use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductDraftAwareInterface;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductListingAwareInterface;
-use BitBag\OpenMarketplace\Factory\ProductDraftImageFactoryInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ProductListingAwareCommandDataTransformer implements CommandDataTransformerInterface

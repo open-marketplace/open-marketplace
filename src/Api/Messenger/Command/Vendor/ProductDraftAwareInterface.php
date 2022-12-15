@@ -16,6 +16,7 @@ use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 
 interface ProductDraftAwareInterface extends CommandAwareDataTransformerInterface
 {
-    public function setProductDraft(ProductDraft $productDraft);
+    public function setProductDraft(ProductDraft $productDraft): void;
+
     public function getProductDraft(): ?ProductDraft;
 }

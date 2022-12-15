@@ -14,12 +14,9 @@ namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
 use BitBag\OpenMarketplace\Api\DataTransformer\ProductDraftAwareCommandDataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductDraftAwareInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Factory\ProductDraftImageFactoryInterface;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
@@ -34,6 +31,7 @@ final class ProductDraftAwareCommandDataTransformerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($requestStack, $draftImageFactory);
     }
+
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductDraftAwareCommandDataTransformer::class);
@@ -61,7 +59,7 @@ final class ProductDraftAwareCommandDataTransformerSpec extends ObjectBehavior
         ProductDraft $productDraft,
         ProductDraftImageFactoryInterface $draftImageFactory,
         RequestStack $requestStack,
-        Request $request,
+        Request $request
     ): void {
         $productDraftAware->getProductDraft()->willReturn($productDraft);
         $request->files = new FileBag();

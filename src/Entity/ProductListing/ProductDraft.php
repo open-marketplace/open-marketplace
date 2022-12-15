@@ -194,7 +194,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         $this->productListingPrices->removeElement($productListingPrice);
     }
 
-    public function getVendor(): VendorInterface
+    public function getVendor(): ?VendorInterface
     {
         return $this->vendor;
     }

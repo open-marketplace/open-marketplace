@@ -17,7 +17,8 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 final class CreateProductListing implements CreateProductListingInterface
 {
     private ?ProductDraft $productDraft = null;
-    private ?VendorInterface $vendor = null;
+
+    private VendorInterface $vendor;
 
     public function getProductDraft(): ?ProductDraft
     {

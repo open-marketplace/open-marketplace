@@ -25,6 +25,7 @@ final class ResourceIdAwareCommandDataTransformerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($requestStack);
     }
+
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(ResourceIdAwareCommandDataTransformer::class);
@@ -39,7 +40,7 @@ final class ResourceIdAwareCommandDataTransformerSpec extends ObjectBehavior
     public function it_throws_exception_when_there_isnt_id_in_request(
         ResourceIdAwareInterface $resourceIdAware,
         RequestStack $requestStack,
-        Request $request,
+        Request $request
     ): void {
         $resourceIdAware->getResourceIdAttributeKey()->willReturn('id');
         $request->attributes = new ParameterBag();
@@ -56,7 +57,7 @@ final class ResourceIdAwareCommandDataTransformerSpec extends ObjectBehavior
     public function it_sets_resource_id_from_request(
         ResourceIdAwareInterface $resourceIdAware,
         RequestStack $requestStack,
-        Request $request,
+        Request $request
     ): void {
         $resourceIdAware->getResourceIdAttributeKey()->willReturn('id');
         $request->attributes = new ParameterBag(['id' => '1']);

@@ -25,6 +25,7 @@ final class ProductListingAwareCommandDataTransformerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($requestStack);
     }
+
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductListingAwareCommandDataTransformer::class);

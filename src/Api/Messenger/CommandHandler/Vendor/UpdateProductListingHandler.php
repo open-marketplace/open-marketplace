@@ -11,14 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
-use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class UpdateProductListingHandler
 {
@@ -36,8 +33,11 @@ final class UpdateProductListingHandler
 
     public function __invoke(UpdateProductListingInterface $updateProductListing): ProductListingInterface
     {
+        /** @var ProductDraftInterface $newProductDraft */
         $newProductDraft = $updateProductListing->getProductDraft();
+        /** @var ProductListingInterface $productListing */
         $productListing = $updateProductListing->getProductListing();
+        /** @var ProductDraftInterface $previousProductDraft */
         $previousProductDraft = $productListing->getLatestDraft();
 
         $newProductDraft->setVersionNumber($previousProductDraft->getVersionNumber());

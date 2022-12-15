@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Entity;
 
 interface VendorAwareInterface
 {
-    public function getVendor(): VendorInterface;
+    public function getVendor(): ?VendorInterface;
 
     public function setVendor(VendorInterface $vendor): void;
 }

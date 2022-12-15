@@ -83,6 +83,7 @@ final class ProductListingTest extends FunctionalTestCase
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/ProductListingTest/test_it_gets_product_listing_by_owner_vendor_response', Response::HTTP_OK);
     }
+
     public function test_it_prevents_creating_product_listing_by_user_without_vendor_context(): void
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
@@ -95,7 +96,7 @@ final class ProductListingTest extends FunctionalTestCase
                 'productListingPrices' => [],
                 'attributes' => [],
                 'productDraftTaxons' => [],
-            ]
+            ],
         ]));
 
         $response = $this->client->getResponse();
@@ -119,7 +120,7 @@ final class ProductListingTest extends FunctionalTestCase
         $this->client->request('POST', '/api/v2/shop/account/product-listings', [], [
             'images' => [
                 $this->getUploadedProductImageFile(),
-            ]
+            ],
         ], $header, json_encode([
             'productDraft' => [
                 'code' => 'test',
@@ -139,20 +140,20 @@ final class ProductListingTest extends FunctionalTestCase
                         'price' => 100,
                         'originalPrice' => 110,
                         'minimumPrice' => 80,
-                    ]
+                    ],
                 ],
                 'attributes' => [
                     [
                         'attribute' => '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid(),
                         'value' => 'example text value',
-                    ]
+                    ],
                 ],
                 'mainTaxon' => '/api/v2/shop/taxons/' . $mainTaxon->getCode(),
                 'productDraftTaxons' => [
                     [
                         'taxon' => '/api/v2/shop/taxons/' . $additionalTaxon->getCode(),
                         'position' => 2,
-                    ]
+                    ],
                 ],
             ],
         ]));
@@ -187,7 +188,7 @@ final class ProductListingTest extends FunctionalTestCase
                 'productListingPrices' => [],
                 'attributes' => [],
                 'productDraftTaxons' => [],
-            ]
+            ],
         ]));
 
         $response = $this->client->getResponse();
@@ -210,7 +211,7 @@ final class ProductListingTest extends FunctionalTestCase
                 'productListingPrices' => [],
                 'attributes' => [],
                 'productDraftTaxons' => [],
-            ]
+            ],
         ]));
 
         $response = $this->client->getResponse();
@@ -226,10 +227,10 @@ final class ProductListingTest extends FunctionalTestCase
             'code' => 'product_listing_bruce_1',
         ]);
 
-        /** @var Taxon $mainTaxon */
+        /** @var Taxon $replacementMainTaxon */
         $replacementMainTaxon = $this->taxonRepository->findOneBy(['code' => 'SECOND_CATEGORY']);
 
-        /** @var Taxon $additionalTaxon */
+        /** @var Taxon $replacementAdditionalTaxon */
         $replacementAdditionalTaxon = $this->taxonRepository->findOneBy(['code' => 'HAT']);
 
         /** @var DraftAttribute $draftAttribute */
@@ -240,7 +241,7 @@ final class ProductListingTest extends FunctionalTestCase
         $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getUuid(), [], [
             'images' => [
                 $this->getUploadedProductImageFile(),
-            ]
+            ],
         ], $header, json_encode([
             'productDraft' => [
                 'translations' => [
@@ -257,20 +258,20 @@ final class ProductListingTest extends FunctionalTestCase
                         'price' => 120,
                         'originalPrice' => 110,
                         'minimumPrice' => 115,
-                    ]
+                    ],
                 ],
                 'attributes' => [
                     [
                         'attribute' => '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid(),
                         'value' => 'changed value',
-                    ]
+                    ],
                 ],
                 'mainTaxon' => '/api/v2/shop/taxons/' . $replacementMainTaxon->getCode(),
                 'productDraftTaxons' => [
                     [
                         'taxon' => '/api/v2/shop/taxons/' . $replacementAdditionalTaxon->getCode(),
                         'position' => 2,
-                    ]
+                    ],
                 ],
             ],
         ]));

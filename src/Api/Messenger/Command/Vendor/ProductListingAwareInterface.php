@@ -16,5 +16,6 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 interface ProductListingAwareInterface
 {
     public function getProductListing(): ?ProductListingInterface;
+
     public function setProductListing(ProductListingInterface $productListing): void;
 }

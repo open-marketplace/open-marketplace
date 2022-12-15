@@ -13,7 +13,6 @@ namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
 use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
