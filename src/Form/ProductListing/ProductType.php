@@ -98,7 +98,7 @@ final class ProductType extends AbstractType
             $productDraft = $event->getData();
 
             $event->getForm()
-                ->add('productListingPrice', ChannelCollectionType::class, [
+                ->add('productListingPrices', ChannelCollectionType::class, [
                     'entry_type' => ProductPriceType::class,
                     'entry_options' => fn (ChannelInterface $channel) => [
                         'channel' => $channel,
