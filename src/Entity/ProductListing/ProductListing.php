@@ -16,10 +16,13 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\UuidInterface;
 
 class ProductListing implements ProductListingInterface
 {
     protected int $id;
+
+    protected ?UuidInterface $uuid = null;
 
     protected ?string $code;
 
@@ -53,6 +56,16 @@ class ProductListing implements ProductListingInterface
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 
     public function getCode(): ?string

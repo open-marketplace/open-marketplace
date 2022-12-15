@@ -1,29 +1,29 @@
 {
     "@context": "\/api\/v2\/contexts\/ProductListing",
-    "@id": "\/api\/v2\/shop\/account\/product-listings\/@integer@",
+    "@id": "\/api\/v2\/shop\/account\/product-listings\/@string@",
     "@type": "ProductListing",
-    "id": "@integer@",
+    "uuid": "@string@",
     "code": "test",
     "enabled": true,
     "verificationStatus": "created",
     "latestDraft": {
-        "@id": "\/api\/v2\/shop\/account\/product-drafts\/@integer@",
+        "@id": "\/api\/v2\/shop\/account\/product-drafts\/@string@",
         "@type": "ProductDraft",
-        "id": "@integer@",
+        "uuid": "@string@",
         "code": "test",
         "status": "created",
         "images": [
             {
                 "@type": "ProductDraftImage",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "path": "@string@\/product1.png"
             }
         ],
         "translations": [
             {
-                "@id": "\/api\/v2\/shop\/account\/draft-product-translations\/@integer@",
+                "@id": "\/api\/v2\/shop\/account\/draft-product-translations\/@string@",
                 "@type": "DraftProductTranslation",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "name": "Test",
                 "description": "Test description",
                 "metaKeywords": "Test metaKeywords",
@@ -35,7 +35,7 @@
         "productListingPrices": [
             {
                 "@type": "ProductListingPrice",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "price": 100,
                 "originalPrice": 110,
                 "minimumPrice": 80,
@@ -45,8 +45,8 @@
         "attributes": [
             {
                 "@type": "DraftAttributeValue",
-                "id": "@integer@",
-                "attribute": "\/api\/v2\/shop\/account\/draft-attributes\/@integer@",
+                "uuid": "@string@",
+                "attribute": "\/api\/v2\/shop\/account\/draft-attributes\/@string@",
                 "value": "example text value"
             }
         ],
@@ -54,7 +54,7 @@
         "productDraftTaxons": [
             {
                 "@type": "ProductDraftTaxon",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "taxon": "\/api\/v2\/shop\/taxons\/MUG",
                 "position": 2
             }

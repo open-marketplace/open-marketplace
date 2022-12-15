@@ -55,7 +55,7 @@
         <itemOperations>
             <itemOperation name="shop_account_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/product-listings/{id}</attribute>
+                <attribute name="path">/shop/account/product-listings/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop_account:product_listing:read</attribute>
                 </attribute>
@@ -67,7 +67,7 @@
                 <attribute name="validation_groups">
                     <attribute>ApiProductListing</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/product-listings/{id}</attribute>
+                <attribute name="path">/shop/account/product-listings/{uuid}</attribute>
                 <attribute name="openapi_context">
                     <attribute name="requestBody">
                         <attribute name="content">
@@ -101,9 +101,12 @@
 
             <itemOperation name="shop_account_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/shop/account/product-listings/{id}</attribute>
+                <attribute name="path">/shop/account/product-listings/{uuid}</attribute>
                 <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_DELETE", object)</attribute>
             </itemOperation>
         </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="uuid" identifier="true" writable="false" />
     </resource>
 </resources>

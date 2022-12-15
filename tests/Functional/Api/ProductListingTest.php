@@ -51,7 +51,7 @@ final class ProductListingTest extends FunctionalTestCase
             'code' => 'product_listing_peter_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getUuid(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }
@@ -65,7 +65,7 @@ final class ProductListingTest extends FunctionalTestCase
             'code' => 'product_listing_peter_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getUuid(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }
@@ -79,7 +79,7 @@ final class ProductListingTest extends FunctionalTestCase
             'code' => 'product_listing_bruce_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/product-listings/' . $productListing->getUuid(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/ProductListingTest/test_it_gets_product_listing_by_owner_vendor_response', Response::HTTP_OK);
     }
@@ -143,7 +143,7 @@ final class ProductListingTest extends FunctionalTestCase
                 ],
                 'attributes' => [
                     [
-                        'attribute' => '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(),
+                        'attribute' => '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid(),
                         'value' => 'example text value',
                     ]
                 ],
@@ -180,7 +180,7 @@ final class ProductListingTest extends FunctionalTestCase
             'code' => 'product_listing_bruce_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getUuid(), [], [], $header, json_encode([
             'productDraft' => [
                 'images' => [],
                 'translations' => [],
@@ -203,7 +203,7 @@ final class ProductListingTest extends FunctionalTestCase
             'code' => 'product_listing_peter_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getUuid(), [], [], $header, json_encode([
             'productDraft' => [
                 'images' => [],
                 'translations' => [],
@@ -237,7 +237,7 @@ final class ProductListingTest extends FunctionalTestCase
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [
+        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getUuid(), [], [
             'images' => [
                 $this->getUploadedProductImageFile(),
             ]
@@ -261,7 +261,7 @@ final class ProductListingTest extends FunctionalTestCase
                 ],
                 'attributes' => [
                     [
-                        'attribute' => '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getId(),
+                        'attribute' => '/api/v2/shop/account/draft-attributes/' . $draftAttribute->getUuid(),
                         'value' => 'changed value',
                     ]
                 ],
@@ -288,7 +288,7 @@ final class ProductListingTest extends FunctionalTestCase
             'code' => 'product_listing_bruce_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getId(), [], [], $header, json_encode([]));
+        $this->client->request('PUT', '/api/v2/shop/account/product-listings/' . $productListing->getUuid(), [], [], $header, json_encode([]));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/ProductListingTest/test_it_validates_not_blank_product_draft_response', Response::HTTP_UNPROCESSABLE_ENTITY);

@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="uuid" type="uuid" unique="true" />
+
         <field name="price" column="price" type="float" unique="false" nullable="false" />
         <field name="minimumPrice" column="minimum_price" type="float" unique="false" nullable="true" />
         <field name="originalPrice" column="original_price" type="float" unique="false" nullable="false" />

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
 use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
@@ -20,7 +21,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface, VendorAwareInterface
+interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface, VendorAwareInterface, UuidAwareInterface
 {
     public const STATUS_CREATED = 'created';
 

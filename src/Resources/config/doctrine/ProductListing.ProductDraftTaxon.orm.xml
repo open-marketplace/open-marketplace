@@ -11,6 +11,8 @@
             <unique-constraint columns="product_draft_id,taxon_id" name="product_draft_taxon_idx" />
         </unique-constraints>
 
+        <field name="uuid" type="uuid" unique="true" />
+
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

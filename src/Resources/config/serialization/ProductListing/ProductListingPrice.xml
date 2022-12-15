@@ -5,7 +5,7 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice">
-        <attribute name="id">
+        <attribute name="uuid">
             <group>shop_account:product_listing:read</group>
             <group>shop_account:product_listing:update</group>
         </attribute>

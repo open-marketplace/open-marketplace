@@ -11,12 +11,15 @@
         <itemOperations>
             <itemOperation name="shop_account_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/product-drafts/{id}</attribute>
+                <attribute name="path">/shop/account/product-drafts/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop_account:product_draft:read</attribute>
                 </attribute>
                 <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_READ", object)</attribute>
             </itemOperation>
         </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="uuid" identifier="true" writable="false" />
     </resource>
 </resources>

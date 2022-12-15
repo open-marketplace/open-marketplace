@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="uuid" type="uuid" unique="true" />
+
         <field name="code" column="code" type="string" unique="false" nullable="false" />
         <field name="isVerified" column="is_verified" type="boolean" unique="false" nullable="false" />
         <field name="verifiedAt" column="verified_at" type="datetime" unique="false" nullable="true"/>

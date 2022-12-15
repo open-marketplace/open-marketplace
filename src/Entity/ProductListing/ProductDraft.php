@@ -14,6 +14,7 @@ namespace BitBag\OpenMarketplace\Entity\ProductListing;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -22,6 +23,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 class ProductDraft implements ResourceInterface, ProductDraftInterface
 {
     protected ?int $id = null;
+
+    protected ?UuidInterface $uuid = null;
 
     protected string $code;
 
@@ -76,6 +79,16 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 
     public function setId(?int $id): void

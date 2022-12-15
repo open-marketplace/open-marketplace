@@ -1,29 +1,29 @@
 {
     "@context": "\/api\/v2\/contexts\/ProductListing",
-    "@id": "\/api\/v2\/shop\/account\/product-listings\/@integer@",
+    "@id": "\/api\/v2\/shop\/account\/product-listings\/@string@",
     "@type": "ProductListing",
-    "id": "@integer@",
+    "uuid": "@string@",
     "code": "product_listing_bruce_1",
     "enabled": true,
     "verificationStatus": "created",
     "latestDraft": {
-        "@id": "\/api\/v2\/shop\/account\/product-drafts\/@integer@",
+        "@id": "\/api\/v2\/shop\/account\/product-drafts\/@string@",
         "@type": "ProductDraft",
-        "id": "@integer@",
+        "uuid": "@string@",
         "code": "product_draft_bruce_1",
         "status": "created",
         "images": [
             {
                 "@type": "ProductDraftImage",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "path": "@string@\/product1.png"
             }
         ],
         "translations": [
             {
-                "@id": "\/api\/v2\/shop\/account\/draft-product-translations\/@integer@",
+                "@id": "\/api\/v2\/shop\/account\/draft-product-translations\/@string@",
                 "@type": "DraftProductTranslation",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "name": "Changed name",
                 "metaKeywords": "Test metaKeywords",
                 "metaDescription": "Test metaDescription",
@@ -33,7 +33,7 @@
         "productListingPrices": [
             {
                 "@type": "ProductListingPrice",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "price": 120,
                 "originalPrice": 110,
                 "minimumPrice": 115,
@@ -43,8 +43,8 @@
         "attributes": [
             {
                 "@type": "DraftAttributeValue",
-                "id": "@integer@",
-                "attribute": "\/api\/v2\/shop\/account\/draft-attributes\/@integer@",
+                "uuid": "@string@",
+                "attribute": "\/api\/v2\/shop\/account\/draft-attributes\/@string@",
                 "value": "changed value"
             }
         ],
@@ -52,7 +52,7 @@
         "productDraftTaxons": [
             {
                 "@type": "ProductDraftTaxon",
-                "id": "@integer@",
+                "uuid": "@string@",
                 "taxon": "\/api\/v2\/shop\/taxons\/HAT",
                 "position": 2
             }
