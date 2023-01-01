@@ -13,10 +13,16 @@ namespace spec\BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Factory\ProductAttributeValueFactoryInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
 final class ProductAttributeValueFactorySpec extends ObjectBehavior
 {
+    public function let(): void
+    {
+        $this->beConstructedWith(ProductAttributeValue::class);
+    }
+
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductAttributeValueFactoryInterface::class);
