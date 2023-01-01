@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
 final class ProductAttributeValueFactory implements ProductAttributeValueFactoryInterface
