@@ -1,0 +1,20 @@
+default:
+  suites:
+    product_reviews:
+      contexts:
+        - sylius.behat.context.setup.shop_security
+        - sylius.behat.context.hook.doctrine_orm
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.user
+        - sylius.behat.context.setup.geographical
+        - sylius.behat.context.setup.product_review
+        - sylius.behat.context.setup.customer
+        - sylius.behat.context.transform.shared_storage
+        - sylius.behat.context.transform.customer
+        - Behat\MinkExtension\Context\MinkContext
+
+        - tests.open_marketplace.behat.context.setup.product
+        - tests.open_marketplace.behat.context.vendor.vendor_update_context
+        - tests.open_marketplace.behat.context.vendor.product_review_context
+      filters:
+        tags: "@product_reviews&&@ui"

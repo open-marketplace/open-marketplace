@@ -1,9 +1,15 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% use 'Vendor/Common/_breadcrumb.html.twig' %}
+
 {% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
 
-{% block breadcrumb %}
-    {% include '@SyliusShop/Account/Order/Index/_breadcrumb.html.twig' %}
+{% block breadcrumb_page %}
+    <a href="{{ path('open_marketplace_order_listing') }}" class="section">{{ 'sylius.ui.order_history'|trans }}</a>
+    <div class="divider"> / </div>
+    <div class="active section"> {{ resource.id }} </div>
+    <div class="divider"> / </div>
+    <div class="active section">{{ 'sylius.ui.show'|trans }}</div>
 {% endblock %}
 
 {% block subcontent %}
