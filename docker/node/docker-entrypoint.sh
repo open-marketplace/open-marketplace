@@ -8,6 +8,7 @@ fi
 
 if [ "$1" = 'node' ] || [ "$1" = 'yarn' ]; then
 	yarn install
+  npm rebuild node-sass
 
 	>&2 echo "Waiting for PHP to be ready..."
 	until nc -z "$PHP_HOST" "$PHP_PORT"; do

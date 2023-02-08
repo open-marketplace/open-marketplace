@@ -3,48 +3,51 @@ services:
     container_name: php
     build:
       context: .
-      target: sylius_php_dev
+      target: open_marketplace_php_dev
     depends_on:
       - migrations
     environment:
       - APP_ENV=dev
       - APP_DEBUG=1
       - APP_SECRET=EDITME
-      - DATABASE_URL=mysql://sylius:${MYSQL_PASSWORD:-nopassword}@mysql/sylius
+      - DATABASE_URL=mysql://open_marketplace:${MYSQL_PASSWORD:-nopassword}@mysql/open_marketplace
       - MAILER_URL=smtp://mailhog:1025
       - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
     volumes:
-      - .:/srv/sylius:rw,cached
+      - .:/srv/open_marketplace:rw,cached
       # if you develop on Linux, you may use a bind-mounted host directory instead
-      # - ./var:/srv/sylius/var:rw
-      - ./public:/srv/sylius/public:rw,delegated
+      # - ./var:/srv/open_marketplace/var:rw
+      - ./public:/srv/open_marketplace/public:rw,delegated
       # if you develop on Linux, you may use a bind-mounted host directory instead
-      # - ./public/media:/srv/sylius/public/media:rw
-      - public-media:/srv/sylius/public/media:rw
+      # - ./public/media:/srv/open_marketplace/public/media:rw
+      - public-media:/srv/open_marketplace/public/media:rw
+      - fixture-images:/srv/open_marketplace/var/fixtures/images:ro,nocopy
 
   migrations:
     container_name: migrations
     build:
       context: .
-      target: sylius_migrations_dev
+      target: open_marketplace_migrations_dev
     depends_on:
       - mysql
     environment:
       - APP_ENV=dev
       - APP_DEBUG=1
       - APP_SECRET=EDITME
-      - DATABASE_URL=mysql://sylius:${MYSQL_PASSWORD:-nopassword}@mysql/sylius
+      - DATABASE_URL=mysql://open_marketplace:${MYSQL_PASSWORD:-nopassword}@mysql/open_marketplace
       - LOAD_FIXTURES=1
       - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
+    volumes:
+      - fixture-images:/srv/open_marketplace/var/fixtures/images:rw
 
   mysql:
     container_name: mysql
-    image: mysql:5.7 # Sylius is fully working on mysql 8.0 version
+    image: mysql:5.7
     platform: linux/amd64
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-nopassword}
-      - MYSQL_DATABASE=sylius
-      - MYSQL_USER=sylius
+      - MYSQL_DATABASE=open_marketplace
+      - MYSQL_USER=open_marketplace
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-nopassword}
     volumes:
       - mysql-data:/var/lib/mysql:rw
@@ -59,7 +62,7 @@ services:
     container_name: node
     build:
       context: .
-      target: sylius_node
+      target: open_marketplace_node
     command: ["yarn", "watch"]
     depends_on:
       - php
@@ -68,8 +71,8 @@ services:
       - PHP_HOST=php
       - PHP_PORT=9000
     volumes:
-      - .:/srv/sylius:rw,cached
-      - ./public:/srv/sylius/public:rw,delegated
+      - .:/srv/open_marketplace:rw,cached
+      - ./public:/srv/open_marketplace/public:rw,delegated
     ports:
       - "${NODE_PORT:-35729}:35729"
 
@@ -77,15 +80,15 @@ services:
     container_name: nginx
     build:
       context: .
-      target: sylius_nginx
+      target: open_marketplace_nginx
     depends_on:
       - php
       - node # to ensure correct build order
     volumes:
-      - ./public:/srv/sylius/public:ro
+      - ./public:/srv/open_marketplace/public:ro
       # if you develop on Linux, you may use a bind-mounted host directory instead
-      # - ./public/media:/srv/sylius/public/media:ro
-      - public-media:/srv/sylius/public/media:ro,nocopy
+      # - ./public/media:/srv/open_marketplace/public/media:ro
+      - public-media:/srv/open_marketplace/public/media:ro,nocopy
     ports:
       - "${HTTP_PORT:-80}:80"
 
@@ -102,3 +105,4 @@ services:
 volumes:
   mysql-data:
   public-media:
+  fixture-images:

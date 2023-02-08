@@ -35,7 +35,7 @@ COPY docker/php/prod/php.ini        $PHP_INI_DIR/php.ini
 COPY docker/php/prod/opcache.ini    $PHP_INI_DIR/conf.d/opcache.ini
 
 # copy file required by opcache preloading
-COPY config/preload.php /srv/sylius/config/preload.php
+COPY config/preload.php /srv/open_marketplace/config/preload.php
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -43,7 +43,7 @@ RUN set -eux; \
     composer clear-cache
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
-WORKDIR /srv/sylius
+WORKDIR /srv/open_marketplace
 
 # build for production
 ENV APP_ENV=prod
@@ -72,9 +72,9 @@ RUN set -eux; \
 #    bin/console sylius:install:assets --no-interaction; \
 #    bin/console sylius:theme:assets:install public --no-interaction
 
-VOLUME /srv/sylius/var
+VOLUME /srv/open_marketplace/var
 
-VOLUME /srv/sylius/public/media
+VOLUME /srv/open_marketplace/public/media
 
 COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
@@ -82,9 +82,9 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
-FROM node:${NODE_VERSION}-alpine${NODE_ALPINE_VERSION} AS sylius_node
+FROM node:${NODE_VERSION}-alpine${NODE_ALPINE_VERSION} AS open_marketplace_node
 
-WORKDIR /srv/sylius
+WORKDIR /srv/open_marketplace
 
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
@@ -99,14 +99,14 @@ RUN set -eux; \
     yarn install; \
     yarn cache clean
 
-COPY --from=base /srv/sylius/vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private       vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private/
-COPY --from=base /srv/sylius/vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private    vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private/
-COPY --from=base /srv/sylius/vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private     vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private/
-COPY --from=base /srv/sylius/assets ./assets
+COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private       vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private/
+COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private    vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private/
+COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private     vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private/
+COPY --from=base /srv/open_marketplace/assets ./assets
 # work out what to do with these file
 #COPY --from=base /srv/sylius/vendor/bitbag/wishlist-plugin/webpack.config.js                         vendor/bitbag/wishlist-plugin/webpack.config.js
 #COPY --from=base /srv/sylius/vendor/bitbag/cms-plugin/webpack.config.js                              vendor/bitbag/cms-plugin/webpack.config.js
-COPY --from=base /srv/sylius/vendor/    vendor/
+COPY --from=base /srv/open_marketplace/vendor/    vendor/
 
 COPY webpack.config.js ./
 RUN yarn prod
@@ -117,25 +117,25 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["yarn", "prod"]
 
-FROM base AS sylius_php_prod
+FROM base AS open_marketplace_php_prod
 
-COPY --from=sylius_node /srv/sylius/public/build public/build
+COPY --from=open_marketplace_node /srv/open_marketplace/public/build public/build
 
-FROM nginx:${NGINX_VERSION}-alpine AS sylius_nginx
+FROM nginx:${NGINX_VERSION}-alpine AS open_marketplace_nginx
 
 COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/
 
-WORKDIR /srv/sylius
+WORKDIR /srv/open_marketplace
 
-COPY --from=base        /srv/sylius/public public/
-COPY --from=sylius_node /srv/sylius/public public/
+COPY --from=base        /srv/open_marketplace/public public/
+COPY --from=open_marketplace_node /srv/open_marketplace/public public/
 
-FROM sylius_php_prod AS sylius_php_dev
+FROM open_marketplace_php_prod AS open_marketplace_php_dev
 
 COPY docker/php/dev/php.ini        $PHP_INI_DIR/php.ini
 COPY docker/php/dev/opcache.ini    $PHP_INI_DIR/conf.d/opcache.ini
 
-WORKDIR /srv/sylius
+WORKDIR /srv/open_marketplace
 
 ENV APP_ENV=dev
 
@@ -145,7 +145,7 @@ RUN set -eux; \
     composer install --prefer-dist --no-autoloader --no-interaction --no-scripts --no-progress; \
     composer clear-cache
 
-FROM sylius_php_prod AS sylius_cron
+FROM open_marketplace_php_prod AS open_marketplace_cron
 
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
@@ -157,7 +157,7 @@ COPY docker/cron/crontab /etc/crontabs/root
 ENTRYPOINT ["crond"]
 CMD ["-f"]
 
-FROM sylius_php_prod AS sylius_migrations_prod
+FROM open_marketplace_php_prod AS open_marketplace_migrations_prod
 
 RUN apk add --no-cache wget
 COPY docker/migrations/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
@@ -165,7 +165,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
 
-FROM sylius_php_dev AS sylius_migrations_dev
+FROM open_marketplace_php_dev AS open_marketplace_migrations_dev
 
 RUN apk add --no-cache wget
 COPY docker/migrations/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
