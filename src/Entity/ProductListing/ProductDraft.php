@@ -18,12 +18,17 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 class ProductDraft implements ResourceInterface, ProductDraftInterface
 {
     protected ?int $id = null;
 
     protected string $code;
+
+    protected bool $shippingRequired = false;
+
+    protected ?ShippingCategoryInterface $shippingCategory = null;
 
     protected ?VendorInterface $vendor = null;
 
@@ -60,6 +65,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
     public function __construct()
     {
+        $this->channels = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->code = '';
         $this->status = ProductDraftInterface::STATUS_CREATED;
@@ -91,6 +97,26 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function setCode(string $code): void
     {
         $this->code = $code;
+    }
+
+    public function isShippingRequired(): bool
+    {
+        return $this->shippingRequired;
+    }
+
+    public function setShippingRequired(bool $shippingRequired): void
+    {
+        $this->shippingRequired = $shippingRequired;
+    }
+
+    public function getShippingCategory(): ?ShippingCategoryInterface
+    {
+        return $this->shippingCategory;
+    }
+
+    public function setShippingCategory(?ShippingCategoryInterface $shippingCategory): void
+    {
+        $this->shippingCategory = $shippingCategory;
     }
 
     public function isVerified(): bool

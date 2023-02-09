@@ -46,6 +46,15 @@
                         </div>
                         <div class="ui segments">
                             <div class="ui segment">
+                                <h3>{{ 'sylius.ui.shipping'|trans }}</h3>
+                            </div>
+                            <div class="ui segment">
+                                {{ form_row(form.shippingRequired) }}
+                                {{ form_row(form.shippingCategory) }}
+                            </div>
+                        </div>
+                        <div class="ui segments">
+                            <div class="ui segment">
                                 <h3>{{ 'sylius.ui.translations'|trans }}</h3>
                             </div>
                             <div class="ui segment">
