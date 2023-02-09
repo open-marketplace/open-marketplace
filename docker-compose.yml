@@ -16,12 +16,12 @@ services:
     volumes:
       - .:/srv/open_marketplace:rw,cached
       # if you develop on Linux, you may use a bind-mounted host directory instead
-      # - ./var:/srv/open_marketplace/var:rw
-      - ./public:/srv/open_marketplace/public:rw,delegated
+      - ./var:/srv/open_marketplace/var:rw
+#      - ./public:/srv/open_marketplace/public:rw,delegated
       # if you develop on Linux, you may use a bind-mounted host directory instead
       # - ./public/media:/srv/open_marketplace/public/media:rw
       - public-media:/srv/open_marketplace/public/media:rw
-      - fixture-images:/srv/open_marketplace/var/fixtures/images:ro,nocopy
+      - fixture-images:/srv/open_marketplace/var/fixtures
 
   migrations:
     container_name: migrations
@@ -38,7 +38,7 @@ services:
       - LOAD_FIXTURES=1
       - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
     volumes:
-      - fixture-images:/srv/open_marketplace/var/fixtures/images:rw
+      - fixture-images:/srv/open_marketplace/var/fixtures
 
   mysql:
     container_name: mysql
