@@ -4,21 +4,21 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/shop\/shipping-methods\/ups",
-            "@type": "ShippingMethod",
-            "id": "@integer@",
-            "code": "ups",
-            "position": 0,
-            "name": "ups",
-            "price": 5
-        },
-        {
             "@id": "\/api\/v2\/shop\/shipping-methods\/fedex",
             "@type": "ShippingMethod",
             "id": "@integer@",
             "code": "fedex",
             "position": 1,
             "name": "fedex",
+            "price": 5
+        },
+        {
+            "@id": "\/api\/v2\/shop\/shipping-methods\/ups",
+            "@type": "ShippingMethod",
+            "id": "@integer@",
+            "code": "ups",
+            "position": 0,
+            "name": "ups",
             "price": 5
         }
     ],
