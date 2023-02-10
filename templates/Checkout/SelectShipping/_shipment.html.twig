@@ -1,5 +1,7 @@
 <div class="ui segment">
-    <div class="ui dividing header">{{ shipment.vendor.companyName }}</div>
+    {% if shipment.vendor.companyName is defined %}
+        <div class="ui dividing header">{{ shipment.vendor.companyName }}</div>
+    {% endif %}
     <div class="ui fluid stackable items">
         {{ form_errors(form.method) }}
 
@@ -28,7 +30,7 @@
         </table>
 
         <div class="ui divider"></div>
-
+        {{ 'open_marketplace.ui.choose_shipping_method'|trans }}
         {% for key, choice_form in form.method %}
             {% set fee = form.method.vars.shipping_costs[choice_form.vars.value] %}
             {% set method = form.method.vars.choices[key].data %}
