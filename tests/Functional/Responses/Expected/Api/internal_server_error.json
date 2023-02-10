@@ -2,5 +2,5 @@
   "@context": "/api/v2/contexts/Error",
   "@type": "hydra:Error",
   "hydra:title": "An error occurred",
-  "hydra:description": "Not Found"
+  "hydra:description": "Internal Server Error"
 }
