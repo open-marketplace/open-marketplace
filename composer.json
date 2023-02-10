@@ -8,7 +8,7 @@
         "bitbag/cms-plugin": "^3.2",
         "bitbag/wishlist-plugin": "^2.0",
         "ramsey/uuid-doctrine": "^1.8",
-        "sylius/sylius": "~1.11.0",
+        "sylius/sylius": "^1.11.12",
         "symfony/webpack-encore-bundle": "^1.15"
     },
     "require-dev": {

@@ -1,1 +1,6 @@
-{"code":403,"message":"Access Denied."}
+{
+  "@context": "/api/v2/contexts/Error",
+  "@type": "hydra:Error",
+  "hydra:title": "An error occurred",
+  "hydra:description": "Access Denied."
+}
