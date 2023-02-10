@@ -4,7 +4,8 @@
         <defaults public="true" />
         <service
                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\OrderContext"
-                id="tests.bit_bag.open_marketplace.behat.context.vendor.order_context" >
+                id="tests.open_marketplace.behat.context.vendor.order_context" >
+            <argument type="service" id="tests.open_marketplace.behat.page.vendor.order_show_page" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
     </services>

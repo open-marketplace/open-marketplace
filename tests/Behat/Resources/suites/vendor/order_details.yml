@@ -2,8 +2,7 @@ default:
     suites:
         order_details:
             contexts:
-                - tests.open_marketplace.behat.context.shop.order
-                - tests.bit_bag.open_marketplace.behat.context.vendor.order_context
+                - tests.open_marketplace.behat.context.vendor.order_context
                 - tests.open_marketplace.behat.context.setup.order_context
                 - tests.open_marketplace.behat.context.vendor.vendor_update_context
                 - Behat\MinkExtension\Context\MinkContext
@@ -11,6 +10,7 @@ default:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.geographical
             filters:
                 tags: "@order_details&&@ui"
