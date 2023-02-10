@@ -105,6 +105,9 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $newProductDraft->setVersionNumber(1)
             ->shouldBeCalled();
 
+        $newProductDraft->setShippingRequired($productDraft->isShippingRequired())->shouldBeCalled();
+        $newProductDraft->setShippingCategory($productDraft->getShippingCategory())->shouldBeCalled();
+
         $newProductDraft->incrementVersion()
             ->shouldBeCalled();
 
