@@ -65,7 +65,6 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
     public function __construct()
     {
-        $this->channels = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->code = '';
         $this->status = ProductDraftInterface::STATUS_CREATED;
