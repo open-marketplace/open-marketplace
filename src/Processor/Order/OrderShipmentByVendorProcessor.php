@@ -29,8 +29,7 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
     public function __construct(
         ShipmentFactoryInterface $shipmentFactory,
         ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator
-    )
-    {
+    ) {
         $this->shipmentFactory = $shipmentFactory;
         $this->shipmentUnitsRecalculator = $shipmentUnitsRecalculator;
     }
@@ -58,7 +57,6 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
         $this->removeShipmentWithoutVendorIfEmpty($order);
     }
-
 
     private function addShipmentsPerVendor(OrderInterface $order): void
     {

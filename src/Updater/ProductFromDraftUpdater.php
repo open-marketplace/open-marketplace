@@ -21,6 +21,7 @@ use BitBag\OpenMarketplace\Factory\ProductTranslationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ProductTranslationInterface as BaseProductTranslationInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
@@ -96,6 +97,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
             $product->removeTranslation($deletedProductTranslation);
         }
 
+        /** @var ProductVariant $productVariant */
         $productVariant = $this->productVariantRepository->findOneBy(['product' => $product]);
         $productVariant->setShippingRequired($productDraft->isShippingRequired());
         $productVariant->setShippingCategory($productDraft->getShippingCategory());

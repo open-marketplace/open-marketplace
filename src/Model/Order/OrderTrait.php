@@ -18,6 +18,7 @@ use BitBag\OpenMarketplace\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 trait OrderTrait
 {
@@ -157,12 +158,15 @@ trait OrderTrait
         foreach ($this->getItems() as $item) {
             /** @var ProductInterface $product */
             $product = $item->getProduct();
+
+            /** @var ProductVariantInterface $variant */
             $variant = $item->getVariant();
 
             if (null === $product->getVendor() && true === $variant->isShippingRequired()) {
                 return true;
             }
         }
+
         return false;
     }
 }
