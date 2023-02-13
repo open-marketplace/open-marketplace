@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Model\Order;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderItem;
 use BitBag\OpenMarketplace\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ShipmentInterface;
@@ -148,5 +149,20 @@ trait OrderTrait
         }
 
         return null;
+    }
+
+    public function hasShippableItemsWithoutVendor(): bool
+    {
+        /** @var OrderItem $item */
+        foreach ($this->getItems() as $item) {
+            /** @var ProductInterface $product */
+            $product = $item->getProduct();
+            $variant = $item->getVariant();
+
+            if (null === $product->getVendor() && true === $variant->isShippingRequired()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

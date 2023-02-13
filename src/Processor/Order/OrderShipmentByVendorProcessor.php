@@ -29,7 +29,8 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
     public function __construct(
         ShipmentFactoryInterface $shipmentFactory,
         ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator
-    ) {
+    )
+    {
         $this->shipmentFactory = $shipmentFactory;
         $this->shipmentUnitsRecalculator = $shipmentUnitsRecalculator;
     }
@@ -51,12 +52,6 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
             return;
         }
 
-        if (false === $order->hasVendorItems()) {
-            return;
-        }
-
-        $this->removeShipmentsWithMissingVendors($order);
-
         $this->addShipmentsPerVendor($order);
 
         $this->shipmentUnitsRecalculator->recalculateShipmentUnits($order);
@@ -64,22 +59,12 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
         $this->removeShipmentWithoutVendorIfEmpty($order);
     }
 
-    private function removeShipmentsWithMissingVendors(OrderInterface $order): void
-    {
-        $vendors = $order->getVendorsFromOrderItems();
-        /** @var ShipmentInterface $shipment */
-        foreach ($order->getShipments() as $shipment) {
-            if (false === in_array($shipment->getVendor(), $vendors)) {
-                $order->removeShipment($shipment);
-            }
-        }
-    }
 
     private function addShipmentsPerVendor(OrderInterface $order): void
     {
         $vendors = $order->getVendorsFromOrderItems();
 
-        if (false === $order->hasShipmentWithoutVendor()) {
+        if (true === $order->hasShippableItemsWithoutVendor() && null === $order->getShipmentWithoutVendor()) {
             $this->addShipment($order, null);
         }
 
@@ -96,9 +81,8 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
     {
         /** @var ShipmentInterface $shipment */
         $shipment = $this
-                ->shipmentFactory
-                ->tryCreateNewWithOrderVendorAndDefaultShipment($order, $vendor)
-            ;
+            ->shipmentFactory
+            ->tryCreateNewWithOrderVendorAndDefaultShipment($order, $vendor);
 
         if (null !== $shipment) {
             $order->addShipment($shipment);

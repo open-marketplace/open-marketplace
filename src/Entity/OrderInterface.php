@@ -40,4 +40,6 @@ interface OrderInterface extends BaseOrderInterface
     public function getShipmentByVendor(?VendorInterface $vendor): ?ShipmentInterface;
 
     public function getShipmentWithoutVendor(): ?ShipmentInterface;
+
+    public function hasShippableItemsWithoutVendor(): bool;
 }
