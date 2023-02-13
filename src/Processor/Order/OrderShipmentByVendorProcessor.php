@@ -27,9 +27,10 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
     private ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator;
 
     public function __construct(
-        ShipmentFactoryInterface $shipmentFactory,
+        ShipmentFactoryInterface           $shipmentFactory,
         ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator
-    ) {
+    )
+    {
         $this->shipmentFactory = $shipmentFactory;
         $this->shipmentUnitsRecalculator = $shipmentUnitsRecalculator;
     }
@@ -67,7 +68,7 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
         }
 
         foreach ($vendors as $vendor) {
-            if ($order->hasVendorShipment($vendor)) {
+            if (true === $order->hasVendorShipment($vendor) || false === $order->hasShippableItemsWithVendor($vendor)) {
                 continue;
             }
 

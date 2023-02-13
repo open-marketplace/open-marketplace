@@ -169,4 +169,22 @@ trait OrderTrait
 
         return false;
     }
+
+    public function hasShippableItemsWithVendor(VendorInterface $vendor): bool
+    {
+        /** @var OrderItem $item */
+        foreach ($this->getItems() as $item) {
+            /** @var ProductInterface $product */
+            $product = $item->getProduct();
+
+            /** @var ProductVariantInterface $variant */
+            $variant = $item->getVariant();
+
+            if ($vendor === $product->getVendor() && true === $variant->isShippingRequired()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
