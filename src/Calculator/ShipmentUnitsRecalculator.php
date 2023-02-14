@@ -31,13 +31,7 @@ final class ShipmentUnitsRecalculator implements ShipmentUnitsRecalculatorInterf
             /** @var ProductInterface $product */
             $product = $orderItem->getVariant()?->getProduct();
             if (null === $itemUnit->getShipment()) {
-                $shipment = null;
-                if ($product->hasVendor()) {
-                    $shipment = $order->getShipmentByVendor($product->getVendor());
-                } else {
-                    $shipment = $order->getShipmentWithoutVendor();
-                }
-
+                $shipment = $order->getShipmentByVendor($product->getVendor());
                 $shipment?->addUnit($itemUnit);
             }
         }

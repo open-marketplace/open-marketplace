@@ -6,7 +6,6 @@ open_marketplace:
         shipping_details: Shipping details
         is_shipping_required: Is shipping required?
         shipping_category: Shipping category
-        choose_shipping_method: Some of chosen products require shipping, please choose shipping method
         conversation_categories: Message categories
         restored: Product successfully restored
         removed: Product successfully removed

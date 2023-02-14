@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 trait OrderItemTrait
 {
-    public function getProductOwner(): VendorInterface
+    public function getProductOwner(): ?VendorInterface
     {
         /** @var ProductInterface $product */
         $product = $this->getProduct();

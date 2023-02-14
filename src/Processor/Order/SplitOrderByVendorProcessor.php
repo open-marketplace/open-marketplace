@@ -42,8 +42,6 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
     {
         $this->secondaryOrders = [];
 
-        $this->secondaryOrders[] = $order;
-
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
         /** @var OrderItemInterface $item */
@@ -62,10 +60,10 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
         $this->entityManager->flush();
 
-        return $this->secondaryOrders;
+        return [$order, ...$this->secondaryOrders];
     }
 
-    private function vendorSecondaryOrderExits(array $secondaryOrders, VendorInterface $vendor): bool
+    private function vendorSecondaryOrderExits(array $secondaryOrders, ?VendorInterface $vendor): bool
     {
         foreach ($secondaryOrders as $secondaryOrder) {
             if ($secondaryOrder->getVendor() === $vendor) {

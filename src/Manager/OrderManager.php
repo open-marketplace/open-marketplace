@@ -59,7 +59,7 @@ final class OrderManager implements OrderManagerInterface
 
     public function generateNewSecondaryOrder(
         OrderInterface $order,
-        VendorInterface $itemVendor,
+        ?VendorInterface $itemVendor,
         OrderItemInterface $item
     ): OrderInterface {
         /** @var OrderInterface $newOrder */
@@ -73,15 +73,15 @@ final class OrderManager implements OrderManagerInterface
         $this->entityManager->flush();
 
         $shipment = $order->getShipmentByVendor($itemVendor);
-        if (null === $shipment) {
-            return $newOrder;
-        }
+        $newShipment = null;
 
-        $newShipment = $this->shipmentFactory->createNew();
-        $newShipment->setOrder($newOrder);
-        $this->shipmentCloner->clone($shipment, $newShipment);
-        $newOrder->addShipment($newShipment);
-        $this->entityManager->persist($newShipment);
+        if (null !== $shipment) {
+            $newShipment = $this->shipmentFactory->createNew();
+            $newShipment->setOrder($newOrder);
+            $this->shipmentCloner->clone($shipment, $newShipment);
+            $newOrder->addShipment($newShipment);
+            $this->entityManager->persist($newShipment);
+        }
 
         $this->cloneItemIntoSecondaryOrder($item, $newOrder, $newShipment);
 
@@ -90,7 +90,7 @@ final class OrderManager implements OrderManagerInterface
 
     public function addItemIntoSecondaryOrder(
         array $secondaryOrders,
-        VendorInterface $itemVendor,
+        ?VendorInterface $itemVendor,
         OrderItemInterface $item
     ): void {
         /** @var OrderInterface $secondaryOrder */
@@ -100,7 +100,7 @@ final class OrderManager implements OrderManagerInterface
         $this->cloneItemIntoSecondaryOrder($item, $secondaryOrder, $shipment);
     }
 
-    private function getVendorSecondaryOrder(array $secondaryOrders, VendorInterface $vendor): ?OrderInterface
+    private function getVendorSecondaryOrder(array $secondaryOrders, ?VendorInterface $vendor): ?OrderInterface
     {
         foreach ($secondaryOrders as $secondaryOrder) {
             if ($secondaryOrder->getVendor() === $vendor) {

@@ -24,13 +24,14 @@
             {% endfor %}
 
             {% for item in items %}
-                {% include 'Checkout/SelectShipping/_itemUnit.html.twig' with {'item': item} %}
+                {% if item.variant.shippingRequired %}
+                    {% include 'Checkout/SelectShipping/_itemUnit.html.twig' with {'item': item} %}
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
 
         <div class="ui divider"></div>
-        {{ 'open_marketplace.ui.choose_shipping_method'|trans }}
         {% for key, choice_form in form.method %}
             {% set fee = form.method.vars.shipping_costs[choice_form.vars.value] %}
             {% set method = form.method.vars.choices[key].data %}
