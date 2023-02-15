@@ -63,12 +63,11 @@
                  id="open_marketplace.controller.show_vendor_page_action"
                  public="true"
         >
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <argument type="service" id="open_marketplace.repository.vendor_repository"/>
             <argument type="service" id="open_marketplace.repository.product_repository"/>
             <argument type="service" id="sylius.context.channel"/>
+            <argument type="service" id="router" />
+            <argument type="service" id="twig" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Controller\DraftAttributesController"
