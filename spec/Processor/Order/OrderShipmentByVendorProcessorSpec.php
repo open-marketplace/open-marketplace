@@ -73,7 +73,6 @@ class OrderShipmentByVendorProcessorSpec extends ObjectBehavior
 
         $order->getVendorsFromOrderItems()->willReturn([$vendor]);
 
-        $order->hasShippableItemsWithoutVendor()->willReturn(false);
         $order->getShipmentWithoutVendor()->willReturn(null);
 
         $order->hasVendorShipment($vendor)->willReturn(false);
@@ -103,13 +102,12 @@ class OrderShipmentByVendorProcessorSpec extends ObjectBehavior
 
         $order->isEmpty()->willReturn(false);
         $order->isShippingRequired()->willReturn(true);
-
         $order->removeShipments()->shouldNotBeCalled();
 
-        $order->getVendorsFromOrderItems()->willReturn([]);
+        $order->getVendorsFromOrderItems()->willReturn([null]);
 
-        $order->hasShippableItemsWithoutVendor()->willReturn(true);
-        $order->getShipmentWithoutVendor()->willReturn(null);
+        $order->hasVendorShipment(null)->willReturn(false);
+        $order->hasShippableItemsWithVendor(null)->willReturn(true);
         $order->addShipment($shipment)->shouldBeCalled();
 
         $order->getShipments()->willReturn(new ArrayCollection());
@@ -120,6 +118,8 @@ class OrderShipmentByVendorProcessorSpec extends ObjectBehavior
         ;
 
         $shipmentUnitsRecalculator->recalculateShipmentUnits($order)->shouldBeCalled();
+
+        $order->getShipmentWithoutVendor()->willReturn(null);
 
         $this->process($order);
     }

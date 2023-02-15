@@ -54,13 +54,15 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
             }
         }
 
-        foreach ($this->secondaryOrders as $secondaryOrder) {
-            $this->paymentRefresher->refreshPayment($secondaryOrder);
+        $orders = [$order, ...$this->secondaryOrders];
+
+        foreach ($orders as $order) {
+            $this->paymentRefresher->refreshPayment($order);
         }
 
         $this->entityManager->flush();
 
-        return [$order, ...$this->secondaryOrders];
+        return $orders;
     }
 
     private function vendorSecondaryOrderExits(array $secondaryOrders, ?VendorInterface $vendor): bool
