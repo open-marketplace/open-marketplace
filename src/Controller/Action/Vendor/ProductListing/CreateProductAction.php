@@ -26,55 +26,35 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\ResourceActions;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Twig\Environment;
 
-class CreateProductAction extends AbstractController
+class CreateProductAction
 {
-    private MetadataInterface $metadata;
-
-    private RequestConfigurationFactoryInterface $requestConfigurationFactory;
-
-    private NewResourceFactoryInterface $newResourceFactory;
-
-    private FactoryInterface $factory;
-
-    private RedirectHandlerInterface $redirectHandler;
-
-    private FlashHelperInterface $flashHelper;
-
-    private EventDispatcherInterface $eventDispatcher;
-
-    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
-
-    private ProductDraftRepositoryInterface $productDraftRepository;
-
-    private ImageUploaderInterface $imageUploader;
-
     public function __construct(
-        MetadataInterface $metadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        NewResourceFactoryInterface $newResourceFactory,
-        FactoryInterface $factory,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        RedirectHandlerInterface $redirectHandler,
-        FlashHelperInterface $flashHelper,
-        EventDispatcherInterface $eventDispatcher,
-        ProductDraftRepositoryInterface $productDraftRepository,
-        ImageUploaderInterface $imageUploader
+        private MetadataInterface $metadata,
+        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        private NewResourceFactoryInterface $newResourceFactory,
+        private FactoryInterface $factory,
+        private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
+        private RedirectHandlerInterface $redirectHandler,
+        private FlashHelperInterface $flashHelper,
+        private EventDispatcherInterface $eventDispatcher,
+        private ProductDraftRepositoryInterface $productDraftRepository,
+        private ImageUploaderInterface $imageUploader,
+        private FormFactoryInterface $formFactory,
+        private RequestStack $requestStack,
+        private RouterInterface $router,
+        private Environment $twig,
+        private TokenStorageInterface $tokenStorage,
     ) {
-        $this->requestConfigurationFactory = $requestConfigurationFactory;
-        $this->newResourceFactory = $newResourceFactory;
-        $this->factory = $factory;
-        $this->metadata = $metadata;
-        $this->redirectHandler = $redirectHandler;
-        $this->flashHelper = $flashHelper;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
-        $this->productDraftRepository = $productDraftRepository;
-        $this->imageUploader = $imageUploader;
     }
 
     public function __invoke(Request $request): Response
@@ -84,7 +64,7 @@ class CreateProductAction extends AbstractController
         /** @var ProductDraftInterface $newResource */
         $newResource = $this->newResourceFactory->create($configuration, $this->factory);
 
-        $form = $this->createForm(ProductType::class, $newResource);
+        $form = $this->formFactory->create(ProductType::class, $newResource);
 
         $form->handleRequest($request);
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
@@ -116,7 +96,7 @@ class CreateProductAction extends AbstractController
             }
 
             /** @var ShopUserInterface $user */
-            $user = $this->getUser();
+            $user = $this->tokenStorage->getToken()->getUser();
             $vendor = $user->getVendor();
 
             if (null === $vendor) {
@@ -126,13 +106,13 @@ class CreateProductAction extends AbstractController
             $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
 
             $this->productDraftRepository->save($productDraft);
-            $this->addFlash('success', 'open_marketplace.ui.product_listing_created');
 
-            return $this->redirectToRoute('open_marketplace_vendor_product_listing_index');
+            $this->requestStack->getSession()->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_created');
+
+            return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
         }
 
-        return new Response(
-            $this->renderView('Vendor/ProductListing/create_form.html.twig', [
+        return new Response($this->twig->render('Vendor/ProductListing/create_form.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $newResource,

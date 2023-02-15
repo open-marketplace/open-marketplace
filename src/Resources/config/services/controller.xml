@@ -134,12 +134,13 @@
             <argument type="service" id="sylius.resource_controller.redirect_handler"/>
             <argument type="service" id="sylius.resource_controller.flash_helper"/>
             <argument type="service" id="sylius.resource_controller.event_dispatcher"/>
-
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
             <argument type="service" id="open_marketplace.repository.product_draft"/>
             <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="router" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="security.token_storage" />
             <tag name="controller.service_arguments" />
         </service>
 
