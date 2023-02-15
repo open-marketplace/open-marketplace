@@ -21,43 +21,30 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Twig\Environment;
 
-class EditProductAction extends AbstractController
+class EditProductAction
 {
-    private MetadataInterface $metadata;
-
-    private RequestConfigurationFactoryInterface $requestConfigurationFactory;
-
-    private ProductDraftRepositoryInterface $productDraftRepository;
-
-    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private ProductListingRepositoryInterface $productListingRepository;
-
-    private AuthorizationCheckerInterface $authorizationChecker;
-
     public function __construct(
-        MetadataInterface $metadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ProductDraftRepositoryInterface $productDraftRepository,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        ImageUploaderInterface $imageUploader,
-        ProductListingRepositoryInterface $productListingRepository,
-        AuthorizationCheckerInterface $authorizationChecker
+        private MetadataInterface $metadata,
+        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        private ProductDraftRepositoryInterface $productDraftRepository,
+        private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
+        private ImageUploaderInterface $imageUploader,
+        private ProductListingRepositoryInterface $productListingRepository,
+        private AuthorizationCheckerInterface $authorizationChecker,
+        private FormFactoryInterface $formFactory,
+        private RequestStack $requestStack,
+        private Environment $twig,
     ) {
-        $this->requestConfigurationFactory = $requestConfigurationFactory;
-        $this->metadata = $metadata;
-        $this->productDraftRepository = $productDraftRepository;
-        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
-        $this->imageUploader = $imageUploader;
-        $this->productListingRepository = $productListingRepository;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Request $request): Response
@@ -76,7 +63,7 @@ class EditProductAction extends AbstractController
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);
         }
 
-        $form = $this->createForm(ProductType::class, $newResource);
+        $form = $this->formFactory->create(ProductType::class, $newResource);
 
         $form->handleRequest($request);
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
@@ -95,11 +82,11 @@ class EditProductAction extends AbstractController
             $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
 
             $this->productDraftRepository->save($productDraft);
-            $this->addFlash('success', 'open_marketplace.ui.product_listing_saved');
+            $this->requestStack->getSession()->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_saved');
         }
 
         return new Response(
-            $this->renderView('Vendor/ProductListing/update_form.html.twig', [
+            $this->twig->render('Vendor/ProductListing/update_form.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $newResource,

@@ -158,9 +158,9 @@
             <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="security.authorization_checker"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="twig" />
             <tag name="controller.service_arguments" />
 
         </service>
