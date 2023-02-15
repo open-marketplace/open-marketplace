@@ -54,7 +54,7 @@ class CreateProductAction
         private RouterInterface $router,
         private Environment $twig,
         private TokenStorageInterface $tokenStorage,
-    ) {
+        ) {
     }
 
     public function __invoke(Request $request): Response
@@ -112,7 +112,8 @@ class CreateProductAction
             return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
         }
 
-        return new Response($this->twig->render('Vendor/ProductListing/create_form.html.twig', [
+        return new Response(
+            $this->twig->render('Vendor/ProductListing/create_form.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $newResource,
