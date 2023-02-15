@@ -54,8 +54,6 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
         $this->addShipmentsPerVendor($order);
 
         $this->shipmentUnitsRecalculator->recalculateShipmentUnits($order);
-
-        $this->removeShipmentWithoutVendorIfEmpty($order);
     }
 
     private function addShipmentsPerVendor(OrderInterface $order): void
@@ -80,17 +78,6 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
 
         if (null !== $shipment) {
             $order->addShipment($shipment);
-        }
-    }
-
-    private function removeShipmentWithoutVendorIfEmpty(OrderInterface $order): void
-    {
-        $shipment = $order->getShipmentWithoutVendor();
-
-        if (null !== $shipment) {
-            if ($shipment->getUnits()->isEmpty()) {
-                $order->removeShipment($shipment);
-            }
         }
     }
 }
