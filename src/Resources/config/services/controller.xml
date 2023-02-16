@@ -3,16 +3,27 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\OpenMarketplace\Controller\Conversation\ConversationController"
-                 id="open_marketplace.controller.conversation.conversation_controller">
+        <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\ShowConversationAction"
+                 id="open_marketplace.controller.conversation.show_conversation_action">
             <argument type="service" id="twig" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="open_marketplace.repository.conversation" />
-            <argument type="service" id="open_marketplace.current_user_resolver" />
             <argument type="service" id="security.authorization_checker"/>
 
             <tag name="controller.service_arguments" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\ListConversationsAction"
+                 id="open_marketplace.controller.conversation.list_conversations_action">
+            <argument type="service" id="twig" />
+            <argument type="service" id="open_marketplace.repository.conversation" />
+            <argument type="service" id="open_marketplace.current_user_resolver" />
+
+            <tag name="controller.service_arguments" />
+        </service>
+
+
+
 
         <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\CreateNewConversationAction"
                  id="open_marketplace.controller.action.conversation.create_new_conversation_action">
@@ -42,7 +53,7 @@
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Controller\ConfirmProfileUpdateAction"
+        <service class="BitBag\OpenMarketplace\Controller\Action\Vendor\ConfirmProfileUpdateAction"
                  id="open_marketplace.controller.confirm_profile_update_action">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="open_marketplace.updater.vendor_profile_updater"/>
@@ -52,7 +63,7 @@
             <tag name="controller.service_arguments"/>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Controller\VendorController"
+        <service class="BitBag\OpenMarketplace\Controller\Resource\Vendor\VendorController"
                  id="open_marketplace.controller.vendor_controller"
                  parent="open_marketplace.controller.vendor">
             <argument type="service" id="open_marketplace.provider.vendor" />
@@ -70,7 +81,7 @@
             <argument type="service" id="twig" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Controller\DraftAttributesController"
+        <service class="BitBag\OpenMarketplace\Controller\Resource\Product\DraftAttributesController"
                  id="open_marketplace.controller.draftAttributes"
                  parent="open_marketplace.controller.draft_attribute">
             <argument type="service" id="open_marketplace.factory.draftAttribute"/>
@@ -203,7 +214,7 @@
             <tag name="controller.service_arguments" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Controller\Order\OrderController"
+        <service class="BitBag\OpenMarketplace\Controller\Resource\Order\OrderController"
                  id="open_marketplace.controller.order.order_controller"
                  parent="sylius.controller.order">
             <argument type="service" id="open_marketplace.processor.order.split_order_by_vendor_processor"/>

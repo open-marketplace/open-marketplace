@@ -24,11 +24,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
 
-class EditProductAction
+final class EditProductAction
 {
     public function __construct(
         private MetadataInterface $metadata,
@@ -79,7 +80,9 @@ class EditProductAction
             $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
 
             $this->productDraftRepository->save($productDraft);
-            $this->requestStack->getSession()->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_saved');
+            /** @var Session $session */
+            $session = $this->requestStack->getSession();
+            $session->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_saved');
         }
 
         return new Response(

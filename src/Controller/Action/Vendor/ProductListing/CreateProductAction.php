@@ -31,12 +31,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Twig\Environment;
 
-class CreateProductAction
+final class CreateProductAction
 {
     public function __construct(
         private MetadataInterface $metadata,
@@ -95,8 +97,11 @@ class CreateProductAction
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
             }
 
+            /** @var TokenInterface $token */
+            $token = $this->tokenStorage->getToken();
             /** @var ShopUserInterface $user */
-            $user = $this->tokenStorage->getToken()->getUser();
+            $user = $token->getUser();
+
             $vendor = $user->getVendor();
 
             if (null === $vendor) {
@@ -107,7 +112,9 @@ class CreateProductAction
 
             $this->productDraftRepository->save($productDraft);
 
-            $this->requestStack->getSession()->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_created');
+            /** @var Session $session */
+            $session = $this->requestStack->getSession();
+            $session->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_created');
 
             return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
         }
