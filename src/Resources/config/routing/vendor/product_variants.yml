@@ -1,5 +1,5 @@
 vendor_product_variant_index:
-    path: vendor/inventory_variants
+    path: vendor/product-variants/inventory
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:indexAction
@@ -16,7 +16,7 @@ vendor_product_variant_index:
                 subheader: sylius.ui.manage_variants
 
 vendor_product_variant_update:
-    path: vendor/inventory_variants/{id}
+    path: vendor/product-variants/{id}/inventory
     methods: [ GET, PUT ]
     defaults:
         _controller: sylius.controller.product_variant:updateAction

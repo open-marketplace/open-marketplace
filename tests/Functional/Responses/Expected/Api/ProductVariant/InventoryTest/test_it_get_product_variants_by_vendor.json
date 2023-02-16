@@ -1,0 +1,35 @@
+{
+  "@context": "\/api\/v2\/contexts\/ProductVariant",
+  "@id": "\/api\/v2\/shop\/product-variants",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "\/api\/v2\/shop\/product-variants\/bruce_1_1",
+      "@type": "ProductVariant",
+      "onHold": 2,
+      "amount": 3,
+      "tracked": true,
+      "code": "bruce_1_1",
+      "position": 0
+    },
+    {
+      "@id": "\/api\/v2\/shop\/product-variants\/bruce_1_2",
+      "@type": "ProductVariant",
+      "onHold": 0,
+      "amount": 1,
+      "tracked": true,
+      "code": "bruce_1_2",
+      "position": 1
+    },
+    {
+      "@id": "\/api\/v2\/shop\/product-variants\/bruce_2_1",
+      "@type": "ProductVariant",
+      "onHold": 0,
+      "amount": 0,
+      "tracked": false,
+      "code": "bruce_2_1",
+      "position": 0
+    }
+  ],
+  "hydra:totalItems": 3
+}
