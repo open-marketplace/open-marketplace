@@ -55,7 +55,7 @@ RUN set -eux; \
     composer clear-cache
 
 # copy only specifically what we need
-COPY .env ./
+COPY .env .env.prod ./
 COPY assets assets/
 COPY bin bin/
 COPY config config/
@@ -67,10 +67,10 @@ COPY translations translations/
 RUN set -eux; \
     mkdir -p var/cache var/log; \
     composer dump-autoload --classmap-authoritative; \
-#    APP_SECRET='' composer run-script post-install-cmd; \
-    chmod +x bin/console; sync;
-#    bin/console sylius:install:assets --no-interaction; \
-#    bin/console sylius:theme:assets:install public --no-interaction
+    APP_SECRET='' composer run-script post-install-cmd; \
+    chmod +x bin/console; sync; \
+    bin/console sylius:install:assets --no-interaction; \
+    bin/console sylius:theme:assets:install public --no-interaction
 
 VOLUME /srv/open_marketplace/var
 
@@ -94,7 +94,7 @@ RUN set -eux; \
 	;
 
 # prevent the reinstallation of vendors at every changes in the source code
-COPY package.json yarn.lock ./
+COPY package.json yarn.* ./
 RUN set -eux; \
     yarn install; \
     yarn cache clean
@@ -103,10 +103,10 @@ COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/Ui
 COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private    vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private/
 COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private     vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private/
 COPY --from=base /srv/open_marketplace/assets ./assets
-# work out what to do with these file
-#COPY --from=base /srv/sylius/vendor/bitbag/wishlist-plugin/webpack.config.js                         vendor/bitbag/wishlist-plugin/webpack.config.js
-#COPY --from=base /srv/sylius/vendor/bitbag/cms-plugin/webpack.config.js                              vendor/bitbag/cms-plugin/webpack.config.js
-COPY --from=base /srv/open_marketplace/vendor/    vendor/
+COPY --from=base /srv/open_marketplace/vendor/bitbag/wishlist-plugin/webpack.config.js  vendor/bitbag/wishlist-plugin/webpack.config.js
+COPY --from=base /srv/open_marketplace/vendor/bitbag/cms-plugin/webpack.config.js   vendor/bitbag/cms-plugin/webpack.config.js
+COPY --from=base /srv/open_marketplace/vendor/bitbag/wishlist-plugin/src/Resources/assets   vendor/bitbag/wishlist-plugin/src/Resources/assets
+COPY --from=base /srv/open_marketplace/vendor/bitbag/cms-plugin/src/Resources/assets    vendor/bitbag/cms-plugin/src/Resources/assets
 
 COPY webpack.config.js ./
 RUN yarn prod
@@ -153,9 +153,11 @@ RUN set -eux; \
 	;
 
 COPY docker/cron/crontab /etc/crontabs/root
+COPY docker/cron/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
-ENTRYPOINT ["crond"]
-CMD ["-f"]
+ENTRYPOINT ["docker-entrypoint"]
+CMD ["crond", "-f"]
 
 FROM open_marketplace_php_prod AS open_marketplace_migrations_prod
 
