@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -28,14 +27,13 @@ final class ProductPriceType extends AbstractResourceType
 {
     private RepositoryInterface $channelPricingRepository;
 
-    protected $dataClass = ProductListingPrice::class;
-
     public function __construct(
+        string $dataClass,
         array $validationGroups,
         RepositoryInterface $channelPricingRepository
     ) {
         $this->channelPricingRepository = $channelPricingRepository;
-        parent::__construct($this->dataClass, $validationGroups);
+        parent::__construct($dataClass, $validationGroups);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
