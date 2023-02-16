@@ -15,17 +15,18 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
+use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class VendorAwareExtension implements ContextAwareQueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    private VendorContextInterface $vendorContext;
-
-    public function __construct(VendorContextInterface $vendorContext)
-    {
-        $this->vendorContext = $vendorContext;
+    public function __construct(
+        private VendorContextInterface $vendorContext,
+        private SectionProviderInterface $sectionProvider,
+    ) {
     }
 
     public function applyToCollection(
@@ -58,7 +59,7 @@ final class VendorAwareExtension implements ContextAwareQueryCollectionExtension
             return;
         }
 
-        if (!is_string($operationName) || !str_starts_with($operationName, 'shop_account')) {
+        if (false === $this->sectionProvider->getSection() instanceof ShopVendorApiSection) {
             return;
         }
 

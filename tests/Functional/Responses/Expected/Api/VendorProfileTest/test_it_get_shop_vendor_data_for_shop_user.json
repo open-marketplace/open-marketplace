@@ -1,0 +1,9 @@
+{
+  "@context": "\/api\/v2\/contexts\/Vendor",
+  "@id": "\/api\/v2\/shop\/vendors\/@string@",
+  "@type": "Vendor",
+  "uuid": "@string@",
+  "companyName": "Wayne Enterprises, Inc.",
+  "slug": "Wayne-Enterprises-Inc",
+  "image": null
+}

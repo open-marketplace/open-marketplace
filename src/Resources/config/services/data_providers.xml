@@ -9,6 +9,7 @@
                  id="bitbag.open_marketplace.api.data_provider.vendor_account_item">
             <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />
             <argument type="service" id="open_marketplace.repository.vendor_repository" />
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.item_data_provider" />
         </service>
     </services>
