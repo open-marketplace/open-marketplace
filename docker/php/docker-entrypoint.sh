@@ -14,6 +14,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
 	if [ "$APP_ENV" != 'prod' ]; then
 		composer install --prefer-dist --no-progress --no-interaction
 		bin/console assets:install --no-interaction
+		bin/console sylius:theme:assets:install public --no-interaction
 	fi
 
 	while ping -c1 migrations >/dev/null 2>&1;

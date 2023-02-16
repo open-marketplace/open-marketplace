@@ -67,7 +67,8 @@ COPY translations translations/
 RUN set -eux; \
     mkdir -p var/cache var/log; \
     composer dump-autoload --classmap-authoritative; \
-    APP_SECRET='' composer run-script post-install-cmd; \
+#    'Symfony Flex'-specific command
+#    APP_SECRET='' composer run-script post-install-cmd; \
     chmod +x bin/console; sync; \
     bin/console sylius:install:assets --no-interaction; \
     bin/console sylius:theme:assets:install public --no-interaction
