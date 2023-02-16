@@ -18,4 +18,3 @@ fi
 
 printf "\n${BLUE}Reloading fixtures${NO_COLOR}\n\n"
 bin/console sylius:fixtures:load -n open_marketplace
-printf "\n${BLUE}Fixtures Done${NO_COLOR}\n\n"

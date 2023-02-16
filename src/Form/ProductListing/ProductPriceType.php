@@ -28,7 +28,7 @@ final class ProductPriceType extends AbstractResourceType
 {
     private RepositoryInterface $channelPricingRepository;
 
-    protected string $dataClass = ProductListingPrice::class;
+    protected $dataClass = ProductListingPrice::class;
 
     public function __construct(
         array $validationGroups,

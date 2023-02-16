@@ -126,7 +126,6 @@ sylius_fixtures:
                             homepage_header_image:
                                 type: image
                                 path: "%kernel.project_dir%/vendor/bitbag/cms-plugin/tests/Application/Resources/fixtures/homepage_header.jpeg"
-                                original_name: "homepage_header.jpeg"
                                 channels:
                                     - "open-marketplace"
                                 translations:
@@ -144,7 +143,6 @@ sylius_fixtures:
                             homepage_video:
                                 type: video
                                 path: "%kernel.project_dir%/vendor/bitbag/cms-plugin/tests/Application/Resources/fixtures/homepage_video.mp4"
-                                original_name: "homepage_video.mp4"
                                 channels:
                                     - "open-marketplace"
                                 translations:
@@ -162,7 +160,6 @@ sylius_fixtures:
                             homepage_pdf:
                                 type: file
                                 path: "%kernel.project_dir%/vendor/bitbag/cms-plugin/tests/Application/Resources/fixtures/BitBagOffer.pdf"
-                                original_name: "BitBagOffer.pdf"
                                 channels:
                                     - "open-marketplace"
                                 translations:
@@ -180,19 +177,16 @@ sylius_fixtures:
                                     - "open-marketplace"
                                 type: image
                                 path: "%kernel.project_dir%/vendor/bitbag/cms-plugin/tests/Application/Resources/fixtures/size_table.jpeg"
-                                original_name: "size_table.jpeg"
                             sale:
                                 channels:
                                     - "open-marketplace"
                                 type: image
                                 path: "%kernel.project_dir%/vendor/bitbag/cms-plugin/tests/Application/Resources/fixtures/sale.jpeg"
-                                original_name: "sale.jpeg"
                                 sections:
                                     - "products"
                             media_with_products:
                                 type: image
                                 path: "%kernel.project_dir%/vendor/bitbag/cms-plugin/tests/Application/Resources/fixtures/homepage_header.jpeg"
-                                original_name: "homepage_header.jpeg"
                                 channels:
                                     - "open-marketplace"
                             media_with_parameteres:
@@ -200,7 +194,6 @@ sylius_fixtures:
                                     - "open-marketplace"
                                 type: image
                                 path: "%kernel.project_dir%/vendor/bitbag/cms-plugin/tests/Application/Resources/fixtures/homepage_header.jpeg"
-                                original_name: "homepage_header.jpeg"
                                 translations:
                                     en_US:
                                         name: Custom media template
