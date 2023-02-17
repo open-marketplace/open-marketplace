@@ -13,6 +13,7 @@ use BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessor;
 use BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 
 class OrderShipmentByVendorProcessorSpec extends ObjectBehavior
@@ -73,19 +74,14 @@ class OrderShipmentByVendorProcessorSpec extends ObjectBehavior
 
         $order->getVendorsFromOrderItems()->willReturn([$vendor]);
 
-        $order->getShipmentWithoutVendor()->willReturn(null);
-
         $order->hasVendorShipment($vendor)->willReturn(false);
         $order->hasShippableItemsWithVendor($vendor)->willReturn(true);
-
-        $order->addShipment($shipment)->shouldBeCalled();
 
         $shipmentFactory
             ->tryCreateNewWithOrderVendorAndDefaultShipment($order, $vendor)
             ->willReturn($shipment)
         ;
-
-        $order->getShipments()->willReturn(new ArrayCollection());
+        $order->addShipment($shipment)->shouldBeCalled();
 
         $shipmentUnitsRecalculator->recalculateShipmentUnits($order)->shouldBeCalled();
 
