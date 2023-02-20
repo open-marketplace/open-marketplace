@@ -13,7 +13,6 @@ use BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessor;
 use BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 
 class OrderShipmentByVendorProcessorSpec extends ObjectBehavior

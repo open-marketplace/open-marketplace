@@ -76,7 +76,7 @@ final class ShipmentUnitsRecalculatorSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ProductInterface $product,
         VendorInterface $vendor,
-    ): void {
+        ): void {
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $shipment->getUnits()->willReturn(new ArrayCollection([$unit->getWrappedObject()]));
         $shipment->removeUnit($unit)->shouldBeCalled();
