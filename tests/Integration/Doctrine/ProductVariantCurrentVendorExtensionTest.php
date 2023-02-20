@@ -32,6 +32,9 @@ class ProductVariantCurrentVendorExtensionTest extends JsonApiTestCase
             ->method('getSection');
 
         $queryBuilder = $this->createMock(QueryBuilder::class);
+        $queryBuilder
+            ->expects(self::never())
+            ->method('andWhere');
         $queryNameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
 
         $productVariantCurrentVendorExtension = new ProductVariantCurrentVendorExtension($vendorContext, $sectionProvider);
@@ -55,6 +58,9 @@ class ProductVariantCurrentVendorExtensionTest extends JsonApiTestCase
             ->willReturn($this->createMock(ShopApiSection::class));
 
         $queryBuilder = $this->createMock(QueryBuilder::class);
+        $queryBuilder
+            ->expects(self::never())
+            ->method('andWhere');
         $queryNameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
 
         $productVariantCurrentVendorExtension = new ProductVariantCurrentVendorExtension($vendorContext, $sectionProvider);
@@ -68,7 +74,7 @@ class ProductVariantCurrentVendorExtensionTest extends JsonApiTestCase
     public function test_it_prevents_returning_any_records_for_collection_when_current_user_is_not_vendor_context(): void
     {
         $productVariantRepository = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository(ProductVariant::class);
-        $this->loadFixturesFromFile('ProductVariantCurrentVendorExtensionTest/product_variant_current_Vendor_extension.yml');
+        $this->loadFixturesFromFile('ProductVariantCurrentVendorExtensionTest/product_variant_current_vendor_extension.yml');
 
         $vendorContext = $this->createMock(VendorContextInterface::class);
         $vendorContext
@@ -100,7 +106,7 @@ class ProductVariantCurrentVendorExtensionTest extends JsonApiTestCase
         $productVariantRepository = $entityManager->getRepository(ProductVariant::class);
         $vendorRepository = $entityManager->getRepository(Vendor::class);
 
-        $this->loadFixturesFromFile('ProductVariantCurrentVendorExtensionTest/product_variant_current_Vendor_extension.yml');
+        $this->loadFixturesFromFile('ProductVariantCurrentVendorExtensionTest/product_variant_current_vendor_extension.yml');
 
         $vendor = $vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
@@ -141,6 +147,9 @@ class ProductVariantCurrentVendorExtensionTest extends JsonApiTestCase
             ->method('getSection');
 
         $queryBuilder = $this->createMock(QueryBuilder::class);
+        $queryBuilder
+            ->expects(self::never())
+            ->method('andWhere');
         $queryNameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
 
         $productVariantCurrentVendorExtension = new ProductVariantCurrentVendorExtension($vendorContext, $sectionProvider);
@@ -165,6 +174,9 @@ class ProductVariantCurrentVendorExtensionTest extends JsonApiTestCase
             ->willReturn($this->createMock(ShopApiSection::class));
 
         $queryBuilder = $this->createMock(QueryBuilder::class);
+        $queryBuilder
+            ->expects(self::never())
+            ->method('andWhere');
         $queryNameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
 
         $productVariantCurrentVendorExtension = new ProductVariantCurrentVendorExtension($vendorContext, $sectionProvider);
@@ -179,7 +191,7 @@ class ProductVariantCurrentVendorExtensionTest extends JsonApiTestCase
     public function test_it_prevents_returning_any_records_for_item_when_current_user_is_not_vendor_context(): void
     {
         $productVariantRepository = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository(ProductVariant::class);
-        $this->loadFixturesFromFile('ProductVariantCurrentVendorExtensionTest/product_variant_current_Vendor_extension.yml');
+        $this->loadFixturesFromFile('ProductVariantCurrentVendorExtensionTest/product_variant_current_vendor_extension.yml');
 
         $vendorContext = $this->createMock(VendorContextInterface::class);
         $vendorContext
@@ -212,7 +224,7 @@ class ProductVariantCurrentVendorExtensionTest extends JsonApiTestCase
         $productVariantRepository = $entityManager->getRepository(ProductVariant::class);
         $vendorRepository = $entityManager->getRepository(Vendor::class);
 
-        $this->loadFixturesFromFile('ProductVariantCurrentVendorExtensionTest/product_variant_current_Vendor_extension.yml');
+        $this->loadFixturesFromFile('ProductVariantCurrentVendorExtensionTest/product_variant_current_vendor_extension.yml');
 
         $vendor = $vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
 
