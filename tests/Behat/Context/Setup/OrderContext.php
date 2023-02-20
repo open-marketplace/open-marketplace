@@ -157,12 +157,10 @@ final class OrderContext extends RawMinkContext
     }
 
     /**
-     * @Given this order has new shipment
+     * @Given /^(this order) has new shipment$/
      */
-    public function thisOrderHasNewShipment(): void
+    public function thisOrderHasNewShipment(OrderInterface $order): void
     {
-        $order = $this->sharedStorage->get('order');
-
         $shippingMethod = $this->shippingMethodRepository->findOneBy([]);
         Assert::notEmpty($shippingMethod);
 
@@ -178,12 +176,10 @@ final class OrderContext extends RawMinkContext
     }
 
     /**
-     * @Given this order has already been shipped
+     * @Given /^(this order) has already been shipped$/
      */
-    public function thisOrderHasAlreadyBeenShipped(): void
+    public function thisOrderHasAlreadyBeenShipped(OrderInterface $order): void
     {
-        $order = $this->sharedStorage->get('order');
-
         $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->apply(OrderShippingTransitions::TRANSITION_SHIP);
         $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::TRANSITION_SHIP);
 

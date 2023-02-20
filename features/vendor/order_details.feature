@@ -17,7 +17,7 @@ Feature: Vendor can view order details
     And this order has new shipping address city: "Warsaw", postalCode: "12-345", street: "ul. New"
     And this order has new billing address city: "Warsaw", postalCode: "45-566", street: "ul. Old"
     And this order has new shipment
-    And I am on order details page
+    When I visit order details page
     Then I should see order with number "55"
     And I should see customer details with name "Adam"
     And I should see customer shipping address "ul. New Warsaw"
@@ -31,12 +31,12 @@ Feature: Vendor can view order details
     Given There is order with property "number" with value "53" made with logged in seller
     And this order has new shipment
     And this order has already been shipped
-    And I am on order details page
+    When I visit order details page
     Then I should see order with number "53"
     And I should see shipping state "Shipped"
 
   @ui
   Scenario: Visiting details page
     Given There is order with property "number" with value "55" made with other seller
-    And I try to open order details page
+    When I try to open order details page
     Then the response status code should be 404

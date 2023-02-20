@@ -39,7 +39,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given I am on order details page
+     * @When I visit order details page
      */
     public function iAmOnOrderDetailsPage(): void
     {
@@ -48,7 +48,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given I try to open order details page
+     * @When I try to open order details page
      */
     public function iToTryOpenOrderDetailsPage(): void
     {
