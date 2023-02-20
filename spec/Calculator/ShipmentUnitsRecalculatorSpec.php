@@ -85,9 +85,7 @@ final class ShipmentUnitsRecalculatorSpec extends ObjectBehavior
         $orderItem->getVariant()->willReturn($variant);
         $variant->getProduct()->willReturn($product);
         $unit->getShipment()->willReturn(null);
-        $order->getShipmentByVendor($vendor)->shouldBeCalled();
         $product->getVendor()->willReturn($vendor);
-        $order->getShipmentByVendor($vendor)->shouldBeCalled();
         $order->getShipmentByVendor($vendor)->willReturn($shipment);
         $shipment->addUnit($unit)->shouldBeCalled();
 
