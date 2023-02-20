@@ -9,8 +9,9 @@
         "bitbag/wishlist-plugin": "^3.0",
         "ramsey/uuid-doctrine": "^1.8",
         "sylius/sylius": "^1.11.12",
-        "symfony/webpack-encore-bundle": "^1.15",
-        "symfony/dotenv": "^4.4 || ^5.2"
+        "symfony/dotenv": "^4.4 || ^5.2",
+        "symfony/flex": "^1.11",
+        "symfony/webpack-encore-bundle": "^1.15"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -51,7 +52,7 @@
             "symfony/thanks": false,
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "phpstan/extension-installer": false,
-            "symfony/flex": false
+            "symfony/flex": true
         }
     },
     "autoload": {
@@ -71,6 +72,15 @@
     },
     "prefer-stable": true,
     "scripts": {
-
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }
