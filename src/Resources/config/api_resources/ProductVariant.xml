@@ -91,6 +91,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     <attribute name="groups">shop:product_variant:read</attribute>
                 </attribute>
             </collectionOperation>
+
             <collectionOperation name="vendor_inventory_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/vendor/product-variants/inventory</attribute>

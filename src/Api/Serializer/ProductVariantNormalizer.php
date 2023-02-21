@@ -14,12 +14,10 @@ use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class ProductVariantNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
 {
-    use NormalizerAwareTrait;
-
     public function __construct(
         private ContextAwareNormalizerInterface $productVariantNormalizer,
         private SectionProviderInterface $sectionProvider,
@@ -45,5 +43,10 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
     private function isNotShopVendorApiSection(): bool
     {
         return !$this->sectionProvider->getSection() instanceof ShopVendorApiSection;
+    }
+
+    public function setNormalizer(NormalizerInterface $normalizer): void
+    {
+        $this->productVariantNormalizer->setNormalizer($normalizer);
     }
 }
