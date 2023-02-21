@@ -6,6 +6,10 @@
                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\ProductReviewContext"
                 id="tests.open_marketplace.behat.context.vendor.product_review_context" >
             <argument type="service" id="tests.open_marketplace.behat.page.vendor.product_review_page"/>
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="sylius.repository.product_review"/>
+            <argument type="service" id="sylius.repository.customer"/>
         </service>
     </services>
 </container>

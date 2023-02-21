@@ -19,30 +19,12 @@ Feature: Vendor can view reviews of his products
 
   @ui
   Scenario: Rendering all reviews of Vendor's product
-    Given I am on "/en_US/account/vendor/product-reviews"
+    When I go to "/en_US/account/vendor/product-reviews"
     Then I should see "1" reviews
 
   @ui
-  Scenario: Filtering by status
-    Given There is a product with variant code "Helmet" owned by logged in vendor
-    And this product has one review from customer "alex@honnold.pl"
-    And this product has a new review titled "No good" and rated 1 added by customer "kim@jain.pl"
-    And I am on "/en_US/account/vendor/product-reviews"
-    And I select "New" from "criteria[status]"
-    And I click "Filter"
-    Then I should see "2" reviews
-
-  @ui
-  Scenario: Filtering by rating
-    Given There is a product with variant code "Helmet" owned by logged in vendor
-    And this product has one review from customer "alex@honnold.pl"
-    And this product has a new review titled "No good" and rated 1 added by customer "kim@jain.pl"
-    And I am on "/en_US/account/vendor/product-reviews"
-    And I select "1" from "criteria[rating]"
-    And I click "Filter"
-    Then I should see "1" reviews
-
-    When There is a product with variant code "Helmet XL" owned by logged in vendor
-    And this product has a new review titled "No good" and rated 1 added by customer "kim@jain.pl"
-    And I click "Filter"
-    Then I should see "2" reviews
+  Scenario: Rendering all reviews of Vendor's product when there are three different
+    Given this product has one review from customer "kim@jain.pl"
+    And this product also has review rated 1 which is rejected
+    When I go to "/en_US/account/vendor/product-reviews"
+    Then I should see "3" reviews

@@ -20,33 +20,18 @@ Feature: Vendor can delete reviews of his products
     Given There is a product with variant code "Quickdraws-x5" owned by logged in vendor
     And this product has a new review titled "Good" and rated 4 added by customer "alex@honnold.pl"
     And this product has a new review titled "Good" and rated 4 added by customer "kim@jain.pl"
-    When I am on "/en_US/account/vendor/product-reviews"
-    Then I should see "2" reviews
-
-    When I select "New" from "criteria[status]"
-    And I click "Filter"
-    Then I should see "2" reviews
-
+    And I am on "/en_US/account/vendor/product-reviews"
     When I click "Delete" first review
-    And I click "Filter"
-    Then I should see "1" reviews
+    Then this product has 1 "New" reviews
 
   @ui
   Scenario: Deleting a accepted review of a product
     Given There is a product with variant code "Quickdraws-x5" owned by logged in vendor
-    And this product has a new review titled "The best" and rated 5 added by customer "addam@ondra.pl"
-    And this product has one review from customer "alex@honnold.pl"
     And this product has one review from customer "kim@jain.pl"
-    When I am on "/en_US/account/vendor/product-reviews"
-    Then I should see "3" reviews
-
-    When I select "Accepted" from "criteria[status]"
-    And I click "Filter"
-    Then I should see "2" reviews
-
+    And this product has a new review titled "The best" and rated 5 added by customer "alex@honnold.pl"
+    And I am on "/en_US/account/vendor/product-reviews"
     When I click "Delete" first review
-    And I click "Filter"
-    Then I should see "1" reviews
+    Then this product has 0 "Accepted" reviews
 
   @ui
   Scenario: Deleting a rejected review of a product
@@ -54,13 +39,6 @@ Feature: Vendor can delete reviews of his products
     And this product also has review rated 2 which is rejected
     And this product also has review rated 1 which is rejected
     And this product also has review rated 1 which is rejected
-    When I am on "/en_US/account/vendor/product-reviews"
-    Then I should see "3" reviews
-
-    When I select "Rejected" from "criteria[status]"
-    And I click "Filter"
-    Then I should see "3" reviews
-
+    And I am on "/en_US/account/vendor/product-reviews"
     When I click "Delete" first review
-    And I click "Filter"
-    Then I should see "2" reviews
+    Then this product has 2 "Rejected" reviews

@@ -16,7 +16,7 @@ final class ProductReviewPage extends SymfonyPage implements ProductReviewPageIn
 {
     public function getRouteName(): string
     {
-        return 'open_marketplace_vendor_product_review_index';
+        return 'open_marketplace_vendor_product_review_edit';
     }
 
     public function getReviews(): array

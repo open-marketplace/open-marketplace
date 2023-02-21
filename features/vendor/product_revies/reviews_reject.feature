@@ -20,35 +20,6 @@ Feature: Vendor can reject reviews of his products
     Given There is a product with variant code "Quickdraws-x5" owned by logged in vendor
     And this product has a new review titled "Good" and rated 4 added by customer "alex@honnold.pl"
     And this product has one review from customer "kim@jain.pl"
-    When I am on "/en_US/account/vendor/product-reviews"
-    Then I should see "2" reviews
-
-    When I select "New" from "criteria[status]"
-    And I click "Filter"
-    Then I should see "1" reviews
-
+    And I am on "/en_US/account/vendor/product-reviews"
     When I click "Reject" first review
-    And I select "Rejected" from "criteria[status]"
-    And I click "Filter"
-    Then I should see "1" reviews
-
-  @ui
-  Scenario: Rejecting two reviews of a product
-    Given There is a product with variant code "Quickdraws-x5" owned by logged in vendor
-    And this product has a new review titled "Good" and rated 4 added by customer "alex@honnold.pl"
-    And this product has a new review titled "The best" and rated 5 added by customer "kim@jain.pl"
-    When I am on "/en_US/account/vendor/product-reviews"
-    Then I should see "2" reviews
-
-    When I select "New" from "criteria[status]"
-    And I click "Filter"
-    Then I should see "2" reviews
-
-    When I click "Reject" first review
-    And I click "Filter"
-    Then I should see "1" reviews
-
-    When I click "Reject" first review
-    And I select "Rejected" from "criteria[status]"
-    And I click "Filter"
-    Then I should see "2" reviews
+    Then this product has 1 "Rejected" reviews

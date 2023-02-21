@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 
-interface ProductReviewPageInterface
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+
+interface ProductReviewPageInterface extends PageInterface
 {
     public function getRouteName(): string;
 

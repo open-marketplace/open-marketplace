@@ -11,6 +11,12 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
+use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
+use BitBag\OpenMarketplace\Repository\ProductReviewRepositoryInterface;
+use Doctrine\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductReviewPageInterface;
 use Webmozart\Assert\Assert;
 
@@ -18,9 +24,26 @@ final class ProductReviewContext implements Context
 {
     private ProductReviewPageInterface $productReviewPage;
 
-    public function __construct(ProductReviewPageInterface $productReviewPage)
-    {
+    private SharedStorageInterface $sharedStorage;
+
+    private ObjectManager $manager;
+
+    private ProductReviewRepositoryInterface $productReviewRepository;
+
+    private CustomerRepositoryInterface $customerRepository;
+
+    public function __construct(
+        ProductReviewPageInterface $productReviewPage,
+        SharedStorageInterface $sharedStorage,
+        ObjectManager $manager,
+        ProductReviewRepositoryInterface $productReviewRepository,
+        CustomerRepositoryInterface $customerRepository,
+        ) {
         $this->productReviewPage = $productReviewPage;
+        $this->sharedStorage = $sharedStorage;
+        $this->manager = $manager;
+        $this->productReviewRepository = $productReviewRepository;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -54,5 +77,47 @@ final class ProductReviewContext implements Context
     public function iEditFirstReview(): void
     {
         $this->productReviewPage->clickEditFirstReview();
+    }
+
+    /**
+     * @Then /^(this product) has (\d+) "([^"]+)" reviews$/
+     */
+    public function thisProductHasReview(
+        ProductInterface $product,
+        int $count,
+        string $status,
+        ): void {
+        $productReviews = $this->productReviewRepository->findBy(['reviewSubject' => $product, 'status' => $status]);
+        Assert::count($productReviews, $count);
+    }
+
+    /**
+     * @Given /^I am on edit page of review added by "([^"]+)" to (this product)$/
+     */
+    public function iAmOnEditPageOfReviewAddedByToProduct(string $customer, ProductInterface $product)
+    {
+        $customer = $this->customerRepository->findOneBy(['email' => $customer]);
+        $productReview = $this->productReviewRepository->findOneBy(['reviewSubject' => $product, 'author' => $customer]);
+        $this->sharedStorage->set('review', $productReview);
+
+        $this->productReviewPage->open(['id' => $productReview->getId()]);
+    }
+
+    /**
+     * @Then /^(this review) should have name "([^"]+)"$/
+     */
+    public function thisReviewShouldHaveName(ReviewInterface $review, string $name): void
+    {
+        $this->manager->refresh($review);
+        Assert::same($review->getTitle(), $name);
+    }
+
+    /**
+     * @Then /^(this review) should have comment "([^"]+)"$/
+     */
+    public function thisReviewShouldHaveComment(ReviewInterface $review, string $comment): void
+    {
+        $this->manager->refresh($review);
+        Assert::same($review->getComment(), $comment);
     }
 }
