@@ -47,6 +47,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
     public function setNormalizer(NormalizerInterface $normalizer): void
     {
+        /** @phpstan-ignore-next-line BaseProductVariantNormalize doesn't have interface */
         $this->productVariantNormalizer->setNormalizer($normalizer);
     }
 }
