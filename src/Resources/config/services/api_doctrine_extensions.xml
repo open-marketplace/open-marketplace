@@ -20,5 +20,29 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Api\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension"
+                 id="bitbag.open_marketplace.api.doctrine.query_collection_extension.orders_by_logged_in_user_extension"
+                 decorates="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension">
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Api\Doctrine\QueryItemExtension\OrderGetMethodItemExtension"
+                 id="bitbag.open_marketplace.api.doctrine.query_item_extension.order_get_method_item_extension"
+                 decorates="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderGetMethodItemExtension">
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Api\Doctrine\QueryItemExtension\OrderMethodsItemExtension"
+                 id="bitbag.open_marketplace.api.doctrine.query_item_extension.order_methods_item_extension"
+                 decorates="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderMethodsItemExtension">
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
     </services>
 </container>
