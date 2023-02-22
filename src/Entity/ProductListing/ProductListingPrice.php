@@ -21,7 +21,7 @@ class ProductListingPrice implements ProductListingPriceInterface
 
     protected ?int $originalPrice;
 
-    protected ?int $minimumPrice;
+    protected int $minimumPrice = 0;
 
     protected string $channelCode;
 

@@ -29,6 +29,9 @@
             <constraint name="Valid" />
         </property>
 
+        <constraint name="BitBag\OpenMarketplace\Validator\ProductListingPriceConstraint">
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="productListingPrice">
             <constraint name="Valid" />
         </property>

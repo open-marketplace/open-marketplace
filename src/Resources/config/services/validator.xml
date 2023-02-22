@@ -16,5 +16,10 @@
 
             <tag name="validator.constraint_validator" alias="bitbag.sylius_open_marketplace_plugin.validator.unique_shop_user_vendor"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Validator\ProductListingPriceValidator"
+                 id="bitbag.sylius_open_marketplace_plugin.validator.product_listing_price">
+            <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing_price"/>
+        </service>
     </services>
 </container>
