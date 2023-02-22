@@ -20,6 +20,7 @@
         <service class="BitBag\OpenMarketplace\Validator\ProductListingPriceValidator"
                  id="bitbag.sylius_open_marketplace_plugin.validator.product_listing_price">
             <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing_price"/>
+            <argument type="service" id="sylius.repository.channel"/>
         </service>
     </services>
 </container>

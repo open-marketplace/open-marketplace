@@ -12,15 +12,36 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Validator;
 
 use BitBag\OpenMarketplace\Validator\Constraint\ProductListingPriceConstraint;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-class ProductListingPriceValidator extends ConstraintValidator
+final class ProductListingPriceValidator extends ConstraintValidator
 {
+    public function __construct(private ChannelRepositoryInterface $channelRepository)
+    {
+    }
+
+
     public function validate($value, Constraint $constraint): void
     {
+        Assert::isInstanceOf($constraint, ProductListingPriceConstraint::class);
 
+        $channels = $this->channelRepository->findAll();
+
+        foreach ($channels as $channel) {
+            /** @var ChannelPricingInterface|null $channelPricing */
+            $productListingPrice = $value->getProductListingPriceForChannel($channel);
+            if (null === $productListingPrice || null === $productListingPrice->getPrice()) {
+                $this->context->buildViolation($constraint->message)
+                    ->atPath('productListingPrice')
+                    ->addViolation()
+                ;
+
+                return;
+            }
+        }
     }
 }

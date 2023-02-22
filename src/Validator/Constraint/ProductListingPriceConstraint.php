@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Validator\Constraint;
 
 use Symfony\Component\Validator\Constraint;
 
-class ProductListingPriceConstraint extends Constraint
+final class ProductListingPriceConstraint extends Constraint
 {
     public string $message = 'sylius.product_variant.channel_pricing.all_defined';
 

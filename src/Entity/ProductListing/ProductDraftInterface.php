@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -144,4 +145,6 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function setVendor(?VendorInterface $vendor): void;
 
     public function getAnyTranslationName(): ?string;
+
+    public function getProductListingPriceForChannel(ChannelInterface $channel): ?ProductListingPriceInterface;
 }

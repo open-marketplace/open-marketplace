@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -481,6 +482,15 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
             if (null !== $translation->getName()) {
                 return $translation->getName();
             }
+        }
+
+        return null;
+    }
+
+    public function getProductListingPriceForChannel(ChannelInterface $channel): ?ProductListingPriceInterface
+    {
+        if ($this->productListingPrice->containsKey($channel->getCode())) {
+            return $this->productListingPrice->get($channel->getCode());
         }
 
         return null;
