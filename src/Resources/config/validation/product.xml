@@ -28,5 +28,9 @@
         <property name="translations">
             <constraint name="Valid" />
         </property>
+
+        <property name="productListingPrice">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>
