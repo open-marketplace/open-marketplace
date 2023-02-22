@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\Order">
+        <attribute name="id">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="number">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="currencyCode">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="channel">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="customer">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="checkoutState">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="state">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="paymentState">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="shipments">
+            <group>shop:account:vendor:order:read</group>
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="total">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="orderPromotionTotal">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="tokenValue">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="items">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="notes">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="itemsTotal">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="taxTotal">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="localeCode">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="shippingTotal">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="shippingAddress">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="billingAddress">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+    </class>
+</serializer>
