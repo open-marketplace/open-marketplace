@@ -23,10 +23,16 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantCurrentVendorExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
+    private VendorContextInterface $vendorContext;
+
+    private SectionProviderInterface $uriBasedSectionContext;
+
     public function __construct(
-        private VendorContextInterface $vendorContext,
-        private SectionProviderInterface $uriBasedSectionContext,
+        VendorContextInterface $vendorContext,
+        SectionProviderInterface $uriBasedSectionContext,
     ) {
+        $this->vendorContext = $vendorContext;
+        $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
 
     public function applyToCollection(

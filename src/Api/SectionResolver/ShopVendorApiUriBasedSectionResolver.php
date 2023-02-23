@@ -10,14 +10,23 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\SectionResolver;
 
+use BitBag\OpenMarketplace\Factory\ShopVendorApiSectionFactoryInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionCannotBeResolvedException;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 
 final class ShopVendorApiUriBasedSectionResolver implements UriBasedSectionResolverInterface
 {
-    public function __construct(private string $shopVendorApiUriBeginning)
-    {
+    private string $shopVendorApiUriBeginning;
+
+    private ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory;
+
+    public function __construct(
+        string $shopVendorApiUriBeginning,
+        ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory,
+    ) {
+        $this->shopVendorApiUriBeginning = $shopVendorApiUriBeginning;
+        $this->shopVendorApiSectionFactory = $shopVendorApiSectionFactory;
     }
 
     public function getSection(string $uri): SectionInterface
@@ -26,6 +35,6 @@ final class ShopVendorApiUriBasedSectionResolver implements UriBasedSectionResol
             throw new SectionCannotBeResolvedException();
         }
 
-        return new ShopVendorApiSection();
+        return $this->shopVendorApiSectionFactory->createNew();
     }
 }

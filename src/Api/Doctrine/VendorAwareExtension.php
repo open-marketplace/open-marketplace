@@ -23,10 +23,16 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class VendorAwareExtension implements ContextAwareQueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
+    private VendorContextInterface $vendorContext;
+
+    private SectionProviderInterface $sectionProvider;
+
     public function __construct(
-        private VendorContextInterface $vendorContext,
-        private SectionProviderInterface $sectionProvider,
+        VendorContextInterface $vendorContext,
+        SectionProviderInterface $sectionProvider,
     ) {
+        $this->vendorContext = $vendorContext;
+        $this->sectionProvider = $sectionProvider;
     }
 
     public function applyToCollection(
