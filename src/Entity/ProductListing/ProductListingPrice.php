@@ -13,19 +13,19 @@ namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 class ProductListingPrice implements ProductListingPriceInterface
 {
-    protected int $id;
+    protected ?int $id = null;
 
     protected ProductDraftInterface $productDraft;
 
-    protected ?int $price;
+    protected ?int $price = null;
 
-    protected ?int $originalPrice;
+    protected ?int $originalPrice = null;
 
     protected int $minimumPrice = 0;
 
     protected string $channelCode;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

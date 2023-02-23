@@ -15,7 +15,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProductListingPriceInterface extends ResourceInterface
 {
-    public function getId(): int;
+    public function getId(): ?int;
 
     public function setId(int $id): void;
 
