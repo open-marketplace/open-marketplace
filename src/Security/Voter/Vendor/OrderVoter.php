@@ -20,7 +20,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 final class OrderVoter extends Voter
 {
     public const PREFIX = 'VENDOR_ORDER_';
-    public const CANCEL = self::PREFIX.'CANCEL';
+
+    public const CANCEL = self::PREFIX . 'CANCEL';
 
     public function __construct(private FactoryInterface $stateMachineFactory)
     {
@@ -45,7 +46,11 @@ final class OrderVoter extends Voter
         return false;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(
+        string $attribute,
+        $subject,
+        TokenInterface $token
+    ): bool
     {
         return match ($attribute) {
             self::CANCEL => $this->canCancel($subject),
@@ -56,6 +61,7 @@ final class OrderVoter extends Voter
     private function canCancel(OrderInterface $order): bool
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderTransitions::GRAPH);
+
         return $stateMachine->can(OrderTransitions::TRANSITION_CANCEL)
             && OrderPaymentStates::STATE_PAID === $order->getPaymentState();
     }

@@ -28,7 +28,7 @@ final class VendorContextExtension implements QueryCollectionExtensionInterface,
         iterable $filterVendorStrategies,
         private VendorContextInterface $vendorContext,
         private SectionProviderInterface $uriBasedSectionContext,
-    ) {
+        ) {
         $this->filterVendorStrategies = $filterVendorStrategies instanceof \Traversable ? iterator_to_array($filterVendorStrategies) : $filterVendorStrategies;
     }
 

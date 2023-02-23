@@ -16,7 +16,6 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
-use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Security;
@@ -33,6 +32,7 @@ final class OrderMenuBuilder
     private EventDispatcherInterface $eventDispatcher;
 
     private StateMachineFactoryInterface $stateMachineFactory;
+
     private CsrfTokenManagerInterface $csrfTokenManager;
 
     public function __construct(
