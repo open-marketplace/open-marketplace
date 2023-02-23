@@ -18,6 +18,7 @@
         <server name="KERNEL_CLASS" value="App\Kernel"/>
         <server name="EXPECTED_RESPONSES_DIR" value="tests\Responses\json"/>
         <env name="APP_ENV" value="test"/>
+        <env name="APP_DEBUG" value="0"/>
         <env name="SHELL_VERBOSITY" value="-1" />
 
     </php>

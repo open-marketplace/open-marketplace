@@ -26,10 +26,7 @@ Below there is information about shipping method (1).
 
 ![Shipping information](images/shipping_info.png)
 
-Next information about payments (1).
+Next information about `payments` (1), `customer` (2) and `adresses` (3).
+You can also manage shipments (4) and resend confirmation email to client (5).
 
-![Payments information](images/payments_info.png)
-
-You can also resend confirmation email to client (1).
-
-![Resend email to client](images/resend_email.png)
+![Order details](images/order_details.png)

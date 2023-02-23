@@ -11,6 +11,9 @@ doctrine:
                 result_cache_driver:
                     type: service
                     id: doctrine.result_cache_provider
+    dbal:
+        types:
+            uuid: 'Ramsey\Uuid\Doctrine\UuidType'
 
 services:
     doctrine.result_cache_provider:

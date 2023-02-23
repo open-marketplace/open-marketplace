@@ -169,7 +169,7 @@ final class VendorProfileTest extends FunctionalTestCase
         ]));
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/invalid_iri_response', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse($response, 'Api/internal_server_error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     public function test_not_existed_country()
@@ -185,7 +185,7 @@ final class VendorProfileTest extends FunctionalTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/VendorProfileTest/not_existed_country_field_error_response', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse($response, 'Api/internal_server_error', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     public function test_vendor_image_upload_successfully()

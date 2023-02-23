@@ -11,13 +11,19 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
 final class ProductAttributeValueFactory implements ProductAttributeValueFactoryInterface
 {
+    private string $classFQN;
+
+    public function __construct(string $classFQN)
+    {
+        $this->classFQN = $classFQN;
+    }
+
     public function create(): ProductAttributeValueInterface
     {
-        return new ProductAttributeValue();
+        return new $this->classFQN();
     }
 }

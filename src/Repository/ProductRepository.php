@@ -87,7 +87,7 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
         $limit = $request->get('limit', $_ENV['DEFAULT_VENDOR_PRODUCTS_LIMIT']);
 
         $pager = $this->getPaginator($qb);
-        $pager->setMaxPerPage($limit);
+        $pager->setMaxPerPage((int) $limit);
         $pager->setCurrentPage($currentPage);
 
         return $pager;
