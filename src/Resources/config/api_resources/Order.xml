@@ -121,6 +121,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="path">/shop/account/vendor/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface:cancel</attribute>
+                <attribute name="security">is_granted("VENDOR_ORDER_CANCEL", object)</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Cancels Order</attribute>
                 </attribute>

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\MenuBuilder;
 
+use BitBag\OpenMarketplace\Security\Voter\Vendor\OrderVoter;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
@@ -18,26 +19,30 @@ use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class OrderMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.vendor.order.show';
 
+    private Security $security;
+
     private FactoryInterface $factory;
 
     private EventDispatcherInterface $eventDispatcher;
 
     private StateMachineFactoryInterface $stateMachineFactory;
-
     private CsrfTokenManagerInterface $csrfTokenManager;
 
     public function __construct(
+        Security $security,
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
         StateMachineFactoryInterface $stateMachineFactory,
         CsrfTokenManagerInterface $csrfTokenManager
     ) {
+        $this->security = $security;
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
         $this->stateMachineFactory = $stateMachineFactory;
@@ -55,9 +60,7 @@ final class OrderMenuBuilder
         $order = $options['order'];
 
         $stateMachine = $this->stateMachineFactory->get($order, OrderTransitions::GRAPH);
-        if ($stateMachine->can(OrderTransitions::TRANSITION_CANCEL)
-            && OrderPaymentStates::STATE_PAID == $order->getPaymentState()
-        ) {
+        if ($this->security->isGranted(OrderVoter::CANCEL, $order)) {
             $menu
                 ->addChild('cancel', [
                     'route' => 'open_marketplace_vendor_order_cancel',

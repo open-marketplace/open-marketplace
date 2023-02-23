@@ -5,6 +5,7 @@
     <services>
         <service class="BitBag\OpenMarketplace\MenuBuilder\OrderMenuBuilder"
                  id="sylius.vendor.menu_builder.order.show" >
+            <argument type="service" id="security.helper" />
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sm.factory" />
