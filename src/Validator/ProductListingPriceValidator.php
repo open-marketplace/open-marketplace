@@ -24,7 +24,6 @@ final class ProductListingPriceValidator extends ConstraintValidator
     {
     }
 
-
     public function validate($value, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, ProductListingPriceConstraint::class);
