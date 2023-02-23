@@ -18,10 +18,16 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class ProductVariantNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
 {
+    private ContextAwareNormalizerInterface $productVariantNormalizer;
+
+    private SectionProviderInterface $sectionProvider;
+
     public function __construct(
-        private ContextAwareNormalizerInterface $productVariantNormalizer,
-        private SectionProviderInterface $sectionProvider,
+        ContextAwareNormalizerInterface $productVariantNormalizer,
+        SectionProviderInterface $sectionProvider,
     ) {
+        $this->productVariantNormalizer = $productVariantNormalizer;
+        $this->sectionProvider = $sectionProvider;
     }
 
     public function supportsNormalization(

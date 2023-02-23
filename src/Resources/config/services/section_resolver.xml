@@ -15,6 +15,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             id="bitbag.open_marketplace.api.section_resolver.shop_vendor_api_uri_based_section_resolver"
         >
             <argument>%sylius.security.new_api_user_account_vendor_route%</argument>
+            <argument type="service" id="bitbag.open_marketplace.factory.shop_vendor_api_section_factory"/>
             <tag name="sylius.uri_based_section_resolver" priority="50" />
         </service>
     </services>

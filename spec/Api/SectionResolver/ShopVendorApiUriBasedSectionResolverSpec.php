@@ -12,15 +12,16 @@ namespace spec\BitBag\OpenMarketplace\Api\SectionResolver;
 
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiUriBasedSectionResolver;
+use BitBag\OpenMarketplace\Factory\ShopVendorApiSectionFactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionCannotBeResolvedException;
 use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 
 final class ShopVendorApiUriBasedSectionResolverSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory)
     {
-        $this->beConstructedWith('/api/v2/shop/account/vendor');
+        $this->beConstructedWith('/api/v2/shop/account/vendor', $shopVendorApiSectionFactory);
     }
 
     public function it_is_initializable(): void
@@ -29,21 +30,61 @@ final class ShopVendorApiUriBasedSectionResolverSpec extends ObjectBehavior
         $this->shouldHaveType(UriBasedSectionResolverInterface::class);
     }
 
-    public function it_returns_shop_vendor_section_if_path_starts_with_api_v2_shop_vendor(): void
-    {
-        $this->getSection('/api/v2/shop/account/vendor')->shouldBeLike(new ShopVendorApiSection());
-        $this->getSection('/api/v2/shop/account/vendor/something')->shouldBeLike(new ShopVendorApiSection());
+    public function it_returns_shop_vendor_section_if_path_starts_with_api_v2_shop_vendor(
+        ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory,
+        ShopVendorApiSection $shopVendorApiSection,
+    ): void {
+        $shopVendorApiSectionFactory->createNew()->willReturn($shopVendorApiSection);
+
+        $this->getSection('/api/v2/shop/account/vendor')->shouldReturn($shopVendorApiSection);
     }
 
-    public function it_throws_an_exception_if_path_does_not_start_with_api_v2_shop_vendor(): void
+    public function it_returns_shop_vendor_section_if_path_starts_with_api_v2_shop_vendor_something(
+        ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory,
+        ShopVendorApiSection $shopVendorApiSection,
+    ): void {
+        $shopVendorApiSectionFactory->createNew()->willReturn($shopVendorApiSection);
+
+        $this->getSection('/api/v2/shop/account/vendor/something')->shouldReturn($shopVendorApiSection);
+    }
+
+    public function it_throws_an_exception_if_path_starts_with_shop(): void
     {
         $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/shop']);
+    }
+
+    public function it_throws_an_exception_if_path_starts_with_admin(): void
+    {
         $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/admin']);
+    }
+
+    public function it_throws_an_exception_if_path_starts_with_api(): void
+    {
         $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/en_US/api']);
+    }
+
+    public function it_throws_an_exception_if_path_starts_with_api_v1(): void
+    {
         $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/api/v1']);
-        $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/api/v2']);
+    }
+
+    public function it_throws_an_exception_if_path_starts_with_api_v2(): void
+    {
+        $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/api/v1']);
+    }
+
+    public function it_throws_an_exception_if_path_starts_with_api_v2_shop(): void
+    {
         $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/api/v2/shop']);
-        $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/api/v2/shop/vendors']);
+    }
+
+    public function it_throws_an_exception_if_path_starts_with_api_v2_admin(): void
+    {
         $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/api/v2/admin']);
+    }
+
+    public function it_throws_an_exception_if_path_starts_with_api_v2_shop_vendors(): void
+    {
+        $this->shouldThrow(SectionCannotBeResolvedException::class)->during('getSection', ['/api/v2/shop/vendors']);
     }
 }
