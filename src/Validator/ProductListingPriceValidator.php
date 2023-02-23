@@ -16,7 +16,7 @@ use BitBag\OpenMarketplace\Validator\Constraint\ProductListingPriceConstraint;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class ProductListingPriceValidator extends ConstraintValidator
 {
@@ -26,7 +26,9 @@ final class ProductListingPriceValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($constraint, ProductListingPriceConstraint::class);
+        if (!$constraint instanceof ProductListingPriceConstraint) {
+            throw new UnexpectedTypeException($constraint, ProductListingPriceConstraint::class);
+        }
 
         $channels = $this->channelRepository->findAll();
 

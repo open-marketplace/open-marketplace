@@ -65,12 +65,12 @@ class ProductListingPrice implements ProductListingPriceInterface
         $this->originalPrice = $originalPrice;
     }
 
-    public function getMinimumPrice(): ?int
+    public function getMinimumPrice(): int
     {
         return $this->minimumPrice;
     }
 
-    public function setMinimumPrice(?int $minimumPrice): void
+    public function setMinimumPrice(int $minimumPrice): void
     {
         $this->minimumPrice = $minimumPrice;
     }

@@ -489,8 +489,10 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
     public function getProductListingPriceForChannel(ChannelInterface $channel): ?ProductListingPriceInterface
     {
-        if ($this->productListingPrice->containsKey($channel->getCode())) {
-            return $this->productListingPrice->get($channel->getCode());
+        if (null !== $channel->getCode()) {
+            if ($this->productListingPrice->containsKey($channel->getCode())) {
+                return $this->productListingPrice->get($channel->getCode());
+            }
         }
 
         return null;

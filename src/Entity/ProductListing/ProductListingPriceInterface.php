@@ -31,9 +31,9 @@ interface ProductListingPriceInterface extends ResourceInterface
 
     public function setOriginalPrice(?int $originalPrice): void;
 
-    public function getMinimumPrice(): ?int;
+    public function getMinimumPrice(): int;
 
-    public function setMinimumPrice(?int $minimumPrice): void;
+    public function setMinimumPrice(int $minimumPrice): void;
 
     public function getChannelCode(): string;
 
