@@ -15,17 +15,26 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorAddress;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Repository\OrderRepository;
-use BitBag\OpenMarketplace\Repository\VendorRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Factory\AddressFactoryInterface;
+use Sylius\Component\Core\Model\Address;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderShippingTransitions;
+use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
+use Webmozart\Assert\Assert;
 
 final class OrderContext extends RawMinkContext
 {
@@ -35,30 +44,42 @@ final class OrderContext extends RawMinkContext
 
     private OrderRepository $orderRepository;
 
-    private VendorRepository $vendorRepository;
-
     private ShopUserExampleFactory $userExampleFactory;
 
     private EntityManagerInterface $entityManager;
 
     private UserRepository $userRepository;
 
+    private ShipmentFactoryInterface $shipmentFactory;
+
+    private ShippingMethodRepositoryInterface $shippingMethodRepository;
+
+    private StateMachineFactoryInterface $stateMachineFactory;
+
+    private AddressFactoryInterface $addressFactory;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $orderFactory,
         OrderRepository $orderRepository,
-        VendorRepository $vendorRepository,
         ShopUserExampleFactory $userExampleFactory,
         EntityManagerInterface $entityManager,
         UserRepository $userRepository,
-        ) {
+        ShipmentFactoryInterface $shipmentFactory,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        StateMachineFactoryInterface $stateMachineFactory,
+        AddressFactoryInterface $addressFactory
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderFactory = $orderFactory;
         $this->orderRepository = $orderRepository;
-        $this->vendorRepository = $vendorRepository;
         $this->userExampleFactory = $userExampleFactory;
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
+        $this->shipmentFactory = $shipmentFactory;
+        $this->shippingMethodRepository = $shippingMethodRepository;
+        $this->stateMachineFactory = $stateMachineFactory;
+        $this->addressFactory = $addressFactory;
     }
 
     /**
@@ -119,15 +140,6 @@ final class OrderContext extends RawMinkContext
     }
 
     /**
-     * @Given I am on order details page
-     */
-    public function iAmOnOrderDetailsPage()
-    {
-        $order = $this->sharedStorage->get('order');
-        $this->visitPath('/en_US/account/vendor/orders/' . $order->getId());
-    }
-
-    /**
      * @Given There is :count orders made with logged in seller
      */
     public function thereIsOrdersMadeWithLoggedInSeller($count)
@@ -142,6 +154,72 @@ final class OrderContext extends RawMinkContext
             $this->orderRepository->add($orders[$i]);
         }
         $this->sharedStorage->set('orders', $orders);
+    }
+
+    /**
+     * @Given /^(this order) has new shipment$/
+     */
+    public function thisOrderHasNewShipment(OrderInterface $order): void
+    {
+        $shippingMethod = $this->shippingMethodRepository->findOneBy([]);
+        Assert::notEmpty($shippingMethod);
+
+        $shipment = $this->shipmentFactory->createNew();
+        $shipment->setMethod($shippingMethod);
+        $shipment->setOrder($order);
+        $order->addShipment($shipment);
+
+        $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
+        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::TRANSITION_CREATE);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^(this order) has already been shipped$/
+     */
+    public function thisOrderHasAlreadyBeenShipped(OrderInterface $order): void
+    {
+        $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->apply(OrderShippingTransitions::TRANSITION_SHIP);
+        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::TRANSITION_SHIP);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given this order has new shipping address city: :city, postalCode: :postalCode, street: :street
+     */
+    public function thisOrderHasNewShippingAddressCityPostalCodeStreet(
+        string $city,
+        string $postalCode,
+        string $street
+    ): void {
+        $country = $this->entityManager->getRepository(Country::class)->findOneBy([]);
+        Assert::notEmpty($country);
+
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        $customer = $order->getCustomer();
+        $order->setShippingAddress($this->createAddress($customer, $country, $city, $postalCode, $street));
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given this order has new billing address city: :city, postalCode: :postalCode, street: :street
+     */
+    public function thisOrderHasNewBillingAddressCityPostalCodeStreet(
+        string $city,
+        string $postalCode,
+        string $street
+    ): void {
+        $country = $this->entityManager->getRepository(Country::class)->findOneBy([]);
+        Assert::notEmpty($country);
+
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        $customer = $order->getCustomer();
+        $order->setBillingAddress($this->createAddress($customer, $country, $city, $postalCode, $street));
+        $this->entityManager->flush();
     }
 
     private function createOrder(
@@ -218,6 +296,31 @@ final class OrderContext extends RawMinkContext
         $this->sharedStorage->set('vendor', $vendor);
 
         return $vendor;
+    }
+
+    private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition): void
+    {
+        foreach ($order->getShipments() as $shipment) {
+            $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition);
+        }
+    }
+
+    private function createAddress(
+        CustomerInterface $customer,
+        CountryInterface $country,
+        string $city,
+        string $postalCode,
+        string $street
+    ): AddressInterface {
+        $address = $this->addressFactory->createNew();
+        $address->setFirstName($customer->getFirstName());
+        $address->setLastName($customer->getLastName());
+        $address->setCountryCode($country->getCode());
+        $address->setCity($city);
+        $address->setPostcode($postalCode);
+        $address->setStreet($street);
+
+        return $address;
     }
 
     /**
