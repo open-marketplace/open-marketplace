@@ -23,7 +23,7 @@ sylius_order:
         order:
             classes:
                 model: BitBag\OpenMarketplace\Entity\Order
-                controller: Sylius\Bundle\CoreBundle\Controller\OrderController
+                controller: BitBag\OpenMarketplace\Controller\Resource\OrderController
                 repository: BitBag\OpenMarketplace\Repository\OrderRepository
                 form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
         order_item:

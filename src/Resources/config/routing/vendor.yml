@@ -9,3 +9,26 @@ sylius_vendor_order_resend_confirmation_email:
 
 bitbag_open_marketplace_product_listings_taxons:
   resource: 'vendor/taxon.yml'
+
+bitbag_open_marketplace_vendor_order_shipment_ship:
+  path: /orders/{orderId}/shipments/{id}/ship
+  methods: [PUT]
+  defaults:
+    _controller: sylius.controller.shipment:updateAction
+    _sylius:
+      event: ship
+      repository:
+        method: findOneByOrderId
+        arguments:
+          id: $id
+          orderId: $orderId
+      state_machine:
+        graph: sylius_shipment
+        transition: ship
+      redirect: referer
+      form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
+      vars:
+        route:
+          parameters:
+            orderId: $orderId
+            id: $id

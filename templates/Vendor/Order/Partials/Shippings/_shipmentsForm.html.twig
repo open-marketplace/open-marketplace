@@ -1,0 +1,10 @@
+<div class="ui segment">
+    {{ form_start(form, {'action': path('bitbag_open_marketplace_vendor_order_shipment_ship', {'id': shipment.id, 'orderId': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    <input type="hidden" name="_method" value="PUT">
+    <div class="ui fluid action input">
+        {{ form_widget(form.tracking, {'attr': {'placeholder': 'sylius.ui.tracking_code'|trans ~ '...'}}) }}
+        <button type="submit" class="ui labeled icon teal button"><i class="plane icon"></i> {{ 'sylius.ui.ship'|trans }}</button>
+    </div>
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>
