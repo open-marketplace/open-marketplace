@@ -23,8 +23,11 @@ final class OrderVoter extends Voter
 
     public const CANCEL = self::PREFIX . 'CANCEL';
 
-    public function __construct(private FactoryInterface $stateMachineFactory)
+    private FactoryInterface $stateMachineFactory;
+
+    public function __construct(FactoryInterface $stateMachineFactory)
     {
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function supportsAttribute(string $attribute): bool
@@ -50,8 +53,7 @@ final class OrderVoter extends Voter
         string $attribute,
         $subject,
         TokenInterface $token
-    ): bool
-    {
+    ): bool {
         return match ($attribute) {
             self::CANCEL => $this->canCancel($subject),
             default => throw new \LogicException(sprintf('Unsupported attribute: "%s"', $attribute))

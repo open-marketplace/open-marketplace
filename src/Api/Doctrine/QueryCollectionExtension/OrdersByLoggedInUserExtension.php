@@ -18,10 +18,16 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollectionExtensionInterface
 {
+    private ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension;
+
+    private SectionProviderInterface $sectionProvider;
+
     public function __construct(
-        private ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension,
-        private SectionProviderInterface $uriBasedSectionContext,
+        ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension,
+        SectionProviderInterface $sectionProvider,
     ) {
+        $this->baseOrdersByLoggedInUserExtension = $baseOrdersByLoggedInUserExtension;
+        $this->sectionProvider = $sectionProvider;
     }
 
     public function applyToCollection(
@@ -31,7 +37,7 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         string $operationName = null,
         array $context = []
     ): void {
-        $section = $this->uriBasedSectionContext->getSection();
+        $section = $this->sectionProvider->getSection();
         if ($section instanceof ShopVendorApiSection) {
             return;
         }

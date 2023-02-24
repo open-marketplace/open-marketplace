@@ -18,10 +18,16 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
 {
+    private QueryItemExtensionInterface $baseOrderGetMethodItemExtension;
+
+    private SectionProviderInterface $uriBasedSectionContext;
+
     public function __construct(
-        private QueryItemExtensionInterface $baseOrderGetMethodItemExtension,
-        private SectionProviderInterface $uriBasedSectionContext,
+        QueryItemExtensionInterface $baseOrderGetMethodItemExtension,
+        SectionProviderInterface $uriBasedSectionContext,
     ) {
+        $this->baseOrderGetMethodItemExtension = $baseOrderGetMethodItemExtension;
+        $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
 
     public function applyToItem(
@@ -29,8 +35,7 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         LegacyQueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName =
-        null,
+        string $operationName = null,
         array $context = []
     ): void {
         $section = $this->uriBasedSectionContext->getSection();

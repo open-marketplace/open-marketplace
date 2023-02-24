@@ -1,0 +1,130 @@
+{
+  "@context": "/api/v2/contexts/Order",
+  "@id": "/api/v2/shop/account/vendor/orders",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_2",
+      "@type": "Order",
+      "customer": {
+        "@id": "/api/v2/shop/customers/@string@",
+        "@type": "Customer",
+        "email": "john.smith@example.com",
+        "firstName": "John",
+        "lastName": "Smith"
+      },
+      "shipments": [
+        {
+          "@id": "/api/v2/shop/shipments/@string@",
+          "@type": "Shipment",
+          "method": {
+            "@id": "/api/v2/shop/shipping-methods/fedex",
+            "@type": "ShippingMethod",
+            "code": "fedex"
+          }
+        }
+      ],
+      "currencyCode": "USD",
+      "checkoutState": "completed",
+      "paymentState": "paid",
+      "id": "@integer@",
+      "state": "new"
+    }
+  ],
+  "hydra:totalItems": 1,
+  "hydra:view": {
+    "@id": "/api/v2/shop/account/vendor/orders?paymentState=paid",
+    "@type": "hydra:PartialCollectionView"
+  },
+  "hydra:search": {
+    "@type": "hydra:IriTemplate",
+    "hydra:template": "/api/v2/shop/account/vendor/orders{?number,state,state[],paymentState,paymentState[],shippingState,shippingState[],shipments.method.code,shipments.method.code[],customer.email,checkoutCompletedAt[before],checkoutCompletedAt[strictly_before],checkoutCompletedAt[after],checkoutCompletedAt[strictly_after]}",
+    "hydra:variableRepresentation": "BasicRepresentation",
+    "hydra:mapping": [
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "number",
+        "property": "number",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "state",
+        "property": "state",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "state[]",
+        "property": "state",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "paymentState",
+        "property": "paymentState",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "paymentState[]",
+        "property": "paymentState",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "shippingState",
+        "property": "shippingState",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "shippingState[]",
+        "property": "shippingState",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "shipments.method.code",
+        "property": "shipments.method.code",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "shipments.method.code[]",
+        "property": "shipments.method.code",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "customer.email",
+        "property": "customer.email",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "checkoutCompletedAt[before]",
+        "property": "checkoutCompletedAt",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "checkoutCompletedAt[strictly_before]",
+        "property": "checkoutCompletedAt",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "checkoutCompletedAt[after]",
+        "property": "checkoutCompletedAt",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "checkoutCompletedAt[strictly_after]",
+        "property": "checkoutCompletedAt",
+        "required": false
+      }
+    ]
+  }
+}
