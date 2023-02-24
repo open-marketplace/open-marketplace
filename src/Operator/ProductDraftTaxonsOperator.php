@@ -14,6 +14,7 @@ namespace BitBag\OpenMarketplace\Operator;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -37,12 +38,14 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
 
         /** @var ProductDraftTaxonInterface $productDraftTaxon */
         foreach ($productDraft->getProductDraftTaxons() as $productDraftTaxon) {
-            $taxon = $productDraftTaxon->getTaxon();
-            /** @var ProductTaxonInterface $productTaxon */
-            $productTaxon = $this->productTaxonFactory->createNew();
-            $productTaxon->setProduct($product);
-            $productTaxon->setTaxon($taxon);
-            $product->addProductTaxon($productTaxon);
+            if (!$this->isTaxonDataAlreadySetInProduct($productDraftTaxon, $product->getProductTaxons())){
+                $taxon = $productDraftTaxon->getTaxon();
+                /** @var ProductTaxonInterface $productTaxon */
+                $productTaxon = $this->productTaxonFactory->createNew();
+                $productTaxon->setProduct($product);
+                $productTaxon->setTaxon($taxon);
+                $product->addProductTaxon($productTaxon);
+            }
         }
 
         return $product;
@@ -56,10 +59,34 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
 
         $productTaxons = $product->getProductTaxons();
         foreach ($productTaxons as $productTaxon) {
-            $product->removeProductTaxon($productTaxon);
-            $this->entityManager->remove($productTaxon);
+            if (!$this->isTaxonDataAlreadySetInProductDraft($productTaxon, $productDraft->getProductDraftTaxons())){
+                $product->removeProductTaxon($productTaxon);
+                $this->entityManager->remove($productTaxon);
+            }
         }
 
         $this->copyTaxonsToProduct($productDraft, $product);
+    }
+
+    /** @param Collection<int, ProductDraftTaxonInterface> $productDraftTaxons */
+    private function isTaxonDataAlreadySetInProductDraft(ProductTaxonInterface $productTaxon, Collection $productDraftTaxons): bool
+    {
+        foreach ($productDraftTaxons as $productDraftTaxon){
+            if ($productDraftTaxon->getTaxon() === $productTaxon->getTaxon()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** @param Collection<int, ProductTaxonInterface> $productTaxons */
+    private function isTaxonDataAlreadySetInProduct(ProductDraftTaxonInterface $productDraftTaxon, Collection $productTaxons): bool
+    {
+        foreach ($productTaxons as $productTaxon){
+            if ($productTaxon->getTaxon() === $productDraftTaxon->getTaxon()){
+                return true;
+            }
+        }
+        return false;
     }
 }
