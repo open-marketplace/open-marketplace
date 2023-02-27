@@ -20,8 +20,10 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class ProductListingPriceValidator extends ConstraintValidator
 {
-    public function __construct(private ChannelRepositoryInterface $channelRepository)
+    private ChannelRepositoryInterface $channelRepository;
+    public function __construct(ChannelRepositoryInterface $channelRepository)
     {
+        $this->channelRepository = $channelRepository;
     }
 
     public function validate($value, Constraint $constraint): void
