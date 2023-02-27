@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 final class ProductListingPriceValidator extends ConstraintValidator
 {
     private ChannelRepositoryInterface $channelRepository;
+
     public function __construct(ChannelRepositoryInterface $channelRepository)
     {
         $this->channelRepository = $channelRepository;
