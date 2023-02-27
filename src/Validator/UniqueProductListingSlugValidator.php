@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Validator;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,10 +25,16 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
 {
     public const PRODUCT_LISTING_CREATE_PRODUCT_ROUTE = 'open_marketplace_vendor_product_listing_create_product';
 
+    private RepositoryInterface $productTranslationRepository;
+
+    private RequestStack $requestStack;
+
     public function __construct(
-        private EntityRepository $productTranslationRepository,
-        private RequestStack $requestStack
+        RepositoryInterface $productTranslationRepository,
+        RequestStack $requestStack
     ) {
+        $this->productTranslationRepository = $productTranslationRepository;
+        $this->requestStack = $requestStack;
     }
 
     /** @var ProductTranslationInterface */
@@ -79,6 +85,6 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
         $request = $this->requestStack->getCurrentRequest();
 
         return
-            self::PRODUCT_LISTING_CREATE_PRODUCT_ROUTE === $request->attributes->get('_route');
+            self::PRODUCT_LISTING_CREATE_PRODUCT_ROUTE === $request->get('_route');
     }
 }
