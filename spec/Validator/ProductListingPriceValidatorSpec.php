@@ -66,4 +66,25 @@ final class ProductListingPriceValidatorSpec extends ObjectBehavior
         $executionContext->addViolation($constraint->message)
             ->shouldBeCalled();
     }
+
+    public function it_does_not_add_violation_if_product_listing_price_provided(
+        ExecutionContextInterface $executionContext,
+        ChannelRepositoryInterface $channelRepository,
+        ChannelInterface $channel,
+        ProductDraftInterface $productDraft,
+        ProductListingPriceInterface $productListingPrice
+    ): void {
+        $constraint = new ProductListingPriceConstraint();
+
+        $this->initialize($executionContext);
+
+        $channelRepository->findAll()->willReturn(new ArrayCollection([$channel->getWrappedObject()]));
+        $productDraft->getProductListingPriceForChannel($channel)->willReturn($productListingPrice);
+        $productListingPrice->getPrice()->willReturn(123);
+
+        $this->validate($productDraft, $constraint);
+
+        $executionContext->addViolation($constraint->message)
+            ->shouldNotBeCalled();
+    }
 }
