@@ -36,9 +36,7 @@ final class ProductListingPriceValidator extends ConstraintValidator
             /** @var ProductListingPriceInterface|null $productListingPrice */
             $productListingPrice = $value->getProductListingPriceForChannel($channel);
             if (null === $productListingPrice || null === $productListingPrice->getPrice()) {
-                $this->context->buildViolation($constraint->message)
-                    ->addViolation()
-                ;
+                $this->context->addViolation($constraint->message);
 
                 return;
             }
