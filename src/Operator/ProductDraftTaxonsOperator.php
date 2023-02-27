@@ -38,7 +38,7 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
 
         /** @var ProductDraftTaxonInterface $productDraftTaxon */
         foreach ($productDraft->getProductDraftTaxons() as $productDraftTaxon) {
-            if (!$this->isTaxonDataAlreadySetInProduct($productDraftTaxon, $product->getProductTaxons())){
+            if (!$this->isTaxonDataAlreadySetInProduct($productDraftTaxon, $product->getProductTaxons())) {
                 $taxon = $productDraftTaxon->getTaxon();
                 /** @var ProductTaxonInterface $productTaxon */
                 $productTaxon = $this->productTaxonFactory->createNew();
@@ -59,7 +59,7 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
 
         $productTaxons = $product->getProductTaxons();
         foreach ($productTaxons as $productTaxon) {
-            if (!$this->isTaxonDataAlreadySetInProductDraft($productTaxon, $productDraft->getProductDraftTaxons())){
+            if (!$this->isTaxonDataAlreadySetInProductDraft($productTaxon, $productDraft->getProductDraftTaxons())) {
                 $product->removeProductTaxon($productTaxon);
                 $this->entityManager->remove($productTaxon);
             }
@@ -71,22 +71,24 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
     /** @param Collection<int, ProductDraftTaxonInterface> $productDraftTaxons */
     private function isTaxonDataAlreadySetInProductDraft(ProductTaxonInterface $productTaxon, Collection $productDraftTaxons): bool
     {
-        foreach ($productDraftTaxons as $productDraftTaxon){
-            if ($productDraftTaxon->getTaxon() === $productTaxon->getTaxon()){
+        foreach ($productDraftTaxons as $productDraftTaxon) {
+            if ($productDraftTaxon->getTaxon() === $productTaxon->getTaxon()) {
                 return true;
             }
         }
+
         return false;
     }
 
     /** @param Collection<int, ProductTaxonInterface> $productTaxons */
     private function isTaxonDataAlreadySetInProduct(ProductDraftTaxonInterface $productDraftTaxon, Collection $productTaxons): bool
     {
-        foreach ($productTaxons as $productTaxon){
-            if ($productTaxon->getTaxon() === $productDraftTaxon->getTaxon()){
+        foreach ($productTaxons as $productTaxon) {
+            if ($productTaxon->getTaxon() === $productDraftTaxon->getTaxon()) {
                 return true;
             }
         }
+
         return false;
     }
 }

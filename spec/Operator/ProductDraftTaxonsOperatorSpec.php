@@ -45,7 +45,7 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
         $this->shouldImplement(ProductDraftTaxonsOperatorInterface::class);
     }
 
-    public function it_copies_taxons_from_draft_to_product(
+    public function it_copies_non_existing_taxons_from_draft_to_product(
         ProductDraftInterface $productDraft,
         ProductInterface $product,
         TaxonInterface $taxon,
@@ -69,6 +69,33 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
         $productTaxon->setProduct($product)->shouldHaveBeenCalled();
         $productTaxon->setTaxon($taxon)->shouldHaveBeenCalled();
         $product->addProductTaxon($productTaxon)->shouldHaveBeenCalled();
+        $product->setMainTaxon($taxon)->shouldHaveBeenCalled();
+    }
+
+    public function it_do_not_copy_existing_taxons_from_draft_to_product(
+        ProductDraftInterface $productDraft,
+        ProductInterface $product,
+        TaxonInterface $taxon,
+        ProductDraftTaxonInterface $productDraftTaxon,
+        ProductTaxonInterface $productTaxon,
+        FactoryInterface $productTaxonFactory
+    ) {
+        $productDraft->getMainTaxon()->willReturn($taxon);
+        $productTaxonFactory->createNew()->willReturn($productTaxon);
+        $productDraftTaxon->getTaxon()->willReturn($taxon);
+        $productTaxon->getTaxon()->willReturn($taxon);
+        $productTaxons = new ArrayCollection([$productTaxon->getWrappedObject()]);
+        $product->getProductTaxons()->willReturn($productTaxons);
+        $productDraftTaxon->getProductDraft()->willReturn($productDraft);
+        $productDraftTaxons = new ArrayCollection([$productDraftTaxon->getWrappedObject()]);
+        $productDraft->getProductDraftTaxons()->willReturn($productDraftTaxons);
+        $productTaxon->getProduct()->willReturn(null);
+
+        $this->copyTaxonsToProduct($productDraft, $product);
+
+        $productTaxon->setProduct($product)->shouldNotBeCalled();
+        $productTaxon->setTaxon($taxon)->shouldNotBeCalled();
+        $product->addProductTaxon($productTaxon)->shouldNotBeCalled();
         $product->setMainTaxon($taxon)->shouldHaveBeenCalled();
     }
 }
