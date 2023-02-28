@@ -5,7 +5,8 @@
     <services>
         <service class="BitBag\OpenMarketplace\Validator\UniqueProductListingSlugValidator"
                  id="bitbag.sylius_open_marketplace_plugin.validator.unique_product_listing_slug">
-            <argument type="service" id="sylius.repository.product_translation" />
+            <argument type="service" id="open_marketplace.repository.product_translation" />
+            <argument type="service" id="request_stack" />
 
             <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing.translation"/>
         </service>
