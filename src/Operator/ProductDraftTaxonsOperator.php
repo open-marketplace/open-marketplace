@@ -16,8 +16,10 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use function Clue\StreamFilter\fun;
 
 final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInterface
 {
@@ -36,14 +38,24 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
         $productDraftMainTaxon = $productDraft->getMainTaxon();
         $product->setMainTaxon($productDraftMainTaxon);
 
+        $taxonsFromProduct = array_map(static function (ProductTaxonInterface $productTaxon) {
+            return $productTaxon->getTaxon()->getId();
+        }, $product->getProductTaxons()->toArray());
+
+        $taxonsFromProductDraft = array_map(static function (ProductDraftTaxonInterface $productDraftTaxon) {
+            return $productDraftTaxon->getTaxon()->getId();
+        }, $productDraft->getProductDraftTaxons()->toArray());
+
+        $sharedTaxons = array_intersect($taxonsFromProduct, $taxonsFromProductDraft);
+
         /** @var ProductDraftTaxonInterface $productDraftTaxon */
         foreach ($productDraft->getProductDraftTaxons() as $productDraftTaxon) {
-            if (!$this->isTaxonDataAlreadySetInProduct($productDraftTaxon, $product->getProductTaxons())) {
-                $taxon = $productDraftTaxon->getTaxon();
+            $taxonId = $productDraftTaxon->getTaxon()->getId();
+            if (!in_array($taxonId, $sharedTaxons)) {
                 /** @var ProductTaxonInterface $productTaxon */
                 $productTaxon = $this->productTaxonFactory->createNew();
                 $productTaxon->setProduct($product);
-                $productTaxon->setTaxon($taxon);
+                $productTaxon->setTaxon($productDraftTaxon->getTaxon());
                 $product->addProductTaxon($productTaxon);
             }
         }
@@ -57,38 +69,25 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
             $product->setMainTaxon(null);
         }
 
-        $productTaxons = $product->getProductTaxons();
-        foreach ($productTaxons as $productTaxon) {
-            if (!$this->isTaxonDataAlreadySetInProductDraft($productTaxon, $productDraft->getProductDraftTaxons())) {
+        $taxonsFromProduct = array_map(static function (ProductTaxonInterface $productTaxon) {
+            return $productTaxon->getTaxon()->getId();
+        }, $product->getProductTaxons()->toArray());
+
+        $taxonsFromProductDraft = array_map(static function (ProductDraftTaxonInterface $productDraftTaxon) {
+            return $productDraftTaxon->getTaxon()->getId();
+        }, $productDraft->getProductDraftTaxons()->toArray());
+
+        $sharedTaxons = array_intersect($taxonsFromProduct, $taxonsFromProductDraft);
+
+        /** @var ProductTaxon $productTaxon */
+        foreach ($product->getProductTaxons() as $productTaxon) {
+            $taxonId = $productTaxon->getTaxon()->getId();
+            if (!in_array($taxonId, $sharedTaxons)) {
                 $product->removeProductTaxon($productTaxon);
                 $this->entityManager->remove($productTaxon);
             }
         }
 
         $this->copyTaxonsToProduct($productDraft, $product);
-    }
-
-    /** @param Collection<int, ProductDraftTaxonInterface> $productDraftTaxons */
-    private function isTaxonDataAlreadySetInProductDraft(ProductTaxonInterface $productTaxon, Collection $productDraftTaxons): bool
-    {
-        foreach ($productDraftTaxons as $productDraftTaxon) {
-            if ($productDraftTaxon->getTaxon() === $productTaxon->getTaxon()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /** @param Collection<int, ProductTaxonInterface> $productTaxons */
-    private function isTaxonDataAlreadySetInProduct(ProductDraftTaxonInterface $productDraftTaxon, Collection $productTaxons): bool
-    {
-        foreach ($productTaxons as $productTaxon) {
-            if ($productTaxon->getTaxon() === $productDraftTaxon->getTaxon()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
