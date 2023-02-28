@@ -54,15 +54,15 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
         FactoryInterface $productTaxonFactory
     ) {
         $productDraft->getMainTaxon()->willReturn($taxon);
-        $productTaxonFactory->createNew()->willReturn($productTaxon);
+
+        $product->getProductTaxons()->willReturn(new ArrayCollection([]));
+        $productDraft->getProductDraftTaxons()->willReturn(new ArrayCollection([$productDraftTaxon->getWrappedObject()]));
         $productDraftTaxon->getTaxon()->willReturn($taxon);
         $productDraftTaxon->getProductDraft()->willReturn($productDraft);
-        $productDraftTaxons = new ArrayCollection([$productDraftTaxon->getWrappedObject()]);
-        $productDraft->getProductDraftTaxons()->willReturn($productDraftTaxons);
+        $taxon->getId()->willReturn(1);
+        $productTaxonFactory->createNew()->willReturn($productTaxon);
         $productTaxon->getProduct()->willReturn(null);
         $productTaxon->getTaxon()->willReturn(null);
-        $productTaxons = new ArrayCollection([$productTaxon->getWrappedObject()]);
-        $product->getProductTaxons()->willReturn($productTaxons);
 
         $this->copyTaxonsToProduct($productDraft, $product);
 
@@ -81,15 +81,17 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
         FactoryInterface $productTaxonFactory
     ) {
         $productDraft->getMainTaxon()->willReturn($taxon);
-        $productTaxonFactory->createNew()->willReturn($productTaxon);
-        $productDraftTaxon->getTaxon()->willReturn($taxon);
+
+        $product->getProductTaxons()->willReturn(new ArrayCollection([$productTaxon->getWrappedObject()]));
         $productTaxon->getTaxon()->willReturn($taxon);
-        $productTaxons = new ArrayCollection([$productTaxon->getWrappedObject()]);
-        $product->getProductTaxons()->willReturn($productTaxons);
+        $productTaxon->getProduct()->willReturn($product);
+
+        $productDraft->getProductDraftTaxons()->willReturn(new ArrayCollection([$productDraftTaxon->getWrappedObject()]));
+        $productDraftTaxon->getTaxon()->willReturn($taxon);
         $productDraftTaxon->getProductDraft()->willReturn($productDraft);
-        $productDraftTaxons = new ArrayCollection([$productDraftTaxon->getWrappedObject()]);
-        $productDraft->getProductDraftTaxons()->willReturn($productDraftTaxons);
-        $productTaxon->getProduct()->willReturn(null);
+
+        $taxon->getId()->willReturn(1);
+        $productTaxonFactory->createNew()->willReturn($productTaxon);
 
         $this->copyTaxonsToProduct($productDraft, $product);
 
