@@ -75,7 +75,8 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
                     ->atPath('slug')
                     ->setInvalidValue($value)
                     ->setCode(UniqueEntity::NOT_UNIQUE_ERROR)
-                    ->addViolation();
+                    ->addViolation()
+                ;
             }
         }
     }
