@@ -60,7 +60,8 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
                 ->atPath('slug')
                 ->setInvalidValue($value)
                 ->setCode(UniqueEntity::NOT_UNIQUE_ERROR)
-                ->addViolation();
+                ->addViolation()
+            ;
 
             return;
         }
@@ -84,7 +85,6 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
         /** @var Request $request */
         $request = $this->requestStack->getCurrentRequest();
 
-        return
-            self::PRODUCT_LISTING_CREATE_PRODUCT_ROUTE === $request->get('_route');
+        return self::PRODUCT_LISTING_CREATE_PRODUCT_ROUTE === $request->get('_route');
     }
 }
