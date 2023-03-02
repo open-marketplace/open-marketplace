@@ -1,5 +1,6 @@
 {% if product.enabledVariants.empty() or product.simple and not sylius_inventory_is_available(product.enabledVariants.first) %}
     {{ render(url('sylius_shop_partial_cart_add_item', {'template': '@SyliusShop/Product/Show/_outOfStock.html.twig', 'productId': product.id })) }}
+    {% include '@BitBagSyliusWishlistPlugin/Common/_addToWishlist.html.twig' %}
 {% else %}
     {{ render(url('sylius_shop_partial_cart_add_item', {'template': '@SyliusShop/Product/Show/_addToCart.html.twig', 'productId': product.id})) }}
 {% endif %}
