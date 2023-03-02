@@ -42,7 +42,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                     options:
-                        fields: [translation.name]
+                        fields: [translations.name]
             actions:
                 main:
                     generate:
