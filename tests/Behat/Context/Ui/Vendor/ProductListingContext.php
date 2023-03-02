@@ -209,8 +209,9 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function iShouldGetValidationError()
     {
         $page = $this->getSession()->getPage();
+        $this->getSession()->reload();
 
-        $label = $page->find('css', '.ui.red.pointing.label.sylius-validation-error');
+        $label = $page->find('css', '.ui.red.label.sylius-validation-error');
         Assert::eq($label->getText(), 'You must define price for every channel.');
     }
 
