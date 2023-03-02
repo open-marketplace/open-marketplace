@@ -14,7 +14,7 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 trait ShipmentTrait
 {
-    private ?VendorInterface $vendor;
+    private ?VendorInterface $vendor = null;
 
     public function hasVendor(): bool
     {

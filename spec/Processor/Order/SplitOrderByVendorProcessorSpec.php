@@ -62,7 +62,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 
         $this->process($order);
 
-        $this->getSecondaryOrdersCount()->shouldReturn(2);
+        $this->getSecondaryOrdersCount()->shouldReturn(1);
 
         $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
     }
@@ -97,7 +97,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 
         $this->process($order);
 
-        $this->getSecondaryOrdersCount()->shouldReturn(3);
+        $this->getSecondaryOrdersCount()->shouldReturn(2);
 
         $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
     }

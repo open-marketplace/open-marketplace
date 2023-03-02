@@ -11,6 +11,7 @@
         </id>
 
         <field name="code" column="code" type="string" unique="false" nullable="false" />
+        <field name="shippingRequired" column="shipping_required" type="boolean" />
         <field name="isVerified" column="is_verified" type="boolean" unique="false" nullable="false" />
         <field name="verifiedAt" column="verified_at" type="datetime" unique="false" nullable="true"/>
         <field name="publishedAt" column="published_at" type="datetime" unique="false" nullable="true"/>
@@ -64,6 +65,10 @@
 
         <many-to-one field="mainTaxon" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
             <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
+        <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
+            <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
     </mapped-superclass>
 </doctrine-mapping>

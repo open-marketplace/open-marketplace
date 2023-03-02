@@ -18,6 +18,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface
 {
@@ -36,6 +37,14 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function getCode(): string;
 
     public function setCode(string $code): void;
+
+    public function isShippingRequired(): bool;
+
+    public function setShippingRequired(bool $shippingRequired): void;
+
+    public function getShippingCategory(): ?ShippingCategoryInterface;
+
+    public function setShippingCategory(?ShippingCategoryInterface $shippingCategory): void;
 
     public function isVerified(): bool;
 

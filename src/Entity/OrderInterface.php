@@ -29,15 +29,13 @@ interface OrderInterface extends BaseOrderInterface
     /** @return Collection<int, OrderInterface> */
     public function getSecondaryOrders(): Collection;
 
-    public function hasVendorItems(): bool;
-
-    public function hasVendorShipment(VendorInterface $vendor): bool;
-
-    public function hasShipmentWithoutVendor(): bool;
+    public function hasVendorShipment(?VendorInterface $vendor): bool;
 
     public function getVendorsFromOrderItems(): array;
 
     public function getShipmentByVendor(?VendorInterface $vendor): ?ShipmentInterface;
 
     public function getShipmentWithoutVendor(): ?ShipmentInterface;
+
+    public function hasShippableItemsWithVendor(?VendorInterface $vendor): bool;
 }

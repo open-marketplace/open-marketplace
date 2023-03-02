@@ -61,10 +61,8 @@ final class ShipmentUnitsRecalculatorSpec extends ObjectBehavior
         $orderItem->getVariant()->willReturn($variant);
         $variant->getProduct()->willReturn($product);
         $unit->getShipment()->willReturn(null);
-        $product->hasVendor()->willReturn(true);
         $product->getVendor()->willReturn($vendor);
         $order->getShipmentByVendor($vendor)->willReturn($shipment);
-        $order->getShipmentWithoutVendor()->shouldNotBeCalled();
         $shipment->addUnit($unit)->shouldBeCalled();
 
         $this->recalculateShipmentUnits($order);
@@ -76,8 +74,9 @@ final class ShipmentUnitsRecalculatorSpec extends ObjectBehavior
         OrderItemUnitInterface $unit,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant,
-        ProductInterface $product
-    ): void {
+        ProductInterface $product,
+        VendorInterface $vendor,
+        ): void {
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $shipment->getUnits()->willReturn(new ArrayCollection([$unit->getWrappedObject()]));
         $shipment->removeUnit($unit)->shouldBeCalled();
@@ -86,9 +85,8 @@ final class ShipmentUnitsRecalculatorSpec extends ObjectBehavior
         $orderItem->getVariant()->willReturn($variant);
         $variant->getProduct()->willReturn($product);
         $unit->getShipment()->willReturn(null);
-        $product->hasVendor()->willReturn(false);
-        $product->getVendor()->shouldNotBeCalled();
-        $order->getShipmentWithoutVendor()->willReturn($shipment);
+        $product->getVendor()->willReturn($vendor);
+        $order->getShipmentByVendor($vendor)->willReturn($shipment);
         $shipment->addUnit($unit)->shouldBeCalled();
 
         $this->recalculateShipmentUnits($order);

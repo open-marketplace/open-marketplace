@@ -1,5 +1,11 @@
 open_marketplace:
     ui:
+        yes: Yes
+        no: No
+        none: None
+        shipping_details: Shipping details
+        is_shipping_required: Is shipping required?
+        shipping_category: Shipping category
         conversation_categories: Message categories
         restored: Product successfully restored
         removed: Product successfully removed
@@ -60,7 +66,7 @@ open_marketplace:
         minimum: minimum
         original: original
         price: Price
-        product_rejected_intro: Corresponding item has been rejected 
+        product_rejected_intro: Corresponding item has been rejected
         product_overview: Product overview
         rejected_listing_msg: This product has been rejected
         more: More

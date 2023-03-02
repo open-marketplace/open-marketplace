@@ -14,10 +14,12 @@ namespace BitBag\OpenMarketplace\Form\ProductListing;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,17 +44,26 @@ final class ProductType extends AbstractType
             ->add('vendor', EntityType::class, [
                 'class' => Vendor::class,
                 'label' => 've',
-                ])
+            ])
             ->add('code', TextType::class, [
                 'label' => 'sylius.ui.code',
                 'disabled' => ($builder->getData()->getCode()),
-                ])
+            ])
+            ->add('shippingRequired', CheckboxType::class, [
+                'label' => 'sylius.form.variant.shipping_required',
+                'required' => false,
+            ])
+            ->add('shippingCategory', ShippingCategoryChoiceType::class, [
+                'required' => false,
+                'placeholder' => 'sylius.ui.no_requirement',
+                'label' => 'sylius.form.product_variant.shipping_category',
+            ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ProductTranslationType::class,
                 'label' => 'sylius.form.product.translations',
                 'attr' => [
                     'class' => 'ui styled fluid accordion',
-                    ],
+                ],
                 'constraints' => [new Valid(['groups' => 'sylius'])],
             ])
             ->add('save', SubmitType::class, [
