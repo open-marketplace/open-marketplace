@@ -202,7 +202,6 @@ final class ProductListingContext extends RawMinkContext implements Context
         $page->findById('sylius_product_mainTaxon')->setValue($taxon);
     }
 
-
     /**
      * @Then I should get validation error
      */
@@ -214,5 +213,4 @@ final class ProductListingContext extends RawMinkContext implements Context
         $label = $page->find('css', '.ui.red.label.sylius-validation-error');
         Assert::eq($label->getText(), 'You must define price for every channel.');
     }
-
 }
