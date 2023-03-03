@@ -26,13 +26,13 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 {
     public function let(
-        FactoryInterface $productListingFactoryInterface,
+        FactoryInterface $productListingFactory,
         FactoryInterface $draftFactory,
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
         ProductListingPricingClonerInterface $productListingPricingCloner
     ): void {
         $this->beConstructedWith(
-            $productListingFactoryInterface,
+            $productListingFactory,
             $draftFactory,
             $productListingTranslationCloner,
             $productListingPricingCloner
@@ -50,12 +50,12 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
     }
 
     public function it_returns_product_listing(
-        FactoryInterface $productListingFactoryInterface,
+        FactoryInterface $productListingFactory,
         ProductListingInterface $productListing,
         ProductDraftInterface $productDraft,
         VendorInterface $vendor
     ): void {
-        $productListingFactoryInterface->createNew()
+        $productListingFactory->createNew()
             ->willReturn($productListing);
 
         $productDraft->getTranslations()
