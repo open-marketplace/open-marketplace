@@ -7,8 +7,6 @@ default:
         - Behat\MinkExtension\Context\MinkContext
         - sylius.behat.context.domain.managing_products
         - sylius.behat.context.setup.admin_security
-
-
         - sylius.behat.context.setup.product
         - sylius.behat.context.setup.shop_security
         - sylius.behat.context.setup.channel
