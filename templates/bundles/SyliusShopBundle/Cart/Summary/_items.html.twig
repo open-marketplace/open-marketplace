@@ -6,7 +6,6 @@
     {{ form_end(form, {'render_rest': false}) }}
 
     {{ sylius_template_event('sylius.shop.cart.summary.items', {'cart': cart, 'form': form}) }}
-{#    {% dump("aAAAAAAAAAAA") %}#}
     <table id="sylius-cart-items" {{ sylius_test_html_attribute('cart-items') }} class="ui very basic celled table">
         <thead>
         <tr>
