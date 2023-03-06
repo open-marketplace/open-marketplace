@@ -64,6 +64,7 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
         /** @var ProductDraftInterface $newProductDraft */
         $newProductDraft = $this->draftFactory->createNew();
         $productListing->addProductDraft($newProductDraft);
+        $productListing->setVerificationStatus(ProductDraftInterface::STATUS_CREATED);
 
         $newProductDraft->setVersionNumber($productDraft->getVersionNumber());
         $newProductDraft->incrementVersion();

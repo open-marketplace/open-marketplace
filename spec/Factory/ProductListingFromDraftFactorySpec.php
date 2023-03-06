@@ -108,6 +108,10 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $productDraft->isShippingRequired()->willReturn(true);
         $productDraft->getShippingCategory()->willReturn(null);
 
+        $productListing->addProductDraft($newProductDraft)->shouldBeCalled();
+        $productListing->setVerificationStatus(ProductDraftInterface::STATUS_CREATED)
+            ->shouldBeCalled();
+
         $newProductDraft->setShippingRequired(true)->shouldBeCalled();
         $newProductDraft->setShippingCategory(null)->shouldBeCalled();
 
