@@ -59,6 +59,7 @@ final class EditProductAction
 
         if (!(ProductDraftInterface::STATUS_CREATED === $newResource->getStatus())) {
             $newResource = $this->productListingFromDraftFactory->createClone($newResource);
+            $newResource->getProductListing()->setVerificationStatus(ProductDraftInterface::STATUS_CREATED);
         }
 
         $form = $this->formFactory->create(ProductType::class, $newResource);
