@@ -31,18 +31,48 @@ use Twig\Environment;
 
 final class EditProductAction
 {
+    private MetadataInterface $metadata;
+
+    private RequestConfigurationFactoryInterface $requestConfigurationFactory;
+
+    private ProductDraftRepositoryInterface $productDraftRepository;
+
+    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
+
+    private ImageUploaderInterface $imageUploader;
+
+    private ProductListingRepositoryInterface $productListingRepository;
+
+    private AuthorizationCheckerInterface $authorizationChecker;
+
+    private FormFactoryInterface $formFactory;
+
+    private RequestStack $requestStack;
+
+    private Environment $twig;
+
     public function __construct(
-        private MetadataInterface $metadata,
-        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        private ProductDraftRepositoryInterface $productDraftRepository,
-        private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        private ImageUploaderInterface $imageUploader,
-        private ProductListingRepositoryInterface $productListingRepository,
-        private AuthorizationCheckerInterface $authorizationChecker,
-        private FormFactoryInterface $formFactory,
-        private RequestStack $requestStack,
-        private Environment $twig,
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        ProductDraftRepositoryInterface $productDraftRepository,
+        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
+        ImageUploaderInterface $imageUploader,
+        ProductListingRepositoryInterface $productListingRepository,
+        AuthorizationCheckerInterface $authorizationChecker,
+        FormFactoryInterface $formFactory,
+        RequestStack $requestStack,
+        Environment $twig,
         ) {
+        $this->metadata = $metadata;
+        $this->requestConfigurationFactory = $requestConfigurationFactory;
+        $this->productDraftRepository = $productDraftRepository;
+        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
+        $this->imageUploader = $imageUploader;
+        $this->productListingRepository = $productListingRepository;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->formFactory = $formFactory;
+        $this->requestStack = $requestStack;
+        $this->twig = $twig;
     }
 
     public function __invoke(Request $request): Response
