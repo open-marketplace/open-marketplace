@@ -171,6 +171,7 @@
             <argument type="service" id="form.factory" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="twig" />
+            <argument type="service" id="router.default" />
             <tag name="controller.service_arguments" />
 
         </service>
