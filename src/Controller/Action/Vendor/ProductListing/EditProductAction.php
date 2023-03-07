@@ -86,6 +86,7 @@ final class EditProductAction
             /** @var Session $session */
             $session = $this->requestStack->getSession();
             $session->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_saved');
+
             return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
         }
 
