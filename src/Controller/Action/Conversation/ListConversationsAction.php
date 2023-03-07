@@ -15,11 +15,20 @@ use Twig\Environment;
 
 final class ListConversationsAction
 {
+    private Environment $templatingEngine;
+
+    private ConversationRepositoryInterface $conversationRepository;
+
+    private CurrentUserResolverInterface $currentUserResolver;
+
     public function __construct(
-        private Environment $templatingEngine,
-        private ConversationRepositoryInterface $conversationRepository,
-        private CurrentUserResolverInterface $currentUserResolver,
+        Environment $templatingEngine,
+        ConversationRepositoryInterface $conversationRepository,
+        CurrentUserResolverInterface $currentUserResolver,
         ) {
+        $this->templatingEngine = $templatingEngine;
+        $this->conversationRepository = $conversationRepository;
+        $this->currentUserResolver = $currentUserResolver;
     }
 
     public function __invoke(Request $request): Response
