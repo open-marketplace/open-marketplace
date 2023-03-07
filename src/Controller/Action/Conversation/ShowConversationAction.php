@@ -17,12 +17,24 @@ use Twig\Environment;
 
 final class ShowConversationAction
 {
+    private Environment $templatingEngine;
+
+    private FormFactoryInterface $formFactory;
+
+    private ConversationRepositoryInterface $conversationRepository;
+
+    private AuthorizationCheckerInterface $authorizationChecker;
+
     public function __construct(
-        private Environment $templatingEngine,
-        private FormFactoryInterface $formFactory,
-        private ConversationRepositoryInterface $conversationRepository,
-        private AuthorizationCheckerInterface $authorizationChecker
+        Environment $templatingEngine,
+        FormFactoryInterface $formFactory,
+        ConversationRepositoryInterface $conversationRepository,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
+        $this->templatingEngine = $templatingEngine;
+        $this->formFactory = $formFactory;
+        $this->conversationRepository = $conversationRepository;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(int $id, Request $request): Response
