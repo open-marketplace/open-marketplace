@@ -138,6 +138,10 @@
         <service id="open_marketplace.factory.product_taxon" class="Sylius\Component\Resource\Factory\Factory" public="true">
             <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon</argument>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Factory\ShopVendorApiSectionFactory"
+                 id="bitbag.open_marketplace.factory.shop_vendor_api_section_factory">
+        </service>
     </services>
 </container>
 
