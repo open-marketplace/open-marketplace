@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryInterface
 {
-    private FactoryInterface $productListingFactoryInterface;
+    private FactoryInterface $productListingFactory;
 
     private FactoryInterface $draftFactory;
 
@@ -30,12 +30,12 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
     private ProductListingPricingClonerInterface $productListingPricingCloner;
 
     public function __construct(
-        FactoryInterface $productListingFactoryInterface,
+        FactoryInterface $productListingFactory,
         FactoryInterface $draftFactory,
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
         ProductListingPricingClonerInterface $productListingPricingCloner
     ) {
-        $this->productListingFactoryInterface = $productListingFactoryInterface;
+        $this->productListingFactory = $productListingFactory;
         $this->draftFactory = $draftFactory;
         $this->productListingTranslationCloner = $productListingTranslationCloner;
         $this->productListingPricingCloner = $productListingPricingCloner;
@@ -44,7 +44,7 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
     public function createNew(ProductDraftInterface $productDraft, VendorInterface $vendor): ProductDraftInterface
     {
         /** @var ProductListingInterface $productListing */
-        $productListing = $this->productListingFactoryInterface->createNew();
+        $productListing = $this->productListingFactory->createNew();
 
         $productDraft = $this->formatTranslation($productDraft);
 
@@ -64,6 +64,7 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
         /** @var ProductDraftInterface $newProductDraft */
         $newProductDraft = $this->draftFactory->createNew();
         $productListing->addProductDraft($newProductDraft);
+        $productListing->setVerificationStatus(ProductDraftInterface::STATUS_CREATED);
 
         $newProductDraft->setVersionNumber($productDraft->getVersionNumber());
         $newProductDraft->incrementVersion();

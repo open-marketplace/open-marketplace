@@ -9,6 +9,7 @@
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="open_marketplace.factory.vendor"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
         </service>
 
     </services>
