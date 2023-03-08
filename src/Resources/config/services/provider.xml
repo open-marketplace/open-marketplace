@@ -13,5 +13,13 @@
             <argument type="service" id="bitbag.open_marketplace.factory.vendor" />
         </service>
 
+        <service class="BitBag\OpenMarketplace\Api\Provider\PathPrefixProvider"
+                 id="bitbag.open_marketplace.api.provider.path_prefix_provider"
+                decorates="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface">
+            <argument type="service" id=".inner" />
+            <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />
+            <argument>%sylius.security.new_api_user_account_vendor_route%</argument>
+        </service>
+
     </services>
 </container>
