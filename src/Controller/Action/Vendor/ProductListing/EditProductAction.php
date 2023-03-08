@@ -21,10 +21,12 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
@@ -42,6 +44,7 @@ final class EditProductAction
         private FormFactoryInterface $formFactory,
         private RequestStack $requestStack,
         private Environment $twig,
+        private RouterInterface $router,
         ) {
     }
 
@@ -83,6 +86,8 @@ final class EditProductAction
             /** @var Session $session */
             $session = $this->requestStack->getSession();
             $session->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_saved');
+
+            return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
         }
 
         return new Response(
