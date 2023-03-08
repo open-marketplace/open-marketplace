@@ -20,7 +20,7 @@
                 class="header sylius-product-name"
         >{{ product.name }}</a>
 
-        {% if not product.variants.empty() %}
+        {% if not product.enabledVariants.empty() %}
             <div class="sylius-product-price">{{ money.calculatePrice(product|sylius_resolve_variant) }}</div>
         {% endif %}
 

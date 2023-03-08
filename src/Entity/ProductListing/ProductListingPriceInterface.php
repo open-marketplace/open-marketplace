@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ProductListingPriceInterface extends ResourceInterface, UuidAwareInterface
 {
-    public function getId(): int;
+    public function getId(): ?int;
 
     public function setId(int $id): void;
 
@@ -32,9 +32,9 @@ interface ProductListingPriceInterface extends ResourceInterface, UuidAwareInter
 
     public function setOriginalPrice(?int $originalPrice): void;
 
-    public function getMinimumPrice(): ?int;
+    public function getMinimumPrice(): int;
 
-    public function setMinimumPrice(?int $minimumPrice): void;
+    public function setMinimumPrice(int $minimumPrice): void;
 
     public function getChannelCode(): string;
 

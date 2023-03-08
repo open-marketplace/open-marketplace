@@ -52,6 +52,7 @@ final class ProductPriceType extends AbstractResourceType
                 'label' => 'sylius.ui.minimum_price',
                 'required' => false,
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
+                'empty_data' => '0.00',
             ])
         ;
 

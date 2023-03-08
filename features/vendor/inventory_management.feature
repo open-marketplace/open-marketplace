@@ -12,7 +12,7 @@ Feature: Vendor can manage his inventory
   @ui
   Scenario: Setting a product as tracked
     Given There is a product with variant code "testing_variant_code" owned by logged in vendor
-    And I am on "/en_US/account/vendor/inventory_variants"
+    And I am on "/en_US/account/vendor/product-variants/inventory"
     And I follow "Edit"
     And I fill in "sylius_product_variant[onHand]" with "12"
     And I set product as tracked
@@ -22,7 +22,7 @@ Feature: Vendor can manage his inventory
   @ui
   Scenario: Setting a product as tracked
     Given There is a product with variant code "testing_variant_code" owned by logged in vendor
-    And I am on "/en_US/account/vendor/inventory_variants"
+    And I am on "/en_US/account/vendor/product-variants/inventory"
     And I follow "Edit"
     And I fill in "sylius_product_variant[onHand]" with "12"
     And I set product as untracked

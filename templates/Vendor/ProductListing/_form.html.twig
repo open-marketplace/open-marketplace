@@ -18,6 +18,7 @@
                                 <h3>{{ 'sylius.ui.pricing'|trans }}</h3>
                             </div>
                             <div class="ui segment">
+                                {{ form_errors(form) }}
                                 <div class="ui styled fluid accordion">
                                     {% for channel, prices in form.productListingPrices %}
                                         <div id="sylius_product_variant_channelPricings" data-locale="{{ channel }}">
@@ -42,6 +43,15 @@
                                         </div>
                                     {% endfor %}
                                 </div>
+                            </div>
+                        </div>
+                        <div class="ui segments">
+                            <div class="ui segment">
+                                <h3>{{ 'sylius.ui.shipping'|trans }}</h3>
+                            </div>
+                            <div class="ui segment">
+                                {{ form_row(form.shippingRequired) }}
+                                {{ form_row(form.shippingCategory) }}
                             </div>
                         </div>
                         <div class="ui segments">
