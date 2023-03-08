@@ -15,26 +15,21 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\ProductRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
+use Twig\Environment;
 
-final class ShowVendorPageAction extends AbstractController
+final class ShowVendorPageAction
 {
-    private VendorRepositoryInterface $vendorRepository;
-
-    private ProductRepositoryInterface $productRepository;
-
-    private ChannelContextInterface $channelContext;
-
     public function __construct(
-        VendorRepositoryInterface $vendorRepository,
-        ProductRepositoryInterface $productRepository,
-        ChannelContextInterface $channelContext
-    ) {
-        $this->vendorRepository = $vendorRepository;
-        $this->productRepository = $productRepository;
-        $this->channelContext = $channelContext;
+        private VendorRepositoryInterface $vendorRepository,
+        private ProductRepositoryInterface $productRepository,
+        private ChannelContextInterface $channelContext,
+        private RouterInterface $router,
+        private Environment $twig,
+        ) {
     }
 
     public function __invoke(Request $request): Response
@@ -43,15 +38,15 @@ final class ShowVendorPageAction extends AbstractController
         $vendor = $this->vendorRepository->findOneBy(['slug' => $request->attributes->get('slug')]);
 
         if (VendorInterface::STATUS_UNVERIFIED === $vendor->getStatus()) {
-            return $this->redirectToRoute('sylius_shop_homepage');
+            return new RedirectResponse($this->router->generate('sylius_shop_homepage'));
         }
 
         $channel = $this->channelContext->getChannel();
         $paginator = $this->productRepository->findVendorProducts($vendor, $request, $channel);
 
-        return $this->render('Vendor/vendor_page.html.twig', [
+        return new Response($this->twig->render('Vendor/vendor_page.html.twig', [
             'vendor' => $vendor,
             'paginator' => $paginator,
-        ]);
+        ]));
     }
 }

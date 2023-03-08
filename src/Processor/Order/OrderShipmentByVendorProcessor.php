@@ -51,40 +51,17 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
             return;
         }
 
-        if (false === $order->hasVendorItems()) {
-            return;
-        }
-
-        $this->removeShipmentsWithMissingVendors($order);
-
         $this->addShipmentsPerVendor($order);
 
         $this->shipmentUnitsRecalculator->recalculateShipmentUnits($order);
-
-        $this->removeShipmentWithoutVendorIfEmpty($order);
-    }
-
-    private function removeShipmentsWithMissingVendors(OrderInterface $order): void
-    {
-        $vendors = $order->getVendorsFromOrderItems();
-        /** @var ShipmentInterface $shipment */
-        foreach ($order->getShipments() as $shipment) {
-            if (false === in_array($shipment->getVendor(), $vendors)) {
-                $order->removeShipment($shipment);
-            }
-        }
     }
 
     private function addShipmentsPerVendor(OrderInterface $order): void
     {
         $vendors = $order->getVendorsFromOrderItems();
 
-        if (false === $order->hasShipmentWithoutVendor()) {
-            $this->addShipment($order, null);
-        }
-
         foreach ($vendors as $vendor) {
-            if ($order->hasVendorShipment($vendor)) {
+            if (true === $order->hasVendorShipment($vendor) || false === $order->hasShippableItemsWithVendor($vendor)) {
                 continue;
             }
 
@@ -96,23 +73,11 @@ final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, O
     {
         /** @var ShipmentInterface $shipment */
         $shipment = $this
-                ->shipmentFactory
-                ->tryCreateNewWithOrderVendorAndDefaultShipment($order, $vendor)
-            ;
+            ->shipmentFactory
+            ->tryCreateNewWithOrderVendorAndDefaultShipment($order, $vendor);
 
         if (null !== $shipment) {
             $order->addShipment($shipment);
-        }
-    }
-
-    private function removeShipmentWithoutVendorIfEmpty(OrderInterface $order): void
-    {
-        $shipment = $order->getShipmentWithoutVendor();
-
-        if (null !== $shipment) {
-            if ($shipment->getUnits()->isEmpty()) {
-                $order->removeShipment($shipment);
-            }
         }
     }
 }

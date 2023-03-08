@@ -1,152 +1,178 @@
-ARG PHP_VERSION=8.0
-ARG NODE_VERSION=12.13
-ARG NGINX_VERSION=1.16
+# the different stages of this Dockerfile are meant to be built into separate images
+# https://docs.docker.com/compose/compose-file/#target
 
-########################## PHP ##########################
-FROM bitbag/sylius-php:${PHP_VERSION}-alpine AS root_php
+ARG PHP_VERSION=8.1
+ARG NODE_VERSION=14.17.3
+ARG NGINX_VERSION=1.21
+ARG ALPINE_VERSION=3.15
+ARG NODE_ALPINE_VERSION=3.14
+ARG COMPOSER_VERSION=2.4
+ARG PHP_EXTENSION_INSTALLER_VERSION=latest
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
+FROM composer:${COMPOSER_VERSION} AS composer
+
+FROM mlocati/php-extension-installer:${PHP_EXTENSION_INSTALLER_VERSION} AS php_extension_installer
+
+FROM php:${PHP_VERSION}-fpm-alpine${ALPINE_VERSION} AS base
+
+# persistent / runtime deps
+RUN apk add --no-cache \
+        acl \
+        file \
+        gettext \
+        unzip \
+    ;
+
+COPY --from=php_extension_installer /usr/bin/install-php-extensions /usr/local/bin/
+
+# default PHP image extensions
+# ctype curl date dom fileinfo filter ftp hash iconv json libxml mbstring mysqlnd openssl pcre PDO pdo_sqlite Phar
+# posix readline Reflection session SimpleXML sodium SPL sqlite3 standard tokenizer xml xmlreader xmlwriter zlib
+RUN install-php-extensions apcu exif gd intl pdo_mysql opcache zip
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY docker/php/prod/php.ini        $PHP_INI_DIR/php.ini
+COPY docker/php/prod/opcache.ini    $PHP_INI_DIR/conf.d/opcache.ini
 
-WORKDIR /var/www
+# copy file required by opcache preloading
+COPY config/preload.php /srv/open_marketplace/config/preload.php
 
-ARG APP_ENV=prod
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN set -eux; \
+    composer clear-cache
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
+
+WORKDIR /srv/open_marketplace
+
+# build for production
+ENV APP_ENV=prod
+
+# prevent the reinstallation of vendors at every changes in the source code
+COPY composer.* ./
+RUN set -eux; \
+    composer install --prefer-dist --no-autoloader --no-interaction --no-scripts --no-progress --no-dev; \
+    composer clear-cache
 
 # copy only specifically what we need
+COPY .env .env.prod ./
+COPY assets assets/
+COPY bin bin/
+COPY config config/
+COPY public public/
 COPY src src/
-COPY tests/Application/Kernel.php tests/Application/Kernel.php
-COPY composer.json ./
+COPY templates templates/
+COPY translations translations/
 
 RUN set -eux; \
-	composer install; \
-	composer dump-autoload;
+    mkdir -p var/cache var/log; \
+    composer dump-autoload --classmap-authoritative; \
+    APP_SECRET='' composer run-script post-install-cmd; \
+    chmod +x bin/console; sync; \
+    bin/console sylius:install:assets --no-interaction; \
+    bin/console sylius:theme:assets:install public --no-interaction
 
-WORKDIR /var/www/tests/Application
+VOLUME /srv/open_marketplace/var
 
-COPY tests/Application/assets assets/
-COPY tests/Application/bin bin/
-COPY tests/Application/config config/
-COPY tests/Application/public public/
-COPY tests/Application/src src/
-COPY tests/Application/templates templates/
-COPY tests/Application/translations translations/
-COPY tests/Application/.env ./.env
-COPY tests/Application/.env.test ./.env.test
-COPY tests/Application/composer.json ./
+VOLUME /srv/open_marketplace/public/media
 
-COPY .docker/php/php.ini /usr/local/etc/php/php.ini
-COPY .docker/php/php-cli.ini /usr/local/etc/php/php-cli.ini
-
-RUN set -eux; \
-	composer install; \
-	composer dump-autoload; \
-	mkdir -p var/cache var/log; \
-	chmod +x bin/console; sync;
-
-RUN set -eux; \
-	php bin/console assets:install; \
-	php bin/console sylius:install:assets;
-
-VOLUME /var/www/tests/Application/var
-VOLUME /var/www/tests/Application/public/media
-
-COPY .docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
-########################## NODE ##########################
-FROM node:${NODE_VERSION}-alpine AS nodejs
+FROM node:${NODE_VERSION}-alpine${NODE_ALPINE_VERSION} AS open_marketplace_node
+
+WORKDIR /srv/open_marketplace
 
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
 		g++ \
 		gcc \
-		git \
 		make \
-		python \
 	;
 
-WORKDIR /var/www
-
-COPY --from=root_php /var/www/vendor ./vendor
-COPY package.json webpack.config.js ./
-COPY src/Resources/public ./src/Resources/public
-COPY src/Resources/assets ./src/Resources/assets
-
-WORKDIR /var/www/tests/Application
-
 # prevent the reinstallation of vendors at every changes in the source code
+COPY package.json yarn.* ./
+RUN set -eux; \
+    yarn install; \
+    yarn cache clean
 
-COPY tests/Application/package.json tests/Application/webpack.config.js tests/Application/.babelrc ./
-COPY tests/Application/assets ./assets
-COPY --from=root_php /var/www/tests/Application/public/bundles ./public/bundles
-COPY --from=root_php /var/www/tests/Application/vendor ./vendor
+COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private       vendor/sylius/sylius/src/Sylius/Bundle/UiBundle/Resources/private/
+COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private    vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private/
+COPY --from=base /srv/open_marketplace/vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private     vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private/
+COPY --from=base /srv/open_marketplace/assets ./assets
+COPY --from=base /srv/open_marketplace/vendor/bitbag/wishlist-plugin/webpack.config.js  vendor/bitbag/wishlist-plugin/webpack.config.js
+COPY --from=base /srv/open_marketplace/vendor/bitbag/cms-plugin/webpack.config.js   vendor/bitbag/cms-plugin/webpack.config.js
+COPY --from=base /srv/open_marketplace/vendor/bitbag/wishlist-plugin/src/Resources/assets   vendor/bitbag/wishlist-plugin/src/Resources/assets
+COPY --from=base /srv/open_marketplace/vendor/bitbag/cms-plugin/src/Resources/assets    vendor/bitbag/cms-plugin/src/Resources/assets
+
+COPY webpack.config.js ./
+RUN yarn prod
+
+COPY docker/node/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["docker-entrypoint"]
+CMD ["yarn", "prod"]
+
+FROM base AS open_marketplace_php_prod
+
+COPY --from=open_marketplace_node /srv/open_marketplace/public/build public/build
+
+FROM nginx:${NGINX_VERSION}-alpine AS open_marketplace_nginx
+
+COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/
+
+WORKDIR /srv/open_marketplace
+
+COPY --from=base        /srv/open_marketplace/public public/
+COPY --from=open_marketplace_node /srv/open_marketplace/public public/
+
+FROM open_marketplace_php_prod AS open_marketplace_php_dev
+
+COPY docker/php/dev/php.ini        $PHP_INI_DIR/php.ini
+COPY docker/php/dev/opcache.ini    $PHP_INI_DIR/conf.d/opcache.ini
+
+WORKDIR /srv/open_marketplace
+
+ENV APP_ENV=dev
+
+COPY .env.test ./
 
 RUN set -eux; \
-	yarn install; \
-	yarn cache clean
+    composer install --prefer-dist --no-autoloader --no-interaction --no-scripts --no-progress; \
+    composer clear-cache
 
-RUN ln -sf /var/www/tests/Application/node_modules /var/www
+FROM open_marketplace_php_prod AS open_marketplace_cron
 
-RUN yarn encore production
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps \
+		apk-cron \
+	;
 
-COPY .docker/nodejs/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY docker/cron/crontab /etc/crontabs/root
+COPY docker/cron/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
-CMD ["yarn", "watch"]
+CMD ["crond", "-f"]
 
+FROM open_marketplace_php_prod AS open_marketplace_migrations_prod
 
-########################## NGINX ##########################
-FROM nginx:${NGINX_VERSION}-alpine AS nginx
-
-COPY .docker/nginx/conf.d/default.conf /etc/nginx/conf.d/
-
-WORKDIR /var/www
-
-COPY --from=root_php /var/www/tests/Application/public public/
-COPY --from=nodejs /var/www/tests/Application/public public/
-
-########################## PHP ##########################
-FROM bitbag/sylius-php:${PHP_VERSION}-alpine AS result_php
-
-RUN apk add --no-cache fcgi;
-
-COPY .docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-COPY .docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
-
+RUN apk add --no-cache wget
+COPY docker/migrations/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-healthcheck
-
-RUN { \
-		echo '[www]'; \
-		echo 'ping.path = /ping'; \
-	} | tee /usr/local/etc/php-fpm.d/docker-healthcheck.conf
-
-WORKDIR /var/www
-
-COPY --from=root_php /var/www/src src/
-COPY --from=root_php /var/www/vendor vendor/
-COPY --from=root_php /var/www/tests/Application/bin tests/Application/bin/
-COPY --from=root_php /var/www/tests/Application/config tests/Application/config/
-COPY --from=root_php /var/www/tests/Application/src tests/Application/src/
-COPY --from=root_php /var/www/tests/Application/public tests/Application/public/
-COPY --from=root_php /var/www/tests/Application/templates tests/Application/templates/
-COPY --from=root_php /var/www/tests/Application/translations tests/Application/translations/
-COPY --from=root_php /var/www/tests/Application/Kernel.php tests/Application/Kernel.php
-COPY --from=root_php /var/www/tests/Application/composer.json tests/Application/composer.json
-COPY --from=root_php /var/www/tests/Application/composer.lock tests/Application/composer.lock
-COPY --from=nodejs /var/www/tests/Application/public tests/Application/public/
-
-COPY --from=root_php /usr/local/etc/php/php.ini /usr/local/etc/php/php.ini
-COPY --from=root_php /usr/local/etc/php/php-cli.ini /usr/local/etc/php/php-cli.ini
-
-RUN touch tests/Application/.env
-
-WORKDIR /var/www/tests/Application
 
 ENTRYPOINT ["docker-entrypoint"]
-CMD ["php-fpm"]
+
+FROM open_marketplace_php_dev AS open_marketplace_migrations_dev
+
+RUN apk add --no-cache wget
+COPY docker/migrations/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
+RUN composer dump-autoload --classmap-authoritative
+
+ENTRYPOINT ["docker-entrypoint"]

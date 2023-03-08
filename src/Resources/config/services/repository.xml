@@ -63,7 +63,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductListing</argument>
+                    <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation</argument>
                     <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
                 </service>
             </argument>

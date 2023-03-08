@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Order;
+namespace BitBag\OpenMarketplace\Controller\Resource\Order;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Processor\Order\SplitOrderByVendorProcessorInterface;

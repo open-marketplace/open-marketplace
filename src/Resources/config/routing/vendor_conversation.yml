@@ -2,7 +2,7 @@ open_marketplace_vendor_conversation_index:
     path: /vendor/conversations
     methods: [GET]
     defaults:
-        _controller:  open_marketplace.controller.conversation.conversation_controller:index
+        _controller:  open_marketplace.controller.conversation.list_conversations_action
         _sylius:
             template: "Conversation/User/index.html.twig"
 
@@ -10,7 +10,7 @@ open_marketplace_vendor_conversation_show:
     path: /vendor/conversations/{id}
     methods: [GET,POST]
     defaults:
-        _controller: 'open_marketplace.controller.conversation.conversation_controller:show'
+        _controller: 'open_marketplace.controller.conversation.show_conversation_action'
         _sylius:
             template: "Conversation/User/show.html.twig"
 
