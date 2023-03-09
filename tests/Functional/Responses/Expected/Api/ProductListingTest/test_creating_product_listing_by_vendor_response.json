@@ -1,13 +1,13 @@
 {
     "@context": "\/api\/v2\/contexts\/ProductListing",
-    "@id": "\/api\/v2\/shop\/account\/product-listings\/@string@",
+    "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings\/@string@",
     "@type": "ProductListing",
     "uuid": "@string@",
     "code": "test",
     "enabled": true,
     "verificationStatus": "created",
     "latestDraft": {
-        "@id": "\/api\/v2\/shop\/account\/product-drafts\/@string@",
+        "@id": "\/api\/v2\/shop\/account\/vendor\/product-drafts\/@string@",
         "@type": "ProductDraft",
         "uuid": "@string@",
         "code": "test",
@@ -21,7 +21,7 @@
         ],
         "translations": [
             {
-                "@id": "\/api\/v2\/shop\/account\/draft-product-translations\/@string@",
+                "@id": "\/api\/v2\/shop\/account\/vendor\/draft-product-translations\/@string@",
                 "@type": "DraftProductTranslation",
                 "uuid": "@string@",
                 "name": "Test",
@@ -46,7 +46,7 @@
             {
                 "@type": "DraftAttributeValue",
                 "uuid": "@string@",
-                "attribute": "\/api\/v2\/shop\/account\/draft-attributes\/@string@",
+                "attribute": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
                 "value": "example text value"
             }
         ],

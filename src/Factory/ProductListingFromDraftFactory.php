@@ -53,6 +53,7 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
         $productListing->setVendor($vendor);
 
         $productDraft->setProductListing($productListing);
+        $productDraft->setVendor($vendor);
 
         return $productDraft;
     }

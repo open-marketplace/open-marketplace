@@ -34,7 +34,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
     protected ?ShippingCategoryInterface $shippingCategory = null;
 
-    protected ?VendorInterface $vendor = null;
+    protected VendorInterface $vendor;
 
     protected bool $isVerified;
 
@@ -220,7 +220,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         $this->productListingPrices->removeElement($productListingPrice);
     }
 
-    public function getVendor(): ?VendorInterface
+    public function getVendor(): VendorInterface
     {
         return $this->vendor;
     }
@@ -550,8 +550,8 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function getProductListingPriceForChannel(ChannelInterface $channel): ?ProductListingPriceInterface
     {
         if (null !== $channel->getCode()) {
-            if ($this->productListingPrice->containsKey($channel->getCode())) {
-                return $this->productListingPrice->get($channel->getCode());
+            if ($this->productListingPrices->containsKey($channel->getCode())) {
+                return $this->productListingPrices->get($channel->getCode());
             }
         }
 

@@ -1,70 +1,76 @@
 <?xml version="1.0" ?>
 
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
 <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft">
         <attribute name="uuid">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:read</group>
         </attribute>
         <attribute name="code">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:create</group>
-            <group>shop_account:product_listing:read</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:create</group>
+            <group>shop:account:vendor:product_listing:read</group>
         </attribute>
         <attribute name="isVerified">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:read</group>
         </attribute>
         <attribute name="status">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:read</group>
         </attribute>
         <attribute name="verifiedAt">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:read</group>
         </attribute>
         <attribute name="publishedAt">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:read</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:read</group>
         </attribute>
         <attribute name="images">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:create</group>
-            <group>shop_account:product_listing:read</group>
-            <group>shop_account:product_listing:update</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:create</group>
+            <group>shop:account:vendor:product_listing:read</group>
+            <group>shop:account:vendor:product_listing:update</group>
         </attribute>
         <attribute name="translations">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:create</group>
-            <group>shop_account:product_listing:read</group>
-            <group>shop_account:product_listing:update</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:create</group>
+            <group>shop:account:vendor:product_listing:read</group>
+            <group>shop:account:vendor:product_listing:update</group>
         </attribute>
         <attribute name="productListingPrices">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:create</group>
-            <group>shop_account:product_listing:read</group>
-            <group>shop_account:product_listing:update</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:create</group>
+            <group>shop:account:vendor:product_listing:read</group>
+            <group>shop:account:vendor:product_listing:update</group>
         </attribute>
         <attribute name="attributes">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:create</group>
-            <group>shop_account:product_listing:read</group>
-            <group>shop_account:product_listing:update</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:create</group>
+            <group>shop:account:vendor:product_listing:read</group>
+            <group>shop:account:vendor:product_listing:update</group>
         </attribute>
         <attribute name="mainTaxon">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:create</group>
-            <group>shop_account:product_listing:read</group>
-            <group>shop_account:product_listing:update</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:create</group>
+            <group>shop:account:vendor:product_listing:read</group>
+            <group>shop:account:vendor:product_listing:update</group>
         </attribute>
         <attribute name="productDraftTaxons">
-            <group>shop_account:product_draft:read</group>
-            <group>shop_account:product_listing:create</group>
-            <group>shop_account:product_listing:read</group>
-            <group>shop_account:product_listing:update</group>
+            <group>shop:account:vendor:product_draft:read</group>
+            <group>shop:account:vendor:product_listing:create</group>
+            <group>shop:account:vendor:product_listing:read</group>
+            <group>shop:account:vendor:product_listing:update</group>
         </attribute>
     </class>
 </serializer>
