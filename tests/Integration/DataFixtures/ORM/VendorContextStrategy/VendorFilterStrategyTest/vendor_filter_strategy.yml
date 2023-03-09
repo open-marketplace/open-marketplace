@@ -1,0 +1,75 @@
+Sylius\Component\Addressing\Model\Country:
+  poland:
+    code: 'PL'
+Sylius\Component\Core\Model\Customer:
+  customer_bruce:
+    firstName: "Bruce"
+    lastName: "Wayne"
+    email: "bruce.wayne@example.com"
+    emailCanonical: "bruce.wayne@example.com"
+  customer_peter:
+    firstName: "Peter"
+    lastName: "Weyland"
+    email: "peter.weyland@example.com"
+    emailCanonical: "peter.weyland@example.com"
+  customer_john:
+    firstName: "John"
+    lastName: "Smith"
+    email: "john.smith@example.com"
+    emailCanonical: "john.smith@example.com"
+BitBag\OpenMarketplace\Entity\ShopUser:
+  user_bruce:
+    plainPassword: "123password"
+    roles: ["ROLE_USER", "ROLE_VENDOR"]
+    enabled: "true"
+    customer: '@customer_bruce'
+    username: "bruce.wayne@example.com"
+    usernameCanonical: "bruce.wayne@example.com"
+  user_peter:
+    plainPassword: "123password"
+    roles: ["ROLE_USER", "ROLE_VENDOR"]
+    enabled: "true"
+    customer: '@customer_peter'
+    username: "peter.weyland@example.com"
+    usernameCanonical: "peter.weyland@example.com"
+  user_john:
+    plainPassword: "123password"
+    roles: ["ROLE_USER"]
+    enabled: "true"
+    customer: '@customer_john'
+    username: "john.smith@example.com"
+    usernameCanonical: "john.smith@example.com"
+BitBag\OpenMarketplace\Entity\Vendor:
+  vendor_bruce:
+    shopUser: '@user_bruce'
+    companyName: 'Wayne Enterprises, Inc.'
+    taxIdentifier: '1234567'
+    phoneNumber: '555123123'
+    slug: 'Wayne-Enterprises-Inc'
+    description: 'description'
+  vendor_peter:
+    shopUser: '@user_peter'
+    companyName: 'Weyland Corp'
+    taxIdentifier: '7654321'
+    phoneNumber: '555444333'
+    slug: 'Weyland-Corp'
+    description: 'description'
+BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+  attribute_bruce_1:
+    vendor: '@vendor_bruce'
+    code: 'attribute_bruce_1'
+    type: 'text'
+    storageType: 'text'
+    translatable: 'true'
+  attribute_bruce_2:
+    vendor: '@vendor_bruce'
+    code: 'attribute_bruce_2'
+    type: 'text'
+    storageType: 'text'
+    translatable: 'true'
+  attribute_peter_1:
+    vendor: '@vendor_peter'
+    code: 'attribute_peter_1'
+    type: 'text'
+    storageType: 'text'
+    translatable: 'true'

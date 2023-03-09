@@ -13,6 +13,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <class name="Sylius\Component\Core\Model\ProductVariant">
         <attribute name="code">
             <group>shop:account:vendor:product-variants:inventory:read</group>
+            <group>shop:account:vendor:order:details</group>
         </attribute>
         <attribute name="position">
             <group>shop:account:vendor:product-variants:inventory:read</group>

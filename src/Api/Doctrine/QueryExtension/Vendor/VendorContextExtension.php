@@ -8,29 +8,32 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Api\Doctrine;
+namespace BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor;
 
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
+use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\FilterVendorStrategy;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class ProductVariantCurrentVendorExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+final class VendorContextExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
+    private array $filterVendorStrategies;
+
     private VendorContextInterface $vendorContext;
 
     private SectionProviderInterface $uriBasedSectionContext;
 
     public function __construct(
+        iterable $filterVendorStrategies,
         VendorContextInterface $vendorContext,
         SectionProviderInterface $uriBasedSectionContext,
-    ) {
+        ) {
+        $this->filterVendorStrategies = $filterVendorStrategies instanceof \Traversable ? iterator_to_array($filterVendorStrategies) : $filterVendorStrategies;
         $this->vendorContext = $vendorContext;
         $this->uriBasedSectionContext = $uriBasedSectionContext;
     }
@@ -58,7 +61,7 @@ final class ProductVariantCurrentVendorExtension implements QueryCollectionExten
 
     public function filterByVendorIfApply(QueryBuilder $queryBuilder, string $resourceClass): void
     {
-        if (false === is_a($resourceClass, ProductVariantInterface::class, true)) {
+        if (null === $filterVendorStrategy = $this->getSupportedStrategy($resourceClass)) {
             return;
         }
 
@@ -69,7 +72,7 @@ final class ProductVariantCurrentVendorExtension implements QueryCollectionExten
         if (null === $vendor = $this->vendorContext->getVendor()) {
             $this->filterForEmptyResult($queryBuilder);
         } else {
-            $this->filterByVendor($queryBuilder, $vendor);
+            $filterVendorStrategy->filterByVendor($queryBuilder, $vendor);
         }
     }
 
@@ -78,11 +81,15 @@ final class ProductVariantCurrentVendorExtension implements QueryCollectionExten
         $queryBuilder->andWhere('1=0');
     }
 
-    private function filterByVendor(QueryBuilder $queryBuilder, VendorInterface $vendor): void
+    private function getSupportedStrategy(string $class): ?FilterVendorStrategy
     {
-        $rootAlias = $queryBuilder->getRootAliases()[0];
-        $queryBuilder->innerJoin(sprintf('%s.product', $rootAlias), 'p');
-        $queryBuilder->andWhere('p.vendor = :currentVendor');
-        $queryBuilder->setParameter('currentVendor', $vendor->getId());
+        /** @var FilterVendorStrategy $filterVendorStrategy */
+        foreach ($this->filterVendorStrategies as $filterVendorStrategy) {
+            if ($filterVendorStrategy->supports($class)) {
+                return $filterVendorStrategy;
+            }
+        }
+
+        return null;
     }
 }

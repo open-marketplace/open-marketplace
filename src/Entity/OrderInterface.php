@@ -14,12 +14,8 @@ namespace BitBag\OpenMarketplace\Entity;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\OrderInterface as BaseOrderInterface;
 
-interface OrderInterface extends BaseOrderInterface
+interface OrderInterface extends BaseOrderInterface, OptionalVendorAwareInterface
 {
-    public function getVendor(): ?VendorInterface;
-
-    public function setVendor(?VendorInterface $vendor): void;
-
     public function getPrimaryOrder(): ?self;
 
     public function setPrimaryOrder(?self $primaryOrder): void;
