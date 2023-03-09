@@ -40,23 +40,68 @@ use Twig\Environment;
 
 final class CreateProductAction
 {
+    private MetadataInterface $metadata;
+
+    private RequestConfigurationFactoryInterface $requestConfigurationFactory;
+
+    private NewResourceFactoryInterface $newResourceFactory;
+
+    private FactoryInterface $factory;
+
+    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
+
+    private RedirectHandlerInterface $redirectHandler;
+
+    private FlashHelperInterface $flashHelper;
+
+    private EventDispatcherInterface $eventDispatcher;
+
+    private ProductDraftRepositoryInterface $productDraftRepository;
+
+    private ImageUploaderInterface $imageUploader;
+
+    private FormFactoryInterface $formFactory;
+
+    private RequestStack $requestStack;
+
+    private RouterInterface $router;
+
+    private Environment $twig;
+
+    private TokenStorageInterface $tokenStorage;
+
     public function __construct(
-        private MetadataInterface $metadata,
-        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        private NewResourceFactoryInterface $newResourceFactory,
-        private FactoryInterface $factory,
-        private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        private RedirectHandlerInterface $redirectHandler,
-        private FlashHelperInterface $flashHelper,
-        private EventDispatcherInterface $eventDispatcher,
-        private ProductDraftRepositoryInterface $productDraftRepository,
-        private ImageUploaderInterface $imageUploader,
-        private FormFactoryInterface $formFactory,
-        private RequestStack $requestStack,
-        private RouterInterface $router,
-        private Environment $twig,
-        private TokenStorageInterface $tokenStorage,
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        NewResourceFactoryInterface $newResourceFactory,
+        FactoryInterface $factory,
+        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ProductDraftRepositoryInterface $productDraftRepository,
+        ImageUploaderInterface $imageUploader,
+        FormFactoryInterface $formFactory,
+        RequestStack $requestStack,
+        RouterInterface $router,
+        Environment $twig,
+        TokenStorageInterface $tokenStorage,
         ) {
+        $this->metadata = $metadata;
+        $this->requestConfigurationFactory = $requestConfigurationFactory;
+        $this->newResourceFactory = $newResourceFactory;
+        $this->factory = $factory;
+        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
+        $this->redirectHandler = $redirectHandler;
+        $this->flashHelper = $flashHelper;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->productDraftRepository = $productDraftRepository;
+        $this->imageUploader = $imageUploader;
+        $this->formFactory = $formFactory;
+        $this->requestStack = $requestStack;
+        $this->router = $router;
+        $this->twig = $twig;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function __invoke(Request $request): Response

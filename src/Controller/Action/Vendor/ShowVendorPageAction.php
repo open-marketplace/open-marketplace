@@ -23,13 +23,28 @@ use Twig\Environment;
 
 final class ShowVendorPageAction
 {
+    private VendorRepositoryInterface $vendorRepository;
+
+    private ProductRepositoryInterface $productRepository;
+
+    private ChannelContextInterface $channelContext;
+
+    private RouterInterface $router;
+
+    private Environment $twig;
+
     public function __construct(
-        private VendorRepositoryInterface $vendorRepository,
-        private ProductRepositoryInterface $productRepository,
-        private ChannelContextInterface $channelContext,
-        private RouterInterface $router,
-        private Environment $twig,
+        VendorRepositoryInterface $vendorRepository,
+        ProductRepositoryInterface $productRepository,
+        ChannelContextInterface $channelContext,
+        RouterInterface $router,
+        Environment $twig,
         ) {
+        $this->vendorRepository = $vendorRepository;
+        $this->productRepository = $productRepository;
+        $this->channelContext = $channelContext;
+        $this->router = $router;
+        $this->twig = $twig;
     }
 
     public function __invoke(Request $request): Response
