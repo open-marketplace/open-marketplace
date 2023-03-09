@@ -14,7 +14,6 @@ namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -41,9 +40,8 @@ final class CreateProductListingHandler
     {
         /** @var ProductDraftInterface $productDraft */
         $productDraft = $createProductListing->getProductDraft();
-        /** @var VendorInterface $vendor */
         $vendor = $createProductListing->getVendor();
-        $productDraft->setVendor($vendor);
+
         $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
 
         foreach ($productDraft->getImages() as $productImage) {

@@ -52,7 +52,6 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
         $createProductListing->getProductDraft()->willReturn($productDraft);
         $createProductListing->getVendor()->willReturn($vendor);
 
-        $productDraft->setVendor($vendor)->shouldBeCalled();
         $productDraft->getVendor()->willReturn($vendor);
 
         $productListingFromDraftFactory->createNew($productDraft, $vendor)->willReturn($productDraft);

@@ -56,6 +56,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
                 </attribute>
+                <attribute name="filters">
+                    <attribute>bitbag.open_marketplace.api.vendor.search_product_listing_filter</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 

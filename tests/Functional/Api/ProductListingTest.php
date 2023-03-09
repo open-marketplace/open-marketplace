@@ -42,6 +42,24 @@ final class ProductListingTest extends FunctionalTestCase
         $this->assertResponse($response, 'Api/ProductListingTest/test_it_gets_only_product_listings_for_current_vendor_response', Response::HTTP_OK);
     }
 
+    public function test_it_gets_only_product_listings_for_current_vendor_filter_by_verification_status(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        $this->client->request('GET', '/api/v2/shop/account/vendor/product-listings', ['verificationStatus' => 'verified'], [], $header);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/ProductListingTest/test_it_gets_only_product_listings_for_current_vendor_filter_by_verification_status', Response::HTTP_OK);
+    }
+
+    public function test_it_gets_only_product_listings_for_current_vendor_filter_by_code(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        $this->client->request('GET', '/api/v2/shop/account/vendor/product-listings', ['code' => 'bruce_1'], [], $header);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/ProductListingTest/test_it_gets_only_product_listings_for_current_vendor_filter_by_code', Response::HTTP_OK);
+    }
+
     public function test_it_prevents_to_get_different_vendor_product_listing(): void
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
