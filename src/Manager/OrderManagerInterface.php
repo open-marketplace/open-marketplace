@@ -19,13 +19,13 @@ interface OrderManagerInterface
 {
     public function generateNewSecondaryOrder(
         OrderInterface $order,
-        VendorInterface $itemVendor,
+        ?VendorInterface $itemVendor,
         OrderItemInterface $item
     ): OrderInterface;
 
     public function addItemIntoSecondaryOrder(
         array $secondaryOrders,
-        VendorInterface $itemVendor,
+        ?VendorInterface $itemVendor,
         OrderItemInterface $item
     ): void;
 }

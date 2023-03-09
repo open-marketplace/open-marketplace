@@ -11,7 +11,9 @@
         "@type": "Customer",
         "email": "john.smith@example.com",
         "firstName": "John",
-        "lastName": "Smith"
+        "lastName": "Smith",
+        "phoneNumber": "123456789",
+        "subscribedToNewsletter": false
       },
       "shipments": [
         {

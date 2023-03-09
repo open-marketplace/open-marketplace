@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file was created by developers working at BitBag
+ * Do you need more information about us and what we do? Visit our https://bitbag.io website!
+ * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+*/
+
 declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Integration\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy;
@@ -24,7 +30,7 @@ class VendorFilterStrategyTest extends IntegrationTestCase
     public function test_supported_class_optional_vendor_aware(): void
     {
         $vendorFilterStrategy = new VendorFilterStrategy();
-        $result = $vendorFilterStrategy->isSupportClass(OptionalVendorAwareInterface::class);
+        $result = $vendorFilterStrategy->supports(OptionalVendorAwareInterface::class);
 
         self::assertTrue($result);
     }
@@ -32,7 +38,7 @@ class VendorFilterStrategyTest extends IntegrationTestCase
     public function test_supported_class_vendor_aware(): void
     {
         $vendorFilterStrategy = new VendorFilterStrategy();
-        $result = $vendorFilterStrategy->isSupportClass(VendorAwareInterface::class);
+        $result = $vendorFilterStrategy->supports(VendorAwareInterface::class);
 
         self::assertTrue($result);
     }
@@ -40,7 +46,7 @@ class VendorFilterStrategyTest extends IntegrationTestCase
     public function test_unsupported_class(): void
     {
         $vendorFilterStrategy = new VendorFilterStrategy();
-        $result = $vendorFilterStrategy->isSupportClass(ProductVariantInterface::class);
+        $result = $vendorFilterStrategy->supports(ProductVariantInterface::class);
 
         self::assertFalse($result);
     }

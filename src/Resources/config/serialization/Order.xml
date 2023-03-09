@@ -84,7 +84,19 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:account:vendor:order:details</group>
         </attribute>
 
+        <attribute name="adjustments">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="adjustmentsTotal">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
         <attribute name="localeCode">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="promotionCoupon">
             <group>shop:account:vendor:order:details</group>
         </attribute>
 

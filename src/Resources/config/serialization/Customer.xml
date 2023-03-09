@@ -23,5 +23,12 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:account:vendor:order:read</group>
         </attribute>
 
+        <attribute name="phoneNumber">
+            <group>shop:account:vendor:order:read</group>
+        </attribute>
+
+        <attribute name="subscribedToNewsletter">
+            <group>shop:account:vendor:order:read</group>
+        </attribute>
     </class>
 </serializer>

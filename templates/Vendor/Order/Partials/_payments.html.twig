@@ -5,16 +5,17 @@
         <h3 class="ui dividing header">{{ 'sylius.ui.payments'|trans }}</h3>
         <div class="ui relaxed divided list" id="sylius-payments">
             {% for payment in order.payments %}
-                <div class="right floated content">
-                    {% include '@SyliusAdmin/Common/Label/paymentState.html.twig' with {'data': payment.state} %}
-                </div>
-                <i class="large payment icon"></i>
-                <div class="content">
-                    <div class="header">
-                        {{ payment.method }}
+                <div class="item">
+                    <div class="right floated content">
+                        {% include '@SyliusAdmin/Common/Label/paymentState.html.twig' with {'data': payment.state} %}
                     </div>
-                    <div class="description">
-                        {{ money.format(payment.amount, payment.order.currencyCode) }}
+                    <div class="content">
+                        <div class="header">
+                            <i class="large payment icon"></i>{{ payment.method }}
+                        </div>
+                        <div class="description">
+                            {{ money.format(payment.amount, payment.order.currencyCode) }}
+                        </div>
                     </div>
                 </div>
             {% endfor %}

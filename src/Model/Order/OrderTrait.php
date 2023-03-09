@@ -11,12 +11,14 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Model\Order;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\OrderItem;
 use BitBag\OpenMarketplace\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 trait OrderTrait
 {
@@ -67,40 +69,11 @@ trait OrderTrait
         return $this->secondaryOrders;
     }
 
-    public function hasVendorItems(): bool
-    {
-        foreach ($this->getItems() as $item) {
-            /** @phpstan-ignore-next-line */
-            if (null === $item->getVariant() || null === $item->getVariant()?->getProduct()) {
-                continue;
-            }
-            /** @phpstan-ignore-next-line */
-            $product = $item->getVariant()?->getProduct();
-            if ($product->hasVendor()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function hasVendorShipment(VendorInterface $vendor): bool
+    public function hasVendorShipment(?VendorInterface $vendor): bool
     {
         /** @var ShipmentInterface $shipment */
         foreach ($this->getShipments() as $shipment) {
-            if ($shipment->hasVendor() && $shipment->getVendor() === $vendor) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function hasShipmentWithoutVendor(): bool
-    {
-        /** @var ShipmentInterface $shipment */
-        foreach ($this->getShipments() as $shipment) {
-            if (false === $shipment->hasVendor()) {
+            if ($shipment->getVendor() === $vendor) {
                 return true;
             }
         }
@@ -118,7 +91,7 @@ trait OrderTrait
             $product = $item->getVariant()?->getProduct();
             $vendor = $product->getVendor();
 
-            if (null !== $vendor && false === in_array($vendor, $vendors)) {
+            if (false === in_array($vendor, $vendors)) {
                 $vendors[] = $vendor;
             }
         }
@@ -130,7 +103,7 @@ trait OrderTrait
     {
         /** @var ShipmentInterface $shipment */
         foreach ($this->getShipments() as $shipment) {
-            if ($shipment->hasVendor() && $shipment->getVendor() === $vendor) {
+            if ($shipment->getVendor() === $vendor) {
                 return $shipment;
             }
         }
@@ -140,13 +113,24 @@ trait OrderTrait
 
     public function getShipmentWithoutVendor(): ?ShipmentInterface
     {
-        /** @var ShipmentInterface $shipment */
-        foreach ($this->getShipments() as $shipment) {
-            if (false === $shipment->hasVendor()) {
-                return $shipment;
+        return $this->getShipmentByVendor(null);
+    }
+
+    public function hasShippableItemsWithVendor(?VendorInterface $vendor): bool
+    {
+        /** @var OrderItem $item */
+        foreach ($this->getItems() as $item) {
+            /** @var ProductInterface $product */
+            $product = $item->getProduct();
+
+            /** @var ProductVariantInterface $variant */
+            $variant = $item->getVariant();
+
+            if ($vendor === $product->getVendor() && true === $variant->isShippingRequired()) {
+                return true;
             }
         }
 
-        return null;
+        return false;
     }
 }

@@ -5,7 +5,8 @@
     <services>
         <service class="BitBag\OpenMarketplace\Validator\UniqueProductListingSlugValidator"
                  id="bitbag.sylius_open_marketplace_plugin.validator.unique_product_listing_slug">
-            <argument type="service" id="sylius.repository.product_translation" />
+            <argument type="service" id="open_marketplace.repository.product_translation" />
+            <argument type="service" id="request_stack" />
 
             <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing.translation"/>
         </service>
@@ -15,6 +16,12 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
 
             <tag name="validator.constraint_validator" alias="bitbag.sylius_open_marketplace_plugin.validator.unique_shop_user_vendor"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Validator\ProductListingPriceValidator"
+                 id="bitbag.sylius_open_marketplace_plugin.validator.product_listing_price">
+            <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing_price"/>
+            <argument type="service" id="sylius.repository.channel"/>
         </service>
     </services>
 </container>
