@@ -14,7 +14,7 @@ abstract class AbstractFilterStrategy
 {
     abstract protected function getSupportedClasses(): array;
 
-    public function isSupportClass(string $class): bool
+    public function supports(string $class): bool
     {
         foreach ($this->getSupportedClasses() as $supportedClass) {
             if (is_a($class, $supportedClass, true)) {

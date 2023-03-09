@@ -9,9 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller;
+namespace BitBag\OpenMarketplace\Controller\Resource\Vendor;
 
-use BitBag\OpenMarketplace\Updater\ProductAttributeUpdaterInterface;
+use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
+use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
+use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -27,19 +32,22 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
-final class DraftAttributeController extends ResourceController
+final class VendorController extends ResourceController
 {
-    private ProductAttributeUpdaterInterface $productAttributeUpdater;
+    private VendorProviderInterface $vendorProvider;
+
+    private VendorProfileUpdaterInterface $vendorProfileUpdater;
 
     public function __construct(
         MetadataInterface $metadata,
@@ -59,7 +67,8 @@ final class DraftAttributeController extends ResourceController
         ?StateMachineInterface $stateMachine,
         ResourceUpdateHandlerInterface $resourceUpdateHandler,
         ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        ProductAttributeUpdaterInterface $productAttributeUpdater
+        VendorProviderInterface $vendorProvider,
+        VendorProfileUpdaterInterface $vendorProfileUpdater
     ) {
         parent::__construct(
             $metadata,
@@ -80,15 +89,39 @@ final class DraftAttributeController extends ResourceController
             $resourceUpdateHandler,
             $resourceDeleteHandler
         );
-        $this->productAttributeUpdater = $productAttributeUpdater;
+
+        $this->vendorProvider = $vendorProvider;
+        $this->vendorProfileUpdater = $vendorProfileUpdater;
     }
 
-    public function updateAction(Request $request): Response
+    public function createAction(Request $request): Response
+    {
+        try {
+            return parent::createAction($request);
+        } catch (ShopUserNotFoundException $exception) {
+            return $this->redirectToRoute('sylius_shop_login');
+        } catch (TokenNotFoundException $exception) {
+            return $this->redirectToRoute('sylius_shop_login');
+        }
+    }
+
+    public function customUpdateAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        $resource = $this->findOr404($configuration);
+
+        $vendor = $this->vendorProvider->provideCurrentVendor();
+        $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)
+            ->findOneBy(['vendor' => $vendor]);
+
+        if (null !== $pendingUpdate) {
+            $this->addFlash('error', 'sylius.user.verify_email_request');
+
+            return $this->redirectToRoute('vendor_profile');
+        }
+
+        $resource = $vendor;
+
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
         $form->handleRequest($request);
@@ -98,30 +131,21 @@ final class DraftAttributeController extends ResourceController
             && $form->isValid()
         ) {
             $resource = $form->getData();
-            $productAttribute = $resource->getProductAttribute();
-            if ($productAttribute) {
-                $this->productAttributeUpdater->update($resource, $productAttribute);
-            }
-
-            /** @var ResourceControllerEvent $event */
-            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
-
-            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-                throw new HttpException($event->getErrorCode(), $event->getMessage());
-            }
-            if ($event->isStopped()) {
-                $this->flashHelper->addFlashFromEvent($configuration, $event);
-
-                $eventResponse = $event->getResponse();
-                if (null !== $eventResponse) {
-                    return $eventResponse;
-                }
-
-                return $this->redirectHandler->redirectToResource($configuration, $resource);
-            }
 
             try {
-                $this->resourceUpdateHandler->handle($resource, $configuration, $this->manager);
+                $image = $resource->getImage();
+                $this->vendorProfileUpdater->createPendingVendorProfileUpdate(
+                    $form->getData(),
+                    $vendor,
+                    $image
+                );
+                if ($image) {
+                    $this->manager->remove($image);
+                }
+                $this->manager->flush();
+
+                $vendor->setEditedAt(new \DateTime());
+                $this->manager->flush();
             } catch (UpdateHandlingException $exception) {
                 if (!$configuration->isHtmlRequest()) {
                     return $this->createRestView($configuration, $form, $exception->getApiResponseCode());
@@ -136,19 +160,12 @@ final class DraftAttributeController extends ResourceController
                 $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
             }
 
-            $postEvent = $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
-
             if (!$configuration->isHtmlRequest()) {
                 if ($configuration->getParameters()->get('return_content', false)) {
                     return $this->createRestView($configuration, $resource, Response::HTTP_OK);
                 }
 
                 return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
-            }
-
-            $postEventResponse = $postEvent->getResponse();
-            if (null !== $postEventResponse) {
-                return $postEventResponse;
             }
 
             return $this->redirectHandler->redirectToResource($configuration, $resource);
@@ -158,12 +175,6 @@ final class DraftAttributeController extends ResourceController
             return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
 
-        $initializeEvent = $this->eventDispatcher->dispatchInitializeEvent(ResourceActions::UPDATE, $configuration, $resource);
-        $initializeEventResponse = $initializeEvent->getResponse();
-        if (null !== $initializeEventResponse) {
-            return $initializeEventResponse;
-        }
-
         return $this->render($configuration->getTemplate(ResourceActions::UPDATE . '.html'), [
             'configuration' => $configuration,
             'metadata' => $this->metadata,
@@ -171,5 +182,63 @@ final class DraftAttributeController extends ResourceController
             $this->metadata->getName() => $resource,
             'form' => $form->createView(),
         ]);
+    }
+
+    public function showAction(Request $request): Response
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::SHOW);
+
+        /** @var ResourceInterface $resource */
+        $resource = $this->vendorProvider->provideCurrentVendor();
+        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+
+        if ($configuration->isHtmlRequest()) {
+            return $this->render($configuration->getTemplate(ResourceActions::SHOW . '.html'), [
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+            ]);
+        }
+
+        return $this->createRestView($configuration, $resource);
+    }
+
+    public function verifyVendorAction(Request $request): Response
+    {
+        $vendorId = $request->attributes->get('id', 0);
+        $vendorRepository = $this->manager->getRepository(Vendor::class);
+
+        $currentVendor = $vendorRepository->findOneBy(['id' => $vendorId]);
+
+        if (null === $currentVendor) {
+            throw new NotFoundHttpException(sprintf('Vendor with id %d has not been found', $vendorId));
+        }
+
+        $currentVendor->setStatus(VendorInterface::STATUS_VERIFIED);
+
+        $this->manager->flush();
+
+        $this->addFlash('success', 'open_marketplace.ui.vendor_verified');
+
+        return $this->redirectToRoute('open_marketplace_admin_vendor_index');
+    }
+
+    public function enablingVendorAction(Request $request): Response
+    {
+        $vendorId = $request->attributes->get('id', 0);
+        $vendorRepository = $this->manager->getRepository(Vendor::class);
+        $currentVendor = $vendorRepository->findOneBy(['id' => $vendorId]);
+        if ($currentVendor) {
+            $currentVendor->setEnabled(!$currentVendor->isEnabled());
+            $messageSuffix = $currentVendor->isEnabled() ? 'enabled' : 'disabled';
+
+            $this->manager->flush();
+            $this->addFlash('success', 'open_marketplace.ui.vendor_' . $messageSuffix);
+        }
+
+        return $this->redirectToRoute('open_marketplace_admin_vendor_index');
     }
 }

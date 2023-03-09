@@ -78,6 +78,8 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         }
 
         $productVariant = $this->productVariantFactory->createNewForProduct($product, true, 0);
+        $productVariant->setShippingRequired($productDraft->isShippingRequired());
+        $productVariant->setShippingCategory($productDraft->getShippingCategory());
 
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {

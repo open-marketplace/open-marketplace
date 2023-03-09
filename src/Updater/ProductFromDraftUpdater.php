@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Updater;
 
+use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
@@ -19,8 +20,8 @@ use BitBag\OpenMarketplace\Exception\ProductNotFoundException;
 use BitBag\OpenMarketplace\Factory\ProductTranslationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelPricing;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface as BaseProductTranslationInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
@@ -96,7 +97,10 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
             $product->removeTranslation($deletedProductTranslation);
         }
 
+        /** @var ProductVariant $productVariant */
         $productVariant = $this->productVariantRepository->findOneBy(['product' => $product]);
+        $productVariant->setShippingRequired($productDraft->isShippingRequired());
+        $productVariant->setShippingCategory($productDraft->getShippingCategory());
 
         /** @var ProductListingPriceInterface $productListingPrice */
         foreach ($productDraft->getProductListingPrice() as $productListingPrice) {

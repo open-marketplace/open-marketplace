@@ -15,7 +15,9 @@ use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInterface
@@ -35,14 +37,23 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
         $productDraftMainTaxon = $productDraft->getMainTaxon();
         $product->setMainTaxon($productDraftMainTaxon);
 
+        $taxonIdsFromProduct = $this->getTaxonIdsForProduct($product);
+
+        $taxonIdsFromProductDraft = $this->getTaxonIdsForProductDraft($productDraft);
+
+        $sharedTaxonIds = array_intersect($taxonIdsFromProduct, $taxonIdsFromProductDraft);
+
         /** @var ProductDraftTaxonInterface $productDraftTaxon */
         foreach ($productDraft->getProductDraftTaxons() as $productDraftTaxon) {
+            /** @var TaxonInterface $taxon */
             $taxon = $productDraftTaxon->getTaxon();
-            /** @var ProductTaxonInterface $productTaxon */
-            $productTaxon = $this->productTaxonFactory->createNew();
-            $productTaxon->setProduct($product);
-            $productTaxon->setTaxon($taxon);
-            $product->addProductTaxon($productTaxon);
+            if (!in_array($taxon->getId(), $sharedTaxonIds)) {
+                /** @var ProductTaxonInterface $productTaxon */
+                $productTaxon = $this->productTaxonFactory->createNew();
+                $productTaxon->setProduct($product);
+                $productTaxon->setTaxon($productDraftTaxon->getTaxon());
+                $product->addProductTaxon($productTaxon);
+            }
         }
 
         return $product;
@@ -54,12 +65,46 @@ final class ProductDraftTaxonsOperator implements ProductDraftTaxonsOperatorInte
             $product->setMainTaxon(null);
         }
 
-        $productTaxons = $product->getProductTaxons();
-        foreach ($productTaxons as $productTaxon) {
-            $product->removeProductTaxon($productTaxon);
-            $this->entityManager->remove($productTaxon);
+        $taxonIdsFromProduct = $this->getTaxonIdsForProduct($product);
+
+        $taxonIdsFromProductDraft = $this->getTaxonIdsForProductDraft($productDraft);
+
+        $sharedTaxonIds = array_intersect($taxonIdsFromProduct, $taxonIdsFromProductDraft);
+
+        /** @var ProductTaxon $productTaxon */
+        foreach ($product->getProductTaxons() as $productTaxon) {
+            /** @var TaxonInterface $taxon */
+            $taxon = $productTaxon->getTaxon();
+            if (!in_array($taxon->getId(), $sharedTaxonIds)) {
+                $product->removeProductTaxon($productTaxon);
+                $this->entityManager->remove($productTaxon);
+            }
         }
 
         $this->copyTaxonsToProduct($productDraft, $product);
+    }
+
+    private function getTaxonIdsForProduct(ProductInterface $product): array
+    {
+        $taxonIds = [];
+        foreach ($product->getProductTaxons() as $productTaxon) {
+            /** @var TaxonInterface $taxon */
+            $taxon = $productTaxon->getTaxon();
+            $taxonIds[] = $taxon->getId();
+        }
+
+        return $taxonIds;
+    }
+
+    private function getTaxonIdsForProductDraft(ProductDraftInterface $productDraft): array
+    {
+        $taxonIds = [];
+        foreach ($productDraft->getProductDraftTaxons() as $productDraftTaxon) {
+            /** @var TaxonInterface $taxon */
+            $taxon = $productDraftTaxon->getTaxon();
+            $taxonIds[] = $taxon->getId();
+        }
+
+        return $taxonIds;
     }
 }

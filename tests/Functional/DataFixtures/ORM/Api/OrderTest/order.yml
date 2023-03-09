@@ -64,6 +64,7 @@ Sylius\Component\Core\Model\Customer:
     lastName: "Smith"
     email: "john.smith@example.com"
     emailCanonical: "john.smith@example.com"
+    phoneNumber: 123456789
 BitBag\OpenMarketplace\Entity\ShopUser:
   user_bruce:
     plainPassword: "123password"

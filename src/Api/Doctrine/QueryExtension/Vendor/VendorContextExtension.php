@@ -85,7 +85,7 @@ final class VendorContextExtension implements QueryCollectionExtensionInterface,
     {
         /** @var FilterVendorStrategy $filterVendorStrategy */
         foreach ($this->filterVendorStrategies as $filterVendorStrategy) {
-            if ($filterVendorStrategy->isSupportClass($class)) {
+            if ($filterVendorStrategy->supports($class)) {
                 return $filterVendorStrategy;
             }
         }
