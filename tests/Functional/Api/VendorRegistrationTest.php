@@ -28,7 +28,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
             'phoneNumber' => '123456789',
@@ -48,7 +48,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
     {
         $this->loadFixturesFromFile('Api/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], self::CONTENT_TYPE_HEADER, json_encode([]));
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], self::CONTENT_TYPE_HEADER, json_encode([]));
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/VendorRegistrationTest/unauthorized_registration_response', Response::HTTP_UNAUTHORIZED);
     }
@@ -62,7 +62,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
             'phoneNumber' => '123456789',
@@ -87,7 +87,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([]));
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([]));
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/VendorRegistrationTest/not_blank_validation_errors_response', Response::HTTP_BAD_REQUEST);
     }
@@ -101,7 +101,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
             'phoneNumber' => '123456789',
@@ -122,7 +122,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
             'phoneNumber' => '123456789',
@@ -147,7 +147,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
             'phoneNumber' => '123456789',
@@ -172,7 +172,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wa',
             'taxIdentifier' => '34',
             'phoneNumber' => '12',
@@ -200,7 +200,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $string256Length = str_repeat('a', 256);
         $string2049Length = str_repeat('a', 2049);
 
-        $this->client->request('POST', '/api/v2/shop/account/vendors', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => $string256Length,
             'taxIdentifier' => $string256Length,
             'phoneNumber' => $string256Length,

@@ -24,6 +24,7 @@ use BitBag\OpenMarketplace\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
@@ -38,16 +39,20 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private AdminUserExampleFactory $adminUserExampleFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         ShopUserExampleFactory $shopUserExampleFactory,
         FactoryInterface $vendorFactory,
-        SharedStorageInterface $sharedStorage
-    ) {
+        SharedStorageInterface $sharedStorage,
+        AdminUserExampleFactory $adminUserExampleFactory,
+        ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
         $this->sharedStorage = $sharedStorage;
+        $this->adminUserExampleFactory = $adminUserExampleFactory;
     }
 
     /**
@@ -173,6 +178,51 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Given there is :count product listing created by vendor with status :status
+     */
+    public function thereIsProductListingCreatedByVendorWithStatus2($count, $status)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        for ($i = 0; $i < $count; ++$i) {
+            $productListing = new ProductListing();
+            $productListing->setCode('code' . $i);
+            $productListing->setVendor($vendor);
+            $productListing->setVerificationStatus($status);
+
+            $productDraft = new ProductDraft();
+            $productDraft->setCode('code' . $i);
+            $productDraft->setStatus($status);
+            $productDraft->setPublishedAt(new \DateTime());
+            $productDraft->setVersionNumber(0);
+            $productDraft->setProductListing($productListing);
+
+            $productTranslation = new ProductTranslation();
+            $productTranslation->setLocale('en_US');
+            $productTranslation->setSlug('product-listing-' . $i);
+            $productTranslation->setName('product-listing-' . $i);
+            $productTranslation->setDescription('product-listing-' . $i);
+            $productTranslation->setProductDraft($productDraft);
+
+            $productPricing = new ProductListingPrice();
+            $productPricing->setProductDraft($productDraft);
+            $productPricing->setPrice(1000);
+            $productPricing->setOriginalPrice(1000);
+            $productPricing->setMinimumPrice(1000);
+            $productPricing->setChannelCode('en_US');
+
+            $this->entityManager->persist($productListing);
+            $this->entityManager->persist($productDraft);
+            $this->entityManager->persist($productTranslation);
+            $this->entityManager->persist($productPricing);
+
+            $this->sharedStorage->set('product_listing' . $i, $productListing);
+        }
+
+        $this->entityManager->flush();
+    }
+
+    /**
      * @Given Product listing status is :arg1
      */
     public function productListingStatusIs($arg1)
@@ -212,5 +262,35 @@ final class ProductListingContext extends RawMinkContext implements Context
 
         $label = $page->find('css', '.ui.red.label.sylius-validation-error');
         Assert::eq($label->getText(), 'You must define price for every channel.');
+    }
+
+    /**
+     * @Given there is an admin user :username with password :password
+     */
+    public function thereIsAnAdminUserWithPassword($username, $password)
+    {
+        $admin = $this->adminUserExampleFactory->create();
+        $admin->setUsername($username);
+        $admin->setPlainPassword($password);
+        $admin->setEmail('admin@email.com');
+        $this->entityManager->persist($admin);
+        $this->entityManager->flush();
+
+        $admin->setPlainPassword($password);
+        $this->sharedStorage->set('admin', $admin);
+    }
+
+    /**
+     * @Given I am logged in as an admin
+     */
+    public function iAmLoggedInAsAnAdmin()
+    {
+        $admin = $this->sharedStorage->get('admin');
+
+        $this->visitPath('/admin/login');
+        $this->getPage()->fillField('Username', $admin->getUsername());
+        $this->getPage()->fillField('Password', $admin->getPlainPassword());
+        $this->getPage()->pressButton('Login');
+        ($this->getPage()->findLink('Logout'));
     }
 }
