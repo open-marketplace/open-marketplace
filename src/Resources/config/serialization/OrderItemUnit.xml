@@ -18,5 +18,13 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <attribute name="shippable">
             <group>shop:account:vendor:order:details</group>
         </attribute>
+
+        <attribute name="adjustments">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
+        <attribute name="adjustmentsTotal">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
     </class>
 </serializer>

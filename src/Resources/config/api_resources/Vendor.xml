@@ -36,14 +36,6 @@ We are hiring developers from all over the world. Join us and start your new, ex
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/vendors/{uuid}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:vendor:read</attribute>
-                </attribute>
-            </itemOperation>
-
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/vendors/{uuid}</attribute>

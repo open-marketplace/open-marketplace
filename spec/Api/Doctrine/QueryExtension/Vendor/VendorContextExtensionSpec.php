@@ -47,7 +47,7 @@ final class VendorContextExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $filterVendorStrategy->isSupportClass(VendorInterface::class)->willReturn(false);
+        $filterVendorStrategy->supports(VendorInterface::class)->willReturn(false);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, VendorInterface::class);
 
@@ -63,7 +63,7 @@ final class VendorContextExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $filterVendorStrategy->isSupportClass(VendorInterface::class)->willReturn(true);
+        $filterVendorStrategy->supports(VendorInterface::class)->willReturn(true);
         $sectionProvider->getSection()->willReturn($shopApiSection);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, VendorInterface::class);
@@ -79,7 +79,7 @@ final class VendorContextExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $filterVendorStrategy->isSupportClass(VendorInterface::class)->willReturn(true);
+        $filterVendorStrategy->supports(VendorInterface::class)->willReturn(true);
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
         $vendorContext->getVendor()->willReturn(null);
 
@@ -97,7 +97,7 @@ final class VendorContextExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $filterVendorStrategy->isSupportClass(VendorInterface::class)->willReturn(true);
+        $filterVendorStrategy->supports(VendorInterface::class)->willReturn(true);
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
         $vendorContext->getVendor()->willReturn($vendor);
 
@@ -113,7 +113,7 @@ final class VendorContextExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $filterVendorStrategy->isSupportClass(VendorInterface::class)->willReturn(false);
+        $filterVendorStrategy->supports(VendorInterface::class)->willReturn(false);
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, VendorInterface::class, ['id']);
 
@@ -129,7 +129,7 @@ final class VendorContextExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $filterVendorStrategy->isSupportClass(VendorInterface::class)->willReturn(true);
+        $filterVendorStrategy->supports(VendorInterface::class)->willReturn(true);
         $sectionProvider->getSection()->willReturn($shopApiSection);
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, VendorInterface::class, ['id']);
@@ -145,7 +145,7 @@ final class VendorContextExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $filterVendorStrategy->isSupportClass(VendorInterface::class)->willReturn(true);
+        $filterVendorStrategy->supports(VendorInterface::class)->willReturn(true);
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
         $vendorContext->getVendor()->willReturn(null);
 
@@ -163,7 +163,7 @@ final class VendorContextExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $filterVendorStrategy->isSupportClass(VendorInterface::class)->willReturn(true);
+        $filterVendorStrategy->supports(VendorInterface::class)->willReturn(true);
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
         $vendorContext->getVendor()->willReturn($vendor);
 

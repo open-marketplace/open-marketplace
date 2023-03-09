@@ -15,7 +15,7 @@ use Doctrine\ORM\QueryBuilder;
 
 interface FilterVendorStrategy
 {
-    public function isSupportClass(string $class): bool;
+    public function supports(string $class): bool;
 
     public function filterByVendor(QueryBuilder $queryBuilder, VendorInterface $vendor): void;
 }
