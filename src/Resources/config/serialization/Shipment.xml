@@ -18,5 +18,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:order:account:read</group>
             <group>shop:shipment:read</group>
         </attribute>
+
+        <attribute name="method">
+            <group>shop:account:vendor:order:read</group>
+        </attribute>
     </class>
 </serializer>

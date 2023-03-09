@@ -18,6 +18,12 @@
             <tag name="security.voter"/>
         </service>
 
+        <service class="BitBag\OpenMarketplace\Security\Voter\Vendor\OrderVoter"
+                 id="bitbag.open_marketplace.security.voter.vendor.order_voter">
+            <argument type="service" id="sm.factory" />
+            <tag name="security.voter"/>
+        </service>
+
         <service class="BitBag\OpenMarketplace\Api\Security\Voter\VendorImageVoter"
             id="bitbag.open_marketplace.api.security.voter.vendor_image">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />

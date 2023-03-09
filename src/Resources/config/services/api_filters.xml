@@ -10,6 +10,25 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
         <defaults autowire="false" autoconfigure="false" public="false" />
 
+        <service id="bitbag.open_marketplace.api.vendor.search_order_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="number">partial</argument>
+                <argument key="state">exact</argument>
+                <argument key="paymentState">exact</argument>
+                <argument key="shippingState">exact</argument>
+                <argument key="shipments.method.code">exact</argument>
+                <argument key="customer.email">partial</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="bitbag.open_marketplace.api.vendor.search_date_order_filter" parent="api_platform.doctrine.orm.date_filter">
+            <argument type="collection">
+                <argument key="checkoutCompletedAt" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="bitbag.open_marketplace.api.vendor.search_product_listing_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="code">partial</argument>
