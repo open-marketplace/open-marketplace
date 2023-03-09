@@ -53,6 +53,8 @@ final class EditProductAction
 
     private Environment $twig;
 
+    private RouterInterface $router;
+
     public function __construct(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -64,6 +66,7 @@ final class EditProductAction
         FormFactoryInterface $formFactory,
         RequestStack $requestStack,
         Environment $twig,
+        RouterInterface $router,
         ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
@@ -75,6 +78,7 @@ final class EditProductAction
         $this->formFactory = $formFactory;
         $this->requestStack = $requestStack;
         $this->twig = $twig;
+        $this->router = $router;
     }
 
     public function __invoke(Request $request): Response
