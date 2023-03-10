@@ -8,5 +8,11 @@
                  public="true">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Api\Controller\Vendor\SendToVerificationAction"
+                 id="bitbag.open_marketplace.api.controller.vendor.send_to_verification_action"
+                 public="true">
+            <argument type="service" id="open_marketplace.state_machine.product_draft.transition"/>
+        </service>
     </services>
 </container>

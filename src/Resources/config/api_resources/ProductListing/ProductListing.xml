@@ -109,10 +109,20 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListing</attribute>
             </itemOperation>
 
+            <itemOperation name="vendor_send_to_verification">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/account/vendor/product-listings/{uuid}/send-to-verification</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">bitbag.open_marketplace.api.controller.vendor.send_to_verification_action</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
+                </attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_UPDATE", object)</attribute>
+            </itemOperation>
+
             <itemOperation name="vendor_delete">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/account/vendor/product-listings/{uuid}</attribute>
-                <attribute name="input">false</attribute>
                 <attribute name="controller">bitbag.open_marketplace.api.controller.vendor.delete_product_listing_action</attribute>
                 <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_DELETE", object)</attribute>
             </itemOperation>
