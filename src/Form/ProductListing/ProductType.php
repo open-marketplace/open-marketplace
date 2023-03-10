@@ -11,13 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -31,20 +28,9 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 final class ProductType extends AbstractType
 {
-    private VendorProviderInterface $vendorProvider;
-
-    public function __construct(VendorProviderInterface $vendorProvider)
-    {
-        $this->vendorProvider = $vendorProvider;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('vendor', EntityType::class, [
-                'class' => Vendor::class,
-                'label' => 've',
-            ])
             ->add('code', TextType::class, [
                 'label' => 'sylius.ui.code',
                 'disabled' => ($builder->getData()->getCode()),
@@ -98,12 +84,7 @@ final class ProductType extends AbstractType
                 'required' => false,
                 'label' => 'sylius.form.product.images',
                 'block_name' => 'entry',
-            ])
-            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
-                $form = $event->getForm();
-                $form->get('vendor')->setData($this->vendorProvider->provideCurrentVendor());
-                $event->setData($form);
-            });
+            ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $productDraft = $event->getData();

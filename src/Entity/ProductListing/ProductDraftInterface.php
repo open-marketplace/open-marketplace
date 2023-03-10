@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
-interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface, VendorAwareInterface, UuidAwareInterface
+interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface, UuidAwareInterface
 {
     public const STATUS_CREATED = 'created';
 
@@ -154,6 +154,8 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function getName(string $locale): ?string;
 
     public function getSlug(string $locale): ?string;
+
+    public function getVendor(): VendorInterface;
 
     public function getAnyTranslationName(): ?string;
 

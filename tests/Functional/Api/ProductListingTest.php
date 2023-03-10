@@ -313,6 +313,52 @@ final class ProductListingTest extends FunctionalTestCase
         $this->assertResponse($response, 'Api/ProductListingTest/test_it_validates_not_blank_product_draft_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
+    public function test_it_prevents_delete_by_user_without_vendor_context(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_bruce_1',
+        ]);
+
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor/product-listings/' . $productListing->getUuid(), [], [], $header);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_it_prevents_delete_by_different_vendor(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_bruce_1',
+        ]);
+
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor/product-listings/' . $productListing->getUuid(), [], [], $header);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    public function test_it_delete_attribute_by_owner_vendor(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        /** @var ProductListing $productListing */
+        $productListing = $this->productListingRepository->findOneBy([
+            'code' => 'product_listing_bruce_1',
+        ]);
+
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor/product-listings/' . $productListing->getUuid(), [], [], $header);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+        $this->assertEquals('', $response->getContent());
+    }
+
     private function getUploadedProductImageFile(): UploadedFile
     {
         $fileName = 'product1.png';

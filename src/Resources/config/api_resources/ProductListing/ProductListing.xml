@@ -112,6 +112,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <itemOperation name="vendor_delete">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/account/vendor/product-listings/{uuid}</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">bitbag.open_marketplace.api.controller.vendor.delete_product_listing_action</attribute>
                 <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_DELETE", object)</attribute>
             </itemOperation>
         </itemOperations>

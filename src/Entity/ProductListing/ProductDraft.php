@@ -34,8 +34,6 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
     protected ?ShippingCategoryInterface $shippingCategory = null;
 
-    protected VendorInterface $vendor;
-
     protected bool $isVerified;
 
     protected string $status;
@@ -222,12 +220,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
     public function getVendor(): VendorInterface
     {
-        return $this->vendor;
-    }
-
-    public function setVendor(VendorInterface $vendor): void
-    {
-        $this->vendor = $vendor;
+        return $this->getProductListing()->getVendor();
     }
 
     public function getProductListing(): ProductListingInterface
