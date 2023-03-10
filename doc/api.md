@@ -33,6 +33,8 @@ Vendor has only access to itself resources.
 
 - Vendor(`/api/v2/shop/account/vendor/...` or `/api/v2/shop/account/vendor-images/...`) - managing 
 details of Vendor.
+- ProductListing(`/api/v2/shop/account/vendor/product-listings/...`) - managing product
+listing resource, which converts to products after administration acceptance.
 - DraftAttribute(`/api/v2/shop/account/vendor/draft-attributes/...` or 
 `/api/v2/shop/account/vendor/draft-attribute-translations/...`) - creating and managing attributes for
 Vendor's products.
