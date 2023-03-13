@@ -1,0 +1,46 @@
+$breakpoint-sm: 576px !default;
+
+.bb-wishlist-button > span > .icon{
+  @media screen and (min-width: $breakpoint-sm) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    text-align: center;
+    width: 2.57142857em;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.bb-wishlist-button > span > i.icon.heart:before{
+  @media screen and (min-width: $breakpoint-sm) {
+    position: absolute;
+    display: block;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+    transform: translateY(-50%);
+  }
+}
+
+.bb-wishlist-button.ui.labeled.icon.button{
+  @media screen and (max-width: $breakpoint-sm) {
+    display: flex !important;
+    justify-content: center;
+    padding-left: unset !important;
+    padding-right: unset !important;
+    width: 20%;
+  }
+}
+
+.bb-wishlist-button > span > i.heart{
+  @media screen and (max-width: $breakpoint-sm) {
+    margin: unset !important;
+  }
+}
+
+.bb-wishlist-button > span.text{
+  @media screen and (max-width: $breakpoint-sm) {
+    display: none !important;
+  }
+}
