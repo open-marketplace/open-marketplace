@@ -44,12 +44,12 @@ final class CustomerItemDataProvider implements ItemDataProviderInterface, Restr
         $id,
         string $operationName = null,
         array $context = []
-    )
-    {
+    ) {
         $section = $this->sectionProvider->getSection();
         $vendor = $this->vendorContext->getVendor();
         if (null !== $vendor && $section instanceof ShopVendorApiSection) {
-            return $this->customerRepository->findCustomerForVendor($vendor, strval($id));
+            /** @phpstan-ignore-next-line function strval() is risky */
+            return $this->customerRepository->findCustomerForVendor($vendor, (string) $id);
         }
 
         return $this->baseCustomerItemDataProvider->getItem($resourceClass, $id, $operationName, $context);
@@ -59,8 +59,7 @@ final class CustomerItemDataProvider implements ItemDataProviderInterface, Restr
         string $resourceClass,
         string $operationName = null,
         array $context = []
-    ): bool
-    {
+    ): bool {
         /** @phpstan-ignore-next-line BaseCustomerItemDataProvider doesn't have interface */
         return $this->baseCustomerItemDataProvider->supports($resourceClass, $operationName, $context);
     }
