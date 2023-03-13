@@ -22,6 +22,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
 use Sylius\Component\Product\Model\ProductInterface;
+use Webmozart\Assert\Assert;
 
 class ProductContext implements Context
 {
@@ -93,6 +94,18 @@ class ProductContext implements Context
 
             $this->sharedStorage->set('products', $products);
         }
+    }
+
+    /**
+     * @Then product on hand count should be :count
+     */
+    public function productOnHoldCountShouldBe(int $count)
+    {
+        $product = $this->sharedStorage->get('product');
+
+        $variant = $this->productVariantRepository->findOneBy(['product'=>$product]);
+        $this->manager->refresh($variant);
+        Assert::same($count, $variant->getOnHand());
     }
 
     /**
