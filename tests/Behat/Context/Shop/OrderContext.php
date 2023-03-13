@@ -12,10 +12,14 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Entity\Order;
+use Doctrine\ORM\EntityManagerInterface;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 
@@ -25,12 +29,20 @@ class OrderContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private AdminUserExampleFactory $adminUserExampleFactory;
+
+    private EntityManagerInterface $entityManager;
+
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
-    ) {
+        AdminUserExampleFactory $adminUserExampleFactory,
+        EntityManagerInterface $entityManager,
+        ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
+        $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -159,5 +171,61 @@ class OrderContext extends RawMinkContext implements Context
         $page = $this->getSession()->getPage();
         $card = $page->find('css', '.ui.fluid.card');
         assertStringContainsString($name, $card->getText());
+    }
+
+    /**
+     * @Given there is an admin user :username with password :password
+     */
+    public function thereIsAnAdminUserWithPassword($username, $password)
+    {
+        $admin = $this->adminUserExampleFactory->create();
+        $admin->setUsername($username);
+        $admin->setPlainPassword($password);
+        $admin->setEmail('admin@email.com');
+        $this->entityManager->persist($admin);
+        $this->entityManager->flush();
+
+        $admin->setPlainPassword($password);
+        $this->sharedStorage->set('admin', $admin);
+    }
+
+    /**
+     * @Given I am logged in as an admin
+     */
+    public function iAmLoggedInAsAnAdmin()
+    {
+        $admin = $this->sharedStorage->get('admin');
+
+        $this->visitPath('/admin/login');
+        $this->getPage()->fillField('Username', $admin->getUsername());
+        $this->getPage()->fillField('Password', $admin->getPlainPassword());
+        $this->getPage()->pressButton('Login');
+        ($this->getPage()->findLink('Logout'));
+    }
+
+    /**
+     * @Given I am on admin primary order page
+     */
+    public function iAmOnAdminPrimaryOrderPage()
+    {
+        /** @var Order $order */
+        $order = $this->entityManager->getRepository(Order::class)->findOneBy([], ['id' => 'ASC']);
+        $this->visitPath(sprintf('/admin/orders/%d', $order->getId()));
+    }
+
+    /**
+     * @Given I test stuff
+     */
+    public function iTestStuff()
+    {
+        dd($this->getPage()->getText());
+    }
+
+    /**
+     * @return DocumentElement
+     */
+    private function getPage()
+    {
+        return $this->getSession()->getPage();
     }
 }
