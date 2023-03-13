@@ -13,8 +13,11 @@ namespace BitBag\OpenMarketplace\Api\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface as LegacyQueryNameGeneratorInterface;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 final class OrderMethodsItemExtension implements QueryItemExtensionInterface
 {
@@ -22,12 +25,16 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
 
     private SectionProviderInterface $sectionProvider;
 
+    private UserContextInterface $userContext;
+
     public function __construct(
         QueryItemExtensionInterface $baseOrderMethodsItemExtension,
         SectionProviderInterface $sectionProvider,
-    ) {
+        UserContextInterface $userContext,
+        ) {
         $this->baseOrderMethodsItemExtension = $baseOrderMethodsItemExtension;
         $this->sectionProvider = $sectionProvider;
+        $this->userContext = $userContext;
     }
 
     public function applyToItem(
@@ -38,9 +45,17 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         string $operationName = null,
         array $context = []
     ): void {
-        $section = $this->sectionProvider->getSection();
-        if ($section instanceof ShopVendorApiSection) {
+        if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
+        }
+
+        if ($this->sectionProvider->getSection() instanceof ShopVendorApiSection) {
+            return;
+        }
+
+        if ($this->userContext->getUser() instanceof ShopUserInterface) {
+            $rootAlias = $queryBuilder->getRootAliases()[0];
+            $queryBuilder->andWhere(sprintf('%s.primaryOrder is NOT NULL', $rootAlias));
         }
 
         $this->baseOrderMethodsItemExtension->applyToItem(
