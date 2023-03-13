@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
@@ -15,12 +21,17 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\ProductVariantFilterStrategy"
-                 id="bitbag.open_marketplace.api.doctrine.query_extension.vendor.vendor_context_strategy.product_variant_filter_strategy">
+                 id="bitbag.open_marketplace.api.doctrine.query_extension.vendor.vendor_context_strategy.product_variant">
             <tag name="bitbag.open_marketplace.strategy.api.doctrine.vendor_filter"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\VendorFilterStrategy"
-                 id="bitbag.open_marketplace.api.doctrine.query_extension.vendor.vendor_context_strategy.vendor_filter_strategy">
+                 id="bitbag.open_marketplace.api.doctrine.query_extension.vendor.vendor_context_strategy.vendor">
+            <tag name="bitbag.open_marketplace.strategy.api.doctrine.vendor_filter"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\CustomerFilterStrategy"
+                 id="bitbag.open_marketplace.api.doctrine.query_extension.vendor.vendor_context_strategy.customer">
             <tag name="bitbag.open_marketplace.strategy.api.doctrine.vendor_filter"/>
         </service>
 
