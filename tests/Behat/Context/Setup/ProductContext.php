@@ -103,7 +103,7 @@ class ProductContext implements Context
     {
         $product = $this->sharedStorage->get('product');
 
-        $variant = $this->productVariantRepository->findOneBy(['product'=>$product]);
+        $variant = $this->productVariantRepository->findOneBy(['product' => $product]);
         $this->manager->refresh($variant);
         Assert::same($count, $variant->getOnHand());
     }
