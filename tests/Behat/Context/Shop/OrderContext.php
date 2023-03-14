@@ -32,7 +32,7 @@ class OrderContext extends RawMinkContext implements Context
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
-        ) {
+    ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
     }
@@ -58,7 +58,7 @@ class OrderContext extends RawMinkContext implements Context
         $orders = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($orders), $count);
         $labels = $page->findAll('css', '.ui.green.label');
-        foreach ($labels as $label){
+        foreach ($labels as $label) {
            Assert::eq($label->getText(), $status);
         }
     }
