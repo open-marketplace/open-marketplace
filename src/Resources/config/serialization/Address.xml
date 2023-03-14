@@ -19,33 +19,43 @@ We are hiring developers from all over the world. Join us and start your new, ex
         </attribute>
         <attribute name="firstName">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="lastName">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="phoneNumber">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="company">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="city">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="street">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="postcode">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="countryCode">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="provinceCode">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
         <attribute name="provinceName">
             <group>shop:account:vendor:order:details</group>
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
     </class>
 </serializer>

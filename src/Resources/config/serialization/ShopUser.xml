@@ -13,6 +13,15 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <class name="BitBag\OpenMarketplace\Entity\ShopUser">
         <attribute name="vendor">
             <group>shop:customer:read</group>
+            <group>shop:account:vendor:customer:read</group>
+        </attribute>
+
+        <attribute name="verified">
+            <group>shop:account:vendor:customer:read</group>
+        </attribute>
+
+        <attribute name="enabled">
+            <group>shop:account:vendor:customer:read</group>
         </attribute>
     </class>
 </serializer>
