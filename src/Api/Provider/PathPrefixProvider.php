@@ -32,8 +32,8 @@ final class PathPrefixProvider implements PathPrefixProviderInterface
         PathPrefixProviderInterface $basePathPrefixProvider,
         VendorContextInterface $vendorContext,
         SectionProviderInterface $sectionProvider,
-        string $shopVendorApiUriBeginning,
-        ) {
+        string $shopVendorApiUriBeginning
+    ) {
         $this->basePathPrefixProvider = $basePathPrefixProvider;
         $this->vendorContext = $vendorContext;
         $this->sectionProvider = $sectionProvider;

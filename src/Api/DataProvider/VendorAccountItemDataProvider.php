@@ -32,8 +32,8 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
     public function __construct(
         VendorContextInterface $vendorContext,
         VendorRepositoryInterface $vendorRepository,
-        SectionProviderInterface $sectionProvider,
-        ) {
+        SectionProviderInterface $sectionProvider
+    ) {
         $this->vendorContext = $vendorContext;
         $this->vendorRepository = $vendorRepository;
         $this->sectionProvider = $sectionProvider;

@@ -161,7 +161,16 @@ Sylius\Component\Core\Model\ChannelPricing:
     channelCode: 'CODE'
     productVariant: '@product_variant_product_peter_1_1'
 BitBag\OpenMarketplace\Entity\Order:
+  bruce_order_made_by_john_1_main:
+    currency_code: "USD"
+    locale_code: "en-US"
+    customer: '@customer_john'
+    paymentState: "awaiting_payment"
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_john_1_main'
   bruce_order_made_by_john_1:
+    primaryOrder: '@bruce_order_made_by_john_1_main'
     currency_code: "USD"
     locale_code: "en-US"
     vendor: '@vendor_bruce'
@@ -172,7 +181,16 @@ BitBag\OpenMarketplace\Entity\Order:
     tokenValue: 'bruce_order_made_by_john_1'
     shippingAddress: '@address_john'
     billingAddress: '@address_john'
+  bruce_order_made_by_john_2_main:
+    currency_code: "USD"
+    locale_code: "en-US"
+    customer: '@customer_john'
+    paymentState: "paid"
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_john_2_main'
   bruce_order_made_by_john_2:
+    primaryOrder: '@bruce_order_made_by_john_2_main'
     currency_code: "USD"
     locale_code: "en-US"
     vendor: '@vendor_bruce'
@@ -181,7 +199,16 @@ BitBag\OpenMarketplace\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2'
+  peter_order_made_by_john_main:
+    currency_code: "USD"
+    locale_code: "en-US"
+    customer: '@customer_john'
+    paymentState: "paid"
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'peter_order_made_by_john_main'
   peter_order_made_by_john:
+    primaryOrder: '@peter_order_made_by_john'
     currency_code: "USD"
     locale_code: "en-US"
     vendor: '@vendor_peter'
@@ -190,7 +217,16 @@ BitBag\OpenMarketplace\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'peter_order_made_by_john'
+  order_made_by_peter_main:
+    currency_code: "USD"
+    locale_code: "en-US"
+    customer: '@customer_peter'
+    paymentState: "paid"
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'order_made_by_peter_main'
   order_made_by_peter:
+    primaryOrder: '@order_made_by_peter_main'
     currency_code: "USD"
     locale_code: "en-US"
     customer: '@customer_peter'
