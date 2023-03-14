@@ -14,7 +14,7 @@ namespace BitBag\OpenMarketplace\Operator;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class OrderInventoryOperator implements OrderInventoryOperatorInterface
+final class OrderInventoryOperator
 {
     private OrderInventoryOperatorInterface $decoratedOperator;
 
