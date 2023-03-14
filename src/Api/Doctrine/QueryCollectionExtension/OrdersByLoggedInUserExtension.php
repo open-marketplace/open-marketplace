@@ -30,8 +30,8 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
     public function __construct(
         ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension,
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
-        ) {
+        UserContextInterface $userContext
+    ) {
         $this->baseOrdersByLoggedInUserExtension = $baseOrdersByLoggedInUserExtension;
         $this->sectionProvider = $sectionProvider;
         $this->userContext = $userContext;

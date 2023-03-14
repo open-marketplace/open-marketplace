@@ -24,8 +24,8 @@ final class PathPrefixProviderSpec extends ObjectBehavior
     public function let(
         PathPrefixProviderInterface $pathPrefixProvider,
         VendorContextInterface $vendorContext,
-        SectionProviderInterface $sectionProvider,
-        ) {
+        SectionProviderInterface $sectionProvider
+    ): void {
         $this->beConstructedWith(
             $pathPrefixProvider,
             $vendorContext,
@@ -57,8 +57,8 @@ final class PathPrefixProviderSpec extends ObjectBehavior
         VendorContextInterface $vendorContext,
         VendorInterface $vendor,
         SectionProviderInterface $sectionProvider,
-        ShopVendorApiSection $section,
-        ): void {
+        ShopVendorApiSection $section
+    ): void {
         $sectionProvider->getSection()->willReturn($section);
         $vendorContext->getVendor()->willReturn($vendor);
 
@@ -79,8 +79,8 @@ final class PathPrefixProviderSpec extends ObjectBehavior
         VendorContextInterface $vendorContext,
         PathPrefixProviderInterface $pathPrefixProvider,
         SectionProviderInterface $sectionProvider,
-        ShopApiSection $section,
-        ): void {
+        ShopApiSection $section
+    ): void {
         $sectionProvider->getSection()->willReturn($section);
         $vendorContext->getVendor()->willReturn(null);
         $pathPrefixProvider->getCurrentPrefix()->willReturn('base');

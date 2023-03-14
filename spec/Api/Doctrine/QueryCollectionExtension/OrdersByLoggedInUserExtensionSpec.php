@@ -30,8 +30,8 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
     public function let(
         ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension,
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
-        ): void {
+        UserContextInterface $userContext
+    ): void {
         $this->beConstructedWith($baseOrdersByLoggedInUserExtension, $sectionProvider, $userContext);
     }
 
@@ -45,8 +45,8 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension,
         SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface $queryNameGenerator,
-        ): void {
+        LegacyQueryNameGeneratorInterface $queryNameGenerator
+    ): void {
         $this->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
@@ -68,8 +68,8 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         SectionProviderInterface $sectionProvider,
         ShopVendorApiSection $shopVendorApiSection,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface $queryNameGenerator,
-        ): void {
+        LegacyQueryNameGeneratorInterface $queryNameGenerator
+    ): void {
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
 
         $this->applyToCollection(
@@ -94,8 +94,8 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         AdminUserInterface $user,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface $queryNameGenerator,
-        ): void {
+        LegacyQueryNameGeneratorInterface $queryNameGenerator
+    ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $userContext->getUser()->willReturn($user);
 
@@ -123,8 +123,8 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface $queryNameGenerator,
-        ): void {
+        LegacyQueryNameGeneratorInterface $queryNameGenerator
+    ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $userContext->getUser()->willReturn($user);
         $queryBuilder->getRootAliases()->willReturn(['root']);

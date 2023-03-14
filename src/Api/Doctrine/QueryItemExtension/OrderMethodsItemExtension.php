@@ -30,8 +30,8 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
     public function __construct(
         QueryItemExtensionInterface $baseOrderMethodsItemExtension,
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
-        ) {
+        UserContextInterface $userContext
+    ) {
         $this->baseOrderMethodsItemExtension = $baseOrderMethodsItemExtension;
         $this->sectionProvider = $sectionProvider;
         $this->userContext = $userContext;

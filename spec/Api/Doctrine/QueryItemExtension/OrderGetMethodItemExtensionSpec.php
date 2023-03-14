@@ -30,8 +30,8 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
     public function let(
         QueryItemExtensionInterface $baseOrderGetMethodItemExtension,
         SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext,
-        ): void {
+        UserContextInterface $userContext
+    ): void {
         $this->beConstructedWith($baseOrderGetMethodItemExtension, $sectionProvider, $userContext);
     }
 
@@ -45,8 +45,8 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         QueryItemExtensionInterface $baseOrderGetMethodItemExtension,
         SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface $queryNameGenerator,
-        ): void {
+        LegacyQueryNameGeneratorInterface $queryNameGenerator
+    ): void {
         $this->applyToItem(
             $queryBuilder,
             $queryNameGenerator,
@@ -70,8 +70,8 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         SectionProviderInterface $sectionProvider,
         ShopVendorApiSection $shopVendorApiSection,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface $queryNameGenerator,
-        ): void {
+        LegacyQueryNameGeneratorInterface $queryNameGenerator
+    ): void {
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
 
         $this->applyToItem(
@@ -98,8 +98,8 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         AdminUserInterface $user,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface $queryNameGenerator,
-        ): void {
+        LegacyQueryNameGeneratorInterface $queryNameGenerator
+    ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $userContext->getUser()->willReturn($user);
 
@@ -129,8 +129,8 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         QueryBuilder $queryBuilder,
-        LegacyQueryNameGeneratorInterface $queryNameGenerator,
-        ): void {
+        LegacyQueryNameGeneratorInterface $queryNameGenerator
+    ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $userContext->getUser()->willReturn($user);
         $queryBuilder->getRootAliases()->willReturn(['root']);
