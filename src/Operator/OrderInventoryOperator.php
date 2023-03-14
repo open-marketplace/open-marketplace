@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Operator;
 
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
 
-final class OrderInventoryOperator
+final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
     private OrderInventoryOperatorInterface $decoratedOperator;
 
@@ -29,6 +29,7 @@ final class OrderInventoryOperator
         $this->productVariantManager = $productVariantManager;
     }
 
+    /** @param \BitBag\OpenMarketplace\Entity\OrderInterface $order */
     public function cancel(OrderInterface $order): void
     {
         if (null !== $order->getPrimaryOrder()) {
@@ -36,6 +37,7 @@ final class OrderInventoryOperator
         }
     }
 
+    /** @param \BitBag\OpenMarketplace\Entity\OrderInterface $order */
     public function hold(OrderInterface $order): void
     {
         if (null !== $order->getPrimaryOrder()) {
@@ -43,6 +45,7 @@ final class OrderInventoryOperator
         }
     }
 
+    /** @param \BitBag\OpenMarketplace\Entity\OrderInterface $order */
     public function sell(OrderInterface $order): void
     {
         if (null !== $order->getPrimaryOrder()) {
