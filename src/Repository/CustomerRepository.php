@@ -16,7 +16,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository as BaseCustomerRepository;
 use Sylius\Component\Core\Model\CustomerInterface;
 
-class CustomerRepository extends BaseCustomerRepository
+class CustomerRepository extends BaseCustomerRepository implements CustomerRepositoryInterface
 {
     public function findVendorCustomers(VendorInterface $vendor): QueryBuilder
     {

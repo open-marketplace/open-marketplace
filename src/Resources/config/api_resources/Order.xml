@@ -38,6 +38,18 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 </attribute>
             </collectionOperation>
 
+            <collectionOperation name="vendor_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendor/orders</attribute>
+                <attribute name="filters">
+                    <attribute>bitbag.open_marketplace.api.vendor.search_order_filter</attribute>
+                    <attribute>bitbag.open_marketplace.api.vendor.date_order_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:order:read</attribute>
+                </attribute>
+            </collectionOperation>
+
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders</attribute>
@@ -45,18 +57,6 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     <attribute name="groups">
                         <attribute>shop:order:read</attribute>
                     </attribute>
-                </attribute>
-            </collectionOperation>
-
-            <collectionOperation name="vendor_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendor/orders</attribute>
-                <attribute name="filters">
-                    <attribute>bitbag.open_marketplace.api.vendor.search_order_filter</attribute>
-                    <attribute>bitbag.open_marketplace.api.vendor.search_date_order_filter</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:account:vendor:order:read</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -71,19 +71,19 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="shop_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
-                </attribute>
-            </itemOperation>
-
             <itemOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/vendor/orders/{tokenValue}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:order:details</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
             </itemOperation>
 
