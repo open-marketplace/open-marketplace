@@ -6,7 +6,7 @@ FILE=var/fixtures/images.zip
 if [ ! -f "$FILE" ]; then
   printf "\n${BLUE}Fetching fixture images from BitBag server...${NO_COLOR}\n\n"
   mkdir -p var/fixtures
-  wget -O var/fixtures/images.zip https://demo.open-marketplace.io/images.zip -q --show-progress
+  wget -O var/fixtures/images.zip https://demo.open-marketplace.io/images-compressed.zip -q --show-progress
 fi
 
 DIR=var/fixtures/images
