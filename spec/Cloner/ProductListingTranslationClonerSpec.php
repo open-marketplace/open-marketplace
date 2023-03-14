@@ -94,7 +94,7 @@ final class ProductListingTranslationClonerSpec extends ObjectBehavior
         $newTranslation->setShortDescription('shortDescription')
             ->shouldBeCalled();
 
-        $newProductDraft->addTranslationsWithKey($newTranslation, 'en_US')
+        $newProductDraft->addTranslationWithKey($newTranslation, 'en_US')
         ->shouldBeCalled();
 
         $this->cloneTranslation($newProductDraft, $productDraft);

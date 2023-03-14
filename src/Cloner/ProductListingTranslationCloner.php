@@ -44,7 +44,7 @@ final class ProductListingTranslationCloner implements ProductListingTranslation
             $newTranslation->setMetaKeywords($translation->getMetaKeywords());
             $newTranslation->setSlug($translation->getSlug());
             $newTranslation->setShortDescription($translation->getShortDescription());
-            $newProductDraft->addTranslationsWithKey($newTranslation, $locale);
+            $newProductDraft->addTranslationWithKey($newTranslation, $locale);
         }
     }
 }

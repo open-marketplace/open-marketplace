@@ -29,6 +29,14 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="bitbag.open_marketplace.api.vendor.search_product_listing_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="code">partial</argument>
+                <argument key="verificationStatus">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="bitbag.open_marketplace.api.vendor.search_customer_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="firstName">partial</argument>

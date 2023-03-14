@@ -44,6 +44,10 @@
                  id="open_marketplace.factory.product_variant_translation_factory">
         </service>
 
+        <service class="BitBag\OpenMarketplace\Factory\ProductDraftFactory"
+                 id="bitbag.open_marketplace.factory.product_draft">
+        </service>
+
         <service class="BitBag\OpenMarketplace\Factory\ProductFromDraftFactory"
                  id="open_marketplace.factory.product_from_draft_factory">
             <argument type="service" id="sylius.custom_factory.product" />

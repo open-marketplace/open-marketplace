@@ -11,10 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ProductDraftTaxonInterface extends ResourceInterface
+interface ProductDraftTaxonInterface extends ResourceInterface, UuidAwareInterface
 {
     public function getProductDraft(): ?ProductDraftInterface;
 

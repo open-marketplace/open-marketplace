@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductListing">
+        <attribute name="uuid">
+            <group>shop:account:vendor:product_listing:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>shop:account:vendor:product_listing:read</group>
+        </attribute>
+        <attribute name="enabled">
+            <group>shop:account:vendor:product_listing:read</group>
+        </attribute>
+        <attribute name="verificationStatus">
+            <group>shop:account:vendor:product_listing:read</group>
+        </attribute>
+        <attribute name="latestDraft">
+            <group>shop:account:vendor:product_listing:read</group>
+        </attribute>
+        <attribute name="product">
+            <group>shop:account:vendor:product_listing:read</group>
+        </attribute>
+        <attribute name="lastVerifiedAt">
+            <group>shop:account:vendor:product_listing:read</group>
+        </attribute>
+    </class>
+</serializer>

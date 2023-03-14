@@ -1,0 +1,161 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductListing",
+    "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings\/@string@",
+            "@type": "ProductListing",
+            "uuid": "@string@",
+            "code": "product_listing_bruce_1",
+            "enabled": true,
+            "verificationStatus": "created",
+            "latestDraft": {
+                "@id": "\/api\/v2\/shop\/account\/vendor\/product-drafts\/@string@",
+                "@type": "ProductDraft",
+                "uuid": "@string@",
+                "code": "product_draft_bruce_1",
+                "status": "created",
+                "verifiedAt": null,
+                "publishedAt": null,
+                "images": [
+                    {
+                        "@type": "ProductDraftImage",
+                        "uuid": "@string@",
+                        "path": "\/dummy\/file\/path"
+                    }
+                ],
+                "translations": {
+                    "en_US": {
+                        "@id": "\/api\/v2\/shop\/account\/vendor\/draft-product-translations\/@string@",
+                        "@type": "DraftProductTranslation",
+                        "uuid": "@string@",
+                        "name": "product_draft_bruce_1_translations_us",
+                        "slug": "product_draft_bruce_1_translations_us",
+                        "description": null,
+                        "metaKeywords": null,
+                        "metaDescription": null,
+                        "shortDescription": null,
+                        "locale": "en_US"
+                    }
+                },
+                "productListingPrices": {
+                    "CODE": {
+                        "@type": "ProductListingPrice",
+                        "uuid": "@string@",
+                        "price": 100,
+                        "originalPrice": 80,
+                        "minimumPrice": 90,
+                        "channelCode": "CODE"
+                    }
+                },
+                "attributes": [
+                    {
+                        "@type": "DraftAttributeValue",
+                        "uuid": "@string@",
+                        "attribute": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
+                        "value": "example value"
+                    }
+                ],
+                "mainTaxon": "\/api\/v2\/shop\/taxons\/CATEGORY",
+                "productDraftTaxons": [
+                    {
+                        "@type": "ProductDraftTaxon",
+                        "uuid": "@string@",
+                        "taxon": "\/api\/v2\/shop\/taxons\/MUG",
+                        "position": 1
+                    }
+                ]
+            },
+            "product": null,
+            "lastVerifiedAt": null
+        },
+        {
+            "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings\/@string@",
+            "@type": "ProductListing",
+            "uuid": "@string@",
+            "code": "product_listing_bruce_2",
+            "enabled": true,
+            "verificationStatus": "verified",
+            "latestDraft": {
+                "@id": "\/api\/v2\/shop\/account\/vendor\/product-drafts\/@string@",
+                "@type": "ProductDraft",
+                "uuid": "@string@",
+                "code": "product_draft_bruce_2",
+                "status": "created",
+                "verifiedAt": null,
+                "publishedAt": null,
+                "images": [],
+                "translations": {
+                    "en_US": {
+                        "@id": "\/api\/v2\/shop\/account\/vendor\/draft-product-translations\/@string@",
+                        "@type": "DraftProductTranslation",
+                        "uuid": "@string@",
+                        "name": "product_draft_bruce_2_translations_us",
+                        "slug": "product_draft_bruce_2_translations_us",
+                        "description": null,
+                        "metaKeywords": null,
+                        "metaDescription": null,
+                        "shortDescription": null,
+                        "locale": "en_US"
+                    }
+                },
+                "productListingPrices": {
+                    "CODE": {
+                        "@type": "ProductListingPrice",
+                        "uuid": "@string@",
+                        "price": 150,
+                        "originalPrice": 200,
+                        "minimumPrice": 90,
+                        "channelCode": "CODE"
+                    }
+                },
+                "attributes": [
+                    {
+                        "@type": "DraftAttributeValue",
+                        "uuid": "@string@",
+                        "attribute": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
+                        "value": "example value"
+                    }
+                ],
+                "mainTaxon": "\/api\/v2\/shop\/taxons\/CATEGORY",
+                "productDraftTaxons": [
+                    {
+                        "@type": "ProductDraftTaxon",
+                        "uuid": "@string@",
+                        "taxon": "\/api\/v2\/shop\/taxons\/HAT",
+                        "position": 2
+                    }
+                ]
+            },
+            "product": null,
+            "lastVerifiedAt": null
+        }
+    ],
+    "hydra:totalItems": 2,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "/api/v2/shop/account/vendor/product-listings{?code,verificationStatus,verificationStatus[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "verificationStatus",
+                "property": "verificationStatus",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "verificationStatus[]",
+                "property": "verificationStatus",
+                "required": false
+            }
+        ]
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductListing",
+    "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings\/@string@",
+    "@type": "ProductListing",
+    "uuid": "@string@",
+    "code": "product_listing_bruce_1",
+    "enabled": true,
+    "verificationStatus": "created",
+    "latestDraft": {
+        "@id": "\/api\/v2\/shop\/account\/vendor\/product-drafts\/@string@",
+        "@type": "ProductDraft",
+        "uuid": "@string@",
+        "code": "product_draft_bruce_1",
+        "status": "created",
+        "images": [
+            {
+                "@type": "ProductDraftImage",
+                "uuid": "@string@",
+                "path": "@string@\/product1.png"
+            }
+        ],
+        "translations": [
+            {
+                "@id": "\/api\/v2\/shop\/account\/vendor\/draft-product-translations\/@string@",
+                "@type": "DraftProductTranslation",
+                "uuid": "@string@",
+                "name": "Changed name",
+                "metaKeywords": "Test metaKeywords",
+                "metaDescription": "Test metaDescription",
+                "shortDescription": "Test shortDescription"
+            }
+        ],
+        "productListingPrices": [
+            {
+                "@type": "ProductListingPrice",
+                "uuid": "@string@",
+                "price": 120,
+                "originalPrice": 110,
+                "minimumPrice": 115,
+                "channelCode": "CODE"
+            }
+        ],
+        "attributes": [
+            {
+                "@type": "DraftAttributeValue",
+                "uuid": "@string@",
+                "attribute": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
+                "value": "changed value"
+            }
+        ],
+        "mainTaxon": "\/api\/v2\/shop\/taxons\/SECOND_CATEGORY",
+        "productDraftTaxons": [
+            {
+                "@type": "ProductDraftTaxon",
+                "uuid": "@string@",
+                "taxon": "\/api\/v2\/shop\/taxons\/HAT",
+                "position": 2
+            }
+        ]
+    },
+    "product": null,
+    "lastVerifiedAt": null
+}

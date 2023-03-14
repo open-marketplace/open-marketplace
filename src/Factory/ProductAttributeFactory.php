@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Product\Model\ProductAttribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 
@@ -23,6 +24,7 @@ final class ProductAttributeFactory implements ProductAttributeFactoryInterface
         $productAttribute->setTranslatable($draftAttribute->isTranslatable());
         $productAttribute->setStorageType($draftAttribute->getStorageType());
         $productAttribute->setConfiguration($draftAttribute->getConfiguration());
+        /** @var VendorInterface $vendor */
         $vendor = $draftAttribute->getVendor();
         $vendorID = $vendor->getId();
         $productAttribute->setCode($draftAttribute->getCode() . '-' . $vendorID);

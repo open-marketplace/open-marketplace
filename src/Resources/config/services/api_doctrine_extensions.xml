@@ -35,6 +35,11 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="bitbag.open_marketplace.strategy.api.doctrine.vendor_filter"/>
         </service>
 
+        <service class="BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\ProductDraftFilterStrategy"
+                 id="bitbag.open_marketplace.api.doctrine.query_extension.vendor.vendor_context_strategy.product_draft_filter_strategy">
+            <tag name="bitbag.open_marketplace.strategy.api.doctrine.vendor_filter"/>
+        </service>
+
         <service class="BitBag\OpenMarketplace\Api\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension"
                  id="bitbag.open_marketplace.api.doctrine.query_collection_extension.orders_by_logged_in_user_extension"
                  decorates="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension">
