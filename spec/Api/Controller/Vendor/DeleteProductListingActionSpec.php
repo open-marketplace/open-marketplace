@@ -31,7 +31,7 @@ final class DeleteProductListingActionSpec extends ObjectBehavior
 
     public function it_deletes_product_listing_without_product(
         ProductListingInterface $productListing,
-        EntityManagerInterface $entityManager,
+        EntityManagerInterface $entityManager
     ): void {
         $productListing->getProduct()->willReturn(null);
 
@@ -45,8 +45,8 @@ final class DeleteProductListingActionSpec extends ObjectBehavior
     public function it_deletes_product_listing_with_product(
         ProductListingInterface $productListing,
         EntityManagerInterface $entityManager,
-        ProductInterface $product,
-        ): void {
+        ProductInterface $product
+    ): void {
         $productListing->getProduct()->willReturn($product);
 
         $this($productListing)->shouldBeAnInstanceOf(JsonResponse::class);
