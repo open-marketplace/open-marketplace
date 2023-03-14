@@ -2,7 +2,7 @@
   "@context": "/api/v2/contexts/Order",
   "@id": "/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_2",
   "@type": "Order",
-  "customer": "/api/v2/shop/customers/@string@",
+  "customer": "/api/v2/shop/account/vendor/customers/@string@",
   "payments": [],
   "shipments": [
     {

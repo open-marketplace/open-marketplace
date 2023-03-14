@@ -65,6 +65,7 @@ Sylius\Component\Core\Model\Customer:
     email: "john.smith@example.com"
     emailCanonical: "john.smith@example.com"
     phoneNumber: 123456789
+    defaultAddress: '@address_john'
 BitBag\OpenMarketplace\Entity\ShopUser:
   user_bruce:
     plainPassword: "123password"
@@ -110,56 +111,6 @@ BitBag\OpenMarketplace\Entity\Vendor:
     phoneNumber: '555444333'
     slug: 'Weyland-Corp'
     description: 'description'
-BitBag\OpenMarketplace\Entity\Product:
-  product_bruce_1:
-    vendor: '@vendor_bruce'
-    code: "bruce_1"
-    enabled: true
-    channels: ['@channel']
-  product_peter_1:
-    vendor: '@vendor_peter'
-    code: "peter_2"
-    enabled: true
-    channels: [ '@channel' ]
-Sylius\Component\Core\Model\ProductVariant:
-  product_variant_product_bruce_1_1:
-    product: '@product_bruce_1'
-    code: "bruce_1_1"
-    enabled: true
-    onHold: 2
-    onHand: 3
-    tracked: true
-  product_variant_product_bruce_1_2:
-    product: '@product_bruce_1'
-    code: "bruce_1_2"
-    enabled: true
-    onHand: 1
-    tracked: true
-  product_variant_product_peter_1_1:
-    product: '@product_peter_1'
-    code: "peter_1_1"
-    enabled: true
-    onHand: 3
-    tracked: true
-Sylius\Component\Core\Model\ChannelPricing:
-  pricing_product_variant_product_bruce_1_1:
-    price: 10
-    originalPrice: 15
-    minimumPrice: 0
-    channelCode: 'CODE'
-    productVariant: '@product_variant_product_bruce_1_1'
-  pricing_product_variant_product_bruce_1_2:
-    price: 13
-    originalPrice: 25
-    minimumPrice: 10
-    channelCode: 'CODE'
-    productVariant: '@product_variant_product_bruce_1_2'
-  pricing_product_variant_product_peter_1_1:
-    price: 9
-    originalPrice: 12
-    minimumPrice: 5
-    channelCode: 'CODE'
-    productVariant: '@product_variant_product_peter_1_1'
 BitBag\OpenMarketplace\Entity\Order:
   bruce_order_made_by_john_1:
     currency_code: "USD"
@@ -181,49 +132,12 @@ BitBag\OpenMarketplace\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2'
-  peter_order_made_by_john:
-    currency_code: "USD"
-    locale_code: "en-US"
-    vendor: '@vendor_peter'
-    customer: '@customer_john'
-    paymentState: "paid"
-    state: 'new'
-    checkoutState: 'completed'
-    tokenValue: 'peter_order_made_by_john'
   order_made_by_peter:
     currency_code: "USD"
     locale_code: "en-US"
+    vendor: '@vendor_bruce'
     customer: '@customer_peter'
     paymentState: "paid"
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter'
-BitBag\OpenMarketplace\Entity\OrderItem:
-  bruce_order_made_by_john_1_item_1:
-    order: '@bruce_order_made_by_john_1'
-    variant: '@product_variant_product_bruce_1_1'
-  bruce_order_made_by_john_2_item_1:
-    order: '@bruce_order_made_by_john_2'
-    variant: '@product_variant_product_bruce_1_2'
-  peter_order_made_by_john_1_item_1:
-    order: '@peter_order_made_by_john'
-    variant: '@product_variant_product_peter_1_1'
-BitBag\OpenMarketplace\Entity\Shipment:
-  bruce_order_made_by_john_1_shipment:
-    vendor: '@vendor_bruce'
-    order: '@bruce_order_made_by_john_1'
-    method: '@shipping_method_ups'
-  bruce_order_made_by_john_2_shipment:
-    vendor: '@vendor_bruce'
-    order: '@bruce_order_made_by_john_2'
-    method: '@shipping_method_fedex'
-  peter_order_made_by_john_shipment:
-    vendor: '@vendor_peter'
-    order: '@peter_order_made_by_john'
-    method: '@shipping_method_ups'
-Sylius\Component\Core\Model\OrderItemUnit:
-  bruce_order_made_by_john_1_item_1_unit:
-    __construct: ["@bruce_order_made_by_john_1_item_1"]
-    shipment: '@bruce_order_made_by_john_1_shipment'
-
-
