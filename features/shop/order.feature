@@ -50,7 +50,6 @@ Feature: Spliting orders when cart was filled with products from different Vendo
   @ui
   Scenario: Completing primary order payment should fulfill all secondary order payments
     Given store has 2 vendors with different product each
-    And there is an admin user "admin" with password "admin"
     And I have 2 products in cart
     And I am on "/en_US/checkout/address"
     And I fill in "sylius_checkout_address[billingAddress][firstName]" with "Test name"
@@ -65,8 +64,4 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     And I choose payment
     And I complete checkout
     And I am on "en_US/account/orders/"
-    Then I should see 2 orders
-    Given I am logged in as an admin
-    And I am on admin primary order page
-    And I click "Complete"
-
+    Then I should see 2 orders with "Fulfilled" status
