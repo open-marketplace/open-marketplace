@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Operator;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
