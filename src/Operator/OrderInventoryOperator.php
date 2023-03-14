@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Operator;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
 
 final class OrderInventoryOperator
 {
