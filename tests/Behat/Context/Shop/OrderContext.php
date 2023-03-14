@@ -14,12 +14,9 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\Order;
-use Doctrine\ORM\EntityManagerInterface;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 
@@ -59,7 +56,7 @@ class OrderContext extends RawMinkContext implements Context
         Assert::eq(count($orders), $count);
         $labels = $page->findAll('css', '.ui.green.label');
         foreach ($labels as $label) {
-           Assert::eq($label->getText(), $status);
+            Assert::eq($label->getText(), $status);
         }
     }
 
