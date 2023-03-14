@@ -32,7 +32,7 @@ final class CustomerItemDataProvider implements ItemDataProviderInterface, Restr
         CustomerRepositoryInterface $customerRepository,
         SectionProviderInterface $sectionProvider,
         VendorContextInterface $vendorContext,
-        ) {
+    ) {
         $this->baseCustomerItemDataProvider = $baseCustomerItemDataProvider;
         $this->customerRepository = $customerRepository;
         $this->sectionProvider = $sectionProvider;
@@ -43,7 +43,7 @@ final class CustomerItemDataProvider implements ItemDataProviderInterface, Restr
         string $resourceClass,
         $id,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ) {
         $section = $this->sectionProvider->getSection();
         $vendor = $this->vendorContext->getVendor();
@@ -58,7 +58,7 @@ final class CustomerItemDataProvider implements ItemDataProviderInterface, Restr
     public function supports(
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): bool {
         /** @phpstan-ignore-next-line BaseCustomerItemDataProvider doesn't have interface */
         return $this->baseCustomerItemDataProvider->supports($resourceClass, $operationName, $context);
