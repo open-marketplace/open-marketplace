@@ -20,7 +20,7 @@
                             <div class="ui segment">
                                 {{ form_errors(form) }}
                                 <div class="ui styled fluid accordion">
-                                    {% for channel, prices in form.productListingPrice %}
+                                    {% for channel, prices in form.productListingPrices %}
                                         <div id="sylius_product_variant_channelPricings" data-locale="{{ channel }}">
                                             <div class="title {% if loop.first %}active{% endif %}">
                                                 <i class="dropdown icon"></i>
@@ -125,8 +125,5 @@
                 {{ form_widget(form.save) }}
             </div>
         </div>
-    <div style="display: none">
-        {{ form_row(form.vendor) }}
-    </div>
       {{ form_end(form, {'render_rest': true})  }}
 {% endblock %}

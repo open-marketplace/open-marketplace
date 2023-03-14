@@ -16,7 +16,9 @@ use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Factory\Message\MessageFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 final class SendArchiveRequestAction
 {
@@ -26,14 +28,18 @@ final class SendArchiveRequestAction
 
     private MessageFactoryInterface $messageFactory;
 
+    private RequestStack $requestStack;
+
     public function __construct(
         AddMessageFacadeInterface $addMessageFacade,
         UrlGeneratorInterface $urlGenerator,
-        MessageFactoryInterface $messageFactory
-    ) {
+        MessageFactoryInterface $messageFactory,
+        RequestStack $requestStack,
+        ) {
         $this->addMessageFacade = $addMessageFacade;
         $this->urlGenerator = $urlGenerator;
         $this->messageFactory = $messageFactory;
+        $this->requestStack = $requestStack;
     }
 
     public function __invoke(int $id, Request $request): Response
@@ -44,6 +50,10 @@ final class SendArchiveRequestAction
 
         $this->addMessageFacade
             ->createWithConversation($id, $archiveRequestMessage, null, false);
+
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $session->getFlashBag()->add('success', 'open_marketplace.ui.archive_message_send');
 
         return new RedirectResponse($this->urlGenerator->generate($redirect, [
             'id' => $id,

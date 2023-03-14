@@ -1,0 +1,86 @@
+{
+  "@context": "/api/v2/contexts/Customer",
+  "@id": "/api/v2/shop/account/vendor/customers",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "/api/v2/shop/account/vendor/customers/@string@",
+      "@type": "Customer",
+      "defaultAddress": null,
+      "user": {
+        "@type": "ShopUser",
+        "@id": "true",
+        "enabled": true,
+        "vendor": "/api/v2/shop/vendors/@string@",
+        "verified": false
+      },
+      "email": "peter.weyland@example.com",
+      "firstName": "Peter",
+      "lastName": "Weyland",
+      "gender": "u",
+      "phoneNumber": null
+    },
+    {
+      "@id": "/api/v2/shop/account/vendor/customers/@string@",
+      "@type": "Customer",
+      "defaultAddress": {
+        "@id": "/api/v2/shop/addresses/@string@",
+        "@type": "Address",
+        "firstName": "John",
+        "lastName": "Smith",
+        "phoneNumber": null,
+        "company": null,
+        "countryCode": "US",
+        "provinceCode": null,
+        "provinceName": null,
+        "street": "Avenue 2115",
+        "city": "Arkham City",
+        "postcode": "00000"
+      },
+      "user": {
+        "@type": "ShopUser",
+        "@id": "true",
+        "enabled": true,
+        "vendor": null,
+        "verified": false
+      },
+      "email": "john.smith@example.com",
+      "firstName": "John",
+      "lastName": "Smith",
+      "gender": "u",
+      "phoneNumber": "123456789"
+    }
+  ],
+  "hydra:totalItems": 2,
+  "hydra:search": {
+    "@type": "hydra:IriTemplate",
+    "hydra:template": "/api/v2/shop/account/vendor/customers{?firstName,lastName,email,user.enabled}",
+    "hydra:variableRepresentation": "BasicRepresentation",
+    "hydra:mapping": [
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "firstName",
+        "property": "firstName",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "lastName",
+        "property": "lastName",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "email",
+        "property": "email",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "user.enabled",
+        "property": "user.enabled",
+        "required": false
+      }
+    ]
+  }
+}

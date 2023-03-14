@@ -11,9 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
-interface DraftAttributeValueInterface extends AttributeValueInterface
+interface DraftAttributeValueInterface extends AttributeValueInterface, UuidAwareInterface
 {
     public function getDraft(): ?ProductDraftInterface;
 

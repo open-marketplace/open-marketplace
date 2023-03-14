@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="uuid" type="uuid" unique="true" />
+
         <field name="code" column="code" type="string" unique="false" nullable="false" />
         <field name="publishedAt" column="published_at" type="datetime" nullable="true"/>
         <field name="lastVerifiedAt" column="last_verified_at" type="datetime" nullable="true"/>

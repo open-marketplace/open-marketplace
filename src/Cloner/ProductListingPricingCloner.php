@@ -27,7 +27,7 @@ final class ProductListingPricingCloner implements ProductListingPricingClonerIn
     public function clonePrice(ProductDraftInterface $newProductDraft, ProductDraftInterface $productDraft): void
     {
         /** @var ProductListingPriceInterface $price */
-        foreach ($productDraft->getProductListingPrice() as $price) {
+        foreach ($productDraft->getProductListingPrices() as $price) {
             /** @var ProductListingPriceInterface $newPrice */
             $newPrice = $this->priceFactory->createNew();
             $newPrice->setChannelCode($price->getChannelCode());

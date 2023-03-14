@@ -12,12 +12,14 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
+use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use DatetimeInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ProductListingInterface extends ResourceInterface
+interface ProductListingInterface extends ResourceInterface, VendorAwareInterface, UuidAwareInterface
 {
     public function getId(): int;
 

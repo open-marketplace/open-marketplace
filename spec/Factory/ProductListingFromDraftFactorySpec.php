@@ -73,10 +73,9 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $productListing->setVendor($vendor)
             ->shouldBeCalled();
 
-        $productDraft->setProductListing($productListing)
-            ->shouldBeCalled();
-
         $this->createNew($productDraft, $vendor);
+
+        $productDraft->setProductListing($productListing)->shouldHaveBeenCalled();
     }
 
     public function it_returns_product_listing_clone(

@@ -43,7 +43,7 @@ final class ProductListingPricingClonerSpec extends ObjectBehavior
         ProductListingPriceInterface $price,
         ProductListingPriceInterface $newPrice,
         ): void {
-        $productDraft->getProductListingPrice()
+        $productDraft->getProductListingPrices()
             ->willReturn(new ArrayCollection([$price->getWrappedObject()]));
 
         $priceFactory->createNew()

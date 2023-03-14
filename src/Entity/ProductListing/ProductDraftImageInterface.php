@@ -11,8 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 
-interface ProductDraftImageInterface extends ImageInterface
+interface ProductDraftImageInterface extends ImageInterface, UuidAwareInterface
 {
 }

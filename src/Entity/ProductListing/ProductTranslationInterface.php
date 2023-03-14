@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
-interface ProductTranslationInterface
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
+
+interface ProductTranslationInterface extends UuidAwareInterface
 {
     public function getId(): ?int;
 

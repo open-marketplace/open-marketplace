@@ -1,0 +1,68 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductListing",
+    "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings\/@string@",
+    "@type": "ProductListing",
+    "uuid": "@string@",
+    "code": "product_listing_bruce_1",
+    "enabled": true,
+    "verificationStatus": "created",
+    "latestDraft": {
+        "@id": "\/api\/v2\/shop\/account\/vendor\/product-drafts\/@string@",
+        "@type": "ProductDraft",
+        "uuid": "@string@",
+        "code": "product_draft_bruce_1",
+        "status": "created",
+        "verifiedAt": null,
+        "publishedAt": null,
+        "images": [
+            {
+                "@type": "ProductDraftImage",
+                "uuid": "@string@",
+                "path": "\/dummy\/file\/path"
+            }
+        ],
+        "translations": {
+            "en_US": {
+                "@id": "\/api\/v2\/shop\/account\/vendor\/draft-product-translations\/@string@",
+                "@type": "DraftProductTranslation",
+                "uuid": "@string@",
+                "name": "product_draft_bruce_1_translations_us",
+                "slug": "product_draft_bruce_1_translations_us",
+                "description": null,
+                "metaKeywords": null,
+                "metaDescription": null,
+                "shortDescription": null,
+                "locale": "en_US"
+            }
+        },
+        "productListingPrices": {
+            "CODE": {
+                "@type": "ProductListingPrice",
+                "uuid": "@string@",
+                "price": 100,
+                "originalPrice": 80,
+                "minimumPrice": 90,
+                "channelCode": "CODE"
+            }
+        },
+        "attributes": [
+            {
+                "@type": "DraftAttributeValue",
+                "uuid": "@string@",
+                "attribute": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
+                "value": "example value"
+            }
+        ],
+        "mainTaxon": "\/api\/v2\/shop\/taxons\/CATEGORY",
+        "productDraftTaxons": [
+            {
+                "@type": "ProductDraftTaxon",
+                "uuid": "@string@",
+                "taxon": "\/api\/v2\/shop\/taxons\/MUG",
+                "position": 1
+            }
+        ]
+    },
+    "product": null,
+    "lastVerifiedAt": null
+}

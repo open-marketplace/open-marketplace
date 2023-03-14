@@ -11,9 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ProductListingPriceInterface extends ResourceInterface
+interface ProductListingPriceInterface extends ResourceInterface, UuidAwareInterface
 {
     public function getId(): ?int;
 
