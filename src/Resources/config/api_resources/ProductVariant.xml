@@ -44,13 +44,20 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <itemOperation name="vendor_inventory_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/vendor/product-variants/{code}/inventory</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves an inventory of Vendor's product variant.</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:product-variants:inventory:read</attribute>
                 </attribute>
             </itemOperation>
+
             <itemOperation name="vendor_inventory_update">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/account/vendor/product-variants/{code}/inventory</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Replaces the inventory of Vendor's product variant.</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:account:vendor:product-variants:inventory:update</attribute>
                 </attribute>
@@ -95,6 +102,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <collectionOperation name="vendor_inventory_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/vendor/product-variants/inventory</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves the collection of inventory Vendor's product variants.</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:product-variants:inventory:read</attribute>
                 </attribute>

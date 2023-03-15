@@ -31,6 +31,9 @@ endpoint and press button `Try it out`(2).
 Fill in your data(1), and then execute(2).
 
 ![Register as a vendor](images/api_vendor_register_2.png)
+
+Now you have to wait for the administrator to accept your request to become vendor.
+
 ![Register as a vendor](images/api_vendor_register_3.png)
 
 ### Vendor Api (for Vendors only)
@@ -46,8 +49,12 @@ Vendor has only access to itself resources.
 - Creating and managing attributes for Vendor's products.
 ![Api draft attribute](images/api_draft_attribute.png)
 
-- Inventory(`/api/v2/shop/account/vendor/product-variants/{code}/inventory`) - each product variants can
-be `tracked`, meaning you can not sell mor then the available amount. These endpoints allow you to manage
-inventory of product variant. 
-- Order(`/api/v2/shop/account/vendor/orders/...`) - you can get all your orders or get more details for one
-order only. You can also cancel the order.
+- These endpoints allow you to manage inventory of product variant.
+![Api inventory](images/api_inventory.png)
+
+- You can get all your orders or get more details for one order only. 
+You can also cancel the order.
+![Api order](images/api_order.png)
+
+- Get more details about customers who bought your products.
+![Api customer](images/api_customer.png)
