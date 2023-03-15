@@ -13,6 +13,9 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Entity\Order;
+use BitBag\OpenMarketplace\Repository\OrderRepository;
+use Doctrine\Common\Collections\Criteria;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -25,12 +28,16 @@ class OrderContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private OrderRepository $orderRepository;
+
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
+        OrderRepository $orderRepository,
     ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -159,5 +166,77 @@ class OrderContext extends RawMinkContext implements Context
         $page = $this->getSession()->getPage();
         $card = $page->find('css', '.ui.fluid.card');
         assertStringContainsString($name, $card->getText());
+    }
+
+    /**
+     * @Given I finalize order
+     */
+    public function iFinalizeOrder()
+    {
+        $this->visitPath('/en_US/checkout/address');
+        $this->fillField('sylius_checkout_address[billingAddress][firstName]', 'Test name');
+        $this->fillField('sylius_checkout_address[billingAddress][lastName]', 'Test name');
+        $this->fillField('sylius_checkout_address[billingAddress][company]', 'Test company');
+        $this->fillField('sylius_checkout_address[billingAddress][street]', 'Test street');
+        $this->selectOption('sylius_checkout_address[billingAddress][countryCode]', 'United States');
+        $this->fillField('sylius_checkout_address[billingAddress][city]', 'Test city');
+        $this->fillField('sylius_checkout_address[billingAddress][postcode]', 'Test code');
+        $this->iSubmitForm();
+        $this->iChooseShipment();
+        $this->iChoosePayment();
+        $this->iCompleteCheckout();
+    }
+
+    /**
+     * @Then secondary orders should have numbers assigned
+     */
+    public function secondaryOrdersShouldHaveNumberAssigned()
+    {
+        /** @var Order $primaryOrder */
+        $primaryOrder = $this->orderRepository->findOneBy(['primaryOrder' => null]);
+
+        Assert::isInstanceOf($primaryOrder, Order::class);
+
+        $criteria = Criteria::create();
+        $criteria
+            ->andWhere($criteria::expr()->neq('number', null))
+            ->andWhere($criteria::expr()->eq('primaryOrder', $primaryOrder));
+        $orders = $this->orderRepository->matching($criteria);
+
+        /** @var Order $order */
+        foreach ($orders as $order) {
+            Assert::notNull($order->getNumber());
+        }
+    }
+
+    /**
+     * @Then primary order should not have number assigned
+     */
+    public function primaryOrderShouldNotHaveNumber()
+    {
+        /** @var Order|null $order */
+        $order = $this->orderRepository->findOneBy([], ['id' => 'ASC']);
+        if (null !== $order) {
+            Assert::null($order->getNumber());
+        }
+    }
+
+    private function fillField($field, $value)
+    {
+        $field = $this->fixStepArgument($field);
+        $value = $this->fixStepArgument($value);
+        $this->getSession()->getPage()->fillField($field, $value);
+    }
+
+    private function fixStepArgument($argument): array|string
+    {
+        return str_replace('\\"', '"', $argument);
+    }
+
+    private function selectOption($select, $option)
+    {
+        $select = $this->fixStepArgument($select);
+        $option = $this->fixStepArgument($option);
+        $this->getSession()->getPage()->selectFieldOption($select, $option);
     }
 }
