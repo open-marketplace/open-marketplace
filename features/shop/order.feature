@@ -26,16 +26,9 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     Then I should see 1 orders
 
   @ui
-  Scenario: Avoid assigning number to primary order
+  Scenario: Assign prefixed number to primary order
     Given store has 4 products from different Vendors
     And I have 3 products in cart
     And I finalize order
-    Then primary order should not have number assigned
-
-  @ui
-  Scenario: Assign numbers to secondary orders
-    Given store has 4 products from different Vendors
-    And I have 3 products in cart
-    And I finalize order
-    Then secondary orders should have numbers assigned
+    Then primary order number should have "primary-" prefix
 

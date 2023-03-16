@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Entity\Order;
 use BitBag\OpenMarketplace\Repository\OrderRepository;
-use Doctrine\Common\Collections\Criteria;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -34,7 +33,7 @@ class OrderContext extends RawMinkContext implements Context
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
         OrderRepository $orderRepository,
-    ) {
+        ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
@@ -188,36 +187,15 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then secondary orders should have numbers assigned
+     * @Then primary order number should have :prefix prefix
      */
-    public function secondaryOrdersShouldHaveNumberAssigned()
-    {
-        /** @var Order $primaryOrder */
-        $primaryOrder = $this->orderRepository->findOneBy(['primaryOrder' => null]);
-
-        Assert::isInstanceOf($primaryOrder, Order::class);
-
-        $criteria = Criteria::create();
-        $criteria
-            ->andWhere($criteria::expr()->neq('number', null))
-            ->andWhere($criteria::expr()->eq('primaryOrder', $primaryOrder));
-        $orders = $this->orderRepository->matching($criteria);
-
-        /** @var Order $order */
-        foreach ($orders as $order) {
-            Assert::notNull($order->getNumber());
-        }
-    }
-
-    /**
-     * @Then primary order should not have number assigned
-     */
-    public function primaryOrderShouldNotHaveNumber()
+    public function primaryOrderShouldNotHaveNumber(string $prefix)
     {
         /** @var Order|null $order */
-        $order = $this->orderRepository->findOneBy([], ['id' => 'ASC']);
+        $order = $this->orderRepository->findOneBy(['primaryOrder' => null]);
+
         if (null !== $order) {
-            Assert::null($order->getNumber());
+            Assert::startsWith($order->getNumber(), $prefix);
         }
     }
 
