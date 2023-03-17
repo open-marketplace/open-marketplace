@@ -55,7 +55,10 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
 
         if ($this->userContext->getUser() instanceof ShopUserInterface) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
-            $queryBuilder->andWhere(sprintf('%s.primaryOrder is NOT NULL', $rootAlias));
+            $queryBuilder
+                ->andWhere(sprintf('%s.mode = :secondaryOrderMode', $rootAlias))
+                ->setParameter('secondaryOrderMode', \BitBag\OpenMarketplace\Entity\OrderInterface::SECONDARY_ORDER_MODE)
+            ;
         }
 
         $this->baseOrderMethodsItemExtension->applyToItem(
