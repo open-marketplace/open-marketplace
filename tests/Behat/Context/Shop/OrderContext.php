@@ -187,15 +187,15 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then primary order number should have :prefix prefix
+     * @Then primary order should not have number
      */
-    public function primaryOrderShouldNotHaveNumber(string $prefix)
+    public function primaryOrderShouldNotHaveNumber()
     {
         /** @var Order|null $order */
         $order = $this->orderRepository->findOneBy(['primaryOrder' => null]);
 
         if (null !== $order) {
-            Assert::startsWith($order->getNumber(), $prefix);
+            Assert::eq($order->getNumber(), null);
         }
     }
 

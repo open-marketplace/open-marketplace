@@ -46,7 +46,7 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
 
         $this->assignNumber($order);
 
-        $order->setNumber(Argument::any())->shouldBeCalled();
+        $order->setNumber(Argument::any())->shouldNotBeCalled();
         $decoratedOrderNumberAssigner->assignNumber($order)->shouldNotBeCalled();
     }
 }

@@ -30,8 +30,6 @@ final class OrderNumberAssigner implements OrderNumberAssignerInterface
         }
 
         if (null === $order->getPrimaryOrder()) {
-            $order->setNumber(uniqid(self::PRIMARY_ORDER_NUMBER_PREFIX));
-
             return;
         }
 
