@@ -16,6 +16,9 @@ use Sylius\Component\Core\Model\OrderInterface as BaseOrderInterface;
 
 interface OrderInterface extends BaseOrderInterface, OptionalVendorAwareInterface
 {
+    public const PRIMARY_ORDER_MODE = "primary";
+    public const SECONDARY_ORDER_MODE = "secondary";
+
     public function getPrimaryOrder(): ?self;
 
     public function setPrimaryOrder(?self $primaryOrder): void;
@@ -34,4 +37,11 @@ interface OrderInterface extends BaseOrderInterface, OptionalVendorAwareInterfac
     public function getShipmentWithoutVendor(): ?ShipmentInterface;
 
     public function hasShippableItemsWithVendor(?VendorInterface $vendor): bool;
+
+    public function getMode(): string;
+
+    public function setMode(string $mode): void;
+
+    public function isPrimary(): bool;
+
 }
