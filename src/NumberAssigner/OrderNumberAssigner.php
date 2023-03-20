@@ -29,7 +29,7 @@ final class OrderNumberAssigner implements OrderNumberAssignerInterface
             return;
         }
 
-        if (null === $order->getPrimaryOrder()) {
+        if ($order->isPrimary()) {
             return;
         }
 
