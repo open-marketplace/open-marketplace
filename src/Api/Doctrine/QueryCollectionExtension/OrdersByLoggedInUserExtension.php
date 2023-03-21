@@ -55,8 +55,8 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         if ($this->userContext->getUser() instanceof ShopUserInterface) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
-                ->andWhere(sprintf('%s.mode = :secondaryOrderMode', $rootAlias))
-                ->setParameter('secondaryOrderMode', \BitBag\OpenMarketplace\Entity\OrderInterface::SECONDARY_ORDER_MODE)
+                ->andWhere(sprintf('%s.mode != :primaryMode', $rootAlias))
+                ->setParameter('primaryMode', \BitBag\OpenMarketplace\Entity\OrderInterface::PRIMARY_ORDER_MODE)
             ;
         }
 
