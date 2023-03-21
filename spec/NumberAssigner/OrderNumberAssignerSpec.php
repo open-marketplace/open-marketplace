@@ -37,11 +37,11 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
         $this->shouldImplement(\BitBag\OpenMarketplace\NumberAssigner\OrderNumberAssignerInterface::class);
     }
 
-    public function it_does_not_inrement_sequence_on_primary_order(
+    public function it_does_not_increment_sequence_on_primary_order(
         OrderInterface $order,
         OrderNumberAssignerInterface $decoratedOrderNumberAssigner
     ) {
-        $order->getPrimaryOrder()->willReturn(null);
+        $order->isPrimary()->willReturn(true);
         $order->getNumber()->willReturn(null);
 
         $this->assignNumber($order);
