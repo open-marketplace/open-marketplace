@@ -1,0 +1,8 @@
+sylius_grid:
+  grids:
+    sylius_admin_order:
+      driver:
+        options:
+          class: BitBag\OpenMarketplace\Entity\Order
+          repository:
+            method: findAllSecondaryOrders
