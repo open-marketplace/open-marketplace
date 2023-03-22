@@ -20,7 +20,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
@@ -32,8 +31,6 @@ final class CreateNewConversationAction
 
     private UrlGeneratorInterface $urlGenerator;
 
-    private FlashBagInterface $flashBag;
-
     private AddMessageFacadeInterface $addMessageFacade;
 
     private ConversationRepositoryInterface $conversationRepository;
@@ -42,14 +39,12 @@ final class CreateNewConversationAction
         FormFactoryInterface $formFactory,
         Environment $templatingEngine,
         UrlGeneratorInterface $urlGenerator,
-        FlashBagInterface $flashBag,
         AddMessageFacadeInterface $addMessageFacade,
         ConversationRepositoryInterface $conversationRepository
     ) {
         $this->formFactory = $formFactory;
         $this->templatingEngine = $templatingEngine;
         $this->urlGenerator = $urlGenerator;
-        $this->flashBag = $flashBag;
         $this->addMessageFacade = $addMessageFacade;
         $this->conversationRepository = $conversationRepository;
     }

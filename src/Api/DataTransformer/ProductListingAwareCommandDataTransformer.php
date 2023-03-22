@@ -13,17 +13,9 @@ namespace BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductListingAwareInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ProductListingAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
-    private RequestStack $requestStack;
-
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
-    }
-
     /**
      * @param ProductListingAwareInterface $object
      *

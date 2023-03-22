@@ -16,16 +16,9 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductListingAwareInter
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ProductListingAwareCommandDataTransformerSpec extends ObjectBehavior
 {
-    public function let(
-        RequestStack $requestStack
-    ): void {
-        $this->beConstructedWith($requestStack);
-    }
-
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductListingAwareCommandDataTransformer::class);

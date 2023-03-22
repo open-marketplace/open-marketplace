@@ -350,10 +350,8 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
             return;
         }
 
-        if ($this->hasAttribute($attribute)) {
-            $this->attributes->removeElement($attribute);
-            $attribute->setDraft(null);
-        }
+        $this->attributes->removeElement($attribute);
+        $attribute->setDraft(null);
     }
 
     public function hasAttribute(AttributeValueInterface $attribute): bool

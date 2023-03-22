@@ -16,6 +16,7 @@ use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
@@ -43,6 +44,7 @@ final class AddMessageFacade implements AddMessageFacadeInterface
         ?UploadedFile $file = null,
         bool $stripTags = true
     ): void {
+        /** @var ?UserInterface $currentUser */
         $currentUser = $this->currentUserResolver->resolve();
 
         if (!$currentUser) {
