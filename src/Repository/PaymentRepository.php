@@ -9,19 +9,21 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\Repository;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository as BasePaymentRepository;
+
 class PaymentRepository extends BasePaymentRepository
 {
-    public function findPaymentsOfSecondaryOrders(){
+    public function findPaymentsOfSecondaryOrders(): QueryBuilder
+    {
         $queryBuilder = $this->createListQueryBuilder();
         $alias = $queryBuilder->getRootAliases()[0];
 
         return $queryBuilder
-            ->join(sprintf('%s.order', $alias),'orderAlias')
+            ->join(sprintf('%s.order', $alias), 'orderAlias')
             ->andWhere('orderAlias.mode != :primaryMode')
             ->setParameter('primaryMode', OrderInterface::PRIMARY_ORDER_MODE)
             ;
