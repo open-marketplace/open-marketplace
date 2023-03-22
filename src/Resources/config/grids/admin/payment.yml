@@ -1,0 +1,8 @@
+sylius_grid:
+  grids:
+    sylius_admin_payment:
+      driver:
+        options:
+          class: Sylius\Component\Core\Model\Payment
+          repository:
+            method: findPaymentsOfSecondaryOrders
