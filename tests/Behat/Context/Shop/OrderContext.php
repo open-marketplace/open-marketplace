@@ -160,4 +160,43 @@ class OrderContext extends RawMinkContext implements Context
         $card = $page->find('css', '.ui.fluid.card');
         assertStringContainsString($name, $card->getText());
     }
+
+
+    /**
+     * @Given I finalize order
+     */
+    public function iFinalizeOrder()
+    {
+        $this->visitPath('/en_US/checkout/address');
+        $this->fillField('sylius_checkout_address[billingAddress][firstName]', 'Test name');
+        $this->fillField('sylius_checkout_address[billingAddress][lastName]', 'Test name');
+        $this->fillField('sylius_checkout_address[billingAddress][company]', 'Test company');
+        $this->fillField('sylius_checkout_address[billingAddress][street]', 'Test street');
+        $this->selectOption('sylius_checkout_address[billingAddress][countryCode]', 'United States');
+        $this->fillField('sylius_checkout_address[billingAddress][city]', 'Test city');
+        $this->fillField('sylius_checkout_address[billingAddress][postcode]', 'Test code');
+        $this->iSubmitForm();
+        $this->iChooseShipment();
+        $this->iChoosePayment();
+        $this->iCompleteCheckout();
+    }
+
+    private function fillField($field, $value)
+    {
+        $field = $this->fixStepArgument($field);
+        $value = $this->fixStepArgument($value);
+        $this->getSession()->getPage()->fillField($field, $value);
+    }
+
+    private function fixStepArgument($argument): array|string
+    {
+        return str_replace('\\"', '"', $argument);
+    }
+
+    private function selectOption($select, $option)
+    {
+        $select = $this->fixStepArgument($select);
+        $option = $this->fixStepArgument($option);
+        $this->getSession()->getPage()->selectFieldOption($select, $option);
+    }
 }
