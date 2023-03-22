@@ -161,7 +161,6 @@ class OrderContext extends RawMinkContext implements Context
         assertStringContainsString($name, $card->getText());
     }
 
-
     /**
      * @Given I finalize order
      */
