@@ -31,7 +31,6 @@
         </service>
         <service class="BitBag\OpenMarketplace\Api\DataTransformer\ProductListingAwareCommandDataTransformer"
                  id="bitbag.open_marketplace.api.data_transformer.product_listing_aware_command">
-            <argument type="service" id="request_stack" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
     </services>

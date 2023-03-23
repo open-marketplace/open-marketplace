@@ -85,7 +85,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
         $this->entityManager->flush();
         $shopUser = $currentVendor->getShopUser();
-        $email = $shopUser->getUsername();
+        $email = $shopUser->getEmail();
 
         $this->sender->send('vendor_profile_update', [$email], ['token' => $token]);
     }

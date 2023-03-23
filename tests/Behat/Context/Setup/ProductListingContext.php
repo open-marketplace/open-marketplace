@@ -20,10 +20,10 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation;
 use Doctrine\ORM\EntityManagerInterface;
-use ECSPrefix20211002\Webmozart\Assert\Assert;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {

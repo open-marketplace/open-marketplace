@@ -15,8 +15,8 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 interface MessageInterface extends ResourceInterface
 {

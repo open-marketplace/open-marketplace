@@ -24,6 +24,7 @@ final class ProductAttributeValueFactory implements ProductAttributeValueFactory
 
     public function create(): ProductAttributeValueInterface
     {
+        /** @phpstan-ignore-next-line  */
         return new $this->classFQN();
     }
 }
