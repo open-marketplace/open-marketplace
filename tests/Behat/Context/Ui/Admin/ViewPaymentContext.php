@@ -31,8 +31,7 @@ class ViewPaymentContext extends RawMinkContext implements Context
         EntityManagerInterface $entityManager,
         OrderExampleFactoryInterface $orderExampleFactory,
         OrderRepositoryInterface $orderRepository
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->orderExampleFactory = $orderExampleFactory;
         $this->orderRepository = $orderRepository;
