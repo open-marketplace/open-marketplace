@@ -32,6 +32,8 @@ trait OrderTrait
     /** @var Collection<int, OrderInterface> */
     protected Collection $secondaryOrders;
 
+    protected string $mode = self::PRIMARY_ORDER_MODE;
+
     public function __construct()
     {
         parent::__construct();
@@ -132,5 +134,20 @@ trait OrderTrait
         }
 
         return false;
+    }
+
+    public function getMode(): string
+    {
+        return $this->mode;
+    }
+
+    public function setMode(string $mode): void
+    {
+        $this->mode = $mode;
+    }
+
+    public function isPrimary(): bool
+    {
+        return self::PRIMARY_ORDER_MODE === $this->getMode();
     }
 }
