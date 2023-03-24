@@ -81,6 +81,7 @@ final class OrderManagerSpec extends ObjectBehavior
         $newOrder->addItem($newItem)->shouldHaveBeenCalledTimes(1);
         $newOrder->setVendor($itemVendor)->shouldHaveBeenCalledTimes(1);
         $newOrder->setPrimaryOrder($order)->shouldHaveBeenCalledTimes(1);
+        $newOrder->setMode(OrderInterface::SECONDARY_ORDER_MODE)->shouldHaveBeenCalledTimes(1);
     }
 
     public function it_adds_item_into_order(

@@ -10,5 +10,6 @@
             <join-column on-delete="SET NULL"/>
         </many-to-one>
         <one-to-many field="secondaryOrders" target-entity="BitBag\OpenMarketplace\Entity\Order" mapped-by="primaryOrder"/>
+        <field name="mode"/>
     </mapped-superclass>
 </doctrine-mapping>
