@@ -15,6 +15,8 @@ use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Order\Model\OrderInterface as OrderInterfaceAlias;
 
 class OrderRepository extends BaseOrderRepository
@@ -66,6 +68,80 @@ class OrderRepository extends BaseOrderRepository
             ->setParameter('customerId', $customerId)
             ->setParameter('channelId', $channelId)
             ->setParameter('state', OrderInterfaceAlias::STATE_CART)
+            ;
+    }
+
+    public function getTotalPaidSalesForChannel(ChannelInterface $channel): int
+    {
+        return (int) $this->createQueryBuilder('o')
+            ->select('SUM(o.total)')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.paymentState = :state')
+            ->andWhere('o.mode != :mode')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderPaymentStates::STATE_PAID)
+            ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function getTotalPaidSalesForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        ): int {
+        return (int) $this->createQueryBuilder('o')
+            ->select('SUM(o.total)')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.paymentState = :state')
+            ->andWhere('o.checkoutCompletedAt >= :startDate')
+            ->andWhere('o.checkoutCompletedAt <= :endDate')
+            ->andWhere('o.mode != :mode')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderPaymentStates::STATE_PAID)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function countPaidByChannel(ChannelInterface $channel): int
+    {
+        return (int) $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.paymentState = :state')
+            ->andWhere('o.mode != :mode')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderPaymentStates::STATE_PAID)
+            ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    public function countPaidForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        ): int {
+        return (int) $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.paymentState = :state')
+            ->andWhere('o.checkoutCompletedAt >= :startDate')
+            ->andWhere('o.checkoutCompletedAt <= :endDate')
+            ->andWhere('o.mode != :mode')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderPaymentStates::STATE_PAID)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
+            ->getQuery()
+            ->getSingleScalarResult()
             ;
     }
 }
