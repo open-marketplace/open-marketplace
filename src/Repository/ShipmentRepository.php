@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\Repository;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository as BasePaymentRepository;
+
 class ShipmentRepository extends BasePaymentRepository
 {
     public function findShipmentsWithoutPrimaryModeOrder(): QueryBuilder
@@ -23,7 +23,7 @@ class ShipmentRepository extends BasePaymentRepository
         $alias = $queryBuilder->getRootAliases()[0];
 
         return $queryBuilder
-            ->join(sprintf('%s.order', $alias),'orderAlias')
+            ->join(sprintf('%s.order', $alias), 'orderAlias')
             ->andWhere('orderAlias.mode != :primaryMode')
             ->setParameter('primaryMode', OrderInterface::PRIMARY_ORDER_MODE)
             ;

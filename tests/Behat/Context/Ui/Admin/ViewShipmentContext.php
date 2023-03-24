@@ -18,11 +18,14 @@ use BitBag\OpenMarketplace\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Fixture\Factory\OrderExampleFactoryInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
 
-class ViewShipmentContext extends RawMinkContext implements Context
+final class ViewShipmentContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
 
@@ -34,18 +37,22 @@ class ViewShipmentContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private StateMachineFactoryInterface $stateMachineFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         OrderExampleFactoryInterface $orderExampleFactory,
         OrderRepositoryInterface $orderRepository,
         ShipmentFactoryInterface $shipmentFactory,
-        SharedStorageInterface $sharedStorage
-    ) {
+        SharedStorageInterface $sharedStorage,
+        StateMachineFactoryInterface $stateMachineFactory,
+        ) {
         $this->entityManager = $entityManager;
         $this->orderExampleFactory = $orderExampleFactory;
         $this->orderRepository = $orderRepository;
         $this->shipmentFactory = $shipmentFactory;
         $this->sharedStorage = $sharedStorage;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     /**
@@ -70,6 +77,7 @@ class ViewShipmentContext extends RawMinkContext implements Context
             $shipment = $this->shipmentFactory->createNewWithOrder($order);
             $shipment->setMethod($shippingMethod);
             $order->addShipment($shipment);
+            $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::TRANSITION_CREATE);
             $this->orderRepository->add($order);
         }
     }
@@ -83,5 +91,12 @@ class ViewShipmentContext extends RawMinkContext implements Context
         $tableWrapper = $page->find('css', 'table');
         $shipments = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($shipments), $count);
+    }
+
+    private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition): void
+    {
+        foreach ($order->getShipments() as $shipment) {
+            $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition);
+        }
     }
 }
