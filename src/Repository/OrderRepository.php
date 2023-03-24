@@ -144,4 +144,20 @@ class OrderRepository extends BaseOrderRepository
             ->getSingleScalarResult()
             ;
     }
+
+    public function findLatestInChannel(int $count, ChannelInterface $channel): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.state != :state')
+            ->andWhere('o.mode != :mode')
+            ->addOrderBy('o.checkoutCompletedAt', 'DESC')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', \Sylius\Component\Core\Model\OrderInterface::STATE_CART)
+            ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
