@@ -13,6 +13,9 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Entity\Order;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Repository\OrderRepository;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -25,12 +28,16 @@ class OrderContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private OrderRepository $orderRepository;
+
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
-    ) {
+        OrderRepository $orderRepository,
+        ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -178,6 +185,19 @@ class OrderContext extends RawMinkContext implements Context
         $this->iChooseShipment();
         $this->iChoosePayment();
         $this->iCompleteCheckout();
+    }
+
+    /**
+     * @Then primary order should not have number
+     */
+    public function primaryOrderShouldNotHaveNumber()
+    {
+        /** @var Order|null $order */
+        $order = $this->orderRepository->findOneBy(['mode' => OrderInterface::PRIMARY_ORDER_MODE]);
+
+        if (null !== $order) {
+            Assert::eq($order->getNumber(), null);
+        }
     }
 
     private function fillField($field, $value)
