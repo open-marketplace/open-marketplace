@@ -128,6 +128,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $userContext->getUser()->willReturn($user);
         $queryBuilder->getRootAliases()->willReturn(['root']);
+        $queryBuilder->andWhere(Argument::any())->willReturn($queryBuilder);
 
         $this->applyToCollection(
             $queryBuilder,
@@ -135,7 +136,9 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
             OrderInterface::class
         );
 
-        $queryBuilder->andWhere('root.primaryOrder is NOT NULL')->shouldHaveBeenCalled();
+        $queryBuilder->andWhere('root.mode != :primaryMode')->shouldHaveBeenCalled();
+        $queryBuilder->setParameter('primaryMode', OrderInterface::PRIMARY_ORDER_MODE)->shouldHaveBeenCalled();
+
         $baseOrdersByLoggedInUserExtension->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
