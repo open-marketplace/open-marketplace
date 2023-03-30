@@ -14,8 +14,24 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\EntityManagerInterface;
 
 class DashboardStatisticsContext extends RawMinkContext implements Context
 {
+    private EntityManagerInterface $entityManager;
 
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function clearData()
+    {
+        $purger = new ORMPurger($this->entityManager);
+        $purger->purge();
+    }
 }

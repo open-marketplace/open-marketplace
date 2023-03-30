@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 trait ProductTrait
 {
-    protected ?VendorInterface $vendor;
+    protected ?VendorInterface $vendor = null;
 
     protected bool $deleted = false;
 

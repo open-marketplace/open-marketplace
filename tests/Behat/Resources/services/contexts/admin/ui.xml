@@ -36,5 +36,10 @@
             <argument type="service" id="tests.open_marketplace.behat.context.setup.factory.vendor_factory"/>
         </service>
 
+        <service id="open_marketplace.behat.context.ui.admin.dashboard_statistics" public="true"
+                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\DashboardStatisticsContext">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+
     </services>
 </container>

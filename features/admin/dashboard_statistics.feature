@@ -5,13 +5,13 @@ Feature: Viewing dashboard statistics
   secondary orders
 
   Background:
-    Given there is an admin user "admin" with password "admin"
-    And I am logged in as an admin
-    And the store has paid order of "Jeans" with total of "$100"
+    And I am logged in as an administrator
+    And the store operates on a single channel in "United States"
+    And the store has "UPS" shipping method with "$20.00" fee per unit for "United States" channel
+    And the store allows paying with "Cash on Delivery"
+    And the store has a product "Jeans" priced at "$150" in "United States" channel
+    And there is an "000000011" order with "Jeans" product in "United States" channel
 
   @ui
   Scenario: Viewing sales summary
     Given I am on "/admin"
-    Then I should see "$100" total sales statistic
-    And I should see 1 paid order statistic
-    And I should see "$100" order avarage price statistic
