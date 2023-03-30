@@ -24,3 +24,13 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     And I finalize order
     And I am on "en_US/account/orders/"
     Then I should see 1 orders
+
+  @ui
+  Scenario: Browsing orders, admin cannot see primary orders
+    Given store has 4 products from different Vendors
+    And I have 3 products in cart
+    And I finalize order
+    Given I am logged in as an administrator
+    And I am on "/admin"
+    And I follow "Orders"
+    Then I should see 3 orders
