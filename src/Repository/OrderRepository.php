@@ -31,6 +31,17 @@ class OrderRepository extends BaseOrderRepository
             ;
     }
 
+    public function findAllSecondaryOrders(): QueryBuilder
+    {
+        $queryBuilder = $this->createListQueryBuilder();
+        $alias = $queryBuilder->getRootAliases()[0];
+
+        return $queryBuilder
+            ->andWhere(sprintf('%s.mode != :primaryMode', $alias))
+            ->setParameter('primaryMode', OrderInterface::PRIMARY_ORDER_MODE)
+            ;
+    }
+
     public function findOrderForVendor(VendorInterface $vendor, string $id): ?OrderInterface
     {
         $vendorId = $vendor->getId();
