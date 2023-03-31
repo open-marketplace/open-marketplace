@@ -53,6 +53,7 @@ sylius_shipping:
             classes:
                 model: BitBag\OpenMarketplace\Entity\Shipment
                 interface: BitBag\OpenMarketplace\Entity\ShipmentInterface
+                repository: BitBag\OpenMarketplace\Repository\ShipmentRepository
 
 sylius_payment:
     resources:

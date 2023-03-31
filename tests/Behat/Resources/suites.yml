@@ -8,6 +8,7 @@ imports:
     - suites/ui/admin/managing_vendors.yml
     - suites/ui/admin/verifying_vendors.yml
     - suites/ui/admin/viewing_payments.yml
+    - suites/ui/admin/viewing_shipments.yml
     - suites/ui/admin/disabling_vendors.yml
     - suites/ui/admin/restoring_product.yml
     - suites/ui/admin/editing_vendors.yml
