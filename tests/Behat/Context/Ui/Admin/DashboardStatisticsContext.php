@@ -9,7 +9,6 @@
 
 declare(strict_types=1);
 
-
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;

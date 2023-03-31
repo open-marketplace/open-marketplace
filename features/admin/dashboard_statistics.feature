@@ -5,13 +5,20 @@ Feature: Viewing dashboard statistics
   secondary orders
 
   Background:
-    And I am logged in as an administrator
-    And the store operates on a single channel in "United States"
-    And the store has "UPS" shipping method with "$20.00" fee per unit for "United States" channel
-    And the store allows paying with "Cash on Delivery"
-    And the store has a product "Jeans" priced at "$150" in "United States" channel
-    And there is an "000000011" order with "Jeans" product in "United States" channel
+    Given I am logged in as an administrator
+    And the store has currency "EUR"
+    And the store has currency "GBP"
+    And the store operates on a channel named "Web-EU" in "EUR" currency and with hostname "web-eu"
+    And that channel allows to shop using "EUR" and "GBP" currencies
+    And the store has country "Ireland"
+    And the store has a product "Leprechaun's Gold" priced at "€10.00" in "Web-EU" channel
+    And the store has a zone "EU"
+    And the store has customer "example@user.com"
+    And the store has "UPS" shipping method with "$20.00" fee per unit for "Web-EU" channel
+    And the store has also a payment method "Bank transfer" with a code "transfer"
+    And store has primary and secondary order with payment state "paid"
 
   @ui
   Scenario: Viewing sales summary
     Given I am on "/admin"
+    Then statistics should omit primary order
