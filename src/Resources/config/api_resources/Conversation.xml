@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%open_marketplace.model.conversation.class%" shortName="Conversation">
+        <collectionOperations>
+            <collectionOperation name="vendor_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendor/conversations</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:conversation:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+        <itemOperations>
+            <itemOperation name="vendor_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendor/conversations/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:conversation:read</attribute>
+                </attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_READ", object)</attribute>
+            </itemOperation>
+
+            <itemOperation name="vendor_archive">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shop/account/vendor/conversations/{id}/archive</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">bitbag.open_marketplace.api.controller.vendor.accept_archive_conversation_action</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:conversation:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Accepts Conversation archive request</attribute>
+                </attribute>
+                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_UPDATE", object)</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+    </resource>
+</resources>

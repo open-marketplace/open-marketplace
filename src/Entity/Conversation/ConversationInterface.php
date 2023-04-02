@@ -48,4 +48,6 @@ interface ConversationInterface extends ResourceInterface
     public function setRejectedListingURL(?string $rejectedListingURL): void;
 
     public function getApplicant(): ?ShopUserInterface;
+
+    public function isConversationReportedToArchive(): bool;
 }

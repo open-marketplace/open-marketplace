@@ -20,5 +20,11 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  public="true">
             <argument type="service" id="open_marketplace.state_machine.product_draft.transition"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Api\Controller\Vendor\AcceptArchiveConversationAction"
+                 id="bitbag.open_marketplace.api.controller.vendor.accept_archive_conversation_action"
+                 public="true">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
     </services>
 </container>

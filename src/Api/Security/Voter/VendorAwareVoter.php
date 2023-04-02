@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Security\Voter;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
+use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
 use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -36,7 +37,7 @@ final class VendorAwareVoter extends Voter
     {
         $supportsAttribute = in_array($attribute, $this->supportedAttributes);
 
-        $supportsSubject = $subject instanceof VendorAwareInterface;
+        $supportsSubject = ($subject instanceof VendorAwareInterface) || ($subject instanceof ConversationInterface);
 
         return $supportsAttribute && $supportsSubject;
     }

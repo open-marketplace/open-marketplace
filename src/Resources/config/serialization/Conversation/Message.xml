@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="BitBag\OpenMarketplace\Entity\Conversation\Message">
+        <attribute name="content">
+            <group>shop:account:vendor:conversation:read</group>
+        </attribute>
+        <attribute name="createdAt">
+            <group>shop:account:vendor:conversation:read</group>
+        </attribute>
+        <attribute name="filename">
+            <group>shop:account:vendor:conversation:read</group>
+        </attribute>
+        <attribute name="file">
+            <group>shop:account:vendor:conversation:read</group>
+        </attribute>
+    </class>
+</serializer>
