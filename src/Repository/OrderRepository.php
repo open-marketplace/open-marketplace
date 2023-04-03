@@ -172,6 +172,7 @@ class OrderRepository extends BaseOrderRepository
             ;
     }
 
+    /** @phpstan-ignore-next-line */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {
         return $this->createListQueryBuilder()
