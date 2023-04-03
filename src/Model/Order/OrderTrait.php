@@ -133,4 +133,18 @@ trait OrderTrait
 
         return false;
     }
+
+    public function getSecondaryPayments(): ?Collection
+    {
+        $secondaryOrders = $this->getSecondaryOrders();
+        if($secondaryOrders->count() === 0){
+            return null;
+        }
+        $payments = [];
+        foreach ($secondaryOrders as $order){
+            $payments = $order->getPayments();
+        }
+
+        return $payments;
+    }
 }
