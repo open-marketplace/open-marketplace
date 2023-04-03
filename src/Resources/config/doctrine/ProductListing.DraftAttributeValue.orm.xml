@@ -5,6 +5,8 @@
 
     <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue"
                        table="bitbag_open_marketplace_draft_attribute_value" >
+        <field name="uuid" type="uuid" unique="true" />
+
         <many-to-one field="subject" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft" inversed-by="attributes">
             <join-column on-delete="CASCADE" />
         </many-to-one>

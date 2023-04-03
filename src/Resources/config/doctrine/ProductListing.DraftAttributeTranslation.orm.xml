@@ -6,6 +6,6 @@
 
     <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation"
                        table="bitbag_open_marketplace_draft_attribute_translation">
-        <field name="uuid" type="uuid" />
+        <field name="uuid" type="uuid" unique="true" />
     </mapped-superclass>
 </doctrine-mapping>

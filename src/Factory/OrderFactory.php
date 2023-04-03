@@ -24,6 +24,7 @@ final class OrderFactory implements OrderFactoryInterface
 
     public function createNew(): OrderInterface
     {
+        /** @phpstan-ignore-next-line */
         return new $this->orderFQN();
     }
 }

@@ -32,7 +32,7 @@
         <constraint name="BitBag\OpenMarketplace\Validator\Constraint\ProductListingPriceConstraint">
             <option name="groups">sylius</option>
         </constraint>
-        <property name="productListingPrice">
+        <property name="productListingPrices">
             <constraint name="Valid" />
         </property>
     </class>

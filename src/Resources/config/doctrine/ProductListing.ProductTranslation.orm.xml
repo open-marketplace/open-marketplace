@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="uuid" type="uuid" unique="true" />
+
         <field name="name" column="name" type="string" unique="false" nullable="true" />
         <field name="slug" column="slug" type="string" unique="false" nullable="true" />
         <field name="description" column="description" type="text" unique="false" nullable="true" />

@@ -88,7 +88,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
 
         $channelPricingCodes = [];
         /** @var ProductListingPriceInterface $productListingPrice */
-        foreach ($productDraft->getProductListingPrice() as $productListingPrice) {
+        foreach ($productDraft->getProductListingPrices() as $productListingPrice) {
             if (!in_array($productListingPrice->getChannelCode(), $channelPricingCodes)) {
                 $channelPricingCodes[] = $productListingPrice->getChannelCode();
             }

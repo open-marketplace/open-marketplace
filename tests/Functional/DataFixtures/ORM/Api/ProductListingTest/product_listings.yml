@@ -1,0 +1,256 @@
+Sylius\Component\Addressing\Model\Country:
+    country_us:
+        code: 'US'
+Sylius\Component\Addressing\Model\Zone:
+    zone_us:
+        code: 'US'
+        name: 'United States of America'
+        type: 'country'
+        scope: 'all'
+Sylius\Component\Addressing\Model\ZoneMember:
+    zone_member_us:
+        code: 'US'
+        belongsTo: '@zone_us'
+Sylius\Component\Currency\Model\Currency:
+    dollar:
+        code: 'USD'
+Sylius\Component\Locale\Model\Locale:
+    locale:
+        createdAt: "<dateTimeBetween('-200 days', 'now')>"
+        code: 'en_US'
+Sylius\Component\Core\Model\Channel:
+    channel:
+        code: 'CODE'
+        name: 'name'
+        defaultLocale: '@locale'
+        locales: [ '@locale' ]
+        taxCalculationStrategy: 'order_items_based'
+        baseCurrency: '@dollar'
+        enabled: true
+Sylius\Component\Core\Model\Customer:
+    customer_bruce:
+        firstName: 'Bruce'
+        lastName: 'Wayne'
+        email: 'bruce.wayne@example.com'
+        emailCanonical: 'bruce.wayne@example.com'
+    customer_peter:
+        firstName: 'Peter'
+        lastName: 'Weyland'
+        email: 'peter.weyland@example.com'
+        emailCanonical: 'peter.weyland@example.com'
+    customer_john:
+        firstName: 'John'
+        lastName: 'Smith'
+        email: 'john.smith@example.com'
+        emailCanonical: 'john.smith@example.com'
+BitBag\OpenMarketplace\Entity\ShopUser:
+    user_bruce:
+        plainPassword: '123password'
+        roles: ['ROLE_USER', 'ROLE_VENDOR']
+        enabled: 'true'
+        customer: '@customer_bruce'
+        username: 'bruce.wayne@example.com'
+        usernameCanonical: 'bruce.wayne@example.com'
+    user_peter:
+        plainPassword: '123password'
+        roles: ['ROLE_USER', 'ROLE_VENDOR']
+        enabled: 'true'
+        customer: '@customer_peter'
+        username: 'peter.weyland@example.com'
+        usernameCanonical: 'peter.weyland@example.com'
+    user_john:
+        plainPassword: '123password'
+        roles: ['ROLE_USER']
+        enabled: 'true'
+        customer: '@customer_john'
+        username: 'john.smith@example.com'
+        usernameCanonical: 'john.smith@example.com'
+BitBag\OpenMarketplace\Entity\VendorAddress:
+    vendor_address_bruce:
+        country: '@country_us'
+        city: 'Arkham City'
+        postalCode: '00000'
+        street: 'Avenue 2115'
+    vendor_address_peter:
+        country: '@country_us'
+        city: 'San Francisco'
+        postalCode: '94016'
+        street: 'Unknown 1'
+BitBag\OpenMarketplace\Entity\Vendor:
+    vendor_bruce:
+        shopUser: '@user_bruce'
+        companyName: 'Wayne Enterprises, Inc.'
+        taxIdentifier: '1234567'
+        phoneNumber: '555123123'
+        vendorAddress: '@vendor_address_bruce'
+        slug: 'Wayne-Enterprises-Inc'
+        description: 'description'
+    vendor_peter:
+        shopUser: '@user_peter'
+        companyName: 'Weyland Corp'
+        taxIdentifier: '7654321'
+        phoneNumber: '555444333'
+        vendorAddress: '@vendor_address_peter'
+        slug: 'Weyland-Corp'
+        description: 'description'
+BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+    attribute_bruce_1:
+        vendor: '@vendor_bruce'
+        code: 'attribute_bruce_1'
+        type: 'text'
+        storageType: 'text'
+        translatable: 'true'
+    attribute_bruce_2:
+        vendor: '@vendor_bruce'
+        code: 'attribute_bruce_2'
+        type: 'text'
+        storageType: 'text'
+        translatable: 'true'
+    attribute_peter_1:
+        vendor: '@vendor_peter'
+        code: 'attribute_peter_1'
+        type: 'text'
+        storageType: 'text'
+        translatable: 'true'
+BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
+    attribute_bruce_1_translations_us:
+        translatable: '@attribute_bruce_1'
+        locale: 'en_US'
+        name: 'attribute_bruce_1_us'
+    attribute_bruce_2_translations_us:
+        translatable: '@attribute_bruce_2'
+        locale: 'en_US'
+        name: 'attribute_bruce_2_us'
+    attribute_peter_1_translations_us:
+        translatable: '@attribute_peter_1'
+        locale: 'en_US'
+        name: 'attribute_peter_1_us'
+BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
+    product_listing_bruce_1:
+        code: 'product_listing_bruce_1'
+        vendor: '@vendor_bruce'
+    product_listing_bruce_2:
+        code: 'product_listing_bruce_2'
+        vendor: '@vendor_bruce'
+        verificationStatus: 'verified'
+    product_listing_peter_1:
+        code: 'product_listing_peter_1'
+        vendor: '@vendor_peter'
+BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage:
+    product_draft_image_bruce_1:
+        owner: '@product_draft_bruce_1'
+        path: '/dummy/file/path'
+BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft:
+    product_draft_bruce_1:
+        code: 'product_draft_bruce_1'
+        productListing: '@product_listing_bruce_1'
+        images: ['@product_draft_image_bruce_1']
+        productListingPrices: ['@product_draft_listing_price_bruce_1']
+        attributes: ['@product_draft_attribute_value_bruce_1']
+        mainTaxon: '@category_taxon'
+        productDraftTaxons: ['@product_draft_taxon_bruce_1']
+    product_draft_bruce_2:
+        code: 'product_draft_bruce_2'
+        productListing: '@product_listing_bruce_2'
+        productListingPrices: ['@product_draft_listing_price_bruce_2']
+        attributes: ['@product_draft_attribute_value_bruce_2']
+        mainTaxon: '@category_taxon'
+        productDraftTaxons: ['@product_draft_taxon_bruce_2']
+    product_draft_peter_1:
+        code: 'product_draft_peter_1'
+        productListing: '@product_listing_peter_1'
+BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation:
+    product_draft_bruce_1_translations_us:
+        productDraft: '@product_draft_bruce_1'
+        locale: 'en_US'
+        name: 'product_draft_bruce_1_translations_us'
+        slug: 'product_draft_bruce_1_translations_us'
+    product_draft_bruce_2_translations_us:
+        productDraft: '@product_draft_bruce_2'
+        locale: 'en_US'
+        name: 'product_draft_bruce_2_translations_us'
+        slug: 'product_draft_bruce_2_translations_us'
+    product_draft_peter_1_translations_us:
+        productDraft: '@product_draft_peter_1'
+        locale: 'en_US'
+        name: 'product_draft_peter_1_translations_us'
+        slug: 'product_draft_peter_1_translations_us'
+BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue:
+    product_draft_attribute_value_bruce_1:
+        draft: '@product_draft_bruce_1'
+        attribute: '@attribute_bruce_1'
+        value: 'example value'
+    product_draft_attribute_value_bruce_2:
+        draft: '@product_draft_bruce_2'
+        attribute: '@attribute_bruce_2'
+        value: 'example value'
+BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice:
+    product_draft_listing_price_bruce_1:
+        productDraft: '@product_draft_bruce_1'
+        price: 100
+        originalPrice: 80
+        minimumPrice: 90
+        channelCode: 'CODE'
+    product_draft_listing_price_bruce_2:
+        productDraft: '@product_draft_bruce_2'
+        price: 150
+        originalPrice: 200
+        minimumPrice: 90
+        channelCode: 'CODE'
+Sylius\Component\Core\Model\Taxon:
+    category_taxon:
+        code: 'CATEGORY'
+        currentLocale: 'en_US'
+        translations: ['@en_us_category_translation']
+        children: ['@mug_taxon', '@hat_taxon']
+    second_category_taxon:
+        code: 'SECOND_CATEGORY'
+        currentLocale: 'en_US'
+        translations: ['@en_us_second_category_translation']
+        children: ['@hat_taxon']
+    mug_taxon:
+        code: 'MUG'
+        currentLocale: 'en_US'
+        translations: ['@en_us_mug_taxon_translation']
+        parent: '@category_taxon'
+        position: 0
+    hat_taxon:
+        code: 'HAT'
+        currentLocale: 'en_US'
+        translations: ['@en_us_hat_translation']
+        parent: '@category_taxon'
+        position: 1
+Sylius\Component\Taxonomy\Model\TaxonTranslation:
+    en_us_category_translation:
+        slug: 'categories'
+        locale: 'en_US'
+        name: 'Categories'
+        description: 'Some description Lorem ipsum dolor sit amet.'
+        translatable: '@category_taxon'
+    en_us_second_category_translation:
+        slug: 'second-categories'
+        locale: 'en_US'
+        name: 'Second categories'
+        description: 'Some description Lorem ipsum dolor sit amet.'
+        translatable: '@second_category_taxon'
+    en_us_mug_taxon_translation:
+        slug: 'categories/mugs'
+        locale: 'en_US'
+        name: 'Mugs'
+        description: 'Some description Lorem ipsum dolor sit amet.'
+        translatable: '@mug_taxon'
+    en_us_hat_translation:
+        slug: 'categories/hats'
+        locale: 'en_US'
+        name: 'Hats'
+        description: 'Some description Lorem ipsum dolor sit amet.'
+        translatable: '@hat_taxon'
+BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon:
+    product_draft_taxon_bruce_1:
+        productDraft: '@product_draft_bruce_1'
+        taxon: '@mug_taxon'
+        position: 1
+    product_draft_taxon_bruce_2:
+        productDraft: '@product_draft_bruce_2'
+        taxon: '@hat_taxon'
+        position: 2

@@ -21,7 +21,6 @@ use BitBag\OpenMarketplace\Factory\ProductFromDraftFactoryInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperatorInterface;
 use BitBag\OpenMarketplace\Updater\ProductFromDraftUpdaterInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 
 final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
@@ -31,7 +30,6 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductDraftFilesOperatorInterface $filesOperator,
         AttributesConverterInterface $attributesConverter,
-        EntityManagerInterface $entityManager,
         ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
     ): void {
         $this->beConstructedWith(
@@ -39,7 +37,6 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
             $productFromDraftUpdater,
             $filesOperator,
             $attributesConverter,
-            $entityManager,
             $productDraftTaxonsOperator
         );
     }

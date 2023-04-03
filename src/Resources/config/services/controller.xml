@@ -22,15 +22,11 @@
             <tag name="controller.service_arguments" />
         </service>
 
-
-
-
         <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\CreateNewConversationAction"
                  id="open_marketplace.controller.action.conversation.create_new_conversation_action">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="twig"/>
             <argument type="service" id="api_platform.router"/>
-            <argument type="service" id="session.flash_bag"/>
             <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade"/>
             <argument type="service" id="open_marketplace.repository.conversation"/>
             <tag name="controller.service_arguments" />
@@ -39,7 +35,6 @@
         <service id="open_marketplace.controller.action.conversation_message.add_message_action"
                  class="BitBag\OpenMarketplace\Controller\Action\ConversationMessage\AddMessageAction">
             <argument type="service" id="form.factory" />
-            <argument type="service" id="session.flash_bag" />
             <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade" />
             <argument type="service" id="router"/>
             <tag name="controller.service_arguments" />
