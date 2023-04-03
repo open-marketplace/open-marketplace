@@ -14,13 +14,11 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository;
-use Sylius\Component\Core\Factory\PaymentMethodFactory;
-use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
-use Sylius\Component\Payment\Factory\PaymentFactory;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 
@@ -202,7 +200,7 @@ class OrderContext extends RawMinkContext implements Context
      */
     public function thereIsPaymentMethod()
     {
-        $payment =$this->paymentMethodFactory->create([
+        $payment = $this->paymentMethodFactory->create([
             'name' => ucfirst($name),
             'code' => $code,
             'description' => $description,
@@ -213,5 +211,4 @@ class OrderContext extends RawMinkContext implements Context
         ]);
         $this->methodRepository->add($payment);
     }
-
 }

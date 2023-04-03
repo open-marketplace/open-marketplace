@@ -138,13 +138,14 @@ trait OrderTrait
     {
         $payments = new ArrayCollection();
         $secondaryOrders = $this->getSecondaryOrders();
-        if($secondaryOrders->count() === 0){
+        if (0 === $secondaryOrders->count()) {
             return $payments;
         }
 
-        foreach ($secondaryOrders as $order){
+        foreach ($secondaryOrders as $order) {
             $payments->add($order->getPayments()->first());
         }
+
         return $payments;
     }
 }

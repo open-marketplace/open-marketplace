@@ -137,6 +137,5 @@ final class DraftAttributeContext extends RawMinkContext
         $wrapper->press();
 
         $div = $page->find('css', '[data-value="name"]');
-
     }
 }
