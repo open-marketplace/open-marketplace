@@ -171,4 +171,14 @@ class OrderRepository extends BaseOrderRepository
             ->getResult()
             ;
     }
+
+    public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
+    {
+        return $this->createListQueryBuilder()
+            ->andWhere('o.customer = :customerId')
+            ->andWhere('o.mode != :mode')
+            ->setParameter('customerId', $customerId)
+            ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
+            ;
+    }
 }
