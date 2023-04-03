@@ -1,0 +1,27 @@
+default:
+  suites:
+    dashboard_statistics:
+      contexts:
+        - tests.open_marketplace.behat.context.shop.order
+        - tests.open_marketplace.behat.context.admin.view_payment_context
+        - Behat\MinkExtension\Context\MinkContext
+        - sylius.behat.context.setup.order
+        - sylius.behat.context.setup.product
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.admin_security
+        - sylius.behat.context.transform.lexical
+        - sylius.behat.context.transform.product
+        - sylius.behat.context.transform.channel
+        - sylius.behat.context.transform.zone
+        - sylius.behat.context.setup.shipping
+        - sylius.behat.context.setup.zone
+        - sylius.behat.context.transform.payment
+        - sylius.behat.context.setup.payment
+        - sylius.behat.context.setup.customer
+        - sylius.behat.context.setup.cart
+        - sylius.behat.context.setup.currency
+        - sylius.behat.context.setup.user
+        - sylius.behat.context.setup.geographical
+        - sylius.behat.context.transform.shared_storage
+      filters:
+        tags: "@hiding_primary_orders_in_customer_tab && @ui"

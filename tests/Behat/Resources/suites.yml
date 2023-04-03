@@ -14,6 +14,7 @@ imports:
     - suites/ui/admin/editing_vendors.yml
     - suites/ui/admin/product_listing.yml
     - suites/ui/admin/dashboard_statistics.yml
+    - suites/ui/admin/customer_orders.yml
     - suites/shop/order.yml
     - suites/vendor/order_listing.yml
     - suites/vendor/clients_listing.yml
