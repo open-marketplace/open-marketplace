@@ -50,5 +50,5 @@ winzou_state_machine:
         sylius_pay_suborders:
           on: ["complete", "process", "refund", "authorize"]
           do: [ "@sm.callback.cascade_transition", "apply" ]
-          args: [ "object.getSecondaryPayments()", "event" ]
+          args: [ "object.getOrder().getSecondaryPayments()", "event" ]
           priority: -200

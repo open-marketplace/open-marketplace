@@ -131,7 +131,6 @@ class VendorUpdateContext extends RawMinkContext
     {
         $page = $this->getSession()->getPage();
         $label = $page->find('css', '.ui.red.pointing.label.sylius-validation-error');
-        dd($label->getText());
     }
 
     /**

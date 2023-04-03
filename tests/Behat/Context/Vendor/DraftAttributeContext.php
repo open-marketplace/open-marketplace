@@ -134,10 +134,9 @@ final class DraftAttributeContext extends RawMinkContext
         $page = $this->getSession()->getPage();
 
         $wrapper = $page->find('css', '.ui.fluid.action.input');
-        dd($wrapper->getHtml());
         $wrapper->press();
 
         $div = $page->find('css', '[data-value="name"]');
-        dd($div);
+
     }
 }

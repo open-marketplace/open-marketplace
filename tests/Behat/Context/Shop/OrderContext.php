@@ -14,6 +14,10 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository;
+use Sylius\Component\Core\Factory\PaymentMethodFactory;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
+use Sylius\Component\Payment\Factory\PaymentFactory;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -26,12 +30,20 @@ class OrderContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private PaymentMethodFactoryInterface $paymentMethodFactory;
+
+    private PaymentMethodRepository $methodRepository;
+
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
+        PaymentMethodFactoryInterface $paymentMethodFactory,
+        PaymentMethodRepository $methodRepository
     ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
+        $this->paymentMethodFactory = $paymentMethodFactory;
+        $this->methodRepository = $methodRepository;
     }
 
     /**
@@ -184,4 +196,22 @@ class OrderContext extends RawMinkContext implements Context
     {
         return $this->getSession()->getPage();
     }
+
+    /**
+     * @Given There is payment method
+     */
+    public function thereIsPaymentMethod()
+    {
+        $payment =$this->paymentMethodFactory->create([
+            'name' => ucfirst($name),
+            'code' => $code,
+            'description' => $description,
+            'gatewayName' => $gatewayFactory,
+            'gatewayFactory' => $gatewayFactory,
+            'enabled' => true,
+            'channels' => ($addForCurrentChannel && $this->sharedStorage->has('channel')) ? [$this->sharedStorage->get('channel')] : [],
+        ]);
+        $this->methodRepository->add($payment);
+    }
+
 }
