@@ -13,6 +13,7 @@
             <argument type="service" id="sylius.fixture.example_factory.product"/>
             <argument type="service" id="sylius.fixture.example_factory.taxon"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="sylius.repository.shipping_method"/>
         </service>
 
     </services>
