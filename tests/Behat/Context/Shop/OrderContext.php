@@ -160,6 +160,7 @@ class OrderContext extends RawMinkContext implements Context
         $card = $page->find('css', '.ui.fluid.card');
         assertStringContainsString($name, $card->getText());
     }
+
     /**
      * @Given I add this product to the cart
      */
@@ -173,5 +174,4 @@ class OrderContext extends RawMinkContext implements Context
 
         $this->sharedStorage->set('product', $product);
     }
-
 }

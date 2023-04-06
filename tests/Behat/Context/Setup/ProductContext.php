@@ -48,7 +48,6 @@ class ProductContext implements Context
 
     private RepositoryInterface $shippingMethodRepository;
 
-
     public function __construct(
         ShopUserExampleFactory $userExampleFactory,
         VendorRepository $vendorRepository,
@@ -141,6 +140,7 @@ class ProductContext implements Context
 
         $this->manager->flush();
     }
+
     /**
      * @Given vendor uses this shipping method
      */
@@ -149,7 +149,7 @@ class ProductContext implements Context
         /** @var VendorInterface $vendor */
         $vendor = $this->sharedStorage->get('vendor');
         /** @var VendorShippingMethodInterface $shippingMethod */
-        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code'=> 'ENVELOPE-US']);
+        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => 'ENVELOPE-US']);
         $vendorShippingMethod = new VendorShippingMethod();
         $vendorShippingMethod->setVendor($vendor);
         $vendorShippingMethod->setShippingMethod($shippingMethod);
@@ -159,7 +159,6 @@ class ProductContext implements Context
         $this->manager->persist($vendor);
         $this->manager->flush();
     }
-
 
     private function createDefaultVendor(): Vendor
     {
