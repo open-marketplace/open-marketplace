@@ -17,8 +17,10 @@ use ApiPlatform\Metadata\Operation;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\FilterVendorStrategy;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
+use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use function PHPUnit\Framework\isType;
 
 final class VendorContextExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
@@ -56,11 +58,15 @@ final class VendorContextExtension implements QueryCollectionExtensionInterface,
         Operation $operation = null,
         array $context = []
     ): void {
+        if ($resourceClass === Conversation::class){
+            return;
+        }
         $this->filterByVendorIfApply($queryBuilder, $resourceClass);
     }
 
     public function filterByVendorIfApply(QueryBuilder $queryBuilder, string $resourceClass): void
     {
+
         if (null === $filterVendorStrategy = $this->getSupportedStrategy($resourceClass)) {
             return;
         }

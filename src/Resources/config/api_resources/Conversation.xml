@@ -19,6 +19,18 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     <attribute name="groups">shop:account:vendor:conversation:read</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="vendor_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/shop/account/vendor/conversations</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:conversation:write</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:account:vendor:conversation:write</attribute>
+                </attribute>
+                <attribute name="security_post_denormalize">is_granted("VENDOR_AWARE_OBJECT_CREATE", object)</attribute>
+            </collectionOperation>
         </collectionOperations>
         <itemOperations>
             <itemOperation name="vendor_get">
@@ -27,7 +39,19 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:conversation:read</attribute>
                 </attribute>
-                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_READ", object)</attribute>
+                <attribute name="security">is_granted("UPDATE-CONVERSATION", object)</attribute>
+            </itemOperation>
+
+            <itemOperation name="vendor_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/account/vendor/conversations/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:conversation:write</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:account:vendor:conversation:write</attribute>
+                </attribute>
+                <attribute name="security_post_denormalize">is_granted("UPDATE-CONVERSATION", object)</attribute>
             </itemOperation>
 
             <itemOperation name="vendor_archive">
@@ -41,7 +65,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="openapi_context">
                     <attribute name="summary">Accepts Conversation archive request</attribute>
                 </attribute>
-                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_UPDATE", object)</attribute>
+                <attribute name="security">is_granted("UPDATE-CONVERSATION", object)</attribute>
             </itemOperation>
         </itemOperations>
 

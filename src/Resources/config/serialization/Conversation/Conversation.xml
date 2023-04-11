@@ -15,9 +15,11 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:account:vendor:conversation:read</group>
         </attribute>
         <attribute name="category">
+            <group>shop:account:vendor:conversation:write</group>
             <group>shop:account:vendor:conversation:read</group>
         </attribute>
         <attribute name="messages">
+            <group>shop:account:vendor:conversation:write</group>
             <group>shop:account:vendor:conversation:read</group>
         </attribute>
         <attribute name="status">
