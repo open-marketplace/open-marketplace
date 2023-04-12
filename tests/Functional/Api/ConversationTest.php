@@ -95,4 +95,22 @@ final class ConversationTest extends FunctionalTestCase
         $this->assertEquals($this->count($responseData['hydra:member']), 1);
         $this->assertEquals($responseData['hydra:member'][0]['messages'][0]['content'], 'Own by Peter');
     }
+
+    public function test_vendor_can_archive_his_conversation(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        $this->client->request('GET', '/api/v2/shop/account/vendor/conversations', [], [], $header);
+
+        $response = $this->client->getResponse();
+        $responseData = json_decode($response->getContent(), true);
+        $archiveIRI = $responseData["hydra:member"][1]["@id"];
+
+        $this->client->request('PATCH', "$archiveIRI/archive", [], [], $header);
+        $response = $this->client->getResponse();
+        $responseData = json_decode($response->getContent(), true);
+
+        $this->assertEquals($responseData["status"], "closed");
+
+    }
 }

@@ -115,6 +115,8 @@ BitBag\OpenMarketplace\Entity\Conversation\Conversation:
     shopUser: '@user_bruce'
   peter_conversation:
     shopUser: '@user_peter'
+  conversation_to_archive:
+    shopUser: '@user_bruce'
 BitBag\OpenMarketplace\Entity\Conversation\Message:
   peter_message:
     content: "Own by Peter"
@@ -122,4 +124,7 @@ BitBag\OpenMarketplace\Entity\Conversation\Message:
   bruce_message:
     content: "Own by Bruce"
     conversation: '@bruce_conversation'
+  archive_request:
+    content: '\<span>ARCHIVE_REQUEST_MESSAGE</span>'
+    conversation: "@conversation_to_archive"
 
