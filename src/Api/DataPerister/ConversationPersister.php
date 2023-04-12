@@ -32,7 +32,6 @@ class ConversationPersister implements DataPersisterInterface
         return $data instanceof ConversationInterface;
     }
 
-    /** @param $data ConversationInterface */
     public function persist($data)
     {
         $data->setShopUser($this->security->getUser());
