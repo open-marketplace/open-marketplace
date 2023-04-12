@@ -20,7 +20,6 @@ use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use function PHPUnit\Framework\isType;
 
 final class VendorContextExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
@@ -58,7 +57,7 @@ final class VendorContextExtension implements QueryCollectionExtensionInterface,
         Operation $operation = null,
         array $context = []
     ): void {
-        if ($resourceClass === Conversation::class){
+        if (Conversation::class === $resourceClass) {
             return;
         }
         $this->filterByVendorIfApply($queryBuilder, $resourceClass);
@@ -66,7 +65,6 @@ final class VendorContextExtension implements QueryCollectionExtensionInterface,
 
     public function filterByVendorIfApply(QueryBuilder $queryBuilder, string $resourceClass): void
     {
-
         if (null === $filterVendorStrategy = $this->getSupportedStrategy($resourceClass)) {
             return;
         }

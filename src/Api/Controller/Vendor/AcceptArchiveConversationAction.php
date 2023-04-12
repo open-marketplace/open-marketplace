@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
@@ -33,8 +35,7 @@ class AcceptArchiveConversationAction
 
             return $data;
         }
-        else {
-            return new Response('', Response::HTTP_BAD_REQUEST);
-        }
+
+        return new Response('', Response::HTTP_BAD_REQUEST);
     }
 }

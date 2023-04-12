@@ -12,7 +12,6 @@ namespace Test\BitBag\OpenMarketplace\Functional\Api;
 
 use BitBag\OpenMarketplace\Entity\Order;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\OpenMarketplace\Functional\FunctionalTestCase;
 
 final class ConversationTest extends FunctionalTestCase
@@ -27,21 +26,20 @@ final class ConversationTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/ConversationTest/conversation.yml');
     }
 
-
     public function test_vendor_can_start_conversation(): void
     {
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
 
         $this->client->request('POST', '/api/v2/shop/account/vendor/conversations', [], [], $header, json_encode([
-            'messages'=> [
+            'messages' => [
                 [
-                    'content' => "hello"
-                ]
-            ]
+                    'content' => 'hello',
+                ],
+            ],
         ]));
 
         $response = $this->client->getResponse();
-        $this->assertEquals("hello", json_decode($response->getContent(), true)["messages"][0]["content"]);
+        $this->assertEquals('hello', json_decode($response->getContent(), true)['messages'][0]['content']);
     }
 
     public function test_vendor_can_reply_to_conversation(): void
@@ -54,15 +52,15 @@ final class ConversationTest extends FunctionalTestCase
         $conversationIRI = json_decode($response->getContent(), true)['hydra:member'][0]['@id'];
 //        dd($conversationIRI);
         $this->client->request('PUT', "$conversationIRI", [], [], $header, json_encode([
-            'messages'=> [
+            'messages' => [
                 [
-                    'content' => "hello"
-                ]
-            ]
+                    'content' => 'hello',
+                ],
+            ],
         ]));
 
         $response = $this->client->getResponse();
-        $this->assertEquals("hello", json_decode($response->getContent(), true)["messages"][1]["content"]);
+        $this->assertEquals('hello', json_decode($response->getContent(), true)['messages'][1]['content']);
     }
 
     public function test_vendor_cannot_reply_to_others_conversation(): void
@@ -76,14 +74,14 @@ final class ConversationTest extends FunctionalTestCase
 
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
         $this->client->request('PUT', "$conversationIRI", [], [], $header, json_encode([
-            'messages'=> [
+            'messages' => [
                 [
-                    'content' => "hello"
-                ]
-            ]
+                    'content' => 'hello',
+                ],
+            ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponseCode($response,403);
+        $this->assertResponseCode($response, 403);
     }
 
     public function test_vendor_can_list_his_conversation(): void
@@ -94,8 +92,7 @@ final class ConversationTest extends FunctionalTestCase
 
         $response = $this->client->getResponse();
         $responseData = json_decode($response->getContent(), true);
-        $this->assertEquals($this->count($responseData["hydra:member"]), 1);
-        $this->assertEquals($responseData["hydra:member"][0]["messages"][0]["content"],"Own by Peter");
-
+        $this->assertEquals($this->count($responseData['hydra:member']), 1);
+        $this->assertEquals($responseData['hydra:member'][0]['messages'][0]['content'], 'Own by Peter');
     }
 }

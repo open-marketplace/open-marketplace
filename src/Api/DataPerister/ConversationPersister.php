@@ -27,7 +27,7 @@ class ConversationPersister implements DataPersisterInterface
         $this->security = $security;
     }
 
-    public function supports($data): bool
+    public function supports(mixed $data): bool
     {
         return $data instanceof ConversationInterface;
     }

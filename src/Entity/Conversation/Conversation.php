@@ -131,7 +131,7 @@ class Conversation implements ConversationInterface
     public function isConversationReportedToArchive(): bool
     {
         foreach ($this->getMessages() as $message) {
-            if($message->getContent() === MessagesStorage::ARCHIVE_REQUEST_MESSAGE) {
+            if (MessagesStorage::ARCHIVE_REQUEST_MESSAGE === $message->getContent()) {
                 return true;
             }
         }
