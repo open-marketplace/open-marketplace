@@ -15,9 +15,10 @@ use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Security;
 
-class ConversationPersister implements DataPersisterInterface
+final class ConversationPersister implements DataPersisterInterface
 {
     private EntityManager $manager;
+
     private Security $security;
 
     public function __construct(EntityManager $manager, Security $security)
