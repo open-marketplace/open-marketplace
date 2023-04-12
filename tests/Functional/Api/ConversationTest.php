@@ -50,8 +50,8 @@ final class ConversationTest extends FunctionalTestCase
 
         $response = $this->client->getResponse();
         $conversationIRI = json_decode($response->getContent(), true)['hydra:member'][0]['@id'];
-//        dd($conversationIRI);
-        $this->client->request('PUT', "$conversationIRI", [], [], $header, json_encode([
+
+        $this->client->request('PUT', $conversationIRI, [], [], $header, json_encode([
             'messages' => [
                 [
                     'content' => 'hello',
@@ -73,7 +73,7 @@ final class ConversationTest extends FunctionalTestCase
         $conversationIRI = json_decode($response->getContent(), true)['hydra:member'][0]['@id'];
 
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
-        $this->client->request('PUT', "$conversationIRI", [], [], $header, json_encode([
+        $this->client->request('PUT', $conversationIRI, [], [], $header, json_encode([
             'messages' => [
                 [
                     'content' => 'hello',
@@ -106,7 +106,7 @@ final class ConversationTest extends FunctionalTestCase
         $responseData = json_decode($response->getContent(), true);
         $archiveIRI = $responseData['hydra:member'][1]['@id'];
 
-        $this->client->request('PATCH', "$archiveIRI/archive", [], [], $header);
+        $this->client->request('PATCH', $archiveIRI."/archive", [], [], $header);
         $response = $this->client->getResponse();
         $responseData = json_decode($response->getContent(), true);
 
