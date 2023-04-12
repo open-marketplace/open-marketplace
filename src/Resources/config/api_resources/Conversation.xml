@@ -51,7 +51,10 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:account:vendor:conversation:write</attribute>
                 </attribute>
-                <attribute name="security_post_denormalize">is_granted("UPDATE-CONVERSATION", object)</attribute>
+                <attribute name="security">is_granted("UPDATE-CONVERSATION", object)</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Add message to conversation</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="vendor_archive">
