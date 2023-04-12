@@ -12,7 +12,6 @@ namespace BitBag\OpenMarketplace\Api\DataPerister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
-use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Security;
 
@@ -32,7 +31,7 @@ class ConversationPersister implements DataPersisterInterface
         return $data instanceof ConversationInterface;
     }
 
-    public function persist($data)
+    public function persist($data): void
     {
         $data->setShopUser($this->security->getUser());
 
@@ -40,7 +39,7 @@ class ConversationPersister implements DataPersisterInterface
         $this->manager->flush();
     }
 
-    public function remove($data)
+    public function remove($data): void
     {
         $this->manager->remove($data);
         $this->manager->flush();
