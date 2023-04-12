@@ -104,13 +104,12 @@ final class ConversationTest extends FunctionalTestCase
 
         $response = $this->client->getResponse();
         $responseData = json_decode($response->getContent(), true);
-        $archiveIRI = $responseData["hydra:member"][1]["@id"];
+        $archiveIRI = $responseData['hydra:member'][1]['@id'];
 
         $this->client->request('PATCH', "$archiveIRI/archive", [], [], $header);
         $response = $this->client->getResponse();
         $responseData = json_decode($response->getContent(), true);
 
-        $this->assertEquals($responseData["status"], "closed");
-
+        $this->assertEquals($responseData['status'], 'closed');
     }
 }
