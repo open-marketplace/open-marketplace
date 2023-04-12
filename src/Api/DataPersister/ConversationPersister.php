@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Api\DataPerister;
+namespace BitBag\OpenMarketplace\Api\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
