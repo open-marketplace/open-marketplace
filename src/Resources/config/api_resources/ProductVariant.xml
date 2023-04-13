@@ -47,6 +47,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:product-variants:inventory:read</attribute>
                 </attribute>
+                <attribute name="security">is_granted("OWNS_VARIANT", object)</attribute>
             </itemOperation>
             <itemOperation name="vendor_inventory_update">
                 <attribute name="method">PUT</attribute>
@@ -57,6 +58,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:product-variants:inventory:read</attribute>
                 </attribute>
+                <attribute name="security">is_granted("OWNS_VARIANT", object)</attribute>
             </itemOperation>
         </itemOperations>
 
