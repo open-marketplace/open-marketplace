@@ -21,6 +21,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:product_draft:read</attribute>
                 </attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
             </itemOperation>
         </itemOperations>
 

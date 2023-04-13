@@ -48,7 +48,7 @@ final class ProductDraftTest extends FunctionalTestCase
 
         $this->client->request('GET', '/api/v2/shop/account/vendor/product-drafts/' . $productDraft->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_it_get_by_user_without_vendor_context(): void
