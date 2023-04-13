@@ -52,7 +52,7 @@ final class DraftAttributeTest extends FunctionalTestCase
 
         $this->client->request('GET', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_it_prevents_to_get_attribute_by_user_without_vendor_context(): void
@@ -182,7 +182,7 @@ final class DraftAttributeTest extends FunctionalTestCase
         ]));
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_it_update_attribute_by_vendor_owner(): void
@@ -279,7 +279,7 @@ final class DraftAttributeTest extends FunctionalTestCase
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_it_delete_attribute_by_owner_vendor(): void
