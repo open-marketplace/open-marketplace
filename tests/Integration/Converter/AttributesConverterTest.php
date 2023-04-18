@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\BitBag\OpenMarketplace\Integration\Converter;
 
 use ApiTestCase\JsonApiTestCase;
@@ -28,6 +30,6 @@ class AttributesConverterTest extends JsonApiTestCase
         $freshProduct = $this->entityManager->getRepository(Product::class)->findAll()[0];
         $this->entityManager->refresh($freshProduct);
 
-        $this->assertEquals(0, count($freshProduct->getAttributes()));
+        $this->assertCount(0, $freshProduct->getAttributes());
     }
 }
