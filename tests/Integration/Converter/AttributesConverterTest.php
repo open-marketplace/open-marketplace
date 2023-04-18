@@ -24,12 +24,14 @@ class AttributesConverterTest extends JsonApiTestCase
         $draft = $this->entityManager->getRepository(ProductDraft::class)->findAll()[0];
         $product = $draft->getProductListing()->getProduct();
 
+        $this->assertCount( 1, $product->getAttributes());
+
         $this->attributesConverter->convert($draft, $product);
         $this->entityManager->flush();
 
         $freshProduct = $this->entityManager->getRepository(Product::class)->findAll()[0];
         $this->entityManager->refresh($freshProduct);
 
-        $this->assertCount(0, $freshProduct->getAttributes());
+        $this->assertCount( 0, $freshProduct->getAttributes());
     }
 }
