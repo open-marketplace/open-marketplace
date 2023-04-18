@@ -29,6 +29,8 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
 
     protected ?VendorImageInterface $image = null;
 
+    protected ?VendorBackgroundImageInterface $backgroundImage = null;
+
     protected ?string $description;
 
     public function getId(): int
@@ -119,5 +121,15 @@ class VendorProfileUpdate implements VendorProfileUpdateInterface
     public function setImage(?VendorImageInterface $image): void
     {
         $this->image = $image;
+    }
+
+    public function getBackgroundImage(): ?VendorBackgroundImageInterface
+    {
+        return $this->backgroundImage;
+    }
+
+    public function setBackgroundImage(?VendorBackgroundImageInterface $backgroundImage): void
+    {
+        $this->backgroundImage = $backgroundImage;
     }
 }

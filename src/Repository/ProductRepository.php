@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Repository;
 
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
@@ -88,8 +90,34 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
 
         $pager = $this->getPaginator($qb);
         $pager->setMaxPerPage((int) $limit);
-        $pager->setCurrentPage($currentPage);
+        $pager->setCurrentPage((int) $currentPage);
 
         return $pager;
+    }
+
+    public function createVendorShopListQueryBuilder(
+        VendorInterface $vendor,
+        \Sylius\Component\Core\Model\ChannelInterface $channel,
+        TaxonInterface $taxon,
+        string $locale,
+        array $sorting = [],
+        bool $includeAllDescendants = false,
+    ): QueryBuilder
+    {
+        $qb = $this->createShopListQueryBuilder(
+            $channel,
+            $taxon,
+            $locale,
+            $sorting,
+            $includeAllDescendants,
+        );
+
+        $vendorId = $vendor->getId();
+
+        return $qb
+            ->andWhere('o.vendor = :vendor')
+            ->setParameter('vendor', $vendorId)
+            ;
+
     }
 }

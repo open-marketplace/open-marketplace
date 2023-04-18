@@ -32,6 +32,15 @@
             </cascade>
         </one-to-one>
 
+        <one-to-one field="backgroundImage"
+                    target-entity="BitBag\OpenMarketplace\Entity\VendorProfileUpdateBackgroundImage"
+                    mapped-by="owner"
+                    orphan-removal="true">
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </one-to-one>
+
         <one-to-one field="vendor" orphan-removal="false" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface">
             <join-column name="vendor_id" on-delete="SET NULL" />
         </one-to-one>

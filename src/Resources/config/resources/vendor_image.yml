@@ -8,3 +8,11 @@ sylius_resource:
     bitbag_open_marketplace.vendor_profile_update_image:
       classes:
         model: BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage
+    bitbag_open_marketplace.vendor_background_image:
+      classes:
+        model: BitBag\OpenMarketplace\Entity\VendorBackgroundImage
+        interface: BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface
+        form: BitBag\OpenMarketplace\Form\VendorBackgroundImageType
+    bitbag_open_marketplace.vendor_profile_update_background_image:
+      classes:
+        model: BitBag\OpenMarketplace\Entity\VendorProfileUpdateBackgroundImage

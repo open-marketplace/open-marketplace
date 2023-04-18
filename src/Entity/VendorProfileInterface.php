@@ -40,4 +40,6 @@ interface VendorProfileInterface extends ResourceInterface
     public function setDescription(?string $description): void;
 
     public function getImage(): ?VendorImageInterface;
+
+    public function getBackgroundImage(): ?VendorBackgroundImageInterface;
 }

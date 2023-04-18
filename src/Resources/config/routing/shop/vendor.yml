@@ -1,7 +1,19 @@
 open_marketplace_vendor_page_show:
-  path: vendors/{slug}
+  path: vendors/{vendor_slug}
   methods: [GET]
   defaults:
-    _controller: open_marketplace.controller.show_vendor_page_action
+    _controller: sylius.controller.product:indexAction
     _sylius:
       template: "Vendor/vendor_page.html.twig"
+      grid: open_marketplace_vendor_shop_product
+
+open_marketplace_vendor_shop_product_index:
+  path: /vendors/{vendor_slug}/taxons/{slug}
+  methods: [GET]
+  defaults:
+    _controller: sylius.controller.product:indexAction
+    _sylius:
+      template: "Vendor/vendor_page.html.twig"
+      grid: open_marketplace_vendor_shop_product
+  requirements:
+    slug: .+(?<!/)

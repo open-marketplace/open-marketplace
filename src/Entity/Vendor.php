@@ -45,6 +45,8 @@ class Vendor implements VendorInterface
 
     protected ?VendorImageInterface $image = null;
 
+    protected ?VendorBackgroundImageInterface $backgroundImage = null;
+
     /** @var Collection<int, ProductInterface> */
     protected Collection $products;
 
@@ -229,6 +231,21 @@ class Vendor implements VendorInterface
     public function removeImage(): void
     {
         $this->image = null;
+    }
+
+    public function getBackgroundImage(): ?VendorBackgroundImageInterface
+    {
+        return $this->backgroundImage;
+    }
+
+    public function setBackgroundImage(?VendorBackgroundImageInterface $backgroundImage): void
+    {
+        $this->backgroundImage = $backgroundImage;
+    }
+
+    public function removeBackgroundImage(): void
+    {
+        $this->backgroundImage = null;
     }
 
     public function isVerified(): bool

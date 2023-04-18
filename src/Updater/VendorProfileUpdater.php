@@ -11,12 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Updater;
 
+use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
+use BitBag\OpenMarketplace\Operator\VendorBackgroundOperatorInterface;
 use BitBag\OpenMarketplace\Operator\VendorLogoOperatorInterface;
 use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,9 +39,13 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
     private VendorProfileUpdateImageFactoryInterface $imageFactory;
 
+    private VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory;
+
     private ImageUploaderInterface $imageUploader;
 
     private VendorLogoOperatorInterface $vendorLogoOperator;
+
+    private VendorBackgroundOperatorInterface $vendorBackgroundOperator;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -46,22 +53,27 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         ProfileUpdateRemoverInterface $remover,
         VendorProfileUpdateFactoryInterface $profileUpdateFactory,
         VendorProfileUpdateImageFactoryInterface $imageFactory,
+        VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
         ImageUploader $imageUploader,
-        VendorLogoOperatorInterface $vendorLogoOperator
+        VendorLogoOperatorInterface $vendorLogoOperator,
+        VendorBackgroundOperatorInterface $vendorBackgroundOperator
     ) {
         $this->entityManager = $entityManager;
         $this->sender = $sender;
         $this->remover = $remover;
         $this->profileUpdateFactory = $profileUpdateFactory;
         $this->imageFactory = $imageFactory;
+        $this->backgroundImageFactory = $backgroundImageFactory;
         $this->imageUploader = $imageUploader;
         $this->vendorLogoOperator = $vendorLogoOperator;
+        $this->vendorBackgroundOperator = $vendorBackgroundOperator;
     }
 
     public function createPendingVendorProfileUpdate(
         VendorProfileInterface $vendorData,
         VendorInterface $currentVendor,
-        ?VendorImageInterface $image
+        ?VendorImageInterface $image,
+        ?VendorBackgroundImageInterface $backgroundImage
     ): void {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
 
@@ -75,6 +87,18 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
 
         if ($image && !$image->getPath()) {
             $currentVendor->setImage(null);
+        }
+
+        if ($backgroundImage && $backgroundImage->getFile()) {
+            $backgroundImageEntity = $this->backgroundImageFactory->createWithFileAndOwner($backgroundImage, $pendingVendorUpdate);
+
+            $this->imageUploader->upload($backgroundImageEntity);
+            $pendingVendorUpdate->setBackgroundImage($backgroundImageEntity);
+            $this->entityManager->persist($backgroundImageEntity);
+        }
+
+        if ($backgroundImage && !$backgroundImage->getPath()) {
+            $currentVendor->setBackgroundImage(null);
         }
 
         $this->entityManager->persist($pendingVendorUpdate);
@@ -121,7 +145,13 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $vendor = $vendorData->getVendor();
 
         $this->setVendorFromData($vendor, $vendorData);
-        $this->vendorLogoOperator->replaceVendorImage($vendorData, $vendor);
+
+        if (null !== $vendorData->getBackgroundImage()) {
+            $this->vendorBackgroundOperator->replaceVendorImage($vendorData, $vendor);
+        }
+        if (null !== $vendorData->getImage()) {
+            $this->vendorLogoOperator->replaceVendorImage($vendorData, $vendor);
+        }
 
         $this->remover->removePendingUpdate($vendorData);
     }

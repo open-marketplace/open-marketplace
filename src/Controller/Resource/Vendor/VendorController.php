@@ -134,13 +134,18 @@ final class VendorController extends ResourceController
 
             try {
                 $image = $resource->getImage();
+                $backgroundImage = $resource->getBackgroundImage();
                 $this->vendorProfileUpdater->createPendingVendorProfileUpdate(
                     $form->getData(),
                     $vendor,
-                    $image
+                    $image,
+                    $backgroundImage
                 );
                 if ($image) {
                     $this->manager->remove($image);
+                }
+                if ($backgroundImage) {
+                    $this->manager->remove($backgroundImage);
                 }
                 $this->manager->flush();
 
@@ -202,7 +207,6 @@ final class VendorController extends ResourceController
                 $this->metadata->getName() => $resource,
             ]);
         }
-
         return $this->createRestView($configuration, $resource);
     }
 

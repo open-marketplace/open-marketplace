@@ -50,7 +50,7 @@ final class ShowVendorPageAction
     public function __invoke(Request $request): Response
     {
         /** @var VendorInterface $vendor */
-        $vendor = $this->vendorRepository->findOneBy(['slug' => $request->attributes->get('slug')]);
+        $vendor = $this->vendorRepository->findOneBy(['slug' => $request->attributes->get('vendor_slug')]);
 
         if (VendorInterface::STATUS_UNVERIFIED === $vendor->getStatus()) {
             return new RedirectResponse($this->router->generate('sylius_shop_homepage'));

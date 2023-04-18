@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Form\Type;
 
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
+use BitBag\OpenMarketplace\Form\VendorBackgroundImageType;
 use BitBag\OpenMarketplace\Form\VendorImageType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -64,6 +65,11 @@ final class VendorType extends AbstractResourceType
                 'label' => false,
                 'required' => false,
                 'constraints' => [new Valid(['groups' => 'VendorLogo'])],
+            ])
+            ->add('backgroundImage', VendorBackgroundImageType::class, [
+                'label' => false,
+                'required' => false,
+                'constraints' => [new Valid(['groups' => 'VendorBackground'])],
             ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'open_marketplace.ui.company_address',
