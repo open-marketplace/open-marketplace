@@ -11,7 +11,11 @@ We are hiring developers from all over the world. Join us and start your new, ex
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="BitBag\OpenMarketplace\Entity\Vendor">
+        <attribute name="id">
+            <group>admin:vendor:read</group>
+        </attribute>
         <attribute name="uuid">
+            <group>admin:vendor:read</group>
             <group>admin:order:read</group>
             <group>admin:shipment:read</group>
             <group>shop:cart:read</group>
@@ -24,6 +28,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:account:vendor:vendor_image:read</group>
         </attribute>
         <attribute name="slug">
+            <group>admin:vendor:read</group>
             <group>admin:order:read</group>
             <group>admin:shipment:read</group>
             <group>shop:cart:read</group>
@@ -35,29 +40,45 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:account:vendor:create</group>
         </attribute>
         <attribute name="companyName">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
             <group>shop:vendor:read</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="taxIdentifier">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="phoneNumber">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="description">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="vendorAddress">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="image">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
             <group>shop:vendor:read</group>
             <group>shop:account:vendor:read</group>
+        </attribute>
+        <attribute name="enabled">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
         </attribute>
     </class>
 </serializer>

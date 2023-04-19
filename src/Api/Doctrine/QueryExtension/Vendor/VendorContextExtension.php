@@ -56,7 +56,7 @@ final class VendorContextExtension implements QueryCollectionExtensionInterface,
         Operation $operation = null,
         array $context = []
     ): void {
-        $this->filterByVendorIfApply($queryBuilder, $resourceClass);
+//        $this->filterByVendorIfApply($queryBuilder, $resourceClass);
     }
 
     public function filterByVendorIfApply(QueryBuilder $queryBuilder, string $resourceClass): void

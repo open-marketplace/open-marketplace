@@ -278,6 +278,17 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->assertEmpty($response->getContent());
     }
 
+    public function test_it_lists_vendors()
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+
+        $this->client->request('GET', '/api/v2/admin/vendors' , [], [], $header);
+        $response = $this->client->getResponse();
+
+        $readableResponse = json_decode($response->getContent(),true);
+        $this->assertCount(2, $readableResponse['hydra:member'],'Number of listed vendors is invalid');
+    }
+
     private function getUploadedFile(): UploadedFile
     {
         $fileName = 'avatar.png';
