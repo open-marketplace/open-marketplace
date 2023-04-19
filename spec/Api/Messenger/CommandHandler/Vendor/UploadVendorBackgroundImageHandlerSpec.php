@@ -12,14 +12,10 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImageInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorBackgroundImageHandler;
-use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorImageHandler;
 use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
