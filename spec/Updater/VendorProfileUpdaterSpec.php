@@ -90,7 +90,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorAddressInterface $vendorAddressUpdate,
         VendorImageInterface $imageFromForm,
         VendorBackgroundImageInterface $backgroundImageFromForm
-        ): void {
+    ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
         $newPendingUpdate->getToken()->willReturn('testing-token');
         $vendorData->getCompanyName()->willReturn('testcompany');
