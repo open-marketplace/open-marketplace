@@ -13,12 +13,15 @@ namespace spec\BitBag\OpenMarketplace\Updater;
 
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
+use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
+use BitBag\OpenMarketplace\Operator\VendorBackgroundOperatorInterface;
 use BitBag\OpenMarketplace\Operator\VendorLogoOperatorInterface;
 use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
 use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
@@ -36,8 +39,10 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         ProfileUpdateRemoverInterface $remover,
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorProfileUpdateImageFactoryInterface $imageFactory,
+        VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
         ImageUploader $imageUploader,
-        VendorLogoOperatorInterface $vendorLogoOperator
+        VendorLogoOperatorInterface $vendorLogoOperator,
+        VendorBackgroundOperatorInterface $vendorBackgroundOperator
     ): void {
         $this->beConstructedWith(
             $entityManager,
@@ -45,8 +50,10 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
             $remover,
             $vendorProfileFactory,
             $imageFactory,
+            $backgroundImageFactory,
             $imageUploader,
-            $vendorLogoOperator
+            $vendorLogoOperator,
+            $vendorBackgroundOperator
         );
     }
 
@@ -82,6 +89,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         ShopUserInterface $user,
         VendorAddressInterface $vendorAddressUpdate,
         VendorImageInterface $imageFromForm,
+        VendorBackgroundImageInterface $backgroundImageFromForm
         ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
         $newPendingUpdate->getToken()->willReturn('testing-token');
@@ -92,6 +100,8 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
         $imageFromForm->getFile()->willReturn(null);
         $imageFromForm->getPath()->willReturn('path/to/file');
+        $backgroundImageFromForm->getFile()->willReturn(null);
+        $backgroundImageFromForm->getPath()->willReturn('path/to/file');
         $newPendingUpdate->getVendorAddress()->shouldBeCalled();
 
         $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
@@ -103,7 +113,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
 
         $user->getEmail()->willReturn('test@mail.at');
 
-        $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm);
+        $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm, $backgroundImageFromForm);
 
         $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])
             ->shouldHaveBeenCalledTimes(1);
@@ -120,6 +130,9 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorImageInterface $imageFromForm,
         VendorProfileUpdateImageFactoryInterface $imageFactory,
         VendorImageInterface $newImage,
+        VendorBackgroundImageInterface $backgroundImageFromForm,
+        VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
+        VendorBackgroundImageInterface $newBackgroundImage,
         ImageUploader $imageUploader,
         SplFileInfo $fileInfo
     ): void {
@@ -136,6 +149,11 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $imageUploader->upload($newImage);
         $newPendingUpdate->setImage($newImage)->shouldBeCalledOnce();
 
+        $backgroundImageFromForm->getFile()->willReturn($fileInfo);
+        $backgroundImageFactory->createWithFileAndOwner($backgroundImageFromForm, $newPendingUpdate)->willReturn($newBackgroundImage);
+        $imageUploader->upload($newBackgroundImage);
+        $newPendingUpdate->setBackgroundImage($newBackgroundImage)->shouldBeCalledOnce();
+
         $newPendingUpdate->getVendorAddress()->shouldBeCalled();
 
         $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
@@ -143,10 +161,11 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
         $imageFromForm->getPath()->willReturn('path/to/file');
+        $backgroundImageFromForm->getPath()->willReturn('path/to/file');
         $vendor->getShopUser()->willReturn($user);
         $user->getEmail()->willReturn('test@mail.at');
 
-        $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm);
+        $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm, $backgroundImageFromForm);
 
         $sender->send('vendor_profile_update', ['test@mail.at'], ['token' => 'testing-token'])
             ->shouldHaveBeenCalledTimes(1);
