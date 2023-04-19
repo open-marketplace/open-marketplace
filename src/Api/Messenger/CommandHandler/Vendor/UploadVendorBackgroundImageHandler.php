@@ -12,11 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

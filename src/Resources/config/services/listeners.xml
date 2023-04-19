@@ -11,6 +11,7 @@
 
             <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="generateSlug"/>
             <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadImage"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadBackgroundImage"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\EventListener\AccessDeniedListener"

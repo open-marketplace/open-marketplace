@@ -12,10 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdateBackgroundImage;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage;
 
 final class VendorProfileUpdateBackgroundImageFactory implements VendorProfileUpdateBackgroundImageFactoryInterface
 {

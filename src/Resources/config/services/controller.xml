@@ -66,17 +66,6 @@
             <argument type="service" id="open_marketplace.updater.vendor_profile_updater" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Controller\Action\Vendor\ShowVendorPageAction"
-                 id="open_marketplace.controller.show_vendor_page_action"
-                 public="true"
-        >
-            <argument type="service" id="open_marketplace.repository.vendor_repository"/>
-            <argument type="service" id="open_marketplace.repository.product"/>
-            <argument type="service" id="sylius.context.channel"/>
-            <argument type="service" id="router" />
-            <argument type="service" id="twig" />
-        </service>
-
         <service class="BitBag\OpenMarketplace\Controller\Resource\Product\DraftAttributesController"
                  id="open_marketplace.controller.draftAttributes"
                  parent="open_marketplace.controller.draft_attribute">

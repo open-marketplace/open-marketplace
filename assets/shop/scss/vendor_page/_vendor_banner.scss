@@ -1,4 +1,4 @@
-.col-lg-3{
+.vendor-banner{
   width: 100%;
   min-width: 230px;
   float: left;
@@ -8,7 +8,7 @@
   padding-right: 15px;
   text-align: center;
 }
-.col-lg-3 img {
+.vendor-banner img {
   width: 100%;
   max-height: 240px;
   object-fit: cover;
@@ -18,7 +18,7 @@
   position: relative;
   width: 100%;
 }
-.positioning{
+.vendor-positioning{
   max-height: 80%;
   max-width: 25%;
   position: absolute;
@@ -32,17 +32,17 @@
   border: 1px solid #E0E0E0;
 }
 
-.content {
+.vendor-content {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 1rem
 }
-.content h2 {
+.vendor-content h2 {
   margin-top: 0;
 }
 
-.positioning p {
+.vendor-positioning p {
     margin-bottom: 1rem;
 }
 
@@ -65,7 +65,7 @@
     display: inline-block;
     position: relative;
   }
-  .positioning {
+  .vendor-positioning {
     width: 100%;
     max-height: 60%;
     max-width: 100%;

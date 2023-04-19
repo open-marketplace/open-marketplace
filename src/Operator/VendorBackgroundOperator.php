@@ -12,11 +12,9 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Operator;
 
 use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class VendorBackgroundOperator implements VendorBackgroundOperatorInterface

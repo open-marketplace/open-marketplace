@@ -59,5 +59,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:vendor:read</group>
             <group>shop:account:vendor:read</group>
         </attribute>
+        <attribute name="backgroundImage">
+            <group>shop:vendor:read</group>
+            <group>shop:account:vendor:read</group>
+        </attribute>
     </class>
 </serializer>

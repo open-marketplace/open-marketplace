@@ -207,6 +207,7 @@ final class VendorController extends ResourceController
                 $this->metadata->getName() => $resource,
             ]);
         }
+
         return $this->createRestView($configuration, $resource);
     }
 

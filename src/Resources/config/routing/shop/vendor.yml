@@ -1,4 +1,4 @@
-open_marketplace_vendor_page_show:
+open_marketplace_vendor_shop_page_index:
   path: vendors/{vendor_slug}
   methods: [GET]
   defaults:
@@ -17,3 +17,18 @@ open_marketplace_vendor_shop_product_index:
       grid: open_marketplace_vendor_shop_product
   requirements:
     slug: .+(?<!/)
+
+open_marketplace_shop_partial_taxon_show_by_slug:
+  path: /vendors/{vendor_slug}/by-slug/{slug}
+  methods: [GET]
+  defaults:
+    _controller: sylius.controller.taxon:showAction
+    _sylius:
+      template: $template
+      repository:
+        method: findOneBySlug
+        arguments:
+          - $slug
+          - "expr:service('sylius.context.locale').getLocaleCode()"
+  requirements:
+    slug: .+

@@ -1,118 +1,73 @@
-{#{% extends '@SyliusShop/layout.html.twig' %}#}
-{#{% set reviewsCount = 0 %}#}
-{#{% set vendor = products.definition.driverConfiguration.repository.arguments.vendor %}#}
-{#{% block content %}#}
-{#    {{ dump(products.definition.driverConfiguration.repository.arguments.vendor) }}#}
+{% extends '@SyliusShop/layout.html.twig' %}
+{% set reviewsCount = 0 %}
+{% set vendor = products.definition.driverConfiguration.repository.arguments.vendor %}
+{% block content %}
+
+    <div class="ui clearing hidden divider"></div>
+    <div class="ui stackable grid">
+        <div id="container" class="vendor-banner">
+            <div class="img-container">
+                <img id="vendor_banner" src="{{ '/media/image/' ~ vendor.getBackgroundImage.path }}" alt="image broken">
+                <div class="vendor-positioning">
+                    <div class="vendor-content">
+                        {% if vendor.getImage is not null %}
+                            <div class="vendor-logo">
+                                <img id="vendor_logo" src="{{ '/media/image/' ~ vendor.getImage.path }}" alt="image broken">
+                            </div>
+                        {% endif %}
+                        <h2>{{ vendor.companyName }}</h2>
+                    </div>
+                    <div class="reviews-count">
+                        {% set productsAvarageRating = 0 %}
+                        {% set ratedProducts = 0 %}
+                        {% for product in vendor.products %}
+                            {% set acceptedReviews = 0 %}
+                            {% for review in product.reviews %}
+                                {% if review.status == 'accepted' %}
+                                    {% set acceptedReviews = acceptedReviews + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if acceptedReviews >= 1 %}
+                                {% set reviewsCount = reviewsCount + acceptedReviews %}
+                                {% set ratedProducts = ratedProducts + 1 %}
+                                {% set productsAvarageRating = productsAvarageRating + product.averageRating|round(2) %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if ratedProducts > 0 %}
+                            <div id="average-rating" class="ui star large rating" data-rating="{{ (productsAvarageRating / ratedProducts) |round }}" data-max-rating="5" data-average-rating="{{ (productsAvarageRating / ratedProducts) |round(2) }}" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', (productsAvarageRating / ratedProducts) |round(2) ) }}></div>
+                        {% else %}
+                            <div id="average-rating" class="ui star large rating" data-rating="0" data-max-rating="5" data-average-rating="0" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', 0)}}></div>
+                        {% endif %}
+                        <p>{{ reviewsCount }}</p>
+                        {% if ratedProducts == 1 %}
+                            <p>{{ 'open_marketplace.ui.review'|trans }}</p>
+                        {% else %}
+                            <p>{{ 'sylius.ui.reviews'|trans }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui card">
+                <div style="display: inline-block" class="content">
+                    <div class="header">
+                        {{ vendor.companyName }}
+                    </div>
+                    <br>
+                    <div class="description">
+                       <p>{{ vendor.description}}</p>
+                    </div>
+                </div>
+            </div>
+            {% include 'Vendor/VendorPage/_sidebar.html.twig' %}
+        </div>
+        <div class="twelve wide column">
+            {% include 'Vendor/VendorPage/_main.html.twig' %}
+        </div>
+    </div>
+
+    <div class="ui clearing hidden divider"></div>
 
 
-{#    {% if resources.data|length > 0 %}#}
-{#        {% for product in resources.data %}#}
-{#            {% if product.vendor is not null %}#}
-{#                {% set vendor = product.vendor %}#}
-{#            {% endif %}#}
-{#        {% endfor %}#}
-{#    {% endif %}#}
-
-{#        <div class="ui clearing hidden divider"></div>#}
-
-{#    <div class="ui stackable grid">#}
-{#        <div id="container" class="col-lg-3">#}
-{#            <div class="img-container">#}
-{#                <img id="vendor_banner" src="{{ '/media/image/' ~ vendor.getBackgroundImage.path }}" alt="image broken">#}
-{#                <div class="positioning">#}
-{#                    <div class="content">#}
-{#                        {% if vendor.getImage is not null %}#}
-{#                            <div class="vendor-logo">#}
-{#                                <img id="vendor_logo" src="{{ '/media/image/' ~ vendor.getImage.path }}" alt="image broken">#}
-{#                            </div>#}
-{#                        {% endif %}#}
-{#                        <h2>{{ vendor.companyName }}</h2>#}
-{#                    </div>#}
-{#                    <div class="reviews-count">#}
-{#                        {% set productsAvarageRating = 0 %}#}
-{#                        {% set ratedProducts = 0 %}#}
-{#                        {% for product in vendor.products %}#}
-{#                            {% set acceptedReviews = 0 %}#}
-{#                            {% for review in product.reviews %}#}
-{#                                {% if review.status == 'accepted' %}#}
-{#                                    {% set acceptedReviews = acceptedReviews + 1 %}#}
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-{#                            {% if acceptedReviews >= 1 %}#}
-{#                                {% set reviewsCount = reviewsCount + acceptedReviews %}#}
-{#                                {% set ratedProducts = ratedProducts + 1 %}#}
-{#                                {% set productsAvarageRating = productsAvarageRating + product.averageRating|round(2) %}#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                        {% if ratedProducts > 0 %}#}
-{#                            <div id="average-rating" class="ui star large rating" data-rating="{{ (productsAvarageRating / ratedProducts) |round }}" data-max-rating="5" data-average-rating="{{ (productsAvarageRating / ratedProducts) |round(2) }}" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', (productsAvarageRating / ratedProducts) |round(2) ) }}></div>#}
-{#                        {% else %}#}
-{#                            <div id="average-rating" class="ui star large rating" data-rating="0" data-max-rating="5" data-average-rating="0" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', 0)}}></div>#}
-{#                        {% endif %}#}
-{#                        <p>{{ reviewsCount }}</p>#}
-{#                        {% if ratedProducts == 1 %}#}
-{#                            <p>{{ 'open_marketplace.ui.review'|trans }}</p>#}
-{#                        {% else %}#}
-{#                            <p>{{ 'sylius.ui.reviews'|trans }}</p>#}
-{#                        {% endif %}#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-
-
-{#        <div class="four wide column">#}
-{#            <div>#}
-{#                {% if vendor.getImage is not null %}#}
-{#                    <img id="vendor_logo" src="{{ '/media/image/' ~ vendor.getImage.path }}" alt="image broken">#}
-{#                {% endif %}#}
-{#            </div>#}
-{#            <div>#}
-{#                <b>{{ vendor.companyName }}</b>#}
-{#            </div>#}
-{#            <div>#}
-{#                {{ vendor.description}}#}
-{#            </div>#}
-{#            {% include '@SyliusShop/Product/Index/_sidebar.html.twig' %}#}
-{#        </div>#}
-
-{#        <div class="twelve wide column">#}
-
-
-
-{#            {{ dump(_context) }}#}
-
-{#            <div class="ui segment">#}
-{#                <form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui loadable form">#}
-{#                    <div class="ui stackable grid" id="searchbar">#}
-{#                        <div class="column" id="searchbarTextField">#}
-{#                            {% for filter in products.definition.enabledFilters %}#}
-{#                                {{ sylius_grid_render_filter(products, filter) }}#}
-{#                            {% endfor %}#}
-{#                        </div>#}
-{#                        <div class="right aligned column" id="searchbarButtons">#}
-{#                            <div class="ui buttons">#}
-{#                                <button type="submit" class="ui primary icon labeled button" {{ sylius_test_html_attribute('search') }}><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>#}
-{#                                <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui negative icon labeled button" {{ sylius_test_html_attribute('clear') }}>#}
-{#                                    <i class="cancel icon"></i> {{ 'sylius.ui.clear'|trans }}#}
-{#                                </a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#            {{ dump() }}#}
-{#            {{ sylius_template_event('sylius.shop.product.index.search', {'products': vendor.products}) }}#}
-
-
-
-
-{#                <div class="twelve wide column">#}
-{#                    {% include '@SyliusShop/Product/Index/_main.html.twig' %}#}
-{#                </div>#}
-
-{#        </div>#}
-{#    </div>#}
-
-
-{#{% endblock %}#}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% if app.request.attributes.get('slug') is null %}
+    {% set slug = get_main_taxon().slug %}
+    {{ render(url('open_marketplace_shop_partial_taxon_show_by_slug', {
+        'vendor_slug': app.request.attributes.get('vendor_slug'),
+        'slug': slug,
+        'template': 'Vendor/VendorPage/_verticalMenu.html.twig'
+    })) }}
+{% else %}
+    {{ render(url('open_marketplace_shop_partial_taxon_show_by_slug', {
+        'vendor_slug': app.request.attributes.get('vendor_slug'),
+        'slug': app.request.attributes.get('slug'),
+        'template': 'Vendor/VendorPage/_verticalMenu.html.twig'
+    })) }}
+{% endif %}
