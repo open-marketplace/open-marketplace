@@ -18,7 +18,6 @@ use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Ramsey\Uuid\UuidInterface;
-use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;

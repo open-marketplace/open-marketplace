@@ -64,6 +64,10 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
+        <attribute name="enabled">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
+        </attribute>
         <attribute name="vendorAddress">
             <group>admin:vendor:update</group>
             <group>admin:vendor:read</group>
@@ -75,10 +79,6 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>admin:vendor:read</group>
             <group>shop:vendor:read</group>
             <group>shop:account:vendor:read</group>
-        </attribute>
-        <attribute name="enabled">
-            <group>admin:vendor:update</group>
-            <group>admin:vendor:read</group>
         </attribute>
     </class>
 </serializer>

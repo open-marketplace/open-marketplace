@@ -17,6 +17,7 @@ use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 abstract class FunctionalTestCase extends BaseJsonApiTestCase
 {
     use AdminUserLoginTrait;
+
     protected string $filesPath;
 
     public function __construct(

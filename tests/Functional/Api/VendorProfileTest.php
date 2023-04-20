@@ -282,11 +282,90 @@ final class VendorProfileTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForAdmin('clark.kent@example.com');
 
-        $this->client->request('GET', '/api/v2/admin/vendors' , [], [], $header);
+        $this->client->request('GET', '/api/v2/admin/vendors', [], [], $header);
         $response = $this->client->getResponse();
 
-        $readableResponse = json_decode($response->getContent(),true);
-        $this->assertCount(2, $readableResponse['hydra:member'],'Number of listed vendors is invalid');
+        $readableResponse = json_decode($response->getContent(), true);
+        $this->assertCount(2, $readableResponse['hydra:member'], 'Number of listed vendors is invalid');
+    }
+
+    public function test_it_successful_update_vendor_data_by_admin()
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/admin/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
+            'companyName' => 'Wayne Enterprises',
+            'taxIdentifier' => '345',
+            'phoneNumber' => '123456789',
+            'description' => 'Wayne Enterprises Desc',
+            'vendorAddress' => [
+                'country' => '/api/v2/shop/countries/PL',
+                'city' => 'New York',
+                'street' => 'Wall St. 1',
+                'postalCode' => '12123',
+            ],
+        ], \JSON_THROW_ON_ERROR));
+        $response = $this->client->getResponse();
+        $content = json_decode($response->getContent(), true);
+        $this->assertEquals('Wayne-Enterprises', $vendor->getSlug());
+        $this->assertEquals($content['companyName'], 'Wayne Enterprises');
+    }
+
+    public function test_it_successful_enable_vendor_by_admin()
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/admin/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
+            'companyName' => 'Wayne Enterprises',
+            'taxIdentifier' => '345',
+            'phoneNumber' => '123456789',
+            'description' => 'Wayne Enterprises Desc',
+            'enabled' => true,
+            'vendorAddress' => [
+                'country' => '/api/v2/shop/countries/PL',
+                'city' => 'New York',
+                'street' => 'Wall St. 1',
+                'postalCode' => '12123',
+            ],
+        ], \JSON_THROW_ON_ERROR));
+        $response = $this->client->getResponse();
+        $content = json_decode($response->getContent(), true);
+
+        $this->assertEquals('Wayne-Enterprises', $vendor->getSlug());
+        $this->assertTrue($content['enabled']);
+    }
+
+    public function test_it_successful_disable_vendor_by_admin()
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/admin/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
+            'companyName' => 'Wayne Enterprises',
+            'taxIdentifier' => '345',
+            'phoneNumber' => '123456789',
+            'description' => 'Wayne Enterprises Desc',
+            'enabled' => false,
+            'vendorAddress' => [
+                'country' => '/api/v2/shop/countries/PL',
+                'city' => 'New York',
+                'street' => 'Wall St. 1',
+                'postalCode' => '12123',
+            ],
+        ], \JSON_THROW_ON_ERROR));
+        $response = $this->client->getResponse();
+        $content = json_decode($response->getContent(), true);
+
+        $this->assertEquals('Wayne-Enterprises', $vendor->getSlug());
+        $this->assertFalse($content['enabled']);
     }
 
     private function getUploadedFile(): UploadedFile
