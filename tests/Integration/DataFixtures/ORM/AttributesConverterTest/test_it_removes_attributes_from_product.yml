@@ -62,7 +62,6 @@ Sylius\Component\Product\Model\ProductAttributeValue:
   test_value:
     subject: '@some_product'
     attribute: '@productAttribute1'
-#    value: 'test_text'
 BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
   attribute:
     vendor: '@vendor_oliver'
@@ -84,7 +83,3 @@ BitBag\OpenMarketPlace\Entity\ProductListing\ProductDraft:
   some_draft:
     code: 'test_code'
     productListing: '@test_listing'
-
-
-
-
