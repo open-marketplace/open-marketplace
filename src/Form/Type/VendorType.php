@@ -12,45 +12,27 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Form\Type;
 
 use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use BitBag\OpenMarketplace\Form\VendorImageType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Core\Model\ShopUserInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Validator\Constraints\Valid;
 
 final class VendorType extends AbstractResourceType
 {
-    private TokenStorageInterface $tokenStorage;
-
-    private string $shopUserClassFQN;
-
     public function __construct(
-        string $shopUserClassFQN,
-        TokenStorageInterface $tokenStorage,
         string $dataClass,
         array $validationGroups = []
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->tokenStorage = $tokenStorage;
-        $this->shopUserClassFQN = $shopUserClassFQN;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('shopUser', EntityType::class, [
-                'class' => $this->shopUserClassFQN,
-            ])
             ->add('companyName', TextType::class, [
                 'label' => 'open_marketplace.ui.company_name',
             ])
@@ -72,22 +54,7 @@ final class VendorType extends AbstractResourceType
             ->add('description', TextType::class, [
                 'label' => 'open_marketplace.ui.description',
             ])
-            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
-                $token = $this->tokenStorage->getToken();
-                if (null === $token) {
-                    throw new TokenNotFoundException('No token found.');
-                }
-
-                /** @var ShopUserInterface $user */
-                $user = $token->getUser();
-                if (!$user instanceof ShopUserInterface) {
-                    throw new ShopUserNotFoundException('No user found.');
-                }
-
-                $form = $event->getForm();
-                $form->get('shopUser')->setData($user);
-                $event->setData($form);
-            });
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
