@@ -22,13 +22,6 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 final class VendorType extends AbstractResourceType
 {
-    public function __construct(
-        string $dataClass,
-        array $validationGroups = []
-    ) {
-        parent::__construct($dataClass, $validationGroups);
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
