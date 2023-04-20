@@ -19,6 +19,7 @@ use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorRegisterListener
 {
@@ -69,10 +70,14 @@ final class VendorRegisterListener
     {
         /** @var VendorInterface $vendor */
         $vendor = $event->getSubject();
+        $token = $this->tokenStorage->getToken();
+        if (null === $token) {
+            throw new TokenNotFoundException();
+        }
         /** @var ShopUserInterface|null $shopUser */
-        $shopUser = $this->tokenStorage->getToken()?->getUser();
+        $shopUser = $token->getUser();
         if (null === $shopUser) {
-            throw new ShopUserNotFoundException('No user found.');
+            throw new ShopUserNotFoundException();
         }
         $vendor->setShopUser($shopUser);
     }
