@@ -62,8 +62,7 @@ class OrderContext extends RawMinkContext implements Context
         int $count,
         string $status,
         string $color
-    )
-    {
+    ) {
         $page = $this->getSession()->getPage();
         $tableWrapper = $page->find('css', 'table');
         $orders = $tableWrapper->findAll('css', '.item');
