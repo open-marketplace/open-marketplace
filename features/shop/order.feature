@@ -65,7 +65,7 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     And I choose payment
     And I complete checkout
     And I am on "en_US/account/orders/"
-    Then I should see 2 orders with "Fulfilled" status
+    Then I should see 2 orders with "Fulfilled" status label "green"
     And I am logged in as an administrator
     And I am on "/admin/payments/"
-    Then I should see 3 orders with "Completed" status
+    Then I should see 3 orders with "Completed" status label "green"

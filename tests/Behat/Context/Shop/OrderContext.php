@@ -56,15 +56,15 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then I should see :count orders with :status status
+     * @Then I should see :count orders with :status status label :color
      */
-    public function iShouldSeeOrdersWithStatus(int $count, string $status)
+    public function iShouldSeeOrdersWithStatus(int $count, string $status, string $color)
     {
         $page = $this->getSession()->getPage();
         $tableWrapper = $page->find('css', 'table');
         $orders = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($orders), $count);
-        $labels = $page->findAll('css', '.ui.green.label');
+        $labels = $page->findAll('css', '.ui.'.$color.'label');
         foreach ($labels as $label) {
             Assert::eq($label->getText(), $status);
         }
