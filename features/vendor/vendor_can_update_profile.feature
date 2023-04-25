@@ -10,7 +10,8 @@ Feature: Vendor can update his company information
     And the store operates in "Poland"
     And there is a "verified" vendor user "test@company.domain" registered in country "PL"
     And I am logged in as "test@company.domain"
-    
+    And the channel has as a menu taxon
+
   Scenario: Navigating to form
     When I am on "/en_US/account/dashboard"
     Then I follow "Profile"
@@ -30,7 +31,7 @@ Feature: Vendor can update his company information
     Then Pending update data should appear in database
 
   Scenario: Visiting confirmation link
-    Given There is pending update data with token value "simpletoken" for logged in vendor 
+    Given There is pending update data with token value "simpletoken" for logged in vendor
     When I am on "/en_US/account/vendor/profile-update/simpletoken"
     Then I should see "new ID"
     And I should see "New Company"

@@ -21,7 +21,10 @@ use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Taxonomy\Factory\TaxonFactory;
+use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,18 +40,22 @@ class VendorUpdateContext extends RawMinkContext
 
     private VendorImageFactoryInterface $vendorImageFactory;
 
+    private TaxonFactory $taxonFactory;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
         ObjectManager $manager,
         VendorImageFactoryInterface $vendorImageFactory,
+        TaxonFactory $taxonFactory
         ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
         $this->manager = $manager;
         $this->vendorImageFactory = $vendorImageFactory;
+        $this->taxonFactory = $taxonFactory;
     }
 
     /**
@@ -131,7 +138,7 @@ class VendorUpdateContext extends RawMinkContext
     {
         $page = $this->getSession()->getPage();
         $label = $page->find('css', '.ui.red.pointing.label.sylius-validation-error');
-        dd($label->getText());
+
     }
 
     /**
@@ -170,7 +177,6 @@ class VendorUpdateContext extends RawMinkContext
 
         $page = $session->getPage();
         $logo = $page->find('css', '#vendor_logo');
-
         $newPath = $logo->getAttribute('src');
         Assert::notEq($oldImagePath, $newPath);
     }
@@ -211,4 +217,21 @@ class VendorUpdateContext extends RawMinkContext
         Assert::eq($taxId, $taxIdInput->getAttribute('value'));
         Assert::eq($phoneNumber, $phoneNumberInput->getAttribute('value'));
     }
+
+    /**
+     * @Given the channel has as a menu taxon
+     */
+    public function theChannelHasAsAMenuTaxon()
+    {
+        $taxon = $this->taxonFactory->createNew();
+        $taxon->setCode('menu_category');
+        $taxon->setName("main");
+        $taxon->setSlug("main");
+        $taxon->enable();
+
+        $this->manager->persist($taxon);
+        $this->manager->flush();
+
+    }
+
 }

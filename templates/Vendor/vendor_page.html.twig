@@ -7,7 +7,11 @@
     <div class="ui stackable grid">
         <div id="container" class="vendor-banner">
             <div class="img-container">
-                <img id="vendor_banner" src="{{ '/media/image/' ~ vendor.getBackgroundImage.path }}" alt="image broken">
+                <div class="sixteen wide column">
+                    {% if vendor.getBackgroundImage is not null %}
+                        <img id="vendor_banner" src="{{ '/media/image/' ~ vendor.getBackgroundImage.path }}" alt="image broken">
+                    {% endif %}
+                </div>
                 <div class="vendor-positioning">
                     <div class="vendor-content">
                         {% if vendor.getImage is not null %}
