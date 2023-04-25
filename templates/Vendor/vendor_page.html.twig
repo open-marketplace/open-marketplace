@@ -5,54 +5,50 @@
 
     <div class="ui clearing hidden divider"></div>
     <div class="ui stackable grid">
-        <div id="container" class="vendor-banner">
-            <div class="img-container">
-                <div class="sixteen wide column">
-                    {% if vendor.getBackgroundImage is not null %}
-                        <img id="vendor_banner" src="{{ '/media/image/' ~ vendor.getBackgroundImage.path }}" alt="image broken">
-                    {% endif %}
-                </div>
-                <div class="vendor-positioning">
-                    <div class="vendor-content">
-                        {% if vendor.getImage is not null %}
-                            <div class="vendor-logo">
-                                <img id="vendor_logo" src="{{ '/media/image/' ~ vendor.getImage.path }}" alt="image broken">
-                            </div>
-                        {% endif %}
-                        <h2>{{ vendor.companyName }}</h2>
-                    </div>
-                    <div class="reviews-count">
-                        {% set productsAvarageRating = 0 %}
-                        {% set ratedProducts = 0 %}
-                        {% for product in vendor.products %}
-                            {% set acceptedReviews = 0 %}
-                            {% for review in product.reviews %}
-                                {% if review.status == 'accepted' %}
-                                    {% set acceptedReviews = acceptedReviews + 1 %}
-                                {% endif %}
-                            {% endfor %}
-                            {% if acceptedReviews >= 1 %}
-                                {% set reviewsCount = reviewsCount + acceptedReviews %}
-                                {% set ratedProducts = ratedProducts + 1 %}
-                                {% set productsAvarageRating = productsAvarageRating + product.averageRating|round(2) %}
-                            {% endif %}
-                        {% endfor %}
-                        {% if ratedProducts > 0 %}
-                            <div id="average-rating" class="ui star large rating" data-rating="{{ (productsAvarageRating / ratedProducts) |round }}" data-max-rating="5" data-average-rating="{{ (productsAvarageRating / ratedProducts) |round(2) }}" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', (productsAvarageRating / ratedProducts) |round(2) ) }}></div>
-                        {% else %}
-                            <div id="average-rating" class="ui star large rating" data-rating="0" data-max-rating="5" data-average-rating="0" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', 0)}}></div>
-                        {% endif %}
-                        <p>{{ reviewsCount }}</p>
-                        {% if ratedProducts == 1 %}
-                            <p>{{ 'open_marketplace.ui.review'|trans }}</p>
-                        {% else %}
-                            <p>{{ 'sylius.ui.reviews'|trans }}</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+        <div class="sixteen wide column vendor-banner">
+            {% if vendor.getBackgroundImage is not null %}
+                <img id="vendor_banner" src="{{ '/media/image/' ~ vendor.getBackgroundImage.path }}" alt="image broken">
+            {% endif %}
         </div>
         <div class="four wide column">
+            <div class="vendor-positioning">
+                <div class="vendor-content">
+                    {% if vendor.getImage is not null %}
+                        <div class="vendor-logo">
+                            <img id="vendor_logo" src="{{ '/media/image/' ~ vendor.getImage.path }}" alt="image broken">
+                        </div>
+                    {% endif %}
+                    <h2>{{ vendor.companyName }}</h2>
+                </div>
+                <div class="reviews-count">
+                    {% set productsAvarageRating = 0 %}
+                    {% set ratedProducts = 0 %}
+                    {% for product in vendor.products %}
+                        {% set acceptedReviews = 0 %}
+                        {% for review in product.reviews %}
+                            {% if review.status == 'accepted' %}
+                                {% set acceptedReviews = acceptedReviews + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if acceptedReviews >= 1 %}
+                            {% set reviewsCount = reviewsCount + acceptedReviews %}
+                            {% set ratedProducts = ratedProducts + 1 %}
+                            {% set productsAvarageRating = productsAvarageRating + product.averageRating|round(2) %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if ratedProducts > 0 %}
+                        <div id="average-rating" class="ui star large rating" data-rating="{{ (productsAvarageRating / ratedProducts) |round }}" data-max-rating="5" data-average-rating="{{ (productsAvarageRating / ratedProducts) |round(2) }}" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', (productsAvarageRating / ratedProducts) |round(2) ) }}></div>
+                    {% else %}
+                        <div id="average-rating" class="ui star large rating" data-rating="0" data-max-rating="5" data-average-rating="0" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', 0)}}></div>
+                    {% endif %}
+                    <p>{{ reviewsCount }}</p>
+                    {% if ratedProducts == 1 %}
+                        <p>{{ 'open_marketplace.ui.review'|trans }}</p>
+                    {% else %}
+                        <p>{{ 'sylius.ui.reviews'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
             <div class="ui card">
                 <div style="display: inline-block" class="content">
                     <div class="header">
