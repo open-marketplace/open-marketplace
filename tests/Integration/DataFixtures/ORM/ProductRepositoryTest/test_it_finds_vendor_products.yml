@@ -107,6 +107,12 @@ BitBag\OpenMarketplace\Entity\Product:
       - '@channel'
     translations:
       - '@second_product_US_translation'
+  third_product_without_translation:
+    mainTaxon: '@taxon'
+    vendor: '@vendor_oliver'
+    code: "code3"
+    channels:
+      - '@channel'
 Sylius\Component\Core\Model\ProductTaxon:
   firs_relation:
     taxon: '@taxon'
@@ -118,7 +124,6 @@ Sylius\Component\Core\Model\ProductVariant:
   first_variant:
     product: '@first_product'
     code: "code"
-
 BitBag\OpenMarketplace\Entity\Order:
   bruce_order_made_with_oliver:
     currency_code: "USD"
