@@ -112,7 +112,7 @@ class ProductContext implements Context
 
     private function createDefaultVendor(?int $iteration): Vendor
     {
-        if(1 === $iteration){
+        if (1 === $iteration) {
             $iteration = null;
         }
         $userFactory = $this->userExampleFactory;
@@ -122,7 +122,7 @@ class ProductContext implements Context
         $vendor->setCompanyName('company');
         $vendor->setTaxIdentifier('111');
         $vendor->setPhoneNumber('333');
-        $vendor->setSlug('SLUG'."$iteration");
+        $vendor->setSlug('SLUG' . "$iteration");
         $vendor->setDescription('description');
         $this->manager->persist($user);
 
