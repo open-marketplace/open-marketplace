@@ -10,6 +10,8 @@ sylius_fixtures:
                                 first_name: 'Antonio'
                                 last_name: 'Loren'
                                 password: 'password'
+                                image: "%kernel.project_dir%/var/fixtures/images/vendor/image/1.jpg"
+                                backgroundImage: "%kernel.project_dir%/var/fixtures/images/vendor/backgroundImage/1.jpg"
                                 shipping_methods:
                                     - dhl_express
                                     - ups
@@ -18,6 +20,8 @@ sylius_fixtures:
                                 first_name: 'John'
                                 last_name: 'Smith'
                                 password: 'password'
+                                image: "%kernel.project_dir%/var/fixtures/images/vendor/image/2.jpg"
+                                backgroundImage: "%kernel.project_dir%/var/fixtures/images/vendor/backgroundImage/2.jpg"
                                 shipping_methods:
                                     - fedex
                                     - ups
@@ -26,6 +30,8 @@ sylius_fixtures:
                                 first_name: 'Lisa'
                                 last_name: 'Werner'
                                 password: 'password'
+                                image: "%kernel.project_dir%/var/fixtures/images/vendor/image/3.jpg"
+                                backgroundImage: "%kernel.project_dir%/var/fixtures/images/vendor/backgroundImage/3.jpg"
                                 shipping_methods:
                                     - dhl_express
                                     - fedex
@@ -34,6 +40,8 @@ sylius_fixtures:
                                 first_name: 'Clark'
                                 last_name: 'Van der Bite'
                                 password: 'password'
+                                image: "%kernel.project_dir%/var/fixtures/images/vendor/image/4.jpg"
+                                backgroundImage: "%kernel.project_dir%/var/fixtures/images/vendor/backgroundImage/4.jpg"
                                 shipping_methods:
                                     - dhl_express
                                     - ups

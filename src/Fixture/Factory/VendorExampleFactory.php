@@ -15,6 +15,8 @@ use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorShippingMethod;
 use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
+use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
+use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
 use Faker\Factory;
 use Faker\Generator;
@@ -26,10 +28,13 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Model\CustomerInterface as CustomerComponent;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -55,6 +60,14 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
 
     private RepositoryInterface $channelRepository;
 
+    private VendorImageFactoryInterface $vendorImageFactory;
+
+    private VendorBackgroundImageFactoryInterface $backgroundImageFactory;
+
+    private FileLocatorInterface $fileLocator;
+
+    private ImageUploaderInterface $imageUploader;
+
     public function __construct(
         VendorProfileFactoryInterface $profileFactory,
         AddressFactoryInterface $addressFactory,
@@ -63,7 +76,11 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         RepositoryInterface $countryRepository,
         RepositoryInterface $customerGroupRepository,
         RepositoryInterface $vendorShippingMethodRepository,
-        RepositoryInterface $channelRepository
+        RepositoryInterface $channelRepository,
+        VendorImageFactoryInterface $vendorImageFactory,
+        VendorBackgroundImageFactoryInterface $backgroundImageFactory,
+        FileLocatorInterface $fileLocator,
+        ImageUploaderInterface $imageUploader
     ) {
         $this->profileFactory = $profileFactory;
         $this->addressFactory = $addressFactory;
@@ -73,10 +90,13 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         $this->customerGroupRepository = $customerGroupRepository;
         $this->vendorShippingMethodRepository = $vendorShippingMethodRepository;
         $this->channelRepository = $channelRepository;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
+        $this->vendorImageFactory = $vendorImageFactory;
+        $this->backgroundImageFactory = $backgroundImageFactory;
+        $this->fileLocator = $fileLocator;
+        $this->imageUploader = $imageUploader;
     }
 
     public function create(array $options = []): VendorInterface
@@ -114,6 +134,27 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         $vendor->setShopUser($user);
         $vendor->setVendorAddress($vendorAddress);
 
+        if (null !== $options['image']) {
+            $imagePath = $this->fileLocator->locate($options['image']);
+            $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
+
+            $vendorImage = $this->vendorImageFactory->create($imagePath, $vendor);
+            $vendorImage->setFile($uploadedImage);
+            $this->imageUploader->upload($vendorImage);
+            $vendor->setImage($vendorImage);
+            $vendorImage->setOwner($vendor);
+        }
+
+        if (null !== $options['backgroundImage']) {
+            $imagePath = $this->fileLocator->locate($options['backgroundImage']);
+            $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
+
+            $vendorbackgroundImage = $this->backgroundImageFactory->create($imagePath, $vendor);
+            $vendorbackgroundImage->setFile($uploadedImage);
+            $this->imageUploader->upload($vendorbackgroundImage);
+            $vendor->setBackgroundImage($vendorbackgroundImage);
+            $vendorbackgroundImage->setOwner($vendor);
+        }
         if (isset($options['shipping_methods'])) {
             $allChannels = $this->channelRepository->findAll();
 
@@ -142,6 +183,8 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
             ->setDefault('first_name', fn (Options $options): string => $this->faker->firstName)
             ->setDefault('last_name', fn (Options $options): string => $this->faker->lastName)
             ->setDefault('password', 'password')
+            ->setDefault('image', null)
+            ->setDefault('backgroundImage', null)
             ->setDefault('customer_group', LazyOption::randomOneOrNull($this->customerGroupRepository, 100))
             ->setDefault('shipping_methods', fn (Options $options): array => [])
             ->setAllowedTypes('customer_group', ['null', 'string', CustomerGroupInterface::class])
