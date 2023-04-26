@@ -1,0 +1,15 @@
+default:
+  suites:
+    vendor_page:
+      contexts:
+        - tests.open_marketplace.behat.context.shop.order
+        - tests.open_marketplace.behat.context.setup.product
+        - tests.open_marketplace.behat.context.vendor_page_context
+        - sylius.behat.context.setup.shop_security
+        - sylius.behat.context.hook.doctrine_orm
+        - sylius.behat.context.setup.user
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.customer
+        - sylius.behat.context.setup.user
+      filters:
+        tags: "@vendor_page"

@@ -67,7 +67,7 @@ class ProductContext implements Context
     public function storeHasProductsFromSameVendor($productsCount): void
     {
         $this->createTaxon();
-        $vendor = $this->createDefaultVendor();
+        $vendor = $this->createDefaultVendor(null);
         for ($i = 1; $i <= $productsCount; ++$i) {
             $products[$i] = $this->createDefaultProduct();
             $products[$i]->setVendor($vendor);
@@ -85,7 +85,7 @@ class ProductContext implements Context
     {
         $this->createTaxon();
         for ($i = 1; $i <= $productsCount; ++$i) {
-            $vendors[$i] = $this->createDefaultVendor();
+            $vendors[$i] = $this->createDefaultVendor($i);
             $products[$i] = $this->createDefaultProduct();
             $products[$i]->setVendor($vendors[$i]);
             $this->vendorRepository->add($vendors[$i]);
@@ -110,8 +110,11 @@ class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
-    private function createDefaultVendor(): Vendor
+    private function createDefaultVendor(?int $iteration): Vendor
     {
+        if(1 === $iteration){
+            $iteration = null;
+        }
         $userFactory = $this->userExampleFactory;
         $user = $userFactory->create();
         $vendor = new Vendor();
@@ -119,7 +122,7 @@ class ProductContext implements Context
         $vendor->setCompanyName('company');
         $vendor->setTaxIdentifier('111');
         $vendor->setPhoneNumber('333');
-        $vendor->setSlug('SLUG');
+        $vendor->setSlug('SLUG'."$iteration");
         $vendor->setDescription('description');
         $this->manager->persist($user);
 

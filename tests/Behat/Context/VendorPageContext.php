@@ -159,6 +159,35 @@ class VendorPageContext extends MinkContext implements Context
         Assert::same($this->vendorPagePage->getLastProductNameFromList(), $name);
     }
 
+    /**
+     * @Then I should see :count products in the list
+     */
+    public function iShouldSeeProductsInTheList(int $count)
+    {
+        $this->vendorPagePage->open(['vendor_slug'=>'SLUG']);
+        $productsCount = $this->vendorPagePage->countProduct();
+        Assert::same($productsCount, $count);
+    }
+
+    /**
+     * @Then I should see :count products on page :pageNumber
+     */
+    public function iShouldSeeProductsOnPage(int $count, string $pageNumber)
+
+    {
+        $this->vendorPagePage->open(
+            [
+                'vendor_slug'=>'SLUG',
+                'limit' => 2,
+                'page' => $pageNumber
+            ]);
+
+        $productsCount = $this->vendorPagePage->countProduct();
+
+        Assert::same($count, $productsCount,);
+    }
+
+
     private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
