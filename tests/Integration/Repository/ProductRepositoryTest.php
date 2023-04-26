@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
@@ -31,6 +33,5 @@ class ProductRepositoryTest extends JsonApiTestCase
         $vendorProductsQuery = $this->repository->createVendorShopListQueryBuilder($vendorOliver, $channel, $taxon, 'en_US', [], true);
 
         $this->assertCount(2, $vendorProductsQuery->getQuery()->getResult());
-
     }
 }

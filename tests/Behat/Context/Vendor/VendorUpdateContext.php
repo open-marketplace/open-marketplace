@@ -21,7 +21,6 @@ use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
-use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Taxonomy\Factory\TaxonFactory;
 use Sylius\Component\Taxonomy\Model\Taxon;
@@ -49,7 +48,7 @@ class VendorUpdateContext extends RawMinkContext
         ObjectManager $manager,
         VendorImageFactoryInterface $vendorImageFactory,
         TaxonFactory $taxonFactory
-        ) {
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
@@ -138,7 +137,6 @@ class VendorUpdateContext extends RawMinkContext
     {
         $page = $this->getSession()->getPage();
         $label = $page->find('css', '.ui.red.pointing.label.sylius-validation-error');
-
     }
 
     /**
@@ -225,13 +223,11 @@ class VendorUpdateContext extends RawMinkContext
     {
         $taxon = $this->taxonFactory->createNew();
         $taxon->setCode('menu_category');
-        $taxon->setName("main");
-        $taxon->setSlug("main");
+        $taxon->setName('main');
+        $taxon->setSlug('main');
         $taxon->enable();
 
         $this->manager->persist($taxon);
         $this->manager->flush();
-
     }
-
 }
