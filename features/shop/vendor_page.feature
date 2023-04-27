@@ -22,3 +22,9 @@ Feature: Displaying vendor page
   Scenario: Displaying only current vendor products
     Given store has 5 products from different Vendors
     And I should see 1 products on page "1"
+
+  @ui
+  Scenario: Sorting vendor products
+    Given store has 3 products from same vendor
+    And sorting is set to "price" "ascending"
+    Then i should see products sorted by "price" "ascending"

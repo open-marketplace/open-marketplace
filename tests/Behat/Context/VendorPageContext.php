@@ -19,6 +19,7 @@ use BitBag\OpenMarketplace\Entity\VendorAddress;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use function PHPUnit\Framework\assertTrue;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -137,6 +138,9 @@ class VendorPageContext extends MinkContext implements Context
     public function theVendorHasMoreThanOnePageOfProductsWithDifferentDatesAndPrices(int $number)
     {
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'test-company']);
+        if (null === $vendor) {
+            $vendor = $this->vendorRepository->findOneBy(['slug' => 'vendor-slug']);
+        }
         for ($i = 1; $i <= $number; ++$i) {
             $date = strtotime("+$i day", strtotime('2007-02-28'));
             $this->saveProduct($this->createProduct("product-$i", $vendor, $i * 100, date('Y-m-d', $date)));
@@ -187,6 +191,36 @@ class VendorPageContext extends MinkContext implements Context
         Assert::same($count, $productsCount, );
     }
 
+    /**
+     * @Given sorting is set to :sortField :value
+     */
+    public function sortingIsSetTo($sortField, $value)
+    {
+        $this->sharedStorage->set('sorting', [$sortField => $value]);
+    }
+
+    /**
+     * @Then i should see products sorted by :field :value
+     */
+    public function iShouldSeeProductsSortedBy($field, $value)
+    {
+        $sort = [
+            'ascending' => 'asc',
+            'descending' => 'desc',
+        ];
+
+        $this->vendorPagePage->open(
+            [
+                'vendor_slug' => 'SLUG',
+                'sorting' => [
+                       $field => $sort[$value],
+                    ],
+            ]
+        );
+
+        assertTrue($this->vendorPagePage->productsSortedBy($field, $sort[$value]));
+    }
+
     private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
@@ -197,7 +231,7 @@ class VendorPageContext extends MinkContext implements Context
         VendorInterface $vendor,
         int $price = 100,
         string $date = 'now',
-        ChannelInterface $channel = null
+        ?ChannelInterface $channel = null
     ): ProductInterface {
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');

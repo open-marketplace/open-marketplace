@@ -5,6 +5,7 @@ default:
         - tests.open_marketplace.behat.context.shop.order
         - tests.open_marketplace.behat.context.setup.product
         - tests.open_marketplace.behat.context.vendor_page_context
+        - tests.open_marketplace.behat.context.vendor.vendor_update_context
         - sylius.behat.context.setup.shop_security
         - sylius.behat.context.hook.doctrine_orm
         - sylius.behat.context.setup.user
