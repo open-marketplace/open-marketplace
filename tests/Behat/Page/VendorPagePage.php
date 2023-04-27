@@ -44,13 +44,14 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
         return count($productCards);
     }
 
-    public function productsSortedBy($field, $sorting): bool
+    public function productsSorted(array $sorting): bool
     {
         $page = $this->getDocument();
+
         $productCards = $page->findAll('css', '.ui.fluid.card');
 
         foreach ($productCards as $i => $productCard) {
-            $productField[$i] = $productCard->find('css', '.sylius-product-' . $field)->getText();
+            $productField[$i] = $productCard->find('css', '.sylius-product-' . $sorting['field'])->getText();
 
             if (0 === $i) {
                 continue;
@@ -59,8 +60,8 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
             $comparationValue = $productField[$i - 1] <= $productField[$i];
 
             if (
-                ('asc' === $sorting && !$comparationValue) ||
-                ('desc' === $sorting && $comparationValue)
+                ('asc' === $sorting['value'] && !$comparationValue) ||
+                ('desc' === $sorting['value'] && $comparationValue)
             ) {
                 return false;
             }

@@ -196,29 +196,37 @@ class VendorPageContext extends MinkContext implements Context
      */
     public function sortingIsSetTo($sortField, $value)
     {
-        $this->sharedStorage->set('sorting', [$sortField => $value]);
-    }
-
-    /**
-     * @Then i should see products sorted by :field :value
-     */
-    public function iShouldSeeProductsSortedBy($field, $value)
-    {
-        $sort = [
+        $sortType = [
             'ascending' => 'asc',
             'descending' => 'desc',
         ];
+
+        $this->sharedStorage->set(
+            'sorting',
+            [
+                'field' => $sortField,
+                'value' => $sortType[$value],
+            ]
+        );
+    }
+
+    /**
+     * @Then i should see products sorted by :field
+     */
+    public function iShouldSeeProductsSorted()
+    {
+        $shopSorting = $this->sharedStorage->get('sorting');
 
         $this->vendorPagePage->open(
             [
                 'vendor_slug' => 'SLUG',
                 'sorting' => [
-                       $field => $sort[$value],
+                        $shopSorting['field'] => $shopSorting['value'],
                     ],
             ]
         );
 
-        assertTrue($this->vendorPagePage->productsSortedBy($field, $sort[$value]));
+        assertTrue($this->vendorPagePage->productsSorted($shopSorting));
     }
 
     private function getPage(): DocumentElement

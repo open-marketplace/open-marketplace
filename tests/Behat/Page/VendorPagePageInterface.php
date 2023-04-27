@@ -17,4 +17,6 @@ interface VendorPagePageInterface
     public function getLastProductNameFromList(): string;
 
     public function countProduct(): int;
+
+    public function productsSorted(array $sorting): bool;
 }
