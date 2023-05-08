@@ -14,7 +14,6 @@ namespace BitBag\OpenMarketplace\Controller\Action\ConversationMessage;
 use BitBag\OpenMarketplace\Entity\Conversation\Message;
 use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\MessageType;
-use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +30,6 @@ final class AddMessageAction
     private UrlGeneratorInterface $urlGenerator;
 
     private FlashBag $flashBag;
-
 
     public function __construct(
         FormFactoryInterface $formFactory,
@@ -59,10 +57,10 @@ final class AddMessageAction
 
             $this->addMessageFacade
                 ->createWithConversation($id, $message, $file);
-        }
-        else {
+        } else {
             $this->flashBag->add('error', $form->get('file')->getErrors()[0]->getMessage());
         }
+
         return new RedirectResponse($this->urlGenerator->generate($redirect, [
             'id' => $id,
         ]));
