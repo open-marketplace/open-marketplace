@@ -58,7 +58,7 @@ final class AddMessageAction
             $this->addMessageFacade
                 ->createWithConversation($id, $message, $file);
         } else {
-            $this->flashBag->add('error', $form->get('file')->getErrors()[0]->getMessage());
+            $this->flashBag->add('error', (string) $form->get('file')->getErrors());
         }
 
         return new RedirectResponse($this->urlGenerator->generate($redirect, [
