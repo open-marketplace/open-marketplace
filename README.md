@@ -19,7 +19,7 @@
 Official website: http://open-marketplace.io </br>
 Demo: http://demo.open-marketplace.io
 
-BitBag OpenMarketplace is the first open-source marketplace platform. The solution is based on Sylius, Symfony and Semantic UI meaning it is fully compatible with each. The platform is highly customisable project made using full-stack BDD with Behat and PHPSpec.
+BitBag OpenMarketplace is the first open-source marketplace platform. The solution is based on Sylius, Symfony and Semantic UI meaning it is fully compatible with each. The platform is highly customizable project made using full-stack BDD with Behat and PHPSpec.
 
 Like what we do? Give us a star! ⭐
 
@@ -57,7 +57,7 @@ Looking for a professional team to build a MVM for your business on top of open-
 
 ## Customization
 
-Our project is highly customisable, [here](./doc/how_to_customize.md) is our guide on how to do it.
+Our project is highly customizable, [here](./doc/how_to_customize.md) is our guide on how to do it.
 
 ## Contribution
 
