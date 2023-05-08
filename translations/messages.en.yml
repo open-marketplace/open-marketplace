@@ -3,6 +3,7 @@ open_marketplace:
         yes: Yes
         no: No
         none: None
+        enabled_channels: Enabled Channels
         shipping_details: Shipping details
         is_shipping_required: Is shipping required?
         shipping_category: Shipping category

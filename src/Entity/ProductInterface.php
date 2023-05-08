@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Entity;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductInterface as BaseProductInterface;
 
 interface ProductInterface extends BaseProductInterface
@@ -29,4 +30,6 @@ interface ProductInterface extends BaseProductInterface
     public function isDeleted(): bool;
 
     public function setDeleted(bool $deleted): void;
+
+    public function setChannels(Collection $channels): void;
 }
