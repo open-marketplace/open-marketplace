@@ -33,7 +33,7 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
         string $locale,
         array $sorting = [],
         bool $includeAllDescendants = false,
-    ): QueryBuilder {
+        ): QueryBuilder {
         $qb = $this->createShopListQueryBuilder(
             $channel,
             $taxon,

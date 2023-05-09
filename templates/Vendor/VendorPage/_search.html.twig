@@ -1,5 +1,5 @@
 {% if app.request.attributes.get('slug') is null %}
-{% set slug = get_main_taxon().slug %}
+{% set slug = get_channel_main_taxon().slug %}
 {% else %}
 {% set slug = app.request.attributes.get('slug') %}
 {% endif %}

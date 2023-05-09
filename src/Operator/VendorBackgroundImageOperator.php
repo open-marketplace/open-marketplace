@@ -35,7 +35,7 @@ final class VendorBackgroundImageOperator implements VendorBackgroundImageOperat
     {
         $backgroundImageUpdate = $vendorData->getBackgroundImage();
 
-        if(!$backgroundImageUpdate){
+        if (!$backgroundImageUpdate) {
             return;
         }
 
@@ -52,6 +52,5 @@ final class VendorBackgroundImageOperator implements VendorBackgroundImageOperat
         $backgroundImageUpdate->setPath(null);
 
         $this->entityManager->persist($backgroundImageUpdate);
-
     }
 }

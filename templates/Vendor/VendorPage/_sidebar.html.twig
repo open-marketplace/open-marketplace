@@ -1,5 +1,6 @@
 {% if app.request.attributes.get('slug') is null %}
-    {% set slug = get_main_taxon().slug %}
+    {% dump %}
+    {% set slug = get_channel_main_taxon().slug %}
     {{ render(url('open_marketplace_shop_partial_taxon_show_by_slug', {
         'vendor_slug': app.request.attributes.get('vendor_slug'),
         'slug': slug,

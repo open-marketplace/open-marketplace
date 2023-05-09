@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository;
+use Sylius\Component\Channel\Context\CachedPerRequestChannelContext;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Context\CompositeLocaleContext;
@@ -35,18 +36,22 @@ class VendorExtension extends AbstractExtension
 
     private TaxonRepositoryInterface $taxonRepository;
 
+    private CachedPerRequestChannelContext $channelContext;
+
     public function __construct(
         VendorProviderInterface $vendorProvider,
         ObjectManager $manager,
         CompositeLocaleContext $localeContext,
         ChannelRepositoryInterface $channelRepository,
-        TaxonRepository $taxonRepository
+        TaxonRepository $taxonRepository,
+        CachedPerRequestChannelContext $channelContext
     ) {
         $this->vendorProvider = $vendorProvider;
         $this->manager = $manager;
         $this->localeContext = $localeContext;
         $this->channelRepository = $channelRepository;
         $this->taxonRepository = $taxonRepository;
+        $this->channelContext = $channelContext;
     }
 
     public function getFunctions(): array
@@ -55,7 +60,7 @@ class VendorExtension extends AbstractExtension
             new TwigFunction('is_pending_vendor_profile_update', [$this, 'isPendingVendorProfileUpdate']),
             new TwigFunction('current_locale', [$this, 'currentLocale']),
             new TwigFunction('get_channel', [$this, 'getChannel']),
-            new TwigFunction('get_main_taxon', [$this, 'getMainTaxon']),
+            new TwigFunction('get_channel_main_taxon', [$this, 'getChannelMainTaxon']),
         ];
     }
 
@@ -85,12 +90,11 @@ class VendorExtension extends AbstractExtension
         return $channel;
     }
 
-    public function getMainTaxon(): TaxonInterface
+    public function getChannelMainTaxon(): TaxonInterface
     {
-        return  $this->taxonRepository->createListQueryBuilder()
-            ->andWhere('o.parent IS NULL')
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+//        dd($channel);
+        return $channel->getMenuTaxon();
     }
 }

@@ -14,7 +14,6 @@ namespace BitBag\OpenMarketplace\Provider;
 use BitBag\OpenMarketplace\Repository\TaxonRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-
 final class TaxonProvider implements TaxonProviderInterface
 {
     private TaxonRepositoryInterface $taxonRepository;

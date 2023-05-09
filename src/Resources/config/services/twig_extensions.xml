@@ -10,6 +10,7 @@
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.context.channel"/>
             <tag name="twig.extension" />
         </service>
     </services>
