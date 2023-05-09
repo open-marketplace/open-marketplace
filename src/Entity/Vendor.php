@@ -278,6 +278,33 @@ class Vendor implements VendorInterface
         }
     }
 
+    public function getAverageRatingData(): array
+    {
+        $ratingSum = 0.0;
+        $productsRated = 0;
+        $reviewsCount = 0;
+        /** @var ProductInterface $product */
+        foreach ($this->products as $product) {
+            if (0 < count($product->getAcceptedReviews())) {
+                $ratingSum += $product->getAverageRating();
+                $productsRated += 1;
+                $reviewsCount += count($product->getAcceptedReviews());
+            }
+        }
+
+        if (0 === $productsRated) {
+            return [
+                'averageRating' => 0.0,
+                'productsRatedCount' => 0,
+            ];
+        }
+
+        return [
+            'averageRating' => $ratingSum / $productsRated,
+            'reviewsCount' => $reviewsCount,
+            ];
+    }
+
     public function __toString(): string
     {
         /**  @phpstan-ignore-next-line */
