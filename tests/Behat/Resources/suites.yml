@@ -7,6 +7,7 @@ imports:
     - suites/start_conversation.yml
     - suites/ui/admin/managing_vendors.yml
     - suites/ui/admin/verifying_vendors.yml
+    - suites/ui/admin/order_viewing.yml
     - suites/ui/admin/viewing_payments.yml
     - suites/ui/admin/viewing_shipments.yml
     - suites/ui/admin/disabling_vendors.yml
