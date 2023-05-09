@@ -22,6 +22,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Taxonomy\Factory\TaxonFactory;
 use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
 use Sylius\Component\Taxonomy\Model\Taxon;
@@ -222,11 +223,14 @@ class VendorUpdateContext extends RawMinkContext
      */
     public function theChannelHasAsAMenuTaxon()
     {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
         $taxon = $this->taxonFactory->createNew();
         $taxon->setCode('menu_category');
         $taxon->setName('main');
         $taxon->setSlug('main');
         $taxon->enable();
+        $channel->setMenuTaxon($taxon);
 
         $this->manager->persist($taxon);
         $this->manager->flush();

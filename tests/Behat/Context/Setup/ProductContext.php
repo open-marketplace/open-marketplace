@@ -140,6 +140,9 @@ class ProductContext implements Context
     private function createTaxon()
     {
         $taxon = $this->taxonFactory->create();
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setMenuTaxon($taxon);
+        $this->manager->persist($channel);
         $this->manager->persist($taxon);
         $this->manager->flush();
     }

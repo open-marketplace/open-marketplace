@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository;
+use Sylius\Component\Channel\Context\CompositeChannelContext;
 use Sylius\Component\Channel\Context\RequestBased\ChannelContext;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -36,7 +37,7 @@ class VendorExtension extends AbstractExtension
 
     private TaxonRepositoryInterface $taxonRepository;
 
-    private ChannelContext $channelContext;
+    private CompositeChannelContext $channelContext;
 
     public function __construct(
         VendorProviderInterface $vendorProvider,
@@ -44,7 +45,7 @@ class VendorExtension extends AbstractExtension
         CompositeLocaleContext $localeContext,
         ChannelRepositoryInterface $channelRepository,
         TaxonRepository $taxonRepository,
-        ChannelContext $channelContext
+        CompositeChannelContext $channelContext
     ) {
         $this->vendorProvider = $vendorProvider;
         $this->manager = $manager;

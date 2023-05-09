@@ -5,6 +5,7 @@ Feature: Displaying vendor page
 
   Background:
     Given the store operates on a single channel in "United States"
+#    And the channel has a menu taxon
 
   @ui
   Scenario: Viewing vendor products
