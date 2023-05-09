@@ -14,14 +14,11 @@ namespace BitBag\OpenMarketplace\Twig;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository;
 use Sylius\Component\Channel\Context\CompositeChannelContext;
-use Sylius\Component\Channel\Context\RequestBased\ChannelContext;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Context\CompositeLocaleContext;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -35,8 +32,6 @@ class VendorExtension extends AbstractExtension
 
     private ChannelRepositoryInterface $channelRepository;
 
-    private TaxonRepositoryInterface $taxonRepository;
-
     private CompositeChannelContext $channelContext;
 
     public function __construct(
@@ -44,14 +39,12 @@ class VendorExtension extends AbstractExtension
         ObjectManager $manager,
         CompositeLocaleContext $localeContext,
         ChannelRepositoryInterface $channelRepository,
-        TaxonRepository $taxonRepository,
         CompositeChannelContext $channelContext
     ) {
         $this->vendorProvider = $vendorProvider;
         $this->manager = $manager;
         $this->localeContext = $localeContext;
         $this->channelRepository = $channelRepository;
-        $this->taxonRepository = $taxonRepository;
         $this->channelContext = $channelContext;
     }
 
