@@ -5,4 +5,4 @@ sylius_grid:
         options:
           class: BitBag\OpenMarketplace\Entity\Shipment
           repository:
-            method: findShipmentsWithoutPrimaryModeOrder
+            method: createNonPrimaryQueryBuilder

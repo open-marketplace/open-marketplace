@@ -13,11 +13,11 @@ namespace BitBag\OpenMarketplace\Repository;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository as BasePaymentRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository as BaseShipmentRepository;
 
-class ShipmentRepository extends BasePaymentRepository
+class ShipmentRepository extends BaseShipmentRepository
 {
-    public function findShipmentsWithoutPrimaryModeOrder(): QueryBuilder
+    public function createNonPrimaryQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->createListQueryBuilder();
         $alias = $queryBuilder->getRootAliases()[0];
