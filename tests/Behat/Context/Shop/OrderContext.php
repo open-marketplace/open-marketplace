@@ -65,7 +65,7 @@ class OrderContext extends RawMinkContext implements Context
         preg_match_all($pattern, $htmlString, $matches);
         $orders = $this->orderRepository->findBy(['id' => $matches[1]]);
         Assert::eq(count($orders), $count);
-        foreach ($orders as $order){
+        foreach ($orders as $order) {
             Assert::eq($order->getMode(), $mode);
         }
     }
@@ -84,7 +84,7 @@ class OrderContext extends RawMinkContext implements Context
         preg_match_all($pattern, $htmlString, $matches);
         $orders = $this->orderRepository->findBy(['number' => $matches[1]]);
         Assert::eq(count($orders), $count);
-        foreach ($orders as $order){
+        foreach ($orders as $order) {
             Assert::eq($order->getMode(), $mode);
         }
     }

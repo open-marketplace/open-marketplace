@@ -96,7 +96,7 @@ final class ViewShipmentContext extends RawMinkContext implements Context
         preg_match_all($pattern, $htmlString, $matches);
         $orderRepository = $this->entityManager->getRepository(Order::class);
         $orders = $orderRepository->findBy(['id' => $matches[1]]);
-        foreach ($orders as $order){
+        foreach ($orders as $order) {
             Assert::eq($order->getMode(), $mode);
         }
     }
