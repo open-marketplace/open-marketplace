@@ -19,6 +19,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Context\CompositeLocaleContext;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -32,7 +33,7 @@ class VendorExtension extends AbstractExtension
 
     private ChannelRepositoryInterface $channelRepository;
 
-    private TaxonRepository $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
     public function __construct(
         VendorProviderInterface $vendorProvider,

@@ -23,6 +23,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Taxonomy\Factory\TaxonFactory;
+use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
 use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -39,7 +40,7 @@ class VendorUpdateContext extends RawMinkContext
 
     private VendorImageFactoryInterface $vendorImageFactory;
 
-    private TaxonFactory $taxonFactory;
+    private TaxonFactoryInterface $taxonFactory;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
