@@ -1,7 +1,7 @@
 @hiding_primary_orders_in_customer_tab
 Feature: Hiding primary orders in customers tab
   As an administrator
-  viewing the list of orders for a specific customer
+  During orders list view for a specific customer
   I cannot see primary orders
 
   Background:

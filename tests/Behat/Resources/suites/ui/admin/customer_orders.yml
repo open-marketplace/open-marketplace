@@ -1,6 +1,6 @@
 default:
   suites:
-    dashboard_statistics:
+    customer_orders:
       contexts:
         - tests.open_marketplace.behat.context.shop.order
         - tests.open_marketplace.behat.context.admin.view_payment_context
