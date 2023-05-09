@@ -53,3 +53,10 @@ sylius_shipping:
             classes:
                 model: BitBag\OpenMarketplace\Entity\Shipment
                 interface: BitBag\OpenMarketplace\Entity\ShipmentInterface
+
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                model: Sylius\Component\Core\Model\Taxon
+                repository: BitBag\OpenMarketplace\Repository\TaxonRepository

@@ -3,4 +3,5 @@ sylius_product:
     product:
       classes:
         model: BitBag\OpenMarketplace\Entity\Product
+        interface: BitBag\OpenMarketplace\Entity\ProductInterface
         repository: BitBag\OpenMarketplace\Repository\ProductRepository
