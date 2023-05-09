@@ -37,8 +37,8 @@ class OrderRepository extends BaseOrderRepository
         $alias = $queryBuilder->getRootAliases()[0];
 
         return $queryBuilder
-            ->andWhere(sprintf('%s.mode != :primaryMode', $alias))
-            ->setParameter('primaryMode', OrderInterface::PRIMARY_ORDER_MODE)
+            ->andWhere(sprintf('%s.mode = :mode', $alias))
+            ->setParameter('mode', OrderInterface::SECONDARY_ORDER_MODE)
             ;
     }
 
