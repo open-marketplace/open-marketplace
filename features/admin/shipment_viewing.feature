@@ -21,4 +21,4 @@ Feature: Login in to admin panel
     Given I am logged in as an administrator
     And store has primary and secondary order
     And I am on "/admin/shipments/"
-    Then I should see 1 shipments
+    Then I should see 1 shipment for secondary order

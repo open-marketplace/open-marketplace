@@ -41,4 +41,14 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     Given I am logged in as an administrator
     And I am on "/admin"
     And I follow "Orders"
-    Then I should see 3 orders
+    Then I should see 3 secondary orders
+
+  @ui
+  Scenario: Browsing orders history, customer cannot see primary orders
+    Given store has 4 products from different Vendors
+    And I have 3 products in cart
+    And I finalize order
+    And I am on "/"
+    And I follow "My account"
+    And I follow "Order history"
+    Then I should see 3 secondary orders in order history

@@ -52,6 +52,44 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Then I should see :count :mode order(s)
+     */
+    public function iShouldSeeOrdersWithMode($count, $mode)
+    {
+        $page = $this->getSession()->getPage();
+        $tableWrapper = $page->find('css', 'table');
+        $orders = $tableWrapper->findAll('css', '.item');
+        Assert::eq(count($orders), $count);
+        $htmlString = $page->getHtml();
+        $pattern = "/\/admin\/orders\/(\d+)/";
+        preg_match_all($pattern, $htmlString, $matches);
+        $orders = $this->orderRepository->findBy(['id' => $matches[1]]);
+        Assert::eq(count($orders), $count);
+        foreach ($orders as $order){
+            Assert::eq($order->getMode(), $mode);
+        }
+    }
+
+    /**
+     * @Then I should see :count :mode order(s) in order history
+     */
+    public function iShouldSeeOrdersWithModeInHistory($count, $mode)
+    {
+        $page = $this->getSession()->getPage();
+        $tableWrapper = $page->find('css', 'table');
+        $orders = $tableWrapper->findAll('css', '.item');
+        Assert::eq(count($orders), $count);
+        $htmlString = $page->getHtml();
+        $pattern = "/\/.*\/account\/orders\/(\d+)/";
+        preg_match_all($pattern, $htmlString, $matches);
+        $orders = $this->orderRepository->findBy(['number' => $matches[1]]);
+        Assert::eq(count($orders), $count);
+        foreach ($orders as $order){
+            Assert::eq($order->getMode(), $mode);
+        }
+    }
+
+    /**
      * @Given I complete checkout
      */
     public function iCompleteCheckout()

@@ -82,20 +82,28 @@ class ViewPaymentContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then I should see :count payments
+     * @Then I should see :count payment(s) for :mode order(s)
      */
-    public function iShouldSeePayments($count)
+    public function iShouldSeePayments($count, $mode)
     {
         $page = $this->getSession()->getPage();
         $tableWrapper = $page->find('css', 'table');
         $payments = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($payments), $count);
+        $htmlString = $page->getHtml();
+        $pattern = "/\/admin\/orders\/(\d+)/";
+        preg_match_all($pattern, $htmlString, $matches);
+        $orderRepository = $this->entityManager->getRepository(Order::class);
+        $orders = $orderRepository->findBy(['id' => $matches[1]]);
+        foreach ($orders as $order){
+            Assert::eq($order->getMode(), $mode);
+        }
     }
 
     /**
      * @Then statistics should omit primary order
      */
-    public function iTestStuff()
+    public function iViewStatistics()
     {
         $page = $this->getSession()->getPage();
         $totalSalesStats = $this->currencyToInt($page->find('css', '#total-sales')->getText());

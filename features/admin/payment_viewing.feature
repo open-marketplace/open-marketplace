@@ -21,4 +21,4 @@ Feature: Login in to admin panel
     Given I am logged in as an administrator
     And store has primary and secondary order
     And I am on "/admin/payments/"
-    Then I should see 1 payments
+    Then I should see 1 payment for secondary order

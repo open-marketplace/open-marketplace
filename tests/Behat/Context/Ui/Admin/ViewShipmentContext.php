@@ -83,14 +83,22 @@ final class ViewShipmentContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then I should see :count shipments
+     * @Then I should see :count shipment(s) for :mode order(s)
      */
-    public function iShouldSeePayments($count)
+    public function iShouldSeeShipments($count, $mode)
     {
         $page = $this->getSession()->getPage();
         $tableWrapper = $page->find('css', 'table');
         $shipments = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($shipments), $count);
+        $htmlString = $page->getHtml();
+        $pattern = "/\/admin\/orders\/(\d+)/";
+        preg_match_all($pattern, $htmlString, $matches);
+        $orderRepository = $this->entityManager->getRepository(Order::class);
+        $orders = $orderRepository->findBy(['id' => $matches[1]]);
+        foreach ($orders as $order){
+            Assert::eq($order->getMode(), $mode);
+        }
     }
 
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition): void
