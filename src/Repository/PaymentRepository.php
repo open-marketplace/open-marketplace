@@ -17,7 +17,7 @@ use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository as BasePaymentReposi
 
 class PaymentRepository extends BasePaymentRepository
 {
-    public function findPaymentsOfSecondaryOrders(): QueryBuilder
+    public function createSecondaryOrderPaymentQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->createListQueryBuilder();
         $alias = $queryBuilder->getRootAliases()[0];

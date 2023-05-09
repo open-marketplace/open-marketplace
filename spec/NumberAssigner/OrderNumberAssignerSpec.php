@@ -13,6 +13,7 @@ namespace spec\BitBag\OpenMarketplace\NumberAssigner;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\NumberAssigner\OrderNumberAssigner;
+use BitBag\OpenMarketplace\NumberAssigner\OrderNumberAssignerInterface as BitbagOrderNumberAssignerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface;
@@ -34,7 +35,7 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
 
     public function it_implements_interface(): void
     {
-        $this->shouldImplement(\BitBag\OpenMarketplace\NumberAssigner\OrderNumberAssignerInterface::class);
+        $this->shouldImplement(BitbagOrderNumberAssignerInterface::class);
     }
 
     public function it_does_not_increment_sequence_on_primary_order(

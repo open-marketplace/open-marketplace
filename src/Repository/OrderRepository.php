@@ -172,6 +172,8 @@ class OrderRepository extends BaseOrderRepository
             ;
     }
 
+    //  PHPStan warns about no type specified for $customerId argument
+    //  As method below overwrites another method, such type addition is not possible
     /** @phpstan-ignore-next-line */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {

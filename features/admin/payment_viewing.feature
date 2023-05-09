@@ -1,7 +1,7 @@
 @payment_viewing
 Feature: Login in to admin panel
   and going to payments tab
-  i should not see primary order payments
+  I should not see primary order payments
 
   Background:
     Given the store has currency "EUR"

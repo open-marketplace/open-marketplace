@@ -5,4 +5,4 @@ sylius_grid:
         options:
           class: Sylius\Component\Core\Model\Payment
           repository:
-            method: findPaymentsOfSecondaryOrders
+            method: createSecondaryOrderPaymentQueryBuilder
