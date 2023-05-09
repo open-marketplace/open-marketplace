@@ -15,11 +15,11 @@ use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
-use BitBag\OpenMarketplace\Operator\VendorBackgroundOperator;
+use BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperator;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 
-final class VendorBackgroundOperatorSpec extends ObjectBehavior
+final class VendorBackgroundImageOperatorSpec extends ObjectBehavior
 {
     public function let(
         EntityManager $entityManager,
@@ -33,7 +33,7 @@ final class VendorBackgroundOperatorSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(VendorBackgroundOperator::class);
+        $this->shouldHaveType(VendorBackgroundImageOperator::class);
     }
 
     public function it_replaces_background_image(

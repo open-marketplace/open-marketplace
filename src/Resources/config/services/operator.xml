@@ -20,7 +20,7 @@
             <argument type="service" id="open_marketplace.service.vendor_image_factory"/>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Operator\VendorBackgroundOperator"
+        <service class="BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperator"
                  id="open_marketplace.operator.vendor_background">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="open_marketplace.service.vendor_background_image_factory"/>

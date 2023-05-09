@@ -134,7 +134,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         $vendor->setShopUser($user);
         $vendor->setVendorAddress($vendorAddress);
 
-        if (null !== $options['image'] ) {
+        if (null !== $options['image']) {
             /** @var string $imagePath */
             $imagePath = $this->fileLocator->locate($options['image']);
             $uploadedImage = new UploadedFile($imagePath, basename($imagePath));

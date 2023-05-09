@@ -21,7 +21,7 @@ use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
-use BitBag\OpenMarketplace\Operator\VendorBackgroundOperatorInterface;
+use BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperatorInterface;
 use BitBag\OpenMarketplace\Operator\VendorLogoOperatorInterface;
 use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
 use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
@@ -42,7 +42,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
         ImageUploader $imageUploader,
         VendorLogoOperatorInterface $vendorLogoOperator,
-        VendorBackgroundOperatorInterface $vendorBackgroundOperator
+        VendorBackgroundImageOperatorInterface $VendorBackgroundImageOperator
     ): void {
         $this->beConstructedWith(
             $entityManager,
@@ -53,7 +53,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
             $backgroundImageFactory,
             $imageUploader,
             $vendorLogoOperator,
-            $vendorBackgroundOperator
+            $VendorBackgroundImageOperator
         );
     }
 

@@ -218,7 +218,7 @@ class VendorUpdateContext extends RawMinkContext
     }
 
     /**
-     * @Given the channel has as a menu taxon
+     * @Given the channel has a menu taxon
      */
     public function theChannelHasAsAMenuTaxon()
     {

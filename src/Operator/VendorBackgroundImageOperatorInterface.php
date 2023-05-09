@@ -14,7 +14,7 @@ namespace BitBag\OpenMarketplace\Operator;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 
-interface VendorBackgroundOperatorInterface
+interface VendorBackgroundImageOperatorInterface
 {
     public function replaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void;
 }

@@ -10,7 +10,7 @@ Feature: Vendor can update his company information
     And the store operates in "Poland"
     And there is a "verified" vendor user "test@company.domain" registered in country "PL"
     And I am logged in as "test@company.domain"
-    And the channel has as a menu taxon
+    And the channel has a menu taxon
 
   Scenario: Navigating to form
     When I am on "/en_US/account/dashboard"
