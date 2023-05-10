@@ -35,3 +35,10 @@ sylius_resource:
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: BitBag\OpenMarketplace\Repository\VendorShippingMethodRepository
 
+        open_marketplace.vendor_settlement:
+            classes:
+                model: BitBag\OpenMarketplace\Entity\VendorSettlement
+                interface: BitBag\OpenMarketplace\Entity\VendorSettlementInterface
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: BitBag\OpenMarketplace\Repository\VendorSettlementRepository
+

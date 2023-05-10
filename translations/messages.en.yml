@@ -155,6 +155,8 @@ open_marketplace:
         your_account_has_been_disabled: Your vendor account has been disabled. Please contact administrators for more information.
         view_orders: View your orders
         footer_signature: BitBag OpenMarketplace - an open-source MVM based on Symfony & Sylius.
+        commission: Commission
+        commission_type: Commission Type
 
     email:
         vendor_profile_update: Vendor profile update requested
