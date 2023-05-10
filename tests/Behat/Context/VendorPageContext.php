@@ -250,9 +250,9 @@ class VendorPageContext extends MinkContext implements Context
         $this->vendorPagePage->open(
             [
                 'vendor_slug' => 'SLUG',
-                'criteria'=>[
-                    'search' => $name
-                    ]
+                'criteria' => [
+                    'search' => $name,
+                    ],
             ]
         );
 
@@ -261,7 +261,6 @@ class VendorPageContext extends MinkContext implements Context
         $productCards = $page->findAll('css', '.ui.fluid.card');
 
         Assert::count($productCards, $count);
-
     }
 
     private function getPage(): DocumentElement

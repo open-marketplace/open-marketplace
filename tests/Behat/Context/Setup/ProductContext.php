@@ -121,7 +121,7 @@ class ProductContext implements Context
         $menuTaxon = $channel->getMenuTaxon();
         /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->create();
-        $taxon->setCode("code");
+        $taxon->setCode('code');
         $taxon->setSlug($taxonSlug);
         $taxon->setEnabled(true);
 
@@ -191,5 +191,4 @@ class ProductContext implements Context
         $this->manager->persist($taxon);
         $this->manager->flush();
     }
-
 }
