@@ -22,6 +22,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 class ProductContext implements Context
 {
@@ -110,6 +111,42 @@ class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
+    /**
+     * @Given :count product belongs to :taxon taxon
+     */
+    public function onlyOneProductBelongsToTaxon($count, $taxon)
+    {
+        $channel = $this->sharedStorage->get('channel');
+        $menuTaxon = $channel->getMenuTaxon();
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->taxonFactory->create();
+        $taxon->setCode("code");
+        $taxon->setSlug("Test_Slug");
+        $taxon->setEnabled(true);
+        $taxon->setParent($menuTaxon);
+        $products = $this->sharedStorage->get('products');
+
+        $products[1]->setMainTaxon($taxon);
+
+        $this->manager->persist($products[1]);
+        $this->manager->persist($taxon);
+        $this->manager->flush();
+    }
+
+    /**
+     * @Given product has name :name
+     */
+    public function productHasName($name)
+    {
+        $products = $this->sharedStorage->get('products');
+
+        $products[1]->setName($name);
+
+        $this->manager->persist($products[1]);
+
+        $this->manager->flush();
+    }
+
     private function createDefaultVendor(?int $iteration): Vendor
     {
         if (1 === $iteration) {
@@ -146,4 +183,5 @@ class ProductContext implements Context
         $this->manager->persist($taxon);
         $this->manager->flush();
     }
+
 }

@@ -28,3 +28,9 @@ Feature: Displaying vendor page
     Given store has 3 products from same vendor
     And sorting is set to "price" "ascending"
     Then i should see products sorted by "price"
+
+  @ui
+  Scenario: Searching for products
+    Given store has 3 products from same vendor
+    And product has name "test_name"
+    Then I should see 1 products when search for "test_name"

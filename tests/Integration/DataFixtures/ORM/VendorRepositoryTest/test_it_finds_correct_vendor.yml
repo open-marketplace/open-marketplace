@@ -55,6 +55,3 @@ BitBag\OpenMarketplace\Entity\Vendor:
     vendorAddress: '@bruce_vendor_address'
     slug: 'bruce-wayne-company'
     description: 'description'
-
-
-

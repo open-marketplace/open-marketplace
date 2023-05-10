@@ -229,6 +229,42 @@ class VendorPageContext extends MinkContext implements Context
         assertTrue($this->vendorPagePage->productsSorted($shopSorting));
     }
 
+    /**
+     * @Then I should see :arg1 products on taxon page
+     */
+    public function iShouldSeeProductsOnTaxonPage($arg1)
+    {
+        $this->visit("/en_US/vendors/SLUG/taxons/Test_Slug");
+
+        $page = $this->getSession()->getPage();
+        $productCards = $page->findAll('css', '.ui.fluid.card');
+
+
+        return count($productCards);
+    }
+
+    /**
+     * @Then I should see :count products when search for :name
+     */
+    public function iShouldSeeProductsWhenSearchFor($count, $name)
+    {
+        $this->vendorPagePage->open(
+            [
+                'vendor_slug' => 'SLUG',
+                'criteria'=>[
+                    'search' => $name
+                    ]
+            ]
+        );
+
+        $page = $this->getSession()->getPage();
+
+        $productCards = $page->findAll('css', '.ui.fluid.card');
+
+        Assert::count($productCards, $count);
+
+    }
+
     private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();

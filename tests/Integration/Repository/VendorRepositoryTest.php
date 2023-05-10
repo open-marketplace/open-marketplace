@@ -34,4 +34,13 @@ final class VendorRepositoryTest extends JsonApiTestCase
         $this->assertEquals('Queen company', $vendorOliver->getCompanyName());
         $this->assertEquals('Wayne enterprise', $vendorBruce->getCompanyName());
     }
+
+    public function test_it_finds_null_for_null_slug_vendor(): void
+    {
+        $this->loadFixturesFromFile('VendorRepositoryTest/test_it_finds_correct_vendor.yml');
+        /** @var VendorInterface $vendorOliver */
+        $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBySlug('Not_in_db_slug');
+
+        $this->assertNull($vendorOliver);
+    }
 }

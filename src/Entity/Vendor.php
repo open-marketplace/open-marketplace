@@ -295,7 +295,7 @@ class Vendor implements VendorInterface
         if (0 === $productsRated) {
             return [
                 'averageRating' => 0.0,
-                'productsRatedCount' => 0,
+                'reviewsCount' => 0,
             ];
         }
 
