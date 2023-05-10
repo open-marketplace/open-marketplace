@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
+use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -112,22 +113,29 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given :count product belongs to :taxon taxon
+     * @Given product belongs to :taxonSlug taxon
      */
-    public function onlyOneProductBelongsToTaxon($count, $taxon)
+    public function onlyOneProductBelongsToTaxon($taxonSlug)
     {
         $channel = $this->sharedStorage->get('channel');
         $menuTaxon = $channel->getMenuTaxon();
         /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->create();
         $taxon->setCode("code");
-        $taxon->setSlug("Test_Slug");
+        $taxon->setSlug($taxonSlug);
         $taxon->setEnabled(true);
+
         $taxon->setParent($menuTaxon);
+
         $products = $this->sharedStorage->get('products');
 
         $products[1]->setMainTaxon($taxon);
 
+        $productTaxon = new ProductTaxon();
+        $productTaxon->setProduct($products[1]);
+        $productTaxon->setTaxon($taxon);
+
+        $this->manager->persist($productTaxon);
         $this->manager->persist($products[1]);
         $this->manager->persist($taxon);
         $this->manager->flush();

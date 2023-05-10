@@ -230,17 +230,16 @@ class VendorPageContext extends MinkContext implements Context
     }
 
     /**
-     * @Then I should see :arg1 products on taxon page
+     * @Then I should see :count products on :slug taxon page
      */
-    public function iShouldSeeProductsOnTaxonPage($arg1)
+    public function iShouldSeeProductsOnTaxonPage($count, $slug)
     {
-        $this->visit("/en_US/vendors/SLUG/taxons/Test_Slug");
+        $this->visit("/en_US/vendors/SLUG/taxons/$slug");
 
         $page = $this->getSession()->getPage();
         $productCards = $page->findAll('css', '.ui.fluid.card');
 
-
-        return count($productCards);
+        Assert::count($productCards, $count);
     }
 
     /**

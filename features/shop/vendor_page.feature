@@ -34,3 +34,9 @@ Feature: Displaying vendor page
     Given store has 3 products from same vendor
     And product has name "test_name"
     Then I should see 1 products when search for "test_name"
+
+  @ui
+  Scenario: Viewing products from given taxon
+    Given store has 3 products from same vendor
+    And  product belongs to "test" taxon
+    Then I should see 1 products on "test" taxon page
