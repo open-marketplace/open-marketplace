@@ -84,7 +84,7 @@ class VendorExtension extends AbstractExtension
         return $channel;
     }
 
-    public function getChannelMainTaxon(): TaxonInterface
+    public function getChannelMainTaxon(): ?TaxonInterface
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();

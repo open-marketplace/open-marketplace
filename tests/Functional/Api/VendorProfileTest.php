@@ -285,7 +285,7 @@ final class VendorProfileTest extends FunctionalTestCase
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-        /** @var VendorImage $vendorImage */
+        /** @var VendorBackgroundImage $vendorImage */
         $vendorImage = $this->vendorBackgroundImageRepository->findOneBy(['owner' => $vendor]);
 
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/vendor-background-images/' . $vendorImage->getUuid()->toString(), [], [], $header);
@@ -300,7 +300,7 @@ final class VendorProfileTest extends FunctionalTestCase
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-        /** @var VendorImage $vendorImage */
+        /** @var VendorBackgroundImage $vendorImage */
         $vendorImage = $this->vendorBackgroundImageRepository->findOneBy(['owner' => $vendor]);
 
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/vendor-background-images/' . $vendorImage->getUuid()->toString(), [], [], $header);
