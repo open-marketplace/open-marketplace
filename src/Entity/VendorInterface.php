@@ -94,4 +94,8 @@ interface VendorInterface extends VendorProfileInterface, UuidAwareInterface
     public function addShippingMethod(VendorShippingMethodInterface $shippingMethod): void;
 
     public function removeShippingMethod(VendorShippingMethodInterface $shippingMethod): void;
+
+    public function getVendorSettlement(): ?VendorSettlementInterface;
+
+    public function setVendorSettlement(?VendorSettlementInterface $vendorSettlement): void;
 }

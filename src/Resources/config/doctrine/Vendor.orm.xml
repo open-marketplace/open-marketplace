@@ -24,6 +24,13 @@
             </cascade>
         </one-to-one>
 
+        <one-to-one field="vendorSettlement" target-entity="BitBag\OpenMarketplace\Entity\VendorSettlement" >
+            <join-column name="vendor_settlement_id" referenced-column-name="id" on-delete="SET NULL" />
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-one>
+
         <one-to-one field="shopUser" target-entity="BitBag\OpenMarketplace\Entity\ShopUserInterface" inversed-by="vendor">
             <join-column name="user_id" referenced-column-name="id" />
             <cascade>

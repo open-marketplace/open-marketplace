@@ -14,6 +14,7 @@ namespace BitBag\OpenMarketplace\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Valid;
 
 final class VendorEditType extends AbstractResourceType
 {
@@ -31,6 +32,10 @@ final class VendorEditType extends AbstractResourceType
             ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'open_marketplace.ui.vendor_address',
+            ])
+            ->add('vendorSettlement', VendorSettlementType::class, [
+                'label' => 'open_marketplace.ui.vendor_settlement',
+                'constraints' => [new Valid()],
             ]);
     }
 }

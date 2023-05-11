@@ -13,9 +13,10 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Form\Type;
 
 use BitBag\OpenMarketplace\Entity\VendorSettlement;
+use BitBag\OpenMarketplace\Entity\VendorSettlementInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,10 +28,13 @@ class VendorSettlementType extends AbstractType
             ->add('commission', NumberType::class, [
                 'label' => 'open_marketplace.ui.commission',
             ])
-            ->add('commissionType', TextType::class, [
+            ->add('commissionType', ChoiceType::class, [
                 'label' => 'open_marketplace.ui.commission_type',
-            ])
-        ;
+                'choices' => [
+                    'Net' => VendorSettlementInterface::NET_COMMISSION,
+                    'Gross' => VendorSettlementInterface::GROSS_COMMISSION,
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -54,6 +54,8 @@ class Vendor implements VendorInterface
     /** @var Collection<int, VendorShippingMethodInterface> */
     protected Collection $shippingMethods;
 
+    protected ?VendorSettlementInterface $vendorSettlement;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -259,6 +261,15 @@ class Vendor implements VendorInterface
         if ($this->hasShippingMethod($shippingMethod)) {
             $this->shippingMethods->removeElement($shippingMethod);
         }
+    }
+
+    public function getVendorSettlement(): ?VendorSettlementInterface
+    {
+        return $this->vendorSettlement;
+    }
+    public function setVendorSettlement(?VendorSettlementInterface $vendorSettlement): void
+    {
+        $this->vendorSettlement = $vendorSettlement;
     }
 
     public function __toString(): string

@@ -16,6 +16,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface VendorSettlementInterface extends ResourceInterface
 {
+    public const NET_COMMISSION = 'net';
+    public const GROSS_COMMISSION = 'gross';
     public function getId(): ?int;
 
     public function getCommission(): ?int;

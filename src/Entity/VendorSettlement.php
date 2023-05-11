@@ -14,9 +14,6 @@ namespace BitBag\OpenMarketplace\Entity;
 
 class VendorSettlement implements VendorSettlementInterface
 {
-    public const NET_COMMISSION = 'net';
-    public const GROSS_COMMISSION = 'gross';
-
     protected ?int $id;
 
     protected ?int $commission = null;
