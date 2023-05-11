@@ -23,5 +23,12 @@
             <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing_price"/>
             <argument type="service" id="sylius.repository.channel"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Validator\ProductListingCodeValidator"
+                 id="bitbag.sylius_open_marketplace_plugin.validator.product_listing_code">
+            <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing_code"/>
+            <argument type="service" id="open_marketplace.repository.product_listing"/>
+            <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context"/>
+        </service>
     </services>
 </container>

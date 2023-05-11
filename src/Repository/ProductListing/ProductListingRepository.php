@@ -61,4 +61,15 @@ class ProductListingRepository extends EntityRepository implements ProductListin
             ->setParameter('vendor', $vendorId)
             ;
     }
+
+    public function findByCodeAndVendor(string $code, VendorInterface $vendor): ?ProductListingInterface
+    {
+        return $this->createQueryBuilder('pl')
+            ->andWhere('pl.code = :code')
+            ->andWhere('pl.vendor = :vendor')
+            ->setParameter('code', $code)
+            ->setParameter('vendor', $vendor->getId())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
