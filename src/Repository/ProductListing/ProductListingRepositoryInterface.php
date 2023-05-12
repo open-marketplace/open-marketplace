@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -30,5 +31,11 @@ interface ProductListingRepositoryInterface
 
     public function createByProductDraftQueryBuilder(): QueryBuilder;
 
-    public function findByCodeAndVendor(string $code, VendorInterface $vendor): ?ProductListingInterface;
+    public function findByCodeAndVendor(ProductDraftInterface $productDraft, VendorInterface $vendor): ?ProductListingInterface;
+
+    public function findByCodeAndVendorOmitProductListing(
+        ProductDraftInterface $productDraft,
+        VendorInterface $vendor,
+        ProductListingInterface $productListing
+    ): ?ProductListingInterface;
 }

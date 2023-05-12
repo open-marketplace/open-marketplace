@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -62,14 +63,39 @@ class ProductListingRepository extends EntityRepository implements ProductListin
             ;
     }
 
-    public function findByCodeAndVendor(string $code, VendorInterface $vendor): ?ProductListingInterface
+    public function findByCodeAndVendor(ProductDraftInterface $productDraft, VendorInterface $vendor): ?ProductListingInterface
+    {
+        $qb = $this->createCodeAndVendorQueryBuilder($productDraft, $vendor);
+
+        return $qb->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function findByCodeAndVendorOmitProductListing(
+        ProductDraftInterface $productDraft,
+        VendorInterface $vendor,
+        ProductListingInterface $productListing
+    ): ?ProductListingInterface
+    {
+        $qb = $this->createCodeAndVendorQueryBuilder($productDraft, $vendor);
+
+        $qb->andWhere('pl.id != :id')
+            ->setParameter('id', $productListing->getId())
+        ;
+
+        return $qb->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    private function createCodeAndVendorQueryBuilder(ProductDraftInterface $productDraft, VendorInterface $vendor): QueryBuilder
     {
         return $this->createQueryBuilder('pl')
             ->andWhere('pl.code = :code')
             ->andWhere('pl.vendor = :vendor')
-            ->setParameter('code', $code)
+            ->setParameter('code', $productDraft->getCode())
             ->setParameter('vendor', $vendor->getId())
-            ->getQuery()
-            ->getOneOrNullResult();
+            ;
     }
 }

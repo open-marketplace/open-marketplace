@@ -16,20 +16,31 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\ProductListingCodeConstraint;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class ProductListingCodeValidator extends ConstraintValidator
 {
+    public const PRODUCT_LISTING_CREATE_PRODUCT_ROUTE = 'open_marketplace_vendor_product_listing_create_product';
+
     private ProductListingRepositoryInterface $productListingRepository;
 
     private VendorContextInterface $vendorContext;
 
-    public function __construct(ProductListingRepositoryInterface $productListingRepository, VendorContextInterface $vendorContext)
+    private RequestStack $requestStack;
+
+    public function __construct(
+        ProductListingRepositoryInterface $productListingRepository,
+        VendorContextInterface $vendorContext,
+        RequestStack $requestStack
+    )
     {
         $this->productListingRepository = $productListingRepository;
         $this->vendorContext = $vendorContext;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -41,12 +52,25 @@ final class ProductListingCodeValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, ProductListingCodeConstraint::class);
         }
 
-        $code = $value->getCode();
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorContext->getVendor();
-        $productListing = $this->productListingRepository->findByCodeAndVendor($code, $vendor);
+        if ($this->isCreatingNewProductListing()) {
+            $productListing = $this->productListingRepository->findByCodeAndVendor($value, $vendor);
+        } else {
+            $productListing = $this->productListingRepository->findByCodeAndVendorOmitProductListing($value, $vendor, $value->getProductListing());
+        }
         if (null !== $productListing) {
             $this->context->addViolation($constraint->message);
         }
+    }
+
+    private function isCreatingNewProductListing(): bool
+    {
+        /** @var Request $request */
+        $request = $this->requestStack->getCurrentRequest();
+
+        return
+            self::PRODUCT_LISTING_CREATE_PRODUCT_ROUTE
+            === $request->attributes->get('_route');
     }
 }

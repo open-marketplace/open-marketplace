@@ -29,6 +29,7 @@
             <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.validator.product_listing_code"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context"/>
+            <argument type="service" id="request_stack" />
         </service>
     </services>
 </container>
