@@ -249,7 +249,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function iShouldSeeNonUniqueCodeMessage()
     {
         $text = $this->getPage()->getText();
-        $isErrorMessagePresent = stripos($text,"Product Listing with given code already exists") !== false;
+        $isErrorMessagePresent = false !== stripos($text, 'Product Listing with given code already exists');
         Assert::true($isErrorMessagePresent);
     }
 
