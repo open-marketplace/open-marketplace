@@ -1,6 +1,0 @@
-sylius_shipping:
-    resources:
-        shipment:
-            classes:
-                model: BitBag\OpenMarketplace\Entity\Shipment
-                interface: BitBag\OpenMarketplace\Entity\ShipmentInterface

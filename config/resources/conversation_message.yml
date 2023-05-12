@@ -1,8 +1,0 @@
-sylius_resource:
-    resources:
-        bitbag_open_marketplace.conversation_message:
-            driver: doctrine/orm
-            classes:
-                model: BitBag\OpenMarketplace\Entity\Conversation\Message
-                interface: BitBag\OpenMarketplace\Entity\Conversation\MessageInterface
-                repository: BitBag\OpenMarketplace\Repository\Conversation\MessageRepository

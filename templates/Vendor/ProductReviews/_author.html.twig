@@ -1,0 +1,28 @@
+{% set author = product_review.author %}
+
+<div class="ui fluid card" id="customer">
+    <div class="content">
+        {% if is_vendor_client(product_review.reviewSubject.vendor, author) is same as true %}
+            <a href="{{ path('open_marketplace_vendor_customer_show', {'id': author.id}) }}" class="header sylius-customer-name">{{ author.fullName }}</a>
+        {% else %}
+            <div class="header sylius-customer-name">{{ author.fullName }}</div>
+        {% endif %}
+        <div class="meta">
+            <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ author.createdAt|format_date }}.</span>
+        </div>
+    </div>
+    <div class="extra content">
+        <a href="mailto:{{ author.email }}">
+            <i class="envelope icon"></i>
+            {{ author.email }}
+        </a>
+    </div>
+    {% if author.phoneNumber is not empty %}
+        <div class="extra content">
+        <span>
+            <i class="phone icon"></i>
+            {{ author.phoneNumber }}
+        </span>
+        </div>
+    {% endif %}
+</div>

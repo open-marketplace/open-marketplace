@@ -11,5 +11,11 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="twig.extension" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Twig\Vendor\VendorClientExtension"
+                 id="open_marketplace.twig.vendor.vendor_client_extension">
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>

@@ -60,7 +60,7 @@ open_marketplace:
         minimum: minimum
         original: original
         price: Price
-        product_rejected_intro: Corresponding item has been rejected 
+        product_rejected_intro: Corresponding item has been rejected
         product_overview: Product overview
         rejected_listing_msg: This product has been rejected
         more: More
@@ -113,6 +113,7 @@ open_marketplace:
         menu:
             conversations: Messages
             conversation_categories: Message categories
+            product_reviews: Product Reviews
         new_conversation_category: New conversation category
         edit_conversation_category: Edit conversation category
         unverified: Unverified

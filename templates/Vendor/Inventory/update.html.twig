@@ -1,9 +1,14 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Vendor/Common/_breadcrumb.html.twig' %}
 
 {% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
 
-{% block breadcrumb %}
-    {% include '@SyliusShop/Account/Order/Index/_breadcrumb.html.twig' %}
+{% block breadcrumb_page %}
+    <a href="{{ path('vendor_product_variant_index') }}" class="section">{{ 'sylius.ui.inventory'|trans }}</a>
+    <div class="divider"> / </div>
+    <div class="active section"> {{ resource.id }} </div>
+    <div class="divider"> / </div>
+    <div class="active section">{{ 'sylius.ui.edit'|trans }}</div>
 {% endblock %}
 
 {% block subcontent %}
