@@ -76,8 +76,7 @@ class ProductListingRepository extends EntityRepository implements ProductListin
         ProductDraftInterface $productDraft,
         VendorInterface $vendor,
         ProductListingInterface $productListing
-    ): ?ProductListingInterface
-    {
+    ): ?ProductListingInterface {
         $qb = $this->createCodeAndVendorQueryBuilder($productDraft, $vendor);
 
         $qb->andWhere('pl.id != :id')

@@ -36,8 +36,7 @@ final class ProductListingCodeValidator extends ConstraintValidator
         ProductListingRepositoryInterface $productListingRepository,
         VendorContextInterface $vendorContext,
         RequestStack $requestStack
-    )
-    {
+    ) {
         $this->productListingRepository = $productListingRepository;
         $this->vendorContext = $vendorContext;
         $this->requestStack = $requestStack;
