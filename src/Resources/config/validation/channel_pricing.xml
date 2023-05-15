@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                    http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Core\Model\ChannelPricing">
+        <property name="price">
+            <constraint name="Range">
+                <option name="min">0.00</option>
+                <option name="max">1000000000</option>
+                <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="originalPrice">
+            <constraint name="Range">
+                <option name="min">0.00</option>
+                <option name="max">1000000000</option>
+                <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="minimumPrice">
+            <constraint name="Range">
+                <option name="min">0.00</option>
+                <option name="max">1000000000</option>
+                <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

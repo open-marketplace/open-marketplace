@@ -124,6 +124,17 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Given I have product :name in cart
+     */
+    public function iHaveProductInCart(string $name)
+    {
+        $product = $this->sharedStorage->get('product');
+        $slug = $product->getSlug();
+        $this->productPage->open(['slug' => $slug]);
+        $this->productPage->addToCart();
+    }
+
+    /**
      * @Given I click :button
      */
     public function iClickButton($button)

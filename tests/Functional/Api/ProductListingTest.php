@@ -71,7 +71,7 @@ final class ProductListingTest extends FunctionalTestCase
 
         $this->client->request('GET', '/api/v2/shop/account/vendor/product-listings/' . $productListing->getUuid(), [], [], $header);
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_it_prevents_to_get_product_listing_by_user_without_vendor_context(): void
@@ -233,7 +233,7 @@ final class ProductListingTest extends FunctionalTestCase
         ]));
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_update_product_listing_by_vendor(): void
@@ -340,7 +340,7 @@ final class ProductListingTest extends FunctionalTestCase
         $this->client->request('PUT', sprintf('/api/v2/shop/account/vendor/product-listings/%s/send-to-verification', $productListing->getUuid()), [], [], $header);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_it_send_to_verification_by_owner_vendor(): void
@@ -385,7 +385,7 @@ final class ProductListingTest extends FunctionalTestCase
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/product-listings/' . $productListing->getUuid(), [], [], $header);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_it_delete_by_owner_vendor(): void

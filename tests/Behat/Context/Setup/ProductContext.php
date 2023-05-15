@@ -31,6 +31,7 @@ use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 class ProductContext implements Context
 {
@@ -194,6 +195,18 @@ class ProductContext implements Context
         $channelPricing->setChannelCode($channel->getCode());
 
         return $channelPricing;
+    }
+  
+    /**
+     * @Then product on hand count should be :count
+     */
+    public function productOnHoldCountShouldBe(int $count)
+    {
+        $product = $this->sharedStorage->get('product');
+
+        $variant = $this->productVariantRepository->findOneBy(['product' => $product]);
+        $this->manager->refresh($variant);
+        Assert::same($count, $variant->getOnHand());
     }
 
     /**
