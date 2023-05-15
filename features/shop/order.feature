@@ -13,18 +13,7 @@ Feature: Spliting orders when cart was filled with products from different Vendo
   Scenario: Picking products from different Vendors
     Given store has 5 products from different Vendors
     And I have 3 products in cart
-    And I am on "/en_US/checkout/address"
-    And I fill in "sylius_checkout_address[billingAddress][firstName]" with "Test name"
-    And I fill in "sylius_checkout_address[billingAddress][lastName]" with "Test name"
-    And I fill in "sylius_checkout_address[billingAddress][company]" with "Test company"
-    And I fill in "sylius_checkout_address[billingAddress][street]" with "Test street"
-    And I select "United States" from "sylius_checkout_address[billingAddress][countryCode]"
-    And I fill in "sylius_checkout_address[billingAddress][city]" with "Test city"
-    And I fill in "sylius_checkout_address[billingAddress][postcode]" with "Test code"
-    And I submit form
-    And I choose shipment
-    And I choose payment
-    And I complete checkout    
+    And I finalize order
     And I am on "en_US/account/orders/"
     Then I should see 3 orders
 
@@ -32,17 +21,34 @@ Feature: Spliting orders when cart was filled with products from different Vendo
   Scenario: Picking products from same Vendor
     Given store has 5 products from same Vendor
     And I have 2 products in cart
-    And I am on "/en_US/checkout/address"
-    And I fill in "sylius_checkout_address[billingAddress][firstName]" with "Test name"
-    And I fill in "sylius_checkout_address[billingAddress][lastName]" with "Test name"
-    And I fill in "sylius_checkout_address[billingAddress][company]" with "Test company"
-    And I fill in "sylius_checkout_address[billingAddress][street]" with "Test street"
-    And I select "United States" from "sylius_checkout_address[billingAddress][countryCode]"
-    And I fill in "sylius_checkout_address[billingAddress][city]" with "Test city"
-    And I fill in "sylius_checkout_address[billingAddress][postcode]" with "Test code"
-    And I submit form
-    And I choose shipment
-    And I choose payment
-    And I complete checkout
+    And I finalize order
     And I am on "en_US/account/orders/"
     Then I should see 1 orders
+
+  @ui
+  Scenario: Do not Assign number to primary order
+    Given store has 4 products from different Vendors
+    And I have 3 products in cart
+    And I finalize order
+    Then primary order should not have number
+
+
+  @ui
+  Scenario: Browsing orders, admin cannot see primary orders
+    Given store has 4 products from different Vendors
+    And I have 3 products in cart
+    And I finalize order
+    Given I am logged in as an administrator
+    And I am on "/admin"
+    And I follow "Orders"
+    Then I should see 3 secondary orders
+
+  @ui
+  Scenario: Browsing orders history, customer cannot see primary orders
+    Given store has 4 products from different Vendors
+    And I have 3 products in cart
+    And I finalize order
+    And I am on "/"
+    And I follow "My account"
+    And I follow "Order history"
+    Then I should see 3 secondary orders in order history
