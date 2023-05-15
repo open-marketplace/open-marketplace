@@ -17,7 +17,6 @@ Feature: Editing a product listing.
     And I follow "My account"
     And I follow "Product listings"
     And I follow "Edit"
-    And I fill in "Code" with "productTest"
     And I fill in "Price" with "10"
     And I fill in "Original price" with "20"
     And I fill in "Minimum price" with "30"

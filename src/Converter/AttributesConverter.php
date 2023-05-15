@@ -52,9 +52,13 @@ final class AttributesConverter implements AttributesConverterInterface
         $attributes = $this->attributesExtractor->extract($attributeValues);
 
         $oldProductAttributeValues = $product->getAttributes();
+
         foreach ($oldProductAttributeValues as $oldProductAttributeValue) {
+            $oldProductAttributeValue = $this->entityManager->merge($oldProductAttributeValue);
             $this->entityManager->remove($oldProductAttributeValue);
         }
+
+        $this->entityManager->flush();
 
         /** @var DraftAttributeInterface $draftAttribute */
         foreach ($attributes as $draftAttribute) {

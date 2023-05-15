@@ -41,6 +41,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <collectionOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/vendor/orders</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves the collection of orders that contain vendor's product.</attribute>
+                </attribute>
                 <attribute name="filters">
                     <attribute>bitbag.open_marketplace.api.vendor.search_order_filter</attribute>
                     <attribute>bitbag.open_marketplace.api.vendor.date_order_filter</attribute>
@@ -74,9 +77,13 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <itemOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/vendor/orders/{tokenValue}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves an order that contain vendor's product.</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:order:details</attribute>
                 </attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -121,9 +128,12 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="path">/shop/account/vendor/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface:cancel</attribute>
-                <attribute name="security">is_granted("VENDOR_ORDER_CANCEL", object)</attribute>
+                <attribute name="security">
+                    is_granted("VENDOR_ORDER_CANCEL", object) and is_granted("OWNIT", object)
+                </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Cancels Order</attribute>
+                    <attribute name="description">You can only cancel an order if the order is paid for, but not shipped yet.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
