@@ -489,6 +489,6 @@ final class ProductListingContext extends RawMinkContext implements Context
     private function getChannel(): ChannelInterface
     {
         return $this->entityManager->getRepository(ChannelInterface::class)
-            ->findOneBy([]);
+            ->findAll()[0];
     }
 }
