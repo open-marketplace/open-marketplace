@@ -1,5 +1,11 @@
 open_marketplace:
     ui:
+        yes: Yes
+        no: No
+        none: None
+        shipping_details: Shipping details
+        is_shipping_required: Is shipping required?
+        shipping_category: Shipping category
         conversation_categories: Message categories
         restored: Product successfully restored
         removed: Product successfully removed

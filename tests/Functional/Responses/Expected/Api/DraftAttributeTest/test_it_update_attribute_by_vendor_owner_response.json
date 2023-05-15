@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/DraftAttribute",
-    "@id": "\/api\/v2\/shop\/account\/draft-attributes\/@string@",
+    "@id": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
     "@type": "DraftAttribute",
     "vendor": "\/api\/v2\/shop\/vendors\/@string@",
     "uuid": "@string@",
@@ -13,7 +13,7 @@
     "position": 0,
     "translations": {
         "en_US": {
-            "@id": "/api/v2/shop/account/draft-attribute-translations/@string@",
+            "@id": "/api/v2/shop/account/vendor/draft-attribute-translations/@string@",
             "@type": "DraftAttributeTranslation",
             "uuid": "@string@",
             "name": "attribute_bruce_1_us",

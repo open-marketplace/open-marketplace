@@ -9,7 +9,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="uuid" type="uuid" />
+        <field name="uuid" type="uuid" unique="true" />
         <field name="path" column="path" type="text" />
 
         <one-to-one field="owner" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="image">

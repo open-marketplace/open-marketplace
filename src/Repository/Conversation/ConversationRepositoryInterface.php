@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Repository\Conversation;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 interface ConversationRepositoryInterface extends RepositoryInterface
 {

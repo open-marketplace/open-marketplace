@@ -1,0 +1,47 @@
+{
+  "@context": "/api/v2/contexts/Order",
+  "@id": "/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_2",
+  "@type": "Order",
+  "customer": "/api/v2/shop/account/vendor/customers/@string@",
+  "payments": [],
+  "shipments": [
+    {
+      "@id": "/api/v2/shop/shipments/@string@",
+      "@type": "Shipment",
+      "id": "@integer@",
+      "method": "/api/v2/shop/shipping-methods/fedex",
+      "vendor": {
+        "@id": "/api/v2/shop/@string@",
+        "@type": "Vendor",
+        "uuid": "@string@",
+        "slug": "Wayne-Enterprises-Inc"
+      }
+    }
+  ],
+  "currencyCode": "USD",
+  "localeCode": "en-US",
+  "checkoutState": "completed",
+  "paymentState": "paid",
+  "shippingState": "cart",
+  "tokenValue": "bruce_order_made_by_john_2",
+  "id": "@integer@",
+  "items": [
+    {
+      "@id": "/api/v2/shop/order-items/@string@",
+      "@type": "OrderItem",
+      "variant": "/api/v2/shop/product-variants/bruce_1_2",
+      "id": "@integer@",
+      "quantity": 0,
+      "unitPrice": 0,
+      "originalUnitPrice": 0,
+      "total": 0,
+      "subtotal": 0
+    }
+  ],
+  "itemsTotal": 0,
+  "total": 0,
+  "state": "cancelled",
+  "taxTotal": 0,
+  "shippingTotal": 0,
+  "orderPromotionTotal": 0
+}

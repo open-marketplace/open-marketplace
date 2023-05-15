@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Api\Security\Voter;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -69,6 +70,7 @@ final class TranslatableVendorAwareVoter extends Voter
             return false;
         }
 
+        /** @var VendorInterface $translatableOwner */
         $translatableOwner = $translatable->getVendor();
 
         return $translatableOwner->getId() === $vendor->getId();

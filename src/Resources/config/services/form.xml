@@ -14,8 +14,6 @@
 
         <service id="open_marketplace.form.vendor_type"
                  class="BitBag\OpenMarketplace\Form\Type\VendorType">
-            <argument>%sylius.model.shop_user.class%</argument>
-            <argument type="service" id="security.token_storage"/>
             <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
             <argument>%open_marketplace.form.type.vendor.validation_groups%</argument>
 

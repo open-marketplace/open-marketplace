@@ -14,9 +14,13 @@ namespace BitBag\OpenMarketplace\Api\DataProvider;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
+use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Ramsey\Uuid\UuidInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class VendorAccountItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
@@ -24,12 +28,16 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
 
     private VendorRepositoryInterface $vendorRepository;
 
+    private SectionProviderInterface $sectionProvider;
+
     public function __construct(
         VendorContextInterface $vendorContext,
-        VendorRepositoryInterface $vendorRepository
+        VendorRepositoryInterface $vendorRepository,
+        SectionProviderInterface $sectionProvider
     ) {
         $this->vendorContext = $vendorContext;
         $this->vendorRepository = $vendorRepository;
+        $this->sectionProvider = $sectionProvider;
     }
 
     /**
@@ -41,11 +49,12 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
         string $operationName = null,
         array $context = []
     ) {
-        if (!is_string($operationName) || !str_starts_with($operationName, 'shop_account')) {
-            return $this->vendorRepository->findOneBy(['uuid' => $id]);
-        }
+        $section = $this->sectionProvider->getSection();
 
-        if ($this->isRequestedByRightVendor($id)) {
+        if (($section instanceof AdminApiSection) ||
+            ($section instanceof ShopVendorApiSection && $this->isRequestedByRightVendor($id)) ||
+            ($section instanceof ShopApiSection)
+        ) {
             return $this->vendorRepository->findOneBy(['uuid' => $id]);
         }
 

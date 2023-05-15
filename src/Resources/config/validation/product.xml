@@ -28,5 +28,17 @@
         <property name="translations">
             <constraint name="Valid" />
         </property>
+
+        <constraint name="BitBag\OpenMarketplace\Validator\Constraint\ProductListingPriceConstraint">
+            <option name="groups">sylius</option>
+        </constraint>
+
+        <constraint name="BitBag\OpenMarketplace\Validator\Constraint\ProductListingCodeConstraint">
+            <option name="groups">sylius</option>
+        </constraint>
+
+        <property name="productListingPrices">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>

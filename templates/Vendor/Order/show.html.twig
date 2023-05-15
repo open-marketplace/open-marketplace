@@ -13,67 +13,7 @@
 {% endblock %}
 
 {% block subcontent %}
-    <div class="ui stackable two column grid">
-        <div class="ten wide column">
-            <h1 class="ui header">
-                <i class="circular cart icon"></i>
-                <div class="content">
-                    {{ 'sylius.ui.order'|trans }} #{{ order.number }}
-                    <div class="sub header">
-                        <div class="ui horizontal divided list">
-                            <div class="item">
-                                {{ order.checkoutCompletedAt|format_datetime }}
-                            </div>
-                            <div class="item" id="sylius-order-state">
-                                {% include [('@SyliusAdmin/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
-                            </div>
-                            <div class="item" id="sylius-order-currency">
-                                {{ order.currencyCode }}
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </h1>
-        </div>
-    <div class="six wide column">
-        {% set menu = knp_menu_get('sylius.vendor.order.show', [], {'order': order}) %}
-        {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
-    </div>
-    </div>
-    <table class="ui celled compact small table order-summary-table">
-        <thead>
-        <tr>
-            <th class="five wide sylius-table-column-item">{{ 'sylius.ui.order_item_product'|trans }}</th>
-            <th class="center aligned sylius-table-column-unit_price">{{ 'sylius.ui.unit_price'|trans }}</th>
-            <th class="center aligned sylius-table-column-unit_discount">{{ 'sylius.ui.unit_discount'|trans }}</th>
-            <th class="center aligned sylius-table-column-unit_order_discount">{{ 'sylius.ui.distributed_order_discount'|trans }}</th>
-            <th class="center aligned sylius-table-column-discounted_unit_price">{{ 'sylius.ui.discounted_unit_price'|trans }}</th>
-            <th class="center aligned sylius-table-column-quantity">{{ 'sylius.ui.quantity'|trans }}</th>
-            <th class="center aligned sylius-table-column-subtotal">{{ 'sylius.ui.subtotal'|trans }}</th>
-            <th class="center aligned sylius-table-column-tax">{{ 'sylius.ui.tax'|trans }}</th>
-            <th class="center aligned sylius-table-column-total">{{ 'sylius.ui.total'|trans }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in order.items %}
-            {% include 'Vendor/Order/Partials/_item.html.twig' %}
-        {% endfor %}
-        </tbody>
-        <tfoot>
-            {% include 'Vendor/Order/Partials/_totals.html.twig' %}
-        </tfoot>
-    </table>
-    <div class="ui stackable grid">
-        <div class="ten wide column">
-            <div class="ui segments">
-                {% include 'Vendor/Order/Partials/_payments.html.twig' %}
-            </div>
-        </div>
-        <div class="six wide column">
-            <div class="ui segments">
-                {% include 'Vendor/Order/Partials/_resendEmail.html.twig' %}
-            </div>
-        </div>
-    </div>
+    {% include 'Vendor/Order/Partials/_order_title.html.twig' %}
+    {% include 'Vendor/Order/Partials/_order_table.html.twig' %}
+    {% include 'Vendor/Order/Partials/_order_details.html.twig' %}
 {% endblock %}

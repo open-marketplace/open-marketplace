@@ -1,0 +1,22 @@
+<div class="ui stackable grid">
+    <div class="ten wide column">
+        <div class="ui segments">
+            {% include 'Vendor/Order/Partials/_payments.html.twig' %}
+        </div>
+        <div class="ui segments">
+            {% include 'Vendor/Order/Partials/_shipments.html.twig' %}
+        </div>
+    </div>
+    <div class="six wide column">
+        <div class="ui segments">
+            {% set customer = order.customer %}
+            {% include 'Vendor/Order/Partials/_customerInfo.html.twig' %}
+        </div>
+        <div class="ui segments">
+            {% include 'Vendor/Order/Partials/_addresses.html.twig' %}
+        </div>
+        <div class="ui segments">
+            {% include 'Vendor/Order/Partials/_resendEmail.html.twig' %}
+        </div>
+    </div>
+</div>

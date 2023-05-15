@@ -45,7 +45,7 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
         $this->shouldImplement(ProductDraftTaxonsOperatorInterface::class);
     }
 
-    public function it_copies_taxons_from_draft_to_product(
+    public function it_copies_non_existing_taxons_from_draft_to_product(
         ProductDraftInterface $productDraft,
         ProductInterface $product,
         TaxonInterface $taxon,
@@ -54,21 +54,50 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
         FactoryInterface $productTaxonFactory
     ) {
         $productDraft->getMainTaxon()->willReturn($taxon);
-        $productTaxonFactory->createNew()->willReturn($productTaxon);
+
+        $product->getProductTaxons()->willReturn(new ArrayCollection([]));
+        $productDraft->getProductDraftTaxons()->willReturn(new ArrayCollection([$productDraftTaxon->getWrappedObject()]));
         $productDraftTaxon->getTaxon()->willReturn($taxon);
         $productDraftTaxon->getProductDraft()->willReturn($productDraft);
-        $productDraftTaxons = new ArrayCollection([$productDraftTaxon->getWrappedObject()]);
-        $productDraft->getProductDraftTaxons()->willReturn($productDraftTaxons);
+        $taxon->getId()->willReturn(1);
+        $productTaxonFactory->createNew()->willReturn($productTaxon);
         $productTaxon->getProduct()->willReturn(null);
         $productTaxon->getTaxon()->willReturn(null);
-        $productTaxons = new ArrayCollection([$productTaxon->getWrappedObject()]);
-        $product->getProductTaxons()->willReturn($productTaxons);
 
         $this->copyTaxonsToProduct($productDraft, $product);
 
         $productTaxon->setProduct($product)->shouldHaveBeenCalled();
         $productTaxon->setTaxon($taxon)->shouldHaveBeenCalled();
         $product->addProductTaxon($productTaxon)->shouldHaveBeenCalled();
+        $product->setMainTaxon($taxon)->shouldHaveBeenCalled();
+    }
+
+    public function it_do_not_copy_existing_taxons_from_draft_to_product(
+        ProductDraftInterface $productDraft,
+        ProductInterface $product,
+        TaxonInterface $taxon,
+        ProductDraftTaxonInterface $productDraftTaxon,
+        ProductTaxonInterface $productTaxon,
+        FactoryInterface $productTaxonFactory
+    ) {
+        $productDraft->getMainTaxon()->willReturn($taxon);
+
+        $product->getProductTaxons()->willReturn(new ArrayCollection([$productTaxon->getWrappedObject()]));
+        $productTaxon->getTaxon()->willReturn($taxon);
+        $productTaxon->getProduct()->willReturn($product);
+
+        $productDraft->getProductDraftTaxons()->willReturn(new ArrayCollection([$productDraftTaxon->getWrappedObject()]));
+        $productDraftTaxon->getTaxon()->willReturn($taxon);
+        $productDraftTaxon->getProductDraft()->willReturn($productDraft);
+
+        $taxon->getId()->willReturn(1);
+        $productTaxonFactory->createNew()->willReturn($productTaxon);
+
+        $this->copyTaxonsToProduct($productDraft, $product);
+
+        $productTaxon->setProduct($product)->shouldNotBeCalled();
+        $productTaxon->setTaxon($taxon)->shouldNotBeCalled();
+        $product->addProductTaxon($productTaxon)->shouldNotBeCalled();
         $product->setMainTaxon($taxon)->shouldHaveBeenCalled();
     }
 }

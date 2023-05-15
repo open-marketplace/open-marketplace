@@ -25,5 +25,11 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.factory.product_taxon" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Operator\OrderInventoryOperator"
+                 id="sylius.custom_inventory.order_inventory_operator"
+                 decorates="sylius.inventory.order_inventory_operator">
+            <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
+        </service>
     </services>
 </container>

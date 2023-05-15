@@ -101,7 +101,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
 
         $vendor->getShopUser()->willReturn($user);
 
-        $user->getUsername()->willReturn('test@mail.at');
+        $user->getEmail()->willReturn('test@mail.at');
 
         $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm);
 
@@ -144,7 +144,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
         $imageFromForm->getPath()->willReturn('path/to/file');
         $vendor->getShopUser()->willReturn($user);
-        $user->getUsername()->willReturn('test@mail.at');
+        $user->getEmail()->willReturn('test@mail.at');
 
         $this->createPendingVendorProfileUpdate($vendorData, $vendor, $imageFromForm);
 

@@ -10,12 +10,18 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="uuid" type="uuid" unique="true" />
+
         <field name="price" column="price" type="float" unique="false" nullable="false" />
-        <field name="minimumPrice" column="minimum_price" type="float" unique="false" nullable="true" />
-        <field name="originalPrice" column="original_price" type="float" unique="false" nullable="false" />
+        <field name="minimumPrice" column="minimum_price" type="float" unique="false" nullable="true" >
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="originalPrice" column="original_price" type="float" unique="false" nullable="true" />
         <field name="channelCode" column="channel_code" type="string" unique="false" nullable="false" />
 
-        <many-to-one field="productDraft" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface" inversed-by="productListingPrice">
+        <many-to-one field="productDraft" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface" inversed-by="productListingPrices">
             <join-column name="product_draft_id" nullable="false" on-delete="CASCADE" />
             <cascade>
                 <cascade-persist/>

@@ -29,6 +29,16 @@ Sylius\Component\Core\Model\Channel:
         taxCalculationStrategy: 'order_items_based'
         baseCurrency: '@dollar'
         enabled: true
+Sylius\Component\Core\Model\AdminUser:
+    test_admin:
+        enabled: true
+        username: "Clark Kent"
+        firstName: "Clark"
+        lastName: "Kent"
+        email: "clark.kent@example.com"
+        emailCanonical: "clark.kent@example.com"
+        localeCode: 'en_US'
+        roles: ["ROLE_ADMINISTRATION_ACCESS","ROLE_API_ACCESS"]
 Sylius\Component\Core\Model\Customer:
     customer_bruce:
         firstName: "Bruce"
@@ -48,14 +58,14 @@ Sylius\Component\Core\Model\Customer:
 BitBag\OpenMarketplace\Entity\ShopUser:
     user_bruce:
         plainPassword: "123password"
-        roles: ["ROLE_USER"]
+        roles: ["ROLE_USER", "ROLE_VENDOR"]
         enabled: "true"
         customer: '@customer_bruce'
         username: "bruce.wayne@example.com"
         usernameCanonical: "bruce.wayne@example.com"
     user_peter:
         plainPassword: "123password"
-        roles: ["ROLE_USER"]
+        roles: ["ROLE_USER", "ROLE_VENDOR"]
         enabled: "true"
         customer: '@customer_peter'
         username: "peter.weyland@example.com"

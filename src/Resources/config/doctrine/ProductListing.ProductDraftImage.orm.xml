@@ -4,6 +4,7 @@
 
     <mapped-superclass name="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage"
                        table="bitbag_open_marketplace_product_listing_image">
+        <field name="uuid" type="uuid" unique="true" />
 
         <many-to-one field="owner" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface"
                      inversed-by="images">

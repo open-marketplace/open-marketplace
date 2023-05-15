@@ -11,15 +11,18 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
-interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface
+interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInterface, UuidAwareInterface
 {
     public const STATUS_CREATED = 'created';
 
@@ -36,6 +39,14 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function getCode(): string;
 
     public function setCode(string $code): void;
+
+    public function isShippingRequired(): bool;
+
+    public function setShippingRequired(bool $shippingRequired): void;
+
+    public function getShippingCategory(): ?ShippingCategoryInterface;
+
+    public function setShippingCategory(?ShippingCategoryInterface $shippingCategory): void;
 
     public function isVerified(): bool;
 
@@ -60,10 +71,13 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     /** @return Collection<int|string, ProductTranslationInterface> */
     public function getTranslations(): Collection;
 
-    public function addTranslations(ProductTranslationInterface $translation): void;
+    /** @param Collection<int|string, ProductTranslationInterface> $translations */
+    public function setTranslations(Collection $translations): void;
+
+    public function addTranslation(ProductTranslationInterface $translation): void;
 
     /** @return Collection<int|string, ProductListingPriceInterface> */
-    public function getProductListingPrice(): Collection;
+    public function getProductListingPrices(): Collection;
 
     public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void;
 
@@ -77,7 +91,7 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
 
     public function incrementVersion(): void;
 
-    public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void;
+    public function addTranslationWithKey(ProductTranslationInterface $translation, string $key): void;
 
     public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void;
 
@@ -94,6 +108,8 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function setImages(Collection $images): void;
 
     public function addImage(ImageInterface $image): void;
+
+    public function removeImage(ImageInterface $image): void;
 
     /** @return  Collection<int, AttributeValueInterface> */
     public function getAttributes(): Collection;
@@ -139,9 +155,9 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
 
     public function getSlug(string $locale): ?string;
 
-    public function getVendor(): ?VendorInterface;
-
-    public function setVendor(?VendorInterface $vendor): void;
+    public function getVendor(): VendorInterface;
 
     public function getAnyTranslationName(): ?string;
+
+    public function getProductListingPriceForChannel(ChannelInterface $channel): ?ProductListingPriceInterface;
 }

@@ -78,6 +78,8 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         }
 
         $productVariant = $this->productVariantFactory->createNewForProduct($product, true, 0);
+        $productVariant->setShippingRequired($productDraft->isShippingRequired());
+        $productVariant->setShippingCategory($productDraft->getShippingCategory());
 
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
@@ -86,7 +88,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
 
         $channelPricingCodes = [];
         /** @var ProductListingPriceInterface $productListingPrice */
-        foreach ($productDraft->getProductListingPrice() as $productListingPrice) {
+        foreach ($productDraft->getProductListingPrices() as $productListingPrice) {
             if (!in_array($productListingPrice->getChannelCode(), $channelPricingCodes)) {
                 $channelPricingCodes[] = $productListingPrice->getChannelCode();
             }

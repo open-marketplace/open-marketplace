@@ -11,21 +11,25 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use Ramsey\Uuid\UuidInterface;
+
 class ProductListingPrice implements ProductListingPriceInterface
 {
-    protected int $id;
+    protected ?int $id = null;
+
+    protected ?UuidInterface $uuid = null;
 
     protected ProductDraftInterface $productDraft;
 
-    protected ?int $price;
+    protected ?int $price = null;
 
-    protected ?int $originalPrice;
+    protected ?int $originalPrice = null;
 
-    protected ?int $minimumPrice;
+    protected int $minimumPrice = 0;
 
     protected string $channelCode;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -33,6 +37,16 @@ class ProductListingPrice implements ProductListingPriceInterface
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 
     public function getProductDraft(): ProductDraftInterface
@@ -65,12 +79,12 @@ class ProductListingPrice implements ProductListingPriceInterface
         $this->originalPrice = $originalPrice;
     }
 
-    public function getMinimumPrice(): ?int
+    public function getMinimumPrice(): int
     {
         return $this->minimumPrice;
     }
 
-    public function setMinimumPrice(?int $minimumPrice): void
+    public function setMinimumPrice(int $minimumPrice): void
     {
         $this->minimumPrice = $minimumPrice;
     }

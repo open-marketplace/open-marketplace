@@ -1,11 +1,21 @@
 <?xml version="1.0" ?>
 
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
 <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="BitBag\OpenMarketplace\Entity\Vendor">
+        <attribute name="id">
+            <group>admin:vendor:read</group>
+        </attribute>
         <attribute name="uuid">
+            <group>admin:vendor:read</group>
             <group>admin:order:read</group>
             <group>admin:shipment:read</group>
             <group>shop:cart:read</group>
@@ -13,11 +23,12 @@
             <group>shop:shipment:read</group>
             <group>shop:customer:read</group>
             <group>shop:vendor:read</group>
-            <group>shop_account:vendor:read</group>
-            <group>shop_account:vendor:create</group>
-            <group>shop:vendor_image:read</group>
+            <group>shop:account:vendor:read</group>
+            <group>shop:account:vendor:create</group>
+            <group>shop:account:vendor:vendor_image:read</group>
         </attribute>
         <attribute name="slug">
+            <group>admin:vendor:read</group>
             <group>admin:order:read</group>
             <group>admin:shipment:read</group>
             <group>shop:cart:read</group>
@@ -25,33 +36,49 @@
             <group>shop:shipment:read</group>
             <group>shop:customer:read</group>
             <group>shop:vendor:read</group>
-            <group>shop_account:vendor:read</group>
-            <group>shop_account:vendor:create</group>
+            <group>shop:account:vendor:read</group>
+            <group>shop:account:vendor:create</group>
         </attribute>
         <attribute name="companyName">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
             <group>shop:vendor:read</group>
-            <group>shop_account:vendor:read</group>
-            <group>shop_account:vendor:update</group>
+            <group>shop:account:vendor:read</group>
+            <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="taxIdentifier">
-            <group>shop_account:vendor:read</group>
-            <group>shop_account:vendor:update</group>
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
+            <group>shop:account:vendor:read</group>
+            <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="phoneNumber">
-            <group>shop_account:vendor:read</group>
-            <group>shop_account:vendor:update</group>
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
+            <group>shop:account:vendor:read</group>
+            <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="description">
-            <group>shop_account:vendor:read</group>
-            <group>shop_account:vendor:update</group>
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
+            <group>shop:account:vendor:read</group>
+            <group>shop:account:vendor:update</group>
+        </attribute>
+        <attribute name="enabled">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
         </attribute>
         <attribute name="vendorAddress">
-            <group>shop_account:vendor:read</group>
-            <group>shop_account:vendor:update</group>
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
+            <group>shop:account:vendor:read</group>
+            <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="image">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
             <group>shop:vendor:read</group>
-            <group>shop_account:vendor:read</group>
+            <group>shop:account:vendor:read</group>
         </attribute>
     </class>
 </serializer>

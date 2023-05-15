@@ -1,5 +1,11 @@
 <?xml version="1.0" ?>
 
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
 <resources xmlns="https://api-platform.com/schema/metadata"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
@@ -13,19 +19,28 @@
                     <attribute>Default</attribute>
                     <attribute>VendorUserRegister</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/vendors</attribute>
+                <attribute name="path">/shop/account/vendor/register</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Registers as a new vendor</attribute>
+                    <attribute name="description">Body parameter `country` accept id of Country e.g. `/api/v2/shop/countries/EU`.</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop_account:vendor:create</attribute>
+                    <attribute name="groups">shop:account:vendor:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop_account:vendor:read</attribute>
+                    <attribute name="groups">shop:account:vendor:read</attribute>
                 </attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor</attribute>
                 <attribute name="status">201</attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/vendors</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:vendor:read</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -38,26 +53,52 @@
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="shop_account_get">
+            <itemOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendors/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendor/{uuid}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop_account:vendor:read</attribute>
+                    <attribute name="groups">shop:account:vendor:read</attribute>
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="shop_account_put">
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/vendors/{uuid}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:vendor:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="vendor_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="validation_groups">
                     <attribute>Default</attribute>
                     <attribute>VendorUser</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/vendors/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendor/{uuid}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">Body parameter `country` accept id of Country e.g. `/api/v2/shop/countries/EU`.</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop_account:vendor:update</attribute>
+                    <attribute name="groups">shop:account:vendor:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop_account:vendor:read</attribute>
+                    <attribute name="groups">shop:account:vendor:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="validation_groups">
+                    <attribute>Default</attribute>
+                    <attribute>VendorUser</attribute>
+                </attribute>
+                <attribute name="path">/admin/vendors/{uuid}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:vendor:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:vendor:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

@@ -10,7 +10,10 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="uuid" type="uuid" unique="true" />
+
         <field name="code" column="code" type="string" unique="false" nullable="false" />
+        <field name="shippingRequired" column="shipping_required" type="boolean" />
         <field name="isVerified" column="is_verified" type="boolean" unique="false" nullable="false" />
         <field name="verifiedAt" column="verified_at" type="datetime" unique="false" nullable="true"/>
         <field name="publishedAt" column="published_at" type="datetime" unique="false" nullable="true"/>
@@ -23,10 +26,6 @@
             <cascade>
                 <cascade-persist />
             </cascade>
-        </many-to-one>
-
-        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="productListings">
-            <join-column name="vendor_id" on-delete="SET NULL"/>
         </many-to-one>
 
         <one-to-many field="images" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImageInterface"
@@ -42,7 +41,7 @@
             </cascade>
         </one-to-many>
 
-        <one-to-many field="productListingPrice" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
+        <one-to-many field="productListingPrices" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
             <cascade>
                 <cascade-persist/>
             </cascade>
@@ -64,6 +63,10 @@
 
         <many-to-one field="mainTaxon" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
             <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
+        <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
+            <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
     </mapped-superclass>
 </doctrine-mapping>

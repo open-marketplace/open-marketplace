@@ -13,25 +13,30 @@ namespace BitBag\OpenMarketplace\Validator;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductTranslationInterface as SyliusProductTranslationInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class UniqueProductListingSlugValidator extends ConstraintValidator
 {
-    private EntityRepository $productTranslationRepository;
+    public const PRODUCT_LISTING_CREATE_PRODUCT_ROUTE = 'open_marketplace_vendor_product_listing_create_product';
+
+    private RepositoryInterface $productTranslationRepository;
+
+    private RequestStack $requestStack;
 
     public function __construct(
-        EntityRepository $productTranslationRepository
+        RepositoryInterface $productTranslationRepository,
+        RequestStack $requestStack
     ) {
         $this->productTranslationRepository = $productTranslationRepository;
+        $this->requestStack = $requestStack;
     }
 
-    /** @var ProductTranslationInterface */
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof UniqueProductListingSlugConstraint) {
@@ -43,22 +48,43 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, UniqueProductListingSlugConstraint::class);
         }
 
-        /** @var SyliusProductTranslationInterface|null $existingProductTranslation */
+        /** @var ProductTranslationInterface|null $existingProductTranslation */
         $existingProductTranslation = $this->productTranslationRepository->findOneBy(['slug' => $value->getSlug()]);
         if (null === $existingProductTranslation) {
             return;
         }
 
-        /** @var ProductInterface $existingProduct */
-        $existingProduct = $existingProductTranslation->getTranslatable();
-        $currentProduct = $value->getProductDraft()->getProductListing()->getProduct();
-
-        if ($existingProduct->getId() !== $currentProduct->getId()) {
+        if ($this->isCreateListingProductPage()) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('slug')
                 ->setInvalidValue($value)
                 ->setCode(UniqueEntity::NOT_UNIQUE_ERROR)
-                ->addViolation();
+                ->addViolation()
+            ;
+
+            return;
         }
+        $currentProduct = $value->getProductDraft()?->getProductListing();
+
+        $existingProduct = $existingProductTranslation->getProductDraft()->getProductListing();
+
+        if (null !== $currentProduct) {
+            if ($currentProduct->getId() !== $existingProduct->getId()) {
+                $this->context->buildViolation($constraint->message)
+                    ->atPath('slug')
+                    ->setInvalidValue($value)
+                    ->setCode(UniqueEntity::NOT_UNIQUE_ERROR)
+                    ->addViolation()
+                ;
+            }
+        }
+    }
+
+    private function isCreateListingProductPage(): bool
+    {
+        /** @var Request $request */
+        $request = $this->requestStack->getCurrentRequest();
+
+        return self::PRODUCT_LISTING_CREATE_PRODUCT_ROUTE === $request->get('_route');
     }
 }

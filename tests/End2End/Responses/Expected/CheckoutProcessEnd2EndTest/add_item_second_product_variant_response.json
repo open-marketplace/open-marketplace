@@ -23,7 +23,7 @@
                 "slug": "oliver-queen-company"
             }
         },
-        "2": {
+        "1": {
             "@id": "\/api\/v2\/shop\/shipments\/@integer@",
             "@type": "Shipment",
             "id": "@integer@",

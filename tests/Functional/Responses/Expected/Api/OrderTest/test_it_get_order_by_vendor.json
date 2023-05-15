@@ -1,0 +1,87 @@
+{
+  "@context": "/api/v2/contexts/Order",
+  "@id": "/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_1",
+  "@type": "Order",
+  "customer": "/api/v2/shop/account/vendor/customers/@string@",
+  "shippingAddress": {
+    "@id": "/api/v2/shop/addresses/@string@",
+    "@type": "Address",
+    "id": "@integer@",
+    "firstName": "John",
+    "lastName": "Smith",
+    "countryCode": "US",
+    "street": "Avenue 2115",
+    "city": "Arkham City",
+    "postcode": "00000"
+  },
+  "billingAddress": {
+    "@id": "/api/v2/shop/addresses/@string@",
+    "@type": "Address",
+    "id": "@integer@",
+    "firstName": "John",
+    "lastName": "Smith",
+    "countryCode": "US",
+    "street": "Avenue 2115",
+    "city": "Arkham City",
+    "postcode": "00000"
+  },
+  "shipments": [
+    "/api/v2/shop/shipments/@string@"
+  ],
+  "currencyCode": "USD",
+  "localeCode": "en-US",
+  "checkoutState": "completed",
+  "paymentState": "awaiting_payment",
+  "tokenValue": "bruce_order_made_by_john_1",
+  "id": "@integer@",
+  "items": [
+    {
+      "@id": "/api/v2/shop/order-items/@string@",
+      "@type": "OrderItem",
+      "variant": {
+        "@id": "/api/v2/shop/product-variants/bruce_1_1",
+        "@type": "ProductVariant",
+        "code": "bruce_1_1"
+      },
+      "id": "@integer@",
+      "order": "/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_1",
+      "quantity": 1,
+      "unitPrice": 0,
+      "originalUnitPrice": 0,
+      "total": 0,
+      "units": [
+        {
+          "@id": "/api/v2/shop/order-item-units/@string@",
+          "@type": "OrderItemUnit",
+          "id": "@integer@",
+          "adjustments": [],
+          "adjustmentsTotal": 0,
+          "shippable": {
+            "@id": "/api/v2/shop/product-variants/bruce_1_1",
+            "@type": "ProductVariant",
+            "code": "bruce_1_1"
+          }
+        }
+      ],
+      "adjustments": [],
+      "adjustmentsTotal": 0,
+      "product": {
+        "@id": "/api/v2/shop/products/bruce_1",
+        "@type": "Product",
+        "defaultVariant": "/api/v2/shop/product-variants/bruce_1_1"
+      },
+      "discountedUnitPrice": 0,
+      "subtotal": 0,
+      "adjustmentsRecursively": [],
+      "adjustmentsTotalRecursively": 0
+    }
+  ],
+  "itemsTotal": 0,
+  "adjustments": [],
+  "adjustmentsTotal": 0,
+  "total": 0,
+  "state": "new",
+  "taxTotal": 0,
+  "shippingTotal": 0,
+  "orderPromotionTotal": 0
+}

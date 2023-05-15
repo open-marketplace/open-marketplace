@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 final class ConversationRepository extends EntityRepository implements ConversationRepositoryInterface
 {

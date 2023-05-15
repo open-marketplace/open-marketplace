@@ -176,7 +176,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
             $productDraftTranslation->setMetaDescription(null);
             $productDraftTranslation->setMetaKeywords(null);
             $productDraftTranslation->setProductDraft($productDraft);
-            $productDraft->addTranslations($productDraftTranslation);
+            $productDraft->addTranslation($productDraftTranslation);
         }
     }
 

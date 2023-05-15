@@ -13,8 +13,9 @@ namespace BitBag\OpenMarketplace\Repository;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface as BaseCustomerRepositoryInterface;
 
-interface CustomerRepositoryInterface
+interface CustomerRepositoryInterface extends BaseCustomerRepositoryInterface
 {
     public function findVendorCustomers(VendorInterface $vendor): QueryBuilder;
 

@@ -11,13 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,30 +28,28 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 final class ProductType extends AbstractType
 {
-    private VendorProviderInterface $vendorProvider;
-
-    public function __construct(VendorProviderInterface $vendorProvider)
-    {
-        $this->vendorProvider = $vendorProvider;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('vendor', EntityType::class, [
-                'class' => Vendor::class,
-                'label' => 've',
-                ])
             ->add('code', TextType::class, [
                 'label' => 'sylius.ui.code',
                 'disabled' => ($builder->getData()->getCode()),
-                ])
+            ])
+            ->add('shippingRequired', CheckboxType::class, [
+                'label' => 'sylius.form.variant.shipping_required',
+                'required' => false,
+            ])
+            ->add('shippingCategory', ShippingCategoryChoiceType::class, [
+                'required' => false,
+                'placeholder' => 'sylius.ui.no_requirement',
+                'label' => 'sylius.form.product_variant.shipping_category',
+            ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ProductTranslationType::class,
                 'label' => 'sylius.form.product.translations',
                 'attr' => [
                     'class' => 'ui styled fluid accordion',
-                    ],
+                ],
                 'constraints' => [new Valid(['groups' => 'sylius'])],
             ])
             ->add('save', SubmitType::class, [
@@ -87,18 +84,13 @@ final class ProductType extends AbstractType
                 'required' => false,
                 'label' => 'sylius.form.product.images',
                 'block_name' => 'entry',
-            ])
-            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
-                $form = $event->getForm();
-                $form->get('vendor')->setData($this->vendorProvider->provideCurrentVendor());
-                $event->setData($form);
-            });
+            ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             $productDraft = $event->getData();
 
             $event->getForm()
-                ->add('productListingPrice', ChannelCollectionType::class, [
+                ->add('productListingPrices', ChannelCollectionType::class, [
                     'entry_type' => ProductPriceType::class,
                     'entry_options' => fn (ChannelInterface $channel) => [
                         'channel' => $channel,
