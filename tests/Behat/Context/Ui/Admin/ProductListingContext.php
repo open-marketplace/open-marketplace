@@ -486,7 +486,8 @@ final class ProductListingContext extends RawMinkContext implements Context
         Assert::contains($imagePath, 'path/to/file', 'no image found');
     }
 
-    private function getChannel(): ChannelInterface {
+    private function getChannel(): ChannelInterface
+    {
         return $this->entityManager->getRepository(ChannelInterface::class)
             ->findOneBy([]);
     }
