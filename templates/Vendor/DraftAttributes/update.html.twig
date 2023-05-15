@@ -30,7 +30,7 @@
     {% endif %}
 
 
-    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': 'bitbag_open_marketplace_vendor_draft_attribute_index'}} %}
+    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path('bitbag_open_marketplace_vendor_draft_attribute_index', configuration.vars.route.parameters|default({}))}} %}
 
     {{ form_end(form, {'render_rest': false}) }}
 
