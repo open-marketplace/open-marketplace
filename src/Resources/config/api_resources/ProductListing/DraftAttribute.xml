@@ -43,7 +43,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:draft_attribute:read</attribute>
                 </attribute>
-                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_READ", object)</attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
             </itemOperation>
 
             <itemOperation name="vendor_put">
@@ -58,13 +58,13 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:draft_attribute:read</attribute>
                 </attribute>
-                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_UPDATE", object)</attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
             </itemOperation>
 
             <itemOperation name="vendor_delete">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/account/vendor/draft-attributes/{uuid}</attribute>
-                <attribute name="security">is_granted("VENDOR_AWARE_OBJECT_DELETE", object)</attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
             </itemOperation>
         </itemOperations>
 

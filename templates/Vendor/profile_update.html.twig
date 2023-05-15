@@ -37,10 +37,6 @@
 
         {{ sylius_template_event('sylius.shop.account.profile.update.form', {'vendor': vendor, 'form': form}) }}
 
-        <div style="display: none">
-            {{ form_row(form.shopUser) }}
-        </div>
-
         <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
