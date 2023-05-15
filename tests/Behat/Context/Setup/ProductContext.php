@@ -196,7 +196,7 @@ class ProductContext implements Context
 
         return $channelPricing;
     }
-  
+
     /**
      * @Then product on hand count should be :count
      */
