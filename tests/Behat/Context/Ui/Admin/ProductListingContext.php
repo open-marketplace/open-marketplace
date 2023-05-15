@@ -30,11 +30,14 @@ use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorAddress;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Fixture\Factory\VendorExampleFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -52,13 +55,19 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private DraftAttributeFactoryInterface $draftAttributeFactory;
 
+    private VendorExampleFactory $vendorExampleFactory;
+
+    private FactoryInterface $countryFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         AdminUserExampleFactory $adminUserExampleFactory,
         ShopUserExampleFactory $shopUserExampleFactory,
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        DraftAttributeFactoryInterface $draftAttributeFactory
+        DraftAttributeFactoryInterface $draftAttributeFactory,
+        VendorExampleFactory $vendorExampleFactory,
+        FactoryInterface $countryFactory
     ) {
         $this->entityManager = $entityManager;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
@@ -66,6 +75,8 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->draftAttributeFactory = $draftAttributeFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
+        $this->countryFactory = $countryFactory;
     }
 
     /**
@@ -110,18 +121,32 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->userRepository->add($user);
 
         $country = $this->entityManager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
-        $vendor = new Vendor();
-        $vendor->setCompanyName('sdasdsa');
-        $vendor->setShopUser($user);
-        $vendor->setPhoneNumber('333333333');
-        $vendor->setTaxIdentifier('543455');
-        $vendor->setVendorAddress(new VendorAddress());
+
+        if ($country === null){
+            /** @var CountryInterface $country */
+            $country = $this->countryFactory->createNew();
+            $country->setCode($country_code);
+            $country->enable();
+            $this->entityManager->persist($country);
+        }
+
+        $options = [
+            'company_name' => 'sdasdsa',
+            'phone_number' => '333333333',
+            'tax_identifier' => '543455',
+            'street' => 'Tajna 13',
+            'city' => 'Warsaw',
+            'postcode' => '00-111',
+            'slug' => 'vendor-slug',
+            'description' => 'description',
+            'country' => $country
+        ];
+
+        $vendor = $this->vendorExampleFactory->create($options);
+
         $vendor->getVendorAddress()->setCountry($country);
-        $vendor->getVendorAddress()->setCity('Warsaw');
-        $vendor->getVendorAddress()->setPostalCode('00-111');
-        $vendor->getVendorAddress()->setStreet('Tajna 13');
-        $vendor->setSlug('vendor-slug');
-        $vendor->setDescription('description');
+        $vendor->setShopUser($user);
+
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
         $this->sharedStorage->set('vendor', $vendor);

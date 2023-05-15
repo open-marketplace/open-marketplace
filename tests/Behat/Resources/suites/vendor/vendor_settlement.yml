@@ -1,0 +1,18 @@
+default:
+  suites:
+    vendor_register:
+      contexts:
+        - tests.open_marketplace.behat.context.vendor.vendor_register_context
+        - sylius.behat.context.setup.shop_security
+        - sylius.behat.context.hook.doctrine_orm
+        - sylius.behat.context.setup.admin_security
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.locale
+        - sylius.behat.context.ui.shop.account
+        - tests.open_marketplace.behat.context.shop.order
+        - tests.open_marketplace.behat.context.setup.product
+        - sylius.behat.context.setup.customer
+        - sylius.behat.context.setup.user
+        - tests.bit_bag.sylius_open_marketplace_plugin.behat.context.vendor.vendor_settlement_context
+      filters:
+        tags: "@vendor_settlement"

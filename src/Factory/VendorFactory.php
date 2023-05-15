@@ -17,9 +17,29 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class VendorFactory implements FactoryInterface
 {
+    private int $defaultCommission;
+
+    private string $defaultCommissionType;
+
+    private VendorSettlementFactoryInterface $vendorSettlementFactory;
+
+    public function __construct(
+        int $defaultCommission,
+        string $defaultCommissionType,
+        VendorSettlementFactoryInterface $vendorSettlementFactory
+    )
+    {
+        $this->defaultCommission = $defaultCommission;
+        $this->defaultCommissionType = $defaultCommissionType;
+        $this->vendorSettlementFactory = $vendorSettlementFactory;
+    }
+
     /** @return VendorInterface */
     public function createNew()
     {
-        return new Vendor();
+        $vendor = new Vendor();
+        $settlement = $this->vendorSettlementFactory->create($this->defaultCommission, $this->defaultCommissionType);
+        $vendor->setVendorSettlement($settlement);
+        return $vendor;
     }
 }

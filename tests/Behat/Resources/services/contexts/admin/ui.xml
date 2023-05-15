@@ -11,6 +11,8 @@
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="open_marketplace.factory.draftAttribute"/>
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
+            <argument type="service" id="sylius.factory.country" />
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_listing" public="true"

@@ -54,7 +54,7 @@ class Vendor implements VendorInterface
     /** @var Collection<int, VendorShippingMethodInterface> */
     protected Collection $shippingMethods;
 
-    protected ?VendorSettlementInterface $vendorSettlement;
+    protected ?VendorSettlementInterface $vendorSettlement = null;
 
     public function __construct()
     {

@@ -14,9 +14,17 @@ namespace BitBag\OpenMarketplace\Factory;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class VendorProfileFactory implements VendorProfileFactoryInterface
 {
+    private FactoryInterface $vendorFactory;
+
+    public function __construct(FactoryInterface $vendorFactory)
+    {
+        $this->vendorFactory = $vendorFactory;
+    }
+
     public function createVendor(
         string $companyName,
         string $taxIdentifier,
@@ -36,6 +44,6 @@ final class VendorProfileFactory implements VendorProfileFactoryInterface
 
     public function createNew(): VendorProfileInterface
     {
-        return new Vendor();
+        return $this->vendorFactory->createNew();
     }
 }

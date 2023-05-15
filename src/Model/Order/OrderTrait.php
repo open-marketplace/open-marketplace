@@ -32,6 +32,8 @@ trait OrderTrait
     /** @var Collection<int, OrderInterface> */
     protected Collection $secondaryOrders;
 
+    protected ?int $commissionTotal = null;
+
     protected string $mode = self::PRIMARY_ORDER_MODE;
 
     public function __construct()
@@ -149,5 +151,13 @@ trait OrderTrait
     public function isPrimary(): bool
     {
         return self::PRIMARY_ORDER_MODE === $this->getMode();
+    }
+
+    public function getCommissionTotal(): ?int{
+        return $this->commissionTotal;
+    }
+
+    public function setCommissionTotal(int $commissionTotal): int{
+        return $this->commissionTotal = $commissionTotal;
     }
 }

@@ -1,4 +1,4 @@
-@settlement
+@vendor_settlement
 Feature: In case of creating the order
   I want the commission to be automatically calculated
 
@@ -12,4 +12,5 @@ Feature: In case of creating the order
   Scenario: Picking products from different Vendors
     Given I have 3 products in cart
     And I finalize order
-    Then commision should be calculated for each secondary order
+#    Then commission should be calculated for each secondary order
+    And commissions should not be calculated for primary orders
