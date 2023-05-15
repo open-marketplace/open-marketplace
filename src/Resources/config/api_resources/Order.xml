@@ -83,6 +83,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:order:details</attribute>
                 </attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -127,7 +128,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="path">/shop/account/vendor/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface:cancel</attribute>
-                <attribute name="security">is_granted("VENDOR_ORDER_CANCEL", object)</attribute>
+                <attribute name="security">
+                    is_granted("VENDOR_ORDER_CANCEL", object) and is_granted("OWNIT", object)
+                </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Cancels Order</attribute>
                     <attribute name="description">You can only cancel an order if the order is paid for, but not shipped yet.</attribute>
