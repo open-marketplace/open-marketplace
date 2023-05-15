@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class AddMessageAction
@@ -28,14 +29,18 @@ final class AddMessageAction
 
     private UrlGeneratorInterface $urlGenerator;
 
+    private FlashBag $flashBag;
+
     public function __construct(
         FormFactoryInterface $formFactory,
         AddMessageFacadeInterface $addMessageFacade,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        FlashBag $flashBag
     ) {
         $this->formFactory = $formFactory;
         $this->addMessageFacade = $addMessageFacade;
         $this->urlGenerator = $urlGenerator;
+        $this->flashBag = $flashBag;
     }
 
     public function __invoke(int $id, Request $request): Response
@@ -52,6 +57,8 @@ final class AddMessageAction
 
             $this->addMessageFacade
                 ->createWithConversation($id, $message, $file);
+        } else {
+            $this->flashBag->add('error', (string) $form->get('file')->getErrors());
         }
 
         return new RedirectResponse($this->urlGenerator->generate($redirect, [
