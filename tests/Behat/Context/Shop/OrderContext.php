@@ -12,10 +12,13 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 
@@ -25,12 +28,20 @@ class OrderContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private PaymentMethodFactoryInterface $paymentMethodFactory;
+
+    private PaymentMethodRepository $methodRepository;
+
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
+        PaymentMethodFactoryInterface $paymentMethodFactory,
+        PaymentMethodRepository $methodRepository
     ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
+        $this->paymentMethodFactory = $paymentMethodFactory;
+        $this->methodRepository = $methodRepository;
     }
 
     /**
@@ -42,6 +53,24 @@ class OrderContext extends RawMinkContext implements Context
         $tableWrapper = $page->find('css', 'table');
         $orders = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($orders), $count);
+    }
+
+    /**
+     * @Then I should see :count orders with :status status label :color
+     */
+    public function iShouldSeeOrdersWithStatus(
+        int $count,
+        string $status,
+        string $color
+    ) {
+        $page = $this->getSession()->getPage();
+        $tableWrapper = $page->find('css', 'table');
+        $orders = $tableWrapper->findAll('css', '.item');
+        Assert::eq(count($orders), $count);
+        $labels = $page->findAll('css', '.ui.' . $color . 'label');
+        foreach ($labels as $label) {
+            Assert::eq($label->getText(), $status);
+        }
     }
 
     /**
@@ -170,5 +199,30 @@ class OrderContext extends RawMinkContext implements Context
         $page = $this->getSession()->getPage();
         $card = $page->find('css', '.ui.fluid.card');
         assertStringContainsString($name, $card->getText());
+    }
+
+    /**
+     * @return DocumentElement
+     */
+    private function getPage()
+    {
+        return $this->getSession()->getPage();
+    }
+
+    /**
+     * @Given There is payment method
+     */
+    public function thereIsPaymentMethod()
+    {
+        $payment = $this->paymentMethodFactory->create([
+            'name' => ucfirst($name),
+            'code' => $code,
+            'description' => $description,
+            'gatewayName' => $gatewayFactory,
+            'gatewayFactory' => $gatewayFactory,
+            'enabled' => true,
+            'channels' => ($addForCurrentChannel && $this->sharedStorage->has('channel')) ? [$this->sharedStorage->get('channel')] : [],
+        ]);
+        $this->methodRepository->add($payment);
     }
 }

@@ -46,3 +46,26 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     And I complete checkout
     And I am on "en_US/account/orders/"
     Then I should see 1 orders
+
+  @ui
+  Scenario: Completing primary order payment should fulfill all secondary order payments
+    Given store has 2 vendors with different product each
+    And I have 2 products in cart
+    And I am on "/en_US/checkout/address"
+    And I fill in "sylius_checkout_address[billingAddress][firstName]" with "Test name"
+    And I fill in "sylius_checkout_address[billingAddress][lastName]" with "Test name"
+    And I fill in "sylius_checkout_address[billingAddress][company]" with "Test company"
+    And I fill in "sylius_checkout_address[billingAddress][street]" with "Test street"
+    And I select "United States" from "sylius_checkout_address[billingAddress][countryCode]"
+    And I fill in "sylius_checkout_address[billingAddress][city]" with "Test city"
+    And I fill in "sylius_checkout_address[billingAddress][postcode]" with "Test code"
+    And I submit form
+    And I choose shipment
+    And the store has a payment method "method" with a code "code"
+    And I choose payment
+    And I complete checkout
+    And I am on "en_US/account/orders/"
+    Then I should see 2 orders with "Fulfilled" status label "green"
+    And I am logged in as an administrator
+    And I am on "/admin/payments/"
+    Then I should see 3 orders with "Completed" status label "green"
