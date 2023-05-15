@@ -147,7 +147,6 @@ final class VendorController extends ResourceController
                 if ($backgroundImage) {
                     $this->manager->remove($backgroundImage);
                 }
-                $this->manager->flush();
 
                 $vendor->setEditedAt(new \DateTime());
                 $this->manager->flush();
