@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Processor\Order;
 
+use BitBag\OpenMarketplace\Calculator\VendorCommissionCalculatorInterface;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
@@ -28,14 +29,22 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     private PaymentRefresherInterface $paymentRefresher;
 
+    /**
+     * @var VendorCommissionCalculatorInterface[]
+     */
+    private iterable $commissionCalculators;
+
     public function __construct(
         EntityManager $entityManager,
         OrderManagerInterface $orderManager,
-        PaymentRefresherInterface $paymentRefresher
-    ) {
+        PaymentRefresherInterface $paymentRefresher,
+        iterable $commissionCalculators
+    )
+    {
         $this->entityManager = $entityManager;
         $this->orderManager = $orderManager;
         $this->paymentRefresher = $paymentRefresher;
+        $this->commissionCalculators = $commissionCalculators;
     }
 
     public function process(OrderInterface $order): array
@@ -54,6 +63,10 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
             }
         }
 
+        foreach ($this->secondaryOrders as $secondaryOrder) {
+            $secondaryOrder->setCommissionTotal($this->calculateCommission($secondaryOrder));
+        }
+
         $orders = [$order, ...$this->secondaryOrders];
 
         foreach ($orders as $order) {
@@ -63,6 +76,11 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $this->entityManager->flush();
 
         return $orders;
+    }
+
+    public function getSecondaryOrdersCount(): int
+    {
+        return count($this->secondaryOrders);
     }
 
     private function vendorSecondaryOrderExits(array $secondaryOrders, ?VendorInterface $vendor): bool
@@ -76,8 +94,13 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         return false;
     }
 
-    public function getSecondaryOrdersCount(): int
+    private function calculateCommission(OrderInterface $order): int
     {
-        return count($this->secondaryOrders);
+        foreach ($this->commissionCalculators as $commissionCalculator) {
+            if ($commissionCalculator->supports($order)) {
+                return $commissionCalculator->calculate($order);
+            }
+        }
+        throw new \RuntimeException('No commission calculator found for order');
     }
 }
