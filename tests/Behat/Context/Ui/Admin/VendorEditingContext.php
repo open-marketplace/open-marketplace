@@ -16,20 +16,20 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\BitBag\OpenMarketplace\Behat\Context\Setup\Factory\VendorFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
 final class VendorEditingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
 
-    private VendorFactoryInterface $vendorFactory;
+    private ExampleFactoryInterface $vendorExampleFactory;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        VendorFactoryInterface $vendorFactory
+        ExampleFactoryInterface $vendorExampleFactory
     ) {
         $this->entityManager = $entityManager;
-        $this->vendorFactory = $vendorFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -37,14 +37,16 @@ final class VendorEditingContext extends RawMinkContext implements Context
      */
     public function thereIsAVendorWhoChange($ifVerified, $ifRequested): void
     {
-        $vendor = $this->vendorFactory->createVendor(
-            'vendor',
-            'vendorTax',
-            'vendorPhone',
-            'slug',
-            'description',
-            $ifVerified
-        );
+        $options = [
+            'company_name' => 'vendor',
+            'phone_number' => 'vendorPhone',
+            'tax_identifier' => 'vendorTax',
+            'slug' => 'slug',
+            'description' => 'description',
+            'status' => $ifVerified,
+        ];
+
+        $vendor = $this->vendorExampleFactory->create($options);
 
         if ('requested' === $ifRequested) {
             $vendor->setEditedAt(new DateTime());

@@ -9,7 +9,6 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -17,7 +16,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface VendorSettlementInterface extends ResourceInterface
 {
     public const NET_COMMISSION = 'net';
+
     public const GROSS_COMMISSION = 'gross';
+
     public function getId(): ?int;
 
     public function getCommission(): ?int;
@@ -31,5 +32,4 @@ interface VendorSettlementInterface extends ResourceInterface
     public function getVendor(): ?VendorInterface;
 
     public function setVendor(?VendorInterface $vendor): void;
-
 }

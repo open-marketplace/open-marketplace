@@ -267,7 +267,8 @@ class Vendor implements VendorInterface
     {
         return $this->vendorSettlement;
     }
-    public function setVendorSettlement(?VendorSettlementInterface $vendorSettlement): void
+
+    public function setVendorSettlement(VendorSettlementInterface $vendorSettlement): void
     {
         $this->vendorSettlement = $vendorSettlement;
     }

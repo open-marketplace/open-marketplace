@@ -97,5 +97,5 @@ interface VendorInterface extends VendorProfileInterface, UuidAwareInterface
 
     public function getVendorSettlement(): ?VendorSettlementInterface;
 
-    public function setVendorSettlement(?VendorSettlementInterface $vendorSettlement): void;
+    public function setVendorSettlement(VendorSettlementInterface $vendorSettlement): void;
 }

@@ -9,7 +9,6 @@
 
 declare(strict_types=1);
 
-
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
@@ -22,14 +21,17 @@ use Webmozart\Assert\Assert;
 
 final class VendorSettlementContext implements Context
 {
-
     private OrderRepositoryInterface $orderRepository;
+
     private EntityManagerInterface $entityManager;
 
     private SharedStorageInterface $sharedStorage;
 
-    public function __construct(OrderRepositoryInterface $orderRepository, EntityManagerInterface $entityManager, SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        EntityManagerInterface $entityManager,
+        SharedStorageInterface $sharedStorage
+    ) {
         $this->orderRepository = $orderRepository;
         $this->entityManager = $entityManager;
         $this->sharedStorage = $sharedStorage;
@@ -48,18 +50,14 @@ final class VendorSettlementContext implements Context
             $settlement = $vendor->getVendorSettlement();
             $validCommissionTotal =
                 match ($settlement->getCommissionType()) {
-                    VendorSettlementInterface::NET_COMMISSION =>
-                    $this->calculateNetCommision($order, $settlement->getCommission()),
-                    VendorSettlementInterface::GROSS_COMMISSION =>
-                    $this->calculateGrossCommision($order, $settlement->getCommission()),
-                    default =>
-                    throw new \InvalidArgumentException('Invalid Commission Type')
+                    VendorSettlementInterface::NET_COMMISSION => $this->calculateNetCommision($order, $settlement->getCommission()),
+                    VendorSettlementInterface::GROSS_COMMISSION => $this->calculateGrossCommision($order, $settlement->getCommission()),
+                    default => throw new \InvalidArgumentException('Invalid Commission Type')
                 };
 
             Assert::eq($order->getCommissionTotal(), $validCommissionTotal);
         }
     }
-
 
     /**
      * @Then commissions should not be calculated for primary orders

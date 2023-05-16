@@ -27,8 +27,7 @@ final class VendorFactory implements FactoryInterface
         int $defaultCommission,
         string $defaultCommissionType,
         VendorSettlementFactoryInterface $vendorSettlementFactory
-    )
-    {
+    ) {
         $this->defaultCommission = $defaultCommission;
         $this->defaultCommissionType = $defaultCommissionType;
         $this->vendorSettlementFactory = $vendorSettlementFactory;
@@ -40,6 +39,7 @@ final class VendorFactory implements FactoryInterface
         $vendor = new Vendor();
         $settlement = $this->vendorSettlementFactory->create($this->defaultCommission, $this->defaultCommissionType);
         $vendor->setVendorSettlement($settlement);
+
         return $vendor;
     }
 }

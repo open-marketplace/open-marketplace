@@ -26,14 +26,13 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Fixture\Factory\VendorExampleFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -55,7 +54,7 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private DraftAttributeFactoryInterface $draftAttributeFactory;
 
-    private VendorExampleFactory $vendorExampleFactory;
+    private ExampleFactoryInterface $vendorExampleFactory;
 
     private FactoryInterface $countryFactory;
 
@@ -110,6 +109,17 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Given I am logged in as an user :email with password :password
+     */
+    public function iAmLoggedInAsUserWithPassword(string $email, string $password)
+    {
+        $this->visitPath('/en_US/login');
+        $this->getPage()->fillField('Username', $email);
+        $this->getPage()->fillField('Password', $password);
+        $this->getPage()->pressButton('Login');
+    }
+
+    /**
      * @Given there is a vendor user :vendor_user_email registered in country :country_code
      */
     public function thereIsAVendorUserRegisteredInCountry($vendor_user_email, $country_code): void
@@ -122,7 +132,7 @@ final class ProductListingContext extends RawMinkContext implements Context
 
         $country = $this->entityManager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
 
-        if ($country === null){
+        if (null === $country) {
             /** @var CountryInterface $country */
             $country = $this->countryFactory->createNew();
             $country->setCode($country_code);
@@ -139,7 +149,7 @@ final class ProductListingContext extends RawMinkContext implements Context
             'postcode' => '00-111',
             'slug' => 'vendor-slug',
             'description' => 'description',
-            'country' => $country
+            'country' => $country,
         ];
 
         $vendor = $this->vendorExampleFactory->create($options);

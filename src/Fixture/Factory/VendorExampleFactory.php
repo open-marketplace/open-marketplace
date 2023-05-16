@@ -55,6 +55,8 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
 
     private RepositoryInterface $channelRepository;
 
+    private FactoryInterface $countryFactory;
+
     public function __construct(
         VendorProfileFactoryInterface $profileFactory,
         AddressFactoryInterface $addressFactory,
@@ -63,7 +65,8 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         RepositoryInterface $countryRepository,
         RepositoryInterface $customerGroupRepository,
         RepositoryInterface $vendorShippingMethodRepository,
-        RepositoryInterface $channelRepository
+        RepositoryInterface $channelRepository,
+        FactoryInterface $countryFactory
     ) {
         $this->profileFactory = $profileFactory;
         $this->addressFactory = $addressFactory;
@@ -73,6 +76,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         $this->customerGroupRepository = $customerGroupRepository;
         $this->vendorShippingMethodRepository = $vendorShippingMethodRepository;
         $this->channelRepository = $channelRepository;
+        $this->countryFactory = $countryFactory;
 
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -81,6 +85,8 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
 
     public function create(array $options = []): VendorInterface
     {
+        $this->countryCheck();
+
         $options = $this->optionsResolver->resolve($options);
 
         /** @var CustomerInterface $customer */
@@ -177,7 +183,17 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
             ->setNormalizer('country', LazyOption::getOneBy($this->countryRepository, 'code'))
             ->setDefault('city', fn (Options $options): string => $this->faker->city)
             ->setDefault('street', fn (Options $options): string => $this->faker->streetAddress)
-            ->setDefault('postcode', fn (Options $options): string => $this->faker->postcode)
-        ;
+            ->setDefault('postcode', fn (Options $options): string => $this->faker->postcode);
+    }
+
+    private function countryCheck(): void
+    {
+        if (0 === count($this->countryRepository->findAll())) {
+            /** @var CountryInterface $country */
+            $country = $this->countryFactory->createNew();
+            $country->setCode($this->faker->countryCode);
+            $country->setEnabled(true);
+            $this->countryRepository->add($country);
+        }
     }
 }

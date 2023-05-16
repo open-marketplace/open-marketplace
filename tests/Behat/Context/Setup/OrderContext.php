@@ -12,8 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Repository\OrderRepository;
@@ -21,6 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -58,6 +57,8 @@ final class OrderContext extends RawMinkContext
 
     private AddressFactoryInterface $addressFactory;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $orderFactory,
@@ -68,8 +69,9 @@ final class OrderContext extends RawMinkContext
         ShipmentFactoryInterface $shipmentFactory,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         StateMachineFactoryInterface $stateMachineFactory,
-        AddressFactoryInterface $addressFactory
-    ) {
+        AddressFactoryInterface $addressFactory,
+        ExampleFactoryInterface $vendorExampleFactory,
+        ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderFactory = $orderFactory;
         $this->orderRepository = $orderRepository;
@@ -80,6 +82,7 @@ final class OrderContext extends RawMinkContext
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->stateMachineFactory = $stateMachineFactory;
         $this->addressFactory = $addressFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -279,18 +282,22 @@ final class OrderContext extends RawMinkContext
         $this->userRepository->add($user);
 
         $country = $this->entityManager->getRepository(Country::class)->findAll()[0];
-        $vendor = new Vendor();
-        $vendor->setCompanyName('sdasdsa');
+        $options = [
+            'company_name' => 'sdasdsa',
+            'phone_number' => '333333333',
+            'tax_identifier' => '543455',
+            'street' => 'Tajna 13',
+            'city' => 'Warsaw',
+            'postcode' => '00-111',
+            'slug' => 'vendor-slug',
+            'description' => 'description',
+            'country' => $country,
+        ];
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorExampleFactory->create($options);
+
         $vendor->setShopUser($user);
-        $vendor->setPhoneNumber('333333333');
-        $vendor->setTaxIdentifier('543455');
-        $vendor->setVendorAddress(new VendorAddress());
-        $vendor->getVendorAddress()->setCountry($country);
-        $vendor->getVendorAddress()->setCity('Warsaw');
-        $vendor->getVendorAddress()->setPostalCode('00-111');
-        $vendor->getVendorAddress()->setStreet('Tajna 13');
-        $vendor->setSlug('vendor-slug');
-        $vendor->setDescription('description');
+
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
         $this->sharedStorage->set('vendor', $vendor);

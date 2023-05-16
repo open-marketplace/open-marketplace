@@ -10,6 +10,8 @@
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="open_marketplace.service.vendor_image_factory"/>
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
+            <argument type="service" id="sylius.factory.country" />
         </service>
     </services>
 </container>

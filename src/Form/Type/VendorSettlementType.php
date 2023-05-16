@@ -9,7 +9,6 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\Form\Type;
 
 use BitBag\OpenMarketplace\Entity\VendorSettlement;
@@ -33,7 +32,7 @@ final class VendorSettlementType extends AbstractType
                 'choices' => [
                     'Net' => VendorSettlementInterface::NET_COMMISSION,
                     'Gross' => VendorSettlementInterface::GROSS_COMMISSION,
-                ]
+                ],
             ]);
     }
 

@@ -11,10 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\ChannelInterface;
 
 final class VendorSettlementRepository extends EntityRepository implements VendorSettlementRepositoryInterface
 {

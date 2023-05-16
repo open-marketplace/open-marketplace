@@ -15,11 +15,11 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -56,6 +56,8 @@ class VendorPageContext extends MinkContext implements Context
 
     private VendorPagePageInterface $vendorPagePage;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         RepositoryInterface $countryRepository,
@@ -66,8 +68,9 @@ class VendorPageContext extends MinkContext implements Context
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
         FactoryInterface $channelPricingFactory,
-        VendorPagePageInterface $vendorPagePage
-    ) {
+        VendorPagePageInterface $vendorPagePage,
+        ExampleFactoryInterface $vendorExampleFactory,
+        ) {
         $this->entityManager = $entityManager;
         $this->countryRepository = $countryRepository;
         $this->vendorRepository = $vendorRepository;
@@ -78,6 +81,7 @@ class VendorPageContext extends MinkContext implements Context
         $this->productRepository = $productRepository;
         $this->channelPricingFactory = $channelPricingFactory;
         $this->vendorPagePage = $vendorPagePage;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -89,33 +93,23 @@ class VendorPageContext extends MinkContext implements Context
 
         $country = $this->countryRepository->findOneBy(['code' => 'US']);
 
-        $vendorAddress = new VendorAddress();
-        $vendorAddress->setCity('test');
-        $vendorAddress->setCountry($country);
-        $vendorAddress->setPostalCode('test');
-        $vendorAddress->setStreet('test');
+        $options = [
+            'company_name' => 'test company',
+            'phone_number' => '123123123',
+            'tax_identifier' => '123123123',
+            'street' => 'test',
+            'city' => 'test',
+            'postcode' => 'test',
+            'slug' => 'test-company',
+            'description' => 'test-company',
+            'country' => $country,
+            'status' => $verifiedStatus,
+        ];
 
-        $vendor = new Vendor();
-        $vendor->setSlug('test-company');
-        $vendor->setDescription('test-company');
-        $vendor->setCompanyName('test company');
+        $vendor = $this->vendorExampleFactory->create($options);
+
         $vendor->setShopUser($shopUser);
-        $vendor->setPhoneNumber('123123123');
-        $vendor->setTaxIdentifier('123123123');
-        $vendor->setVendorAddress($vendorAddress);
 
-        switch ($verifiedStatus) {
-            case 'verified':
-                $vendor->setStatus(VendorInterface::STATUS_VERIFIED);
-
-                break;
-            case 'unverified':
-                $vendor->setStatus(VendorInterface::STATUS_UNVERIFIED);
-
-                break;
-        }
-
-        $this->entityManager->persist($vendorAddress);
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }

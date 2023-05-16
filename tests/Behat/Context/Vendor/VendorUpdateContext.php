@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
 use BitBag\OpenMarketplace\Entity\VendorAddressUpdate;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
@@ -22,6 +22,8 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,18 +39,26 @@ class VendorUpdateContext extends RawMinkContext
 
     private VendorImageFactoryInterface $vendorImageFactory;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
+    private FactoryInterface $countryFactory;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
         ObjectManager $manager,
         VendorImageFactoryInterface $vendorImageFactory,
+        ExampleFactoryInterface $vendorExampleFactory,
+        FactoryInterface $countryFactory,
         ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
         $this->manager = $manager;
         $this->vendorImageFactory = $vendorImageFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
+        $this->countryFactory = $countryFactory;
     }
 
     /**
@@ -59,6 +69,7 @@ class VendorUpdateContext extends RawMinkContext
         $vendor_user_email,
         $country_code
     ): void {
+        /** @var ShopUserInterface $user */
         $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
         $user->setVerifiedAt(new \DateTime());
         $user->addRole('ROLE_USER');
@@ -69,19 +80,29 @@ class VendorUpdateContext extends RawMinkContext
         $this->userRepository->add($user);
 
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
-        $vendor = new Vendor();
-        $vendor->setCompanyName('Test');
+        if (null === $country) {
+            /** @var CountryInterface $country */
+            $country = $this->countryFactory->createNew();
+            $country->setCode($country_code);
+            $country->enable();
+            $this->manager->persist($country);
+        }
+
+        $options = [
+            'company_name' => 'Test',
+            'phone_number' => '333333333',
+            'tax_identifier' => '543455',
+            'street' => 'Secret 13',
+            'city' => 'Warsaw',
+            'postcode' => '00-111',
+            'slug' => 'vendor-slug',
+            'description' => 'description',
+            'country' => $country,
+            'status' => $status,
+        ];
+
+        $vendor = $this->vendorExampleFactory->create($options);
         $vendor->setShopUser($user);
-        $vendor->setPhoneNumber('333333333');
-        $vendor->setTaxIdentifier('543455');
-        $vendor->setVendorAddress(new VendorAddress());
-        $vendor->getVendorAddress()->setCountry($country);
-        $vendor->getVendorAddress()->setCity('Warsaw');
-        $vendor->getVendorAddress()->setPostalCode('00-111');
-        $vendor->getVendorAddress()->setStreet('Secret 13');
-        $vendor->setSlug('vendor-slug');
-        $vendor->setDescription('description');
-        $vendor->setStatus($status);
         $this->manager->persist($vendor);
         $this->manager->flush();
         $this->sharedStorage->set('vendor', $vendor);

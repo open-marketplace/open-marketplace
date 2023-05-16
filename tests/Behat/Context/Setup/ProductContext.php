@@ -13,11 +13,13 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\ProductRepository;
 use BitBag\OpenMarketplace\Repository\VendorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
@@ -41,6 +43,8 @@ class ProductContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
         ShopUserExampleFactory $userExampleFactory,
         VendorRepository $vendorRepository,
@@ -49,8 +53,9 @@ class ProductContext implements Context
         EntityManagerInterface $manager,
         ProductExampleFactory $productExampleFactory,
         TaxonExampleFactory $taxonFactory,
-        SharedStorageInterface $sharedStorage
-    ) {
+        SharedStorageInterface $sharedStorage,
+        ExampleFactoryInterface $vendorExampleFactory,
+        ) {
         $this->vendorRepository = $vendorRepository;
         $this->productVariantRepository = $productVariantRepository;
         $this->productRepository = $productRepository;
@@ -59,6 +64,7 @@ class ProductContext implements Context
         $this->productExampleFactory = $productExampleFactory;
         $this->taxonFactory = $taxonFactory;
         $this->sharedStorage = $sharedStorage;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -110,17 +116,23 @@ class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
-    private function createDefaultVendor(): Vendor
+    private function createDefaultVendor(): VendorInterface
     {
         $userFactory = $this->userExampleFactory;
         $user = $userFactory->create();
-        $vendor = new Vendor();
+
+        $options = [
+            'company_name' => 'company',
+            'phone_number' => '333',
+            'tax_identifier' => '111',
+            'slug' => 'SLUG',
+            'description' => 'description',
+        ];
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorExampleFactory->create($options);
         $vendor->setShopUser($user);
-        $vendor->setCompanyName('company');
-        $vendor->setTaxIdentifier('111');
-        $vendor->setPhoneNumber('333');
-        $vendor->setSlug('SLUG');
-        $vendor->setDescription('description');
+
         $this->manager->persist($user);
 
         return $vendor;
