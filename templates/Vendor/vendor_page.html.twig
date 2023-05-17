@@ -7,10 +7,8 @@
     <div class="ui stackable grid">
         <div class="sixteen wide column vendor-banner">
             {% if vendor.getBackgroundImage is not null %}
-                <img id="vendor_banner" src="{{ '/media/image/' ~ vendor.getBackgroundImage.path }}" alt="image broken">
+                <img id="vendor_banner" src="{{ '/media/cache/resolve/open_marketplace_vendor_background/' ~ vendor.getBackgroundImage.path }}" alt="image broken">
             {% endif %}
-        </div>
-        <div class="four wide column">
             <div class="vendor-positioning">
                 <div class="vendor-content">
                     {% if vendor.getImage is not null %}
@@ -32,6 +30,8 @@
                     {% endif %}
                 </div>
             </div>
+        </div>
+        <div class="four wide column">
             <div class="ui card">
                 <div style="display: inline-block" class="content">
                     <div class="header">

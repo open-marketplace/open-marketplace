@@ -20,13 +20,15 @@
 }
 .vendor-positioning{
   max-height: 80%;
-  max-width: 25%;
   position: absolute;
-  left: 5%;
-  bottom: 10%;
+  top: 0;
+  left: 0;
+  margin-top: 4rem;
+  margin-left: 2.5rem;
   background-color: white;
   color: black;
   padding: 4px;
+  padding-right: 28px;
   font-size: 17px;
   line-height: 18px;
   border: 1px solid #E0E0E0;
