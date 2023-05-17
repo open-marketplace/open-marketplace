@@ -15,7 +15,7 @@ use ApiTestCase\JsonApiTestCase;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
 use BitBag\OpenMarketplace\Entity\Vendor;
 
-class DraftAttributeRepositoryTest extends JsonApiTestCase
+final class DraftAttributeRepositoryTest extends JsonApiTestCase
 {
     public function setUp(): void
     {

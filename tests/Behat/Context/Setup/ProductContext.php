@@ -25,12 +25,14 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 class ProductContext implements Context
@@ -93,7 +95,7 @@ class ProductContext implements Context
     public function storeHasProductsFromSameVendor($productsCount): void
     {
         $this->createTaxon();
-        $vendor = $this->createDefaultVendor();
+        $vendor = $this->createDefaultVendor(null);
         for ($i = 1; $i <= $productsCount; ++$i) {
             $products[$i] = $this->createDefaultProduct();
             $products[$i]->setVendor($vendor);
@@ -111,7 +113,7 @@ class ProductContext implements Context
     {
         $this->createTaxon();
         for ($i = 1; $i <= $productsCount; ++$i) {
-            $vendors[$i] = $this->createDefaultVendor();
+            $vendors[$i] = $this->createDefaultVendor($i);
             $products[$i] = $this->createDefaultProduct();
             $products[$i]->setVendor($vendors[$i]);
             $this->vendorRepository->add($vendors[$i]);
@@ -129,7 +131,7 @@ class ProductContext implements Context
         $name = 'product-';
         $basePrice = 100;
         for ($i = 1; $i <= $vendorsCount; ++$i) {
-            $vendors[$i] = $this->createDefaultVendor();
+            $vendors[$i] = $this->createDefaultVendor($i);
             $products[$i] = $this->createProduct(sprintf('%s%d', $name, $i), $vendors[$i], $basePrice * $i);
             $this->vendorRepository->add($vendors[$i]);
             $this->productRepository->add($products[$i]);
@@ -224,8 +226,54 @@ class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
-    private function createDefaultVendor(): Vendor
+    /**
+     * @Given product belongs to :taxonSlug taxon
+     */
+    public function onlyOneProductBelongsToTaxon($taxonSlug)
     {
+        $channel = $this->sharedStorage->get('channel');
+        $menuTaxon = $channel->getMenuTaxon();
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->taxonFactory->create();
+        $taxon->setCode('code');
+        $taxon->setSlug($taxonSlug);
+        $taxon->setEnabled(true);
+
+        $taxon->setParent($menuTaxon);
+
+        $products = $this->sharedStorage->get('products');
+
+        $products[1]->setMainTaxon($taxon);
+
+        $productTaxon = new ProductTaxon();
+        $productTaxon->setProduct($products[1]);
+        $productTaxon->setTaxon($taxon);
+
+        $this->manager->persist($productTaxon);
+        $this->manager->persist($products[1]);
+        $this->manager->persist($taxon);
+        $this->manager->flush();
+    }
+
+    /**
+     * @Given product has name :name
+     */
+    public function productHasName($name)
+    {
+        $products = $this->sharedStorage->get('products');
+
+        $products[1]->setName($name);
+
+        $this->manager->persist($products[1]);
+
+        $this->manager->flush();
+    }
+
+    private function createDefaultVendor(?int $iteration): Vendor
+    {
+        if (1 === $iteration) {
+            $iteration = null;
+        }
         $userFactory = $this->userExampleFactory;
         $user = $userFactory->create();
         $vendor = new Vendor();
@@ -233,7 +281,7 @@ class ProductContext implements Context
         $vendor->setCompanyName('company');
         $vendor->setTaxIdentifier('111');
         $vendor->setPhoneNumber('333');
-        $vendor->setSlug('SLUG');
+        $vendor->setSlug('SLUG' . "$iteration");
         $vendor->setDescription('description');
         $this->manager->persist($user);
 
@@ -251,6 +299,9 @@ class ProductContext implements Context
     private function createTaxon()
     {
         $taxon = $this->taxonFactory->create();
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setMenuTaxon($taxon);
+        $this->manager->persist($channel);
         $this->manager->persist($taxon);
         $this->manager->flush();
     }

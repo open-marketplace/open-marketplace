@@ -48,6 +48,12 @@
             <tag name="form.type"/>
         </service>
 
+        <service id="open_marketplace.form.type.vendor_background_image"
+                 class="BitBag\OpenMarketplace\Form\VendorBackgroundImageType">
+            <argument>BitBag\OpenMarketplace\Entity\VendorBackgroundImage</argument>
+            <tag name="form.type"/>
+        </service>
+
         <service id="mvm.form.type.conversation"
                  class="BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType">
             <argument type="service" id="open_marketplace.current_user_resolver" />

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\EventListener;
 
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
@@ -51,6 +52,21 @@ final class VendorRegisterListener
             $this->fileUploader->upload($vendorImage);
 
             $vendorImage->setOwner($vendor);
+        }
+    }
+
+    public function uploadBackgroundImage(ResourceControllerEvent $event): void
+    {
+        /** @var VendorInterface $vendor */
+        $vendor = $event->getSubject();
+
+        /** @var VendorBackgroundImageInterface $vendorBackgroundImage */
+        $vendorBackgroundImage = $vendor->getBackgroundImage();
+
+        if (null !== $vendorBackgroundImage) {
+            $this->fileUploader->upload($vendorBackgroundImage);
+
+            $vendorBackgroundImage->setOwner($vendor);
         }
     }
 

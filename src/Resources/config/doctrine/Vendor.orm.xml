@@ -41,6 +41,14 @@
                 <cascade-all />
             </cascade>
         </one-to-one>
+        <one-to-one field="backgroundImage"
+                    target-entity="BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface"
+                    mapped-by="owner"
+                    orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-one>
         <one-to-many field="products"
                      target-entity="BitBag\OpenMarketplace\Entity\ProductInterface"
                      mapped-by="vendor">

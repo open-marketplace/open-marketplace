@@ -30,6 +30,12 @@
             <tag name="security.voter"/>
         </service>
 
+        <service class="BitBag\OpenMarketplace\Api\Security\Voter\VendorBackgroundImageVoter"
+                 id="bitbag.open_marketplace.api.security.voter.vendor_background_image">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="security.voter"/>
+        </service>
+
         <service class="BitBag\OpenMarketplace\Api\Security\Voter\VendorAwareVoter"
             id="bitbag.open_marketplace.api.security.voter.vendor_aware">
             <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />

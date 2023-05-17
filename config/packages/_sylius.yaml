@@ -54,6 +54,13 @@ sylius_shipping:
                 model: BitBag\OpenMarketplace\Entity\Shipment
                 interface: BitBag\OpenMarketplace\Entity\ShipmentInterface
 
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                model: Sylius\Component\Core\Model\Taxon
+                repository: BitBag\OpenMarketplace\Repository\TaxonRepository
+
 sylius_ui:
     events:
         sylius.shop.checkout.header:
@@ -71,4 +78,3 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.shop.checkout.address.after_header # Intentionally using "address" event for backwards compatibility
-
