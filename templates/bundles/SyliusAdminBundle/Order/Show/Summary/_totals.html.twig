@@ -1,4 +1,4 @@
-{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
 
 {% set orderShippingPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
@@ -20,7 +20,7 @@
 
 <tr>
     <td colspan="5" id="commission">
-        <p><small>{{ 'open_marketplace.ui.commission'|trans }} ({{ 'sylius.ui.included_in_price'|trans }})</small></p>
+            <p><small>{{ 'open_marketplace.ui.commission'|trans }} ({{ 'sylius.ui.included_in_price'|trans }})</small></p>
     </td>
     <td colspan="4" id="shipping-total" class="right aligned">
         <strong>{{ 'open_marketplace.ui.commission'|trans }}</strong>:
@@ -86,7 +86,7 @@
     </td>
 </tr>
 
-{% include 'Vendor/Order/Partials/_totalsPromotions.html.twig' %}
+{% include '@SyliusAdmin/Order/Show/Summary/_totalsPromotions.html.twig' %}
 
 <tr>
     <td colspan="9" id="total" class="ui large header right aligned">

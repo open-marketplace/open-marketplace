@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
+use Behat\MinkExtension\Context\MinkContext;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\VendorSettlementInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +20,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class VendorSettlementContext implements Context
+final class VendorSettlementContext extends MinkContext implements Context
 {
     private OrderRepositoryInterface $orderRepository;
 
@@ -68,17 +69,79 @@ final class VendorSettlementContext implements Context
 
         /** @var OrderInterface $order */
         foreach ($orders as $order) {
-            Assert::null($order->getCommissionTotal());
+            Assert::eq(0, $order->getCommissionTotal());
         }
+    }
+
+    /**
+     * @Then /^I should see valid commission information's$/
+     */
+    public function iShouldSeeCommissionInformations()
+    {
+        $text = $this->getSession()->getPage()->getText();
+
+//      Make sure that commission is displayed
+        Assert::true(str_contains($text, 'Commission (Included in price)'));
+        Assert::true(str_contains($text, 'Commission:'));
+
+        $urlArray = explode('/', $this->getSession()->getCurrentUrl());
+        $orderId = (int) end($urlArray);
+        /** @var OrderInterface $order */
+        $order = $this->orderRepository->find($orderId);
+        $decimalCommission = number_format($order->getCommissionTotal() / 100, 2, '.', ',');
+
+//      Make  sure that displayed commission is correct
+        $this->commissionDisplayedShouldBeEqual($decimalCommission);
+    }
+
+    /**
+     * @Then /^I should see no commission$/
+     */
+    public function iShouldSeeNoCommission()
+    {
+        $text = $this->getSession()->getPage()->getText();
+
+//      Make sure that commission is displayed
+        Assert::true(str_contains($text, 'Commission (Included in price)'));
+        Assert::true(str_contains($text, 'Commission:'));
+        $this->commissionDisplayedShouldBeEqual('0.00');
+    }
+
+    private function commissionDisplayedShouldBeEqual(string $value)
+    {
+        $text = $this->getSession()->getPage()->getText();
+        $pattern = '/Commission: \$([\d.,]+)/';
+        preg_match($pattern, $text, $matches);
+        Assert::eq($matches[1], $value);
     }
 
     private function calculateNetCommision(OrderInterface $order, int $commission): int
     {
-        return $order->getItemsTotal() * (1 + $commission / 100);
+        $floatTotal = $order->getItemsTotal() / 100;
+
+        $floatCommission = round(($floatTotal * ($commission / 100)), 2);
+        $intCommission = $floatCommission * 100;
+
+        return (int) $intCommission;
     }
 
     private function calculateGrossCommision(OrderInterface $order, int $commission): int
     {
-        return $order->getTotal() * (1 + $commission / 100);
+        $commission = $order->getVendor()->getVendorSettlement()->getCommission();
+
+        $floatTotal = $order->getTotal() / 100;
+
+        $floatCommission = round(($floatTotal * ($commission / 100)), 2);
+        $intCommission = $floatCommission * 100;
+
+        return (int) $intCommission;
+    }
+
+    /**
+     * @Given I test stuff
+     */
+    public function iTestStuff()
+    {
+        dd('stop');
     }
 }

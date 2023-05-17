@@ -11,6 +11,10 @@
             <tag name="open_marketplace.vendor_commission_calculator" default-priority-method="getPriority" />
         </instanceof>
 
+        <service class="BitBag\OpenMarketplace\Calculator\NoVendorCommissionCalculator"
+                 id="open_marketplace.vendor_commission_calculator.no_vendor">
+        </service>
+
         <service class="BitBag\OpenMarketplace\Calculator\VendorNetCommissionCalculator"
                  id="open_marketplace.vendor_commission_calculator.net">
         </service>

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\ProductRepository;
@@ -24,6 +25,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 class ProductContext implements Context
 {
@@ -45,6 +47,8 @@ class ProductContext implements Context
 
     private ExampleFactoryInterface $vendorExampleFactory;
 
+    private UserRepositoryInterface $userRepository;
+
     public function __construct(
         ShopUserExampleFactory $userExampleFactory,
         VendorRepository $vendorRepository,
@@ -55,6 +59,7 @@ class ProductContext implements Context
         TaxonExampleFactory $taxonFactory,
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $vendorExampleFactory,
+        UserRepositoryInterface $userRepository,
         ) {
         $this->vendorRepository = $vendorRepository;
         $this->productVariantRepository = $productVariantRepository;
@@ -65,6 +70,7 @@ class ProductContext implements Context
         $this->taxonFactory = $taxonFactory;
         $this->sharedStorage = $sharedStorage;
         $this->vendorExampleFactory = $vendorExampleFactory;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -85,7 +91,41 @@ class ProductContext implements Context
     }
 
     /**
+     * @Given store has :productsCount products from vendor :username
+     */
+    public function storeHasProductsFromVendorNamed($productsCount, $username): void
+    {
+        $this->createTaxon();
+        /** @var ShopUserInterface $user */
+        $user = $this->userRepository->findOneBy(['username' => $username]);
+        $vendor = $user->getVendor();
+        for ($i = 1; $i <= $productsCount; ++$i) {
+            $products[$i] = $this->createDefaultProduct();
+            $products[$i]->setVendor($vendor);
+            $this->vendorRepository->add($vendor);
+            $this->productRepository->add($products[$i]);
+
+            $this->sharedStorage->set('products', $products);
+        }
+    }
+
+    /**
+     * @Given store has :productsCount products created by admin
+     */
+    public function storeHasProductsFromAdmin($productsCount): void
+    {
+        $this->createTaxon();
+        for ($i = 1; $i <= $productsCount; ++$i) {
+            $products[$i] = $this->createDefaultProduct();
+            $this->productRepository->add($products[$i]);
+
+            $this->sharedStorage->set('products', $products);
+        }
+    }
+
+    /**
      * @Given store has :productsCount products from different Vendors
+     * @Given store has :productsCount products from different Vendors with default commission settings
      */
     public function storeHasProductsFromDifferentVendors($productsCount)
     {

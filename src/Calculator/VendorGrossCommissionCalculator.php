@@ -9,34 +9,42 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\Calculator;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorSettlementInterface;
 
 class VendorGrossCommissionCalculator implements VendorCommissionCalculatorInterface
 {
-
     public function calculate(OrderInterface $order): int
     {
-        if ($order->isPrimary()){
+        if ($order->isPrimary()) {
             throw new \Exception('Primary order cannot be used for gross commission');
         }
 
-        $commission = $order->getVendor()->getVendorSettlement()->getCommission();
+        /** @var VendorInterface $vendor */
+        $vendor = $order->getVendor();
+        /** @var VendorSettlementInterface $vendorSettlement */
+        $vendorSettlement = $vendor->getVendorSettlement();
+        $commission = $vendorSettlement->getCommission();
 
         $floatTotal = $order->getTotal() / 100;
 
         $floatCommission = round(($floatTotal * ($commission / 100)), 2);
         $intCommission = $floatCommission * 100;
 
-        return (int)$intCommission;
+        return (int) $intCommission;
     }
 
     public function supports(OrderInterface $order): bool
     {
-        return $order->getVendor()->getVendorSettlement()->getCommissionType() === VendorSettlementInterface::GROSS_COMMISSION;
+        /** @var VendorInterface $vendor */
+        $vendor = $order->getVendor();
+        /** @var VendorSettlementInterface $vendorSettlement */
+        $vendorSettlement = $vendor->getVendorSettlement();
+
+        return VendorSettlementInterface::GROSS_COMMISSION === $vendorSettlement->getCommissionType();
     }
 
     public static function getDefaultPriority(): int

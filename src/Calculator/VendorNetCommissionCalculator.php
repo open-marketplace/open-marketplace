@@ -9,34 +9,42 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\Calculator;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorSettlementInterface;
 
 class VendorNetCommissionCalculator implements VendorCommissionCalculatorInterface
 {
-
     public function calculate(OrderInterface $order): int
     {
         if ($order->isPrimary()) {
             throw new \Exception('Primary order cannot be used for net commission');
         }
 
-        $commission = $order->getVendor()->getVendorSettlement()->getCommission();
+        /** @var VendorInterface $vendor */
+        $vendor = $order->getVendor();
+        /** @var VendorSettlementInterface $vendorSettlement */
+        $vendorSettlement = $vendor->getVendorSettlement();
+        $commission = $vendorSettlement->getCommission();
 
         $floatTotal = $order->getItemsTotal() / 100;
 
         $floatCommission = round(($floatTotal * ($commission / 100)), 2);
         $intCommission = $floatCommission * 100;
 
-        return (int)$intCommission;
+        return (int) $intCommission;
     }
 
     public function supports(OrderInterface $order): bool
     {
-        return $order->getVendor()->getVendorSettlement()->getCommissionType() === VendorSettlementInterface::NET_COMMISSION;
+        /** @var VendorInterface $vendor */
+        $vendor = $order->getVendor();
+        /** @var VendorSettlementInterface $vendorSettlement */
+        $vendorSettlement = $vendor->getVendorSettlement();
+
+        return VendorSettlementInterface::NET_COMMISSION === $vendorSettlement->getCommissionType();
     }
 
     public static function getDefaultPriority(): int

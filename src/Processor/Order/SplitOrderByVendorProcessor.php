@@ -29,9 +29,7 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     private PaymentRefresherInterface $paymentRefresher;
 
-    /**
-     * @var VendorCommissionCalculatorInterface[]
-     */
+    /** @var VendorCommissionCalculatorInterface[] */
     private iterable $commissionCalculators;
 
     public function __construct(
@@ -39,8 +37,7 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
         iterable $commissionCalculators
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->orderManager = $orderManager;
         $this->paymentRefresher = $paymentRefresher;
@@ -101,6 +98,7 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
                 return $commissionCalculator->calculate($order);
             }
         }
+
         throw new \RuntimeException('No commission calculator found for order');
     }
 }

@@ -32,7 +32,7 @@ trait OrderTrait
     /** @var Collection<int, OrderInterface> */
     protected Collection $secondaryOrders;
 
-    protected ?int $commissionTotal = null;
+    protected int $commissionTotal = 0;
 
     protected string $mode = self::PRIMARY_ORDER_MODE;
 
