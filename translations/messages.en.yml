@@ -58,6 +58,8 @@ open_marketplace:
         pending_update_message: Your profile has been edited. Please approve the changes by clicking on the link in the email sent to you.
         vendors: Vendors
         logo: Logo
+        background: Background
+        review: Review
         invalid_logo: Please upload a valid image (jpg/png/svg)
         description: Description
         shipping_methods: Shipping methods

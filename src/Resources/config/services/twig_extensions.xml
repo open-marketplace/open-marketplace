@@ -9,6 +9,7 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.context.channel.composite"/>
             <tag name="twig.extension" />
         </service>
 

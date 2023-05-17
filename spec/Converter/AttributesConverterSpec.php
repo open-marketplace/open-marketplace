@@ -101,6 +101,7 @@ final class AttributesConverterSpec extends ObjectBehavior
 
         $draftAttribute->setProductAttribute($newProductAttribute)->shouldBeCalledOnce();
         $entityManager->persist($newProductAttribute)->shouldBeCalledOnce();
+        $entityManager->flush()->shouldBeCalledOnce();
         $attributeTranslationCloner->clone($draftAttribute)->shouldBeCalledOnce();
 
         $this->convert($productDraft, $product);

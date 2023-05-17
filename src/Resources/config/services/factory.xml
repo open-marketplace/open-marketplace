@@ -70,6 +70,9 @@
         <service class="BitBag\OpenMarketplace\Factory\VendorImageFactory"
                  id="open_marketplace.service.vendor_image_factory" />
 
+        <service class="BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactory"
+                 id="open_marketplace.service.vendor_background_image_factory" />
+
         <service class="BitBag\OpenMarketplace\Factory\AddressFactory"
                  id="bitbag.mvm.factory.address_factory"/>
 
@@ -92,6 +95,9 @@
 
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactory"
                  id="open_marketplace.service.vendor_profile_image_factory" />
+
+        <service class="BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactory"
+                 id="open_marketplace.service.vendor_profile_background_image_factory" />
 
         <service class="BitBag\OpenMarketplace\Factory\DraftAttributeFactory"
                  id="open_marketplace.factory.draftAttribute" >

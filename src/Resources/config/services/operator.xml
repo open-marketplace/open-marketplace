@@ -20,6 +20,12 @@
             <argument type="service" id="open_marketplace.service.vendor_image_factory"/>
         </service>
 
+        <service class="BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperator"
+                 id="open_marketplace.operator.vendor_background">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="open_marketplace.service.vendor_background_image_factory"/>
+        </service>
+
         <service class="BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperator"
                  id="open_marketplace.operator.product_draft_taxons">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>

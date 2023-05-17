@@ -109,3 +109,7 @@ BitBag\OpenMarketplace\Entity\VendorImage:
     vendor_image_peter:
         owner: "@vendor_peter"
         path: "/dummy/file/path"
+BitBag\OpenMarketplace\Entity\VendorBackgroundImage:
+    vendor_backgroundimage_peter:
+        owner: "@vendor_peter"
+        path: "/dummy/file/path"
