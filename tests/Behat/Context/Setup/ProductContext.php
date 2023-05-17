@@ -131,7 +131,7 @@ class ProductContext implements Context
         $name = 'product-';
         $basePrice = 100;
         for ($i = 1; $i <= $vendorsCount; ++$i) {
-            $vendors[$i] = $this->createDefaultVendor();
+            $vendors[$i] = $this->createDefaultVendor($i);
             $products[$i] = $this->createProduct(sprintf('%s%d', $name, $i), $vendors[$i], $basePrice * $i);
             $this->vendorRepository->add($vendors[$i]);
             $this->productRepository->add($products[$i]);
