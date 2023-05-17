@@ -22,6 +22,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="path">/shop/account/vendor/register</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Registers as a new vendor</attribute>
+                    <attribute name="description">Body parameter `country` accept id of Country e.g. `/api/v2/shop/countries/EU`.</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:account:vendor:create</attribute>
@@ -32,6 +33,14 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor</attribute>
                 <attribute name="status">201</attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/vendors</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:vendor:read</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -52,6 +61,14 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/vendors/{uuid}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:vendor:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="vendor_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="validation_groups">
@@ -59,11 +76,29 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     <attribute>VendorUser</attribute>
                 </attribute>
                 <attribute name="path">/shop/account/vendor/{uuid}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">Body parameter `country` accept id of Country e.g. `/api/v2/shop/countries/EU`.</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:account:vendor:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="validation_groups">
+                    <attribute>Default</attribute>
+                    <attribute>VendorUser</attribute>
+                </attribute>
+                <attribute name="path">/admin/vendors/{uuid}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:vendor:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:vendor:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

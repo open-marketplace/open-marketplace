@@ -21,10 +21,6 @@
     {{ form_row(form.description) }}
     {{ form_row(form.vendorAddress) }}
 
-    <div style="display: none">
-        {{ form_row(form.shopUser) }}
-    </div>
-
     {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
 
     <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('register-button') }}>

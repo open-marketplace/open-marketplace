@@ -47,5 +47,10 @@
             <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />
             <tag name="security.voter"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Api\Security\Voter\VendorOwnsVariantVoter"
+                 id="bitbag.open_marketplace.api.security.voter.vendor_owns_variant_voter">
+            <tag name="security.voter"/>
+        </service>
     </services>
 </container>

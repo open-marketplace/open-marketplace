@@ -13,6 +13,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\ProductRepository;
 use BitBag\OpenMarketplace\Repository\VendorRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,16 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
 use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Factory\ProductFactoryInterface;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 class ProductContext implements Context
 {
@@ -43,6 +54,14 @@ class ProductContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private SlugGeneratorInterface $slugGenerator;
+
+    private ProductVariantResolverInterface $defaultVariantResolver;
+
+    private ProductFactoryInterface $productFactory;
+
+    private FactoryInterface $channelPricingFactory;
+
     public function __construct(
         ShopUserExampleFactory $userExampleFactory,
         VendorRepository $vendorRepository,
@@ -51,8 +70,12 @@ class ProductContext implements Context
         EntityManagerInterface $manager,
         ProductExampleFactory $productExampleFactory,
         TaxonExampleFactory $taxonFactory,
-        SharedStorageInterface $sharedStorage
-    ) {
+        SharedStorageInterface $sharedStorage,
+        SlugGeneratorInterface $slugGenerator,
+        ProductVariantResolverInterface $defaultVariantResolver,
+        ProductFactoryInterface $productFactory,
+        FactoryInterface $channelPricingFactory,
+        ) {
         $this->vendorRepository = $vendorRepository;
         $this->productVariantRepository = $productVariantRepository;
         $this->productRepository = $productRepository;
@@ -61,6 +84,10 @@ class ProductContext implements Context
         $this->productExampleFactory = $productExampleFactory;
         $this->taxonFactory = $taxonFactory;
         $this->sharedStorage = $sharedStorage;
+        $this->slugGenerator = $slugGenerator;
+        $this->defaultVariantResolver = $defaultVariantResolver;
+        $this->productFactory = $productFactory;
+        $this->channelPricingFactory = $channelPricingFactory;
     }
 
     /**
@@ -95,6 +122,94 @@ class ProductContext implements Context
 
             $this->sharedStorage->set('products', $products);
         }
+    }
+
+    /**
+     * @Given store has :vendorsCount vendors with different product each
+     */
+    public function storeHasVendorsWithDifferentProductEach(int $vendorsCount)
+    {
+        $name = 'product-';
+        $basePrice = 100;
+        for ($i = 1; $i <= $vendorsCount; ++$i) {
+            $vendors[$i] = $this->createDefaultVendor();
+            $products[$i] = $this->createProduct(sprintf('%s%d', $name, $i), $vendors[$i], $basePrice * $i);
+            $this->vendorRepository->add($vendors[$i]);
+            $this->productRepository->add($products[$i]);
+
+            $this->sharedStorage->set('products', $products);
+        }
+    }
+
+    private function createProduct(
+        string $productName,
+        VendorInterface $vendor,
+        int $price = 100,
+        string $date = 'now',
+        ChannelInterface $channel = null
+    ): \Sylius\Component\Core\Model\ProductInterface {
+        if (null === $channel && $this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+        }
+
+        $date = new \DateTime($date);
+
+        /** @var ProductInterface $product */
+        $product = $this->productFactory->createWithVariant();
+
+        $product->setCode(StringInflector::nameToUppercaseCode($productName));
+        $product->setName($productName);
+        $product->setSlug($this->slugGenerator->generate($productName));
+        $product->setVendor($vendor);
+        $product->setCreatedAt($date);
+
+        if (null !== $channel) {
+            $product->addChannel($channel);
+
+            foreach ($channel->getLocales() as $locale) {
+                $product->setFallbackLocale($locale->getCode());
+                $product->setCurrentLocale($locale->getCode());
+
+                $product->setName($productName);
+                $product->setSlug($this->slugGenerator->generate($productName));
+            }
+        }
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+
+        if (null !== $channel) {
+            $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        }
+
+        $productVariant->setCode($product->getCode());
+        $productVariant->setName($product->getName());
+        $productVariant->setCreatedAt($date);
+        $productVariant->setUpdatedAt($date);
+
+        return $product;
+    }
+
+    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null)
+    {
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $this->channelPricingFactory->createNew();
+        $channelPricing->setPrice($price);
+        $channelPricing->setChannelCode($channel->getCode());
+
+        return $channelPricing;
+    }
+
+    /**
+     * @Then product on hand count should be :count
+     */
+    public function productOnHoldCountShouldBe(int $count)
+    {
+        $product = $this->sharedStorage->get('product');
+
+        $variant = $this->productVariantRepository->findOneBy(['product' => $product]);
+        $this->manager->refresh($variant);
+        Assert::same($count, $variant->getOnHand());
     }
 
     /**

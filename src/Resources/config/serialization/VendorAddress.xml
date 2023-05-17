@@ -12,21 +12,29 @@ We are hiring developers from all over the world. Join us and start your new, ex
 >
     <class name="BitBag\OpenMarketplace\Entity\VendorAddress">
         <attribute name="country">
+            <group>admin:vendor:read</group>
+            <group>admin:vendor:update</group>
             <group>shop:account:vendor:create</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="city">
+            <group>admin:vendor:read</group>
+            <group>admin:vendor:update</group>
             <group>shop:account:vendor:create</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="street">
+            <group>admin:vendor:read</group>
+            <group>admin:vendor:update</group>
             <group>shop:account:vendor:create</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
         <attribute name="postalCode">
+            <group>admin:vendor:read</group>
+            <group>admin:vendor:update</group>
             <group>shop:account:vendor:create</group>
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
