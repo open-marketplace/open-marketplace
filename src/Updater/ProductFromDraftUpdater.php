@@ -103,7 +103,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
         $productVariant->setShippingCategory($productDraft->getShippingCategory());
 
         /** @var ProductListingPriceInterface $productListingPrice */
-        foreach ($productDraft->getProductListingPrice() as $productListingPrice) {
+        foreach ($productDraft->getProductListingPrices() as $productListingPrice) {
             /** @var ChannelPricing $channelPricing */
             $channelPricing = $this->channelPricingRepository->findOneBy(['productVariant' => $productVariant, 'channelCode' => $productListingPrice->getChannelCode()]);
 

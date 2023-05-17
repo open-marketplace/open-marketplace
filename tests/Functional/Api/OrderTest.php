@@ -67,14 +67,14 @@ final class OrderTest extends FunctionalTestCase
         $this->assertResponse($response, 'Api/OrderTest/test_it_get_order_by_vendor', Response::HTTP_OK);
     }
 
-    public function test_not_found_get_order_by_different_vendor(): void
+    public function test_forbidden_get_order_by_different_vendor(): void
     {
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
 
         $this->client->request('GET', '/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_1', [], [], $header);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_denies_access_get_order_by_user_without_vendor_context(): void
@@ -114,7 +114,7 @@ final class OrderTest extends FunctionalTestCase
         $this->client->request('PATCH', '/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_2/cancel', [], [], $header);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_it_cancel_order_by_user_without_vendor_context(): void
@@ -125,5 +125,25 @@ final class OrderTest extends FunctionalTestCase
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_get_shop_orders_by_user(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
+
+        $this->client->request('GET', '/api/v2/shop/orders', [], [], $header);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/OrderTest/test_get_shop_orders_by_shop_user', Response::HTTP_OK);
+    }
+
+    public function test_get_shop_orders_by_vendor(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+
+        $this->client->request('GET', '/api/v2/shop/orders', [], [], $header);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/OrderTest/test_get_shop_orders_by_vendor', Response::HTTP_OK);
     }
 }

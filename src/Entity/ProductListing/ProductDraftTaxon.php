@@ -11,11 +11,14 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 class ProductDraftTaxon implements ProductDraftTaxonInterface
 {
     protected mixed $id;
+
+    protected ?UuidInterface $uuid = null;
 
     protected ProductDraftInterface|null $productDraft;
 
@@ -26,6 +29,16 @@ class ProductDraftTaxon implements ProductDraftTaxonInterface
     public function getId(): mixed
     {
         return $this->id;
+    }
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 
     public function getProductDraft(): ?ProductDraftInterface

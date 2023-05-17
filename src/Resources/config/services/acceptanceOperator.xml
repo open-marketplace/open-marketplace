@@ -9,7 +9,6 @@
             <argument type="service" id="open_marketplace.updater.product_from_draft_updater"/>
             <argument type="service" id="open_marketplace.operator.product_draft_files"/>
             <argument type="service" id="open_marketplace.attributes_converter"/>
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="open_marketplace.operator.product_draft_taxons"/>
         </service>
     </services>

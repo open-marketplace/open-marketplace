@@ -12,17 +12,26 @@ namespace spec\BitBag\OpenMarketplace\Api\Provider;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\Provider\PathPrefixProvider;
+use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class PathPrefixProviderSpec extends ObjectBehavior
 {
     public function let(
         PathPrefixProviderInterface $pathPrefixProvider,
         VendorContextInterface $vendorContext,
-    ) {
-        $this->beConstructedWith($pathPrefixProvider, $vendorContext, 'api/v2/shop/account/vendor');
+        SectionProviderInterface $sectionProvider
+    ): void {
+        $this->beConstructedWith(
+            $pathPrefixProvider,
+            $vendorContext,
+            $sectionProvider,
+            'api/v2/shop/account/vendor'
+        );
     }
 
     public function it_is_initializable(): void
@@ -44,10 +53,13 @@ final class PathPrefixProviderSpec extends ObjectBehavior
         $this->getPathPrefix('api/v2/shop/account/something')->shouldReturn('base');
     }
 
-    public function it_return_shop_vendor_prefix_if_currently_legged_in_is_vendor(
+    public function it_return_shop_vendor_prefix_if_currently_legged_in_is_vendor_and_shop_vendor_section(
         VendorContextInterface $vendorContext,
         VendorInterface $vendor,
+        SectionProviderInterface $sectionProvider,
+        ShopVendorApiSection $section
     ): void {
+        $sectionProvider->getSection()->willReturn($section);
         $vendorContext->getVendor()->willReturn($vendor);
 
         $this->getCurrentPrefix()->shouldReturn('shop_vendor');
@@ -57,6 +69,19 @@ final class PathPrefixProviderSpec extends ObjectBehavior
         VendorContextInterface $vendorContext,
         PathPrefixProviderInterface $pathPrefixProvider,
     ): void {
+        $vendorContext->getVendor()->willReturn(null);
+        $pathPrefixProvider->getCurrentPrefix()->willReturn('base');
+
+        $this->getCurrentPrefix()->shouldReturn('base');
+    }
+
+    public function it_run_base_method_if_currently_legged_in_is_vendor_and_shop_section(
+        VendorContextInterface $vendorContext,
+        PathPrefixProviderInterface $pathPrefixProvider,
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $section
+    ): void {
+        $sectionProvider->getSection()->willReturn($section);
         $vendorContext->getVendor()->willReturn(null);
         $pathPrefixProvider->getCurrentPrefix()->willReturn('base');
 

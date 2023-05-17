@@ -14,6 +14,7 @@ namespace BitBag\OpenMarketplace\Entity\ProductListing;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -25,13 +26,13 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 {
     protected ?int $id = null;
 
+    protected ?UuidInterface $uuid = null;
+
     protected string $code;
 
     protected bool $shippingRequired = false;
 
     protected ?ShippingCategoryInterface $shippingCategory = null;
-
-    protected ?VendorInterface $vendor = null;
 
     protected bool $isVerified;
 
@@ -52,7 +53,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     protected Collection $translations;
 
     /** @var Collection<int|string, ProductListingPriceInterface> */
-    protected Collection $productListingPrice;
+    protected Collection $productListingPrices;
 
     protected ProductListingInterface $productListing;
 
@@ -69,7 +70,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         $this->images = new ArrayCollection();
         $this->code = '';
         $this->status = ProductDraftInterface::STATUS_CREATED;
-        $this->productListingPrice = new ArrayCollection();
+        $this->productListingPrices = new ArrayCollection();
         $this->translations = new ArrayCollection();
         $this->isVerified = false;
         $this->createdAt = new \DateTime();
@@ -82,6 +83,16 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 
     public function setId(?int $id): void
@@ -175,29 +186,41 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         return $this->translations;
     }
 
-    public function addTranslations(ProductTranslationInterface $translation): void
+    /** @param Collection<int|string, ProductTranslationInterface> $translations */
+    public function setTranslations(Collection $translations): void
+    {
+        $this->translations = $translations;
+    }
+
+    public function addTranslation(ProductTranslationInterface $translation): void
     {
         $this->translations->add($translation);
     }
 
-    public function getProductListingPrice(): Collection
+    public function removeTranslation(ProductTranslationInterface $translation): void
     {
-        return $this->productListingPrice;
+        $this->translations->removeElement($translation);
+    }
+
+    public function getProductListingPrices(): Collection
+    {
+        return $this->productListingPrices;
     }
 
     public function addProductListingPrice(ProductListingPriceInterface $productListingPrice): void
     {
-        $this->productListingPrice->add($productListingPrice);
+        $productListingPrice->setProductDraft($this);
+        $this->productListingPrices->add($productListingPrice);
     }
 
-    public function getVendor(): ?VendorInterface
+    public function removeProductListingPrice(ProductListingPriceInterface $productListingPrice): void
     {
-        return $this->vendor;
+        $this->productListingPrices->removeElement($productListingPrice);
     }
 
-    public function setVendor(?VendorInterface $vendor): void
+    public function getVendor(): VendorInterface
     {
-        $this->vendor = $vendor;
+        return $this->getProductListing()->getVendor();
     }
 
     public function getProductListing(): ProductListingInterface
@@ -225,14 +248,14 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         ++$this->versionNumber;
     }
 
-    public function addTranslationsWithKey(ProductTranslationInterface $translation, string $key): void
+    public function addTranslationWithKey(ProductTranslationInterface $translation, string $key): void
     {
         $this->translations->set($key, $translation);
     }
 
     public function addProductListingPriceWithKey(ProductListingPriceInterface $productListingPrice, string $key): void
     {
-        $this->productListingPrice->set($key, $productListingPrice);
+        $this->productListingPrices->set($key, $productListingPrice);
     }
 
     public function accept(): void
@@ -267,6 +290,11 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function addImage(ImageInterface $image): void
     {
         $this->images->add($image);
+    }
+
+    public function removeImage(ImageInterface $image): void
+    {
+        $this->images->removeElement($image);
     }
 
     public function getAttributes(): Collection
@@ -322,10 +350,8 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
             return;
         }
 
-        if ($this->hasAttribute($attribute)) {
-            $this->attributes->removeElement($attribute);
-            $attribute->setDraft(null);
-        }
+        $this->attributes->removeElement($attribute);
+        $attribute->setDraft(null);
     }
 
     public function hasAttribute(AttributeValueInterface $attribute): bool
@@ -515,8 +541,8 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function getProductListingPriceForChannel(ChannelInterface $channel): ?ProductListingPriceInterface
     {
         if (null !== $channel->getCode()) {
-            if ($this->productListingPrice->containsKey($channel->getCode())) {
-                return $this->productListingPrice->get($channel->getCode());
+            if ($this->productListingPrices->containsKey($channel->getCode())) {
+                return $this->productListingPrices->get($channel->getCode());
             }
         }
 

@@ -64,7 +64,7 @@ final class InventoryTest extends FunctionalTestCase
         $this->client->request('GET', '/api/v2/shop/account/vendor/product-variants/bruce_1_2/inventory', [], [], $header);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_denies_access_get_product_variant_by_user_without_vendor_context(): void
@@ -112,7 +112,7 @@ final class InventoryTest extends FunctionalTestCase
         ], \JSON_THROW_ON_ERROR));
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
 
     public function test_denies_access_update_product_variant_by_user_without_vendor_context(): void

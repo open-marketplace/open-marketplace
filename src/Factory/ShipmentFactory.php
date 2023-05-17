@@ -38,6 +38,7 @@ final class ShipmentFactory implements ShipmentFactoryInterface
 
     public function createNew(): ShipmentInterface
     {
+        /** @phpstan-ignore-next-line  */
         return new $this->shipmentFQN();
     }
 

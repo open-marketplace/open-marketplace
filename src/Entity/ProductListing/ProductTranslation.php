@@ -11,11 +11,14 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 class ProductTranslation implements ProductTranslationInterface, ResourceInterface
 {
     protected ?int $id = null;
+
+    protected ?UuidInterface $uuid = null;
 
     protected ProductDraftInterface $productDraft;
 
@@ -41,6 +44,16 @@ class ProductTranslation implements ProductTranslationInterface, ResourceInterfa
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getUuid(): ?UuidInterface
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?UuidInterface $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 
     public function getProductDraft(): ProductDraftInterface

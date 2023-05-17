@@ -11,12 +11,15 @@
         <label>{{ 'sylius.ui.image'|trans }}</label>
         {{ form_row(form.image, {'label': false}) }}
     </div>
+
+    <div class="field" id="add-background">
+        {% form_theme form 'Vendor/ProductListing/form/theme/image_theme.html.twig' %}
+        <label>{{ 'open_marketplace.ui.background'|trans }}</label>
+        {{ form_row(form.backgroundImage, {'label': false}) }}
+    </div>
+
     {{ form_row(form.description) }}
     {{ form_row(form.vendorAddress) }}
-
-    <div style="display: none">
-        {{ form_row(form.shopUser) }}
-    </div>
 
     {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
 

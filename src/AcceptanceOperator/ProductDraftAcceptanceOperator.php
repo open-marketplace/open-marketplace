@@ -18,7 +18,6 @@ use BitBag\OpenMarketplace\Factory\ProductFromDraftFactoryInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperatorInterface;
 use BitBag\OpenMarketplace\Updater\ProductFromDraftUpdaterInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOperatorInterface
@@ -31,8 +30,6 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
 
     private AttributesConverterInterface $attributesConverter;
 
-    private EntityManagerInterface $entityManager;
-
     private ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator;
 
     public function __construct(
@@ -40,14 +37,12 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductDraftFilesOperatorInterface $productDraftFilesOperator,
         AttributesConverterInterface $attributesConverter,
-        EntityManagerInterface $entityManager,
         ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
     ) {
         $this->productFromDraftFactory = $productFromDraftFactory;
         $this->productFromDraftUpdater = $productFromDraftUpdater;
         $this->productDraftFilesOperator = $productDraftFilesOperator;
         $this->attributesConverter = $attributesConverter;
-        $this->entityManager = $entityManager;
         $this->productDraftTaxonsOperator = $productDraftTaxonsOperator;
     }
 

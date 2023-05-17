@@ -1,7 +1,12 @@
 @import "./attributes/attributes";
 @import "./product_listing/product_listing_dropdown";
 @import "./wishlist_button/index";
+@import "./vendor_page/vendor_banner";
+@import "./address_book/address_book";
+@import "./menu/horizontal_menu";
+
 $base-box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.04);
+$base-border: 1px solid rgba(34, 36, 38, 0.1);
 $base-border-radius: 8px;
 $base-color: #339ae8;
 body.pushable .pusher {
@@ -22,4 +27,28 @@ body.pushable .pusher {
 
 .ui.label.blue {
   background-color: #28afff !important;
+}
+
+@media (max-width: 767px) {
+  .ui.table:not(.unstackable) {
+    thead {
+      display: table-header-group;
+    }
+
+    tbody {
+      display: table-row-group!important;
+    }
+
+    tr {
+      display: table-row!important;
+    }
+
+    tr > td, tr > th {
+      display: table-cell!important;
+    }
+
+    tr > td:not(:first-of-type), tr > th:not(:first-of-type) {
+      border-left: $base-border!important;
+    }
+  }
 }

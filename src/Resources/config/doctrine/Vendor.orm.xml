@@ -9,7 +9,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="uuid" type="uuid" />
+        <field name="uuid" type="uuid" unique="true" />
         <field name="companyName" column="company_name" type="text" />
         <field name="taxIdentifier" column="tax_identifier" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
@@ -35,6 +35,14 @@
         <field name="description" column="description" type="string" length="2048" />
         <one-to-one field="image"
                     target-entity="BitBag\OpenMarketplace\Entity\VendorImageInterface"
+                    mapped-by="owner"
+                    orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-one>
+        <one-to-one field="backgroundImage"
+                    target-entity="BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface"
                     mapped-by="owner"
                     orphan-removal="true">
             <cascade>

@@ -20,9 +20,9 @@ use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class AddMessageFacadeSpec extends ObjectBehavior
 {

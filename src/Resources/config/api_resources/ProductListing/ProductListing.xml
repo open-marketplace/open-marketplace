@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%open_marketplace.model.product_listing.class%" shortName="ProductListing">
+        <collectionOperations>
+            <collectionOperation name="vendor_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="validation_groups">
+                    <attribute>ApiProductListing</attribute>
+                </attribute>
+                <attribute name="path">/shop/account/vendor/product-listings</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Body parameters:
+- `attributes.attribute` accept id of DraftAttributes e.g. `/api/v2/shop/account/vendor/draft-attributes/4DGR-334Spds`.
+- `mainTaxon`, `productDraftTaxons.taxon` accept id of Taxon e.g.  `/api/v2/shop/taxons/clothes`.
+- `images` as an array of files
+                    </attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
+                </attribute>
+                <attribute name="security_post_denormalize">is_granted("VENDOR_AWARE_OBJECT_CREATE", object)</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListing</attribute>
+                <attribute name="status">201</attribute>
+            </collectionOperation>
+
+            <collectionOperation name="vendor_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendor/product-listings</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
+                </attribute>
+                <attribute name="filters">
+                    <attribute>bitbag.open_marketplace.api.vendor.search_product_listing_filter</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="vendor_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendor/product-listings/{uuid}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
+                </attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
+            </itemOperation>
+
+            <itemOperation name="vendor_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="validation_groups">
+                    <attribute>ApiProductListing</attribute>
+                </attribute>
+                <attribute name="path">/shop/account/vendor/product-listings/{uuid}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Body parameters:
+- `attributes.attribute` accept id of DraftAttributes e.g. `/api/v2/shop/account/vendor/draft-attributes/4DGR-334Spds`.
+- `mainTaxon`, `productDraftTaxons.taxon` accept id of Taxon e.g.  `/api/v2/shop/taxons/clothes`.
+- `images` as an array of files
+                    </attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
+                </attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListing</attribute>
+            </itemOperation>
+
+            <itemOperation name="vendor_send_to_verification">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/account/vendor/product-listings/{uuid}/send-to-verification</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Send to verification by administrator the product.</attribute>
+                </attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
+                <attribute name="controller">bitbag.open_marketplace.api.controller.vendor.send_to_verification_action</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="vendor_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shop/account/vendor/product-listings/{uuid}</attribute>
+                <attribute name="controller">bitbag.open_marketplace.api.controller.vendor.delete_product_listing_action</attribute>
+                <attribute name="security">is_granted("OWNIT", object)</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="uuid" identifier="true" writable="false" />
+    </resource>
+</resources>

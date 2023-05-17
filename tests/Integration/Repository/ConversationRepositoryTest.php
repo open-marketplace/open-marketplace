@@ -15,7 +15,7 @@ use ApiTestCase\JsonApiTestCase;
 use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
 use BitBag\OpenMarketplace\Entity\ShopUser;
 
-class ConversationRepositoryTest extends JsonApiTestCase
+final class ConversationRepositoryTest extends JsonApiTestCase
 {
     public function setUp(): void
     {

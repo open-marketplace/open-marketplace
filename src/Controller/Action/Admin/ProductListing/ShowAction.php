@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 final class ShowAction
@@ -46,8 +45,6 @@ final class ShowAction
 
     private RouterInterface $router;
 
-    private TranslatorInterface $translator;
-
     public function __construct(
         ProductListingRepositoryInterface $productListingRepository,
         Environment $twig,
@@ -56,17 +53,14 @@ final class ShowAction
         FormFactoryInterface $formFactory,
         AddMessageFacadeInterface $addMessageFacade,
         RouterInterface $router,
-        TranslatorInterface $translator
-    ) {
+        ) {
         $this->productListingRepository = $productListingRepository;
         $this->twig = $twig;
         $this->productDraftRepository = $productDraftRepository;
         $this->conversationRepository = $conversationRepository;
         $this->formFactory = $formFactory;
         $this->addMessageFacade = $addMessageFacade;
-
         $this->router = $router;
-        $this->translator = $translator;
     }
 
     public function __invoke(Request $request): Response

@@ -7,7 +7,7 @@
       "@id": "/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_1",
       "@type": "Order",
       "customer": {
-        "@id": "/api/v2/shop/customers/@string@",
+        "@id": "/api/v2/shop/account/vendor/customers/@string@",
         "@type": "Customer",
         "email": "john.smith@example.com",
         "firstName": "John",
@@ -36,7 +36,7 @@
       "@id": "/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_2",
       "@type": "Order",
       "customer": {
-        "@id": "/api/v2/shop/customers/@string@",
+        "@id": "/api/v2/shop/account/vendor/customers/@string@",
         "@type": "Customer",
         "email": "john.smith@example.com",
         "firstName": "John",

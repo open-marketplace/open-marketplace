@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
 use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Entity\VendorBackgroundImage;
 use BitBag\OpenMarketplace\Entity\VendorImage;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Core\Model\Customer;
@@ -30,7 +31,7 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
         $this->customerRepository = $this->entityManager->getRepository(Customer::class);
         $this->vendorImageRepository = $this->entityManager->getRepository(VendorImage::class);
-
+        $this->vendorBackgroundImageRepository = $this->entityManager->getRepository(VendorBackgroundImage::class);
         $this->loadFixturesFromFile('Api/VendorProfileTest/vendor_profile.yml');
     }
 
@@ -276,6 +277,139 @@ final class VendorProfileTest extends FunctionalTestCase
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
         $this->assertEmpty($response->getContent());
+    }
+
+    public function test_it_denies_access_on_delete_vendor_background_image_by_user_without_vendor_context()
+    {
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
+        /** @var VendorBackgroundImage $vendorImage */
+        $vendorImage = $this->vendorBackgroundImageRepository->findOneBy(['owner' => $vendor]);
+
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor/vendor-background-images/' . $vendorImage->getUuid()->toString(), [], [], $header);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_it_deletes_vendor_background_image_by_right_owner()
+    {
+        $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
+        /** @var VendorBackgroundImage $vendorImage */
+        $vendorImage = $this->vendorBackgroundImageRepository->findOneBy(['owner' => $vendor]);
+
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor/vendor-background-images/' . $vendorImage->getUuid()->toString(), [], [], $header);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+        $this->assertEmpty($response->getContent());
+    }
+
+    public function test_it_denies_access_on_background_image_upload_from_user_without_vendor_context()
+    {
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
+
+        $this->client->request('POST', '/api/v2/shop/account/vendor/vendor-background-images', [], [
+            'file' => $this->getUploadedFile(),
+        ], $header, json_encode([]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_it_lists_vendors()
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+
+        $this->client->request('GET', '/api/v2/admin/vendors', [], [], $header);
+        $response = $this->client->getResponse();
+
+        $readableResponse = json_decode($response->getContent(), true);
+        $this->assertCount(2, $readableResponse['hydra:member'], 'Number of listed vendors is invalid');
+    }
+
+    public function test_it_successful_update_vendor_data_by_admin()
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/admin/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
+            'companyName' => 'Wayne Enterprises',
+            'taxIdentifier' => '345',
+            'phoneNumber' => '123456789',
+            'description' => 'Wayne Enterprises Desc',
+            'vendorAddress' => [
+                'country' => '/api/v2/shop/countries/PL',
+                'city' => 'New York',
+                'street' => 'Wall St. 1',
+                'postalCode' => '12123',
+            ],
+        ], \JSON_THROW_ON_ERROR));
+        $response = $this->client->getResponse();
+        $content = json_decode($response->getContent(), true);
+        $this->assertEquals('Wayne-Enterprises', $vendor->getSlug());
+        $this->assertEquals($content['companyName'], 'Wayne Enterprises');
+    }
+
+    public function test_it_successful_enable_vendor_by_admin()
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/admin/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
+            'companyName' => 'Wayne Enterprises',
+            'taxIdentifier' => '345',
+            'phoneNumber' => '123456789',
+            'description' => 'Wayne Enterprises Desc',
+            'enabled' => true,
+            'vendorAddress' => [
+                'country' => '/api/v2/shop/countries/PL',
+                'city' => 'New York',
+                'street' => 'Wall St. 1',
+                'postalCode' => '12123',
+            ],
+        ], \JSON_THROW_ON_ERROR));
+        $response = $this->client->getResponse();
+        $content = json_decode($response->getContent(), true);
+
+        $this->assertEquals('Wayne-Enterprises', $vendor->getSlug());
+        $this->assertTrue($content['enabled']);
+    }
+
+    public function test_it_successful_disable_vendor_by_admin()
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+
+        $this->client->request('PUT', '/api/v2/admin/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
+            'companyName' => 'Wayne Enterprises',
+            'taxIdentifier' => '345',
+            'phoneNumber' => '123456789',
+            'description' => 'Wayne Enterprises Desc',
+            'enabled' => false,
+            'vendorAddress' => [
+                'country' => '/api/v2/shop/countries/PL',
+                'city' => 'New York',
+                'street' => 'Wall St. 1',
+                'postalCode' => '12123',
+            ],
+        ], \JSON_THROW_ON_ERROR));
+        $response = $this->client->getResponse();
+        $content = json_decode($response->getContent(), true);
+
+        $this->assertEquals('Wayne-Enterprises', $vendor->getSlug());
+        $this->assertFalse($content['enabled']);
     }
 
     private function getUploadedFile(): UploadedFile

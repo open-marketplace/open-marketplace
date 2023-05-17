@@ -18,6 +18,7 @@ use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Ramsey\Uuid\UuidInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
@@ -32,8 +33,8 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
     public function __construct(
         VendorContextInterface $vendorContext,
         VendorRepositoryInterface $vendorRepository,
-        SectionProviderInterface $sectionProvider,
-        ) {
+        SectionProviderInterface $sectionProvider
+    ) {
         $this->vendorContext = $vendorContext;
         $this->vendorRepository = $vendorRepository;
         $this->sectionProvider = $sectionProvider;
@@ -50,11 +51,10 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
     ) {
         $section = $this->sectionProvider->getSection();
 
-        if ($section instanceof ShopVendorApiSection && $this->isRequestedByRightVendor($id)) {
-            return $this->vendorRepository->findOneBy(['uuid' => $id]);
-        }
-
-        if ($section instanceof ShopApiSection) {
+        if (($section instanceof AdminApiSection) ||
+            ($section instanceof ShopVendorApiSection && $this->isRequestedByRightVendor($id)) ||
+            ($section instanceof ShopApiSection)
+        ) {
             return $this->vendorRepository->findOneBy(['uuid' => $id]);
         }
 

@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "productDraft: This field cannot be empty",
+    "violations": [
+        {
+            "propertyPath": "productDraft",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        }
+    ]
+}

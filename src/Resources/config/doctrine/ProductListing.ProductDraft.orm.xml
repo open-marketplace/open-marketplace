@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="uuid" type="uuid" unique="true" />
+
         <field name="code" column="code" type="string" unique="false" nullable="false" />
         <field name="shippingRequired" column="shipping_required" type="boolean" />
         <field name="isVerified" column="is_verified" type="boolean" unique="false" nullable="false" />
@@ -26,10 +28,6 @@
             </cascade>
         </many-to-one>
 
-        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="productListings">
-            <join-column name="vendor_id" on-delete="SET NULL"/>
-        </many-to-one>
-
         <one-to-many field="images" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImageInterface"
                      mapped-by="owner">
             <cascade>
@@ -43,7 +41,7 @@
             </cascade>
         </one-to-many>
 
-        <one-to-many field="productListingPrice" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
+        <one-to-many field="productListingPrices" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
             <cascade>
                 <cascade-persist/>
             </cascade>

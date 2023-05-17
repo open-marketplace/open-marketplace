@@ -18,5 +18,20 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
+        <service class="BitBag\OpenMarketplace\Api\DataTransformer\ResourceIdAwareCommandDataTransformer"
+                 id="bitbag.open_marketplace.api.data_transformer.resource_id_aware_command">
+            <argument type="service" id="request_stack" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Api\DataTransformer\ProductDraftAwareCommandDataTransformer"
+                 id="bitbag.open_marketplace.api.data_transformer.product_draft_aware_command">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="open_marketplace.factory.product_draft_image" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Api\DataTransformer\ProductListingAwareCommandDataTransformer"
+                 id="bitbag.open_marketplace.api.data_transformer.product_listing_aware_command">
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
     </services>
 </container>

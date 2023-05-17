@@ -76,6 +76,12 @@ interface VendorInterface extends VendorProfileInterface, UuidAwareInterface
 
     public function removeImage(): void;
 
+    public function getBackgroundImage(): ?VendorBackgroundImageInterface;
+
+    public function setBackgroundImage(?VendorBackgroundImageInterface $backgroundImage): void;
+
+    public function removeBackgroundImage(): void;
+
     /** @return Collection<int, ProductListing> */
     public function getProductListings(): Collection;
 
