@@ -1,9 +1,10 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Vendor/Common/_breadcrumb.html.twig' %}
 
 {% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
 
-{% block breadcrumb %}
-    {% include '@SyliusShop/Account/Order/Index/_breadcrumb.html.twig' %}
+{% block breadcrumb_page %}
+    <div class="active section">{{ 'sylius.ui.order_history'|trans }}</div>
 {% endblock %}
 
 {% block subcontent %}

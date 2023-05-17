@@ -1,8 +1,0 @@
-sylius_resource:
-    resources:
-        open_marketplace.conversation_category:
-            driver: doctrine/orm
-            classes:
-                model: BitBag\OpenMarketplace\Entity\Conversation\Category
-                interface: BitBag\OpenMarketplace\Entity\Conversation\CategoryInterface
-                repository: BitBag\OpenMarketplace\Repository\Conversation\CategoryRepository

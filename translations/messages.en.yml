@@ -121,6 +121,7 @@ open_marketplace:
         menu:
             conversations: Messages
             conversation_categories: Message categories
+            product_reviews: Product Reviews
         new_conversation_category: New conversation category
         edit_conversation_category: Edit conversation category
         unverified: Unverified

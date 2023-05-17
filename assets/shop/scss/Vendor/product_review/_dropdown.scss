@@ -1,0 +1,15 @@
+.product-review-dropdown {
+  button {
+    &.item {
+      background: white;
+      border: none;
+      padding: 0.7857142rem 1.14285714rem !important;
+      width: 100%;
+      text-align: left;
+
+      &:hover {
+        background: rgba(34,36,38,.1);
+      }
+    }
+  }
+}
