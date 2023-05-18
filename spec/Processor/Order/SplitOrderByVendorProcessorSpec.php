@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Processor\Order;
 
-use BitBag\OpenMarketplace\Calculator\VendorCommissionCalculatorInterface;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Manager\OrderManagerInterface;
 use BitBag\OpenMarketplace\Processor\Order\SplitOrderByVendorProcessor;
+use BitBag\OpenMarketplace\Processor\Order\VendorCommissionProcessorInterface;
 use BitBag\OpenMarketplace\Refresher\PaymentRefresherInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
@@ -29,13 +29,13 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         EntityManager $entityManager,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
-        \IteratorAggregate $commissionCalculators
+        VendorCommissionProcessorInterface $commissionProcessor
     ): void {
         $this->beConstructedWith(
             $entityManager,
             $orderManager,
             $paymentRefresher,
-            $commissionCalculators
+            $commissionProcessor
         );
     }
 
@@ -52,10 +52,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         VendorInterface $vendor,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
-        \IteratorAggregate $commissionCalculators,
-        VendorCommissionCalculatorInterface $commissionCalculator
-    ): void {
-        $commissionCalculators->getIterator()->willReturn(new ArrayCollection([]));
+        ): void {
         $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject()]);
         $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
         $order->getItems()->willReturn($orderItemCollection);
@@ -65,9 +62,8 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $subOrder->getVendor()->willReturn(null);
         $order->getVendor()->willReturn(null);
         $orderManager->generateNewSecondaryOrder($order, $vendor, $orderItem)->willReturn($subOrder);
-        $this->process($order);
 
-        $this->getSecondaryOrdersCount()->shouldReturn(1);
+        $this->process($order);
 
         $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
     }
@@ -83,9 +79,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         VendorInterface $vendor2,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
-        \IteratorAggregate $commissionCalculators,
-        VendorCommissionCalculatorInterface $commissionCalculator
-    ): void {
+        ): void {
         $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject(), $secondItem->getWrappedObject()]);
         $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
         $order->getItems()->willReturn($orderItemCollection);
@@ -102,14 +96,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $orderManager->generateNewSecondaryOrder($order, $vendor, $orderItem)->willReturn($subOrder);
         $orderManager->generateNewSecondaryOrder($order, $vendor2, $secondItem)->willReturn($subOrder2);
 
-        $commissionCalculator->supports($order)->willReturn(true);
-        $commissionCalculator->calculate($order)->willReturn(0);
-        $commissionCalculators->getIterator()->willReturn(new ArrayCollection([$commissionCalculator->getWrappedObject()]));
-
-
         $this->process($order);
-
-        $this->getSecondaryOrdersCount()->shouldReturn(2);
 
         $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
     }

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Processor\Order;
 
-use BitBag\OpenMarketplace\Calculator\VendorCommissionCalculatorInterface;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
@@ -23,48 +22,45 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 {
     private EntityManager $entityManager;
 
-    private array $secondaryOrders;
-
     private OrderManagerInterface $orderManager;
 
     private PaymentRefresherInterface $paymentRefresher;
 
-    /** @var VendorCommissionCalculatorInterface[] */
-    private iterable $commissionCalculators;
+    private VendorCommissionProcessorInterface $commissionProcessor;
 
     public function __construct(
         EntityManager $entityManager,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
-        iterable $commissionCalculators
+        VendorCommissionProcessorInterface $commissionProcessor
     ) {
         $this->entityManager = $entityManager;
         $this->orderManager = $orderManager;
         $this->paymentRefresher = $paymentRefresher;
-        $this->commissionCalculators = $commissionCalculators;
+        $this->commissionProcessor = $commissionProcessor;
     }
 
     public function process(OrderInterface $order): array
     {
-        $this->secondaryOrders = [];
+        $secondaryOrders = [];
 
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
         /** @var OrderItemInterface $item */
         foreach ($orderItems as $item) {
             $itemVendor = $item->getProductOwner();
-            if ($this->vendorSecondaryOrderExits($this->secondaryOrders, $itemVendor)) {
-                $this->orderManager->addItemIntoSecondaryOrder($this->secondaryOrders, $itemVendor, $item);
+            if ($this->vendorSecondaryOrderExits($secondaryOrders, $itemVendor)) {
+                $this->orderManager->addItemIntoSecondaryOrder($secondaryOrders, $itemVendor, $item);
             } else {
-                $this->secondaryOrders[] = $this->orderManager->generateNewSecondaryOrder($order, $itemVendor, $item);
+                $secondaryOrders[] = $this->orderManager->generateNewSecondaryOrder($order, $itemVendor, $item);
             }
         }
 
-        foreach ($this->secondaryOrders as $secondaryOrder) {
-            $secondaryOrder->setCommissionTotal($this->calculateCommission($secondaryOrder));
+        foreach ($secondaryOrders as $secondaryOrder) {
+            $this->commissionProcessor->process($secondaryOrder);
         }
 
-        $orders = [$order, ...$this->secondaryOrders];
+        $orders = [$order, ...$secondaryOrders];
 
         foreach ($orders as $order) {
             $this->paymentRefresher->refreshPayment($order);
@@ -73,11 +69,6 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         $this->entityManager->flush();
 
         return $orders;
-    }
-
-    public function getSecondaryOrdersCount(): int
-    {
-        return count($this->secondaryOrders);
     }
 
     private function vendorSecondaryOrderExits(array $secondaryOrders, ?VendorInterface $vendor): bool
@@ -89,16 +80,5 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         }
 
         return false;
-    }
-
-    private function calculateCommission(OrderInterface $order): int
-    {
-        foreach ($this->commissionCalculators as $commissionCalculator) {
-            if ($commissionCalculator->supports($order)) {
-                return $commissionCalculator->calculate($order);
-            }
-        }
-
-        throw new \RuntimeException('No commission calculator found for order');
     }
 }
