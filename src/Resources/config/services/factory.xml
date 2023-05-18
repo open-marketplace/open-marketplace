@@ -2,11 +2,6 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <parameters>
-        <parameter key="default_vendor_commission">%env(int:DEFAULT_VENDOR_COMMISSION)%</parameter>
-        <parameter key="default_vendor_commission_type">%env(string:DEFAULT_VENDOR_COMMISSION_TYPE)%</parameter>
-    </parameters>
-
     <services >
         <defaults autowire="false" autoconfigure="false" />
 
@@ -21,15 +16,15 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorFactory"
-                 id="bitbag.open_marketplace.factory.vendor">
-            <argument>%default_vendor_commission%</argument>
-            <argument>%default_vendor_commission_type%</argument>
+                 id="open_marketplace.factory.vendor">
             <argument type="service" id="bitbag.open_marketplace.factory.vendor_settlement"/>
+            <argument>%env(DEFAULT_VENDOR_COMMISSION)%</argument>
+            <argument>%env(string:DEFAULT_VENDOR_COMMISSION_TYPE)%</argument>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileFactory"
                  id="open_marketplace.factory.vendor_profile_factory">
-            <argument type="service" id="bitbag.open_marketplace.factory.vendor"/>
+            <argument type="service" id="open_marketplace.factory.vendor"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\AddressFactory"

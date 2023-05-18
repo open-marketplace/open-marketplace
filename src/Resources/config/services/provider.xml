@@ -16,7 +16,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
         <service class="BitBag\OpenMarketplace\Api\Provider\VendorProvider"
                  id="bitbag.open_marketplace.api.provider.vendor">
-            <argument type="service" id="bitbag.open_marketplace.factory.vendor" />
+            <argument type="service" id="open_marketplace.factory.vendor" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Api\Provider\PathPrefixProvider"

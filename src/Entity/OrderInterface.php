@@ -45,7 +45,7 @@ interface OrderInterface extends BaseOrderInterface, OptionalVendorAwareInterfac
 
     public function isPrimary(): bool;
 
-    public function getCommissionTotal(): ?int;
+    public function getCommissionTotal(): int;
 
-    public function setCommissionTotal(int $commissionTotal): int;
+    public function setCommissionTotal(int $commissionTotal): void;
 }

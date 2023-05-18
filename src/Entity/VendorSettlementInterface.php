@@ -21,13 +21,13 @@ interface VendorSettlementInterface extends ResourceInterface
 
     public function getId(): ?int;
 
-    public function getCommission(): ?int;
+    public function getCommission(): int;
 
-    public function setCommission(?int $commission): void;
+    public function setCommission(int $commission): void;
 
-    public function getCommissionType(): ?string;
+    public function getCommissionType(): string;
 
-    public function setCommissionType(?string $commissionType): void;
+    public function setCommissionType(string $commissionType): void;
 
     public function getVendor(): ?VendorInterface;
 

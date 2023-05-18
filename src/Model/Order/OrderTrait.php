@@ -153,13 +153,13 @@ trait OrderTrait
         return self::PRIMARY_ORDER_MODE === $this->getMode();
     }
 
-    public function getCommissionTotal(): ?int
+    public function getCommissionTotal(): int
     {
         return $this->commissionTotal;
     }
 
-    public function setCommissionTotal(int $commissionTotal): int
+    public function setCommissionTotal(int $commissionTotal): void
     {
-        return $this->commissionTotal = $commissionTotal;
+        $this->commissionTotal = $commissionTotal;
     }
 }
