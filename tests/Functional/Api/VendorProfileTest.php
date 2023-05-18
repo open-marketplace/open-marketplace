@@ -66,7 +66,7 @@ final class VendorProfileTest extends FunctionalTestCase
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendor/' . (string) $vendor->getUuid()->toString(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendors/' . (string) $vendor->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/VendorProfileTest/test_it_gets_vendor_data_for_shop_user_in_his_vendor_context', Response::HTTP_OK);
     }
@@ -78,7 +78,7 @@ final class VendorProfileTest extends FunctionalTestCase
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendor/' . $vendor->getUuid()->toString(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
@@ -90,7 +90,7 @@ final class VendorProfileTest extends FunctionalTestCase
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendor/' . $vendor->getUuid()->toString(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/not_found_response', Response::HTTP_NOT_FOUND);
     }

@@ -63,7 +63,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
             <itemOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendor/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendors/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:read</attribute>
                 </attribute>
