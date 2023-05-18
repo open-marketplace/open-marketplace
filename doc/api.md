@@ -36,25 +36,35 @@ Now you have to wait for the administrator to accept your request to become vend
 
 ![Register as a vendor](images/api_vendor_register_3.png)
 
-### Vendor Api (for Vendors only)
-Vendor has only access to itself resources.
+### Vendor Api
+Vendors have access only to their resources.
 
-- Managing details of Vendor.
+#### Endpoints for managing details of Vendor.
+
 ![Api vendor](images/api_vendor.png)
+![Api vendor](images/api_vendor_images.png)
 
 
-- Managing product listing resources, which converts to products after administration acceptance.
+#### Endpoints for managing product listing resources, which converts to products after administration acceptance.
+
 ![Api product listing](images/api_product_listing.png)
+![Api product listing](images/api_draft.png)
+![Api product listing](images/api_draft_translation.png)
 
-- Creating and managing attributes for Vendor's products.
+#### Endpoints for creating and managing attributes for Vendor's products.
+
 ![Api draft attribute](images/api_draft_attribute.png)
 
-- These endpoints allow you to manage inventory of product variant.
+#### Endpoints that allow you to manage inventory of product variant.
+
 ![Api inventory](images/api_inventory.png)
 
-- You can get all your orders or get more details for one order only. 
+#### Endpoints for getting all your orders or get more details for one order only. 
+
 You can also cancel the order.
+
 ![Api order](images/api_order.png)
 
-- Get more details about customers who bought your products.
+#### Endpoints for getting more details about customers who bought your products.
+
 ![Api customer](images/api_customer.png)
