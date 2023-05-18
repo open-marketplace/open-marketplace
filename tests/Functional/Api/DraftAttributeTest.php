@@ -36,7 +36,7 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        $this->client->request('GET', '/api/v2/shop/account/vendor/draft-attributes', [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendor/product-draft/attributes', [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/DraftAttributeTest/test_it_get_only_draft_attributes_for_current_vendor_response', Response::HTTP_OK);
     }
@@ -50,7 +50,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
@@ -64,7 +64,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
     }
@@ -78,7 +78,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('GET', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/DraftAttributeTest/test_it_get_attribute_by_owner_vendor_response', Response::HTTP_OK);
     }
@@ -87,7 +87,7 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
-        $this->client->request('POST', '/api/v2/shop/account/vendor/draft-attributes', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/product-draft/attributes', [], [], $header, json_encode([
             'code' => 'test',
             'type' => 'text',
             'storageType' => 'text',
@@ -109,7 +109,7 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        $this->client->request('POST', '/api/v2/shop/account/vendor/draft-attributes', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/product-draft/attributes', [], [], $header, json_encode([
             'code' => 'test',
             'type' => 'text',
             'storageType' => 'text',
@@ -131,7 +131,7 @@ final class DraftAttributeTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        $this->client->request('POST', '/api/v2/shop/account/vendor/draft-attributes', [], [], $header, json_encode([
+        $this->client->request('POST', '/api/v2/shop/account/vendor/product-draft/attributes', [], [], $header, json_encode([
             'code' => '',
             'type' => '',
             'storageType' => '',
@@ -156,7 +156,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
             'configuration' => [
                 'min' => 2,
             ],
@@ -175,7 +175,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
             'configuration' => [
                 'min' => 2,
             ],
@@ -194,7 +194,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header, json_encode([
             'configuration' => [
                 'min' => 2,
             ],
@@ -220,7 +220,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'name' => 'attribute_bruce_1_us',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendor/draft-attribute-translations/' . $draftAttributeTranslation->getUuid()->toString(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendor/product-draft/attribute-translations/' . $draftAttributeTranslation->getUuid()->toString(), [], [], $header, json_encode([
             'name' => 'changed translation name',
         ]));
 
@@ -244,7 +244,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'name' => 'attribute_bruce_1_us',
         ]);
 
-        $this->client->request('PUT', '/api/v2/shop/account/vendor/draft-attribute-translations/' . $draftAttributeTranslation->getUuid()->toString(), [], [], $header, json_encode([
+        $this->client->request('PUT', '/api/v2/shop/account/vendor/product-draft/attribute-translations/' . $draftAttributeTranslation->getUuid()->toString(), [], [], $header, json_encode([
             'name' => 'changed translation name',
         ]));
 
@@ -261,7 +261,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('DELETE', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
@@ -276,7 +276,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_peter_1',
         ]);
 
-        $this->client->request('DELETE', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/access_denied_response', Response::HTTP_FORBIDDEN);
@@ -291,7 +291,7 @@ final class DraftAttributeTest extends FunctionalTestCase
             'code' => 'attribute_bruce_1',
         ]);
 
-        $this->client->request('DELETE', '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
+        $this->client->request('DELETE', '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid()->toString(), [], [], $header);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);

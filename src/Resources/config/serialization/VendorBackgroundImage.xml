@@ -14,15 +14,15 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <attribute name="uuid">
             <group>shop:vendor:read</group>
             <group>shop:account:vendor:read</group>
-            <group>shop:account:vendor:vendor_background_image:read</group>
+            <group>shop:account:vendor:background_image:read</group>
         </attribute>
         <attribute name="path">
             <group>shop:vendor:read</group>
             <group>shop:account:vendor:read</group>
-            <group>shop:account:vendor:vendor_background_image:read</group>
+            <group>shop:account:vendor:background_image:read</group>
         </attribute>
         <attribute name="owner">
-            <group>shop:account:vendor:vendor_background_image:read</group>
+            <group>shop:account:vendor:background_image:read</group>
         </attribute>
     </class>
 </serializer>

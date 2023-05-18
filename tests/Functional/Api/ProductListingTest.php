@@ -162,7 +162,7 @@ final class ProductListingTest extends FunctionalTestCase
                 ],
                 'attributes' => [
                     [
-                        'attribute' => '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid(),
+                        'attribute' => '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid(),
                         'value' => 'example text value',
                     ],
                 ],
@@ -280,7 +280,7 @@ final class ProductListingTest extends FunctionalTestCase
                 ],
                 'attributes' => [
                     [
-                        'attribute' => '/api/v2/shop/account/vendor/draft-attributes/' . $draftAttribute->getUuid(),
+                        'attribute' => '/api/v2/shop/account/vendor/product-draft/attributes/' . $draftAttribute->getUuid(),
                         'value' => 'changed value',
                     ],
                 ],
