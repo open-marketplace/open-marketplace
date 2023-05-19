@@ -43,8 +43,7 @@ Feature: In case of creating the order
     And store has 5 products from vendor "test@company.domain"
     And I have 3 products in cart
     And I finalize order
-    And I follow "Logout"
-    And I am logged in as an user "test@company.domain" with password "password"
+    And I am logged in as "test@company.domain"
     And I follow "My account"
     And I follow "Orders"
     And I follow "Show"
