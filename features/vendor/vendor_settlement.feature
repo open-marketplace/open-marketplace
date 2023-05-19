@@ -44,7 +44,6 @@ Feature: In case of creating the order
     And I have 3 products in cart
     And I finalize order
     And I am logged in as "test@company.domain"
-    And I test stuff
     And I follow "My account"
     And I follow "Orders"
     And I follow "Show"
