@@ -148,4 +148,13 @@ final class VendorSettlementContext extends MinkContext implements Context
 
         return (int) $intCommission;
     }
+
+    /**
+     * @Given /^I test stuff$/
+     */
+    public function iTestStuff()
+    {
+        dump($this->getSession()->getCurrentUrl());
+        dd($this->getSession()->getPage()->getText());
+    }
 }
