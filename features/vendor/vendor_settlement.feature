@@ -49,3 +49,14 @@ Feature: In case of creating the order
     And I follow "Orders"
     And I follow "Show"
     Then I should see valid commission information's
+
+  @ui
+  Scenario: Trying to set negative commission
+    Given there is a vendor user "test@company.domain" registered in country "PL"
+    And I am logged in as an administrator
+    And I am on "/admin"
+    And I follow "Vendors"
+    And I follow "Edit"
+    And I fill in "Commission" with "-10"
+    And I click "Save changes" button
+    Then I should get commission value validation error

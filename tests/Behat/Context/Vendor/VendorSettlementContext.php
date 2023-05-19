@@ -107,6 +107,18 @@ final class VendorSettlementContext extends MinkContext implements Context
         $this->commissionDisplayedShouldBeEqual('0.00');
     }
 
+    /**
+     * @Then I should get commission value validation error
+     */
+    public function iShouldGetValidationError()
+    {
+        $page = $this->getSession()->getPage();
+        $this->getSession()->reload();
+
+        $label = $page->find('css', '.ui.red.label.sylius-validation-error');
+        Assert::eq($label->getText(), 'Commission value must be positive or zero');
+    }
+
     private function commissionDisplayedShouldBeEqual(string $value)
     {
         $text = $this->getSession()->getPage()->getText();
@@ -135,13 +147,5 @@ final class VendorSettlementContext extends MinkContext implements Context
         $intCommission = $floatCommission * 100;
 
         return (int) $intCommission;
-    }
-
-    /**
-     * @Given I test stuff
-     */
-    public function iTestStuff()
-    {
-        dd('stop');
     }
 }

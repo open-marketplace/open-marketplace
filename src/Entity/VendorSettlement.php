@@ -15,7 +15,7 @@ class VendorSettlement implements VendorSettlementInterface
 {
     protected ?int $id;
 
-    protected int $commission;
+    protected ?int $commission;
 
     protected string $commissionType;
 
@@ -26,12 +26,12 @@ class VendorSettlement implements VendorSettlementInterface
         return $this->id;
     }
 
-    public function getCommission(): int
+    public function getCommission(): ?int
     {
         return $this->commission;
     }
 
-    public function setCommission(int $commission): void
+    public function setCommission(?int $commission): void
     {
         $this->commission = $commission;
     }
