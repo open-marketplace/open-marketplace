@@ -52,7 +52,8 @@ Looking for a professional team to build a MVM for your business on top of open-
 - [Shipment](./doc/manage_shipping_methods.md)
 - [Order Process](./doc/order_process.md)
 - [Order management](./doc/manage_orders.md)
-- [Conversations](./doc/conversations.md)
+- [Clients](./doc/manage_clients.md)
+- [Product Reviews](./doc/manage_product_reviews.md)
 - [Customization](./doc/how_to_customize.md)
 - [API](./doc/api.md)
 
@@ -66,7 +67,7 @@ Every contribution is meaningful, kudos to everyone who helped us with developin
 
 ## We are here to help
 
-This **open-source project was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin, or need any assistance with your Sylius project - let us know! For community support, join the official [OpenMarketplace Community Slack](https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1ij1t41wx-HfAR6~URm3OAcqm0jc423Q).
+This **open-source project was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin, or need any assistance with your Sylius project - let us know! For community support, join the official [OpenMarketplace Community Slack](https://join.slack.com/t/openmarketplacegroup/shared_invite/zt-1vejiwrbn-XZkLwRH5L0s4L9~qfkcP~g).
 
 If you want to participate in the development, you can do it by submitting [pull requests](https://github.com/BitBagCommerce/OpenMarketplace/pulls) or reporting [issues](https://github.com/BitBagCommerce/OpenMarketplace/issues).
 

@@ -12,10 +12,16 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Entity\Order;
+use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Repository\OrderRepository;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 
@@ -25,12 +31,24 @@ class OrderContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private OrderRepository $orderRepository;
+
+    private PaymentMethodFactoryInterface $paymentMethodFactory;
+
+    private PaymentMethodRepository $methodRepository;
+
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
+        OrderRepository $orderRepository,
+        PaymentMethodFactoryInterface $paymentMethodFactory,
+        PaymentMethodRepository $methodRepository
     ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
+        $this->orderRepository = $orderRepository;
+        $this->paymentMethodFactory = $paymentMethodFactory;
+        $this->methodRepository = $methodRepository;
     }
 
     /**
@@ -42,6 +60,62 @@ class OrderContext extends RawMinkContext implements Context
         $tableWrapper = $page->find('css', 'table');
         $orders = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($orders), $count);
+    }
+
+    /**
+     * @Then I should see :count :mode order(s)
+     */
+    public function iShouldSeeOrdersWithMode($count, $mode)
+    {
+        $page = $this->getSession()->getPage();
+        $tableWrapper = $page->find('css', 'table');
+        $orders = $tableWrapper->findAll('css', '.item');
+        Assert::eq(count($orders), $count);
+        $htmlString = $page->getHtml();
+        $pattern = "/\/admin\/orders\/(\d+)/";
+        preg_match_all($pattern, $htmlString, $matches);
+        $orders = $this->orderRepository->findBy(['id' => $matches[1]]);
+        Assert::eq(count($orders), $count);
+        foreach ($orders as $order) {
+            Assert::eq($order->getMode(), $mode);
+        }
+    }
+
+    /**
+     * @Then I should see :count :mode order(s) in order history
+     */
+    public function iShouldSeeOrdersWithModeInHistory($count, $mode)
+    {
+        $page = $this->getSession()->getPage();
+        $tableWrapper = $page->find('css', 'table');
+        $orders = $tableWrapper->findAll('css', '.item');
+        Assert::eq(count($orders), $count);
+        $htmlString = $page->getHtml();
+        $pattern = "/\/.*\/account\/orders\/(\d+)/";
+        preg_match_all($pattern, $htmlString, $matches);
+        $orders = $this->orderRepository->findBy(['number' => $matches[1]]);
+        Assert::eq(count($orders), $count);
+        foreach ($orders as $order) {
+            Assert::eq($order->getMode(), $mode);
+        }
+    }
+
+    /**
+     * @Then I should see :count orders with :status status label :color
+     */
+    public function iShouldSeeOrdersWithStatus(
+        int $count,
+        string $status,
+        string $color
+    ) {
+        $page = $this->getSession()->getPage();
+        $tableWrapper = $page->find('css', 'table');
+        $orders = $tableWrapper->findAll('css', '.item');
+        Assert::eq(count($orders), $count);
+        $labels = $page->findAll('css', '.ui.' . $color . 'label');
+        foreach ($labels as $label) {
+            Assert::eq($label->getText(), $status);
+        }
     }
 
     /**
@@ -184,5 +258,81 @@ class OrderContext extends RawMinkContext implements Context
         $this->productPage->addToCart();
 
         $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Given I finalize order
+     */
+    public function iFinalizeOrder()
+    {
+        $this->visitPath('/en_US/checkout/address');
+        $this->fillField('sylius_checkout_address[billingAddress][firstName]', 'Test name');
+        $this->fillField('sylius_checkout_address[billingAddress][lastName]', 'Test name');
+        $this->fillField('sylius_checkout_address[billingAddress][company]', 'Test company');
+        $this->fillField('sylius_checkout_address[billingAddress][street]', 'Test street');
+        $this->selectOption('sylius_checkout_address[billingAddress][countryCode]', 'United States');
+        $this->fillField('sylius_checkout_address[billingAddress][city]', 'Test city');
+        $this->fillField('sylius_checkout_address[billingAddress][postcode]', 'Test code');
+        $this->iSubmitForm();
+        $this->iChooseShipment();
+        $this->iChoosePayment();
+        $this->iCompleteCheckout();
+    }
+
+    /**
+     * @Then primary order should not have number
+     */
+    public function primaryOrderShouldNotHaveNumber()
+    {
+        /** @var Order|null $order */
+        $order = $this->orderRepository->findOneBy(['mode' => OrderInterface::PRIMARY_ORDER_MODE]);
+
+        if (null !== $order) {
+            Assert::eq($order->getNumber(), null);
+        }
+    }
+
+    private function fillField($field, $value)
+    {
+        $field = $this->fixStepArgument($field);
+        $value = $this->fixStepArgument($value);
+        $this->getSession()->getPage()->fillField($field, $value);
+    }
+
+    private function fixStepArgument($argument): array|string
+    {
+        return str_replace('\\"', '"', $argument);
+    }
+
+    private function selectOption($select, $option)
+    {
+        $select = $this->fixStepArgument($select);
+        $option = $this->fixStepArgument($option);
+        $this->getSession()->getPage()->selectFieldOption($select, $option);
+    }
+
+    /**
+     * @return DocumentElement
+     */
+    private function getPage()
+    {
+        return $this->getSession()->getPage();
+    }
+
+    /**
+     * @Given There is payment method
+     */
+    public function thereIsPaymentMethod()
+    {
+        $payment = $this->paymentMethodFactory->create([
+            'name' => ucfirst($name),
+            'code' => $code,
+            'description' => $description,
+            'gatewayName' => $gatewayFactory,
+            'gatewayFactory' => $gatewayFactory,
+            'enabled' => true,
+            'channels' => ($addForCurrentChannel && $this->sharedStorage->has('channel')) ? [$this->sharedStorage->get('channel')] : [],
+        ]);
+        $this->methodRepository->add($payment);
     }
 }

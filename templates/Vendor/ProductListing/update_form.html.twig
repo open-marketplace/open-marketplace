@@ -1,4 +1,5 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Vendor/Common/_breadcrumb.html.twig' %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
 {% set event_prefix = metadata.applicationName ~ '.vendor.' ~ metadata.name ~ '.create' %}
@@ -7,16 +8,10 @@
 
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
-{% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
-        <div class="divider"> / </div>
-        <a href="{{ path('open_marketplace_vendor_product_listing_index') }}" class="section">{{ 'open_marketplace.ui.product_list'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.edit'|trans }}</div>
-    </div>
+{% block breadcrumb_page %}
+    <a href="{{ path('open_marketplace_vendor_product_listing_index') }}" class="section">{{ 'open_marketplace.ui.product_list'|trans }}</a>
+    <div class="divider"> / </div>
+    <div class="active section">{{ 'sylius.ui.edit'|trans }}</div>
 {% endblock %}
 
 {% block subcontent %}

@@ -160,4 +160,14 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function getAnyTranslationName(): ?string;
 
     public function getProductListingPriceForChannel(ChannelInterface $channel): ?ProductListingPriceInterface;
+
+    /** @return Collection<array-key, ChannelInterface> */
+    public function getChannels(): Collection;
+
+    /** @param Collection<array-key, ChannelInterface> $channels */
+    public function setChannels(Collection $channels): void;
+
+    public function addChannel(ChannelInterface $channel): void;
+
+    public function removeChannel(ChannelInterface $channel): void;
 }

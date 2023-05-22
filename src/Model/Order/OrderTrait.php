@@ -27,10 +27,12 @@ trait OrderTrait
 
     protected ?VendorInterface $vendor = null;
 
-    protected ?OrderInterface $primaryOrder;
+    protected ?OrderInterface $primaryOrder = null;
 
     /** @var Collection<int, OrderInterface> */
     protected Collection $secondaryOrders;
+
+    protected string $mode = self::PRIMARY_ORDER_MODE;
 
     public function __construct()
     {
@@ -132,5 +134,35 @@ trait OrderTrait
         }
 
         return false;
+    }
+
+    public function getMode(): string
+    {
+        return $this->mode;
+    }
+
+    public function setMode(string $mode): void
+    {
+        $this->mode = $mode;
+    }
+
+    public function isPrimary(): bool
+    {
+        return self::PRIMARY_ORDER_MODE === $this->getMode();
+    }
+
+    public function getSecondaryPayments(): Collection
+    {
+        $payments = new ArrayCollection();
+        $secondaryOrders = $this->getSecondaryOrders();
+        if (0 === $secondaryOrders->count()) {
+            return $payments;
+        }
+
+        foreach ($secondaryOrders as $order) {
+            $payments->add($order->getPayments()->first());
+        }
+
+        return $payments;
     }
 }

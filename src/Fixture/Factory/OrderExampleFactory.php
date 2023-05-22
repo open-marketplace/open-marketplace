@@ -24,7 +24,6 @@ use Faker\Factory;
 use Faker\Generator;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -43,7 +42,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
-final class OrderExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+final class OrderExampleFactory extends AbstractExampleFactory implements OrderExampleFactoryInterface
 {
     private OrderFactoryInterface $orderFactory;
 

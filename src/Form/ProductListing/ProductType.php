@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
@@ -66,6 +67,11 @@ final class ProductType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => true,
                 'label' => false,
+            ])
+            ->add('channels', ChannelChoiceType::class, [
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'sylius.form.product.channels',
             ])
             ->add('mainTaxon', TaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.product.main_taxon',

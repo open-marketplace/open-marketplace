@@ -42,6 +42,14 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     <attribute name="groups">admin:vendor:read</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="shop_vendors_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/vendors</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:vendor:read</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
@@ -55,7 +63,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
             <itemOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendor/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendors/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:read</attribute>
                 </attribute>
@@ -75,7 +83,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     <attribute>Default</attribute>
                     <attribute>VendorUser</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/vendor/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendors/{uuid}</attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">Body parameter `country` accept id of Country e.g. `/api/v2/shop/countries/EU`.</attribute>
                 </attribute>

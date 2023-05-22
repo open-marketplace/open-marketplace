@@ -10,7 +10,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
-    <resource class="%open_marketplace.model.draft_attribute.class%" shortName="DraftAttribute">
+    <resource class="%open_marketplace.model.draft_attribute.class%" shortName="ProductDraftAttribute">
 
         <collectionOperations>
             <collectionOperation name="vendor_post">
@@ -18,7 +18,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="validation_groups">
                     <attribute>ApiDraftAttribute</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/vendor/draft-attributes</attribute>
+                <attribute name="path">/shop/account/vendor/product-draft/attributes</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:account:vendor:draft_attribute:create</attribute>
                 </attribute>
@@ -29,7 +29,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             </collectionOperation>
             <collectionOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendor/draft-attributes</attribute>
+                <attribute name="path">/shop/account/vendor/product-draft/attributes</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:draft_attribute:read</attribute>
                 </attribute>
@@ -39,7 +39,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <itemOperations>
             <itemOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendor/draft-attributes/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendor/product-draft/attributes/{uuid}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:draft_attribute:read</attribute>
                 </attribute>
@@ -51,7 +51,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="validation_groups">
                     <attribute>ApiDraftAttribute</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/vendor/draft-attributes/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendor/product-draft/attributes/{uuid}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:account:vendor:draft_attribute:update</attribute>
                 </attribute>
@@ -63,7 +63,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
             <itemOperation name="vendor_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/shop/account/vendor/draft-attributes/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendor/product-draft/attributes/{uuid}</attribute>
                 <attribute name="security">is_granted("OWNIT", object)</attribute>
             </itemOperation>
         </itemOperations>

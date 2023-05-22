@@ -21,7 +21,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="openapi_context">
                     <attribute name="description">
 Body parameters:
-- `attributes.attribute` accept id of DraftAttributes e.g. `/api/v2/shop/account/vendor/draft-attributes/4DGR-334Spds`.
+- `attributes.attribute` accept id of DraftAttributes e.g. `/api/v2/shop/account/vendor/product-draft/attributes/4DGR-334Spds`.
 - `mainTaxon`, `productDraftTaxons.taxon` accept id of Taxon e.g.  `/api/v2/shop/taxons/clothes`.
 - `images` as an array of files
                     </attribute>
@@ -69,7 +69,7 @@ Body parameters:
                 <attribute name="openapi_context">
                     <attribute name="description">
 Body parameters:
-- `attributes.attribute` accept id of DraftAttributes e.g. `/api/v2/shop/account/vendor/draft-attributes/4DGR-334Spds`.
+- `attributes.attribute` accept id of DraftAttributes e.g. `/api/v2/shop/account/vendor/product-draft/attributes/4DGR-334Spds`.
 - `mainTaxon`, `productDraftTaxons.taxon` accept id of Taxon e.g.  `/api/v2/shop/taxons/clothes`.
 - `images` as an array of files
                     </attribute>
@@ -107,7 +107,20 @@ Body parameters:
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="productDrafts_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendor/product-listings/{uuid}/product-drafts</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:product_listing:drafts:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="uuid" identifier="true" writable="false" />
+        <property name="productDrafts" readable="true">
+            <subresource resourceClass="%open_marketplace.model.product_draft.class%" maxDepth="1" />
+        </property>
     </resource>
 </resources>

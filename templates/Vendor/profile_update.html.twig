@@ -1,17 +1,14 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Vendor/Common/_breadcrumb.html.twig' %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
 {% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
 
-{% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.personal_information'|trans }}</div>
-    </div>
+{% block breadcrumb_page %}
+    <a href="{{ path('vendor_profile') }}" class="section">{{ 'sylius.ui.profile'|trans }}</a>
+    <div class="divider"> / </div>
+    <div class="active section">{{ 'sylius.ui.edit'|trans }}</div>
 {% endblock %}
 
 {% block subcontent %}
@@ -30,6 +27,12 @@
             {% form_theme form 'Vendor/ProductListing/form/theme/image_theme.html.twig' %}
             <label>{{ 'sylius.ui.image'|trans }}</label>
             {{ form_row(form.image, {'label': false}) }}
+        </div>
+
+        <div class="field" id="add-background">
+            {% form_theme form 'Vendor/ProductListing/form/theme/image_theme.html.twig' %}
+            <label>{{ 'open_marketplace.ui.background'|trans }}</label>
+            {{ form_row(form.backgroundImage, {'label': false}) }}
         </div>
 
         {{ form_row(form.description) }}

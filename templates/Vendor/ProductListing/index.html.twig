@@ -1,15 +1,10 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Vendor/Common/_breadcrumb.html.twig' %}
 
 {% block title %}{{ 'open_marketplace.ui.product_list'|trans }} | {{ parent() }}{% endblock %}
 
-{% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'open_marketplace.ui.product_list'|trans }}</div>
-    </div>
+{% block breadcrumb_page %}
+    <div class="active section">{{ 'open_marketplace.ui.product_list'|trans }}</div>
 {% endblock %}
 
 {% block subcontent %}

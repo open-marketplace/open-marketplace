@@ -23,3 +23,15 @@ Feature: Verifying product listing
     Then I should see url "#\/admin\/product-listings\/$#"
     And I should see product's listing status "Accepted"
     And I should see "Product listing accepted."
+
+  @ui
+  Scenario: Accept product listing with channel
+    Given there is product listing enabled for channel
+    And I am on "/admin"
+    And I follow "Product listings"
+    And I should see 1 product listing
+    And I should see product's listing status "Under verification"
+    And I follow "Details"
+    And I should see url "#\/admin\/product-listings\/(\d+)#"
+    When I click "Accept" button
+    Then there should be product with channel enabled

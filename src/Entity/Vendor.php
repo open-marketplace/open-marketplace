@@ -45,6 +45,8 @@ class Vendor implements VendorInterface
 
     protected ?VendorImageInterface $image = null;
 
+    protected ?VendorBackgroundImageInterface $backgroundImage = null;
+
     /** @var Collection<int, ProductInterface> */
     protected Collection $products;
 
@@ -231,6 +233,21 @@ class Vendor implements VendorInterface
         $this->image = null;
     }
 
+    public function getBackgroundImage(): ?VendorBackgroundImageInterface
+    {
+        return $this->backgroundImage;
+    }
+
+    public function setBackgroundImage(?VendorBackgroundImageInterface $backgroundImage): void
+    {
+        $this->backgroundImage = $backgroundImage;
+    }
+
+    public function removeBackgroundImage(): void
+    {
+        $this->backgroundImage = null;
+    }
+
     public function isVerified(): bool
     {
         return self::STATUS_VERIFIED === $this->getStatus();
@@ -259,6 +276,33 @@ class Vendor implements VendorInterface
         if ($this->hasShippingMethod($shippingMethod)) {
             $this->shippingMethods->removeElement($shippingMethod);
         }
+    }
+
+    public function getAverageRatingData(): array
+    {
+        $ratingSum = 0.0;
+        $productsRated = 0;
+        $reviewsCount = 0;
+        /** @var ProductInterface $product */
+        foreach ($this->products as $product) {
+            if (0 < count($product->getAcceptedReviews())) {
+                $ratingSum += $product->getAverageRating();
+                $productsRated += 1;
+                $reviewsCount += count($product->getAcceptedReviews());
+            }
+        }
+
+        if (0 === $productsRated) {
+            return [
+                'averageRating' => 0.0,
+                'reviewsCount' => 0,
+            ];
+        }
+
+        return [
+            'averageRating' => $ratingSum / $productsRated,
+            'reviewsCount' => $reviewsCount,
+            ];
     }
 
     public function __toString(): string

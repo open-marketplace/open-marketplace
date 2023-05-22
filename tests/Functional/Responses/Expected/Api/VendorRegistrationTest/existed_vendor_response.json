@@ -2,11 +2,11 @@
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
-    "hydra:description": "Vendor for current user already exist",
+    "hydra:description": "Vendor for current user already exists",
     "violations": [
         {
             "propertyPath": "",
-            "message": "Vendor for current user already exist",
+            "message": "Vendor for current user already exists",
             "code": null
         }
     ]

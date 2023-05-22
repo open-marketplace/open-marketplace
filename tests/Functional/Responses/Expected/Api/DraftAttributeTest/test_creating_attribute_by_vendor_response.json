@@ -1,7 +1,7 @@
 {
-    "@context": "\/api\/v2\/contexts\/DraftAttribute",
-    "@id": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
-    "@type": "DraftAttribute",
+    "@context": "\/api\/v2\/contexts\/ProductDraftAttribute",
+    "@id": "\/api\/v2\/shop\/account\/vendor\/product-draft/attributes\/@string@",
+    "@type": "ProductDraftAttribute",
     "vendor": "\/api\/v2\/shop\/vendors\/@string@",
     "uuid": "@string@",
     "code": "test",
@@ -11,8 +11,8 @@
     "position": 1,
     "translations": {
         "en_US": {
-            "@id": "/api/v2/shop/account/vendor/draft-attribute-translations/@string@",
-            "@type": "DraftAttributeTranslation",
+            "@id": "/api/v2/shop/account/vendor/product-draft/attribute-translations/@string@",
+            "@type": "ProductDraftAttributeTranslation",
             "uuid": "@string@",
             "name": "test",
             "locale": "en_US"

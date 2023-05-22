@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
@@ -16,4 +15,8 @@ interface VendorPagePageInterface
     public function getFirstProductNameFromList(): string;
 
     public function getLastProductNameFromList(): string;
+
+    public function countProduct(): int;
+
+    public function productsSorted(array $sorting): bool;
 }

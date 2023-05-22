@@ -1,0 +1,34 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+<div class="ui buttons product-review-dropdown">
+    <div class="ui labeled icon floating dropdown  link button" tabindex="0">
+        <i class="angle down icon"></i>
+        <span class="text">{{ 'open_marketplace.ui.details'|trans }}</span>
+        <div class="menu" tabindex="-1">
+            <a href="{{ path('open_marketplace_vendor_product_review_edit', {'id': data.id}) }}"
+               class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}
+            </a>
+
+            {% if data.status is same as "new" %}
+                <form action="{{ path('open_marketplace_vendor_product_review_accept', {'id': data.id}) }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <button class="item"><i class="checkmark icon"></i> {{ 'sylius.ui.accept'|trans }}</button>
+                </form>
+
+                <form action="{{ path('open_marketplace_vendor_product_review_reject', {'id': data.id}) }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <button class="item"><i class="remove icon"></i> {{ 'sylius.ui.reject'|trans }}</button>
+                </form>
+            {% endif %}
+
+            <form action="{{ path('open_marketplace_vendor_product_review_delete', {'id': data.id}) }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}" />
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="item" data-requires-confirmation><i class="icon trash"></i> {{ 'sylius.ui.delete'|trans }}</button>
+            </form>
+
+        </div>
+    </div>
+</div>
