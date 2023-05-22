@@ -14,6 +14,8 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Entity\VendorShippingMethod;
+use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
 use BitBag\OpenMarketplace\Repository\ProductRepository;
 use BitBag\OpenMarketplace\Repository\VendorRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,6 +34,8 @@ use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -53,6 +57,8 @@ class ProductContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
+    private RepositoryInterface $shippingMethodRepository;
+
     private SlugGeneratorInterface $slugGenerator;
 
     private ProductVariantResolverInterface $defaultVariantResolver;
@@ -70,6 +76,7 @@ class ProductContext implements Context
         ProductExampleFactory $productExampleFactory,
         TaxonExampleFactory $taxonFactory,
         SharedStorageInterface $sharedStorage,
+        RepositoryInterface $shippingMethodRepository,
         SlugGeneratorInterface $slugGenerator,
         ProductVariantResolverInterface $defaultVariantResolver,
         ProductFactoryInterface $productFactory,
@@ -83,6 +90,7 @@ class ProductContext implements Context
         $this->productExampleFactory = $productExampleFactory;
         $this->taxonFactory = $taxonFactory;
         $this->sharedStorage = $sharedStorage;
+        $this->shippingMethodRepository = $shippingMethodRepository;
         $this->slugGenerator = $slugGenerator;
         $this->defaultVariantResolver = $defaultVariantResolver;
         $this->productFactory = $productFactory;
@@ -101,7 +109,7 @@ class ProductContext implements Context
             $products[$i]->setVendor($vendor);
             $this->vendorRepository->add($vendor);
             $this->productRepository->add($products[$i]);
-
+            $this->sharedStorage->set('vendor', $vendor);
             $this->sharedStorage->set('products', $products);
         }
     }
@@ -224,6 +232,47 @@ class ProductContext implements Context
         $product->getVariants()[0]->setCode($variant_code);
         $this->productRepository->add($product);
         $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Given one of it belongs to :shippingCategory shipping category
+     */
+    public function oneOfItBelongsToShippingCategory(ShippingCategoryInterface $shippingCategory)
+    {
+        $products = $this->sharedStorage->get('products');
+        $products[1]->getVariants()->first()->setShippingCategory($shippingCategory);
+
+        $this->manager->flush();
+    }
+
+    /**
+     * @Given one of it not belongs to :shippingCategory shipping category
+     */
+    public function oneOfItNotBelongsToShippingCategory(ShippingCategoryInterface $shippingCategory)
+    {
+        $products = $this->sharedStorage->get('products');
+        $products[1]->getVariants()->first()->setShippingCategory(null);
+
+        $this->manager->flush();
+    }
+
+    /**
+     * @Given vendor uses this shipping method
+     */
+    public function vendorUsesThisShippingMethod()
+    {
+        /** @var VendorInterface $vendor */
+        $vendor = $this->sharedStorage->get('vendor');
+        /** @var VendorShippingMethodInterface $shippingMethod */
+        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => 'ENVELOPE-US']);
+        $vendorShippingMethod = new VendorShippingMethod();
+        $vendorShippingMethod->setVendor($vendor);
+        $vendorShippingMethod->setShippingMethod($shippingMethod);
+        $vendorShippingMethod->setChannelCode($this->sharedStorage->get('channel')->getCode());
+        $vendor->addShippingMethod($vendorShippingMethod);
+        $this->manager->persist($vendorShippingMethod);
+        $this->manager->persist($vendor);
+        $this->manager->flush();
     }
 
     /**

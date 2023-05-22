@@ -247,6 +247,20 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Given I add this product to the cart
+     */
+    public function iAddThisProductToTheCart()
+    {
+        $product = $this->sharedStorage->get('product');
+
+        $slug = $product->getSlug();
+        $this->productPage->open(['slug' => $slug]);
+        $this->productPage->addToCart();
+
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
      * @Given I finalize order
      */
     public function iFinalizeOrder()
