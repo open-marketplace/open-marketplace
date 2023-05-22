@@ -12,9 +12,12 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Functional;
 
 use Sylius\Tests\Api\JsonApiTestCase as BaseJsonApiTestCase;
+use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 
 abstract class FunctionalTestCase extends BaseJsonApiTestCase
 {
+    use AdminUserLoginTrait;
+
     protected string $filesPath;
 
     public function __construct(
@@ -37,6 +40,15 @@ abstract class FunctionalTestCase extends BaseJsonApiTestCase
     protected function getHeaderForLoginShopUser(string $email): array
     {
         $loginData = $this->logInShopUser($email);
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
+        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
+
+        return array_merge($header, self::CONTENT_TYPE_HEADER);
+    }
+
+    protected function getHeaderForAdmin(string $email): array
+    {
+        $loginData = $this->logInAdminUser($email);
         $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
 

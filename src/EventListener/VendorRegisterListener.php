@@ -11,11 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\EventListener;
 
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorRegisterListener
 {
@@ -23,12 +27,16 @@ final class VendorRegisterListener
 
     private ImageUploaderInterface $fileUploader;
 
+    private TokenStorageInterface $tokenStorage;
+
     public function __construct(
         VendorSlugGeneratorInterface $vendorSlugGenerator,
-        ImageUploaderInterface $fileUploader
-    ) {
+        ImageUploaderInterface $fileUploader,
+        TokenStorageInterface $tokenStorage,
+        ) {
         $this->vendorSlugGenerator = $vendorSlugGenerator;
         $this->fileUploader = $fileUploader;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function uploadImage(ResourceControllerEvent $event): void
@@ -56,5 +64,21 @@ final class VendorRegisterListener
         }
 
         $vendor->setSlug($this->vendorSlugGenerator->generateSlug($vendor->getCompanyName()));
+    }
+
+    public function connectShopUser(ResourceControllerEvent $event): void
+    {
+        /** @var VendorInterface $vendor */
+        $vendor = $event->getSubject();
+        $token = $this->tokenStorage->getToken();
+        if (null === $token) {
+            throw new TokenNotFoundException();
+        }
+        /** @var ShopUserInterface|null $shopUser */
+        $shopUser = $token->getUser();
+        if (null === $shopUser) {
+            throw new ShopUserNotFoundException();
+        }
+        $vendor->setShopUser($shopUser);
     }
 }

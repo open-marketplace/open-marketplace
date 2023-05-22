@@ -209,7 +209,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function thereIsProductListingForChannel()
     {
         $vendor = $this->sharedStorage->get('vendor');
-        $channel = $this->sharedStorage->get('channel');
+        $channel = $this->getChannel();
 
         $productListing = $this->createProductListing($vendor, 'code');
         $productDraft = $this->createProductListingDraft($productListing, 'code');
@@ -238,7 +238,7 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function thereShouldBeProductWithChannel()
     {
-        $setChannel = $this->sharedStorage->get('channel');
+        $setChannel = $this->getChannel();
         $products = $this->entityManager->getRepository(Product::class)->findAll();
         Assert::count($products, 1);
         /** @var ProductInterface $product */
@@ -347,7 +347,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $productDraft->setPublishedAt(new \DateTime($publishedAt));
         $productDraft->setVersionNumber($versionNumber);
         $productDraft->setProductListing($productListing);
-        $channel = $this->sharedStorage->get('channel');
+        $channel = $this->getChannel();
         $productDraft->setChannels(new ArrayCollection([$channel]));
 
         return $productDraft;
@@ -484,5 +484,11 @@ final class ProductListingContext extends RawMinkContext implements Context
         $imagePath = $image->getAttribute('src');
 
         Assert::contains($imagePath, 'path/to/file', 'no image found');
+    }
+
+    private function getChannel(): ChannelInterface
+    {
+        return $this->entityManager->getRepository(ChannelInterface::class)
+            ->findAll()[0];
     }
 }

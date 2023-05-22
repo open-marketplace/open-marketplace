@@ -1,0 +1,12 @@
+@media (max-width: 767px) {
+  #sylius-addresses, #sylius-default-address {
+    .ui.vertical.buttons {
+      flex-direction: row;
+    }
+    .ui.vertical .button.icon.labeled.ui {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

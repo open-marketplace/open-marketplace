@@ -3,6 +3,8 @@ default:
         order:
             contexts:
             - tests.open_marketplace.behat.context.shop.order
+            - sylius.behat.context.setup.payment
+            - sylius.behat.context.setup.admin_security
             - tests.open_marketplace.behat.context.setup.product
             - sylius.behat.context.setup.shop_security
             - sylius.behat.context.hook.doctrine_orm
