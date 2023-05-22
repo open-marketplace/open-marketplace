@@ -21,4 +21,4 @@ If you want see more details about client you can click show button(1) in action
 In client details View you can see Customer data(1) and his address information(2).
 You can also click show orders button to see his orders placed with you.
 
-![Clients show button](images/clients_details.png)
+![Clients show button](images/client-details.png)

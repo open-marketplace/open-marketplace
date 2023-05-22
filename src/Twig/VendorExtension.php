@@ -14,9 +14,11 @@ namespace BitBag\OpenMarketplace\Twig;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Component\Channel\Context\CompositeChannelContext;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Context\CompositeLocaleContext;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -30,16 +32,20 @@ class VendorExtension extends AbstractExtension
 
     private ChannelRepositoryInterface $channelRepository;
 
+    private CompositeChannelContext $channelContext;
+
     public function __construct(
         VendorProviderInterface $vendorProvider,
         ObjectManager $manager,
         CompositeLocaleContext $localeContext,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        CompositeChannelContext $channelContext
     ) {
         $this->vendorProvider = $vendorProvider;
         $this->manager = $manager;
         $this->localeContext = $localeContext;
         $this->channelRepository = $channelRepository;
+        $this->channelContext = $channelContext;
     }
 
     public function getFunctions(): array
@@ -48,6 +54,7 @@ class VendorExtension extends AbstractExtension
             new TwigFunction('is_pending_vendor_profile_update', [$this, 'isPendingVendorProfileUpdate']),
             new TwigFunction('current_locale', [$this, 'currentLocale']),
             new TwigFunction('get_channel', [$this, 'getChannel']),
+            new TwigFunction('get_channel_main_taxon', [$this, 'getChannelMainTaxon']),
         ];
     }
 
@@ -75,5 +82,13 @@ class VendorExtension extends AbstractExtension
         $channel = $this->channelRepository->findOneByCode($channelCode);
 
         return $channel;
+    }
+
+    public function getChannelMainTaxon(): ?TaxonInterface
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
+        return $channel->getMenuTaxon();
     }
 }

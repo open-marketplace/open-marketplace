@@ -244,6 +244,16 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Then I should see non unique code error message
+     */
+    public function iShouldSeeNonUniqueCodeMessage()
+    {
+        $text = $this->getPage()->getText();
+        $isErrorMessagePresent = false !== stripos($text, 'Product Listing with given code already exists');
+        Assert::true($isErrorMessagePresent);
+    }
+
+    /**
      * @Given I choose main taxon :taxon
      */
     public function iChooseMainTaxon($taxon)

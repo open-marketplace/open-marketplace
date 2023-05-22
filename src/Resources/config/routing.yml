@@ -84,3 +84,9 @@ vendor_shipping_methods:
   prefix: /{_locale}/account
   requirements:
     _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+
+open_marketplace_vendor_product_reviews:
+  resource: "routing/vendor/product_review.yml"
+  prefix: /{_locale}/account/vendor
+  requirements:
+    _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$

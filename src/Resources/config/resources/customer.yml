@@ -1,5 +1,0 @@
-sylius_customer:
-    resources:
-        customer:
-            classes:
-                repository: BitBag\OpenMarketplace\Repository\CustomerRepository

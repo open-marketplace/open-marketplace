@@ -68,5 +68,15 @@
                 </service>
             </argument>
         </service>
+
+        <service id="open_marketplace.repository.taxon_repository" class="BitBag\OpenMarketplace\Repository\TaxonRepository" >
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>%sylius.model.taxon.class%</argument>
+                    <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
+                </service>
+            </argument>
+        </service>
     </services>
 </container>

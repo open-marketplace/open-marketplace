@@ -21,8 +21,8 @@
         ],
         "translations": [
             {
-                "@id": "\/api\/v2\/shop\/account\/vendor\/draft-product-translations\/@string@",
-                "@type": "DraftProductTranslation",
+                "@id": "\/api\/v2\/shop\/account\/vendor\/product-draft\/translations\/@string@",
+                "@type": "ProductDraftTranslation",
                 "uuid": "@string@",
                 "name": "Changed name",
                 "metaKeywords": "Test metaKeywords",
@@ -44,7 +44,7 @@
             {
                 "@type": "DraftAttributeValue",
                 "uuid": "@string@",
-                "attribute": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
+                "attribute": "\/api\/v2\/shop\/account\/vendor\/product-draft\/attributes\/@string@",
                 "value": "changed value"
             }
         ],

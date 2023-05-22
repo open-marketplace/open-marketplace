@@ -5,7 +5,7 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="BitBag\OpenMarketplace\Entity\Order" table="sylius_order">
-        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" inversed-by="products" />
+        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\VendorInterface" />
         <many-to-one field="primaryOrder" target-entity="BitBag\OpenMarketplace\Entity\Order" inversed-by="secondaryOrders">
             <join-column on-delete="SET NULL"/>
         </many-to-one>

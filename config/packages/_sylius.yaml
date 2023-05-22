@@ -8,11 +8,10 @@ imports:
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
-    - { resource: "../resources/*" }
+    - { resource: "./../../src/Resources/config/resources/*" }
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
-
 
 sylius_shop:
     product_grid:
@@ -61,6 +60,26 @@ sylius_payment:
             classes:
                 repository: BitBag\OpenMarketplace\Repository\PaymentRepository
 
+sylius_customer:
+    resources:
+        customer:
+            classes:
+                repository: BitBag\OpenMarketplace\Repository\CustomerRepository
+
+sylius_review:
+    resources:
+        product:
+            review:
+                classes:
+                    repository: BitBag\OpenMarketplace\Repository\ProductReviewRepository
+
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                model: Sylius\Component\Core\Model\Taxon
+                repository: BitBag\OpenMarketplace\Repository\TaxonRepository
+
 sylius_ui:
     events:
         sylius.shop.checkout.header:
@@ -78,4 +97,3 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.shop.checkout.address.after_header # Intentionally using "address" event for backwards compatibility
-

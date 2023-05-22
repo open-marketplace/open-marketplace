@@ -150,4 +150,19 @@ trait OrderTrait
     {
         return self::PRIMARY_ORDER_MODE === $this->getMode();
     }
+
+    public function getSecondaryPayments(): Collection
+    {
+        $payments = new ArrayCollection();
+        $secondaryOrders = $this->getSecondaryOrders();
+        if (0 === $secondaryOrders->count()) {
+            return $payments;
+        }
+
+        foreach ($secondaryOrders as $order) {
+            $payments->add($order->getPayments()->first());
+        }
+
+        return $payments;
+    }
 }

@@ -100,6 +100,10 @@ final class VendorMenuBuilder
                 ->addChild('Conversations', ['route' => 'open_marketplace_vendor_conversation_index'])
                 ->setLabel('open_marketplace.ui.menu.conversations')
                 ->setLabelAttribute('icon', 'envelope open');
+            $menu
+                ->addChild('Product Reviews', ['route' => 'open_marketplace_vendor_product_review_index'])
+                ->setLabel('open_marketplace.ui.menu.product_reviews')
+                ->setLabelAttribute('icon', 'star');
         }
 
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);

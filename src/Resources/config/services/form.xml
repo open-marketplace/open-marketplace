@@ -14,8 +14,6 @@
 
         <service id="open_marketplace.form.vendor_type"
                  class="BitBag\OpenMarketplace\Form\Type\VendorType">
-            <argument>%sylius.model.shop_user.class%</argument>
-            <argument type="service" id="security.token_storage"/>
             <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
             <argument>%open_marketplace.form.type.vendor.validation_groups%</argument>
 
@@ -47,6 +45,12 @@
         <service id="open_marketplace.form.type.vendor_image"
                  class="BitBag\OpenMarketplace\Form\VendorImageType">
             <argument>BitBag\OpenMarketplace\Entity\VendorImage</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service id="open_marketplace.form.type.vendor_background_image"
+                 class="BitBag\OpenMarketplace\Form\VendorBackgroundImageType">
+            <argument>BitBag\OpenMarketplace\Entity\VendorBackgroundImage</argument>
             <tag name="form.type"/>
         </service>
 
@@ -160,5 +164,12 @@
             <argument type="service" id="open_marketplace.repository.product_taxon" />
             <tag name="form.type" />
         </service>
+
+        <service id="open_marketplace.form.type.vendor.product_review_type"
+                 class="BitBag\OpenMarketplace\Form\Type\Vendor\ProductReviewType">
+            <argument>%sylius.model.product_review.class%</argument>
+            <tag name="form.type"/>
+        </service>
+
     </services>
 </container>

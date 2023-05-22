@@ -17,7 +17,7 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
 {
     public function getRouteName(): string
     {
-        return 'open_marketplace_vendor_page_show';
+        return 'open_marketplace_vendor_shop_page_index';
     }
 
     public function getFirstProductNameFromList(): string
@@ -34,5 +34,39 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
         $productsList = $page->findById('products');
 
         return $productsList->find('css', '[data-test-product]:last-child [data-test-product-content] [data-test-product-name]')->getText();
+    }
+
+    public function countProduct(): int
+    {
+        $page = $this->getDocument();
+        $productCards = $page->findAll('css', '.ui.fluid.card');
+
+        return count($productCards);
+    }
+
+    public function productsSorted(array $sorting): bool
+    {
+        $page = $this->getDocument();
+
+        $productCards = $page->findAll('css', '.ui.fluid.card');
+
+        foreach ($productCards as $i => $productCard) {
+            $productField[$i] = $productCard->find('css', '.sylius-product-' . $sorting['field'])->getText();
+
+            if (0 === $i) {
+                continue;
+            }
+
+            $comparationValue = $productField[$i - 1] <= $productField[$i];
+
+            if (
+                ('asc' === $sorting['value'] && !$comparationValue) ||
+                ('desc' === $sorting['value'] && $comparationValue)
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

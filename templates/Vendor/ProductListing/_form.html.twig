@@ -4,6 +4,7 @@
         <div class="ui stackable grid sylius-tabular-form">
             <div class="sixteen wide column">
                 <div>
+                    {{ form_errors(form) }}
                     <div class="ui tab active" data-tab="details">
                         <div class="ui segments">
                             <div class="ui segment">
@@ -18,7 +19,6 @@
                                 <h3>{{ 'sylius.ui.pricing'|trans }}</h3>
                             </div>
                             <div class="ui segment">
-                                {{ form_errors(form) }}
                                 <div class="ui styled fluid accordion">
                                     {% for channel, prices in form.productListingPrices %}
                                         <div id="sylius_product_variant_channelPricings" data-locale="{{ channel }}">
