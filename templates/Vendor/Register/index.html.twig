@@ -2,7 +2,7 @@
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 {% block subcontent %}
    {% if null == app.user.vendor %}
-      {{ include('Form/_vendorRegister.html.twig') }}
+      {{ include('Vendor/Register/_form.html.twig') }}
    {% elseif app.user.vendor.verified %}
       {%  set vars = {messageTranslationKey: 'open_marketplace.ui.vendor_verification_accepted'} %}
       {%  include '_Alert/infoMessage.html.twig' with vars %}
