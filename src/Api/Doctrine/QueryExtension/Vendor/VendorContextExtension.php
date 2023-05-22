@@ -16,6 +16,7 @@ use ApiPlatform\Metadata\Operation;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\FilterVendorStrategy;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
+use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
@@ -44,6 +45,20 @@ final class VendorContextExtension implements QueryCollectionExtensionInterface
         Operation $operation = null,
         array $context = []
     ): void {
+        $this->filterByVendorIfApply($queryBuilder, $resourceClass);
+    }
+
+    public function applyToItem(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        array $identifiers,
+        Operation $operation = null,
+        array $context = []
+    ): void {
+        if (Conversation::class === $resourceClass) {
+            return;
+        }
         $this->filterByVendorIfApply($queryBuilder, $resourceClass);
     }
 
