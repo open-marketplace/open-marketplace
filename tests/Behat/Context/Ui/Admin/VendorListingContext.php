@@ -83,6 +83,17 @@ final class VendorListingContext extends RawMinkContext implements Context
         Assert::eq($count, count($rows), 'Rows numbers are not equal');
     }
 
+
+
+    /**
+     * @Then page should contain valid customer :email link
+     */
+    public function iShouldSeeValidCustomerLink(string $email)
+    {
+
+    }
+
+
     /**
      * @return DocumentElement
      */
