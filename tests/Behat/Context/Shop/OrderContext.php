@@ -43,7 +43,7 @@ class OrderContext extends RawMinkContext implements Context
         OrderRepository $orderRepository,
         PaymentMethodFactoryInterface $paymentMethodFactory,
         PaymentMethodRepository $methodRepository
-        ) {
+    ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
