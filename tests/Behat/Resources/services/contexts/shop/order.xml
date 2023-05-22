@@ -7,6 +7,7 @@
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Shop\OrderContext">
             <argument type="service" id="tests.open_marketplace.behat.page.show_product_page"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="sylius.custom_factory.payment_method"/>
             <argument type="service" id="sylius.repository.payment_method"/>
         </service>

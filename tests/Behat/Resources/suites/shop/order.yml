@@ -7,6 +7,7 @@ default:
             - sylius.behat.context.setup.admin_security
             - tests.open_marketplace.behat.context.setup.product
             - sylius.behat.context.setup.shop_security
+            - sylius.behat.context.setup.admin_security
             - sylius.behat.context.hook.doctrine_orm
             - sylius.behat.context.setup.user
             - sylius.behat.context.setup.channel

@@ -68,6 +68,7 @@ final class OrderManager implements OrderManagerInterface
 
         $newOrder->setVendor($itemVendor);
         $newOrder->setPrimaryOrder($order);
+        $newOrder->setMode(OrderInterface::SECONDARY_ORDER_MODE);
 
         $this->entityManager->persist($newOrder);
         $this->entityManager->flush();
