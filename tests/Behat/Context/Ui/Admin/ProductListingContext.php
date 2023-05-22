@@ -236,7 +236,8 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Then there should be product with channel enabled
      */
-    public function thereShouldBeProductWithChannel(){
+    public function thereShouldBeProductWithChannel()
+    {
         $setChannel = $this->sharedStorage->get('channel');
         $products = $this->entityManager->getRepository(Product::class)->findAll();
         Assert::count($products, 1);
