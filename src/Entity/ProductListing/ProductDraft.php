@@ -65,6 +65,9 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     /** @var Collection<array-key, ProductDraftTaxonInterface> */
     protected Collection $productDraftTaxons;
 
+    /** @var Collection<array-key, ChannelInterface> */
+    protected Collection $channels;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -78,6 +81,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         $this->attributes = new ArrayCollection();
         $this->mainTaxon = null;
         $this->productDraftTaxons = new ArrayCollection();
+        $this->channels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -547,5 +551,27 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         }
 
         return null;
+    }
+
+    /** @return Collection<array-key, ChannelInterface> */
+    public function getChannels(): Collection
+    {
+        return $this->channels;
+    }
+
+    /** @param Collection<array-key, ChannelInterface> $channels */
+    public function setChannels(Collection $channels): void
+    {
+        $this->channels = $channels;
+    }
+
+    public function addChannel(ChannelInterface $channel): void
+    {
+        $this->channels->add($channel);
+    }
+
+    public function removeChannel(ChannelInterface $channel): void
+    {
+        $this->channels->removeElement($channel);
     }
 }

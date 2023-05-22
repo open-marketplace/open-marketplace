@@ -60,6 +60,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
     private function updateSimpleProductProperties(ProductInterface $product, ProductDraftInterface $productDraft): ProductInterface
     {
         $product->setUpdatedAt(new \DateTime());
+        $product->setChannels($productDraft->getChannels());
 
         $productTranslations = $this->productTranslationRepository->findBy(['translatable' => $product]);
         $mappedProductTranslations = [];
