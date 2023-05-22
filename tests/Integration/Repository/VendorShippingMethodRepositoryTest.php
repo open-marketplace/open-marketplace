@@ -15,7 +15,7 @@ use ApiTestCase\JsonApiTestCase;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use Sylius\Component\Core\Model\Channel;
 
-class VendorShippingMethodRepositoryTest extends JsonApiTestCase
+final class VendorShippingMethodRepositoryTest extends JsonApiTestCase
 {
     public function setUp(): void
     {

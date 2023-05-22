@@ -134,15 +134,19 @@ final class VendorController extends ResourceController
 
             try {
                 $image = $resource->getImage();
+                $backgroundImage = $resource->getBackgroundImage();
                 $this->vendorProfileUpdater->createPendingVendorProfileUpdate(
                     $form->getData(),
                     $vendor,
-                    $image
+                    $image,
+                    $backgroundImage
                 );
                 if ($image) {
                     $this->manager->remove($image);
                 }
-                $this->manager->flush();
+                if ($backgroundImage) {
+                    $this->manager->remove($backgroundImage);
+                }
 
                 $vendor->setEditedAt(new \DateTime());
                 $this->manager->flush();

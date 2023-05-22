@@ -8,9 +8,12 @@
 
             <argument type="service" id="open_marketplace.service.vendor_slug_generator"/>
             <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="security.token_storage"/>
 
             <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="generateSlug"/>
             <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadImage"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadBackgroundImage"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="connectShopUser"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\EventListener\AccessDeniedListener"

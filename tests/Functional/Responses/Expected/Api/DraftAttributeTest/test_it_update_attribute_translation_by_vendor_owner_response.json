@@ -1,7 +1,7 @@
 {
-    "@context": "\/api\/v2\/contexts\/DraftAttributeTranslation",
-    "@id": "\/api\/v2\/shop\/account\/vendor\/draft-attribute-translations\/@string@",
-    "@type": "DraftAttributeTranslation",
+    "@context": "\/api\/v2\/contexts\/ProductDraftAttributeTranslation",
+    "@id": "\/api\/v2\/shop\/account\/vendor\/product-draft/attribute-translations\/@string@",
+    "@type": "ProductDraftAttributeTranslation",
     "uuid": "@string@",
     "name": "changed translation name",
     "locale": "en_US"

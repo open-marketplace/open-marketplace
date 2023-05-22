@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="BitBag\OpenMarketplace\Entity\VendorBackgroundImage" shortName="VendorBackgroundImage">
+
+        <collectionOperations>
+            <collectionOperation name="vendor_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="validation_groups">
+                    <attribute>ApiUploadVendorBackgroundImage</attribute>
+                </attribute>
+                <attribute name="path">/shop/account/vendor/background-image</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="multipart/form-data">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="file">
+                                            <attribute name="type">string</attribute>
+                                            <attribute name="format">binary</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:account:vendor:background_image:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:background_image:read</attribute>
+                </attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorBackgroundImage</attribute>
+                <attribute name="status">201</attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="vendor_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/account/vendor/background-image/{uuid}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:account:vendor:vendor_background_image:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="vendor_delete">
+                <attribute name="security">is_granted("VENDOR_BACKGROUND_IMAGE_DELETE", object)</attribute>
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shop/account/vendor/background-image/{uuid}</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="uuid" identifier="true" writable="false" />
+        <property name="path" required="true" />
+        <property name="owner" required="true" />
+    </resource>
+</resources>

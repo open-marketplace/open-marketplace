@@ -37,7 +37,6 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
         $this->requestStack = $requestStack;
     }
 
-    /** @var ProductTranslationInterface */
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof UniqueProductListingSlugConstraint) {

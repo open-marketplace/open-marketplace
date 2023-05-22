@@ -29,6 +29,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <attribute name="product">
             <group>shop:account:vendor:product_listing:read</group>
         </attribute>
+        <attribute name="productDrafts">
+            <group>shop:account:vendor:product_listing:drafts:read</group>
+        </attribute>
         <attribute name="lastVerifiedAt">
             <group>shop:account:vendor:product_listing:read</group>
         </attribute>

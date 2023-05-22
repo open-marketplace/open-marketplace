@@ -1,5 +1,5 @@
 validator:
-  message:    
+  message:
     organization_name: Company Name
     tax_identifier: Tax Identifier
     not_blank: This field cannot be empty
@@ -14,4 +14,5 @@ validator:
     maximum_image_height: The image height is too big ({{ height }}px). Allowed maximum height is {{ max_height }}px.
     slug_invalid: This is not valid slug
     code_vendor_unique: User cannot have multiple products with same code
-    vendor_already_exists: Vendor for current user already exist
+    vendor_already_exists: Vendor for current user already exists
+    product_listing_unique_code: Product Listing with given code already exists

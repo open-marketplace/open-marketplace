@@ -30,6 +30,8 @@ final class VendorFixture extends AbstractResourceFixture
                 ->scalarNode('first_name')->cannotBeEmpty()->end()
                 ->scalarNode('last_name')->cannotBeEmpty()->end()
                 ->scalarNode('gender')->end()
+                ->scalarNode('image')->end()
+                ->scalarNode('backgroundImage')->end()
                 ->scalarNode('phone_number')->end()
                 ->scalarNode('birthday')->end()
                 ->booleanNode('enabled')->end()

@@ -27,8 +27,8 @@
         ],
         "translations": {
           "en_US": {
-            "@id": "\/api\/v2\/shop\/account\/vendor\/draft-product-translations\/@string@",
-            "@type": "DraftProductTranslation",
+            "@id": "\/api\/v2\/shop\/account\/vendor\/product-draft\/translations\/@string@",
+            "@type": "ProductDraftTranslation",
             "uuid": "@string@",
             "name": "product_draft_bruce_1_translations_us",
             "slug": "product_draft_bruce_1_translations_us",
@@ -53,7 +53,7 @@
           {
             "@type": "DraftAttributeValue",
             "uuid": "@string@",
-            "attribute": "\/api\/v2\/shop\/account\/vendor\/draft-attributes\/@string@",
+            "attribute": "\/api\/v2\/shop\/account\/vendor\/product-draft\/attributes\/@string@",
             "value": "example value"
           }
         ],

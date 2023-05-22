@@ -32,6 +32,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <collectionOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/vendor/customers</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves the collection of Customers who bought Vendor's products.</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:customer:read</attribute>
                 </attribute>
@@ -54,6 +57,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <itemOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/vendor/customers/{id}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves a Customer who bought Vendor's products.</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:customer:read</attribute>
                 </attribute>

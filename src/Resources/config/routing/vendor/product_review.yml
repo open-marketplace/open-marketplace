@@ -1,0 +1,50 @@
+open_marketplace_vendor_product_review_index:
+    path: /product-reviews
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: "Vendor/ProductReviews/index.html.twig"
+            grid: open_marketplace_vendor_product_review
+
+open_marketplace_vendor_product_review_edit:
+    path: /product-reviews/{id}/edit
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_review:updateAction
+        _sylius:
+            template: "Vendor/ProductReviews/update.html.twig"
+            redirect: open_marketplace_vendor_product_review_index
+            form: BitBag\OpenMarketplace\Form\Type\Vendor\ProductReviewType
+
+open_marketplace_vendor_product_review_delete:
+    path: /product-reviews/{id}/delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_review:deleteAction
+        _sylius:
+            redirect: referer
+
+open_marketplace_vendor_product_review_accept:
+    path: /product-review/{id}/accept
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: accept
+            redirect: referer
+            flash: sylius.review.accept
+
+open_marketplace_vendor_product_review_reject:
+    path: /product-review/{id}/reject
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: reject
+            redirect: referer
+            flash: sylius.review.reject
