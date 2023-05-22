@@ -80,7 +80,6 @@ final class VendorSettlementContext extends MinkContext implements Context
     {
         $text = $this->getSession()->getPage()->getText();
 
-//      Make sure that commission is displayed
         Assert::true(str_contains($text, 'Commission (Included in price)'));
         Assert::true(str_contains($text, 'Commission:'));
 
@@ -90,7 +89,6 @@ final class VendorSettlementContext extends MinkContext implements Context
         $order = $this->orderRepository->find($orderId);
         $decimalCommission = number_format($order->getCommissionTotal() / 100, 2, '.', ',');
 
-//      Make  sure that displayed commission is correct
         $this->commissionDisplayedShouldBeEqual($decimalCommission);
     }
 
@@ -101,7 +99,6 @@ final class VendorSettlementContext extends MinkContext implements Context
     {
         $text = $this->getSession()->getPage()->getText();
 
-//      Make sure that commission is displayed
         Assert::true(str_contains($text, 'Commission (Included in price)'));
         Assert::true(str_contains($text, 'Commission:'));
         $this->commissionDisplayedShouldBeEqual('0.00');
@@ -147,5 +144,14 @@ final class VendorSettlementContext extends MinkContext implements Context
         $intCommission = $floatCommission * 100;
 
         return (int) $intCommission;
+    }
+
+    /**
+     * @Given /^I test stuff$/
+     */
+    public function iTestStuff()
+    {
+        dump($this->getSession()->getCurrentUrl());
+        dd($this->getSession()->getPage()->getText());
     }
 }
