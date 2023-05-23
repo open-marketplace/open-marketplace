@@ -5,7 +5,7 @@ vendor_profile_update:
         autowire: true
         _controller: open_marketplace.controller.vendor_controller:customUpdateAction
         _sylius:
-            template: "Vendor/profile_update.html.twig"
+            template: "Vendor/Profile/update.html.twig"
             form: BitBag\OpenMarketplace\Form\Type\VendorType
             event: update
             flash: open_marketplace.ui.vendor_updated
