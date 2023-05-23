@@ -17,6 +17,7 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use Sylius\Component\Core\Model\Customer;
 use Webmozart\Assert\Assert;
 
 final class VendorListingContext extends RawMinkContext implements Context
@@ -90,7 +91,10 @@ final class VendorListingContext extends RawMinkContext implements Context
      */
     public function iShouldSeeValidCustomerLink(string $email)
     {
-
+        /** @var Customer $customer */
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $email]);
+        $link = sprintf('<a href="/admin/customers/%d">%s</a>', $customer->getId(), $email);
+        Assert::contains($this->getPage()->getHtml(), $link);
     }
 
 
