@@ -1,7 +1,7 @@
 sylius_grid:
     templates:
         action:
-            archiveConversation: "Grid/Conversation/Action/archiveConversation.html.twig"
+            archiveConversation: "Admin/Conversation/_archiveConversation.html.twig"
     grids:
         open_marketplace_admin_conversation:
             driver:
@@ -13,12 +13,12 @@ sylius_grid:
                     type: twig
                     label: open_marketplace.ui.form.conversation.category
                     options:
-                        template: 'Grid/Conversation/Ui/category.html.twig'
+                        template: 'Admin/Conversation/_category.html.twig'
                 shopUser:
                     type: twig
                     label: open_marketplace.ui.grid.conversation.applicant
                     options:
-                        template: 'Grid/Conversation/Ui/applicant.html.twig'
+                        template: 'Admin/Conversation/_applicant.html.twig'
             filters:
                 status:
                     label: open_marketplace.ui.status
