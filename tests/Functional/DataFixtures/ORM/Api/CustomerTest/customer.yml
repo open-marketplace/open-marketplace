@@ -123,6 +123,7 @@ BitBag\OpenMarketplace\Entity\Order:
     tokenValue: 'bruce_order_made_by_john_1'
     shippingAddress: '@address_john'
     billingAddress: '@address_john'
+    mode: 'secondary'
   bruce_order_made_by_john_2:
     currency_code: "USD"
     locale_code: "en-US"
@@ -132,6 +133,7 @@ BitBag\OpenMarketplace\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2'
+    mode: 'secondary'
   order_made_by_peter:
     currency_code: "USD"
     locale_code: "en-US"
@@ -141,3 +143,4 @@ BitBag\OpenMarketplace\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter'
+    mode: 'secondary'

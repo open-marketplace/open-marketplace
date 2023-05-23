@@ -97,14 +97,6 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
             $this->channelPricingFactory->createFromProductListingPrice($productVariant, $productListingPrice);
         }
 
-        foreach ($channelPricingCodes as $channelPricingCode) {
-            /** @var Channel $channel */
-            $channel = $this->channelRepository->findOneBy(['code' => $channelPricingCode]);
-            if (null !== $channel) {
-                $product->addChannel($channel);
-            }
-        }
-
         return $product;
     }
 }

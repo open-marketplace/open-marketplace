@@ -65,6 +65,7 @@
             <argument type="service" id="open_marketplace.factory.product_draft" />
             <argument type="service" id="open_marketplace.cloner.product_listing_translation_cloner" />
             <argument type="service" id="open_marketplace.cloner.product_listing_pricing_cloner" />
+            <argument type="service" id="sylius.image_uploader"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorImageFactory"

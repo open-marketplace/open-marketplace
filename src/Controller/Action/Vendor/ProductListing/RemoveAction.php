@@ -47,8 +47,7 @@ final class RemoveAction
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
-        $newStatus = true;
-        $productListing->setRemoved($newStatus);
+        $productListing->remove();
 
         $product = $productListing->getProduct();
 

@@ -58,11 +58,6 @@ final class SendForVerificationAction
             $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
         }
 
-        $this->session->getFlashBag()->add(
-            'success',
-            'open_marketplace.ui.product_listing_sent_to_verification',
-        );
-
         return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
     }
 }

@@ -67,7 +67,7 @@ final class UpdateProductListingHandlerSpec extends ObjectBehavior
         $image->setOwner($productDraft)->shouldBeCalled();
         $imageUploader->upload(Argument::any())->shouldBeCalled();
 
-        $productListing->addProductDraft($productDraft)->shouldBeCalled();
+        $productListing->insertDraft($productDraft)->shouldBeCalled();
         $manager->persist($productListing)->shouldBeCalled();
 
         $this($updateProductListing)->shouldReturn($productListing);

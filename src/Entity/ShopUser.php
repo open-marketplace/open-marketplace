@@ -18,13 +18,15 @@ class ShopUser extends BaseShopUser implements ShopUserInterface
 {
     use ShopUserTrait;
 
+    private const ROLE_VENDOR = 'ROLE_VENDOR';
+
     public function getRoles(): array
     {
         $roles = $this->roles;
 
         $vendor = $this->getVendor();
         if (null !== $vendor && $vendor->isVerified() && $vendor->isEnabled()) {
-            $roles[] = 'ROLE_VENDOR';
+            $roles[] = self::ROLE_VENDOR;
         }
 
         return array_unique($roles);

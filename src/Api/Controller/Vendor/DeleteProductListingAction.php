@@ -26,7 +26,7 @@ final class DeleteProductListingAction
 
     public function __invoke(ProductListingInterface $data): Response
     {
-        $data->setRemoved(true);
+        $data->remove();
 
         if (null !== $product = $data->getProduct()) {
             $product->setEnabled(false);

@@ -33,7 +33,9 @@ interface ProductListingInterface extends ResourceInterface, VendorAwareInterfac
 
     public function isRemoved(): bool;
 
-    public function setRemoved(bool $deleted): void;
+    public function remove(): void;
+
+    public function restore(): void;
 
     public function getVerificationStatus(): string;
 
@@ -62,15 +64,19 @@ interface ProductListingInterface extends ResourceInterface, VendorAwareInterfac
 
     public function setCreatedAt(DatetimeInterface $createdAt): void;
 
-    public function addProductDraft(ProductDraftInterface $productDraft): void;
+    public function insertDraft(ProductDraftInterface $newDraft): void;
 
     public function getAnyTranslationName(): ?string;
 
     public function getLatestDraft(): ?ProductDraftInterface;
 
+    public function needsNewDraft(): bool;
+
+    public function canBeVerified(): bool;
+
     public function sendToVerification(ProductDraftInterface $productDraft): void;
 
-    public function accept(ProductDraftInterface $productDraft): void;
+    public function accept(): void;
 
-    public function reject(ProductDraftInterface $productDraft): void;
+    public function reject(): void;
 }

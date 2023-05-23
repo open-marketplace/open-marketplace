@@ -444,23 +444,10 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         return new ProductTranslation();
     }
 
-    public function setAttributesFrom(ProductDraftInterface $otherDraft): void
-    {
-        $this->attributes = $otherDraft->getAttributes();
-        foreach ($otherDraft->getAttributes() as $attribute) {
-            $attribute->setSubject($this);
-        }
-    }
-
     /** @return Collection<array-key, ProductDraftTaxonInterface> */
     public function getProductDraftTaxons(): Collection
     {
         return $this->productDraftTaxons;
-    }
-
-    public function setProductTaxonsFrom(ProductDraftInterface $otherDraft): void
-    {
-        $this->productDraftTaxons = $otherDraft->getProductDraftTaxons();
     }
 
     public function addProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): void
@@ -573,5 +560,40 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function removeChannel(ChannelInterface $channel): void
     {
         $this->channels->removeElement($channel);
+    }
+
+    public function isCreated(): bool
+    {
+        return $this->status === self::STATUS_CREATED;
+    }
+
+    public function markAsCreated(): void
+    {
+        $this->status = self::STATUS_CREATED;
+    }
+
+    public function cloneInto(ProductDraftInterface $destinationDraft): void
+    {
+        $destinationDraft->setProductListing($this->productListing);
+        $destinationDraft->setCode($this->code);
+        $destinationDraft->setVersionNumber($this->versionNumber);
+        $destinationDraft->incrementVersion();
+
+        $destinationDraft->setShippingRequired($this->shippingRequired);
+        $destinationDraft->setShippingCategory($this->shippingCategory);
+
+        $destinationDraft->attributes = $this->getAttributes();
+        foreach ($destinationDraft->getAttributes() as $attribute) {
+            $attribute->setSubject($this);
+        }
+
+        foreach ($this->getImages() as $image) {
+            $destinationDraft->addImage($image);
+        }
+
+        $destinationDraft->setChannels($this->channels);
+
+        $destinationDraft->productDraftTaxons = $this->productDraftTaxons;
+        $destinationDraft->setMainTaxon($this->mainTaxon);
     }
 }

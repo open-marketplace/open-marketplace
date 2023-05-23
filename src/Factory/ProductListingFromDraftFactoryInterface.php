@@ -12,13 +12,14 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 interface ProductListingFromDraftFactoryInterface
 {
-    public function createNew(ProductDraftInterface $productDraft, VendorInterface $vendor): ProductDraftInterface;
+    public function createNewProductListing(ProductDraftInterface $productDraft, VendorInterface $vendor): void;
 
-    public function createClone(ProductDraftInterface $productDraft): ProductDraftInterface;
+    public function getLatestDraft(ProductListingInterface $productListing): ProductDraftInterface;
 
-    public function saveEdit(ProductDraftInterface $productDraft): ProductDraftInterface;
+    public function rejoinRelations(ProductDraftInterface $productDraft): void;
 }

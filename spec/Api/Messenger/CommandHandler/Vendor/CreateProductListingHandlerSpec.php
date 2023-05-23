@@ -54,7 +54,7 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
 
         $productDraft->getVendor()->willReturn($vendor);
 
-        $productListingFromDraftFactory->createNew($productDraft, $vendor)->willReturn($productDraft);
+        $productListingFromDraftFactory->createNewProductListing($productDraft, $vendor)->willReturn($productDraft);
 
         $images = new ArrayCollection([$image->getWrappedObject()]);
         $productDraft->getImages()->willReturn($images);

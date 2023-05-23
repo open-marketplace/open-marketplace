@@ -93,9 +93,14 @@ class ProductListing implements ProductListingInterface
         return $this->removed;
     }
 
-    public function setRemoved(bool $removed): void
+    public function remove(): void
     {
-        $this->removed = $removed;
+        $this->removed = true;
+    }
+
+    public function restore(): void
+    {
+        $this->removed = false;
     }
 
     public function getVerificationStatus(): string
@@ -129,22 +134,24 @@ class ProductListing implements ProductListingInterface
         return $this->latestDraft;
     }
 
-    private function reattachLatestDraft(): void
-    {
-        $this->latestDraft = $this->getProductDrafts()->last() ?: null;
-    }
-
     public function getProductDrafts(): Collection
     {
         return $this->productDrafts;
     }
 
-    public function addProductDraft(ProductDraftInterface $productDraft): void
+    public function insertDraft(ProductDraftInterface $newDraft): void
     {
-        $productDraft->setProductListing($this);
+        if ($this->latestDraft !== null) {
+            $newDraft->setVersionNumber($this->latestDraft->getVersionNumber());
+            $newDraft->incrementVersion();
+        }
 
-        $this->productDrafts->add($productDraft);
-        $this->reattachLatestDraft();
+        $newDraft->setProductListing($this);
+
+        $this->productDrafts->add($newDraft);
+
+        $this->latestDraft = $newDraft;
+        $this->verificationStatus = ProductDraftInterface::STATUS_CREATED;
     }
 
     public function getProduct(): ?ProductInterface
@@ -195,6 +202,18 @@ class ProductListing implements ProductListingInterface
         return $latestDraft->getAnyTranslationName();
     }
 
+    public function needsNewDraft(): bool
+    {
+        return $this->latestDraft !== null &&
+            $this->latestDraft->isCreated() === false;
+    }
+
+    public function canBeVerified(): bool
+    {
+        return null !== $this->latestDraft &&
+            ProductDraftInterface::STATUS_CREATED === $this->latestDraft->getStatus();
+    }
+
     public function sendToVerification(ProductDraftInterface $productDraft): void
     {
         $productDraft->sendToVerification();
@@ -203,19 +222,19 @@ class ProductListing implements ProductListingInterface
         $this->publishedAt = $productDraft->getPublishedAt();
     }
 
-    public function accept(ProductDraftInterface $productDraft): void
+    public function accept(): void
     {
-        $productDraft->accept();
+        $this->latestDraft->accept();
 
-        $this->verificationStatus = $productDraft->getStatus();
-        $this->lastVerifiedAt = $productDraft->getVerifiedAt();
+        $this->verificationStatus = $this->latestDraft->getStatus();
+        $this->lastVerifiedAt = $this->latestDraft->getVerifiedAt();
     }
 
-    public function reject(ProductDraftInterface $productDraft): void
+    public function reject(): void
     {
-        $productDraft->reject();
+        $this->latestDraft->reject();
 
-        $this->verificationStatus = $productDraft->getStatus();
-        $this->lastVerifiedAt = $productDraft->getVerifiedAt();
+        $this->verificationStatus = $this->latestDraft->getStatus();
+        $this->lastVerifiedAt = $this->latestDraft->getVerifiedAt();
     }
 }

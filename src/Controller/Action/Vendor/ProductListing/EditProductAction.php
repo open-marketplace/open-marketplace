@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
@@ -67,7 +68,7 @@ final class EditProductAction
         RequestStack $requestStack,
         Environment $twig,
         RouterInterface $router,
-        ) {
+    ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->productDraftRepository = $productDraftRepository;
@@ -85,37 +86,22 @@ final class EditProductAction
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $listing = $this->productListingRepository->find($request->get('id'));
+        /** @var ProductListingInterface $productListing */
+        $productListing = $this->productListingRepository->find($request->get('id'));
 
-        if (!$this->authorizationChecker->isGranted(ObjectOwningVoter::OWNIT, $listing)) {
+        if (!$this->authorizationChecker->isGranted(ObjectOwningVoter::OWNIT, $productListing)) {
             throw new AccessDeniedException();
         }
-        /** @var ProductDraftInterface $newResource */
-        $newResource = $this->productDraftRepository->findLatestDraft($listing);
 
-        if (!(ProductDraftInterface::STATUS_CREATED === $newResource->getStatus())) {
-            $newResource = $this->productListingFromDraftFactory->createClone($newResource);
-        }
+        $productDraft = $this->productListingFromDraftFactory->getLatestDraft($productListing);
 
-        $form = $this->formFactory->create(ProductType::class, $newResource);
-
+        $form = $this->formFactory->create(ProductType::class, $productDraft);
         $form->handleRequest($request);
+
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
-            /** @var ProductDraftInterface $productDraft */
-            $productDraft = $form->getData();
-
-            foreach ($productDraft->getImages() as $image) {
-                $image->setOwner($newResource);
-                $this->imageUploader->upload($image);
-            }
-            foreach ($productDraft->getAttributes() as $attribute) {
-                $attribute->setSubject($productDraft);
-                $productDraft->addAttribute($attribute);
-            }
-
-            $productDraft = $this->productListingFromDraftFactory->saveEdit($productDraft);
-
+            $this->productListingFromDraftFactory->rejoinRelations($productDraft);
             $this->productDraftRepository->save($productDraft);
+
             /** @var Session $session */
             $session = $this->requestStack->getSession();
             $session->getFlashBag()->add('success', 'open_marketplace.ui.product_listing_saved');
@@ -127,8 +113,8 @@ final class EditProductAction
             $this->twig->render('Vendor/ProductListing/update_form.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
-                'resource' => $newResource,
-                $this->metadata->getName() => $newResource,
+                'resource' => $productDraft,
+                $this->metadata->getName() => $productDraft,
                 'form' => $form->createView(),
             ])
         );

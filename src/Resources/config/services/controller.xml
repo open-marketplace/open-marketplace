@@ -127,11 +127,7 @@
             <argument type="service" id="sylius.resource_controller.new_resource_factory" />
             <argument type="service" id="open_marketplace.factory.product_draft" />
             <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory"/>
-            <argument type="service" id="sylius.resource_controller.redirect_handler"/>
-            <argument type="service" id="sylius.resource_controller.flash_helper"/>
-            <argument type="service" id="sylius.resource_controller.event_dispatcher"/>
             <argument type="service" id="open_marketplace.repository.product_draft"/>
-            <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="form.factory" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />

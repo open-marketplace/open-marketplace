@@ -121,7 +121,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         $vendor = $shopUser->getVendor();
         Assert::notNull($vendor);
 
-        $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
+        $this->productListingFromDraftFactory->createNewProductListing($productDraft, $vendor);
 
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {

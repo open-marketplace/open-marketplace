@@ -15,8 +15,8 @@ use BitBag\OpenMarketplace\Cloner\ProductListingPricingClonerInterface;
 use BitBag\OpenMarketplace\Cloner\ProductListingTranslationClonerInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryInterface
@@ -29,80 +29,67 @@ class ProductListingFromDraftFactory implements ProductListingFromDraftFactoryIn
 
     private ProductListingPricingClonerInterface $productListingPricingCloner;
 
+    private ImageUploaderInterface $imageUploader;
+
     public function __construct(
         FactoryInterface $productListingFactory,
         FactoryInterface $draftFactory,
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
-        ProductListingPricingClonerInterface $productListingPricingCloner
+        ProductListingPricingClonerInterface $productListingPricingCloner,
+        ImageUploaderInterface $imageUploader,
     ) {
         $this->productListingFactory = $productListingFactory;
         $this->draftFactory = $draftFactory;
         $this->productListingTranslationCloner = $productListingTranslationCloner;
         $this->productListingPricingCloner = $productListingPricingCloner;
+        $this->imageUploader = $imageUploader;
     }
 
-    public function createNew(ProductDraftInterface $productDraft, VendorInterface $vendor): ProductDraftInterface
-    {
+    public function createNewProductListing(
+        ProductDraftInterface $productDraft,
+        VendorInterface $vendor
+    ): void {
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingFactory->createNew();
-
-        $productDraft = $this->formatTranslation($productDraft);
-
         $productListing->setCode($productDraft->getCode());
-        $productListing->addProductDraft($productDraft);
+        $productListing->insertDraft($productDraft);
         $productListing->setVendor($vendor);
 
         $productDraft->setProductListing($productListing);
-
-        return $productDraft;
+        $this->rejoinRelations($productDraft);
     }
 
-    public function createClone(ProductDraftInterface $productDraft): ProductDraftInterface
+    public function getLatestDraft(ProductListingInterface $productListing): ProductDraftInterface
     {
-        $productListing = $productDraft->getProductListing();
+        $latestDraft = $productListing->getLatestDraft();
 
-        /** @var ProductDraftInterface $newProductDraft */
-        $newProductDraft = $this->draftFactory->createNew();
-        $productListing->addProductDraft($newProductDraft);
-        $productListing->setVerificationStatus(ProductDraftInterface::STATUS_CREATED);
+        if ($productListing->needsNewDraft()) {
+            $newProductDraft = $this->draftFactory->createNew();
+            $latestDraft->cloneInto($newProductDraft);
+            $latestDraft->markAsCreated();
 
-        $newProductDraft->setVersionNumber($productDraft->getVersionNumber());
-        $newProductDraft->incrementVersion();
-        $newProductDraft->setCode($productDraft->getCode());
-        $newProductDraft->setProductListing($productListing);
-
-        $newProductDraft->setShippingRequired($productDraft->isShippingRequired());
-        $newProductDraft->setShippingCategory($productDraft->getShippingCategory());
-
-        foreach ($productDraft->getImages() as $image) {
-            $newProductDraft->addImage($image);
+            $this->productListingTranslationCloner->cloneTranslation($newProductDraft, $latestDraft);
+            $this->productListingPricingCloner->clonePrice($newProductDraft, $latestDraft);
+            $productListing->insertDraft($newProductDraft);
         }
 
-        $newProductDraft->setAttributesFrom($productDraft);
-
-        $newProductDraft->setProductTaxonsFrom($productDraft);
-
-        $this->productListingTranslationCloner->cloneTranslation($newProductDraft, $productDraft);
-
-        $this->productListingPricingCloner->clonePrice($newProductDraft, $productDraft);
-
-        return $newProductDraft;
+        return $productListing->getLatestDraft();
     }
 
-    public function saveEdit(ProductDraftInterface $productDraft): ProductDraftInterface
+    public function rejoinRelations(ProductDraftInterface $productDraft): void
     {
-        $this->formatTranslation($productDraft);
-
-        return $productDraft;
-    }
-
-    private function formatTranslation(ProductDraftInterface $productDraft): ProductDraftInterface
-    {
-        /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
             $translation->setProductDraft($productDraft);
         }
 
-        return $productDraft;
+        foreach ($productDraft->getAttributes() as $attribute) {
+            $attribute->setSubject($productDraft);
+            $productDraft->addAttribute($attribute);
+        }
+
+        foreach ($productDraft->getImages() as $image) {
+            $image->setOwner($productDraft);
+            $this->imageUploader->upload($image);
+        }
     }
 }

@@ -46,8 +46,7 @@ final class RestoreAction
         /** @var ProductListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
-        $newStatus = !$productListing->isRemoved();
-        $productListing->setRemoved($newStatus);
+        $productListing->restore();
 
         $product = $productListing->getProduct();
 

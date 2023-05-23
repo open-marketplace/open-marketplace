@@ -37,7 +37,7 @@ final class DeleteProductListingActionSpec extends ObjectBehavior
 
         $this($productListing)->shouldBeAnInstanceOf(JsonResponse::class);
 
-        $productListing->setRemoved(true)->shouldHaveBeenCalled();
+        $productListing->remove()->shouldHaveBeenCalled();
         $entityManager->persist($productListing)->shouldHaveBeenCalled();
         $entityManager->flush()->shouldHaveBeenCalled();
     }
@@ -51,7 +51,7 @@ final class DeleteProductListingActionSpec extends ObjectBehavior
 
         $this($productListing)->shouldBeAnInstanceOf(JsonResponse::class);
 
-        $productListing->setRemoved(true)->shouldHaveBeenCalled();
+        $productListing->remove()->shouldHaveBeenCalled();
         $product->setEnabled(false)->shouldHaveBeenCalled();
         $entityManager->persist($product)->shouldHaveBeenCalled();
         $entityManager->persist($productListing)->shouldHaveBeenCalled();

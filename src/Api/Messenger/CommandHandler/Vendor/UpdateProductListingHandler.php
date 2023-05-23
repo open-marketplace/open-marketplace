@@ -33,23 +33,22 @@ final class UpdateProductListingHandler
 
     public function __invoke(UpdateProductListingInterface $updateProductListing): ProductListingInterface
     {
-        /** @var ProductDraftInterface $newProductDraft */
-        $newProductDraft = $updateProductListing->getProductDraft();
         /** @var ProductListingInterface $productListing */
         $productListing = $updateProductListing->getProductListing();
-        /** @var ProductDraftInterface $previousProductDraft */
-        $previousProductDraft = $productListing->getLatestDraft();
 
-        $newProductDraft->setVersionNumber($previousProductDraft->getVersionNumber());
-        $newProductDraft->incrementVersion();
-        $newProductDraft->setCode($previousProductDraft->getCode());
+        /** @var ProductDraftInterface $newDraft */
+        $newDraft = $updateProductListing->getProductDraft();
 
-        foreach ($newProductDraft->getImages() as $productImage) {
-            $productImage->setOwner($newProductDraft);
+        if ($productListing->needsNewDraft()) {
+
+        }
+
+        foreach ($newDraft->getImages() as $productImage) {
+            $productImage->setOwner($newDraft);
             $this->imageUploader->upload($productImage);
         }
 
-        $productListing->addProductDraft($newProductDraft);
+        $productListing->insertDraft($newDraft);
 
         $this->manager->persist($productListing);
 

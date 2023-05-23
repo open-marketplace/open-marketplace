@@ -131,10 +131,6 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
 
     public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface;
 
-    public function setAttributesFrom(self $otherDraft): void;
-
-    public function setProductTaxonsFrom(self $otherDraft): void;
-
     /** @return Collection<array-key, ProductDraftTaxonInterface> */
     public function getProductDraftTaxons(): Collection;
 
@@ -170,4 +166,10 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function addChannel(ChannelInterface $channel): void;
 
     public function removeChannel(ChannelInterface $channel): void;
+
+    public function isCreated(): bool;
+
+    public function markAsCreated(): void;
+
+    public function cloneInto(ProductDraftInterface $destinationDraft): void;
 }

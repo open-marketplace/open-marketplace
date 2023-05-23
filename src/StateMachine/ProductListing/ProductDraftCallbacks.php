@@ -57,7 +57,7 @@ final class ProductDraftCallbacks
     public function reject(ProductDraftInterface $productDraft): void
     {
         $productListing = $productDraft->getProductListing();
-        $productListing->reject($productDraft);
+        $productListing->reject();
 
         $this->entityManager->flush();
 

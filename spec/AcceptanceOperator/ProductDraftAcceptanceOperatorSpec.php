@@ -64,7 +64,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->getProduct()
             ->willReturn(null);
 
-        $productListing->accept($productDraft)
+        $productListing->accept()
             ->shouldBeCalledOnce();
 
         $productFromDraftFactory->createSimpleProduct($productDraft)
@@ -91,7 +91,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->getProduct()
             ->willReturn($product);
 
-        $productListing->accept($productDraft)
+        $productListing->accept()
             ->shouldBeCalledOnce();
 
         $productFromDraftUpdater->updateProduct($productDraft)
@@ -121,7 +121,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->getProduct()
             ->willReturn($product);
 
-        $productListing->accept($productDraft)
+        $productListing->accept()
             ->shouldBeCalledOnce();
 
         $productFromDraftUpdater->updateProduct($productDraft)
@@ -138,9 +138,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         ProductDraftInterface $productDraft,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductFromDraftFactoryInterface $productFromDraftFactory,
-        ProductDraftFilesOperatorInterface $filesOperator,
         ProductListingInterface $productListing,
-        ProductInterface $product,
         ProductInterface $newProduct,
         AttributesConverterInterface $attributesConverter
     ): void {
@@ -150,7 +148,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->getProduct()
             ->willReturn(null);
 
-        $productListing->accept($productDraft)
+        $productListing->accept()
             ->shouldBeCalledOnce();
 
         $productFromDraftUpdater->updateProduct($productDraft)

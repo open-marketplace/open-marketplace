@@ -54,7 +54,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
             $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
             $this->productDraftTaxonsOperator->copyTaxonsToProduct($productDraft, $product);
             $this->attributesConverter->convert($productDraft, $product);
-            $productListing->accept($productDraft);
+            $productListing->accept();
 
             return $product;
         }
@@ -66,7 +66,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         $this->productDraftFilesOperator->copyFilesToProduct($productDraft, $product);
         $this->productDraftTaxonsOperator->updateTaxonsInProduct($productDraft, $product);
         $this->attributesConverter->convert($productDraft, $product);
-        $productListing->accept($productDraft);
+        $productListing->accept();
 
         return $product;
     }

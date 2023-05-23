@@ -22,18 +22,10 @@ final class CreateProductListingHandler
 {
     private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
 
-    private ObjectManager $manager;
-
-    private ImageUploaderInterface $imageUploader;
-
     public function __construct(
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        ObjectManager $manager,
-        ImageUploaderInterface $imageUploader
+        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory
     ) {
         $this->productListingFromDraftFactory = $productListingFromDraftFactory;
-        $this->manager = $manager;
-        $this->imageUploader = $imageUploader;
     }
 
     public function __invoke(CreateProductListingInterface $createProductListing): ProductListingInterface
@@ -42,17 +34,8 @@ final class CreateProductListingHandler
         $productDraft = $createProductListing->getProductDraft();
         $vendor = $createProductListing->getVendor();
 
-        $productDraft = $this->productListingFromDraftFactory->createNew($productDraft, $vendor);
+        $this->productListingFromDraftFactory->createNewProductListing($productDraft, $vendor);
 
-        foreach ($productDraft->getImages() as $productImage) {
-            $productImage->setOwner($productDraft);
-            $this->imageUploader->upload($productImage);
-        }
-
-        $productListing = $productDraft->getProductListing();
-
-        $this->manager->persist($productListing);
-
-        return $productListing;
+        return $productDraft->getProductListing();
     }
 }

@@ -67,13 +67,13 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $productListing->setCode('code')
             ->shouldBeCalled();
 
-        $productListing->addProductDraft($productDraft)
+        $productListing->insertDraft($productDraft)
             ->shouldBeCalled();
 
         $productListing->setVendor($vendor)
             ->shouldBeCalled();
 
-        $this->createNew($productDraft, $vendor);
+        $this->createNewProductListing($productDraft, $vendor);
 
         $productDraft->setProductListing($productListing)->shouldHaveBeenCalled();
     }
@@ -107,7 +107,7 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $productDraft->isShippingRequired()->willReturn(true);
         $productDraft->getShippingCategory()->willReturn(null);
 
-        $productListing->addProductDraft($newProductDraft)->shouldBeCalled();
+        $productListing->insertDraft($newProductDraft)->shouldBeCalled();
         $productListing->setVerificationStatus(ProductDraftInterface::STATUS_CREATED)
             ->shouldBeCalled();
 
@@ -137,7 +137,7 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $newProductDraft->setProductListing($productListing)
             ->shouldBeCalled();
 
-        $this->createClone($productDraft);
+        $this->getLatestDraft($productDraft);
     }
 
     public function it_formats_translations(
@@ -146,6 +146,6 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection());
 
-        $this->saveEdit($productDraft);
+        $this->rejoinRelations($productDraft);
     }
 }
