@@ -1,7 +1,7 @@
 sylius_grid:
     templates:
         action:
-            product_review_dropdown: "Grid/Action/product_review_dropdown.html.twig"
+            product_review_dropdown: "Grid/Action/productReviewDropdown.html.twig"
     grids:
         open_marketplace_vendor_product_review:
             driver:

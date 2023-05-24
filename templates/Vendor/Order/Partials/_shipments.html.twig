@@ -1,5 +1,12 @@
+{% set shippingStates = { 
+    'ready': 'Vendor/Order/Partials/Shippings/_ready.html.twig',
+    'partially_shipped': 'Vendor/Order/Partials/Shippings/_partiallyShipped.html.twig',
+    'shipped': 'Vendor/Order/Partials/Shippings/_shipped.html.twig',
+    'cancelled': 'Vendor/Order/Partials/Shippings/_cancelled.html.twig'
+} %}
+
 <div class="ui segment" id="shipping-state">
-    {% include 'Vendor/Order/Partials/Shippings/' ~ order.shippingState ~ '.html.twig' %}
+    {% include shippingStates[order.shippingState] %}
 
     {% if order.hasShipments %}
         <h3 class="ui dividing header">{{ 'sylius.ui.shipments'|trans }}</h3>

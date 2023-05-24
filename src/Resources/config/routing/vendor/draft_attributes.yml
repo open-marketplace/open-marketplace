@@ -61,12 +61,12 @@ bitbag_vendor_get_product_attributes:
     methods: [GET]
     defaults:
         _controller: open_marketplace.controller.draftAttributes:renderAttributesAction
-        template: "Vendor/ProductListing/form/_attribute_choice.html.twig"
+        template: "Vendor/ProductListing/form/_attributeChoice.html.twig"
 
 bitbag_vendor_render_attribute_forms:
     path: /attribute-forms
     methods: [GET]
     defaults:
         _controller: open_marketplace.controller.draftAttributes:renderAttributeValueFormsAction
-        template: "Vendor/ProductListing/form/attribute_values.html.twig"
+        template: "Vendor/ProductListing/form/attributeValues.html.twig"
 

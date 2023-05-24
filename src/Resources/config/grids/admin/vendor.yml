@@ -1,9 +1,9 @@
 sylius_grid:
     templates:
         action:
-            enable_vendor_action: "Grid/Action/enable_vendor.html.twig"
-            edit_vendor: "Grid/Action/edit_vendor.html.twig"
-            show_product_listings: "Grid/Action/show_vendor_product_listings.html.twig"
+            enable_vendor_action: "Grid/Action/enableVendor.html.twig"
+            edit_vendor: "Grid/Action/editVendor.html.twig"
+            show_product_listings: "Grid/Action/showVendorProductListings.html.twig"
     grids:
         open_marketplace_admin_vendor:
             driver:

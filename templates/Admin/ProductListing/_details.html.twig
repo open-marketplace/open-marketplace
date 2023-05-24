@@ -11,7 +11,7 @@
 </div>
 <div class="ui hidden divider"></div>
 
-{% include 'Admin/ProductListing/details/_more_details.html.twig' %}
+{% include 'Admin/ProductListing/details/_moreDetails.html.twig' %}
 <div class="ui hidden divider"></div>
 
 {% include 'Admin/ProductListing/details/_shipping.html.twig' %}
@@ -25,5 +25,5 @@
 {% if productDraft.status == 'under_verification' %}
     <div class="ui divider"></div>
 
-    {% include 'Admin/ProductListing/details/_verification_form.html.twig' %}
+    {% include 'Admin/ProductListing/details/_verificationForm.html.twig' %}
 {% endif %}
