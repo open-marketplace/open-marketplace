@@ -5,10 +5,10 @@
       {{ include('Context/Vendor/Register/_form.html.twig') }}
    {% elseif app.user.vendor.verified %}
       {%  set vars = {messageTranslationKey: 'open_marketplace.ui.vendor_verification_accepted'} %}
-      {%  include '_Alert/infoMessage.html.twig' with vars %}
+      {%  include 'Context/Vendor/_Alert/infoMessage.html.twig' with vars %}
    {% else %}
       {%  set vars = {messageTranslationKey: 'open_marketplace.ui.vendor_under_verification'} %}
-      {%  include '_Alert/infoMessage.html.twig' with vars %}
+      {%  include 'Context/Vendor/_Alert/infoMessage.html.twig' with vars %}
    {% endif %}
 {% endblock %}
 
