@@ -1,4 +1,4 @@
-@vendor_settlement
+@vendor_commission
 Feature: In case of creating the order
   I want the commission to be automatically calculated
 

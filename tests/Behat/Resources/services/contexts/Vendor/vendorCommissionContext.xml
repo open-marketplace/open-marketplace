@@ -3,11 +3,9 @@
     <services>
         <defaults public="true" />
         <service
-                class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\VendorSettlementContext"
-                id="tests.bit_bag.sylius_open_marketplace_plugin.behat.context.vendor.vendor_settlement_context" >
+                class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\VendorCommissionContext"
+                id="tests.bit_bag.sylius_open_marketplace_plugin.behat.context.vendor.vendor_commission_context" >
             <argument type="service" id="sylius.repository.order"/>
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-            <argument type="service" id="sylius.behat.shared_storage"/>
         </service>
     </services>
 </container>

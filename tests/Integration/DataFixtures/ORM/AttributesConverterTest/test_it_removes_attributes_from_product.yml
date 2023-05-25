@@ -38,6 +38,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
     vendorAddress: '@vendor_address'
     slug: 'someslug'
     description: 'description'
+    commission: 10
+    commissionType: 'net'
 Sylius\Component\Product\Model\ProductAttributeTranslation:
   attributeTranslation1:
     locale: de

@@ -11,13 +11,8 @@
             <argument type="service" id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory.inner" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Factory\VendorSettlementFactory"
-                 id="bitbag.open_marketplace.factory.vendor_settlement">
-        </service>
-
         <service class="BitBag\OpenMarketplace\Factory\VendorFactory"
                  id="open_marketplace.factory.vendor">
-            <argument type="service" id="bitbag.open_marketplace.factory.vendor_settlement"/>
             <argument>%env(DEFAULT_VENDOR_COMMISSION)%</argument>
             <argument>%env(string:DEFAULT_VENDOR_COMMISSION_TYPE)%</argument>
         </service>

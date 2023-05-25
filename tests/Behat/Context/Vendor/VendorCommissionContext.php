@@ -13,57 +13,39 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
+use BitBag\OpenMarketplace\Entity\Order;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\VendorSettlementInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class VendorSettlementContext extends MinkContext implements Context
+final class VendorCommissionContext extends MinkContext implements Context
 {
     private OrderRepositoryInterface $orderRepository;
 
-    private EntityManagerInterface $entityManager;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        EntityManagerInterface $entityManager,
-        SharedStorageInterface $sharedStorage
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->orderRepository = $orderRepository;
-        $this->entityManager = $entityManager;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @Then commission should be calculated for each secondary order
      */
-    public function commissionShouldBeCalculatedForEachSecondaryOrder()
+    public function commissionShouldBeCalculatedForEachSecondaryOrder(): void
     {
         $orders = $this->orderRepository->findBy(['mode' => OrderInterface::SECONDARY_ORDER_MODE]);
 
         /** @var OrderInterface $order */
         foreach ($orders as $order) {
-            $vendor = $order->getVendor();
-            $settlement = $vendor->getVendorSettlement();
-            $validCommissionTotal =
-                match ($settlement->getCommissionType()) {
-                    VendorSettlementInterface::NET_COMMISSION => $this->calculateNetCommision($order, $settlement->getCommission()),
-                    VendorSettlementInterface::GROSS_COMMISSION => $this->calculateGrossCommision($order, $settlement->getCommission()),
-                    default => throw new \InvalidArgumentException('Invalid Commission Type')
-                };
-
-            Assert::eq($order->getCommissionTotal(), $validCommissionTotal);
+            $this->testCommission($order);
         }
     }
 
     /**
      * @Then commissions should not be calculated for primary orders
      */
-    public function commissionShouldNotBeCalculatedForPrimaryOrders()
+    public function commissionShouldNotBeCalculatedForPrimaryOrders(): void
     {
         $orders = $this->orderRepository->findBy(['mode' => OrderInterface::PRIMARY_ORDER_MODE]);
 
@@ -76,7 +58,7 @@ final class VendorSettlementContext extends MinkContext implements Context
     /**
      * @Then /^I should see valid commission information's$/
      */
-    public function iShouldSeeCommissionInformations()
+    public function iShouldSeeCommissionInformations(): void
     {
         $text = $this->getSession()->getPage()->getText();
 
@@ -95,7 +77,7 @@ final class VendorSettlementContext extends MinkContext implements Context
     /**
      * @Then /^I should see no commission$/
      */
-    public function iShouldSeeNoCommission()
+    public function iShouldSeeNoCommission(): void
     {
         $text = $this->getSession()->getPage()->getText();
 
@@ -107,7 +89,7 @@ final class VendorSettlementContext extends MinkContext implements Context
     /**
      * @Then I should get commission value validation error
      */
-    public function iShouldGetValidationError()
+    public function iShouldGetValidationError(): void
     {
         $page = $this->getSession()->getPage();
         $this->getSession()->reload();
@@ -116,7 +98,7 @@ final class VendorSettlementContext extends MinkContext implements Context
         Assert::eq($label->getText(), 'Commission value must be positive or zero');
     }
 
-    private function commissionDisplayedShouldBeEqual(string $value)
+    private function commissionDisplayedShouldBeEqual(string $value): void
     {
         $text = $this->getSession()->getPage()->getText();
         $pattern = '/Commission: \$([\d.,]+)/';
@@ -124,7 +106,7 @@ final class VendorSettlementContext extends MinkContext implements Context
         Assert::eq($matches[1], $value);
     }
 
-    private function calculateNetCommision(OrderInterface $order, int $commission): int
+    private function calculateNetCommission(OrderInterface $order, int $commission): int
     {
         $floatTotal = $order->getItemsTotal() / 100;
 
@@ -134,15 +116,35 @@ final class VendorSettlementContext extends MinkContext implements Context
         return (int) $intCommission;
     }
 
-    private function calculateGrossCommision(OrderInterface $order, int $commission): int
+    private function calculateGrossCommission(OrderInterface $order, int $commission): int
     {
-        $commission = $order->getVendor()->getVendorSettlement()->getCommission();
-
         $floatTotal = $order->getTotal() / 100;
 
         $floatCommission = round(($floatTotal * ($commission / 100)), 2);
         $intCommission = $floatCommission * 100;
 
         return (int) $intCommission;
+    }
+
+    private function testCommission(OrderInterface $order): void
+    {
+        $vendor = $order->getVendor();
+
+        if (null === $vendor) {
+            Assert::eq($order->getCommissionTotal(), 0);
+
+            return;
+        }
+
+        /** @var int $vendorCommission */
+        $vendorCommission = $vendor->getCommission();
+        $validCommissionTotal =
+            match ($vendor->getCommissionType()) {
+                VendorInterface::NET_COMMISSION => $this->calculateNetCommission($order, $vendorCommission),
+                VendorInterface::GROSS_COMMISSION => $this->calculateGrossCommission($order, $vendorCommission),
+                default => throw new \InvalidArgumentException('Invalid Commission Type')
+            };
+
+        Assert::eq($order->getCommissionTotal(), $validCommissionTotal);
     }
 }

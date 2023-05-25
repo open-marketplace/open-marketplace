@@ -56,7 +56,9 @@ class Vendor implements VendorInterface
     /** @var Collection<int, VendorShippingMethodInterface> */
     protected Collection $shippingMethods;
 
-    protected ?VendorSettlementInterface $vendorSettlement = null;
+    protected ?int $commission;
+
+    protected string $commissionType;
 
     public function __construct()
     {
@@ -307,14 +309,24 @@ class Vendor implements VendorInterface
             ];
     }
 
-    public function getVendorSettlement(): ?VendorSettlementInterface
+    public function getCommission(): ?int
     {
-        return $this->vendorSettlement;
+        return $this->commission;
     }
 
-    public function setVendorSettlement(VendorSettlementInterface $vendorSettlement): void
+    public function setCommission(?int $commission): void
     {
-        $this->vendorSettlement = $vendorSettlement;
+        $this->commission = $commission;
+    }
+
+    public function getCommissionType(): string
+    {
+        return $this->commissionType;
+    }
+
+    public function setCommissionType(string $commissionType): void
+    {
+        $this->commissionType = $commissionType;
     }
 
     public function __toString(): string

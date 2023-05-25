@@ -13,7 +13,6 @@ namespace BitBag\OpenMarketplace\Calculator;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorSettlementInterface;
 
 class VendorGrossCommissionCalculator implements VendorCommissionCalculatorInterface
 {
@@ -25,9 +24,9 @@ class VendorGrossCommissionCalculator implements VendorCommissionCalculatorInter
 
         /** @var VendorInterface $vendor */
         $vendor = $order->getVendor();
-        /** @var VendorSettlementInterface $vendorSettlement */
-        $vendorSettlement = $vendor->getVendorSettlement();
-        $commission = $vendorSettlement->getCommission();
+
+        /** @var int $commission */
+        $commission = $vendor->getCommission();
 
         $floatTotal = $order->getTotal() / 100;
 
@@ -41,10 +40,8 @@ class VendorGrossCommissionCalculator implements VendorCommissionCalculatorInter
     {
         /** @var VendorInterface $vendor */
         $vendor = $order->getVendor();
-        /** @var VendorSettlementInterface $vendorSettlement */
-        $vendorSettlement = $vendor->getVendorSettlement();
 
-        return VendorSettlementInterface::GROSS_COMMISSION === $vendorSettlement->getCommissionType();
+        return VendorInterface::GROSS_COMMISSION === $vendor->getCommissionType();
     }
 
     public static function getDefaultPriority(): int

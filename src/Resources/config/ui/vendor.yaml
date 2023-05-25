@@ -33,10 +33,10 @@ sylius_ui:
                 content:
                     template: 'Admin/Vendor/Update/_details.html.twig'
                     priority: 10
-        open_marketplace.admin.vendor.form.vendor_settlement:
+        open_marketplace.admin.vendor.form.vendor_commission:
             blocks:
                 content:
-                    template: 'Admin/Vendor/Update/_settlement.html.twig'
+                    template: 'Admin/Vendor/Update/_commission.html.twig'
                     priority: 10
         open_marketplace.admin.vendor.form.second_column:
             blocks:

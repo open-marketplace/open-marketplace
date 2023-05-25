@@ -38,6 +38,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_address'
         description: 'description'
         slug: 'test-slug'
+        commission: 10
+        commissionType: 'net'
 BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
     listing:
         createdAt: '<dateTimeBetween("-40min","-5min")>'

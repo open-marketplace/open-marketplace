@@ -30,3 +30,5 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_address'
         description: 'description'
         slug: 'test-slug'
+        commission: 10
+        commissionType: 'net'

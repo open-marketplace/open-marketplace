@@ -2,7 +2,7 @@ imports:
     - suites/vendor/customer_dashboard.yml
     - suites/vendor/vendor_register.yml
     - suites/vendor/vendor_update.yml
-    - suites/vendor/vendor_settlement.yml
+    - suites/vendor/vendor_commission.yml
     - suites/ui/vendor/product_listing.yml
     - suites/ui/admin/product_listing.yml
     - suites/start_conversation.yml

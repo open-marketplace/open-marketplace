@@ -128,7 +128,7 @@ open_marketplace:
         unverified: Unverified
         vendor_address: Vendor address
         vendor_details: Vendor details
-        vendor_settlement: Vendor settlement
+        vendor_commission: Vendor commission
         show_product_listings: Show product listings
         verified: Accepted
         verify: Verify
