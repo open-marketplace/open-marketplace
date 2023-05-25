@@ -56,7 +56,7 @@ sylius_shop_checkout_select_shipping:
         _sylius:
             event: select_shipping
             flash: false
-            template: "Checkout/selectShipping.html.twig"
+            template: "Context/Shop/Checkout/selectShipping.html.twig"
             form: BitBag\OpenMarketplace\Form\Type\Checkout\SelectShippingType
             repository:
                 method: findCartForSelectingShipping
@@ -72,4 +72,4 @@ sylius_shop_order_thank_you:
     defaults:
         _controller: open_marketplace.controller.order.order_controller:thankYouAction
         _sylius:
-            template: "Checkout/thankYou.html.twig"
+            template: "Context/Shop/Checkout/thankYou.html.twig"

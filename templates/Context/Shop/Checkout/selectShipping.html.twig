@@ -16,7 +16,7 @@
                     {{ form_errors(form) }}
                     <input type="hidden" name="_method" value="PUT" />
 
-                    {% include 'Checkout/SelectShipping/_form.html.twig' %}
+                    {% include 'Context/Shop/Checkout/SelectShipping/_form.html.twig' %}
                     <div class="ui hidden divider"></div>
 
                     {{ sylius_template_event('sylius.shop.checkout.select_shipping.before_navigation', {'order': order}) }}

@@ -25,7 +25,7 @@
 
             {% for item in items %}
                 {% if item.variant.shippingRequired %}
-                    {% include 'Checkout/SelectShipping/_itemUnit.html.twig' with {'item': item} %}
+                    {% include 'Context/Shop/Checkout/SelectShipping/_itemUnit.html.twig' with {'item': item} %}
                 {% endif %}
             {% endfor %}
             </tbody>
