@@ -13,6 +13,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorShippingMethod;
 use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
@@ -166,6 +167,27 @@ class ProductContext implements Context
         $this->createTaxon();
         for ($i = 1; $i <= $productsCount; ++$i) {
             $vendors[$i] = $this->createDefaultVendor($i);
+            $products[$i] = $this->createDefaultProduct();
+            $products[$i]->setVendor($vendors[$i]);
+            $this->vendorRepository->add($vendors[$i]);
+            $this->productRepository->add($products[$i]);
+
+            $this->sharedStorage->set('products', $products);
+        }
+    }
+
+    /**
+     * @Given store has :productsCount products from different Vendors with random commission settings
+     */
+    public function storeHasProductsFromDifferentVendorsWithRandomCommissions($productsCount)
+    {
+        $this->createTaxon();
+        $commissionTypes = [VendorInterface::NET_COMMISSION, VendorInterface::GROSS_COMMISSION];
+        for ($i = 1; $i <= $productsCount; ++$i) {
+            $vendor = $this->createDefaultVendor($i);
+            $vendor->setCommission(rand(1,10));
+            $vendor->setCommissionType($commissionTypes[array_rand($commissionTypes)]);
+            $vendors[$i] = $vendor;
             $products[$i] = $this->createDefaultProduct();
             $products[$i]->setVendor($vendors[$i]);
             $this->vendorRepository->add($vendors[$i]);

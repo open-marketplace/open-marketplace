@@ -14,7 +14,7 @@ namespace BitBag\OpenMarketplace\Calculator;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 
-class VendorNetCommissionCalculator implements VendorCommissionCalculatorInterface
+final class VendorNetCommissionCalculator implements VendorCommissionCalculatorInterface
 {
     public function calculate(OrderInterface $order): int
     {

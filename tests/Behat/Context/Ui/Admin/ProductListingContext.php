@@ -145,7 +145,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         }
 
         $options = [
-            'company_name' => 'sdasdsa',
+            'company_name' => 'Company Name',
             'phone_number' => '333333333',
             'tax_identifier' => '543455',
             'street' => 'Tajna 13',

@@ -59,3 +59,10 @@ Feature: In case of creating the order
     And I fill in "Commission" with "-10"
     And I click "Save changes" button
     Then I should get commission value validation error
+
+  @ui
+  Scenario: Picking products from different Vendors with random commission settings
+    Given store has 2 products from different Vendors with random commission settings
+    And I have 2 products in cart
+    And I finalize order
+    Then every secondary order should have valid commission total

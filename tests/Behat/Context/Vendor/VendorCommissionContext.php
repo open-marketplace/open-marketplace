@@ -98,6 +98,18 @@ final class VendorCommissionContext extends MinkContext implements Context
         Assert::eq($label->getText(), 'Commission value must be positive or zero');
     }
 
+    /**
+     * @Then every secondary order should have valid commission total
+     */
+    public function everySecondaryOrderShouldHaveValidCommission(): void
+    {
+        $orders = $this->orderRepository->findBy(['mode' => OrderInterface::SECONDARY_ORDER_MODE]);
+        /** @var OrderInterface $order */
+        foreach ($orders as $order) {
+            $this->testCommission($order);
+        }
+    }
+
     private function commissionDisplayedShouldBeEqual(string $value): void
     {
         $text = $this->getSession()->getPage()->getText();
