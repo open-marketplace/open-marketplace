@@ -46,7 +46,7 @@ sylius_ui:
         sylius.shop.account.layout.menu:
             blocks:
                 vendor:
-                    template: "Account/Menu/_content.html.twig"
+                    template: "Context/Shop/Account/Menu/_content.html.twig"
                     priority: 7
         open_marketplace.shop.product.index.search:
             blocks:
