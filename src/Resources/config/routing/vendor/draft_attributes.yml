@@ -4,7 +4,7 @@ bitbag_open_marketplace_vendor_draft_attribute_index:
     defaults:
         _controller: open_marketplace.controller.draft_attribute:indexAction
         _sylius:
-            template: "Vendor/DraftAttributes/index.html.twig"
+            template: "Context/Vendor/DraftAttributes/index.html.twig"
             grid: vendor_draft_attribute
 
 open_marketplace_admin_draft_attribute_create:
@@ -17,7 +17,7 @@ open_marketplace_admin_draft_attribute_create:
                 method: createTyped
                 arguments:
                     type: $type
-            template: "Vendor/DraftAttributes/create.html.twig"
+            template: "Context/Vendor/DraftAttributes/create.html.twig"
             redirect: bitbag_open_marketplace_vendor_draft_attribute_index
             permission: true
             vars:
@@ -33,7 +33,7 @@ open_marketplace_draft_attribute_update:
     defaults:
         _controller: open_marketplace.controller.draftAttributes:updateAction
         _sylius:
-            template: "Vendor/DraftAttributes/update.html.twig"
+            template: "Context/Vendor/DraftAttributes/update.html.twig"
             redirect: bitbag_open_marketplace_vendor_draft_attribute_index
             vars:
                 templates:
@@ -54,19 +54,19 @@ vendor_get_attribute_types:
     methods: [GET]
     defaults:
         _controller: open_marketplace.controller.draftAttributes:getAttributeTypesAction
-        template: "Vendor/DraftAttributes/attributeTypes.html.twig"
+        template: "Context/Vendor/DraftAttributes/attributeTypes.html.twig"
 
 bitbag_vendor_get_product_attributes:
     path: /attributes
     methods: [GET]
     defaults:
         _controller: open_marketplace.controller.draftAttributes:renderAttributesAction
-        template: "Vendor/ProductListing/form/_attributeChoice.html.twig"
+        template: "Context/Vendor/ProductListing/form/_attributeChoice.html.twig"
 
 bitbag_vendor_render_attribute_forms:
     path: /attribute-forms
     methods: [GET]
     defaults:
         _controller: open_marketplace.controller.draftAttributes:renderAttributeValueFormsAction
-        template: "Vendor/ProductListing/form/attributeValues.html.twig"
+        template: "Context/Vendor/ProductListing/form/attributeValues.html.twig"
 

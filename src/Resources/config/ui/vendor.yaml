@@ -56,7 +56,7 @@ sylius_ui:
                     context:
                         event: sylius.shop.product.index.before_search
                 search:
-                    template: "Vendor/VendorPage/_search.html.twig"
+                    template: "Context/Vendor/VendorPage/_search.html.twig"
                     priority: 30
                 after_search_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"

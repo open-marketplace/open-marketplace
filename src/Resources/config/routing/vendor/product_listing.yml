@@ -4,7 +4,7 @@ open_marketplace_vendor_product_listing_index:
   defaults:
     _controller: open_marketplace.controller.product_listing:indexAction
     _sylius:
-      template: "Vendor/ProductListing/index.html.twig"
+      template: "Context/Vendor/ProductListing/index.html.twig"
       grid: open_marketplace_vendor_product_listing
 
 open_marketplace_vendor_product_listing_create_product:
@@ -13,7 +13,7 @@ open_marketplace_vendor_product_listing_create_product:
     defaults:
         _controller: open_marketplace.controller.action.vendor.product_listing.create_product_action
         _sylius:
-            template: "Vendor/ProductListing/create.html.twig"
+            template: "Context/Vendor/ProductListing/create.html.twig"
             redirect:
                 route: vendor_product_variant_index
 
@@ -23,7 +23,7 @@ open_marketplace_vendor_product_listing_edit_product:
     defaults:
         _controller: open_marketplace.controller.action.vendor.product_listing.edit_product_action
         _sylius:
-            template: "Vendor/ProductListing/update.html.twig"
+            template: "Context/Vendor/ProductListing/update.html.twig"
             redirect:
                 route: vendor_product_variant_index
 
@@ -33,7 +33,7 @@ open_marketplace_vendor_product_draft_show_product:
     defaults:
         _controller: open_marketplace.controller.product_draft:showAction
         _sylius:
-            template: 'Vendor/ProductListing/details.html.twig'
+            template: 'Context/Vendor/ProductListing/details.html.twig'
 
 open_marketplace_vendor_product_listing_send_for_verification:
     path: /product-listings/{id}/send-for-verification
@@ -47,7 +47,7 @@ open_marketplace_vendor_product_listing_remove_action:
     defaults:
         _controller: open_marketplace.controller.product_listing.remove_action
         _sylius:
-            template: "Vendor/ProductListing/index.html.twig"
+            template: "Context/Vendor/ProductListing/index.html.twig"
             redirect:
                 route: vendor_product_variant_index
 

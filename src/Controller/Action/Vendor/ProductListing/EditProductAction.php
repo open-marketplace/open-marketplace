@@ -124,7 +124,7 @@ final class EditProductAction
         }
 
         return new Response(
-            $this->twig->render('Vendor/ProductListing/update.html.twig', [
+            $this->twig->render('Context/Vendor/ProductListing/update.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $newResource,

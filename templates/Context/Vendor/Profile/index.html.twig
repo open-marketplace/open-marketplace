@@ -1,0 +1,84 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Context/Vendor/Common/_breadcrumb.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.my_account'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb_page %}
+    <div class="active section">{{ 'sylius.ui.profile'|trans }}</div>
+{% endblock %}
+
+{% block subcontent %}
+    <div class="ui stackable two column grid">
+        <div class="ten wide column">
+            <h1 class="ui header">
+                <i class="icon user"></i>
+                <div class="content">
+                    {{ 'open_marketplace.ui.my_vendor_account'|trans }}
+                    <div class="sub header">{{ 'open_marketplace.ui.manage_your_vendor_information_and_preferences'|trans }}</div>
+                </div>
+            </h1>
+        </div>
+        <div class="middle aligned six wide column">
+            {% if is_pending_vendor_profile_update() is same as true %}
+                <a href="{{ path('vendor_profile_update') }}" class="ui right floated blue button">
+                    <i class="pencil icon"></i>
+                    {{ 'sylius.ui.edit'|trans }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    {{ sylius_template_event('sylius.shop.account.dashboard.after_content_header', {'vendor': vendor}) }}
+
+    <div class="ui grid" id="vendor-information" {{ sylius_test_html_attribute('vendor-information') }}>
+        <div class="sixteen wide mobile ten wide computer column">
+            {% if is_pending_vendor_profile_update() == false %}
+                <div class="ui info  yellow  message">
+                    <div class="header">
+                        {{ 'sylius.ui.info'|trans }}
+                    </div>
+                    <p>
+                        {{ 'open_marketplace.ui.pending_update_message'|trans }}
+                    </p>
+                </div>
+            {% endif %}
+                <div class="ui attached segment">
+                    <table class="ui very basic celled table">
+                        <tbody>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.company_name'|trans }}</strong></td>
+                            <td>{{ vendor.companyName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.tax_identifier'|trans }}</strong></td>
+                            <td>{{ vendor.taxIdentifier }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.phone_number'|trans }}</strong></td>
+                            <td>{{ vendor.phoneNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.country'|trans }}</strong></td>
+                            <td>{{ vendor.vendorAddress.country }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.postal_code'|trans }}</strong></td>
+                            <td>{{ vendor.vendorAddress.postalCode }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.city'|trans }}</strong></td>
+                            <td>{{ vendor.vendorAddress.city }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.street'|trans }}</strong></td>
+                            <td>{{ vendor.vendorAddress.street }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+    {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'vendor': vendor}) }}
+{% endblock %}

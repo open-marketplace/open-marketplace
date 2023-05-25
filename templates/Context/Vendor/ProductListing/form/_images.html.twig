@@ -1,0 +1,10 @@
+{% form_theme form 'Context/Vendor/ProductListing/form/theme/image_theme.html.twig' %}
+
+<div class="ui segments" data-tab="media">
+    <div class="ui segment">
+        <h3>{{ 'sylius.ui.media'|trans }}</h3>
+    </div>
+    <div class="ui segment">
+        <div style="margin-top:2.5vh">{{ form_row(form.images, {'label': false}) }}</div>
+    </div>
+</div>

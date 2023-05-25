@@ -1,7 +1,7 @@
 sylius_grid:
   templates:
     action:
-      edit_product: "Grid/Action/editProductListing.html.twig"
+      edit_product: "Configuration/Grid/Action/editProductListing.html.twig"
   grids:
     open_marketplace_vendor_product_listing:
       driver:
@@ -32,18 +32,18 @@ sylius_grid:
           label: open_marketplace.ui.name
           path: getLatestDraft
           options:
-            template: "Grid/Field/productListingProductName.html.twig"
+            template: "Configuration/Grid/Field/productListingProductName.html.twig"
 
         getLatestDraft.verifiedAt:
           type: twig
           label: open_marketplace.ui.verified_at
           options:
-            template: "Grid/Field/productListingVerifiedAt.html.twig"
+            template: "Configuration/Grid/Field/productListingVerifiedAt.html.twig"
         getLatestDraft.status:
           type: twig
           label: open_marketplace.ui.status
           options:
-            template: "Grid/Field/productListingStatus.html.twig"
+            template: "Configuration/Grid/Field/productListingStatus.html.twig"
       actions:
         main:
           create:

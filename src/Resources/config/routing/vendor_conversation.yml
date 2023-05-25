@@ -4,7 +4,7 @@ open_marketplace_vendor_conversation_index:
     defaults:
         _controller:  open_marketplace.controller.conversation.list_conversations_action
         _sylius:
-            template: "Vendor/Conversation/index.html.twig"
+            template: "Context/Vendor/Conversation/index.html.twig"
 
 open_marketplace_vendor_conversation_show:
     path: /vendor/conversations/{id}
@@ -12,7 +12,7 @@ open_marketplace_vendor_conversation_show:
     defaults:
         _controller: 'open_marketplace.controller.conversation.show_conversation_action'
         _sylius:
-            template: "Vendor/Conversation/show.html.twig"
+            template: "Context/Vendor/Conversation/show.html.twig"
 
 open_marketplace_vendor_conversation_message_add:
     path: /vendor/conversations/{id}/message/add
@@ -29,7 +29,7 @@ open_marketplace_vendor_conversation_create:
     defaults:
         _controller: open_marketplace.controller.action.conversation.create_new_conversation_action
         _sylius:
-            template: "Vendor/Conversation/create.html.twig"
+            template: "Context/Vendor/Conversation/create.html.twig"
             redirect: open_marketplace_vendor_conversation_show
             mail_redirect: open_marketplace_admin_conversation_show
 

@@ -3,7 +3,7 @@ open_marketplace_customer_index:
     defaults:
         _controller: sylius.controller.customer:indexAction
         _sylius:
-            template: "Vendor/Customers/index.html.twig"
+            template: "Context/Vendor/Customers/index.html.twig"
             grid: open_marketplace_vendor_clients
 
 open_marketplace_vendor_customer_show:
@@ -14,7 +14,7 @@ open_marketplace_vendor_customer_show:
         _controller: sylius.controller.customer:showAction
         _sylius:
             permission: true
-            template: "Vendor/Customers/show.html.twig"
+            template: "Context/Vendor/Customers/show.html.twig"
             repository:
                 method: findCustomerForVendor
                 arguments:
@@ -29,5 +29,5 @@ open_marketplace_vendor_customer_order_index:
         _sylius:
             section: admin
             permission: true
-            template: "Vendor/Order/index.html.twig"
+            template: "Context/Vendor/Order/index.html.twig"
             grid: vendor_account_customer_orders

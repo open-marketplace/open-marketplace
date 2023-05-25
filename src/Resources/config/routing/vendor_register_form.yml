@@ -4,7 +4,7 @@ vendor_register_form:
   defaults:
     _controller: open_marketplace.controller.vendor:createAction
     _sylius:
-      template: 'Vendor/Register/index.html.twig'
+      template: 'Context/Vendor/Register/index.html.twig'
       form: BitBag\OpenMarketplace\Form\Type\VendorType
       redirect:
         route: vendor_register_form
