@@ -14,7 +14,7 @@ open_marketplace_admin_product_listing_show:
     _controller: open_marketplace.controller.action.admin.product_listing.show_action
     _sylius:
       section: admin
-      template: "Admin/ProductListing/show.html.twig"
+      template: "Context/Admin/ProductListing/show.html.twig"
       permission: true
 
 open_marketplace_admin_product_listing_accept:

@@ -8,7 +8,7 @@
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block content %}
-    {% include 'Admin/Vendor/Update/_header.html.twig' %}
+    {% include 'Context/Admin/Vendor/Update/_header.html.twig' %}
     {{ sylius_template_event('open_marketplace.admin.vendor.form', _context) }}
 {% endblock %}
 
