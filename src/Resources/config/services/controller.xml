@@ -126,7 +126,7 @@
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="sylius.resource_controller.new_resource_factory" />
             <argument type="service" id="open_marketplace.factory.product_draft" />
-            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory"/>
+            <argument type="service" id="open_marketplace.component.product_listing.administration_tool"/>
             <argument type="service" id="open_marketplace.repository.product_draft"/>
             <argument type="service" id="form.factory" />
             <argument type="service" id="request_stack" />
@@ -146,7 +146,7 @@
             </argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="open_marketplace.repository.product_draft"/>
-            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory"/>
+            <argument type="service" id="open_marketplace.component.product_listing.administration_tool"/>
             <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="security.authorization_checker"/>

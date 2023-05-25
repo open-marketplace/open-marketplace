@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Factory;
 
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;

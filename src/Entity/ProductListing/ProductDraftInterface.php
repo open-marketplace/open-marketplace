@@ -111,10 +111,12 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
 
     public function removeImage(ImageInterface $image): void;
 
-    /** @return  Collection<int, AttributeValueInterface> */
+    public function clearImages(): void;
+
+    /** @return  Collection<int, DraftAttributeValueInterface> */
     public function getAttributes(): Collection;
 
-    /** @return  Collection<int, AttributeValueInterface>  */
+    /** @return  Collection<int, DraftAttributeValueInterface>  */
     public function getAttributesByLocale(
         string $localeCode,
         string $fallbackLocaleCode,
@@ -124,6 +126,8 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function addAttribute(AttributeValueInterface $attribute): void;
 
     public function removeAttribute(AttributeValueInterface $attribute): void;
+
+    public function clearAttributes(): void;
 
     public function hasAttribute(AttributeValueInterface $attribute): bool;
 
@@ -137,6 +141,8 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function addProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): void;
 
     public function removeProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): void;
+
+    public function clearProductDraftTaxons(): void;
 
     /** @return Collection<array-key, ?TaxonInterface> */
     public function getTaxons(): Collection;
@@ -170,6 +176,4 @@ interface ProductDraftInterface extends AttributeSubjectInterface, ResourceInter
     public function isCreated(): bool;
 
     public function markAsCreated(): void;
-
-    public function cloneInto(ProductDraftInterface $destinationDraft): void;
 }

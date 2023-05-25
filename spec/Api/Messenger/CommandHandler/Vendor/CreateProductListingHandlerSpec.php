@@ -13,10 +13,10 @@ namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\CreateProductListingHandler;
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
@@ -27,9 +27,9 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 final class CreateProductListingHandlerSpec extends ObjectBehavior
 {
     public function let(
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        ObjectManager $manager,
-        ImageUploaderInterface $imageUploader
+        ProductListingAdministrationToolInterface $productListingFromDraftFactory,
+        ObjectManager                             $manager,
+        ImageUploaderInterface                    $imageUploader
     ): void {
         $this->beConstructedWith($productListingFromDraftFactory, $manager, $imageUploader);
     }
@@ -40,14 +40,14 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
     }
 
     public function it_creates_product_listing(
-        CreateProductListingInterface $createProductListing,
-        ProductDraft $productDraft,
-        VendorInterface $vendor,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        ProductListingInterface $productListing,
-        ImageInterface $image,
-        ImageUploaderInterface $imageUploader,
-        ObjectManager $manager
+        CreateProductListingInterface             $createProductListing,
+        ProductDraft                              $productDraft,
+        VendorInterface                           $vendor,
+        ProductListingAdministrationToolInterface $productListingFromDraftFactory,
+        ProductListingInterface                   $productListing,
+        ImageInterface                            $image,
+        ImageUploaderInterface                    $imageUploader,
+        ObjectManager                             $manager
     ): void {
         $createProductListing->getProductDraft()->willReturn($productDraft);
         $createProductListing->getVendor()->willReturn($vendor);

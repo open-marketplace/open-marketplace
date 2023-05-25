@@ -11,9 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
@@ -40,7 +39,7 @@ final class EditProductAction
 
     private ProductDraftRepositoryInterface $productDraftRepository;
 
-    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
+    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
 
     private ImageUploaderInterface $imageUploader;
 
@@ -60,7 +59,7 @@ final class EditProductAction
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ProductDraftRepositoryInterface $productDraftRepository,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
+        ProductListingAdministrationToolInterface $productListingAdministrationTool,
         ImageUploaderInterface $imageUploader,
         ProductListingRepositoryInterface $productListingRepository,
         AuthorizationCheckerInterface $authorizationChecker,
@@ -72,7 +71,7 @@ final class EditProductAction
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->productDraftRepository = $productDraftRepository;
-        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
+        $this->productListingAdministrationTool = $productListingAdministrationTool;
         $this->imageUploader = $imageUploader;
         $this->productListingRepository = $productListingRepository;
         $this->authorizationChecker = $authorizationChecker;
@@ -93,13 +92,13 @@ final class EditProductAction
             throw new AccessDeniedException();
         }
 
-        $productDraft = $this->productListingFromDraftFactory->getLatestDraft($productListing);
+        $productDraft = $this->productListingAdministrationTool->serveLatestDraft($productListing);
 
         $form = $this->formFactory->create(ProductType::class, $productDraft);
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
-            $this->productListingFromDraftFactory->rejoinRelations($productDraft);
+            $this->productListingAdministrationTool->updateProductListing($productListing, $productDraft);
             $this->productDraftRepository->save($productDraft);
 
             /** @var Session $session */

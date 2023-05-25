@@ -9,15 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Factory;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage;
+use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 
-final class ProductDraftImageFactory implements ProductDraftImageFactoryInterface
+interface DraftImageFactoryInterface
 {
-    public function createNew(): ImageInterface
-    {
-        return new ProductDraftImage();
-    }
+    public function createNew(): ImageInterface;
+
+    public function createForDraft(ProductDraftInterface $productDraft): ImageInterface;
 }

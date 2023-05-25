@@ -22,7 +22,7 @@
         <service id="open_marketplace.fixture.example_factory.product_listing" class="BitBag\OpenMarketplace\Fixture\Factory\ProductListingExampleFactory">
             <argument type="service" id="open_marketplace.factory.product_draft" />
             <argument type="service" id="open_marketplace.factory.product_listing_price" />
-            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory" />
+            <argument type="service" id="open_marketplace.component.product_listing.administration_tool" />
             <argument type="service" id="open_marketplace.factory.product_translation" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
@@ -32,7 +32,7 @@
             <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="sylius.image_uploader"/>
-            <argument type="service" id="open_marketplace.factory.product_draft_image"/>
+            <argument type="service" id="open_marketplace.component.product_listing.factory.draft_image"/>
             <argument type="service" id="file_locator"/>
         </service>
 

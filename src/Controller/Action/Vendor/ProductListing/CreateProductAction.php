@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
@@ -43,7 +43,7 @@ final class CreateProductAction
 
     private FactoryInterface $factory;
 
-    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
+    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
 
     private ProductDraftRepositoryInterface $productDraftRepository;
 
@@ -62,7 +62,7 @@ final class CreateProductAction
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         NewResourceFactoryInterface $newResourceFactory,
         FactoryInterface $factory,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
+        ProductListingAdministrationToolInterface $productListingAdministrationTool,
         ProductDraftRepositoryInterface $productDraftRepository,
         FormFactoryInterface $formFactory,
         RequestStack $requestStack,
@@ -74,7 +74,7 @@ final class CreateProductAction
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->newResourceFactory = $newResourceFactory;
         $this->factory = $factory;
-        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
+        $this->productListingAdministrationTool = $productListingAdministrationTool;
         $this->productDraftRepository = $productDraftRepository;
         $this->formFactory = $formFactory;
         $this->requestStack = $requestStack;
@@ -103,7 +103,7 @@ final class CreateProductAction
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
-            $this->productListingFromDraftFactory->createNewProductListing($productDraft, $vendor);
+            $this->productListingAdministrationTool->createNewProductListing($productDraft, $vendor);
             $this->productDraftRepository->save($productDraft);
 
             /** @var Session $session */

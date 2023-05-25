@@ -12,20 +12,23 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
 final class CreateProductListingHandler
 {
-    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
+    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
+
+    private ObjectManager $manager;
 
     public function __construct(
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory
+        ProductListingAdministrationToolInterface $productListingAdministrationTool,
+        ObjectManager $manager
     ) {
-        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
+        $this->productListingAdministrationTool = $productListingAdministrationTool;
+        $this->manager = $manager;
     }
 
     public function __invoke(CreateProductListingInterface $createProductListing): ProductListingInterface
@@ -34,7 +37,8 @@ final class CreateProductListingHandler
         $productDraft = $createProductListing->getProductDraft();
         $vendor = $createProductListing->getVendor();
 
-        $this->productListingFromDraftFactory->createNewProductListing($productDraft, $vendor);
+        $this->productListingAdministrationTool->createNewProductListing($productDraft, $vendor);
+        $this->manager->persist($productDraft->getProductListing());
 
         return $productDraft->getProductListing();
     }

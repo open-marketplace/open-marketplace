@@ -55,7 +55,7 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     /** @var Collection<int|string, ProductListingPriceInterface> */
     protected Collection $productListingPrices;
 
-    protected ProductListingInterface $productListing;
+    protected ?ProductListingInterface $productListing = null;
 
     /** @var Collection<int, AttributeValueInterface> */
     protected Collection $attributes;
@@ -301,6 +301,11 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         $this->images->removeElement($image);
     }
 
+    public function clearImages(): void
+    {
+        $this->images->clear();
+    }
+
     public function getAttributes(): Collection
     {
         return $this->attributes;
@@ -356,6 +361,11 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
 
         $this->attributes->removeElement($attribute);
         $attribute->setDraft(null);
+    }
+
+    public function clearAttributes(): void
+    {
+        $this->attributes->clear();
     }
 
     public function hasAttribute(AttributeValueInterface $attribute): bool
@@ -465,6 +475,11 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
         }
     }
 
+    public function clearProductDraftTaxons(): void
+    {
+        $this->productDraftTaxons->clear();
+    }
+
     public function hasProductDraftTaxon(ProductDraftTaxonInterface $productDraftTaxons): bool
     {
         return $this->productDraftTaxons->contains($productDraftTaxons);
@@ -570,30 +585,5 @@ class ProductDraft implements ResourceInterface, ProductDraftInterface
     public function markAsCreated(): void
     {
         $this->status = self::STATUS_CREATED;
-    }
-
-    public function cloneInto(ProductDraftInterface $destinationDraft): void
-    {
-        $destinationDraft->setProductListing($this->productListing);
-        $destinationDraft->setCode($this->code);
-        $destinationDraft->setVersionNumber($this->versionNumber);
-        $destinationDraft->incrementVersion();
-
-        $destinationDraft->setShippingRequired($this->shippingRequired);
-        $destinationDraft->setShippingCategory($this->shippingCategory);
-
-        $destinationDraft->attributes = $this->getAttributes();
-        foreach ($destinationDraft->getAttributes() as $attribute) {
-            $attribute->setSubject($this);
-        }
-
-        foreach ($this->getImages() as $image) {
-            $destinationDraft->addImage($image);
-        }
-
-        $destinationDraft->setChannels($this->channels);
-
-        $destinationDraft->productDraftTaxons = $this->productDraftTaxons;
-        $destinationDraft->setMainTaxon($this->mainTaxon);
     }
 }

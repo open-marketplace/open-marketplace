@@ -11,15 +11,15 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactory;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImageInterface;
-use BitBag\OpenMarketplace\Factory\ProductDraftImageFactory;
 use PhpSpec\ObjectBehavior;
 
 final class ProductDraftImageFactorySpec extends ObjectBehavior
 {
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(ProductDraftImageFactory::class);
+        $this->shouldHaveType(DraftImageFactory::class);
     }
 
     public function it_creates_valid_image(): void

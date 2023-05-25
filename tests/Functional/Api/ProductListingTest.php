@@ -258,13 +258,16 @@ final class ProductListingTest extends FunctionalTestCase
 
         $this->client->request('PUT', '/api/v2/shop/account/vendor/product-listings/' . $productListing->getUuid(), [], [
             'images' => [
-                $this->getUploadedProductImageFile(),
+
             ],
         ], $header, json_encode([
             'productDraft' => [
                 'translations' => [
                     'en_US' => [
+                        'locale' => 'en_US',
                         'name' => 'Changed name',
+                        'slug' => 'Changed slug',
+                        'description' => 'Changed description',
                         'metaKeywords' => 'Test metaKeywords',
                         'metaDescription' => 'Test metaDescription',
                         'shortDescription' => 'Test shortDescription',

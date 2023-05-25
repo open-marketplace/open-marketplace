@@ -13,10 +13,10 @@ namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UpdateProductListingHandler;
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
@@ -39,15 +39,15 @@ final class UpdateProductListingHandlerSpec extends ObjectBehavior
     }
 
     public function it_updates_product_listing(
-        UpdateProductListingInterface $updateProductListing,
-        ProductDraft $productDraft,
-        ProductDraft $previousProductDraft,
-        VendorInterface $vendor,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        ProductListingInterface $productListing,
-        ImageInterface $image,
-        ImageUploaderInterface $imageUploader,
-        ObjectManager $manager
+        UpdateProductListingInterface             $updateProductListing,
+        ProductDraft                              $productDraft,
+        ProductDraft                              $previousProductDraft,
+        VendorInterface                           $vendor,
+        ProductListingAdministrationToolInterface $productListingFromDraftFactory,
+        ProductListingInterface                   $productListing,
+        ImageInterface                            $image,
+        ImageUploaderInterface                    $imageUploader,
+        ObjectManager                             $manager
     ): void {
         $updateProductListing->getProductDraft()->willReturn($productDraft);
         $updateProductListing->getVendor()->willReturn($vendor);

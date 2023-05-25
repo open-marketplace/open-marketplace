@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductDraftAwareInterface;
-use BitBag\OpenMarketplace\Factory\ProductDraftImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactoryInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,11 +22,11 @@ final class ProductDraftAwareCommandDataTransformer implements CommandDataTransf
 {
     private RequestStack $requestStack;
 
-    private ProductDraftImageFactoryInterface $draftImageFactory;
+    private DraftImageFactoryInterface $draftImageFactory;
 
     public function __construct(
         RequestStack $requestStack,
-        ProductDraftImageFactoryInterface $draftImageFactory
+        DraftImageFactoryInterface $draftImageFactory
     ) {
         $this->requestStack = $requestStack;
         $this->draftImageFactory = $draftImageFactory;

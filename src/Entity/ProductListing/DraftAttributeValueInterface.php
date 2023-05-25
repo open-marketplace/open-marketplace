@@ -12,11 +12,18 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Entity\ProductListing;
 
 use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
+use Ramsey\Uuid\UuidInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 interface DraftAttributeValueInterface extends AttributeValueInterface, UuidAwareInterface
 {
+    public function getUuid(): ?UuidInterface;
+
+    public function setUuid(?UuidInterface $uuid): void;
+
     public function getDraft(): ?ProductDraftInterface;
 
     public function setDraft(?ProductDraftInterface $product): void;
+
+    public function getAttribute(): ?DraftAttributeInterface;
 }

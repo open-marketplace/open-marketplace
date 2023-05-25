@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Fixture\Factory;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Model\LocaleInterface;

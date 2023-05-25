@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Resource\Product;
 
-use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter;

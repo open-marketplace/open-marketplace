@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
@@ -20,8 +22,6 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\ProductDraftImageFactoryInterface;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use Faker\Factory;
 use Faker\Generator;
@@ -48,7 +48,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
 
     private FactoryInterface $productListingPriceFactory;
 
-    private ProductListingFromDraftFactoryInterface $productListingFromDraftFactory;
+    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
 
     private FactoryInterface $productTranslationFactory;
 
@@ -70,27 +70,27 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
 
     private ImageUploaderInterface $imageUploader;
 
-    private ProductDraftImageFactoryInterface $draftImageFactory;
+    private DraftImageFactoryInterface $draftImageFactory;
 
     public function __construct(
         FactoryInterface $productDraftFactory,
         FactoryInterface $productListingPriceFactory,
-        ProductListingFromDraftFactoryInterface $productListingFromDraftFactory,
-        FactoryInterface $productTranslationFactory,
-        EntityRepository $shopUserRepository,
-        ChannelRepositoryInterface $channelRepository,
-        RepositoryInterface $localeRepository,
-        RepositoryInterface $draftAttributeRepository,
-        RepositoryInterface $taxonRepository,
+        ProductListingAdministrationToolInterface   $productListingAdministrationTool,
+        FactoryInterface                            $productTranslationFactory,
+        EntityRepository                            $shopUserRepository,
+        ChannelRepositoryInterface                  $channelRepository,
+        RepositoryInterface                         $localeRepository,
+        RepositoryInterface                         $draftAttributeRepository,
+        RepositoryInterface                         $taxonRepository,
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        SlugGeneratorInterface $slugGenerator,
-        ImageUploaderInterface $imageUploader,
-        ProductDraftImageFactoryInterface $draftImageFactory,
-        FileLocatorInterface $fileLocator,
-        ) {
+        SlugGeneratorInterface                      $slugGenerator,
+        ImageUploaderInterface                      $imageUploader,
+        DraftImageFactoryInterface                  $draftImageFactory,
+        FileLocatorInterface                        $fileLocator,
+    ) {
         $this->productDraftFactory = $productDraftFactory;
         $this->productListingPriceFactory = $productListingPriceFactory;
-        $this->productListingFromDraftFactory = $productListingFromDraftFactory;
+        $this->productListingAdministrationTool = $productListingAdministrationTool;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->shopUserRepository = $shopUserRepository;
         $this->channelRepository = $channelRepository;
@@ -121,7 +121,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         $vendor = $shopUser->getVendor();
         Assert::notNull($vendor);
 
-        $this->productListingFromDraftFactory->createNewProductListing($productDraft, $vendor);
+        $this->productListingAdministrationTool->createNewProductListing($productDraft, $vendor);
 
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {

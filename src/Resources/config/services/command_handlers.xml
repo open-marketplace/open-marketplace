@@ -32,14 +32,16 @@
         </service>
         <service class="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\CreateProductListingHandler"
                  id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.create_product_listing">
-            <argument type="service" id="open_marketplace.factory.product_listing_from_draft_factory" />
+            <argument type="service" id="open_marketplace.component.product_listing.administration_tool" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
         <service class="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UpdateProductListingHandler"
                  id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.update_product_listing">
+            <argument type="service" id="open_marketplace.component.product_listing.administration_tool" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="open_marketplace.repository.product_listing" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

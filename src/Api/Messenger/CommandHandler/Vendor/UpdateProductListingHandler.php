@@ -12,45 +12,43 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Webmozart\Assert\Assert;
 
 final class UpdateProductListingHandler
 {
+    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
+
     private ObjectManager $manager;
 
-    private ImageUploaderInterface $imageUploader;
+    private ProductListingRepositoryInterface $productListingRepository;
 
     public function __construct(
+        ProductListingAdministrationToolInterface $productListingAdministrationTool,
         ObjectManager $manager,
-        ImageUploaderInterface $imageUploader
+        ProductListingRepositoryInterface $productListingRepository
     ) {
+        $this->productListingAdministrationTool = $productListingAdministrationTool;
         $this->manager = $manager;
-        $this->imageUploader = $imageUploader;
+        $this->productListingRepository = $productListingRepository;
     }
 
     public function __invoke(UpdateProductListingInterface $updateProductListing): ProductListingInterface
     {
         /** @var ProductListingInterface $productListing */
-        $productListing = $updateProductListing->getProductListing();
+        $productListingId = $updateProductListing->getProductListing()->getId();
+        $productListing = $this->productListingRepository->find($productListingId);
+        Assert::isInstanceOf($productListing, ProductListingInterface::class);
 
         /** @var ProductDraftInterface $newDraft */
         $newDraft = $updateProductListing->getProductDraft();
 
-        if ($productListing->needsNewDraft()) {
-
-        }
-
-        foreach ($newDraft->getImages() as $productImage) {
-            $productImage->setOwner($newDraft);
-            $this->imageUploader->upload($productImage);
-        }
-
-        $productListing->insertDraft($newDraft);
-
-        $this->manager->persist($productListing);
+        $this->productListingAdministrationTool->updateLatestDraftWith($productListing, $newDraft);
 
         return $productListing;
     }

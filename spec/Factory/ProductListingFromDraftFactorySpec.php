@@ -13,12 +13,12 @@ namespace spec\BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Cloner\ProductListingPricingClonerInterface;
 use BitBag\OpenMarketplace\Cloner\ProductListingTranslationClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationTool;
+use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValueInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactory;
-use BitBag\OpenMarketplace\Factory\ProductListingFromDraftFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -41,12 +41,12 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(ProductListingFromDraftFactory::class);
+        $this->shouldHaveType(ProductListingAdministrationTool::class);
     }
 
     public function it_implements_interface(): void
     {
-        $this->shouldImplement(ProductListingFromDraftFactoryInterface::class);
+        $this->shouldImplement(ProductListingAdministrationToolInterface::class);
     }
 
     public function it_returns_product_listing(
