@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository;
 
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -19,5 +20,15 @@ final class VendorRepository extends EntityRepository implements VendorRepositor
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o');
+    }
+
+    public function findOneBySlug(string $slug): ?VendorInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 }

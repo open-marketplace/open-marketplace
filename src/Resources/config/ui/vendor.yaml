@@ -53,3 +53,24 @@ sylius_ui:
                 vendor:
                     template: "Account/Menu/_content.html.twig"
                     priority: 7
+        open_marketplace.shop.product.index.search:
+            blocks:
+                before_search_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 35
+                    context:
+                        event: sylius.shop.product.index.before_search
+                search:
+                    template: "Vendor/VendorPage/_search.html.twig"
+                    priority: 30
+                after_search_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 25
+                    context:
+                        event: sylius.shop.product.index.after_search
+                pagination:
+                    template: "@SyliusShop/Product/Index/_pagination.html.twig"
+                    priority: 20
+                sorting:
+                    template: "@SyliusShop/Product/Index/_sorting.html.twig"
+                    priority: 10

@@ -13,7 +13,6 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorAddressUpdate;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
@@ -23,7 +22,10 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Taxonomy\Factory\TaxonFactory;
+use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -39,6 +41,8 @@ class VendorUpdateContext extends RawMinkContext
 
     private VendorImageFactoryInterface $vendorImageFactory;
 
+    private TaxonFactoryInterface $taxonFactory;
+
     private ExampleFactoryInterface $vendorExampleFactory;
 
     private FactoryInterface $countryFactory;
@@ -49,6 +53,7 @@ class VendorUpdateContext extends RawMinkContext
         ExampleFactoryInterface $userFactory,
         ObjectManager $manager,
         VendorImageFactoryInterface $vendorImageFactory,
+        TaxonFactory $taxonFactory,
         ExampleFactoryInterface $vendorExampleFactory,
         FactoryInterface $countryFactory,
         ) {
@@ -57,6 +62,7 @@ class VendorUpdateContext extends RawMinkContext
         $this->userFactory = $userFactory;
         $this->manager = $manager;
         $this->vendorImageFactory = $vendorImageFactory;
+        $this->taxonFactory = $taxonFactory;
         $this->vendorExampleFactory = $vendorExampleFactory;
         $this->countryFactory = $countryFactory;
     }
@@ -152,7 +158,6 @@ class VendorUpdateContext extends RawMinkContext
     {
         $page = $this->getSession()->getPage();
         $label = $page->find('css', '.ui.red.pointing.label.sylius-validation-error');
-        dd($label->getText());
     }
 
     /**
@@ -191,7 +196,6 @@ class VendorUpdateContext extends RawMinkContext
 
         $page = $session->getPage();
         $logo = $page->find('css', '#vendor_logo');
-
         $newPath = $logo->getAttribute('src');
         Assert::notEq($oldImagePath, $newPath);
     }
@@ -231,5 +235,23 @@ class VendorUpdateContext extends RawMinkContext
         Assert::eq($companyName, $companyNameInput->getAttribute('value'));
         Assert::eq($taxId, $taxIdInput->getAttribute('value'));
         Assert::eq($phoneNumber, $phoneNumberInput->getAttribute('value'));
+    }
+
+    /**
+     * @Given the channel has a menu taxon
+     */
+    public function theChannelHasAsAMenuTaxon()
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $taxon = $this->taxonFactory->createNew();
+        $taxon->setCode('menu_category');
+        $taxon->setName('main');
+        $taxon->setSlug('main');
+        $taxon->enable();
+        $channel->setMenuTaxon($taxon);
+
+        $this->manager->persist($taxon);
+        $this->manager->flush();
     }
 }

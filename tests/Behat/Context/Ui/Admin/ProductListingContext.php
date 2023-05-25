@@ -14,6 +14,8 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Entity\Product;
+use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation;
 use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue;
@@ -29,6 +31,7 @@ use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Fixture\Factory\VendorExampleFactory;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
@@ -36,6 +39,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -235,6 +239,53 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Given there is product listing enabled for channel
+     */
+    public function thereIsProductListingForChannel()
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+        $channel = $this->getChannel();
+
+        $productListing = $this->createProductListing($vendor, 'code');
+        $productDraft = $this->createProductListingDraft($productListing, 'code');
+        $productDraft->addChannel($channel);
+        $productTranslation = $this->createProductListingTranslation(
+            $productDraft,
+            'product-listing-',
+            'product-listing-',
+            'product-listing-'
+        );
+        $productPricing = $this->createProductListingPricing($productDraft);
+
+        $productListing->setPublishedAt($productDraft->getPublishedAt());
+        $productListing->setVerificationStatus($productDraft->getStatus());
+
+        $this->entityManager->persist($productListing);
+        $this->entityManager->persist($productDraft);
+        $this->entityManager->persist($productTranslation);
+        $this->entityManager->persist($productPricing);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Then there should be product with channel enabled
+     */
+    public function thereShouldBeProductWithChannel()
+    {
+        $setChannel = $this->getChannel();
+        $products = $this->entityManager->getRepository(Product::class)->findAll();
+        Assert::count($products, 1);
+        /** @var ProductInterface $product */
+        $product = $products[0];
+        Assert::count($product->getChannels(), 1);
+        $productChannels = $product->getChannels();
+        /** @var ChannelInterface $productChannel */
+        $productChannel = $productChannels[0];
+        Assert::eq($setChannel, $productChannel);
+    }
+
+    /**
      * @Given there is a product listing with code :code and name :name and status :status
      */
     public function thereIsAProductListingWithCodeAndNameAndStatus(
@@ -331,6 +382,8 @@ final class ProductListingContext extends RawMinkContext implements Context
         $productDraft->setPublishedAt(new \DateTime($publishedAt));
         $productDraft->setVersionNumber($versionNumber);
         $productDraft->setProductListing($productListing);
+        $channel = $this->getChannel();
+        $productDraft->setChannels(new ArrayCollection([$channel]));
 
         return $productDraft;
     }
@@ -466,5 +519,11 @@ final class ProductListingContext extends RawMinkContext implements Context
         $imagePath = $image->getAttribute('src');
 
         Assert::contains($imagePath, 'path/to/file', 'no image found');
+    }
+
+    private function getChannel(): ChannelInterface
+    {
+        return $this->entityManager->getRepository(ChannelInterface::class)
+            ->findAll()[0];
     }
 }

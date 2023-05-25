@@ -18,6 +18,7 @@ use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use function PHPUnit\Framework\assertTrue;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -131,6 +132,9 @@ class VendorPageContext extends MinkContext implements Context
     public function theVendorHasMoreThanOnePageOfProductsWithDifferentDatesAndPrices(int $number)
     {
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'test-company']);
+        if (null === $vendor) {
+            $vendor = $this->vendorRepository->findOneBy(['slug' => 'vendor-slug']);
+        }
         for ($i = 1; $i <= $number; ++$i) {
             $date = strtotime("+$i day", strtotime('2007-02-28'));
             $this->saveProduct($this->createProduct("product-$i", $vendor, $i * 100, date('Y-m-d', $date)));
@@ -153,6 +157,105 @@ class VendorPageContext extends MinkContext implements Context
         Assert::same($this->vendorPagePage->getLastProductNameFromList(), $name);
     }
 
+    /**
+     * @Then I should see :count products in the list
+     */
+    public function iShouldSeeProductsInTheList(int $count)
+    {
+        $this->vendorPagePage->open(['vendor_slug' => 'SLUG']);
+        $productsCount = $this->vendorPagePage->countProduct();
+        Assert::same($productsCount, $count);
+    }
+
+    /**
+     * @Then I should see :count products on page :pageNumber
+     */
+    public function iShouldSeeProductsOnPage(int $count, string $pageNumber)
+    {
+        $this->vendorPagePage->open(
+            [
+                'vendor_slug' => 'SLUG',
+                'limit' => 2,
+                'page' => $pageNumber,
+            ]
+        );
+        $productsCount = $this->vendorPagePage->countProduct();
+
+        Assert::same($count, $productsCount, );
+    }
+
+    /**
+     * @Given sorting is set to :sortField :value
+     */
+    public function sortingIsSetTo($sortField, $value)
+    {
+        $sortType = [
+            'ascending' => 'asc',
+            'descending' => 'desc',
+        ];
+
+        $this->sharedStorage->set(
+            'sorting',
+            [
+                'field' => $sortField,
+                'value' => $sortType[$value],
+            ]
+        );
+    }
+
+    /**
+     * @Then i should see products sorted by :field
+     */
+    public function iShouldSeeProductsSorted()
+    {
+        $shopSorting = $this->sharedStorage->get('sorting');
+
+        $this->vendorPagePage->open(
+            [
+                'vendor_slug' => 'SLUG',
+                'sorting' => [
+                        $shopSorting['field'] => $shopSorting['value'],
+                    ],
+            ]
+        );
+
+        assertTrue($this->vendorPagePage->productsSorted($shopSorting));
+    }
+
+    /**
+     * @Then I should see :count products on :slug taxon page
+     */
+    public function iShouldSeeProductsOnTaxonPage($count, $slug)
+    {
+        $this->visit("/en_US/vendors/SLUG/taxons/$slug");
+
+        $page = $this->getSession()->getPage();
+        $productCards = $page->findAll('css', '.ui.fluid.card');
+
+        Assert::count($productCards, $count);
+    }
+
+    /**
+     * @Then I should see :count products when search for :name
+     */
+    public function iShouldSeeProductsWhenSearchFor($count, $name)
+    {
+        $this->vendorPagePage->open(
+            [
+                'vendor_slug' => 'SLUG',
+                'criteria' => [
+                    'search' => $name,
+                    ],
+            ]
+        );
+
+        $page = $this->getSession()->getPage();
+
+        $productCards = $page->findAll('css', '.ui.fluid.card');
+
+        Assert::count($productCards, $count);
+    }
+
     private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
@@ -163,7 +266,7 @@ class VendorPageContext extends MinkContext implements Context
         VendorInterface $vendor,
         int $price = 100,
         string $date = 'now',
-        ChannelInterface $channel = null
+        ?ChannelInterface $channel = null
     ): ProductInterface {
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');

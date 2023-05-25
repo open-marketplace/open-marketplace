@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Entity\Order;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
@@ -19,6 +20,8 @@ use BitBag\OpenMarketplace\Repository\OrderRepository;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 
@@ -30,14 +33,22 @@ class OrderContext extends RawMinkContext implements Context
 
     private OrderRepository $orderRepository;
 
+    private PaymentMethodFactoryInterface $paymentMethodFactory;
+
+    private PaymentMethodRepository $methodRepository;
+
     public function __construct(
         ShowProductPage $productPage,
         SharedStorageInterface $sharedStorage,
         OrderRepository $orderRepository,
-        ) {
+        PaymentMethodFactoryInterface $paymentMethodFactory,
+        PaymentMethodRepository $methodRepository
+    ) {
         $this->productPage = $productPage;
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
+        $this->paymentMethodFactory = $paymentMethodFactory;
+        $this->methodRepository = $methodRepository;
     }
 
     /**
@@ -90,6 +101,24 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Then I should see :count orders with :status status label :color
+     */
+    public function iShouldSeeOrdersWithStatus(
+        int $count,
+        string $status,
+        string $color
+    ) {
+        $page = $this->getSession()->getPage();
+        $tableWrapper = $page->find('css', 'table');
+        $orders = $tableWrapper->findAll('css', '.item');
+        Assert::eq(count($orders), $count);
+        $labels = $page->findAll('css', '.ui.' . $color . 'label');
+        foreach ($labels as $label) {
+            Assert::eq($label->getText(), $status);
+        }
+    }
+
+    /**
      * @Given I complete checkout
      */
     public function iCompleteCheckout()
@@ -137,6 +166,17 @@ class OrderContext extends RawMinkContext implements Context
             $this->productPage->addToCart();
         }
         $this->sharedStorage->set('products', $products);
+    }
+
+    /**
+     * @Given I have product :name in cart
+     */
+    public function iHaveProductInCart(string $name)
+    {
+        $product = $this->sharedStorage->get('product');
+        $slug = $product->getSlug();
+        $this->productPage->open(['slug' => $slug]);
+        $this->productPage->addToCart();
     }
 
     /**
@@ -207,6 +247,20 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Given I add this product to the cart
+     */
+    public function iAddThisProductToTheCart()
+    {
+        $product = $this->sharedStorage->get('product');
+
+        $slug = $product->getSlug();
+        $this->productPage->open(['slug' => $slug]);
+        $this->productPage->addToCart();
+
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
      * @Given I finalize order
      */
     public function iFinalizeOrder()
@@ -255,5 +309,30 @@ class OrderContext extends RawMinkContext implements Context
         $select = $this->fixStepArgument($select);
         $option = $this->fixStepArgument($option);
         $this->getSession()->getPage()->selectFieldOption($select, $option);
+    }
+
+    /**
+     * @return DocumentElement
+     */
+    private function getPage()
+    {
+        return $this->getSession()->getPage();
+    }
+
+    /**
+     * @Given There is payment method
+     */
+    public function thereIsPaymentMethod()
+    {
+        $payment = $this->paymentMethodFactory->create([
+            'name' => ucfirst($name),
+            'code' => $code,
+            'description' => $description,
+            'gatewayName' => $gatewayFactory,
+            'gatewayFactory' => $gatewayFactory,
+            'enabled' => true,
+            'channels' => ($addForCurrentChannel && $this->sharedStorage->has('channel')) ? [$this->sharedStorage->get('channel')] : [],
+        ]);
+        $this->methodRepository->add($payment);
     }
 }

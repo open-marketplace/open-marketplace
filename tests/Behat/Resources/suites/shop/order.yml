@@ -3,6 +3,8 @@ default:
         order:
             contexts:
             - tests.open_marketplace.behat.context.shop.order
+            - sylius.behat.context.setup.payment
+            - sylius.behat.context.setup.admin_security
             - tests.open_marketplace.behat.context.setup.product
             - sylius.behat.context.setup.shop_security
             - sylius.behat.context.setup.admin_security
@@ -10,6 +12,12 @@ default:
             - sylius.behat.context.setup.user
             - sylius.behat.context.setup.channel
             - sylius.behat.context.setup.customer
+            - sylius.behat.context.setup.shipping_category
+            - sylius.behat.context.setup.product
+            - sylius.behat.context.transform.shipping_category
+            - sylius.behat.context.setup.shipping
+            - sylius.behat.context.transform.shipping_method
+            - sylius.behat.context.transform.shared_storage
             - sylius.behat.context.setup.user
             - Behat\MinkExtension\Context\MinkContext
             filters:

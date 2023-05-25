@@ -3,6 +3,7 @@ open_marketplace:
         yes: Yes
         no: No
         none: None
+        enabled_channels: Enabled Channels
         shipping_details: Shipping details
         is_shipping_required: Is shipping required?
         shipping_category: Shipping category
@@ -58,6 +59,8 @@ open_marketplace:
         pending_update_message: Your profile has been edited. Please approve the changes by clicking on the link in the email sent to you.
         vendors: Vendors
         logo: Logo
+        background: Background
+        review: Review
         invalid_logo: Please upload a valid image (jpg/png/svg)
         description: Description
         shipping_methods: Shipping methods
@@ -119,6 +122,7 @@ open_marketplace:
         menu:
             conversations: Messages
             conversation_categories: Message categories
+            product_reviews: Product Reviews
         new_conversation_category: New conversation category
         edit_conversation_category: Edit conversation category
         unverified: Unverified

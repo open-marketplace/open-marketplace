@@ -29,6 +29,16 @@ Sylius\Component\Core\Model\Channel:
         taxCalculationStrategy: 'order_items_based'
         baseCurrency: '@dollar'
         enabled: true
+Sylius\Component\Core\Model\AdminUser:
+    test_admin:
+        enabled: true
+        username: "Clark Kent"
+        firstName: "Clark"
+        lastName: "Kent"
+        email: "clark.kent@example.com"
+        emailCanonical: "clark.kent@example.com"
+        localeCode: 'en_US'
+        roles: ["ROLE_ADMINISTRATION_ACCESS","ROLE_API_ACCESS"]
 Sylius\Component\Core\Model\Customer:
     customer_bruce:
         firstName: "Bruce"
@@ -97,5 +107,9 @@ BitBag\OpenMarketplace\Entity\Vendor:
         description: 'description'
 BitBag\OpenMarketplace\Entity\VendorImage:
     vendor_image_peter:
+        owner: "@vendor_peter"
+        path: "/dummy/file/path"
+BitBag\OpenMarketplace\Entity\VendorBackgroundImage:
+    vendor_backgroundimage_peter:
         owner: "@vendor_peter"
         path: "/dummy/file/path"

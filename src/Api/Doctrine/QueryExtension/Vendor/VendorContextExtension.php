@@ -11,16 +11,16 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor;
 
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
-use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\FilterVendorStrategy;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
+use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
-final class VendorContextExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+final class VendorContextExtension implements QueryCollectionExtensionInterface
 {
     private array $filterVendorStrategies;
 
@@ -56,6 +56,9 @@ final class VendorContextExtension implements QueryCollectionExtensionInterface,
         Operation $operation = null,
         array $context = []
     ): void {
+        if (Conversation::class === $resourceClass) {
+            return;
+        }
         $this->filterByVendorIfApply($queryBuilder, $resourceClass);
     }
 

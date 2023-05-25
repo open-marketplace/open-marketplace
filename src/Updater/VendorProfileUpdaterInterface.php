@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Updater;
 
+use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorImageInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
@@ -21,7 +22,8 @@ interface VendorProfileUpdaterInterface
     public function createPendingVendorProfileUpdate(
         VendorProfileInterface $vendorData,
         VendorInterface $currentVendor,
-        ?VendorImageInterface $image
+        ?VendorImageInterface $image,
+        ?VendorBackgroundImageInterface $backgroundImage
     ): void;
 
     public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;

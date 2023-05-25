@@ -10,7 +10,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
-    <resource class="%bitbag_open_marketplace.model.vendor_image.class%" shortName="VendorImage">
+    <resource class="%bitbag_open_marketplace.model.vendor_image.class%" shortName="VendorLogo">
 
         <collectionOperations>
             <collectionOperation name="vendor_post">
@@ -18,7 +18,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 <attribute name="validation_groups">
                     <attribute>ApiUploadVendorImage</attribute>
                 </attribute>
-                <attribute name="path">/shop/account/vendor/vendor-images</attribute>
+                <attribute name="path">/shop/account/vendor/logo</attribute>
                 <attribute name="openapi_context">
                     <attribute name="requestBody">
                         <attribute name="content">
@@ -37,10 +37,10 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     </attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:account:vendor:vendor_image:create</attribute>
+                    <attribute name="groups">shop:account:vendor:logo:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:account:vendor:vendor_image:read</attribute>
+                    <attribute name="groups">shop:account:vendor:logo:read</attribute>
                 </attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImage</attribute>
@@ -51,16 +51,16 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <itemOperations>
             <itemOperation name="vendor_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/account/vendor/vendor-images/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendor/logo/{uuid}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:account:vendor:vendor_image:read</attribute>
+                    <attribute name="groups">shop:account:vendor:logo:read</attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="vendor_delete">
                 <attribute name="security">is_granted("VENDOR_IMAGE_DELETE", object)</attribute>
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/shop/account/vendor/vendor-images/{uuid}</attribute>
+                <attribute name="path">/shop/account/vendor/logo/{uuid}</attribute>
             </itemOperation>
         </itemOperations>
 

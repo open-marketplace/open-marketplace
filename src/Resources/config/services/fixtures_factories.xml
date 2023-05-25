@@ -13,6 +13,10 @@
             <argument type="service" id="sylius.repository.customer_group" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="open_marketplace.service.vendor_image_factory"/>
+            <argument type="service" id="open_marketplace.service.vendor_background_image_factory"/>
+            <argument type="service" id="file_locator"/>
+            <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="sylius.factory.country" />
         </service>
 

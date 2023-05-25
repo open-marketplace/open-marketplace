@@ -1,28 +1,25 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Vendor/Common/_breadcrumb.html.twig' %}
 
-{% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <a href="{{ path('open_marketplace_vendor_conversation_index') }}" class="section">{{ 'open_marketplace.ui.conversations_listing.breadcrumb_header'|trans }}</a>
-        <div class="divider"> / </div>
+{% block breadcrumb_page %}
+    <a href="{{ path('open_marketplace_vendor_conversation_index') }}" class="section">{{ 'open_marketplace.ui.conversations_listing.breadcrumb_header'|trans }}</a>
+    <div class="divider"> / </div>
 
-        {% if conversation is not null  %}
-            {% if conversation.category is not null %}
-                <div class="active section">{{ conversation.category.name }}</div>
+    {% if conversation is not null  %}
+        {% if conversation.category is not null %}
+            <div class="active section">{{ conversation.category.name }}</div>
+        {% else %}
+            {% set author = conversation.messages.first.author %}
+            {% if conversation.messages.first.vendorUser is not null %}
+                <div class="active section">{{ author.customer.firstName ~ ' ' ~ author.customer.lastName }}</div>
+            {% elseif conversation.messages.first.shopUser is not null %}
+                <div class="active section">{{ author.username }}</div>
+
             {% else %}
-                {% set author = conversation.messages.first.author %}
-                {% if conversation.messages.first.vendorUser is not null %}
-                    <div class="active section">{{ author.customer.firstName ~ ' ' ~ author.customer.lastName }}</div>
-                {% elseif conversation.messages.first.shopUser is not null %}
-                    <div class="active section">{{ author.username }}</div>
-
-                {% else %}
-                    <div class="active section">{{ author.firstName ~ ' ' ~ author.lastName }}</div>
-                {% endif %}
+                <div class="active section">{{ author.firstName ~ ' ' ~ author.lastName }}</div>
             {% endif %}
         {% endif %}
-    </div>
+    {% endif %}
 {% endblock %}
 
 {% block subcontent %}

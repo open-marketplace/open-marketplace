@@ -1,18 +1,19 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Vendor/Common/_breadcrumb.html.twig' %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
 {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
 
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
-{% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.attributes'|trans }}</div>
-    </div>
+
+{% block breadcrumb_page %}
+    <a href="{{ path('bitbag_open_marketplace_vendor_draft_attribute_index') }}" class="section">{{ 'sylius.ui.attributes'|trans }}</a>
+    <div class="divider"> / </div>
+    <div class="active section"> {{ resource.id }} </div>
+    <div class="divider"> / </div>
+    <div class="active section">{{ 'sylius.ui.edit'|trans }}</div>
 {% endblock %}
+
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block subcontent %}
@@ -30,7 +31,7 @@
     {% endif %}
 
 
-    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': 'bitbag_open_marketplace_vendor_draft_attribute_index'}} %}
+    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path('bitbag_open_marketplace_vendor_draft_attribute_index', configuration.vars.route.parameters|default({}))}} %}
 
     {{ form_end(form, {'render_rest': false}) }}
 

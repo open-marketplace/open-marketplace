@@ -1,12 +1,8 @@
 {
-    "@context": "\/api\/v2\/contexts\/VendorImage",
-    "@id": "\/api\/v2\/shop\/account\/vendor\/vendor-images\/@string@",
-    "@type": "VendorImage",
+    "@context": "\/api\/v2\/contexts\/VendorLogo",
+    "@id": "\/api\/v2\/shop\/account\/vendor\/logo\/@string@",
+    "@type": "VendorLogo",
     "uuid": "@string@",
     "path": "@string@\/avatar.png",
-    "owner": {
-        "@id": "\/api\/v2\/shop\/vendors\/@string@",
-        "@type": "Vendor",
-        "uuid": "@string@"
-    }
+    "owner": "\/api\/v2\/shop\/vendors\/@string@"
 }

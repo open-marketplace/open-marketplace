@@ -9,3 +9,6 @@ liip_imagine:
         open_marketplace_fixture_size:
             filters:
                 thumbnail: { size: [800, 600], mode: outbound }
+        open_marketplace_vendor_background:
+            filters:
+                thumbnail: { size: [1155, 200], mode: outbound }
