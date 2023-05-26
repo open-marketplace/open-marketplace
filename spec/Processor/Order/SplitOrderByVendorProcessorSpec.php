@@ -16,12 +16,13 @@ use BitBag\OpenMarketplace\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Manager\OrderManagerInterface;
 use BitBag\OpenMarketplace\Processor\Order\SplitOrderByVendorProcessor;
-use BitBag\OpenMarketplace\Processor\Order\VendorCommissionProcessorInterface;
 use BitBag\OpenMarketplace\Refresher\PaymentRefresherInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 {
@@ -29,13 +30,13 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         EntityManager $entityManager,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
-        VendorCommissionProcessorInterface $commissionProcessor
+        EventDispatcherInterface $eventDispatcher
     ): void {
         $this->beConstructedWith(
             $entityManager,
             $orderManager,
             $paymentRefresher,
-            $commissionProcessor
+            $eventDispatcher
         );
     }
 
@@ -52,7 +53,9 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         VendorInterface $vendor,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
-        ): void {
+        EventDispatcherInterface $eventDispatcher
+    ): void {
+        $eventDispatcher->dispatch(Argument::any(), Argument::any())->willReturn((object) []);
         $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject()]);
         $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
         $order->getItems()->willReturn($orderItemCollection);
@@ -66,6 +69,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $this->process($order);
 
         $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
+        $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldHaveBeenCalled();
     }
 
     public function it_creates_2_secondary_orders_for_products_from_different_vendors(
@@ -79,7 +83,9 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         VendorInterface $vendor2,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
-        ): void {
+        EventDispatcherInterface $eventDispatcher
+    ): void {
+        $eventDispatcher->dispatch(Argument::any(), Argument::any())->willReturn((object) []);
         $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject(), $secondItem->getWrappedObject()]);
         $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
         $order->getItems()->willReturn($orderItemCollection);
@@ -99,5 +105,6 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $this->process($order);
 
         $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
+        $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldHaveBeenCalled();
     }
 }

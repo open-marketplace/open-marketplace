@@ -9,19 +9,15 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\Event\Order;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 
 class PostSplitOrderEvent
 {
-
     public const NAME = 'order.post_split';
 
-    /**
-     * @var OrderInterface[]
-     */
+    /** @var OrderInterface[] */
     private array $orders;
 
     /**
@@ -36,6 +32,4 @@ class PostSplitOrderEvent
     {
         return $this->orders;
     }
-
-
 }

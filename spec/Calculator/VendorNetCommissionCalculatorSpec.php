@@ -9,7 +9,6 @@
 
 declare(strict_types=1);
 
-
 namespace spec\BitBag\OpenMarketplace\Calculator;
 
 use BitBag\OpenMarketplace\Calculator\VendorCommissionCalculatorInterface;
@@ -33,7 +32,8 @@ class VendorNetCommissionCalculatorSpec extends ObjectBehavior
         $this->supports($order)->shouldReturn(false);
     }
 
-    public function it_throws_exception_on_primary_order(OrderInterface $order): void {
+    public function it_throws_exception_on_primary_order(OrderInterface $order): void
+    {
         $order->isPrimary()->willReturn(true);
         $this->shouldThrow(\Exception::class)
             ->during('calculate', [$order]);

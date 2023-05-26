@@ -9,7 +9,6 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\EventListener;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
@@ -27,9 +26,10 @@ class CalculateOrderCommissionListener
         $this->commissionCalculators = $commissionCalculators;
         $this->entityManager = $entityManager;
     }
+
     public function __invoke(PostSplitOrderEvent $event): void
     {
-        foreach ($event->getOrders() as $order){
+        foreach ($event->getOrders() as $order) {
             $commission = $this->calculateCommission($order);
             $order->setCommissionTotal($commission);
             $this->entityManager->persist($order);

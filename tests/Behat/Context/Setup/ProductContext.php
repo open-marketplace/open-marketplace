@@ -185,7 +185,7 @@ class ProductContext implements Context
         $commissionTypes = [VendorInterface::NET_COMMISSION, VendorInterface::GROSS_COMMISSION];
         for ($i = 1; $i <= $productsCount; ++$i) {
             $vendor = $this->createDefaultVendor($i);
-            $vendor->setCommission(rand(1,10));
+            $vendor->setCommission(rand(1, 10));
             $vendor->setCommissionType($commissionTypes[array_rand($commissionTypes)]);
             $vendors[$i] = $vendor;
             $products[$i] = $this->createDefaultProduct();

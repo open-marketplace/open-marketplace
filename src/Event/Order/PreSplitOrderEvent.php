@@ -9,7 +9,6 @@
 
 declare(strict_types=1);
 
-
 namespace BitBag\OpenMarketplace\Event\Order;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
@@ -29,6 +28,4 @@ class PreSplitOrderEvent
     {
         return $this->order;
     }
-
-
 }
