@@ -14,13 +14,7 @@
     "status": "under_verification",
     "verifiedAt": null,
     "publishedAt":  "@string@.isDateTime()",
-    "images": [
-      {
-        "@type": "ProductDraftImage",
-        "uuid": "@string@",
-        "path": "/dummy/file/path"
-      }
-    ],
+    "images": [],
     "translations": {
       "en_US": {
         "@id": "/api/v2/shop/account/vendor/product-draft\/translations/@string@",

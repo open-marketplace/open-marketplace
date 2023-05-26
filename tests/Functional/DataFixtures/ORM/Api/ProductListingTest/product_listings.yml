@@ -144,6 +144,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft:
         attributes: ['@product_draft_attribute_value_bruce_1']
         mainTaxon: '@category_taxon'
         productDraftTaxons: ['@product_draft_taxon_bruce_1']
+        status: "created"
     product_draft_bruce_2:
         code: 'product_draft_bruce_2'
         productListing: '@product_listing_bruce_2'

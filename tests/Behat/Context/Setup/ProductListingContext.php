@@ -68,6 +68,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $productDraft->setPublishedAt(new \DateTime());
         $productDraft->setVersionNumber(0);
         $productDraft->setProductListing($productListing);
+        $productListing->insertDraft($productDraft);
 
         $productTranslation = new ProductTranslation();
         $productTranslation->setLocale('en_US');

@@ -141,8 +141,8 @@ class ProductListing implements ProductListingInterface
 
     public function insertDraft(ProductDraftInterface $newDraft): void
     {
-        if ($this->latestDraft !== null) {
-            $newDraft->setVersionNumber($this->latestDraft->getVersionNumber());
+        if ($this->getLatestDraft() !== null) {
+            $newDraft->setVersionNumber($this->getLatestDraft()->getVersionNumber());
             $newDraft->incrementVersion();
         }
 
@@ -204,14 +204,14 @@ class ProductListing implements ProductListingInterface
 
     public function needsNewDraft(): bool
     {
-        return $this->latestDraft !== null &&
-            $this->latestDraft->isCreated() === false;
+        return $this->getLatestDraft() !== null &&
+            $this->getLatestDraft()->isCreated() === false;
     }
 
     public function canBeVerified(): bool
     {
-        return null !== $this->latestDraft &&
-            ProductDraftInterface::STATUS_CREATED === $this->latestDraft->getStatus();
+        return null !== $this->getLatestDraft() &&
+            ProductDraftInterface::STATUS_CREATED === $this->getLatestDraft()->getStatus();
     }
 
     public function sendToVerification(ProductDraftInterface $productDraft): void
@@ -224,17 +224,17 @@ class ProductListing implements ProductListingInterface
 
     public function accept(): void
     {
-        $this->latestDraft->accept();
+        $this->getLatestDraft()->accept();
 
-        $this->verificationStatus = $this->latestDraft->getStatus();
-        $this->lastVerifiedAt = $this->latestDraft->getVerifiedAt();
+        $this->verificationStatus = $this->getLatestDraft()->getStatus();
+        $this->lastVerifiedAt = $this->getLatestDraft()->getVerifiedAt();
     }
 
     public function reject(): void
     {
-        $this->latestDraft->reject();
+        $this->getLatestDraft()->reject();
 
-        $this->verificationStatus = $this->latestDraft->getStatus();
-        $this->lastVerifiedAt = $this->latestDraft->getVerifiedAt();
+        $this->verificationStatus = $this->getLatestDraft()->getStatus();
+        $this->lastVerifiedAt = $this->getLatestDraft()->getVerifiedAt();
     }
 }

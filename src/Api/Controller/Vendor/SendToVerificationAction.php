@@ -24,13 +24,13 @@ final class SendToVerificationAction
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
     }
 
-    public function __invoke(ProductListingInterface $productListing): ProductListingInterface
+    public function __invoke(ProductListingInterface $data): ProductListingInterface
     {
-        if ($productListing->canBeVerified()) {
-            $latestDraft = $productListing->getLatestDraft();
+        if ($data->canBeVerified()) {
+            $latestDraft = $data->getLatestDraft();
             $this->productDraftStateMachineTransition->applyIfCan($latestDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
         }
 
-        return $productListing;
+        return $data;
     }
 }
