@@ -28,8 +28,8 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
 {
     public function let(
         ProductListingAdministrationToolInterface $productListingFromDraftFactory,
-        ObjectManager                             $manager,
-        ImageUploaderInterface                    $imageUploader
+        ObjectManager $manager,
+        ImageUploaderInterface $imageUploader
     ): void {
         $this->beConstructedWith($productListingFromDraftFactory, $manager, $imageUploader);
     }
@@ -40,14 +40,14 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
     }
 
     public function it_creates_product_listing(
-        CreateProductListingInterface             $createProductListing,
-        ProductDraft                              $productDraft,
-        VendorInterface                           $vendor,
+        CreateProductListingInterface $createProductListing,
+        ProductDraft $productDraft,
+        VendorInterface $vendor,
         ProductListingAdministrationToolInterface $productListingFromDraftFactory,
-        ProductListingInterface                   $productListing,
-        ImageInterface                            $image,
-        ImageUploaderInterface                    $imageUploader,
-        ObjectManager                             $manager
+        ProductListingInterface $productListing,
+        ImageInterface $image,
+        ImageUploaderInterface $imageUploader,
+        ObjectManager $manager
     ): void {
         $createProductListing->getProductDraft()->willReturn($productDraft);
         $createProductListing->getVendor()->willReturn($vendor);

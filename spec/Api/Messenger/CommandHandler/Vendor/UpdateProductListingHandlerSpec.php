@@ -39,15 +39,15 @@ final class UpdateProductListingHandlerSpec extends ObjectBehavior
     }
 
     public function it_updates_product_listing(
-        UpdateProductListingInterface             $updateProductListing,
-        ProductDraft                              $productDraft,
-        ProductDraft                              $previousProductDraft,
-        VendorInterface                           $vendor,
+        UpdateProductListingInterface $updateProductListing,
+        ProductDraft $productDraft,
+        ProductDraft $previousProductDraft,
+        VendorInterface $vendor,
         ProductListingAdministrationToolInterface $productListingFromDraftFactory,
-        ProductListingInterface                   $productListing,
-        ImageInterface                            $image,
-        ImageUploaderInterface                    $imageUploader,
-        ObjectManager                             $manager
+        ProductListingInterface $productListing,
+        ImageInterface $image,
+        ImageUploaderInterface $imageUploader,
+        ObjectManager $manager
     ): void {
         $updateProductListing->getProductDraft()->willReturn($productDraft);
         $updateProductListing->getVendor()->willReturn($vendor);

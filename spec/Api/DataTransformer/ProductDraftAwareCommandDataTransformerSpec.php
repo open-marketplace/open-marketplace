@@ -56,10 +56,10 @@ final class ProductDraftAwareCommandDataTransformerSpec extends ObjectBehavior
 
     public function it_does_nothing_when_there_is_no_images_in_request(
         ProductDraftAwareInterface $productDraftAware,
-        ProductDraft               $productDraft,
+        ProductDraft $productDraft,
         DraftImageFactoryInterface $draftImageFactory,
-        RequestStack               $requestStack,
-        Request                    $request
+        RequestStack $requestStack,
+        Request $request
     ): void {
         $productDraftAware->getProductDraft()->willReturn($productDraft);
         $request->files = new FileBag();
@@ -73,12 +73,12 @@ final class ProductDraftAwareCommandDataTransformerSpec extends ObjectBehavior
 
     public function it_sets_images_when_there_is_one_in_request(
         ProductDraftAwareInterface $productDraftAware,
-        ProductDraft               $productDraft,
+        ProductDraft $productDraft,
         DraftImageFactoryInterface $draftImageFactory,
-        RequestStack               $requestStack,
-        Request                    $request,
-        ImageInterface             $draftImage,
-        Collection                 $imagesCollection
+        RequestStack $requestStack,
+        Request $request,
+        ImageInterface $draftImage,
+        Collection $imagesCollection
     ): void {
         $productDraftAware->getProductDraft()->willReturn($productDraft);
         $imageFile = new UploadedFile(__FILE__, 'test');
