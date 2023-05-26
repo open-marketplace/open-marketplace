@@ -1,10 +1,10 @@
 sylius_grid:
   templates:
     action:
-      details: 'Configuration/Grid/Action/productDetails.html.twig'
-      restore: 'Configuration/Grid/Action/restore.html.twig'
+      details: 'Configuration/Grid/Admin/Action/productDetails.html.twig'
+      restore: 'Configuration/Grid/Admin/Action/restore.html.twig'
     filter:
-      product_listing_status: 'Configuration/Grid/Filter/productListingStatus.html.twig'
+      product_listing_status: 'Configuration/Grid/Admin/Filter/productListingStatus.html.twig'
   grids:
     open_marketplace_admin_product_listing:
       driver:
@@ -44,13 +44,13 @@ sylius_grid:
           label: sylius.ui.name
           sortable: latestDraft.translations.name
           options:
-            template: "Configuration/Grid/Field/productListingName.html.twig"
+            template: "Configuration/Grid/Admin/Field/productListingName.html.twig"
         vendor:
           type: twig
           label: open_marketplace.ui.vendor
           sortable: vendor.companyName
           options:
-            template: "Configuration/Grid/Field/productListingVendor.html.twig"
+            template: "Configuration/Grid/Admin/Field/productListingVendor.html.twig"
         publishedAt:
           type: datetime
           label: open_marketplace.ui.published_at
@@ -64,7 +64,7 @@ sylius_grid:
           label: open_marketplace.ui.status
           sortable: ~
           options:
-            template: "Configuration/Grid/Field/productListingStatus.html.twig"
+            template: "Configuration/Grid/Common/Field/productListingStatus.html.twig"
       actions:
         item:
           details:
