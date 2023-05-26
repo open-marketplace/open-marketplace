@@ -14,9 +14,12 @@ namespace BitBag\OpenMarketplace\Processor\Order;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Event\Order\PostSplitOrderEvent;
+use BitBag\OpenMarketplace\Event\Order\PreSplitOrderEvent;
 use BitBag\OpenMarketplace\Manager\OrderManagerInterface;
 use BitBag\OpenMarketplace\Refresher\PaymentRefresherInterface;
 use Doctrine\ORM\EntityManager;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
 {
@@ -26,22 +29,24 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
 
     private PaymentRefresherInterface $paymentRefresher;
 
-    private VendorCommissionProcessorInterface $commissionProcessor;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         EntityManager $entityManager,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
-        VendorCommissionProcessorInterface $commissionProcessor
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->entityManager = $entityManager;
         $this->orderManager = $orderManager;
         $this->paymentRefresher = $paymentRefresher;
-        $this->commissionProcessor = $commissionProcessor;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function process(OrderInterface $order): array
     {
+        $this->eventDispatcher->dispatch(new PreSplitOrderEvent($order), PreSplitOrderEvent::NAME);
+
         $secondaryOrders = [];
 
         /** @var array<OrderItemInterface> $orderItems */
@@ -56,9 +61,7 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
             }
         }
 
-        foreach ($secondaryOrders as $secondaryOrder) {
-            $this->commissionProcessor->process($secondaryOrder);
-        }
+        $this->eventDispatcher->dispatch(new PostSplitOrderEvent($secondaryOrders), PostSplitOrderEvent::NAME);
 
         $orders = [$order, ...$secondaryOrders];
 

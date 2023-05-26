@@ -9,12 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Processor\Order;
+
+namespace BitBag\OpenMarketplace\EventListener;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Event\Order\PostSplitOrderEvent;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class VendorCommissionProcessor implements VendorCommissionProcessorInterface
+class CalculateOrderCommissionListener
 {
     private iterable $commissionCalculators;
 
@@ -25,12 +27,13 @@ final class VendorCommissionProcessor implements VendorCommissionProcessorInterf
         $this->commissionCalculators = $commissionCalculators;
         $this->entityManager = $entityManager;
     }
-
-    public function process(OrderInterface $order): void
+    public function __invoke(PostSplitOrderEvent $event): void
     {
-        $commission = $this->calculateCommission($order);
-        $order->setCommissionTotal($commission);
-        $this->entityManager->persist($order);
+        foreach ($event->getOrders() as $order){
+            $commission = $this->calculateCommission($order);
+            $order->setCommissionTotal($commission);
+            $this->entityManager->persist($order);
+        }
     }
 
     private function calculateCommission(OrderInterface $order): int
