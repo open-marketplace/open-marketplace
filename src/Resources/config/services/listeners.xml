@@ -32,7 +32,7 @@
             <argument type="tagged_iterator" tag="open_marketplace.vendor_commission_calculator" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
 
-            <tag name="kernel.event_listener" event="order.post_split"/>
+            <tag name="kernel.event_listener" event="order.post_split" method="calculate"/>
         </service>
     </services>
 </container>

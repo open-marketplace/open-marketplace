@@ -27,7 +27,7 @@ class CalculateOrderCommissionListener
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(PostSplitOrderEvent $event): void
+    public function calculate(PostSplitOrderEvent $event): void
     {
         foreach ($event->getOrders() as $order) {
             $commission = $this->calculateCommission($order);
