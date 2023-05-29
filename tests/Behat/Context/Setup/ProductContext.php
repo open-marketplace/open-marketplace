@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorShippingMethod;
@@ -21,6 +22,7 @@ use BitBag\OpenMarketplace\Repository\VendorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory;
@@ -37,6 +39,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 class ProductContext implements Context
@@ -67,6 +70,10 @@ class ProductContext implements Context
 
     private FactoryInterface $channelPricingFactory;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
+    private UserRepositoryInterface $userRepository;
+
     public function __construct(
         ShopUserExampleFactory $userExampleFactory,
         VendorRepository $vendorRepository,
@@ -81,6 +88,8 @@ class ProductContext implements Context
         ProductVariantResolverInterface $defaultVariantResolver,
         ProductFactoryInterface $productFactory,
         FactoryInterface $channelPricingFactory,
+        ExampleFactoryInterface $vendorExampleFactory,
+        UserRepositoryInterface $userRepository,
         ) {
         $this->vendorRepository = $vendorRepository;
         $this->productVariantRepository = $productVariantRepository;
@@ -95,6 +104,8 @@ class ProductContext implements Context
         $this->defaultVariantResolver = $defaultVariantResolver;
         $this->productFactory = $productFactory;
         $this->channelPricingFactory = $channelPricingFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -115,13 +126,68 @@ class ProductContext implements Context
     }
 
     /**
+     * @Given store has :productsCount products from vendor :username
+     */
+    public function storeHasProductsFromVendorNamed($productsCount, $username): void
+    {
+        $this->createTaxon();
+        /** @var ShopUserInterface $user */
+        $user = $this->userRepository->findOneBy(['username' => $username]);
+        $vendor = $user->getVendor();
+        for ($i = 1; $i <= $productsCount; ++$i) {
+            $products[$i] = $this->createDefaultProduct();
+            $products[$i]->setVendor($vendor);
+            $this->vendorRepository->add($vendor);
+            $this->productRepository->add($products[$i]);
+
+            $this->sharedStorage->set('products', $products);
+        }
+    }
+
+    /**
+     * @Given store has :productsCount products created by admin
+     */
+    public function storeHasProductsFromAdmin($productsCount): void
+    {
+        $this->createTaxon();
+        for ($i = 1; $i <= $productsCount; ++$i) {
+            $products[$i] = $this->createDefaultProduct();
+            $this->productRepository->add($products[$i]);
+
+            $this->sharedStorage->set('products', $products);
+        }
+    }
+
+    /**
      * @Given store has :productsCount products from different Vendors
+     * @Given store has :productsCount products from different Vendors with default commission settings
      */
     public function storeHasProductsFromDifferentVendors($productsCount)
     {
         $this->createTaxon();
         for ($i = 1; $i <= $productsCount; ++$i) {
             $vendors[$i] = $this->createDefaultVendor($i);
+            $products[$i] = $this->createDefaultProduct();
+            $products[$i]->setVendor($vendors[$i]);
+            $this->vendorRepository->add($vendors[$i]);
+            $this->productRepository->add($products[$i]);
+
+            $this->sharedStorage->set('products', $products);
+        }
+    }
+
+    /**
+     * @Given store has :productsCount products from different Vendors with random commission settings
+     */
+    public function storeHasProductsFromDifferentVendorsWithRandomCommissions($productsCount)
+    {
+        $this->createTaxon();
+        $commissionTypes = [VendorInterface::NET_COMMISSION, VendorInterface::GROSS_COMMISSION];
+        for ($i = 1; $i <= $productsCount; ++$i) {
+            $vendor = $this->createDefaultVendor($i);
+            $vendor->setCommission(rand(1, 10));
+            $vendor->setCommissionType($commissionTypes[array_rand($commissionTypes)]);
+            $vendors[$i] = $vendor;
             $products[$i] = $this->createDefaultProduct();
             $products[$i]->setVendor($vendors[$i]);
             $this->vendorRepository->add($vendors[$i]);
@@ -318,20 +384,26 @@ class ProductContext implements Context
         $this->manager->flush();
     }
 
-    private function createDefaultVendor(?int $iteration): Vendor
+    private function createDefaultVendor(?int $iteration): VendorInterface
     {
         if (1 === $iteration) {
             $iteration = null;
         }
         $userFactory = $this->userExampleFactory;
         $user = $userFactory->create();
-        $vendor = new Vendor();
+
+        $options = [
+            'company_name' => 'company',
+            'phone_number' => '333',
+            'tax_identifier' => '111',
+            'slug' => 'SLUG' . "$iteration",
+            'description' => 'description',
+        ];
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorExampleFactory->create($options);
         $vendor->setShopUser($user);
-        $vendor->setCompanyName('company');
-        $vendor->setTaxIdentifier('111');
-        $vendor->setPhoneNumber('333');
-        $vendor->setSlug('SLUG' . "$iteration");
-        $vendor->setDescription('description');
+
         $this->manager->persist($user);
 
         return $vendor;

@@ -14,9 +14,9 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
 final class VendorVerificationContext extends RawMinkContext implements Context
 {
@@ -24,12 +24,16 @@ final class VendorVerificationContext extends RawMinkContext implements Context
 
     private ContainerInterface $container;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
-        ContainerInterface $container
-    ) {
+        ContainerInterface $container,
+        ExampleFactoryInterface $vendorExampleFactory,
+        ) {
         $this->entityManager = $entityManager;
         $this->container = $container;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -37,26 +41,25 @@ final class VendorVerificationContext extends RawMinkContext implements Context
      */
     public function thereIsAnUnverifiedVendor()
     {
-        $vendor = new Vendor();
-        $vendorAddress = new VendorAddress();
-
         $vendorCountry = $this->container->get('sylius.factory.country')->createNew();
         $vendorCountry->setCode('US');
         $this->entityManager->persist($vendorCountry);
 
-        $vendor->setCompanyName('vendor');
-        $vendor->setTaxIdentifier('vendorTax');
-        $vendor->setPhoneNumber('vendorPhone');
-        $vendor->setSlug('slug');
-        $vendor->setDescription('description');
+        $options = [
+            'company_name' => 'vendor',
+            'phone_number' => 'vendorPhone',
+            'tax_identifier' => 'vendorTax',
+            'street' => 'vendorStreet',
+            'city' => 'vendorCity',
+            'postcode' => 'vendorCode',
+            'slug' => 'slug',
+            'description' => 'description',
+            'country' => $vendorCountry,
+            'status' => 'unverified',
+        ];
 
-        $vendorAddress->setCountry($vendorCountry);
-        $vendorAddress->setCity('vendorCity');
-        $vendorAddress->setStreet('vendorStreet');
-        $vendorAddress->setPostalCode('vendorCode');
+        $vendor = $this->vendorExampleFactory->create($options);
 
-        $vendor->setVendorAddress($vendorAddress);
-        $vendor->setStatus('unverified');
         $this->entityManager->persist($vendorCountry);
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();

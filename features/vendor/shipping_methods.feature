@@ -9,7 +9,7 @@ Feature: Vendor can modify shipping methods
     And the store also operates on another channel named "Poland"
     And the store has a zone "United States" with code "US"
     And default tax zone is "US"
-    And there is a "verified" vendor user "test@company.domain" registered in country "United States"
+    And there is a "verified" vendor user "test@company.domain" registered in country "US"
     And I am logged in as "test@company.domain"
 
   @ui
