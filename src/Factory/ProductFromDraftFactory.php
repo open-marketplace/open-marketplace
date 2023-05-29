@@ -71,6 +71,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         $product->setUpdatedAt($now);
         $product->setCreatedAt($now);
         $product->setVendor($productDraft->getProductListing()->getVendor());
+        $product->setChannels($productDraft->getChannels());
 
         /** @var ProductTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {

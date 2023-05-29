@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity\Conversation;
 
+use BitBag\OpenMarketplace\Storage\MessagesStorage;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -125,5 +126,20 @@ class Conversation implements ConversationInterface
     public function getApplicant(): ?ShopUserInterface
     {
         return $this->shopUser;
+    }
+
+    public function isConversationReportedToArchive(): bool
+    {
+        if (null === $this->getMessages()) {
+            return false;
+        }
+
+        foreach ($this->getMessages() as $message) {
+            if (MessagesStorage::ARCHIVE_REQUEST_MESSAGE === $message->getContent()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

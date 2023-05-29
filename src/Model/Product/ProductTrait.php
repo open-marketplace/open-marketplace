@@ -13,10 +13,11 @@ namespace BitBag\OpenMarketplace\Model\Product;
 use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 trait ProductTrait
 {
-    protected ?VendorInterface $vendor;
+    protected ?VendorInterface $vendor = null;
 
     protected bool $deleted = false;
 
@@ -53,5 +54,10 @@ trait ProductTrait
     public function setAttributesFrom(ProductDraftInterface $draft): void
     {
         $this->attributes = $draft->getAttributes();
+    }
+
+    public function setChannels(Collection $channels): void
+    {
+        $this->channels = $channels;
     }
 }
