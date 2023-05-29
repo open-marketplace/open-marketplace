@@ -11,29 +11,34 @@
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="open_marketplace.factory.draftAttribute"/>
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
+            <argument type="service" id="sylius.factory.country" />
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_listing" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorListingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_verification" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorVerificationContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="service_container"/>
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_disabling" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorDisablingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_editing" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorEditingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="tests.open_marketplace.behat.context.setup.factory.vendor_factory"/>
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.dashboard_statistics" public="true"

@@ -1,0 +1,27 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Context/Vendor/Common/_breadcrumb.html.twig' %}
+
+{% set definition = resources.definition %}
+{% block title %}{{ 'open_marketplace.ui.draft_attributes'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb_page %}
+    <div class="active section">{{ 'sylius.ui.attributes'|trans }}</div>
+{% endblock %}
+
+{% block subcontent %}
+    <div class="ui stackable two column grid">
+        <div class="column">
+            <h1 class="ui header">
+                <i class="circular cubes icon"></i>
+                <div class="content">
+                    {{ 'open_marketplace.ui.draft_attributes'|trans }}
+
+                </div>
+            </h1>
+        </div>
+
+        {% include 'Context/Vendor/DraftAttributes/_menu.html.twig' %}
+    </div>
+
+    {{ sylius_grid_render(resources, '@SyliusAdmin/Grid/_default.html.twig') }}
+{% endblock %}

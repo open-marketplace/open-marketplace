@@ -4,7 +4,7 @@ open_marketplace_order_listing:
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
-            template: "Vendor/Order/index.html.twig"
+            template: "Context/Vendor/Order/index.html.twig"
             grid: vendor_account_order
 
 open_marketplace_vendor_order_show:
@@ -15,7 +15,7 @@ open_marketplace_vendor_order_show:
         _sylius:
             section: admin
             permission: true
-            template: "Vendor/Order/show.html.twig"
+            template: "Context/Vendor/Order/show.html.twig"
             repository:
                 method: findOrderForVendor
                 arguments:

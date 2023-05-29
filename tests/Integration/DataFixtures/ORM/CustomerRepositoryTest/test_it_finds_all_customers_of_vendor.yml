@@ -54,6 +54,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_address'
         slug: 'oliver-queen-company'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
 BitBag\OpenMarketplace\Entity\Product:
     first_product:
         vendor: '@vendor_oliver'

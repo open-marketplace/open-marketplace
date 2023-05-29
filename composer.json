@@ -7,12 +7,13 @@
         "php": "^8.0",
         "bitbag/cms-plugin": "^3.2",
         "bitbag/wishlist-plugin": "^3.0",
+        "doctrine/annotations": "^1.14",
+        "php-http/message-factory": "^1.1",
         "ramsey/uuid-doctrine": "^1.8",
         "sylius/sylius": "^1.11.12",
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/flex": "^1.11",
-        "symfony/webpack-encore-bundle": "^1.15",
-        "doctrine/annotations": "^1.14"
+        "symfony/webpack-encore-bundle": "^1.15"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

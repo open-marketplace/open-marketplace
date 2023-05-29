@@ -1,0 +1,53 @@
+<table class="ui very basic celled table">
+    <tbody>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.shop_user'|trans }}</strong></td>
+            <td>
+                <a href="{{ path('sylius_admin_customer_show', {'id': vendor.shopUser.customer.id}) }}">{{ vendor.shopUser.username }}</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.company_name'|trans }}</strong></td>
+            <td>{{ vendor.companyName }}</td>
+        </tr>
+        {% if vendor.image is not null %}
+            <tr>
+                <td class="five wide top aligned"><strong class="gray text">{{ 'open_marketplace.ui.logo'|trans }}</strong>
+                </td>
+                <td><img class="ui image" src="{{ asset('media/image/' ~ vendor.image.path) }}"/></td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.tax_id'|trans }}</strong></td>
+            <td> {{ vendor.taxIdentifier }} </td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.phone_number'|trans }}</strong></td>
+            <td>{{ vendor.phoneNumber }}</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.country'|trans }}</strong></td>
+            <td>{{ vendor.vendorAddress.country }}</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.city'|trans }}</strong></td>
+            <td>{{ vendor.vendorAddress.city }}</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.street'|trans }}</strong></td>
+            <td>{{ vendor.vendorAddress.street }}</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.postal_code'|trans }}</strong></td>
+            <td>{{ vendor.vendorAddress.postalCode }}</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.commission'|trans }} (%)</strong></td>
+            <td>{{ vendor.commission }}</td>
+        </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.commission_type'|trans }}</strong></td>
+            <td>{{ vendor.commissionType }}</td>
+        </tr>
+    </tbody>
+</table>

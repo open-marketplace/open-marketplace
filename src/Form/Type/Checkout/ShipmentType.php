@@ -32,7 +32,6 @@ final class ShipmentType extends AbstractType
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $form = $event->getForm();
                 $shipment = $event->getData();
-
                 $form->add('method', ShippingMethodChoiceType::class, [
                     'required' => true,
                     'label' => 'sylius.form.checkout.shipping_method',
