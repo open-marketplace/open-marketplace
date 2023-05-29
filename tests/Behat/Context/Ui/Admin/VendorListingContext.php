@@ -14,10 +14,10 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Model\Customer;
 use Webmozart\Assert\Assert;
 
 final class VendorListingContext extends RawMinkContext implements Context
@@ -90,6 +90,17 @@ final class VendorListingContext extends RawMinkContext implements Context
         $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
         Assert::notEmpty($rows, 'Could not find any rows');
         Assert::eq($count, count($rows), 'Rows numbers are not equal');
+    }
+
+    /**
+     * @Then page should contain valid customer :email link
+     */
+    public function iShouldSeeValidCustomerLink(string $email)
+    {
+        /** @var Customer $customer */
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $email]);
+        $link = sprintf('<a href="/admin/customers/%d">%s</a>', $customer->getId(), $email);
+        Assert::contains($this->getPage()->getHtml(), $link);
     }
 
     /**

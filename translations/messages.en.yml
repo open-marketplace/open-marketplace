@@ -50,6 +50,7 @@ open_marketplace:
         tax_identifier: Tax Identifier
         not_blank: This field cannot be empty
         company_name: Company name
+        shop_user: Shop user
         country: Country
         city: City
         street: Street
