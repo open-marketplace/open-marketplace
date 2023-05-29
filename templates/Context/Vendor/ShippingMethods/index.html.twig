@@ -1,0 +1,45 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Context/Vendor/Common/_breadcrumb.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb_page %}
+    <div class="active section">{{ 'sylius.ui.shipping_method'|trans }}</div>
+{% endblock %}
+
+{% block subcontent %}
+    <div class="ui form segment">
+        {{ form_start(form) }}
+        <h1 class="ui dividing header">
+            {{ 'open_marketplace.ui.your_vendor_profile'|trans }}
+            <div class="sub header">{{ 'open_marketplace.ui.edit_your_vendor_information'|trans }}</div>
+        </h1>
+
+
+        {% for channel in form.channels %}
+            <div class="ui top attached tabular menu">
+                <a class="item active" data-tab="{{ channel.vars.name }}">{{ channel.vars.label }}</a>
+            </div>
+            <div class="ui bottom attached active tab segment" data-tab="{{ channel.vars.name }}">
+                <div class="field">
+                    <div id="{{ channel.vars.id }}">
+                        {% for method in channel %}
+                            <div class="field">
+                                <div class="ui labeled toggle checkbox">
+                                    {{ form_widget(method) }}
+                                    {{ form_label(method) }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

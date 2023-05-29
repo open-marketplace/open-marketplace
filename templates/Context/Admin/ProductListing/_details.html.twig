@@ -1,0 +1,34 @@
+<div class="ui grid">
+    <div class="sixteen wide mobile ten wide computer column">
+        {% include 'Context/Admin/ProductListing/details/_details.html.twig' %}
+
+        <div class="ui hidden divider"></div>
+
+        {% include 'Context/Admin/ProductListing/details/_taxons.html.twig' %}
+    </div>
+    <div class="sixteen wide mobile six wide computer column">
+        {% include 'Context/Admin/ProductListing/details/_channels.html.twig' %}
+
+        <div class="ui hidden divider"></div>
+
+        {% include 'Context/Admin/ProductListing/details/_pricing.html.twig' %}
+    </div>
+</div>
+<div class="ui hidden divider"></div>
+
+{% include 'Context/Admin/ProductListing/details/_moreDetails.html.twig' %}
+<div class="ui hidden divider"></div>
+
+{% include 'Context/Admin/ProductListing/details/_shipping.html.twig' %}
+<div class="ui hidden divider"></div>
+
+{% include 'Context/Admin/ProductListing/details/_media.html.twig' %}
+<div class="ui hidden divider"></div>
+
+{% include 'Context/Admin/ProductListing/details/_attributes.html.twig' %}
+
+{% if productDraft.status == 'under_verification' %}
+    <div class="ui divider"></div>
+
+    {% include 'Context/Admin/ProductListing/details/_verificationForm.html.twig' %}
+{% endif %}

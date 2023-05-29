@@ -1,0 +1,44 @@
+<div id="details">
+    <h4 class="ui top attached large header">{{ 'open_marketplace.ui.details'|trans }}</h4>
+    <div class="ui attached segment">
+        <table class="ui very basic celled table">
+            <tbody>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.vendor'|trans }}</strong></td>
+                    <td>
+                        {% set vendor = productDraft.productListing.vendor %}
+                        <a href="{{ path('open_marketplace_admin_vendor_show', {id: vendor.id}) }}" target="_blank">
+                            {{ vendor.companyName ~ ' ' ~ vendor.shopUser.customer.fullName }}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.name'|trans }}</strong></td>
+                    <td>
+                        {{ productDraft.code }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.published_at'|trans }}</strong></td>
+                    <td>
+                        {{ productDraft.publishedAt | date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.status'|trans }}</strong></td>
+                    <td>
+                        {% if productDraft.status == 'rejected' %}
+                            <span class="ui red label"><i class="ban icon"></i>{{ 'open_marketplace.ui.rejected'|trans }}</span>
+                        {% elseif productDraft.status == 'under_verification' %}
+                            <span class="ui yellow label"><i class="clock icon"></i>{{ 'open_marketplace.ui.under_verification'|trans }}</span>
+                        {% elseif productDraft.status == 'verified' %}
+                            <span class="ui teal label"><i class="check icon"></i>{{ 'open_marketplace.ui.verified'|trans }}</span>
+                        {% else %}
+                            <span class="ui blue label"><i class="plus icon"></i>{{ 'open_marketplace.ui.created'|trans }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

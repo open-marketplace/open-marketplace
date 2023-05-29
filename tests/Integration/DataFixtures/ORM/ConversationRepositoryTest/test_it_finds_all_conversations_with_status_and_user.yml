@@ -38,6 +38,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_address'
         slug: 'someslug'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
 BitBag\OpenMarketplace\Entity\Conversation\Conversation:
     opened_conversation_with_oliver:
         shopUser: '@user_oliver'

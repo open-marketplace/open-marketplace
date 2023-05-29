@@ -1,0 +1,55 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% set reviewsCount = 0 %}
+{% set vendor = products.definition.driverConfiguration.repository.arguments.vendor %}
+
+{% block content %}
+    <div class="ui clearing hidden divider"></div>
+    <div class="ui stackable grid">
+        <div class="sixteen wide column vendor-banner">
+            {% if vendor.getBackgroundImage is not null %}
+                <img id="vendor_banner" src="{{ '/media/cache/resolve/open_marketplace_vendor_background/' ~ vendor.getBackgroundImage.path }}" alt="image broken">
+            {% endif %}
+            <div class="vendor-positioning">
+                <div class="vendor-content">
+                    {% if vendor.getImage is not null %}
+                        <div class="vendor-logo">
+                            <img id="vendor_logo" src="{{ '/media/image/' ~ vendor.getImage.path }}" alt="image broken">
+                        </div>
+                    {% endif %}
+                    <h2>{{ vendor.companyName }}</h2>
+                </div>
+                <div class="reviews-count">
+
+                    <div id="average-rating" class="ui star large rating" data-rating="{{ vendor.getAverageRatingData()['averageRating']|round }}" data-max-rating="5" data-average-rating="{{ vendor.getAverageRatingData()['averageRating'] |round(2) }}" style="pointer-events: none;" {{ sylius_test_html_attribute('average-rating', vendor.getAverageRatingData()['reviewsCount'] |round(2) ) }}></div>
+
+                    <p>{{ vendor.getAverageRatingData()['reviewsCount'] }}</p>
+                    {% if vendor.getAverageRatingData()['reviewsCount'] == 1 %}
+                        <p>{{ 'open_marketplace.ui.review'|trans }}</p>
+                    {% else %}
+                        <p>{{ 'sylius.ui.reviews'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui card">
+                <div style="display: inline-block" class="content">
+                    <div class="header">
+                        {{ vendor.companyName }}
+                    </div>
+                    <br>
+                    <div class="description">
+                       <p>{{ vendor.description}}</p>
+                    </div>
+                </div>
+            </div>
+            {% include 'Context/Vendor/VendorPage/_sidebar.html.twig' %}
+        </div>
+        <div class="twelve wide column">
+            {% include 'Context/Vendor/VendorPage/_main.html.twig' %}
+        </div>
+    </div>
+
+    <div class="ui clearing hidden divider"></div>
+{% endblock %}
