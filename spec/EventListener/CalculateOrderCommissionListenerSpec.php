@@ -40,8 +40,7 @@ class CalculateOrderCommissionListenerSpec extends ObjectBehavior
         \IteratorAggregate $commissionCalculators,
         PostSplitOrderEvent $event,
         OrderInterface $order
-    ): void
-    {
+    ): void {
         $commissionCalculators->getIterator()->willReturn(new ArrayCollection([]));
         $event->getOrders()->willReturn([$order]);
         $this->shouldThrow(\RuntimeException::class)->during('calculate', [$event]);
