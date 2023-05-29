@@ -6,7 +6,7 @@
 
 {% block content %}
     {% include '@SyliusShop/Login/_header.html.twig' %}
-    {% include 'vendorTestData.html.twig' %}
+    {% include 'Context/Vendor/Login/_vendorDefaultCredentials.html.twig' %}
     {{ sylius_template_event('sylius.shop.login.after_content_header') }}
 
     <div class="ui padded segment">

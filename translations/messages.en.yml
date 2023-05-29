@@ -162,7 +162,9 @@ open_marketplace:
         footer_signature: BitBag OpenMarketplace - an open-source MVM based on Symfony & Sylius.
         commission: Commission
         commission_type: Commission Type
-
+        vendor_test_credentials: Vendor test credentials
+        username: Username
+        password: Password
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.
