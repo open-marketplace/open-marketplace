@@ -16,8 +16,8 @@ use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
-use Sylius\Component\Core\Model\Customer;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Model\Customer;
 use Webmozart\Assert\Assert;
 
 final class VendorListingContext extends RawMinkContext implements Context
@@ -92,8 +92,6 @@ final class VendorListingContext extends RawMinkContext implements Context
         Assert::eq($count, count($rows), 'Rows numbers are not equal');
     }
 
-
-
     /**
      * @Then page should contain valid customer :email link
      */
@@ -104,7 +102,6 @@ final class VendorListingContext extends RawMinkContext implements Context
         $link = sprintf('<a href="/admin/customers/%d">%s</a>', $customer->getId(), $email);
         Assert::contains($this->getPage()->getHtml(), $link);
     }
-
 
     /**
      * @return DocumentElement
