@@ -98,7 +98,7 @@ final class ShowAction
         }
 
         return new Response(
-            $this->twig->render('Admin/ProductListing/show_product_listing.html.twig', [
+            $this->twig->render('Context/Admin/ProductListing/show.html.twig', [
                 'productListing' => $productListing,
                 'productDraft' => $latestProductDraft,
                 'form' => $form->createView(),

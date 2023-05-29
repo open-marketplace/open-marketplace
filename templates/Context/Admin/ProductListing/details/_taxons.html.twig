@@ -1,0 +1,30 @@
+<div id="taxonomy">
+    <h4 class="ui top attached large header">{{ 'sylius.ui.taxonomy'|trans }}</h4>
+    <div class="ui attached segment">
+        {% if productDraft.mainTaxon == null and productDraft.productDraftTaxons|length == 0 %}
+            {{ 'open_marketplace.ui.no_draft_taxons'|trans }}
+        {% else %}
+            <table class="ui very basic celled table">
+                <tbody>
+                    {% if productDraft.mainTaxon != null %}
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'sylius.ui.main_taxon'|trans }}</strong></td>
+                            <td>{{ productDraft.mainTaxon.getFullName }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="five wide"><strong class="gray text">{{ 'sylius.ui.product_taxons'|trans }}</strong></td>
+                        <td>
+                            <ul class="ui bulleted list">
+                                {% for productDraftTaxon in productDraft.productDraftTaxons %}
+                                    <li>{{ productDraftTaxon.getTaxon.getFullName }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+

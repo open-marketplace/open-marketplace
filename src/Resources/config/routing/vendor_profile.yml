@@ -4,4 +4,4 @@ vendor_profile:
     defaults:
         _controller: open_marketplace.controller.vendor_controller:showAction
         _sylius:
-            template: "Vendor/profile.html.twig"
+            template: "Context/Vendor/Profile/index.html.twig"
