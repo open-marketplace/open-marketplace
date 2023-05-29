@@ -17,6 +17,7 @@
                     <i class="icon check"></i> {{ 'open_marketplace.ui.conversation.yes'|trans }}
                 </button>
             {% endif %}
+
             <input type="hidden" name="_csrf_token" value="{{ csrf_token(conversation.id) }}" />
         </form>
     </div>

@@ -11,7 +11,6 @@
 {% block subcontent %}
     <div class="ui stackable two column grid">
         <div class="column">
-
             <h1 class="ui header">
                 <i class="circular cubes icon"></i>
                 <div class="content">
@@ -19,11 +18,9 @@
 
                 </div>
             </h1>
-
         </div>
 
         {% include 'Context/Vendor/DraftAttributes/_menu.html.twig' %}
-
     </div>
 
     {{ sylius_grid_render(resources, '@SyliusAdmin/Grid/_default.html.twig') }}

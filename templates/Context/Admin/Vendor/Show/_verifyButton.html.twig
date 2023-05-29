@@ -1,5 +1,4 @@
 {% if vendor.status == constant('BitBag\\OpenMarketplace\\Entity\\VendorInterface::STATUS_UNVERIFIED') %}
-
     <form action="{{ path('open_marketplace_admin_vendor_verify', {'id': vendor.id}) }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(vendor.id) }}">
         <input type="hidden" name="_method" value="PUT">
@@ -7,6 +6,5 @@
             <i class="thumbs up icon"></i> {{ 'open_marketplace.ui.verify'|trans }}
         </button>
     </form>
-
 {% endif %}
 

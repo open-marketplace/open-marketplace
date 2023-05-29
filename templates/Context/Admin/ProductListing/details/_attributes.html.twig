@@ -31,8 +31,8 @@
                                 </td>
                                 <td>
                                     {% include [
-                                        '@SyliusAdmin/Product/Show/Types/'~attributeValue.type~'.html.twig',
-                                        '@SyliusAttribute/Types/'~attributeValue.type~'.html.twig',
+                                        '@SyliusAdmin/Product/Show/Types/' ~ attributeValue.type ~ '.html.twig',
+                                        '@SyliusAttribute/Types/' ~ attributeValue.type ~ '.html.twig',
                                         '@SyliusAdmin/Product/Show/Types/default.html.twig'
                                     ] with {
                                         'attribute': attributeValue

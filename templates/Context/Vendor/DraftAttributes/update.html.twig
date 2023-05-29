@@ -17,7 +17,6 @@
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block subcontent %}
-
     {{ form_start(form, {'action': path('open_marketplace_draft_attribute_update', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
 
@@ -34,7 +33,6 @@
     {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path('bitbag_open_marketplace_vendor_draft_attribute_index', configuration.vars.route.parameters|default({}))}} %}
 
     {{ form_end(form, {'render_rest': false}) }}
-
 {% endblock %}
 
 {% block topbar %}

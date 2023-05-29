@@ -1,8 +1,9 @@
 {% extends '@SyliusShop/layout.html.twig' %}
+
 {% set reviewsCount = 0 %}
 {% set vendor = products.definition.driverConfiguration.repository.arguments.vendor %}
-{% block content %}
 
+{% block content %}
     <div class="ui clearing hidden divider"></div>
     <div class="ui stackable grid">
         <div class="sixteen wide column vendor-banner">
@@ -51,6 +52,4 @@
     </div>
 
     <div class="ui clearing hidden divider"></div>
-
-
 {% endblock %}

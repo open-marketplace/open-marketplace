@@ -3,13 +3,13 @@
     <div class="ui attached segment">
         <table id="channels" class="ui very basic celled table">
             <tbody>
-            {% for channel in productDraft.channels %}
-                <tr>
-                    <td class="five wide gray text">
-                        <strong>{{ channel.code|sylius_channel_name }} </strong>
-                    </td>
-                </tr>
-            {% endfor %}
+                {% for channel in productDraft.channels %}
+                    <tr>
+                        <td class="five wide gray text">
+                            <strong>{{ channel.code|sylius_channel_name }} </strong>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

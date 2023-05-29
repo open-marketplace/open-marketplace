@@ -3,26 +3,26 @@
     <div class="ui attached segment">
         <table class="ui very basic celled table">
             <tbody>
-            <tr>
-                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.is_shipping_required'|trans }}</strong></td>
-                <td>
-                    {% if productDraft.shippingRequired %}
-                        {{ 'open_marketplace.ui.yes'|trans }}
-                    {% else %}
-                        {{ 'open_marketplace.ui.no'|trans }}
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.shipping_category'|trans }}</strong></td>
-                <td>
-                    {% if productDraft.shippingCategory is not null %}
-                        {{ productDraft.shippingCategory.name }}
-                    {% else %}
-                        {{ 'open_marketplace.ui.none'|trans }}
-                    {% endif %}
-                </td>
-            </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.is_shipping_required'|trans }}</strong></td>
+                    <td>
+                        {% if productDraft.shippingRequired %}
+                            {{ 'open_marketplace.ui.yes'|trans }}
+                        {% else %}
+                            {{ 'open_marketplace.ui.no'|trans }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.shipping_category'|trans }}</strong></td>
+                    <td>
+                        {% if productDraft.shippingCategory is not null %}
+                            {{ productDraft.shippingCategory.name }}
+                        {% else %}
+                            {{ 'open_marketplace.ui.none'|trans }}
+                        {% endif %}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
