@@ -4,7 +4,7 @@ vendor_shipping_methods:
   defaults:
     _controller: open_marketplace.controller.vendor_controller:updateAction
     _sylius:
-      template: "Vendor/shipping_methods.html.twig"
+      template: 'Context/Vendor/ShippingMethods/index.html.twig'
       form: BitBag\OpenMarketplace\Form\Type\VendorShippingMethodsType
       event: update
       repository:
@@ -14,4 +14,3 @@ vendor_shipping_methods:
       flash: open_marketplace.ui.shipping_method_updated
       redirect:
         route: vendor_shipping_methods
-

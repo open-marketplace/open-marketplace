@@ -17,6 +17,10 @@ use Doctrine\Common\Collections\Collection;
 
 interface VendorInterface extends VendorProfileInterface, UuidAwareInterface
 {
+    public const NET_COMMISSION = 'net';
+
+    public const GROSS_COMMISSION = 'gross';
+
     public const STATUS_UNVERIFIED = 'unverified';
 
     public const STATUS_VERIFIED = 'verified';
@@ -100,4 +104,12 @@ interface VendorInterface extends VendorProfileInterface, UuidAwareInterface
     public function addShippingMethod(VendorShippingMethodInterface $shippingMethod): void;
 
     public function removeShippingMethod(VendorShippingMethodInterface $shippingMethod): void;
+
+    public function getCommission(): ?int;
+
+    public function setCommission(?int $commission): void;
+
+    public function getCommissionType(): string;
+
+    public function setCommissionType(string $commissionType): void;
 }

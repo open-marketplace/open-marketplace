@@ -114,7 +114,7 @@ final class CreateProductAction
         }
 
         return new Response(
-            $this->twig->render('Vendor/ProductListing/create_form.html.twig', [
+            $this->twig->render('Context/Vendor/ProductListing/create.html.twig', [
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $productDraft,

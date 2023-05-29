@@ -19,7 +19,6 @@ final class CheckoutProcessEnd2EndTest extends End2EndTestCase
     public function test_it_for_shipment_methods_for_multiple_vendors_during_order(): void
     {
         $this->loadFixturesFromFile('CheckoutProcessEnd2EndTest/test_it_for_shipment_methods_for_multiple_vendors.yml');
-
         $token = $this->createCartAndCheckResponse();
         $this->addProductsToCartAndCheckResponse($token);
         $extractedOrderResponse = $this->fillAddressInformationAndCheckResponse($token);

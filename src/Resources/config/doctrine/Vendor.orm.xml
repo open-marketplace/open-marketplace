@@ -16,6 +16,8 @@
         <field name="status" column="status" type="string" />
         <field name="enabled" column="enabled" type="boolean" />
         <field name="editedAt" column="edited_at" type="datetime" nullable="true"/>
+        <field name="commission" column="commission" type="integer" />
+        <field name="commissionType" column="commission_type" type="string" />
 
         <one-to-one field="vendorAddress" target-entity="BitBag\OpenMarketplace\Entity\VendorAddress" >
             <join-column name="vendor_address_id" referenced-column-name="id" on-delete="SET NULL" />

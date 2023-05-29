@@ -14,6 +14,7 @@
             <argument type="service" id="sylius.repository.shipping_method"/>
             <argument type="service" id="sm.factory" />
             <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
         </service>
     </services>
 </container>

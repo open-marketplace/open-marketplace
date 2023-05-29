@@ -16,14 +16,14 @@ use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class VendorContext implements Context
 {
     private ShopUserExampleFactory $shopUserExampleFactory;
 
-    private FactoryInterface $vendorFactory;
+    private ExampleFactoryInterface $vendorExampleFactory;
 
     private EntityManagerInterface $entityManager;
 
@@ -31,12 +31,12 @@ final class VendorContext implements Context
 
     public function __construct(
         ShopUserExampleFactory $shopUserExampleFactory,
-        FactoryInterface $vendorFactory,
+        ExampleFactoryInterface $vendorExampleFactory,
         EntityManagerInterface $entityManager,
         SharedStorageInterface $sharedStorage
     ) {
         $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->vendorFactory = $vendorFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
         $this->entityManager = $entityManager;
         $this->sharedStorage = $sharedStorage;
     }
@@ -53,14 +53,18 @@ final class VendorContext implements Context
         $user->setEmail($username . '@email.com');
         $this->entityManager->persist($user);
 
+        $options = [
+            'company_name' => 'vendor',
+            'phone_number' => '987654321',
+            'tax_identifier' => '123456789',
+            'slug' => 'vendor-slug',
+            'description' => 'description',
+        ];
+
         /** @var Vendor $vendor */
-        $vendor = $this->vendorFactory->createNew();
-        $vendor->setCompanyName('vendor');
+        $vendor = $this->vendorExampleFactory->create($options);
+
         $vendor->setShopUser($user);
-        $vendor->setSlug('vendor-slug');
-        $vendor->setDescription('description');
-        $vendor->setPhoneNumber('987654321');
-        $vendor->setTaxIdentifier('123456789');
         $this->entityManager->persist($vendor);
 
         $this->entityManager->flush();

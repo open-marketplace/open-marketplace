@@ -87,6 +87,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_address_bruce'
         slug: 'Wayne-Enterprises-Inc'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
     vendor_peter:
         shopUser: '@user_peter'
         companyName: 'Weyland Corp'
@@ -95,6 +97,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_address_peter'
         slug: 'Weyland-Corp'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
 BitBag\OpenMarketplace\Entity\VendorImage:
     vendor_image_peter:
         owner: "@vendor_peter"

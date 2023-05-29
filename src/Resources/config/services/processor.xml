@@ -8,6 +8,7 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="open_marketplace.manager.order_manager"/>
             <argument type="service" id="open_marketplace.refresher.payment_refresher"/>
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Processor\Order\OrderShipmentByVendorProcessor"

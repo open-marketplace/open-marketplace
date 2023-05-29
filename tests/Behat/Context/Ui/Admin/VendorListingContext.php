@@ -14,9 +14,10 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Model\Customer;
 use Webmozart\Assert\Assert;
 
 final class VendorListingContext extends RawMinkContext implements Context
@@ -25,12 +26,16 @@ final class VendorListingContext extends RawMinkContext implements Context
 
     private AdminUserExampleFactory $adminUserExample;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
-        AdminUserExampleFactory $adminUserExample
-    ) {
+        AdminUserExampleFactory $adminUserExample,
+        ExampleFactoryInterface $vendorExampleFactory,
+        ) {
         $this->entityManager = $entityManager;
         $this->adminUserExample = $adminUserExample;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -62,12 +67,16 @@ final class VendorListingContext extends RawMinkContext implements Context
     public function thereAreVendors($count)
     {
         for ($i = 0; $i < $count; ++$i) {
-            $vendor = new Vendor();
-            $vendor->setCompanyName('vendor ' . $i);
-            $vendor->setTaxIdentifier('vendorTax' . $i);
-            $vendor->setPhoneNumber('vendorPhone' . $i);
-            $vendor->setSlug('vendor-' . $i);
-            $vendor->setDescription('description');
+            $options = [
+                'company_name' => 'vendor ' . $i,
+                'phone_number' => 'vendorPhone' . $i,
+                'tax_identifier' => 'vendorTax' . $i,
+                'slug' => 'vendor-' . $i,
+                'description' => 'description',
+            ];
+
+            $vendor = $this->vendorExampleFactory->create($options);
+
             $this->entityManager->persist($vendor);
         }
         $this->entityManager->flush();
@@ -81,6 +90,17 @@ final class VendorListingContext extends RawMinkContext implements Context
         $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
         Assert::notEmpty($rows, 'Could not find any rows');
         Assert::eq($count, count($rows), 'Rows numbers are not equal');
+    }
+
+    /**
+     * @Then page should contain valid customer :email link
+     */
+    public function iShouldSeeValidCustomerLink(string $email)
+    {
+        /** @var Customer $customer */
+        $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $email]);
+        $link = sprintf('<a href="/admin/customers/%d">%s</a>', $customer->getId(), $email);
+        Assert::contains($this->getPage()->getHtml(), $link);
     }
 
     /**

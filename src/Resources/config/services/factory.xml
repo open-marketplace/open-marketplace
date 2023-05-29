@@ -12,11 +12,14 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorFactory"
-                 id="bitbag.open_marketplace.factory.vendor">
+                 id="open_marketplace.factory.vendor">
+            <argument>%env(DEFAULT_VENDOR_COMMISSION)%</argument>
+            <argument>%env(string:DEFAULT_VENDOR_COMMISSION_TYPE)%</argument>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileFactory"
                  id="open_marketplace.factory.vendor_profile_factory">
+            <argument type="service" id="open_marketplace.factory.vendor"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\AddressFactory"

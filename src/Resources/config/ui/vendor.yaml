@@ -3,50 +3,55 @@ sylius_ui:
         open_marketplace.admin.vendor.show.details:
             blocks:
                 content:
-                    template: 'Admin/Vendor/Show/_details.html.twig'
+                    template: 'Configuration/Event/Admin/Show/details.html.twig'
                     priority: 10
         open_marketplace.admin.vendor.show.details_content:
             blocks:
                 labels:
-                    template: 'Admin/Vendor/Show/_detailsLabels.html.twig'
+                    template: 'Configuration/Event/Admin/Show/detailsLabels.html.twig'
                     priority: 20
                 table:
-                    template: 'Admin/Vendor/Show/_detailsTable.html.twig'
+                    template: 'Configuration/Event/Admin/Show/detailsTable.html.twig'
                     priority: 10
         open_marketplace.admin.vendor.form:
             blocks:
                 content:
-                    template: 'Admin/Vendor/Update/_content.html.twig'
+                    template: 'Configuration/Event/Admin/Update/content.html.twig'
                     priority: 10
         open_marketplace.admin.vendor.form.content:
             blocks:
                 content:
-                    template: 'Admin/Vendor/Update/_columns.html.twig'
+                    template: 'Configuration/Event/Admin/Update/columns.html.twig'
                     priority: 10
         open_marketplace.admin.vendor.form.first_column:
             blocks:
                 content:
-                    template: 'Admin/Vendor/Update/_firstColumn.html.twig'
+                    template: 'Configuration/Event/Admin/Update/firstColumn.html.twig'
                     priority: 10
         open_marketplace.admin.vendor.form.vendor_details:
             blocks:
                 content:
-                    template: 'Admin/Vendor/Update/_details.html.twig'
+                    template: 'Configuration/Event/Admin/Update/_details.html.twig'
+                    priority: 10
+        open_marketplace.admin.vendor.form.vendor_commission:
+            blocks:
+                content:
+                    template: 'Configuration/Event/Admin/Update/_commission.html.twig'
                     priority: 10
         open_marketplace.admin.vendor.form.second_column:
             blocks:
                 content:
-                    template: 'Admin/Vendor/Update/_secondColumn.html.twig'
+                    template: 'Configuration/Event/Admin/Update/secondColumn.html.twig'
                     priority: 10
         open_marketplace.admin.vendor.form.vendor_address:
             blocks:
                 content:
-                    template: 'Admin/Vendor/Update/_vendorAddress.html.twig'
+                    template: 'Configuration/Event/Admin/Update/vendorAddress.html.twig'
                     priority: 10
         sylius.shop.account.layout.menu:
             blocks:
                 vendor:
-                    template: "Account/Menu/_content.html.twig"
+                    template: "Configuration/Event/Shop/Account/Menu/content.html.twig"
                     priority: 7
         open_marketplace.shop.product.index.search:
             blocks:
@@ -56,7 +61,7 @@ sylius_ui:
                     context:
                         event: sylius.shop.product.index.before_search
                 search:
-                    template: "Vendor/VendorPage/_search.html.twig"
+                    template: "Context/Vendor/VendorPage/_search.html.twig"
                     priority: 30
                 after_search_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"

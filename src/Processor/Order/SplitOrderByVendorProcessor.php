@@ -14,47 +14,56 @@ namespace BitBag\OpenMarketplace\Processor\Order;
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Event\Order\PostSplitOrderEvent;
+use BitBag\OpenMarketplace\Event\Order\PreSplitOrderEvent;
 use BitBag\OpenMarketplace\Manager\OrderManagerInterface;
 use BitBag\OpenMarketplace\Refresher\PaymentRefresherInterface;
 use Doctrine\ORM\EntityManager;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
 {
     private EntityManager $entityManager;
 
-    private array $secondaryOrders;
-
     private OrderManagerInterface $orderManager;
 
     private PaymentRefresherInterface $paymentRefresher;
 
+    private EventDispatcherInterface $eventDispatcher;
+
     public function __construct(
         EntityManager $entityManager,
         OrderManagerInterface $orderManager,
-        PaymentRefresherInterface $paymentRefresher
+        PaymentRefresherInterface $paymentRefresher,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->entityManager = $entityManager;
         $this->orderManager = $orderManager;
         $this->paymentRefresher = $paymentRefresher;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function process(OrderInterface $order): array
     {
-        $this->secondaryOrders = [];
+        $this->eventDispatcher->dispatch(new PreSplitOrderEvent($order), PreSplitOrderEvent::NAME);
+
+        $secondaryOrders = [];
 
         /** @var array<OrderItemInterface> $orderItems */
         $orderItems = $order->getItems();
         /** @var OrderItemInterface $item */
         foreach ($orderItems as $item) {
             $itemVendor = $item->getProductOwner();
-            if ($this->vendorSecondaryOrderExits($this->secondaryOrders, $itemVendor)) {
-                $this->orderManager->addItemIntoSecondaryOrder($this->secondaryOrders, $itemVendor, $item);
+            if ($this->vendorSecondaryOrderExits($secondaryOrders, $itemVendor)) {
+                $this->orderManager->addItemIntoSecondaryOrder($secondaryOrders, $itemVendor, $item);
             } else {
-                $this->secondaryOrders[] = $this->orderManager->generateNewSecondaryOrder($order, $itemVendor, $item);
+                $secondaryOrders[] = $this->orderManager->generateNewSecondaryOrder($order, $itemVendor, $item);
             }
         }
 
-        $orders = [$order, ...$this->secondaryOrders];
+        $this->eventDispatcher->dispatch(new PostSplitOrderEvent($secondaryOrders), PostSplitOrderEvent::NAME);
+
+        $orders = [$order, ...$secondaryOrders];
 
         foreach ($orders as $order) {
             $this->paymentRefresher->refreshPayment($order);
@@ -74,10 +83,5 @@ class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterfac
         }
 
         return false;
-    }
-
-    public function getSecondaryOrdersCount(): int
-    {
-        return count($this->secondaryOrders);
     }
 }

@@ -17,16 +17,21 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Webmozart\Assert\Assert;
 
 final class VendorDisablingContext extends RawMinkContext implements Context
 {
     private EntityManagerInterface $entityManager;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        ExampleFactoryInterface $vendorExampleFactory,
     ) {
         $this->entityManager = $entityManager;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -35,13 +40,18 @@ final class VendorDisablingContext extends RawMinkContext implements Context
     public function thereIsAVendor($ifEnabled)
     {
         $flag = 'enabled' == $ifEnabled ? true : false;
-        $vendor = new Vendor();
-        $vendor->setCompanyName('vendor');
-        $vendor->setTaxIdentifier('vendorTax');
-        $vendor->setPhoneNumber('vendorPhone');
-        $vendor->setSlug('slug');
-        $vendor->setDescription('description');
-        $vendor->setEnabled($flag);
+
+        $options = [
+            'company_name' => 'vendor',
+            'phone_number' => 'vendorPhone',
+            'tax_identifier' => 'vendorTax',
+            'slug' => 'slug',
+            'description' => 'description',
+            'enabled' => $flag,
+        ];
+
+        $vendor = $this->vendorExampleFactory->create($options);
+
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
