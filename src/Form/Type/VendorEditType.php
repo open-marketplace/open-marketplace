@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\Type;
 
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -31,6 +34,16 @@ final class VendorEditType extends AbstractResourceType
             ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'open_marketplace.ui.vendor_address',
+            ])
+            ->add('commission', NumberType::class, [
+                'label' => 'open_marketplace.ui.commission',
+            ])
+            ->add('commissionType', ChoiceType::class, [
+                'label' => 'open_marketplace.ui.commission_type',
+                'choices' => [
+                    'Net' => VendorInterface::NET_COMMISSION,
+                    'Gross' => VendorInterface::GROSS_COMMISSION,
+                ],
             ]);
     }
 }

@@ -17,6 +17,17 @@
         {{ money.format(order.itemsTotal, order.currencyCode) }}
     </th>
 </tr>
+
+<tr>
+    <td colspan="5" id="commission">
+        <p><small>{{ 'open_marketplace.ui.commission'|trans }} ({{ 'sylius.ui.included_in_price'|trans }})</small></p>
+    </td>
+    <td colspan="4" id="shipping-total" class="right aligned">
+        <strong>{{ 'open_marketplace.ui.commission'|trans }}</strong>:
+        {{ money.format(order.commissionTotal, order.currencyCode) }}
+    </td>
+</tr>
+
 <tr>
     <td colspan="{{ orderShippingPromotions ? 2 : 5 }}" id="shipping-charges">
         {% if not order.adjustments(shippingAdjustment).isEmpty() %}

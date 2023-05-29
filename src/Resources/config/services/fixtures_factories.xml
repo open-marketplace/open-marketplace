@@ -17,6 +17,7 @@
             <argument type="service" id="open_marketplace.service.vendor_background_image_factory"/>
             <argument type="service" id="file_locator"/>
             <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="sylius.factory.country" />
         </service>
 
         <service id="open_marketplace.fixture.example_factory.product_listing" class="BitBag\OpenMarketplace\Fixture\Factory\ProductListingExampleFactory">

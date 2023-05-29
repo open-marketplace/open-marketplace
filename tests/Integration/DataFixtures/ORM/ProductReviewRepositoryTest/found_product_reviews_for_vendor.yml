@@ -47,6 +47,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_adam_address'
         slug: 'adam-ondra-company'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
     vendor_alex:
         shopUser: '@user_alex'
         companyName: '8a'
@@ -55,6 +57,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_alex_address'
         slug: 'alex-honnold-company'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
 BitBag\OpenMarketplace\Entity\Product:
     product_adam_1:
         vendor: '@vendor_adam'
