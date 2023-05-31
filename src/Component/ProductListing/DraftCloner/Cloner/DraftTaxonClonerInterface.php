@@ -9,15 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Factory;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 
-interface DraftPricingFactoryInterface
+interface DraftTaxonClonerInterface
 {
-    public function createForChannelCode(
-        string $channelCode,
-        DraftInterface $draft
-    ): ListingPriceInterface;
+    public function clone(
+        DraftInterface $from,
+        DraftInterface $to
+    ): void;
 }

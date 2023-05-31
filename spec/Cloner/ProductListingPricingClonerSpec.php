@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Cloner;
 
-use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftPricingCloner;
-use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftPricingClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner\DraftPricingCloner;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner\DraftPricingClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;

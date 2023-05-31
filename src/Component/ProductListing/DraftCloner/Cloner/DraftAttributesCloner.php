@@ -9,25 +9,20 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner;
 
+use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftAttributeValueFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftAttributeValueFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DraftAttributesCloner implements DraftAttributesClonerInterface
 {
-    private DraftAttributeValueFactoryInterface $draftAttributeValueFactory;
-
-    private EntityManagerInterface $entityManager;
 
     public function __construct(
-        DraftAttributeValueFactoryInterface $draftAttributeValueFactory,
-        EntityManagerInterface $entityManager
+        private DraftAttributeValueFactoryInterface $draftAttributeValueFactory,
+        private EntityManagerInterface $entityManager
     ) {
 
-        $this->draftAttributeValueFactory = $draftAttributeValueFactory;
-        $this->entityManager = $entityManager;
     }
 
     public function clone(

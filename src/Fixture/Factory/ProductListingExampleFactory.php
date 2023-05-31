@@ -12,13 +12,13 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon;
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;

@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\DataTransformer\ProductDraftAwareCommandDataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductDraftAwareInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
-use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactoryInterface;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageInterface;

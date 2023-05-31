@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Factory;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
@@ -19,16 +19,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class DraftAttributeFactory implements DraftAttributeFactoryInterface
 {
-    private ServiceRegistryInterface $attributeTypesRegistry;
-
-    private FactoryInterface $factory;
 
     public function __construct(
-        FactoryInterface $factory,
-        ServiceRegistryInterface $attributeTypesRegistry
+        private FactoryInterface $factory,
+        private ServiceRegistryInterface $attributeTypesRegistry
     ) {
-        $this->factory = $factory;
-        $this->attributeTypesRegistry = $attributeTypesRegistry;
     }
 
     public function createTyped(

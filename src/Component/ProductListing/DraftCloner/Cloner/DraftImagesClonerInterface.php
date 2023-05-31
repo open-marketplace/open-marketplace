@@ -9,11 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 
-interface DraftPricingClonerInterface
+interface DraftImagesClonerInterface
 {
-    public function clone(DraftInterface $to, DraftInterface $from): void;
+    public function clone(
+        DraftInterface $from,
+        DraftInterface $to
+    ): void;
 }

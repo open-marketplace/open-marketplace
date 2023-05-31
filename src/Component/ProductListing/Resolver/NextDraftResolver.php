@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing\Resolver;
 
-use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner\DraftClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,20 +19,12 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class NextDraftResolver implements NextDraftResolverInterface
 {
-    private FactoryInterface $draftFactory;
-
-    private EntityManagerInterface $entityManager;
-
-    private DraftClonerInterface $draftCloner;
-
     public function __construct(
-        FactoryInterface $draftFactory,
-        DraftClonerInterface $draftCloner,
-        EntityManagerInterface $entityManager
+        private FactoryInterface $draftFactory,
+        private DraftClonerInterface $draftCloner,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->draftFactory = $draftFactory;
-        $this->draftCloner = $draftCloner;
-        $this->entityManager = $entityManager;
+
     }
 
     public function resolveForListing(ListingInterface $listing): DraftInterface

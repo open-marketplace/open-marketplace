@@ -9,34 +9,19 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 
 final class DraftCloner implements DraftClonerInterface
 {
-    private DraftAttributesClonerInterface $draftAttributesCloner;
-
-    private DraftTaxonClonerInterface $draftTaxonCloner;
-
-    private DraftImagesClonerInterface $draftImagesCloner;
-
-    private DraftTranslationClonerInterface $draftTranslationCloner;
-    private DraftPricingClonerInterface $draftPricingCloner;
-
-
     public function __construct(
-        DraftAttributesClonerInterface $draftAttributesCloner,
-        DraftTaxonClonerInterface $draftTaxonCloner,
-        DraftImagesClonerInterface $draftImagesCloner,
-        DraftTranslationClonerInterface $productListingTranslationCloner,
-        DraftPricingClonerInterface $productListingPricingCloner,
+        private DraftAttributesClonerInterface $draftAttributesCloner,
+        private DraftTaxonClonerInterface $draftTaxonCloner,
+        private DraftImagesClonerInterface $draftImagesCloner,
+        private DraftTranslationClonerInterface $draftTranslationCloner,
+        private DraftPricingClonerInterface $draftPricingCloner,
     ) {
-        $this->draftAttributesCloner = $draftAttributesCloner;
-        $this->draftTaxonCloner = $draftTaxonCloner;
-        $this->draftImagesCloner = $draftImagesCloner;
-        $this->draftTranslationCloner = $productListingTranslationCloner;
-        $this->draftPricingCloner = $productListingPricingCloner;
     }
 
     public function cloneDraft(

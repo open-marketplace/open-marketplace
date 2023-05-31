@@ -9,20 +9,18 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner;
 
+use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftPricingFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftPricingFactoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class DraftPricingCloner implements DraftPricingClonerInterface
 {
-    private DraftPricingFactoryInterface $priceFactory;
+    public function __construct(
+        private DraftPricingFactoryInterface $priceFactory
+    ) {
 
-    public function __construct(DraftPricingFactoryInterface $priceFactory)
-    {
-        $this->priceFactory = $priceFactory;
     }
 
     public function clone(DraftInterface $to, DraftInterface $from): void

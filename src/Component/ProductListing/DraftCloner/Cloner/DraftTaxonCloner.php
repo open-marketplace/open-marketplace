@@ -9,24 +9,19 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner;
 
+use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftTaxonFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftTaxonFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DraftTaxonCloner implements DraftTaxonClonerInterface
 {
-    private DraftTaxonFactoryInterface $draftTaxonFactory;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        DraftTaxonFactoryInterface $draftTaxonFactory,
-        EntityManagerInterface $entityManager
+        private DraftTaxonFactoryInterface $draftTaxonFactory,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->draftTaxonFactory = $draftTaxonFactory;
-        $this->entityManager = $entityManager;
+
     }
 
     public function clone(
