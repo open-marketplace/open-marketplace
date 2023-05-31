@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
@@ -51,10 +51,10 @@ final class SendForVerificationAction
     {
         $listing = $this->productListingRepository->find($request->get('id'));
 
-        /** @var ProductDraftInterface $productDraft */
+        /** @var DraftInterface $productDraft */
         $productDraft = $this->productDraftRepository->findLatestDraft($listing);
 
-        if (null != $productDraft && ProductDraftInterface::STATUS_CREATED === $productDraft->getStatus()) {
+        if (null != $productDraft && DraftInterface::STATUS_CREATED === $productDraft->getStatus()) {
             $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
         }
 

@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftAttributeFactory;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use PhpSpec\ObjectBehavior;

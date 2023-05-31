@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Action\StateMachine\Transition;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use SM\Factory\FactoryInterface;
 
@@ -25,7 +25,7 @@ final class ProductDraftStateMachineTransition implements ProductDraftStateMachi
     }
 
     public function applyIfCan(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         string $transition
     ): void {
         $stateMachine = $this->productDraftStateMachineFactory->get(

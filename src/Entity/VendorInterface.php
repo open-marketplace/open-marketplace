@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
 
@@ -86,11 +86,11 @@ interface VendorInterface extends VendorProfileInterface, UuidAwareInterface
 
     public function removeBackgroundImage(): void;
 
-    /** @return Collection<int, ProductListing> */
+    /** @return Collection<int, Listing> */
     public function getProductListings(): Collection;
 
     /**
-     * @param Collection<int, ProductListing> $productListings
+     * @param Collection<int, Listing> $productListings
      */
     public function setProductListings(Collection $productListings): void;
 

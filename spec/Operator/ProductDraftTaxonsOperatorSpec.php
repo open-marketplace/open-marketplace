@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Operator;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxonInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperator;
 use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperatorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -46,10 +46,10 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
     }
 
     public function it_copies_non_existing_taxons_from_draft_to_product(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ProductInterface $product,
         TaxonInterface $taxon,
-        ProductDraftTaxonInterface $productDraftTaxon,
+        DraftTaxonInterface $productDraftTaxon,
         ProductTaxonInterface $productTaxon,
         FactoryInterface $productTaxonFactory
     ) {
@@ -73,10 +73,10 @@ final class ProductDraftTaxonsOperatorSpec extends ObjectBehavior
     }
 
     public function it_do_not_copy_existing_taxons_from_draft_to_product(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ProductInterface $product,
         TaxonInterface $taxon,
-        ProductDraftTaxonInterface $productDraftTaxon,
+        DraftTaxonInterface $productDraftTaxon,
         ProductTaxonInterface $productTaxon,
         FactoryInterface $productTaxonFactory
     ) {

@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 
 interface ProductListingRepositoryInterface
 {
-    public function save(ProductListingInterface $productListing): void;
+    public function save(ListingInterface $productListing): void;
 
     /**
      * @return mixed
@@ -31,11 +31,11 @@ interface ProductListingRepositoryInterface
 
     public function createByProductDraftQueryBuilder(): QueryBuilder;
 
-    public function findByCodeAndVendor(ProductDraftInterface $productDraft, VendorInterface $vendor): ?ProductListingInterface;
+    public function findByCodeAndVendor(DraftInterface $productDraft, VendorInterface $vendor): ?ListingInterface;
 
     public function findByCodeAndVendorOmitProductListing(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         VendorInterface $vendor,
-        ProductListingInterface $productListing
-    ): ?ProductListingInterface;
+        ListingInterface $productListing
+    ): ?ListingInterface;
 }

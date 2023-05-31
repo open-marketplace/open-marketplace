@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Cloner;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Factory\ProductAttributeValueFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -31,7 +31,7 @@ final class AttributeValueCloner implements AttributeValueClonerInterface
         $this->attributeValueFactory = $attributeValueFactory;
     }
 
-    public function clone(ProductDraftInterface $productDraft, ProductInterface $product): void
+    public function clone(DraftInterface $productDraft, ProductInterface $product): void
     {
         $attributeValues = $productDraft->getAttributes();
         foreach ($attributeValues as $draftAttributeValue) {

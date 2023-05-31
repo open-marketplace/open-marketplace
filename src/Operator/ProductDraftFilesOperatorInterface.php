@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Operator;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 
 interface ProductDraftFilesOperatorInterface
 {
-    public function copyFilesToProduct(ProductDraftInterface $productDraft, ProductInterface $cratedProduct): void;
+    public function copyFilesToProduct(DraftInterface $productDraft, ProductInterface $cratedProduct): void;
 
     public function removeOldFiles(ProductInterface $product): void;
 }

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Factory\ProductVariantTranslationFactory;
 use BitBag\OpenMarketplace\Factory\ProductVariantTranslationFactoryInterface;
 use PhpSpec\ObjectBehavior;
@@ -46,7 +46,7 @@ final class ProductVariantTranslationFactorySpec extends ObjectBehavior
 
     public function it_should_create_product_variant_translation_from_product_listing(
         ProductVariantInterface $productVariant,
-        ProductTranslationInterface $productTranslation
+        DraftTranslationInterface $productTranslation
     ): void {
         $productTranslation->getName()->willReturn('translation');
         $productTranslation->getLocale()->willReturn('en');

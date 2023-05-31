@@ -2,14 +2,14 @@ sylius_resource:
     resources:
         open_marketplace.draft_attribute:
             classes:
-                model: BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute
-                interface: BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute
+                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: BitBag\OpenMarketplace\Repository\DraftAttributeRepository
                 form: BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeType
             translation:
                 classes:
-                    model: BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation
+                    model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation
         open_marketplace.draft_attribute_value:
             classes:
-                model: BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue

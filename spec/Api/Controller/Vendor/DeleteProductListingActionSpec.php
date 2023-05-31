@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Api\Controller\Vendor;
 
 use BitBag\OpenMarketplace\Api\Controller\Vendor\DeleteProductListingAction;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,7 +30,7 @@ final class DeleteProductListingActionSpec extends ObjectBehavior
     }
 
     public function it_deletes_product_listing_without_product(
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         EntityManagerInterface $entityManager
     ): void {
         $productListing->getProduct()->willReturn(null);
@@ -43,7 +43,7 @@ final class DeleteProductListingActionSpec extends ObjectBehavior
     }
 
     public function it_deletes_product_listing_with_product(
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         EntityManagerInterface $entityManager,
         ProductInterface $product
     ): void {

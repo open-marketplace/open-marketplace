@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 
 interface ProductListingAwareInterface
 {
-    public function getProductListing(): ?ProductListingInterface;
+    public function getProductListing(): ?ListingInterface;
 
-    public function setProductListing(ProductListingInterface $productListing): void;
+    public function setProductListing(ListingInterface $productListing): void;
 }

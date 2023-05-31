@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use Doctrine\Persistence\ObjectManager;
 
 final class CreateProductListingHandler
@@ -31,9 +31,9 @@ final class CreateProductListingHandler
         $this->manager = $manager;
     }
 
-    public function __invoke(CreateProductListingInterface $createProductListing): ProductListingInterface
+    public function __invoke(CreateProductListingInterface $createProductListing): ListingInterface
     {
-        /** @var ProductDraftInterface $productDraft */
+        /** @var DraftInterface $productDraft */
         $productDraft = $createProductListing->getProductDraft();
         $vendor = $createProductListing->getVendor();
 

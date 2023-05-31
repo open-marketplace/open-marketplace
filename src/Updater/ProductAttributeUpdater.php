@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Updater;
 
 use BitBag\OpenMarketplace\Cloner\AttributeTranslationClonerInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 

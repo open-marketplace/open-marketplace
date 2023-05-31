@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -67,7 +67,7 @@ final class ProductDraftTaxonAutocompleteChoiceType extends AbstractType
 
         $resolver
             ->setRequired('productDraft')
-            ->setAllowedTypes('productDraft', ProductDraftInterface::class)
+            ->setAllowedTypes('productDraft', DraftInterface::class)
         ;
     }
 

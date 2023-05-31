@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Updater;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Exception\LocaleNotFoundException;
 use BitBag\OpenMarketplace\Exception\ProductNotFoundException;
 use BitBag\OpenMarketplace\Factory\ProductTranslationFactoryInterface;
@@ -46,7 +46,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function updateProduct(ProductDraftInterface $productDraft): ProductInterface
+    public function updateProduct(DraftInterface $productDraft): ProductInterface
     {
         $product = $productDraft->getProductListing()->getProduct();
 
@@ -57,7 +57,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
         return $this->updateSimpleProductProperties($product, $productDraft);
     }
 
-    private function updateSimpleProductProperties(ProductInterface $product, ProductDraftInterface $productDraft): ProductInterface
+    private function updateSimpleProductProperties(ProductInterface $product, DraftInterface $productDraft): ProductInterface
     {
         $product->setUpdatedAt(new \DateTime());
         $product->setChannels($productDraft->getChannels());
@@ -70,7 +70,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
             $mappedProductTranslations[$productTranslation->getLocale()] = $productTranslation;
         }
 
-        /** @var ProductTranslationInterface $translation */
+        /** @var DraftTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
             $productTranslation = null;
             $translationLocale = $translation->getLocale();
@@ -103,7 +103,7 @@ final class ProductFromDraftUpdater implements ProductFromDraftUpdaterInterface
         $productVariant->setShippingRequired($productDraft->isShippingRequired());
         $productVariant->setShippingCategory($productDraft->getShippingCategory());
 
-        /** @var ProductListingPriceInterface $productListingPrice */
+        /** @var ListingPriceInterface $productListingPrice */
         foreach ($productDraft->getProductListingPrices() as $productListingPrice) {
             /** @var ChannelPricing $channelPricing */
             $channelPricing = $this->channelPricingRepository->findOneBy(['productVariant' => $productVariant, 'channelCode' => $productListingPrice->getChannelCode()]);

@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Validator;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\ProductListingCodeConstraint;
@@ -43,7 +43,7 @@ final class ProductListingCodeValidator extends ConstraintValidator
     }
 
     /**
-     * @param ProductDraftInterface $value
+     * @param DraftInterface $value
      */
     public function validate($value, Constraint $constraint): void
     {

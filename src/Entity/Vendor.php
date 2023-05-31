@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -50,7 +50,7 @@ class Vendor implements VendorInterface
     /** @var Collection<int, ProductInterface> */
     protected Collection $products;
 
-    /** @var Collection<int, ProductListing> */
+    /** @var Collection<int, Listing> */
     protected Collection $productListings;
 
     /** @var Collection<int, VendorShippingMethodInterface> */
@@ -176,7 +176,7 @@ class Vendor implements VendorInterface
         $this->productListings = $productListings;
     }
 
-    public function addProductListing(ProductListing $productListings): void
+    public function addProductListing(Listing $productListings): void
     {
         $this->productListings->add($productListings);
     }

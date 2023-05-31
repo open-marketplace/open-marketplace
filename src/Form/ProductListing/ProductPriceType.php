@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -59,7 +59,7 @@ final class ProductPriceType extends AbstractResourceType
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options): void {
             $pricing = $event->getData();
 
-            if (!$pricing instanceof $this->dataClass || !$pricing instanceof ProductListingPriceInterface) {
+            if (!$pricing instanceof $this->dataClass || !$pricing instanceof ListingPriceInterface) {
                 $event->setData(null);
 
                 return;
@@ -95,7 +95,7 @@ final class ProductPriceType extends AbstractResourceType
             ->setRequired('channel')
             ->setAllowedTypes('channel', [ChannelInterface::class])
             ->setDefined('product_draft')
-            ->setAllowedTypes('product_draft', ['null', ProductDraftInterface::class])
+            ->setAllowedTypes('product_draft', ['null', DraftInterface::class])
 
             ->setDefaults([
                 'label' => fn (Options $options): string => $options['channel']->getName(),

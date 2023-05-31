@@ -13,9 +13,9 @@ namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\CreateProductListingHandler;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
@@ -41,10 +41,10 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
 
     public function it_creates_product_listing(
         CreateProductListingInterface $createProductListing,
-        ProductDraft $productDraft,
+        Draft $productDraft,
         VendorInterface $vendor,
         ProductListingAdministrationToolInterface $productListingFromDraftFactory,
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         ImageInterface $image,
         ImageUploaderInterface $imageUploader,
         ObjectManager $manager

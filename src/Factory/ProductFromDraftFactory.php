@@ -11,12 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
 final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
@@ -49,7 +48,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         $this->channelRepository = $channelRepository;
     }
 
-    public function createSimpleProduct(ProductDraftInterface $productDraft): ProductInterface
+    public function createSimpleProduct(DraftInterface $productDraft): ProductInterface
     {
         /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
@@ -60,7 +59,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         return $product;
     }
 
-    private function setSimpleProductProperties(ProductInterface $product, ProductDraftInterface $productDraft): ProductInterface
+    private function setSimpleProductProperties(ProductInterface $product, DraftInterface $productDraft): ProductInterface
     {
         $now = new \DateTime();
 
@@ -73,7 +72,7 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         $product->setVendor($productDraft->getProductListing()->getVendor());
         $product->setChannels($productDraft->getChannels());
 
-        /** @var ProductTranslationInterface $translation */
+        /** @var DraftTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
             $this->productTranslationFactory->createFromProductListingTranslation($product, $translation);
         }
@@ -82,13 +81,13 @@ final class ProductFromDraftFactory implements ProductFromDraftFactoryInterface
         $productVariant->setShippingRequired($productDraft->isShippingRequired());
         $productVariant->setShippingCategory($productDraft->getShippingCategory());
 
-        /** @var ProductTranslationInterface $translation */
+        /** @var DraftTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
             $this->productVariantTranslationFactory->createFromProductListingTranslation($productVariant, $translation);
         }
 
         $channelPricingCodes = [];
-        /** @var ProductListingPriceInterface $productListingPrice */
+        /** @var ListingPriceInterface $productListingPrice */
         foreach ($productDraft->getProductListingPrices() as $productListingPrice) {
             if (!in_array($productListingPrice->getChannelCode(), $channelPricingCodes)) {
                 $channelPricingCodes[] = $productListingPrice->getChannelCode();

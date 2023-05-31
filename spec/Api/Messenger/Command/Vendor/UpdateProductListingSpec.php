@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListing;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 
@@ -25,7 +25,7 @@ final class UpdateProductListingSpec extends ObjectBehavior
     }
 
     public function it_has_product_draft(
-        ProductDraft $productDraft
+        Draft $productDraft
     ): void {
         $this->setProductDraft($productDraft);
         $this->getProductDraft()->shouldReturn($productDraft);
@@ -39,7 +39,7 @@ final class UpdateProductListingSpec extends ObjectBehavior
     }
 
     public function it_has_product_listing(
-        ProductListingInterface $productListing
+        ListingInterface $productListing
     ): void {
         $this->setProductListing($productListing);
         $this->getProductListing()->shouldReturn($productListing);

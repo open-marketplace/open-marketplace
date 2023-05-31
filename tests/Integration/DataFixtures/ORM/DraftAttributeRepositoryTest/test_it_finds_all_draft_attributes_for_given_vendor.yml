@@ -73,7 +73,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
         description: 'description'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation:
     translation1:
         translatable: '@first_olivers_attribute'
         name: 'name1'
@@ -86,7 +86,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
         translatable: '@first_bruces_attribute'
         name: 'name3'
         locale: '@locale'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
     first_olivers_attribute:
         addTranslation: '@translation1'
         currentLocale: '@locale'

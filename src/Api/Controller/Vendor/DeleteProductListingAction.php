@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Controller\Vendor;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +24,7 @@ final class DeleteProductListingAction
         $this->entityManager = $entityManager;
     }
 
-    public function __invoke(ProductListingInterface $data): Response
+    public function __invoke(ListingInterface $data): Response
     {
         $data->remove();
 

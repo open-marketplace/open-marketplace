@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Cloner;
 
 use BitBag\OpenMarketplace\Cloner\ProductListingPricingCloner;
 use BitBag\OpenMarketplace\Cloner\ProductListingPricingClonerInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -38,10 +38,10 @@ final class ProductListingPricingClonerSpec extends ObjectBehavior
 
     public function it_clones_product_listing_prices(
         FactoryInterface $priceFactory,
-        ProductDraftInterface $newProductDraft,
-        ProductDraftInterface $productDraft,
-        ProductListingPriceInterface $price,
-        ProductListingPriceInterface $newPrice,
+        DraftInterface $newProductDraft,
+        DraftInterface $productDraft,
+        ListingPriceInterface $price,
+        ListingPriceInterface $newPrice,
         ): void {
         $productDraft->getProductListingPrices()
             ->willReturn(new ArrayCollection([$price->getWrappedObject()]));

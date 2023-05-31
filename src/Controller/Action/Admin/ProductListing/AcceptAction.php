@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
@@ -45,10 +45,10 @@ final class AcceptAction
 
     public function __invoke(Request $request): RedirectResponse
     {
-        /** @var ProductListingInterface $productListing */
+        /** @var ListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
-        /** @var ProductDraftInterface $latestProductDraft */
+        /** @var DraftInterface $latestProductDraft */
         $latestProductDraft = $this->productDraftRepository->findLatestDraft($productListing);
 
         $this->productDraftStateMachineTransition->applyIfCan($latestProductDraft, ProductDraftTransitions::TRANSITION_ACCEPT);

@@ -56,7 +56,7 @@
                      mapped-by="vendor">
         </one-to-many>
 
-        <one-to-many field="productListings" target-entity="BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface" mapped-by="vendor"/>
+        <one-to-many field="productListings" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface" mapped-by="vendor"/>
         <one-to-many
                 field="shippingMethods"
                 target-entity="BitBag\OpenMarketplace\Entity\VendorShippingMethod"

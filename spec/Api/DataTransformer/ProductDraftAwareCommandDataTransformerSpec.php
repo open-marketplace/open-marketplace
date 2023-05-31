@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\DataTransformer\ProductDraftAwareCommandDataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductDraftAwareInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactoryInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -56,7 +56,7 @@ final class ProductDraftAwareCommandDataTransformerSpec extends ObjectBehavior
 
     public function it_does_nothing_when_there_is_no_images_in_request(
         ProductDraftAwareInterface $productDraftAware,
-        ProductDraft $productDraft,
+        Draft $productDraft,
         DraftImageFactoryInterface $draftImageFactory,
         RequestStack $requestStack,
         Request $request
@@ -73,7 +73,7 @@ final class ProductDraftAwareCommandDataTransformerSpec extends ObjectBehavior
 
     public function it_sets_images_when_there_is_one_in_request(
         ProductDraftAwareInterface $productDraftAware,
-        ProductDraft $productDraft,
+        Draft $productDraft,
         DraftImageFactoryInterface $draftImageFactory,
         RequestStack $requestStack,
         Request $request,

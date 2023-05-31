@@ -64,7 +64,7 @@ Sylius\Component\Product\Model\ProductAttributeValue:
   test_value:
     subject: '@some_product'
     attribute: '@productAttribute1'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
   attribute:
     vendor: '@vendor_oliver'
     storage_type: "text"
@@ -76,12 +76,12 @@ BitBag\OpenMarketPlace\Entity\Product:
     vendor: '@vendor_oliver'
     attributes:
       - '@test_value'
-BitBag\OpenMarketPlace\Entity\ProductListing\ProductListing:
+BitBag\OpenMarketPlace\Component\ProductListing\Entity\Listing:
   test_listing:
     code: 'test_code'
     vendor: '@vendor_oliver'
     product: '@some_product'
-BitBag\OpenMarketPlace\Entity\ProductListing\ProductDraft:
+BitBag\OpenMarketPlace\Component\ProductListing\Entity\Draft:
   some_draft:
     code: 'test_code'
     productListing: '@test_listing'

@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Cloner;
 
 use BitBag\OpenMarketplace\Cloner\AttributeTranslationCloner;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslationInterface;
 use BitBag\OpenMarketplace\Factory\ProductAttributeTranslationFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -44,7 +44,7 @@ final class RemoveAction
 
     public function __invoke(Request $request): RedirectResponse
     {
-        /** @var ProductListingInterface $productListing */
+        /** @var ListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
         $productListing->remove();

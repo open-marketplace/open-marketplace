@@ -12,14 +12,14 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
@@ -106,9 +106,9 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         $this->draftImageFactory = $draftImageFactory;
     }
 
-    public function create(array $options = []): ProductDraftInterface
+    public function create(array $options = []): DraftInterface
     {
-        /** @var ProductDraftInterface $productDraft */
+        /** @var DraftInterface $productDraft */
         $productDraft = $this->productDraftFactory->createNew();
 
         $productDraft->setCode($options['code']);
@@ -143,9 +143,9 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         return $productDraft;
     }
 
-    private function createProductListingPricing(ProductDraftInterface $productDraft, string $channelCode): void
+    private function createProductListingPricing(DraftInterface $productDraft, string $channelCode): void
     {
-        /** @var ProductListingPriceInterface $productListingPrice */
+        /** @var ListingPriceInterface $productListingPrice */
         $productListingPrice = $this->productListingPriceFactory->createNew();
         $productListingPrice->setChannelCode($channelCode);
         $productListingPrice->setPrice($this->faker->numberBetween(100, 10000));
@@ -156,10 +156,10 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         $productDraft->addProductListingPrice($productListingPrice);
     }
 
-    private function createTranslations(ProductDraftInterface $productDraft, array $options): void
+    private function createTranslations(DraftInterface $productDraft, array $options): void
     {
         foreach ($this->getLocales() as $localeCode) {
-            /** @var ProductTranslationInterface $productDraftTranslation */
+            /** @var DraftTranslationInterface $productDraftTranslation */
             $productDraftTranslation = $this->productTranslationFactory->createNew();
             $productDraftTranslation->setLocale($localeCode);
             $productDraftTranslation->setName($options['name']);
@@ -181,7 +181,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
     }
 
     private function createAttributes(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         VendorInterface $vendor,
         array $options
     ): void {
@@ -214,7 +214,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         }
     }
 
-    private function createRandomImage(ProductDraftInterface $product, array $options): void
+    private function createRandomImage(DraftInterface $product, array $options): void
     {
         if (!count($options['images'])) {
             return;
@@ -242,7 +242,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         }
     }
 
-    private function attachToTaxons(ProductDraftInterface $productDraft, array $options): void
+    private function attachToTaxons(DraftInterface $productDraft, array $options): void
     {
         if (isset($options['main_taxon'])) {
             /** @var TaxonInterface $taxon */
@@ -258,7 +258,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
             /** @var TaxonInterface $taxon */
             $taxon = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
 
-            $productDraftTaxon = new ProductDraftTaxon();
+            $productDraftTaxon = new DraftTaxon();
             $productDraftTaxon->setProductDraft($productDraft);
             $productDraftTaxon->setTaxon($taxon);
 

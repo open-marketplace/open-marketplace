@@ -40,7 +40,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
         slug: 'test-slug'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing:
     listing:
         createdAt: '<dateTimeBetween("-40min","-5min")>'
         code: "Test"

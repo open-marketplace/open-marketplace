@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -34,7 +34,7 @@ final class ProductDraftImageType extends ImageType
         parent::configureOptions($resolver);
 
         $resolver->setDefined('product');
-        $resolver->setAllowedTypes('product', ProductDraftInterface::class);
+        $resolver->setAllowedTypes('product', DraftInterface::class);
     }
 
     public function getBlockPrefix(): string

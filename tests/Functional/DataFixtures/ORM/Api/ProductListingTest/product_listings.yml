@@ -97,7 +97,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
         description: 'description'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
     attribute_bruce_1:
         vendor: '@vendor_bruce'
         code: 'attribute_bruce_1'
@@ -116,7 +116,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
         type: 'text'
         storageType: 'text'
         translatable: 'true'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation:
     attribute_bruce_1_translations_us:
         translatable: '@attribute_bruce_1'
         locale: 'en_US'
@@ -129,7 +129,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
         translatable: '@attribute_peter_1'
         locale: 'en_US'
         name: 'attribute_peter_1_us'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing:
     product_listing_bruce_1:
         code: 'product_listing_bruce_1'
         vendor: '@vendor_bruce'
@@ -140,7 +140,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
     product_listing_peter_1:
         code: 'product_listing_peter_1'
         vendor: '@vendor_peter'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft:
     product_draft_bruce_1:
         code: 'product_draft_bruce_1'
         productListing: '@product_listing_bruce_1'
@@ -159,7 +159,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft:
     product_draft_peter_1:
         code: 'product_draft_peter_1'
         productListing: '@product_listing_peter_1'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation:
     product_draft_bruce_1_translations_us:
         productDraft: '@product_draft_bruce_1'
         locale: 'en_US'
@@ -175,7 +175,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation:
         locale: 'en_US'
         name: 'product_draft_peter_1_translations_us'
         slug: 'product_draft_peter_1_translations_us'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue:
     product_draft_attribute_value_bruce_1:
         draft: '@product_draft_bruce_1'
         attribute: '@attribute_bruce_1'
@@ -184,7 +184,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue:
         draft: '@product_draft_bruce_2'
         attribute: '@attribute_bruce_2'
         value: 'example value'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice:
     product_draft_listing_price_bruce_1:
         productDraft: '@product_draft_bruce_1'
         price: 100
@@ -245,7 +245,7 @@ Sylius\Component\Taxonomy\Model\TaxonTranslation:
         name: 'Hats'
         description: 'Some description Lorem ipsum dolor sit amet.'
         translatable: '@hat_taxon'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon:
     product_draft_taxon_bruce_1:
         productDraft: '@product_draft_bruce_1'
         taxon: '@mug_taxon'

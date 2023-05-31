@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,7 +26,7 @@ final class ProductListingTest extends FunctionalTestCase
     public function setUp(): void
     {
         $this->entityManager = static::getContainer()->get('doctrine.orm.entity_manager');
-        $this->productListingRepository = $this->entityManager->getRepository(ProductListing::class);
+        $this->productListingRepository = $this->entityManager->getRepository(Listing::class);
         $this->taxonRepository = $this->entityManager->getRepository(Taxon::class);
         $this->draftAttributeRepository = $this->entityManager->getRepository(DraftAttribute::class);
 
@@ -64,7 +64,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_peter_1',
         ]);
@@ -78,7 +78,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_peter_1',
         ]);
@@ -92,7 +92,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -194,7 +194,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -217,7 +217,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_peter_1',
         ]);
@@ -240,7 +240,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -305,7 +305,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -320,7 +320,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -335,7 +335,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -350,7 +350,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -365,7 +365,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -380,7 +380,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);
@@ -395,7 +395,7 @@ final class ProductListingTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var ProductListing $productListing */
+        /** @var Listing $productListing */
         $productListing = $this->productListingRepository->findOneBy([
             'code' => 'product_listing_bruce_1',
         ]);

@@ -11,8 +11,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Controller\Vendor;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 
 final class SendToVerificationAction
@@ -24,7 +23,7 @@ final class SendToVerificationAction
         $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
     }
 
-    public function __invoke(ProductListingInterface $data): ProductListingInterface
+    public function __invoke(ListingInterface $data): ListingInterface
     {
         if ($data->canBeVerified()) {
             $latestDraft = $data->getLatestDraft();

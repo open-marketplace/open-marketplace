@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Cloner;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 
 interface ProductListingPricingClonerInterface
 {
-    public function clonePrice(ProductDraftInterface $newProductDraft, ProductDraftInterface $productDraft): void;
+    public function clonePrice(DraftInterface $newProductDraft, DraftInterface $productDraft): void;
 }

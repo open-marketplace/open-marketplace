@@ -7,7 +7,7 @@ sylius_grid:
       driver:
         name: doctrine/orm
         options:
-          class: BitBag\OpenMarketplace\Entity\ProductListing\ProductListing
+          class: BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing
           repository:
             method: createQueryBuilderByVendorAndDeleted
             arguments:

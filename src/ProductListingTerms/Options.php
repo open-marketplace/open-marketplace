@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\ProductListingTerms;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 
 final class Options
 {
@@ -24,9 +24,9 @@ final class Options
     public static function getTypeFilter(): array
     {
         return [
-            self::STATUS_UNDER_VERIFICATION => ProductDraftInterface::STATUS_UNDER_VERIFICATION,
-            self::STATUS_VERIFIED => ProductDraftInterface::STATUS_VERIFIED,
-            self::STATUS_REJECTED => ProductDraftInterface::STATUS_REJECTED,
+            self::STATUS_UNDER_VERIFICATION => DraftInterface::STATUS_UNDER_VERIFICATION,
+            self::STATUS_VERIFIED => DraftInterface::STATUS_VERIFIED,
+            self::STATUS_REJECTED => DraftInterface::STATUS_REJECTED,
         ];
     }
 }

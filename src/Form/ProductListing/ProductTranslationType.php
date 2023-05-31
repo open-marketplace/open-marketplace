@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductTranslationType extends AbstractType
 {
-    protected string $dataClass = ProductTranslation::class;
+    protected string $dataClass = DraftTranslation::class;
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

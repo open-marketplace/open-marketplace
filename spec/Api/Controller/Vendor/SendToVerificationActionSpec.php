@@ -12,8 +12,8 @@ namespace spec\BitBag\OpenMarketplace\Api\Controller\Vendor;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Api\Controller\Vendor\SendToVerificationAction;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -32,7 +32,7 @@ final class SendToVerificationActionSpec extends ObjectBehavior
 
     public function it_do_nothing_if_last_draft_is_null(
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
     ): void {
         $productListing->getLatestDraft()->willReturn(null);
 
@@ -43,10 +43,10 @@ final class SendToVerificationActionSpec extends ObjectBehavior
 
     public function it_do_nothing_if_last_draft_is_not_in_status_created(
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        ProductListingInterface $productListing,
-        ProductDraftInterface $productDraft
+        ListingInterface $productListing,
+        DraftInterface $productDraft
     ): void {
-        $productDraft->getStatus()->willReturn(ProductDraftInterface::STATUS_VERIFIED);
+        $productDraft->getStatus()->willReturn(DraftInterface::STATUS_VERIFIED);
         $productListing->getLatestDraft()->willReturn($productDraft);
 
         $this($productListing)->shouldReturn($productListing);
@@ -56,10 +56,10 @@ final class SendToVerificationActionSpec extends ObjectBehavior
 
     public function it_set_status_in_last_draft(
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        ProductListingInterface $productListing,
-        ProductDraftInterface $productDraft
+        ListingInterface $productListing,
+        DraftInterface $productDraft
     ): void {
-        $productDraft->getStatus()->willReturn(ProductDraftInterface::STATUS_CREATED);
+        $productDraft->getStatus()->willReturn(DraftInterface::STATUS_CREATED);
         $productListing->getLatestDraft()->willReturn($productDraft);
 
         $this($productListing)->shouldReturn($productListing);

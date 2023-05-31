@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
@@ -96,7 +96,7 @@ final class CreateProductAction
 
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        /** @var ProductDraftInterface $productDraft */
+        /** @var DraftInterface $productDraft */
         $productDraft = $this->newResourceFactory->create($configuration, $this->factory);
 
         $form = $this->formFactory->create(ProductType::class, $productDraft);

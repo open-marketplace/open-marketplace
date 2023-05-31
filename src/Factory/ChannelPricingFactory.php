@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
@@ -40,7 +40,7 @@ final class ChannelPricingFactory implements ChannelPricingFactoryInterface
         return $channelPricing;
     }
 
-    public function createFromProductListingPrice(ProductVariantInterface $productVariant, ProductListingPriceInterface $productListingPrice): ChannelPricing
+    public function createFromProductListingPrice(ProductVariantInterface $productVariant, ListingPriceInterface $productListingPrice): ChannelPricing
     {
         $channelPricing = $this->create(
             $productVariant,

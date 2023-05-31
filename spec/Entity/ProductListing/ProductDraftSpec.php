@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Entity\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValueInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValueInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
@@ -21,7 +21,7 @@ final class ProductDraftSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType(ProductDraft::class);
+        $this->shouldHaveType(Draft::class);
     }
 
     public function it_returns_id(): void

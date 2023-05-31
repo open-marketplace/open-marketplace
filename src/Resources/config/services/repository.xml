@@ -43,7 +43,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft</argument>
+                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft</argument>
                     <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
                 </service>
             </argument>
@@ -53,7 +53,7 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon</argument>
+                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon</argument>
                     <factory service="doctrine.orm.default_entity_manager" method="getClassMetadata"/>
                 </service>
             </argument>
@@ -63,7 +63,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">
                 <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation</argument>
+                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation</argument>
                     <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
                 </service>
             </argument>

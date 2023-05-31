@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslation;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -33,6 +33,6 @@ interface ProductTranslationFactoryInterface
 
     public function createFromProductListingTranslation(
         ProductInterface $product,
-        ProductTranslationInterface $translation
+        DraftTranslationInterface $translation
     ): ProductTranslation;
 }

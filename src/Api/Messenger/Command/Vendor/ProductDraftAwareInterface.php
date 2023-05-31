@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 
 interface ProductDraftAwareInterface extends CommandAwareDataTransformerInterface
 {
-    public function setProductDraft(ProductDraft $productDraft): void;
+    public function setProductDraft(Draft $productDraft): void;
 
-    public function getProductDraft(): ?ProductDraft;
+    public function getProductDraft(): ?Draft;
 }

@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Fixture\Factory;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation;
 use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftAttributeFactoryInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;

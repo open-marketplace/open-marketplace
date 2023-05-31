@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Operator;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 
 interface ProductDraftTaxonsOperatorInterface
 {
-    public function copyTaxonsToProduct(ProductDraftInterface $productDraft, ProductInterface $product): ?ProductInterface;
+    public function copyTaxonsToProduct(DraftInterface $productDraft, ProductInterface $product): ?ProductInterface;
 
-    public function updateTaxonsInProduct(ProductDraftInterface $productDraft, ProductInterface $product): void;
+    public function updateTaxonsInProduct(DraftInterface $productDraft, ProductInterface $product): void;
 }

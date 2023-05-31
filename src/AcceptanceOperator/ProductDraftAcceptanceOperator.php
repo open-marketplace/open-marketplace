@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\AcceptanceOperator;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Converter\AttributesConverterInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface as BitBagProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Factory\ProductFromDraftFactoryInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperatorInterface;
@@ -46,7 +46,7 @@ final class ProductDraftAcceptanceOperator implements ProductDraftAcceptanceOper
         $this->productDraftTaxonsOperator = $productDraftTaxonsOperator;
     }
 
-    public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface
+    public function acceptProductDraft(DraftInterface $productDraft): ProductInterface
     {
         $productListing = $productDraft->getProductListing();
         if (!$productListing->getProduct()) {

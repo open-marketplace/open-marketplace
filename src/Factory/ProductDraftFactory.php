@@ -11,15 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductDraftFactory implements FactoryInterface
 {
-    /** @return ProductDraftInterface */
+    /** @return DraftInterface */
     public function createNew()
     {
-        return new ProductDraft();
+        return new Draft();
     }
 }

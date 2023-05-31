@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Cloner;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslationInterface;
 use BitBag\OpenMarketplace\Factory\ProductAttributeTranslationFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 

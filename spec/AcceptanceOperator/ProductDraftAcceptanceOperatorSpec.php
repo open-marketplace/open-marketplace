@@ -13,10 +13,10 @@ namespace spec\BitBag\OpenMarketplace\AcceptanceOperator;
 
 use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperator;
 use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Converter\AttributesConverterInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Factory\ProductFromDraftFactoryInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperatorInterface;
 use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperatorInterface;
@@ -52,9 +52,9 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
     }
 
     public function it_creates_new_product(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ProductFromDraftFactoryInterface $productFromDraftFactory,
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator,
         ProductInterface $product
     ): void {
@@ -77,10 +77,10 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
     }
 
     public function it_updates_existing_product(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductDraftFilesOperatorInterface $filesOperator,
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         ProductInterface $product,
         ProductInterface $updatedProduct,
         ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
@@ -107,10 +107,10 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
     }
 
     public function it_converts_attributes_to_existing_product(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductDraftFilesOperatorInterface $filesOperator,
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         ProductInterface $product,
         ProductInterface $updatedProduct,
         AttributesConverterInterface $attributesConverter
@@ -135,10 +135,10 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
     }
 
     public function it_converts_attributes_to_new_product(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ProductFromDraftUpdaterInterface $productFromDraftUpdater,
         ProductFromDraftFactoryInterface $productFromDraftFactory,
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         ProductInterface $newProduct,
         AttributesConverterInterface $attributesConverter
     ): void {

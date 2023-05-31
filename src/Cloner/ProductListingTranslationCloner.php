@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Cloner;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Exception\LocaleNotFoundException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -25,16 +25,16 @@ final class ProductListingTranslationCloner implements ProductListingTranslation
         $this->translationFactory = $translationFactory;
     }
 
-    public function cloneTranslation(ProductDraftInterface $newProductDraft, ProductDraftInterface $productDraft): void
+    public function cloneTranslation(DraftInterface $newProductDraft, DraftInterface $productDraft): void
     {
-        /** @var ProductTranslationInterface $translation */
+        /** @var DraftTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {
             $locale = $translation->getLocale();
             if (null === $locale) {
                 throw new LocaleNotFoundException('Locale not found.');
             }
 
-            /** @var ProductTranslationInterface $newTranslation */
+            /** @var DraftTranslationInterface $newTranslation */
             $newTranslation = $this->translationFactory->createNew();
             $newTranslation->setName($translation->getName());
             $newTranslation->setProductDraft($newProductDraft);

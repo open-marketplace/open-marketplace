@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Exception\TranslationNotFoundException;
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
@@ -39,13 +39,13 @@ final class ResourceTranslationsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-            /** @var ProductTranslationInterface[]|null[] $translations */
+            /** @var DraftTranslationInterface[]|null[] $translations */
             $translations = $event->getData();
 
             $parentForm = $event->getForm()->getParent();
             Assert::notNull($parentForm);
 
-            /** @var ProductTranslationInterface $translation */
+            /** @var DraftTranslationInterface $translation */
             foreach ($translations as $localeCode => $translation) {
                 if (null == $translation) {
                     throw new TranslationNotFoundException('Translation not found.');

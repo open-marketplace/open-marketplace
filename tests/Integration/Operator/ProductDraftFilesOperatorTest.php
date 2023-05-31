@@ -12,10 +12,10 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Operator;
 
 use ApiTestCase\JsonApiTestCase;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use BitBag\OpenMarketplace\Entity\Product;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
 use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperator;
 use Gaufrette\Filesystem;
 
@@ -46,7 +46,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->create_draft_fixture_with_file();
 
-        $draftFixture = $manager->getRepository(ProductDraft::class)->findOneBy(['code' => 'FIXTURE']);
+        $draftFixture = $manager->getRepository(Draft::class)->findOneBy(['code' => 'FIXTURE']);
         $cratedProduct = $this->productFromDraftFactory->createSimpleProduct($draftFixture);
 
         $this->productDraftFilesOperator->copyFilesToProduct($draftFixture, $cratedProduct);
@@ -66,11 +66,11 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
     {
         $manager = $this->getEntityManager();
 
-        $listing = $this->getEntityManager()->getRepository(ProductListing::class)->findAll()[0];
+        $listing = $this->getEntityManager()->getRepository(Listing::class)->findAll()[0];
 
-        $image1 = new ProductDraftImage();
+        $image1 = new DraftImage();
 
-        $draftFixture = new ProductDraft();
+        $draftFixture = new Draft();
         $draftFixture->setCode('FIXTURE');
         $draftFixture->setProductListing($listing);
         $draftFixture->addImage($image1);

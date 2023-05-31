@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Converter;
 
 use ApiTestCase\JsonApiTestCase;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Entity\Product;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
 
 class AttributesConverterTest extends JsonApiTestCase
 {
@@ -21,7 +21,7 @@ class AttributesConverterTest extends JsonApiTestCase
     public function test_it_removes_attributes_from_product(): void
     {
         $this->loadFixturesFromFile('AttributesConverterTest/test_it_removes_attributes_from_product.yml');
-        $draft = $this->entityManager->getRepository(ProductDraft::class)->findAll()[0];
+        $draft = $this->entityManager->getRepository(Draft::class)->findAll()[0];
         $product = $draft->getProductListing()->getProduct();
 
         $this->assertCount(1, $product->getAttributes());

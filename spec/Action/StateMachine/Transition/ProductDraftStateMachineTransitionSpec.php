@@ -13,7 +13,7 @@ namespace spec\BitBag\OpenMarketplace\Action\StateMachine\Transition;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransition;
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
@@ -40,7 +40,7 @@ final class ProductDraftStateMachineTransitionSpec extends ObjectBehavior
     }
 
     public function it_applies_transition(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         FactoryInterface $productDraftStateMachineFactory,
         StateMachineInterface $stateMachine
     ): void {
@@ -68,7 +68,7 @@ final class ProductDraftStateMachineTransitionSpec extends ObjectBehavior
     }
 
     public function it_cannot_apply_transition(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         FactoryInterface $productDraftStateMachineFactory,
         StateMachineInterface $stateMachine
     ): void {

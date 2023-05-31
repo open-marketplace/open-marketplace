@@ -11,24 +11,24 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 final class UpdateProductListing implements UpdateProductListingInterface
 {
-    private ?ProductDraft $productDraft = null;
+    private ?Draft $productDraft = null;
 
     private VendorInterface $vendor;
 
-    private ?ProductListingInterface $productListing = null;
+    private ?ListingInterface $productListing = null;
 
-    public function getProductDraft(): ?ProductDraft
+    public function getProductDraft(): ?Draft
     {
         return $this->productDraft;
     }
 
-    public function setProductDraft(ProductDraft $productDraft): void
+    public function setProductDraft(Draft $productDraft): void
     {
         $this->productDraft = $productDraft;
     }
@@ -43,12 +43,12 @@ final class UpdateProductListing implements UpdateProductListingInterface
         $this->vendor = $vendor;
     }
 
-    public function getProductListing(): ?ProductListingInterface
+    public function getProductListing(): ?ListingInterface
     {
         return $this->productListing;
     }
 
-    public function setProductListing(ProductListingInterface $productListing): void
+    public function setProductListing(ListingInterface $productListing): void
     {
         $this->productListing = $productListing;
     }

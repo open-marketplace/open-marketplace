@@ -11,28 +11,28 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 interface ProductListingAdministrationToolInterface
 {
     public function createNewProductListing(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         VendorInterface $vendor
     ): void;
 
     public function updateProductListing(
-        ProductListingInterface $productListing,
-        ProductDraftInterface $productDraft
+        ListingInterface $productListing,
+        DraftInterface $productDraft
     ): void;
 
     public function serveLatestDraft(
-        ProductListingInterface $productListing
-    ): ProductDraftInterface;
+        ListingInterface $productListing
+    ): DraftInterface;
 
     public function updateLatestDraftWith(
-        ProductListingInterface $productListing,
-        ProductDraftInterface $base
+        ListingInterface $productListing,
+        DraftInterface $base
     ): void;
 }

@@ -13,12 +13,12 @@ namespace BitBag\OpenMarketplace\Component\ProductListing;
 
 use BitBag\OpenMarketplace\Cloner\ProductListingPricingClonerInterface;
 use BitBag\OpenMarketplace\Cloner\ProductListingTranslationClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImageInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftAttributeValueFactoryInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftTaxonFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactoryInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImageInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftTaxonFactoryInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -72,10 +72,10 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
     }
 
     public function createNewProductListing(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         VendorInterface $vendor
     ): void {
-        /** @var ProductListingInterface $productListing */
+        /** @var ListingInterface $productListing */
         $productListing = $this->productListingFactory->createNew();
         $productListing->setCode($productDraft->getCode());
         $productListing->insertDraft($productDraft);
@@ -88,14 +88,14 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
     }
 
     public function updateProductListing(
-        ProductListingInterface $productListing,
-        ProductDraftInterface $productDraft
+        ListingInterface $productListing,
+        DraftInterface $productDraft
     ): void {
         $this->rejoinRelations($productDraft);
         $this->uploadImages($productDraft);
     }
 
-    private function rejoinRelations(ProductDraftInterface $productDraft): void
+    private function rejoinRelations(DraftInterface $productDraft): void
     {
         foreach ($productDraft->getTranslations() as $translation) {
             $translation->setProductDraft($productDraft);
@@ -111,8 +111,8 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
     }
 
     public function serveLatestDraft(
-        ProductListingInterface $productListing
-    ): ProductDraftInterface {
+        ListingInterface $productListing
+    ): DraftInterface {
         $latestDraft = $productListing->getLatestDraft();
 
         if ($productListing->needsNewDraft()) {
@@ -129,7 +129,7 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
         return $productListing->getLatestDraft();
     }
 
-    private function createNextDraft(ProductDraftInterface $base): ProductDraftInterface
+    private function createNextDraft(DraftInterface $base): DraftInterface
     {
         $destination = $this->draftFactory->createNew();
         $destination->markAsCreated();
@@ -153,8 +153,8 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
     }
 
     public function updateLatestDraftWith(
-        ProductListingInterface $productListing,
-        ProductDraftInterface $base
+        ListingInterface $productListing,
+        DraftInterface $base
     ): void {
         $destination = $this->serveLatestDraft($productListing);
 
@@ -181,8 +181,8 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
     }
 
     private function cloneAttributes(
-        ProductDraftInterface $from,
-        ProductDraftInterface $to
+        DraftInterface $from,
+        DraftInterface $to
     ): void {
         foreach ($from->getAttributes() as $baseAttribute) {
             $attributeValue = $this->draftAttributeValueFactory->createForAttribute($baseAttribute->getAttribute(), $to);
@@ -194,8 +194,8 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
     }
 
     private function cloneTaxons(
-        ProductDraftInterface $from,
-        ProductDraftInterface $to
+        DraftInterface $from,
+        DraftInterface $to
     ): void {
         foreach ($from->getProductDraftTaxons() as $baseDraftTaxon) {
             $draftTaxon = $this->draftTaxonFactory->createForTaxon(
@@ -210,12 +210,12 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
     }
 
     private function cloneImages(
-        ProductDraftInterface $from,
-        ProductDraftInterface $to
+        DraftInterface $from,
+        DraftInterface $to
     ): void {
         $baseImages = $from->getImages();
 
-        /** @var ProductDraftImageInterface $baseImage */
+        /** @var DraftImageInterface $baseImage */
         foreach ($baseImages as $baseImage) {
             $newImage = $this->productDraftImageFactory->createForDraft($to);
             $newImage->setType($baseImage->getType());
@@ -232,7 +232,7 @@ final class ProductListingAdministrationTool implements ProductListingAdministra
     }
 
     private function uploadImages(
-        ProductDraftInterface $productDraft
+        DraftInterface $productDraft
     ): void {
         foreach ($productDraft->getImages() as $image) {
             $this->imageUploader->upload($image);

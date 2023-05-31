@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\AcceptanceOperator;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 interface ProductDraftAcceptanceOperatorInterface
 {
-    public function acceptProductDraft(ProductDraftInterface $productDraft): ProductInterface;
+    public function acceptProductDraft(DraftInterface $productDraft): ProductInterface;
 }

@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Cloner;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 
 interface AttributeValueClonerInterface
 {
-    public function clone(ProductDraftInterface $productDraft, ProductInterface $product): void;
+    public function clone(DraftInterface $productDraft, ProductInterface $product): void;
 }

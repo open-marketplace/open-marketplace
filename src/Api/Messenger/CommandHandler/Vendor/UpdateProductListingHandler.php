@@ -12,12 +12,11 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Webmozart\Assert\Assert;
 
 final class UpdateProductListingHandler
@@ -38,14 +37,14 @@ final class UpdateProductListingHandler
         $this->productListingRepository = $productListingRepository;
     }
 
-    public function __invoke(UpdateProductListingInterface $updateProductListing): ProductListingInterface
+    public function __invoke(UpdateProductListingInterface $updateProductListing): ListingInterface
     {
-        /** @var ProductListingInterface $productListing */
+        /** @var ListingInterface $productListing */
         $productListingId = $updateProductListing->getProductListing()->getId();
         $productListing = $this->productListingRepository->find($productListingId);
-        Assert::isInstanceOf($productListing, ProductListingInterface::class);
+        Assert::isInstanceOf($productListing, ListingInterface::class);
 
-        /** @var ProductDraftInterface $newDraft */
+        /** @var DraftInterface $newDraft */
         $newDraft = $updateProductListing->getProductDraft();
 
         $this->productListingAdministrationTool->updateLatestDraftWith($productListing, $newDraft);

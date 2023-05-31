@@ -12,10 +12,10 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Cloner;
 
 use BitBag\OpenMarketplace\Cloner\AttributeValueCloner;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValueInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValueInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Factory\ProductAttributeValueFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,7 +38,7 @@ final class AttributeValueClonerSpec extends ObjectBehavior
     }
 
     public function it_clones_attribute_values(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ProductInterface $product,
         DraftAttributeValueInterface $firstAttribute,
         DraftAttributeInterface $draftAttribute,

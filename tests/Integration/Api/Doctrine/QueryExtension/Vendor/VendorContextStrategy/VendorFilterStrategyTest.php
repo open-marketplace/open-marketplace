@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy;
 
 use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\VendorFilterStrategy;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;
 use BitBag\OpenMarketplace\Entity\OptionalVendorAwareInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;

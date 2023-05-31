@@ -122,7 +122,7 @@
         </service>
 
         <service id="open_marketplace.factory.product_taxon" class="Sylius\Component\Resource\Factory\Factory" public="true">
-            <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon</argument>
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon</argument>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ShopVendorApiSectionFactory"

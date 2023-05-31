@@ -13,7 +13,7 @@ namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\DataTransformer\ProductListingAwareCommandDataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\ProductListingAwareInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -32,7 +32,7 @@ final class ProductListingAwareCommandDataTransformerSpec extends ObjectBehavior
 
     public function it_does_nothing_when_product_listing_is_already_assigned(
         ProductListingAwareInterface $productListingAware,
-        ProductListingInterface $productListing
+        ListingInterface $productListing
     ): void {
         $productListingAware->getProductListing()->willReturn($productListing);
         $this->supportsTransformation($productListingAware)->shouldReturn(true);
@@ -43,7 +43,7 @@ final class ProductListingAwareCommandDataTransformerSpec extends ObjectBehavior
 
     public function it_sets_product_listing_when_there_is_one_in_context(
         ProductListingAwareInterface $productListingAware,
-        ProductListingInterface $productListing
+        ListingInterface $productListing
     ): void {
         $productListingAware->getProductListing()->willReturn(null);
         $this->supportsTransformation($productListingAware)->shouldReturn(true);

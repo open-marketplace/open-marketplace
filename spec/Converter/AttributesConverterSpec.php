@@ -13,11 +13,11 @@ namespace spec\BitBag\OpenMarketplace\Converter;
 
 use BitBag\OpenMarketplace\Cloner\AttributeTranslationClonerInterface;
 use BitBag\OpenMarketplace\Cloner\AttributeValueClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValueInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Converter\AttributesConverter;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValueInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Extractor\AttributesExtractorInterface;
 use BitBag\OpenMarketplace\Factory\ProductAttributeFactoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -50,7 +50,7 @@ final class AttributesConverterSpec extends ObjectBehavior
     }
 
     public function it_doesnt_link_draft_to_product_attribute_when_it_is_already_linked(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         AttributeValueClonerInterface $attributeValueCloner,
         EntityManagerInterface $entityManager,
         DraftAttributeInterface $draftAttribute,
@@ -76,7 +76,7 @@ final class AttributesConverterSpec extends ObjectBehavior
     }
 
     public function it_links_draft_with_product_attribute(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ProductAttributeFactoryInterface $productAttributeFactory,
         AttributeValueClonerInterface $attributeValueCloner,
         EntityManagerInterface $entityManager,

@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 
 interface ProductDraftRepositoryInterface
 {
-    public function save(ProductDraftInterface $productDraft): void;
+    public function save(DraftInterface $productDraft): void;
 
-    public function findLatestDraft(ProductListingInterface $productListing): ?ProductDraftInterface;
+    public function findLatestDraft(ListingInterface $productListing): ?DraftInterface;
 
     /**
      * @return mixed

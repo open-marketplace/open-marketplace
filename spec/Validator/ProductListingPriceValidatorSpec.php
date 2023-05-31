@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Validator;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\ProductListingPriceConstraint;
 use BitBag\OpenMarketplace\Validator\ProductListingPriceValidator;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -39,7 +39,7 @@ final class ProductListingPriceValidatorSpec extends ObjectBehavior
 
     public function it_throws_an_exception_on_wrong_constraint(
         Constraint $constraint,
-        ProductDraftInterface $productDraft
+        DraftInterface $productDraft
     ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
@@ -50,8 +50,8 @@ final class ProductListingPriceValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
-        ProductDraftInterface $productDraft,
-        ProductListingPriceInterface $productListingPrice
+        DraftInterface $productDraft,
+        ListingPriceInterface $productListingPrice
     ): void {
         $constraint = new ProductListingPriceConstraint();
 
@@ -71,8 +71,8 @@ final class ProductListingPriceValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
-        ProductDraftInterface $productDraft,
-        ProductListingPriceInterface $productListingPrice
+        DraftInterface $productDraft,
+        ListingPriceInterface $productListingPrice
     ): void {
         $constraint = new ProductListingPriceConstraint();
 

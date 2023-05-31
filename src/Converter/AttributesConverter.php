@@ -13,9 +13,9 @@ namespace BitBag\OpenMarketplace\Converter;
 
 use BitBag\OpenMarketplace\Cloner\AttributeTranslationClonerInterface;
 use BitBag\OpenMarketplace\Cloner\AttributeValueClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Extractor\AttributesExtractorInterface;
 use BitBag\OpenMarketplace\Factory\ProductAttributeFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,7 +46,7 @@ final class AttributesConverter implements AttributesConverterInterface
         $this->attributeValueCloner = $attributeValueCloner;
     }
 
-    public function convert(ProductDraftInterface $productDraft, ProductInterface $product): void
+    public function convert(DraftInterface $productDraft, ProductInterface $product): void
     {
         $attributeValues = $productDraft->getAttributes();
         $attributes = $this->attributesExtractor->extract($attributeValues);

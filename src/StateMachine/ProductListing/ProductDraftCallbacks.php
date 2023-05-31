@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\StateMachine\ProductListing;
 
 use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
@@ -34,7 +34,7 @@ final class ProductDraftCallbacks
         $this->entityManager = $entityManager;
     }
 
-    public function sendToVerification(ProductDraftInterface $productDraft): void
+    public function sendToVerification(DraftInterface $productDraft): void
     {
         $productListing = $productDraft->getProductListing();
         $productListing->sendToVerification($productDraft);
@@ -44,7 +44,7 @@ final class ProductDraftCallbacks
         $this->session->add('warning', 'open_marketplace.ui.product_listing_sent_to_verification');
     }
 
-    public function accept(ProductDraftInterface $productDraft): void
+    public function accept(DraftInterface $productDraft): void
     {
         $product = $this->productDraftService->acceptProductDraft($productDraft);
 
@@ -54,7 +54,7 @@ final class ProductDraftCallbacks
         $this->session->add('success', 'open_marketplace.ui.product_listing_accepted');
     }
 
-    public function reject(ProductDraftInterface $productDraft): void
+    public function reject(DraftInterface $productDraft): void
     {
         $productListing = $productDraft->getProductListing();
         $productListing->reject();

@@ -11,21 +11,21 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 final class CreateProductListing implements CreateProductListingInterface
 {
-    private ?ProductDraft $productDraft = null;
+    private ?Draft $productDraft = null;
 
     private VendorInterface $vendor;
 
-    public function getProductDraft(): ?ProductDraft
+    public function getProductDraft(): ?Draft
     {
         return $this->productDraft;
     }
 
-    public function setProductDraft(ProductDraft $productDraft): void
+    public function setProductDraft(Draft $productDraft): void
     {
         $this->productDraft = $productDraft;
     }

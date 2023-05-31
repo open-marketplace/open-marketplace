@@ -68,7 +68,7 @@
 
         <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeType"
                  id="open_marketplace.form.type.draftAttribute">
-            <argument>BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute</argument>
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute</argument>
             <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
             <argument>BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeTranslationType</argument>
             <argument type="service" id="sylius.form_registry.attribute_type"/>
@@ -78,7 +78,7 @@
         <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeTranslationType"
                  id="open_marketplace.form.type.draft_attribute_translation" >
             <tag name="form.type"/>
-            <argument>BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation</argument>
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation</argument>
             <argument>%sylius.form.type.product_attribute_translation.validation_groups%</argument>
         </service>
 
@@ -91,7 +91,7 @@
 
         <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeValueType"
                  id="open_marketplace.form.product_listing.draft_attribute_value_type" >
-            <argument>BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue</argument>
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue</argument>
             <argument>%sylius.form.type.product_attribute_value.validation_groups%</argument>
             <argument>BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType</argument>
             <argument type="service" id="open_marketplace.repository.draft_attribute"/>
@@ -155,7 +155,7 @@
         </service>
 
         <service id="bitbag.form.type.image_type" class="BitBag\OpenMarketplace\Form\ProductListing\ProductDraftImageType">
-            <argument>BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage</argument>
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage</argument>
             <tag name="form.type" />
         </service>
 

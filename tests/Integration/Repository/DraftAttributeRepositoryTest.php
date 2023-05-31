@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;
 use BitBag\OpenMarketplace\Entity\Vendor;
 
 final class DraftAttributeRepositoryTest extends JsonApiTestCase

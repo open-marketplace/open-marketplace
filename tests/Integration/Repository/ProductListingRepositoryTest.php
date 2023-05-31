@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use BitBag\OpenMarketplace\Entity\Vendor;
 
 final class ProductListingRepositoryTest extends JsonApiTestCase
@@ -21,7 +21,7 @@ final class ProductListingRepositoryTest extends JsonApiTestCase
     {
         parent::setUp();
         $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->repository = $this->entityManager->getRepository(ProductListing::class);
+        $this->repository = $this->entityManager->getRepository(Listing::class);
     }
 
     public function test_it_finds_product_listings_with_latest_draft(): void

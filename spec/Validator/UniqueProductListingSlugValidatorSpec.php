@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Validator;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint;
 use BitBag\OpenMarketplace\Validator\UniqueProductListingSlugValidator;
 use PhpSpec\ObjectBehavior;
@@ -40,7 +40,7 @@ class UniqueProductListingSlugValidatorSpec extends ObjectBehavior
 
     public function it_throws_an_exception_on_wrong_constraint(
         Constraint $constraint,
-        ProductTranslationInterface $existingProductTranslation,
+        DraftTranslationInterface $existingProductTranslation,
     ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
@@ -49,7 +49,7 @@ class UniqueProductListingSlugValidatorSpec extends ObjectBehavior
 
     public function it_adds_violation_if_creating_new_product_draft_with_taken_slug(
         RepositoryInterface $productTranslationRepository,
-        ProductTranslationInterface $existingProductTranslation,
+        DraftTranslationInterface $existingProductTranslation,
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $builder,
         RequestStack $requestStack,
@@ -75,7 +75,7 @@ class UniqueProductListingSlugValidatorSpec extends ObjectBehavior
 
     public function it_does_not_add_violation_if_slug_not_taken(
         RepositoryInterface $productTranslationRepository,
-        ProductTranslationInterface $existingProductTranslation,
+        DraftTranslationInterface $existingProductTranslation,
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $builder,
         RequestStack $requestStack,

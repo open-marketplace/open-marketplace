@@ -13,11 +13,11 @@ namespace spec\BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Cloner\ProductListingPricingClonerInterface;
 use BitBag\OpenMarketplace\Cloner\ProductListingTranslationClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValueInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationTool;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValueInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -51,8 +51,8 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
     public function it_returns_product_listing(
         FactoryInterface $productListingFactory,
-        ProductListingInterface $productListing,
-        ProductDraftInterface $productDraft,
+        ListingInterface $productListing,
+        DraftInterface $productDraft,
         VendorInterface $vendor
     ): void {
         $productListingFactory->createNew()
@@ -80,9 +80,9 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
     public function it_returns_product_listing_clone(
         FactoryInterface $draftFactory,
-        ProductListingInterface $productListing,
-        ProductDraftInterface $productDraft,
-        ProductDraftInterface $newProductDraft,
+        ListingInterface $productListing,
+        DraftInterface $productDraft,
+        DraftInterface $newProductDraft,
         ProductListingTranslationClonerInterface $productListingTranslationCloner,
         ProductListingPricingClonerInterface $productListingPricingCloner,
         DraftAttributeValueInterface $attributeValue,
@@ -108,7 +108,7 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $productDraft->getShippingCategory()->willReturn(null);
 
         $productListing->insertDraft($newProductDraft)->shouldBeCalled();
-        $productListing->setVerificationStatus(ProductDraftInterface::STATUS_CREATED)
+        $productListing->setVerificationStatus(DraftInterface::STATUS_CREATED)
             ->shouldBeCalled();
 
         $newProductDraft->setShippingRequired(true)->shouldBeCalled();
@@ -141,7 +141,7 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
     }
 
     public function it_formats_translations(
-        ProductDraftInterface $productDraft
+        DraftInterface $productDraft
     ): void {
         $productDraft->getTranslations()
             ->willReturn(new ArrayCollection());

@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Cloner;
 
 use BitBag\OpenMarketplace\Cloner\ProductListingTranslationCloner;
 use BitBag\OpenMarketplace\Cloner\ProductListingTranslationClonerInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -37,10 +37,10 @@ final class ProductListingTranslationClonerSpec extends ObjectBehavior
     }
 
     public function it_clones_product_listing_translations(
-        ProductDraftInterface $newProductDraft,
-        ProductDraftInterface $productDraft,
-        ProductTranslationInterface $translation,
-        ProductTranslationInterface $newTranslation,
+        DraftInterface $newProductDraft,
+        DraftInterface $productDraft,
+        DraftTranslationInterface $translation,
+        DraftTranslationInterface $newTranslation,
         FactoryInterface $translationFactory
     ): void {
         $productDraft->getTranslations()

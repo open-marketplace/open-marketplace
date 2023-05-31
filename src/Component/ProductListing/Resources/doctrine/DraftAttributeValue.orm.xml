@@ -1,0 +1,19 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue"
+                       table="bitbag_open_marketplace_draft_attribute_value" >
+        <field name="uuid" type="uuid" unique="true" />
+
+        <many-to-one field="subject" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft" inversed-by="attributes">
+            <join-column on-delete="CASCADE" />
+        </many-to-one>
+
+        <many-to-one field="attribute" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute">
+            <join-column on-delete="CASCADE" />
+        </many-to-one>
+
+    </mapped-superclass>
+</doctrine-mapping>

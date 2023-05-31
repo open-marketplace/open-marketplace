@@ -97,7 +97,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
         description: 'description'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
     attribute_bruce_1:
         vendor: '@vendor_bruce'
         code: 'attribute_bruce_1'
@@ -110,7 +110,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
         type: 'text'
         storageType: 'text'
         translatable: 'true'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation:
     attribute_bruce_1_translations_us:
         translatable: '@attribute_bruce_1'
         locale: 'en_US'

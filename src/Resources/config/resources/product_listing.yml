@@ -3,37 +3,37 @@ sylius_resource:
         open_marketplace.product_listing:
             driver: doctrine/orm
             classes:
-                model: BitBag\OpenMarketplace\Entity\ProductListing\ProductListing
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing
                 repository: BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepository
 
         open_marketplace.product_draft:
             driver: doctrine/orm
             classes:
-                model: BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft
-                interface: BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft
+                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 form: BitBag\OpenMarketplace\Form\ProductListing\ProductType
 
         open_marketplace.product_translation:
             driver: doctrine/orm
             classes:
-                model: BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation
-                interface: BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation
+                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface
 
         open_marketplace.product_listing_price:
             driver: doctrine/orm
             classes:
-                model: BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice
-                interface: BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice
+                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface
 
         open_marketplace.product_draft_image:
             driver: doctrine/orm
             classes:
-                model: BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage
 
         open_marketplace.product_draft_taxons:
             driver: doctrine/orm
             classes:
-                model: BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon
-                interface: BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon
+                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxonInterface
                 repository: BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftTaxonRepository

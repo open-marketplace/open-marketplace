@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing\Factory;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxon;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 final class DraftTaxonFactory implements DraftTaxonFactoryInterface
 {
     public function createForTaxon(
         TaxonInterface $taxon,
-        ProductDraftInterface $productDraft
-    ): ProductDraftTaxonInterface {
-        $draftTaxon = new ProductDraftTaxon();
+        DraftInterface $productDraft
+    ): DraftTaxonInterface {
+        $draftTaxon = new DraftTaxon();
         $draftTaxon->setTaxon($taxon);
         $draftTaxon->setProductDraft($productDraft);
 

@@ -59,7 +59,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing:
   product_listing_oliver_1:
     vendor: '@vendor_oliver'
     code: 'Oliver product'
@@ -69,7 +69,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
   product_listing_bruce_1:
     vendor: '@vendor_bruce'
     code: 'Bruce product'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft:
   product_draft_oliver_1_1:
     product_listing: '@product_listing_oliver_1'
     version_number: '1'

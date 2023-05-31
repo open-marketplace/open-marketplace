@@ -11,15 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ProductListingRepository extends EntityRepository implements ProductListingRepositoryInterface
 {
-    public function save(ProductListingInterface $productListing): void
+    public function save(ListingInterface $productListing): void
     {
         $this->_em->persist($productListing);
         $this->_em->flush();
@@ -63,7 +63,7 @@ class ProductListingRepository extends EntityRepository implements ProductListin
             ;
     }
 
-    public function findByCodeAndVendor(ProductDraftInterface $productDraft, VendorInterface $vendor): ?ProductListingInterface
+    public function findByCodeAndVendor(DraftInterface $productDraft, VendorInterface $vendor): ?ListingInterface
     {
         $qb = $this->createCodeAndVendorQueryBuilder($productDraft, $vendor);
 
@@ -73,10 +73,10 @@ class ProductListingRepository extends EntityRepository implements ProductListin
     }
 
     public function findByCodeAndVendorOmitProductListing(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         VendorInterface $vendor,
-        ProductListingInterface $productListing
-    ): ?ProductListingInterface {
+        ListingInterface $productListing
+    ): ?ListingInterface {
         $qb = $this->createCodeAndVendorQueryBuilder($productDraft, $vendor);
 
         $qb->andWhere('pl.id != :id')
@@ -88,7 +88,7 @@ class ProductListingRepository extends EntityRepository implements ProductListin
             ;
     }
 
-    private function createCodeAndVendorQueryBuilder(ProductDraftInterface $productDraft, VendorInterface $vendor): QueryBuilder
+    private function createCodeAndVendorQueryBuilder(DraftInterface $productDraft, VendorInterface $vendor): QueryBuilder
     {
         return $this->createQueryBuilder('pl')
             ->andWhere('pl.code = :code')

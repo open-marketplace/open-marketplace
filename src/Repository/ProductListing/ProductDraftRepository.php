@@ -11,19 +11,19 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ProductDraftRepository extends EntityRepository implements ProductDraftRepositoryInterface
 {
-    public function save(ProductDraftInterface $productDraft): void
+    public function save(DraftInterface $productDraft): void
     {
         $this->_em->persist($productDraft);
         $this->_em->flush();
     }
 
-    public function findLatestDraft(ProductListingInterface $listing): ?ProductDraftInterface
+    public function findLatestDraft(ListingInterface $listing): ?DraftInterface
     {
         return $this->createQueryBuilder('pd')
             ->andWhere('pd.productListing = :productListing')

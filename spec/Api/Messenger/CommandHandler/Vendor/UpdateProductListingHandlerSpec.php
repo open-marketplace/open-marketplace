@@ -13,9 +13,9 @@ namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UpdateProductListingHandler;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
@@ -40,11 +40,11 @@ final class UpdateProductListingHandlerSpec extends ObjectBehavior
 
     public function it_updates_product_listing(
         UpdateProductListingInterface $updateProductListing,
-        ProductDraft $productDraft,
-        ProductDraft $previousProductDraft,
+        Draft $productDraft,
+        Draft $previousProductDraft,
         VendorInterface $vendor,
         ProductListingAdministrationToolInterface $productListingFromDraftFactory,
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         ImageInterface $image,
         ImageUploaderInterface $imageUploader,
         ObjectManager $manager

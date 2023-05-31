@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImageInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactory;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImageInterface;
 use PhpSpec\ObjectBehavior;
 
 final class ProductDraftImageFactorySpec extends ObjectBehavior
@@ -25,6 +25,6 @@ final class ProductDraftImageFactorySpec extends ObjectBehavior
     public function it_creates_valid_image(): void
     {
         $image = $this->createNew();
-        $image->shouldBeAnInstanceOf(ProductDraftImageInterface::class);
+        $image->shouldBeAnInstanceOf(DraftImageInterface::class);
     }
 }

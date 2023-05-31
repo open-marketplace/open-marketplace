@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 
@@ -19,7 +19,7 @@ final class ProductDraftFilterStrategy extends AbstractFilterStrategy implements
     protected function getSupportedClasses(): array
     {
         return [
-            ProductDraftInterface::class,
+            DraftInterface::class,
         ];
     }
 

@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
@@ -85,7 +85,7 @@ final class EditProductAction
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        /** @var ProductListingInterface $productListing */
+        /** @var ListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->get('id'));
 
         if (!$this->authorizationChecker->isGranted(ObjectOwningVoter::OWNIT, $productListing)) {

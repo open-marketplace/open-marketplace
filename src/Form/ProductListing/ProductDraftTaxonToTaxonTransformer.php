@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftTaxonInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -25,12 +25,12 @@ final class ProductDraftTaxonToTaxonTransformer implements DataTransformerInterf
 
     private RepositoryInterface $productDraftTaxonRepository;
 
-    private ProductDraftInterface $productDraft;
+    private DraftInterface $productDraft;
 
     public function __construct(
         FactoryInterface $productDraftTaxonFactory,
         RepositoryInterface $productDraftTaxonRepository,
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         ) {
         $this->productDraftTaxonFactory = $productDraftTaxonFactory;
         $this->productDraftTaxonRepository = $productDraftTaxonRepository;
@@ -43,12 +43,12 @@ final class ProductDraftTaxonToTaxonTransformer implements DataTransformerInterf
             return null;
         }
 
-        $this->assertTransformationValueType($value, ProductDraftTaxonInterface::class);
+        $this->assertTransformationValueType($value, DraftTaxonInterface::class);
 
         return $value->getTaxon();
     }
 
-    public function reverseTransform($value): ?ProductDraftTaxonInterface
+    public function reverseTransform($value): ?DraftTaxonInterface
     {
         if (null === $value) {
             return null;
@@ -56,11 +56,11 @@ final class ProductDraftTaxonToTaxonTransformer implements DataTransformerInterf
 
         $this->assertTransformationValueType($value, TaxonInterface::class);
 
-        /** @var ProductDraftTaxonInterface|null $productDraftTaxon */
+        /** @var DraftTaxonInterface|null $productDraftTaxon */
         $productDraftTaxon = $this->productDraftTaxonRepository->findOneBy(['taxon' => $value, 'productDraft' => $this->productDraft]);
 
         if (null === $productDraftTaxon) {
-            /** @var ProductDraftTaxonInterface $productDraftTaxon */
+            /** @var DraftTaxonInterface $productDraftTaxon */
             $productDraftTaxon = $this->productDraftTaxonFactory->createNew();
             $productDraftTaxon->setProductDraft($this->productDraft);
             $productDraftTaxon->setTaxon($value);

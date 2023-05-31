@@ -4,7 +4,7 @@
                     xmlns="http://symfony.com/schema/dic/constraint-mapping"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                     http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation">
+    <class name="BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation">
         <constraint name="BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint">
             <option name="groups">sylius</option>
         </constraint>

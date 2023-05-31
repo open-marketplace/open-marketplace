@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Entity;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductInterface as BaseProductInterface;
 
@@ -25,7 +25,7 @@ interface ProductInterface extends BaseProductInterface
 
     public function setVendor(?VendorInterface $vendor): void;
 
-    public function setAttributesFrom(ProductDraftInterface $draft): void;
+    public function setAttributesFrom(DraftInterface $draft): void;
 
     public function isDeleted(): bool;
 

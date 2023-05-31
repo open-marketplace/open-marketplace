@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Cloner;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ProductListingPricingCloner implements ProductListingPricingClonerInterface
@@ -24,11 +24,11 @@ final class ProductListingPricingCloner implements ProductListingPricingClonerIn
         $this->priceFactory = $priceFactory;
     }
 
-    public function clonePrice(ProductDraftInterface $newProductDraft, ProductDraftInterface $productDraft): void
+    public function clonePrice(DraftInterface $newProductDraft, DraftInterface $productDraft): void
     {
-        /** @var ProductListingPriceInterface $price */
+        /** @var ListingPriceInterface $price */
         foreach ($productDraft->getProductListingPrices() as $price) {
-            /** @var ProductListingPriceInterface $newPrice */
+            /** @var ListingPriceInterface $newPrice */
             $newPrice = $this->priceFactory->createNew();
             $newPrice->setChannelCode($price->getChannelCode());
             $newPrice->setPrice($price->getPrice());

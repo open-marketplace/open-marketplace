@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing\Factory;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 
 interface DraftImageFactoryInterface
 {
     public function createNew(): ImageInterface;
 
-    public function createForDraft(ProductDraftInterface $productDraft): ImageInterface;
+    public function createForDraft(DraftInterface $productDraft): ImageInterface;
 }

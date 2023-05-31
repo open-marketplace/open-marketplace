@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Validator;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -48,7 +48,7 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, UniqueProductListingSlugConstraint::class);
         }
 
-        /** @var ProductTranslationInterface|null $existingProductTranslation */
+        /** @var DraftTranslationInterface|null $existingProductTranslation */
         $existingProductTranslation = $this->productTranslationRepository->findOneBy(['slug' => $value->getSlug()]);
         if (null === $existingProductTranslation) {
             return;

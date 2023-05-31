@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Repository\ProductListing;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 
 interface ProductTranslationRepositoryInterface
 {
-    public function save(ProductTranslationInterface $productTranslation): void;
+    public function save(DraftTranslationInterface $productTranslation): void;
 
     public function saveCollection(array $productTranslations): void;
 }

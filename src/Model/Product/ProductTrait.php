@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Model\Product;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -51,7 +51,7 @@ trait ProductTrait
         $this->vendor = $vendor;
     }
 
-    public function setAttributesFrom(ProductDraftInterface $draft): void
+    public function setAttributesFrom(DraftInterface $draft): void
     {
         $this->attributes = $draft->getAttributes();
     }

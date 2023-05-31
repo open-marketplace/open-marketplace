@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Operator;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
 use BitBag\OpenMarketplace\Factory\ProductImageFactoryInterface;
 use Gaufrette\Filesystem;
 
@@ -28,7 +28,7 @@ final class ProductDraftFilesOperator implements ProductDraftFilesOperatorInterf
         $this->productImageFactory = $productImageFactory;
     }
 
-    public function copyFilesToProduct(ProductDraftInterface $productDraft, ProductInterface $cratedProduct): void
+    public function copyFilesToProduct(DraftInterface $productDraft, ProductInterface $cratedProduct): void
     {
         foreach ($productDraft->getImages() as $image) {
             $newImage = $this->productImageFactory->createNew();
