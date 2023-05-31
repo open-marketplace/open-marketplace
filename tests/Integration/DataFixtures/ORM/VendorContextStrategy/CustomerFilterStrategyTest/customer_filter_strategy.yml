@@ -47,6 +47,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
     phoneNumber: '555123123'
     slug: 'Wayne-Enterprises-Inc'
     description: 'description'
+    commission: 10
+    commissionType: 'net'
   vendor_peter:
     shopUser: '@user_peter'
     companyName: 'Weyland Corp'
@@ -54,6 +56,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
     phoneNumber: '555444333'
     slug: 'Weyland-Corp'
     description: 'description'
+    commission: 10
+    commissionType: 'net'
 BitBag\OpenMarketplace\Entity\Order:
   bruce_order_made_by_john_1:
     currency_code: "USD"

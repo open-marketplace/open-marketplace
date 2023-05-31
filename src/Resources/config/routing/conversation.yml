@@ -20,7 +20,7 @@ open_marketplace_admin_conversation_create:
     defaults:
         _controller: open_marketplace.controller.action.conversation.create_new_conversation_action
         _sylius:
-            template: "Admin/Conversation/create.html.twig"
+            template: "Context/Admin/Conversation/create.html.twig"
             redirect: open_marketplace_admin_conversation_show
             mail_redirect: mvm_vendor_conversation_show
 
@@ -30,7 +30,7 @@ open_marketplace_admin_conversation_show:
     defaults:
         _controller: open_marketplace.controller.conversation.show_conversation_action
         _sylius:
-            template: "Admin/Conversation/show.html.twig"
+            template: "Context/Admin/Conversation/show.html.twig"
 
 open_marketplace_admin_conversation_archive:
     path: /admin/conversations/{id}/archive

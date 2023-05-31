@@ -19,7 +19,7 @@
         <tbody>
         {% for key, item in cart.items %}
 
-            {% include 'Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id, 'loop_index': loop.index} %}
+            {% include 'Context/Shop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id, 'loop_index': loop.index} %}
         {% endfor %}
         </tbody>
     </table>

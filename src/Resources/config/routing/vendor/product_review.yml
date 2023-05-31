@@ -4,7 +4,7 @@ open_marketplace_vendor_product_review_index:
     defaults:
         _controller: sylius.controller.product_review:indexAction
         _sylius:
-            template: "Vendor/ProductReviews/index.html.twig"
+            template: "Context/Vendor/ProductReviews/index.html.twig"
             grid: open_marketplace_vendor_product_review
 
 open_marketplace_vendor_product_review_edit:
@@ -13,7 +13,7 @@ open_marketplace_vendor_product_review_edit:
     defaults:
         _controller: sylius.controller.product_review:updateAction
         _sylius:
-            template: "Vendor/ProductReviews/update.html.twig"
+            template: "Context/Vendor/ProductReviews/update.html.twig"
             redirect: open_marketplace_vendor_product_review_index
             form: BitBag\OpenMarketplace\Form\Type\Vendor\ProductReviewType
 

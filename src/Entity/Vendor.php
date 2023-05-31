@@ -56,6 +56,10 @@ class Vendor implements VendorInterface
     /** @var Collection<int, VendorShippingMethodInterface> */
     protected Collection $shippingMethods;
 
+    protected ?int $commission;
+
+    protected string $commissionType;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -303,6 +307,26 @@ class Vendor implements VendorInterface
             'averageRating' => $ratingSum / $productsRated,
             'reviewsCount' => $reviewsCount,
             ];
+    }
+
+    public function getCommission(): ?int
+    {
+        return $this->commission;
+    }
+
+    public function setCommission(?int $commission): void
+    {
+        $this->commission = $commission;
+    }
+
+    public function getCommissionType(): string
+    {
+        return $this->commissionType;
+    }
+
+    public function setCommissionType(string $commissionType): void
+    {
+        $this->commissionType = $commissionType;
     }
 
     public function __toString(): string

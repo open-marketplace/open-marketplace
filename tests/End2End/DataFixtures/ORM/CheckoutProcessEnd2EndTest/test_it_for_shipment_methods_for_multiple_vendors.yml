@@ -76,6 +76,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@oliver_vendor_address'
         slug: 'oliver-queen-company'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
     vendor_bruce:
         shopUser: '@user_bruce'
         companyName: 'Test company name'
@@ -84,6 +86,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@bruce_vendor_address'
         slug: 'bruce-wayne-company'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
 BitBag\OpenMarketplace\Entity\Product:
     vendor_olivier_first_product:
         vendor: '@vendor_oliver'

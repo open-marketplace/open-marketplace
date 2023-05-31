@@ -70,6 +70,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
     vendorAddress: '@vendor_address'
     slug: 'oliver-queen-company'
     description: 'description'
+    commission: 10
+    commissionType: 'net'
 Sylius\Component\Taxonomy\Model\TaxonTranslation:
   taxon_translation:
     locale: 'en_US'

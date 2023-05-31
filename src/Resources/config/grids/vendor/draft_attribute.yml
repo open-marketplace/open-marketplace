@@ -1,7 +1,7 @@
 sylius_grid:
     templates:
         action:
-            render_attribute_types: "Grid/Action/createDraftAttribute.html.twig"
+            render_attribute_types: "Configuration/Grid/Action/createDraftAttribute.html.twig"
     grids:
         vendor_draft_attribute:
             driver:

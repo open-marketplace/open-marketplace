@@ -1,0 +1,12 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Context/Vendor/Common/_breadcrumb.html.twig' %}
+
+{% block title %}{{ 'open_marketplace.ui.product_list'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb_page %}
+    <div class="active section">{{ 'open_marketplace.ui.product_list'|trans }}</div>
+{% endblock %}
+
+{% block subcontent %}
+    {{ sylius_grid_render(resources, 'Context/Vendor/ProductListing/_productListings.html.twig') }}
+{% endblock %}

@@ -11,5 +11,10 @@
         </many-to-one>
         <one-to-many field="secondaryOrders" target-entity="BitBag\OpenMarketplace\Entity\Order" mapped-by="primaryOrder"/>
         <field name="mode"/>
+        <field name="commissionTotal" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
     </mapped-superclass>
 </doctrine-mapping>

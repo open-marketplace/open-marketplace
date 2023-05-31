@@ -90,7 +90,7 @@ sylius_ui:
                     context:
                         event: sylius.shop.checkout.address.before_header # Intentionally using "address" event for backwards compatibility
                 header:
-                    template: "_header.html.twig"
+                    template: "@SyliusShop/Checkout/_header.html.twig"
                     priority: 10
                 after_header_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"

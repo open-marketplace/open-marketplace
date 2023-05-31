@@ -32,6 +32,8 @@ BitBag\OpenMarketplace\Entity\Vendor:
         vendorAddress: '@vendor_address'
         slug: 'test-company-name'
         description: 'description'
+        commission: 10
+        commissionType: 'net'
 BitBag\OpenMarketplace\Entity\VendorAddressUpdate:
     vendor_new_address:
         country: '@USA'

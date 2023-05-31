@@ -4,7 +4,7 @@ vendor_product_variant_index:
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            template: "Vendor/Inventory/index.html.twig"
+            template: "Context/Vendor/Inventory/index.html.twig"
             grid: vendor_product_variant
             vars:
                 route:
@@ -21,7 +21,7 @@ vendor_product_variant_update:
     defaults:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
-            template: "Vendor/Inventory/update.html.twig"
+            template: "Context/Vendor/Inventory/update.html.twig"
             grid: sylius_admin_product_variant
             redirect:
                 route: vendor_product_variant_index

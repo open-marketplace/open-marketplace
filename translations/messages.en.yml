@@ -50,6 +50,7 @@ open_marketplace:
         tax_identifier: Tax Identifier
         not_blank: This field cannot be empty
         company_name: Company name
+        shop_user: Shop user
         country: Country
         city: City
         street: Street
@@ -128,6 +129,7 @@ open_marketplace:
         unverified: Unverified
         vendor_address: Vendor address
         vendor_details: Vendor details
+        vendor_commission: Vendor commission
         show_product_listings: Show product listings
         verified: Accepted
         verify: Verify
@@ -159,7 +161,11 @@ open_marketplace:
         your_account_has_been_disabled: Your vendor account has been disabled. Please contact administrators for more information.
         view_orders: View your orders
         footer_signature: BitBag OpenMarketplace - an open-source MVM based on Symfony & Sylius.
-
+        commission: Commission
+        commission_type: Commission Type
+        vendor_test_credentials: Vendor test credentials
+        username: Username
+        password: Password
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.

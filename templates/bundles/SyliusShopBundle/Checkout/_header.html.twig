@@ -1,0 +1,30 @@
+<div class="ui basic segment">
+    <div class="ui large text menu">
+        <a href="{{ path('sylius_shop_homepage') }}">
+            <img
+                src="{{ asset('open-marketplace-logo.png') }}"
+                alt="BitBag OpenMarketplace logo"
+                class="ui medium image"
+            />
+        </a>
+        <div class="right menu">
+            {% if order.customer.id|default(null) is not null %}
+                <div
+                    class="item"
+                    id="purchaser-email"
+                    {{ sylius_test_html_attribute('purchaser-name-or-email') }}
+                >
+                    {% set translationText = 'sylius.ui.checking_out_as'|trans %}
+                    {% set customerName = app.user is null
+                        ? order.customer.email
+                        : order.customer.fullName|default(order.customer.email)
+                    %}
+
+                    {{ "#{translationText} #{customerName}." }}
+                </div>
+            {% else %}
+                <a href="{{ path('sylius_shop_login') }}" class="item">{{ 'sylius.ui.sign_in'|trans }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

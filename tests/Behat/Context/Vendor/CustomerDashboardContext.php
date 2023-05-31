@@ -15,7 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;
@@ -33,16 +33,20 @@ class CustomerDashboardContext extends MinkContext implements Context
 
     private ObjectManager $manager;
 
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
         CustomerDashboardPage $dashboardPage,
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
-        ObjectManager $manager
-    ) {
+        ObjectManager $manager,
+        ExampleFactoryInterface $vendorExampleFactory,
+        ) {
         $this->dashboardPage = $dashboardPage;
         $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
         $this->manager = $manager;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -78,20 +82,23 @@ class CustomerDashboardContext extends MinkContext implements Context
         $this->userRepository->add($user);
 
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
-        $vendor = new Vendor();
-        $vendor->setCompanyName('Test');
+
+        $options = [
+            'company_name' => 'Test',
+            'phone_number' => '333333333',
+            'tax_identifier' => '543455',
+            'street' => 'Secret 13',
+            'city' => 'Warsaw',
+            'postcode' => '00-111',
+            'slug' => 'vendor-slug',
+            'description' => 'description',
+            'country' => $country,
+            'status' => $status,
+        ];
+
+        /** @var VendorInterface $vendor */
+        $vendor = $this->vendorExampleFactory->create($options);
         $vendor->setShopUser($user);
-        $vendor->setPhoneNumber('333333333');
-        $vendor->setTaxIdentifier('543455');
-        $vendor->setVendorAddress(new VendorAddress());
-        $vendor->getVendorAddress()->setCountry($country);
-        $vendor->getVendorAddress()->setCity('Warsaw');
-        $vendor->getVendorAddress()->setPostalCode('00-111');
-        $vendor->getVendorAddress()->setStreet('Secret 13');
-        $vendor->setSlug('vendor-slug');
-        $vendor->setDescription('description');
-        $vendor->setStatus($status);
-        $vendor->setEnabled(true);
         $user->setVendor($vendor);
         $this->manager->persist($vendor);
         $this->manager->flush();
