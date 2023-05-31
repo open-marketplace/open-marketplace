@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner\DraftPricingClonerInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner\DraftTranslationClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftPricingClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTranslationClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValueInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;

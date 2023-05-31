@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
-use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftAttributeValueFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeValueFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Doctrine\ORM\EntityManagerInterface;
 

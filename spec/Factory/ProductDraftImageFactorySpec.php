@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftImageFactory;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftImageFactory;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImageInterface;
 use PhpSpec\ObjectBehavior;
 

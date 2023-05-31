@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
-use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImageInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

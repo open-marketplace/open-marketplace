@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Fixture\Factory;
 
-use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Factory\DraftAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;

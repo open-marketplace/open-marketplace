@@ -9,12 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Resolver;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 
-interface NextDraftResolverInterface
+interface DraftClonerInterface
 {
-    public function resolveForListing(ListingInterface $listing): DraftInterface;
+    public function cloneDraft(
+        DraftInterface $base,
+        DraftInterface $destination
+    ): void;
 }

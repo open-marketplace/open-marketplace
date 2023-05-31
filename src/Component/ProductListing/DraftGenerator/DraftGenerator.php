@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\Resolver;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator;
 
-use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner\DraftClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class NextDraftResolver implements NextDraftResolverInterface
+final class DraftGenerator implements DraftGeneratorInterface
 {
     public function __construct(
         private FactoryInterface $draftFactory,
@@ -27,7 +27,7 @@ final class NextDraftResolver implements NextDraftResolverInterface
 
     }
 
-    public function resolveForListing(ListingInterface $listing): DraftInterface
+    public function generateNextDraft(ListingInterface $listing): DraftInterface
     {
         $latestDraft = $listing->getLatestDraft();
 

@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing;
 
-use BitBag\OpenMarketplace\Component\ProductListing\DraftCloner\Cloner\DraftClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\DraftGeneratorInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Resolver\NextDraftResolverInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -24,7 +24,7 @@ final class ListingPersister implements ListingPersisterInterface
     public function __construct(
         private FactoryInterface $productListingFactory,
         private DraftClonerInterface $draftCloner,
-        private NextDraftResolverInterface $nextDraftResolver,
+        private DraftGeneratorInterface $nextDraftResolver,
         private ImageUploaderInterface $imageUploader,
     ) {
 
@@ -49,7 +49,7 @@ final class ListingPersister implements ListingPersisterInterface
     public function resolveLatestDraft(
         ListingInterface $listing
     ): DraftInterface {
-        return $this->nextDraftResolver->resolveForListing($listing);
+        return $this->nextDraftResolver->generateNextDraft($listing);
     }
 
     public function updateLatestDraftWith(
