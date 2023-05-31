@@ -19,7 +19,7 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftImageFactoryInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
@@ -48,7 +48,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
 
     private FactoryInterface $productListingPriceFactory;
 
-    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $productListingAdministrationTool;
 
     private FactoryInterface $productTranslationFactory;
 
@@ -75,7 +75,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
     public function __construct(
         FactoryInterface $productDraftFactory,
         FactoryInterface $productListingPriceFactory,
-        ProductListingAdministrationToolInterface   $productListingAdministrationTool,
+        ListingPersisterInterface   $productListingAdministrationTool,
         FactoryInterface                            $productTranslationFactory,
         EntityRepository                            $shopUserRepository,
         ChannelRepositoryInterface                  $channelRepository,

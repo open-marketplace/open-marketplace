@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
@@ -39,7 +39,7 @@ final class EditProductAction
 
     private ProductDraftRepositoryInterface $productDraftRepository;
 
-    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $productListingAdministrationTool;
 
     private ImageUploaderInterface $imageUploader;
 
@@ -59,7 +59,7 @@ final class EditProductAction
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ProductDraftRepositoryInterface $productDraftRepository,
-        ProductListingAdministrationToolInterface $productListingAdministrationTool,
+        ListingPersisterInterface $productListingAdministrationTool,
         ImageUploaderInterface $imageUploader,
         ProductListingRepositoryInterface $productListingRepository,
         AuthorizationCheckerInterface $authorizationChecker,
@@ -92,13 +92,15 @@ final class EditProductAction
             throw new AccessDeniedException();
         }
 
-        $productDraft = $this->productListingAdministrationTool->serveLatestDraft($productListing);
+        $productDraft = $this->productListingAdministrationTool->resolveLatestDraft($productListing);
 
         $form = $this->formFactory->create(ProductType::class, $productDraft);
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
-            $this->productListingAdministrationTool->updateProductListing($productListing, $productDraft);
+            $productDraft->ownRelations();
+            $this->productListingAdministrationTool->uploadImages($productDraft);
+
             $this->productDraftRepository->save($productDraft);
 
             /** @var Session $session */

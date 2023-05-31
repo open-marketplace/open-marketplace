@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
@@ -8,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Entity\ProductListing;
+namespace spec\BitBag\OpenMarketplace\Component\ProductListing\Entity;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValueInterface;
@@ -17,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 
-final class ProductDraftSpec extends ObjectBehavior
+final class DraftSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {

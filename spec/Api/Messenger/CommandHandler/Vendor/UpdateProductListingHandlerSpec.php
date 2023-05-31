@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInte
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UpdateProductListingHandler;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
@@ -43,7 +43,7 @@ final class UpdateProductListingHandlerSpec extends ObjectBehavior
         Draft $productDraft,
         Draft $previousProductDraft,
         VendorInterface $vendor,
-        ProductListingAdministrationToolInterface $productListingFromDraftFactory,
+        ListingPersisterInterface $productListingFromDraftFactory,
         ListingInterface $productListing,
         ImageInterface $image,
         ImageUploaderInterface $imageUploader,

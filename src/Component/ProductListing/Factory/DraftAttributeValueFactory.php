@@ -12,12 +12,12 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 final class DraftAttributeValueFactory implements DraftAttributeValueFactoryInterface
 {
     public function createForAttribute(
-        DraftAttributeInterface $attribute,
-        DraftInterface $productDraft,
+        DraftAttributeInterface $draftAttribute,
+        DraftInterface $draft,
     ): DraftAttributeValueInterface {
         $attributeValue = new DraftAttributeValue();
-        $attributeValue->setAttribute($attribute);
-        $attributeValue->setSubject($productDraft);
+        $attributeValue->setAttribute($draftAttribute);
+        $attributeValue->setSubject($draft);
 
         return $attributeValue;
     }

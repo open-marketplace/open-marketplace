@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Cloner;
 
-use BitBag\OpenMarketplace\Cloner\ProductListingTranslationCloner;
-use BitBag\OpenMarketplace\Cloner\ProductListingTranslationClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftTranslationCloner;
+use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftTranslationClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,12 +28,12 @@ final class ProductListingTranslationClonerSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(ProductListingTranslationCloner::class);
+        $this->shouldHaveType(DraftTranslationCloner::class);
     }
 
     public function it_implements_interface(): void
     {
-        $this->shouldImplement(ProductListingTranslationClonerInterface::class);
+        $this->shouldImplement(DraftTranslationClonerInterface::class);
     }
 
     public function it_clones_product_listing_translations(

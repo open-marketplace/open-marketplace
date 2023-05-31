@@ -15,24 +15,23 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 
-interface ProductListingAdministrationToolInterface
+interface ListingPersisterInterface
 {
     public function createNewProductListing(
         DraftInterface $productDraft,
         VendorInterface $vendor
     ): void;
 
-    public function updateProductListing(
-        ListingInterface $productListing,
-        DraftInterface $productDraft
-    ): void;
-
-    public function serveLatestDraft(
-        ListingInterface $productListing
+    public function resolveLatestDraft(
+        ListingInterface $listing
     ): DraftInterface;
 
     public function updateLatestDraftWith(
-        ListingInterface $productListing,
+        ListingInterface $listing,
         DraftInterface $base
+    ): void;
+
+    public function uploadImages(
+        DraftInterface $productDraft
     ): void;
 }

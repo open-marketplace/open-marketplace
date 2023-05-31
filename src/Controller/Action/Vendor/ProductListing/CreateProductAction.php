@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
@@ -43,7 +43,7 @@ final class CreateProductAction
 
     private FactoryInterface $factory;
 
-    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $productListingAdministrationTool;
 
     private ProductDraftRepositoryInterface $productDraftRepository;
 
@@ -62,7 +62,7 @@ final class CreateProductAction
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         NewResourceFactoryInterface $newResourceFactory,
         FactoryInterface $factory,
-        ProductListingAdministrationToolInterface $productListingAdministrationTool,
+        ListingPersisterInterface $productListingAdministrationTool,
         ProductDraftRepositoryInterface $productDraftRepository,
         FormFactoryInterface $formFactory,
         RequestStack $requestStack,

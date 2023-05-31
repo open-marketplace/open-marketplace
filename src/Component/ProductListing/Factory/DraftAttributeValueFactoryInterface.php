@@ -11,7 +11,7 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 interface DraftAttributeValueFactoryInterface
 {
     public function createForAttribute(
-        DraftAttributeInterface $attribute,
-        DraftInterface $productDraft,
+        DraftAttributeInterface $draftAttribute,
+        DraftInterface $draft,
     ): DraftAttributeValueInterface;
 }

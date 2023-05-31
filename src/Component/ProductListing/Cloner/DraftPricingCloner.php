@@ -9,33 +9,36 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Factory\DraftPricingFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class ProductListingPricingCloner implements ProductListingPricingClonerInterface
+final class DraftPricingCloner implements DraftPricingClonerInterface
 {
-    private FactoryInterface $priceFactory;
+    private DraftPricingFactoryInterface $priceFactory;
 
-    public function __construct(FactoryInterface $priceFactory)
+    public function __construct(DraftPricingFactoryInterface $priceFactory)
     {
         $this->priceFactory = $priceFactory;
     }
 
-    public function clonePrice(DraftInterface $newProductDraft, DraftInterface $productDraft): void
+    public function clone(DraftInterface $to, DraftInterface $from): void
     {
         /** @var ListingPriceInterface $price */
-        foreach ($productDraft->getProductListingPrices() as $price) {
+        foreach ($from->getProductListingPrices() as $price) {
             /** @var ListingPriceInterface $newPrice */
-            $newPrice = $this->priceFactory->createNew();
-            $newPrice->setChannelCode($price->getChannelCode());
+            $newPrice = $this->priceFactory->createForChannelCode(
+                $price->getChannelCode(),
+                $price->getProductDraft()
+            );
+
             $newPrice->setPrice($price->getPrice());
             $newPrice->setMinimumPrice($price->getMinimumPrice());
             $newPrice->setOriginalPrice($price->getOriginalPrice());
-            $newPrice->setProductDraft($newProductDraft);
-            $newProductDraft->addProductListingPriceWithKey($newPrice, $newPrice->getChannelCode());
+            $to->addProductListingPriceWithKey($newPrice, $newPrice->getChannelCode());
         }
     }
 }

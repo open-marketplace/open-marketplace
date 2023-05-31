@@ -12,6 +12,6 @@ interface DraftTaxonFactoryInterface
 {
     public function createForTaxon(
         TaxonInterface $taxon,
-        DraftInterface $productDraft
+        DraftInterface $draft
     ): DraftTaxonInterface;
 }

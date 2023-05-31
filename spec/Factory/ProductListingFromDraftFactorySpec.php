@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Cloner\ProductListingPricingClonerInterface;
-use BitBag\OpenMarketplace\Cloner\ProductListingTranslationClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftPricingClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftTranslationClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValueInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationTool;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersister;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -28,8 +28,8 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
     public function let(
         FactoryInterface $productListingFactory,
         FactoryInterface $draftFactory,
-        ProductListingTranslationClonerInterface $productListingTranslationCloner,
-        ProductListingPricingClonerInterface $productListingPricingCloner
+        DraftTranslationClonerInterface $productListingTranslationCloner,
+        DraftPricingClonerInterface $productListingPricingCloner
     ): void {
         $this->beConstructedWith(
             $productListingFactory,
@@ -41,12 +41,12 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(ProductListingAdministrationTool::class);
+        $this->shouldHaveType(ListingPersister::class);
     }
 
     public function it_implements_interface(): void
     {
-        $this->shouldImplement(ProductListingAdministrationToolInterface::class);
+        $this->shouldImplement(ListingPersisterInterface::class);
     }
 
     public function it_returns_product_listing(
@@ -83,8 +83,8 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         ListingInterface $productListing,
         DraftInterface $productDraft,
         DraftInterface $newProductDraft,
-        ProductListingTranslationClonerInterface $productListingTranslationCloner,
-        ProductListingPricingClonerInterface $productListingPricingCloner,
+        DraftTranslationClonerInterface $productListingTranslationCloner,
+        DraftPricingClonerInterface $productListingPricingCloner,
         DraftAttributeValueInterface $attributeValue,
         ): void {
         $productDraft->getProductListing()
@@ -128,10 +128,10 @@ final class ProductListingFromDraftFactorySpec extends ObjectBehavior
         $newProductDraft->setProductListing($productListing)
             ->shouldBeCalled();
 
-        $productListingTranslationCloner->cloneTranslation($newProductDraft, $productDraft)
+        $productListingTranslationCloner->clone($productDraft, $newProductDraft)
             ->shouldBeCalled();
 
-        $productListingPricingCloner->clonePrice($newProductDraft, $productDraft)
+        $productListingPricingCloner->clone($productDraft, $newProductDraft)
             ->shouldBeCalled();
 
         $newProductDraft->setProductListing($productListing)

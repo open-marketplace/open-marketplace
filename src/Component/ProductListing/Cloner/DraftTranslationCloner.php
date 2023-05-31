@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Exception\LocaleNotFoundException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class ProductListingTranslationCloner implements ProductListingTranslationClonerInterface
+final class DraftTranslationCloner implements DraftTranslationClonerInterface
 {
     private FactoryInterface $translationFactory;
 
@@ -25,10 +25,10 @@ final class ProductListingTranslationCloner implements ProductListingTranslation
         $this->translationFactory = $translationFactory;
     }
 
-    public function cloneTranslation(DraftInterface $newProductDraft, DraftInterface $productDraft): void
+    public function clone(DraftInterface $from, DraftInterface $to): void
     {
         /** @var DraftTranslationInterface $translation */
-        foreach ($productDraft->getTranslations() as $translation) {
+        foreach ($from->getTranslations() as $translation) {
             $locale = $translation->getLocale();
             if (null === $locale) {
                 throw new LocaleNotFoundException('Locale not found.');
@@ -37,14 +37,14 @@ final class ProductListingTranslationCloner implements ProductListingTranslation
             /** @var DraftTranslationInterface $newTranslation */
             $newTranslation = $this->translationFactory->createNew();
             $newTranslation->setName($translation->getName());
-            $newTranslation->setProductDraft($newProductDraft);
+            $newTranslation->setProductDraft($to);
             $newTranslation->setDescription($translation->getDescription());
             $newTranslation->setLocale($locale);
             $newTranslation->setMetaDescription($translation->getMetaDescription());
             $newTranslation->setMetaKeywords($translation->getMetaKeywords());
             $newTranslation->setSlug($translation->getSlug());
             $newTranslation->setShortDescription($translation->getShortDescription());
-            $newProductDraft->addTranslationWithKey($newTranslation, $locale);
+            $to->addTranslationWithKey($newTranslation, $locale);
         }
     }
 }

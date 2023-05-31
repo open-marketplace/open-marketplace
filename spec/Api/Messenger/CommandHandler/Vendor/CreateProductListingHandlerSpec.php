@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInte
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\CreateProductListingHandler;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
@@ -27,7 +27,7 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 final class CreateProductListingHandlerSpec extends ObjectBehavior
 {
     public function let(
-        ProductListingAdministrationToolInterface $productListingFromDraftFactory,
+        ListingPersisterInterface $productListingFromDraftFactory,
         ObjectManager $manager,
         ImageUploaderInterface $imageUploader
     ): void {
@@ -43,7 +43,7 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
         CreateProductListingInterface $createProductListing,
         Draft $productDraft,
         VendorInterface $vendor,
-        ProductListingAdministrationToolInterface $productListingFromDraftFactory,
+        ListingPersisterInterface $productListingFromDraftFactory,
         ListingInterface $productListing,
         ImageInterface $image,
         ImageUploaderInterface $imageUploader,

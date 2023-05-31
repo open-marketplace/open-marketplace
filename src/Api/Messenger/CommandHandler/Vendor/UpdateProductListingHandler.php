@@ -14,21 +14,21 @@ namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Webmozart\Assert\Assert;
 
 final class UpdateProductListingHandler
 {
-    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $productListingAdministrationTool;
 
     private ObjectManager $manager;
 
     private ProductListingRepositoryInterface $productListingRepository;
 
     public function __construct(
-        ProductListingAdministrationToolInterface $productListingAdministrationTool,
+        ListingPersisterInterface $productListingAdministrationTool,
         ObjectManager $manager,
         ProductListingRepositoryInterface $productListingRepository
     ) {

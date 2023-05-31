@@ -176,4 +176,6 @@ interface DraftInterface extends AttributeSubjectInterface, ResourceInterface, U
     public function isCreated(): bool;
 
     public function markAsCreated(): void;
+
+    public function ownRelations(): void;
 }

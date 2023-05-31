@@ -14,17 +14,17 @@ namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\CreateProductListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\ProductListingAdministrationToolInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use Doctrine\Persistence\ObjectManager;
 
 final class CreateProductListingHandler
 {
-    private ProductListingAdministrationToolInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $productListingAdministrationTool;
 
     private ObjectManager $manager;
 
     public function __construct(
-        ProductListingAdministrationToolInterface $productListingAdministrationTool,
+        ListingPersisterInterface $productListingAdministrationTool,
         ObjectManager $manager
     ) {
         $this->productListingAdministrationTool = $productListingAdministrationTool;

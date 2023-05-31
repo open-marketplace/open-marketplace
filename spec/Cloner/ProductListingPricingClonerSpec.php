@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Cloner;
 
-use BitBag\OpenMarketplace\Cloner\ProductListingPricingCloner;
-use BitBag\OpenMarketplace\Cloner\ProductListingPricingClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftPricingCloner;
+use BitBag\OpenMarketplace\Component\ProductListing\Cloner\DraftPricingClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,12 +28,12 @@ final class ProductListingPricingClonerSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(ProductListingPricingCloner::class);
+        $this->shouldHaveType(DraftPricingCloner::class);
     }
 
     public function it_implements_interface(): void
     {
-        $this->shouldImplement(ProductListingPricingClonerInterface::class);
+        $this->shouldImplement(DraftPricingClonerInterface::class);
     }
 
     public function it_clones_product_listing_prices(

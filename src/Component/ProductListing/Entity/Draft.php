@@ -586,4 +586,19 @@ class Draft implements ResourceInterface, DraftInterface
     {
         $this->status = self::STATUS_CREATED;
     }
+
+    public function ownRelations(): void
+    {
+        foreach ($this->getTranslations() as $translation) {
+            $translation->setProductDraft($this);
+        }
+
+        foreach ($this->getAttributes() as $attribute) {
+            $attribute->setSubject($this);
+        }
+
+        foreach ($this->getImages() as $image) {
+            $image->setOwner($this);
+        }
+    }
 }
