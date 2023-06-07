@@ -129,6 +129,8 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
             if (null === $code) {
                 continue;
             }
+
+            $productDraft->addChannel($channel);
             $this->createProductListingPricing($productDraft, $code);
         }
 
