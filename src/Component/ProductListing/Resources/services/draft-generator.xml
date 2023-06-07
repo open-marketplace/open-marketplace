@@ -58,7 +58,7 @@
                 <service class="Sylius\Component\Resource\Factory\TranslatableFactory" public="true">
                     <argument type="service">
                         <service class="Sylius\Component\Resource\Factory\Factory">
-                            <argument>BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute</argument>
+                            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute</argument>
                         </service>
                     </argument>
                     <argument type="service" id="sylius.translation_locale_provider.admin"/>
