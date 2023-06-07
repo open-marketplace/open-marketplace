@@ -46,6 +46,8 @@ final class UpdateProductListingHandler
 
         /** @var DraftInterface $newDraft */
         $newDraft = $updateProductListing->getProductDraft();
+        $newDraft->setProductListing($productListing);
+        $newDraft->setCode($productListing->getLatestDraft()->getCode());
 
         $this->listingPersister->updateLatestDraftWith($productListing, $newDraft);
 

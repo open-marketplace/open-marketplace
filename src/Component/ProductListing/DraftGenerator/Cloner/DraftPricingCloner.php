@@ -23,7 +23,7 @@ final class DraftPricingCloner implements DraftPricingClonerInterface
 
     }
 
-    public function clone(DraftInterface $to, DraftInterface $from): void
+    public function clone(DraftInterface $from, DraftInterface $to): void
     {
         /** @var ListingPriceInterface $price */
         foreach ($from->getProductListingPrices() as $price) {
