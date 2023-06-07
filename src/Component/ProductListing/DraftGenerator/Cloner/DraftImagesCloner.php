@@ -40,6 +40,7 @@ final class DraftImagesCloner implements DraftImagesClonerInterface
             $baseImagePath = sprintf('%s/%s', $this->imageUploadPath, $baseImage->getPath());
             $newUploadedImage = new UploadedFile($baseImagePath, basename($baseImagePath));
             $newImage->setFile($newUploadedImage);
+            $newImage->setPath($baseImage->getPath());
 
             $to->addImage($newImage);
         }
