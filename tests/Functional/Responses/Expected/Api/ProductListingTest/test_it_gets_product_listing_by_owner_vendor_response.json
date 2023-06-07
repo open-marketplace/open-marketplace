@@ -1,14 +1,14 @@
 {
-    "@context": "\/api\/v2\/contexts\/ProductListing",
+    "@context": "\/api\/v2\/contexts\/Listing",
     "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings\/@string@",
-    "@type": "ProductListing",
+    "@type": "Listing",
     "uuid": "@string@",
     "code": "product_listing_bruce_1",
     "enabled": true,
     "verificationStatus": "created",
     "latestDraft": {
         "@id": "\/api\/v2\/shop\/account\/vendor\/product-drafts\/@string@",
-        "@type": "ProductDraft",
+        "@type": "Draft",
         "uuid": "@string@",
         "code": "product_draft_bruce_1",
         "status": "created",
@@ -18,7 +18,7 @@
         "translations": {
             "en_US": {
                 "@id": "\/api\/v2\/shop\/account\/vendor\/product-draft/translations\/@string@",
-                "@type": "ProductDraftTranslation",
+                "@type": "DraftTranslation",
                 "uuid": "@string@",
                 "name": "product_draft_bruce_1_translations_us",
                 "slug": "product_draft_bruce_1_translations_us",
@@ -31,7 +31,7 @@
         },
         "productListingPrices": {
             "CODE": {
-                "@type": "ProductListingPrice",
+                "@type": "ListingPrice",
                 "uuid": "@string@",
                 "price": 100,
                 "originalPrice": 80,
@@ -50,7 +50,7 @@
         "mainTaxon": "\/api\/v2\/shop\/taxons\/CATEGORY",
         "productDraftTaxons": [
             {
-                "@type": "ProductDraftTaxon",
+                "@type": "DraftTaxon",
                 "uuid": "@string@",
                 "taxon": "\/api\/v2\/shop\/taxons\/MUG",
                 "position": 1
