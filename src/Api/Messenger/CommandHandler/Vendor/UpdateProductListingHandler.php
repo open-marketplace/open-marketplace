@@ -21,18 +21,18 @@ use Webmozart\Assert\Assert;
 
 final class UpdateProductListingHandler
 {
-    private ListingPersisterInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $listingPersister;
 
     private ObjectManager $manager;
 
     private ProductListingRepositoryInterface $productListingRepository;
 
     public function __construct(
-        ListingPersisterInterface $productListingAdministrationTool,
+        ListingPersisterInterface $listingPersister,
         ObjectManager $manager,
         ProductListingRepositoryInterface $productListingRepository
     ) {
-        $this->productListingAdministrationTool = $productListingAdministrationTool;
+        $this->listingPersister = $listingPersister;
         $this->manager = $manager;
         $this->productListingRepository = $productListingRepository;
     }
@@ -47,7 +47,7 @@ final class UpdateProductListingHandler
         /** @var DraftInterface $newDraft */
         $newDraft = $updateProductListing->getProductDraft();
 
-        $this->productListingAdministrationTool->updateLatestDraftWith($productListing, $newDraft);
+        $this->listingPersister->updateLatestDraftWith($productListing, $newDraft);
 
         return $productListing;
     }

@@ -2,46 +2,18 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/*.xml"/>
+    </imports>
     <services>
-        <defaults autowire="true" autoconfigure="false" />
+        <defaults autowire="false" autoconfigure="false" />
 
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\ListingPersister" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\DraftGeneratorInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\DraftGenerator" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftAttributesClonerInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftAttributesCloner" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftClonerInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftCloner" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftImagesClonerInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftImagesCloner" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftPricingClonerInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftPricingCloner" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTaxonClonerInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTaxonCloner" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTranslationClonerInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTranslationCloner" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactory" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeValueFactoryInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeValueFactory" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftImageFactoryInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftImageFactory" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftPricingFactoryInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftPricingFactory" />
-
-        <service id="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftTaxonFactoryInterface"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftTaxonFactory" />
+        <service id="bitbag.open_marketplace.component.product_listing.listing_persister"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\ListingPersister">
+            <argument type="service" id="open_marketplace.factory.product_listing" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator" />
+            <argument type="service" id="sylius.image_uploader"/>
+        </service>
     </services>
 </container>

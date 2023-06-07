@@ -19,15 +19,15 @@ use Doctrine\Persistence\ObjectManager;
 
 final class CreateProductListingHandler
 {
-    private ListingPersisterInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $listingPersister;
 
     private ObjectManager $manager;
 
     public function __construct(
-        ListingPersisterInterface $productListingAdministrationTool,
+        ListingPersisterInterface $listingPersister,
         ObjectManager $manager
     ) {
-        $this->productListingAdministrationTool = $productListingAdministrationTool;
+        $this->listingPersister = $listingPersister;
         $this->manager = $manager;
     }
 
@@ -37,7 +37,7 @@ final class CreateProductListingHandler
         $productDraft = $createProductListing->getProductDraft();
         $vendor = $createProductListing->getVendor();
 
-        $this->productListingAdministrationTool->createNewProductListing($productDraft, $vendor);
+        $this->listingPersister->createNewProductListing($productDraft, $vendor);
         $this->manager->persist($productDraft->getProductListing());
 
         return $productDraft->getProductListing();

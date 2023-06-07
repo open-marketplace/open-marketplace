@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\DraftGenerator">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftCloner">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_attributes" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_taxon" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_images" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_translation" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_pricing" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_attributes"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftAttributesCloner">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute_value" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_images"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftImagesCloner">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_image" />
+            <argument>%kernel.project_dir%/public/media/image</argument>
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_pricing"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftPricingCloner">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_pricing" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_taxon"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTaxonCloner">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_taxon" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft_translation"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTranslationCloner">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_translation" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftFactory" />
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactory">
+            <argument type="service">
+                <service class="Sylius\Component\Resource\Factory\TranslatableFactory" public="true">
+                    <argument type="service">
+                        <service class="Sylius\Component\Resource\Factory\Factory">
+                            <argument>BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute</argument>
+                        </service>
+                    </argument>
+                    <argument type="service" id="sylius.translation_locale_provider.admin"/>
+                </service>
+            </argument>
+            <argument type="service" id="sylius.registry.attribute_type"/>
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute_value"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeValueFactory" />
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_image"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftImageFactory" />
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_pricing"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftPricingFactory">
+            <argument type="service" id="open_marketplace.factory.product_listing_price" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_taxon"
+                 class="BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftTaxonFactory" />
+
+        <service id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_translation"
+                 alias="open_marketplace.factory.product_translation" />
+    </services>
+</container>

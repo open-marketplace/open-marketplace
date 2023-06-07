@@ -43,7 +43,7 @@ final class CreateProductAction
 
     private FactoryInterface $factory;
 
-    private ListingPersisterInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $listingPersister;
 
     private ProductDraftRepositoryInterface $productDraftRepository;
 
@@ -62,7 +62,7 @@ final class CreateProductAction
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         NewResourceFactoryInterface $newResourceFactory,
         FactoryInterface $factory,
-        ListingPersisterInterface $productListingAdministrationTool,
+        ListingPersisterInterface $listingPersister,
         ProductDraftRepositoryInterface $productDraftRepository,
         FormFactoryInterface $formFactory,
         RequestStack $requestStack,
@@ -74,7 +74,7 @@ final class CreateProductAction
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->newResourceFactory = $newResourceFactory;
         $this->factory = $factory;
-        $this->productListingAdministrationTool = $productListingAdministrationTool;
+        $this->listingPersister = $listingPersister;
         $this->productDraftRepository = $productDraftRepository;
         $this->formFactory = $formFactory;
         $this->requestStack = $requestStack;
@@ -103,7 +103,7 @@ final class CreateProductAction
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
-            $this->productListingAdministrationTool->createNewProductListing($productDraft, $vendor);
+            $this->listingPersister->createNewProductListing($productDraft, $vendor);
             $this->productDraftRepository->save($productDraft);
 
             /** @var Session $session */

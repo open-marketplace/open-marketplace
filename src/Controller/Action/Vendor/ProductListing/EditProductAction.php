@@ -18,7 +18,6 @@ use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInter
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,9 +38,7 @@ final class EditProductAction
 
     private ProductDraftRepositoryInterface $productDraftRepository;
 
-    private ListingPersisterInterface $productListingAdministrationTool;
-
-    private ImageUploaderInterface $imageUploader;
+    private ListingPersisterInterface $listingPersister;
 
     private ProductListingRepositoryInterface $productListingRepository;
 
@@ -59,8 +56,7 @@ final class EditProductAction
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ProductDraftRepositoryInterface $productDraftRepository,
-        ListingPersisterInterface $productListingAdministrationTool,
-        ImageUploaderInterface $imageUploader,
+        ListingPersisterInterface $listingPersister,
         ProductListingRepositoryInterface $productListingRepository,
         AuthorizationCheckerInterface $authorizationChecker,
         FormFactoryInterface $formFactory,
@@ -71,8 +67,7 @@ final class EditProductAction
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->productDraftRepository = $productDraftRepository;
-        $this->productListingAdministrationTool = $productListingAdministrationTool;
-        $this->imageUploader = $imageUploader;
+        $this->listingPersister = $listingPersister;
         $this->productListingRepository = $productListingRepository;
         $this->authorizationChecker = $authorizationChecker;
         $this->formFactory = $formFactory;
@@ -92,14 +87,14 @@ final class EditProductAction
             throw new AccessDeniedException();
         }
 
-        $productDraft = $this->productListingAdministrationTool->resolveLatestDraft($productListing);
+        $productDraft = $this->listingPersister->resolveLatestDraft($productListing);
 
         $form = $this->formFactory->create(ProductType::class, $productDraft);
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             $productDraft->ownRelations();
-            $this->productListingAdministrationTool->uploadImages($productDraft);
+            $this->listingPersister->uploadImages($productDraft);
 
             $this->productDraftRepository->save($productDraft);
 

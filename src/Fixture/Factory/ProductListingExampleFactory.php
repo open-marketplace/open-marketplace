@@ -48,7 +48,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
 
     private FactoryInterface $productListingPriceFactory;
 
-    private ListingPersisterInterface $productListingAdministrationTool;
+    private ListingPersisterInterface $listingPersister;
 
     private FactoryInterface $productTranslationFactory;
 
@@ -75,22 +75,22 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
     public function __construct(
         FactoryInterface $productDraftFactory,
         FactoryInterface $productListingPriceFactory,
-        ListingPersisterInterface   $productListingAdministrationTool,
-        FactoryInterface                            $productTranslationFactory,
-        EntityRepository                            $shopUserRepository,
-        ChannelRepositoryInterface                  $channelRepository,
-        RepositoryInterface                         $localeRepository,
-        RepositoryInterface                         $draftAttributeRepository,
-        RepositoryInterface                         $taxonRepository,
+        ListingPersisterInterface $listingPersister,
+        FactoryInterface $productTranslationFactory,
+        EntityRepository $shopUserRepository,
+        ChannelRepositoryInterface $channelRepository,
+        RepositoryInterface $localeRepository,
+        RepositoryInterface $draftAttributeRepository,
+        RepositoryInterface $taxonRepository,
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        SlugGeneratorInterface                      $slugGenerator,
-        ImageUploaderInterface                      $imageUploader,
-        DraftImageFactoryInterface                  $draftImageFactory,
-        FileLocatorInterface                        $fileLocator,
+        SlugGeneratorInterface $slugGenerator,
+        ImageUploaderInterface $imageUploader,
+        DraftImageFactoryInterface $draftImageFactory,
+        FileLocatorInterface $fileLocator,
     ) {
         $this->productDraftFactory = $productDraftFactory;
         $this->productListingPriceFactory = $productListingPriceFactory;
-        $this->productListingAdministrationTool = $productListingAdministrationTool;
+        $this->listingPersister = $listingPersister;
         $this->productTranslationFactory = $productTranslationFactory;
         $this->shopUserRepository = $shopUserRepository;
         $this->channelRepository = $channelRepository;
@@ -121,7 +121,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         $vendor = $shopUser->getVendor();
         Assert::notNull($vendor);
 
-        $this->productListingAdministrationTool->createNewProductListing($productDraft, $vendor);
+        $this->listingPersister->createNewProductListing($productDraft, $vendor);
 
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {

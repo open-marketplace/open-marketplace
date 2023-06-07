@@ -24,7 +24,7 @@ final class DraftCloner implements DraftClonerInterface
     ) {
     }
 
-    public function cloneDraft(
+    public function clone(
         DraftInterface $base,
         DraftInterface $destination
     ): void {

@@ -24,7 +24,7 @@ final class ListingPersister implements ListingPersisterInterface
     public function __construct(
         private FactoryInterface $productListingFactory,
         private DraftClonerInterface $draftCloner,
-        private DraftGeneratorInterface $nextDraftResolver,
+        private DraftGeneratorInterface $draftGenerator,
         private ImageUploaderInterface $imageUploader,
     ) {
 
@@ -49,7 +49,7 @@ final class ListingPersister implements ListingPersisterInterface
     public function resolveLatestDraft(
         ListingInterface $listing
     ): DraftInterface {
-        return $this->nextDraftResolver->generateNextDraft($listing);
+        return $this->draftGenerator->generateNextDraft($listing);
     }
 
     public function updateLatestDraftWith(
@@ -57,7 +57,7 @@ final class ListingPersister implements ListingPersisterInterface
         DraftInterface $base
     ): void {
         $destination = $this->resolveLatestDraft($listing);
-        $this->draftCloner->cloneDraft($base, $destination);
+        $this->draftCloner->clone($base, $destination);
         $this->uploadImages($destination);
     }
 

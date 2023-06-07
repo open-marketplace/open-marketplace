@@ -9,14 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
-interface DraftClonerInterface
+interface DraftFactoryInterface extends FactoryInterface
 {
-    public function clone(
-        DraftInterface $base,
-        DraftInterface $destination
-    ): void;
+    /** @return DraftInterface */
+    public function createNew();
 }

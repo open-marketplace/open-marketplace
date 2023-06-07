@@ -26,7 +26,7 @@
         <service class="BitBag\OpenMarketplace\Api\DataTransformer\ProductDraftAwareCommandDataTransformer"
                  id="bitbag.open_marketplace.api.data_transformer.product_draft_aware_command">
             <argument type="service" id="request_stack" />
-            <argument type="service" id="open_marketplace.component.product_listing.factory.draft_image" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_image" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
         <service class="BitBag\OpenMarketplace\Api\DataTransformer\ProductListingAwareCommandDataTransformer"

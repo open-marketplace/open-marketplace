@@ -9,13 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class ProductDraftFactory implements FactoryInterface
+final class DraftFactory implements DraftFactoryInterface
 {
     /** @return DraftInterface */
     public function createNew()

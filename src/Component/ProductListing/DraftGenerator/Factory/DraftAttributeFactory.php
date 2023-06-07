@@ -21,7 +21,7 @@ final class DraftAttributeFactory implements DraftAttributeFactoryInterface
 {
 
     public function __construct(
-        private FactoryInterface $factory,
+        private FactoryInterface $resourceFactory,
         private ServiceRegistryInterface $attributeTypesRegistry
     ) {
     }
@@ -33,7 +33,7 @@ final class DraftAttributeFactory implements DraftAttributeFactoryInterface
         /** @var AttributeTypeInterface $attributeType */
         $attributeType = $this->attributeTypesRegistry->get($type);
         /** @var DraftAttributeInterface $attribute */
-        $attribute = $this->factory->createNew();
+        $attribute = $this->resourceFactory->createNew();
         $attribute->setType($type);
         $attribute->setStorageType($attributeType->getStorageType());
         $attribute->setVendor($vendor);
@@ -43,6 +43,6 @@ final class DraftAttributeFactory implements DraftAttributeFactoryInterface
 
     public function createNew(): object
     {
-        return $this->factory->createNew();
+        return $this->resourceFactory->createNew();
     }
 }

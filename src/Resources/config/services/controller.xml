@@ -70,7 +70,7 @@
         <service class="BitBag\OpenMarketplace\Controller\Resource\Product\DraftAttributesController"
                  id="open_marketplace.controller.draftAttributes"
                  parent="open_marketplace.controller.draft_attribute">
-            <argument type="service" id="open_marketplace.factory.draftAttribute"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
             <argument type="service" id="open_marketplace.updater.product_attribute_updater"/>
             <argument type="service" id="open_marketplace.provider.vendor"/>
         </service>
@@ -126,7 +126,7 @@
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="sylius.resource_controller.new_resource_factory" />
             <argument type="service" id="open_marketplace.factory.product_draft" />
-            <argument type="service" id="open_marketplace.component.product_listing.administration_tool"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister"/>
             <argument type="service" id="open_marketplace.repository.product_draft"/>
             <argument type="service" id="form.factory" />
             <argument type="service" id="request_stack" />
@@ -146,8 +146,7 @@
             </argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="open_marketplace.repository.product_draft"/>
-            <argument type="service" id="open_marketplace.component.product_listing.administration_tool"/>
-            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="security.authorization_checker"/>
             <argument type="service" id="form.factory" />

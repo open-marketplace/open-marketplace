@@ -12,15 +12,15 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class DraftGenerator implements DraftGeneratorInterface
 {
     public function __construct(
-        private FactoryInterface $draftFactory,
+        private DraftFactoryInterface $draftFactory,
         private DraftClonerInterface $draftCloner,
         private EntityManagerInterface $entityManager
     ) {
@@ -47,7 +47,7 @@ final class DraftGenerator implements DraftGeneratorInterface
         $destination = $this->draftFactory->createNew();
         $destination->markAsCreated();
 
-        $this->draftCloner->cloneDraft($base, $destination);
+        $this->draftCloner->clone($base, $destination);
 
         $destination->setVersionNumber($base->getVersionNumber());
         $destination->incrementVersion();
