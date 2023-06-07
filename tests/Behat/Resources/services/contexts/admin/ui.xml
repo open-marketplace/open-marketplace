@@ -10,7 +10,7 @@
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="open_marketplace.factory.draftAttribute"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
             <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
             <argument type="service" id="sylius.factory.country" />
         </service>
