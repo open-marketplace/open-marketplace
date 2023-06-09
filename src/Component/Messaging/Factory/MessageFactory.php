@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory\Message;
+namespace BitBag\OpenMarketplace\Component\Messaging\Factory;
 
 use BitBag\OpenMarketplace\Component\Messaging\MessagesStorage;
 use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;

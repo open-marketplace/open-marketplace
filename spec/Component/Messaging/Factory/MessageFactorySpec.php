@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Factory\Message;
+namespace spec\BitBag\OpenMarketplace\Component\Messaging\Factory;
 
+use BitBag\OpenMarketplace\Component\Messaging\Factory\MessageFactory;
+use BitBag\OpenMarketplace\Component\Messaging\Factory\MessageFactoryInterface;
 use BitBag\OpenMarketplace\Component\Messaging\MessagesStorage;
 use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
-use BitBag\OpenMarketplace\Factory\Message\MessageFactory;
-use BitBag\OpenMarketplace\Factory\Message\MessageFactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
