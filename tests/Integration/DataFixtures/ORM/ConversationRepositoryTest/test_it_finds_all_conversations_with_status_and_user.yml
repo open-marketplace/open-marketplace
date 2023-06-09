@@ -40,7 +40,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
         description: 'description'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\Conversation\Conversation:
+BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation:
     opened_conversation_with_oliver:
         shopUser: '@user_oliver'
         status: "open"

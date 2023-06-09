@@ -10,7 +10,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="BitBag\OpenMarketplace\Entity\Conversation\Category">
+    <class name="BitBag\OpenMarketplace\Component\Messaging\Entity\Category">
         <attribute name="name">
             <group>shop:account:vendor:conversation:read</group>
             <group>shop:account:vendor:category:read</group>

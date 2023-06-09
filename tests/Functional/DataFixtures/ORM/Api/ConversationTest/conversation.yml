@@ -114,14 +114,14 @@ BitBag\OpenMarketplace\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Entity\Conversation\Conversation:
+BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation:
   bruce_conversation:
     shopUser: '@user_bruce'
   peter_conversation:
     shopUser: '@user_peter'
   conversation_to_archive:
     shopUser: '@user_bruce'
-BitBag\OpenMarketplace\Entity\Conversation\Message:
+BitBag\OpenMarketplace\Component\Messaging\Entity\Message:
   peter_message:
     content: "Own by Peter"
     conversation: '@peter_conversation'
