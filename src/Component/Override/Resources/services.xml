@@ -14,5 +14,12 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="api_platform.router" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
         </service>
+
+        <service id="open_marketplace.order_number_assigner"
+                 class="BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner"
+                 decorates="sylius.order_number_assigner"
+        >
+            <argument type="service" id=".inner"/>
+        </service>
     </services>
 </container>

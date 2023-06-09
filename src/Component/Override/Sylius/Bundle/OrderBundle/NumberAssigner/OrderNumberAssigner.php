@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\NumberAssigner;
+namespace BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\OrderBundle\NumberAssigner;
 
 use BitBag\OpenMarketplace\Entity\OrderInterface;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface as DecoratedOrderNumberAssignerInterface;
