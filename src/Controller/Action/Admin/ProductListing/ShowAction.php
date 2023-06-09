@@ -41,7 +41,7 @@ final class ShowAction
 
     private FormFactoryInterface $formFactory;
 
-    private MessagePersisterInterface $addMessageFacade;
+    private MessagePersisterInterface $messagePersister;
 
     private RouterInterface $router;
 
@@ -51,7 +51,7 @@ final class ShowAction
         ProductDraftRepositoryInterface $productDraftRepository,
         ConversationRepositoryInterface $conversationRepository,
         FormFactoryInterface $formFactory,
-        MessagePersisterInterface $addMessageFacade,
+        MessagePersisterInterface $messagePersister,
         RouterInterface $router,
         ) {
         $this->productListingRepository = $productListingRepository;
@@ -59,7 +59,7 @@ final class ShowAction
         $this->productDraftRepository = $productDraftRepository;
         $this->conversationRepository = $conversationRepository;
         $this->formFactory = $formFactory;
-        $this->addMessageFacade = $addMessageFacade;
+        $this->messagePersister = $messagePersister;
         $this->router = $router;
     }
 
@@ -111,7 +111,7 @@ final class ShowAction
         if (null !== $conversation->getMessages()) {
             /** @var MessageInterface $message */
             foreach ($conversation->getMessages()->toArray() as $message) {
-                $this->addMessageFacade->createWithConversation(
+                $this->messagePersister->createWithConversation(
                     $conversation->getId(),
                     $message,
                     $message->getFile(),

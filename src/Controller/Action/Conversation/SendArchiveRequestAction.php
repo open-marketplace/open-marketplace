@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 final class SendArchiveRequestAction
 {
-    private MessagePersisterInterface $addMessageFacade;
+    private MessagePersisterInterface $messagePersister;
 
     private UrlGeneratorInterface $urlGenerator;
 
@@ -31,12 +31,12 @@ final class SendArchiveRequestAction
     private RequestStack $requestStack;
 
     public function __construct(
-        MessagePersisterInterface $addMessageFacade,
+        MessagePersisterInterface $messagePersister,
         UrlGeneratorInterface $urlGenerator,
         MessageFactoryInterface $messageFactory,
         RequestStack $requestStack,
         ) {
-        $this->addMessageFacade = $addMessageFacade;
+        $this->messagePersister = $messagePersister;
         $this->urlGenerator = $urlGenerator;
         $this->messageFactory = $messageFactory;
         $this->requestStack = $requestStack;
@@ -48,7 +48,7 @@ final class SendArchiveRequestAction
 
         $archiveRequestMessage = $this->messageFactory->createNewWithArchiveRequest();
 
-        $this->addMessageFacade
+        $this->messagePersister
             ->createWithConversation($id, $archiveRequestMessage, null, false);
 
         /** @var Session $session */

@@ -31,7 +31,7 @@ final class CreateNewConversationAction
 
     private UrlGeneratorInterface $urlGenerator;
 
-    private MessagePersisterInterface $addMessageFacade;
+    private MessagePersisterInterface $messagePersister;
 
     private ConversationRepositoryInterface $conversationRepository;
 
@@ -39,13 +39,13 @@ final class CreateNewConversationAction
         FormFactoryInterface $formFactory,
         Environment $templatingEngine,
         UrlGeneratorInterface $urlGenerator,
-        MessagePersisterInterface $addMessageFacade,
+        MessagePersisterInterface $messagePersister,
         ConversationRepositoryInterface $conversationRepository
     ) {
         $this->formFactory = $formFactory;
         $this->templatingEngine = $templatingEngine;
         $this->urlGenerator = $urlGenerator;
-        $this->addMessageFacade = $addMessageFacade;
+        $this->messagePersister = $messagePersister;
         $this->conversationRepository = $conversationRepository;
     }
 
@@ -90,7 +90,7 @@ final class CreateNewConversationAction
 
         /** @var MessageInterface $message */
         foreach ($conversation->getMessages()->toArray() as $message) {
-            $this->addMessageFacade->createWithConversation(
+            $this->messagePersister->createWithConversation(
                 $conversation->getId(),
                 $message,
                 $message->getFile(),

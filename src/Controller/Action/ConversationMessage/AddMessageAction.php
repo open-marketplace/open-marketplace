@@ -25,7 +25,7 @@ final class AddMessageAction
 {
     private FormFactoryInterface $formFactory;
 
-    private MessagePersisterInterface $addMessageFacade;
+    private MessagePersisterInterface $messagePersister;
 
     private UrlGeneratorInterface $urlGenerator;
 
@@ -33,12 +33,12 @@ final class AddMessageAction
 
     public function __construct(
         FormFactoryInterface $formFactory,
-        MessagePersisterInterface $addMessageFacade,
+        MessagePersisterInterface $messagePersister,
         UrlGeneratorInterface $urlGenerator,
         FlashBag $flashBag
     ) {
         $this->formFactory = $formFactory;
-        $this->addMessageFacade = $addMessageFacade;
+        $this->messagePersister = $messagePersister;
         $this->urlGenerator = $urlGenerator;
         $this->flashBag = $flashBag;
     }
@@ -55,7 +55,7 @@ final class AddMessageAction
             $message = $form->getData();
             $file = $form->get('file')->getData();
 
-            $this->addMessageFacade
+            $this->messagePersister
                 ->createWithConversation($id, $message, $file);
         } else {
             $this->flashBag->add('error', (string) $form->get('file')->getErrors());
