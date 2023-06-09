@@ -9,7 +9,7 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\OpenMarketplace\Facade\Message\AddMessageFacade"
+        <service class="BitBag\OpenMarketplace\Component\Messaging\MessagePersister"
                  id="bitbag.open_marketplace.component.messaging.persister.message">
             <argument type="service" id="open_marketplace.current_user_resolver" />
             <argument type="service" id="bitbag.sylius_open_marketplace_plugin.uploader.conversation_file_uploader" />
