@@ -2,13 +2,18 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/*.xml"/>
+    </imports>
+
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\OpenMarketplace\Component\Messaging\Factory\MessageFactory"
-                 id="bitbag.open_marketplace.component.messaging.factory.message"
-                 decorates="open_marketplace.factory.conversation_message">
-            <argument type="service" id="bitbag.open_marketplace.component.messaging.factory.message.inner" />
+        <service class="BitBag\OpenMarketplace\Facade\Message\AddMessageFacade"
+                 id="bitbag.open_marketplace.component.messaging.persister.message">
+            <argument type="service" id="open_marketplace.current_user_resolver" />
+            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.uploader.conversation_file_uploader" />
+            <argument type="service" id="open_marketplace.repository.conversation" />
         </service>
     </services>
 </container>

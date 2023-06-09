@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\ConversationMessage;
 
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Message;
-use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\MessageType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,7 +25,7 @@ final class AddMessageAction
 {
     private FormFactoryInterface $formFactory;
 
-    private AddMessageFacadeInterface $addMessageFacade;
+    private MessagePersisterInterface $addMessageFacade;
 
     private UrlGeneratorInterface $urlGenerator;
 
@@ -33,7 +33,7 @@ final class AddMessageAction
 
     public function __construct(
         FormFactoryInterface $formFactory,
-        AddMessageFacadeInterface $addMessageFacade,
+        MessagePersisterInterface $addMessageFacade,
         UrlGeneratorInterface $urlGenerator,
         FlashBag $flashBag
     ) {

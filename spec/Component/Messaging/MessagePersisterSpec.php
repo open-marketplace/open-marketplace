@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Facade\Message;
+namespace spec\BitBag\OpenMarketplace\Component\Messaging;
 
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersister;
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
-use BitBag\OpenMarketplace\Facade\Message\AddMessageFacade;
-use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
@@ -24,7 +24,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
-final class AddMessageFacadeSpec extends ObjectBehavior
+final class MessagePersisterSpec extends ObjectBehavior
 {
     public function let(
         CurrentUserResolverInterface $actualUserResolver,
@@ -36,8 +36,8 @@ final class AddMessageFacadeSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(AddMessageFacade::class);
-        $this->shouldImplement(AddMessageFacadeInterface::class);
+        $this->shouldHaveType(MessagePersister::class);
+        $this->shouldImplement(MessagePersisterInterface::class);
     }
 
     public function it_processes_message_and_adds_it_to_given_conversation(
@@ -48,7 +48,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         MessageInterface $message,
         ConversationInterface $conversation
     ): void {
-        $file = new UploadedFile('spec/Facade/Message/testfiles/test.txt', 'test.txt');
+        $file = new UploadedFile('spec/testfiles/test.txt', 'test.txt');
         $filename = 'filename';
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($user);
@@ -135,7 +135,7 @@ final class AddMessageFacadeSpec extends ObjectBehavior
         MessageInterface $message,
         ConversationInterface $conversation
     ): void {
-        $file = new UploadedFile('spec/Facade/Message/testfiles/test.txt', 'test.txt');
+        $file = new UploadedFile('spec/testfiles/test.txt', 'test.txt');
         $filename = 'filename';
         $messageContent = 'messageContent';
         $actualUserResolver->resolve()->willReturn($user);

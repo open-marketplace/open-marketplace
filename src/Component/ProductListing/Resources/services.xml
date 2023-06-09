@@ -5,6 +5,7 @@
     <imports>
         <import resource="services/*.xml"/>
     </imports>
+
     <services>
         <defaults autowire="false" autoconfigure="false" />
 

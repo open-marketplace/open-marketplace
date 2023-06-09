@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
 
 use ApiPlatform\Core\Api\UrlGeneratorInterface;
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Factory\MessageFactoryInterface;
-use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 final class SendArchiveRequestAction
 {
-    private AddMessageFacadeInterface $addMessageFacade;
+    private MessagePersisterInterface $addMessageFacade;
 
     private UrlGeneratorInterface $urlGenerator;
 
@@ -31,7 +31,7 @@ final class SendArchiveRequestAction
     private RequestStack $requestStack;
 
     public function __construct(
-        AddMessageFacadeInterface $addMessageFacade,
+        MessagePersisterInterface $addMessageFacade,
         UrlGeneratorInterface $urlGenerator,
         MessageFactoryInterface $messageFactory,
         RequestStack $requestStack,

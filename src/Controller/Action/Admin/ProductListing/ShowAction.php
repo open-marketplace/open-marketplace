@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing;
 
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
@@ -41,7 +41,7 @@ final class ShowAction
 
     private FormFactoryInterface $formFactory;
 
-    private AddMessageFacadeInterface $addMessageFacade;
+    private MessagePersisterInterface $addMessageFacade;
 
     private RouterInterface $router;
 
@@ -51,7 +51,7 @@ final class ShowAction
         ProductDraftRepositoryInterface $productDraftRepository,
         ConversationRepositoryInterface $conversationRepository,
         FormFactoryInterface $formFactory,
-        AddMessageFacadeInterface $addMessageFacade,
+        MessagePersisterInterface $addMessageFacade,
         RouterInterface $router,
         ) {
         $this->productListingRepository = $productListingRepository;

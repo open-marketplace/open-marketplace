@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Facade\Message;
+namespace BitBag\OpenMarketplace\Component\Messaging;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
@@ -20,7 +20,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
-final class AddMessageFacade implements AddMessageFacadeInterface
+final class MessagePersister implements MessagePersisterInterface
 {
     private CurrentUserResolverInterface $currentUserResolver;
 

@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Facade\Message;
+namespace BitBag\OpenMarketplace\Component\Messaging;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-interface AddMessageFacadeInterface
+interface MessagePersisterInterface
 {
     public function createWithConversation(
         int $conversationId,

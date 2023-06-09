@@ -27,7 +27,7 @@
             <argument type="service" id="form.factory"/>
             <argument type="service" id="twig"/>
             <argument type="service" id="api_platform.router"/>
-            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message"/>
             <argument type="service" id="open_marketplace.repository.conversation"/>
             <tag name="controller.service_arguments" />
         </service>
@@ -35,7 +35,7 @@
         <service id="open_marketplace.controller.action.conversation_message.add_message_action"
                  class="BitBag\OpenMarketplace\Controller\Action\ConversationMessage\AddMessageAction">
             <argument type="service" id="form.factory" />
-            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade" />
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message" />
             <argument type="service" id="router"/>
             <argument type="service" id="session.flash_bag"/>
             <tag name="controller.service_arguments" />
@@ -43,7 +43,7 @@
 
         <service class="BitBag\OpenMarketplace\Controller\Action\Conversation\SendArchiveRequestAction"
                  id="open_marketplace.controller.action.conversation.send_archive_request_action">
-            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade" />
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message" />
             <argument type="service" id="api_platform.router" />
             <argument type="service" id="bitbag.open_marketplace.component.messaging.factory.message" />
             <argument type="service" id="request_stack" />
@@ -82,7 +82,7 @@
             <argument type="service" id="open_marketplace.repository.product_draft" />
             <argument type="service" id="open_marketplace.repository.conversation"/>
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade"/>
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message"/>
             <argument type="service" id="router.default" />
             <argument type="service" id="translator" />
             <tag name="controller.service_arguments" />

@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
 
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
-use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -31,7 +31,7 @@ final class CreateNewConversationAction
 
     private UrlGeneratorInterface $urlGenerator;
 
-    private AddMessageFacadeInterface $addMessageFacade;
+    private MessagePersisterInterface $addMessageFacade;
 
     private ConversationRepositoryInterface $conversationRepository;
 
@@ -39,7 +39,7 @@ final class CreateNewConversationAction
         FormFactoryInterface $formFactory,
         Environment $templatingEngine,
         UrlGeneratorInterface $urlGenerator,
-        AddMessageFacadeInterface $addMessageFacade,
+        MessagePersisterInterface $addMessageFacade,
         ConversationRepositoryInterface $conversationRepository
     ) {
         $this->formFactory = $formFactory;
