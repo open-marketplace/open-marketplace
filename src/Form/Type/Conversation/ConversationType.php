@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\Type\Conversation;
 
-use BitBag\OpenMarketplace\Entity\Conversation\Category;
-use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
-use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Category;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepository;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;

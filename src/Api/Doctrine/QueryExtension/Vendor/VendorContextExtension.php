@@ -16,7 +16,7 @@ use ApiPlatform\Metadata\Operation;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\FilterVendorStrategy;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
-use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 

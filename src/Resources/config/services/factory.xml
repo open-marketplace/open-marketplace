@@ -5,12 +5,6 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\OpenMarketplace\Factory\Message\MessageFactory"
-                 id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory"
-                 decorates="bitbag_open_marketplace.factory.conversation_message" >
-            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory.inner" />
-        </service>
-
         <service class="BitBag\OpenMarketplace\Factory\VendorFactory"
                  id="open_marketplace.factory.vendor">
             <argument>%env(DEFAULT_VENDOR_COMMISSION)%</argument>

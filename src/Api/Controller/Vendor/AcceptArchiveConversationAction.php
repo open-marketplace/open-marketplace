@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Controller\Vendor;
 
-use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
-use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 

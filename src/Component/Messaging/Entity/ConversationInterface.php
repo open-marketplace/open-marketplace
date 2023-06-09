@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Entity\Conversation;
+namespace BitBag\OpenMarketplace\Component\Messaging\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ShopUserInterface;

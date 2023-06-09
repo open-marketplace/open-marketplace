@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Facade\Message;
 
-use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface AddMessageFacadeInterface

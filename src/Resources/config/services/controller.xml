@@ -45,7 +45,7 @@
                  id="open_marketplace.controller.action.conversation.send_archive_request_action">
             <argument type="service" id="bitbag.sylius_open_marketplace_plugin.facade.message.add_message_facade" />
             <argument type="service" id="api_platform.router" />
-            <argument type="service" id="bitbag.sylius_open_marketplace_plugin.factory.message.message_factory" />
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.factory.message" />
             <argument type="service" id="request_stack" />
             <tag name="controller.service_arguments" />
         </service>

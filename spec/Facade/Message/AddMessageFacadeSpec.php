@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Facade\Message;
 
-use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
-use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Facade\Message\AddMessageFacade;
 use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;

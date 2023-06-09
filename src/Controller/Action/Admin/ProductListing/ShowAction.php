@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing;
 
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
-use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
-use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
 use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;

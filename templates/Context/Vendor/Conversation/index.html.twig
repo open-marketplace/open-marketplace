@@ -91,7 +91,7 @@
                                         {{ 'open_marketplace.ui.conversation.no_subject'|trans|lower }}
                                     {% endif %}
                                     {% set lastMessage = conversation.messages|last.content %}
-                                    {% set archiveText = constant('BitBag\\OpenMarketplace\\Storage\\MessagesStorage::ARCHIVE_REQUEST_MESSAGE') %}
+                                    {% set archiveText = constant('BitBag\\OpenMarketplace\\Component\\Messaging\\MessagesStorage::ARCHIVE_REQUEST_MESSAGE') %}
                                     {% if archiveText in lastMessage %}
                                         {% set lastMessage = 'open_marketplace.ui.conversation.archive_request_text_first_line'|trans %}
                                     {% endif %}

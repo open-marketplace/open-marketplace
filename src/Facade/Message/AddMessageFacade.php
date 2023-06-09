@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Facade\Message;
 
-use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
-use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;

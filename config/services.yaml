@@ -7,5 +7,6 @@ imports:
     - { resource: "../src/Component/Core/Admin/Resources/services.xml" }
     - { resource: "../src/Component/Core/Shop/Resources/services.xml" }
     - { resource: "../src/Component/Core/Vendor/Resources/services.xml" }
+    - { resource: "../src/Component/Messaging/Resources/services.xml" }
     - { resource: "../src/Component/Override/Resources/services.xml" }
     - { resource: "../src/Component/ProductListing/Resources/services.xml" }

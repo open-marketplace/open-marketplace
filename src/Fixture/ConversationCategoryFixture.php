@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Fixture;
 
-use BitBag\OpenMarketplace\Entity\Conversation\CategoryInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\CategoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;

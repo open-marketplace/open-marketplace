@@ -55,7 +55,7 @@
 
         <service id="open_marketplace.fixture.example_factory.conversation" class="BitBag\OpenMarketplace\Fixture\Factory\ConversationExampleFactory">
             <argument type="service" id="open_marketplace.factory.conversation" />
-            <argument type="service" id="bitbag_open_marketplace.factory.conversation_message" />
+            <argument type="service" id="open_marketplace.factory.conversation_message" />
             <argument type="service" id="open_marketplace.repository.vendor_repository" />
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="open_marketplace.repository.conversation_category" />

@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Messaging\Factory;
 
+use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Component\Messaging\MessagesStorage;
-use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class MessageFactory implements MessageFactoryInterface

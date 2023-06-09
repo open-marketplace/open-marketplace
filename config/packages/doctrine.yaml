@@ -23,6 +23,11 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/src/Resources/config/doctrine'
                 prefix: 'BitBag\OpenMarketplace\Entity'
+            MessagingComponent:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Component/Messaging/Resources/doctrine'
+                prefix: 'BitBag\OpenMarketplace\Component\Messaging\Entity'
             ProductListingComponent:
                 is_bundle: false
                 type: xml

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\ConversationMessage;
 
-use BitBag\OpenMarketplace\Entity\Conversation\Message;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Message;
 use BitBag\OpenMarketplace\Facade\Message\AddMessageFacadeInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\MessageType;
 use Symfony\Component\Form\FormFactoryInterface;

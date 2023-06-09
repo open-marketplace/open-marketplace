@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
 
-use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Form\Type\Conversation\MessageType;
 use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Security\Voter\ConversationOwningVoter;

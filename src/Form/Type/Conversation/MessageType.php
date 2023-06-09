@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\Type\Conversation;
 
-use BitBag\OpenMarketplace\Entity\Conversation\Message;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Message;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

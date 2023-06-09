@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
-use BitBag\OpenMarketplace\Entity\Conversation\ConversationInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Security;
 
