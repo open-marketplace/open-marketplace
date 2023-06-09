@@ -39,8 +39,9 @@ final class UpdateProductListingHandler
 
     public function __invoke(UpdateProductListingInterface $updateProductListing): ListingInterface
     {
-        /** @var ListingInterface $productListing */
         $productListingId = $updateProductListing->getProductListing()->getId();
+
+        /** @var ListingInterface $productListing */
         $productListing = $this->productListingRepository->find($productListingId);
         Assert::isInstanceOf($productListing, ListingInterface::class);
 

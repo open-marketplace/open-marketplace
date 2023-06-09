@@ -21,7 +21,7 @@ final class DraftCloner implements DraftClonerInterface
         private DraftImagesClonerInterface $draftImagesCloner,
         private DraftTranslationClonerInterface $draftTranslationCloner,
         private DraftPricingClonerInterface $draftPricingCloner,
-    ) {
+        ) {
     }
 
     public function clone(

@@ -17,12 +17,10 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class DraftAttributesCloner implements DraftAttributesClonerInterface
 {
-
     public function __construct(
         private DraftAttributeValueFactoryInterface $draftAttributeValueFactory,
         private EntityManagerInterface $entityManager
     ) {
-
     }
 
     public function clone(

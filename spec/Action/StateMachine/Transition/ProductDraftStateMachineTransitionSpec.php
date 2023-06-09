@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Action\StateMachine\Transition;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransition;
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;

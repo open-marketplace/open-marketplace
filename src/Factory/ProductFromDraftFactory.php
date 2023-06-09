@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Factory;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;

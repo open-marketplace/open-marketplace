@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
 
 use ApiPlatform\Core\Api\UrlGeneratorInterface;
-use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Factory\MessageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

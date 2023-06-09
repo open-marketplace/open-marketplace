@@ -141,7 +141,7 @@ class Listing implements ListingInterface
 
     public function insertDraft(DraftInterface $newDraft): void
     {
-        if ($this->getLatestDraft() !== null) {
+        if (null !== $this->getLatestDraft()) {
             $newDraft->setVersionNumber($this->getLatestDraft()->getVersionNumber());
             $newDraft->incrementVersion();
         }
@@ -204,8 +204,8 @@ class Listing implements ListingInterface
 
     public function needsNewDraft(): bool
     {
-        return $this->getLatestDraft() !== null &&
-            $this->getLatestDraft()->isCreated() === false;
+        return null !== $this->getLatestDraft() &&
+            false === $this->getLatestDraft()->isCreated();
     }
 
     public function canBeVerified(): bool

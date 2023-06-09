@@ -29,5 +29,4 @@ final class DraftImageFactory implements DraftImageFactoryInterface
 
         return $image;
     }
-
 }

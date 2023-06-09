@@ -69,7 +69,7 @@ final class CreateProductAction
         RouterInterface $router,
         Environment $twig,
         TokenStorageInterface $tokenStorage,
-    ) {
+        ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->newResourceFactory = $newResourceFactory;

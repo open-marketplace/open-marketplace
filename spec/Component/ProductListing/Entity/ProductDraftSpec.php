@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Component\ProductListing\Entity;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValueInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;

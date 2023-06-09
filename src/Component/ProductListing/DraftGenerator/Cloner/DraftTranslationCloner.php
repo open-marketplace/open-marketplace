@@ -21,7 +21,6 @@ final class DraftTranslationCloner implements DraftTranslationClonerInterface
     public function __construct(
         private FactoryInterface $translationFactory
     ) {
-
     }
 
     public function clone(DraftInterface $from, DraftInterface $to): void

@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class DraftImagesCloner implements DraftImagesClonerInterface
 {
-
     public function __construct(
         private DraftImageFactoryInterface $draftImageFactory,
         private string $imageUploadPath,

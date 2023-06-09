@@ -42,7 +42,7 @@ final class DraftPricingClonerSpec extends ObjectBehavior
         DraftInterface $productDraft,
         ListingPriceInterface $price,
         ListingPriceInterface $newPrice,
-    ): void {
+        ): void {
         $productDraft->getProductListingPrices()
             ->willReturn(new ArrayCollection([$price->getWrappedObject()]));
 
@@ -53,7 +53,8 @@ final class DraftPricingClonerSpec extends ObjectBehavior
             ->willReturn('en_US');
 
         $priceFactory->createForChannelCode(
-            'en_US', $productDraft
+            'en_US',
+            $productDraft
         )->willReturn($newPrice);
 
         $price->getPrice()

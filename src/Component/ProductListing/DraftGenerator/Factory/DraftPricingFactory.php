@@ -20,7 +20,6 @@ final class DraftPricingFactory implements DraftPricingFactoryInterface
     public function __construct(
         private FactoryInterface $resourceFactory,
     ) {
-
     }
 
     public function createForChannelCode(

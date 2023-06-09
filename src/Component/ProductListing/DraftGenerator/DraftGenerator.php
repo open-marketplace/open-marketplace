@@ -24,7 +24,6 @@ final class DraftGenerator implements DraftGeneratorInterface
         private DraftClonerInterface $draftCloner,
         private EntityManagerInterface $entityManager
     ) {
-
     }
 
     public function generateNextDraft(ListingInterface $listing): DraftInterface

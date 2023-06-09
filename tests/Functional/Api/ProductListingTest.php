@@ -258,7 +258,6 @@ final class ProductListingTest extends FunctionalTestCase
 
         $this->client->request('PUT', '/api/v2/shop/account/vendor/product-listings/' . $productListing->getUuid(), [], [
             'images' => [
-
             ],
         ], $header, json_encode([
             'productDraft' => [

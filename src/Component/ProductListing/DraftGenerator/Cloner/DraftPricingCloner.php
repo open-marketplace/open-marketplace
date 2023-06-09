@@ -20,7 +20,6 @@ final class DraftPricingCloner implements DraftPricingClonerInterface
     public function __construct(
         private DraftPricingFactoryInterface $priceFactory
     ) {
-
     }
 
     public function clone(DraftInterface $from, DraftInterface $to): void

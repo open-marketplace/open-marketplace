@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

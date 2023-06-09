@@ -26,8 +26,7 @@ final class ListingPersister implements ListingPersisterInterface
         private DraftClonerInterface $draftCloner,
         private DraftGeneratorInterface $draftGenerator,
         private ImageUploaderInterface $imageUploader,
-    ) {
-
+        ) {
     }
 
     public function createNewProductListing(

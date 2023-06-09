@@ -579,7 +579,7 @@ class Draft implements ResourceInterface, DraftInterface
 
     public function isCreated(): bool
     {
-        return $this->status === self::STATUS_CREATED;
+        return self::STATUS_CREATED === $this->status;
     }
 
     public function markAsCreated(): void

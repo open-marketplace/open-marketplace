@@ -21,7 +21,6 @@ final class DraftTaxonCloner implements DraftTaxonClonerInterface
         private DraftTaxonFactoryInterface $draftTaxonFactory,
         private EntityManagerInterface $entityManager
     ) {
-
     }
 
     public function clone(

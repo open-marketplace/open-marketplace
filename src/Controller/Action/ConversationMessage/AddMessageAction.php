@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\ConversationMessage;
 
-use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Message;
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\MessageType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

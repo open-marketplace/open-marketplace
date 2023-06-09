@@ -19,7 +19,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class DraftAttributeFactory implements DraftAttributeFactoryInterface
 {
-
     public function __construct(
         private FactoryInterface $resourceFactory,
         private ServiceRegistryInterface $attributeTypesRegistry

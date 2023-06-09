@@ -33,7 +33,6 @@ final class MenuListener
         private StateMachineFactoryInterface $stateMachineFactory,
         private CsrfTokenManagerInterface $csrfTokenManager
     ) {
-
     }
 
     public function createVendorSidebar(array $options): ItemInterface

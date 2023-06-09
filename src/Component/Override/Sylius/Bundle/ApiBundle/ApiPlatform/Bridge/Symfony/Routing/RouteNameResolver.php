@@ -22,7 +22,6 @@ final class RouteNameResolver implements RouteNameResolverInterface
         private RouterInterface $router,
         private PathPrefixProviderInterface $pathPrefixProvider,
     ) {
-
     }
 
     public function getRouteName(string $resourceClass, $operationType /*, array $context = [] */): string

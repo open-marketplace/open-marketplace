@@ -15,8 +15,8 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation;
 use BitBag\OpenMarketplace\Repository\DraftAttributeRepositoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use function PHPUnit\Framework\assertTrue;
+use Sylius\Behat\Service\SharedStorageInterface;
 
 final class DraftAttributeContext extends RawMinkContext
 {

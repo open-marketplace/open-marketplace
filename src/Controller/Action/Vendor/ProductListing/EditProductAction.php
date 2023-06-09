@@ -63,7 +63,7 @@ final class EditProductAction
         RequestStack $requestStack,
         Environment $twig,
         RouterInterface $router,
-    ) {
+        ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->productDraftRepository = $productDraftRepository;

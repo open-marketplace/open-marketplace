@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Action\StateMachine\Transition;
 
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use SM\Factory\FactoryInterface;
 
 final class ProductDraftStateMachineTransition implements ProductDraftStateMachineTransitionInterface
