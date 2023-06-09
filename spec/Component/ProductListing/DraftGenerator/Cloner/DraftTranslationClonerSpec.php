@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Cloner;
+namespace spec\BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTranslationCloner;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftTranslationClonerInterface;
@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class ProductListingTranslationClonerSpec extends ObjectBehavior
+final class DraftTranslationClonerSpec extends ObjectBehavior
 {
     public function let(FactoryInterface $translationFactory): void
     {
@@ -97,6 +97,6 @@ final class ProductListingTranslationClonerSpec extends ObjectBehavior
         $newProductDraft->addTranslationWithKey($newTranslation, 'en_US')
         ->shouldBeCalled();
 
-        $this->cloneTranslation($newProductDraft, $productDraft);
+        $this->clone($productDraft, $newProductDraft);
     }
 }

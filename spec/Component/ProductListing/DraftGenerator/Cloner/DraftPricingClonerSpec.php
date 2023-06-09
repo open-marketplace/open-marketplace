@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Cloner;
+namespace spec\BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftPricingCloner;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftPricingClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftPricingFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class ProductListingPricingClonerSpec extends ObjectBehavior
+final class DraftPricingClonerSpec extends ObjectBehavior
 {
-    public function let(FactoryInterface $priceFactory): void
+    public function let(DraftPricingFactoryInterface $priceFactory): void
     {
         $this->beConstructedWith($priceFactory);
     }
@@ -37,35 +37,33 @@ final class ProductListingPricingClonerSpec extends ObjectBehavior
     }
 
     public function it_clones_product_listing_prices(
-        FactoryInterface $priceFactory,
+        DraftPricingFactoryInterface $priceFactory,
         DraftInterface $newProductDraft,
         DraftInterface $productDraft,
         ListingPriceInterface $price,
         ListingPriceInterface $newPrice,
-        ): void {
+    ): void {
         $productDraft->getProductListingPrices()
             ->willReturn(new ArrayCollection([$price->getWrappedObject()]));
 
-        $priceFactory->createNew()
-            ->willReturn($newPrice);
+        $price->getProductDraft()
+            ->willReturn($productDraft);
 
         $price->getChannelCode()
             ->willReturn('en_US');
 
+        $priceFactory->createForChannelCode(
+            'en_US', $productDraft
+        )->willReturn($newPrice);
+
         $price->getPrice()
             ->willReturn(1000);
-
-        $newPrice->getChannelCode()
-            ->willReturn('en_US');
 
         $price->getMinimumPrice()
             ->willReturn(1000);
 
         $price->getOriginalPrice()
             ->willReturn(1000);
-
-        $newPrice->setChannelCode('en_US')
-            ->shouldBeCalled();
 
         $newPrice->setPrice(1000)
             ->shouldBeCalled();
@@ -76,11 +74,11 @@ final class ProductListingPricingClonerSpec extends ObjectBehavior
         $newPrice->setOriginalPrice(1000)
             ->shouldBeCalled();
 
-        $newPrice->setProductDraft($newProductDraft)
-            ->shouldBeCalled();
+        $newPrice->getChannelCode()
+            ->willReturn('en_US');
 
         $newProductDraft->addProductListingPriceWithKey($newPrice, 'en_US');
 
-        $this->clonePrice($newProductDraft, $productDraft);
+        $this->clone($productDraft, $newProductDraft);
     }
 }
