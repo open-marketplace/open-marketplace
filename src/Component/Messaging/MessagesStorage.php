@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Storage;
+namespace BitBag\OpenMarketplace\Component\Messaging;
 
 final class MessagesStorage
 {

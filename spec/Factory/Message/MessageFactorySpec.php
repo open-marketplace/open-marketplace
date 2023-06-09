@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory\Message;
 
+use BitBag\OpenMarketplace\Component\Messaging\MessagesStorage;
 use BitBag\OpenMarketplace\Entity\Conversation\MessageInterface;
 use BitBag\OpenMarketplace\Factory\Message\MessageFactory;
 use BitBag\OpenMarketplace\Factory\Message\MessageFactoryInterface;
-use BitBag\OpenMarketplace\Storage\MessagesStorage;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
