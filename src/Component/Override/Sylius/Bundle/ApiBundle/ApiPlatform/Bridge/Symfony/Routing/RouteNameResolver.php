@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Override\Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing;
+namespace BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing;
 
 use ApiPlatform\Core\Api\OperationType;
 use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
@@ -22,6 +22,7 @@ final class RouteNameResolver implements RouteNameResolverInterface
         private RouterInterface $router,
         private PathPrefixProviderInterface $pathPrefixProvider,
     ) {
+
     }
 
     public function getRouteName(string $resourceClass, $operationType /*, array $context = [] */): string

@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Override\Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing;
+namespace spec\BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing;
 
 use ApiPlatform\Core\Api\OperationType;
 use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
-use BitBag\OpenMarketplace\Override\Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\RouteNameResolver;
+use BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\RouteNameResolver;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Symfony\Component\Routing\Route;
