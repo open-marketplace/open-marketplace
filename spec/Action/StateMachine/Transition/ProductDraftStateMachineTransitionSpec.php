@@ -14,7 +14,7 @@ namespace spec\BitBag\OpenMarketplace\Action\StateMachine\Transition;
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransition;
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
@@ -46,25 +46,25 @@ final class ProductDraftStateMachineTransitionSpec extends ObjectBehavior
     ): void {
         $productDraftStateMachineFactory->get(
             $productDraft,
-            ProductDraftTransitions::GRAPH
+            DraftTransitions::GRAPH
         )->willReturn($stateMachine);
 
-        $stateMachine->can(ProductDraftTransitions::TRANSITION_ACCEPT)
+        $stateMachine->can(DraftTransitions::TRANSITION_ACCEPT)
             ->willReturn(true);
 
-        $stateMachine->apply(ProductDraftTransitions::TRANSITION_ACCEPT)
+        $stateMachine->apply(DraftTransitions::TRANSITION_ACCEPT)
             ->willReturn(true);
 
-        $productDraftStateMachineFactory->get($productDraft, ProductDraftTransitions::GRAPH)
+        $productDraftStateMachineFactory->get($productDraft, DraftTransitions::GRAPH)
             ->shouldBeCalled();
 
-        $stateMachine->can(ProductDraftTransitions::TRANSITION_ACCEPT)
+        $stateMachine->can(DraftTransitions::TRANSITION_ACCEPT)
             ->shouldBeCalled();
 
-        $stateMachine->apply(ProductDraftTransitions::TRANSITION_ACCEPT)
+        $stateMachine->apply(DraftTransitions::TRANSITION_ACCEPT)
             ->shouldBeCalled();
 
-        $this->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
+        $this->applyIfCan($productDraft, DraftTransitions::TRANSITION_ACCEPT);
     }
 
     public function it_cannot_apply_transition(
@@ -74,21 +74,21 @@ final class ProductDraftStateMachineTransitionSpec extends ObjectBehavior
     ): void {
         $productDraftStateMachineFactory->get(
             $productDraft,
-            ProductDraftTransitions::GRAPH
+            DraftTransitions::GRAPH
         )->willReturn($stateMachine);
 
-        $stateMachine->can(ProductDraftTransitions::TRANSITION_ACCEPT)
+        $stateMachine->can(DraftTransitions::TRANSITION_ACCEPT)
             ->willReturn(false);
 
-        $productDraftStateMachineFactory->get($productDraft, ProductDraftTransitions::GRAPH)
+        $productDraftStateMachineFactory->get($productDraft, DraftTransitions::GRAPH)
             ->shouldBeCalled();
 
-        $stateMachine->can(ProductDraftTransitions::TRANSITION_ACCEPT)
+        $stateMachine->can(DraftTransitions::TRANSITION_ACCEPT)
             ->shouldBeCalled();
 
-        $stateMachine->apply(ProductDraftTransitions::TRANSITION_ACCEPT)
+        $stateMachine->apply(DraftTransitions::TRANSITION_ACCEPT)
             ->shouldNotBeCalled();
 
-        $this->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
+        $this->applyIfCan($productDraft, DraftTransitions::TRANSITION_ACCEPT);
     }
 }

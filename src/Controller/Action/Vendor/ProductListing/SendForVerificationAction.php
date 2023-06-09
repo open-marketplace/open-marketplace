@@ -13,9 +13,9 @@ namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
-use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -55,7 +55,7 @@ final class SendForVerificationAction
         $productDraft = $this->productDraftRepository->findLatestDraft($listing);
 
         if (null != $productDraft && DraftInterface::STATUS_CREATED === $productDraft->getStatus()) {
-            $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
+            $this->productDraftStateMachineTransition->applyIfCan($productDraft, DraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
         }
 
         return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));

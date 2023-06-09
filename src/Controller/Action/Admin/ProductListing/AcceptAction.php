@@ -14,9 +14,9 @@ namespace BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing;
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
-use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -51,7 +51,7 @@ final class AcceptAction
         /** @var DraftInterface $latestProductDraft */
         $latestProductDraft = $this->productDraftRepository->findLatestDraft($productListing);
 
-        $this->productDraftStateMachineTransition->applyIfCan($latestProductDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
+        $this->productDraftStateMachineTransition->applyIfCan($latestProductDraft, DraftTransitions::TRANSITION_ACCEPT);
 
         return new RedirectResponse($this->router->generate('open_marketplace_admin_product_listing_index'));
     }

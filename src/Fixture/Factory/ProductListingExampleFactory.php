@@ -20,9 +20,9 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -139,8 +139,8 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         $this->createRandomImage($productDraft, $options);
         $this->attachToTaxons($productDraft, $options);
 
-        $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
-        $this->productDraftStateMachineTransition->applyIfCan($productDraft, ProductDraftTransitions::TRANSITION_ACCEPT);
+        $this->productDraftStateMachineTransition->applyIfCan($productDraft, DraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
+        $this->productDraftStateMachineTransition->applyIfCan($productDraft, DraftTransitions::TRANSITION_ACCEPT);
 
         return $productDraft;
     }

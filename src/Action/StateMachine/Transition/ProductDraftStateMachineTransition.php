@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Action\StateMachine\Transition;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use SM\Factory\FactoryInterface;
 
 final class ProductDraftStateMachineTransition implements ProductDraftStateMachineTransitionInterface
@@ -30,7 +30,7 @@ final class ProductDraftStateMachineTransition implements ProductDraftStateMachi
     ): void {
         $stateMachine = $this->productDraftStateMachineFactory->get(
             $productDraft,
-            ProductDraftTransitions::GRAPH
+            DraftTransitions::GRAPH
         );
 
         if (!$stateMachine->can($transition)) {

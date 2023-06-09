@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Transitions;
+namespace BitBag\OpenMarketplace\Component\ProductListing;
 
-final class ProductDraftTransitions
+final class DraftTransitions
 {
     public const GRAPH = 'product_draft';
 

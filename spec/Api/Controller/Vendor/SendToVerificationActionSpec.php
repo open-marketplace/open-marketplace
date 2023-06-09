@@ -14,7 +14,7 @@ use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachi
 use BitBag\OpenMarketplace\Api\Controller\Vendor\SendToVerificationAction;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Transitions\ProductDraftTransitions;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -38,7 +38,7 @@ final class SendToVerificationActionSpec extends ObjectBehavior
 
         $this($productListing)->shouldReturn($productListing);
 
-        $productDraftStateMachineTransition->applyIfCan(Argument::any(), ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldNotHaveBeenCalled();
+        $productDraftStateMachineTransition->applyIfCan(Argument::any(), DraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldNotHaveBeenCalled();
     }
 
     public function it_do_nothing_if_last_draft_is_not_in_status_created(
@@ -51,7 +51,7 @@ final class SendToVerificationActionSpec extends ObjectBehavior
 
         $this($productListing)->shouldReturn($productListing);
 
-        $productDraftStateMachineTransition->applyIfCan(Argument::any(), ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldNotHaveBeenCalled();
+        $productDraftStateMachineTransition->applyIfCan(Argument::any(), DraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldNotHaveBeenCalled();
     }
 
     public function it_set_status_in_last_draft(
@@ -64,6 +64,6 @@ final class SendToVerificationActionSpec extends ObjectBehavior
 
         $this($productListing)->shouldReturn($productListing);
 
-        $productDraftStateMachineTransition->applyIfCan(Argument::any(), ProductDraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldHaveBeenCalled();
+        $productDraftStateMachineTransition->applyIfCan(Argument::any(), DraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldHaveBeenCalled();
     }
 }
