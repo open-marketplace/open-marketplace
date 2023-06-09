@@ -13,9 +13,9 @@ namespace BitBag\OpenMarketplace\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Repository\CategoryRepositoryInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Repository\Conversation\CategoryRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use Faker\Factory;
 use Faker\Generator;

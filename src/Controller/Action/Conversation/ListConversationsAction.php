@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
+use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

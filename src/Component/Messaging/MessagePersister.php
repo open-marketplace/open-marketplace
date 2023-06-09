@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Messaging;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
-use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
 use Sylius\Component\User\Model\UserInterface;

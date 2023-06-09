@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\Conversation;
+namespace BitBag\OpenMarketplace\Component\Messaging\Repository;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-final class MessageRepository extends EntityRepository implements MessageRepositoryInterface
+final class CategoryRepository extends EntityRepository implements CategoryRepositoryInterface
 {
 }

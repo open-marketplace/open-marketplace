@@ -6,7 +6,7 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation
                 interface: BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: BitBag\OpenMarketplace\Repository\Conversation\ConversationRepository
+                repository: BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepository
                 form: BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType
 
         open_marketplace.conversation_category:
@@ -14,11 +14,11 @@ sylius_resource:
             classes:
                 model: BitBag\OpenMarketplace\Component\Messaging\Entity\Category
                 interface: BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation\CategoryInterface
-                repository: BitBag\OpenMarketplace\Repository\Conversation\CategoryRepository
+                repository: BitBag\OpenMarketplace\Component\Messaging\Repository\CategoryRepository
 
         open_marketplace.conversation_message:
             driver: doctrine/orm
             classes:
                 model: BitBag\OpenMarketplace\Component\Messaging\Entity\Message
                 interface: BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface
-                repository: BitBag\OpenMarketplace\Repository\Conversation\MessageRepository
+                repository: BitBag\OpenMarketplace\Component\Messaging\Repository\MessageRepository

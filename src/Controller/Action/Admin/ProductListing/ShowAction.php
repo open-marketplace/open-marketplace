@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing;
 
-use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
+use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType;
-use BitBag\OpenMarketplace\Repository\Conversation\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;

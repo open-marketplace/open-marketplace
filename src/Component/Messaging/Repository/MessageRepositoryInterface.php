@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\Conversation;
+namespace BitBag\OpenMarketplace\Component\Messaging\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-interface CategoryRepositoryInterface extends RepositoryInterface
+interface MessageRepositoryInterface extends RepositoryInterface
 {
 }

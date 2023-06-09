@@ -9,12 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\Conversation;
+namespace BitBag\OpenMarketplace\Component\Messaging\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\User\Model\UserInterface;
 
-interface ConversationRepositoryInterface extends RepositoryInterface
+interface CategoryRepositoryInterface extends RepositoryInterface
 {
-    public function findAllWithStatusAndUser(string $status, ?UserInterface $user): ?array;
 }
