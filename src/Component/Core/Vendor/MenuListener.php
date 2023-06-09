@@ -26,28 +26,14 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class MenuListener
 {
-    private FactoryInterface $factory;
-
-    private EventDispatcherInterface $eventDispatcher;
-
-    private Security $security;
-
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    private CsrfTokenManagerInterface $csrfTokenManager;
-
     public function __construct(
-        FactoryInterface $factory,
-        EventDispatcherInterface $eventDispatcher,
-        Security $security,
-        StateMachineFactoryInterface $stateMachineFactory,
-        CsrfTokenManagerInterface $csrfTokenManager
+        private FactoryInterface $factory,
+        private EventDispatcherInterface $eventDispatcher,
+        private Security $security,
+        private StateMachineFactoryInterface $stateMachineFactory,
+        private CsrfTokenManagerInterface $csrfTokenManager
     ) {
-        $this->factory = $factory;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->security = $security;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->csrfTokenManager = $csrfTokenManager;
+
     }
 
     public function createVendorSidebar(array $options): ItemInterface
