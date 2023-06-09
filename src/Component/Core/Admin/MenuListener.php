@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Menu;
+namespace BitBag\OpenMarketplace\Component\Core\Admin;
 
 use Knp\Menu\Util\MenuManipulator;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
-final class MultiVendorMarketplaceMenuListener
+final class MenuListener
 {
-    public function buildMenu(MenuBuilderEvent $menuBuilderEvent): void
+    public function addMarketplaceSection(MenuBuilderEvent $menuBuilderEvent): void
     {
         $menu = $menuBuilderEvent->getMenu();
 

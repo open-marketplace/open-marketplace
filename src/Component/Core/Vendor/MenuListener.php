@@ -9,36 +9,48 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Menu;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor;
 
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Security\Voter\Vendor\OrderVoter;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
+use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class VendorMenuBuilder
+final class MenuListener
 {
-    public const EVENT_NAME = 'open_marketplace.menu.shop.vendor';
-
     private FactoryInterface $factory;
 
     private EventDispatcherInterface $eventDispatcher;
 
     private Security $security;
 
+    private StateMachineFactoryInterface $stateMachineFactory;
+
+    private CsrfTokenManagerInterface $csrfTokenManager;
+
     public function __construct(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
-        Security $security
+        Security $security,
+        StateMachineFactoryInterface $stateMachineFactory,
+        CsrfTokenManagerInterface $csrfTokenManager
     ) {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
         $this->security = $security;
+        $this->stateMachineFactory = $stateMachineFactory;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    public function createMenu(array $options): ItemInterface
+    public function createVendorSidebar(array $options): ItemInterface
     {
         /** @var ShopUserInterface $user */
         $user = $this->security->getUser();
@@ -106,7 +118,75 @@ final class VendorMenuBuilder
                 ->setLabelAttribute('icon', 'star');
         }
 
-        $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);
+        $eventName = 'open_marketplace.menu.shop.vendor';
+        $this->eventDispatcher->dispatch(
+            new MenuBuilderEvent($this->factory, $menu),
+            $eventName
+        );
+
+        return $menu;
+    }
+
+    public function addOrderCancelButton(array $options): ItemInterface
+    {
+        $menu = $this->factory->createItem('root');
+
+        if (!isset($options['order'])) {
+            return $menu;
+        }
+
+        $order = $options['order'];
+
+        $stateMachine = $this->stateMachineFactory->get($order, OrderTransitions::GRAPH);
+        if ($this->security->isGranted(OrderVoter::CANCEL, $order)) {
+            $menu
+                ->addChild('cancel', [
+                    'route' => 'open_marketplace_vendor_order_cancel',
+                    'routeParameters' => [
+                        'id' => $order->getId(),
+                        '_csrf_token' => $this->csrfTokenManager->getToken((string) $order->getId())->getValue(),
+                    ],
+                ])
+                ->setAttribute('type', 'transition')
+                ->setAttribute('confirmation', true)
+                ->setLabel('sylius.ui.cancel')
+                ->setLabelAttribute('icon', 'ban')
+                ->setLabelAttribute('color', 'yellow')
+            ;
+        }
+
+        $eventName = 'sylius.menu.vendor.order.show';
+        $this->eventDispatcher->dispatch(
+            new OrderShowMenuBuilderEvent($this->factory, $menu, $order, $stateMachine),
+            $eventName
+        );
+
+        return $menu;
+    }
+
+    public function addShowCustomerOrdersButton(array $options): ItemInterface
+    {
+        $menu = $this->factory->createItem('root');
+
+        if (!isset($options['customer'])) {
+            return $menu;
+        }
+
+        $customer = $options['customer'];
+        $menu
+            ->addChild('order_index', [
+                'route' => 'open_marketplace_vendor_customer_order_index',
+                'routeParameters' => ['id' => $customer->getId()],
+            ])
+            ->setAttribute('type', 'show')
+            ->setLabel('sylius.ui.show_orders')
+        ;
+
+        $eventName = 'sylius.menu.vendor.customer.show';
+        $this->eventDispatcher->dispatch(
+            new CustomerShowMenuBuilderEvent($this->factory, $menu, $customer),
+            $eventName,
+        );
 
         return $menu;
     }
