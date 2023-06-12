@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Calculator;
+namespace spec\BitBag\OpenMarketplace\Component\Order\Calculator;
 
-use BitBag\OpenMarketplace\Calculator\ShipmentUnitsRecalculator;
-use BitBag\OpenMarketplace\Calculator\ShipmentUnitsRecalculatorInterface;
+use BitBag\OpenMarketplace\Component\Order\Calculator\ShipmentUnitsRecalculator;
+use BitBag\OpenMarketplace\Component\Order\Calculator\ShipmentUnitsRecalculatorInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;

@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Refresher;
+namespace spec\BitBag\OpenMarketplace\Component\Order\Refresher;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Refresher\PaymentRefresher;
+use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresher;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;

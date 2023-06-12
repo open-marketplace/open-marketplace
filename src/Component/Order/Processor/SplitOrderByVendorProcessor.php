@@ -16,8 +16,8 @@ use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Component\Order\Event\PostSplitOrderEvent;
 use BitBag\OpenMarketplace\Component\Order\Event\PreSplitOrderEvent;
 use BitBag\OpenMarketplace\Component\Order\OrderManagerInterface;
+use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresherInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Refresher\PaymentRefresherInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 

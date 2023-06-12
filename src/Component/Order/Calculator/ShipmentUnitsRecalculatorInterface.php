@@ -9,7 +9,7 @@ declare(strict_types=1);
  * an email on hello@bitbag.io.
  */
 
-namespace BitBag\OpenMarketplace\Calculator;
+namespace BitBag\OpenMarketplace\Component\Order\Calculator;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 

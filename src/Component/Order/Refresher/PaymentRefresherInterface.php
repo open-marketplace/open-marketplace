@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Refresher;
+namespace BitBag\OpenMarketplace\Component\Order\Refresher;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 
