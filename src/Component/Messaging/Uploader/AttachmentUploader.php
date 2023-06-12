@@ -17,12 +17,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class AttachmentUploader implements FileUploaderInterface
 {
-    private string $targetDirectory;
-
     public function __construct(
-        string $targetDirectory
+        private string $targetDirectory
     ) {
-        $this->targetDirectory = $targetDirectory;
+
     }
 
     public function upload(UploadedFile $file): string

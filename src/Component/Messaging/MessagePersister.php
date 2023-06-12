@@ -22,20 +22,12 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 final class MessagePersister implements MessagePersisterInterface
 {
-    private CurrentUserResolverInterface $currentUserResolver;
-
-    private FileUploaderInterface $fileUploader;
-
-    private ConversationRepositoryInterface $conversationRepository;
-
     public function __construct(
-        CurrentUserResolverInterface $currentUserResolver,
-        FileUploaderInterface $fileUploader,
-        ConversationRepositoryInterface $conversationRepository
+        private CurrentUserResolverInterface $currentUserResolver,
+        private FileUploaderInterface $fileUploader,
+        private ConversationRepositoryInterface $conversationRepository
     ) {
-        $this->currentUserResolver = $currentUserResolver;
-        $this->fileUploader = $fileUploader;
-        $this->conversationRepository = $conversationRepository;
+
     }
 
     public function createWithConversation(

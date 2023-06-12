@@ -17,11 +17,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class MessageFactory implements MessageFactoryInterface
 {
-    private FactoryInterface $conversationMessageFactory;
+    public function __construct(
+        private FactoryInterface $conversationMessageFactory
+    ) {
 
-    public function __construct(FactoryInterface $conversationMessageFactory)
-    {
-        $this->conversationMessageFactory = $conversationMessageFactory;
     }
 
     public function createNew(): MessageInterface
