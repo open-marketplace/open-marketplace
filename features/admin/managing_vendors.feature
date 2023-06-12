@@ -23,3 +23,4 @@ Feature: Listing vendors
     And I follow "Details"
     Then I should see "Shop user"
     And page should contain valid customer "vendor@email.com" link
+    And I should see vendors commission data
