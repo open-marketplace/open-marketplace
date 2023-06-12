@@ -29,7 +29,7 @@
         <service class="BitBag\OpenMarketplace\EventListener\CalculateOrderCommissionListener"
                  id="open_marketplace.event_listener.calculate_order_commission_listener">
 
-            <argument type="tagged_iterator" tag="open_marketplace.vendor_commission_calculator" />
+            <argument type="tagged_iterator" tag="bitbag.open_marketplace.component.order.commission_calculator" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
 
             <tag name="kernel.event_listener" event="order.post_split" method="calculate"/>

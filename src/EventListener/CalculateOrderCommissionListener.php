@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\EventListener;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Event\Order\PostSplitOrderEvent;
+use BitBag\OpenMarketplace\Component\Order\Event\PostSplitOrderEvent;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CalculateOrderCommissionListener

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service id="bitbag.open_marketplace.component.order.factory.order"
+                 class="BitBag\OpenMarketplace\Component\Order\Factory\OrderFactory">
+            <argument>%sylius.model.order.class%</argument>
+        </service>
+
+        <service id="bitbag.open_marketplace.component.order.factory.order_item"
+                 class="BitBag\OpenMarketplace\Component\Order\Factory\OrderItemFactory">
+            <argument >%sylius.model.order_item.class%</argument>
+        </service>
+
+        <service id="bitbag.open_marketplace.component.order.factory.shipment"
+                 class="BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactory">
+            <argument>%sylius.model.shipment.class%</argument>
+            <argument type="service" id="bitbag.open_marketplace.component.order.resolver.vendor_shipping_methods" />
+            <argument type="service" id="sylius.shipping_method_resolver.default" />
+        </service>
+    </services>
+</container>

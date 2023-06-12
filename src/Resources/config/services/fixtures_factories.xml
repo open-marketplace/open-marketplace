@@ -38,8 +38,8 @@
         </service>
 
         <service id="open_marketplace.fixture.example_factory.order" class="BitBag\OpenMarketplace\Fixture\Factory\OrderExampleFactory">
-            <argument type="service" id="open_marketplace.factory.order_factory" />
-            <argument type="service" id="open_marketplace.factory.order_item_factory" />
+            <argument type="service" id="bitbag.open_marketplace.component.order.factory.order" />
+            <argument type="service" id="bitbag.open_marketplace.component.order.factory.order_item" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.channel" />
@@ -50,7 +50,7 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.factory.address" />
             <argument type="service" id="sm.factory" />
-            <argument type="service" id="open_marketplace.processor.order.split_order_by_vendor_processor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"/>
         </service>
 
         <service id="open_marketplace.fixture.example_factory.conversation" class="BitBag\OpenMarketplace\Fixture\Factory\ConversationExampleFactory">

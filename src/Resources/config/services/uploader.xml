@@ -7,11 +7,6 @@
             <argument>%kernel.project_dir%/public/</argument>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Uploader\ConversationFileUploader"
-                 id="bitbag.sylius_open_marketplace_plugin.uploader.conversation_file_uploader">
-            <argument>%env(MESSAGES_FILE_UPLOAD_DIRECTORY)%</argument>
-        </service>
-
         <service class="BitBag\OpenMarketplace\Uploader\VendorRegistrationFileUploader"
                  id="bitbag.sylius_open_marketplace_plugin.uploader.vendor_registration_file_uploader">
             <argument>%env(MESSAGES_FILE_UPLOAD_DIRECTORY)%</argument>

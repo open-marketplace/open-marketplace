@@ -199,7 +199,7 @@
         <service class="BitBag\OpenMarketplace\Controller\Resource\Order\OrderController"
                  id="open_marketplace.controller.order.order_controller"
                  parent="sylius.controller.order">
-            <argument type="service" id="open_marketplace.processor.order.split_order_by_vendor_processor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"/>
         </service>
     </services>
 </container>

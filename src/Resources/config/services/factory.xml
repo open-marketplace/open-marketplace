@@ -64,17 +64,6 @@
         <service class="BitBag\OpenMarketplace\Factory\ProductImageFactory"
                  id="open_marketplace.factory.product_image"/>
 
-        <service class="BitBag\OpenMarketplace\Factory\OrderFactory"
-                 id="open_marketplace.factory.order_factory">
-            <argument>%sylius.model.order.class%</argument>
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\OrderItemFactory"
-                id="open_marketplace.factory.order_item_factory">
-            <argument >%sylius.model.order_item.class%</argument>
-        </service>
-
-
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactory"
                  id="open_marketplace.service.vendor_profile_image_factory" />
 
@@ -91,7 +80,6 @@
 
         <service class="BitBag\OpenMarketplace\Factory\ProductAttributeFactory"
                  id="open_marketplace.factory.product_attribute">
-
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ProductAttributeValueFactory"
@@ -101,14 +89,6 @@
 
         <service class="BitBag\OpenMarketplace\Factory\VendorShippingMethodFactory"
                  id="open_marketplace.factory.vendor_shipping_method">
-
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ShipmentFactory"
-                 id="open_marketplace.factory.shipment">
-            <argument>%sylius.model.shipment.class%</argument>
-            <argument type="service" id="open_marketplace.vendor_shipping_methods_resolver" />
-            <argument type="service" id="sylius.shipping_method_resolver.default" />
         </service>
 
         <service id="open_marketplace.factory.product_taxon" class="Sylius\Component\Resource\Factory\Factory" public="true">

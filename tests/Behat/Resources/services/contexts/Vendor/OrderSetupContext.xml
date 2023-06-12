@@ -10,7 +10,7 @@
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.repository.shop_user"/>
-            <argument type="service" id="open_marketplace.factory.shipment"/>
+            <argument type="service" id="bitbag.open_marketplace.component.order.factory.shipment"/>
             <argument type="service" id="sylius.repository.shipping_method"/>
             <argument type="service" id="sm.factory" />
             <argument type="service" id="sylius.factory.address" />

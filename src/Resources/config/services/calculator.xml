@@ -6,21 +6,5 @@
         <service class="BitBag\OpenMarketplace\Calculator\ShipmentUnitsRecalculator"
                  id="open_marketplace.calculator.shipment_units_recalculator">
         </service>
-
-        <instanceof id="BitBag\OpenMarketplace\Calculator\VendorCommissionCalculatorInterface" autowire="true">
-            <tag name="open_marketplace.vendor_commission_calculator" default-priority-method="getPriority" />
-        </instanceof>
-
-        <service class="BitBag\OpenMarketplace\Calculator\NoVendorCommissionCalculator"
-                 id="open_marketplace.vendor_commission_calculator.no_vendor">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Calculator\VendorNetCommissionCalculator"
-                 id="open_marketplace.vendor_commission_calculator.net">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Calculator\VendorGrossCommissionCalculator"
-                 id="open_marketplace.vendor_commission_calculator.gross">
-        </service>
     </services>
 </container>

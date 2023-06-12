@@ -24,43 +24,5 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="open_marketplace.factory.product_attribute_value"/>
         </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\ShipmentCloner"
-                 id="open_marketplace.cloner.shipment_cloner">
-            <argument type="service" id="open_marketplace.cloner.adjustment_cloner"/>
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\PaymentCloner"
-                 id="open_marketplace.cloner.payment_cloner">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\OrderItemUnitCloner"
-                 id="open_marketplace.cloner.order_item_unit_cloner">
-            <argument type="service" id="open_marketplace.cloner.adjustment_cloner"/>
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\OrderItemCloner"
-            id="open_marketplace.cloner.order_item_cloner">
-            <argument type="service" id="open_marketplace.cloner.adjustment_cloner"/>
-            <argument type="service" id="open_marketplace.cloner.order_item_unit_cloner"/>
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\OrderCloner"
-                 id="open_marketplace.cloner.order_cloner">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="open_marketplace.cloner.address_cloner"/>
-            <argument type="service" id="open_marketplace.cloner.payment_cloner"/>
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\AdjustmentCloner"
-                 id="open_marketplace.cloner.adjustment_cloner">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\AddressCloner"
-                 id="open_marketplace.cloner.address_cloner">
-        </service>
     </services>
 </container>
