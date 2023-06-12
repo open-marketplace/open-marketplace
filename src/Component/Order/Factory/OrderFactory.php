@@ -15,11 +15,10 @@ use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 
 final class OrderFactory implements OrderFactoryInterface
 {
-    private string $orderFQN;
+    public function __construct(
+        private string $orderFQN
+    ) {
 
-    public function __construct(string $orderFQN)
-    {
-        $this->orderFQN = $orderFQN;
     }
 
     public function createNew(): OrderInterface

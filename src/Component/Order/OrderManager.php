@@ -25,36 +25,16 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 
 final class OrderManager implements OrderManagerInterface
 {
-    private OrderFactoryInterface $factory;
-
-    private OrderClonerInterface $cloner;
-
-    private ShipmentClonerInterface $shipmentCloner;
-
-    private EntityManager $entityManager;
-
-    private OrderItemClonerInterface $orderItemCloner;
-
-    private OrderItemFactoryInterface $itemFactory;
-
-    private ShipmentFactoryInterface $shipmentFactory;
-
     public function __construct(
-        OrderFactoryInterface $factory,
-        OrderClonerInterface $cloner,
-        ShipmentClonerInterface $shipmentCloner,
-        EntityManager $entityManager,
-        OrderItemClonerInterface $orderItemCloner,
-        OrderItemFactoryInterface $itemFactory,
-        ShipmentFactoryInterface $shipmentFactory
+        private OrderFactoryInterface $factory,
+        private OrderClonerInterface $cloner,
+        private ShipmentClonerInterface $shipmentCloner,
+        private EntityManager $entityManager,
+        private OrderItemClonerInterface $orderItemCloner,
+        private OrderItemFactoryInterface $itemFactory,
+        private ShipmentFactoryInterface $shipmentFactory
     ) {
-        $this->factory = $factory;
-        $this->cloner = $cloner;
-        $this->shipmentCloner = $shipmentCloner;
-        $this->entityManager = $entityManager;
-        $this->orderItemCloner = $orderItemCloner;
-        $this->itemFactory = $itemFactory;
-        $this->shipmentFactory = $shipmentFactory;
+
     }
 
     public function generateNewSecondaryOrder(

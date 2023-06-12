@@ -19,20 +19,12 @@ use Sylius\Component\Core\Model\Payment;
 
 final class OrderCloner implements OrderClonerInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    private AddressClonerInterface $addressCloner;
-
-    private PaymentClonerInterface $paymentCloner;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        AddressClonerInterface $addressCloner,
-        PaymentClonerInterface $paymentCloner
+        private EntityManagerInterface $entityManager,
+        private AddressClonerInterface $addressCloner,
+        private PaymentClonerInterface $paymentCloner
     ) {
-        $this->entityManager = $entityManager;
-        $this->addressCloner = $addressCloner;
-        $this->paymentCloner = $paymentCloner;
+
     }
 
     public function clone(OrderInterface $originalOrder, OrderInterface $newOrder): void

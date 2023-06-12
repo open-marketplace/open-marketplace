@@ -23,11 +23,10 @@ use Webmozart\Assert\Assert;
 
 final class VendorShippingMethodsResolver implements VendorShippingMethodsResolverInterface
 {
-    private VendorShippingMethodRepositoryInterface $vendorShippingMethodRepository;
+    public function __construct(
+        private VendorShippingMethodRepositoryInterface $vendorShippingMethodRepository
+    ) {
 
-    public function __construct(VendorShippingMethodRepositoryInterface $vendorShippingMethodRepository)
-    {
-        $this->vendorShippingMethodRepository = $vendorShippingMethodRepository;
     }
 
     public function getDefaultShippingMethod(

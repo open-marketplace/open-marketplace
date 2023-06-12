@@ -20,20 +20,12 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 
 final class OrderItemCloner implements OrderItemClonerInterface
 {
-    private AdjustmentClonerInterface $cloner;
-
-    private OrderItemUnitClonerInterface $itemUnitCloner;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        AdjustmentClonerInterface $cloner,
-        OrderItemUnitClonerInterface $itemUnitCloner,
-        EntityManagerInterface $entityManager
+        private AdjustmentClonerInterface $cloner,
+        private OrderItemUnitClonerInterface $itemUnitCloner,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->cloner = $cloner;
-        $this->itemUnitCloner = $itemUnitCloner;
-        $this->entityManager = $entityManager;
+
     }
 
     public function clone(

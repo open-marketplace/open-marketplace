@@ -17,11 +17,10 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 
 final class ShipmentCloner implements ShipmentClonerInterface
 {
-    private AdjustmentClonerInterface $adjustmentCloner;
+    public function __construct(
+        private AdjustmentClonerInterface $adjustmentCloner
+    ) {
 
-    public function __construct(AdjustmentClonerInterface $adjustmentCloner)
-    {
-        $this->adjustmentCloner = $adjustmentCloner;
     }
 
     public function clone(ShipmentInterface $originalShipment, ShipmentInterface $newShipment): void

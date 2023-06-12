@@ -22,16 +22,11 @@ use Webmozart\Assert\Assert;
 
 final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, OrderShipmentByVendorProcessorInterface
 {
-    private ShipmentFactoryInterface $shipmentFactory;
-
-    private ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator;
-
     public function __construct(
-        ShipmentFactoryInterface $shipmentFactory,
-        ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator
+        private ShipmentFactoryInterface $shipmentFactory,
+        private ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator
     ) {
-        $this->shipmentFactory = $shipmentFactory;
-        $this->shipmentUnitsRecalculator = $shipmentUnitsRecalculator;
+
     }
 
     /**

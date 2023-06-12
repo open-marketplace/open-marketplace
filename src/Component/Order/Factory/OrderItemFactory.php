@@ -15,11 +15,10 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 
 final class OrderItemFactory implements OrderItemFactoryInterface
 {
-    private string $orderItemFQN;
+    public function __construct(
+        private string $orderItemFQN
+    ) {
 
-    public function __construct(string $orderItemFQN)
-    {
-        $this->orderItemFQN = $orderItemFQN;
     }
 
     public function createNew(): OrderItemInterface

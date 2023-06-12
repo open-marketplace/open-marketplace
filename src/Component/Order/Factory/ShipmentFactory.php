@@ -20,20 +20,12 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 final class ShipmentFactory implements ShipmentFactoryInterface
 {
-    private string $shipmentFQN;
-
-    private VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver;
-
-    private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver;
-
     public function __construct(
-        string $orderFQN,
-        VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver,
-        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
+        private string $shipmentFQN,
+        private VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver,
+        private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
     ) {
-        $this->shipmentFQN = $orderFQN;
-        $this->defaultVendorShippingMethodResolver = $defaultVendorShippingMethodResolver;
-        $this->defaultShippingMethodResolver = $defaultShippingMethodResolver;
+
     }
 
     public function createNew(): ShipmentInterface

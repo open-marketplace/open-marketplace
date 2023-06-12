@@ -18,16 +18,11 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 
 final class OrderItemUnitCloner implements OrderItemUnitClonerInterface
 {
-    private AdjustmentClonerInterface $cloner;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        AdjustmentClonerInterface $cloner,
-        EntityManagerInterface $entityManager
+        private AdjustmentClonerInterface $cloner,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->cloner = $cloner;
-        $this->entityManager = $entityManager;
+
     }
 
     public function clone(OrderItemUnitInterface $originalUnit, OrderItemUnitInterface $newUnit): void
