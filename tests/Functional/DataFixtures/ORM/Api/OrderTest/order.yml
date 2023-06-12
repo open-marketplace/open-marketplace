@@ -164,7 +164,7 @@ Sylius\Component\Core\Model\ChannelPricing:
     minimumPrice: 5
     channelCode: 'CODE'
     productVariant: '@product_variant_product_peter_1_1'
-BitBag\OpenMarketplace\Entity\Order:
+BitBag\OpenMarketplace\Component\Order\Entity\Order:
   bruce_order_made_by_john_1_main:
     mode: "primary"
     currency_code: "USD"
@@ -246,7 +246,7 @@ BitBag\OpenMarketplace\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter'
-BitBag\OpenMarketplace\Entity\OrderItem:
+BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
   bruce_order_made_by_john_1_item_1:
     order: '@bruce_order_made_by_john_1'
     variant: '@product_variant_product_bruce_1_1'

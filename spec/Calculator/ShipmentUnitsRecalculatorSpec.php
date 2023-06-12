@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Calculator;
 
 use BitBag\OpenMarketplace\Calculator\ShipmentUnitsRecalculator;
 use BitBag\OpenMarketplace\Calculator\ShipmentUnitsRecalculatorInterface;
-use BitBag\OpenMarketplace\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;

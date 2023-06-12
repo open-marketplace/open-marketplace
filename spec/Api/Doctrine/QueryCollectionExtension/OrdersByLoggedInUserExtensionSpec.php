@@ -14,7 +14,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface as LegacyQueryNameGeneratorInterface;
 use BitBag\OpenMarketplace\Api\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Doctrine\ORM\QueryBuilder;

@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Security\Voter\Vendor;
 
-use BitBag\OpenMarketplace\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\OrderItemInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Security\Voter\Vendor\OrderVoter;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;

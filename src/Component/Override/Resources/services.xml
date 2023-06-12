@@ -21,5 +21,12 @@ We are hiring developers from all over the world. Join us and start your new, ex
         >
             <argument type="service" id=".inner"/>
         </service>
+
+        <service id="sylius.custom_inventory.order_inventory_operator"
+                 class="BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\OrderInventoryOperator"
+                 decorates="sylius.inventory.order_inventory_operator"
+        >
+            <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
+        </service>
     </services>
 </container>

@@ -9,10 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Operator;
+namespace BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator;
 
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface as BaseOrderInterface;
 
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
@@ -24,9 +25,9 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
         $this->decoratedOperator = $decoratedOperator;
     }
 
-    public function cancel(OrderInterface $order): void
+    public function cancel(BaseOrderInterface $order): void
     {
-        if (!$order instanceof \BitBag\OpenMarketplace\Entity\OrderInterface) {
+        if (!$order instanceof OrderInterface) {
             return;
         }
         if (null !== $order->getPrimaryOrder()) {
@@ -34,9 +35,9 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
         }
     }
 
-    public function hold(OrderInterface $order): void
+    public function hold(BaseOrderInterface $order): void
     {
-        if (!$order instanceof \BitBag\OpenMarketplace\Entity\OrderInterface) {
+        if (!$order instanceof OrderInterface) {
             return;
         }
         if (null !== $order->getPrimaryOrder()) {
@@ -44,9 +45,9 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
         }
     }
 
-    public function sell(OrderInterface $order): void
+    public function sell(BaseOrderInterface $order): void
     {
-        if (!$order instanceof \BitBag\OpenMarketplace\Entity\OrderInterface) {
+        if (!$order instanceof OrderInterface) {
             return;
         }
         if (null !== $order->getPrimaryOrder()) {

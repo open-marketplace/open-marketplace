@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Controller\Resource\Order;
 
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Processor\Order\SplitOrderByVendorProcessorInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Controller\OrderController as BaseOrderController;

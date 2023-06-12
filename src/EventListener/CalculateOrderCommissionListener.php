@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\EventListener;
 
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Event\Order\PostSplitOrderEvent;
 use Doctrine\ORM\EntityManagerInterface;
 

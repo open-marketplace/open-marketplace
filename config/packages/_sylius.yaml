@@ -21,13 +21,13 @@ sylius_order:
     resources:
         order:
             classes:
-                model: BitBag\OpenMarketplace\Entity\Order
+                model: BitBag\OpenMarketplace\Component\Order\Entity\Order
                 controller: BitBag\OpenMarketplace\Controller\Resource\OrderController
                 repository: BitBag\OpenMarketplace\Repository\OrderRepository
                 form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
         order_item:
             classes:
-                model: BitBag\OpenMarketplace\Entity\OrderItem
+                model: BitBag\OpenMarketplace\Component\Order\Entity\OrderItem
 
 sylius_product:
     resources:

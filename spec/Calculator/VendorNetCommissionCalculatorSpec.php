@@ -13,7 +13,7 @@ namespace spec\BitBag\OpenMarketplace\Calculator;
 
 use BitBag\OpenMarketplace\Calculator\VendorCommissionCalculatorInterface;
 use BitBag\OpenMarketplace\Calculator\VendorNetCommissionCalculator;
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 

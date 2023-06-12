@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Refresher;
 
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use Doctrine\ORM\EntityManager;
 
 final class PaymentRefresher implements PaymentRefresherInterface

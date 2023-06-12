@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Entity;
+namespace BitBag\OpenMarketplace\Component\Order\Entity;
 
-use BitBag\OpenMarketplace\Model\Order\OrderTrait;
-use Sylius\Component\Core\Model\Order as BaseOrder;
+use BitBag\OpenMarketplace\Model\OrderItem\OrderItemTrait;
+use Sylius\Component\Core\Model\OrderItem as BaseOrderItem;
 
-class Order extends BaseOrder implements OrderInterface
+class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
-    use OrderTrait;
+    use OrderItemTrait;
 }

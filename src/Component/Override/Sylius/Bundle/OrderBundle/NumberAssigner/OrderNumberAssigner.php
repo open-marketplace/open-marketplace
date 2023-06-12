@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\OrderBundle\NumberAssigner;
 
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface as DecoratedOrderNumberAssignerInterface;
 
 final class OrderNumberAssigner implements OrderNumberAssignerInterface

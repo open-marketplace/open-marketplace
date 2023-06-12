@@ -9,8 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Entity;
+namespace BitBag\OpenMarketplace\Component\Order\Entity;
 
+use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Core\Model\OrderItemInterface as BaseOrderItemInterface;
 
 interface OrderItemInterface extends BaseOrderItemInterface

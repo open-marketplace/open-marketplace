@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\OrderBundle\NumberAssigner;
 
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner;
 use BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface as BitbagOrderNumberAssignerInterface;
-use BitBag\OpenMarketplace\Entity\OrderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface;

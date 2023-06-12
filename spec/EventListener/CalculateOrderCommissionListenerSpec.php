@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\EventListener;
 
 use BitBag\OpenMarketplace\Calculator\VendorCommissionCalculatorInterface;
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Event\Order\PostSplitOrderEvent;
 use BitBag\OpenMarketplace\EventListener\CalculateOrderCommissionListener;
 use Doctrine\Common\Collections\ArrayCollection;

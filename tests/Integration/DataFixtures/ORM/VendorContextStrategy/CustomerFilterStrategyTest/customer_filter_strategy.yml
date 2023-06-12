@@ -58,7 +58,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Entity\Order:
+BitBag\OpenMarketplace\Component\Order\Entity\Order:
   bruce_order_made_by_john_1:
     currency_code: "USD"
     locale_code: "en-US"

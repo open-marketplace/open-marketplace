@@ -58,7 +58,7 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
 
             $queryBuilder
                 ->andWhere(sprintf('%s.mode != :primaryMode', $rootAlias))
-                ->setParameter('primaryMode', \BitBag\OpenMarketplace\Entity\OrderInterface::PRIMARY_ORDER_MODE)
+                ->setParameter('primaryMode', \BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface::PRIMARY_ORDER_MODE)
             ;
         }
 

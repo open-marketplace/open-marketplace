@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Security\Voter\Vendor;
 
-use BitBag\OpenMarketplace\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Order\OrderTransitions;
