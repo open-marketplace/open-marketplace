@@ -6,7 +6,8 @@
         <defaults autowire="false" autoconfigure="false" />
 
         <service id="bitbag.open_marketplace.component.order.factory.order"
-                 class="BitBag\OpenMarketplace\Component\Order\Factory\OrderFactory">
+                 class="BitBag\OpenMarketplace\Component\Order\Factory\OrderFactory"
+        >
             <argument>%sylius.model.order.class%</argument>
         </service>
 

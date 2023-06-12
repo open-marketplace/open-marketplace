@@ -5,17 +5,19 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessor"
-                 id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor">
+        <service id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"
+                 class="BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessor"
+        >
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="bitbag.open_marketplace.component.order.order_manager"/>
             <argument type="service" id="open_marketplace.refresher.payment_refresher"/>
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Component\Order\Processor\OrderShipmentByVendorProcessor"
+        <service id="bitbag.open_marketplace.component.order.processor.order_shipment_by_vendor"
+                 class="BitBag\OpenMarketplace\Component\Order\Processor\OrderShipmentByVendorProcessor"
                  decorates="sylius.order_processing.order_shipment_processor"
-                 id="bitbag.open_marketplace.component.order.processor.order_shipment_by_vendor">
+        >
             <argument type="service" id="bitbag.open_marketplace.component.order.factory.shipment" />
             <argument type="service" id="open_marketplace.calculator.shipment_units_recalculator" />
         </service>
