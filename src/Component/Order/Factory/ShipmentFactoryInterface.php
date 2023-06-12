@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Factory;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\ShipmentInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 
 interface ShipmentFactoryInterface

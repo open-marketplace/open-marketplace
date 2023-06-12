@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Order\Resolver;
 
-use BitBag\OpenMarketplace\Entity\ShipmentInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
 use BitBag\OpenMarketplace\Repository\VendorShippingMethodRepositoryInterface;

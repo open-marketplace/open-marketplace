@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Entity;
 
 use BitBag\OpenMarketplace\Entity\OptionalVendorAwareInterface;
-use BitBag\OpenMarketplace\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\OrderInterface as BaseOrderInterface;

@@ -12,10 +12,10 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Component\Order\Factory;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\Shipment;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactory;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Resolver\VendorShippingMethodsResolverInterface;
-use BitBag\OpenMarketplace\Entity\Shipment;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
 use PhpSpec\ObjectBehavior;

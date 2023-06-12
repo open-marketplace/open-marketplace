@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\EventListener;
+namespace spec\BitBag\OpenMarketplace\Component\Order\EventListener;
 
 use BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorCommissionCalculatorInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Event\PostSplitOrderEvent;
-use BitBag\OpenMarketplace\EventListener\CalculateOrderCommissionListener;
+use BitBag\OpenMarketplace\Component\Order\EventListener\CalculateOrderCommissionListener;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;

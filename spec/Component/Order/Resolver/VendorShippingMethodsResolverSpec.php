@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Component\Order\Resolver;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Component\Order\Resolver\VendorShippingMethodsResolver;
 use BitBag\OpenMarketplace\Component\Order\Resolver\VendorShippingMethodsResolverInterface;
-use BitBag\OpenMarketplace\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
 use BitBag\OpenMarketplace\Repository\VendorShippingMethodRepositoryInterface;

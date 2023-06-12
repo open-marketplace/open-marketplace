@@ -50,8 +50,8 @@ sylius_shipping:
     resources:
         shipment:
             classes:
-                model: BitBag\OpenMarketplace\Entity\Shipment
-                interface: BitBag\OpenMarketplace\Entity\ShipmentInterface
+                model: BitBag\OpenMarketplace\Component\Order\Entity\Shipment
+                interface: BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface
                 repository: BitBag\OpenMarketplace\Repository\ShipmentRepository
 
 sylius_payment:

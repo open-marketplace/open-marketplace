@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\EventListener;
+namespace BitBag\OpenMarketplace\Component\Order\EventListener;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Event\PostSplitOrderEvent;

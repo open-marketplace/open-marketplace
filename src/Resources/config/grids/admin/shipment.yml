@@ -3,6 +3,6 @@ sylius_grid:
     sylius_admin_shipment:
       driver:
         options:
-          class: BitBag\OpenMarketplace\Entity\Shipment
+          class: BitBag\OpenMarketplace\Component\Order\Entity\Shipment
           repository:
             method: createNonPrimaryQueryBuilder

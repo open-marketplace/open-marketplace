@@ -13,10 +13,10 @@ namespace spec\BitBag\OpenMarketplace\Component\Order\Processor;
 
 use BitBag\OpenMarketplace\Component\Order\Calculator\ShipmentUnitsRecalculatorInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Processor\OrderShipmentByVendorProcessor;
 use BitBag\OpenMarketplace\Component\Order\Processor\OrderShipmentByVendorProcessorInterface;
-use BitBag\OpenMarketplace\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;

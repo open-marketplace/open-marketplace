@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Order\Event;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 
-final class PreSplitOrderEvent
+class PreSplitOrderEvent
 {
     public const NAME = 'order.pre_split';
 

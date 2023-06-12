@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Model\Shipment;
+namespace BitBag\OpenMarketplace\Component\Order\Entity;
 
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 
