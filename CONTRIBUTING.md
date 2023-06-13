@@ -142,7 +142,7 @@ Once you're ready to contribute, follow these steps:
 
 ## Styleguide
 
-We adhere to a specific set of code style and guidelines to maintain consistency across the project. Please ensure that your contributions follow these guidelines to streamline the review process. You can find the guidelines in the project's documentation.
+We adhere to a specific set of code style and guidelines to maintain consistency across the project. Please ensure that your contributions follow these guidelines to streamline the review process. You can find the guidelines in the [project's documentation](https://github.com/BitBagCommerce/OpenMarketplace/STYLEGUIDE.md).
 
 ## Communication
 
