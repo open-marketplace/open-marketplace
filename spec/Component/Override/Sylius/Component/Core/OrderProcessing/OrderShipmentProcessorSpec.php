@@ -9,20 +9,20 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Component\Order\Processor;
+namespace spec\BitBag\OpenMarketplace\Component\Override\Sylius\Component\Core\OrderProcessing;
 
 use BitBag\OpenMarketplace\Component\Order\Calculator\ShipmentUnitsRecalculatorInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
-use BitBag\OpenMarketplace\Component\Order\Processor\OrderShipmentByVendorProcessor;
-use BitBag\OpenMarketplace\Component\Order\Processor\OrderShipmentByVendorProcessorInterface;
+use BitBag\OpenMarketplace\Component\Override\Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor;
+use BitBag\OpenMarketplace\Component\Override\Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 
-class OrderShipmentByVendorProcessorSpec extends ObjectBehavior
+class OrderShipmentProcessorSpec extends ObjectBehavior
 {
     public function let(
         ShipmentFactoryInterface $shipmentFactory,
@@ -36,8 +36,8 @@ class OrderShipmentByVendorProcessorSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(OrderShipmentByVendorProcessor::class);
-        $this->shouldImplement(OrderShipmentByVendorProcessorInterface::class);
+        $this->shouldHaveType(OrderShipmentProcessor::class);
+        $this->shouldImplement(OrderShipmentProcessorInterface::class);
     }
 
     public function it_does_nothing_because_of_wrong_state(

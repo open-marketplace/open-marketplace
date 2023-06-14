@@ -13,13 +13,5 @@
             <argument type="service" id="bitbag.open_marketplace.component.order.refresher.payment"/>
             <argument type="service" id="event_dispatcher" />
         </service>
-
-        <service id="bitbag.open_marketplace.component.order.processor.order_shipment_by_vendor"
-                 class="BitBag\OpenMarketplace\Component\Order\Processor\OrderShipmentByVendorProcessor"
-                 decorates="sylius.order_processing.order_shipment_processor"
-        >
-            <argument type="service" id="bitbag.open_marketplace.component.order.factory.shipment" />
-            <argument type="service" id="bitbag.open_marketplace.component.order.calculator.shipment_units_recalculator" />
-        </service>
     </services>
 </container>

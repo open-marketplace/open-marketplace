@@ -8,14 +8,14 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="api_platform.route_name_resolver"
+        <service id="bitbag.api_platform.route_name_resolver"
                  class="BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\RouteNameResolver"
         >
             <argument type="service" id="api_platform.router" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
         </service>
 
-        <service id="open_marketplace.order_number_assigner"
+        <service id="bitbag.sylius.order_number_assigner"
                  class="BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner"
                  decorates="sylius.order_number_assigner"
         >
@@ -27,6 +27,14 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  decorates="sylius.inventory.order_inventory_operator"
         >
             <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
+        </service>
+
+        <service id="bitbag.sylius.order_processing.order_shipment_processor"
+                 class="BitBag\OpenMarketplace\Component\Override\Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor"
+                 decorates="sylius.order_processing.order_shipment_processor"
+        >
+            <argument type="service" id="bitbag.open_marketplace.component.order.factory.shipment" />
+            <argument type="service" id="bitbag.open_marketplace.component.order.calculator.shipment_units_recalculator" />
         </service>
     </services>
 </container>

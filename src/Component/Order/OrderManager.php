@@ -81,8 +81,10 @@ final class OrderManager implements OrderManagerInterface
         $this->cloneItemIntoSecondaryOrder($item, $secondaryOrder, $shipment);
     }
 
-    private function getVendorSecondaryOrder(array $secondaryOrders, ?VendorInterface $vendor): ?OrderInterface
-    {
+    private function getVendorSecondaryOrder(
+        array $secondaryOrders,
+        ?VendorInterface $vendor
+    ): ?OrderInterface {
         foreach ($secondaryOrders as $secondaryOrder) {
             if ($secondaryOrder->getVendor() === $vendor) {
                 return $secondaryOrder;

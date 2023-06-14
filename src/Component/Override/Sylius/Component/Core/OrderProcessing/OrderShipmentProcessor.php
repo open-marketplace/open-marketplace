@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Order\Processor;
+namespace BitBag\OpenMarketplace\Component\Override\Sylius\Component\Core\OrderProcessing;
 
 use BitBag\OpenMarketplace\Component\Order\Calculator\ShipmentUnitsRecalculatorInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
@@ -17,10 +17,9 @@ use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Webmozart\Assert\Assert;
 
-final class OrderShipmentByVendorProcessor implements OrderProcessorInterface, OrderShipmentByVendorProcessorInterface
+final class OrderShipmentProcessor implements OrderShipmentProcessorInterface
 {
     public function __construct(
         private ShipmentFactoryInterface $shipmentFactory,

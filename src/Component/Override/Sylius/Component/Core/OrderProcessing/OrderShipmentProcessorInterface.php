@@ -9,11 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Order\Processor;
+namespace BitBag\OpenMarketplace\Component\Override\Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
-interface OrderShipmentByVendorProcessorInterface
+interface OrderShipmentProcessorInterface extends OrderProcessorInterface
 {
     public function process(BaseOrderInterface $order): void;
 }
