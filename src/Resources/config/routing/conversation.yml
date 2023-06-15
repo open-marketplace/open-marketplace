@@ -18,7 +18,7 @@ open_marketplace_admin_conversation_create:
     path: /admin/conversation/create
     methods: [GET,POST]
     defaults:
-        _controller: open_marketplace.controller.action.conversation.create_new_conversation_action
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_thread
         _sylius:
             template: "Context/Admin/Conversation/create.html.twig"
             redirect: open_marketplace_admin_conversation_show
@@ -28,7 +28,7 @@ open_marketplace_admin_conversation_show:
     path: /admin/conversations/{id}
     methods: [GET,POST]
     defaults:
-        _controller: open_marketplace.controller.conversation.show_conversation_action
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.show_thread
         _sylius:
             template: "Context/Admin/Conversation/show.html.twig"
 
@@ -36,7 +36,7 @@ open_marketplace_admin_conversation_archive:
     path: /admin/conversations/{id}/archive
     methods: [GET,POST]
     defaults:
-        _controller: open_marketplace.controller.action.conversation.send_archive_request_action
+        _controller: bitbag.open_marketplace.component.core.admin.controller.messaging.send_archive_request
         _sylius:
             redirect: open_marketplace_admin_conversation_index
 
@@ -45,7 +45,7 @@ open_marketplace_admin_conversation_message_add:
     path: /admin/conversations/{id}/message/add
     methods: [GET, POST]
     defaults:
-        _controller: open_marketplace.controller.action.conversation_message.add_message_action
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_message
         _sylius:
             redirect: open_marketplace_admin_conversation_show
             mail_redirect: open_marketplace_admin_conversation_show

@@ -2,7 +2,7 @@ confirm_profile_update_link:
     path: /vendor/profile-update/{token}
     methods: [GET]
     defaults:
-        _controller: open_marketplace.controller.confirm_profile_update_action
+        _controller: bitbag.open_marketplace.component.core.vendor.controller.profile.confirm_update
         _sylius:
             template: "Context/Vendor/Profile/update.html.twig"
             form: BitBag\OpenMarketplace\Form\Type\VendorType

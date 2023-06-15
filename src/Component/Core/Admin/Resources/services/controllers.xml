@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service id="bitbag.open_marketplace.component.core.admin.controller.messaging.send_archive_request"
+                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\Messaging\SendArchiveRequestAction">
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message" />
+            <argument type="service" id="api_platform.router" />
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.factory.message" />
+            <argument type="service" id="request_stack" />
+
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.core.admin.controller.product_listing.show"
+                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\ShowAction">
+            <argument type="service" id="open_marketplace.repository.product_listing" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="open_marketplace.repository.product_draft" />
+            <argument type="service" id="open_marketplace.repository.conversation"/>
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message"/>
+            <argument type="service" id="router.default" />
+            <argument type="service" id="translator" />
+
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.core.admin.controller.product_listing.accept"
+                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\AcceptAction">
+            <argument type="service" id="open_marketplace.repository.product_listing" />
+            <argument type="service" id="router.default" />
+            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
+            <argument type="service" id="open_marketplace.repository.product_draft" />
+
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.core.admin.controller.product_listing.reject"
+                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\RejectAction">
+            <argument type="service" id="open_marketplace.repository.product_listing" />
+            <argument type="service" id="router.default" />
+            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
+            <argument type="service" id="open_marketplace.repository.product_draft" />
+
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.core.admin.controller.product_listing.restore"
+                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\RestoreAction">
+            <argument type="service" id="open_marketplace.repository.product_listing"/>
+            <argument type="service" id="router.default"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="session.flash_bag"/>
+
+            <tag name="controller.service_arguments" />
+        </service>
+    </services>
+</container>

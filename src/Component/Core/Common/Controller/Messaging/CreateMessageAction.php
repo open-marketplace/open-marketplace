@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\ConversationMessage;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Message;
 use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class AddMessageAction
+final class CreateMessageAction
 {
     private FormFactoryInterface $formFactory;
 

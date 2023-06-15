@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
 
-final class EditProductAction
+final class UpdateAction
 {
     private MetadataInterface $metadata;
 

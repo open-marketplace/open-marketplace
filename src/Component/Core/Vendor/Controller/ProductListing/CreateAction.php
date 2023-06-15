@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
@@ -33,7 +33,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Twig\Environment;
 use Webmozart\Assert\Assert;
 
-final class CreateProductAction
+final class CreateAction
 {
     private MetadataInterface $metadata;
 

@@ -11,7 +11,7 @@ open_marketplace_vendor_product_listing_create_product:
     path: /product-listings/create
     methods: [GET,POST]
     defaults:
-        _controller: open_marketplace.controller.action.vendor.product_listing.create_product_action
+        _controller: bitbag.open_marketplace.component.core.vendor.controller.product_listing.create
         _sylius:
             template: "Context/Vendor/ProductListing/create.html.twig"
             redirect:
@@ -21,7 +21,7 @@ open_marketplace_vendor_product_listing_edit_product:
     path: /product-listings/{id}/edit
     methods: [GET,POST]
     defaults:
-        _controller: open_marketplace.controller.action.vendor.product_listing.edit_product_action
+        _controller: bitbag.open_marketplace.component.core.vendor.controller.product_listing.update
         _sylius:
             template: "Context/Vendor/ProductListing/update.html.twig"
             redirect:
@@ -39,13 +39,13 @@ open_marketplace_vendor_product_listing_send_for_verification:
     path: /product-listings/{id}/send-for-verification
     methods: [POST]
     defaults:
-        _controller: open_marketplace.controller.action.vendor.product_listing.send_for_verification
+        _controller: bitbag.open_marketplace.component.core.vendor.controller.product_listing.send_for_verification
 
 open_marketplace_vendor_product_listing_remove_action:
     path: /product-listings-hide/{id}
     methods: [POST]
     defaults:
-        _controller: open_marketplace.controller.product_listing.remove_action
+        _controller: bitbag.open_marketplace.component.core.vendor.controller.product_listing.remove
         _sylius:
             template: "Context/Vendor/ProductListing/index.html.twig"
             redirect:
@@ -55,4 +55,4 @@ open_marketplace_vendor_product_listing_enable:
     path: /product-listings/{id}/enable
     methods: [POST]
     defaults:
-        _controller: open_marketplace.controller.enable_product_listing_action
+        _controller: bitbag.open_marketplace.component.core.vendor.controller.product_listing.enable

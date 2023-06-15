@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Vendor\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing;
 
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-final class EnableProductListingAction
+final class EnableAction
 {
     private ProductListingRepositoryInterface $productListingRepository;
 

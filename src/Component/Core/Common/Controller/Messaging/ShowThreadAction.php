@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Twig\Environment;
 
-final class ShowConversationAction
+final class ShowThreadAction
 {
     private Environment $templatingEngine;
 

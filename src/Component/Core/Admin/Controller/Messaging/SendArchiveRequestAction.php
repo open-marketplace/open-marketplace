@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
+namespace BitBag\OpenMarketplace\Component\Core\Admin\Controller\Messaging;
 
 use ApiPlatform\Core\Api\UrlGeneratorInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Factory\MessageFactoryInterface;

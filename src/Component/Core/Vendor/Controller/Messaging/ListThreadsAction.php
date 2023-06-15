@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Messaging;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-final class ListConversationsAction
+final class ListThreadsAction
 {
     private Environment $templatingEngine;
 

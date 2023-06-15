@@ -14,9 +14,5 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.core.admin.menu_listener"
-                 class="BitBag\OpenMarketplace\Component\Core\Admin\MenuListener">
-            <tag name="kernel.event_listener" method="addMarketplaceSection" event="sylius.menu.admin.main" />
-        </service>
     </services>
 </container>

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Vendor;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Order;
 
 use Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class ResendOrderConfirmationEmailAction
+final class ResendConfirmationEmailAction
 {
     private OrderRepositoryInterface $orderRepository;
 

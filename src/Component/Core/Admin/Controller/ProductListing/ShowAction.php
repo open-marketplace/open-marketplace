@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;

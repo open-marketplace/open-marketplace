@@ -2,7 +2,7 @@ open_marketplace_vendor_conversation_index:
     path: /vendor/conversations
     methods: [GET]
     defaults:
-        _controller:  open_marketplace.controller.conversation.list_conversations_action
+        _controller:  bitbag.open_marketplace.component.core.vendor.controller.messaging.list_threads
         _sylius:
             template: "Context/Vendor/Conversation/index.html.twig"
 
@@ -10,7 +10,7 @@ open_marketplace_vendor_conversation_show:
     path: /vendor/conversations/{id}
     methods: [GET,POST]
     defaults:
-        _controller: 'open_marketplace.controller.conversation.show_conversation_action'
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.show_thread
         _sylius:
             template: "Context/Vendor/Conversation/show.html.twig"
 
@@ -18,7 +18,7 @@ open_marketplace_vendor_conversation_message_add:
     path: /vendor/conversations/{id}/message/add
     methods: [GET, POST]
     defaults:
-        _controller: open_marketplace.controller.action.conversation_message.add_message_action
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_message
         _sylius:
             redirect: open_marketplace_vendor_conversation_show
             mail_redirect: open_marketplace_vendor_conversation_show
@@ -27,7 +27,7 @@ open_marketplace_vendor_conversation_create:
     path: /vendor/conversation/create
     methods: [GET,POST]
     defaults:
-        _controller: open_marketplace.controller.action.conversation.create_new_conversation_action
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_thread
         _sylius:
             template: "Context/Vendor/Conversation/create.html.twig"
             redirect: open_marketplace_vendor_conversation_show

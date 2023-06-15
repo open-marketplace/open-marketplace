@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Vendor;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Profile;
 
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
 use BitBag\OpenMarketplace\Provider\VendorProvider;
@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-final class ConfirmProfileUpdateAction
+final class ConfirmUpdateAction
 {
     private EntityManagerInterface $entityManager;
 

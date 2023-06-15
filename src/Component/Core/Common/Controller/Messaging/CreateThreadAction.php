@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Conversation;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-final class CreateNewConversationAction
+final class CreateThreadAction
 {
     private FormFactoryInterface $formFactory;
 

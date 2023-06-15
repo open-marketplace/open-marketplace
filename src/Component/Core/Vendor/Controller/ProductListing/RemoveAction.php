@@ -9,17 +9,18 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Action\Admin\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-final class RestoreAction
+final class RemoveAction
 {
     private ProductListingRepositoryInterface $productListingRepository;
 
@@ -33,7 +34,7 @@ final class RestoreAction
         ProductListingRepositoryInterface $productListingRepository,
         RouterInterface $router,
         EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag
+        FlashBag $flashBag
     ) {
         $this->productListingRepository = $productListingRepository;
         $this->router = $router;
@@ -46,20 +47,19 @@ final class RestoreAction
         /** @var ListingInterface $productListing */
         $productListing = $this->productListingRepository->find($request->attributes->get('id'));
 
-        $productListing->restore();
+        $productListing->remove();
 
         $product = $productListing->getProduct();
 
         if ($product) {
-            $product->setEnabled(true);
+            $product->setEnabled(false);
             $this->entityManager->persist($product);
         }
 
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
+        $this->flashBag->set('success', 'open_marketplace.ui.removed');
 
-        $this->flashBag->set('success', 'open_marketplace.ui.restored');
-
-        return new RedirectResponse($this->router->generate('open_marketplace_admin_product_listing_index'));
+        return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
     }
 }
