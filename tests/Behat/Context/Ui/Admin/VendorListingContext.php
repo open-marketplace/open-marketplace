@@ -104,6 +104,16 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Given /^I should see vendors commission data$/
+     */
+    public function iShouldSeeVendorsCommissionData()
+    {
+        $content = $this->getPage()->getText();
+        Assert::contains($content, 'Commission (%)');
+        Assert::contains($content, 'Commission Type');
+    }
+
+    /**
      * @return DocumentElement
      */
     private function getPage()
