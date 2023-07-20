@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Resolver;
+namespace spec\BitBag\OpenMarketplace\Component\Core\Common\Resolver;
 
-use BitBag\OpenMarketplace\Resolver\CurrentUserResolver;
-use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
+use BitBag\OpenMarketplace\Component\Core\Common\Resolver\CurrentUserResolver;
+use BitBag\OpenMarketplace\Component\Core\Common\Resolver\CurrentUserResolverInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Resolver;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Resolver;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -17,3 +17,4 @@ interface CurrentUserResolverInterface
 {
     public function resolve(): ?UserInterface;
 }
+

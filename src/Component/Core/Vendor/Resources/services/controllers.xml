@@ -15,7 +15,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Messaging\ListThreadsAction">
             <argument type="service" id="twig" />
             <argument type="service" id="open_marketplace.repository.conversation" />
-            <argument type="service" id="open_marketplace.current_user_resolver" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.resolver.resource.current_user_resolver" />
 
             <tag name="controller.service_arguments" />
         </service>

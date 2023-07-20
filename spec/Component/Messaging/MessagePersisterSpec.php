@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Component\Messaging;
 
+use BitBag\OpenMarketplace\Component\Core\Common\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Component\Messaging\MessagePersister;
 use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
-use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;

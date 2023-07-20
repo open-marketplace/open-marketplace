@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Messaging;
 
+use BitBag\OpenMarketplace\Component\Core\Common\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;

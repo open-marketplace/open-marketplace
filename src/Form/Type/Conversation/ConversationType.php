@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\Type\Conversation;
 
+use BitBag\OpenMarketplace\Component\Core\Common\Resolver\CurrentUserResolverInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Category;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Repository\VendorRepository;
 use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
-use BitBag\OpenMarketplace\Resolver\CurrentUserResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
