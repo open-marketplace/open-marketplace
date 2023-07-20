@@ -27,32 +27,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ResendConfirmationEmailAction
 {
-    private OrderRepositoryInterface $orderRepository;
-
-    private OrderEmailManagerInterface $orderEmailManager;
-
-    private CsrfTokenManagerInterface $csrfTokenManager;
-
-    private Session $session;
-
-    private TranslatorInterface $translator;
-
-    private RouterInterface $router;
-
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        OrderEmailManagerInterface $orderEmailManager,
-        CsrfTokenManagerInterface $csrfTokenManager,
-        Session $session,
-        TranslatorInterface $translator,
-        RouterInterface $router
+        private OrderRepositoryInterface $orderRepository,
+        private OrderEmailManagerInterface $orderEmailManager,
+        private CsrfTokenManagerInterface $csrfTokenManager,
+        private Session $session,
+        private TranslatorInterface $translator,
+        private RouterInterface $router
     ) {
-        $this->orderRepository = $orderRepository;
-        $this->orderEmailManager = $orderEmailManager;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->session = $session;
-        $this->translator = $translator;
-        $this->router = $router;
     }
 
     public function __invoke(Request $request): Response

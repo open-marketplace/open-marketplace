@@ -3,7 +3,7 @@ vendor_profile_update:
     methods: [GET, POST]
     defaults:
         autowire: true
-        _controller: open_marketplace.controller.vendor_controller:customUpdateAction
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:customUpdateAction
         _sylius:
             template: "Context/Vendor/Profile/update.html.twig"
             form: BitBag\OpenMarketplace\Form\Type\VendorType

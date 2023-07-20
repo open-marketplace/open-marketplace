@@ -1,107 +1,28 @@
 <?php
 
 /*
- * This file has been created by developers from BitBag.
- * Feel free to contact us once you face any issues or want to start
- * You can find more information about us on https://bitbag.io and write us
- * an email on hello@bitbag.io.
- */
+ * This file was created by developers working at BitBag
+ * Do you need more information about us and what we do? Visit our https://bitbag.io website!
+ * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+*/
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Resource\Order;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessorInterface;
-use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Controller\OrderController as BaseOrderController;
-use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
-use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
-use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandlerInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;
-use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
-use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType;
 use Sylius\Component\Resource\Exception\UpdateHandlingException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Webmozart\Assert\Assert;
 
-class OrderController extends BaseOrderController
+final class OrderController extends BaseOrderController
 {
-    private SplitOrderByVendorProcessorInterface $splitOrderByVendorProcessor;
-
-    public function __construct(
-        MetadataInterface $metadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ?ViewHandlerInterface $viewHandler,
-        RepositoryInterface $repository,
-        FactoryInterface $factory,
-        NewResourceFactoryInterface $newResourceFactory,
-        ObjectManager $manager,
-        SingleResourceProviderInterface $singleResourceProvider,
-        ResourcesCollectionProviderInterface $resourcesFinder,
-        ResourceFormFactoryInterface $resourceFormFactory,
-        RedirectHandlerInterface $redirectHandler,
-        FlashHelperInterface $flashHelper,
-        AuthorizationCheckerInterface $authorizationChecker,
-        EventDispatcherInterface $eventDispatcher,
-        ?StateMachineInterface $stateMachine,
-        ResourceUpdateHandlerInterface $resourceUpdateHandler,
-        ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        SplitOrderByVendorProcessorInterface $splitOrderByVendorProcessor
-    ) {
-        parent::__construct(
-            $metadata,
-            $requestConfigurationFactory,
-            $viewHandler,
-            $repository,
-            $factory,
-            $newResourceFactory,
-            $manager,
-            $singleResourceProvider,
-            $resourcesFinder,
-            $resourceFormFactory,
-            $redirectHandler,
-            $flashHelper,
-            $authorizationChecker,
-            $eventDispatcher,
-            $stateMachine,
-            $resourceUpdateHandler,
-            $resourceDeleteHandler
-        );
-
-        $this->metadata = $metadata;
-        $this->requestConfigurationFactory = $requestConfigurationFactory;
-        $this->viewHandler = $viewHandler;
-        $this->repository = $repository;
-        $this->factory = $factory;
-        $this->newResourceFactory = $newResourceFactory;
-        $this->manager = $manager;
-        $this->singleResourceProvider = $singleResourceProvider;
-        $this->resourceFormFactory = $resourceFormFactory;
-        $this->redirectHandler = $redirectHandler;
-        $this->flashHelper = $flashHelper;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->stateMachine = $stateMachine;
-        $this->resourceUpdateHandler = $resourceUpdateHandler;
-        $this->resourceDeleteHandler = $resourceDeleteHandler;
-        $this->splitOrderByVendorProcessor = $splitOrderByVendorProcessor;
-    }
-
     public function indexAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -133,7 +54,7 @@ class OrderController extends BaseOrderController
         $resource = $this->findOr404($configuration);
 
         if (null === $resource->getPrimaryOrder()) {
-            return $this->redirectToRoute('sylius_shop_account_order_index');
+            return $this->redirectToRoute('open_marketplace_order_listing');
         }
 
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
@@ -143,6 +64,7 @@ class OrderController extends BaseOrderController
                 'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $resource,
+                'form' => $this->createForm(ShipmentShipType::class)->createView(),
                 $this->metadata->getName() => $resource,
             ]);
         }
@@ -185,7 +107,8 @@ class OrderController extends BaseOrderController
             }
 
             try {
-                $orders = $this->splitOrderByVendorProcessor->process($resource);
+                $splitOrderByVendorProcessor = $this->container->get('bitbag.open_marketplace.component.order.processor.split_order_by_vendor');
+                $orders = $splitOrderByVendorProcessor->process($resource);
 
                 foreach ($orders as $order) {
                     $this->resourceUpdateHandler->handle($order, $configuration, $this->manager);

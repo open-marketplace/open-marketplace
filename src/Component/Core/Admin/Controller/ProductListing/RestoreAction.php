@@ -21,24 +21,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class RestoreAction
 {
-    private ProductListingRepositoryInterface $productListingRepository;
-
-    private RouterInterface $router;
-
-    private EntityManagerInterface $entityManager;
-
-    private FlashBagInterface $flashBag;
-
     public function __construct(
-        ProductListingRepositoryInterface $productListingRepository,
-        RouterInterface $router,
-        EntityManagerInterface $entityManager,
-        FlashBagInterface $flashBag
+        private ProductListingRepositoryInterface $productListingRepository,
+        private RouterInterface $router,
+        private EntityManagerInterface $entityManager,
+        private FlashBagInterface $flashBag
     ) {
-        $this->productListingRepository = $productListingRepository;
-        $this->router = $router;
-        $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
     }
 
     public function __invoke(Request $request): RedirectResponse

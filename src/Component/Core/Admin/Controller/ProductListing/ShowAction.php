@@ -31,36 +31,15 @@ use Twig\Environment;
 
 final class ShowAction
 {
-    private ProductListingRepositoryInterface $productListingRepository;
-
-    private Environment $twig;
-
-    private ProductDraftRepositoryInterface $productDraftRepository;
-
-    private ConversationRepositoryInterface $conversationRepository;
-
-    private FormFactoryInterface $formFactory;
-
-    private MessagePersisterInterface $messagePersister;
-
-    private RouterInterface $router;
-
     public function __construct(
-        ProductListingRepositoryInterface $productListingRepository,
-        Environment $twig,
-        ProductDraftRepositoryInterface $productDraftRepository,
-        ConversationRepositoryInterface $conversationRepository,
-        FormFactoryInterface $formFactory,
-        MessagePersisterInterface $messagePersister,
-        RouterInterface $router,
-        ) {
-        $this->productListingRepository = $productListingRepository;
-        $this->twig = $twig;
-        $this->productDraftRepository = $productDraftRepository;
-        $this->conversationRepository = $conversationRepository;
-        $this->formFactory = $formFactory;
-        $this->messagePersister = $messagePersister;
-        $this->router = $router;
+        private ProductListingRepositoryInterface $productListingRepository,
+        private Environment $twig,
+        private ProductDraftRepositoryInterface $productDraftRepository,
+        private ConversationRepositoryInterface $conversationRepository,
+        private FormFactoryInterface $formFactory,
+        private MessagePersisterInterface $messagePersister,
+        private RouterInterface $router,
+    ) {
     }
 
     public function __invoke(Request $request): Response

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Resource\Product;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType;
@@ -48,35 +48,29 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-final class DraftAttributesController extends ResourceController
+final class DraftAttributeController extends ResourceController
 {
-    private DraftAttributeFactoryInterface $draftAttributeFactory;
-
-    private ProductAttributeUpdaterInterface $productAttributeUpdater;
-
-    private VendorProviderInterface $vendorProvider;
-
     public function __construct(
-        MetadataInterface $metadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ?ViewHandlerInterface $viewHandler,
-        RepositoryInterface $repository,
-        FactoryInterface $factory,
-        NewResourceFactoryInterface $newResourceFactory,
-        ObjectManager $manager,
-        SingleResourceProviderInterface $singleResourceProvider,
-        ResourcesCollectionProviderInterface $resourcesFinder,
-        ResourceFormFactoryInterface $resourceFormFactory,
-        RedirectHandlerInterface $redirectHandler,
-        FlashHelperInterface $flashHelper,
-        AuthorizationCheckerInterface $authorizationChecker,
-        EventDispatcherInterface $eventDispatcher,
-        ?StateMachineInterface $stateMachine,
-        ResourceUpdateHandlerInterface $resourceUpdateHandler,
-        ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        DraftAttributeFactoryInterface $draftAttributeFactory,
-        ProductAttributeUpdaterInterface $productAttributeUpdater,
-        VendorProviderInterface $vendorProvider
+        protected MetadataInterface $metadata,
+        protected RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        protected ?ViewHandlerInterface $viewHandler,
+        protected RepositoryInterface $repository,
+        protected FactoryInterface $factory,
+        protected NewResourceFactoryInterface $newResourceFactory,
+        protected ObjectManager $manager,
+        protected SingleResourceProviderInterface $singleResourceProvider,
+        protected ResourcesCollectionProviderInterface $resourcesFinder,
+        protected ResourceFormFactoryInterface $resourceFormFactory,
+        protected RedirectHandlerInterface $redirectHandler,
+        protected FlashHelperInterface $flashHelper,
+        protected AuthorizationCheckerInterface $authorizationChecker,
+        protected EventDispatcherInterface $eventDispatcher,
+        protected ?StateMachineInterface $stateMachine,
+        protected ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        protected ResourceDeleteHandlerInterface $resourceDeleteHandler,
+        private DraftAttributeFactoryInterface $draftAttributeFactory,
+        private ProductAttributeUpdaterInterface $productAttributeUpdater,
+        private VendorProviderInterface $vendorProvider
     ) {
         parent::__construct(
             $metadata,
@@ -97,10 +91,6 @@ final class DraftAttributesController extends ResourceController
             $resourceUpdateHandler,
             $resourceDeleteHandler
         );
-
-        $this->draftAttributeFactory = $draftAttributeFactory;
-        $this->productAttributeUpdater = $productAttributeUpdater;
-        $this->vendorProvider = $vendorProvider;
     }
 
     public function updateAction(Request $request): Response

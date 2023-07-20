@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Controller\Resource\Vendor;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 
 use BitBag\OpenMarketplace\Entity\Vendor;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
@@ -45,30 +45,26 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
 {
-    private VendorProviderInterface $vendorProvider;
-
-    private VendorProfileUpdaterInterface $vendorProfileUpdater;
-
     public function __construct(
-        MetadataInterface $metadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ?ViewHandlerInterface $viewHandler,
-        RepositoryInterface $repository,
-        FactoryInterface $factory,
-        NewResourceFactoryInterface $newResourceFactory,
-        ObjectManager $manager,
-        SingleResourceProviderInterface $singleResourceProvider,
-        ResourcesCollectionProviderInterface $resourcesFinder,
-        ResourceFormFactoryInterface $resourceFormFactory,
-        RedirectHandlerInterface $redirectHandler,
-        FlashHelperInterface $flashHelper,
-        AuthorizationCheckerInterface $authorizationChecker,
-        EventDispatcherInterface $eventDispatcher,
-        ?StateMachineInterface $stateMachine,
-        ResourceUpdateHandlerInterface $resourceUpdateHandler,
-        ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        VendorProviderInterface $vendorProvider,
-        VendorProfileUpdaterInterface $vendorProfileUpdater
+        protected MetadataInterface $metadata,
+        protected RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        protected ?ViewHandlerInterface $viewHandler,
+        protected RepositoryInterface $repository,
+        protected FactoryInterface $factory,
+        protected NewResourceFactoryInterface $newResourceFactory,
+        protected ObjectManager $manager,
+        protected SingleResourceProviderInterface $singleResourceProvider,
+        protected ResourcesCollectionProviderInterface $resourcesFinder,
+        protected ResourceFormFactoryInterface $resourceFormFactory,
+        protected RedirectHandlerInterface $redirectHandler,
+        protected FlashHelperInterface $flashHelper,
+        protected AuthorizationCheckerInterface $authorizationChecker,
+        protected EventDispatcherInterface $eventDispatcher,
+        protected ?StateMachineInterface $stateMachine,
+        protected ResourceUpdateHandlerInterface $resourceUpdateHandler,
+        protected ResourceDeleteHandlerInterface $resourceDeleteHandler,
+        protected VendorProviderInterface $vendorProvider,
+        protected VendorProfileUpdaterInterface $vendorProfileUpdater
     ) {
         parent::__construct(
             $metadata,
@@ -89,9 +85,6 @@ final class VendorController extends ResourceController
             $resourceUpdateHandler,
             $resourceDeleteHandler
         );
-
-        $this->vendorProvider = $vendorProvider;
-        $this->vendorProfileUpdater = $vendorProfileUpdater;
     }
 
     public function createAction(Request $request): Response

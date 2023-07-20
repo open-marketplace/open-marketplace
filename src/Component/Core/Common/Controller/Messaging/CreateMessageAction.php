@@ -23,24 +23,12 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class CreateMessageAction
 {
-    private FormFactoryInterface $formFactory;
-
-    private MessagePersisterInterface $messagePersister;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private FlashBag $flashBag;
-
     public function __construct(
-        FormFactoryInterface $formFactory,
-        MessagePersisterInterface $messagePersister,
-        UrlGeneratorInterface $urlGenerator,
-        FlashBag $flashBag
+        private FormFactoryInterface $formFactory,
+        private MessagePersisterInterface $messagePersister,
+        private UrlGeneratorInterface $urlGenerator,
+        private FlashBag $flashBag
     ) {
-        $this->formFactory = $formFactory;
-        $this->messagePersister = $messagePersister;
-        $this->urlGenerator = $urlGenerator;
-        $this->flashBag = $flashBag;
     }
 
     public function __invoke(int $id, Request $request): Response

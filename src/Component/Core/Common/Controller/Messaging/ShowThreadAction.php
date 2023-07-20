@@ -24,24 +24,12 @@ use Twig\Environment;
 
 final class ShowThreadAction
 {
-    private Environment $templatingEngine;
-
-    private FormFactoryInterface $formFactory;
-
-    private ConversationRepositoryInterface $conversationRepository;
-
-    private AuthorizationCheckerInterface $authorizationChecker;
-
     public function __construct(
-        Environment $templatingEngine,
-        FormFactoryInterface $formFactory,
-        ConversationRepositoryInterface $conversationRepository,
-        AuthorizationCheckerInterface $authorizationChecker
+        private Environment $templatingEngine,
+        private FormFactoryInterface $formFactory,
+        private ConversationRepositoryInterface $conversationRepository,
+        private AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->templatingEngine = $templatingEngine;
-        $this->formFactory = $formFactory;
-        $this->conversationRepository = $conversationRepository;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(int $id, Request $request): Response

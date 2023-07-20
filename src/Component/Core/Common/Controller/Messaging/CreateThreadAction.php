@@ -25,28 +25,13 @@ use Twig\Environment;
 
 final class CreateThreadAction
 {
-    private FormFactoryInterface $formFactory;
-
-    private Environment $templatingEngine;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private MessagePersisterInterface $messagePersister;
-
-    private ConversationRepositoryInterface $conversationRepository;
-
     public function __construct(
-        FormFactoryInterface $formFactory,
-        Environment $templatingEngine,
-        UrlGeneratorInterface $urlGenerator,
-        MessagePersisterInterface $messagePersister,
-        ConversationRepositoryInterface $conversationRepository
+        private FormFactoryInterface $formFactory,
+        private Environment $templatingEngine,
+        private UrlGeneratorInterface $urlGenerator,
+        private MessagePersisterInterface $messagePersister,
+        private ConversationRepositoryInterface $conversationRepository
     ) {
-        $this->formFactory = $formFactory;
-        $this->templatingEngine = $templatingEngine;
-        $this->urlGenerator = $urlGenerator;
-        $this->messagePersister = $messagePersister;
-        $this->conversationRepository = $conversationRepository;
     }
 
     public function __invoke(Request $request): Response

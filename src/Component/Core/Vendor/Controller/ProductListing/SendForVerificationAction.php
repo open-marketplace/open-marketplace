@@ -23,28 +23,13 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class SendForVerificationAction
 {
-    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
-
-    private ProductDraftRepositoryInterface $productDraftRepository;
-
-    private ProductListingRepositoryInterface $productListingRepository;
-
-    private RouterInterface $router;
-
-    private Session $session;
-
     public function __construct(
-        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        ProductDraftRepositoryInterface $productDraftRepository,
-        ProductListingRepositoryInterface $productListingRepository,
-        RouterInterface $router,
-        Session $session
+        private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
+        private ProductDraftRepositoryInterface $productDraftRepository,
+        private ProductListingRepositoryInterface $productListingRepository,
+        private RouterInterface $router,
+        private Session $session
     ) {
-        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
-        $this->productDraftRepository = $productDraftRepository;
-        $this->productListingRepository = $productListingRepository;
-        $this->router = $router;
-        $this->session = $session;
     }
 
     public function __invoke(Request $request): RedirectResponse

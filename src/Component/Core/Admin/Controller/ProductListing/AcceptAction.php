@@ -23,24 +23,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class AcceptAction
 {
-    private ProductListingRepositoryInterface $productListingRepository;
-
-    private RouterInterface $router;
-
-    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
-
-    private ProductDraftRepositoryInterface $productDraftRepository;
-
     public function __construct(
-        ProductListingRepositoryInterface $productListingRepository,
-        RouterInterface $router,
-        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        ProductDraftRepositoryInterface $productDraftRepository
+        private ProductListingRepositoryInterface $productListingRepository,
+        private RouterInterface $router,
+        private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
+        private ProductDraftRepositoryInterface $productDraftRepository
     ) {
-        $this->productListingRepository = $productListingRepository;
-        $this->router = $router;
-        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
-        $this->productDraftRepository = $productDraftRepository;
     }
 
     public function __invoke(Request $request): RedirectResponse

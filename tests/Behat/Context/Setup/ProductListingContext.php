@@ -42,7 +42,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         FactoryInterface $vendorFactory,
         EntityManagerInterface $entityManager,
         SharedStorageInterface $sharedStorage,
-        ProductDraftAcceptanceOperator $acceptanceOperator
+        ProductDraftAcceptanceOperator $acceptanceOperator,
     ) {
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
@@ -73,7 +73,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $productTranslation = new DraftTranslation();
         $productTranslation->setLocale('en_US');
         $productTranslation->setSlug('product-listing-slug');
-        $productTranslation->setName('product-listing-');
+        $productTranslation->setName('ProductListingName');
         $productTranslation->setDescription('product-listing-');
         $productTranslation->setProductDraft($productDraft);
 

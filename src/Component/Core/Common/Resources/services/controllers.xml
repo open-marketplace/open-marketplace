@@ -41,5 +41,27 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
             <tag name="controller.service_arguments" />
         </service>
+
+        <service id="bitbag.open_marketplace.component.core.common.controller.resource.order"
+                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\OrderController"
+                 parent="sylius.controller.order"
+                 autowire="false">
+            <argument type="service" id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"/>
+        </service>
+
+        <service id="bitbag.open_marketplace.component.core.common.controller.resource.vendor"
+                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\VendorController"
+                 parent="open_marketplace.controller.vendor">
+            <argument type="service" id="open_marketplace.provider.vendor" />
+            <argument type="service" id="open_marketplace.updater.vendor_profile_updater" />
+        </service>
+
+        <service id="bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute"
+                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\DraftAttributeController"
+                 parent="open_marketplace.controller.draft_attribute">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
+            <argument type="service" id="open_marketplace.updater.product_attribute_updater"/>
+            <argument type="service" id="open_marketplace.provider.vendor"/>
+        </service>
     </services>
 </container>

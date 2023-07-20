@@ -11,7 +11,7 @@ open_marketplace_admin_draft_attribute_create:
     path: vendor/product-attributes/{type}/new
     methods: [GET, POST]
     defaults:
-        _controller: open_marketplace.controller.draftAttributes:createAction
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:createAction
         _sylius:
             factory:
                 method: createTyped
@@ -31,7 +31,7 @@ open_marketplace_admin_draft_attribute_create:
 open_marketplace_draft_attribute_update:
     path: vendor/product-attributes/{id}/update
     defaults:
-        _controller: open_marketplace.controller.draftAttributes:updateAction
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:updateAction
         _sylius:
             template: "Context/Vendor/DraftAttributes/update.html.twig"
             redirect: bitbag_open_marketplace_vendor_draft_attribute_index
@@ -45,7 +45,7 @@ open_marketplace_draft_attribute_update:
 open_marketplace_draft_attribute_delete:
     path: vendor/product-attributes/{id}/delete
     defaults:
-        _controller: open_marketplace.controller.draftAttributes:deleteAction
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:deleteAction
         _sylius:
             redirect: bitbag_open_marketplace_vendor_draft_attribute_index
 
@@ -53,20 +53,20 @@ vendor_get_attribute_types:
     path: /attribute-types
     methods: [GET]
     defaults:
-        _controller: open_marketplace.controller.draftAttributes:getAttributeTypesAction
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:getAttributeTypesAction
         template: "Context/Vendor/DraftAttributes/attributeTypes.html.twig"
 
 bitbag_vendor_get_product_attributes:
     path: /attributes
     methods: [GET]
     defaults:
-        _controller: open_marketplace.controller.draftAttributes:renderAttributesAction
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:renderAttributesAction
         template: "Context/Vendor/ProductListing/form/_attributeChoice.html.twig"
 
 bitbag_vendor_render_attribute_forms:
     path: /attribute-forms
     methods: [GET]
     defaults:
-        _controller: open_marketplace.controller.draftAttributes:renderAttributeValueFormsAction
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:renderAttributeValueFormsAction
         template: "Context/Vendor/ProductListing/form/attributeValues.html.twig"
 

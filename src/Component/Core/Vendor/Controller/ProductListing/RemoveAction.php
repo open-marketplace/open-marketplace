@@ -22,24 +22,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class RemoveAction
 {
-    private ProductListingRepositoryInterface $productListingRepository;
-
-    private RouterInterface $router;
-
-    private EntityManagerInterface $entityManager;
-
-    private FlashBagInterface $flashBag;
-
     public function __construct(
-        ProductListingRepositoryInterface $productListingRepository,
-        RouterInterface $router,
-        EntityManagerInterface $entityManager,
-        FlashBag $flashBag
+        private ProductListingRepositoryInterface $productListingRepository,
+        private RouterInterface $router,
+        private EntityManagerInterface $entityManager,
+        private FlashBag $flashBag
     ) {
-        $this->productListingRepository = $productListingRepository;
-        $this->router = $router;
-        $this->entityManager = $entityManager;
-        $this->flashBag = $flashBag;
     }
 
     public function __invoke(Request $request): RedirectResponse

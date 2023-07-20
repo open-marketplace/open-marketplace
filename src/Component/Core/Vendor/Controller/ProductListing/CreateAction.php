@@ -35,52 +35,19 @@ use Webmozart\Assert\Assert;
 
 final class CreateAction
 {
-    private MetadataInterface $metadata;
-
-    private RequestConfigurationFactoryInterface $requestConfigurationFactory;
-
-    private NewResourceFactoryInterface $newResourceFactory;
-
-    private FactoryInterface $factory;
-
-    private ListingPersisterInterface $listingPersister;
-
-    private ProductDraftRepositoryInterface $productDraftRepository;
-
-    private FormFactoryInterface $formFactory;
-
-    private RequestStack $requestStack;
-
-    private RouterInterface $router;
-
-    private Environment $twig;
-
-    private TokenStorageInterface $tokenStorage;
-
     public function __construct(
-        MetadataInterface $metadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        NewResourceFactoryInterface $newResourceFactory,
-        FactoryInterface $factory,
-        ListingPersisterInterface $listingPersister,
-        ProductDraftRepositoryInterface $productDraftRepository,
-        FormFactoryInterface $formFactory,
-        RequestStack $requestStack,
-        RouterInterface $router,
-        Environment $twig,
-        TokenStorageInterface $tokenStorage,
-        ) {
-        $this->metadata = $metadata;
-        $this->requestConfigurationFactory = $requestConfigurationFactory;
-        $this->newResourceFactory = $newResourceFactory;
-        $this->factory = $factory;
-        $this->listingPersister = $listingPersister;
-        $this->productDraftRepository = $productDraftRepository;
-        $this->formFactory = $formFactory;
-        $this->requestStack = $requestStack;
-        $this->router = $router;
-        $this->twig = $twig;
-        $this->tokenStorage = $tokenStorage;
+        private MetadataInterface $metadata,
+        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        private NewResourceFactoryInterface $newResourceFactory,
+        private FactoryInterface $factory,
+        private ListingPersisterInterface $listingPersister,
+        private ProductDraftRepositoryInterface $productDraftRepository,
+        private FormFactoryInterface $formFactory,
+        private RequestStack $requestStack,
+        private RouterInterface $router,
+        private Environment $twig,
+        private TokenStorageInterface $tokenStorage,
+    ) {
     }
 
     public function __invoke(Request $request): Response

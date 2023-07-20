@@ -22,20 +22,11 @@ use Twig\Environment;
 
 final class ListThreadsAction
 {
-    private Environment $templatingEngine;
-
-    private ConversationRepositoryInterface $conversationRepository;
-
-    private CurrentUserResolverInterface $currentUserResolver;
-
     public function __construct(
-        Environment $templatingEngine,
-        ConversationRepositoryInterface $conversationRepository,
-        CurrentUserResolverInterface $currentUserResolver,
-        ) {
-        $this->templatingEngine = $templatingEngine;
-        $this->conversationRepository = $conversationRepository;
-        $this->currentUserResolver = $currentUserResolver;
+        private Environment $templatingEngine,
+        private ConversationRepositoryInterface $conversationRepository,
+        private CurrentUserResolverInterface $currentUserResolver,
+    ) {
     }
 
     public function __invoke(Request $request): Response

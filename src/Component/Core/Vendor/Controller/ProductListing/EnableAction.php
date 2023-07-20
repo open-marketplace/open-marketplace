@@ -20,24 +20,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class EnableAction
 {
-    private ProductListingRepositoryInterface $productListingRepository;
-
-    private EntityManagerInterface $entityManager;
-
-    private RouterInterface $router;
-
-    private FlashBagInterface $flashBag;
-
     public function __construct(
-        ProductListingRepositoryInterface $productListingRepository,
-        EntityManagerInterface $entityManager,
-        RouterInterface $router,
-        FlashBagInterface $flashBag
+        private ProductListingRepositoryInterface $productListingRepository,
+        private EntityManagerInterface $entityManager,
+        private RouterInterface $router,
+        private FlashBagInterface $flashBag
     ) {
-        $this->productListingRepository = $productListingRepository;
-        $this->entityManager = $entityManager;
-        $this->router = $router;
-        $this->flashBag = $flashBag;
     }
 
     public function __invoke(Request $request): RedirectResponse

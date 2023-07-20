@@ -22,24 +22,12 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 final class SendArchiveRequestAction
 {
-    private MessagePersisterInterface $messagePersister;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private MessageFactoryInterface $messageFactory;
-
-    private RequestStack $requestStack;
-
     public function __construct(
-        MessagePersisterInterface $messagePersister,
-        UrlGeneratorInterface $urlGenerator,
-        MessageFactoryInterface $messageFactory,
-        RequestStack $requestStack,
-        ) {
-        $this->messagePersister = $messagePersister;
-        $this->urlGenerator = $urlGenerator;
-        $this->messageFactory = $messageFactory;
-        $this->requestStack = $requestStack;
+        private MessagePersisterInterface $messagePersister,
+        private UrlGeneratorInterface $urlGenerator,
+        private MessageFactoryInterface $messageFactory,
+        private RequestStack $requestStack,
+    ) {
     }
 
     public function __invoke(int $id, Request $request): Response

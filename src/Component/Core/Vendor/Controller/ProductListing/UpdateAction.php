@@ -32,48 +32,18 @@ use Twig\Environment;
 
 final class UpdateAction
 {
-    private MetadataInterface $metadata;
-
-    private RequestConfigurationFactoryInterface $requestConfigurationFactory;
-
-    private ProductDraftRepositoryInterface $productDraftRepository;
-
-    private ListingPersisterInterface $listingPersister;
-
-    private ProductListingRepositoryInterface $productListingRepository;
-
-    private AuthorizationCheckerInterface $authorizationChecker;
-
-    private FormFactoryInterface $formFactory;
-
-    private RequestStack $requestStack;
-
-    private Environment $twig;
-
-    private RouterInterface $router;
-
     public function __construct(
-        MetadataInterface $metadata,
-        RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        ProductDraftRepositoryInterface $productDraftRepository,
-        ListingPersisterInterface $listingPersister,
-        ProductListingRepositoryInterface $productListingRepository,
-        AuthorizationCheckerInterface $authorizationChecker,
-        FormFactoryInterface $formFactory,
-        RequestStack $requestStack,
-        Environment $twig,
-        RouterInterface $router,
-        ) {
-        $this->metadata = $metadata;
-        $this->requestConfigurationFactory = $requestConfigurationFactory;
-        $this->productDraftRepository = $productDraftRepository;
-        $this->listingPersister = $listingPersister;
-        $this->productListingRepository = $productListingRepository;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->formFactory = $formFactory;
-        $this->requestStack = $requestStack;
-        $this->twig = $twig;
-        $this->router = $router;
+        private MetadataInterface $metadata,
+        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        private ProductDraftRepositoryInterface $productDraftRepository,
+        private ListingPersisterInterface $listingPersister,
+        private ProductListingRepositoryInterface $productListingRepository,
+        private AuthorizationCheckerInterface $authorizationChecker,
+        private FormFactoryInterface $formFactory,
+        private RequestStack $requestStack,
+        private Environment $twig,
+        private RouterInterface $router,
+    ) {
     }
 
     public function __invoke(Request $request): Response

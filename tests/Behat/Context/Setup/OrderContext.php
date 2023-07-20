@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface as OpenMarketplaceOrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\OrderRepository;
@@ -264,12 +265,22 @@ final class OrderContext extends RawMinkContext
         $channel = $this->sharedStorage->get('channel');
         $localeCode = $this->sharedStorage->get('locale')->getCode();
 
-        return $this->createOrder(
+        /** @var OpenMarketplaceOrderInterface $secondaryOrder */
+        $secondaryOrder = $this->createOrder(
             $customer,
             $number = null,
             $channel,
             $localeCode
         );
+        $primaryOrder = $this->createOrder($customer,
+            $number = null,
+            $channel,
+            $localeCode
+        );
+        $this->entityManager->persist($primaryOrder);
+        $secondaryOrder->setPrimaryOrder($primaryOrder);
+
+        return $secondaryOrder;
     }
 
     private function createDefaultVendor(): VendorInterface

@@ -23,28 +23,13 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 final class ConfirmUpdateAction
 {
-    private EntityManagerInterface $entityManager;
-
-    private VendorProfileUpdaterInterface $vendorProfileUpdateService;
-
-    private AuthorizationCheckerInterface $security;
-
-    private RouterInterface $router;
-
-    private VendorProvider $vendorProvider;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        VendorProfileUpdaterInterface $vendorProfileUpdateService,
-        AuthorizationCheckerInterface $security,
-        RouterInterface $router,
-        VendorProvider $vendorProvider
+        private EntityManagerInterface $entityManager,
+        private VendorProfileUpdaterInterface $vendorProfileUpdateService,
+        private AuthorizationCheckerInterface $security,
+        private RouterInterface $router,
+        private VendorProvider $vendorProvider
     ) {
-        $this->entityManager = $entityManager;
-        $this->vendorProfileUpdateService = $vendorProfileUpdateService;
-        $this->security = $security;
-        $this->router = $router;
-        $this->vendorProvider = $vendorProvider;
     }
 
     public function __invoke(string $token): Response

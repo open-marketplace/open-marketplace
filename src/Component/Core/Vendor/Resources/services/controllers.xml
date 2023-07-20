@@ -54,7 +54,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         </service>
 
         <service id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.update"
-                 class="BitBag\OpenMarketplace\Component\Core\Vendor\\ProductListing\UpdateAction">
+                 class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\UpdateAction">
             <argument type="service">
                 <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
                     <factory service="sylius.resource_registry" method="get" />
@@ -75,7 +75,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         </service>
 
         <service id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.send_for_verification"
-                 class="BitBag\OpenMarketplace\Component\Core\Vendor\ProductListing\SendForVerificationAction">
+                 class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\SendForVerificationAction">
             <argument type="service" id="open_marketplace.state_machine.product_draft.transition"/>
             <argument type="service" id="open_marketplace.repository.product_draft"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
@@ -86,7 +86,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         </service>
 
         <service id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.remove"
-                 class="BitBag\OpenMarketplace\Component\Core\Vendor\ProductListing\RemoveAction">
+                 class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\RemoveAction">
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="router.default"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
@@ -96,7 +96,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         </service>
 
         <service id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.enable"
-                 class="BitBag\OpenMarketplace\Component\Core\Vendor\ProductListing\EnableAction">
+                 class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\EnableAction">
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="router.default" />
@@ -106,7 +106,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         </service>
 
         <service id="bitbag.open_marketplace.component.core.vendor.controller.order.resend_confirmation_email"
-                 class="BitBag\OpenMarketplace\Component\Core\Vendor\Order\ResendConfirmationEmailAction">
+                 class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Order\ResendConfirmationEmailAction">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface" />
             <argument type="service" id="security.csrf.token_manager" />

@@ -2,6 +2,6 @@ vendor_profile:
     path: /vendor/profile
     methods: [GET]
     defaults:
-        _controller: open_marketplace.controller.vendor_controller:showAction
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:showAction
         _sylius:
             template: "Context/Vendor/Profile/index.html.twig"

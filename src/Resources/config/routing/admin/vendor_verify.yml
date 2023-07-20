@@ -1,4 +1,4 @@
 open_marketplace_admin_vendor_verify:
     path: /vendors/{id}/verify
     methods: [PUT]
-    controller: open_marketplace.controller.vendor_controller:verifyVendorAction
+    controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:verifyVendorAction

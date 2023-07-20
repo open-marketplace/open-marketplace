@@ -8,7 +8,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag.api_platform.route_name_resolver"
+        <service id="api_platform.route_name_resolver"
                  class="BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\RouteNameResolver"
         >
             <argument type="service" id="api_platform.router" />
