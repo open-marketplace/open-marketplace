@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Entity;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductInterface as BaseProductInterface;
 

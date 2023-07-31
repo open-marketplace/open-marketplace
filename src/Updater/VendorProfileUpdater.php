@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Updater;
 
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
@@ -70,10 +70,10 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
     }
 
     public function createPendingVendorProfileUpdate(
-        VendorProfileInterface $vendorData,
+        ProfileInterface $vendorData,
         VendorInterface $currentVendor,
-        ?VendorImageInterface $image,
-        ?VendorBackgroundImageInterface $backgroundImage
+        ?LogoImageInterface $image,
+        ?BackgroundImageInterface $backgroundImage
     ): void {
         $pendingVendorUpdate = $this->profileUpdateFactory->createWithGeneratedTokenAndVendor($currentVendor);
 
@@ -115,8 +115,8 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
     }
 
     public function setVendorFromData(
-        VendorProfileInterface $vendor,
-        VendorProfileInterface $data
+        ProfileInterface $vendor,
+        ProfileInterface $data
     ): void {
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
@@ -140,7 +140,7 @@ final class VendorProfileUpdater implements VendorProfileUpdaterInterface
         $this->entityManager->flush();
     }
 
-    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void
+    public function updateVendorFromPendingData(ProfileUpdateInterface $vendorData): void
     {
         $vendor = $vendorData->getVendor();
 

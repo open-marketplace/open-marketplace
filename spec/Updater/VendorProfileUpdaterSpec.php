@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Updater;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorProfileInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
@@ -66,7 +66,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         VendorInterface $vendor,
         VendorProfileInterface $vendorData,
-        VendorAddressInterface $vendorAddress
+        AddressInterface $vendorAddress
     ): void {
         $vendorData->getCompanyName()->willReturn('CompanyName');
         $vendorData->getTaxIdentifier()->willReturn('TaxIdentifier');
@@ -85,11 +85,11 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
         VendorProfileInterface $vendorData,
-        VendorProfileUpdateInterface $newPendingUpdate,
+        ProfileUpdateInterface $newPendingUpdate,
         ShopUserInterface $user,
-        VendorAddressInterface $vendorAddressUpdate,
-        VendorImageInterface $imageFromForm,
-        VendorBackgroundImageInterface $backgroundImageFromForm
+        AddressInterface $vendorAddressUpdate,
+        LogoImageInterface $imageFromForm,
+        BackgroundImageInterface $backgroundImageFromForm
     ): void {
         $vendorProfileFactory->createWithGeneratedTokenAndVendor($vendor)->willReturn($newPendingUpdate);
         $newPendingUpdate->getToken()->willReturn('testing-token');
@@ -124,15 +124,15 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
         VendorProfileInterface $vendorData,
-        VendorProfileUpdateInterface $newPendingUpdate,
+        ProfileUpdateInterface $newPendingUpdate,
         ShopUserInterface $user,
-        VendorAddressInterface $vendorAddressUpdate,
-        VendorImageInterface $imageFromForm,
+        AddressInterface $vendorAddressUpdate,
+        LogoImageInterface $imageFromForm,
         VendorProfileUpdateImageFactoryInterface $imageFactory,
-        VendorImageInterface $newImage,
-        VendorBackgroundImageInterface $backgroundImageFromForm,
+        LogoImageInterface $newImage,
+        BackgroundImageInterface $backgroundImageFromForm,
         VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
-        VendorBackgroundImageInterface $newBackgroundImage,
+        BackgroundImageInterface $newBackgroundImage,
         ImageUploader $imageUploader,
         SplFileInfo $fileInfo
     ): void {

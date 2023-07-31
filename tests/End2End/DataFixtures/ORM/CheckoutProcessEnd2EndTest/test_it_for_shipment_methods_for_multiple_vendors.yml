@@ -56,7 +56,7 @@ BitBag\OpenMarketplace\Entity\ShopUser:
         customer: '@customer_bruce'
         username: "bruce@wayne.com"
         usernameCanonical: "bruce@wayne.com"
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
     oliver_vendor_address:
         country: '@poland'
         city: 'Warsaw'
@@ -67,7 +67,7 @@ BitBag\OpenMarketplace\Entity\VendorAddress:
         city: 'Poznan'
         postalCode: '61-512'
         street: 'Umultowska 54'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     vendor_oliver:
         shopUser: '@user_oliver'
         companyName: 'Test company name'
@@ -175,7 +175,7 @@ Sylius\Component\Shipping\Model\ShippingMethodTranslation:
         translatable: '@shipping_method_fedex'
         name: 'fedex'
         locale: 'en_US'
-BitBag\OpenMarketplace\Entity\VendorShippingMethod:
+BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod:
     vendor_olivier_shipping_method_ups:
         vendor: '@vendor_oliver'
         shippingMethod: '@shipping_method_ups'

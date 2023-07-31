@@ -14,7 +14,7 @@ use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrat
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use Tests\BitBag\OpenMarketplace\Integration\IntegrationTestCase;
 
 final class ProductDraftFilterStrategyTest extends IntegrationTestCase

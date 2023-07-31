@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Profile;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\TokenOwningVoter;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Provider\VendorProvider;
 use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,7 +34,7 @@ final class ConfirmUpdateAction
 
     public function __invoke(string $token): Response
     {
-        $vendorProfileUpdateData = $this->entityManager->getRepository(VendorProfileUpdate::class)->findOneBy(['token' => $token]);
+        $vendorProfileUpdateData = $this->entityManager->getRepository(ProfileUpdate::class)->findOneBy(['token' => $token]);
         $profileRoot = $this->router->generate('vendor_profile');
         $vendorIsGranted = $this->security->isGranted(TokenOwningVoter::UPDATE, $vendorProfileUpdateData);
         if ($vendorIsGranted && null !== $vendorProfileUpdateData) {

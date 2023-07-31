@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\EventListener;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -45,7 +45,7 @@ final class VendorRegisterListener
         /** @var VendorInterface $vendor */
         $vendor = $event->getSubject();
 
-        /** @var VendorImageInterface $vendorImage */
+        /** @var LogoImageInterface $vendorImage */
         $vendorImage = $vendor->getImage();
 
         if (null !== $vendorImage) {
@@ -60,7 +60,7 @@ final class VendorRegisterListener
         /** @var VendorInterface $vendor */
         $vendor = $event->getSubject();
 
-        /** @var VendorBackgroundImageInterface $vendorBackgroundImage */
+        /** @var BackgroundImageInterface $vendorBackgroundImage */
         $vendorBackgroundImage = $vendor->getBackgroundImage();
 
         if (null !== $vendorBackgroundImage) {

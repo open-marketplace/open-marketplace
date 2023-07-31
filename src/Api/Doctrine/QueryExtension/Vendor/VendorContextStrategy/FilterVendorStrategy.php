@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 
 interface FilterVendorStrategy

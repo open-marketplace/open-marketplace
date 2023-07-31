@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension\VendorClientExtension;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;

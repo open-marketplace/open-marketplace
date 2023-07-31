@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Api\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;

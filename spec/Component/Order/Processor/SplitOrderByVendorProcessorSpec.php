@@ -16,7 +16,7 @@ use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Component\Order\OrderManagerInterface;
 use BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessor;
 use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresherInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;

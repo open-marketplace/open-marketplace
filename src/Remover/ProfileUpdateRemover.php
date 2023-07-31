@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Remover;
 
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class ProfileUpdateRemover implements ProfileUpdateRemoverInterface
@@ -23,7 +23,7 @@ final class ProfileUpdateRemover implements ProfileUpdateRemoverInterface
         $this->entityManager = $entityManager;
     }
 
-    public function removePendingUpdate(VendorProfileUpdateInterface $profileUpdate): void
+    public function removePendingUpdate(ProfileUpdateInterface $profileUpdate): void
     {
         $pendingAddressChange = $profileUpdate->getVendorAddress();
 

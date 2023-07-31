@@ -16,7 +16,7 @@ use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextExtension;
 use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\FilterVendorStrategy;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;

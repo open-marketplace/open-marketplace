@@ -13,7 +13,7 @@ namespace spec\BitBag\OpenMarketplace\Api\Provider;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\Provider\PathPrefixProvider;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;

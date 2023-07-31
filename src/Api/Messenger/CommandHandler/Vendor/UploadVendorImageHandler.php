@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -40,7 +40,7 @@ final class UploadVendorImageHandler
         $this->vendorImageRepository = $vendorImageRepository;
     }
 
-    public function __invoke(UploadVendorImageInterface $command): VendorImageInterface
+    public function __invoke(UploadVendorImageInterface $command): LogoImageInterface
     {
         if (!$command->getFile()) {
             throw new \DomainException('File should be set');

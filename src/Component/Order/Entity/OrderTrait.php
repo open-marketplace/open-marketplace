@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Order\Entity;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductVariantInterface;

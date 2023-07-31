@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\Type;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorShippingMethod;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Symfony\Component\Form\AbstractType;

@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
 
 final class RegisterVendor implements RegisterVendorInterface
 {
@@ -24,7 +24,7 @@ final class RegisterVendor implements RegisterVendorInterface
 
     private string $description;
 
-    private VendorAddress $vendorAddress;
+    private Address $vendorAddress;
 
     private ?string $slug = null;
 
@@ -35,7 +35,7 @@ final class RegisterVendor implements RegisterVendorInterface
         string $taxIdentifier,
         string $phoneNumber,
         string $description,
-        VendorAddress $vendorAddress
+        Address $vendorAddress
     ) {
         $this->companyName = $companyName;
         $this->taxIdentifier = $taxIdentifier;
@@ -64,7 +64,7 @@ final class RegisterVendor implements RegisterVendorInterface
         return $this->description;
     }
 
-    public function getVendorAddress(): VendorAddress
+    public function getVendorAddress(): Address
     {
         return $this->vendorAddress;
     }

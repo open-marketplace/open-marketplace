@@ -27,7 +27,7 @@ BitBag\OpenMarketplace\Entity\ShopUser:
         customer: '@customer_alex'
         username: "alex@honnold.com"
         usernameCanonical: "alex@honnold.com"
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
     vendor_adam_address:
         country: '@poland'
         city: 'Poznan'
@@ -38,7 +38,7 @@ BitBag\OpenMarketplace\Entity\VendorAddress:
         city: 'Warsaw'
         postalCode: '00-999'
         street: 'Avenue 20'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     vendor_adam:
         shopUser: '@user_adam'
         companyName: 'Skalnik'

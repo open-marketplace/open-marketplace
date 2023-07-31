@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Remover;
 
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 
 interface ProfileUpdateRemoverInterface
 {
-    public function removePendingUpdate(VendorProfileUpdateInterface $profileUpdate): void;
+    public function removePendingUpdate(ProfileUpdateInterface $profileUpdate): void;
 }

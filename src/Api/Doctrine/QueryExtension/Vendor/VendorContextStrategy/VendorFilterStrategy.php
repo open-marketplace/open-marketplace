@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy;
 
-use BitBag\OpenMarketplace\Entity\OptionalVendorAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\OptionalVendorAwareInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorAwareInterface;
 use Doctrine\ORM\QueryBuilder;
 
 final class VendorFilterStrategy extends AbstractFilterStrategy implements FilterVendorStrategy

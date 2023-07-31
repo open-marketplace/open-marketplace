@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImage;
-use BitBag\OpenMarketplace\Entity\VendorImage;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -30,8 +30,8 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->entityManager = static::getContainer()->get('doctrine.orm.entity_manager');
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
         $this->customerRepository = $this->entityManager->getRepository(Customer::class);
-        $this->vendorImageRepository = $this->entityManager->getRepository(VendorImage::class);
-        $this->vendorBackgroundImageRepository = $this->entityManager->getRepository(VendorBackgroundImage::class);
+        $this->vendorImageRepository = $this->entityManager->getRepository(LogoImage::class);
+        $this->vendorBackgroundImageRepository = $this->entityManager->getRepository(BackgroundImage::class);
         $this->loadFixturesFromFile('Api/VendorProfileTest/vendor_profile.yml');
     }
 
@@ -239,7 +239,7 @@ final class VendorProfileTest extends FunctionalTestCase
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-        /** @var VendorImage $vendorImage */
+        /** @var LogoImage $vendorImage */
         $vendorImage = $this->vendorImageRepository->findOneBy(['owner' => $vendor]);
 
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/logo/' . $vendorImage->getUuid()->toString(), [], [], $header);
@@ -254,7 +254,7 @@ final class VendorProfileTest extends FunctionalTestCase
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-        /** @var VendorImage $vendorImage */
+        /** @var LogoImage $vendorImage */
         $vendorImage = $this->vendorImageRepository->findOneBy(['owner' => $vendor]);
 
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/logo/' . $vendorImage->getUuid()->toString(), [], [], $header);
@@ -269,7 +269,7 @@ final class VendorProfileTest extends FunctionalTestCase
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-        /** @var VendorImage $vendorImage */
+        /** @var LogoImage $vendorImage */
         $vendorImage = $this->vendorImageRepository->findOneBy(['owner' => $vendor]);
 
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/logo/' . $vendorImage->getUuid()->toString(), [], [], $header);
@@ -285,7 +285,7 @@ final class VendorProfileTest extends FunctionalTestCase
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-        /** @var VendorBackgroundImage $vendorImage */
+        /** @var BackgroundImage $vendorImage */
         $vendorImage = $this->vendorBackgroundImageRepository->findOneBy(['owner' => $vendor]);
 
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/background-image/' . $vendorImage->getUuid()->toString(), [], [], $header);
@@ -300,7 +300,7 @@ final class VendorProfileTest extends FunctionalTestCase
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-        /** @var VendorBackgroundImage $vendorImage */
+        /** @var BackgroundImage $vendorImage */
         $vendorImage = $this->vendorBackgroundImageRepository->findOneBy(['owner' => $vendor]);
 
         $this->client->request('DELETE', '/api/v2/shop/account/vendor/background-image/' . $vendorImage->getUuid()->toString(), [], [], $header);

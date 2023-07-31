@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorProfileInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileFactory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -39,7 +39,7 @@ final class VendorProfileFactorySpec extends ObjectBehavior
         $this->createNew()->shouldHaveType(VendorProfileInterface::class);
     }
 
-    public function it_returns_valid_address(VendorAddressInterface $vendorAddress, FactoryInterface $vendorFactory): void
+    public function it_returns_valid_address(AddressInterface $vendorAddress, FactoryInterface $vendorFactory): void
     {
         $vendorFactory->createNew()->willReturn(new Vendor());
         $vendor = $this->createVendor('some street', 'City', '22-111', 'description', $vendorAddress);

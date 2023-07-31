@@ -11,20 +11,20 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorImage;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 final class VendorImageFactory implements VendorImageFactoryInterface
 {
-    public function createNew(): VendorImageInterface
+    public function createNew(): LogoImageInterface
     {
-        return new VendorImage();
+        return new LogoImage();
     }
 
-    public function create(string $path, VendorInterface $vendor): VendorImageInterface
+    public function create(string $path, VendorInterface $vendor): LogoImageInterface
     {
-        $vendorImage = new VendorImage();
+        $vendorImage = new LogoImage();
 
         $vendorImage->setPath($path);
         $vendorImage->setOwner($vendor);

@@ -11,18 +11,18 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 
 final class VendorProfileUpdateImageFactory implements VendorProfileUpdateImageFactoryInterface
 {
-    public function createNew(): VendorImageInterface
+    public function createNew(): LogoImageInterface
     {
-        return new VendorProfileUpdateImage();
+        return new LogoImage();
     }
 
-    public function createWithFileAndOwner(VendorImageInterface $uploadedImage, VendorProfileInterface $vendorProfile): VendorImageInterface
+    public function createWithFileAndOwner(LogoImageInterface $uploadedImage, ProfileInterface $vendorProfile): LogoImageInterface
     {
         $image = $this->createNew();
         $image->setFile($uploadedImage->getFile());

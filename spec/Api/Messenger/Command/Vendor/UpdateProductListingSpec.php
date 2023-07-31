@@ -14,7 +14,7 @@ namespace spec\BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListing;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 
 final class UpdateProductListingSpec extends ObjectBehavior

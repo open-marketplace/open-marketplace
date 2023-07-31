@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Provider;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserHasNoVendorContextException;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use Symfony\Component\Security\Core\Security;

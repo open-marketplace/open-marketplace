@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorShippingMethod;
 use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;

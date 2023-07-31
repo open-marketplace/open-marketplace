@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 
 interface VendorProfileFactoryInterface
 {
@@ -21,8 +21,8 @@ interface VendorProfileFactoryInterface
         string $taxIdentifier,
         string $phoneNumber,
         string $description,
-        VendorAddressInterface $address
-    ): VendorProfileInterface;
+        AddressInterface $address
+    ): ProfileInterface;
 
-    public function createNew(): VendorProfileInterface;
+    public function createNew(): ProfileInterface;
 }

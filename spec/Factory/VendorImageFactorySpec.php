@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage;
 use BitBag\OpenMarketplace\Factory\VendorImageFactory;
 use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use PhpSpec\ObjectBehavior;
@@ -31,7 +31,7 @@ final class VendorImageFactorySpec extends ObjectBehavior
 
     public function it_should_create_empty_vendor_image(): void
     {
-        $vendorImage = new VendorImage();
+        $vendorImage = new LogoImage();
 
         $this->createNew()->shouldBeLike($vendorImage);
     }
@@ -39,7 +39,7 @@ final class VendorImageFactorySpec extends ObjectBehavior
     public function it_should_create_vendor_image_with_data(): void
     {
         $vendor = new Vendor();
-        $vendorImage = new VendorImage();
+        $vendorImage = new LogoImage();
 
         $vendorImage->setPath('test');
         $vendorImage->setOwner($vendor);

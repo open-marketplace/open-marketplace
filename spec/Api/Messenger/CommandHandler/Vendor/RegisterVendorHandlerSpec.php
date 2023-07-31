@@ -15,10 +15,10 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendorInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler;
 use BitBag\OpenMarketplace\Api\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUser;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 
@@ -42,7 +42,7 @@ final class RegisterVendorHandlerSpec extends ObjectBehavior
         VendorInterface $vendor,
         ShopUserInterface $shopUser,
         RegisterVendorInterface $command,
-        VendorAddress $vendorAddress
+        Address $vendorAddress
     ): void {
         $command->getCompanyName()->willReturn('companyName');
         $command->getTaxIdentifier()->willReturn('taxIdentifier');
@@ -68,7 +68,7 @@ final class RegisterVendorHandlerSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_shop_user_is_not_set(): void
     {
-        $command = new RegisterVendor('companyName', 'taxIdentifier', 'phoneNumber', 'description', new VendorAddress());
+        $command = new RegisterVendor('companyName', 'taxIdentifier', 'phoneNumber', 'description', new Address());
         $command->setSlug('slug');
 
         $this
@@ -79,7 +79,7 @@ final class RegisterVendorHandlerSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_slug_is_not_set(): void
     {
-        $command = new RegisterVendor('companyName', 'taxIdentifier', 'phoneNumber', 'description', new VendorAddress());
+        $command = new RegisterVendor('companyName', 'taxIdentifier', 'phoneNumber', 'description', new Address());
         $shopUser = new ShopUser();
         $command->setShopUser($shopUser);
 

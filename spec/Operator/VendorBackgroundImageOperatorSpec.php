@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Operator;
 
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperator;
 use Doctrine\ORM\EntityManager;
@@ -38,11 +38,11 @@ final class VendorBackgroundImageOperatorSpec extends ObjectBehavior
 
     public function it_replaces_background_image(
         EntityManager $entityManager,
-        VendorProfileUpdateInterface $vendorData,
+        ProfileUpdateInterface $vendorData,
         VendorInterface $vendor,
-        VendorBackgroundImageInterface $updateImage,
-        VendorBackgroundImageInterface $oldImage,
-        VendorBackgroundImageInterface $newImage
+        BackgroundImageInterface $updateImage,
+        BackgroundImageInterface $oldImage,
+        BackgroundImageInterface $newImage
     ): void {
         $vendorData->getBackgroundImage()->willReturn($updateImage);
         $vendor->getBackgroundImage()->willReturn($oldImage);
@@ -60,9 +60,9 @@ final class VendorBackgroundImageOperatorSpec extends ObjectBehavior
 
     public function it_does_nothing_when_no_update(
         EntityManager $entityManager,
-        VendorProfileUpdateInterface $vendorData,
+        ProfileUpdateInterface $vendorData,
         VendorInterface $vendor,
-        VendorBackgroundImageInterface $updateImage,
+        BackgroundImageInterface $updateImage,
         ): void {
         $vendorData->getBackgroundImage()->willReturn(null);
 

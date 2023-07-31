@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 interface ListingPersisterInterface
 {

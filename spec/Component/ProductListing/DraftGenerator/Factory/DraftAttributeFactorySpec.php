@@ -13,7 +13,7 @@ namespace spec\BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Fa
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactory;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;

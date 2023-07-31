@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Twig\Extension\AbstractExtension;

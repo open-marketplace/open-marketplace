@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Operator;
 
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -29,12 +29,12 @@ final class VendorLogoOperator implements VendorLogoOperatorInterface
         $this->vendorImageFactory = $vendorImageFactory;
     }
 
-    public function replaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void
+    public function replaceVendorImage(ProfileUpdateInterface $vendorData, VendorInterface $vendor): void
     {
         $imageUpdate = $vendorData->getImage();
 
         if ($imageUpdate) {
-            /** @var VendorImageInterface $imageEntity */
+            /** @var LogoImageInterface $imageEntity */
             $imageEntity = $vendor->getImage();
             if (!$vendor->getImage()) {
                 $imageEntity = $this->vendorImageFactory->createNew();

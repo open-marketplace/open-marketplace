@@ -13,7 +13,7 @@
             </attribute-override>
         </attribute-overrides>
 
-        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Entity\Vendor"/>
+        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor"/>
         <one-to-one field="productAttribute" target-entity="Sylius\Component\Product\Model\ProductAttribute">
             <join-column on-delete="SET NULL"/>
         </one-to-one>

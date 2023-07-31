@@ -17,7 +17,7 @@ use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Component\Override\Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor;
 use BitBag\OpenMarketplace\Component\Override\Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;

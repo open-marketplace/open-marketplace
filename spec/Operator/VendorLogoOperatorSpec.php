@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Operator;
 
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use BitBag\OpenMarketplace\Operator\VendorLogoOperator;
 use Doctrine\ORM\EntityManager;
@@ -38,11 +38,11 @@ final class VendorLogoOperatorSpec extends ObjectBehavior
 
     public function it_replaces_logo(
         EntityManager $entityManager,
-        VendorProfileUpdateInterface $vendorData,
+        ProfileUpdateInterface $vendorData,
         VendorInterface $vendor,
-        VendorImageInterface $updateImage,
-        VendorImageInterface $oldImage,
-        VendorImageInterface $newImage
+        LogoImageInterface $updateImage,
+        LogoImageInterface $oldImage,
+        LogoImageInterface $newImage
     ): void {
         $vendorData->getImage()->willReturn($updateImage);
         $vendor->getImage()->willReturn($oldImage);
@@ -59,12 +59,12 @@ final class VendorLogoOperatorSpec extends ObjectBehavior
 
     public function it_creates_new_logo_entity(
         EntityManager $entityManager,
-        VendorProfileUpdateInterface $vendorData,
+        ProfileUpdateInterface $vendorData,
         VendorInterface $vendor,
-        VendorImageInterface $updateImage,
-        VendorImageInterface $oldImage,
+        LogoImageInterface $updateImage,
+        LogoImageInterface $oldImage,
         VendorImageFactoryInterface $vendorImageFactory,
-        VendorImageInterface $newImage
+        LogoImageInterface $newImage
     ): void {
         $vendorData->getImage()->willReturn($updateImage);
         $vendor->getImage()->willReturn(null);
@@ -82,12 +82,12 @@ final class VendorLogoOperatorSpec extends ObjectBehavior
 
     public function it_does_nothing_when_for_empty_image(
         EntityManager $entityManager,
-        VendorProfileUpdateInterface $vendorData,
+        ProfileUpdateInterface $vendorData,
         VendorInterface $vendor,
-        VendorImageInterface $updateImage,
-        VendorImageInterface $oldImage,
+        LogoImageInterface $updateImage,
+        LogoImageInterface $oldImage,
         VendorImageFactoryInterface $vendorImageFactory,
-        VendorImageInterface $newImage
+        LogoImageInterface $newImage
     ): void {
         $vendorData->getImage()->willReturn(null);
         $vendor->getImage()->willReturn(null);

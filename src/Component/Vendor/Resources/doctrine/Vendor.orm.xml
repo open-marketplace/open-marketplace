@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor" table="bitbag_open_marketplace_vendor">
+        <id name="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="uuid" type="uuid" unique="true" />
+        <field name="companyName" column="company_name" type="text" />
+        <field name="taxIdentifier" column="tax_identifier" type="text" />
+        <field name="phoneNumber" column="phone_number" type="text" />
+        <field name="status" column="status" type="string" />
+        <field name="enabled" column="enabled" type="boolean" />
+        <field name="editedAt" column="edited_at" type="datetime" nullable="true"/>
+        <field name="commission" column="commission" type="integer" />
+        <field name="commissionType" column="commission_type" type="string" />
+
+        <one-to-one field="vendorAddress" target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\Address" >
+            <join-column name="vendor_address_id" referenced-column-name="id" on-delete="SET NULL" />
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-one>
+
+        <one-to-one field="shopUser" target-entity="BitBag\OpenMarketplace\Entity\ShopUserInterface" inversed-by="vendor">
+            <join-column name="user_id" referenced-column-name="id" />
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-one>
+
+        <field name="slug" column="slug" type="string" />
+        <field name="description" column="description" type="string" length="2048" />
+        <one-to-one field="image"
+                    target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface"
+                    mapped-by="owner"
+                    orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-one>
+        <one-to-one field="backgroundImage"
+                    target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface"
+                    mapped-by="owner"
+                    orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-one>
+        <one-to-many field="products"
+                     target-entity="BitBag\OpenMarketplace\Entity\ProductInterface"
+                     mapped-by="vendor">
+        </one-to-many>
+
+        <one-to-many field="productListings" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface" mapped-by="vendor"/>
+        <one-to-many
+                field="shippingMethods"
+                target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod"
+                mapped-by="vendor"
+                orphan-removal="true"
+        >
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+    </mapped-superclass>
+</doctrine-mapping>

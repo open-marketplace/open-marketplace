@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\ShopUserAwareInterface;
 use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
 
 interface RegisterVendorInterface extends ShopUserAwareInterface, VendorSlugAwareInterface
 {
@@ -25,5 +25,5 @@ interface RegisterVendorInterface extends ShopUserAwareInterface, VendorSlugAwar
 
     public function getDescription(): string;
 
-    public function getVendorAddress(): VendorAddress;
+    public function getVendorAddress(): Address;
 }

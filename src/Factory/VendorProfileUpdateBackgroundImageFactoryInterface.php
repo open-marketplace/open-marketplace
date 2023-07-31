@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 
 interface VendorProfileUpdateBackgroundImageFactoryInterface
 {
-    public function createNew(): VendorBackgroundImageInterface;
+    public function createNew(): BackgroundImageInterface;
 
-    public function createWithFileAndOwner(VendorBackgroundImageInterface $uploadedBackgroundImage, VendorProfileInterface $vendorProfile): VendorBackgroundImageInterface;
+    public function createWithFileAndOwner(BackgroundImageInterface $uploadedBackgroundImage, ProfileInterface $vendorProfile): BackgroundImageInterface;
 }

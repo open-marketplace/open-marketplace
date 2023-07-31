@@ -11,17 +11,17 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 interface VendorShippingMethodFactoryInterface
 {
-    public function createNew(): VendorShippingMethodInterface;
+    public function createNew(): ShippingMethodInterface;
 
     public function createNewWithChannelCodeShippingAndVendor(
         string $channelCode,
         ShippingMethodInterface $shippingMethod,
         VendorInterface $vendor
-    ): VendorShippingMethodInterface;
+    ): ShippingMethodInterface;
 }

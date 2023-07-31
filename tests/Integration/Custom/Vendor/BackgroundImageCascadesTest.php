@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImage;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Tests\BitBag\OpenMarketplace\Integration\IntegrationTestCase;
 
 final class BackgroundImageCascadesTest extends IntegrationTestCase
@@ -25,7 +25,7 @@ final class BackgroundImageCascadesTest extends IntegrationTestCase
         $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
 
-        $this->backgroundImageRepository = $this->entityManager->getRepository(VendorBackgroundImage::class);
+        $this->backgroundImageRepository = $this->entityManager->getRepository(BackgroundImage::class);
     }
 
     public function test_it_removes_background_image_only(): void
@@ -34,7 +34,7 @@ final class BackgroundImageCascadesTest extends IntegrationTestCase
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);
-        /** @var VendorBackgroundImage $vendorImage */
+        /** @var BackgroundImage $vendorImage */
         $vendorImage = $this->backgroundImageRepository->findOneBy(['owner' => $vendor]);
         $this->backgroundImageRepository->remove($vendorImage);
 

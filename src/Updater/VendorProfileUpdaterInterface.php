@@ -11,22 +11,22 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Updater;
 
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 
 interface VendorProfileUpdaterInterface
 {
     public function createPendingVendorProfileUpdate(
-        VendorProfileInterface $vendorData,
+        ProfileInterface $vendorData,
         VendorInterface $currentVendor,
-        ?VendorImageInterface $image,
-        ?VendorBackgroundImageInterface $backgroundImage
+        ?LogoImageInterface $image,
+        ?BackgroundImageInterface $backgroundImage
     ): void;
 
-    public function setVendorFromData(VendorProfileInterface $vendor, VendorProfileInterface $data): void;
+    public function setVendorFromData(ProfileInterface $vendor, ProfileInterface $data): void;
 
-    public function updateVendorFromPendingData(VendorProfileUpdateInterface $vendorData): void;
+    public function updateVendorFromPendingData(ProfileUpdateInterface $vendorData): void;
 }

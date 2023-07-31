@@ -14,7 +14,7 @@
 
         <service id="open_marketplace.form.vendor_type"
                  class="BitBag\OpenMarketplace\Form\Type\VendorType">
-            <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
             <argument>%open_marketplace.form.type.vendor.validation_groups%</argument>
 
             <tag name="form.type"/>
@@ -25,7 +25,7 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="open_marketplace.factory.vendor_shipping_method" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
             <tag name="form.type"/>
         </service>
 
@@ -37,20 +37,20 @@
 
         <service id="open_marketplace.form.type.vendor_edit_type"
                  class="BitBag\OpenMarketplace\Form\Type\VendorEditType">
-            <argument>BitBag\OpenMarketplace\Entity\Vendor</argument>
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
 
             <tag name="form.type"/>
         </service>
 
         <service id="open_marketplace.form.type.vendor_image"
                  class="BitBag\OpenMarketplace\Form\VendorImageType">
-            <argument>BitBag\OpenMarketplace\Entity\VendorImage</argument>
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage</argument>
             <tag name="form.type"/>
         </service>
 
         <service id="open_marketplace.form.type.vendor_background_image"
                  class="BitBag\OpenMarketplace\Form\VendorBackgroundImageType">
-            <argument>BitBag\OpenMarketplace\Entity\VendorBackgroundImage</argument>
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage</argument>
             <tag name="form.type"/>
         </service>
 

@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Security\Voter;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -35,7 +35,7 @@ final class VendorBackgroundImageVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof VendorBackgroundImageInterface) {
+        if (!$subject instanceof BackgroundImageInterface) {
             return false;
         }
 
@@ -43,7 +43,7 @@ final class VendorBackgroundImageVoter extends Voter
     }
 
     /**
-     * @param VendorBackgroundImageInterface $subject
+     * @param BackgroundImageInterface $subject
      */
     protected function voteOnAttribute(
         string $attribute,
@@ -57,7 +57,7 @@ final class VendorBackgroundImageVoter extends Voter
         return true;
     }
 
-    private function voteOnDelete(string $attribute, VendorBackgroundImageInterface $subject): bool
+    private function voteOnDelete(string $attribute, BackgroundImageInterface $subject): bool
     {
         $currentVendor = $this->getCurrentVendor();
         /** @var ?VendorInterface $subjectOwner */

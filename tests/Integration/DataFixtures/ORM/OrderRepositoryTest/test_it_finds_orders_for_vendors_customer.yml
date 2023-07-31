@@ -39,13 +39,13 @@ BitBag\OpenMarketplace\Entity\ShopUser:
     customer: '@customer_clark'
     username: "clark@kent.com"
     usernameCanonical: "clark@kent.com"
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   vendor_address:
     country: '@poland'
     city: 'Warsaw'
     postalCode: '00-999'
     street: 'Avenue 2115'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_oliver:
     shopUser: '@user_oliver'
     companyName: 'Test company name'

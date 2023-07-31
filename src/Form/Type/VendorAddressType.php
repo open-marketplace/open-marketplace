@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\Type;
 
-use BitBag\OpenMarketplace\Entity\VendorAddress;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
 use Sylius\Component\Addressing\Model\Country;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -43,7 +43,7 @@ final class VendorAddressType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => VendorAddress::class,
+            'data_class' => Address::class,
         ]);
     }
 }

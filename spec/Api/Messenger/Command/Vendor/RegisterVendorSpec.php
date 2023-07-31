@@ -14,14 +14,14 @@ namespace spec\BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 use BitBag\OpenMarketplace\Api\Messenger\Command\ShopUserAwareInterface;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor;
 use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorAddress;
 use PhpSpec\ObjectBehavior;
 
 final class RegisterVendorSpec extends ObjectBehavior
 {
     public function let(
-        VendorAddress $vendorAddress
+        Address $vendorAddress
     ): void {
         $this->beConstructedWith('companyName', 'taxIdentifier', 'phoneNumber', 'description', $vendorAddress);
     }
@@ -53,7 +53,7 @@ final class RegisterVendorSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('description');
     }
 
-    public function it_has_vendor_address(VendorAddress $vendorAddress): void
+    public function it_has_vendor_address(Address $vendorAddress): void
     {
         $this->getVendorAddress()->shouldReturn($vendorAddress);
     }

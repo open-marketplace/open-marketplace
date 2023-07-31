@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Common\Security\Voter;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -45,7 +45,7 @@ final class ObjectOwningVoter extends Voter
             return false;
         }
 
-        /** @var VendorProfileUpdateInterface $vendorUpdateData */
+        /** @var ProfileUpdateInterface $vendorUpdateData */
         $vendorUpdateData = $subject;
 
         switch ($attribute) {

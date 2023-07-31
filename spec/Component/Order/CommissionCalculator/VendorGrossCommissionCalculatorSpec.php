@@ -14,7 +14,7 @@ namespace spec\BitBag\OpenMarketplace\Component\Order\CommissionCalculator;
 use BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorCommissionCalculatorInterface;
 use BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorGrossCommissionCalculator;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 
 class VendorGrossCommissionCalculatorSpec extends ObjectBehavior

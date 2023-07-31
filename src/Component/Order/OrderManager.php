@@ -19,7 +19,7 @@ use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\OrderFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\OrderItemFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Core\Model\ShipmentInterface;
 

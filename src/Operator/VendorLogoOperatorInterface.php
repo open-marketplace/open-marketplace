@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Operator;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 interface VendorLogoOperatorInterface
 {
-    public function replaceVendorImage(VendorProfileUpdateInterface $vendorData, VendorInterface $vendor): void;
+    public function replaceVendorImage(ProfileUpdateInterface $vendorData, VendorInterface $vendor): void;
 }

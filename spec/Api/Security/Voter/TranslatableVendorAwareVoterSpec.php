@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\Security\Voter;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\Security\Voter\TranslatableVendorAwareVoter;
-use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorAwareInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;

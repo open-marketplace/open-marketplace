@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactory;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
 use PhpSpec\ObjectBehavior;
@@ -31,7 +31,7 @@ final class VendorBackgroundImageFactorySpec extends ObjectBehavior
 
     public function it_should_create_empty_vendor_image(): void
     {
-        $vendorImage = new VendorBackgroundImage();
+        $vendorImage = new BackgroundImage();
 
         $this->createNew()->shouldBeLike($vendorImage);
     }
@@ -39,7 +39,7 @@ final class VendorBackgroundImageFactorySpec extends ObjectBehavior
     public function it_should_create_vendor_image_with_data(): void
     {
         $vendor = new Vendor();
-        $vendorImage = new VendorBackgroundImage();
+        $vendorImage = new BackgroundImage();
 
         $vendorImage->setPath('test');
         $vendorImage->setOwner($vendor);

@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorAddress;
-use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
 use Sylius\Component\Addressing\Model\Country;
 
 final class AddressFactory implements AddressFactoryInterface
@@ -22,8 +22,8 @@ final class AddressFactory implements AddressFactoryInterface
         string $city,
         string $postalCode,
         Country $country
-    ): VendorAddressInterface {
-        $address = new VendorAddress();
+    ): AddressInterface {
+        $address = new Address();
         $address->setCountry($country);
         $address->setPostalCode($postalCode);
         $address->setStreet($street);

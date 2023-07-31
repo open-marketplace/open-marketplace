@@ -67,7 +67,7 @@ BitBag\OpenMarketplace\Entity\ShopUser:
     customer: '@customer_john'
     username: "john.smith@example.com"
     usernameCanonical: "john.smith@example.com"
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_bruce:
     shopUser: '@user_bruce'
     companyName: 'Wayne Enterprises, Inc.'

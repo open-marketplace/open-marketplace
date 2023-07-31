@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Order;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 interface OrderManagerInterface
 {

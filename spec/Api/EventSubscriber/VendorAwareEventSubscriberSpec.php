@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\EventSubscriber;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\EventSubscriber\VendorAwareEventSubscriber;
-use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorAwareInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;

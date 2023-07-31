@@ -14,7 +14,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface as OpenMarketplaceOrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;

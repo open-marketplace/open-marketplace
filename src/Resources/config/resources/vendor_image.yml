@@ -2,17 +2,17 @@ sylius_resource:
     resources:
         bitbag_open_marketplace.vendor_image:
             classes:
-                model: BitBag\OpenMarketplace\Entity\VendorImage
-                interface: BitBag\OpenMarketplace\Entity\VendorImageInterface
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface
                 form: BitBag\OpenMarketplace\Form\VendorImageType
         bitbag_open_marketplace.vendor_profile_update_image:
             classes:
-                model: BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage
         bitbag_open_marketplace.vendor_background_image:
             classes:
-                model: BitBag\OpenMarketplace\Entity\VendorBackgroundImage
-                interface: BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface
                 form: BitBag\OpenMarketplace\Form\VendorBackgroundImageType
         bitbag_open_marketplace.vendor_profile_update_background_image:
             classes:
-                model: BitBag\OpenMarketplace\Entity\VendorProfileUpdateBackgroundImage
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage

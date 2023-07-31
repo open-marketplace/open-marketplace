@@ -21,7 +21,7 @@ use BitBag\OpenMarketplace\Component\Order\Factory\OrderFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\OrderItemFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\OrderManager;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;

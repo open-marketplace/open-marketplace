@@ -14,7 +14,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 

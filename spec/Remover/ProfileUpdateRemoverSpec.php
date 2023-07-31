@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Remover;
 
-use BitBag\OpenMarketplace\Entity\VendorAddressInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
 use BitBag\OpenMarketplace\Remover\ProfileUpdateRemover;
 use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,7 +34,7 @@ final class ProfileUpdateRemoverSpec extends ObjectBehavior
 
     public function it_removes_profile_update(
         EntityManagerInterface $entityManager,
-        VendorProfileUpdateInterface $vendorProfileUpdate
+        ProfileUpdateInterface $vendorProfileUpdate
     ): void {
         $vendorProfileUpdate->getVendorAddress()
             ->willReturn(null);
@@ -50,8 +50,8 @@ final class ProfileUpdateRemoverSpec extends ObjectBehavior
 
     public function it_removes_profile_update_and_address_update(
         EntityManagerInterface $entityManager,
-        VendorProfileUpdateInterface $vendorProfileUpdate,
-        VendorAddressInterface $vendorProfileAddressUpdate
+        ProfileUpdateInterface $vendorProfileUpdate,
+        AddressInterface $vendorProfileAddressUpdate
     ): void {
         $vendorProfileUpdate->getVendorAddress()
             ->willReturn($vendorProfileAddressUpdate);

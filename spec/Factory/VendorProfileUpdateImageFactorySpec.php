@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorProfileInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactory;
 use PhpSpec\ObjectBehavior;
 
@@ -26,17 +26,17 @@ final class VendorProfileUpdateImageFactorySpec extends ObjectBehavior
 
     public function it_creates_new_vendor_image(): void
     {
-        $this->createNew()->shouldBeAnInstanceOf(VendorProfileUpdateImage::class);
+        $this->createNew()->shouldBeAnInstanceOf(LogoImage::class);
     }
 
     public function it_creates_initialized_image(
-        VendorImageInterface $uploadedImage,
+        LogoImageInterface $uploadedImage,
         VendorProfileInterface $vendorProfile
     ): void {
         $imageEntity = $this->createWithFileAndOwner($uploadedImage, $vendorProfile);
 
-        $imageEntity->shouldBeAnInstanceOf(VendorProfileUpdateImage::class);
-        $imageEntity->shouldImplement(VendorImageInterface::class);
+        $imageEntity->shouldBeAnInstanceOf(LogoImage::class);
+        $imageEntity->shouldImplement(LogoImageInterface::class);
         $imageEntity->getOwner()->shouldBe($vendorProfile);
     }
 }

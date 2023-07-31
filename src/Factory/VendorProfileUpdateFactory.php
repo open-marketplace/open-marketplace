@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorAddressUpdate;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\Address;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Generator\TokenGeneratorInterface;
 
 final class VendorProfileUpdateFactory implements VendorProfileUpdateFactoryInterface
@@ -28,9 +28,9 @@ final class VendorProfileUpdateFactory implements VendorProfileUpdateFactoryInte
 
     public function createWithGeneratedTokenAndVendor(
         VendorInterface $vendor
-    ): VendorProfileUpdateInterface {
-        $vendorUpdate = new VendorProfileUpdate();
-        $vendorUpdate->setVendorAddress(new VendorAddressUpdate());
+    ): ProfileUpdateInterface {
+        $vendorUpdate = new ProfileUpdate();
+        $vendorUpdate->setVendorAddress(new Address());
         $vendorUpdate->setToken($this->tokenGenerator->generate());
         $vendorUpdate->setVendor($vendor);
 

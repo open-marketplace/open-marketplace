@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorBackgroundImageInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorBackgroundImageHandler;
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
@@ -45,7 +45,7 @@ final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
         ObjectManager $manager,
         UploadVendorBackgroundImageInterface $command,
         VendorInterface $owner,
-        VendorBackgroundImageInterface $vendorBackgroundImage
+        BackgroundImageInterface $vendorBackgroundImage
     ): void {
         $file = new UploadedFile(__FILE__, 'test');
         $command->getFile()->willReturn($file);
@@ -69,8 +69,8 @@ final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
         RepositoryInterface $vendorBackgroundImageRepository,
         UploadVendorBackgroundImageInterface $command,
         VendorInterface $owner,
-        VendorBackgroundImageInterface $previousBackgroundImage,
-        VendorBackgroundImageInterface $vendorBackgroundImage
+        BackgroundImageInterface $previousBackgroundImage,
+        BackgroundImageInterface $vendorBackgroundImage
     ): void {
         $file = new UploadedFile(__FILE__, 'test');
         $command->getFile()->willReturn($file);
@@ -93,8 +93,8 @@ final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
         RepositoryInterface $vendorBackgroundImageRepository,
         UploadVendorBackgroundImageInterface $command,
         VendorInterface $owner,
-        VendorBackgroundImageInterface $previousBackgroundImage,
-        VendorBackgroundImageInterface $vendorBackgroundImage
+        BackgroundImageInterface $previousBackgroundImage,
+        BackgroundImageInterface $vendorBackgroundImage
     ): void {
         $command->getFile()->willReturn(null);
 
@@ -109,8 +109,8 @@ final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
         RepositoryInterface $vendorBackgroundImageRepository,
         UploadVendorBackgroundImageInterface $command,
         VendorInterface $owner,
-        VendorBackgroundImageInterface $previousBackgroundImage,
-        VendorBackgroundImageInterface $vendorBackgroundImage
+        BackgroundImageInterface $previousBackgroundImage,
+        BackgroundImageInterface $vendorBackgroundImage
     ): void {
         $file = new UploadedFile(__FILE__, 'test');
         $command->getFile()->willReturn($file);

@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\Validator;
 
 use BitBag\OpenMarketplace\Api\Validator\UniqueShopUserVendor;
 use BitBag\OpenMarketplace\Api\Validator\UniqueShopUserVendorValidator;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

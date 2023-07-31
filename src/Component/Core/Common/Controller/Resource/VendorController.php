@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
@@ -104,7 +104,7 @@ final class VendorController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
 
         $vendor = $this->vendorProvider->provideCurrentVendor();
-        $pendingUpdate = $this->manager->getRepository(VendorProfileUpdate::class)
+        $pendingUpdate = $this->manager->getRepository(ProfileUpdate::class)
             ->findOneBy(['vendor' => $vendor]);
 
         if (null !== $pendingUpdate) {

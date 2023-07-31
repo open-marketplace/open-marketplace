@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Api\Security\Voter;
 
 use BitBag\OpenMarketplace\Api\Security\Voter\VendorImageVoter;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -37,7 +37,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
-        VendorImageInterface $vendorImage,
+        LogoImageInterface $vendorImage,
         TokenInterface $token
     ): void {
         $user->getVendor()->willReturn($vendor);
@@ -54,7 +54,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         ShopUserInterface $user,
         VendorInterface $vendor,
         VendorInterface $imageOwner,
-        VendorImageInterface $vendorImage,
+        LogoImageInterface $vendorImage,
         TokenInterface $token
     ): void {
         $user->getVendor()->willReturn($vendor);
@@ -71,7 +71,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
-        VendorImageInterface $vendorImage,
+        LogoImageInterface $vendorImage,
         TokenInterface $token
     ): void {
         $user->getVendor()->willReturn(null);
@@ -87,7 +87,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
-        VendorImageInterface $vendorImage,
+        LogoImageInterface $vendorImage,
         TokenInterface $token
     ): void {
         $user->getVendor()->willReturn($vendor);
@@ -103,7 +103,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         VendorInterface $vendor,
-        VendorImageInterface $vendorImage,
+        LogoImageInterface $vendorImage,
         TokenInterface $token
     ): void {
         $user->getVendor()->willReturn($vendor);

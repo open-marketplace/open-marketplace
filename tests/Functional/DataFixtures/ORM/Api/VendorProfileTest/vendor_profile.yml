@@ -77,7 +77,7 @@ BitBag\OpenMarketplace\Entity\ShopUser:
         customer: '@customer_john'
         username: "john.smith@example.com"
         usernameCanonical: "john.smith@example.com"
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
     vendor_address_bruce:
         country: '@country_us'
         city: 'Arkham City'
@@ -88,7 +88,7 @@ BitBag\OpenMarketplace\Entity\VendorAddress:
         city: 'San Francisco'
         postalCode: '94016'
         street: 'Unknown 1'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     vendor_bruce:
         shopUser: '@user_bruce'
         companyName: 'Wayne Enterprises, Inc.'
@@ -109,11 +109,11 @@ BitBag\OpenMarketplace\Entity\Vendor:
         description: 'description'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\VendorImage:
+BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage:
     vendor_image_peter:
         owner: "@vendor_peter"
         path: "/dummy/file/path"
-BitBag\OpenMarketplace\Entity\VendorBackgroundImage:
+BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage:
     vendor_backgroundimage_peter:
         owner: "@vendor_peter"
         path: "/dummy/file/path"

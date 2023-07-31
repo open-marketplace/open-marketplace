@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 final class UpdateProductListing implements UpdateProductListingInterface
 {

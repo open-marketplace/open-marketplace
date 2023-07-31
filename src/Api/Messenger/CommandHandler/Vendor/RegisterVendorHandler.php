@@ -13,8 +13,8 @@ namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendorInterface;
 use BitBag\OpenMarketplace\Api\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 
 final class RegisterVendorHandler

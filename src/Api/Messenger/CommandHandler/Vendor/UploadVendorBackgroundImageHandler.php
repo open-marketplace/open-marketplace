@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorBackgroundImageInterface;
-use BitBag\OpenMarketplace\Entity\VendorBackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -40,7 +40,7 @@ final class UploadVendorBackgroundImageHandler
         $this->vendorBackgroundImageRepository = $vendorBackgroundImageRepository;
     }
 
-    public function __invoke(UploadVendorBackgroundImageInterface $command): VendorBackgroundImageInterface
+    public function __invoke(UploadVendorBackgroundImageInterface $command): BackgroundImageInterface
     {
         if (!$command->getFile()) {
             throw new \DomainException('File should be set');

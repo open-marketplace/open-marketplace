@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
-use BitBag\OpenMarketplace\Entity\Vendor;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;

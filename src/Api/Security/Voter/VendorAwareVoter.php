@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Api\Security\Voter;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
-use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorAwareInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 

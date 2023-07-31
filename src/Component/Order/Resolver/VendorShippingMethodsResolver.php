@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Resolver;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface;
 use BitBag\OpenMarketplace\Repository\VendorShippingMethodRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
@@ -64,7 +64,7 @@ final class VendorShippingMethodsResolver implements VendorShippingMethodsResolv
         ;
 
         $shippingMethods = [];
-        /** @var VendorShippingMethodInterface $vendorShippingMethod */
+        /** @var ShippingMethodInterface $vendorShippingMethod */
         foreach ($vendorShippingMethods as $vendorShippingMethod) {
             /** @var ShippingMethodInterface $shippingMethod */
             $shippingMethod = $vendorShippingMethod->getShippingMethod();

@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 interface VendorProfileUpdateFactoryInterface
 {
-    public function createWithGeneratedTokenAndVendor(VendorInterface $vendor): VendorProfileUpdateInterface;
+    public function createWithGeneratedTokenAndVendor(VendorInterface $vendor): ProfileUpdateInterface;
 }

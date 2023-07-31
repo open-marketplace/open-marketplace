@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorShippingMethod;
-use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class VendorShippingMethodFactory implements VendorShippingMethodFactoryInterface
 {
-    public function createNew(): VendorShippingMethodInterface
+    public function createNew(): ShippingMethodInterface
     {
         return new VendorShippingMethod();
     }
@@ -27,7 +27,7 @@ final class VendorShippingMethodFactory implements VendorShippingMethodFactoryIn
         string $channelCode,
         ShippingMethodInterface $shippingMethod,
         VendorInterface $vendor
-    ): VendorShippingMethodInterface {
+    ): ShippingMethodInterface {
         $vendorShippingMethod = $this->createNew();
 
         $vendorShippingMethod->setChannelCode($channelCode);

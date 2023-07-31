@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\Type;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Form\VendorBackgroundImageType;
 use BitBag\OpenMarketplace\Form\VendorImageType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;

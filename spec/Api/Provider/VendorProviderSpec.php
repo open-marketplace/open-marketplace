@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\Provider;
 
 use BitBag\OpenMarketplace\Api\Provider\VendorProvider;
 use BitBag\OpenMarketplace\Api\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 

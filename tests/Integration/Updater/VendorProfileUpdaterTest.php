@@ -12,11 +12,11 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Updater;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateBackgroundImage;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
 use BitBag\OpenMarketplace\Updater\VendorProfileUpdater;
@@ -50,8 +50,8 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
         $this->countryRepository = $this->entityManager->getRepository(Country::class);
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
-        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
-        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
+        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
+        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
         $this->vendorAddressFactory = static::$container->get('open_marketplace.factory.vendor_address_factory');
         $this->vendorProfileFactory = static::$container->get('open_marketplace.factory.vendor_profile_factory');
         $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('open_marketplace.service.vendor_profile_image_factory');
@@ -86,9 +86,9 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
         $vendorFormData = $this->createFakeUpdateFormData();
 
-        $fakeImage = new VendorProfileUpdateImage();
+        $fakeImage = new LogoImage();
         $fakeImage->setPath('fakepath');
-        $fakeBackgroundImage = new VendorProfileUpdateBackgroundImage();
+        $fakeBackgroundImage = new BackgroundImage();
         $fakeBackgroundImage->setPath('fakepath');
 
         $this->vendorProfileUpdater
@@ -100,7 +100,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->assertNotEquals($pendingData->getCompanyName(), $vendorDataBeforeFormSubmit->getCompanyName());
     }
 
-    private function createFakeUpdateFormData(): VendorProfileInterface
+    private function createFakeUpdateFormData(): ProfileInterface
     {
         $poland = $this->countryRepository
             ->findOneBy(['code' => 'PL']);
@@ -127,16 +127,16 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $currentVendor = $this->vendorRepository
             ->findOneBy(['taxIdentifier' => '1234567']);
 
-        $fakeImage = new VendorProfileUpdateImage();
+        $fakeImage = new LogoImage();
         $fakeImage->setPath('fakepath');
-        $fakeBackgroundImage = new VendorProfileUpdateBackgroundImage();
+        $fakeBackgroundImage = new BackgroundImage();
         $fakeBackgroundImage->setPath('fakepath');
 
         $this->vendorProfileUpdater
             ->createPendingVendorProfileUpdate($vendorFormData, $currentVendor, $fakeImage, $fakeBackgroundImage);
 
         $pendingData = $this->entityManager
-            ->getRepository(VendorProfileUpdate::class)
+            ->getRepository(ProfileUpdate::class)
             ->findOneBy(['vendor' => $currentVendor]);
 
         $this->assertEquals($vendorFormData->getCompanyName(), $pendingData->getCompanyName());

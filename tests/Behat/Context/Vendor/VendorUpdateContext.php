@@ -12,10 +12,10 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\Address;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorAddressUpdate;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
 use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -120,7 +120,7 @@ class VendorUpdateContext extends RawMinkContext
     public function pendingUpdateDataShouldAppearInDatabase()
     {
         $vendor = $this->sharedStorage->get('vendor');
-        $pendingData = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
+        $pendingData = $this->manager->getRepository(ProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
 
         Assert::notEq(null, $pendingData);
     }
@@ -132,8 +132,8 @@ class VendorUpdateContext extends RawMinkContext
     {
         $vendor = $this->sharedStorage->get('vendor');
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => 'PL']);
-        $pendigUpdate = new VendorProfileUpdate();
-        $pendigUpdate->setVendorAddress(new VendorAddressUpdate());
+        $pendigUpdate = new ProfileUpdate();
+        $pendigUpdate->setVendorAddress(new Address());
         $pendigUpdate->setVendor($vendor);
         $pendigUpdate->setToken($token);
         $pendigUpdate->setCompanyName('new Company');
@@ -178,7 +178,7 @@ class VendorUpdateContext extends RawMinkContext
      */
     public function iVisitConfirmationPage()
     {
-        $repository = $this->manager->getRepository(VendorProfileUpdate::class);
+        $repository = $this->manager->getRepository(ProfileUpdate::class);
         $updateData = $repository->findAll();
         $token = $updateData[0]->getToken();
         $session = $this->getSession();

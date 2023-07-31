@@ -13,7 +13,7 @@ namespace spec\BitBag\OpenMarketplace\Api\EventSubscriber;
 
 use BitBag\OpenMarketplace\Api\EventSubscriber\VendorSlugEventSubscriber;
 use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

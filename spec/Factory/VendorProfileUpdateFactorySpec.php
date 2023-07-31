@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Factory;
 
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactory;
 use BitBag\OpenMarketplace\Generator\TokenGeneratorInterface;
 use PhpSpec\ObjectBehavior;
@@ -34,7 +34,7 @@ final class VendorProfileUpdateFactorySpec extends ObjectBehavior
         VendorInterface $vendor
     ): void {
         $tokenGenerator->generate()->willReturn('test_token');
-        $this->createWithGeneratedTokenAndVendor($vendor)->shouldHaveType(VendorProfileUpdateInterface::class);
+        $this->createWithGeneratedTokenAndVendor($vendor)->shouldHaveType(ProfileUpdateInterface::class);
     }
 
     public function it_creates_vendor_profile_update_with_valid_token(

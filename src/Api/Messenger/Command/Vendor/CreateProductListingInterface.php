@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Entity\VendorAwareInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorAwareInterface;
 
 interface CreateProductListingInterface extends ProductDraftAwareInterface, VendorAwareInterface
 {
