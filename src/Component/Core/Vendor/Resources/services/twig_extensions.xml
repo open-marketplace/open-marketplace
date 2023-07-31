@@ -3,8 +3,10 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\OpenMarketplace\Twig\VendorExtension"
-                 id="open_marketplace.twig.extension.vendor_extension">
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension\VendorExtension"
+                 id="bitbag.open_marketplace.component.core.vendor.twig.extension.vendor">
             <argument type="service" id="open_marketplace.provider.vendor" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="sylius.context.locale" />
@@ -13,8 +15,8 @@
             <tag name="twig.extension" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Twig\Vendor\VendorClientExtension"
-                 id="open_marketplace.twig.vendor.vendor_client_extension">
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension\VendorClientExtension"
+                 id="bitbag.open_marketplace.component.core.vendor.twig.extension.vendor_client">
             <argument type="service" id="sylius.repository.customer" />
             <tag name="twig.extension" />
         </service>

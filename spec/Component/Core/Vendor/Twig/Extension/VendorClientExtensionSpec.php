@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Twig\Vendor;
+namespace spec\BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension;
 
+use BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension\VendorClientExtension;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
-use BitBag\OpenMarketplace\Twig\Vendor\VendorClientExtension;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Twig\Extension\AbstractExtension;

@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Twig\Vendor;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension;
 
 use BitBag\OpenMarketplace\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
