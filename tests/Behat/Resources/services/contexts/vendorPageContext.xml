@@ -16,7 +16,7 @@
             <argument type="service" id="open_marketplace.repository.product_repository"/>
             <argument type="service" id="sylius.factory.channel_pricing"/>
             <argument type="service" id="tests.open_marketplace.behat.page.vendor_page_page"/>
-            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.fixture.factory.vendor"/>
         </service>
     </services>
 </container>

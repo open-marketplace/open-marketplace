@@ -9,23 +9,20 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture;
+namespace BitBag\OpenMarketplace\Component\Fixture\Fixture;
 
-use BitBag\OpenMarketplace\Fixture\Factory\ProductListingExampleFactory;
+use BitBag\OpenMarketplace\Component\Fixture\Factory\ProductListingExampleFactory;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 final class ProductListingFixture extends AbstractFixture
 {
-    private ObjectManager $productDraftManager;
+    public function __construct(
+        private ObjectManager $productDraftManager,
+        private ProductListingExampleFactory $productDraftExampleFactory
+    ) {
 
-    private ProductListingExampleFactory $productDraftExampleFactory;
-
-    public function __construct(ObjectManager $productDraftManager, ProductListingExampleFactory $productDraftExampleFactory)
-    {
-        $this->productDraftManager = $productDraftManager;
-        $this->productDraftExampleFactory = $productDraftExampleFactory;
     }
 
     public function load(array $options): void

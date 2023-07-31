@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
@@ -24,20 +24,12 @@ use Webmozart\Assert\Assert;
 
 final class AttributeExampleFactory implements ExampleFactoryInterface
 {
-    private DraftAttributeFactoryInterface $draftAttributeFactory;
-
-    private EntityRepository $shopUserRepository;
-
-    private RepositoryInterface $localeRepository;
-
     public function __construct(
-        DraftAttributeFactoryInterface $draftAttributeFactory,
-        EntityRepository $shopUserRepository,
-        RepositoryInterface $localeRepository
+        private DraftAttributeFactoryInterface $draftAttributeFactory,
+        private EntityRepository $shopUserRepository,
+        private RepositoryInterface $localeRepository
     ) {
-        $this->draftAttributeFactory = $draftAttributeFactory;
-        $this->shopUserRepository = $shopUserRepository;
-        $this->localeRepository = $localeRepository;
+
     }
 
     public function create(array $options = []): DraftAttributeInterface

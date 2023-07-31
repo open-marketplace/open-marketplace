@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture;
+namespace BitBag\OpenMarketplace\Component\Fixture\Fixture;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\CategoryInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -19,14 +19,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 final class ConversationCategoryFixture extends AbstractFixture
 {
-    private ObjectManager $conversationCategoryManager;
+    public function __construct(
+        private ObjectManager $conversationCategoryManager,
+        private FactoryInterface $conversationCategoryFactory
+    ) {
 
-    private FactoryInterface $conversationCategoryFactory;
-
-    public function __construct(ObjectManager $conversationCategoryManager, FactoryInterface $conversationCategoryFactory)
-    {
-        $this->conversationCategoryManager = $conversationCategoryManager;
-        $this->conversationCategoryFactory = $conversationCategoryFactory;
     }
 
     public function load(array $options): void

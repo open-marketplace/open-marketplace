@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorInterface;
@@ -44,63 +44,24 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
 
     private OptionsResolver $optionsResolver;
 
-    private VendorProfileFactoryInterface $profileFactory;
-
-    private AddressFactoryInterface $addressFactory;
-
-    private FactoryInterface $shopUserFactory;
-
-    private FactoryInterface $customerFactory;
-
-    private RepositoryInterface $countryRepository;
-
-    private RepositoryInterface $customerGroupRepository;
-
-    private RepositoryInterface $vendorShippingMethodRepository;
-
-    private RepositoryInterface $channelRepository;
-
-    private VendorImageFactoryInterface $vendorImageFactory;
-
-    private VendorBackgroundImageFactoryInterface $backgroundImageFactory;
-
-    private FileLocatorInterface $fileLocator;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private FactoryInterface $countryFactory;
-
     public function __construct(
-        VendorProfileFactoryInterface $profileFactory,
-        AddressFactoryInterface $addressFactory,
-        FactoryInterface $shopUserFactory,
-        FactoryInterface $customerFactory,
-        RepositoryInterface $countryRepository,
-        RepositoryInterface $customerGroupRepository,
-        RepositoryInterface $vendorShippingMethodRepository,
-        RepositoryInterface $channelRepository,
-        VendorImageFactoryInterface $vendorImageFactory,
-        VendorBackgroundImageFactoryInterface $backgroundImageFactory,
-        FileLocatorInterface $fileLocator,
-        ImageUploaderInterface $imageUploader,
-        FactoryInterface $countryFactory
+        private VendorProfileFactoryInterface $profileFactory,
+        private AddressFactoryInterface $addressFactory,
+        private FactoryInterface $shopUserFactory,
+        private FactoryInterface $customerFactory,
+        private RepositoryInterface $countryRepository,
+        private RepositoryInterface $customerGroupRepository,
+        private RepositoryInterface $vendorShippingMethodRepository,
+        private RepositoryInterface $channelRepository,
+        private VendorImageFactoryInterface $vendorImageFactory,
+        private VendorBackgroundImageFactoryInterface $backgroundImageFactory,
+        private FileLocatorInterface $fileLocator,
+        private ImageUploaderInterface $imageUploader,
+        private FactoryInterface $countryFactory
     ) {
-        $this->profileFactory = $profileFactory;
-        $this->addressFactory = $addressFactory;
-        $this->shopUserFactory = $shopUserFactory;
-        $this->customerFactory = $customerFactory;
-        $this->countryRepository = $countryRepository;
-        $this->customerGroupRepository = $customerGroupRepository;
-        $this->vendorShippingMethodRepository = $vendorShippingMethodRepository;
-        $this->channelRepository = $channelRepository;
-        $this->countryFactory = $countryFactory;
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
-        $this->vendorImageFactory = $vendorImageFactory;
-        $this->backgroundImageFactory = $backgroundImageFactory;
-        $this->fileLocator = $fileLocator;
-        $this->imageUploader = $imageUploader;
     }
 
     public function create(array $options = []): VendorInterface

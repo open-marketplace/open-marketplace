@@ -6,7 +6,7 @@
         <service id="open_marketplace.behat.context.setup.vendor" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\VendorContext">
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
-            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.fixture.factory.vendor"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
         </service>

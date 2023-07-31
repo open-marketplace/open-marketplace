@@ -9,10 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface as BitBagOrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\OrderFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\OrderItemFactoryInterface;
@@ -44,65 +43,25 @@ use Webmozart\Assert\Assert;
 
 final class OrderExampleFactory extends AbstractExampleFactory implements OrderExampleFactoryInterface
 {
-    private OrderFactoryInterface $orderFactory;
-
-    private OrderItemFactoryInterface $orderItemFactory;
-
-    private OrderItemQuantityModifierInterface $orderItemQuantityModifier;
-
-    private ObjectManager $orderManager;
-
-    private RepositoryInterface $channelRepository;
-
-    private RepositoryInterface $customerRepository;
-
-    private ProductRepositoryInterface $productRepository;
-
-    private RepositoryInterface $countryRepository;
-
-    private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private FactoryInterface $addressFactory;
-
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    private SplitOrderByVendorProcessorInterface $splitOrderByVendorProcessor;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        OrderFactoryInterface $orderFactory,
-        OrderItemFactoryInterface $orderItemFactory,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        ObjectManager $orderManager,
-        RepositoryInterface $channelRepository,
-        RepositoryInterface $customerRepository,
-        ProductRepositoryInterface $productRepository,
-        RepositoryInterface $countryRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        FactoryInterface $addressFactory,
-        StateMachineFactoryInterface $stateMachineFactory,
-        SplitOrderByVendorProcessorInterface $splitOrderByVendorProcessor
+        private OrderFactoryInterface $orderFactory,
+        private OrderItemFactoryInterface $orderItemFactory,
+        private OrderItemQuantityModifierInterface $orderItemQuantityModifier,
+        private ObjectManager $orderManager,
+        private RepositoryInterface $channelRepository,
+        private RepositoryInterface $customerRepository,
+        private ProductRepositoryInterface $productRepository,
+        private RepositoryInterface $countryRepository,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private FactoryInterface $addressFactory,
+        private StateMachineFactoryInterface $stateMachineFactory,
+        private SplitOrderByVendorProcessorInterface $splitOrderByVendorProcessor
     ) {
-        $this->orderFactory = $orderFactory;
-        $this->orderItemFactory = $orderItemFactory;
-        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
-        $this->orderManager = $orderManager;
-        $this->channelRepository = $channelRepository;
-        $this->customerRepository = $customerRepository;
-        $this->productRepository = $productRepository;
-        $this->countryRepository = $countryRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->addressFactory = $addressFactory;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->splitOrderByVendorProcessor = $splitOrderByVendorProcessor;
-
         $this->optionsResolver = new OptionsResolver();
         $this->faker = Factory::create();
         $this->configureOptions($this->optionsResolver);
@@ -319,7 +278,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements OrderE
         }
         $this->orderManager->persist($order);
 
-        /** @var BitBagOrderInterface $order */
+        /** @var OrderInterface $order */
         $order = $order;
         $orders = $this->splitOrderByVendorProcessor->process($order);
 

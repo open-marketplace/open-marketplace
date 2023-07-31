@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftImageFactoryInterface;
@@ -44,66 +44,23 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
 {
     private Generator $faker;
 
-    private FactoryInterface $productDraftFactory;
-
-    private FactoryInterface $productListingPriceFactory;
-
-    private ListingPersisterInterface $listingPersister;
-
-    private FactoryInterface $productTranslationFactory;
-
-    private EntityRepository $shopUserRepository;
-
-    private ChannelRepositoryInterface $channelRepository;
-
-    private RepositoryInterface $localeRepository;
-
-    private RepositoryInterface $draftAttributeRepository;
-
-    private RepositoryInterface $taxonRepository;
-
-    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
-
-    private SlugGeneratorInterface $slugGenerator;
-
-    private FileLocatorInterface $fileLocator;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private DraftImageFactoryInterface $draftImageFactory;
-
     public function __construct(
-        FactoryInterface $productDraftFactory,
-        FactoryInterface $productListingPriceFactory,
-        ListingPersisterInterface $listingPersister,
-        FactoryInterface $productTranslationFactory,
-        EntityRepository $shopUserRepository,
-        ChannelRepositoryInterface $channelRepository,
-        RepositoryInterface $localeRepository,
-        RepositoryInterface $draftAttributeRepository,
-        RepositoryInterface $taxonRepository,
-        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        SlugGeneratorInterface $slugGenerator,
-        ImageUploaderInterface $imageUploader,
-        DraftImageFactoryInterface $draftImageFactory,
-        FileLocatorInterface $fileLocator,
-        ) {
-        $this->productDraftFactory = $productDraftFactory;
-        $this->productListingPriceFactory = $productListingPriceFactory;
-        $this->listingPersister = $listingPersister;
-        $this->productTranslationFactory = $productTranslationFactory;
-        $this->shopUserRepository = $shopUserRepository;
-        $this->channelRepository = $channelRepository;
-        $this->localeRepository = $localeRepository;
-        $this->draftAttributeRepository = $draftAttributeRepository;
-        $this->taxonRepository = $taxonRepository;
-        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
-        $this->slugGenerator = $slugGenerator;
+        private FactoryInterface $productDraftFactory,
+        private FactoryInterface $productListingPriceFactory,
+        private ListingPersisterInterface $listingPersister,
+        private FactoryInterface $productTranslationFactory,
+        private EntityRepository $shopUserRepository,
+        private ChannelRepositoryInterface $channelRepository,
+        private RepositoryInterface $localeRepository,
+        private RepositoryInterface $draftAttributeRepository,
+        private RepositoryInterface $taxonRepository,
+        private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
+        private SlugGeneratorInterface $slugGenerator,
+        private ImageUploaderInterface $imageUploader,
+        private DraftImageFactoryInterface $draftImageFactory,
+        private FileLocatorInterface $fileLocator,
+    ) {
         $this->faker = Factory::create();
-
-        $this->fileLocator = $fileLocator;
-        $this->imageUploader = $imageUploader;
-        $this->draftImageFactory = $draftImageFactory;
     }
 
     public function create(array $options = []): DraftInterface

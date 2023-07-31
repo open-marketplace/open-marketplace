@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture;
+namespace BitBag\OpenMarketplace\Component\Fixture\Fixture;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -18,16 +18,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 final class AttributeFixture extends AbstractFixture
 {
-    private ExampleFactoryInterface $attributeExampleFactory;
-
-    private EntityManagerInterface $attributeManager;
-
     public function __construct(
-        ExampleFactoryInterface $attributeExampleFactory,
-        EntityManagerInterface $attributeManager
+        private ExampleFactoryInterface $attributeExampleFactory,
+        private EntityManagerInterface $attributeManager,
     ) {
-        $this->attributeExampleFactory = $attributeExampleFactory;
-        $this->attributeManager = $attributeManager;
+
     }
 
     public function getName(): string

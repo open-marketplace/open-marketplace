@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
@@ -30,33 +30,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ConversationExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private FactoryInterface $conversationFactory;
-
-    private FactoryInterface $conversationMessageFactory;
-
-    private VendorRepositoryInterface $vendorRepository;
-
-    private RepositoryInterface $adminUserRepository;
-
-    private CategoryRepositoryInterface $categoryRepository;
-
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $conversationFactory,
-        FactoryInterface $conversationMessageFactory,
-        VendorRepositoryInterface $vendorRepository,
-        RepositoryInterface $adminUserRepository,
-        CategoryRepositoryInterface $categoryRepository
+        private FactoryInterface $conversationFactory,
+        private FactoryInterface $conversationMessageFactory,
+        private VendorRepositoryInterface $vendorRepository,
+        private RepositoryInterface $adminUserRepository,
+        private CategoryRepositoryInterface $categoryRepository
     ) {
-        $this->conversationFactory = $conversationFactory;
-        $this->conversationMessageFactory = $conversationMessageFactory;
-        $this->vendorRepository = $vendorRepository;
-        $this->adminUserRepository = $adminUserRepository;
-        $this->categoryRepository = $categoryRepository;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 

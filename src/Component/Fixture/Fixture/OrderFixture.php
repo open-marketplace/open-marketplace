@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Fixture;
+namespace BitBag\OpenMarketplace\Component\Fixture\Fixture;
 
-use BitBag\OpenMarketplace\Fixture\Factory\OrderExampleFactory;
+use BitBag\OpenMarketplace\Component\Fixture\Factory\OrderExampleFactory;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
@@ -20,17 +20,12 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 final class OrderFixture extends AbstractFixture
 {
-    private ObjectManager $orderManager;
-
-    private OrderExampleFactory $orderExampleFactory;
-
     private Generator $faker;
 
-    public function __construct(ObjectManager $orderManager, OrderExampleFactory $orderExampleFactory)
-    {
-        $this->orderManager = $orderManager;
-        $this->orderExampleFactory = $orderExampleFactory;
-
+    public function __construct(
+        private ObjectManager $orderManager,
+        private OrderExampleFactory $orderExampleFactory
+    ) {
         $this->faker = Factory::create();
     }
 
