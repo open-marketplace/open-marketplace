@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Security\Voter\Vendor;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use SM\Factory\FactoryInterface;
@@ -17,17 +17,16 @@ use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-final class OrderVoter extends Voter
+final class OrderOperationVoter extends Voter
 {
     public const PREFIX = 'VENDOR_ORDER_';
 
     public const CANCEL = self::PREFIX . 'CANCEL';
 
-    private FactoryInterface $stateMachineFactory;
+    public function __construct(
+        private FactoryInterface $stateMachineFactory
+    ) {
 
-    public function __construct(FactoryInterface $stateMachineFactory)
-    {
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function supportsAttribute(string $attribute): bool

@@ -9,20 +9,20 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Security\Voter;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Security\Voter;
 
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdateInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-final class TokenOwningVoter extends Voter
+final class ObjectOwningVoter extends Voter
 {
-    public const UPDATE = 'UPDATE';
+    public const OWNIT = 'OWNIT';
 
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, [self::UPDATE])) {
+        if (!in_array($attribute, [self::OWNIT])) {
             return false;
         }
 
@@ -49,17 +49,18 @@ final class TokenOwningVoter extends Voter
         $vendorUpdateData = $subject;
 
         switch ($attribute) {
-            case self::UPDATE:
-                return $this->doesUserOwnTheData($vendorUpdateData, $user);
+            case self::OWNIT:
+                return $this->doesUserOwnTheData($subject, $user);
             default:
                 return false;
         }
     }
 
-    private function doesUserOwnTheData(VendorProfileUpdateInterface $profileUpdate, ShopUserInterface $user): bool
+    private function doesUserOwnTheData(object $data, ShopUserInterface $user): bool
     {
         $loggedInVendor = $user->getVendor();
-        $vendorData = $profileUpdate->getVendor();
+        /** @phpstan-ignore-next-line */
+        $vendorData = $data->getVendor();
         if ($loggedInVendor === $vendorData) {
             return true;
         }

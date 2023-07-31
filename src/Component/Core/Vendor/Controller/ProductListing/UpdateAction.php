@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing;
 
+use BitBag\OpenMarketplace\Component\Core\Common\Security\Voter\ObjectOwningVoter;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
 use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
-use BitBag\OpenMarketplace\Security\Voter\ObjectOwningVoter;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormFactoryInterface;

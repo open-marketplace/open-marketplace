@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Security\Voter;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Security\Voter;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;

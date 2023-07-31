@@ -16,11 +16,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class CurrentUserResolver implements CurrentUserResolverInterface
 {
-    private TokenStorageInterface $tokenStorage;
-
-    public function __construct(TokenStorageInterface $tokenStorage)
-    {
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(
+        private TokenStorageInterface $tokenStorage
+    ) {
     }
 
     public function resolve(): ?UserInterface

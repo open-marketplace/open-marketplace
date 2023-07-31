@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Profile;
 
+use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\TokenOwningVoter;
 use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
 use BitBag\OpenMarketplace\Provider\VendorProvider;
-use BitBag\OpenMarketplace\Security\Voter\TokenOwningVoter;
 use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

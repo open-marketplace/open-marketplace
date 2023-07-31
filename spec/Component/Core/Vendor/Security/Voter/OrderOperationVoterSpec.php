@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Security\Voter\Vendor;
+namespace spec\BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter;
 
+use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\OrderOperationVoter;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
-use BitBag\OpenMarketplace\Security\Voter\Vendor\OrderVoter;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-final class OrderVoterSpec extends ObjectBehavior
+final class OrderOperationVoterSpec extends ObjectBehavior
 {
     public function let(FactoryInterface $stateMachineFactory)
     {
@@ -31,7 +31,7 @@ final class OrderVoterSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(OrderVoter::class);
+        $this->shouldHaveType(OrderOperationVoter::class);
         $this->shouldHaveType(Voter::class);
     }
 

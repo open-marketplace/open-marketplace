@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor;
 
+use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\OrderOperationVoter;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Security\Voter\Vendor\OrderVoter;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
@@ -123,7 +123,7 @@ final class MenuListener
         $order = $options['order'];
 
         $stateMachine = $this->stateMachineFactory->get($order, OrderTransitions::GRAPH);
-        if ($this->security->isGranted(OrderVoter::CANCEL, $order)) {
+        if ($this->security->isGranted(OrderOperationVoter::CANCEL, $order)) {
             $menu
                 ->addChild('cancel', [
                     'route' => 'open_marketplace_vendor_order_cancel',
