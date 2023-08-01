@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class VendorShippingMethodFactory implements VendorShippingMethodFactoryInterface
 {
-    public function createNew(): ShippingMethodInterface
+    public function createNew(): VendorShippingMethodInterface
     {
         return new VendorShippingMethod();
     }
@@ -27,7 +27,7 @@ final class VendorShippingMethodFactory implements VendorShippingMethodFactoryIn
         string $channelCode,
         ShippingMethodInterface $shippingMethod,
         VendorInterface $vendor
-    ): ShippingMethodInterface {
+    ): VendorShippingMethodInterface {
         $vendorShippingMethod = $this->createNew();
 
         $vendorShippingMethod->setChannelCode($channelCode);

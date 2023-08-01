@@ -17,11 +17,11 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 interface VendorShippingMethodFactoryInterface
 {
-    public function createNew(): ShippingMethodInterface;
+    public function createNew(): VendorShippingMethodInterface;
 
     public function createNewWithChannelCodeShippingAndVendor(
         string $channelCode,
         ShippingMethodInterface $shippingMethod,
         VendorInterface $vendor
-    ): ShippingMethodInterface;
+    ): VendorShippingMethodInterface;
 }
