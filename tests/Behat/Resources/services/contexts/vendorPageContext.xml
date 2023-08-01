@@ -8,7 +8,7 @@
         >
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.repository.country"/>
-            <argument type="service" id="open_marketplace.repository.vendor_repository"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.repository.vendor"/>
             <argument type="service" id="sylius.custom_factory.product"/>
             <argument type="service" id="sylius.generator.slug"/>
             <argument type="service" id="sylius.product_variant_resolver.default"/>

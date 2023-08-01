@@ -68,7 +68,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  id="bitbag.open_marketplace.component.core.common.fixture.factory.conversation">
             <argument type="service" id="open_marketplace.factory.conversation" />
             <argument type="service" id="open_marketplace.factory.conversation_message" />
-            <argument type="service" id="open_marketplace.repository.vendor_repository" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.repository.vendor" />
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="open_marketplace.repository.conversation_category" />
         </service>

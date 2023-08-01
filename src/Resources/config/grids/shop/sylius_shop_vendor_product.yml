@@ -8,7 +8,7 @@ sylius_grid:
           repository:
             method: createVendorShopListQueryBuilder
             arguments:
-              vendor: "expr:notFoundOnNull(service('open_marketplace.repository.vendor_repository').findOneBySlug($vendor_slug))"
+              vendor: "expr:notFoundOnNull(service('bitbag.open_marketplace.component.vendor.repository.vendor').findOneBySlug($vendor_slug))"
               channel: "expr:service('sylius.context.channel').getChannel()"
               taxon: "expr:notFoundOnNull(service('open_marketplace.provider.taxon').provideForVendorPage(service('request_stack').getCurrentRequest().attributes.get('slug', null), service('sylius.context.locale').getLocaleCode()))"
               locale: "expr:service('sylius.context.locale').getLocaleCode()"

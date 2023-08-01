@@ -17,7 +17,7 @@ use BitBag\OpenMarketplace\Component\Order\Resolver\VendorShippingMethodsResolve
 use BitBag\OpenMarketplace\Component\Order\Resolver\VendorShippingMethodsResolverInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface;
-use BitBag\OpenMarketplace\Repository\VendorShippingMethodRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorShippingMethodRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;

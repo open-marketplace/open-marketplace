@@ -15,8 +15,8 @@ use BitBag\OpenMarketplace\Component\Core\Common\Resolver\CurrentUserResolverInt
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Category;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
-use BitBag\OpenMarketplace\Repository\VendorRepository;
-use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

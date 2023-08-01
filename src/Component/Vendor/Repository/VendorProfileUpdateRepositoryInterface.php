@@ -9,10 +9,8 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository;
+namespace BitBag\OpenMarketplace\Component\Vendor\Repository;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-
-final class VendorProfileUpdateRepository extends EntityRepository implements VendorProfileUpdateRepositoryInterface
+interface VendorProfileUpdateRepositoryInterface
 {
 }

@@ -22,17 +22,17 @@ In order to display more details for give resource use command
 
 Example details view for vendor
 ```
-+--------------------+----------------------------------------------------------------+
-| name               | vendor                                                         |
-| application        | open_marketplace                                               |
-| driver             | doctrine/orm                                                   |
-| classes.model      | BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor          |
-| classes.interface  | BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface |
-| classes.controller | Sylius\Bundle\ResourceBundle\Controller\ResourceController     |
-| classes.repository | BitBag\OpenMarketplace\Repository\VendorRepository             |
-| classes.form       | BitBag\OpenMarketplace\Form\Type\VendorEditType                |
-| classes.factory    | Sylius\Component\Resource\Factory\Factory                      |
-+--------------------+----------------------------------------------------------------+
++--------------------+---------------------------------------------------------------------+
+| name               | vendor                                                              |
+| application        | open_marketplace                                                    |
+| driver             | doctrine/orm                                                        |
+| classes.model      | BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor               |
+| classes.interface  | BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface      |
+| classes.controller | Sylius\Bundle\ResourceBundle\Controller\ResourceController          |
+| classes.repository | BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository |
+| classes.form       | BitBag\OpenMarketplace\Form\Type\VendorEditType                     |
+| classes.factory    | Sylius\Component\Resource\Factory\Factory                           |
++--------------------+---------------------------------------------------------------------+
 ```
 
 

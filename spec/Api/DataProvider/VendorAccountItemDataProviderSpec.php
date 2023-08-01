@@ -18,7 +18,7 @@ use BitBag\OpenMarketplace\Api\DataProvider\VendorAccountItemDataProvider;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\UuidInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;

@@ -6,7 +6,7 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor
                 interface: BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: BitBag\OpenMarketplace\Repository\VendorRepository
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository
                 form: BitBag\OpenMarketplace\Form\Type\VendorEditType
 
         open_marketplace.vendor_profile_update:
@@ -14,7 +14,7 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate
                 interface: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: BitBag\OpenMarketplace\Repository\VendorProfileUpdateRepository
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorProfileUpdateRepository
 
         open_marketplace.vendor_address:
             classes:
@@ -33,5 +33,5 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod
                 interface: BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: BitBag\OpenMarketplace\Repository\VendorShippingMethodRepository
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorShippingMethodRepository
 

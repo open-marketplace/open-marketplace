@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Generator;
 
-use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 
 final class VendorSlugGenerator implements VendorSlugGeneratorInterface
 {

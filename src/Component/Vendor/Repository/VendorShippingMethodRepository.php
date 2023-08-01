@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository;
+namespace BitBag\OpenMarketplace\Component\Vendor\Repository;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;

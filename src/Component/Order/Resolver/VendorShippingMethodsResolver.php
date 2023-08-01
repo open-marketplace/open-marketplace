@@ -14,7 +14,7 @@ namespace BitBag\OpenMarketplace\Component\Order\Resolver;
 use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface;
-use BitBag\OpenMarketplace\Repository\VendorShippingMethodRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorShippingMethodRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;

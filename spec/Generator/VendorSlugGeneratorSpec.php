@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Generator;
 
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 use BitBag\OpenMarketplace\Generator\VendorSlugGenerator;
 use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
-use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 
 final class VendorSlugGeneratorSpec extends ObjectBehavior
