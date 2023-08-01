@@ -11,11 +11,10 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Messaging\Uploader;
 
-use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class AttachmentUploader implements FileUploaderInterface
+final class AttachmentUploader implements AttachmentUploaderInterface
 {
     public function __construct(
         private string $targetDirectory

@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Uploader;
+namespace BitBag\OpenMarketplace\Component\Messaging\Uploader;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-interface FileUploaderInterface
+interface AttachmentUploaderInterface
 {
     public function upload(UploadedFile $file): string;
 }

@@ -17,7 +17,7 @@ use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Component\Messaging\MessagePersister;
 use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
-use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Uploader\AttachmentUploaderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -28,7 +28,7 @@ final class MessagePersisterSpec extends ObjectBehavior
 {
     public function let(
         CurrentUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        AttachmentUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository
     ) {
         $this->beConstructedWith($actualUserResolver, $fileUploader, $conversationRepository);
@@ -42,7 +42,7 @@ final class MessagePersisterSpec extends ObjectBehavior
 
     public function it_processes_message_and_adds_it_to_given_conversation(
         CurrentUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        AttachmentUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
         UserInterface $user,
         MessageInterface $message,
@@ -69,7 +69,7 @@ final class MessagePersisterSpec extends ObjectBehavior
 
     public function it_processes_message_admin_create_not_send_file(
         CurrentUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        AttachmentUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
         AdminUserInterface $admin,
         MessageInterface $message,
@@ -105,7 +105,7 @@ final class MessagePersisterSpec extends ObjectBehavior
 
     public function it_doesnt_strip_tags_on_false_parameter(
         CurrentUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        AttachmentUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
         AdminUserInterface $admin,
         UserInterface $user,
@@ -129,7 +129,7 @@ final class MessagePersisterSpec extends ObjectBehavior
 
     public function it_adds_file(
         CurrentUserResolverInterface $actualUserResolver,
-        FileUploaderInterface $fileUploader,
+        AttachmentUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
         UserInterface $user,
         MessageInterface $message,

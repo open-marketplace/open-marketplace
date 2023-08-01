@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Component\Core\Common\Resolver\CurrentUserResolverInt
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
-use BitBag\OpenMarketplace\Uploader\FileUploaderInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Uploader\AttachmentUploaderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -24,7 +24,7 @@ final class MessagePersister implements MessagePersisterInterface
 {
     public function __construct(
         private CurrentUserResolverInterface $currentUserResolver,
-        private FileUploaderInterface $fileUploader,
+        private AttachmentUploaderInterface $fileUploader,
         private ConversationRepositoryInterface $conversationRepository
     ) {
 
