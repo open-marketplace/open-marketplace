@@ -40,7 +40,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="open_marketplace.repository.draft_attribute" />
             <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_image"/>

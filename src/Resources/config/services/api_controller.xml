@@ -18,7 +18,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <service class="BitBag\OpenMarketplace\Api\Controller\Vendor\SendToVerificationAction"
                  id="bitbag.open_marketplace.api.controller.vendor.send_to_verification_action"
                  public="true">
-            <argument type="service" id="open_marketplace.state_machine.product_draft.transition"/>
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Api\Controller\Vendor\AcceptArchiveConversationAction"

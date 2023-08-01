@@ -23,13 +23,13 @@ winzou_state_machine:
             after:
                 send_to_verification:
                     on: [ 'send_to_verification' ]
-                    do: [ '@open_marketplace.state_machine.product_draft', 'sendToVerification' ]
+                    do: [ '@bitbag.open_marketplace.component.core.common.state_machine.product_draft_callbacks', 'sendToVerification' ]
                     args: [ 'object' ]
                 accept_product_listing:
                     on: ['accept_product_draft']
-                    do: ['@open_marketplace.state_machine.product_draft', 'accept']
+                    do: ['@bitbag.open_marketplace.component.core.common.state_machine.product_draft_callbacks', 'accept']
                     args: ['object']
                 reject_product_listing:
                     on: [ 'reject_product_draft' ]
-                    do: [ '@open_marketplace.state_machine.product_draft', 'reject' ]
+                    do: [ '@bitbag.open_marketplace.component.core.common.state_machine.product_draft_callbacks', 'reject' ]
                     args: [ 'object' ]

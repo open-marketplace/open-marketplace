@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\StateMachine\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Common\StateMachine;
 
 use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
@@ -18,20 +18,12 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class ProductDraftCallbacks
 {
-    private FlashBagInterface $session;
-
-    private ProductDraftAcceptanceOperatorInterface $productDraftService;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        FlashBagInterface $session,
-        ProductDraftAcceptanceOperatorInterface $productDraftService,
-        EntityManagerInterface $entityManager
+        private FlashBagInterface $session,
+        private ProductDraftAcceptanceOperatorInterface $productDraftService,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->session = $session;
-        $this->productDraftService = $productDraftService;
-        $this->entityManager = $entityManager;
+
     }
 
     public function sendToVerification(DraftInterface $productDraft): void

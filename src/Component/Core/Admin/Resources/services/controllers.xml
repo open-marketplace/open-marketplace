@@ -39,7 +39,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\AcceptAction">
             <argument type="service" id="open_marketplace.repository.product_listing" />
             <argument type="service" id="router.default" />
-            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition" />
             <argument type="service" id="open_marketplace.repository.product_draft" />
 
             <tag name="controller.service_arguments" />
@@ -49,7 +49,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\RejectAction">
             <argument type="service" id="open_marketplace.repository.product_listing" />
             <argument type="service" id="router.default" />
-            <argument type="service" id="open_marketplace.state_machine.product_draft.transition" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition" />
             <argument type="service" id="open_marketplace.repository.product_draft" />
 
             <tag name="controller.service_arguments" />

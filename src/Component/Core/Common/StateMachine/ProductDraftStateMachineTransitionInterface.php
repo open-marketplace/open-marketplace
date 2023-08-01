@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Action\StateMachine\Transition;
+namespace BitBag\OpenMarketplace\Component\Core\Common\StateMachine;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 

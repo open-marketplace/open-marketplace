@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Action\StateMachine\Transition;
+namespace spec\BitBag\OpenMarketplace\Component\Core\Common\StateMachine;
 
-use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransition;
-use BitBag\OpenMarketplace\Action\StateMachine\Transition\ProductDraftStateMachineTransitionInterface;
+use BitBag\OpenMarketplace\Component\Core\Common\StateMachine\ProductDraftStateMachineTransition;
+use BitBag\OpenMarketplace\Component\Core\Common\StateMachine\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use PhpSpec\ObjectBehavior;

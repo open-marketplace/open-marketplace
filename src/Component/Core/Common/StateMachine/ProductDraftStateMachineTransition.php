@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Action\StateMachine\Transition;
+namespace BitBag\OpenMarketplace\Component\Core\Common\StateMachine;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
@@ -17,11 +17,10 @@ use SM\Factory\FactoryInterface;
 
 final class ProductDraftStateMachineTransition implements ProductDraftStateMachineTransitionInterface
 {
-    private FactoryInterface $productDraftStateMachineFactory;
+    public function __construct(
+        private FactoryInterface $productDraftStateMachineFactory
+    ) {
 
-    public function __construct(FactoryInterface $productDraftStateMachineFactory)
-    {
-        $this->productDraftStateMachineFactory = $productDraftStateMachineFactory;
     }
 
     public function applyIfCan(
