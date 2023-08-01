@@ -17,8 +17,8 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
-use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdater;
-use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdater;
+use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdaterInterface;
 use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;

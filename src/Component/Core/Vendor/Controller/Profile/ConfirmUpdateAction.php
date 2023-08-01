@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Profile;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\TokenOwningVoter;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
-use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdaterInterface;
 use BitBag\OpenMarketplace\Component\Vendor\VendorContext;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

@@ -10,5 +10,18 @@
                  id="bitbag.open_marketplace.component.vendor.context.vendor" public="true">
             <argument type="service" id="security.helper" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\ProfileUpdater"
+                 id="bitbag.open_marketplace.component.vendor.profile_updater">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="sylius.email_sender"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.profile_update_remover"/>
+            <argument type="service" id="open_marketplace.factory.vendor_profile_update_factory"/>
+            <argument type="service" id="open_marketplace.service.vendor_profile_image_factory" />
+            <argument type="service" id="open_marketplace.service.vendor_profile_background_image_factory" />
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.logo_image_operator"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.background_image_operator"/>
+        </service>
     </services>
 </container>

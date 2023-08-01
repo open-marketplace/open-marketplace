@@ -14,7 +14,7 @@ namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdaterInterface;
 use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use Doctrine\Persistence\ObjectManager;
