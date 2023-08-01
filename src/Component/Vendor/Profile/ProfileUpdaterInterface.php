@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Updater;
+namespace BitBag\OpenMarketplace\Component\Vendor\Profile;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 
-interface VendorProfileUpdaterInterface
+interface ProfileUpdaterInterface
 {
     public function createPendingVendorProfileUpdate(
         ProfileInterface $vendorData,

@@ -9,29 +9,29 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Updater;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdateRemoverInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
 use BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperatorInterface;
 use BitBag\OpenMarketplace\Operator\VendorLogoOperatorInterface;
-use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
-use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
-final class VendorProfileUpdaterSpec extends ObjectBehavior
+final class ProfileUpdaterSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $entityManager,
@@ -59,13 +59,13 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(VendorProfileUpdaterInterface::class);
+        $this->shouldHaveType(ProfileUpdaterInterface::class);
     }
 
     public function it_calls_entity_manager(
         EntityManagerInterface $entityManager,
         VendorInterface $vendor,
-        VendorProfileInterface $vendorData,
+        ProfileInterface $vendorData,
         AddressInterface $vendorAddress
     ): void {
         $vendorData->getCompanyName()->willReturn('CompanyName');
@@ -84,7 +84,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         SenderInterface $sender,
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
-        VendorProfileInterface $vendorData,
+        ProfileInterface $vendorData,
         ProfileUpdateInterface $newPendingUpdate,
         ShopUserInterface $user,
         AddressInterface $vendorAddressUpdate,
@@ -123,7 +123,7 @@ final class VendorProfileUpdaterSpec extends ObjectBehavior
         SenderInterface $sender,
         VendorProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
-        VendorProfileInterface $vendorData,
+        ProfileInterface $vendorData,
         ProfileUpdateInterface $newPendingUpdate,
         ShopUserInterface $user,
         AddressInterface $vendorAddressUpdate,

@@ -12,15 +12,15 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Updater;
 
 use ApiTestCase\JsonApiTestCase;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdater;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
 use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
-use BitBag\OpenMarketplace\Updater\VendorProfileUpdater;
-use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\Country;
@@ -28,7 +28,7 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 class VendorProfileUpdaterTest extends JsonApiTestCase
 {
-    private VendorProfileUpdaterInterface $vendorProfileUpdater;
+    private ProfileUpdaterInterface $vendorProfileUpdater;
 
     private EntityManagerInterface $entityManager;
 
@@ -60,11 +60,11 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorLogoOperator = static::$container->get('open_marketplace.operator.vendor_logo');
         $this->VendorBackgroundImageOperator = static::$container->get('open_marketplace.operator.vendor_background');
 
-        $remover = static::$container->get('open_marketplace.remover.profile_update_remover');
+        $remover = static::$container->get('bitbag.open_marketplace.component.vendor.profile.profile_update_remover');
         $vendorProfileFactory = static::$container->get('open_marketplace.factory.vendor_profile_update_factory');
 
         $senderMock = $this->createMock(SenderInterface::class);
-        $this->vendorProfileUpdater = new VendorProfileUpdater(
+        $this->vendorProfileUpdater = new ProfileUpdater(
             $this->entityManager,
             $senderMock,
             $remover,

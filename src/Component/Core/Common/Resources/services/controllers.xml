@@ -53,7 +53,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\VendorController"
                  parent="open_marketplace.controller.vendor">
             <argument type="service" id="open_marketplace.provider.vendor" />
-            <argument type="service" id="open_marketplace.updater.vendor_profile_updater" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.updater" />
         </service>
 
         <service id="bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute"

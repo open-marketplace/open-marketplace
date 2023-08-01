@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Remover;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile;
 
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
-use BitBag\OpenMarketplace\Remover\ProfileUpdateRemover;
-use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdateRemover;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 

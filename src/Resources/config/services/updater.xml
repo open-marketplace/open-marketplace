@@ -17,19 +17,5 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="open_marketplace.cloner.attribute_translation"/>
         </service>
-
-        <service class="BitBag\OpenMarketplace\Updater\VendorProfileUpdater"
-                 id="open_marketplace.updater.vendor_profile_updater"
-                 public="true">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="sylius.email_sender"/>
-            <argument type="service" id="open_marketplace.remover.profile_update_remover"/>
-            <argument type="service" id="open_marketplace.factory.vendor_profile_update_factory"/>
-            <argument type="service" id="open_marketplace.service.vendor_profile_image_factory" />
-            <argument type="service" id="open_marketplace.service.vendor_profile_background_image_factory" />
-            <argument type="service" id="sylius.image_uploader"/>
-            <argument type="service" id="open_marketplace.operator.vendor_logo"/>
-            <argument type="service" id="open_marketplace.operator.vendor_background"/>
-        </service>
     </services>
 </container>

@@ -13,8 +13,8 @@ namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Profile;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\TokenOwningVoter;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
 use BitBag\OpenMarketplace\Provider\VendorProvider;
-use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +25,7 @@ final class ConfirmUpdateAction
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private VendorProfileUpdaterInterface $vendorProfileUpdateService,
+        private ProfileUpdaterInterface $vendorProfileUpdateService,
         private AuthorizationCheckerInterface $security,
         private RouterInterface $router,
         private VendorProvider $vendorProvider

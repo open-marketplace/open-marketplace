@@ -9,25 +9,24 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Updater;
+namespace BitBag\OpenMarketplace\Component\Vendor\Profile;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
 use BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperatorInterface;
 use BitBag\OpenMarketplace\Operator\VendorLogoOperatorInterface;
-use BitBag\OpenMarketplace\Remover\ProfileUpdateRemoverInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-final class VendorProfileUpdater implements VendorProfileUpdaterInterface
+final class ProfileUpdater implements ProfileUpdaterInterface
 {
     private EntityManagerInterface $entityManager;
 

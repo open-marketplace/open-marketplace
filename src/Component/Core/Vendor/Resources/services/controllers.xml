@@ -23,7 +23,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <service id="bitbag.open_marketplace.component.core.vendor.controller.profile.confirm_update"
                  class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Profile\ConfirmUpdateAction">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="open_marketplace.updater.vendor_profile_updater"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.updater"/>
             <argument type="service" id="security.helper"/>
             <argument type="service" id="router"/>
             <argument type="service" id="open_marketplace.provider.vendor"/>

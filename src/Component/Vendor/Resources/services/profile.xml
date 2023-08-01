@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdateRemover"
+                 id="bitbag.open_marketplace.component.vendor.profile.profile_update_remover">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdater"
+                 id="bitbag.open_marketplace.component.vendor.profile.updater">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="sylius.email_sender"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.profile_update_remover"/>
+            <argument type="service" id="open_marketplace.factory.vendor_profile_update_factory"/>
+            <argument type="service" id="open_marketplace.service.vendor_profile_image_factory" />
+            <argument type="service" id="open_marketplace.service.vendor_profile_background_image_factory" />
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="open_marketplace.operator.vendor_logo"/>
+            <argument type="service" id="open_marketplace.operator.vendor_background"/>
+        </service>
+    </services>
+</container>

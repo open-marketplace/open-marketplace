@@ -14,9 +14,9 @@ namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
-use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -64,7 +64,7 @@ final class VendorController extends ResourceController
         protected ResourceUpdateHandlerInterface $resourceUpdateHandler,
         protected ResourceDeleteHandlerInterface $resourceDeleteHandler,
         protected VendorProviderInterface $vendorProvider,
-        protected VendorProfileUpdaterInterface $vendorProfileUpdater
+        protected ProfileUpdaterInterface $vendorProfileUpdater
     ) {
         parent::__construct(
             $metadata,
