@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Operator;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile;
 
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\LogoImageOperator;
 use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
-use BitBag\OpenMarketplace\Operator\VendorLogoOperator;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 
-final class VendorLogoOperatorSpec extends ObjectBehavior
+final class LogoImageOperatorSpec extends ObjectBehavior
 {
     public function let(
         EntityManager $entityManager,
@@ -33,7 +33,7 @@ final class VendorLogoOperatorSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(VendorLogoOperator::class);
+        $this->shouldHaveType(LogoImageOperator::class);
     }
 
     public function it_replaces_logo(

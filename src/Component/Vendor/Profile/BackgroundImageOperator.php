@@ -9,26 +9,21 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Operator;
+namespace BitBag\OpenMarketplace\Component\Vendor\Profile;
 
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class VendorBackgroundImageOperator implements VendorBackgroundImageOperatorInterface
+final class BackgroundImageOperator implements BackgroundImageOperatorInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    private VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory
+        private EntityManagerInterface $entityManager,
+        private VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory
     ) {
-        $this->entityManager = $entityManager;
-        $this->vendorBackgroundImageFactory = $vendorBackgroundImageFactory;
+
     }
 
     public function replaceVendorImage(ProfileUpdateInterface $vendorData, VendorInterface $vendor): void

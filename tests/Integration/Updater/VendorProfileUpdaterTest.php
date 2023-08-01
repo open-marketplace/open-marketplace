@@ -57,8 +57,8 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('open_marketplace.service.vendor_profile_image_factory');
         $this->vendorProfileUpdateBackgroundImageFactoryInterface = static::$container->get('open_marketplace.service.vendor_profile_background_image_factory');
         $this->imageUploader = static::$container->get('sylius.image_uploader');
-        $this->vendorLogoOperator = static::$container->get('open_marketplace.operator.vendor_logo');
-        $this->VendorBackgroundImageOperator = static::$container->get('open_marketplace.operator.vendor_background');
+        $this->vendorLogoOperator = static::$container->get('bitbag.open_marketplace.component.vendor.profile.logo_image_operator');
+        $this->vendorBackgroundImageOperator = static::$container->get('bitbag.open_marketplace.component.vendor.profile.background_image_operator');
 
         $remover = static::$container->get('bitbag.open_marketplace.component.vendor.profile.profile_update_remover');
         $vendorProfileFactory = static::$container->get('open_marketplace.factory.vendor_profile_update_factory');
@@ -73,7 +73,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             $this->vendorProfileUpdateBackgroundImageFactoryInterface,
             $this->imageUploader,
             $this->vendorLogoOperator,
-            $this->VendorBackgroundImageOperator
+            $this->vendorBackgroundImageOperator
         );
     }
 

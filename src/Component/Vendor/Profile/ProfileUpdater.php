@@ -19,8 +19,6 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
-use BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperatorInterface;
-use BitBag\OpenMarketplace\Operator\VendorLogoOperatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -28,44 +26,18 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class ProfileUpdater implements ProfileUpdaterInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    private SenderInterface $sender;
-
-    private ProfileUpdateRemoverInterface $remover;
-
-    private VendorProfileUpdateFactoryInterface $profileUpdateFactory;
-
-    private VendorProfileUpdateImageFactoryInterface $imageFactory;
-
-    private VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private VendorLogoOperatorInterface $vendorLogoOperator;
-
-    private VendorBackgroundImageOperatorInterface $VendorBackgroundImageOperator;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        SenderInterface $sender,
-        ProfileUpdateRemoverInterface $remover,
-        VendorProfileUpdateFactoryInterface $profileUpdateFactory,
-        VendorProfileUpdateImageFactoryInterface $imageFactory,
-        VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
-        ImageUploader $imageUploader,
-        VendorLogoOperatorInterface $vendorLogoOperator,
-        VendorBackgroundImageOperatorInterface $VendorBackgroundImageOperator
+        private EntityManagerInterface $entityManager,
+        private SenderInterface $sender,
+        private ProfileUpdateRemoverInterface $remover,
+        private VendorProfileUpdateFactoryInterface $profileUpdateFactory,
+        private VendorProfileUpdateImageFactoryInterface $imageFactory,
+        private VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
+        private ImageUploader $imageUploader,
+        private LogoImageOperatorInterface $vendorLogoOperator,
+        private BackgroundImageOperatorInterface $vendorBackgroundImageOperator
     ) {
-        $this->entityManager = $entityManager;
-        $this->sender = $sender;
-        $this->remover = $remover;
-        $this->profileUpdateFactory = $profileUpdateFactory;
-        $this->imageFactory = $imageFactory;
-        $this->backgroundImageFactory = $backgroundImageFactory;
-        $this->imageUploader = $imageUploader;
-        $this->vendorLogoOperator = $vendorLogoOperator;
-        $this->VendorBackgroundImageOperator = $VendorBackgroundImageOperator;
+
     }
 
     public function createPendingVendorProfileUpdate(
@@ -146,7 +118,7 @@ final class ProfileUpdater implements ProfileUpdaterInterface
         $this->setVendorFromData($vendor, $vendorData);
 
         if (null !== $vendorData->getBackgroundImage()) {
-            $this->VendorBackgroundImageOperator->replaceVendorImage($vendorData, $vendor);
+            $this->vendorBackgroundImageOperator->replaceVendorImage($vendorData, $vendor);
         }
         if (null !== $vendorData->getImage()) {
             $this->vendorLogoOperator->replaceVendorImage($vendorData, $vendor);

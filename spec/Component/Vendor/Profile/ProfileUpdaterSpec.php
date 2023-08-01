@@ -14,17 +14,17 @@ namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdateRemoverInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\BackgroundImageOperatorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\LogoImageOperatorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
 use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
-use BitBag\OpenMarketplace\Operator\VendorBackgroundImageOperatorInterface;
-use BitBag\OpenMarketplace\Operator\VendorLogoOperatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Uploader\ImageUploader;
@@ -41,8 +41,8 @@ final class ProfileUpdaterSpec extends ObjectBehavior
         VendorProfileUpdateImageFactoryInterface $imageFactory,
         VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
         ImageUploader $imageUploader,
-        VendorLogoOperatorInterface $vendorLogoOperator,
-        VendorBackgroundImageOperatorInterface $VendorBackgroundImageOperator
+        LogoImageOperatorInterface $vendorLogoOperator,
+        BackgroundImageOperatorInterface $VendorBackgroundImageOperator
     ): void {
         $this->beConstructedWith(
             $entityManager,

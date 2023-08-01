@@ -17,8 +17,20 @@
             <argument type="service" id="open_marketplace.service.vendor_profile_image_factory" />
             <argument type="service" id="open_marketplace.service.vendor_profile_background_image_factory" />
             <argument type="service" id="sylius.image_uploader"/>
-            <argument type="service" id="open_marketplace.operator.vendor_logo"/>
-            <argument type="service" id="open_marketplace.operator.vendor_background"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.logo_image_operator"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.background_image_operator"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\LogoImageOperator"
+                 id="bitbag.open_marketplace.component.vendor.profile.logo_image_operator">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="open_marketplace.service.vendor_image_factory"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\BackgroundImageOperator"
+                 id="bitbag.open_marketplace.component.vendor.profile.background_image_operator">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="open_marketplace.service.vendor_background_image_factory"/>
         </service>
     </services>
 </container>
