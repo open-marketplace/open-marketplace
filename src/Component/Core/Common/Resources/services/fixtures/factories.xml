@@ -12,8 +12,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <defaults public="false" autowire="false" autoconfigure="false" />
 
 
-        <service class="BitBag\OpenMarketplace\Component\Fixture\Factory\VendorExampleFactory"
-                 id="bitbag.open_marketplace.component.fixture.factory.vendor">
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\VendorExampleFactory"
+                 id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor">
             <argument type="service" id="open_marketplace.factory.vendor_profile_factory" />
             <argument type="service" id="open_marketplace.factory.vendor_address_factory" />
             <argument type="service" id="sylius.factory.shop_user" />
@@ -29,8 +29,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="sylius.factory.country" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Component\Fixture\Factory\ProductListingExampleFactory"
-                 id="bitbag.open_marketplace.component.fixture.factory.product_listing">
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\ProductListingExampleFactory"
+                 id="bitbag.open_marketplace.component.core.common.fixture.factory.product_listing">
             <argument type="service" id="open_marketplace.factory.product_draft" />
             <argument type="service" id="open_marketplace.factory.product_listing_price" />
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister" />
@@ -47,8 +47,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="file_locator"/>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Component\Fixture\Factory\OrderExampleFactory"
-                 id="bitbag.open_marketplace.component.fixture.factory.order">
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFactory"
+                 id="bitbag.open_marketplace.component.core.common.fixture.factory.order">
             <argument type="service" id="bitbag.open_marketplace.component.order.factory.order" />
             <argument type="service" id="bitbag.open_marketplace.component.order.factory.order_item" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
@@ -64,8 +64,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"/>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Component\Fixture\Factory\ConversationExampleFactory"
-                 id="bitbag.open_marketplace.component.fixture.factory.conversation">
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\ConversationExampleFactory"
+                 id="bitbag.open_marketplace.component.core.common.fixture.factory.conversation">
             <argument type="service" id="open_marketplace.factory.conversation" />
             <argument type="service" id="open_marketplace.factory.conversation_message" />
             <argument type="service" id="open_marketplace.repository.vendor_repository" />
@@ -73,8 +73,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="open_marketplace.repository.conversation_category" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Component\Fixture\Factory\AttributeExampleFactory"
-                 id="bitbag.open_marketplace.component.fixture.factory.attribute">
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\AttributeExampleFactory"
+                 id="bitbag.open_marketplace.component.core.common.fixture.factory.attribute">
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.locale" />

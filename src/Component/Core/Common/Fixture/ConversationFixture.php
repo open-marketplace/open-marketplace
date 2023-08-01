@@ -9,11 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture;
 
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\AbstractResourceFixture;
 
-interface OrderExampleFactoryInterface extends ExampleFactoryInterface
+final class ConversationFixture extends AbstractResourceFixture
 {
-    public function createArray(array $options = []): array;
+    public function getName(): string
+    {
+        return 'conversation';
+    }
 }

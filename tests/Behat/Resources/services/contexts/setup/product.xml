@@ -18,7 +18,7 @@
             <argument type="service" id="sylius.product_variant_resolver.default"/>
             <argument type="service" id="sylius.custom_factory.product"/>
             <argument type="service" id="sylius.factory.channel_pricing"/>
-            <argument type="service" id="bitbag.open_marketplace.component.fixture.factory.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
             <argument type="service" id="sylius.repository.shop_user"/>
         </service>
 

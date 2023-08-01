@@ -8,7 +8,6 @@ imports:
     - { resource: "../src/Component/Core/Common/Resources/services.xml" }
     - { resource: "../src/Component/Core/Shop/Resources/services.xml" }
     - { resource: "../src/Component/Core/Vendor/Resources/services.xml" }
-    - { resource: "../src/Component/Fixture/Resources/services.xml" }
     - { resource: "../src/Component/Messaging/Resources/services.xml" }
     - { resource: "../src/Component/Order/Resources/services.xml" }
     - { resource: "../src/Component/Override/Resources/services.xml" }

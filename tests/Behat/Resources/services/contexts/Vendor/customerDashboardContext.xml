@@ -9,7 +9,7 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
-            <argument type="service" id="bitbag.open_marketplace.component.fixture.factory.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
         </service>
     </services>
 </container>

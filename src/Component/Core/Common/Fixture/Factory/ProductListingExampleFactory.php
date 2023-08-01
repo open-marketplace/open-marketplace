@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Component\Core\Common\StateMachine\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftImageFactoryInterface;

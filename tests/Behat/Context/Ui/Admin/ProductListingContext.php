@@ -14,7 +14,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Component\Fixture\Factory\VendorExampleFactory;
+use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\VendorExampleFactory;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;

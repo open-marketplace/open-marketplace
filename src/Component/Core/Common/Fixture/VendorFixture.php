@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Fixture\Fixture;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture;
 
 use Sylius\Bundle\CoreBundle\Fixture\AbstractResourceFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;

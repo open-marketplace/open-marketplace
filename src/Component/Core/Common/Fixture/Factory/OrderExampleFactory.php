@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Fixture\Factory;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;

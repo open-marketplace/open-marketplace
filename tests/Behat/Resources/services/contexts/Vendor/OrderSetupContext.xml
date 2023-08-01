@@ -14,7 +14,7 @@
             <argument type="service" id="sylius.repository.shipping_method"/>
             <argument type="service" id="sm.factory" />
             <argument type="service" id="sylius.factory.address" />
-            <argument type="service" id="bitbag.open_marketplace.component.fixture.factory.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
         </service>
     </services>
 </container>

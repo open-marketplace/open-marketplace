@@ -9,14 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Fixture\Fixture;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture;
 
-use BitBag\OpenMarketplace\Component\Fixture\Factory\OrderExampleFactory;
+use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFactory;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use function BitBag\OpenMarketplace\Component\Fixture\Fixture\sort;
 
 final class OrderFixture extends AbstractFixture
 {

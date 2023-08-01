@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Fixture\Fixture;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\CategoryInterface;
 use Doctrine\Persistence\ObjectManager;

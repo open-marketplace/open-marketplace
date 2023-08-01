@@ -13,7 +13,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Component\Fixture\Factory\OrderExampleFactoryInterface;
+use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\Order;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;

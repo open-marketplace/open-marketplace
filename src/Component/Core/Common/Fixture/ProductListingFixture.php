@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Fixture\Fixture;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture;
 
-use BitBag\OpenMarketplace\Component\Fixture\Factory\ProductListingExampleFactory;
+use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\ProductListingExampleFactory;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
