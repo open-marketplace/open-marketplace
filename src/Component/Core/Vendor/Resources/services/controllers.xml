@@ -43,7 +43,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="sylius.resource_controller.new_resource_factory" />
             <argument type="service" id="open_marketplace.factory.product_draft" />
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister"/>
-            <argument type="service" id="open_marketplace.repository.product_draft"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft"/>
             <argument type="service" id="form.factory" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
@@ -62,7 +62,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                 </service>
             </argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
-            <argument type="service" id="open_marketplace.repository.product_draft"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="security.authorization_checker"/>
@@ -77,7 +77,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <service id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.send_for_verification"
                  class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\SendForVerificationAction">
             <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition"/>
-            <argument type="service" id="open_marketplace.repository.product_draft"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="router.default" />
             <argument type="service" id="session" />

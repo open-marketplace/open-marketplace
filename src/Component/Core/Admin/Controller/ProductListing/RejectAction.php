@@ -15,8 +15,8 @@ use BitBag\OpenMarketplace\Component\Core\Common\StateMachine\ProductDraftStateM
 use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -24,10 +24,10 @@ use Symfony\Component\Routing\RouterInterface;
 final class RejectAction
 {
     public function __construct(
-        private ProductListingRepositoryInterface $productListingRepository,
+        private ListingRepositoryInterface $productListingRepository,
         private RouterInterface $router,
         private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        private ProductDraftRepositoryInterface $productDraftRepository
+        private DraftRepositoryInterface $productDraftRepository
     ) {
     }
 

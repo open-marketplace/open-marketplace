@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Repository;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
@@ -17,7 +17,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class ProductListingRepository extends EntityRepository implements ProductListingRepositoryInterface
+class ListingRepository extends EntityRepository implements ListingRepositoryInterface
 {
     public function save(ListingInterface $productListing): void
     {

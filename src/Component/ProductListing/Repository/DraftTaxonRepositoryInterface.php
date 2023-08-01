@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Repository;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-class ProductDraftTaxonRepository extends EntityRepository implements ProductDraftTaxonRepositoryInterface
+interface DraftTaxonRepositoryInterface extends RepositoryInterface
 {
 }

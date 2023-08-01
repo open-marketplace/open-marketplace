@@ -26,36 +26,6 @@
             </argument>
         </service>
 
-        <service id="open_marketplace.repository.product_draft" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepository">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-            <argument type="service">
-                <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft</argument>
-                    <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
-                </service>
-            </argument>
-        </service>
-
-        <service id="open_marketplace.repository.product_taxon" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepository" public="true">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service">
-                <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon</argument>
-                    <factory service="doctrine.orm.default_entity_manager" method="getClassMetadata"/>
-                </service>
-            </argument>
-        </service>
-
-        <service id="open_marketplace.repository.product_translation" class="BitBag\OpenMarketplace\Repository\ProductListing\ProductTranslationRepository">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-            <argument type="service">
-                <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation</argument>
-                    <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
-                </service>
-            </argument>
-        </service>
-
         <service id="open_marketplace.repository.taxon_repository" class="BitBag\OpenMarketplace\Repository\TaxonRepository" >
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">

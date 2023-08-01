@@ -161,7 +161,7 @@
 
         <service id="bitbag.form.type.taxonomy" class="BitBag\OpenMarketplace\Form\ProductListing\ProductDraftTaxonAutocompleteChoiceType">
             <argument type="service" id="open_marketplace.factory.product_taxon" />
-            <argument type="service" id="open_marketplace.repository.product_taxon" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.repository.draft_taxon" />
             <tag name="form.type" />
         </service>
 

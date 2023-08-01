@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UpdateProductListingInte
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Webmozart\Assert\Assert;
 
@@ -25,12 +25,12 @@ final class UpdateProductListingHandler
 
     private ObjectManager $manager;
 
-    private ProductListingRepositoryInterface $productListingRepository;
+    private ListingRepositoryInterface $productListingRepository;
 
     public function __construct(
         ListingPersisterInterface $listingPersister,
         ObjectManager $manager,
-        ProductListingRepositoryInterface $productListingRepository
+        ListingRepositoryInterface $productListingRepository
     ) {
         $this->listingPersister = $listingPersister;
         $this->manager = $manager;

@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Repository;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 
-interface ProductListingRepositoryInterface
+interface ListingRepositoryInterface
 {
     public function save(ListingInterface $productListing): void;
 

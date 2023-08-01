@@ -4,7 +4,7 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing
-                repository: BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepository
+                repository: BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepository
 
         open_marketplace.product_draft:
             driver: doctrine/orm
@@ -36,4 +36,4 @@ sylius_resource:
             classes:
                 model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon
                 interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxonInterface
-                repository: BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftTaxonRepository
+                repository: BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftTaxonRepository

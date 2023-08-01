@@ -9,10 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Repository;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-interface ProductDraftTaxonRepositoryInterface extends RepositoryInterface
+interface DraftAttributeRepositoryInterface extends RepositoryInterface
 {
+    public function findVendorDraftAttributes(VendorInterface $vendor): array;
 }

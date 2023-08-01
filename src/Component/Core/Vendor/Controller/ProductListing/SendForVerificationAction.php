@@ -14,8 +14,8 @@ namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing
 use BitBag\OpenMarketplace\Component\Core\Common\StateMachine\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -25,8 +25,8 @@ final class SendForVerificationAction
 {
     public function __construct(
         private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        private ProductDraftRepositoryInterface $productDraftRepository,
-        private ProductListingRepositoryInterface $productListingRepository,
+        private DraftRepositoryInterface $productDraftRepository,
+        private ListingRepositoryInterface $productListingRepository,
         private RouterInterface $router,
         private Session $session
     ) {

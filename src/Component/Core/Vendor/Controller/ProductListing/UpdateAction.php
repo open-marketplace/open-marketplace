@@ -14,9 +14,9 @@ namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing
 use BitBag\OpenMarketplace\Component\Core\Common\Security\Voter\ObjectOwningVoter;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -35,9 +35,9 @@ final class UpdateAction
     public function __construct(
         private MetadataInterface $metadata,
         private RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        private ProductDraftRepositoryInterface $productDraftRepository,
+        private DraftRepositoryInterface $productDraftRepository,
         private ListingPersisterInterface $listingPersister,
-        private ProductListingRepositoryInterface $productListingRepository,
+        private ListingRepositoryInterface $productListingRepository,
         private AuthorizationCheckerInterface $authorizationChecker,
         private FormFactoryInterface $formFactory,
         private RequestStack $requestStack,

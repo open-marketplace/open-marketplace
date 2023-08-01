@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Repository;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class ProductDraftRepository extends EntityRepository implements ProductDraftRepositoryInterface
+class DraftRepository extends EntityRepository implements DraftRepositoryInterface
 {
     public function save(DraftInterface $productDraft): void
     {

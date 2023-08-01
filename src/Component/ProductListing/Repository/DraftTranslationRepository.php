@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository\ProductListing;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Repository;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class ProductTranslationRepository extends EntityRepository implements ProductTranslationRepositoryInterface
+class DraftTranslationRepository extends EntityRepository implements DraftTranslationRepositoryInterface
 {
     public function save(DraftTranslationInterface $productTranslation): void
     {

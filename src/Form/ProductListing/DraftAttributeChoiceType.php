@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftAttributeRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
-use BitBag\OpenMarketplace\Repository\DraftAttributeRepositoryInterface;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -18,9 +18,9 @@ use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductDraftRepositoryInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,9 +32,9 @@ use Twig\Environment;
 final class ShowAction
 {
     public function __construct(
-        private ProductListingRepositoryInterface $productListingRepository,
+        private ListingRepositoryInterface $productListingRepository,
         private Environment $twig,
-        private ProductDraftRepositoryInterface $productDraftRepository,
+        private DraftRepositoryInterface $productDraftRepository,
         private ConversationRepositoryInterface $conversationRepository,
         private FormFactoryInterface $formFactory,
         private MessagePersisterInterface $messagePersister,

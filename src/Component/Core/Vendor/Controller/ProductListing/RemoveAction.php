@@ -12,18 +12,17 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Repository\ProductListing\ProductListingRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 final class RemoveAction
 {
     public function __construct(
-        private ProductListingRepositoryInterface $productListingRepository,
+        private ListingRepositoryInterface $productListingRepository,
         private RouterInterface $router,
         private EntityManagerInterface $entityManager,
         private FlashBag $flashBag
