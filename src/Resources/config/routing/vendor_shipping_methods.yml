@@ -10,7 +10,7 @@ vendor_shipping_methods:
       repository:
         method: findOneById
         arguments:
-          id: "expr:service('open_marketplace.provider.vendor').provideCurrentVendor().getId()"
+          id: "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor().getId()"
       flash: open_marketplace.ui.shipping_method_updated
       redirect:
         route: vendor_shipping_methods

@@ -14,7 +14,7 @@ namespace spec\BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Fa
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactory;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -25,7 +25,7 @@ final class DraftAttributeFactorySpec extends ObjectBehavior
     public function let(
         FactoryInterface $factory,
         ServiceRegistryInterface $attributeTypesRegistry,
-        VendorProviderInterface $vendorProvider,
+        VendorContextInterface $vendorProvider,
         ): void {
         $this->beConstructedWith($factory, $attributeTypesRegistry, $vendorProvider);
     }
@@ -38,7 +38,7 @@ final class DraftAttributeFactorySpec extends ObjectBehavior
     public function it_creates_typed_attribute(
         ServiceRegistryInterface $attributeTypesRegistry,
         AttributeTypeInterface $attributeType,
-        VendorProviderInterface $vendorProvider,
+        VendorContextInterface $vendorProvider,
         FactoryInterface $factory,
         DraftAttributeInterface $attribute,
         DraftAttributeInterface $typedAttribute,
@@ -50,7 +50,7 @@ final class DraftAttributeFactorySpec extends ObjectBehavior
         $attributeTypesRegistry->get($type)->willReturn($attributeType);
         $attributeType->getStorageType()->willReturn($storageType);
         $factory->createNew()->willReturn($attribute);
-        $vendorProvider->provideCurrentVendor()->willReturn($vendor);
+        $vendorProvider->getVendor()->willReturn($vendor);
 
         $attribute->setType($type)->shouldBeCalledOnce();
         $attribute->setStorageType($storageType)->shouldBeCalledOnce();

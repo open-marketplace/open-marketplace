@@ -15,8 +15,8 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
@@ -63,7 +63,7 @@ final class VendorController extends ResourceController
         protected ?StateMachineInterface $stateMachine,
         protected ResourceUpdateHandlerInterface $resourceUpdateHandler,
         protected ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        protected VendorProviderInterface $vendorProvider,
+        protected VendorContextInterface $vendorProvider,
         protected ProfileUpdaterInterface $vendorProfileUpdater
     ) {
         parent::__construct(
@@ -103,7 +103,7 @@ final class VendorController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
 
-        $vendor = $this->vendorProvider->provideCurrentVendor();
+        $vendor = $this->vendorProvider->getVendor();
         $pendingUpdate = $this->manager->getRepository(ProfileUpdate::class)
             ->findOneBy(['vendor' => $vendor]);
 
@@ -188,7 +188,7 @@ final class VendorController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
 
         /** @var ResourceInterface $resource */
-        $resource = $this->vendorProvider->provideCurrentVendor();
+        $resource = $this->vendorProvider->getVendor();
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
 
         if ($configuration->isHtmlRequest()) {

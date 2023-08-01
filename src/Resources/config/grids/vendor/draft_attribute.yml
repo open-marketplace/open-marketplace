@@ -11,7 +11,7 @@ sylius_grid:
                     repository:
                         method: findVendorDraftAttributesQuery
                         arguments:
-                        - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
+                        - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
             sorting:
                 position: asc
             fields:

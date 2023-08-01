@@ -26,7 +26,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.updater"/>
             <argument type="service" id="security.helper"/>
             <argument type="service" id="router"/>
-            <argument type="service" id="open_marketplace.provider.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
 
             <tag name="controller.service_arguments"/>
         </service>

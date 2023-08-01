@@ -18,7 +18,7 @@ open_marketplace_vendor_customer_show:
             repository:
                 method: findCustomerForVendor
                 arguments:
-                    - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
+                    - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
                     - $id
 
 open_marketplace_vendor_customer_order_index:

@@ -9,11 +9,6 @@ We are hiring developers from all over the world. Join us and start your new, ex
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\OpenMarketplace\Provider\VendorProvider"
-                 id="open_marketplace.provider.vendor" public="true">
-            <argument type="service" id="security.helper" />
-        </service>
-
         <service class="BitBag\OpenMarketplace\Api\Provider\VendorProvider"
                  id="bitbag.open_marketplace.api.provider.vendor">
             <argument type="service" id="open_marketplace.factory.vendor" />

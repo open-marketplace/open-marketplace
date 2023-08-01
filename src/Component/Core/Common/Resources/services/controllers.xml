@@ -52,7 +52,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <service id="bitbag.open_marketplace.component.core.common.controller.resource.vendor"
                  class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\VendorController"
                  parent="open_marketplace.controller.vendor">
-            <argument type="service" id="open_marketplace.provider.vendor" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor" />
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.updater" />
         </service>
 
@@ -61,7 +61,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  parent="open_marketplace.controller.draft_attribute">
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
             <argument type="service" id="open_marketplace.updater.product_attribute_updater"/>
-            <argument type="service" id="open_marketplace.provider.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
         </service>
     </services>
 </container>

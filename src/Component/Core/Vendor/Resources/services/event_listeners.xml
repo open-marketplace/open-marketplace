@@ -13,7 +13,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\EventListener\AccessDeniedListener"
                  id="bitbag.open_marketplace.component.core.vendor.event_listener.access_denied_listener">
-            <argument type="service" id="open_marketplace.provider.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
             <argument type="service" id="request_stack"/>
             <argument type="service" id="router"/>
 

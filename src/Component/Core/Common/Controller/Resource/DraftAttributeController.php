@@ -13,8 +13,8 @@ namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 
 use BitBag\OpenMarketplace\Component\Core\Common\Security\Voter\ObjectOwningVoter;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Updater\ProductAttributeUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
@@ -70,7 +70,7 @@ final class DraftAttributeController extends ResourceController
         protected ResourceDeleteHandlerInterface $resourceDeleteHandler,
         private DraftAttributeFactoryInterface $draftAttributeFactory,
         private ProductAttributeUpdaterInterface $productAttributeUpdater,
-        private VendorProviderInterface $vendorProvider
+        private VendorContextInterface $vendorProvider
     ) {
         parent::__construct(
             $metadata,
@@ -195,7 +195,7 @@ final class DraftAttributeController extends ResourceController
          * This three lines uses custom factory to create attribute rest is default Sylius controller
          */
         $type = $request->attributes->get('type');
-        $currentVendor = $this->vendorProvider->provideCurrentVendor();
+        $currentVendor = $this->vendorProvider->getVendor();
         $newResource = $this->draftAttributeFactory->createTyped($type, $currentVendor);
         $form = $this->resourceFormFactory->create($configuration, $newResource);
 

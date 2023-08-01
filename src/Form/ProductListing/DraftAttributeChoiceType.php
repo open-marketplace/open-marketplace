@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Form\ProductListing;
 
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use BitBag\OpenMarketplace\Repository\DraftAttributeRepositoryInterface;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -19,9 +19,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class DraftAttributeChoiceType extends AttributeChoiceType
 {
-    private VendorProviderInterface $vendorProvider;
+    private VendorContextInterface $vendorProvider;
 
-    public function __construct(RepositoryInterface $attributeRepository, VendorProviderInterface $vendorProvider)
+    public function __construct(RepositoryInterface $attributeRepository, VendorContextInterface $vendorProvider)
     {
         $this->attributeRepository = $attributeRepository;
         $this->vendorProvider = $vendorProvider;
@@ -33,7 +33,7 @@ final class DraftAttributeChoiceType extends AttributeChoiceType
         $draftAttributeRepository = $this->attributeRepository;
         $resolver
             ->setDefaults([
-                'choices' => [$draftAttributeRepository->findVendorDraftAttributes($this->vendorProvider->provideCurrentVendor())],
+                'choices' => [$draftAttributeRepository->findVendorDraftAttributes($this->vendorProvider->getVendor())],
                 'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,

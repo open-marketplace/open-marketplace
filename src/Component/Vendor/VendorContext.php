@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Provider;
+namespace BitBag\OpenMarketplace\Component\Vendor;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
@@ -18,7 +18,7 @@ use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class VendorProvider implements VendorProviderInterface
+final class VendorContext implements VendorContextInterface
 {
     private Security $security;
 
@@ -27,7 +27,7 @@ final class VendorProvider implements VendorProviderInterface
         $this->security = $security;
     }
 
-    public function provideCurrentVendor(): VendorInterface
+    public function getVendor(): VendorInterface
     {
         /** @var ShopUserInterface|UserInterface|null $user */
         $user = $this->security->getUser();

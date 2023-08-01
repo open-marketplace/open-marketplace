@@ -14,7 +14,7 @@ namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Profile;
 use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\TokenOwningVoter;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdaterInterface;
-use BitBag\OpenMarketplace\Provider\VendorProvider;
+use BitBag\OpenMarketplace\Component\Vendor\VendorContext;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +28,7 @@ final class ConfirmUpdateAction
         private ProfileUpdaterInterface $vendorProfileUpdateService,
         private AuthorizationCheckerInterface $security,
         private RouterInterface $router,
-        private VendorProvider $vendorProvider
+        private VendorContext $vendorProvider
     ) {
     }
 
@@ -40,7 +40,7 @@ final class ConfirmUpdateAction
         if ($vendorIsGranted && null !== $vendorProfileUpdateData) {
             $this->vendorProfileUpdateService->updateVendorFromPendingData($vendorProfileUpdateData);
 
-            $loggedVendor = $this->vendorProvider->provideCurrentVendor();
+            $loggedVendor = $this->vendorProvider->getVendor();
             $loggedVendor->setEditedAt(null);
 
             $this->entityManager->flush();

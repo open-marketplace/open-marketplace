@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Channel\Context\CompositeChannelContext;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -24,7 +24,7 @@ use Twig\TwigFunction;
 
 class VendorExtension extends AbstractExtension
 {
-    private VendorProviderInterface $vendorProvider;
+    private VendorContextInterface $vendorProvider;
 
     private ObjectManager $manager;
 
@@ -35,7 +35,7 @@ class VendorExtension extends AbstractExtension
     private CompositeChannelContext $channelContext;
 
     public function __construct(
-        VendorProviderInterface $vendorProvider,
+        VendorContextInterface $vendorProvider,
         ObjectManager $manager,
         CompositeLocaleContext $localeContext,
         ChannelRepositoryInterface $channelRepository,
@@ -60,7 +60,7 @@ class VendorExtension extends AbstractExtension
 
     public function isPendingVendorProfileUpdate(): bool
     {
-        $vendor = $this->vendorProvider->provideCurrentVendor();
+        $vendor = $this->vendorProvider->getVendor();
         $pendingUpdate = $this->manager->getRepository(ProfileUpdate::class)
             ->findOneBy(['vendor' => $vendor]);
 

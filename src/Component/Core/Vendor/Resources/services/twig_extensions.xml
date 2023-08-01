@@ -7,7 +7,7 @@
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension\VendorExtension"
                  id="bitbag.open_marketplace.component.core.vendor.twig.extension.vendor">
-            <argument type="service" id="open_marketplace.provider.vendor" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.repository.channel" />

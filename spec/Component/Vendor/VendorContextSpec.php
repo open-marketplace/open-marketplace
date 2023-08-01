@@ -9,18 +9,18 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Provider;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\VendorContext;
+use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserHasNoVendorContextException;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
-use BitBag\OpenMarketplace\Provider\VendorProvider;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Security;
 
-final class VendorProviderSpec extends ObjectBehavior
+final class VendorContextSpec extends ObjectBehavior
 {
     public function let(
         Security $security
@@ -30,8 +30,8 @@ final class VendorProviderSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(VendorProvider::class);
-        $this->shouldImplement(VendorProviderInterface::class);
+        $this->shouldHaveType(VendorContext::class);
+        $this->shouldImplement(VendorContextInterface::class);
     }
 
     public function it_throws_exception_when_no_user_got_from_security(
@@ -40,7 +40,7 @@ final class VendorProviderSpec extends ObjectBehavior
         $security->getUser()->willReturn(null);
 
         $this->shouldThrow(ShopUserNotFoundException::class)
-            ->during('provideCurrentVendor', []);
+            ->during('getVendor', []);
     }
 
     public function it_throws_exception_when_shop_user_has_no_vendor_context(
@@ -52,7 +52,7 @@ final class VendorProviderSpec extends ObjectBehavior
         $shopUser->getVendor()->willReturn(null);
 
         $this->shouldThrow(ShopUserHasNoVendorContextException::class)
-            ->during('provideCurrentVendor', []);
+            ->during('getVendor', []);
     }
 
     public function it_returns_vendor_from_shop_user_context(
@@ -64,7 +64,7 @@ final class VendorProviderSpec extends ObjectBehavior
 
         $shopUser->getVendor()->willReturn($vendor);
 
-        $this->provideCurrentVendor()
+        $this->getVendor()
             ->shouldReturn($vendor);
     }
 }

@@ -85,7 +85,7 @@
         <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType"
                  id="open_marketplace.form.product_listing.draft_attribute_choice_type">
             <argument type="service" id="open_marketplace.repository.draft_attribute"/>
-            <argument type="service" id="open_marketplace.provider.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
             <tag name="form.type"/>
         </service>
 
@@ -123,7 +123,7 @@
         </service>
 
         <service id="bitbag.form.type.product" class="BitBag\OpenMarketplace\Form\ProductListing\ProductType">
-            <argument type="service" id="open_marketplace.provider.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
             <tag name="form.type" />
         </service>
 

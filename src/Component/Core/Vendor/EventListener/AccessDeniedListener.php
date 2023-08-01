@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\EventListener;
 
+use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use BitBag\OpenMarketplace\Exception\ShopUserHasNoVendorContextException;
 use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
-use BitBag\OpenMarketplace\Provider\VendorProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +26,7 @@ use Symfony\Component\Routing\RouterInterface;
 class AccessDeniedListener implements EventSubscriberInterface
 {
     public function __construct(
-        private VendorProviderInterface $vendorProvider,
+        private VendorContextInterface $vendorProvider,
         private RequestStack $requestStack,
         private RouterInterface $router
     ) {
@@ -63,7 +63,7 @@ class AccessDeniedListener implements EventSubscriberInterface
         }
 
         try {
-            $currentVendor = $this->vendorProvider->provideCurrentVendor();
+            $currentVendor = $this->vendorProvider->getVendor();
             if (false === $currentVendor->isEnabled()) {
                 $event->setResponse(new RedirectResponse(
                     $this->router->generate('open_marketplace_vendor_conversation_index')

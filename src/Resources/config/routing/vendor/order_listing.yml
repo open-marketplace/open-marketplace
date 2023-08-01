@@ -19,7 +19,7 @@ open_marketplace_vendor_order_show:
             repository:
                 method: findOrderForVendor
                 arguments:
-                    - "expr:service('open_marketplace.provider.vendor').provideCurrentVendor()"
+                    - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
                     - $id
 
 open_marketplace_vendor_order_cancel:
