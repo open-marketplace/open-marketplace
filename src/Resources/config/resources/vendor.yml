@@ -14,7 +14,7 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate
                 interface: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorProfileUpdateRepository
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\ProfileUpdateRepository
 
         open_marketplace.vendor_address:
             classes:
