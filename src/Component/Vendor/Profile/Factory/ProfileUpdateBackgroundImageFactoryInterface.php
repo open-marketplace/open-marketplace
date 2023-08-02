@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 
-interface VendorProfileUpdateBackgroundImageFactoryInterface
+interface ProfileUpdateBackgroundImageFactoryInterface
 {
     public function createNew(): BackgroundImageInterface;
 

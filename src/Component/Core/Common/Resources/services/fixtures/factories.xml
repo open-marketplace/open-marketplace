@@ -14,7 +14,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
         <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\VendorExampleFactory"
                  id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor">
-            <argument type="service" id="open_marketplace.factory.vendor_profile_factory" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.profile_factory" />
             <argument type="service" id="open_marketplace.factory.vendor_address_factory" />
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
@@ -22,8 +22,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="sylius.repository.customer_group" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="open_marketplace.service.vendor_image_factory"/>
-            <argument type="service" id="open_marketplace.service.vendor_background_image_factory"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.logo_image_factory"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.background_image_factory"/>
             <argument type="service" id="file_locator"/>
             <argument type="service" id="sylius.image_uploader"/>
             <argument type="service" id="sylius.factory.country" />

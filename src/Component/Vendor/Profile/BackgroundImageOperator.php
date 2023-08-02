@@ -14,14 +14,14 @@ namespace BitBag\OpenMarketplace\Component\Vendor\Profile;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\BackgroundImageFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class BackgroundImageOperator implements BackgroundImageOperatorInterface
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory
+        private BackgroundImageFactoryInterface $vendorBackgroundImageFactory
     ) {
 
     }

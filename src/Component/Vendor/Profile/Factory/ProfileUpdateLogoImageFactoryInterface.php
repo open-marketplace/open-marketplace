@@ -9,17 +9,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 
-interface VendorImageFactoryInterface
+interface ProfileUpdateLogoImageFactoryInterface
 {
     public function createNew(): LogoImageInterface;
 
-    public function create(
-        string $path,
-        VendorInterface $vendor
-    ): LogoImageInterface;
+    public function createWithFileAndOwner(LogoImageInterface $uploadedImage, ProfileInterface $vendorProfile): LogoImageInterface;
 }

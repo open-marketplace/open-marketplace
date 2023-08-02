@@ -14,7 +14,7 @@
         </service>
         <service class="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorImageHandler"
                  id="bitbag.open_marketplace.api.messenger.command_handler.vendor.upload_vendor_image">
-            <argument type="service" id="open_marketplace.service.vendor_image_factory" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.logo_image_factory" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="bitbag_open_marketplace.repository.vendor_image" />
@@ -23,7 +23,7 @@
         </service>
         <service class="BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorBackgroundImageHandler"
                  id="bitbag.open_marketplace.api.messenger.command_handler.vendor.upload_vendor_background_image">
-            <argument type="service" id="open_marketplace.service.vendor_background_image_factory" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.background_image_factory" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="bitbag_open_marketplace.repository.vendor_background_image" />

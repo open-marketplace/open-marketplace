@@ -5,18 +5,8 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\OpenMarketplace\Factory\VendorProfileFactory"
-                 id="open_marketplace.factory.vendor_profile_factory">
-            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor"/>
-        </service>
-
         <service class="BitBag\OpenMarketplace\Factory\AddressFactory"
                  id="open_marketplace.factory.vendor_address_factory">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactory"
-                 id="open_marketplace.factory.vendor_profile_update_factory">
-            <argument type="service" id="open_marketplace.generator.token_generator"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\ChannelPricingFactory"
@@ -46,23 +36,11 @@
             <argument type="service" id="open_marketplace.factory.product_image"/>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Factory\VendorImageFactory"
-                 id="open_marketplace.service.vendor_image_factory" />
-
-        <service class="BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactory"
-                 id="open_marketplace.service.vendor_background_image_factory" />
-
         <service class="BitBag\OpenMarketplace\Factory\AddressFactory"
                  id="bitbag.mvm.factory.address_factory"/>
 
         <service class="BitBag\OpenMarketplace\Factory\ProductImageFactory"
                  id="open_marketplace.factory.product_image"/>
-
-        <service class="BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactory"
-                 id="open_marketplace.service.vendor_profile_image_factory" />
-
-        <service class="BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactory"
-                 id="open_marketplace.service.vendor_profile_background_image_factory" />
 
         <service class="BitBag\OpenMarketplace\Factory\ProductAttributeFactory"
                  id="open_marketplace.product_attribute_factory">

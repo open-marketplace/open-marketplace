@@ -13,11 +13,11 @@ namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\BackgroundImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactoryInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
@@ -45,7 +45,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
     private OptionsResolver $optionsResolver;
 
     public function __construct(
-        private VendorProfileFactoryInterface $profileFactory,
+        private ProfileFactoryInterface $profileFactory,
         private AddressFactoryInterface $addressFactory,
         private FactoryInterface $shopUserFactory,
         private FactoryInterface $customerFactory,
@@ -53,8 +53,8 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         private RepositoryInterface $customerGroupRepository,
         private RepositoryInterface $vendorShippingMethodRepository,
         private RepositoryInterface $channelRepository,
-        private VendorImageFactoryInterface $vendorImageFactory,
-        private VendorBackgroundImageFactoryInterface $backgroundImageFactory,
+        private LogoImageFactoryInterface $vendorImageFactory,
+        private BackgroundImageFactoryInterface $backgroundImageFactory,
         private FileLocatorInterface $fileLocator,
         private ImageUploaderInterface $imageUploader,
         private FactoryInterface $countryFactory

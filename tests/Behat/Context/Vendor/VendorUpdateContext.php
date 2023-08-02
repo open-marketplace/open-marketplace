@@ -12,11 +12,11 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\Address;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -39,7 +39,7 @@ class VendorUpdateContext extends RawMinkContext
 
     private ObjectManager $manager;
 
-    private VendorImageFactoryInterface $vendorImageFactory;
+    private LogoImageFactoryInterface $vendorImageFactory;
 
     private TaxonFactoryInterface $taxonFactory;
 
@@ -52,7 +52,7 @@ class VendorUpdateContext extends RawMinkContext
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
         ObjectManager $manager,
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         TaxonFactory $taxonFactory,
         ExampleFactoryInterface $vendorExampleFactory,
         FactoryInterface $countryFactory,

@@ -13,14 +13,14 @@ namespace BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class UploadVendorImageHandler
 {
-    private VendorImageFactoryInterface $vendorImageFactory;
+    private LogoImageFactoryInterface $vendorImageFactory;
 
     private ImageUploaderInterface $imageUploader;
 
@@ -29,7 +29,7 @@ final class UploadVendorImageHandler
     private RepositoryInterface $vendorImageRepository;
 
     public function __construct(
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         ImageUploaderInterface $imageUploader,
         ObjectManager $manager,
         RepositoryInterface $vendorImageRepository

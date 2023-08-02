@@ -9,29 +9,29 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Factory;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage;
-use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactory;
-use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactory;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
 use PhpSpec\ObjectBehavior;
 
-final class VendorBackgroundImageFactorySpec extends ObjectBehavior
+final class LogoImageFactorySpec extends ObjectBehavior
 {
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(VendorBackgroundImageFactory::class);
+        $this->shouldHaveType(LogoImageFactory::class);
     }
 
     public function it_should_implement_interface(): void
     {
-        $this->shouldImplement(VendorBackgroundImageFactoryInterface::class);
+        $this->shouldImplement(LogoImageFactoryInterface::class);
     }
 
     public function it_should_create_empty_vendor_image(): void
     {
-        $vendorImage = new BackgroundImage();
+        $vendorImage = new LogoImage();
 
         $this->createNew()->shouldBeLike($vendorImage);
     }
@@ -39,7 +39,7 @@ final class VendorBackgroundImageFactorySpec extends ObjectBehavior
     public function it_should_create_vendor_image_with_data(): void
     {
         $vendor = new Vendor();
-        $vendorImage = new BackgroundImage();
+        $vendorImage = new LogoImage();
 
         $vendorImage->setPath('test');
         $vendorImage->setOwner($vendor);

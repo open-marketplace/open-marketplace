@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\BackgroundImageOperator;
-use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\BackgroundImageFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 
@@ -23,7 +23,7 @@ final class BackgroundImageOperatorSpec extends ObjectBehavior
 {
     public function let(
         EntityManager $entityManager,
-        VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory,
+        BackgroundImageFactoryInterface $vendorBackgroundImageFactory,
     ): void {
         $this->beConstructedWith(
             $entityManager,

@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorBackgroundIm
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorBackgroundImageHandler;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\VendorBackgroundImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\BackgroundImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
 {
     public function let(
-        VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory,
+        BackgroundImageFactoryInterface $vendorBackgroundImageFactory,
         ImageUploaderInterface $imageUploader,
         ObjectManager $manager,
         RepositoryInterface $vendorBackgroundImageRepository
@@ -40,7 +40,7 @@ final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
     }
 
     public function it_creates_vendor_background_image(
-        VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory,
+        BackgroundImageFactoryInterface $vendorBackgroundImageFactory,
         ImageUploaderInterface $imageUploader,
         ObjectManager $manager,
         UploadVendorBackgroundImageInterface $command,
@@ -65,7 +65,7 @@ final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
     }
 
     public function it_removes_previous_background_image(
-        VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory,
+        BackgroundImageFactoryInterface $vendorBackgroundImageFactory,
         RepositoryInterface $vendorBackgroundImageRepository,
         UploadVendorBackgroundImageInterface $command,
         VendorInterface $owner,
@@ -89,7 +89,7 @@ final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
     }
 
     public function it_throws_exception_on_empty_file(
-        VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory,
+        BackgroundImageFactoryInterface $vendorBackgroundImageFactory,
         RepositoryInterface $vendorBackgroundImageRepository,
         UploadVendorBackgroundImageInterface $command,
         VendorInterface $owner,
@@ -105,7 +105,7 @@ final class UploadVendorBackgroundImageHandlerSpec extends ObjectBehavior
     }
 
     public function it_throws_exception_on_empty_owner(
-        VendorBackgroundImageFactoryInterface $vendorBackgroundImageFactory,
+        BackgroundImageFactoryInterface $vendorBackgroundImageFactory,
         RepositoryInterface $vendorBackgroundImageRepository,
         UploadVendorBackgroundImageInterface $command,
         VendorInterface $owner,

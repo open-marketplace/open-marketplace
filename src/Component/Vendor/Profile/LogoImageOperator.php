@@ -14,14 +14,14 @@ namespace BitBag\OpenMarketplace\Component\Vendor\Profile;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class LogoImageOperator implements LogoImageOperatorInterface
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private VendorImageFactoryInterface $vendorImageFactory
+        private LogoImageFactoryInterface $vendorImageFactory
     ) {
 
     }

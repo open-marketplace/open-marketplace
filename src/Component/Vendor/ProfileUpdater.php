@@ -17,11 +17,11 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\BackgroundImageOperatorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateBackgroundImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateLogoImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\LogoImageOperatorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdateRemoverInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Mailer\Sender\SenderInterface;
@@ -32,9 +32,9 @@ final class ProfileUpdater implements ProfileUpdaterInterface
         private EntityManagerInterface $entityManager,
         private SenderInterface $sender,
         private ProfileUpdateRemoverInterface $remover,
-        private VendorProfileUpdateFactoryInterface $profileUpdateFactory,
-        private VendorProfileUpdateImageFactoryInterface $imageFactory,
-        private VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
+        private ProfileUpdateFactoryInterface $profileUpdateFactory,
+        private ProfileUpdateLogoImageFactoryInterface $imageFactory,
+        private ProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
         private ImageUploader $imageUploader,
         private LogoImageOperatorInterface $vendorLogoOperator,
         private BackgroundImageOperatorInterface $vendorBackgroundImageOperator

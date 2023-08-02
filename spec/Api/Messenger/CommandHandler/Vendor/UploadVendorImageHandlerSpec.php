@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\UploadVendorImageInterfa
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UploadVendorImageHandler;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 final class UploadVendorImageHandlerSpec extends ObjectBehavior
 {
     public function let(
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         ImageUploaderInterface $imageUploader,
         ObjectManager $manager,
         RepositoryInterface $vendorImageRepository
@@ -40,7 +40,7 @@ final class UploadVendorImageHandlerSpec extends ObjectBehavior
     }
 
     public function it_creates_vendor_image(
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         ImageUploaderInterface $imageUploader,
         ObjectManager $manager,
         UploadVendorImageInterface $command,
@@ -65,7 +65,7 @@ final class UploadVendorImageHandlerSpec extends ObjectBehavior
     }
 
     public function it_removes_previous_image(
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         RepositoryInterface $vendorImageRepository,
         UploadVendorImageInterface $command,
         VendorInterface $owner,
@@ -89,7 +89,7 @@ final class UploadVendorImageHandlerSpec extends ObjectBehavior
     }
 
     public function it_throws_exception_on_empty_file(
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         RepositoryInterface $vendorImageRepository,
         UploadVendorImageInterface $command,
         VendorInterface $owner,
@@ -105,7 +105,7 @@ final class UploadVendorImageHandlerSpec extends ObjectBehavior
     }
 
     public function it_throws_exception_on_empty_owner(
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         RepositoryInterface $vendorImageRepository,
         UploadVendorImageInterface $command,
         VendorInterface $owner,

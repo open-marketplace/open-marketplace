@@ -18,13 +18,13 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\BackgroundImageOperatorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateBackgroundImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateLogoImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\LogoImageOperatorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdateRemoverInterface;
 use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdaterInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileUpdateBackgroundImageFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Uploader\ImageUploader;
@@ -37,9 +37,9 @@ final class ProfileUpdaterSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         SenderInterface $sender,
         ProfileUpdateRemoverInterface $remover,
-        VendorProfileUpdateFactoryInterface $vendorProfileFactory,
-        VendorProfileUpdateImageFactoryInterface $imageFactory,
-        VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
+        ProfileUpdateFactoryInterface $vendorProfileFactory,
+        ProfileUpdateLogoImageFactoryInterface $imageFactory,
+        ProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
         ImageUploader $imageUploader,
         LogoImageOperatorInterface $vendorLogoOperator,
         BackgroundImageOperatorInterface $VendorBackgroundImageOperator
@@ -82,7 +82,7 @@ final class ProfileUpdaterSpec extends ObjectBehavior
 
     public function it_sends_email_after_creating_pending_data(
         SenderInterface $sender,
-        VendorProfileUpdateFactoryInterface $vendorProfileFactory,
+        ProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
         ProfileInterface $vendorData,
         ProfileUpdateInterface $newPendingUpdate,
@@ -121,17 +121,17 @@ final class ProfileUpdaterSpec extends ObjectBehavior
 
     public function it_creates_new_image_object_for_new_image_upload(
         SenderInterface $sender,
-        VendorProfileUpdateFactoryInterface $vendorProfileFactory,
+        ProfileUpdateFactoryInterface $vendorProfileFactory,
         VendorInterface $vendor,
         ProfileInterface $vendorData,
         ProfileUpdateInterface $newPendingUpdate,
         ShopUserInterface $user,
         AddressInterface $vendorAddressUpdate,
         LogoImageInterface $imageFromForm,
-        VendorProfileUpdateImageFactoryInterface $imageFactory,
+        ProfileUpdateLogoImageFactoryInterface $imageFactory,
         LogoImageInterface $newImage,
         BackgroundImageInterface $backgroundImageFromForm,
-        VendorProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
+        ProfileUpdateBackgroundImageFactoryInterface $backgroundImageFactory,
         BackgroundImageInterface $newBackgroundImage,
         ImageUploader $imageUploader,
         SplFileInfo $fileInfo

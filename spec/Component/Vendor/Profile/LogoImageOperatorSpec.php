@@ -14,8 +14,8 @@ namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\LogoImageOperator;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 
@@ -23,7 +23,7 @@ final class LogoImageOperatorSpec extends ObjectBehavior
 {
     public function let(
         EntityManager $entityManager,
-        VendorImageFactoryInterface $vendorImageFactory
+        LogoImageFactoryInterface $vendorImageFactory
     ): void {
         $this->beConstructedWith(
             $entityManager,
@@ -63,7 +63,7 @@ final class LogoImageOperatorSpec extends ObjectBehavior
         VendorInterface $vendor,
         LogoImageInterface $updateImage,
         LogoImageInterface $oldImage,
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         LogoImageInterface $newImage
     ): void {
         $vendorData->getImage()->willReturn($updateImage);
@@ -86,7 +86,7 @@ final class LogoImageOperatorSpec extends ObjectBehavior
         VendorInterface $vendor,
         LogoImageInterface $updateImage,
         LogoImageInterface $oldImage,
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         LogoImageInterface $newImage
     ): void {
         $vendorData->getImage()->willReturn(null);

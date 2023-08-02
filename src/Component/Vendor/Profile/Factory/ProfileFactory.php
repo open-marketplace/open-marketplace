@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class VendorProfileFactory implements VendorProfileFactoryInterface
+final class ProfileFactory implements ProfileFactoryInterface
 {
     private FactoryInterface $vendorFactory;
 

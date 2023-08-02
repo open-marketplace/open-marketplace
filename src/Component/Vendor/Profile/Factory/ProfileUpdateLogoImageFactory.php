@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
 
-final class VendorProfileUpdateImageFactory implements VendorProfileUpdateImageFactoryInterface
+final class ProfileUpdateLogoImageFactory implements ProfileUpdateLogoImageFactoryInterface
 {
     public function createNew(): LogoImageInterface
     {

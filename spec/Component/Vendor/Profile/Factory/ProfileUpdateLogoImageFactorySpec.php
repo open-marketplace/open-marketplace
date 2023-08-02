@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Factory;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorProfileInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileUpdateImageFactory;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateLogoImageFactory;
 use PhpSpec\ObjectBehavior;
 
-final class VendorProfileUpdateImageFactorySpec extends ObjectBehavior
+final class ProfileUpdateLogoImageFactorySpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType(VendorProfileUpdateImageFactory::class);
+        $this->shouldHaveType(ProfileUpdateLogoImageFactory::class);
     }
 
     public function it_creates_new_vendor_image(): void
@@ -31,7 +31,7 @@ final class VendorProfileUpdateImageFactorySpec extends ObjectBehavior
 
     public function it_creates_initialized_image(
         LogoImageInterface $uploadedImage,
-        VendorProfileInterface $vendorProfile
+        ProfileInterface $vendorProfile
     ): void {
         $imageEntity = $this->createWithFileAndOwner($uploadedImage, $vendorProfile);
 

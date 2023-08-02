@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Factory;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileUpdateFactory;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateFactory;
 use BitBag\OpenMarketplace\Generator\TokenGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 
-final class VendorProfileUpdateFactorySpec extends ObjectBehavior
+final class ProfileUpdateFactorySpec extends ObjectBehavior
 {
     public function let(TokenGeneratorInterface $tokenGenerator): void
     {
@@ -26,7 +26,7 @@ final class VendorProfileUpdateFactorySpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(VendorProfileUpdateFactory::class);
+        $this->shouldHaveType(ProfileUpdateFactory::class);
     }
 
     public function it_creates_vendor_profile_update(

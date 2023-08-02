@@ -11,13 +11,35 @@
         <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\LogoImageOperator"
                  id="bitbag.open_marketplace.component.vendor.profile.logo_image_operator">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="open_marketplace.service.vendor_image_factory"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.logo_image_factory"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\BackgroundImageOperator"
                  id="bitbag.open_marketplace.component.vendor.profile.background_image_operator">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="open_marketplace.service.vendor_background_image_factory"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.background_image_factory"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactory"
+                 id="bitbag.open_marketplace.component.vendor.profile.factory.profile_factory">
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactory"
+                 id="bitbag.open_marketplace.component.vendor.profile.factory.logo_image_factory" />
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\BackgroundImageFactory"
+                 id="bitbag.open_marketplace.component.vendor.profile.factory.background_image_factory" />
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateFactory"
+                 id="bitbag.open_marketplace.component.vendor.profile.factory.profile_update_factory">
+            <argument type="service" id="open_marketplace.generator.token_generator"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateBackgroundImageFactory"
+                 id="bitbag.open_marketplace.component.vendor.profile.factory.profile_background_image_factory" />
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateLogoImageFactory"
+                 id="bitbag.open_marketplace.component.vendor.profile.factory.profile_logo_image_factory" />
     </services>
 </container>
