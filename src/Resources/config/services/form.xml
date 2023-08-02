@@ -23,7 +23,7 @@
         <service id="open_marketplace.form.vendor_shipping_methods_type"
                  class="BitBag\OpenMarketplace\Form\Type\VendorShippingMethodsType">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="open_marketplace.factory.vendor_shipping_method" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor_shipping_method" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
             <tag name="form.type"/>

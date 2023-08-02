@@ -9,31 +9,19 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Component\Vendor\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
-final class VendorShippingMethodFactory implements VendorShippingMethodFactoryInterface
+interface VendorShippingMethodFactoryInterface
 {
-    public function createNew(): VendorShippingMethodInterface
-    {
-        return new VendorShippingMethod();
-    }
+    public function createNew(): VendorShippingMethodInterface;
 
     public function createNewWithChannelCodeShippingAndVendor(
         string $channelCode,
         ShippingMethodInterface $shippingMethod,
         VendorInterface $vendor
-    ): VendorShippingMethodInterface {
-        $vendorShippingMethod = $this->createNew();
-
-        $vendorShippingMethod->setChannelCode($channelCode);
-        $vendorShippingMethod->setShippingMethod($shippingMethod);
-        $vendorShippingMethod->setVendor($vendor);
-
-        return $vendorShippingMethod;
-    }
+    ): VendorShippingMethodInterface;
 }

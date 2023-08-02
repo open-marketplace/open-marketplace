@@ -5,15 +5,9 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\OpenMarketplace\Factory\VendorFactory"
-                 id="open_marketplace.factory.vendor">
-            <argument>%env(DEFAULT_VENDOR_COMMISSION)%</argument>
-            <argument>%env(string:DEFAULT_VENDOR_COMMISSION_TYPE)%</argument>
-        </service>
-
         <service class="BitBag\OpenMarketplace\Factory\VendorProfileFactory"
                  id="open_marketplace.factory.vendor_profile_factory">
-            <argument type="service" id="open_marketplace.factory.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Factory\AddressFactory"
@@ -85,10 +79,6 @@
         <service class="BitBag\OpenMarketplace\Factory\ProductAttributeValueFactory"
                  id="open_marketplace.factory.product_attribute_value">
             <argument type="string">%sylius.model.product_attribute_value.class%</argument>
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\VendorShippingMethodFactory"
-                 id="open_marketplace.factory.vendor_shipping_method">
         </service>
 
         <service id="open_marketplace.factory.product_taxon" class="Sylius\Component\Resource\Factory\Factory" public="true">
