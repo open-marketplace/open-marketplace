@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\EventListener;
 
+use BitBag\OpenMarketplace\Component\Core\Vendor\Exception\ShopUserHasNoVendorContextException;
+use BitBag\OpenMarketplace\Component\Core\Vendor\Exception\ShopUserNotFoundException;
 use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
-use BitBag\OpenMarketplace\Exception\ShopUserHasNoVendorContextException;
-use BitBag\OpenMarketplace\Exception\ShopUserNotFoundException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
