@@ -5,7 +5,7 @@ vendor_shipping_methods:
     _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:updateAction
     _sylius:
       template: 'Context/Vendor/ShippingMethods/index.html.twig'
-      form: BitBag\OpenMarketplace\Form\Type\VendorShippingMethodsType
+      form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\VendorShippingMethodsType
       event: update
       repository:
         method: findOneById

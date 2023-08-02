@@ -7,7 +7,7 @@ sylius_resource:
                 interface: BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository
-                form: BitBag\OpenMarketplace\Form\Type\VendorEditType
+                form: BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\VendorType
 
         open_marketplace.vendor_profile_update:
             classes:

@@ -6,7 +6,7 @@ vendor_profile_update:
         _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:customUpdateAction
         _sylius:
             template: "Context/Vendor/Profile/update.html.twig"
-            form: BitBag\OpenMarketplace\Form\Type\VendorType
+            form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType
             event: update
             flash: open_marketplace.ui.vendor_updated
             redirect:

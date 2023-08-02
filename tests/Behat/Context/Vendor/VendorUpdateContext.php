@@ -228,9 +228,9 @@ class VendorUpdateContext extends RawMinkContext
         $phoneNumber
     ) {
         $page = $this->getSession()->getPage();
-        $companyNameInput = $page->find('css', '#vendor_companyName');
-        $taxIdInput = $page->find('css', '#vendor_taxIdentifier');
-        $phoneNumberInput = $page->find('css', '#vendor_phoneNumber');
+        $companyNameInput = $page->find('css', '#profile_companyName');
+        $taxIdInput = $page->find('css', '#profile_taxIdentifier');
+        $phoneNumberInput = $page->find('css', '#profile_phoneNumber');
 
         Assert::eq($companyName, $companyNameInput->getAttribute('value'));
         Assert::eq($taxId, $taxIdInput->getAttribute('value'));

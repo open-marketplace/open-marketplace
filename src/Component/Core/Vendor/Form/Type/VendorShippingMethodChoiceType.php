@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;

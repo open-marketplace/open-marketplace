@@ -11,61 +11,6 @@
         </parameter>
     </parameters>
     <services>
-
-        <service id="open_marketplace.form.vendor_type"
-                 class="BitBag\OpenMarketplace\Form\Type\VendorType">
-            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
-            <argument>%open_marketplace.form.type.vendor.validation_groups%</argument>
-
-            <tag name="form.type"/>
-        </service>
-
-        <service id="open_marketplace.form.vendor_shipping_methods_type"
-                 class="BitBag\OpenMarketplace\Form\Type\VendorShippingMethodsType">
-            <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor_shipping_method" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
-            <tag name="form.type"/>
-        </service>
-
-        <service id="open_marketplace.form.vendor_shipping_method_choice_type"
-                 class="BitBag\OpenMarketplace\Form\Type\VendorShippingMethodChoiceType">
-            <argument type="service" id="sylius.repository.shipping_method" />
-            <tag name="form.type" />
-        </service>
-
-        <service id="open_marketplace.form.type.vendor_edit_type"
-                 class="BitBag\OpenMarketplace\Form\Type\VendorEditType">
-            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
-
-            <tag name="form.type"/>
-        </service>
-
-        <service id="open_marketplace.form.type.vendor_image"
-                 class="BitBag\OpenMarketplace\Form\VendorImageType">
-            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage</argument>
-            <tag name="form.type"/>
-        </service>
-
-        <service id="open_marketplace.form.type.vendor_background_image"
-                 class="BitBag\OpenMarketplace\Form\VendorBackgroundImageType">
-            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage</argument>
-            <tag name="form.type"/>
-        </service>
-
-        <service id="mvm.form.type.conversation"
-                 class="BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType">
-            <argument type="service" id="bitbag.open_marketplace.component.core.common.resolver.resource.current_user_resolver" />
-            <argument type="service" id="open_marketplace.repository.vendor" />
-            <argument type="service" id="sylius.repository.shop_user" />
-            <tag name="form.type"/>
-        </service>
-
-        <service id="mvm.form.type.conversation_message" class="BitBag\OpenMarketplace\Form\Type\Conversation\MessageType">
-            <tag name="form.type" />
-        </service>
-
         <service class="BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeType"
                  id="open_marketplace.form.type.draftAttribute">
             <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute</argument>
@@ -163,12 +108,6 @@
             <argument type="service" id="open_marketplace.factory.product_taxon" />
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.repository.draft_taxon" />
             <tag name="form.type" />
-        </service>
-
-        <service id="open_marketplace.form.type.vendor.product_review_type"
-                 class="BitBag\OpenMarketplace\Form\Type\Vendor\ProductReviewType">
-            <argument>%sylius.model.product_review.class%</argument>
-            <tag name="form.type"/>
         </service>
 
     </services>

@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging;
 
+use BitBag\OpenMarketplace\Component\Core\Common\Form\Type\Messaging\ConversationType;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
 use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Repository\ConversationRepositoryInterface;
-use BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

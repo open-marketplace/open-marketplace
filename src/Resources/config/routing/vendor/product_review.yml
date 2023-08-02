@@ -15,7 +15,7 @@ open_marketplace_vendor_product_review_edit:
         _sylius:
             template: "Context/Vendor/ProductReviews/update.html.twig"
             redirect: open_marketplace_vendor_product_review_index
-            form: BitBag\OpenMarketplace\Form\Type\Vendor\ProductReviewType
+            form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductReviewType
 
 open_marketplace_vendor_product_review_delete:
     path: /product-reviews/{id}/delete

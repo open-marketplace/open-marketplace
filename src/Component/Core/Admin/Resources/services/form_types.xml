@@ -9,11 +9,13 @@ We are hiring developers from all over the world. Join us and start your new, ex
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults autowire="false" autoconfigure="false" />
+        <defaults public="false" autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.core.admin.grid.filter.product_listing_status"
-                 class="BitBag\OpenMarketplace\Component\Core\Admin\Grid\Filter\ProductListingStatusFilter">
-            <tag name="sylius.grid_filter" type="product_listing_status" form_type="BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\ProductListingStatusFilterType" />
+        <service class="BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\VendorType"
+                 id="bitbag.open_marketplace.component.core.admin.form.type.vendor">
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
+
+            <tag name="form.type"/>
         </service>
     </services>
 </container>

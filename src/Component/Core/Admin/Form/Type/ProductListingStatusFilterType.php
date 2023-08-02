@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type\Filter;
+namespace BitBag\OpenMarketplace\Component\Core\Admin\Form\Type;
 
 use BitBag\OpenMarketplace\ProductListingTerms\Options;
 use Symfony\Component\Form\AbstractType;

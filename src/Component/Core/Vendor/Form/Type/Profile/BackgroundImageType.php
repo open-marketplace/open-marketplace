@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class VendorBackgroundImageType extends ImageType
+final class BackgroundImageType extends ImageType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

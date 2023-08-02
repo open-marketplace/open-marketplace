@@ -4,7 +4,7 @@ sylius_resource:
             classes:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage
                 interface: BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface
-                form: BitBag\OpenMarketplace\Form\VendorImageType
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\LogoImageType
         bitbag_open_marketplace.vendor_profile_update_image:
             classes:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage
@@ -12,7 +12,7 @@ sylius_resource:
             classes:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage
                 interface: BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface
-                form: BitBag\OpenMarketplace\Form\VendorBackgroundImageType
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\BackgroundImageType
         bitbag_open_marketplace.vendor_profile_update_background_image:
             classes:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage

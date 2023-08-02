@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type\Vendor;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

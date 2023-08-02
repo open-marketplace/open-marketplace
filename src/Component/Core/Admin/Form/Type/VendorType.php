@@ -9,8 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type;
+namespace BitBag\OpenMarketplace\Component\Core\Admin\Form\Type;
 
+use BitBag\OpenMarketplace\Component\Core\Common\Form\Type\VendorAddressType;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class VendorEditType extends AbstractResourceType
+final class VendorType extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

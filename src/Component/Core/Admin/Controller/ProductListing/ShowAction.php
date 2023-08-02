@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing;
 
+use BitBag\OpenMarketplace\Component\Core\Common\Form\Type\Messaging\ConversationType;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
@@ -20,7 +21,6 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
-use BitBag\OpenMarketplace\Form\Type\Conversation\ConversationType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

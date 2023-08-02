@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type\Conversation;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Form\Type\Messaging;
 
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Message;
 use Symfony\Component\Form\AbstractType;

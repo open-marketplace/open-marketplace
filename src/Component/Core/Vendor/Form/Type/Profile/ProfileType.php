@@ -9,11 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile;
 
+use BitBag\OpenMarketplace\Component\Core\Common\Form\Type\VendorAddressType;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
-use BitBag\OpenMarketplace\Form\VendorBackgroundImageType;
-use BitBag\OpenMarketplace\Form\VendorImageType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
-final class VendorType extends AbstractResourceType
+final class ProfileType extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -35,12 +34,12 @@ final class VendorType extends AbstractResourceType
             ->add('phoneNumber', TelType::class, [
                 'label' => 'open_marketplace.ui.phone_number',
             ])
-            ->add('image', VendorImageType::class, [
+            ->add('image', LogoImageType::class, [
                 'label' => false,
                 'required' => false,
                 'constraints' => [new Valid(['groups' => 'VendorLogo'])],
             ])
-            ->add('backgroundImage', VendorBackgroundImageType::class, [
+            ->add('backgroundImage', BackgroundImageType::class, [
                 'label' => false,
                 'required' => false,
                 'constraints' => [new Valid(['groups' => 'VendorBackground'])],

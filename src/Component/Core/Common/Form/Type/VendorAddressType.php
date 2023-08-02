@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type;
+namespace BitBag\OpenMarketplace\Component\Core\Common\Form\Type;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
 use Sylius\Component\Addressing\Model\Country;
