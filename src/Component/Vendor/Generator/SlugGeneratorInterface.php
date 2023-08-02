@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Generator;
+namespace BitBag\OpenMarketplace\Component\Vendor\Generator;
 
-interface VendorSlugGeneratorInterface
+interface SlugGeneratorInterface
 {
     public function generateSlug(string $companyName): string;
 }

@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Generator;
+namespace BitBag\OpenMarketplace\Component\Vendor\Generator;
 
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 
-final class VendorSlugGenerator implements VendorSlugGeneratorInterface
+final class SlugGenerator implements SlugGeneratorInterface
 {
     private VendorRepositoryInterface $vendorRepository;
 

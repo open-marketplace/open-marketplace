@@ -14,7 +14,7 @@ namespace spec\BitBag\OpenMarketplace\Api\EventSubscriber;
 use BitBag\OpenMarketplace\Api\EventSubscriber\VendorSlugEventSubscriber;
 use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Generator\SlugGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 final class VendorSlugEventSubscriberSpec extends ObjectBehavior
 {
     public function let(
-        VendorSlugGeneratorInterface $vendorSlugGenerator
+        SlugGeneratorInterface $vendorSlugGenerator
     ): void {
         $this->beConstructedWith($vendorSlugGenerator);
     }
@@ -37,7 +37,7 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
     }
 
     public function it_generates_slug_for_vendor_with_company_name_and_empty_slug(
-        VendorSlugGeneratorInterface $vendorSlugGenerator,
+        SlugGeneratorInterface $vendorSlugGenerator,
         VendorInterface $vendor,
         HttpKernelInterface $kernel,
         Request $request,
@@ -60,7 +60,7 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
     }
 
     public function it_generates_slug_for_vendor_slug_aware_with_company_name_and_empty_slug(
-        VendorSlugGeneratorInterface $vendorSlugGenerator,
+        SlugGeneratorInterface $vendorSlugGenerator,
         VendorSlugAwareInterface $vendorSlugAware,
         HttpKernelInterface $kernel,
         Request $request,
@@ -83,7 +83,7 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
     }
 
     public function it_generates_new_slug_for_vendor_with_slug_and_company_name(
-        VendorSlugGeneratorInterface $vendorSlugGenerator,
+        SlugGeneratorInterface $vendorSlugGenerator,
         VendorInterface $vendor,
         HttpKernelInterface $kernel,
         Request $request,
@@ -106,7 +106,7 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
     }
 
     public function it_does_nothing_if_the_vendor_has_no_company_name(
-        VendorSlugGeneratorInterface $vendorSlugGenerator,
+        SlugGeneratorInterface $vendorSlugGenerator,
         VendorSlugAwareInterface $vendor,
         HttpKernelInterface $kernel,
         Request $request,
@@ -127,7 +127,7 @@ final class VendorSlugEventSubscriberSpec extends ObjectBehavior
     }
 
     public function it_does_nothing_if_the_vendor_has_empty_company_name(
-        VendorSlugGeneratorInterface $vendorSlugGenerator,
+        SlugGeneratorInterface $vendorSlugGenerator,
         VendorSlugAwareInterface $vendor,
         HttpKernelInterface $kernel,
         Request $request,

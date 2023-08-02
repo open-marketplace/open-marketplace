@@ -14,7 +14,7 @@ namespace BitBag\OpenMarketplace\Api\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Generator\SlugGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -22,9 +22,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class VendorSlugEventSubscriber implements EventSubscriberInterface
 {
-    private VendorSlugGeneratorInterface $vendorSlugGenerator;
+    private SlugGeneratorInterface $vendorSlugGenerator;
 
-    public function __construct(VendorSlugGeneratorInterface $vendorSlugGenerator)
+    public function __construct(SlugGeneratorInterface $vendorSlugGenerator)
     {
         $this->vendorSlugGenerator = $vendorSlugGenerator;
     }

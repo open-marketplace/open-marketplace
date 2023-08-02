@@ -7,7 +7,7 @@
     <services>
         <service class="BitBag\OpenMarketplace\Api\EventSubscriber\VendorSlugEventSubscriber"
                  id="bitbag.open_marketplace.api.event_subscriber.vendor_slug">
-            <argument type="service" id="open_marketplace.service.vendor_slug_generator" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.generator.slug" />
             <tag name="kernel.event_subscriber" />
         </service>
         <service class="BitBag\OpenMarketplace\Api\EventSubscriber\VendorAwareEventSubscriber"

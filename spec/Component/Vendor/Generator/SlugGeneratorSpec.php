@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Generator;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Generator;
 
+use BitBag\OpenMarketplace\Component\Vendor\Generator\SlugGenerator;
+use BitBag\OpenMarketplace\Component\Vendor\Generator\SlugGeneratorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
-use BitBag\OpenMarketplace\Generator\VendorSlugGenerator;
-use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 
-final class VendorSlugGeneratorSpec extends ObjectBehavior
+final class SlugGeneratorSpec extends ObjectBehavior
 {
     public function let(
         VendorRepositoryInterface $vendorRepository
@@ -28,12 +28,12 @@ final class VendorSlugGeneratorSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(VendorSlugGenerator::class);
+        $this->shouldHaveType(SlugGenerator::class);
     }
 
     public function it_should_implement_interface(): void
     {
-        $this->shouldImplement(VendorSlugGeneratorInterface::class);
+        $this->shouldImplement(SlugGeneratorInterface::class);
     }
 
     public function it_generates_slug(

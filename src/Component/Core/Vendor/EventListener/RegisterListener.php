@@ -9,38 +9,30 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\EventListener;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\EventListener;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Exception\ShopUserNotFoundException;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Generator\SlugGeneratorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Generator\VendorSlugGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
-final class VendorRegisterListener
+final class RegisterListener
 {
-    private VendorSlugGeneratorInterface $vendorSlugGenerator;
-
-    private ImageUploaderInterface $fileUploader;
-
-    private TokenStorageInterface $tokenStorage;
-
     public function __construct(
-        VendorSlugGeneratorInterface $vendorSlugGenerator,
-        ImageUploaderInterface $fileUploader,
-        TokenStorageInterface $tokenStorage,
-        ) {
-        $this->vendorSlugGenerator = $vendorSlugGenerator;
-        $this->fileUploader = $fileUploader;
-        $this->tokenStorage = $tokenStorage;
+        private SlugGeneratorInterface $vendorSlugGenerator,
+        private ImageUploaderInterface $fileUploader,
+        private TokenStorageInterface $tokenStorage,
+    ) {
+
     }
 
-    public function uploadImage(ResourceControllerEvent $event): void
+    public function uploadLogoImage(ResourceControllerEvent $event): void
     {
         /** @var VendorInterface $vendor */
         $vendor = $event->getSubject();
@@ -90,6 +82,7 @@ final class VendorRegisterListener
         if (null === $token) {
             throw new TokenNotFoundException();
         }
+
         /** @var ShopUserInterface|null $shopUser */
         $shopUser = $token->getUser();
         if (null === $shopUser) {
