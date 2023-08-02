@@ -30,16 +30,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ConversationType extends AbstractType
 {
-    private CurrentUserResolverInterface $currentUserResolver;
-
-    private VendorRepositoryInterface $vendorRepository;
-
     public function __construct(
-        CurrentUserResolverInterface $currentUserResolver,
-        VendorRepository $vendorRepository,
+        private CurrentUserResolverInterface $currentUserResolver,
+        private VendorRepository $vendorRepository,
     ) {
-        $this->currentUserResolver = $currentUserResolver;
-        $this->vendorRepository = $vendorRepository;
+
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

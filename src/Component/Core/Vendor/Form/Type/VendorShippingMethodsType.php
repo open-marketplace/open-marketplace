@@ -25,24 +25,14 @@ use Symfony\Component\Form\FormEvents;
 
 final class VendorShippingMethodsType extends AbstractResourceType
 {
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private VendorShippingMethodFactoryInterface $vendorShippingMethodFactory;
-
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        VendorShippingMethodFactoryInterface $vendorShippingMethodFactory,
-        EntityManagerInterface $entityManager,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private VendorShippingMethodFactoryInterface $vendorShippingMethodFactory,
+        private EntityManagerInterface $entityManager,
         string $dataClass,
         array $validationGroups = []
     ) {
         parent::__construct($dataClass, $validationGroups);
-
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->vendorShippingMethodFactory = $vendorShippingMethodFactory;
-        $this->entityManager = $entityManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

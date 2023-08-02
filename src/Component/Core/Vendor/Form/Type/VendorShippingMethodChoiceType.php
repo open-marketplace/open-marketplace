@@ -25,11 +25,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class VendorShippingMethodChoiceType extends AbstractType
 {
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
+    public function __construct(
+        private ShippingMethodRepositoryInterface $shippingMethodRepository
+    ) {
 
-    public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)
-    {
-        $this->shippingMethodRepository = $shippingMethodRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
