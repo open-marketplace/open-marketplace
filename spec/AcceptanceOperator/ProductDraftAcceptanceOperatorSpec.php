@@ -11,26 +11,26 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\AcceptanceOperator;
 
-use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperator;
-use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperatorInterface;
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Operator\AttributesOperatorInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Operator\ImagesOperatorInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Operator\TaxonsOperatorInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\SimpleProductFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\SimpleProductUpdaterInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverterInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Converter\AttributesConverterInterface;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Factory\ProductFromDraftFactoryInterface;
-use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperatorInterface;
-use BitBag\OpenMarketplace\Operator\ProductDraftTaxonsOperatorInterface;
-use BitBag\OpenMarketplace\Updater\ProductFromDraftUpdaterInterface;
 use PhpSpec\ObjectBehavior;
 
 final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 {
     public function let(
-        ProductFromDraftFactoryInterface $productFromDraftFactory,
-        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $filesOperator,
-        AttributesConverterInterface $attributesConverter,
-        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
+        SimpleProductFactoryInterface $productFromDraftFactory,
+        SimpleProductUpdaterInterface $productFromDraftUpdater,
+        ImagesOperatorInterface $filesOperator,
+        AttributesOperatorInterface $attributesConverter,
+        TaxonsOperatorInterface $productDraftTaxonsOperator
     ): void {
         $this->beConstructedWith(
             $productFromDraftFactory,
@@ -43,19 +43,19 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(ProductDraftAcceptanceOperator::class);
+        $this->shouldHaveType(DraftConverter::class);
     }
 
     public function it_implements_interface(): void
     {
-        $this->shouldImplement(ProductDraftAcceptanceOperatorInterface::class);
+        $this->shouldImplement(DraftConverterInterface::class);
     }
 
     public function it_creates_new_product(
         DraftInterface $productDraft,
-        ProductFromDraftFactoryInterface $productFromDraftFactory,
+        SimpleProductFactoryInterface $productFromDraftFactory,
         ListingInterface $productListing,
-        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator,
+        TaxonsOperatorInterface $productDraftTaxonsOperator,
         ProductInterface $product
     ): void {
         $productDraft->getProductListing()
@@ -67,7 +67,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->accept()
             ->shouldBeCalledOnce();
 
-        $productFromDraftFactory->createSimpleProduct($productDraft)
+        $productFromDraftFactory->create($productDraft)
             ->willReturn($product);
 
         $productDraftTaxonsOperator->copyTaxonsToProduct($productDraft, $product)
@@ -78,12 +78,12 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 
     public function it_updates_existing_product(
         DraftInterface $productDraft,
-        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $filesOperator,
+        SimpleProductUpdaterInterface $productFromDraftUpdater,
+        ImagesOperatorInterface $filesOperator,
         ListingInterface $productListing,
         ProductInterface $product,
         ProductInterface $updatedProduct,
-        ProductDraftTaxonsOperatorInterface $productDraftTaxonsOperator
+        TaxonsOperatorInterface $productDraftTaxonsOperator
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -94,7 +94,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->accept()
             ->shouldBeCalledOnce();
 
-        $productFromDraftUpdater->updateProduct($productDraft)
+        $productFromDraftUpdater->update($productDraft)
             ->willReturn($updatedProduct);
 
         $filesOperator->removeOldFiles($updatedProduct)->shouldBeCalledTimes(1);
@@ -108,12 +108,12 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 
     public function it_converts_attributes_to_existing_product(
         DraftInterface $productDraft,
-        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductDraftFilesOperatorInterface $filesOperator,
+        SimpleProductUpdaterInterface $productFromDraftUpdater,
+        ImagesOperatorInterface $filesOperator,
         ListingInterface $productListing,
         ProductInterface $product,
         ProductInterface $updatedProduct,
-        AttributesConverterInterface $attributesConverter
+        AttributesOperatorInterface $attributesConverter
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -124,7 +124,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->accept()
             ->shouldBeCalledOnce();
 
-        $productFromDraftUpdater->updateProduct($productDraft)
+        $productFromDraftUpdater->update($productDraft)
             ->willReturn($updatedProduct);
 
         $filesOperator->removeOldFiles($updatedProduct)->shouldBeCalledTimes(1);
@@ -136,11 +136,11 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 
     public function it_converts_attributes_to_new_product(
         DraftInterface $productDraft,
-        ProductFromDraftUpdaterInterface $productFromDraftUpdater,
-        ProductFromDraftFactoryInterface $productFromDraftFactory,
+        SimpleProductUpdaterInterface $productFromDraftUpdater,
+        SimpleProductFactoryInterface $productFromDraftFactory,
         ListingInterface $productListing,
         ProductInterface $newProduct,
-        AttributesConverterInterface $attributesConverter
+        AttributesOperatorInterface $attributesConverter
     ): void {
         $productDraft->getProductListing()
             ->willReturn($productListing);
@@ -151,10 +151,10 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productListing->accept()
             ->shouldBeCalledOnce();
 
-        $productFromDraftUpdater->updateProduct($productDraft)
+        $productFromDraftUpdater->update($productDraft)
             ->willReturn(null);
 
-        $productFromDraftFactory->createSimpleProduct($productDraft)->willReturn($newProduct);
+        $productFromDraftFactory->create($productDraft)->willReturn($newProduct);
         $attributesConverter->convert($productDraft, $newProduct);
         $this->acceptProductDraft($productDraft);
     }

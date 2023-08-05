@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Converter;
 
 use ApiTestCase\JsonApiTestCase;
+use BitBag\OpenMarketplace\Component\Product\Entity\Product;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
-use BitBag\OpenMarketplace\Entity\Product;
 
 class AttributesConverterTest extends JsonApiTestCase
 {
@@ -15,7 +15,7 @@ class AttributesConverterTest extends JsonApiTestCase
         parent::setUp();
 
         $this->entityManager = $this->getEntityManager();
-        $this->attributesConverter = $this->getContainer()->get('open_marketplace.attributes_converter');
+        $this->attributesConverter = $this->getContainer()->get('bitbag.open_marketplace.component.product_listing.draft_converter.operator.attributes');
     }
 
     public function test_it_removes_attributes_from_product(): void

@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Api\Controller\Vendor;
 
 use BitBag\OpenMarketplace\Api\Controller\Vendor\DeleteProductListingAction;
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\JsonResponse;

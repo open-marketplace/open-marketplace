@@ -5,53 +5,6 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\OpenMarketplace\Factory\ChannelPricingFactory"
-                 id="open_marketplace.factory.channel_pricing_factory">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductTranslationFactory"
-                 id="open_marketplace.factory.product_translation_factory">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductVariantFactory"
-                 id="open_marketplace.factory.product_variant_factory">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductVariantTranslationFactory"
-                 id="open_marketplace.factory.product_variant_translation_factory">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductFromDraftFactory"
-                 id="open_marketplace.factory.product_from_draft_factory">
-            <argument type="service" id="sylius.custom_factory.product" />
-            <argument type="service" id="open_marketplace.factory.product_translation_factory" />
-            <argument type="service" id="open_marketplace.factory.product_variant_factory" />
-            <argument type="service" id="open_marketplace.factory.product_variant_translation_factory" />
-            <argument type="service" id="open_marketplace.factory.channel_pricing_factory" />
-            <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="open_marketplace.factory.product_image"/>
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductImageFactory"
-                 id="open_marketplace.factory.product_image"/>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductAttributeFactory"
-                 id="open_marketplace.product_attribute_factory">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductAttributeTranslationFactory"
-                 id="open_marketplace.factory.product_attribute_translation">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductAttributeFactory"
-                 id="open_marketplace.factory.product_attribute">
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Factory\ProductAttributeValueFactory"
-                 id="open_marketplace.factory.product_attribute_value">
-            <argument type="string">%sylius.model.product_attribute_value.class%</argument>
-        </service>
-
         <service id="open_marketplace.factory.product_taxon" class="Sylius\Component\Resource\Factory\Factory" public="true">
             <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon</argument>
         </service>

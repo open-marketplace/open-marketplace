@@ -52,7 +52,7 @@
             </cascade>
         </one-to-one>
         <one-to-many field="products"
-                     target-entity="BitBag\OpenMarketplace\Entity\ProductInterface"
+                     target-entity="BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface"
                      mapped-by="vendor">
         </one-to-many>
 

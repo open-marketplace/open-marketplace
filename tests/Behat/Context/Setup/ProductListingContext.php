@@ -13,12 +13,12 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperator;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
@@ -35,14 +35,14 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
-    private ProductDraftAcceptanceOperator $acceptanceOperator;
+    private DraftConverter $acceptanceOperator;
 
     public function __construct(
         ShopUserExampleFactory $shopUserExampleFactory,
         FactoryInterface $vendorFactory,
         EntityManagerInterface $entityManager,
         SharedStorageInterface $sharedStorage,
-        ProductDraftAcceptanceOperator $acceptanceOperator,
+        DraftConverter $acceptanceOperator,
     ) {
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
@@ -98,7 +98,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     public function thisProductListingHasStatusAccepted()
     {
         $draft = $this->entityManager->getRepository(Draft::class)->findOneBy(['code' => 'code']);
-        $newProduct = $this->acceptanceOperator->acceptProductDraft($draft);
+        $newProduct = $this->acceptanceOperator->convertToSimpleProduct($draft);
         $draft->setStatus('verified');
         $this->entityManager->persist($newProduct);
         $this->entityManager->flush();

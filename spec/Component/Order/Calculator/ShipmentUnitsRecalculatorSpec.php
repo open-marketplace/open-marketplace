@@ -16,8 +16,8 @@ use BitBag\OpenMarketplace\Component\Order\Calculator\ShipmentUnitsRecalculatorI
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface;
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;

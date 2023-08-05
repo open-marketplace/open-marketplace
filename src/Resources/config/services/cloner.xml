@@ -12,17 +12,5 @@
                  id="open_marketplace.cloner.product_listing_translation_cloner">
             <argument type="service" id="open_marketplace.factory.product_translation" />
         </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\AttributeTranslationCloner"
-                 id="open_marketplace.cloner.attribute_translation">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="open_marketplace.factory.product_attribute_translation"/>
-        </service>
-
-        <service class="BitBag\OpenMarketplace\Cloner\AttributeValueCloner"
-                 id="open_marketplace.cloner.attribute_value">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="open_marketplace.factory.product_attribute_value"/>
-        </service>
     </services>
 </container>

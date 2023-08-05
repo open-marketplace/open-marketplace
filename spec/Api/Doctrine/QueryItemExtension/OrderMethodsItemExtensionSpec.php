@@ -15,7 +15,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface as Leg
 use BitBag\OpenMarketplace\Api\Doctrine\QueryItemExtension\OrderMethodsItemExtension;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;

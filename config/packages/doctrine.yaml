@@ -33,6 +33,11 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/src/Component/Order/Resources/doctrine'
                 prefix: 'BitBag\OpenMarketplace\Component\Order\Entity'
+            ProductComponent:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Component/Product/Resources/doctrine'
+                prefix: 'BitBag\OpenMarketplace\Component\Product\Entity'
             ProductListingComponent:
                 is_bundle: false
                 type: xml

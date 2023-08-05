@@ -8,7 +8,7 @@
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="bitbag.open_marketplace.component.vendor.repository.vendor"/>
             <argument type="service" id="sylius.repository.product_variant"/>
-            <argument type="service" id="open_marketplace.repository.product_repository"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product.repository.product"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.product"/>
             <argument type="service" id="sylius.fixture.example_factory.taxon"/>

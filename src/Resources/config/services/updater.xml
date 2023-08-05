@@ -3,19 +3,10 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\OpenMarketplace\Updater\ProductFromDraftUpdater"
-                 id="open_marketplace.updater.product_from_draft_updater">
-            <argument type="service" id="open_marketplace.factory.product_translation_factory" />
-            <argument type="service" id="sylius.repository.product_translation" />
-            <argument type="service" id="sylius.repository.channel_pricing" />
-            <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-        </service>
-
         <service class="BitBag\OpenMarketplace\Updater\ProductAttributeUpdater"
                  id="open_marketplace.updater.product_attribute_updater">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="open_marketplace.cloner.attribute_translation"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.cloner.attribute_translation"/>
         </service>
     </services>
 </container>

@@ -33,10 +33,10 @@ sylius_product:
     resources:
         product:
             classes:
-                model: BitBag\OpenMarketplace\Entity\Product
+                model: BitBag\OpenMarketplace\Component\Product\Entity\Product
         product_variant:
             classes:
-                repository: BitBag\OpenMarketplace\Repository\ProductVariantRepository
+                repository: BitBag\OpenMarketplace\Component\Product\Repository\ProductVariantRepository
 
 sylius_user:
     resources:
@@ -71,7 +71,7 @@ sylius_review:
         product:
             review:
                 classes:
-                    repository: BitBag\OpenMarketplace\Repository\ProductReviewRepository
+                    repository: BitBag\OpenMarketplace\Component\Product\Repository\ProductReviewRepository
 
 sylius_taxonomy:
     resources:

@@ -70,7 +70,7 @@ BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
     storage_type: "text"
     code: 'test_code'
     productAttribute: '@productAttribute1'
-BitBag\OpenMarketPlace\Entity\Product:
+BitBag\OpenMarketPlace\Component\Product\Entity\Product:
   some_product:
     code: 'test_code'
     vendor: '@vendor_oliver'

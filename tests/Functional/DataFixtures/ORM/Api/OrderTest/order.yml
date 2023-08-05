@@ -114,7 +114,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Entity\Product:
+BitBag\OpenMarketplace\Component\Product\Entity\Product:
   product_bruce_1:
     vendor: '@vendor_bruce'
     code: "bruce_1"

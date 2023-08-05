@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Order\Calculator;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 
 final class ShipmentUnitsRecalculator implements ShipmentUnitsRecalculatorInterface
 {

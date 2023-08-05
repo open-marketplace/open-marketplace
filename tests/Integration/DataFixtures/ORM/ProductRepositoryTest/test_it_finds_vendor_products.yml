@@ -92,7 +92,7 @@ Sylius\Component\Core\Model\ProductTranslation:
     name: 'test_name2'
     slug: 'test_slug2'
     locale: 'en_US'
-BitBag\OpenMarketplace\Entity\Product:
+BitBag\OpenMarketplace\Component\Product\Entity\Product:
   first_product:
     mainTaxon: '@taxon'
     vendor: '@vendor_oliver'

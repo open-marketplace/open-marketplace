@@ -3,29 +3,6 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="open_marketplace.repository.product_repository"
-                 class="BitBag\OpenMarketplace\Repository\ProductRepository"
-                 decorates="sylius.repository.product" >
-            <argument type="service" id="sylius.manager.product"/>
-            <argument type="service">
-                <service class="Doctrine\ORM\Mapping\ClassMetadata" public="false">
-                    <argument>%sylius.model.product.class%</argument>
-                    <factory service="sylius.manager.product" method="getClassMetadata"/>
-                </service>
-            </argument>
-            <argument type="service" id="security.token_storage"/>
-        </service>
-
-        <service id="open_marketplace.repository.product" class="BitBag\OpenMarketplace\Repository\ProductRepository">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
-            <argument type="service">
-                <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>%sylius.model.product.class%</argument>
-                    <factory service="sylius.manager.product" method="getClassMetadata"/>
-                </service>
-            </argument>
-        </service>
-
         <service id="open_marketplace.repository.taxon_repository" class="BitBag\OpenMarketplace\Repository\TaxonRepository" >
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service">

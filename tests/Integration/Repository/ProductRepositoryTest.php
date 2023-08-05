@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
+use BitBag\OpenMarketplace\Component\Product\Entity\Product;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\Product;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\Channel;
 

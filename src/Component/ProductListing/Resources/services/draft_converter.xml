@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="false" autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.factory.simple_product"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.updater.simple_product"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.operator.images"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.operator.attributes"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.operator.taxons"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\SimpleProductFactory"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.factory.simple_product">
+            <argument type="service" id="sylius.custom_factory.product" />
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_translation" />
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_variant" />
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_variant_translation" />
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.channel_pricing" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_image"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\SimpleProductUpdater"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.updater.simple_product">
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_translation" />
+            <argument type="service" id="sylius.repository.product_translation" />
+            <argument type="service" id="sylius.repository.channel_pricing" />
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Operator\ImagesOperator"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.operator.images">
+            <argument type="service">
+                <service class="Gaufrette\Filesystem">
+                    <argument>%sylius.uploader.filesystem%</argument>
+                    <factory service="knp_gaufrette.filesystem_map" method="get" />
+                </service>
+            </argument>
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_image"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Operator\TaxonsOperator"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.operator.taxons">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="sylius.factory.product_taxon" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Operator\AttributesOperator"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.operator.attributes">
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_attribute"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.extractor.draft_attributes"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.cloner.attribute_translation"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.cloner.attribute_value"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Cloner\AttributeTranslationCloner"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.cloner.attribute_translation">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_attribute_translation"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Cloner\AttributeValueCloner"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.cloner.attribute_value">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_attribute_value"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Extractor\DraftAttributesExtractor"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.extractor.draft_attributes">
+        </service>
+    </services>
+</container>

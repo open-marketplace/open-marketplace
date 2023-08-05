@@ -12,12 +12,12 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use BitBag\OpenMarketplace\Component\Product\Repository\ProductRepository;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository;

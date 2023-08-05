@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing\Entity;
 
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\VendorAwareInterface;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
 use DatetimeInterface;
 use Doctrine\Common\Collections\Collection;
