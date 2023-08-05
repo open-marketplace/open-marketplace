@@ -56,7 +56,7 @@ sylius_shop_checkout_select_shipping:
             event: select_shipping
             flash: false
             template: "Context/Shop/Checkout/selectShipping.html.twig"
-            form: BitBag\OpenMarketplace\Form\Type\Checkout\SelectShippingType
+            form: BitBag\OpenMarketplace\Component\Core\Shop\Form\Type\Checkout\SelectShippingType
             repository:
                 method: findCartForSelectingShipping
                 arguments:

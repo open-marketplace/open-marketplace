@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type\Checkout;
+namespace BitBag\OpenMarketplace\Component\Core\Shop\Form\Type\Checkout;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -29,20 +29,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodChoiceType extends AbstractType
 {
-    private ShippingMethodsResolverInterface $shippingMethodsResolver;
-
-    private ServiceRegistryInterface $calculators;
-
-    private RepositoryInterface $repository;
-
     public function __construct(
-        ShippingMethodsResolverInterface $shippingMethodsResolver,
-        ServiceRegistryInterface $calculators,
-        RepositoryInterface $repository
+        private ShippingMethodsResolverInterface $shippingMethodsResolver,
+        private ServiceRegistryInterface $calculators,
+        private RepositoryInterface $repository
     ) {
-        $this->shippingMethodsResolver = $shippingMethodsResolver;
-        $this->calculators = $calculators;
-        $this->repository = $repository;
+
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

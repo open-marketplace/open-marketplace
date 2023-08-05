@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\Type\Checkout;
+namespace BitBag\OpenMarketplace\Component\Core\Shop\Form\Type\Checkout;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,11 +19,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShipmentType extends AbstractType
 {
-    private string $dataClass;
+    public function __construct(
+        private string $dataClass
+    ) {
 
-    public function __construct(string $dataClass)
-    {
-        $this->dataClass = $dataClass;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
