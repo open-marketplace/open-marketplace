@@ -11,13 +11,19 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Admin\Form\Type;
 
-use BitBag\OpenMarketplace\ProductListingTerms\Options;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductListingStatusFilterType extends AbstractType
 {
+    public const STATUS_UNDER_VERIFICATION = 'open_marketplace.ui.under_verification';
+
+    public const STATUS_VERIFIED = 'open_marketplace.ui.verified';
+
+    public const STATUS_REJECTED = 'open_marketplace.ui.rejected';
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
@@ -25,7 +31,11 @@ final class ProductListingStatusFilterType extends AbstractType
             ChoiceType::class,
             [
                 'label' => false,
-                'choices' => Options::getTypeFilter(),
+                'choices' => [
+                    self::STATUS_UNDER_VERIFICATION => DraftInterface::STATUS_UNDER_VERIFICATION,
+                    self::STATUS_VERIFIED => DraftInterface::STATUS_VERIFIED,
+                    self::STATUS_REJECTED => DraftInterface::STATUS_REJECTED,
+                ],
                 'required' => false,
             ]
         );
