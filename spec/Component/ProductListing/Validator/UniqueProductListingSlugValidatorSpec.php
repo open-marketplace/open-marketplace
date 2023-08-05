@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Validator;
+namespace spec\BitBag\OpenMarketplace\Component\ProductListing\Validator;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
-use BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint;
-use BitBag\OpenMarketplace\Validator\UniqueProductListingSlugValidator;
+use BitBag\OpenMarketplace\Component\ProductListing\Validator\Constraint\UniqueProductListingSlugConstraint;
+use BitBag\OpenMarketplace\Component\ProductListing\Validator\UniqueProductListingSlugValidator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

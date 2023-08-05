@@ -9,17 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Validator\Constraint;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Validator\Constraint;
 
 use Symfony\Component\Validator\Constraint;
 
-final class ProductListingPriceConstraint extends Constraint
+final class UniqueProductListingSlugConstraint extends Constraint
 {
-    public string $message = 'sylius.product_variant.channel_pricing.all_defined';
+    public string $message = 'This value is already used.';
 
-    public ?string $errorPath = null;
-
-    private string $service = 'bitbag.open_marketplace.validator.product_listing_price';
+    private string $service = 'bitbag.open_marketplace.component.product_listing.validator.unique_product_listing_slug';
 
     public function getTargets()
     {

@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Validator;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Validator;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Validator\Constraint\ProductListingCodeConstraint;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Validator\Constraint\ProductListingCodeConstraint;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraint;
@@ -26,20 +26,12 @@ final class ProductListingCodeValidator extends ConstraintValidator
 {
     public const PRODUCT_LISTING_CREATE_PRODUCT_ROUTE = 'open_marketplace_vendor_product_listing_create_product';
 
-    private ListingRepositoryInterface $productListingRepository;
-
-    private VendorContextInterface $vendorContext;
-
-    private RequestStack $requestStack;
-
     public function __construct(
-        ListingRepositoryInterface $productListingRepository,
-        VendorContextInterface $vendorContext,
-        RequestStack $requestStack
+        private ListingRepositoryInterface $productListingRepository,
+        private VendorContextInterface $vendorContext,
+        private RequestStack $requestStack
     ) {
-        $this->productListingRepository = $productListingRepository;
-        $this->vendorContext = $vendorContext;
-        $this->requestStack = $requestStack;
+
     }
 
     /**

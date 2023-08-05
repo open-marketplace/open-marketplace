@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Validator;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Validator;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
-use BitBag\OpenMarketplace\Validator\Constraint\UniqueProductListingSlugConstraint;
+use BitBag\OpenMarketplace\Component\ProductListing\Validator\Constraint\UniqueProductListingSlugConstraint;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,16 +25,11 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
 {
     public const PRODUCT_LISTING_CREATE_PRODUCT_ROUTE = 'open_marketplace_vendor_product_listing_create_product';
 
-    private RepositoryInterface $productTranslationRepository;
-
-    private RequestStack $requestStack;
-
     public function __construct(
-        RepositoryInterface $productTranslationRepository,
-        RequestStack $requestStack
+        private RepositoryInterface $productTranslationRepository,
+        private RequestStack $requestStack
     ) {
-        $this->productTranslationRepository = $productTranslationRepository;
-        $this->requestStack = $requestStack;
+
     }
 
     public function validate($value, Constraint $constraint): void

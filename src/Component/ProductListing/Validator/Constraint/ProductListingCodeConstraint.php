@@ -9,17 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Validator\Constraint;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Validator\Constraint;
 
 use Symfony\Component\Validator\Constraint;
 
-final class UniqueProductListingSlugConstraint extends Constraint
+final class ProductListingCodeConstraint extends Constraint
 {
-    public string $message = 'This value is already used.';
+    public string $message = 'validator.message.product_listing_unique_code';
 
-    public ?string $errorPath = null;
-
-    private string $service = 'bitbag.open_marketplace.validator.product_listing.translation';
+    private string $service = 'bitbag.open_marketplace.component.product_listing.validator.product_listing_code';
 
     public function getTargets()
     {

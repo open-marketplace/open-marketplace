@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Validator;
+namespace spec\BitBag\OpenMarketplace\Component\ProductListing\Validator;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
-use BitBag\OpenMarketplace\Validator\Constraint\ProductListingPriceConstraint;
-use BitBag\OpenMarketplace\Validator\ProductListingPriceValidator;
+use BitBag\OpenMarketplace\Component\ProductListing\Validator\Constraint\ProductListingPriceConstraint;
+use BitBag\OpenMarketplace\Component\ProductListing\Validator\ProductListingPriceValidator;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;

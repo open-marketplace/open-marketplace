@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Validator;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Validator;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
-use BitBag\OpenMarketplace\Validator\Constraint\ProductListingPriceConstraint;
+use BitBag\OpenMarketplace\Component\ProductListing\Validator\Constraint\ProductListingPriceConstraint;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -20,11 +20,10 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class ProductListingPriceValidator extends ConstraintValidator
 {
-    private ChannelRepositoryInterface $channelRepository;
+    public function __construct(
+        private ChannelRepositoryInterface $channelRepository
+    ) {
 
-    public function __construct(ChannelRepositoryInterface $channelRepository)
-    {
-        $this->channelRepository = $channelRepository;
     }
 
     public function validate($value, Constraint $constraint): void
