@@ -14,7 +14,7 @@ namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateFactory;
-use BitBag\OpenMarketplace\Generator\TokenGeneratorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\TokenGeneratorInterface;
 use PhpSpec\ObjectBehavior;
 
 final class ProfileUpdateFactorySpec extends ObjectBehavior

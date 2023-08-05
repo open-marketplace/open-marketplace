@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\Address;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Generator\TokenGeneratorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\TokenGeneratorInterface;
 
 final class ProfileUpdateFactory implements ProfileUpdateFactoryInterface
 {

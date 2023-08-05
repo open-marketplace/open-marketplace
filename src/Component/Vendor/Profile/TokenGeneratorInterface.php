@@ -9,12 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Generator;
+namespace BitBag\OpenMarketplace\Component\Vendor\Profile;
 
-final class TokenGenerator implements TokenGeneratorInterface
+interface TokenGeneratorInterface
 {
-    public function generate(): string
-    {
-        return md5(mt_rand(1, 90000) . 'SALT');
-    }
+    public function generate(): string;
 }

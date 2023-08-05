@@ -33,7 +33,11 @@
 
         <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateFactory"
                  id="bitbag.open_marketplace.component.vendor.profile.factory.profile_update_factory">
-            <argument type="service" id="open_marketplace.generator.token_generator"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.generator.token"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\TokenGenerator"
+                 id="bitbag.open_marketplace.component.vendor.generator.token">
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateBackgroundImageFactory"
