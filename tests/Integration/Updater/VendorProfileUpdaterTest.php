@@ -17,10 +17,10 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\AddressFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdater;
 use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdaterInterface;
-use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\Country;
@@ -52,7 +52,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
-        $this->vendorAddressFactory = static::$container->get('open_marketplace.factory.vendor_address_factory');
+        $this->vendorAddressFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.address');
         $this->vendorProfileFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_factory');
         $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_logo_image_factory');
         $this->vendorProfileUpdateBackgroundImageFactoryInterface = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_background_image_factory');

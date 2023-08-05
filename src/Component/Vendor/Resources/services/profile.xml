@@ -20,6 +20,10 @@
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.background_image_factory"/>
         </service>
 
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\AddressFactory"
+                 id="bitbag.open_marketplace.component.vendor.profile.factory.address">
+        </service>
+
         <service class="BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactory"
                  id="bitbag.open_marketplace.component.vendor.profile.factory.profile_factory">
             <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor"/>

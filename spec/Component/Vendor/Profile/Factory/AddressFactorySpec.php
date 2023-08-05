@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Factory;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
-use BitBag\OpenMarketplace\Factory\AddressFactory;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\AddressFactory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\Country;
 
