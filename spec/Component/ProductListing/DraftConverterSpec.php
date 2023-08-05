@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\AcceptanceOperator;
+namespace spec\BitBag\OpenMarketplace\Component\ProductListing;
 
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
@@ -23,7 +23,7 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use PhpSpec\ObjectBehavior;
 
-final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
+final class DraftConverterSpec extends ObjectBehavior
 {
     public function let(
         SimpleProductFactoryInterface $productFromDraftFactory,
@@ -73,7 +73,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productDraftTaxonsOperator->copyTaxonsToProduct($productDraft, $product)
             ->shouldBeCalled();
 
-        $this->acceptProductDraft($productDraft);
+        $this->convertToSimpleProduct($productDraft);
     }
 
     public function it_updates_existing_product(
@@ -103,7 +103,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $productDraftTaxonsOperator->updateTaxonsInProduct($productDraft, $updatedProduct)
             ->shouldBeCalled();
 
-        $this->acceptProductDraft($productDraft);
+        $this->convertToSimpleProduct($productDraft);
     }
 
     public function it_converts_attributes_to_existing_product(
@@ -131,7 +131,7 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
         $filesOperator->copyFilesToProduct($productDraft, $updatedProduct)->shouldBeCalledTimes(1);
 
         $attributesConverter->convert($productDraft, $updatedProduct);
-        $this->acceptProductDraft($productDraft);
+        $this->convertToSimpleProduct($productDraft);
     }
 
     public function it_converts_attributes_to_new_product(
@@ -156,6 +156,6 @@ final class ProductDraftAcceptanceOperatorSpec extends ObjectBehavior
 
         $productFromDraftFactory->create($productDraft)->willReturn($newProduct);
         $attributesConverter->convert($productDraft, $newProduct);
-        $this->acceptProductDraft($productDraft);
+        $this->convertToSimpleProduct($productDraft);
     }
 }
