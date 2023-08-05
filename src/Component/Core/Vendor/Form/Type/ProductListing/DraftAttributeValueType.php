@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing;
 
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 

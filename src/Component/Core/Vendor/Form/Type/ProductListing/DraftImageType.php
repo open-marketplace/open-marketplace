@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ProductDraftImageType extends ImageType
+final class DraftImageType extends ImageType
 {
     public function buildView(
         FormView $view,

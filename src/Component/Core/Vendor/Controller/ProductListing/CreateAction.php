@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing;
 
+use BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\ListingType;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -66,7 +66,7 @@ final class CreateAction
         /** @var DraftInterface $productDraft */
         $productDraft = $this->newResourceFactory->create($configuration, $this->factory);
 
-        $form = $this->formFactory->create(ProductType::class, $productDraft);
+        $form = $this->formFactory->create(ListingType::class, $productDraft);
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {

@@ -6,7 +6,7 @@ sylius_resource:
                 interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftAttributeRepository
-                form: BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeType
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeType
             translation:
                 classes:
                     model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation

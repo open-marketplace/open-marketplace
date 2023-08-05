@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ProductPriceType extends AbstractResourceType
+final class DraftPriceType extends AbstractResourceType
 {
     private RepositoryInterface $channelPricingRepository;
 

@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 
 use BitBag\OpenMarketplace\Component\Core\Common\Security\Voter\ObjectOwningVoter;
+use BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeChoiceType;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
-use BitBag\OpenMarketplace\Form\ProductListing\DraftAttributeChoiceType;
 use BitBag\OpenMarketplace\Updater\ProductAttributeUpdaterInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;

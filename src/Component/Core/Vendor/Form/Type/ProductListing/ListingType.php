@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
-final class ProductType extends AbstractType
+final class ListingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -45,8 +45,8 @@ final class ProductType extends AbstractType
                 'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.product_variant.shipping_category',
             ])
-            ->add('translations', ResourceTranslationsType::class, [
-                'entry_type' => ProductTranslationType::class,
+            ->add('translations', DraftTranslationsCollectionType::class, [
+                'entry_type' => DraftTranslationType::class,
                 'label' => 'sylius.form.product.translations',
                 'attr' => [
                     'class' => 'ui styled fluid accordion',
@@ -82,7 +82,7 @@ final class ProductType extends AbstractType
                 $form = $event->getForm();
             })
             ->add('images', CollectionType::class, [
-                'entry_type' => ProductDraftImageType::class,
+                'entry_type' => DraftImageType::class,
                 'entry_options' => ['product' => $options['data']],
                 'allow_add' => true,
                 'allow_delete' => true,
@@ -97,7 +97,7 @@ final class ProductType extends AbstractType
 
             $event->getForm()
                 ->add('productListingPrices', ChannelCollectionType::class, [
-                    'entry_type' => ProductPriceType::class,
+                    'entry_type' => DraftPriceType::class,
                     'entry_options' => fn (ChannelInterface $channel) => [
                         'channel' => $channel,
                         'product_draft' => $productDraft,
@@ -105,7 +105,7 @@ final class ProductType extends AbstractType
                     ],
                     'label' => 'sylius.form.variant.price',
                 ])
-                ->add('productDraftTaxons', ProductDraftTaxonAutocompleteChoiceType::class, [
+                ->add('productDraftTaxons', DraftTaxonAutocompleteChoiceType::class, [
                     'label' => 'sylius.form.product.taxons',
                     'productDraft' => $productDraft,
                     'multiple' => true,

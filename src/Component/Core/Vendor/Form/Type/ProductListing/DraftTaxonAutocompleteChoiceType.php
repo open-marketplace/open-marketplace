@@ -9,8 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Form\ProductListing;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing;
 
+use BitBag\OpenMarketplace\Component\Core\Vendor\Form\Transformer\ProductDraftTaxonToTaxonTransformer;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
@@ -20,7 +21,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ProductDraftTaxonAutocompleteChoiceType extends AbstractType
+final class DraftTaxonAutocompleteChoiceType extends AbstractType
 {
     private FactoryInterface $productDraftTaxonFactory;
 

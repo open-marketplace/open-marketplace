@@ -12,11 +12,11 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing;
 
 use BitBag\OpenMarketplace\Component\Core\Common\Security\Voter\ObjectOwningVoter;
+use BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\ListingType;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
-use BitBag\OpenMarketplace\Form\ProductListing\ProductType;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -59,7 +59,7 @@ final class UpdateAction
 
         $productDraft = $this->listingPersister->resolveLatestDraft($productListing);
 
-        $form = $this->formFactory->create(ProductType::class, $productDraft);
+        $form = $this->formFactory->create(ListingType::class, $productDraft);
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {

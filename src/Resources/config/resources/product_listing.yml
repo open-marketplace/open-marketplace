@@ -12,7 +12,7 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft
                 interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                form: BitBag\OpenMarketplace\Form\ProductListing\ProductType
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\ListingType
 
         open_marketplace.product_translation:
             driver: doctrine/orm
