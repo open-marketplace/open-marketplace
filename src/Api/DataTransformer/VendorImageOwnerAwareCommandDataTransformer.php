@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\VendorImageOwnerAwareInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 

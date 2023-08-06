@@ -16,9 +16,9 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendorInterface;
 use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler;
 use BitBag\OpenMarketplace\Api\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUser;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 

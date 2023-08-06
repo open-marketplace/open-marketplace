@@ -13,7 +13,7 @@ namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\DataTransformer\ShopUserAwareInputCommandDataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\ShopUserAwareInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;

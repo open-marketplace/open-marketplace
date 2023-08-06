@@ -26,7 +26,7 @@
             </cascade>
         </one-to-one>
 
-        <one-to-one field="shopUser" target-entity="BitBag\OpenMarketplace\Entity\ShopUserInterface" inversed-by="vendor">
+        <one-to-one field="shopUser" target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface" inversed-by="vendor">
             <join-column name="user_id" referenced-column-name="id" />
             <cascade>
                 <cascade-persist/>

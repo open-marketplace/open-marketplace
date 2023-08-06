@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Provider;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 
 interface VendorProviderInterface
 {

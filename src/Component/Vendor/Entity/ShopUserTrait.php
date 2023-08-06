@@ -8,9 +8,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Model\ShopUser;
-
-use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+namespace BitBag\OpenMarketplace\Component\Vendor\Entity;
 
 trait ShopUserTrait
 {

@@ -15,8 +15,8 @@ use BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\Listin
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

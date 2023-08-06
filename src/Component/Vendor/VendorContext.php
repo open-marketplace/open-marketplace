@@ -13,8 +13,8 @@ namespace BitBag\OpenMarketplace\Component\Vendor;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Exception\ShopUserHasNoVendorContextException;
 use BitBag\OpenMarketplace\Component\Core\Vendor\Exception\ShopUserNotFoundException;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 

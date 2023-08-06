@@ -9,9 +9,8 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Entity;
+namespace BitBag\OpenMarketplace\Component\Vendor\Entity;
 
-use BitBag\OpenMarketplace\Model\ShopUser\ShopUserTrait;
 use Sylius\Component\Core\Model\ShopUser as BaseShopUser;
 
 class ShopUser extends BaseShopUser implements ShopUserInterface

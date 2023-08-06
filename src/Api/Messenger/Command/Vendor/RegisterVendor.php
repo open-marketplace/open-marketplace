@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Messenger\Command\Vendor;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 
 final class RegisterVendor implements RegisterVendorInterface
 {

@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Api\Context;
 
 use BitBag\OpenMarketplace\Api\Context\VendorContext;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 

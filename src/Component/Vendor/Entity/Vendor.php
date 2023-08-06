@@ -13,7 +13,6 @@ namespace BitBag\OpenMarketplace\Component\Vendor\Entity;
 
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

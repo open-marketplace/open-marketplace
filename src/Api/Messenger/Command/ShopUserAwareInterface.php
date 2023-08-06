@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Messenger\Command;
 
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 
 interface ShopUserAwareInterface extends CommandAwareDataTransformerInterface

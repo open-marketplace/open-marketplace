@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Api\Security\Voter;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;

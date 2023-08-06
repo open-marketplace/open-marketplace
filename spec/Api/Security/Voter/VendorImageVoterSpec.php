@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\Security\Voter;
 
 use BitBag\OpenMarketplace\Api\Security\Voter\VendorImageVoter;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Api\Messenger\Command\ShopUserAwareInterface;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\RegisterVendor;
 use BitBag\OpenMarketplace\Api\Messenger\Command\VendorSlugAwareInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use PhpSpec\ObjectBehavior;
 
 final class RegisterVendorSpec extends ObjectBehavior

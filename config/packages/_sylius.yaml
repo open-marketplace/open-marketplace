@@ -43,8 +43,8 @@ sylius_user:
         shop:
             user:
                 classes:
-                    model: BitBag\OpenMarketplace\Entity\ShopUser
-                    interface: BitBag\OpenMarketplace\Entity\ShopUserInterface
+                    model: BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser
+                    interface: BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface
 
 sylius_shipping:
     resources:

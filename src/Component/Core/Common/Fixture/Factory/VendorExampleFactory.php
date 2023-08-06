@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\AddressFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\BackgroundImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactoryInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;

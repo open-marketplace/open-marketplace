@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Entity;
+namespace spec\BitBag\OpenMarketplace\Component\Vendor\Entity;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUser;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ShopUser as BasicShopUser;
 

@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="BitBag\OpenMarketplace\Entity\ShopUser" table="sylius_shop_user">
+    <mapped-superclass name="BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser" table="sylius_shop_user">
         <one-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface" mapped-by="shopUser" />
     </mapped-superclass>
 </doctrine-mapping>

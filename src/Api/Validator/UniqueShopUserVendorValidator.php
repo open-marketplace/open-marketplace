@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\Validator;
 
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

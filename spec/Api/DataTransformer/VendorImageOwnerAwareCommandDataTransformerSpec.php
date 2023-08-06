@@ -13,8 +13,8 @@ namespace spec\BitBag\OpenMarketplace\Api\DataTransformer;
 
 use BitBag\OpenMarketplace\Api\DataTransformer\VendorImageOwnerAwareCommandDataTransformer;
 use BitBag\OpenMarketplace\Api\Messenger\Command\Vendor\VendorImageOwnerAwareInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;

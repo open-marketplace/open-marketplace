@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Api\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface as LegacyQueryNameGeneratorInterface;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;

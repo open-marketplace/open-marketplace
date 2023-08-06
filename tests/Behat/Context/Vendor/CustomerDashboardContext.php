@@ -13,8 +13,8 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Model\Country;

@@ -16,6 +16,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\BackgroundImageOperatorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateBackgroundImageFactoryInterface;
@@ -24,7 +25,6 @@ use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateLogoIma
 use BitBag\OpenMarketplace\Component\Vendor\Profile\LogoImageOperatorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\ProfileUpdateRemoverInterface;
 use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdaterInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Uploader\ImageUploader;

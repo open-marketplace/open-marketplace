@@ -16,7 +16,7 @@ use BitBag\OpenMarketplace\Api\Doctrine\QueryCollectionExtension\OrdersByLoggedI
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
