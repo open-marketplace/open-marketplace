@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing\Entity;
 
-use BitBag\OpenMarketplace\Api\UuidAwareInterface;
+use BitBag\OpenMarketplace\Component\Core\Api\UuidAwareInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 

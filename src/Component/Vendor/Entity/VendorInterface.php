@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Vendor\Entity;
 
-use BitBag\OpenMarketplace\Api\UuidAwareInterface;
+use BitBag\OpenMarketplace\Component\Core\Api\UuidAwareInterface;
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use DateTimeInterface;

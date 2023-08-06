@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Security\Voter\VendorImageVoter"
+            id="bitbag.open_marketplace.api.security.voter.vendor_image">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="security.voter"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Security\Voter\VendorBackgroundImageVoter"
+                 id="bitbag.open_marketplace.api.security.voter.vendor_background_image">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="security.voter"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Security\Voter\VendorAwareVoter"
+            id="bitbag.open_marketplace.api.security.voter.vendor_aware">
+            <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />
+            <tag name="security.voter"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Security\Voter\TranslatableVendorAwareVoter"
+            id="bit_bag.open_marketplace.api.security.voter.translatable_vendor_aware">
+            <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />
+            <tag name="security.voter"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Security\Voter\VendorOwnsVariantVoter"
+                 id="bitbag.open_marketplace.api.security.voter.vendor_owns_variant_voter">
+            <tag name="security.voter"/>
+        </service>
+    </services>
+</container>

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing\Entity;
 
-use BitBag\OpenMarketplace\Api\UuidAwareInterface;
+use BitBag\OpenMarketplace\Component\Core\Api\UuidAwareInterface;
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface as BaseAttributeTranslationInterface;
 
 interface DraftAttributeTranslationInterface extends BaseAttributeTranslationInterface, UuidAwareInterface

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\ProductListing\Validator;
 
-use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
+use BitBag\OpenMarketplace\Component\Core\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Validator\Constraint\ProductListingCodeConstraint;

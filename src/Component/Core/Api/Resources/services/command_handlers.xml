@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler"
+                 id="bitbag.open_marketplace.api.messenger.command_handler.vendor.register_vendor">
+            <argument type="service" id="bitbag.open_marketplace.api.provider.vendor" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\UploadVendorImageHandler"
+                 id="bitbag.open_marketplace.api.messenger.command_handler.vendor.upload_vendor_image">
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.logo_image_factory" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag_open_marketplace.repository.vendor_image" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\UploadVendorBackgroundImageHandler"
+                 id="bitbag.open_marketplace.api.messenger.command_handler.vendor.upload_vendor_background_image">
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.background_image_factory" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag_open_marketplace.repository.vendor_background_image" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\CreateProductListingHandler"
+                 id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.create_product_listing">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\UpdateProductListingHandler"
+                 id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.update_product_listing">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="open_marketplace.repository.product_listing" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+    </services>
+</container>
