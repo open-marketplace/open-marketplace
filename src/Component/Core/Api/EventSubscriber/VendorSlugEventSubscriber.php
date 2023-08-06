@@ -22,11 +22,10 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class VendorSlugEventSubscriber implements EventSubscriberInterface
 {
-    private SlugGeneratorInterface $vendorSlugGenerator;
+    public function __construct(
+        private SlugGeneratorInterface $vendorSlugGenerator
+    ) {
 
-    public function __construct(SlugGeneratorInterface $vendorSlugGenerator)
-    {
-        $this->vendorSlugGenerator = $vendorSlugGenerator;
     }
 
     public static function getSubscribedEvents(): array

@@ -22,11 +22,10 @@ final class VendorBackgroundImageVoter extends Voter
 {
     public const DELETE = 'VENDOR_BACKGROUND_IMAGE_DELETE';
 
-    private UserContextInterface $userContext;
+    public function __construct(
+        private UserContextInterface $userContext
+    ) {
 
-    public function __construct(UserContextInterface $userContext)
-    {
-        $this->userContext = $userContext;
     }
 
     protected function supports(string $attribute, $subject): bool

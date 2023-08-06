@@ -21,20 +21,12 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class OrderMethodsItemExtension implements QueryItemExtensionInterface
 {
-    private QueryItemExtensionInterface $baseOrderMethodsItemExtension;
-
-    private SectionProviderInterface $sectionProvider;
-
-    private UserContextInterface $userContext;
-
     public function __construct(
-        QueryItemExtensionInterface $baseOrderMethodsItemExtension,
-        SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext
+        private QueryItemExtensionInterface $baseOrderMethodsItemExtension,
+        private SectionProviderInterface $sectionProvider,
+        private UserContextInterface $userContext
     ) {
-        $this->baseOrderMethodsItemExtension = $baseOrderMethodsItemExtension;
-        $this->sectionProvider = $sectionProvider;
-        $this->userContext = $userContext;
+
     }
 
     public function applyToItem(

@@ -19,14 +19,11 @@ use Doctrine\Persistence\ObjectManager;
 
 final class RegisterVendorHandler
 {
-    private VendorProviderInterface $vendorProvider;
+    public function __construct(
+        private VendorProviderInterface $vendorProvider,
+        private ObjectManager $manager
+    ) {
 
-    private ObjectManager $manager;
-
-    public function __construct(VendorProviderInterface $vendorProvider, ObjectManager $manager)
-    {
-        $this->vendorProvider = $vendorProvider;
-        $this->manager = $manager;
     }
 
     public function __invoke(RegisterVendorInterface $command): VendorInterface

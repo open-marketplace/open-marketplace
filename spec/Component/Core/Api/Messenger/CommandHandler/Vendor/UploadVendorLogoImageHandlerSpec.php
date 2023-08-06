@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor;
 
 use BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor\UploadVendorImageInterface;
-use BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\UploadVendorImageHandler;
+use BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\UploadVendorLogoImageHandler;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class UploadVendorImageHandlerSpec extends ObjectBehavior
+final class UploadVendorLogoImageHandlerSpec extends ObjectBehavior
 {
     public function let(
         LogoImageFactoryInterface $vendorImageFactory,
@@ -36,7 +36,7 @@ final class UploadVendorImageHandlerSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(UploadVendorImageHandler::class);
+        $this->shouldHaveType(UploadVendorLogoImageHandler::class);
     }
 
     public function it_creates_vendor_image(

@@ -19,24 +19,13 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class CustomerItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
-    private ItemDataProviderInterface $baseCustomerItemDataProvider;
-
-    private CustomerRepositoryInterface $customerRepository;
-
-    private SectionProviderInterface $sectionProvider;
-
-    private VendorContextInterface $vendorContext;
-
     public function __construct(
-        ItemDataProviderInterface $baseCustomerItemDataProvider,
-        CustomerRepositoryInterface $customerRepository,
-        SectionProviderInterface $sectionProvider,
-        VendorContextInterface $vendorContext
+        private ItemDataProviderInterface $baseCustomerItemDataProvider,
+        private CustomerRepositoryInterface $customerRepository,
+        private SectionProviderInterface $sectionProvider,
+        private VendorContextInterface $vendorContext
     ) {
-        $this->baseCustomerItemDataProvider = $baseCustomerItemDataProvider;
-        $this->customerRepository = $customerRepository;
-        $this->sectionProvider = $sectionProvider;
-        $this->vendorContext = $vendorContext;
+
     }
 
     public function getItem(

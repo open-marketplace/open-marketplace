@@ -24,20 +24,12 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class VendorAccountItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    private VendorContextInterface $vendorContext;
-
-    private VendorRepositoryInterface $vendorRepository;
-
-    private SectionProviderInterface $sectionProvider;
-
     public function __construct(
-        VendorContextInterface $vendorContext,
-        VendorRepositoryInterface $vendorRepository,
-        SectionProviderInterface $sectionProvider
+        private VendorContextInterface $vendorContext,
+        private VendorRepositoryInterface $vendorRepository,
+        private SectionProviderInterface $sectionProvider
     ) {
-        $this->vendorContext = $vendorContext;
-        $this->vendorRepository = $vendorRepository;
-        $this->sectionProvider = $sectionProvider;
+
     }
 
     /**

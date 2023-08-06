@@ -19,16 +19,11 @@ use Doctrine\Persistence\ObjectManager;
 
 final class CreateProductListingHandler
 {
-    private ListingPersisterInterface $listingPersister;
-
-    private ObjectManager $manager;
-
     public function __construct(
-        ListingPersisterInterface $listingPersister,
-        ObjectManager $manager
+        private ListingPersisterInterface $listingPersister,
+        private ObjectManager $manager
     ) {
-        $this->listingPersister = $listingPersister;
-        $this->manager = $manager;
+
     }
 
     public function __invoke(CreateProductListingInterface $createProductListing): ListingInterface

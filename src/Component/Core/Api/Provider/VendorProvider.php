@@ -18,11 +18,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class VendorProvider implements VendorProviderInterface
 {
-    private FactoryInterface $vendorFactory;
+    public function __construct(
+        private FactoryInterface $vendorFactory
+    ) {
 
-    public function __construct(FactoryInterface $vendorFactory)
-    {
-        $this->vendorFactory = $vendorFactory;
     }
 
     public function provide(ShopUserInterface $shopUser): VendorInterface

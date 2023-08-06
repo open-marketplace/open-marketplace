@@ -20,24 +20,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class UploadVendorBackgroundImageHandler
 {
-    private BackgroundImageFactoryInterface $vendorBackgroundImageFactory;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private ObjectManager $manager;
-
-    private RepositoryInterface $vendorBackgroundImageRepository;
-
     public function __construct(
-        BackgroundImageFactoryInterface $vendorBackgroundImageFactory,
-        ImageUploaderInterface $imageUploader,
-        ObjectManager $manager,
-        RepositoryInterface $vendorBackgroundImageRepository
+        private BackgroundImageFactoryInterface $vendorBackgroundImageFactory,
+        private ImageUploaderInterface $imageUploader,
+        private ObjectManager $manager,
+        private RepositoryInterface $vendorBackgroundImageRepository
     ) {
-        $this->vendorBackgroundImageFactory = $vendorBackgroundImageFactory;
-        $this->imageUploader = $imageUploader;
-        $this->manager = $manager;
-        $this->vendorBackgroundImageRepository = $vendorBackgroundImageRepository;
+
     }
 
     public function __invoke(UploadVendorBackgroundImageInterface $command): BackgroundImageInterface

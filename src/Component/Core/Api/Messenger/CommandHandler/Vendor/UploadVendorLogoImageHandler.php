@@ -18,26 +18,15 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class UploadVendorImageHandler
+final class UploadVendorLogoImageHandler
 {
-    private LogoImageFactoryInterface $vendorImageFactory;
-
-    private ImageUploaderInterface $imageUploader;
-
-    private ObjectManager $manager;
-
-    private RepositoryInterface $vendorImageRepository;
-
     public function __construct(
-        LogoImageFactoryInterface $vendorImageFactory,
-        ImageUploaderInterface $imageUploader,
-        ObjectManager $manager,
-        RepositoryInterface $vendorImageRepository
+        private LogoImageFactoryInterface $vendorImageFactory,
+        private ImageUploaderInterface $imageUploader,
+        private ObjectManager $manager,
+        private RepositoryInterface $vendorImageRepository
     ) {
-        $this->vendorImageFactory = $vendorImageFactory;
-        $this->imageUploader = $imageUploader;
-        $this->manager = $manager;
-        $this->vendorImageRepository = $vendorImageRepository;
+
     }
 
     public function __invoke(UploadVendorImageInterface $command): LogoImageInterface

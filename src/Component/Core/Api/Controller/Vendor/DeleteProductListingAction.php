@@ -17,11 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class DeleteProductListingAction
 {
-    private EntityManagerInterface $entityManager;
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
     }
 
     public function __invoke(ListingInterface $data): Response

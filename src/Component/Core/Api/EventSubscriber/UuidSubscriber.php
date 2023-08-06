@@ -19,11 +19,10 @@ use Doctrine\ORM\Id\AbstractIdGenerator;
 
 final class UuidSubscriber implements EventSubscriberInterface
 {
-    private AbstractIdGenerator $uuidGenerator;
+    public function __construct(
+        private AbstractIdGenerator $uuidGenerator
+    ) {
 
-    public function __construct(AbstractIdGenerator $uuidGenerator)
-    {
-        $this->uuidGenerator = $uuidGenerator;
     }
 
     public function getSubscribedEvents()

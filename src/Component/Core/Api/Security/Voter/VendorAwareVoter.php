@@ -19,8 +19,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 final class VendorAwareVoter extends Voter
 {
-    private VendorContextInterface $vendorContext;
-
     private array $supportedAttributes = [
         'VENDOR_AWARE_OBJECT_CREATE',
         'VENDOR_AWARE_OBJECT_READ',
@@ -28,9 +26,10 @@ final class VendorAwareVoter extends Voter
         'VENDOR_AWARE_OBJECT_DELETE',
     ];
 
-    public function __construct(VendorContextInterface $vendorContext)
-    {
-        $this->vendorContext = $vendorContext;
+    public function __construct(
+        private VendorContextInterface $vendorContext
+    ) {
+
     }
 
     protected function supports(string $attribute, $subject): bool

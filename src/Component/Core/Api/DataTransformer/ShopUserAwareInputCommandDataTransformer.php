@@ -18,11 +18,10 @@ use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 
 final class ShopUserAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
-    private UserContextInterface $userContext;
+    public function __construct(
+        private UserContextInterface $userContext
+    ) {
 
-    public function __construct(UserContextInterface $userContext)
-    {
-        $this->userContext = $userContext;
     }
 
     /**

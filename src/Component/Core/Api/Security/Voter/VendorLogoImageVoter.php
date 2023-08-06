@@ -18,15 +18,14 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-final class VendorImageVoter extends Voter
+final class VendorLogoImageVoter extends Voter
 {
     public const DELETE = 'VENDOR_IMAGE_DELETE';
 
-    private UserContextInterface $userContext;
+    public function __construct(
+        private UserContextInterface $userContext
+    ) {
 
-    public function __construct(UserContextInterface $userContext)
-    {
-        $this->userContext = $userContext;
     }
 
     protected function supports(string $attribute, $subject): bool

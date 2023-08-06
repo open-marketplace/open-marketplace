@@ -12,19 +12,16 @@ namespace BitBag\OpenMarketplace\Component\Core\Api\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\ConversationInterface;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
 final class ConversationPersister implements DataPersisterInterface
 {
-    private EntityManager $manager;
+    public function __construct(
+        private EntityManagerInterface $manager,
+        private Security $security
+    ) {
 
-    private Security $security;
-
-    public function __construct(EntityManager $manager, Security $security)
-    {
-        $this->manager = $manager;
-        $this->security = $security;
     }
 
     public function supports(mixed $data): bool

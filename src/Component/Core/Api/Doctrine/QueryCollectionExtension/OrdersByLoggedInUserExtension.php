@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Core\Api\Doctrine\QueryCollectionExte
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface as LegacyQueryNameGeneratorInterface;
 use BitBag\OpenMarketplace\Component\Core\Api\SectionResolver\ShopVendorApiSection;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface as MarketplaceOrderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -21,20 +22,12 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    private ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension;
-
-    private SectionProviderInterface $sectionProvider;
-
-    private UserContextInterface $userContext;
-
     public function __construct(
-        ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension,
-        SectionProviderInterface $sectionProvider,
-        UserContextInterface $userContext
+        private ContextAwareQueryCollectionExtensionInterface $baseOrdersByLoggedInUserExtension,
+        private SectionProviderInterface $sectionProvider,
+        private UserContextInterface $userContext
     ) {
-        $this->baseOrdersByLoggedInUserExtension = $baseOrdersByLoggedInUserExtension;
-        $this->sectionProvider = $sectionProvider;
-        $this->userContext = $userContext;
+
     }
 
     public function applyToCollection(
@@ -56,7 +49,7 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
                 ->andWhere(sprintf('%s.mode != :primaryMode', $rootAlias))
-                ->setParameter('primaryMode', \BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface::PRIMARY_ORDER_MODE)
+                ->setParameter('primaryMode', MarketplaceOrderInterface::PRIMARY_ORDER_MODE)
             ;
         }
 

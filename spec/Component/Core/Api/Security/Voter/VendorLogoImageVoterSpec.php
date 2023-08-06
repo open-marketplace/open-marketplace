@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Component\Core\Api\Security\Voter;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Security\Voter\VendorImageVoter;
+use BitBag\OpenMarketplace\Component\Core\Api\Security\Voter\VendorLogoImageVoter;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
@@ -20,7 +20,7 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-final class VendorImageVoterSpec extends ObjectBehavior
+final class VendorLogoImageVoterSpec extends ObjectBehavior
 {
     public function let(
         UserContextInterface $userContext
@@ -30,7 +30,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(VendorImageVoter::class);
+        $this->shouldHaveType(VendorLogoImageVoter::class);
     }
 
     public function it_grants_access_when_current_vendor_is_image_owner_during_delete_action(
@@ -45,7 +45,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         $vendor->getId()->willReturn(1);
         $vendorImage->getOwner()->willReturn($vendor);
 
-        $this->vote($token, $vendorImage, [VendorImageVoter::DELETE])
+        $this->vote($token, $vendorImage, [VendorLogoImageVoter::DELETE])
             ->shouldReturn(VoterInterface::ACCESS_GRANTED);
     }
 
@@ -63,7 +63,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         $imageOwner->getId()->willReturn(2);
         $vendorImage->getOwner()->willReturn($imageOwner);
 
-        $this->vote($token, $vendorImage, [VendorImageVoter::DELETE])
+        $this->vote($token, $vendorImage, [VendorLogoImageVoter::DELETE])
             ->shouldReturn(VoterInterface::ACCESS_DENIED);
     }
 
@@ -79,7 +79,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         $vendor->getId()->willReturn(1);
         $vendorImage->getOwner()->willReturn($vendor);
 
-        $this->vote($token, $vendorImage, [VendorImageVoter::DELETE])
+        $this->vote($token, $vendorImage, [VendorLogoImageVoter::DELETE])
             ->shouldReturn(VoterInterface::ACCESS_DENIED);
     }
 
@@ -111,7 +111,7 @@ final class VendorImageVoterSpec extends ObjectBehavior
         $vendor->getId()->willReturn(1);
         $vendorImage->getOwner()->willReturn($vendor);
 
-        $this->vote($token, $vendor, [VendorImageVoter::DELETE])
+        $this->vote($token, $vendor, [VendorLogoImageVoter::DELETE])
             ->shouldReturn(VoterInterface::ACCESS_ABSTAIN);
     }
 }

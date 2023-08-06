@@ -20,24 +20,13 @@ final class PathPrefixProvider implements PathPrefixProviderInterface
 {
     public const VENDOR_PREFIX = 'vendor';
 
-    private PathPrefixProviderInterface $basePathPrefixProvider;
-
-    private VendorContextInterface $vendorContext;
-
-    private SectionProviderInterface $sectionProvider;
-
-    private string $shopVendorApiUriBeginning;
-
     public function __construct(
-        PathPrefixProviderInterface $basePathPrefixProvider,
-        VendorContextInterface $vendorContext,
-        SectionProviderInterface $sectionProvider,
-        string $shopVendorApiUriBeginning
+        private PathPrefixProviderInterface $basePathPrefixProvider,
+        private VendorContextInterface $vendorContext,
+        private SectionProviderInterface $sectionProvider,
+        private string $shopVendorApiUriBeginning
     ) {
-        $this->basePathPrefixProvider = $basePathPrefixProvider;
-        $this->vendorContext = $vendorContext;
-        $this->sectionProvider = $sectionProvider;
-        $this->shopVendorApiUriBeginning = $shopVendorApiUriBeginning;
+
     }
 
     public function getPathPrefix(string $path): ?string

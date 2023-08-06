@@ -21,11 +21,10 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class VendorAwareEventSubscriber implements EventSubscriberInterface
 {
-    private VendorContextInterface $vendorContext;
+    public function __construct(
+        private VendorContextInterface $vendorContext
+    ) {
 
-    public function __construct(VendorContextInterface $vendorContext)
-    {
-        $this->vendorContext = $vendorContext;
     }
 
     public static function getSubscribedEvents(): array

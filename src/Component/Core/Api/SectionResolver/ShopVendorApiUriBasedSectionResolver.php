@@ -17,16 +17,11 @@ use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 
 final class ShopVendorApiUriBasedSectionResolver implements UriBasedSectionResolverInterface
 {
-    private string $shopVendorApiUriBeginning;
-
-    private ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory;
-
     public function __construct(
-        string $shopVendorApiUriBeginning,
-        ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory,
+        private string $shopVendorApiUriBeginning,
+        private ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory,
     ) {
-        $this->shopVendorApiUriBeginning = $shopVendorApiUriBeginning;
-        $this->shopVendorApiSectionFactory = $shopVendorApiSectionFactory;
+
     }
 
     public function getSection(string $uri): SectionInterface

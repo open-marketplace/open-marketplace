@@ -19,11 +19,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class VendorImageFileAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
-    private RequestStack $requestStack;
+    public function __construct(
+        private RequestStack $requestStack
+    ) {
 
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
     }
 
     /**

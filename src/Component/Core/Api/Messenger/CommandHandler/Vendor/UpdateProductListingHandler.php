@@ -21,20 +21,12 @@ use Webmozart\Assert\Assert;
 
 final class UpdateProductListingHandler
 {
-    private ListingPersisterInterface $listingPersister;
-
-    private ObjectManager $manager;
-
-    private ListingRepositoryInterface $productListingRepository;
-
     public function __construct(
-        ListingPersisterInterface $listingPersister,
-        ObjectManager $manager,
-        ListingRepositoryInterface $productListingRepository
+        private ListingPersisterInterface $listingPersister,
+        private ObjectManager $manager,
+        private ListingRepositoryInterface $productListingRepository
     ) {
-        $this->listingPersister = $listingPersister;
-        $this->manager = $manager;
-        $this->productListingRepository = $productListingRepository;
+        
     }
 
     public function __invoke(UpdateProductListingInterface $updateProductListing): ListingInterface

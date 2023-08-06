@@ -16,11 +16,10 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 
 final class SendToVerificationAction
 {
-    private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition;
+    public function __construct(
+        private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition
+    ) {
 
-    public function __construct(ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition)
-    {
-        $this->productDraftStateMachineTransition = $productDraftStateMachineTransition;
     }
 
     public function __invoke(ListingInterface $data): ListingInterface

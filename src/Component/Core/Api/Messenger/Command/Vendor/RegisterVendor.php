@@ -11,38 +11,23 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor\RegisterVendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Address;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 
 final class RegisterVendor implements RegisterVendorInterface
 {
-    private string $companyName;
-
-    private string $taxIdentifier;
-
-    private string $phoneNumber;
-
-    private string $description;
-
-    private Address $vendorAddress;
-
     private ?string $slug = null;
 
     private ?ShopUserInterface $shopUser = null;
 
     public function __construct(
-        string $companyName,
-        string $taxIdentifier,
-        string $phoneNumber,
-        string $description,
-        Address $vendorAddress
+        private string $companyName,
+        private string $taxIdentifier,
+        private string $phoneNumber,
+        private string $description,
+        private Address $vendorAddress
     ) {
-        $this->companyName = $companyName;
-        $this->taxIdentifier = $taxIdentifier;
-        $this->phoneNumber = $phoneNumber;
-        $this->description = $description;
-        $this->vendorAddress = $vendorAddress;
+
     }
 
     public function getCompanyName(): string

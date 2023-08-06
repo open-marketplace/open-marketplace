@@ -20,8 +20,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 final class TranslatableVendorAwareVoter extends Voter
 {
-    private VendorContextInterface $vendorContext;
-
     private array $supportedAttributes = [
         'TRANSLATABLE_VENDOR_AWARE_OBJECT_CREATE',
         'TRANSLATABLE_VENDOR_AWARE_OBJECT_READ',
@@ -29,9 +27,10 @@ final class TranslatableVendorAwareVoter extends Voter
         'TRANSLATABLE_VENDOR_AWARE_OBJECT_DELETE',
     ];
 
-    public function __construct(VendorContextInterface $vendorContext)
-    {
-        $this->vendorContext = $vendorContext;
+    public function __construct(
+        private VendorContextInterface $vendorContext
+    ) {
+
     }
 
     /** @param TranslationInterface $subject */

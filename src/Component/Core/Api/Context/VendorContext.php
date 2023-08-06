@@ -18,11 +18,10 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 
 final class VendorContext implements VendorContextInterface
 {
-    private UserContextInterface $userContext;
+    public function __construct(
+        private UserContextInterface $userContext
+    ) {
 
-    public function __construct(UserContextInterface $userContext)
-    {
-        $this->userContext = $userContext;
     }
 
     public function getVendor(): ?VendorInterface

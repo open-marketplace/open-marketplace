@@ -20,11 +20,10 @@ use Webmozart\Assert\Assert;
 
 final class UniqueShopUserVendorValidator extends ConstraintValidator
 {
-    private UserContextInterface $userContext;
+    public function __construct(
+        private UserContextInterface $userContext
+    ) {
 
-    public function __construct(UserContextInterface $userContext)
-    {
-        $this->userContext = $userContext;
     }
 
     /** @param UniqueShopUserVendor $constraint */
