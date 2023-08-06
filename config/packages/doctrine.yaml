@@ -18,11 +18,6 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            Overridden:
-                is_bundle: false
-                type: xml
-                dir: '%kernel.project_dir%/src/Resources/config/doctrine'
-                prefix: 'BitBag\OpenMarketplace\Entity'
             MessagingComponent:
                 is_bundle: false
                 type: xml
