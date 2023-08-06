@@ -3,4 +3,4 @@ sylius_taxonomy:
     taxon:
       classes:
         model: Sylius\Component\Core\Model\Taxon
-        repository: BitBag\OpenMarketplace\Repository\TaxonRepository
+        repository: BitBag\OpenMarketplace\Component\Vendor\Repository\TaxonRepository

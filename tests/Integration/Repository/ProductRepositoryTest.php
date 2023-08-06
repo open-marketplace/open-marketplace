@@ -25,7 +25,7 @@ class ProductRepositoryTest extends JsonApiTestCase
         parent::setUp();
         $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->repository = $this->entityManager->getRepository(Product::class);
-        $this->taxonProvider = $this->getContainer()->get('open_marketplace.provider.taxon');
+        $this->taxonProvider = $this->getContainer()->get('bitbag.open_marketplace.component.vendor.context.taxon');
     }
 
     public function test_it_finds_vendor_products(): void
@@ -35,7 +35,7 @@ class ProductRepositoryTest extends JsonApiTestCase
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBySlug('oliver-queen-company');
         $channel = $this->entityManager->getRepository(Channel::class)->findAll()[0];
         $localeCode = $channel->getDefaultLocale()->getCode();
-        $taxon = $this->taxonProvider->provideForVendorPage(null, $localeCode);
+        $taxon = $this->taxonProvider->getForVendorPage(null, $localeCode);
         /** @var QueryBuilder $vendorProductsQuery */
         $vendorProductsQuery = $this->repository->createVendorShopListQueryBuilder($vendorOliver, $channel, $taxon, 'en_US', [], true);
 

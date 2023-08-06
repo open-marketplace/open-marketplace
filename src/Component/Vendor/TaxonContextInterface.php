@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
@@ -7,13 +9,11 @@
  * an email on hello@bitbag.io.
  */
 
-declare(strict_types=1);
-
-namespace BitBag\OpenMarketplace\Repository;
+namespace BitBag\OpenMarketplace\Component\Vendor;
 
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-interface TaxonRepositoryInterface
+interface TaxonContextInterface
 {
-    public function findForVendorPage(?string $slug, string $locale): ?TaxonInterface;
+    public function getForVendorPage(?string $slug, string $locale): ?TaxonInterface;
 }

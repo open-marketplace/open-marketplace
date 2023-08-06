@@ -15,5 +15,16 @@
             </argument>
             <argument type="service" id="security.token_storage"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\Repository\TaxonRepository"
+                 id="bitbag.open_marketplace.component.vendor.repository.taxon">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>%sylius.model.taxon.class%</argument>
+                    <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
+                </service>
+            </argument>
+        </service>
     </services>
 </container>

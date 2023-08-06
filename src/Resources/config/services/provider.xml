@@ -14,11 +14,6 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Provider\TaxonProvider"
-                 id="open_marketplace.provider.taxon" public="true">
-            <argument type="service" id="sylius.repository.taxon" />
-        </service>
-
         <service class="BitBag\OpenMarketplace\Api\Provider\PathPrefixProvider"
                  id="bitbag.open_marketplace.api.provider.path_prefix_provider"
                 decorates="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface">

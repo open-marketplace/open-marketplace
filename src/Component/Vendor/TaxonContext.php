@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Provider;
+namespace BitBag\OpenMarketplace\Component\Vendor;
 
-use BitBag\OpenMarketplace\Repository\TaxonRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\TaxonRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-final class TaxonProvider implements TaxonProviderInterface
+final class TaxonContext implements TaxonContextInterface
 {
     private TaxonRepositoryInterface $taxonRepository;
 
@@ -23,7 +23,7 @@ final class TaxonProvider implements TaxonProviderInterface
         $this->taxonRepository = $taxonRepository;
     }
 
-    public function provideForVendorPage(?string $slug, string $locale): ?TaxonInterface
+    public function getForVendorPage(?string $slug, string $locale): ?TaxonInterface
     {
         return $this->taxonRepository->findForVendorPage($slug, $locale);
     }

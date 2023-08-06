@@ -10,7 +10,7 @@ sylius_grid:
             arguments:
               vendor: "expr:notFoundOnNull(service('bitbag.open_marketplace.component.vendor.repository.vendor').findOneBySlug($vendor_slug))"
               channel: "expr:service('sylius.context.channel').getChannel()"
-              taxon: "expr:notFoundOnNull(service('open_marketplace.provider.taxon').provideForVendorPage(service('request_stack').getCurrentRequest().attributes.get('slug', null), service('sylius.context.locale').getLocaleCode()))"
+              taxon: "expr:notFoundOnNull(service('bitbag.open_marketplace.component.vendor.context.taxon').getForVendorPage(service('request_stack').getCurrentRequest().attributes.get('slug', null), service('sylius.context.locale').getLocaleCode()))"
               locale: "expr:service('sylius.context.locale').getLocaleCode()"
               sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
               includeAllDescendants: "expr:parameter('sylius_shop.product_grid.include_all_descendants')"

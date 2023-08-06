@@ -7,8 +7,15 @@
     </imports>
     <services>
         <service class="BitBag\OpenMarketplace\Component\Vendor\VendorContext"
-                 id="bitbag.open_marketplace.component.vendor.context.vendor" public="true">
+                 id="bitbag.open_marketplace.component.vendor.context.vendor"
+                 public="true">
             <argument type="service" id="security.helper" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\TaxonContext"
+                 id="bitbag.open_marketplace.component.vendor.context.taxon"
+                 public="true">
+            <argument type="service" id="sylius.repository.taxon" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Vendor\ProfileUpdater"
