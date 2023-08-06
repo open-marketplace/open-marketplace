@@ -1,8 +1,8 @@
 winzou_state_machine:
-    mvm_product_listing:
+    open_marketplace_draft:
         class: '%open_marketplace.model.product_draft.class%'
         property_path: status
-        graph: product_draft
+        graph: open_marketplace_draft
         state_machine_class: "%sylius.state_machine.class%"
         states:
             created: ~

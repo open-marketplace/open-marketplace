@@ -40,7 +40,7 @@ open_marketplace_vendor_conversation_archive:
         _controller: open_marketplace.controller.conversation:applyStateMachineTransitionAction
         _sylius:
             state_machine:
-                graph: mvm_conversation
+                graph: open_marketplace_conversation
                 transition: close
             redirect: referer
             flash: open_marketplace.ui.conversation_successfully_closed

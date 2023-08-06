@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\ProductListing;
 
 final class DraftTransitions
 {
-    public const GRAPH = 'product_draft';
+    public const GRAPH = 'open_marketplace_draft';
 
     public const TRANSITION_SEND_TO_VERIFICATION = 'send_to_verification';
 

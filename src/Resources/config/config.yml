@@ -1,5 +1,3 @@
 imports:
-    - { resource: "state_machine/**/*.yml" }
     - { resource: 'resources/*.yml' }
-    - { resource: 'email/*.yml'}
     - { resource: "fixtures.yml"}

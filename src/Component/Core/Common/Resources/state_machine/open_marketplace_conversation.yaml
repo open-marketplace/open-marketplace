@@ -1,8 +1,8 @@
 winzou_state_machine:
-    mvm_conversation:
+    open_marketplace_conversation:
         class: "%open_marketplace.model.conversation.class%"
         property_path: status
-        graph: mvm_conversation
+        graph: open_marketplace_conversation
         state_machine_class: "%sylius.state_machine.class%"
         states:
             open: ~

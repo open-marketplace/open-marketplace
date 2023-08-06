@@ -1,7 +1,7 @@
 sylius_mailer:
     sender:
-        name: 'example owner name'
-        address: no-reply@example.com
+        name: 'OpenMarketplace'
+        address: no-reply@bitbag.io
     emails:
         vendor_profile_update:
             template: "Context/Vendor/Email/profileUpdate.html.twig"
