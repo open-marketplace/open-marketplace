@@ -11,7 +11,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <defaults autowire="false" autoconfigure="false" public="false" />
 
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Factory\ShopVendorApiSectionFactory"
-                 id="bitbag.open_marketplace.factory.shop_vendor_api_section_factory">
+                 id="bitbag.open_marketplace.component.core.factory.shop_vendor_api_section_factory">
         </service>
     </services>
 </container>

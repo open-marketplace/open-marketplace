@@ -39,8 +39,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     <attribute name="groups">shop:account:vendor:customer:read</attribute>
                 </attribute>
                 <attribute name="filters">
-                    <attribute>bitbag.open_marketplace.api.vendor.search_customer_filter</attribute>
-                    <attribute>bitbag.open_marketplace.api.vendor.boolean_customer_filter</attribute>
+                    <attribute>bitbag.open_marketplace.component.core.api.filter.search_customer</attribute>
+                    <attribute>bitbag.open_marketplace.component.core.api.filter.boolean_customer</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

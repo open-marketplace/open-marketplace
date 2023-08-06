@@ -11,10 +11,11 @@ We are hiring developers from all over the world. Join us and start your new, ex
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="false" autowire="false" autoconfigure="false" />
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Serializer\ProductVariantNormalizer"
-                 id="bitbag.open_marketplace.api.serializer.product_variant_normalizer"
-                 decorates="Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer"
-        >
+                 id="bitbag.open_marketplace.component.core.api.serializer.product_variant_normalizer"
+                 decorates="Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer">
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="serializer.normalizer" priority="64" />

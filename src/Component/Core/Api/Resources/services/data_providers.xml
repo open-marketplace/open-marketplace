@@ -11,21 +11,23 @@ We are hiring developers from all over the world. Join us and start your new, ex
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="false" autowire="false" autoconfigure="false" />
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\DataProvider\VendorAccountItemDataProvider"
-                 id="bitbag.open_marketplace.api.data_provider.vendor_account_item">
-            <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />
+                 id="bitbag.open_marketplace.component.core.api.data_provider.vendor_account_item">
+            <argument type="service" id="bitbag.open_marketplace.component.core.api.context.vendor" />
             <argument type="service" id="bitbag.open_marketplace.component.vendor.repository.vendor" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.item_data_provider" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Api\DataProvider\CustomerItemDataProvider"
-                 id="bitbag.open_marketplace.api.data_provider.customer_item"
+                 id="bitbag.open_marketplace.component.core.api.data_provider.customer_item"
                  decorates="Sylius\Bundle\ApiBundle\DataProvider\CustomerItemDataProvider">
             <argument type="service" id=".inner" />
             <argument type="service" id="sylius.repository.customer"/>
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
-            <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context"/>
+            <argument type="service" id="bitbag.open_marketplace.component.core.api.context.vendor"/>
             <tag name="api_platform.item_data_provider" />
         </service>
     </services>

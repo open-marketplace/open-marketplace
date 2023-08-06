@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="false" autowire="false" autoconfigure="false" />
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\EventSubscriber\VendorSlugEventSubscriber"
-                 id="bitbag.open_marketplace.api.event_subscriber.vendor_slug">
+                 id="bitbag.open_marketplace.component.core.api.event_subscriber.vendor_slug">
             <argument type="service" id="bitbag.open_marketplace.component.vendor.generator.slug" />
             <tag name="kernel.event_subscriber" />
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Api\EventSubscriber\VendorAwareEventSubscriber"
-                 id="bitbag.open_marketplace.api.event_subscriber.vendor_aware">
-            <argument type="service" id="bitbag.open_marketplace.api.context.vendor_context" />
+                 id="bitbag.open_marketplace.component.core.api.event_subscriber.vendor_aware">
+            <argument type="service" id="bitbag.open_marketplace.component.core.api.context.vendor" />
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service class="BitBag\OpenMarketplace\Component\Core\Api\Doctrine\ORM\Subscriber\UuidSubscriber"
-                 id="bitbag.open_marketplace.doctrine.orm.subscriber.uuid">
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\EventSubscriber\UuidSubscriber"
+                 id="bitbag.open_marketplace.component.core.event_subscriber.uuid">
             <argument type="service" id="bitbag.open_marketplace.ramsey.uuid_doctrine.uuid_generator" />
             <tag name="doctrine.event_subscriber" />
         </service>

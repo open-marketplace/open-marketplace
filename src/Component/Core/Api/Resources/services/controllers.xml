@@ -9,21 +9,20 @@ We are hiring developers from all over the world. Join us and start your new, ex
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" autowire="false" autoconfigure="false" />
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Controller\Vendor\DeleteProductListingAction"
-                 id="bitbag.open_marketplace.api.controller.vendor.delete_product_listing_action"
-                 public="true">
+                 id="bitbag.open_marketplace.component.core.api.controller.vendor.delete_product_listing_action">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Controller\Vendor\SendToVerificationAction"
-                 id="bitbag.open_marketplace.api.controller.vendor.send_to_verification_action"
-                 public="true">
+                 id="bitbag.open_marketplace.component.core.api.controller.vendor.send_product_listing_to_verification_action">
             <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Controller\Vendor\AcceptArchiveConversationAction"
-                 id="bitbag.open_marketplace.api.controller.vendor.accept_archive_conversation_action"
-                 public="true">
+                 id="bitbag.open_marketplace.component.core.api.controller.vendor.accept_archive_conversation_action">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
     </services>

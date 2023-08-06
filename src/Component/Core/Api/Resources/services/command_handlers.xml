@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults public="false" autowire="false" autoconfigure="false" />
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler"
-                 id="bitbag.open_marketplace.api.messenger.command_handler.vendor.register_vendor">
-            <argument type="service" id="bitbag.open_marketplace.api.provider.vendor" />
+                 id="bitbag.open_marketplace.component.core.api.messenger.command_handler.vendor.register">
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\UploadVendorImageHandler"
-                 id="bitbag.open_marketplace.api.messenger.command_handler.vendor.upload_vendor_image">
+                 id="bitbag.open_marketplace.component.core.api.messenger.command_handler.vendor.upload_logo_image">
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.logo_image_factory" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
@@ -21,8 +30,9 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\UploadVendorBackgroundImageHandler"
-                 id="bitbag.open_marketplace.api.messenger.command_handler.vendor.upload_vendor_background_image">
+                 id="bitbag.open_marketplace.component.core.api.messenger.command_handler.vendor.upload_background_image">
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.background_image_factory" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
@@ -30,15 +40,17 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\CreateProductListingHandler"
-                 id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.create_product_listing">
+                 id="bitbag.open_marketplace.component.core.api.messenger.command_handler.vendor.create_product_listing">
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\UpdateProductListingHandler"
-                 id="bit_bag.open_marketplace.api.messenger.command_handler.vendor.update_product_listing">
+                 id="bitbag.open_marketplace.component.core.api.messenger.command_handler.vendor.update_product_listing">
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="open_marketplace.repository.product_listing" />

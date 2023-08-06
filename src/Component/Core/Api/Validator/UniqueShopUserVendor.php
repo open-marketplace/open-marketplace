@@ -26,6 +26,6 @@ final class UniqueShopUserVendor extends Constraint
 
     public function validatedBy(): string
     {
-        return 'bitbag.sylius_open_marketplace_plugin.validator.unique_shop_user_vendor';
+        return 'bitbag.open_marketplace.component.core.api.validator.vendor.unique_shop_user';
     }
 }

@@ -45,8 +45,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     <attribute name="summary">Retrieves the collection of orders that contain vendor's product.</attribute>
                 </attribute>
                 <attribute name="filters">
-                    <attribute>bitbag.open_marketplace.api.vendor.search_order_filter</attribute>
-                    <attribute>bitbag.open_marketplace.api.vendor.date_order_filter</attribute>
+                    <attribute>bitbag.open_marketplace.component.core.api.filter.search_order</attribute>
+                    <attribute>bitbag.open_marketplace.component.core.api.filter.date_order</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:order:read</attribute>

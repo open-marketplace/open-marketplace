@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Component\Core\Api\Doctrine\ORM\Subscriber;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Doctrine\ORM\Subscriber\UuidSubscriber;
+use BitBag\OpenMarketplace\Component\Core\Api\EventSubscriber\UuidSubscriber;
 use BitBag\OpenMarketplace\Component\Core\Api\UuidAwareInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;

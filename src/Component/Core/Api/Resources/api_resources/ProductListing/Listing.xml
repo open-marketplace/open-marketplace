@@ -45,7 +45,7 @@ Body parameters:
                     <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
                 </attribute>
                 <attribute name="filters">
-                    <attribute>bitbag.open_marketplace.api.vendor.search_product_listing_filter</attribute>
+                    <attribute>bitbag.open_marketplace.component.core.api.filter.search_product_listing</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -93,7 +93,7 @@ Body parameters:
                 </attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="security">is_granted("OWNIT", object)</attribute>
-                <attribute name="controller">bitbag.open_marketplace.api.controller.vendor.send_to_verification_action</attribute>
+                <attribute name="controller">bitbag.open_marketplace.component.core.api.controller.vendor.send_product_listing_to_verification_action</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:account:vendor:product_listing:read</attribute>
                 </attribute>
@@ -102,7 +102,7 @@ Body parameters:
             <itemOperation name="vendor_delete">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/account/vendor/product-listings/{uuid}</attribute>
-                <attribute name="controller">bitbag.open_marketplace.api.controller.vendor.delete_product_listing_action</attribute>
+                <attribute name="controller">bitbag.open_marketplace.component.core.api.controller.vendor.delete_product_listing_action</attribute>
                 <attribute name="security">is_granted("OWNIT", object)</attribute>
             </itemOperation>
         </itemOperations>
