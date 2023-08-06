@@ -82,6 +82,6 @@
                  id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_taxon" />
 
         <service id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_translation"
-                 alias="open_marketplace.factory.product_translation" />
+                 alias="open_marketplace.factory.product_draft_translation" />
     </services>
 </container>

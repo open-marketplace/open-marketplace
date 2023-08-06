@@ -9,13 +9,7 @@ imports:
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
 
-    - { resource: "./../../src/Component/Override/Resources/config.yaml" }
-    - { resource: "./../../src/Component/Core/Admin/Resources/config.yaml" }
-    - { resource: "./../../src/Component/Core/Common/Resources/config.yaml" }
-    - { resource: "./../../src/Component/Core/Shop/Resources/config.yaml" }
-    - { resource: "./../../src/Component/Core/Vendor/Resources/config.yaml" }
-
-    - { resource: "./../../src/Resources/config/resources/*" }
+    - { resource: "./../../src/Resources/config.yaml" }
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
@@ -41,6 +35,8 @@ sylius_product:
         product:
             classes:
                 model: BitBag\OpenMarketplace\Component\Product\Entity\Product
+                interface: BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface
+                repository: BitBag\OpenMarketplace\Component\Product\Repository\ProductRepository
         product_variant:
             classes:
                 repository: BitBag\OpenMarketplace\Component\Product\Repository\ProductVariantRepository

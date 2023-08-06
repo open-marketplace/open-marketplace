@@ -58,7 +58,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
         <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\DraftAttributeController"
                  id="bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute"
-                 parent="open_marketplace.controller.draft_attribute">
+                 parent="open_marketplace.controller.product_draft_attribute">
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.updater.product_attribute_updater"/>
             <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>

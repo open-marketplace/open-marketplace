@@ -6,6 +6,12 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing
                 repository: BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepository
 
+        open_marketplace.product_listing_price:
+            driver: doctrine/orm
+            classes:
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice
+                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface
+
         open_marketplace.product_draft:
             driver: doctrine/orm
             classes:
@@ -14,17 +20,11 @@ sylius_resource:
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\ListingType
 
-        open_marketplace.product_translation:
+        open_marketplace.product_draft_translation:
             driver: doctrine/orm
             classes:
                 model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation
                 interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface
-
-        open_marketplace.product_listing_price:
-            driver: doctrine/orm
-            classes:
-                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice
-                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface
 
         open_marketplace.product_draft_image:
             driver: doctrine/orm
@@ -37,3 +37,18 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon
                 interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxonInterface
                 repository: BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftTaxonRepository
+
+        open_marketplace.product_draft_attribute:
+            classes:
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute
+                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftAttributeRepository
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeType
+            translation:
+                classes:
+                    model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation
+
+        open_marketplace.product_draft_attribute_value:
+            classes:
+                model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue

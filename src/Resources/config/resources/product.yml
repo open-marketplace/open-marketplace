@@ -1,7 +1,0 @@
-sylius_product:
-  resources:
-    product:
-      classes:
-        model: BitBag\OpenMarketplace\Component\Product\Entity\Product
-        interface: BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface
-        repository: BitBag\OpenMarketplace\Component\Product\Repository\ProductRepository

@@ -35,3 +35,22 @@ sylius_resource:
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorShippingMethodRepository
 
+        open_marketplace.vendor_logo_image:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\LogoImageType
+
+        open_marketplace.vendor_background_image:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\BackgroundImageType
+
+        open_marketplace.vendor_profile_update_logo_image:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage
+
+        open_marketplace.vendor_profile_update_background_image:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage

@@ -26,7 +26,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.logo_image_factory" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag_open_marketplace.repository.vendor_image" />
+            <argument type="service" id="open_marketplace.repository.vendor_logo_image" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -36,7 +36,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.background_image_factory" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="bitbag_open_marketplace.repository.vendor_background_image" />
+            <argument type="service" id="open_marketplace.repository.vendor_background_image" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

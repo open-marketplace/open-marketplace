@@ -7,7 +7,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: "%open_marketplace.model.draft_attribute.class%"
+                    class: "%open_marketplace.model.product_draft_attribute.class%"
                     repository:
                         method: findVendorDraftAttributesQuery
                         arguments:
