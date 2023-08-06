@@ -28,7 +28,6 @@ final class VendorShippingMethodChoiceType extends AbstractType
     public function __construct(
         private ShippingMethodRepositoryInterface $shippingMethodRepository
     ) {
-
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -24,7 +24,6 @@ final class OrderCloner implements OrderClonerInterface
         private AddressClonerInterface $addressCloner,
         private PaymentClonerInterface $paymentCloner
     ) {
-
     }
 
     public function clone(OrderInterface $originalOrder, OrderInterface $newOrder): void

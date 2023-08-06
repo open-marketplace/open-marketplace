@@ -22,7 +22,6 @@ final class AttributeFixture extends AbstractFixture
         private ExampleFactoryInterface $attributeExampleFactory,
         private EntityManagerInterface $attributeManager,
     ) {
-
     }
 
     public function getName(): string

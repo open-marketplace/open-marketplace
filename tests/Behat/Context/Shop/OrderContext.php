@@ -17,13 +17,13 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Order\Entity\Order;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepository;
+use function PHPUnit\Framework\assertStringContainsString;
+use function PHPUnit\Framework\assertStringNotContainsString;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository;
 use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
-use function PHPUnit\Framework\assertStringContainsString;
-use function PHPUnit\Framework\assertStringNotContainsString;
 
 class OrderContext extends RawMinkContext implements Context
 {

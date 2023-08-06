@@ -24,7 +24,6 @@ final class ProductDraftAwareCommandDataTransformer implements CommandDataTransf
         private RequestStack $requestStack,
         private DraftImageFactoryInterface $draftImageFactory
     ) {
-
     }
 
     /**

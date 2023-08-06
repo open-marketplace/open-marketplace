@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor\UploadVendorImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

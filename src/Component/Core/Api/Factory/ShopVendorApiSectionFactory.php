@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Api\Factory;
 
 use BitBag\OpenMarketplace\Component\Core\Api\SectionResolver\ShopVendorApiSection;
-use BitBag\OpenMarketplace\Component\Core\Api\Factory\ShopVendorApiSectionFactoryInterface;
 
 final class ShopVendorApiSectionFactory implements ShopVendorApiSectionFactoryInterface
 {

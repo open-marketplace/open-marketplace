@@ -23,7 +23,6 @@ final class CreateProductListingHandler
         private ListingPersisterInterface $listingPersister,
         private ObjectManager $manager
     ) {
-
     }
 
     public function __invoke(CreateProductListingInterface $createProductListing): ListingInterface

@@ -26,7 +26,6 @@ final class UpdateProductListingHandler
         private ObjectManager $manager,
         private ListingRepositoryInterface $productListingRepository
     ) {
-        
     }
 
     public function __invoke(UpdateProductListingInterface $updateProductListing): ListingInterface

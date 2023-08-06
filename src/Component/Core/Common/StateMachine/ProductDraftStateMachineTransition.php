@@ -20,7 +20,6 @@ final class ProductDraftStateMachineTransition implements ProductDraftStateMachi
     public function __construct(
         private FactoryInterface $productDraftStateMachineFactory
     ) {
-
     }
 
     public function applyIfCan(

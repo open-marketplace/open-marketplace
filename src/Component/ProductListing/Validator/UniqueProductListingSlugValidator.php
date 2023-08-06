@@ -29,7 +29,6 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
         private RepositoryInterface $productTranslationRepository,
         private RequestStack $requestStack
     ) {
-
     }
 
     public function validate($value, Constraint $constraint): void

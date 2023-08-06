@@ -23,7 +23,6 @@ final class LogoImageOperator implements LogoImageOperatorInterface
         private EntityManagerInterface $entityManager,
         private LogoImageFactoryInterface $vendorImageFactory
     ) {
-
     }
 
     public function replaceVendorImage(ProfileUpdateInterface $vendorData, VendorInterface $vendor): void

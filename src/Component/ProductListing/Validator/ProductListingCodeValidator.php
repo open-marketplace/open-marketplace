@@ -31,7 +31,6 @@ final class ProductListingCodeValidator extends ConstraintValidator
         private VendorContextInterface $vendorContext,
         private RequestStack $requestStack
     ) {
-
     }
 
     /**

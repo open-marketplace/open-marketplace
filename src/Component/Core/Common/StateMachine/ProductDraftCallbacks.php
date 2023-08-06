@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Common\StateMachine;
 
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftConverterInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
@@ -23,7 +23,6 @@ final class ProductDraftCallbacks
         private DraftConverterInterface $productDraftService,
         private EntityManagerInterface $entityManager
     ) {
-
     }
 
     public function sendToVerification(DraftInterface $productDraft): void

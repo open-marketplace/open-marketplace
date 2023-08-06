@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor\UpdateProductListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;

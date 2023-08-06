@@ -21,7 +21,6 @@ final class MessagePersister implements DataPersisterInterface
         private EntityManagerInterface $manager,
         private Security $security
     ) {
-
     }
 
     public function supports(mixed $data): bool

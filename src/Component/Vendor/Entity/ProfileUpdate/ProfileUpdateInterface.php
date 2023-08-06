@@ -13,8 +13,8 @@ namespace BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface as BaseProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 interface ProfileUpdateInterface extends BaseProfileInterface
 {

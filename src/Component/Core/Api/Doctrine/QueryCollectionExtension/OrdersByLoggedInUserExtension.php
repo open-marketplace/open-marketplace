@@ -27,7 +27,6 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         private SectionProviderInterface $sectionProvider,
         private UserContextInterface $userContext
     ) {
-
     }
 
     public function applyToCollection(

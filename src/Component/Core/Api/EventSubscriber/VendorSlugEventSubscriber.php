@@ -25,7 +25,6 @@ final class VendorSlugEventSubscriber implements EventSubscriberInterface
     public function __construct(
         private SlugGeneratorInterface $vendorSlugGenerator
     ) {
-
     }
 
     public static function getSubscribedEvents(): array

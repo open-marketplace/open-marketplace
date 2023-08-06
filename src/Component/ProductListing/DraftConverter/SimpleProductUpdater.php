@@ -32,7 +32,6 @@ final class SimpleProductUpdater implements SimpleProductUpdaterInterface
         private EntityRepository $channelPricingRepository,
         private ProductVariantRepositoryInterface $productVariantRepository
     ) {
-
     }
 
     public function update(DraftInterface $productDraft): ProductInterface

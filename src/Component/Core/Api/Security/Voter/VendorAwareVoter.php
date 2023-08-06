@@ -29,7 +29,6 @@ final class VendorAwareVoter extends Voter
     public function __construct(
         private VendorContextInterface $vendorContext
     ) {
-
     }
 
     protected function supports(string $attribute, $subject): bool

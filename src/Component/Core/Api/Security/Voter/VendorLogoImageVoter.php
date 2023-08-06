@@ -25,7 +25,6 @@ final class VendorLogoImageVoter extends Voter
     public function __construct(
         private UserContextInterface $userContext
     ) {
-
     }
 
     protected function supports(string $attribute, $subject): bool

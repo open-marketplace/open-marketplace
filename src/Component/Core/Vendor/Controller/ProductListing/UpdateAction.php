@@ -43,7 +43,7 @@ final class UpdateAction
         private RequestStack $requestStack,
         private Environment $twig,
         private RouterInterface $router,
-    ) {
+        ) {
     }
 
     public function __invoke(Request $request): Response

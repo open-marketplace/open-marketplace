@@ -29,7 +29,6 @@ final class AttributesOperator implements AttributesOperatorInterface
         private AttributeTranslationClonerInterface $attributeTranslationCloner,
         private AttributeValueClonerInterface $attributeValueCloner
     ) {
-
     }
 
     public function convert(DraftInterface $productDraft, ProductInterface $product): void

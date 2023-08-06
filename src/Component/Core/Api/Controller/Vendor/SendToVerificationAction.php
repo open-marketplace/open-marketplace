@@ -19,7 +19,6 @@ final class SendToVerificationAction
     public function __construct(
         private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition
     ) {
-
     }
 
     public function __invoke(ListingInterface $data): ListingInterface

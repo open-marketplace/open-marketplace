@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Context;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -21,7 +20,6 @@ final class VendorContext implements VendorContextInterface
     public function __construct(
         private UserContextInterface $userContext
     ) {
-
     }
 
     public function getVendor(): ?VendorInterface

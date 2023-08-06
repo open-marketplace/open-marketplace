@@ -23,7 +23,6 @@ final class BackgroundImageOperator implements BackgroundImageOperatorInterface
         private EntityManagerInterface $entityManager,
         private BackgroundImageFactoryInterface $vendorBackgroundImageFactory
     ) {
-
     }
 
     public function replaceVendorImage(ProfileUpdateInterface $vendorData, VendorInterface $vendor): void

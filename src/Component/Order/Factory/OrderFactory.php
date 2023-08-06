@@ -18,7 +18,6 @@ final class OrderFactory implements OrderFactoryInterface
     public function __construct(
         private string $orderFQN
     ) {
-
     }
 
     public function createNew(): OrderInterface

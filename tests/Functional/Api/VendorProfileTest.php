@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;

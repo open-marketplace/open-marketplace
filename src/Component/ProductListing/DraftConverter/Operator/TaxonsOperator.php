@@ -26,7 +26,6 @@ final class TaxonsOperator implements TaxonsOperatorInterface
         private EntityManagerInterface $entityManager,
         private FactoryInterface $productTaxonFactory
     ) {
-
     }
 
     public function copyTaxonsToProduct(DraftInterface $productDraft, ProductInterface $product): ?ProductInterface

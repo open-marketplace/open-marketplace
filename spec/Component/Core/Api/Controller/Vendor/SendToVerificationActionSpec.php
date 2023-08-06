@@ -16,7 +16,6 @@ use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 final class SendToVerificationActionSpec extends ObjectBehavior
 {

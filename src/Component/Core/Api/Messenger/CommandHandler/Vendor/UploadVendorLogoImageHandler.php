@@ -26,7 +26,6 @@ final class UploadVendorLogoImageHandler
         private ObjectManager $manager,
         private RepositoryInterface $vendorImageRepository
     ) {
-
     }
 
     public function __invoke(UploadVendorImageInterface $command): LogoImageInterface

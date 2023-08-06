@@ -20,7 +20,6 @@ final class ShipmentCloner implements ShipmentClonerInterface
     public function __construct(
         private AdjustmentClonerInterface $adjustmentCloner
     ) {
-
     }
 
     public function clone(ShipmentInterface $originalShipment, ShipmentInterface $newShipment): void

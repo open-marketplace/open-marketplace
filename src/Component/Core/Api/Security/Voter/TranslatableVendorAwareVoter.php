@@ -30,7 +30,6 @@ final class TranslatableVendorAwareVoter extends Voter
     public function __construct(
         private VendorContextInterface $vendorContext
     ) {
-
     }
 
     /** @param TranslationInterface $subject */

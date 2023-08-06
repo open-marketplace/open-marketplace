@@ -22,7 +22,6 @@ final class ProductListingFixture extends AbstractFixture
         private ObjectManager $productDraftManager,
         private ProductListingExampleFactory $productDraftExampleFactory
     ) {
-
     }
 
     public function load(array $options): void

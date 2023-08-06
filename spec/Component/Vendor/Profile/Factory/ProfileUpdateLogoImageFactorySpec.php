@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace spec\BitBag\OpenMarketplace\Component\Vendor\Profile\Factory;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
 use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileUpdateLogoImageFactory;
 use PhpSpec\ObjectBehavior;
 

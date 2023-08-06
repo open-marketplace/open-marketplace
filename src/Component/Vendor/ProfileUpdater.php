@@ -39,7 +39,6 @@ final class ProfileUpdater implements ProfileUpdaterInterface
         private LogoImageOperatorInterface $vendorLogoOperator,
         private BackgroundImageOperatorInterface $vendorBackgroundImageOperator
     ) {
-
     }
 
     public function createPendingVendorProfileUpdate(

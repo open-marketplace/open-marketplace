@@ -47,7 +47,7 @@ final class CreateAction
         private RouterInterface $router,
         private Environment $twig,
         private TokenStorageInterface $tokenStorage,
-    ) {
+        ) {
     }
 
     public function __invoke(Request $request): Response

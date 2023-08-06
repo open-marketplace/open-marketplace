@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate;
 
+use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 class ProfileUpdate implements ProfileUpdateInterface

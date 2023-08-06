@@ -25,7 +25,6 @@ final class OrderShipmentProcessor implements OrderShipmentProcessorInterface
         private ShipmentFactoryInterface $shipmentFactory,
         private ShipmentUnitsRecalculatorInterface $shipmentUnitsRecalculator
     ) {
-
     }
 
     /**

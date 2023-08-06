@@ -18,7 +18,6 @@ final class ProductAttributeValueFactory implements ProductAttributeValueFactory
     public function __construct(
         private string $classFQN
     ) {
-
     }
 
     public function create(): ProductAttributeValueInterface

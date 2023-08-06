@@ -29,7 +29,6 @@ final class VendorAccountItemDataProvider implements RestrictedDataProviderInter
         private VendorRepositoryInterface $vendorRepository,
         private SectionProviderInterface $sectionProvider
     ) {
-
     }
 
     /**

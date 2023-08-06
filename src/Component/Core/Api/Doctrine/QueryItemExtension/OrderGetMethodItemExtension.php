@@ -26,7 +26,6 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         private SectionProviderInterface $sectionProvider,
         private UserContextInterface $userContext
     ) {
-
     }
 
     public function applyToItem(

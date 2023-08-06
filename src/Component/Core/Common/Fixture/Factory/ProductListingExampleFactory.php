@@ -59,7 +59,7 @@ final class ProductListingExampleFactory implements ExampleFactoryInterface
         private ImageUploaderInterface $imageUploader,
         private DraftImageFactoryInterface $draftImageFactory,
         private FileLocatorInterface $fileLocator,
-    ) {
+        ) {
         $this->faker = Factory::create();
     }
 

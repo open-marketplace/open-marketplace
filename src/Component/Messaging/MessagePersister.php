@@ -27,7 +27,6 @@ final class MessagePersister implements MessagePersisterInterface
         private AttachmentUploaderInterface $fileUploader,
         private ConversationRepositoryInterface $conversationRepository
     ) {
-
     }
 
     public function createWithConversation(

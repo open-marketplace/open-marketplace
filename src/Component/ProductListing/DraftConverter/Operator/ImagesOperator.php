@@ -22,7 +22,6 @@ final class ImagesOperator implements ImagesOperatorInterface
         private Filesystem $filesystem,
         private ProductImageFactoryInterface $productImageFactory
     ) {
-
     }
 
     public function copyFilesToProduct(DraftInterface $productDraft, ProductInterface $cratedProduct): void

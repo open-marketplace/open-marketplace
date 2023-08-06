@@ -34,7 +34,6 @@ final class OrderManager implements OrderManagerInterface
         private OrderItemFactoryInterface $itemFactory,
         private ShipmentFactoryInterface $shipmentFactory
     ) {
-
     }
 
     public function generateNewSecondaryOrder(

@@ -23,7 +23,6 @@ final class AttributeValueCloner implements AttributeValueClonerInterface
         private EntityManagerInterface $entityManager,
         private ProductAttributeValueFactoryInterface $attributeValueFactory
     ) {
-
     }
 
     public function clone(DraftInterface $productDraft, ProductInterface $product): void

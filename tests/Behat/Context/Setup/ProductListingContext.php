@@ -13,12 +13,12 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice;
-use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
@@ -43,7 +43,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         EntityManagerInterface $entityManager,
         SharedStorageInterface $sharedStorage,
         DraftConverter $acceptanceOperator,
-    ) {
+        ) {
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
         $this->entityManager = $entityManager;

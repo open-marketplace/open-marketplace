@@ -20,7 +20,6 @@ final class DeleteProductListingAction
     public function __construct(
         private EntityManagerInterface $entityManager
     ) {
-
     }
 
     public function __invoke(ListingInterface $data): Response

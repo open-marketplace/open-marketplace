@@ -19,8 +19,6 @@ use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
 final class CreateProductListingHandlerSpec extends ObjectBehavior

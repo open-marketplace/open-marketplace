@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\AbstractFilterStrategy;
-use BitBag\OpenMarketplace\Component\Core\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\FilterVendorStrategy;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\OptionalVendorAwareInterface;
 use BitBag\OpenMarketplace\Component\Vendor\VendorAwareInterface;

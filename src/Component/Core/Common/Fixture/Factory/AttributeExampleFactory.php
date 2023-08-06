@@ -29,7 +29,6 @@ final class AttributeExampleFactory implements ExampleFactoryInterface
         private EntityRepository $shopUserRepository,
         private RepositoryInterface $localeRepository
     ) {
-
     }
 
     public function create(array $options = []): DraftAttributeInterface

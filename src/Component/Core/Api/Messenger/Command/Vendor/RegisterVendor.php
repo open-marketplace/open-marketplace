@@ -27,7 +27,6 @@ final class RegisterVendor implements RegisterVendorInterface
         private string $description,
         private Address $vendorAddress
     ) {
-
     }
 
     public function getCompanyName(): string

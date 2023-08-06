@@ -29,7 +29,6 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
         private PaymentRefresherInterface $paymentRefresher,
         private EventDispatcherInterface $eventDispatcher
     ) {
-
     }
 
     public function process(OrderInterface $order): array

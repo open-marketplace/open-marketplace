@@ -27,7 +27,7 @@ final class SendArchiveRequestAction
         private UrlGeneratorInterface $urlGenerator,
         private MessageFactoryInterface $messageFactory,
         private RequestStack $requestStack,
-    ) {
+        ) {
     }
 
     public function __invoke(int $id, Request $request): Response

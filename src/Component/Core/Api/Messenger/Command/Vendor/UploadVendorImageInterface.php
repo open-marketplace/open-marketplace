@@ -11,9 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor\VendorImageFileAwareInterface;
-use BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor\VendorImageOwnerAwareInterface;
-
 interface UploadVendorImageInterface extends VendorImageFileAwareInterface, VendorImageOwnerAwareInterface
 {
 }

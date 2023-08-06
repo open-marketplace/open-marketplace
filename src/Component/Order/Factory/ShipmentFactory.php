@@ -25,7 +25,6 @@ final class ShipmentFactory implements ShipmentFactoryInterface
         private VendorShippingMethodsResolverInterface $defaultVendorShippingMethodResolver,
         private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
     ) {
-
     }
 
     public function createNew(): ShipmentInterface

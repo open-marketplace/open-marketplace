@@ -23,7 +23,6 @@ final class ConversationCategoryFixture extends AbstractFixture
         private ObjectManager $conversationCategoryManager,
         private FactoryInterface $conversationCategoryFactory
     ) {
-
     }
 
     public function load(array $options): void

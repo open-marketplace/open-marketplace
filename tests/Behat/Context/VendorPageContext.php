@@ -17,6 +17,7 @@ use Behat\MinkExtension\Context\MinkContext;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use function PHPUnit\Framework\assertTrue;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -32,7 +33,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\VendorPagePageInterface;
 use Webmozart\Assert\Assert;
-use function PHPUnit\Framework\assertTrue;
 
 class VendorPageContext extends MinkContext implements Context
 {

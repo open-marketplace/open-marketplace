@@ -22,7 +22,6 @@ final class OrderItemUnitCloner implements OrderItemUnitClonerInterface
         private AdjustmentClonerInterface $cloner,
         private EntityManagerInterface $entityManager
     ) {
-
     }
 
     public function clone(OrderItemUnitInterface $originalUnit, OrderItemUnitInterface $newUnit): void

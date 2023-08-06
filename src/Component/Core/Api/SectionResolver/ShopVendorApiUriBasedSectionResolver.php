@@ -21,7 +21,6 @@ final class ShopVendorApiUriBasedSectionResolver implements UriBasedSectionResol
         private string $shopVendorApiUriBeginning,
         private ShopVendorApiSectionFactoryInterface $shopVendorApiSectionFactory,
     ) {
-
     }
 
     public function getSection(string $uri): SectionInterface

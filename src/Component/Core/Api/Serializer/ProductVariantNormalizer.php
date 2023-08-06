@@ -22,7 +22,6 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         private ContextAwareNormalizerInterface $productVariantNormalizer,
         private SectionProviderInterface $sectionProvider,
     ) {
-
     }
 
     public function supportsNormalization(

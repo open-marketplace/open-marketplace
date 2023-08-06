@@ -23,7 +23,6 @@ final class RegisterVendorHandler
         private VendorProviderInterface $vendorProvider,
         private ObjectManager $manager
     ) {
-
     }
 
     public function __invoke(RegisterVendorInterface $command): VendorInterface

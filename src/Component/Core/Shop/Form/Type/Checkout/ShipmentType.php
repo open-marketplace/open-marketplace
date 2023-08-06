@@ -22,7 +22,6 @@ final class ShipmentType extends AbstractType
     public function __construct(
         private string $dataClass
     ) {
-
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

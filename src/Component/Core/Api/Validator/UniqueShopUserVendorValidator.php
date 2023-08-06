@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Validator;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Validator\UniqueShopUserVendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Symfony\Component\Validator\Constraint;
@@ -23,7 +22,6 @@ final class UniqueShopUserVendorValidator extends ConstraintValidator
     public function __construct(
         private UserContextInterface $userContext
     ) {
-
     }
 
     /** @param UniqueShopUserVendor $constraint */

@@ -22,7 +22,6 @@ final class UuidSubscriber implements EventSubscriberInterface
     public function __construct(
         private AbstractIdGenerator $uuidGenerator
     ) {
-
     }
 
     public function getSubscribedEvents()

@@ -34,7 +34,6 @@ final class ShippingMethodChoiceType extends AbstractType
         private ServiceRegistryInterface $calculators,
         private RepositoryInterface $repository
     ) {
-
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

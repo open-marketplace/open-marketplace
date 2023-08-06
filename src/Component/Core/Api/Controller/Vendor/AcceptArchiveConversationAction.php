@@ -21,7 +21,6 @@ class AcceptArchiveConversationAction
     public function __construct(
         private EntityManagerInterface $entityManager
     ) {
-
     }
 
     public function __invoke(ConversationInterface $data): ConversationInterface|Response

@@ -20,7 +20,6 @@ final class MessageFactory implements MessageFactoryInterface
     public function __construct(
         private FactoryInterface $conversationMessageFactory
     ) {
-
     }
 
     public function createNew(): MessageInterface

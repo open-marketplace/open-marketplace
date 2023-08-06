@@ -19,7 +19,6 @@ final class AttachmentUploader implements AttachmentUploaderInterface
     public function __construct(
         private string $targetDirectory
     ) {
-
     }
 
     public function upload(UploadedFile $file): string

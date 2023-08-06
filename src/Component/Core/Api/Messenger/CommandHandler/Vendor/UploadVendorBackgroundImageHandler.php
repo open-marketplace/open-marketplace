@@ -26,7 +26,6 @@ final class UploadVendorBackgroundImageHandler
         private ObjectManager $manager,
         private RepositoryInterface $vendorBackgroundImageRepository
     ) {
-
     }
 
     public function __invoke(UploadVendorBackgroundImageInterface $command): BackgroundImageInterface

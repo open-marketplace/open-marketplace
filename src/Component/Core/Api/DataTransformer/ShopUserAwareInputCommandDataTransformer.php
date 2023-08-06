@@ -21,7 +21,6 @@ final class ShopUserAwareInputCommandDataTransformer implements CommandDataTrans
     public function __construct(
         private UserContextInterface $userContext
     ) {
-
     }
 
     /**

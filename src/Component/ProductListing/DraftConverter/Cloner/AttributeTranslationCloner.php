@@ -22,7 +22,6 @@ final class AttributeTranslationCloner implements AttributeTranslationClonerInte
         private EntityManagerInterface $entityManager,
         private ProductAttributeTranslationFactoryInterface $attributeTranslationFactory
     ) {
-
     }
 
     public function clone(DraftAttributeInterface $draftAttribute): void

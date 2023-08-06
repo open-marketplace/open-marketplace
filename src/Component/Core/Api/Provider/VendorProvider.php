@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Provider;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Provider\VendorProviderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -21,7 +20,6 @@ final class VendorProvider implements VendorProviderInterface
     public function __construct(
         private FactoryInterface $vendorFactory
     ) {
-
     }
 
     public function provide(ShopUserInterface $shopUser): VendorInterface

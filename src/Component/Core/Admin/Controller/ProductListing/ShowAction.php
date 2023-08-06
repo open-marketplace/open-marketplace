@@ -39,7 +39,7 @@ final class ShowAction
         private FormFactoryInterface $formFactory,
         private MessagePersisterInterface $messagePersister,
         private RouterInterface $router,
-    ) {
+        ) {
     }
 
     public function __invoke(Request $request): Response

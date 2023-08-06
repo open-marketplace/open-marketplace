@@ -26,7 +26,6 @@ final class PathPrefixProvider implements PathPrefixProviderInterface
         private SectionProviderInterface $sectionProvider,
         private string $shopVendorApiUriBeginning
     ) {
-
     }
 
     public function getPathPrefix(string $path): ?string

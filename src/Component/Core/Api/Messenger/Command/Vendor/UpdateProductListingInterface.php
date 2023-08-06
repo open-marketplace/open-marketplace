@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor;
 
-use BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor\ProductDraftAwareInterface;
-use BitBag\OpenMarketplace\Component\Core\Api\Messenger\Command\Vendor\ProductListingAwareInterface;
 use BitBag\OpenMarketplace\Component\Vendor\VendorAwareInterface;
 
 interface UpdateProductListingInterface extends ProductDraftAwareInterface, ProductListingAwareInterface, VendorAwareInterface

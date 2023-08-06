@@ -21,7 +21,6 @@ final class VendorImageOwnerAwareCommandDataTransformer implements CommandDataTr
     public function __construct(
         private UserContextInterface $userContext
     ) {
-
     }
 
     /**

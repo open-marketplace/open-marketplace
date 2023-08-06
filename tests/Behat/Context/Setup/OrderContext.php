@@ -272,7 +272,8 @@ final class OrderContext extends RawMinkContext
             $channel,
             $localeCode
         );
-        $primaryOrder = $this->createOrder($customer,
+        $primaryOrder = $this->createOrder(
+            $customer,
             $number = null,
             $channel,
             $localeCode

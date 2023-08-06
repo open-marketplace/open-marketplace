@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
-use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Tests\BitBag\OpenMarketplace\Integration\IntegrationTestCase;
 

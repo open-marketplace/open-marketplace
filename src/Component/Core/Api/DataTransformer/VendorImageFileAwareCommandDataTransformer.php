@@ -22,7 +22,6 @@ final class VendorImageFileAwareCommandDataTransformer implements CommandDataTra
     public function __construct(
         private RequestStack $requestStack
     ) {
-
     }
 
     /**

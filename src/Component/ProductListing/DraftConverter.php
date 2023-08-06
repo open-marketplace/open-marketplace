@@ -29,7 +29,6 @@ final class DraftConverter implements DraftConverterInterface
         private AttributesOperatorInterface $attributesOperator,
         private TaxonsOperatorInterface $taxonsOperator
     ) {
-
     }
 
     public function convertToSimpleProduct(DraftInterface $productDraft): ProductInterface

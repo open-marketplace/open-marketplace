@@ -19,7 +19,6 @@ final class ProfileUpdateRemover implements ProfileUpdateRemoverInterface
     public function __construct(
         private EntityManagerInterface $entityManager
     ) {
-
     }
 
     public function removePendingUpdate(ProfileUpdateInterface $profileUpdate): void

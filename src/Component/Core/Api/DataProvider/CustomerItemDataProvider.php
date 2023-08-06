@@ -25,7 +25,6 @@ final class CustomerItemDataProvider implements ItemDataProviderInterface, Restr
         private SectionProviderInterface $sectionProvider,
         private VendorContextInterface $vendorContext
     ) {
-
     }
 
     public function getItem(

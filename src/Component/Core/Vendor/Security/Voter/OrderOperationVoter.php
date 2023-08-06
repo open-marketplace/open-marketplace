@@ -26,7 +26,6 @@ final class OrderOperationVoter extends Voter
     public function __construct(
         private FactoryInterface $stateMachineFactory
     ) {
-
     }
 
     public function supportsAttribute(string $attribute): bool

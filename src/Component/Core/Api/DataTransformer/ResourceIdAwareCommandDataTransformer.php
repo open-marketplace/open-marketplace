@@ -22,7 +22,6 @@ final class ResourceIdAwareCommandDataTransformer implements CommandDataTransfor
     public function __construct(
         private RequestStack $requestStack
     ) {
-
     }
 
     /**

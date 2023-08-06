@@ -24,7 +24,6 @@ final class VendorAwareEventSubscriber implements EventSubscriberInterface
     public function __construct(
         private VendorContextInterface $vendorContext
     ) {
-
     }
 
     public static function getSubscribedEvents(): array

@@ -26,7 +26,6 @@ final class VendorShippingMethodsResolver implements VendorShippingMethodsResolv
     public function __construct(
         private VendorShippingMethodRepositoryInterface $vendorShippingMethodRepository
     ) {
-
     }
 
     public function getDefaultShippingMethod(
