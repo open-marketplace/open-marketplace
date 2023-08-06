@@ -12,7 +12,7 @@ namespace spec\BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension\VendorClientExtension;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\CustomerRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Twig\Extension\AbstractExtension;

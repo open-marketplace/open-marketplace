@@ -23,7 +23,7 @@ sylius_order:
             classes:
                 model: BitBag\OpenMarketplace\Component\Order\Entity\Order
                 controller: BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\OrderController
-                repository: BitBag\OpenMarketplace\Repository\OrderRepository
+                repository: BitBag\OpenMarketplace\Component\Order\Repository\OrderRepository
                 form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
         order_item:
             classes:
@@ -52,19 +52,19 @@ sylius_shipping:
             classes:
                 model: BitBag\OpenMarketplace\Component\Order\Entity\Shipment
                 interface: BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface
-                repository: BitBag\OpenMarketplace\Repository\ShipmentRepository
+                repository: BitBag\OpenMarketplace\Component\Order\Repository\ShipmentRepository
 
 sylius_payment:
     resources:
         payment:
             classes:
-                repository: BitBag\OpenMarketplace\Repository\PaymentRepository
+                repository: BitBag\OpenMarketplace\Component\Order\Repository\PaymentRepository
 
 sylius_customer:
     resources:
         customer:
             classes:
-                repository: BitBag\OpenMarketplace\Repository\CustomerRepository
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\CustomerRepository
 
 sylius_review:
     resources:

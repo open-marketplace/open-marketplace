@@ -16,7 +16,7 @@ use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\DataProvider\CustomerItemDataProvider;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\CustomerRepositoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;

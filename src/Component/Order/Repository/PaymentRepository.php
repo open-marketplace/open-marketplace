@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Repository;
+namespace BitBag\OpenMarketplace\Component\Order\Repository;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository as BaseShipmentRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository as BasePaymentRepository;
 
-class ShipmentRepository extends BaseShipmentRepository
+class PaymentRepository extends BasePaymentRepository
 {
-    public function createNonPrimaryQueryBuilder(): QueryBuilder
+    public function createSecondaryOrderPaymentQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->createListQueryBuilder();
         $alias = $queryBuilder->getRootAliases()[0];

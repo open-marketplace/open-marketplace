@@ -14,7 +14,7 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use BitBag\OpenMarketplace\Api\Context\VendorContextInterface;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
-use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\CustomerRepositoryInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
 final class CustomerItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
