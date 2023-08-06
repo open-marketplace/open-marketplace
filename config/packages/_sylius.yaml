@@ -8,6 +8,11 @@ imports:
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
+
+    - { resource: "./../../src/Component/Core/Admin/Resources/config.yaml" }
+    - { resource: "./../../src/Component/Core/Shop/Resources/config.yaml" }
+    - { resource: "./../../src/Component/Core/Vendor/Resources/config.yaml" }
+
     - { resource: "./../../src/Resources/config/resources/*" }
 
 parameters:

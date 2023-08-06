@@ -1,8 +1,5 @@
 imports:
     - { resource: "state_machine/**/*.yml" }
     - { resource: 'resources/*.yml' }
-    - { resource: 'services.xml' }
-    - { resource: 'grids.yml' }
     - { resource: 'email/*.yml'}
-    - { resource: "ui.yml"}
     - { resource: "fixtures.yml"}
