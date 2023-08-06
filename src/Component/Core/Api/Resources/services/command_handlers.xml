@@ -15,7 +15,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
         <service class="BitBag\OpenMarketplace\Component\Core\Api\Messenger\CommandHandler\Vendor\RegisterVendorHandler"
                  id="bitbag.open_marketplace.component.core.api.messenger.command_handler.vendor.register">
-            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.api.provider.vendor" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />

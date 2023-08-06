@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Component\Core\Api\Doctrine\ORM\Subscriber;
+namespace spec\BitBag\OpenMarketplace\Component\Core\Api\EventSubscriber;
 
 use BitBag\OpenMarketplace\Component\Core\Api\EventSubscriber\UuidSubscriber;
 use BitBag\OpenMarketplace\Component\Core\Api\UuidAwareInterface;
