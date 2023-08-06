@@ -11,8 +11,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.core.common.controller.messaging.show_thread"
-                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\ShowThreadAction">
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\ShowThreadAction"
+                 id="bitbag.open_marketplace.component.core.common.controller.messaging.show_thread">
             <argument type="service" id="twig" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="open_marketplace.repository.conversation" />
@@ -21,8 +21,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.common.controller.messaging.create_thread"
-                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\CreateThreadAction">
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\CreateThreadAction"
+                 id="bitbag.open_marketplace.component.core.common.controller.messaging.create_thread">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="twig"/>
             <argument type="service" id="api_platform.router"/>
@@ -32,8 +32,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.common.controller.messaging.create_message"
-                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\CreateMessageAction">
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\CreateMessageAction"
+                 id="bitbag.open_marketplace.component.core.common.controller.messaging.create_message">
             <argument type="service" id="form.factory" />
             <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message" />
             <argument type="service" id="router"/>
@@ -42,25 +42,25 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.common.controller.resource.order"
-                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\OrderController"
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\OrderController"
+                 id="bitbag.open_marketplace.component.core.common.controller.resource.order"
                  parent="sylius.controller.order"
                  autowire="false">
             <argument type="service" id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"/>
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.common.controller.resource.vendor"
-                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\VendorController"
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\VendorController"
+                 id="bitbag.open_marketplace.component.core.common.controller.resource.vendor"
                  parent="open_marketplace.controller.vendor">
             <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor" />
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile_updater" />
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute"
-                 class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\DraftAttributeController"
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\DraftAttributeController"
+                 id="bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute"
                  parent="open_marketplace.controller.draft_attribute">
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
-            <argument type="service" id="open_marketplace.updater.product_attribute_updater"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.updater.product_attribute_updater"/>
             <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
         </service>
     </services>

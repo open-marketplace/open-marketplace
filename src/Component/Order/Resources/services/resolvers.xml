@@ -4,8 +4,8 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.order.resolver.vendor_shipping_methods"
-                 class="BitBag\OpenMarketplace\Component\Order\Resolver\VendorShippingMethodsResolver">
+        <service class="BitBag\OpenMarketplace\Component\Order\Resolver\VendorShippingMethodsResolver"
+                 id="bitbag.open_marketplace.component.order.resolver.vendor_shipping_methods">
             <argument type="service" id="open_marketplace.repository.vendor_shipping_method" />
             <tag name="sylius.shipping_method_resolver" type="vendor_shipping_methods_resolver" label="open_marketplace.vendor_shipping_methods_resolver" priority="1" />
         </service>

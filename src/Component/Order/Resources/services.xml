@@ -9,8 +9,8 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.order.order_manager"
-                 class="BitBag\OpenMarketplace\Component\Order\OrderManager">
+        <service class="BitBag\OpenMarketplace\Component\Order\OrderManager"
+                 id="bitbag.open_marketplace.component.order.order_manager">
             <argument type="service" id="bitbag.open_marketplace.component.order.factory.order"/>
             <argument type="service" id="bitbag.open_marketplace.component.order.cloner.order"/>
             <argument type="service" id="bitbag.open_marketplace.component.order.cloner.shipment"/>

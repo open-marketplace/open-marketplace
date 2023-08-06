@@ -5,19 +5,18 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.order.factory.order"
-                 class="BitBag\OpenMarketplace\Component\Order\Factory\OrderFactory"
-        >
+        <service class="BitBag\OpenMarketplace\Component\Order\Factory\OrderFactory"
+                 id="bitbag.open_marketplace.component.order.factory.order">
             <argument>%sylius.model.order.class%</argument>
         </service>
 
-        <service id="bitbag.open_marketplace.component.order.factory.order_item"
-                 class="BitBag\OpenMarketplace\Component\Order\Factory\OrderItemFactory">
+        <service class="BitBag\OpenMarketplace\Component\Order\Factory\OrderItemFactory"
+                 id="bitbag.open_marketplace.component.order.factory.order_item">
             <argument >%sylius.model.order_item.class%</argument>
         </service>
 
-        <service id="bitbag.open_marketplace.component.order.factory.shipment"
-                 class="BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactory">
+        <service class="BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactory"
+                 id="bitbag.open_marketplace.component.order.factory.shipment">
             <argument>%sylius.model.shipment.class%</argument>
             <argument type="service" id="bitbag.open_marketplace.component.order.resolver.vendor_shipping_methods" />
             <argument type="service" id="sylius.shipping_method_resolver.default" />

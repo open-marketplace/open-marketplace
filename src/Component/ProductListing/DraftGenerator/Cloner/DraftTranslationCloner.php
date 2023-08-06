@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
-use BitBag\OpenMarketplace\Exception\LocaleNotFoundException;
+use BitBag\OpenMarketplace\Component\ProductListing\Exception\LocaleNotFoundException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class DraftTranslationCloner implements DraftTranslationClonerInterface

@@ -9,8 +9,8 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.product_listing.listing_persister"
-                 class="BitBag\OpenMarketplace\Component\ProductListing\ListingPersister">
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\ListingPersister"
+                 id="bitbag.open_marketplace.component.product_listing.listing_persister">
             <argument type="service" id="open_marketplace.factory.product_listing" />
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft" />
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator" />

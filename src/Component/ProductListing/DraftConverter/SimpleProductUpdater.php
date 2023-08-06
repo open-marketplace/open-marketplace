@@ -16,8 +16,8 @@ use BitBag\OpenMarketplace\Component\Product\Factory\ProductTranslationFactoryIn
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
-use BitBag\OpenMarketplace\Exception\LocaleNotFoundException;
-use BitBag\OpenMarketplace\Exception\ProductNotFoundException;
+use BitBag\OpenMarketplace\Component\ProductListing\Exception\LocaleNotFoundException;
+use BitBag\OpenMarketplace\Component\ProductListing\Exception\ProductNotFoundException;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ProductTranslationInterface as BaseProductTranslationInterface;

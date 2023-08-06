@@ -61,8 +61,7 @@
                 field="shippingMethods"
                 target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod"
                 mapped-by="vendor"
-                orphan-removal="true"
-        >
+                orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

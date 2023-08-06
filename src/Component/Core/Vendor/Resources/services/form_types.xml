@@ -127,7 +127,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftTaxonAutocompleteChoiceType"
                  id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_taxon_autocomplete_choice">
-            <argument type="service" id="open_marketplace.factory.product_taxon" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.vendor.factory.product_taxon" />
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.repository.draft_taxon" />
             <tag name="form.type" />
         </service>

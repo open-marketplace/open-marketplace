@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Updater;
+namespace spec\BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Updater;
 
 use BitBag\OpenMarketplace\Component\Product\Factory\ProductAttributeTranslationFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Cloner\AttributeTranslationClonerInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Updater\ProductAttributeUpdater;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslationInterface;
-use BitBag\OpenMarketplace\Updater\ProductAttributeUpdater;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;

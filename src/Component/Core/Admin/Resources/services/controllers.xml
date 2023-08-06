@@ -11,8 +11,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.core.admin.controller.messaging.send_archive_request"
-                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\Messaging\SendArchiveRequestAction">
+        <service class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\Messaging\SendArchiveRequestAction"
+                 id="bitbag.open_marketplace.component.core.admin.controller.messaging.send_archive_request">
             <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message" />
             <argument type="service" id="api_platform.router" />
             <argument type="service" id="bitbag.open_marketplace.component.messaging.factory.message" />
@@ -21,8 +21,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.admin.controller.product_listing.show"
-                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\ShowAction">
+        <service class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\ShowAction"
+                 id="bitbag.open_marketplace.component.core.admin.controller.product_listing.show">
             <argument type="service" id="open_marketplace.repository.product_listing" />
             <argument type="service" id="twig" />
             <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft" />
@@ -35,8 +35,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.admin.controller.product_listing.accept"
-                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\AcceptAction">
+        <service class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\AcceptAction"
+                 id="bitbag.open_marketplace.component.core.admin.controller.product_listing.accept">
             <argument type="service" id="open_marketplace.repository.product_listing" />
             <argument type="service" id="router.default" />
             <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition" />
@@ -45,8 +45,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.admin.controller.product_listing.reject"
-                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\RejectAction">
+        <service class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\RejectAction"
+                 id="bitbag.open_marketplace.component.core.admin.controller.product_listing.reject">
             <argument type="service" id="open_marketplace.repository.product_listing" />
             <argument type="service" id="router.default" />
             <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition" />
@@ -55,8 +55,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <tag name="controller.service_arguments" />
         </service>
 
-        <service id="bitbag.open_marketplace.component.core.admin.controller.product_listing.restore"
-                 class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\RestoreAction">
+        <service class="BitBag\OpenMarketplace\Component\Core\Admin\Controller\ProductListing\RestoreAction"
+                 id="bitbag.open_marketplace.component.core.admin.controller.product_listing.restore">
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="router.default"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>

@@ -27,7 +27,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
 
         <service class="BitBag\OpenMarketplace\Component\Core\Api\EventSubscriber\UuidSubscriber"
                  id="bitbag.open_marketplace.component.core.event_subscriber.uuid">
-            <argument type="service" id="bitbag.open_marketplace.ramsey.uuid_doctrine.uuid_generator" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.api.generator.ramsey_uuid" />
             <tag name="doctrine.event_subscriber" />
         </service>
     </services>

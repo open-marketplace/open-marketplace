@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Updater;
+namespace BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Updater;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Cloner\AttributeTranslationClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;

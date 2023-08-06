@@ -11,8 +11,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.core.admin.grid.filter.product_listing_status"
-                 class="BitBag\OpenMarketplace\Component\Core\Admin\Grid\Filter\ProductListingStatusFilter">
+        <service class="BitBag\OpenMarketplace\Component\Core\Admin\Grid\Filter\ProductListingStatusFilter"
+                 id="bitbag.open_marketplace.component.core.admin.grid.filter.product_listing_status">
             <tag name="sylius.grid_filter" type="product_listing_status" form_type="BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\ProductListingStatusFilterType" />
         </service>
     </services>

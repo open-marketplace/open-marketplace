@@ -5,10 +5,9 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"
-                 class="BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessor"
-                 public="true"
-        >
+        <service class="BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessor"
+                 id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"
+                 public="true">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="bitbag.open_marketplace.component.order.order_manager"/>
             <argument type="service" id="bitbag.open_marketplace.component.order.refresher.payment"/>

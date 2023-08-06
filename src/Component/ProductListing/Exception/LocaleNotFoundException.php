@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Exception;
+namespace BitBag\OpenMarketplace\Component\ProductListing\Exception;
 
 final class LocaleNotFoundException extends \LogicException
 {

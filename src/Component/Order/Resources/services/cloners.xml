@@ -5,43 +5,39 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service id="bitbag.open_marketplace.component.order.cloner.order"
-                 class="BitBag\OpenMarketplace\Component\Order\Cloner\OrderCloner"
-        >
+        <service class="BitBag\OpenMarketplace\Component\Order\Cloner\OrderCloner"
+                 id="bitbag.open_marketplace.component.order.cloner.order">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="bitbag.open_marketplace.component.order.cloner.address"/>
             <argument type="service" id="bitbag.open_marketplace.component.order.cloner.payment"/>
         </service>
 
-        <service id="bitbag.open_marketplace.component.order.cloner.order_item"
-                 class="BitBag\OpenMarketplace\Component\Order\Cloner\OrderItemCloner"
-        >
+        <service class="BitBag\OpenMarketplace\Component\Order\Cloner\OrderItemCloner"
+                 id="bitbag.open_marketplace.component.order.cloner.order_item">
             <argument type="service" id="bitbag.open_marketplace.component.order.cloner.adjustment"/>
             <argument type="service" id="bitbag.open_marketplace.component.order.cloner.order_item_unit"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
-        <service id="bitbag.open_marketplace.component.order.cloner.shipment"
-                 class="BitBag\OpenMarketplace\Component\Order\Cloner\ShipmentCloner"
-        >
+        <service class="BitBag\OpenMarketplace\Component\Order\Cloner\ShipmentCloner"
+                 id="bitbag.open_marketplace.component.order.cloner.shipment">
             <argument type="service" id="bitbag.open_marketplace.component.order.cloner.adjustment"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
-        <service id="bitbag.open_marketplace.component.order.cloner.payment"
-                 class="BitBag\OpenMarketplace\Component\Order\Cloner\PaymentCloner" />
+        <service class="BitBag\OpenMarketplace\Component\Order\Cloner\PaymentCloner"
+                 id="bitbag.open_marketplace.component.order.cloner.payment" />
 
-        <service id="bitbag.open_marketplace.component.order.cloner.order_item_unit"
-                 class="BitBag\OpenMarketplace\Component\Order\Cloner\OrderItemUnitCloner"
-        >
+        <service class="BitBag\OpenMarketplace\Component\Order\Cloner\OrderItemUnitCloner"
+                 id="bitbag.open_marketplace.component.order.cloner.order_item_unit">
             <argument type="service" id="bitbag.open_marketplace.component.order.cloner.adjustment"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
-        <service id="bitbag.open_marketplace.component.order.cloner.adjustment"
-                 class="BitBag\OpenMarketplace\Component\Order\Cloner\AdjustmentCloner" />
+        <service class="BitBag\OpenMarketplace\Component\Order\Cloner\AdjustmentCloner"
+                 id="bitbag.open_marketplace.component.order.cloner.adjustment" />
 
-        <service id="bitbag.open_marketplace.component.order.cloner.address"
-                 class="BitBag\OpenMarketplace\Component\Order\Cloner\AddressCloner" />
+        <service class="BitBag\OpenMarketplace\Component\Order\Cloner\AddressCloner"
+                 id="bitbag.open_marketplace.component.order.cloner.address" />
     </services>
 </container>

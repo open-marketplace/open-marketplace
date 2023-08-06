@@ -9,13 +9,16 @@
             <tag name="bitbag.open_marketplace.component.order.commission_calculator" default-priority-method="getPriority" />
         </instanceof>
 
-        <service id="bitbag.open_marketplace.component.order.commission_calculator.no_vendor"
-                 class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\NoVendorCommissionCalculator" />
+        <service class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\NoVendorCommissionCalculator"
+                 id="bitbag.open_marketplace.component.order.commission_calculator.no_vendor" />
 
-        <service id="bitbag.open_marketplace.component.order.commission_calculator.net"
-                 class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorNetCommissionCalculator" />
+        <service class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorNetCommissionCalculator"
+                 id="bitbag.open_marketplace.component.order.commission_calculator.net" />
 
-        <service id="bitbag.open_marketplace.component.order.commission_calculator.gross"
-                 class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorGrossCommissionCalculator" />
+        <service class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorGrossCommissionCalculator"
+                 id="bitbag.open_marketplace.component.order.commission_calculator.gross" />
+
+        <service class="BitBag\OpenMarketplace\Component\Order\Calculator\ShipmentUnitsRecalculator"
+                 id="bitbag.open_marketplace.component.order.calculator.shipment_units_recalculator" />
     </services>
 </container>

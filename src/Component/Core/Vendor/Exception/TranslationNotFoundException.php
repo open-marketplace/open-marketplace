@@ -9,8 +9,8 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Exception;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Exception;
 
-final class ProductNotFoundException extends \LogicException
+final class TranslationNotFoundException extends \LogicException
 {
 }

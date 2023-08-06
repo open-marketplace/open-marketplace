@@ -75,5 +75,11 @@
         <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Extractor\DraftAttributesExtractor"
                  id="bitbag.open_marketplace.component.product_listing.draft_converter.extractor.draft_attributes">
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Updater\ProductAttributeUpdater"
+                 id="bitbag.open_marketplace.component.product_listing.draft_converter.updater.product_attribute_updater">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.cloner.attribute_translation"/>
+        </service>
     </services>
 </container>

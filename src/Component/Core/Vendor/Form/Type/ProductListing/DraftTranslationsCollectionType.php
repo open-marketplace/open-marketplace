@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing;
 
+use BitBag\OpenMarketplace\Component\Core\Vendor\Exception\TranslationNotFoundException;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
-use BitBag\OpenMarketplace\Exception\TranslationNotFoundException;
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
