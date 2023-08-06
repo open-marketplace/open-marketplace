@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Api\SectionResolver;
 
-use BitBag\OpenMarketplace\Factory\ShopVendorApiSectionFactoryInterface;
+use BitBag\OpenMarketplace\Api\Factory\ShopVendorApiSectionFactoryInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionCannotBeResolvedException;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;

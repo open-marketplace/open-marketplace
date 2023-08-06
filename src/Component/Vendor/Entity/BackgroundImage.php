@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Vendor\Entity;
 
-use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
+use BitBag\OpenMarketplace\Api\UuidAwareInterface;
 use Ramsey\Uuid\UuidInterface;
 
 class BackgroundImage implements BackgroundImageInterface, UuidAwareInterface

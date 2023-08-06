@@ -8,14 +8,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Factory;
+namespace BitBag\OpenMarketplace\Api\Factory;
 
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class ShopVendorApiSectionFactory implements ShopVendorApiSectionFactoryInterface
+interface ShopVendorApiSectionFactoryInterface extends FactoryInterface
 {
-    public function createNew(): ShopVendorApiSection
-    {
-        return new ShopVendorApiSection();
-    }
+    public function createNew(): ShopVendorApiSection;
 }

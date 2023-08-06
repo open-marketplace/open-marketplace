@@ -4,7 +4,7 @@ api_platform:
             - '%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources'
             - '%kernel.project_dir%/config/api_platform'
             - '%kernel.project_dir%/src/Entity'
-            - '%kernel.project_dir%/src/Resources/config/api_resources'
+            - '%kernel.project_dir%/src/Api/Resources/config/api_resources'
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:

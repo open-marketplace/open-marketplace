@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Doctrine\ORM\Subscriber;
+namespace BitBag\OpenMarketplace\Api\Doctrine\ORM\Subscriber;
 
-use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
+use BitBag\OpenMarketplace\Api\UuidAwareInterface;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;

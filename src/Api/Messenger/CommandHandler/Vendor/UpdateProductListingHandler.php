@@ -39,7 +39,8 @@ final class UpdateProductListingHandler
 
     public function __invoke(UpdateProductListingInterface $updateProductListing): ListingInterface
     {
-        $productListingId = $updateProductListing->getProductListing()->getId();
+        $productListingId = $updateProductListing->getProductListing()
+            ->getId();
 
         /** @var ListingInterface $productListing */
         $productListing = $this->productListingRepository->find($productListingId);

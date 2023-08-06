@@ -16,6 +16,7 @@ use BitBag\OpenMarketplace\Api\Messenger\CommandHandler\Vendor\UpdateProductList
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
@@ -27,10 +28,15 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 final class UpdateProductListingHandlerSpec extends ObjectBehavior
 {
     public function let(
+        ListingPersisterInterface $listingPersister,
         ObjectManager $manager,
-        ImageUploaderInterface $imageUploader
+        ListingRepositoryInterface $productListingRepository
     ): void {
-        $this->beConstructedWith($manager, $imageUploader);
+        $this->beConstructedWith(
+            $listingPersister,
+            $manager,
+            $productListingRepository
+        );
     }
 
     public function it_is_initializable(): void
@@ -43,32 +49,27 @@ final class UpdateProductListingHandlerSpec extends ObjectBehavior
         Draft $productDraft,
         Draft $previousProductDraft,
         VendorInterface $vendor,
-        ListingPersisterInterface $productListingFromDraftFactory,
+        ListingInterface $modelProductListing,
         ListingInterface $productListing,
-        ImageInterface $image,
-        ImageUploaderInterface $imageUploader,
-        ObjectManager $manager
+        ListingRepositoryInterface $productListingRepository,
+        ImageInterface $image
     ): void {
+        $modelProductListing->getId()->willReturn(10);
+
         $updateProductListing->getProductDraft()->willReturn($productDraft);
         $updateProductListing->getVendor()->willReturn($vendor);
-        $updateProductListing->getProductListing()->willReturn($productListing);
+        $updateProductListing->getProductListing()->willReturn($modelProductListing);
+        $productListingRepository->find(10)->willReturn($productListing);
 
         $previousProductDraft->getVersionNumber()->willReturn(1);
         $productListing->getLatestDraft()->willReturn($previousProductDraft);
 
-        $productDraft->setVersionNumber(1)->shouldBeCalled();
-        $productDraft->incrementVersion()->shouldBeCalled();
         $previousProductDraft->getCode()->willReturn('code');
         $productDraft->setCode('code')->shouldBeCalled();
+        $productDraft->setProductListing($productListing)->shouldBeCalled();
 
         $images = new ArrayCollection([$image->getWrappedObject()]);
         $productDraft->getImages()->willReturn($images);
-
-        $image->setOwner($productDraft)->shouldBeCalled();
-        $imageUploader->upload(Argument::any())->shouldBeCalled();
-
-        $productListing->insertDraft($productDraft)->shouldBeCalled();
-        $manager->persist($productListing)->shouldBeCalled();
 
         $this($updateProductListing)->shouldReturn($productListing);
     }

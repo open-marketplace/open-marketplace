@@ -45,8 +45,6 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
         VendorInterface $vendor,
         ListingPersisterInterface $productListingFromDraftFactory,
         ListingInterface $productListing,
-        ImageInterface $image,
-        ImageUploaderInterface $imageUploader,
         ObjectManager $manager
     ): void {
         $createProductListing->getProductDraft()->willReturn($productDraft);
@@ -54,13 +52,7 @@ final class CreateProductListingHandlerSpec extends ObjectBehavior
 
         $productDraft->getVendor()->willReturn($vendor);
 
-        $productListingFromDraftFactory->createNewProductListing($productDraft, $vendor)->willReturn($productDraft);
-
-        $images = new ArrayCollection([$image->getWrappedObject()]);
-        $productDraft->getImages()->willReturn($images);
-
-        $image->setOwner($productDraft)->shouldBeCalled();
-        $imageUploader->upload(Argument::any())->shouldBeCalled();
+        $productListingFromDraftFactory->createNewProductListing($productDraft, $vendor);
 
         $productDraft->getProductListing()->willReturn($productListing);
         $manager->persist($productListing)->shouldBeCalled();

@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Api\SectionResolver;
 
+use BitBag\OpenMarketplace\Api\Factory\ShopVendorApiSectionFactoryInterface;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiSection;
 use BitBag\OpenMarketplace\Api\SectionResolver\ShopVendorApiUriBasedSectionResolver;
-use BitBag\OpenMarketplace\Factory\ShopVendorApiSectionFactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionCannotBeResolvedException;
 use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;

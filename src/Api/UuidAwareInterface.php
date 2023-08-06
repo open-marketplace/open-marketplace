@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Entity;
+namespace BitBag\OpenMarketplace\Api;
 
 use Ramsey\Uuid\UuidInterface;
 

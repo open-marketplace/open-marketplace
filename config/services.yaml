@@ -4,6 +4,7 @@ parameters:
     locale: en_US
 
 imports:
+    - { resource: "../src/Api/Resources/services.xml" }
     - { resource: "../src/Component/Core/Admin/Resources/services.xml" }
     - { resource: "../src/Component/Core/Common/Resources/services.xml" }
     - { resource: "../src/Component/Core/Shop/Resources/services.xml" }

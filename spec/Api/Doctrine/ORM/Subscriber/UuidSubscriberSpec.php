@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace spec\BitBag\OpenMarketplace\Doctrine\ORM\Subscriber;
+namespace spec\BitBag\OpenMarketplace\Api\Doctrine\ORM\Subscriber;
 
-use BitBag\OpenMarketplace\Doctrine\ORM\Subscriber\UuidSubscriber;
-use BitBag\OpenMarketplace\Entity\UuidAwareInterface;
+use BitBag\OpenMarketplace\Api\Doctrine\ORM\Subscriber\UuidSubscriber;
+use BitBag\OpenMarketplace\Api\UuidAwareInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;

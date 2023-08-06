@@ -9,9 +9,7 @@
             <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon</argument>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Factory\ShopVendorApiSectionFactory"
-                 id="bitbag.open_marketplace.factory.shop_vendor_api_section_factory">
-        </service>
+
     </services>
 </container>
 

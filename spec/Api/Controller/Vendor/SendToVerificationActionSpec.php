@@ -30,40 +30,26 @@ final class SendToVerificationActionSpec extends ObjectBehavior
         $this->shouldHaveType(SendToVerificationAction::class);
     }
 
-    public function it_do_nothing_if_last_draft_is_null(
+    public function it_does_nothing_when_cant_be_verified(
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ListingInterface $productListing,
     ): void {
-        $productListing->getLatestDraft()->willReturn(null);
+        $productListing->canBeVerified()->willReturn(false);
 
-        $this($productListing)->shouldReturn($productListing);
-
-        $productDraftStateMachineTransition->applyIfCan(Argument::any(), DraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldNotHaveBeenCalled();
+        $this->__invoke($productListing)->shouldReturn($productListing);
     }
 
-    public function it_do_nothing_if_last_draft_is_not_in_status_created(
+    public function it_applies_when_can(
         ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         ListingInterface $productListing,
         DraftInterface $productDraft
     ): void {
-        $productDraft->getStatus()->willReturn(DraftInterface::STATUS_VERIFIED);
+        $productListing->canBeVerified()->willReturn(true);
         $productListing->getLatestDraft()->willReturn($productDraft);
 
-        $this($productListing)->shouldReturn($productListing);
+        $productDraftStateMachineTransition->applyIfCan($productDraft, DraftTransitions::TRANSITION_SEND_TO_VERIFICATION)
+            ->shouldBeCalled();
 
-        $productDraftStateMachineTransition->applyIfCan(Argument::any(), DraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldNotHaveBeenCalled();
-    }
-
-    public function it_set_status_in_last_draft(
-        ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
-        ListingInterface $productListing,
-        DraftInterface $productDraft
-    ): void {
-        $productDraft->getStatus()->willReturn(DraftInterface::STATUS_CREATED);
-        $productListing->getLatestDraft()->willReturn($productDraft);
-
-        $this($productListing)->shouldReturn($productListing);
-
-        $productDraftStateMachineTransition->applyIfCan(Argument::any(), DraftTransitions::TRANSITION_SEND_TO_VERIFICATION)->shouldHaveBeenCalled();
+        $this->__invoke($productListing)->shouldReturn($productListing);
     }
 }
