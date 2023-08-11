@@ -1,6 +1,12 @@
 open_marketplace:
     resource: "../src/Resources/config/routing.yml"
 
+open_marketplace_admin:
+    resource: "../src/Component/Core/Admin/Resources/routing.yaml"
+
+open_marketplace_shop:
+    resource: "../src/Component/Core/Shop/Resources/routing.yaml"
+
 open_marketplace_vendor:
     resource: "../src/Component/Core/Vendor/Resources/routing.yaml"
 

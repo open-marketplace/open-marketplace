@@ -1,4 +1,0 @@
-open_marketplace_admin_vendor_disable:
-    path: /vendors/{id}/disable
-    methods: [PUT]
-    controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:enablingVendorAction

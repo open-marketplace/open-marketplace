@@ -1,6 +1,47 @@
+open_marketplace_vendor_shop_page_index:
+    path: /{_locale}/vendors/{vendor_slug}
+    methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "Context/Vendor/VendorPage/index.html.twig"
+            grid: open_marketplace_vendor_shop_product
+
+open_marketplace_vendor_shop_product_index:
+    path: /{_locale}/vendors/{vendor_slug}/taxons/{slug}
+    methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+        slug: .+(?<!/)
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "Context/Vendor/VendorPage/index.html.twig"
+            grid: open_marketplace_vendor_shop_product
+
+open_marketplace_shop_partial_taxon_show_by_slug:
+    path: /{_locale}/vendors/{vendor_slug}/by-slug/{slug}
+    methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+        slug: .+
+    defaults:
+        _controller: sylius.controller.taxon:showAction
+        _sylius:
+            template: $template
+            repository:
+                method: findOneBySlug
+                arguments:
+                    - $slug
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+
 sylius_shop_checkout_complete:
-    path: /checkout/complete
+    path: /{_locale}/checkout/complete
     methods: [GET, PUT]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
@@ -10,7 +51,7 @@ sylius_shop_checkout_complete:
             repository:
                 method: find
                 arguments:
-                - "expr:service('sylius.context.cart').getCart()"
+                    - "expr:service('sylius.context.cart').getCart()"
             state_machine:
                 graph: sylius_order_checkout
                 transition: complete
@@ -24,8 +65,10 @@ sylius_shop_checkout_complete:
                     validation_groups: 'sylius_checkout_complete'
 
 sylius_shop_account_order_index:
-    path: /account/orders
+    path: /{_locale}/account/orders
     methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
@@ -34,8 +77,10 @@ sylius_shop_account_order_index:
             grid: open_marketplace_account_order
 
 sylius_shop_account_order_show:
-    path: /account/orders/{number}
+    path: /{_locale}/account/orders/{number}
     methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.order:showAction
         _sylius:
@@ -48,8 +93,10 @@ sylius_shop_account_order_show:
                     - "expr:service('sylius.context.customer').getCustomer()"
 
 sylius_shop_checkout_select_shipping:
-    path: /checkout/select-shipping
+    path: /{_locale}/checkout/select-shipping
     methods: [GET, PUT]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
@@ -66,8 +113,10 @@ sylius_shop_checkout_select_shipping:
                 transition: select_shipping
 
 sylius_shop_order_thank_you:
-    path: /thank-you
+    path: /{_locale}/thank-you
     methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: open_marketplace.controller.order.order_controller:thankYouAction
         _sylius:

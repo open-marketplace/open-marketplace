@@ -1,0 +1,152 @@
+open_marketplace:
+    resource: |
+        alias: open_marketplace.conversation
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        except: ['show', 'update', 'bulk_delete']
+        redirect: index
+        grid: open_marketplace_admin_conversation
+        permission: true
+        vars:
+            all:
+                header: open_marketplace.ui.conversations_listing.admin_header
+                subheader: open_marketplace.ui.conversations_listing.admin_subheader
+    type: sylius.resource
+    prefix: /admin
+
+open_marketplace_admin_conversation_create:
+    path: /admin/conversation/create
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_thread
+        _sylius:
+            template: "Context/Admin/Conversation/create.html.twig"
+            redirect: open_marketplace_admin_conversation_show
+            mail_redirect: mvm_vendor_conversation_show
+
+open_marketplace_admin_conversation_show:
+    path: /admin/conversations/{id}
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.show_thread
+        _sylius:
+            template: "Context/Admin/Conversation/show.html.twig"
+
+open_marketplace_admin_conversation_archive:
+    path: /admin/conversations/{id}/archive
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.admin.controller.messaging.send_archive_request
+        _sylius:
+            redirect: open_marketplace_admin_conversation_index
+
+
+open_marketplace_admin_conversation_message_add:
+    path: /admin/conversations/{id}/message/add
+    methods: [GET, POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_message
+        _sylius:
+            redirect: open_marketplace_admin_conversation_show
+            mail_redirect: open_marketplace_admin_conversation_show
+
+bitbag_open_marketplace_conversation_category:
+    resource: |
+        alias: open_marketplace.conversation_category
+        section: admin
+        except: ['show']
+        templates: "@SyliusAdmin\\Crud"
+        grid: conversation_category
+    type: sylius.resource
+    prefix: /admin
+
+
+open_marketplace_admin_product_listing_show:
+    path: /admin/product-listings/{id}
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.admin.controller.product_listing.show
+        _sylius:
+            section: admin
+            template: "Context/Admin/ProductListing/show.html.twig"
+            permission: true
+
+open_marketplace_admin_product_listing_accept:
+    path: /admin/product-listings/{id}/accept
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.admin.controller.product_listing.accept
+        _sylius:
+            section: admin
+            permission: true
+
+open_marketplace_admin_product_listing_reject:
+    path: /admin/product-listings/{id}/reject
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.admin.controller.product_listing.reject
+        _sylius:
+            section: admin
+            permission: true
+
+open_marketplace_admin_product_listing_restore:
+    path: /admin/product-listings-restore/{id}
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.admin.controller.product_listing.restore
+        _sylius:
+            section: admin
+            permission: true
+
+open_marketplace_admin_product_listing:
+    resource: |
+        alias: open_marketplace.product_listing
+        section: admin
+        templates: '@SyliusAdmin/Crud'
+        only: ['index']
+        redirect: index
+        grid: open_marketplace_admin_product_listing
+    type: sylius.resource
+    prefix: /admin
+
+open_marketplace_admin_vendor:
+    resource: |
+        alias: open_marketplace.vendor
+        section: admin
+        except: ['show']
+        templates: "@SyliusAdmin\\Crud"
+        grid: open_marketplace_admin_vendor
+    type: sylius.resource
+    prefix: /admin
+
+open_marketplace_admin_vendor_show:
+    path: /admin/vendors/{id}
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.controller.vendor:showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: 'Context/Admin/Vendor/show.html.twig'
+
+open_marketplace_admin_vendor_update:
+    path: /admin/vendors/{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: open_marketplace.controller.vendor:updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: 'Context/Admin/Vendor/update.html.twig'
+
+open_marketplace_admin_vendor_disable:
+    path: /admin/vendors/{id}/disable
+    methods: [PUT]
+    controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:enablingVendorAction
+
+open_marketplace_admin_vendor_verify:
+    path: /admin/vendors/{id}/verify
+    methods: [PUT]
+    controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:verifyVendorAction
+
+open_marketplace_admin_vendor_enable:
+    path: /admin/vendors/{id}/enable
+    methods: [PUT]
+    controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:enablingVendorAction
+
