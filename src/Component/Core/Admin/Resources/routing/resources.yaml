@@ -1,0 +1,46 @@
+open_marketplace:
+    resource: |
+        alias: open_marketplace.conversation
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        except: ['show', 'update', 'bulk_delete']
+        redirect: index
+        grid: open_marketplace_admin_conversation
+        permission: true
+        vars:
+            all:
+                header: open_marketplace.ui.conversations_listing.admin_header
+                subheader: open_marketplace.ui.conversations_listing.admin_subheader
+    type: sylius.resource
+    prefix: /admin
+
+bitbag_open_marketplace_conversation_category:
+    resource: |
+        alias: open_marketplace.conversation_category
+        section: admin
+        except: ['show']
+        templates: "@SyliusAdmin\\Crud"
+        grid: conversation_category
+    type: sylius.resource
+    prefix: /admin
+
+open_marketplace_admin_product_listing:
+    resource: |
+        alias: open_marketplace.product_listing
+        section: admin
+        templates: '@SyliusAdmin/Crud'
+        only: ['index']
+        redirect: index
+        grid: open_marketplace_admin_product_listing
+    type: sylius.resource
+    prefix: /admin
+
+open_marketplace_admin_vendor:
+    resource: |
+        alias: open_marketplace.vendor
+        section: admin
+        except: ['show']
+        templates: "@SyliusAdmin\\Crud"
+        grid: open_marketplace_admin_vendor
+    type: sylius.resource
+    prefix: /admin

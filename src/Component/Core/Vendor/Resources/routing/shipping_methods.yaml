@@ -1,0 +1,18 @@
+vendor_shipping_methods:
+    path: /{_locale}/account/vendor/shipping-methods
+    methods: [GET, POST]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:updateAction
+        _sylius:
+            template: 'Context/Vendor/ShippingMethods/index.html.twig'
+            form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\VendorShippingMethodsType
+            event: update
+            repository:
+                method: findOneById
+                arguments:
+                    id: "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor().getId()"
+            flash: open_marketplace.ui.shipping_method_updated
+            redirect:
+                route: vendor_shipping_methods

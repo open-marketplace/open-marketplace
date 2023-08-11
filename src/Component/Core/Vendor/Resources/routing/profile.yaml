@@ -1,0 +1,41 @@
+vendor_profile:
+    path: /{_locale}/account/vendor/profile
+    methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:showAction
+        _sylius:
+            template: "Context/Vendor/Profile/index.html.twig"
+
+vendor_profile_update:
+    path: /{_locale}/account/vendor/profile/update
+    methods: [GET, POST]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    defaults:
+        autowire: true
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:customUpdateAction
+        _sylius:
+            template: "Context/Vendor/Profile/update.html.twig"
+            form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType
+            event: update
+            flash: open_marketplace.ui.vendor_updated
+            redirect:
+                route: sylius_shop_account_dashboard
+
+confirm_profile_update_link:
+    path: /{_locale}/account/vendor/profile-update/{token}
+    methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.vendor.controller.profile.confirm_update
+        _sylius:
+            template: "Context/Vendor/Profile/update.html.twig"
+            form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType
+            event: update
+            repository:
+                method: findOneByActivationToken
+                arguments:
+                    token: $token

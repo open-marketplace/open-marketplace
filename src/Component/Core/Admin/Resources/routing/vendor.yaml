@@ -1,0 +1,35 @@
+open_marketplace_admin_vendor_show:
+    path: /admin/vendors/{id}
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.controller.vendor:showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: 'Context/Admin/Vendor/show.html.twig'
+
+open_marketplace_admin_vendor_update:
+    path: /admin/vendors/{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: open_marketplace.controller.vendor:updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: 'Context/Admin/Vendor/update.html.twig'
+
+open_marketplace_admin_vendor_disable:
+    path: /admin/vendors/{id}/disable
+    methods: [PUT]
+    controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:enablingVendorAction
+
+open_marketplace_admin_vendor_verify:
+    path: /admin/vendors/{id}/verify
+    methods: [PUT]
+    controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:verifyVendorAction
+
+open_marketplace_admin_vendor_enable:
+    path: /admin/vendors/{id}/enable
+    methods: [PUT]
+    controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:enablingVendorAction
+
