@@ -1,3 +1,0 @@
-vendor_register:
-  path: /vendor_register
-  controller: bitbag.open_marketplace.controller.register_vendor_action
