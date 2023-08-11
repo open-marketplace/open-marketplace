@@ -108,7 +108,6 @@ final class Kernel extends BaseKernel
     private function getConfigurationDirectories(): iterable
     {
         yield $this->getProjectDir() . '/config';
-        yield $this->getProjectDir() . '/src/Resources/config';
         $syliusConfigDir = $this->getProjectDir() . '/config/sylius/' . SyliusKernel::MAJOR_VERSION . '.' . SyliusKernel::MINOR_VERSION;
         if (is_dir($syliusConfigDir)) {
             yield $syliusConfigDir;
