@@ -1,19 +1,15 @@
-bitbag_open_marketplace_vendor_draft_attribute_index:
-    path: /{_locale}/account/vendor/product-attributes/index
+open_marketplace_vendor_attributes_index:
+    path: /product-attributes/index
     methods: [ GET, POST ]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: open_marketplace.controller.product_draft_attribute:indexAction
         _sylius:
             template: "Context/Vendor/DraftAttributes/index.html.twig"
             grid: vendor_draft_attribute
 
-open_marketplace_admin_draft_attribute_create:
-    path: /{_locale}/account/vendor/product-attributes/{type}/new
+open_marketplace_vendor_attributes_create:
+    path: /product-attributes/{type}/new
     methods: [GET, POST]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:createAction
         _sylius:
@@ -22,7 +18,7 @@ open_marketplace_admin_draft_attribute_create:
                 arguments:
                     type: $type
             template: "Context/Vendor/DraftAttributes/create.html.twig"
-            redirect: bitbag_open_marketplace_vendor_draft_attribute_index
+            redirect: open_marketplace_vendor_attributes_index
             permission: true
             vars:
                 subheader: sylius.ui.manage_attributes_of_your_products
@@ -33,14 +29,12 @@ open_marketplace_admin_draft_attribute_create:
                         type: $type
 
 open_marketplace_product_draft_attribute_update:
-    path: /{_locale}/account/vendor/product-attributes/{id}/update
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    path: /product-attributes/{id}/update
     defaults:
         _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:updateAction
         _sylius:
             template: "Context/Vendor/DraftAttributes/update.html.twig"
-            redirect: bitbag_open_marketplace_vendor_draft_attribute_index
+            redirect: open_marketplace_vendor_attributes_index
             vars:
                 templates:
                     form: "@SyliusAdmin/ProductAttribute/_form.html.twig"
@@ -48,38 +42,36 @@ open_marketplace_product_draft_attribute_update:
                     parameters:
                         id: $id
 
+open_marketplace_vendor_attributes_update:
+    alias: open_marketplace_product_draft_attribute_update
+
 open_marketplace_product_draft_attribute_delete:
-    path: /{_locale}/account/vendor/product-attributes/{id}/delete
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    path: /product-attributes/{id}/delete
     defaults:
         _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:deleteAction
         _sylius:
-            redirect: bitbag_open_marketplace_vendor_draft_attribute_index
+            redirect: open_marketplace_vendor_attributes_index
 
-vendor_get_attribute_types:
-    path: /{_locale}/account/attribute-types
+open_marketplace_vendor_attributes_delete:
+    alias: open_marketplace_product_draft_attribute_delete
+
+open_marketplace_vendor_attributes_types:
+    path: /attribute-types
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:getAttributeTypesAction
         template: "Context/Vendor/DraftAttributes/attributeTypes.html.twig"
 
-bitbag_vendor_get_product_attributes:
-    path: /{_locale}/account/attributes
+open_marketplace_vendor_attributes_listing:
+    path: /attributes
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:renderAttributesAction
         template: "Context/Vendor/ProductListing/form/_attributeChoice.html.twig"
 
-bitbag_vendor_render_attribute_forms:
-    path: /{_locale}/account/attribute-forms
+open_marketplace_vendor_attributes_render_forms:
+    path: /attribute-forms
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:renderAttributeValueFormsAction
         template: "Context/Vendor/ProductListing/form/attributeValues.html.twig"

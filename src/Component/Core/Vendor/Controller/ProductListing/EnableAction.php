@@ -48,6 +48,6 @@ final class EnableAction
         $this->entityManager->persist($listing);
         $this->entityManager->flush();
 
-        return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
+        return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listings_index'));
     }
 }

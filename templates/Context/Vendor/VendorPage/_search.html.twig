@@ -4,7 +4,7 @@
 {% set slug = app.request.attributes.get('slug') %}
 {% endif %}
 <div class="ui segment">
-    <form method="get" action="{{ path('open_marketplace_vendor_shop_product_index', {'slug': slug, 'vendor_slug': vendor.slug}) }}" class="ui loadable form">
+    <form method="get" action="{{ path('open_marketplace_shop_vendor_page_product_index', {'slug': slug, 'vendor_slug': vendor.slug}) }}" class="ui loadable form">
         <div class="ui stackable grid" id="searchbar">
             <div class="column" id="searchbarTextField">
                 {% for filter in products.definition.enabledFilters %}
@@ -14,7 +14,7 @@
             <div class="right aligned column" id="searchbarButtons">
                 <div class="ui buttons">
                     <button type="submit" class="ui primary icon labeled button" {{ sylius_test_html_attribute('search') }}><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>
-                    <a href="{{ path('open_marketplace_vendor_shop_product_index', {'slug': slug, 'vendor_slug': vendor.slug}) }}" class="ui negative icon labeled button" {{ sylius_test_html_attribute('clear') }}>
+                    <a href="{{ path('open_marketplace_shop_vendor_page_product_index', {'slug': slug, 'vendor_slug': vendor.slug}) }}" class="ui negative icon labeled button" {{ sylius_test_html_attribute('clear') }}>
                         <i class="cancel icon"></i> {{ 'sylius.ui.clear'|trans }}
                     </a>
                 </div>

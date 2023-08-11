@@ -51,7 +51,7 @@ sylius_grid:
             label: open_marketplace.ui.create_new_product
             options:
               link:
-                route: open_marketplace_vendor_product_listing_create_product
+                route: open_marketplace_vendor_product_listings_create
         item:
           dropdown:
             type: product_listing_dropdown

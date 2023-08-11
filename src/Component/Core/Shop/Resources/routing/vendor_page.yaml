@@ -1,19 +1,16 @@
-open_marketplace_vendor_shop_page_index:
-    path: /{_locale}/vendors/{vendor_slug}
+open_marketplace_shop_vendor_page_index:
+    path: /{vendor_slug}
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
             template: "Context/Vendor/VendorPage/index.html.twig"
             grid: open_marketplace_vendor_shop_product
 
-open_marketplace_vendor_shop_product_index:
-    path: /{_locale}/vendors/{vendor_slug}/taxons/{slug}
+open_marketplace_shop_vendor_page_product_index:
+    path: /{vendor_slug}/taxons/{slug}
     methods: [GET]
     requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
         slug: .+(?<!/)
     defaults:
         _controller: sylius.controller.product:indexAction
@@ -21,11 +18,10 @@ open_marketplace_vendor_shop_product_index:
             template: "Context/Vendor/VendorPage/index.html.twig"
             grid: open_marketplace_vendor_shop_product
 
-open_marketplace_shop_partial_taxon_show_by_slug:
-    path: /{_locale}/vendors/{vendor_slug}/by-slug/{slug}
+open_marketplace_shop_vendor_page_partial_taxon_show_by_slug:
+    path: /{vendor_slug}/by-slug/{slug}
     methods: [GET]
     requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
         slug: .+
     defaults:
         _controller: sylius.controller.taxon:showAction

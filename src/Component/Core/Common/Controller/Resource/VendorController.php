@@ -110,7 +110,7 @@ final class VendorController extends ResourceController
         if (null !== $pendingUpdate) {
             $this->addFlash('error', 'sylius.user.verify_email_request');
 
-            return $this->redirectToRoute('vendor_profile');
+            return $this->redirectToRoute('open_marketplace_vendor_profile_details');
         }
 
         $resource = $vendor;

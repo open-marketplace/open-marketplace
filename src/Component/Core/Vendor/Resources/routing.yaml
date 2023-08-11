@@ -30,4 +30,5 @@ open_marketplace_vendor_shipping_methods:
 
 open_marketplace_vendor_taxonomy:
     resource: "routing/taxonomy.yaml"
+    prefix: /taxons
 

@@ -117,6 +117,6 @@ sylius_grid:
                         label: sylius.ui.show
                         options:
                             link:
-                                route: open_marketplace_vendor_order_show
+                                route: open_marketplace_vendor_orders_show
                                 parameters:
                                     id: resource.id

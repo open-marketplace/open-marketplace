@@ -1,8 +1,6 @@
-open_marketplace_ajax_taxon_root_nodes:
-    path: /{_locale}/account/vendor/root-nodes
+open_marketplace_vendor_taxonomy_ajax_taxon_root_nodes:
+    path: /root-nodes
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _format: json
@@ -12,11 +10,9 @@ open_marketplace_ajax_taxon_root_nodes:
             repository:
                 method: findRootNodes
 
-open_marketplace_ajax_taxon_leafs:
-    path: /{_locale}/account/vendor/leafs
+open_marketplace_vendor_taxonomy_ajax_taxon_leafs:
+    path: /leafs
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _format: json
@@ -28,11 +24,9 @@ open_marketplace_ajax_taxon_leafs:
                 arguments:
                     parentCode: $parentCode
 
-open_marketplace_ajax_taxon_by_code:
-    path: /{_locale}/account/vendor/leaf
+open_marketplace_vendor_taxonomy_ajax_taxon_by_code:
+    path: /leaf
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _format: json
@@ -43,11 +37,9 @@ open_marketplace_ajax_taxon_by_code:
                 method: findBy
                 arguments: [code: $code]
 
-open_marketplace_ajax_taxon_by_name_phrase:
-    path: /{_locale}/account/vendor/search
+open_marketplace_vendor_taxonomy_ajax_taxon_by_name_phrase:
+    path: /search
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _format: json
@@ -61,8 +53,8 @@ open_marketplace_ajax_taxon_by_name_phrase:
                     locale: null
                     limit: 25
 
-open_marketplace_ajax_generate_taxon_slug:
-    path: /{_locale}/account/vendor/generate-slug/
+open_marketplace_vendor_taxonomy_ajax_generate_taxon_slug:
+    path: /generate-slug/
     methods: [GET]
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
@@ -70,8 +62,8 @@ open_marketplace_ajax_generate_taxon_slug:
         _controller: sylius.controller.taxon_slug:generateAction
         _format: json
 
-open_marketplace_ajax_taxon_move:
-    path: /{_locale}/account/vendor/{id}/move
+open_marketplace_vendor_taxonomy_ajax_taxon_move:
+    path: /{id}/move
     methods: [PUT]
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$

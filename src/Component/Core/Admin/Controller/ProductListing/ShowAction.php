@@ -56,7 +56,7 @@ final class ShowAction
 
         $form->handleRequest($request);
         $draftViewURL = $this->router->generate(
-            'open_marketplace_vendor_product_draft_show_product',
+            'open_marketplace_vendor_product_listings_show',
             ['id' => $latestProductDraft->getId()],
             UrlGenerator::ABSOLUTE_URL
         );

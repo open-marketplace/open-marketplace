@@ -1,8 +1,5 @@
-open_marketplace_shop_account:
-    resource: "routing/account.yaml"
-
-open_marketplace_shop_checkout:
-    resource: "routing/checkout.yaml"
-
 open_marketplace_shop_vendor_page:
     resource: "routing/vendor_page.yaml"
+    prefix: /{_locale}/vendors
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$

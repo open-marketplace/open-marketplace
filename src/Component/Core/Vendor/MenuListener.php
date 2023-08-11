@@ -46,7 +46,7 @@ final class MenuListener
 
         if (null !== $vendor && false === $vendor->isEnabled()) {
             $menu
-                ->addChild('Conversations', ['route' => 'open_marketplace_vendor_conversation_index'])
+                ->addChild('Conversations', ['route' => 'open_marketplace_vendor_messaging_conversation_index'])
                 ->setLabel('open_marketplace.ui.menu.conversations')
                 ->setLabelAttribute('icon', 'envelope open');
 
@@ -55,46 +55,46 @@ final class MenuListener
 
         if (null === $vendor || !$vendor->isVerified()) {
             $menu
-                ->addChild('new', ['route' => 'vendor_register_form'])
+                ->addChild('new', ['route' => 'open_marketplace_vendor_register_form'])
                 ->setLabel('open_marketplace.ui.become_a_vendor')
                 ->setLabelAttribute('icon', 'star');
         } else {
             $menu
-                ->addChild('Product List', ['route' => 'open_marketplace_vendor_product_listing_index'])
+                ->addChild('Product List', ['route' => 'open_marketplace_vendor_product_listings_index'])
                 ->setLabel('open_marketplace.ui.product_list')
                 ->setLabelAttribute('icon', 'inbox');
 
             $menu
-                ->addChild('Inventory', ['route' => 'vendor_product_variant_index'])
+                ->addChild('Inventory', ['route' => 'open_marketplace_vendor_inventory_index'])
                 ->setLabel('open_marketplace.ui.inventory')
                 ->setLabelAttribute('icon', 'clipboard');
 
             $menu
-                ->addChild('Attributes', ['route' => 'bitbag_open_marketplace_vendor_draft_attribute_index'])
+                ->addChild('Attributes', ['route' => 'open_marketplace_vendor_attributes_index'])
                 ->setLabel('open_marketplace.ui.draft_attributes')
                 ->setLabelAttribute('icon', 'tag');
 
             $menu
-                ->addChild('Order List', ['route' => 'open_marketplace_order_listing'])
+                ->addChild('Order List', ['route' => 'open_marketplace_vendor_orders_listing'])
                 ->setLabel('open_marketplace.ui.order_list')
                 ->setLabelAttribute('icon', 'suitcase');
 
             $menu
-                ->addChild('Clients', ['route' => 'open_marketplace_customer_index'])
+                ->addChild('Clients', ['route' => 'open_marketplace_vendor_customers_index'])
                 ->setLabel('open_marketplace.ui.clients')
                 ->setLabelAttribute('icon', 'users');
 
             $menu
-                ->addChild('Shipping', ['route' => 'vendor_shipping_methods'])
+                ->addChild('Shipping', ['route' => 'open_marketplace_vendor_shipping_methods_form'])
                 ->setLabel('open_marketplace.ui.shipping_methods')
                 ->setLabelAttribute('icon', 'shipping');
 
             $menu
-                ->addChild('Profile', ['route' => 'vendor_profile'])
+                ->addChild('Profile', ['route' => 'open_marketplace_vendor_profile_details'])
                 ->setLabel('open_marketplace.ui.vendor_profile')
                 ->setLabelAttribute('icon', 'pencil');
             $menu
-                ->addChild('Conversations', ['route' => 'open_marketplace_vendor_conversation_index'])
+                ->addChild('Conversations', ['route' => 'open_marketplace_vendor_messaging_conversation_index'])
                 ->setLabel('open_marketplace.ui.menu.conversations')
                 ->setLabelAttribute('icon', 'envelope open');
             $menu
@@ -126,7 +126,7 @@ final class MenuListener
         if ($this->security->isGranted(OrderOperationVoter::CANCEL, $order)) {
             $menu
                 ->addChild('cancel', [
-                    'route' => 'open_marketplace_vendor_order_cancel',
+                    'route' => 'open_marketplace_vendor_orders_cancel',
                     'routeParameters' => [
                         'id' => $order->getId(),
                         '_csrf_token' => $this->csrfTokenManager->getToken((string) $order->getId())->getValue(),
@@ -160,7 +160,7 @@ final class MenuListener
         $customer = $options['customer'];
         $menu
             ->addChild('order_index', [
-                'route' => 'open_marketplace_vendor_customer_order_index',
+                'route' => 'open_marketplace_vendor_customers_order_index',
                 'routeParameters' => ['id' => $customer->getId()],
             ])
             ->setAttribute('type', 'show')

@@ -1,10 +1,6 @@
-
-
-vendor_product_variant_index:
-    path: /{_locale}/account/vendor/product-variants/inventory
+open_marketplace_vendor_inventory_index:
+    path: /product-variants/inventory
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
@@ -19,18 +15,16 @@ vendor_product_variant_index:
                 icon: cubes
                 subheader: sylius.ui.manage_variants
 
-vendor_product_variant_update:
-    path: /{_locale}/account/vendor/product-variants/{id}/inventory
+open_marketplace_vendor_inventory_update:
+    path: /product-variants/{id}/inventory
     methods: [ GET, PUT ]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
             template: "Context/Vendor/Inventory/update.html.twig"
             grid: sylius_admin_product_variant
             redirect:
-                route: vendor_product_variant_index
+                route: open_marketplace_vendor_inventory_index
             repository:
                 method: findOneById
                 arguments:

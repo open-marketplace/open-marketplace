@@ -1,5 +1,5 @@
 open_marketplace_admin_product_listing_show:
-    path: /admin/product-listings/{id}
+    path: /product-listings/{id}
     defaults:
         _controller: bitbag.open_marketplace.component.core.admin.controller.product_listing.show
         _sylius:
@@ -8,7 +8,7 @@ open_marketplace_admin_product_listing_show:
             permission: true
 
 open_marketplace_admin_product_listing_accept:
-    path: /admin/product-listings/{id}/accept
+    path: /product-listings/{id}/accept
     defaults:
         _controller: bitbag.open_marketplace.component.core.admin.controller.product_listing.accept
         _sylius:
@@ -16,7 +16,7 @@ open_marketplace_admin_product_listing_accept:
             permission: true
 
 open_marketplace_admin_product_listing_reject:
-    path: /admin/product-listings/{id}/reject
+    path: /product-listings/{id}/reject
     defaults:
         _controller: bitbag.open_marketplace.component.core.admin.controller.product_listing.reject
         _sylius:
@@ -24,7 +24,7 @@ open_marketplace_admin_product_listing_reject:
             permission: true
 
 open_marketplace_admin_product_listing_restore:
-    path: /admin/product-listings-restore/{id}
+    path: /product-listings-restore/{id}
     defaults:
         _controller: bitbag.open_marketplace.component.core.admin.controller.product_listing.restore
         _sylius:

@@ -66,7 +66,7 @@ class AccessDeniedListener implements EventSubscriberInterface
             $currentVendor = $this->vendorProvider->getVendor();
             if (false === $currentVendor->isEnabled()) {
                 $event->setResponse(new RedirectResponse(
-                    $this->router->generate('open_marketplace_vendor_conversation_index')
+                    $this->router->generate('open_marketplace_vendor_messaging_conversation_index')
                 ));
                 $event->stopPropagation();
             }

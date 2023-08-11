@@ -20,7 +20,7 @@
         </div>
         <div class="middle aligned six wide column">
             {% if is_pending_vendor_profile_update() is same as true %}
-                <a href="{{ path('vendor_profile_update') }}" class="ui right floated blue button">
+                <a href="{{ path('open_marketplace_vendor_profile_update') }}" class="ui right floated blue button">
                     <i class="pencil icon"></i>
                     {{ 'sylius.ui.edit'|trans }}
                 </a>

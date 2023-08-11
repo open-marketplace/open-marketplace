@@ -17,7 +17,7 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
 {
     public function getRouteName(): string
     {
-        return 'open_marketplace_vendor_shop_page_index';
+        return 'open_marketplace_shop_vendor_page_index';
     }
 
     public function getFirstProductNameFromList(): string

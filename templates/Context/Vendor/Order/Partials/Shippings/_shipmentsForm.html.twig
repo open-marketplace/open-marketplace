@@ -1,5 +1,5 @@
 <div class="ui segment">
-    {{ form_start(form, {'action': path('bitbag_open_marketplace_vendor_order_shipment_ship', {'id': shipment.id, 'orderId': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {{ form_start(form, {'action': path('open_marketplace_vendor_orders_shipment_ship', {'id': shipment.id, 'orderId': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <input type="hidden" name="_method" value="PUT">
     <div class="ui fluid action input">
         {{ form_widget(form.tracking, {'attr': {'placeholder': 'sylius.ui.tracking_code'|trans ~ '...'}}) }}

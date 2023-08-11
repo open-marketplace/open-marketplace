@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class ProductListingCodeValidator extends ConstraintValidator
 {
-    public const PRODUCT_LISTING_CREATE_PRODUCT_ROUTE = 'open_marketplace_vendor_product_listing_create_product';
+    public const PRODUCT_LISTING_CREATE_PRODUCT_ROUTE = 'open_marketplace_vendor_product_listings_create';
 
     public function __construct(
         private ListingRepositoryInterface $productListingRepository,

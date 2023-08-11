@@ -55,7 +55,7 @@ sylius_grid:
                         label: sylius.ui.show
                         options:
                             link:
-                                route: open_marketplace_vendor_customer_show
+                                route: open_marketplace_vendor_customers_show
                                 parameters:
                                     id: resource.id
                     show_orders:
@@ -63,6 +63,6 @@ sylius_grid:
                         label: sylius.ui.show_orders
                         options:
                             link:
-                                route: open_marketplace_vendor_customer_order_index
+                                route: open_marketplace_vendor_customers_order_index
                                 parameters:
                                     id: resource.id

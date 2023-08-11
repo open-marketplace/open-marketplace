@@ -62,7 +62,7 @@ sylius_grid:
                         type: update
                         options:
                             link:
-                                route: vendor_product_variant_update
+                                route: open_marketplace_vendor_inventory_update
                                 parameters:
                                     id: resource.id
                                     productId: $productId

@@ -47,6 +47,6 @@ final class RemoveAction
         $this->entityManager->flush();
         $this->flashBag->set('success', 'open_marketplace.ui.removed');
 
-        return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listing_index'));
+        return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listings_index'));
     }
 }

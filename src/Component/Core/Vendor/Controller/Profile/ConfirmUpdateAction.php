@@ -35,7 +35,7 @@ final class ConfirmUpdateAction
     public function __invoke(string $token): Response
     {
         $vendorProfileUpdateData = $this->entityManager->getRepository(ProfileUpdate::class)->findOneBy(['token' => $token]);
-        $profileRoot = $this->router->generate('vendor_profile');
+        $profileRoot = $this->router->generate('open_marketplace_vendor_profile_details');
         $vendorIsGranted = $this->security->isGranted(TokenOwningVoter::UPDATE, $vendorProfileUpdateData);
         if ($vendorIsGranted && null !== $vendorProfileUpdateData) {
             $this->vendorProfileUpdateService->updateVendorFromPendingData($vendorProfileUpdateData);

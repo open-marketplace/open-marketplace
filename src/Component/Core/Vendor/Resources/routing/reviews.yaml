@@ -1,8 +1,6 @@
 open_marketplace_vendor_product_review_index:
-    path: /{_locale}/account/vendor/product-reviews
+    path: /product-reviews
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.product_review:indexAction
         _sylius:
@@ -10,10 +8,8 @@ open_marketplace_vendor_product_review_index:
             grid: open_marketplace_vendor_product_review
 
 open_marketplace_vendor_product_review_edit:
-    path: /{_locale}/account/vendor/product-reviews/{id}/edit
+    path: /product-reviews/{id}/edit
     methods: [GET, POST]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.product_review:updateAction
         _sylius:
@@ -22,20 +18,16 @@ open_marketplace_vendor_product_review_edit:
             form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductReviewType
 
 open_marketplace_vendor_product_review_delete:
-    path: /{_locale}/account/vendor/product-reviews/{id}/delete
+    path: /product-reviews/{id}/delete
     methods: [DELETE]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.product_review:deleteAction
         _sylius:
             redirect: referer
 
 open_marketplace_vendor_product_review_accept:
-    path: /{_locale}/account/vendor/product-review/{id}/accept
+    path: /product-review/{id}/accept
     methods: [PATCH]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.product_review:applyStateMachineTransitionAction
         _sylius:
@@ -46,10 +38,8 @@ open_marketplace_vendor_product_review_accept:
             flash: sylius.review.accept
 
 open_marketplace_vendor_product_review_reject:
-    path: /{_locale}/account/vendor/product-review/{id}/reject
+    path: /product-review/{id}/reject
     methods: [PATCH]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.product_review:applyStateMachineTransitionAction
         _sylius:

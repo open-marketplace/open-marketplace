@@ -26,18 +26,18 @@
             </h1>
         </div>
         <div class="middle aligned column">
-            <a href="{{ path('open_marketplace_vendor_conversation_create') }}" class="ui right floated blue button">
+            <a href="{{ path('open_marketplace_vendor_messaging_conversation_create') }}" class="ui right floated blue button">
                 <i class="circle plus icon"></i>
                 {{ 'open_marketplace.ui.create_new_conversation'|trans }}
             </a>
 
             {% if app.request.query.get('closed') %}
-                <a href="{{ path('open_marketplace_vendor_conversation_index') }}" class="ui right floated green button">
+                <a href="{{ path('open_marketplace_vendor_messaging_conversation_index') }}" class="ui right floated green button">
                     <i class="inbox icon"></i>
                     {{ 'open_marketplace.ui.open_conversations'|trans }}
                 </a>
             {% else %}
-                <a href="{{ path('open_marketplace_vendor_conversation_index', { closed: true }) }}" class="ui right floated green button">
+                <a href="{{ path('open_marketplace_vendor_messaging_conversation_index', { closed: true }) }}" class="ui right floated green button">
                     <i class="archive icon"></i>
                     {{ 'open_marketplace.ui.closed_conversations'|trans }}
                 </a>
@@ -76,7 +76,7 @@
 
                 <div class="column fifteen wide">
                     <div class="message item">
-                        <a href="{{ path('open_marketplace_vendor_conversation_show', { id: conversation.id }) }}">
+                        <a href="{{ path('open_marketplace_vendor_messaging_conversation_show', { id: conversation.id }) }}">
                             <div class="content">
                                 <div class="ui medium header">
                                     {% if app.user.vendor is not null %}

@@ -7,18 +7,18 @@
         <span class="text">{{ 'open_marketplace.ui.more'|trans }}</span>
         <div class="menu" tabindex="-1">
             {% if data.latestDraft.status != 'under_verification' %}
-            <a href="{{ path('open_marketplace_vendor_product_listing_edit_product', {'id': data.id }) }}"
+            <a href="{{ path('open_marketplace_vendor_product_listings_edit', {'id': data.id }) }}"
                class="item"><i class="edit icon"></i>{{ 'sylius.ui.edit'|trans }}
             </a>
             {% endif %}
 
             {% if data.removed == false %}
-            <form action="{{ path('open_marketplace_vendor_product_listing_remove_action', {'id': data.id }) }}" method="post">
+            <form action="{{ path('open_marketplace_vendor_product_listings_remove', {'id': data.id }) }}" method="post">
                 <button class="item require_confirmation_button" data-requires-confirmation><i class="trash icon"></i>{{ 'open_marketplace.ui.remove'|trans }}</button>
             </form>
             {% endif %}
 
-            <form action="{{ path('open_marketplace_vendor_product_listing_enable', {'id': data.id }) }}" method="post">
+            <form action="{{ path('open_marketplace_vendor_product_listings_enable', {'id': data.id }) }}" method="post">
                 <button id="enable" class="item require_confirmation_button" data-requires-confirmation>
                     <i class="low vision icon"></i>
                     {% if data.enabled == true %}
@@ -30,7 +30,7 @@
             </form>
 
             {% if data.latestDraft.status != 'under_verification' and data.latestDraft.status != 'verified' %}
-            <form action="{{ path('open_marketplace_vendor_product_listing_send_for_verification', {'id': data.id }) }}" method="post">
+            <form action="{{ path('open_marketplace_vendor_product_listings_send_for_verification', {'id': data.id }) }}" method="post">
                 <button class="item send-for-verification" data-requires-confirmation>
                     <i class="paper plane icon"></i>{{ 'open_marketplace.ui.send_for_verification'|trans }}</button>
             </form>

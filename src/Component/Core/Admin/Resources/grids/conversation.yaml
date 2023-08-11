@@ -39,7 +39,7 @@ sylius_grid:
                         type: create
                         options:
                             link:
-                                route: open_marketplace_admin_conversation_create
+                                route: open_marketplace_admin_messaging_conversation_create
                 item:
                     show:
                         type: show

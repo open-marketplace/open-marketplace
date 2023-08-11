@@ -54,7 +54,7 @@ final class OrderController extends BaseOrderController
         $resource = $this->findOr404($configuration);
 
         if (null === $resource->getPrimaryOrder()) {
-            return $this->redirectToRoute('open_marketplace_order_listing');
+            return $this->redirectToRoute('open_marketplace_vendor_orders_listing');
         }
 
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);

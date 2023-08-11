@@ -1,5 +1,5 @@
 open_marketplace_admin_vendor_show:
-    path: /admin/vendors/{id}
+    path: /vendors/{id}
     methods: [GET]
     defaults:
         _controller: open_marketplace.controller.vendor:showAction
@@ -9,7 +9,7 @@ open_marketplace_admin_vendor_show:
             template: 'Context/Admin/Vendor/show.html.twig'
 
 open_marketplace_admin_vendor_update:
-    path: /admin/vendors/{id}/edit
+    path: /vendors/{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: open_marketplace.controller.vendor:updateAction
@@ -19,17 +19,17 @@ open_marketplace_admin_vendor_update:
             template: 'Context/Admin/Vendor/update.html.twig'
 
 open_marketplace_admin_vendor_disable:
-    path: /admin/vendors/{id}/disable
+    path: /vendors/{id}/disable
     methods: [PUT]
     controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:enablingVendorAction
 
 open_marketplace_admin_vendor_verify:
-    path: /admin/vendors/{id}/verify
+    path: /vendors/{id}/verify
     methods: [PUT]
     controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:verifyVendorAction
 
 open_marketplace_admin_vendor_enable:
-    path: /admin/vendors/{id}/enable
+    path: /vendors/{id}/enable
     methods: [PUT]
     controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:enablingVendorAction
 

@@ -1,5 +1,5 @@
-vendor_register_form:
-    path: /{_locale}/account/vendor/register
+open_marketplace_vendor_register_form:
+    path: /register
     methods: [GET, POST]
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
@@ -9,11 +9,5 @@ vendor_register_form:
             template: 'Context/Vendor/Register/index.html.twig'
             form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType
             redirect:
-                route: vendor_register_form
+                route: open_marketplace_vendor_register_form
             flash: vendor.vendor_register
-
-vendor_register:
-    path: /{_locale}/account/vendor_register
-    controller: bitbag.open_marketplace.controller.register_vendor_action
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$

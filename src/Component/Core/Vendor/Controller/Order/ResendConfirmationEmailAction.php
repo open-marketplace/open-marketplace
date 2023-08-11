@@ -58,6 +58,6 @@ final class ResendConfirmationEmailAction
             'sylius.email.order_confirmation_resent',
         );
 
-        return new RedirectResponse($this->router->generate('open_marketplace_order_listing'));
+        return new RedirectResponse($this->router->generate('open_marketplace_vendor_orders_listing'));
     }
 }

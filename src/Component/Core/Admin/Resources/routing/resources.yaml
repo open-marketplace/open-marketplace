@@ -1,4 +1,4 @@
-open_marketplace:
+open_marketplace_admin_resource_conversation:
     resource: |
         alias: open_marketplace.conversation
         section: admin
@@ -12,9 +12,8 @@ open_marketplace:
                 header: open_marketplace.ui.conversations_listing.admin_header
                 subheader: open_marketplace.ui.conversations_listing.admin_subheader
     type: sylius.resource
-    prefix: /admin
 
-bitbag_open_marketplace_conversation_category:
+open_marketplace_admin_resource_conversation_category:
     resource: |
         alias: open_marketplace.conversation_category
         section: admin
@@ -22,9 +21,8 @@ bitbag_open_marketplace_conversation_category:
         templates: "@SyliusAdmin\\Crud"
         grid: conversation_category
     type: sylius.resource
-    prefix: /admin
 
-open_marketplace_admin_product_listing:
+open_marketplace_admin_resource_product_listing:
     resource: |
         alias: open_marketplace.product_listing
         section: admin
@@ -33,9 +31,8 @@ open_marketplace_admin_product_listing:
         redirect: index
         grid: open_marketplace_admin_product_listing
     type: sylius.resource
-    prefix: /admin
 
-open_marketplace_admin_vendor:
+open_marketplace_admin_resource_vendor:
     resource: |
         alias: open_marketplace.vendor
         section: admin
@@ -43,4 +40,3 @@ open_marketplace_admin_vendor:
         templates: "@SyliusAdmin\\Crud"
         grid: open_marketplace_admin_vendor
     type: sylius.resource
-    prefix: /admin

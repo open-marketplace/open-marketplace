@@ -1,19 +1,15 @@
-open_marketplace_order_listing:
-    path: /{_locale}/account/vendor/orders
+open_marketplace_vendor_orders_listing:
+    path: /orders
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
             template: "Context/Vendor/Order/index.html.twig"
             grid: vendor_account_order
 
-open_marketplace_vendor_order_show:
-    path: /{_locale}/account/vendor/orders/{id}
+open_marketplace_vendor_orders_show:
+    path: /orders/{id}
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.order:showAction
         _sylius:
@@ -26,11 +22,9 @@ open_marketplace_vendor_order_show:
                     - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
                     - $id
 
-open_marketplace_vendor_order_cancel:
-    path: /{_locale}/account/vendor/orders/{id}/cancel
+open_marketplace_vendor_orders_cancel:
+    path: //{id}/cancel
     methods: [PUT]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: open_marketplace.controller.order.order_controller:applyStateMachineTransitionAction
         _sylius:
@@ -40,19 +34,15 @@ open_marketplace_vendor_order_cancel:
                 transition: cancel
             redirect: referer
 
-sylius_vendor_order_resend_confirmation_email:
-    path: /{_locale}/account/vendor/{id}/resend-confirmation-email
+open_marketplace_vendor_orders_resend_confirmation_email:
+    path: /{id}/resend-confirmation-email
     methods: [GET]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: bitbag.open_marketplace.component.core.vendor.controller.order.resend_confirmation_email
 
-bitbag_open_marketplace_vendor_order_shipment_ship:
-    path: /{_locale}/account/vendor/orders/{orderId}/shipments/{id}/ship
+open_marketplace_vendor_orders_shipment_ship:
+    path: /orders/{orderId}/shipments/{id}/ship
     methods: [PUT]
-    requirements:
-        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
         _controller: sylius.controller.shipment:updateAction
         _sylius:
