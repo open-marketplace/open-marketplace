@@ -63,7 +63,7 @@ final class VendorShippingMethodsResolver implements VendorShippingMethodsResolv
         ;
 
         $shippingMethods = [];
-        /** @var ShippingMethodInterface $vendorShippingMethod */
+        /** @var VendorShippingMethodInterface $vendorShippingMethod */
         foreach ($vendorShippingMethods as $vendorShippingMethod) {
             /** @var ShippingMethodInterface $shippingMethod */
             $shippingMethod = $vendorShippingMethod->getShippingMethod();

@@ -26,6 +26,7 @@ final class DraftPricingFactory implements DraftPricingFactoryInterface
         string $channelCode,
         DraftInterface $draft
     ): ListingPriceInterface {
+        /** @var ListingPriceInterface $price */
         $price = $this->resourceFactory->createNew();
         $price->setChannelCode($channelCode);
         $price->setProductDraft($draft);

@@ -18,16 +18,10 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 
 final class ProductAttributeUpdater implements ProductAttributeUpdaterInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    private AttributeTranslationClonerInterface $attributeTranslationCloner;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        AttributeTranslationClonerInterface $attributeTranslationCloner
+        private EntityManagerInterface $entityManager,
+        private AttributeTranslationClonerInterface $attributeTranslationCloner
     ) {
-        $this->entityManager = $entityManager;
-        $this->attributeTranslationCloner = $attributeTranslationCloner;
     }
 
     public function update(DraftAttributeInterface $draftAttribute, ProductAttributeInterface $productAttribute): void

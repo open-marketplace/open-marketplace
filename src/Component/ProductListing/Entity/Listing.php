@@ -17,6 +17,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\UuidInterface;
+use Webmozart\Assert\Assert;
 
 class Listing implements ListingInterface
 {
@@ -196,10 +197,9 @@ class Listing implements ListingInterface
 
     public function getAnyTranslationName(): ?string
     {
-        /** @var DraftInterface $latestDraft */
         $latestDraft = $this->getLatestDraft();
 
-        return $latestDraft->getAnyTranslationName();
+        return $latestDraft?->getAnyTranslationName();
     }
 
     public function needsNewDraft(): bool
@@ -224,17 +224,25 @@ class Listing implements ListingInterface
 
     public function accept(): void
     {
-        $this->getLatestDraft()->accept();
+        /** @var DraftInterface $latestDraft */
+        $latestDraft = $this->getLatestDraft();
+        Assert::isInstanceOf($latestDraft, DraftInterface::class);
 
-        $this->verificationStatus = $this->getLatestDraft()->getStatus();
-        $this->lastVerifiedAt = $this->getLatestDraft()->getVerifiedAt();
+        $latestDraft->accept();
+
+        $this->verificationStatus = $latestDraft->getStatus();
+        $this->lastVerifiedAt = $latestDraft->getVerifiedAt();
     }
 
     public function reject(): void
     {
-        $this->getLatestDraft()->reject();
+        /** @var DraftInterface $latestDraft */
+        $latestDraft = $this->getLatestDraft();
+        Assert::isInstanceOf($latestDraft, DraftInterface::class);
 
-        $this->verificationStatus = $this->getLatestDraft()->getStatus();
-        $this->lastVerifiedAt = $this->getLatestDraft()->getVerifiedAt();
+        $latestDraft->reject();
+
+        $this->verificationStatus = $latestDraft->getStatus();
+        $this->lastVerifiedAt = $latestDraft->getVerifiedAt();
     }
 }

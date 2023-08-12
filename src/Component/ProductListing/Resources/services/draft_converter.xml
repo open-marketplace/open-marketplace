@@ -21,8 +21,6 @@
             <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_variant" />
             <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_variant_translation" />
             <argument type="service" id="bitbag.open_marketplace.component.product.factory.channel_pricing" />
-            <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_image"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\SimpleProductUpdater"

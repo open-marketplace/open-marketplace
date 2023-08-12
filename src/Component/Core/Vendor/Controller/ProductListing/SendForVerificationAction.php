@@ -18,7 +18,6 @@ use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryIn
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 
 final class SendForVerificationAction
@@ -27,8 +26,7 @@ final class SendForVerificationAction
         private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         private DraftRepositoryInterface $productDraftRepository,
         private ListingRepositoryInterface $productListingRepository,
-        private RouterInterface $router,
-        private Session $session
+        private RouterInterface $router
     ) {
     }
 

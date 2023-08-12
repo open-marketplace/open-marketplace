@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture;
 
 use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFactory;
-use function BitBag\OpenMarketplace\Component\Fixture\Fixture\sort;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;

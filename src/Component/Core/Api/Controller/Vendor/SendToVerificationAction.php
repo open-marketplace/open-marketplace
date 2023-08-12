@@ -12,7 +12,9 @@ namespace BitBag\OpenMarketplace\Component\Core\Api\Controller\Vendor;
 
 use BitBag\OpenMarketplace\Component\Core\Common\StateMachine\ProductDraftStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftTransitions;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
+use Webmozart\Assert\Assert;
 
 final class SendToVerificationAction
 {
@@ -24,7 +26,10 @@ final class SendToVerificationAction
     public function __invoke(ListingInterface $data): ListingInterface
     {
         if ($data->canBeVerified()) {
+            /** @var DraftInterface $latestDraft */
             $latestDraft = $data->getLatestDraft();
+            Assert::notNull($latestDraft);
+
             $this->productDraftStateMachineTransition->applyIfCan($latestDraft, DraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
         }
 

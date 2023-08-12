@@ -19,37 +19,17 @@ use BitBag\OpenMarketplace\Component\Product\Factory\ProductVariantTranslationFa
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 
 final class SimpleProductFactory implements SimpleProductFactoryInterface
 {
-    private ProductFactoryInterface $productFactory;
-
-    private ProductTranslationFactoryInterface $productTranslationFactory;
-
-    private ProductVariantFactoryInterface $productVariantFactory;
-
-    private ProductVariantTranslationFactoryInterface $productVariantTranslationFactory;
-
-    private ChannelPricingFactoryInterface $channelPricingFactory;
-
-    private ChannelRepositoryInterface $channelRepository;
-
     public function __construct(
-        ProductFactoryInterface $productFactory,
-        ProductTranslationFactoryInterface $productTranslationFactory,
-        ProductVariantFactoryInterface $productVariantFactory,
-        ProductVariantTranslationFactoryInterface $productVariantTranslationFactory,
-        ChannelPricingFactoryInterface $channelPricingFactory,
-        ChannelRepositoryInterface $channelRepository
+        private ProductFactoryInterface $productFactory,
+        private ProductTranslationFactoryInterface $productTranslationFactory,
+        private ProductVariantFactoryInterface $productVariantFactory,
+        private ProductVariantTranslationFactoryInterface $productVariantTranslationFactory,
+        private ChannelPricingFactoryInterface $channelPricingFactory
     ) {
-        $this->productFactory = $productFactory;
-        $this->productTranslationFactory = $productTranslationFactory;
-        $this->productVariantFactory = $productVariantFactory;
-        $this->productVariantTranslationFactory = $productVariantTranslationFactory;
-        $this->channelPricingFactory = $channelPricingFactory;
-        $this->channelRepository = $channelRepository;
     }
 
     public function create(DraftInterface $productDraft): ProductInterface

@@ -16,6 +16,7 @@ use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\Draft
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Webmozart\Assert\Assert;
 
 final class DraftGenerator implements DraftGeneratorInterface
 {
@@ -29,6 +30,7 @@ final class DraftGenerator implements DraftGeneratorInterface
     public function generateNextDraft(ListingInterface $listing): DraftInterface
     {
         $latestDraft = $listing->getLatestDraft();
+        Assert::isInstanceOf($latestDraft, DraftInterface::class);
 
         if ($listing->needsNewDraft()) {
             $newProductDraft = $this->createNextDraft($latestDraft);
@@ -38,7 +40,10 @@ final class DraftGenerator implements DraftGeneratorInterface
             $this->entityManager->flush();
         }
 
-        return $listing->getLatestDraft();
+        $currentLatestDraft = $listing->getLatestDraft();
+        Assert::isInstanceOf($currentLatestDraft, DraftInterface::class);
+
+        return $currentLatestDraft;
     }
 
     private function createNextDraft(DraftInterface $base): DraftInterface

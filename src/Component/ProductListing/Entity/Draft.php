@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Webmozart\Assert\Assert;
 
 class Draft implements ResourceInterface, DraftInterface
 {
@@ -57,7 +58,7 @@ class Draft implements ResourceInterface, DraftInterface
 
     protected ?ListingInterface $productListing = null;
 
-    /** @var Collection<int, AttributeValueInterface> */
+    /** @var Collection<array-key, DraftAttributeValueInterface|AttributeValueInterface> */
     protected Collection $attributes;
 
     protected TaxonInterface|null $mainTaxon;
@@ -229,6 +230,8 @@ class Draft implements ResourceInterface, DraftInterface
 
     public function getProductListing(): ListingInterface
     {
+        Assert::isInstanceOf($this->productListing, ListingInterface::class);
+
         return $this->productListing;
     }
 

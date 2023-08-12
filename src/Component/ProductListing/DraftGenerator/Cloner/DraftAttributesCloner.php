@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeValueFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Webmozart\Assert\Assert;
 
 final class DraftAttributesCloner implements DraftAttributesClonerInterface
 {
@@ -28,7 +30,10 @@ final class DraftAttributesCloner implements DraftAttributesClonerInterface
         DraftInterface $to
     ): void {
         foreach ($from->getAttributes() as $baseAttribute) {
-            $attributeValue = $this->draftAttributeValueFactory->createForAttribute($baseAttribute->getAttribute(), $to);
+            $attribute = $baseAttribute->getAttribute();
+            Assert::isInstanceOf($attribute, DraftAttributeInterface::class);
+
+            $attributeValue = $this->draftAttributeValueFactory->createForAttribute($attribute, $to);
             $attributeValue->setValue($baseAttribute->getValue());
             $to->addAttribute($attributeValue);
 

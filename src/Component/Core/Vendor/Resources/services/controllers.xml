@@ -80,7 +80,6 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="router.default" />
-            <argument type="service" id="session" />
 
             <tag name="controller.service_arguments" />
         </service>

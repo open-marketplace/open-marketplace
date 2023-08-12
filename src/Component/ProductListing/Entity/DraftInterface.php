@@ -113,10 +113,10 @@ interface DraftInterface extends AttributeSubjectInterface, ResourceInterface, U
 
     public function clearImages(): void;
 
-    /** @return  Collection<int, DraftAttributeValueInterface> */
+    /** @return  Collection<array-key, DraftAttributeValueInterface|AttributeValueInterface> */
     public function getAttributes(): Collection;
 
-    /** @return  Collection<int, DraftAttributeValueInterface>  */
+    /** @return  Collection<array-key, DraftAttributeValueInterface|AttributeValueInterface>  */
     public function getAttributesByLocale(
         string $localeCode,
         string $fallbackLocaleCode,

@@ -16,22 +16,22 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
-use Doctrine\Persistence\ObjectManager;
 use Webmozart\Assert\Assert;
 
 final class UpdateProductListingHandler
 {
     public function __construct(
         private ListingPersisterInterface $listingPersister,
-        private ObjectManager $manager,
         private ListingRepositoryInterface $productListingRepository
     ) {
     }
 
     public function __invoke(UpdateProductListingInterface $updateProductListing): ListingInterface
     {
+        /** @var int $productListingId */
         $productListingId = $updateProductListing->getProductListing()
-            ->getId();
+            ?->getId();
+        Assert::integer($productListingId);
 
         /** @var ListingInterface $productListing */
         $productListing = $this->productListingRepository->find($productListingId);
@@ -39,8 +39,14 @@ final class UpdateProductListingHandler
 
         /** @var DraftInterface $newDraft */
         $newDraft = $updateProductListing->getProductDraft();
+        Assert::isInstanceOf($newDraft, DraftInterface::class);
+
         $newDraft->setProductListing($productListing);
-        $newDraft->setCode($productListing->getLatestDraft()->getCode());
+
+        $previousDraft = $productListing->getLatestDraft();
+        Assert::isInstanceOf($previousDraft, DraftInterface::class);
+
+        $newDraft->setCode($previousDraft->getCode());
 
         $this->listingPersister->updateLatestDraftWith($productListing, $newDraft);
 

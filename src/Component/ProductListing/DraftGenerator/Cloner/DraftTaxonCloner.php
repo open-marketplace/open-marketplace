@@ -14,6 +14,8 @@ namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftTaxonFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 final class DraftTaxonCloner implements DraftTaxonClonerInterface
 {
@@ -28,8 +30,11 @@ final class DraftTaxonCloner implements DraftTaxonClonerInterface
         DraftInterface $to
     ): void {
         foreach ($from->getProductDraftTaxons() as $baseDraftTaxon) {
+            $taxon = $baseDraftTaxon->getTaxon();
+            Assert::isInstanceOf($taxon, TaxonInterface::class);
+
             $draftTaxon = $this->draftTaxonFactory->createForTaxon(
-                $baseDraftTaxon->getTaxon(),
+                $taxon,
                 $to
             );
             $draftTaxon->setPosition($baseDraftTaxon->getPosition());

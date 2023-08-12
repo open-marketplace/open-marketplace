@@ -19,7 +19,6 @@ use BitBag\OpenMarketplace\Component\ProductListing\ListingPersisterInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageInterface;
 
@@ -27,12 +26,10 @@ final class UpdateProductListingHandlerSpec extends ObjectBehavior
 {
     public function let(
         ListingPersisterInterface $listingPersister,
-        ObjectManager $manager,
         ListingRepositoryInterface $productListingRepository
     ): void {
         $this->beConstructedWith(
             $listingPersister,
-            $manager,
             $productListingRepository
         );
     }
