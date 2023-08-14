@@ -9,4 +9,4 @@ default:
                 - open_marketplace.behat.context.setup.vendor
                 - sylius.behat.context.hook.doctrine_orm
             filters:
-                tags: '@managing_product_listings && @ui'
+                tags: '@managing_product_listings&&@ui'
