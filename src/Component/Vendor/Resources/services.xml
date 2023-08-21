@@ -19,7 +19,7 @@
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Vendor\ProfileUpdater"
-                 id="bitbag.open_marketplace.component.vendor.profile_updater">
+                 id="bitbag.open_marketplace.component.vendor.profile_updater" public="true">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.email_sender"/>
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.profile_update_remover"/>
