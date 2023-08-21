@@ -19,7 +19,6 @@ use BitBag\OpenMarketplace\Component\Order\OrderManagerInterface;
 use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresherInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Core\OrderCheckoutStates;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
@@ -34,7 +33,7 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
 
     public function process(OrderInterface $order): array
     {
-        $isPrimaryOrder = $order->isPrimary() && $order->getSecondaryOrders()->count() > 0;
+        $isPrimaryOrder = $order->isPrimary() && 0 < $order->getSecondaryOrders()->count();
         if ($isPrimaryOrder) {
             return [$order, ...$order->getSecondaryOrders()];
         }
