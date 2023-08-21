@@ -22,7 +22,7 @@ In order to display more details for give resource use command
 
 Example details view for vendor
 ```
-+--------------------+-----------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------------+
 | name               | vendor                                                              |
 | application        | open_marketplace                                                    |
 | driver             | doctrine/orm                                                        |
@@ -32,7 +32,7 @@ Example details view for vendor
 | classes.repository | BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository |
 | classes.form       | BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\VendorType    |
 | classes.factory    | Sylius\Component\Resource\Factory\Factory                           |
-+--------------------+-----------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------------+
 ```
 
 

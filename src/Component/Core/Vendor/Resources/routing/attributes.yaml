@@ -1,5 +1,5 @@
 open_marketplace_vendor_attributes_index:
-    path: /product-attributes/index
+    path: /product-attributes
     methods: [ GET, POST ]
     defaults:
         _controller: open_marketplace.controller.product_draft_attribute:indexAction

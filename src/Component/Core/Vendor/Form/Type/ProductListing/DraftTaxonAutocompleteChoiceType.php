@@ -45,9 +45,7 @@ final class DraftTaxonAutocompleteChoiceType extends AbstractType
                     ),
                 ),
             );
-        }
-
-        if (!$options['multiple']) {
+        } else {
             $builder->addModelTransformer(
                 new ProductDraftTaxonToTaxonTransformer(
                     $this->productDraftTaxonFactory,

@@ -51,11 +51,8 @@ final class ConversationExampleFactory extends AbstractExampleFactory implements
     {
         $resolver
             ->setDefault('number_of_messages', fn (Options $options): int => random_int(4, 10))
-
             ->setDefault('vendor', LazyOption::randomOne($this->vendorRepository))
-
             ->setDefault('admin_user', LazyOption::randomOne($this->adminUserRepository))
-
             ->setDefault('category', LazyOption::randomOne($this->categoryRepository));
     }
 

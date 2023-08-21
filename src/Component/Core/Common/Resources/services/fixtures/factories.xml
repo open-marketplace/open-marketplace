@@ -11,7 +11,6 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
         <defaults public="false" autowire="false" autoconfigure="false" />
 
-
         <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\VendorExampleFactory"
                  id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor">
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.profile_factory" />
