@@ -24,4 +24,4 @@ default:
         - sylius.behat.context.setup.geographical
         - sylius.behat.context.transform.shared_storage
       filters:
-        tags: "@hiding_primary_orders_in_customer_tab && @ui"
+        tags: "@hiding_primary_orders_in_customer_tab&&@ui"

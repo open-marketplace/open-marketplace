@@ -13,4 +13,4 @@ default:
         - sylius.behat.context.transform.product_variant
         - sylius.behat.context.setup.product
       filters:
-        tags: "@product_pricing && @ui"
+        tags: "@product_pricing&&@ui"
