@@ -1,3 +1,9 @@
+open_marketplace_admin_messaging_conversation_index:
+    path: /conversations
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.controller.conversation:index
+
 open_marketplace_admin_messaging_conversation_create:
     path: /conversation/create
     methods: [GET,POST]
@@ -22,7 +28,7 @@ open_marketplace_admin_messaging_conversation_archive:
     defaults:
         _controller: bitbag.open_marketplace.component.core.admin.controller.messaging.send_archive_request
         _sylius:
-            redirect: open_marketplace_admin_conversation_index
+            redirect: open_marketplace_admin_messaging_conversation_index
 
 open_marketplace_admin_messaging_conversation_message_add:
     path: /conversations/{id}/message/add
@@ -32,3 +38,9 @@ open_marketplace_admin_messaging_conversation_message_add:
         _sylius:
             redirect: open_marketplace_admin_messaging_conversation_show
             mail_redirect: open_marketplace_admin_messaging_conversation_show
+
+open_marketplace_admin_messaging_conversation_category_index:
+    path: /conversation-categories
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.controller.conversation_category:index

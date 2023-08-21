@@ -45,7 +45,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $this->shouldHaveType(SplitOrderByVendorProcessor::class);
     }
 
-    public function it_always_creates_at_least_one_secondary_order(
+    public function it_creates_at_least_one_secondary_order_for_the_first_time(
         OrderInterface $order,
         PaymentInterface $payment,
         OrderItemInterface $orderItem,
@@ -55,6 +55,9 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         PaymentRefresherInterface $paymentRefresher,
         EventDispatcherInterface $eventDispatcher
     ): void {
+        $order->isPrimary()->willReturn(false);
+        $order->getSecondaryOrders()->willReturn(new ArrayCollection([]));
+
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->willReturn((object) []);
         $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject()]);
         $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);
@@ -72,6 +75,20 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldHaveBeenCalled();
     }
 
+    public function it_quickly_returns_already_splitted_orders(
+        OrderInterface $order,
+        OrderInterface $subOrder,
+        EventDispatcherInterface $eventDispatcher
+    ): void {
+        $order->isPrimary()->willReturn(true);
+        $order->getSecondaryOrders()->willReturn(new ArrayCollection([$subOrder]));
+
+        $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldNotBeCalled((object) []);
+        $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldNotBeCalled();
+
+        $this->process($order);
+    }
+
     public function it_creates_2_secondary_orders_for_products_from_different_vendors(
         OrderInterface $order,
         PaymentInterface $payment,
@@ -85,6 +102,9 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         PaymentRefresherInterface $paymentRefresher,
         EventDispatcherInterface $eventDispatcher
     ): void {
+        $order->isPrimary()->willReturn(false);
+        $order->getSecondaryOrders()->willReturn(new ArrayCollection([]));
+
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->willReturn((object) []);
         $orderItemCollection = new ArrayCollection([$orderItem->getWrappedObject(), $secondItem->getWrappedObject()]);
         $paymentCollection = new ArrayCollection([$payment->getWrappedObject()]);

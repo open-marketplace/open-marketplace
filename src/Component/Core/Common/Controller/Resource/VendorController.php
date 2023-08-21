@@ -45,48 +45,6 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class VendorController extends ResourceController
 {
-    public function __construct(
-        protected MetadataInterface $metadata,
-        protected RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        protected ?ViewHandlerInterface $viewHandler,
-        protected RepositoryInterface $repository,
-        protected FactoryInterface $factory,
-        protected NewResourceFactoryInterface $newResourceFactory,
-        protected ObjectManager $manager,
-        protected SingleResourceProviderInterface $singleResourceProvider,
-        protected ResourcesCollectionProviderInterface $resourcesFinder,
-        protected ResourceFormFactoryInterface $resourceFormFactory,
-        protected RedirectHandlerInterface $redirectHandler,
-        protected FlashHelperInterface $flashHelper,
-        protected AuthorizationCheckerInterface $authorizationChecker,
-        protected EventDispatcherInterface $eventDispatcher,
-        protected ?StateMachineInterface $stateMachine,
-        protected ResourceUpdateHandlerInterface $resourceUpdateHandler,
-        protected ResourceDeleteHandlerInterface $resourceDeleteHandler,
-        protected VendorContextInterface $vendorProvider,
-        protected ProfileUpdaterInterface $vendorProfileUpdater
-    ) {
-        parent::__construct(
-            $metadata,
-            $requestConfigurationFactory,
-            $viewHandler,
-            $repository,
-            $factory,
-            $newResourceFactory,
-            $manager,
-            $singleResourceProvider,
-            $resourcesFinder,
-            $resourceFormFactory,
-            $redirectHandler,
-            $flashHelper,
-            $authorizationChecker,
-            $eventDispatcher,
-            $stateMachine,
-            $resourceUpdateHandler,
-            $resourceDeleteHandler
-        );
-    }
-
     public function createAction(Request $request): Response
     {
         try {
@@ -103,7 +61,7 @@ final class VendorController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
 
-        $vendor = $this->vendorProvider->getVendor();
+        $vendor = $this->container->get('bitbag.open_marketplace.component.vendor.context.vendor')->getVendor();
         $pendingUpdate = $this->manager->getRepository(ProfileUpdate::class)
             ->findOneBy(['vendor' => $vendor]);
 
@@ -128,7 +86,7 @@ final class VendorController extends ResourceController
             try {
                 $image = $resource->getImage();
                 $backgroundImage = $resource->getBackgroundImage();
-                $this->vendorProfileUpdater->createPendingVendorProfileUpdate(
+                $this->container->get('bitbag.open_marketplace.component.vendor.profile_updater')->createPendingVendorProfileUpdate(
                     $form->getData(),
                     $vendor,
                     $image,
@@ -181,14 +139,14 @@ final class VendorController extends ResourceController
         ]);
     }
 
-    public function showAction(Request $request): Response
+    public function showVendorProfileAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
 
         /** @var ResourceInterface $resource */
-        $resource = $this->vendorProvider->getVendor();
+        $resource = $this->container->get('bitbag.open_marketplace.component.vendor.context.vendor')->getVendor();
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
 
         if ($configuration->isHtmlRequest()) {

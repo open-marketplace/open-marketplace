@@ -5,7 +5,7 @@ open_marketplace_admin_resource_conversation:
         templates: "@SyliusAdmin\\Crud"
         except: ['show', 'update', 'bulk_delete']
         redirect: index
-        grid: open_marketplace_admin_conversation
+        grid: open_marketplace_admin_messaging_conversation
         permission: true
         vars:
             all:

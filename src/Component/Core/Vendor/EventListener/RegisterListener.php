@@ -28,7 +28,7 @@ final class RegisterListener
         private SlugGeneratorInterface $vendorSlugGenerator,
         private ImageUploaderInterface $fileUploader,
         private TokenStorageInterface $tokenStorage,
-        ) {
+    ) {
     }
 
     public function uploadLogoImage(ResourceControllerEvent $event): void

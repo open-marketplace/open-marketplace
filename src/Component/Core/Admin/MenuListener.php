@@ -40,12 +40,12 @@ final class MenuListener
             ->setLabelAttribute('icon', 'users');
 
         $mvmRootMenuItem
-            ->addChild('conversations', ['route' => 'open_marketplace_admin_conversation_index'])
+            ->addChild('conversations', ['route' => 'open_marketplace_admin_messaging_conversation_index'])
             ->setLabel('open_marketplace.ui.menu.conversations')
             ->setLabelAttribute('icon', 'inbox');
 
         $mvmRootMenuItem
-            ->addChild('conversations_category', ['route' => 'open_marketplace_admin_conversation_category_index'])
+            ->addChild('conversations_category', ['route' => 'open_marketplace_admin_messaging_conversation_category_index'])
             ->setLabel('open_marketplace.ui.menu.conversation_categories')
             ->setLabelAttribute('icon', 'inbox');
 

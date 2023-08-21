@@ -3,7 +3,7 @@ sylius_grid:
         action:
             archiveConversation: "Context/Admin/Conversation/_archiveConversation.html.twig"
     grids:
-        open_marketplace_admin_conversation:
+        open_marketplace_admin_messaging_conversation:
             driver:
                 name: doctrine/orm
                 options:
@@ -43,6 +43,9 @@ sylius_grid:
                 item:
                     show:
                         type: show
+                        options:
+                            link:
+                                route: open_marketplace_admin_messaging_conversation_show
                     delete:
                         type: delete
                     archive:

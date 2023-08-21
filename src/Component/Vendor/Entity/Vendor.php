@@ -57,9 +57,9 @@ class Vendor implements VendorInterface
     /** @var Collection<int, VendorShippingMethodInterface> */
     protected Collection $shippingMethods;
 
-    protected ?int $commission;
+    protected ?int $commission = 0;
 
-    protected string $commissionType;
+    protected string $commissionType = self::NET_COMMISSION;
 
     public function __construct()
     {

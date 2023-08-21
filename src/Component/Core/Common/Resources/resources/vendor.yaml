@@ -5,7 +5,7 @@ sylius_resource:
             classes:
                 model: BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor
                 interface: BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                controller: BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\VendorController
                 repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository
                 form: BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\VendorType
 

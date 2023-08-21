@@ -1,15 +1,11 @@
 open_marketplace_admin_resources:
     resource: "routing/resources.yaml"
-    prefix: /admin
 
 open_marketplace_admin_messaging:
     resource: "routing/messaging.yaml"
-    prefix: /admin
 
 open_marketplace_admin_product_listing:
     resource: "routing/product_listing.yaml"
-    prefix: /admin
 
 open_marketplace_admin_vendor:
     resource: "routing/vendor.yaml"
-    prefix: /admin

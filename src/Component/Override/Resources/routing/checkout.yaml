@@ -51,6 +51,6 @@ sylius_shop_order_thank_you:
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
-        _controller: open_marketplace.controller.order.order_controller:thankYouAction
+        _controller: sylius.controller.order:thankYouAction
         _sylius:
             template: "Context/Shop/Checkout/thankYou.html.twig"
