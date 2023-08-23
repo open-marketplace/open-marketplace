@@ -1,18 +1,18 @@
 {
-  "@context": "\/api\/v2\/contexts\/ProductListing",
+  "@context": "\/api\/v2\/contexts\/Listing",
   "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings",
   "@type": "hydra:Collection",
   "hydra:member": [
     {
       "@id": "\/api\/v2\/shop\/account\/vendor\/product-listings\/@string@",
-      "@type": "ProductListing",
+      "@type": "Listing",
       "uuid": "@string@",
       "code": "product_listing_bruce_2",
       "enabled": true,
       "verificationStatus": "verified",
       "latestDraft": {
         "@id": "\/api\/v2\/shop\/account\/vendor\/product-drafts\/@string@",
-        "@type": "ProductDraft",
+        "@type": "Draft",
         "uuid": "@string@",
         "code": "product_draft_bruce_2",
         "status": "created",
@@ -22,7 +22,7 @@
         "translations": {
           "en_US": {
             "@id": "\/api\/v2\/shop\/account\/vendor\/product-draft\/translations\/@string@",
-            "@type": "ProductDraftTranslation",
+            "@type": "DraftTranslation",
             "uuid": "@string@",
             "name": "product_draft_bruce_2_translations_us",
             "slug": "product_draft_bruce_2_translations_us",
@@ -35,7 +35,7 @@
         },
         "productListingPrices": {
           "CODE": {
-            "@type": "ProductListingPrice",
+            "@type": "ListingPrice",
             "uuid": "@string@",
             "price": 150,
             "originalPrice": 200,
@@ -54,7 +54,7 @@
         "mainTaxon": "\/api\/v2\/shop\/taxons\/CATEGORY",
         "productDraftTaxons": [
           {
-            "@type": "ProductDraftTaxon",
+            "@type": "DraftTaxon",
             "uuid": "@string@",
             "taxon": "\/api\/v2\/shop\/taxons\/HAT",
             "position": 2

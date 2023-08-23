@@ -33,7 +33,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Nowak"
         email: "test@example.com"
         emailCanonical: "test@example.com"
-BitBag\OpenMarketplace\Entity\ShopUser:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]

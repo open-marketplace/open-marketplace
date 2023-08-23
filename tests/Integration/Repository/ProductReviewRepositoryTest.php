@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Repository\ProductReviewRepositoryInterface;
-use BitBag\OpenMarketplace\Repository\VendorRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Product\Repository\ProductReviewRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 use Sylius\Component\Core\Model\ProductReview;
 
 final class ProductReviewRepositoryTest extends JsonApiTestCase

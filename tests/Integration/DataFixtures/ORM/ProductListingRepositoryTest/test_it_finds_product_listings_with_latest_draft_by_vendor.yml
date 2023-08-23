@@ -12,7 +12,7 @@ Sylius\Component\Core\Model\Customer:
     lastName: "Wayne"
     email: "test2@example.com"
     emailCanonical: "test@example.com"
-BitBag\OpenMarketplace\Entity\ShopUser:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_oliver:
     plainPassword: "123password"
     roles: ["ROLE_USER"]
@@ -27,7 +27,7 @@ BitBag\OpenMarketplace\Entity\ShopUser:
     customer: '@customer_bruce'
     username: "bruce@wayne.com"
     usernameCanonical: "bruce@wayne.com"
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   oliver_vendor_address:
     country: '@poland'
     city: 'Warsaw'
@@ -38,7 +38,7 @@ BitBag\OpenMarketplace\Entity\VendorAddress:
     city: 'Poznan'
     postalCode: '61-512'
     street: 'Umultowska 54'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_oliver:
     shopUser: '@user_oliver'
     companyName: 'Test company name'
@@ -59,7 +59,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing:
   product_listing_oliver_1:
     vendor: '@vendor_oliver'
     code: 'Oliver product'
@@ -69,7 +69,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
   product_listing_bruce_1:
     vendor: '@vendor_bruce'
     code: 'Bruce product'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft:
   product_draft_oliver_1_1:
     product_listing: '@product_listing_oliver_1'
     version_number: '1'

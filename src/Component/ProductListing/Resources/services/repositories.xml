@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepository"
+                 id="bitbag.open_marketplace.component.product_listing..repository.draft">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft</argument>
+                    <factory service="doctrine.orm.entity_manager" method="getClassMetadata"/>
+                </service>
+            </argument>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftTaxonRepository"
+                 id="bitbag.open_marketplace.component.product_listing.repository.draft_taxon">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxon</argument>
+                    <factory service="doctrine.orm.default_entity_manager" method="getClassMetadata"/>
+                </service>
+            </argument>
+        </service>
+    </services>
+</container>

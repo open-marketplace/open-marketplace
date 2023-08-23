@@ -1,5 +1,18 @@
-open_marketplace:
-    resource: "../src/Resources/config/routing.yml"
+open_marketplace_override:
+    resource: "../src/Component/Override/Resources/routing.yaml"
+
+open_marketplace_admin:
+    resource: "../src/Component/Core/Admin/Resources/routing.yaml"
+    prefix: /admin
+
+open_marketplace_shop:
+    resource: "../src/Component/Core/Shop/Resources/routing.yaml"
+
+open_marketplace_vendor:
+    resource: "../src/Component/Core/Vendor/Resources/routing.yaml"
+    prefix: /{_locale}/account/vendor
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 
 bitbag_sylius_cms_plugin:
     resource: "@BitBagSyliusCmsPlugin/Resources/config/routing.yml"

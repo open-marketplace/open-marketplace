@@ -1,11 +1,11 @@
 {
-    "@context": "\/api\/v2\/contexts\/ProductDraftAttribute",
+    "@context": "\/api\/v2\/contexts\/DraftAttribute",
     "@id": "\/api\/v2\/shop\/account\/vendor\/product-draft\/attributes",
     "@type": "hydra:Collection",
     "hydra:member": [
         {
             "@id": "\/api\/v2\/shop\/account\/vendor\/product-draft\/attributes\/@string@",
-            "@type": "ProductDraftAttribute",
+            "@type": "DraftAttribute",
             "vendor": "\/api\/v2\/shop\/vendors\/@string@",
             "uuid": "@string@",
             "code": "attribute_bruce_1",
@@ -16,7 +16,7 @@
             "translations": {
                 "en_US": {
                     "@id": "/api/v2/shop/account/vendor/product-draft/attribute-translations/@string@",
-                    "@type": "ProductDraftAttributeTranslation",
+                    "@type": "DraftAttributeTranslation",
                     "uuid": "@string@",
                     "name": "attribute_bruce_1_us",
                     "locale": "en_US"

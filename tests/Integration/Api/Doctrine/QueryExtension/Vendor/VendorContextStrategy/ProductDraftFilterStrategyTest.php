@@ -10,11 +10,11 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Integration\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy;
 
-use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\ProductDraftFilterStrategy;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
-use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Core\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\ProductDraftFilterStrategy;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use Tests\BitBag\OpenMarketplace\Integration\IntegrationTestCase;
 
 final class ProductDraftFilterStrategyTest extends IntegrationTestCase
@@ -22,14 +22,14 @@ final class ProductDraftFilterStrategyTest extends IntegrationTestCase
     protected function setUp(): void
     {
         $entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->productDraftRepository = $entityManager->getRepository(ProductDraft::class);
+        $this->productDraftRepository = $entityManager->getRepository(Draft::class);
         $this->vendorRepository = $entityManager->getRepository(Vendor::class);
     }
 
     public function test_supported_class(): void
     {
         $productDraftFilterStrategy = new ProductDraftFilterStrategy();
-        $result = $productDraftFilterStrategy->supports(ProductDraftInterface::class);
+        $result = $productDraftFilterStrategy->supports(DraftInterface::class);
 
         self::assertTrue($result);
     }
@@ -37,7 +37,7 @@ final class ProductDraftFilterStrategyTest extends IntegrationTestCase
     public function test_unsupported_class(): void
     {
         $productDraftFilterStrategy = new ProductDraftFilterStrategy();
-        $result = $productDraftFilterStrategy->supports(ProductListingInterface::class);
+        $result = $productDraftFilterStrategy->supports(ListingInterface::class);
 
         self::assertFalse($result);
     }

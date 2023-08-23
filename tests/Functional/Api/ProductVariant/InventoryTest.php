@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Functional\Api\ProductVariant;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\OpenMarketplace\Functional\FunctionalTestCase;

@@ -1,7 +1,7 @@
 {
-  "@context": "/api/v2/contexts/ProductDraft",
+  "@context": "/api/v2/contexts/Draft",
   "@id": "/api/v2/shop/account/vendor/product-drafts/@string@",
-  "@type": "ProductDraft",
+  "@type": "Draft",
   "uuid": "@string@",
   "code": "product_draft_bruce_1",
   "status": "created",

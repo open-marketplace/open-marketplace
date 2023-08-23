@@ -9,4 +9,4 @@ default:
         - sylius.behat.context.setup.shop_security
         - sylius.behat.context.setup.taxonomy
       filters:
-        tags: '@vendor_managing_product_listings && @ui'
+        tags: '@vendor_managing_product_listings&&@ui'

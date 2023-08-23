@@ -7,4 +7,4 @@ default:
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.hook.doctrine_orm
             filters:
-                tags: "@verifying_vendors && @ui"
+                tags: "@verifying_vendors&&@ui"

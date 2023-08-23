@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/**/*.xml" />
+    </imports>
+    <services>
+        <service class="BitBag\OpenMarketplace\Component\Vendor\VendorContext"
+                 id="bitbag.open_marketplace.component.vendor.context.vendor"
+                 public="true">
+            <argument type="service" id="security.helper" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\TaxonContext"
+                 id="bitbag.open_marketplace.component.vendor.context.taxon"
+                 public="true">
+            <argument type="service" id="sylius.repository.taxon" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Vendor\ProfileUpdater"
+                 id="bitbag.open_marketplace.component.vendor.profile_updater" public="true">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="sylius.email_sender"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.profile_update_remover"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.profile_update_factory"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.profile_logo_image_factory" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.profile_background_image_factory" />
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.logo_image_operator"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.background_image_operator"/>
+        </service>
+    </services>
+</container>

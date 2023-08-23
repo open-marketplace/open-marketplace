@@ -1,0 +1,34 @@
+open_marketplace_vendor_attributes:
+    resource: "routing/attributes.yaml"
+
+open_marketplace_vendor_customers:
+    resource: "routing/customers.yaml"
+
+open_marketplace_vendor_inventory:
+    resource: "routing/inventory.yaml"
+
+open_marketplace_vendor_messaging:
+    resource: "routing/messaging.yaml"
+
+open_marketplace_vendor_orders:
+    resource: "routing/orders.yaml"
+
+open_marketplace_vendor_product_listings:
+    resource: "routing/product_listings.yaml"
+
+open_marketplace_vendor_profile:
+    resource: "routing/profile.yaml"
+
+open_marketplace_vendor_register:
+    resource: "routing/register.yaml"
+
+open_marketplace_vendor_reviews:
+    resource: "routing/reviews.yaml"
+
+open_marketplace_vendor_shipping_methods:
+    resource: "routing/shipping_methods.yaml"
+
+open_marketplace_vendor_taxonomy:
+    resource: "routing/taxonomy.yaml"
+    prefix: /taxons
+

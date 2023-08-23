@@ -1,0 +1,13 @@
+winzou_state_machine:
+    open_marketplace_conversation:
+        class: "%open_marketplace.model.conversation.class%"
+        property_path: status
+        graph: open_marketplace_conversation
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            open: ~
+            closed: ~
+        transitions:
+            close:
+                from: [open]
+                to: closed

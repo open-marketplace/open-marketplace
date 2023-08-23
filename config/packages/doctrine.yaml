@@ -18,8 +18,28 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            Overridden:
+            MessagingComponent:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Resources/config/doctrine'
-                prefix: 'BitBag\OpenMarketplace\Entity'
+                dir: '%kernel.project_dir%/src/Component/Messaging/Resources/doctrine'
+                prefix: 'BitBag\OpenMarketplace\Component\Messaging\Entity'
+            OrderComponent:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Component/Order/Resources/doctrine'
+                prefix: 'BitBag\OpenMarketplace\Component\Order\Entity'
+            ProductComponent:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Component/Product/Resources/doctrine'
+                prefix: 'BitBag\OpenMarketplace\Component\Product\Entity'
+            ProductListingComponent:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Component/ProductListing/Resources/doctrine'
+                prefix: 'BitBag\OpenMarketplace\Component\ProductListing\Entity'
+            VendorComponent:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Component/Vendor/Resources/doctrine'
+                prefix: 'BitBag\OpenMarketplace\Component\Vendor\Entity'

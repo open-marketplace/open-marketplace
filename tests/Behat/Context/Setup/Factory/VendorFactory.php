@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup\Factory;
 
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use DateTimeInterface;
 
 final class VendorFactory implements VendorFactoryInterface

@@ -3,7 +3,7 @@
 <div class="ui fluid card" id="customer">
     <div class="content">
         {% if is_vendor_client(product_review.reviewSubject.vendor, author) is same as true %}
-            <a href="{{ path('open_marketplace_vendor_customer_show', {'id': author.id}) }}" class="header sylius-customer-name">{{ author.fullName }}</a>
+            <a href="{{ path('open_marketplace_vendor_customers_show', {'id': author.id}) }}" class="header sylius-customer-name">{{ author.fullName }}</a>
         {% else %}
             <div class="header sylius-customer-name">{{ author.fullName }}</div>
         {% endif %}

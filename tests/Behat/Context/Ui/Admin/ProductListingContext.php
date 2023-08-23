@@ -14,23 +14,23 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\Product;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
-use BitBag\OpenMarketplace\Fixture\Factory\VendorExampleFactory;
+use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\VendorExampleFactory;
+use BitBag\OpenMarketplace\Component\Product\Entity\Product;
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -174,24 +174,24 @@ final class ProductListingContext extends RawMinkContext implements Context
         $vendor = $this->sharedStorage->get('vendor');
 
         for ($i = 0; $i < $count; ++$i) {
-            $productListing = new ProductListing();
+            $productListing = new Listing();
             $productListing->setCode('code' . $i);
             $productListing->setVendor($vendor);
 
-            $productDraft = new ProductDraft();
+            $productDraft = new Draft();
             $productDraft->setCode('code' . $i);
             $productDraft->setVersionNumber(0);
             $productDraft->setProductListing($productListing);
             $productListing->sendToVerification($productDraft);
 
-            $productTranslation = new ProductTranslation();
+            $productTranslation = new DraftTranslation();
             $productTranslation->setLocale('en_US');
             $productTranslation->setSlug('product-listing-' . $i);
             $productTranslation->setName('product-listing-' . $i);
             $productTranslation->setDescription('product-listing-' . $i);
             $productTranslation->setProductDraft($productDraft);
 
-            $productPricing = new ProductListingPrice();
+            $productPricing = new ListingPrice();
             $productPricing->setProductDraft($productDraft);
             $productPricing->setPrice(1000);
             $productPricing->setOriginalPrice(1000);
@@ -360,9 +360,9 @@ final class ProductListingContext extends RawMinkContext implements Context
         return $this->getSession()->getPage();
     }
 
-    private function createProductListing(VendorInterface $vendor, string $code): ProductListingInterface
+    private function createProductListing(VendorInterface $vendor, string $code): ListingInterface
     {
-        $productListing = new ProductListing();
+        $productListing = new Listing();
         $productListing->setCode($code);
         $productListing->setVendor($vendor);
 
@@ -370,13 +370,13 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     private function createProductListingDraft(
-        ProductListingInterface $productListing,
+        ListingInterface $productListing,
         string $code = 'code',
         string $status = 'under_verification',
         int $versionNumber = 0,
         string $publishedAt = 'now'
-    ): ProductDraftInterface {
-        $productDraft = new ProductDraft();
+    ): DraftInterface {
+        $productDraft = new Draft();
         $productDraft->setCode($code);
         $productDraft->setStatus($status);
         $productDraft->setPublishedAt(new \DateTime($publishedAt));
@@ -389,13 +389,13 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     private function createProductListingTranslation(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         string $name = 'product-listing-name',
         string $description = 'product-listing-description',
         string $slug = 'product-listing-slug',
         string $locale = 'en_US'
-    ): ProductTranslationInterface {
-        $productTranslation = new ProductTranslation();
+    ): DraftTranslationInterface {
+        $productTranslation = new DraftTranslation();
         $productTranslation->setLocale($locale);
         $productTranslation->setSlug($slug);
         $productTranslation->setName($name);
@@ -406,13 +406,13 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     private function createProductListingPricing(
-        ProductDraftInterface $productDraft,
+        DraftInterface $productDraft,
         int $price = 1000,
         int $originalPrice = 1000,
         int $minimumPrice = 1000,
         string $channelCode = 'web_us'
-    ): ProductListingPriceInterface {
-        $productPricing = new ProductListingPrice();
+    ): ListingPriceInterface {
+        $productPricing = new ListingPrice();
         $productPricing->setProductDraft($productDraft);
         $productPricing->setPrice($price);
         $productPricing->setOriginalPrice($originalPrice);
@@ -476,14 +476,14 @@ final class ProductListingContext extends RawMinkContext implements Context
         $attributeValue->setValue('attribute_testing_value');
 
         $productListing = $this->createProductListing($vendor, $code);
-        /** @var ProductDraftInterface $productDraft */
+        /** @var DraftInterface $productDraft */
         $productDraft = $this->createProductListingDraft($productListing, $code, $status);
         $productDraft->addAttribute($attributeValue);
         $productTranslation = $this->createProductListingTranslation($productDraft, $name);
 
         $productPricing = $this->createProductListingPricing($productDraft);
 
-        $draftImage = new ProductDraftImage();
+        $draftImage = new DraftImage();
         $draftImage->setOwner($productDraft);
         $draftImage->setPath('path/to/file');
 

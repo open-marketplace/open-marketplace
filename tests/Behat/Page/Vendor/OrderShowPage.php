@@ -16,7 +16,7 @@ final class OrderShowPage extends SymfonyPage implements OrderShowPageInterface
 {
     public function getRouteName(): string
     {
-        return 'open_marketplace_vendor_order_show';
+        return 'open_marketplace_vendor_orders_show';
     }
 
     public function clickResendEmail(): void

@@ -17,7 +17,7 @@ class VendorRegisterPage extends SymfonyPage
 {
     public function getRouteName(): string
     {
-        return 'vendor_register_form';
+        return 'open_marketplace_vendor_register_form';
     }
 
     public function getValidationMessageCount($messageClass): int

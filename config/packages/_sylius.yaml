@@ -8,7 +8,12 @@ imports:
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
-    - { resource: "./../../src/Resources/config/resources/*" }
+
+    - { resource: "./../../src/Component/Core/Admin/Resources/config.yaml" }
+    - { resource: "./../../src/Component/Core/Common/Resources/config.yaml" }
+    - { resource: "./../../src/Component/Core/Shop/Resources/config.yaml" }
+    - { resource: "./../../src/Component/Core/Vendor/Resources/config.yaml" }
+    - { resource: "./../../src/Component/Override/Resources/config.yaml" }
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
@@ -21,64 +26,66 @@ sylius_order:
     resources:
         order:
             classes:
-                model: BitBag\OpenMarketplace\Entity\Order
-                controller: BitBag\OpenMarketplace\Controller\Resource\OrderController
-                repository: BitBag\OpenMarketplace\Repository\OrderRepository
+                model: BitBag\OpenMarketplace\Component\Order\Entity\Order
+                controller: BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\OrderController
+                repository: BitBag\OpenMarketplace\Component\Order\Repository\OrderRepository
                 form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
         order_item:
             classes:
-                model: BitBag\OpenMarketplace\Entity\OrderItem
+                model: BitBag\OpenMarketplace\Component\Order\Entity\OrderItem
 
 sylius_product:
     resources:
         product:
             classes:
-                model: BitBag\OpenMarketplace\Entity\Product
+                model: BitBag\OpenMarketplace\Component\Product\Entity\Product
+                interface: BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface
+                repository: BitBag\OpenMarketplace\Component\Product\Repository\ProductRepository
         product_variant:
             classes:
-                repository: BitBag\OpenMarketplace\Repository\ProductVariantRepository
+                repository: BitBag\OpenMarketplace\Component\Product\Repository\ProductVariantRepository
 
 sylius_user:
     resources:
         shop:
             user:
                 classes:
-                    model: BitBag\OpenMarketplace\Entity\ShopUser
-                    interface: BitBag\OpenMarketplace\Entity\ShopUserInterface
+                    model: BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser
+                    interface: BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface
 
 sylius_shipping:
     resources:
         shipment:
             classes:
-                model: BitBag\OpenMarketplace\Entity\Shipment
-                interface: BitBag\OpenMarketplace\Entity\ShipmentInterface
-                repository: BitBag\OpenMarketplace\Repository\ShipmentRepository
+                model: BitBag\OpenMarketplace\Component\Order\Entity\Shipment
+                interface: BitBag\OpenMarketplace\Component\Order\Entity\ShipmentInterface
+                repository: BitBag\OpenMarketplace\Component\Order\Repository\ShipmentRepository
 
 sylius_payment:
     resources:
         payment:
             classes:
-                repository: BitBag\OpenMarketplace\Repository\PaymentRepository
+                repository: BitBag\OpenMarketplace\Component\Order\Repository\PaymentRepository
 
 sylius_customer:
     resources:
         customer:
             classes:
-                repository: BitBag\OpenMarketplace\Repository\CustomerRepository
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\CustomerRepository
 
 sylius_review:
     resources:
         product:
             review:
                 classes:
-                    repository: BitBag\OpenMarketplace\Repository\ProductReviewRepository
+                    repository: BitBag\OpenMarketplace\Component\Product\Repository\ProductReviewRepository
 
 sylius_taxonomy:
     resources:
         taxon:
             classes:
                 model: Sylius\Component\Core\Model\Taxon
-                repository: BitBag\OpenMarketplace\Repository\TaxonRepository
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\TaxonRepository
 
 sylius_ui:
     events:

@@ -3,10 +3,10 @@
 <div class="ui fluid vertical menu" {{ sylius_test_html_attribute('vertical-menu') }}>
     <div class="header item">{{ taxon.name }}</div>
     {% for child in taxon.enabledChildren %}
-        <a href="{{ path('open_marketplace_vendor_shop_product_index', {'slug': child.slug, 'vendor_slug': app.request.attributes.get('vendor_slug'), '_locale': child.translation.locale}) }}" class="item" {{ sylius_test_html_attribute('vertical-menu-item') }}>{{ child.name }}</a>
+        <a href="{{ path('open_marketplace_shop_vendor_page_product_index', {'slug': child.slug, 'vendor_slug': app.request.attributes.get('vendor_slug'), '_locale': child.translation.locale}) }}" class="item" {{ sylius_test_html_attribute('vertical-menu-item') }}>{{ child.name }}</a>
     {% endfor %}
     {% if taxon.parent is not empty and taxon.parent.enabled %}
-        <a href="{{ path('open_marketplace_vendor_shop_product_index', {'slug': taxon.parent.slug, 'vendor_slug': app.request.attributes.get('vendor_slug'), '_locale': taxon.parent.translation.locale}) }}" class="item" {{ sylius_test_html_attribute('vertical-menu-go-level-up') }}>
+        <a href="{{ path('open_marketplace_shop_vendor_page_product_index', {'slug': taxon.parent.slug, 'vendor_slug': app.request.attributes.get('vendor_slug'), '_locale': taxon.parent.translation.locale}) }}" class="item" {{ sylius_test_html_attribute('vertical-menu-go-level-up') }}>
             <i class="up arrow icon"></i> {{ 'sylius.ui.go_level_up'|trans }}
         </a>
     {% endif %}

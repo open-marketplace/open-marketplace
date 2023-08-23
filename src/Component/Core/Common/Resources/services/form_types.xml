@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="false" autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Form\Type\Messaging\ConversationType"
+                 id="bitbag.open_marketplace.component.core.common.form.type.messaging.conversation">
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.resolver.resource.current_user_resolver" />
+            <argument type="service" id="open_marketplace.repository.vendor" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Form\Type\Messaging\MessageType"
+                 id="bitbag.open_marketplace.component.core.common.form.type.messaging.message">
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>

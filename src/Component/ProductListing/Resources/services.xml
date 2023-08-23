@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/*.xml"/>
+    </imports>
+
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\ListingPersister"
+                 id="bitbag.open_marketplace.component.product_listing.listing_persister">
+            <argument type="service" id="open_marketplace.factory.product_listing" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator" />
+            <argument type="service" id="sylius.image_uploader"/>
+        </service>
+    </services>
+</container>

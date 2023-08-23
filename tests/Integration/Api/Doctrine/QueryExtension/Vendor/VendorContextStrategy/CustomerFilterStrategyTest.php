@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Integration\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy;
 
-use BitBag\OpenMarketplace\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\CustomerFilterStrategy;
-use BitBag\OpenMarketplace\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Core\Api\Doctrine\QueryExtension\Vendor\VendorContextStrategy\CustomerFilterStrategy;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Tests\BitBag\OpenMarketplace\Integration\IntegrationTestCase;

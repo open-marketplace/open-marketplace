@@ -1,0 +1,5 @@
+open_marketplace_shop_account:
+    resource: "routing/account.yaml"
+
+open_marketplace_shop_checkout:
+    resource: "routing/checkout.yaml"

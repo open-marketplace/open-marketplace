@@ -12,7 +12,7 @@ Sylius\Component\Core\Model\Customer:
     lastName: "Wayne"
     email: "bruce.wayne@wayne.co"
     emailCanonical: "bruce.wayne@wayne.co"
-BitBag\OpenMarketplace\Entity\ShopUser:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_oliver:
     plainPassword: "123password"
     roles: ["ROLE_USER"]
@@ -23,13 +23,13 @@ BitBag\OpenMarketplace\Entity\ShopUser:
     roles: [ "ROLE_USER" ]
     enabled: "true"
     customer: '@customer_bruce'
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   vendor_address:
     country: '@poland'
     city: 'Warsaw'
     postalCode: '00-999'
     street: 'Avenue 2115'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_oliver:
     shopUser: '@user_oliver'
     companyName: 'Test company name'
@@ -64,24 +64,24 @@ Sylius\Component\Product\Model\ProductAttributeValue:
   test_value:
     subject: '@some_product'
     attribute: '@productAttribute1'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
   attribute:
     vendor: '@vendor_oliver'
     storage_type: "text"
     code: 'test_code'
     productAttribute: '@productAttribute1'
-BitBag\OpenMarketPlace\Entity\Product:
+BitBag\OpenMarketPlace\Component\Product\Entity\Product:
   some_product:
     code: 'test_code'
     vendor: '@vendor_oliver'
     attributes:
       - '@test_value'
-BitBag\OpenMarketPlace\Entity\ProductListing\ProductListing:
+BitBag\OpenMarketPlace\Component\ProductListing\Entity\Listing:
   test_listing:
     code: 'test_code'
     vendor: '@vendor_oliver'
     product: '@some_product'
-BitBag\OpenMarketPlace\Entity\ProductListing\ProductDraft:
+BitBag\OpenMarketPlace\Component\ProductListing\Entity\Draft:
   some_draft:
     code: 'test_code'
     productListing: '@test_listing'

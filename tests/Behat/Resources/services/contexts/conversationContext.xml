@@ -7,8 +7,8 @@
                 id="tests.open_marketplace.behat.context.conversation_context">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
-            <argument type="service" id="open_marketplace.factory.vendor_profile_factory"/>
-            <argument type="service" id="bitbag.mvm.factory.address_factory"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.profile_factory"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile.factory.address"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.repository.shop_user"/>
         </service>

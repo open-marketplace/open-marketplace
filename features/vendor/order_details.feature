@@ -9,6 +9,7 @@ Feature: Vendor can view order details
     And the store allows shipping with "fedex"
     And there is a "verified" vendor user "test@company.domain" registered in country "PL"
     And I am logged in as "test@company.domain"
+    And I am on "en_US/account"
 
   @ui
   Scenario: Visiting details page

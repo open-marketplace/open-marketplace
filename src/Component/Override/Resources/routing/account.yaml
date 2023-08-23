@@ -1,0 +1,28 @@
+sylius_shop_account_order_index:
+    path: /{_locale}/account/orders
+    methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            section: shop_account
+            template: "@SyliusShop/Account/Order/index.html.twig"
+            grid: open_marketplace_account_order
+
+sylius_shop_account_order_show:
+    path: /{_locale}/account/orders/{number}
+    methods: [GET]
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            section: shop_account
+            template: "@SyliusShop/Account/Order/show.html.twig"
+            repository:
+                method: findOneByNumberAndCustomer
+                arguments:
+                    - $number
+                    - "expr:service('sylius.context.customer').getCustomer()"
+

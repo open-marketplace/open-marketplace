@@ -9,7 +9,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Nowak"
         email: "test@example.com"
         emailCanonical: "test@example.com"
-BitBag\OpenMarketplace\Entity\ShopUser:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]
@@ -17,13 +17,13 @@ BitBag\OpenMarketplace\Entity\ShopUser:
         customer: '@customer_oliver'
         username: "oliver@queen.com"
         usernameCanonical: "oliver@queen.com"
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
     vendor_address:
         country: '@poland'
         city: 'Warsaw'
         postalCode: '00-999'
         street: 'Avenue 2115'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     vendor_oliver:
         shopUser: '@user_oliver'
         companyName: 'Test company name'
@@ -34,13 +34,13 @@ BitBag\OpenMarketplace\Entity\Vendor:
         description: 'description'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\VendorAddressUpdate:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\Address:
     vendor_new_address:
         country: '@USA'
         city: 'Central City'
         postalCode: '99-000'
         street: 'Arrow Street'
-BitBag\OpenMarketplace\Entity\VendorProfileUpdate:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate:
     vendor_oliver_update:
         vendor: '@vendor_oliver'
         companyName: 'new company'

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                    http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation">
+        <property name="locale">
+            <constraint name="NotBlank">
+                <option name="message">validator.message.not_blank</option>
+                <option name="groups">
+                    <value>ApiDraftAttribute</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">validator.message.not_blank</option>
+                <option name="groups">
+                    <value>ApiDraftAttribute</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

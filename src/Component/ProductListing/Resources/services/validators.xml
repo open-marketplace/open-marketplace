@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\Validator\UniqueProductListingSlugValidator"
+                 id="bitbag.open_marketplace.component.product_listing.validator.unique_product_listing_slug">
+            <argument type="service" id="open_marketplace.repository.product_draft_translation" />
+            <argument type="service" id="request_stack" />
+            <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.component.product_listing.validator.unique_product_listing_slug"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\Validator\ProductListingPriceValidator"
+                 id="bitbag.open_marketplace.component.product_listing.validator.product_listing_price">
+            <argument type="service" id="sylius.repository.channel"/>
+            <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.component.product_listing.validator.product_listing_price"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\ProductListing\Validator\ProductListingCodeValidator"
+                 id="bitbag.open_marketplace.component.product_listing.validator.product_listing_code">
+            <argument type="service" id="open_marketplace.repository.product_listing"/>
+            <argument type="service" id="bitbag.open_marketplace.component.core.api.context.vendor"/>
+            <argument type="service" id="request_stack" />
+            <tag name="validator.constraint_validator" alias="bitbag.open_marketplace.component.product_listing.validator.product_listing_code"/>
+        </service>
+    </services>
+</container>

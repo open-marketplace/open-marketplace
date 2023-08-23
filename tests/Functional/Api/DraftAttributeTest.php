@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslationInterface;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\OpenMarketplace\Functional\FunctionalTestCase;

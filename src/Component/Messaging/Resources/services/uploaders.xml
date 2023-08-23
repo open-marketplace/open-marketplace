@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Messaging\Uploader\AttachmentUploader"
+                 id="bitbag.open_marketplace.component.order.uploader.attachment">
+            <argument>%env(MESSAGES_FILE_UPLOAD_DIRECTORY)%</argument>
+        </service>
+    </services>
+</container>

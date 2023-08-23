@@ -3,4 +3,15 @@
 parameters:
     locale: en_US
 
-
+imports:
+    - { resource: "../src/Component/Core/Admin/Resources/services.xml" }
+    - { resource: "../src/Component/Core/Api/Resources/services.xml" }
+    - { resource: "../src/Component/Core/Common/Resources/services.xml" }
+    - { resource: "../src/Component/Core/Shop/Resources/services.xml" }
+    - { resource: "../src/Component/Core/Vendor/Resources/services.xml" }
+    - { resource: "../src/Component/Messaging/Resources/services.xml" }
+    - { resource: "../src/Component/Order/Resources/services.xml" }
+    - { resource: "../src/Component/Override/Resources/services.xml" }
+    - { resource: "../src/Component/Product/Resources/services.xml" }
+    - { resource: "../src/Component/ProductListing/Resources/services.xml" }
+    - { resource: "../src/Component/Vendor/Resources/services.xml" }

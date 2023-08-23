@@ -1,6 +1,6 @@
 <div class="ui fluid card" id="customer">
     <div class="content">
-        <a href="{{ path('open_marketplace_vendor_customer_show', {'id': customer.id}) }}" class="header sylius-customer-name">
+        <a href="{{ path('open_marketplace_vendor_customers_show', {'id': customer.id}) }}" class="header sylius-customer-name">
             {{ customer.fullName }}
             <div class="meta">
                 <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|format_date }}.</span>

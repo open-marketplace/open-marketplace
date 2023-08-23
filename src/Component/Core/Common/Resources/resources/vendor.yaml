@@ -1,0 +1,56 @@
+sylius_resource:
+    resources:
+        open_marketplace.vendor:
+            driver: doctrine/orm
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface
+                controller: BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\VendorController
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository
+                form: BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\VendorType
+
+        open_marketplace.vendor_profile_update:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdateInterface
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\ProfileUpdateRepository
+
+        open_marketplace.vendor_address:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\Address
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\AddressInterface
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+
+        open_marketplace.vendor_address_update:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\Address
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\AddressInterface
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+
+        open_marketplace.vendor_shipping_method:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                repository: BitBag\OpenMarketplace\Component\Vendor\Repository\VendorShippingMethodRepository
+
+        open_marketplace.vendor_logo_image:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImageInterface
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\LogoImageType
+
+        open_marketplace.vendor_background_image:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage
+                interface: BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImageInterface
+                form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\BackgroundImageType
+
+        open_marketplace.vendor_profile_update_logo_image:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage
+
+        open_marketplace.vendor_profile_update_background_image:
+            classes:
+                model: BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage

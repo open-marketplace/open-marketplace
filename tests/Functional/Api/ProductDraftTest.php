@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\OpenMarketplace\Functional\FunctionalTestCase;
@@ -22,7 +22,7 @@ final class ProductDraftTest extends FunctionalTestCase
     public function setUp(): void
     {
         $this->entityManager = static::getContainer()->get('doctrine.orm.entity_manager');
-        $this->productDraftRepository = $this->entityManager->getRepository(ProductDraft::class);
+        $this->productDraftRepository = $this->entityManager->getRepository(Draft::class);
 
         $this->loadFixturesFromFile('Api/ProductDraftTest/product_draft.yml');
     }
@@ -31,7 +31,7 @@ final class ProductDraftTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
-        /** @var ProductDraft $productDraft */
+        /** @var Draft $productDraft */
         $productDraft = $this->productDraftRepository->findOneBy(['code' => 'product_draft_bruce_1']);
 
         $this->client->request('GET', '/api/v2/shop/account/vendor/product-drafts/' . $productDraft->getUuid()->toString(), [], [], $header);
@@ -43,7 +43,7 @@ final class ProductDraftTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
 
-        /** @var ProductDraft $productDraft */
+        /** @var Draft $productDraft */
         $productDraft = $this->productDraftRepository->findOneBy(['code' => 'product_draft_bruce_1']);
 
         $this->client->request('GET', '/api/v2/shop/account/vendor/product-drafts/' . $productDraft->getUuid()->toString(), [], [], $header);
@@ -55,7 +55,7 @@ final class ProductDraftTest extends FunctionalTestCase
     {
         $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
-        /** @var ProductDraft $productDraft */
+        /** @var Draft $productDraft */
         $productDraft = $this->productDraftRepository->findOneBy(['code' => 'product_draft_bruce_1']);
 
         $this->client->request('GET', '/api/v2/shop/account/vendor/product-drafts/' . $productDraft->getUuid()->toString(), [], [], $header);

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="false" autoconfigure="false" autowire="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ChannelPricingFactory"
+                 id="bitbag.open_marketplace.component.product.factory.channel_pricing">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ProductTranslationFactory"
+                 id="bitbag.open_marketplace.component.product.factory.product_translation">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ProductVariantFactory"
+                 id="bitbag.open_marketplace.component.product.factory.product_variant">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ProductVariantTranslationFactory"
+                 id="bitbag.open_marketplace.component.product.factory.product_variant_translation">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ProductImageFactory"
+                 id="bitbag.open_marketplace.component.product.factory.product_image"/>
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ProductAttributeFactory"
+                 id="bitbag.open_marketplace.component.product.factory.product_attribute">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ProductAttributeTranslationFactory"
+                 id="bitbag.open_marketplace.component.product.factory.product_attribute_translation">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ProductAttributeFactory"
+                 id="bitbag.open_marketplace.component.product.factory.product_attribute">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Product\Factory\ProductAttributeValueFactory"
+                 id="bitbag.open_marketplace.component.product.factory.product_attribute_value">
+            <argument type="string">%sylius.model.product_attribute_value.class%</argument>
+        </service>
+
+    </services>
+</container>
