@@ -15,7 +15,7 @@ Feature: Filling vendor registration form by a customer
 
   Scenario: Filling form with data that fails validation
     When I am on "/en_US/account/vendor/register"
-    And I fill in "profiler_companyName" with "te"
+    And I fill in "profile_companyName" with "te"
     And I fill in "profile_taxIdentifier" with "56"
     And I fill in "profile_phoneNumber" with "55"
     And I attach the file "images/invalid_logo.png" to "profile_image_file"
