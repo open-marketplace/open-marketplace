@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface as OpenMarketplaceOrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepository;
@@ -37,59 +38,29 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext extends RawMinkContext
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private FactoryInterface $orderFactory;
-
-    private OrderRepository $orderRepository;
-
-    private ShopUserExampleFactory $userExampleFactory;
-
-    private EntityManagerInterface $entityManager;
-
-    private UserRepository $userRepository;
-
-    private ShipmentFactoryInterface $shipmentFactory;
-
-    private ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private StateMachineFactoryInterface $stateMachineFactory;
-
-    private AddressFactoryInterface $addressFactory;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        FactoryInterface $orderFactory,
-        OrderRepository $orderRepository,
-        ShopUserExampleFactory $userExampleFactory,
-        EntityManagerInterface $entityManager,
-        UserRepository $userRepository,
-        ShipmentFactoryInterface $shipmentFactory,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        StateMachineFactoryInterface $stateMachineFactory,
-        AddressFactoryInterface $addressFactory,
-        ExampleFactoryInterface $vendorExampleFactory,
-        ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->orderFactory = $orderFactory;
-        $this->orderRepository = $orderRepository;
-        $this->userExampleFactory = $userExampleFactory;
-        $this->entityManager = $entityManager;
-        $this->userRepository = $userRepository;
-        $this->shipmentFactory = $shipmentFactory;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->addressFactory = $addressFactory;
-        $this->vendorExampleFactory = $vendorExampleFactory;
+        private SharedStorageInterface $sharedStorage,
+        private FactoryInterface $orderFactory,
+        private OrderRepository $orderRepository,
+        private ShopUserExampleFactory $userExampleFactory,
+        private EntityManagerInterface $entityManager,
+        private UserRepository $userRepository,
+        private ShipmentFactoryInterface $shipmentFactory,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private StateMachineFactoryInterface $stateMachineFactory,
+        private AddressFactoryInterface $addressFactory,
+        private ExampleFactoryInterface $vendorExampleFactory,
+        private OrderExampleFactoryInterface $orderExampleFactory
+    ) {
     }
 
     /**
      * @Given There is order with property :propertyName with value :value made with logged in seller
      */
-    public function thereIsOrderWithPropertyWithValueMadeWithLoggedInSeller($propertyName, $value): void
-    {
+    public function thereIsOrderWithPropertyWithValueMadeWithLoggedInSeller(
+        string $propertyName,
+        string $value
+    ): void {
         $vendor = $this->sharedStorage->get('vendor');
 
         $order = $this->createDefaultOrder();
@@ -110,8 +81,10 @@ final class OrderContext extends RawMinkContext
     /**
      * @Given There is order with property :propertyName with value :value made with other seller
      */
-    public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller($propertyName, $value)
-    {
+    public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller(
+        string $propertyName,
+        string $value
+    ): void {
         $vendor = $this->createDefaultVendor();
 
         $order = $this->createDefaultOrder();
@@ -223,6 +196,20 @@ final class OrderContext extends RawMinkContext
         $customer = $order->getCustomer();
         $order->setBillingAddress($this->createAddress($customer, $country, $city, $postalCode, $street));
         $this->entityManager->flush();
+    }
+
+    /**
+     * @Given The customer :customer has new order
+     */
+    public function thereIsFulfilledOrder(string $customer): void
+    {
+        $orders = $this->orderExampleFactory->createArray(['customer' => $customer]);
+
+        foreach ($orders as $order) {
+            $this->orderRepository->add($order);
+        }
+
+        $this->sharedStorage->set('primary_order', reset($orders));
     }
 
     private function createOrder(

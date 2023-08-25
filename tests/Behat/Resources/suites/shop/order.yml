@@ -1,6 +1,6 @@
 default:
     suites:
-        order:
+        shop_order:
             contexts:
             - tests.open_marketplace.behat.context.shop.order
             - sylius.behat.context.setup.payment
@@ -21,4 +21,4 @@ default:
             - sylius.behat.context.setup.user
             - Behat\MinkExtension\Context\MinkContext
             filters:
-                tags: "@order"
+                tags: "@shop_order&&@ui"
