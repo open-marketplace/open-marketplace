@@ -1,4 +1,4 @@
-@order
+@shop_order
 Feature: Spliting orders when cart was filled with products from different Vendors
   As a customer
   I want to be able to buy products from multiple vendors

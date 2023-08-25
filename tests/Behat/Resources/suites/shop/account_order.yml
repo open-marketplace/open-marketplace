@@ -1,0 +1,28 @@
+default:
+    suites:
+        shop_account_order:
+            contexts:
+                - tests.open_marketplace.behat.context.setup.order
+                - tests.open_marketplace.behat.context.setup.product
+                - tests.open_marketplace.behat.context.ui.shop.account.order
+#                - tests.open_marketplace.behat.context.setup.product
+#
+                - sylius.behat.context.ui.shop.account
+#                - sylius.behat.context.setup.admin_security
+#                - sylius.behat.context.setup.admin_security
+#                - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shop_security
+#                - sylius.behat.context.setup.shipping_category
+#                - sylius.behat.context.setup.product
+#
+#                - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.order
+#                - sylius.behat.context.transform.shipping_category
+                - sylius.behat.context.hook.doctrine_orm
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@shop_account_order&&@ui"
