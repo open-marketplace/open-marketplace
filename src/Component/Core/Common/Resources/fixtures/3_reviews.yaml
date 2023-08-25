@@ -5,12 +5,3 @@ sylius_fixtures:
                 product_review:
                     options:
                         random: 40
-                        prototype:
-                            status: accepted
-                fulfilled_order_camille:
-                    name: open_marketplace_order
-                    options:
-                        amount: 10
-                        channel: 'open-marketplace'
-                        customer: 'camille@example.com'
-                        country: 'PL'
