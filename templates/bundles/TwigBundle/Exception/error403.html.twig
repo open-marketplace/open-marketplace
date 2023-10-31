@@ -1,17 +1,5 @@
-{% extends '@SyliusShop/layout.html.twig' %}
+{% extends '@Twig/Exception/error.html.twig' %}
 
-{% block content %}
-    <div class="ui vertical stripe segment error-container">
-        <div class="ui two column center aligned middle aligned stackable grid">
-            <div class="column">
-                <h2 class="ui center aligned icon header">
-                    {{ 'sylius.ui.the_page_you_are_looking_for_is_forbidden'|trans }}
-                </h2>
-                <a href="{{ path('sylius_shop_homepage') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.back_to_store'|trans }}</a>
-            </div>
-            <div class="column">
-                <img src="{{ asset('open-marketplace-logo.png') }}" alt="Sylius logo" class="ui large error-page image" />
-            </div>
-        </div>
-    </div>
+{% block error_message %}
+    {{ 'sylius.ui.the_page_you_are_looking_for_is_forbidden'|trans }}
 {% endblock %}

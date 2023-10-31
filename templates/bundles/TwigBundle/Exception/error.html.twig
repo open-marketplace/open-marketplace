@@ -5,7 +5,9 @@
         <div class="ui two column center aligned middle aligned stackable grid">
             <div class="column">
                 <h2 class="ui center aligned icon header">
-                    {{ 'sylius.ui.unexpected_error_occurred'|trans }}
+                    {% block error_message %}
+                        {{ 'sylius.ui.unexpected_error_occurred'|trans }}
+                    {% endblock %}
                 </h2>
                 <a href="{{ path('sylius_shop_homepage') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.back_to_store'|trans }}</a>
             </div>
