@@ -1,0 +1,19 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <div class="ui vertical stripe segment error-container">
+        <div class="ui one column center aligned middle aligned stackable grid">
+            <div class="column">
+                <img src="{{ asset('open-marketplace-logo.png') }}" alt="BitBag OpenMarketplace logo" class="ui large error-page image" />
+                <div class="error-section">
+                    <h2 class="ui center aligned icon header">
+                        {% block error_message %}
+                            {{ 'sylius.ui.unexpected_error_occurred'|trans }}
+                        {% endblock %}
+                    </h2>
+                    <a href="{{ path('sylius_shop_homepage') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.back_to_store'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
