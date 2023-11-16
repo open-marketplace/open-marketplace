@@ -93,6 +93,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         $vendor = $this->profileFactory->createNew();
         $vendor->setCompanyName($options['company_name']);
         $vendor->setTaxIdentifier($options['tax_identifier']);
+        $vendor->setBankAccountNumber($options['bank_account_number']);
         $vendor->setPhoneNumber($options['phone_number']);
         $vendor->setStatus($options['status']);
         $vendor->setEnabled($options['enabled']);
@@ -178,6 +179,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
             )
             ->setDefault('company_name', fn (Options $options): string => $this->faker->company)
             ->setDefault('tax_identifier', fn (Options $options): string => $this->faker->companySuffix)
+            ->setDefault('bank_account_number', fn (Options $options): string => $this->faker->iban)
             ->setDefault('phone_number', fn (Options $options): string => $this->faker->phoneNumber)
             ->setDefault('status', VendorInterface::STATUS_VERIFIED)
             ->setDefault('enabled', true)
