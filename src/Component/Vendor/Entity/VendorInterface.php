@@ -39,6 +39,10 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
 
     public function setTaxIdentifier(?string $taxIdentifier): void;
 
+    public function getBankAccountNumber(): ?string;
+
+    public function setBankAccountNumber(?string $bankAccountNumber): void;
+
     public function getPhoneNumber(): ?string;
 
     public function setPhoneNumber(?string $phoneNumber): void;

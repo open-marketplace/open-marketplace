@@ -30,6 +30,9 @@ final class VendorType extends AbstractResourceType
             ->add('taxIdentifier', TextType::class, [
                 'label' => 'open_marketplace.ui.tax_identifier',
             ])
+            ->add('bankAccountNumber', TextType::class, [
+                'label' => 'open_marketplace.ui.bank_account_number',
+            ])
             ->add('phoneNumber', TextType::class, [
                 'label' => 'open_marketplace.ui.phone_number',
             ])

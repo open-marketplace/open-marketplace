@@ -30,6 +30,8 @@ class Vendor implements VendorInterface
 
     protected ?string $taxIdentifier;
 
+    protected ?string $bankAccountNumber;
+
     protected ?string $phoneNumber;
 
     protected ?AddressInterface $vendorAddress;
@@ -105,6 +107,16 @@ class Vendor implements VendorInterface
     public function setTaxIdentifier(?string $taxIdentifier): void
     {
         $this->taxIdentifier = $taxIdentifier;
+    }
+
+    public function getBankAccountNumber(): ?string
+    {
+        return $this->bankAccountNumber;
+    }
+
+    public function setBankAccountNumber(?string $bankAccountNumber): void
+    {
+        $this->bankAccountNumber = $bankAccountNumber;
     }
 
     public function getPhoneNumber(): ?string
