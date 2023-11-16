@@ -48,6 +48,7 @@ open_marketplace:
         publishedAt: Published at
         status: Status
         tax_identifier: Tax Identifier
+        bank_account_number: Bank account number
         not_blank: This field cannot be empty
         company_name: Company name
         shop_user: Shop user
