@@ -98,6 +98,7 @@ class VendorUpdateContext extends RawMinkContext
             'company_name' => 'Test',
             'phone_number' => '333333333',
             'tax_identifier' => '543455',
+            'bank_account_number' => 'NL31INGB4405427607',
             'street' => 'Secret 13',
             'city' => 'Warsaw',
             'postcode' => '00-111',
@@ -138,6 +139,7 @@ class VendorUpdateContext extends RawMinkContext
         $pendigUpdate->setToken($token);
         $pendigUpdate->setCompanyName('new Company');
         $pendigUpdate->setTaxIdentifier('new ID');
+        $pendigUpdate->setBankAccountNumber('new iban');
         $pendigUpdate->setPhoneNumber('new number');
         $pendigUpdate->setDescription('new description');
         $pendigUpdate->getVendorAddress()->setStreet('new street');

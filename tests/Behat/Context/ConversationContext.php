@@ -69,6 +69,7 @@ class ConversationContext extends MinkContext implements Context
         $vendor = $this->vendorProfileFactory->createVendor(
             'someCompany',
             'TaxID',
+            'iban',
             '333222111',
             'description',
             $address

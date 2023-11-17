@@ -9,6 +9,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
         shopUser: '@user_oliver'
         companyName: 'Test company name'
         taxIdentifier: '1234567'
+        bankAccountNumber: 'PL65109024029994763689555936'
         phoneNumber: '333111222'
         vendorAddress: '@oliver_vendor_address'
         slug: 'oliver-queen-company'
