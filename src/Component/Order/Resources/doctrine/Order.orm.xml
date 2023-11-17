@@ -6,6 +6,7 @@
 
     <mapped-superclass name="BitBag\OpenMarketplace\Component\Order\Entity\Order" table="sylius_order">
         <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface" />
+        <many-to-one field="settlement" target-entity="BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface" inversed-by="orders"/>
         <many-to-one field="primaryOrder" target-entity="BitBag\OpenMarketplace\Component\Order\Entity\Order" inversed-by="secondaryOrders">
             <join-column on-delete="SET NULL"/>
         </many-to-one>

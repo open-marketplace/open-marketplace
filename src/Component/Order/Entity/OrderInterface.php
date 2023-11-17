@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Order\Entity;
 
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\OptionalVendorAwareInterface;
 use Doctrine\Common\Collections\Collection;
@@ -50,4 +51,8 @@ interface OrderInterface extends BaseOrderInterface, OptionalVendorAwareInterfac
     public function getCommissionTotal(): int;
 
     public function setCommissionTotal(int $commissionTotal): void;
+
+    public function getSettlement(): ?SettlementInterface;
+
+    public function setSettlement(?SettlementInterface $settlement): void;
 }

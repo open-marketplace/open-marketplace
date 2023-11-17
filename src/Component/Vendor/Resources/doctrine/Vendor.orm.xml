@@ -67,5 +67,10 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+
+        <one-to-many field="settlements"
+                     target-entity="BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface"
+                     mapped-by="vendor">
+        </one-to-many>
     </mapped-superclass>
 </doctrine-mapping>

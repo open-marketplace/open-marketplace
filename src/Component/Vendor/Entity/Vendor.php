@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Vendor\Entity;
 
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -59,6 +60,9 @@ class Vendor implements VendorInterface
     /** @var Collection<int, VendorShippingMethodInterface> */
     protected Collection $shippingMethods;
 
+    /** @var Collection<int, SettlementInterface> */
+    protected Collection $settlements;
+
     protected ?int $commission = 0;
 
     protected string $commissionType = self::NET_COMMISSION;
@@ -67,6 +71,7 @@ class Vendor implements VendorInterface
     {
         $this->products = new ArrayCollection();
         $this->shippingMethods = new ArrayCollection();
+        $this->settlements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -340,6 +345,16 @@ class Vendor implements VendorInterface
     public function setCommissionType(string $commissionType): void
     {
         $this->commissionType = $commissionType;
+    }
+
+    public function getSettlements(): Collection
+    {
+        return $this->settlements;
+    }
+
+    public function setSettlements(Collection $settlements): void
+    {
+        $this->settlements = $settlements;
     }
 
     public function __toString(): string

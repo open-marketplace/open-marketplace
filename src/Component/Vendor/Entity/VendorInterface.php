@@ -118,4 +118,8 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
     public function getCommissionType(): string;
 
     public function setCommissionType(string $commissionType): void;
+
+    public function getSettlements(): Collection;
+
+    public function setSettlements(Collection $settlements): void;
 }
