@@ -34,6 +34,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
         shopUser: '@user_oliver'
         companyName: 'Test company name'
         taxIdentifier: '1234567'
+        bankAccountNumber: 'PL97109024021972765458596357'
         phoneNumber: '333111222'
         vendorAddress: '@vendor_address'
         description: 'description'
