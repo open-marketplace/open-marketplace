@@ -109,7 +109,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             ->createAddress('Grand Street', 'Warsaw', '00-22', $poland);
 
         $vendorData = $this->vendorProfileFactory
-            ->createVendor('Grand Company', '221133', '0-33 221 333 111', 'description', $address);
+            ->createVendor('Grand Company', '221133', 'PL14109024029586826934815556', '0-33 221 333 111', 'description', $address);
 
         $vendorData->setSlug('test-slug');
 
