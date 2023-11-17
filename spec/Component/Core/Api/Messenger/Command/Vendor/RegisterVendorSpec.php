@@ -23,7 +23,7 @@ final class RegisterVendorSpec extends ObjectBehavior
     public function let(
         Address $vendorAddress
     ): void {
-        $this->beConstructedWith('companyName', 'taxIdentifier', 'phoneNumber', 'description', $vendorAddress);
+        $this->beConstructedWith('companyName', 'taxIdentifier', 'iban', 'phoneNumber', 'description', $vendorAddress);
     }
 
     public function it_is_initializable(): void
@@ -41,6 +41,11 @@ final class RegisterVendorSpec extends ObjectBehavior
     public function it_has_tax_identifier(): void
     {
         $this->getTaxIdentifier()->shouldReturn('taxIdentifier');
+    }
+
+    public function it_has_bank_account_number(): void
+    {
+        $this->getBankAccountNumber()->shouldReturn('iban');
     }
 
     public function it_has_phone_number(): void
