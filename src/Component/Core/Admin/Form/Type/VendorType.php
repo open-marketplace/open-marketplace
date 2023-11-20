@@ -48,6 +48,15 @@ final class VendorType extends AbstractResourceType
                     'Net' => VendorInterface::NET_COMMISSION,
                     'Gross' => VendorInterface::GROSS_COMMISSION,
                 ],
-            ]);
+            ])
+            ->add('settlementFrequency', ChoiceType::class, [
+                'label' => 'open_marketplace.ui.settlement_frequency',
+                'choices' => [
+                    'open_marketplace.ui.seven_days' => 7,
+                    'open_marketplace.ui.one_month' => 30,
+                    'open_marketplace.ui.quarter_year' => 90,
+                ],
+            ])
+        ;
     }
 }
