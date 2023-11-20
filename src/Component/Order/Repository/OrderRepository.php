@@ -187,7 +187,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
     public function findAllForSettlementByVendor(VendorInterface $vendor): array
     {
-        $qb = $this->findAllByVendorQueryBuilder($vendor)
+        $qb = $this->findAllByVendor($vendor)
             ->andWhere('o.state = :state')
             ->andWhere('o.mode != :mode')
             ->andWhere('o.settlement IS NULL')
