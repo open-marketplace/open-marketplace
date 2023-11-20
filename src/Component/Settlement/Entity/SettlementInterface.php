@@ -14,9 +14,12 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Entity;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface SettlementInterface extends ResourceInterface
+interface SettlementInterface extends ResourceInterface, TimestampableInterface
 {
+    public const STATUS_NEW = 'new';
+
     public function getId(): ?int;
 
     public function getVendor(): VendorInterface;
@@ -41,5 +44,15 @@ interface SettlementInterface extends ResourceInterface
 
     public function getTotalProfit(): int;
 
-    public function setTotalProfit(int $totalProfit): void;
+    public function getStartDate(): \DateTimeInterface;
+
+    public function setStartDate(\DateTimeInterface $startDate): void;
+
+    public function getEndDate(): \DateTimeInterface;
+
+    public function setEndDate(\DateTimeInterface $endDate): void;
+
+    public function getCurrencyCode(): string;
+
+    public function setCurrencyCode(string $currencyCode): void;
 }
