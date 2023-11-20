@@ -176,12 +176,6 @@ trait OrderTrait
     {
         $this->commissionTotal = $commissionTotal;
     }
-
-    public function getItems(): Collection
-    {
-        return $this->items;
-    }
-
     public function getSettlement(): ?SettlementInterface
     {
         return $this->settlement;
