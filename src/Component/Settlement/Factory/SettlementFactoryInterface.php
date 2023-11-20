@@ -11,11 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Factory;
 
-use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface SettlementFactoryInterface extends FactoryInterface
 {
-    public function createNewForVendorAndOrders(VendorInterface $vendor, array $orders): SettlementInterface;
 }

@@ -1,9 +1,0 @@
-sylius_fixtures:
-  suites:
-    open_marketplace:
-      fixtures:
-        open_marketplace_order:
-          options:
-            amount: 100
-            fulfilled: true
-        settlement: ~

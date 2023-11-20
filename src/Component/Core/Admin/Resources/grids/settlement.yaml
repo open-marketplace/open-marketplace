@@ -17,31 +17,3 @@ sylius_grid:
         status:
           type: string
           label: open_marketplace.ui.status
-        totalAmount:
-          type: twig
-          label: open_marketplace.ui.total_amount
-          path: .
-          options:
-            vars:
-              method: totalAmount
-            template: "Configuration/Grid/Admin/Field/settlementAmount.html.twig"
-        totalCommissionAmount:
-          type: twig
-          label: open_marketplace.ui.total_commission_amount
-          path: .
-          options:
-            vars:
-              method: totalCommissionAmount
-            template: "Configuration/Grid/Admin/Field/settlementAmount.html.twig"
-        updatedAt:
-          type: datetime
-          label: open_marketplace.ui.updated_at
-        createdAt:
-          type: datetime
-          label: open_marketplace.ui.created_at
-        timePeriod:
-          type: twig
-          label: open_marketplace.ui.time_period
-          path: .
-          options:
-            template: "Configuration/Grid/Admin/Field/settlementTimePeriod.html.twig"
