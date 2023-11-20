@@ -168,6 +168,11 @@ open_marketplace:
         vendor_test_credentials: Vendor test credentials
         username: Username
         password: Password
+        total_commission_amount: Commission amount
+        total_amount: Total amount
+        created_at: Created at
+        updated_at: Updated at
+        time_period: Time period
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.
