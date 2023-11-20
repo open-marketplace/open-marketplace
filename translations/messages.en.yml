@@ -60,6 +60,7 @@ open_marketplace:
         postal_code: Postal code
         pending_update_message: Your profile has been edited. Please approve the changes by clicking on the link in the email sent to you.
         vendors: Vendors
+        settlements: Settlements
         logo: Logo
         background: Background
         review: Review
