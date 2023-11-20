@@ -15,5 +15,4 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 final class SettlementRepository extends EntityRepository implements SettlementRepositoryInterface
 {
-
 }

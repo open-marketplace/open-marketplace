@@ -176,6 +176,7 @@ trait OrderTrait
     {
         $this->commissionTotal = $commissionTotal;
     }
+
     public function getSettlement(): ?SettlementInterface
     {
         return $this->settlement;

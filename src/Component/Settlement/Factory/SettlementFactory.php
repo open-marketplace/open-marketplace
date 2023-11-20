@@ -27,16 +27,20 @@ final class SettlementFactory implements SettlementFactoryInterface
     public function createNewForVendorAndOrders(VendorInterface $vendor, array $orders): SettlementInterface
     {
         $settlement = $this->createNew();
+        /** @var OrderInterface $firstOrder */
+        $firstOrder = $orders[array_key_first($orders)];
+        /** @var OrderInterface $lastOrder */
+        $lastOrder = $orders[array_key_last($orders)];
+
         $settlement->setVendor($vendor);
         $settlement->setOrders(new ArrayCollection($orders));
-
         [$totalAmount, $totalCommission] = $this->calculateTotals($orders);
         $settlement->setTotalAmount($totalAmount);
         $settlement->setTotalCommissionAmount($totalCommission);
         $settlement->setStatus(SettlementInterface::STATUS_NEW);
-        $settlement->setCurrencyCode($orders[array_key_first($orders)]->getCurrencyCode());
-        $settlement->setStartDate($orders[array_key_first($orders)]->getCheckoutCompletedAt());
-        $settlement->setEndDate($orders[array_key_last($orders)]->getCheckoutCompletedAt());
+        $settlement->setCurrencyCode($firstOrder->getCurrencyCode());
+        $settlement->setStartDate($firstOrder->getCheckoutCompletedAt());
+        $settlement->setEndDate($lastOrder->getCheckoutCompletedAt());
 
         return $settlement;
     }
