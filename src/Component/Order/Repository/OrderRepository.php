@@ -184,17 +184,4 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
             ;
     }
-
-    public function findAllForSettlementByVendor(VendorInterface $vendor): array
-    {
-        $qb = $this->findAllByVendor($vendor)
-            ->andWhere('o.state = :state')
-            ->andWhere('o.mode != :mode')
-            ->andWhere('o.settlement IS NULL')
-            ->addOrderBy('o.checkoutCompletedAt', self::ORDER_ASCENDING)
-            ->setParameter('state', \Sylius\Component\Core\Model\OrderInterface::STATE_FULFILLED)
-            ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE);
-
-        return $qb->getQuery()->getResult();
-    }
 }

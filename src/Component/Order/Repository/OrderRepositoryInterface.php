@@ -49,6 +49,4 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /** @phpstan-ignore-next-line */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
-
-    public function findAllForSettlementByVendor(VendorInterface $vendor): array;
 }
