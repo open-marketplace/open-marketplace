@@ -5,6 +5,7 @@
     <h3 class="header">{{ 'open_marketplace.ui.become_a_vendor'|trans }}</h3>
     {{ form_row(form.companyName, sylius_test_form_attribute('companyName')) }}
     {{ form_row(form.taxIdentifier) }}
+    {{ form_row(form.bankAccountNumber) }}
     {{ form_row(form.phoneNumber) }}
     <div class="field" id="add-avatar">
         {% form_theme form 'Context/Vendor/ProductListing/form/theme/image_theme.html.twig' %}

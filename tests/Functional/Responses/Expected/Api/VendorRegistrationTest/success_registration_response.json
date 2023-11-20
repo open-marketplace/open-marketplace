@@ -5,6 +5,7 @@
     "uuid": "@string@",
     "companyName": "Wayland Corp",
     "taxIdentifier": "345",
+    "bankAccountNumber": "PL10109024026243964796978514",
     "phoneNumber": "123456789",
     "vendorAddress": {
         "@type": "Address",

@@ -12,6 +12,7 @@
         <field name="uuid" type="uuid" unique="true" />
         <field name="companyName" column="company_name" type="text" />
         <field name="taxIdentifier" column="tax_identifier" type="text" />
+        <field name="bankAccountNumber" column="bank_account_number" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
         <field name="status" column="status" type="string" />
         <field name="enabled" column="enabled" type="boolean" />

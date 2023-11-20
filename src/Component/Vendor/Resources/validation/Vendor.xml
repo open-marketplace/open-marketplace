@@ -26,6 +26,24 @@
                 </option>
             </constraint>
         </property>
+        <property name="bankAccountNumber">
+            <constraint name="NotBlank">
+                <option name="message">validator.message.not_blank</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
+            <constraint name="Iban">
+                <option name="message">validator.message.not_valid_iban</option>
+                <option name="groups">
+                    <value>Default</value>
+                    <value>VendorUser</value>
+                    <value>VendorUserRegister</value>
+                </option>
+            </constraint>
+        </property>
         <property name="companyName">
             <constraint name="NotBlank">
                 <option name="message">validator.message.not_blank</option>

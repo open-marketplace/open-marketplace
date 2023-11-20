@@ -31,6 +31,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
+            'bankAccountNumber' => 'PL10109024026243964796978514',
             'phoneNumber' => '123456789',
             'description' => 'Wayland Corp Desc',
             'vendorAddress' => [
@@ -64,6 +65,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
+            'bankAccountNumber' => 'PL10109024026243964796978514',
             'phoneNumber' => '123456789',
             'description' => 'Wayland Corp Desc',
             'vendorAddress' => [
@@ -103,6 +105,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
+            'bankAccountNumber' => 'PL10109024026243964796978514',
             'phoneNumber' => '123456789',
             'description' => 'Wayland Corp Desc',
             'vendorAddress' => [
@@ -124,6 +127,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
+            'bankAccountNumber' => 'PL10109024026243964796978514',
             'phoneNumber' => '123456789',
             'description' => 'Wayland Corp Desc',
             'vendorAddress' => [
@@ -149,6 +153,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wayland Corp',
             'taxIdentifier' => '345',
+            'bankAccountNumber' => 'PL10109024026243964796978514',
             'phoneNumber' => '123456789',
             'description' => 'Wayland Corp Desc',
             'vendorAddress' => [
@@ -174,6 +179,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => 'Wa',
             'taxIdentifier' => '34',
+            'bankAccountNumber' => 'PL10109024026243964796978514',
             'phoneNumber' => '12',
             'description' => 'Wa',
             'vendorAddress' => [
@@ -202,6 +208,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->client->request('POST', '/api/v2/shop/account/vendor/register', [], [], $header, json_encode([
             'companyName' => $string256Length,
             'taxIdentifier' => $string256Length,
+            'bankAccountNumber' => 'PL10109024026243964796978514',
             'phoneNumber' => $string256Length,
             'description' => $string2049Length,
             'vendorAddress' => [

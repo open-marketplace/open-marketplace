@@ -17,3 +17,4 @@ validator:
     vendor_already_exists: Vendor for current user already exists
     positive_or_zero_commission: Commission value must be positive or zero
     product_listing_unique_code: Product Listing with given code already exists
+    not_valid_iban: This is not a valid International Bank Account Number (IBAN).

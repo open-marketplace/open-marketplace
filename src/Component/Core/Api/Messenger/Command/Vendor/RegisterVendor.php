@@ -23,6 +23,7 @@ final class RegisterVendor implements RegisterVendorInterface
     public function __construct(
         private string $companyName,
         private string $taxIdentifier,
+        private string $bankAccountNumber,
         private string $phoneNumber,
         private string $description,
         private Address $vendorAddress
@@ -37,6 +38,11 @@ final class RegisterVendor implements RegisterVendorInterface
     public function getTaxIdentifier(): string
     {
         return $this->taxIdentifier;
+    }
+
+    public function getBankAccountNumber(): string
+    {
+        return $this->bankAccountNumber;
     }
 
     public function getPhoneNumber(): string
