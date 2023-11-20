@@ -15,4 +15,3 @@ imports:
     - { resource: "../src/Component/Product/Resources/services.xml" }
     - { resource: "../src/Component/ProductListing/Resources/services.xml" }
     - { resource: "../src/Component/Vendor/Resources/services.xml" }
-    - { resource: "../src/Component/Settlement/Resources/services.xml" }
