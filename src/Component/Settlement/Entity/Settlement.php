@@ -14,9 +14,12 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Entity;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 class Settlement implements SettlementInterface
 {
+    use TimestampableTrait;
+
     protected ?int $id;
 
     protected VendorInterface $vendor;
@@ -24,12 +27,18 @@ class Settlement implements SettlementInterface
     /** @var Collection<int, OrderInterface> */
     protected Collection $orders;
 
-    protected string $status;
+    protected string $status = self::STATUS_NEW;
 
     protected int $totalAmount;
+
     protected int $totalCommissionAmount;
 
-    protected int $totalProfit;
+    protected string $currencyCode;
+
+    protected \DateTimeInterface $startDate;
+
+    protected \DateTimeInterface $endDate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,12 +96,36 @@ class Settlement implements SettlementInterface
 
     public function getTotalProfit(): int
     {
-        return $this->totalProfit;
+        return $this->totalAmount - $this->totalCommissionAmount;
     }
 
-    public function setTotalProfit(int $totalProfit): void
+    public function getStartDate(): \DateTimeInterface
     {
-        $this->totalProfit = $totalProfit;
+        return $this->startDate;
     }
 
+    public function setStartDate(\DateTimeInterface $startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function getEndDate(): \DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(\DateTimeInterface $endDate): void
+    {
+        $this->endDate = $endDate;
+    }
+
+    public function getCurrencyCode(): string
+    {
+        return $this->currencyCode;
+    }
+
+    public function setCurrencyCode(string $currencyCode): void
+    {
+        $this->currencyCode = $currencyCode;
+    }
 }
