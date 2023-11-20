@@ -169,9 +169,9 @@ open_marketplace:
         password: Password
         settlement: Settlement
         settlement_frequency: Settlement frequency
-        seven_days: 7 days
-        one_month: one month
-        quarter_year: quarter of a year
+        7_days: Seven days
+        30_days: One month
+        90_days: Quarter of a year
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.

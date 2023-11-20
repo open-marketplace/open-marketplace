@@ -51,11 +51,10 @@ final class VendorType extends AbstractResourceType
             ])
             ->add('settlementFrequency', ChoiceType::class, [
                 'label' => 'open_marketplace.ui.settlement_frequency',
-                'choices' => [
-                    'open_marketplace.ui.seven_days' => 7,
-                    'open_marketplace.ui.one_month' => 30,
-                    'open_marketplace.ui.quarter_year' => 90,
-                ],
+                'choices' => VendorInterface::VALID_SETTLEMENT_FREQUENCY,
+                'choice_label' => function (string $frequency): string {
+                    return sprintf('open_marketplace.ui.%d_days', $frequency);
+                },
             ])
         ;
     }

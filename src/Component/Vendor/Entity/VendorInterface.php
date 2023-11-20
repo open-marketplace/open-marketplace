@@ -29,6 +29,12 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
 
     public const DEFAULT_SETTLEMENT_FREQUENCY = 7;
 
+    public const VALID_SETTLEMENT_FREQUENCY = [
+        7,
+        30,
+        90,
+    ];
+
     public function getId(): ?int;
 
     public function setId(?int $id): void;
@@ -124,4 +130,6 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
     public function getSettlementFrequency(): int;
 
     public function setSettlementFrequency(int $settlementFrequency): void;
+
+    public function getValidSettlementFrequency(): array;
 }

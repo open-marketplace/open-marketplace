@@ -359,4 +359,9 @@ class Vendor implements VendorInterface
         /**  @phpstan-ignore-next-line */
         return $this->getCompanyName();
     }
+
+    public function getValidSettlementFrequency(): array
+    {
+        return self::VALID_SETTLEMENT_FREQUENCY;
+    }
 }
