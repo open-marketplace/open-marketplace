@@ -22,26 +22,17 @@ use Webmozart\Assert\Assert;
 
 final class VendorListingContext extends RawMinkContext implements Context
 {
-    private EntityManagerInterface $entityManager;
-
-    private AdminUserExampleFactory $adminUserExample;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        AdminUserExampleFactory $adminUserExample,
-        ExampleFactoryInterface $vendorExampleFactory,
+        private EntityManagerInterface $entityManager,
+        private AdminUserExampleFactory $adminUserExample,
+        private ExampleFactoryInterface $vendorExampleFactory,
         ) {
-        $this->entityManager = $entityManager;
-        $this->adminUserExample = $adminUserExample;
-        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
      * @Given There is an admin user :username with password :password
      */
-    public function thereIsAnAdminUserWithPassword($username, $password)
+    public function thereIsAnAdminUserWithPassword($username, $password): void
     {
         $admin = $this->adminUserExample->create();
         $admin->setUsername($username);
@@ -53,7 +44,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     /**
      * @Given I am logged in as an admin
      */
-    public function iAmLoggedInAsAnAdmin()
+    public function iAmLoggedInAsAnAdmin(): void
     {
         $this->visitPath('/admin/login');
         $this->getPage()->fillField('Username', 'admin');
@@ -64,7 +55,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     /**
      * @Given There are :count vendors listed
      */
-    public function thereAreVendors($count)
+    public function thereAreVendors($count): void
     {
         for ($i = 0; $i < $count; ++$i) {
             $options = [
@@ -85,7 +76,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     /**
      * @Then I should see :count vendor rows
      */
-    public function iShouldSeeVendorRows($count)
+    public function iShouldSeeVendorRows($count): void
     {
         $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
         Assert::notEmpty($rows, 'Could not find any rows');
@@ -95,7 +86,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     /**
      * @Then page should contain valid customer :email link
      */
-    public function iShouldSeeValidCustomerLink(string $email)
+    public function iShouldSeeValidCustomerLink(string $email): void
     {
         /** @var Customer $customer */
         $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $email]);
@@ -106,18 +97,24 @@ final class VendorListingContext extends RawMinkContext implements Context
     /**
      * @Given /^I should see vendors commission data$/
      */
-    public function iShouldSeeVendorsCommissionData()
+    public function iShouldSeeVendorsCommissionData(): void
     {
         $content = $this->getPage()->getText();
         Assert::contains($content, 'Commission (%)');
         Assert::contains($content, 'Commission Type');
     }
 
-    /**
-     * @return DocumentElement
-     */
-    private function getPage()
+    private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
+    }
+
+    /**
+     * @Given /^I should see settlement frequency "([^"]*)"$/
+     */
+    public function iShouldSeeSettlementFrequency(string $frequency): void
+    {
+        $content = $this->getPage()->getText();
+        Assert::contains($content, $frequency);
     }
 }

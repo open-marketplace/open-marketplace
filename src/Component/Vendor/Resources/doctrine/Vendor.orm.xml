@@ -19,6 +19,11 @@
         <field name="editedAt" column="edited_at" type="datetime" nullable="true"/>
         <field name="commission" column="commission" type="integer" />
         <field name="commissionType" column="commission_type" type="string" />
+        <field name="settlementFrequency" column="settlement_frequency" type="integer">
+            <options>
+                <option name="default">7</option>
+            </options>
+        </field>
 
         <one-to-one field="vendorAddress" target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\Address" >
             <join-column name="vendor_address_id" referenced-column-name="id" on-delete="SET NULL" />

@@ -115,5 +115,11 @@
                 <option name="message">validator.message.positive_or_zero_commission</option>
             </constraint>
         </property>
+        <property name="settlementFrequency">
+            <constraint name="Choice">
+                <option name="callback">getValidSettlementFrequency</option>
+                <option name="message">validator.message.not_valid_choice</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
