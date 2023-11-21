@@ -11,9 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Entity;
 
-use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 class Settlement implements SettlementInterface
@@ -23,9 +21,6 @@ class Settlement implements SettlementInterface
     protected ?int $id;
 
     protected VendorInterface $vendor;
-
-    /** @var Collection<int, OrderInterface> */
-    protected Collection $orders;
 
     protected string $status = self::STATUS_NEW;
 
@@ -52,16 +47,6 @@ class Settlement implements SettlementInterface
     public function setVendor(VendorInterface $vendor): void
     {
         $this->vendor = $vendor;
-    }
-
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function setOrders(Collection $orders): void
-    {
-        $this->orders = $orders;
     }
 
     public function getStatus(): string

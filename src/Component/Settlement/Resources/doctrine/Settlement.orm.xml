@@ -20,17 +20,6 @@
             <join-column name="vendor_id" referenced-column-name="id" on-delete="CASCADE"/>
         </many-to-one>
 
-        <many-to-many field="orders" target-entity="BitBag\OpenMarketplace\Component\Order\Entity\Order">
-            <join-table name="bitbag_open_marketplace_settlement_orders">
-                <join-columns>
-                    <join-column name="settlement_id" referenced-column-name="id" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="order_id" referenced-column-name="id" unique="true" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-
         <field name="createdAt" column="created_at" type="datetime" nullable="true">
             <gedmo:timestampable on="create"/>
         </field>

@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Settlement\Entity;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -25,10 +24,6 @@ interface SettlementInterface extends ResourceInterface, TimestampableInterface
     public function getVendor(): VendorInterface;
 
     public function setVendor(VendorInterface $vendor): void;
-
-    public function getOrders(): Collection;
-
-    public function setOrders(Collection $orders): void;
 
     public function getStatus(): string;
 
