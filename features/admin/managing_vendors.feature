@@ -24,4 +24,4 @@ Feature: Listing vendors
     Then I should see "Shop user"
     And page should contain valid customer "vendor@email.com" link
     And I should see vendors commission data
-    And I should see settlement frequency "Seven days"
+    And I should see settlement frequency "Weekly"
