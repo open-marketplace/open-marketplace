@@ -38,6 +38,11 @@ sylius_ui:
                 content:
                     template: 'Configuration/Event/Admin/Update/_commission.html.twig'
                     priority: 10
+        open_marketplace.admin.vendor.form.vendor_settlement:
+            blocks:
+                content:
+                    template: 'Configuration/Event/Admin/Update/_settlement.html.twig'
+                    priority: 10
         open_marketplace.admin.vendor.form.second_column:
             blocks:
                 content:

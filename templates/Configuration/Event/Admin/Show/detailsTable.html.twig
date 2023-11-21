@@ -53,5 +53,9 @@
             <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.commission_type'|trans }}</strong></td>
             <td>{{ vendor.commissionType }}</td>
         </tr>
+        <tr>
+            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.settlement_frequency'|trans }}</strong></td>
+            <td>{{ ['open_marketplace.ui', vendor.settlementFrequency, 'days']|join('.', '_')|trans }}</td>
+        </tr>
     </tbody>
 </table>

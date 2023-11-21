@@ -63,6 +63,8 @@ class Vendor implements VendorInterface
 
     protected string $commissionType = self::NET_COMMISSION;
 
+    protected int $settlementFrequency = self::DEFAULT_SETTLEMENT_FREQUENCY;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -342,9 +344,24 @@ class Vendor implements VendorInterface
         $this->commissionType = $commissionType;
     }
 
+    public function getSettlementFrequency(): int
+    {
+        return $this->settlementFrequency;
+    }
+
+    public function setSettlementFrequency(int $settlementFrequency): void
+    {
+        $this->settlementFrequency = $settlementFrequency;
+    }
+
     public function __toString(): string
     {
         /**  @phpstan-ignore-next-line */
         return $this->getCompanyName();
+    }
+
+    public function getValidSettlementFrequency(): array
+    {
+        return self::VALID_SETTLEMENT_FREQUENCY;
     }
 }

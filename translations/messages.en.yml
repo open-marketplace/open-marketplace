@@ -167,6 +167,11 @@ open_marketplace:
         vendor_test_credentials: Vendor test credentials
         username: Username
         password: Password
+        settlement: Settlement
+        settlement_frequency: Settlement frequency
+        7_days: Weekly
+        30_days: Monthly
+        90_days: Quarterly
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.
