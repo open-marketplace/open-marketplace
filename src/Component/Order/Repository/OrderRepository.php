@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Order\Model\OrderInterface as OrderInterfaceAlias;
 
-class OrderRepository extends BaseOrderRepository
+class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
     public function findAllByVendor(VendorInterface $vendor): QueryBuilder
     {

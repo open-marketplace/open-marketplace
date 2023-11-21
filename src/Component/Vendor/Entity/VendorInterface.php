@@ -132,4 +132,8 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
     public function setSettlementFrequency(int $settlementFrequency): void;
 
     public function getValidSettlementFrequency(): array;
+
+    public function getSettlements(): Collection;
+
+    public function setSettlements(Collection $settlements): void;
 }

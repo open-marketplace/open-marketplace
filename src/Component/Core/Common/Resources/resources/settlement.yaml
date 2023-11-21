@@ -1,0 +1,9 @@
+sylius_resource:
+  resources:
+    open_marketplace.settlement:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\OpenMarketplace\Component\Settlement\Entity\Settlement
+        interface: BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface
+        repository: BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepository
+        factory: BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactory

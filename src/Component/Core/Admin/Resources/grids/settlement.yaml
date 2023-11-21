@@ -1,0 +1,25 @@
+sylius_grid:
+  grids:
+    open_marketplace_admin_settlement:
+      driver:
+        name: doctrine/orm
+        options:
+          class: '%open_marketplace.model.settlement.class%'
+      sorting:
+        id: asc
+      fields:
+        id:
+          type: string
+          label: open_marketplace.ui.id
+        vendor:
+          type: string
+          label: open_marketplace.ui.vendor
+        status:
+          type: string
+          label: open_marketplace.ui.status
+        period:
+          type: twig
+          label: open_marketplace.ui.period
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementPeriod.html.twig"

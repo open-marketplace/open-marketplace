@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="BitBag\OpenMarketplace\Component\Settlement\Entity\Settlement"
+                       table="bitbag_open_marketplace_settlement">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="status" column="status" type="string"/>
+        <field name="totalAmount" column="total_amount" type="integer"/>
+        <field name="totalCommissionAmount" column="total_commission_amount" type="integer"/>
+        <field name="currencyCode" column="currency_code" length="3" type="string"/>
+
+        <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface"
+                     inversed-by="settlements">
+            <join-column name="vendor_id" referenced-column-name="id" on-delete="CASCADE"/>
+        </many-to-one>
+
+        <field name="createdAt" column="created_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="create"/>
+        </field>
+
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+        <field name="startDate" column="start_date" type="datetime"/>
+
+        <field name="endDate" column="end_date" type="datetime"/>
+    </mapped-superclass>
+</doctrine-mapping>
