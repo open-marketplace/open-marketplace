@@ -11,8 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Repository;
 
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface SettlementRepositoryInterface extends RepositoryInterface
 {
+    public function findLastByVendor(VendorInterface $vendor): ?SettlementInterface;
 }

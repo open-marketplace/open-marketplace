@@ -79,7 +79,7 @@ class Settlement implements SettlementInterface
         $this->totalCommissionAmount = $totalCommissionAmount;
     }
 
-    public function getTotalProfit(): int
+    public function getTotalProfitAmount(): int
     {
         return $this->totalAmount - $this->totalCommissionAmount;
     }

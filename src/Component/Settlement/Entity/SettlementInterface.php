@@ -37,7 +37,7 @@ interface SettlementInterface extends ResourceInterface, TimestampableInterface
 
     public function setTotalCommissionAmount(int $totalCommissionAmount): void;
 
-    public function getTotalProfit(): int;
+    public function getTotalProfitAmount(): int;
 
     public function getStartDate(): \DateTimeInterface;
 

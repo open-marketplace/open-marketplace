@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.order.class%"
                     repository:
-                        method: findAllByVendor
+                        method: findAllByVendorQueryBuilder
                         arguments:
                         - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
             sorting:

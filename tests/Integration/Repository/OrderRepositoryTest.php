@@ -29,7 +29,7 @@ final class OrderRepositoryTest extends JsonApiTestCase
         $this->loadFixturesFromFile('OrderRepositoryTest/test_it_finds_all_vendor_orders.yml');
 
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
-        $queryBuilder = $this->repository->findAllByVendor($vendorOliver);
+        $queryBuilder = $this->repository->findAllByVendorQueryBuilder($vendorOliver);
 
         $result = $queryBuilder->getQuery()->getResult();
         self::assertCount(1, $result);

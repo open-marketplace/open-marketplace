@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Repository;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Settlement\DTO\SettlementDTO;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
@@ -21,7 +22,7 @@ use Sylius\Component\Order\Model\OrderInterface as OrderInterfaceAlias;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
-    public function findAllByVendor(VendorInterface $vendor): QueryBuilder
+    public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder
     {
         $vendorId = $vendor->getId();
 
@@ -183,5 +184,34 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('customerId', $customerId)
             ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
             ;
+    }
+
+    public function getSettlementDTOForVendorFromDate(VendorInterface $vendor, ?\DateTimeInterface $date): ?SettlementDTO
+    {
+        $qb = $this->findAllByVendorQueryBuilder($vendor)
+            ->select(
+                sprintf(
+                    'NEW %s(
+                        SUM(o.total),
+                        SUM(o.commissionTotal),
+                        o.currencyCode,
+                        MIN(o.paidAt),
+                        MAX(o.paidAt)
+                    )',
+                    SettlementDTO::class
+                )
+            )
+            ->groupBy('o.currencyCode');
+        if (null === $date) {
+            $qb
+                ->andWhere('o.paidAt IS NOT NULL');
+        } else {
+            $qb
+                ->andWhere('o.paidAt >= :date')
+                ->setParameter('date', $date);
+        }
+
+        return $qb->getQuery()
+            ->getOneOrNullResult();
     }
 }
