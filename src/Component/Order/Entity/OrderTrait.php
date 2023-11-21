@@ -32,6 +32,8 @@ trait OrderTrait
 
     protected string $mode = self::PRIMARY_ORDER_MODE;
 
+    protected ?\DateTimeInterface $paidAt = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -172,5 +174,15 @@ trait OrderTrait
     public function setCommissionTotal(int $commissionTotal): void
     {
         $this->commissionTotal = $commissionTotal;
+    }
+
+    public function getPaidAt(): ?\DateTimeInterface
+    {
+        return $this->paidAt;
+    }
+
+    public function setPaidAt(?\DateTimeInterface $paidAt): void
+    {
+        $this->paidAt = $paidAt;
     }
 }

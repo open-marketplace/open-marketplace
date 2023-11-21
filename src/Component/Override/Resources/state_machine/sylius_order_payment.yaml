@@ -51,3 +51,8 @@ winzou_state_machine:
                     do: [ "@sm.callback.cascade_transition", "apply" ]
                     args: [ "object.getSecondaryOrders()", "event" ]
                     priority: -200
+                sylius_order_paid_at:
+                    on: [ "pay" ]
+                    do: [ '@bitbag.open_marketplace.component.order.state_machine.order_callbacks', 'setPaidAt' ]
+                    args: [ "object"]
+                    priority: -200
