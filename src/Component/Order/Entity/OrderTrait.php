@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Entity;
 
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -32,8 +31,6 @@ trait OrderTrait
     protected int $commissionTotal = 0;
 
     protected string $mode = self::PRIMARY_ORDER_MODE;
-
-    protected ?SettlementInterface $settlement = null;
 
     public function __construct()
     {
@@ -175,15 +172,5 @@ trait OrderTrait
     public function setCommissionTotal(int $commissionTotal): void
     {
         $this->commissionTotal = $commissionTotal;
-    }
-
-    public function getSettlement(): ?SettlementInterface
-    {
-        return $this->settlement;
-    }
-
-    public function setSettlement(?SettlementInterface $settlement): void
-    {
-        $this->settlement = $settlement;
     }
 }

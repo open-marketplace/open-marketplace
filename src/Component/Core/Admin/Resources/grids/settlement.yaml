@@ -17,3 +17,9 @@ sylius_grid:
         status:
           type: string
           label: open_marketplace.ui.status
+        period:
+          type: twig
+          label: open_marketplace.ui.period
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementPeriod.html.twig"
