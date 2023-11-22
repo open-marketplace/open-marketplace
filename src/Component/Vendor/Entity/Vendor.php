@@ -43,6 +43,8 @@ class Vendor implements VendorInterface
 
     protected ?DateTimeInterface $editedAt = null;
 
+    protected DateTimeInterface $createdAt;
+
     protected ?string $slug;
 
     protected ?string $description;
@@ -378,5 +380,15 @@ class Vendor implements VendorInterface
     public function getValidSettlementFrequency(): array
     {
         return self::VALID_SETTLEMENT_FREQUENCY;
+    }
+
+    public function getCreatedAt(): DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 }

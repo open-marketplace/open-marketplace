@@ -136,4 +136,8 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
     public function getSettlements(): Collection;
 
     public function setSettlements(Collection $settlements): void;
+
+    public function getCreatedAt(): DateTimeInterface;
+
+    public function setCreatedAt(DateTimeInterface $createdAt): void;
 }
