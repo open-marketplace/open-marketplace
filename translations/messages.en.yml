@@ -174,10 +174,6 @@ open_marketplace:
         30_days: Monthly
         90_days: Quarterly
         period: Period
-        total_amount: Total amount
-        total_commission_amount: Total commission
-        total_profit_amount: Total profit for vendor
-        currency_code: Currency code
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.
