@@ -17,6 +17,7 @@ use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterfa
 use BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,13 +32,15 @@ final class SettlementGenerateCommand extends Command
         private SettlementRepositoryInterface $settlementRepository,
         private OrderRepositoryInterface $orderRepository,
         private SettlementFactoryInterface $settlementFactory,
+        private ObjectManager $settlementManager,
         ) {
-        parent::__construct(self::COMMAND_NAME);
+        parent::__construct();
     }
 
     protected function configure(): void
     {
         $this
+            ->setName(self::COMMAND_NAME)
             ->setDescription('Generates settlements for vendors')
             ->addArgument(
                 'vendors',
@@ -63,14 +66,21 @@ final class SettlementGenerateCommand extends Command
                 continue;
             }
 
-            $settlementDTO = $this->orderRepository->getSettlementDTOForVendorFromDate($vendor, $settlement?->getEndDate());
+            $settlementDTOs = $this->orderRepository->getSettlementDTOForVendorFromDate($vendor, $settlement?->getEndDate());
 
-            if (null === $settlementDTO) {
+            if (empty($settlementDTOs)) {
                 continue;
             }
-            $newSettlement = $this->settlementFactory->createNewFromDTOAndVendor($settlementDTO, $vendor);
-
-            $this->settlementRepository->add($newSettlement);
+            $i = 0;
+            foreach ($settlementDTOs as $settlementDTO) {
+                $newSettlement = $this->settlementFactory->createNewFromDTOAndVendor($settlementDTO, $vendor);
+                $this->settlementManager->persist($newSettlement);
+                if (0 === $i % 50) {
+                    $this->settlementManager->flush();
+                }
+                ++$i;
+            }
+            $this->settlementManager->flush();
         }
 
         return Command::SUCCESS;
