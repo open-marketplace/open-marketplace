@@ -186,7 +186,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ;
     }
 
-    public function getSettlementDTOForVendorFromDate(VendorInterface $vendor, ?\DateTimeInterface $date): ?SettlementDTO
+    public function getSettlementDTOForVendorFromDate(VendorInterface $vendor, ?\DateTimeInterface $date): array
     {
         $qb = $this->findAllByVendorQueryBuilder($vendor)
             ->select(
@@ -201,6 +201,8 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
                     SettlementDTO::class
                 )
             )
+            ->andWhere('o.mode = :secondaryOrderMode')
+            ->setParameter('secondaryOrderMode', OrderInterface::SECONDARY_ORDER_MODE)
             ->groupBy('o.currencyCode');
         if (null === $date) {
             $qb
@@ -212,6 +214,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         }
 
         return $qb->getQuery()
-            ->getOneOrNullResult();
+            ->getArrayResult();
     }
 }

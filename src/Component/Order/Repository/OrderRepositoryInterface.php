@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Repository;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Component\Settlement\DTO\SettlementDTO;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -51,5 +50,5 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /** @phpstan-ignore-next-line */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
 
-    public function getSettlementDTOForVendorFromDate(VendorInterface $vendor, ?\DateTimeInterface $date): ?SettlementDTO;
+    public function getSettlementDTOForVendorFromDate(VendorInterface $vendor, ?\DateTimeInterface $date): array;
 }
