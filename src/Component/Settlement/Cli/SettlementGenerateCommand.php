@@ -79,7 +79,7 @@ final class SettlementGenerateCommand extends Command
     private function shouldGenerateSettlementForVendor(?SettlementInterface $settlement, VendorInterface $vendor): bool
     {
         if (null === $settlement) {
-            return true;
+            return $vendor->getCreatedAt()->diff(new \DateTime())->d >= $vendor->getSettlementFrequency();
         }
 
         return $settlement->getEndDate()->diff(new \DateTime())->d >= $vendor->getSettlementFrequency();
