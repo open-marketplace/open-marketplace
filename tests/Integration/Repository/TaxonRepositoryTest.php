@@ -13,7 +13,7 @@ namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
 
-class TaxonRepositoryTest extends JsonApiTestCase
+final class TaxonRepositoryTest extends JsonApiTestCase
 {
     public function setUp(): void
     {

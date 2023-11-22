@@ -18,7 +18,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\Channel;
 
-class ProductRepositoryTest extends JsonApiTestCase
+final class ProductRepositoryTest extends JsonApiTestCase
 {
     public function setUp(): void
     {
