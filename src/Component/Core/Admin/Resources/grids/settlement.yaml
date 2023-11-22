@@ -17,33 +17,6 @@ sylius_grid:
         status:
           type: string
           label: open_marketplace.ui.status
-        totalAmount:
-          type: twig
-          label: open_marketplace.ui.total_amount
-          path: .
-          options:
-            template: "Configuration/Grid/Admin/Field/settlementTotals.html.twig"
-            vars:
-              method: totalAmount
-        totalCommissionAmount:
-          type: twig
-          label: open_marketplace.ui.total_commission_amount
-          path: .
-          options:
-            template: "Configuration/Grid/Admin/Field/settlementTotals.html.twig"
-            vars:
-              method: totalCommissionAmount
-        totalProfitAmount:
-          type: twig
-          label: open_marketplace.ui.total_profit_amount
-          path: .
-          options:
-            template: "Configuration/Grid/Admin/Field/settlementTotals.html.twig"
-            vars:
-              method: totalProfitAmount
-        currencyCode:
-          type: string
-          label: open_marketplace.ui.currency_code
         period:
           type: twig
           label: open_marketplace.ui.period
