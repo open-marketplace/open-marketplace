@@ -65,13 +65,14 @@ final class OrderRepositoryTest extends JsonApiTestCase
         $vendorWeyland = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'Weyland-Corp']);
 
         $vendorWayneSettlementDTOs = $this->repository->getSettlementDTOForVendorFromDate($vendorWayne, null);
+
         $this->assertCount(2, $vendorWayneSettlementDTOs);
-        $this->assertSame(1002, $vendorWayneSettlementDTOs[0]->getTotalAmount());
-        $this->assertSame(70, $vendorWayneSettlementDTOs[0]->getTotalCommissionAmount());
-        $this->assertSame('EUR', $vendorWayneSettlementDTOs[0]->getCurrencyCode());
-        $this->assertSame(540, $vendorWayneSettlementDTOs[1]->getTotalAmount());
-        $this->assertSame(35, $vendorWayneSettlementDTOs[1]->getTotalCommissionAmount());
-        $this->assertSame('USD', $vendorWayneSettlementDTOs[1]->getCurrencyCode());
+        $this->assertSame('USD', $vendorWayneSettlementDTOs[0]->getCurrencyCode());
+        $this->assertSame(540, $vendorWayneSettlementDTOs[0]->getTotalAmount());
+        $this->assertSame(35, $vendorWayneSettlementDTOs[0]->getTotalCommissionAmount());
+        $this->assertSame('EUR', $vendorWayneSettlementDTOs[1]->getCurrencyCode());
+        $this->assertSame(1002, $vendorWayneSettlementDTOs[1]->getTotalAmount());
+        $this->assertSame(70, $vendorWayneSettlementDTOs[1]->getTotalCommissionAmount());
 
         $vendorWeylandSettlementDTOs = $this->repository->getSettlementDTOForVendorFromDate($vendorWeyland, null);
         $this->assertCount(1, $vendorWeylandSettlementDTOs);
