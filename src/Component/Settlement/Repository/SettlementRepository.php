@@ -21,8 +21,8 @@ final class SettlementRepository extends EntityRepository implements SettlementR
     public function findLastByVendorAndChannel(VendorInterface $vendor, ChannelInterface $channel): ?SettlementInterface
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.vendorId = :vendorId')
-            ->andWhere('s.channelId = :channelId')
+            ->andWhere('s.vendor = :vendorId')
+            ->andWhere('s.channel = :channelId')
             ->setParameter('vendorId', $vendor->getId())
             ->setParameter('channelId', $channel->getId())
             ->orderBy('s.endDate', self::ORDER_DESCENDING)

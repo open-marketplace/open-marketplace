@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Component\Settlement\DTO\SettlementDTO;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\Settlement;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 final class SettlementFactory implements SettlementFactoryInterface
 {
@@ -31,7 +32,25 @@ final class SettlementFactory implements SettlementFactoryInterface
         $settlement->setEndDate($settlementDTO->getEndDate());
         $settlement->setTotalAmount($settlementDTO->getTotalAmount());
         $settlement->setTotalCommissionAmount($settlementDTO->getTotalCommissionAmount());
-        $settlement->setCurrencyCode($settlementDTO->getCurrencyCode());
+
+        return $settlement;
+    }
+
+    public function createNewForVendorAndChannel(
+        VendorInterface $vendor,
+        ChannelInterface $channel,
+        int $total,
+        int $commissionTotal,
+        \DateTimeInterface $nextSettlementStartDate,
+        \DateTimeInterface $nextSettlementEndDate,
+        ): SettlementInterface {
+        $settlement = $this->createNew();
+        $settlement->setVendor($vendor);
+        $settlement->setChannel($channel);
+        $settlement->setStartDate($nextSettlementStartDate);
+        $settlement->setEndDate($nextSettlementEndDate);
+        $settlement->setTotalAmount($total);
+        $settlement->setTotalCommissionAmount($commissionTotal);
 
         return $settlement;
     }
