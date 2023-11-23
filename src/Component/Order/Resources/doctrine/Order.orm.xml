@@ -10,8 +10,9 @@
             <join-column on-delete="SET NULL"/>
         </many-to-one>
         <one-to-many field="secondaryOrders" target-entity="BitBag\OpenMarketplace\Component\Order\Entity\Order" mapped-by="primaryOrder"/>
-        <field name="mode"/>
-        <field name="commissionTotal" type="integer">
+        <field name="mode" column="mode"/>
+        <field name="paidAt" column="paid_at" type="datetime" nullable="true"/>
+        <field name="commissionTotal" column="commission_total" type="integer">
             <options>
                 <option name="default">0</option>
             </options>
