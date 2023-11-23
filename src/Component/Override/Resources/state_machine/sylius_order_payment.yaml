@@ -54,5 +54,5 @@ winzou_state_machine:
                 sylius_order_paid_at:
                     on: [ "pay" ]
                     do: [ '@bitbag.open_marketplace.component.order.state_machine.order_callbacks', 'setPaidAt' ]
-                    args: [ "object"]
+                    args: [ "object" ]
                     priority: -200
