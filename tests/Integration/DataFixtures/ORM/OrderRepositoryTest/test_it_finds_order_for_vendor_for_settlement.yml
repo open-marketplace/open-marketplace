@@ -217,7 +217,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     tokenValue: 'bruce_order_made_by_john_1'
     shippingAddress: '@address_john'
     billingAddress: '@address_john'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-3 days", "now")>'
     commission_total: 35
   bruce_order_made_by_john_2_main:
     mode: "primary"
@@ -228,7 +228,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2_main'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-7 days", "-4 days")>'
   bruce_order_made_by_john_2:
     primaryOrder: '@bruce_order_made_by_john_2_main'
     mode: "secondary"
@@ -240,7 +240,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-11 days", "-8 days")>'
     commission_total: 70
   peter_order_made_by_john_main:
     mode: "primary"
@@ -262,7 +262,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'peter_order_made_by_john'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-14 days", "-9 days")>'
     commission_total: 100
   order_made_by_peter_main:
     mode: "primary"
@@ -283,7 +283,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-20 days", "-15 days")>'
     commission_total: 10
 BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
   bruce_order_made_by_john_1_item_1:
