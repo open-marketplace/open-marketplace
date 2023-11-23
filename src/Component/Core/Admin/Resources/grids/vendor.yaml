@@ -10,8 +10,6 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: '%open_marketplace.model.vendor.class%'
-                    repository:
-                        method: createListQueryBuilder
             sorting:
                 id: asc
             fields:

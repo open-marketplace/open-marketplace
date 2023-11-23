@@ -12,23 +12,27 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Vendor\Repository;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 final class VendorRepository extends EntityRepository implements VendorRepositoryInterface
 {
-    public function createListQueryBuilder(): QueryBuilder
-    {
-        return $this->createQueryBuilder('o');
-    }
-
     public function findOneBySlug(string $slug): ?VendorInterface
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.slug = :slug')
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult()
+            ;
+    }
+
+    public function findAllByFrequency(string $frequency): iterable
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.settlementFrequency = :frequency')
+            ->setParameter('frequency', $frequency)
+            ->getQuery()
+            ->getResult()
             ;
     }
 }

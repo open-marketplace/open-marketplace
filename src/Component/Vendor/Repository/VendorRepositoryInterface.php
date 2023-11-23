@@ -11,18 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Vendor\Repository;
 
-use Doctrine\ORM\QueryBuilder;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface VendorRepositoryInterface extends RepositoryInterface
 {
-    public function createListQueryBuilder(): QueryBuilder;
+    public function findOneBySlug(string $slug): ?VendorInterface;
 
-    /**
-     * @return mixed
-     */
-    public function findOneBy(
-        array $criteria,
-        ?array $orderBy = null
-    );
+    public function findAllByFrequency(string $frequency): iterable;
 }

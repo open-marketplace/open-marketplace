@@ -25,9 +25,9 @@
         </field>
         <field name="commission" column="commission" type="integer"/>
         <field name="commissionType" column="commission_type" type="string"/>
-        <field name="settlementFrequency" column="settlement_frequency" type="integer">
+        <field name="settlementFrequency" column="settlement_frequency" type="string">
             <options>
-                <option name="default">7</option>
+                <option name="default">weekly</option>
             </options>
         </field>
 

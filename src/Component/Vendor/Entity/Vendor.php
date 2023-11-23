@@ -69,7 +69,7 @@ class Vendor implements VendorInterface
 
     protected string $commissionType = self::NET_COMMISSION;
 
-    protected int $settlementFrequency = self::DEFAULT_SETTLEMENT_FREQUENCY;
+    protected string $settlementFrequency = self::DEFAULT_SETTLEMENT_FREQUENCY;
 
     public function __construct()
     {
@@ -361,12 +361,12 @@ class Vendor implements VendorInterface
         $this->settlements = $settlements;
     }
 
-    public function getSettlementFrequency(): int
+    public function getSettlementFrequency(): string
     {
         return $this->settlementFrequency;
     }
 
-    public function setSettlementFrequency(int $settlementFrequency): void
+    public function setSettlementFrequency(string $settlementFrequency): void
     {
         $this->settlementFrequency = $settlementFrequency;
     }
