@@ -14,15 +14,17 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Repository;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 final class SettlementRepository extends EntityRepository implements SettlementRepositoryInterface
 {
-    public function findLastByVendor(VendorInterface $vendor): ?SettlementInterface
+    public function findLastByVendorAndChannel(VendorInterface $vendor, ChannelInterface $channel): ?SettlementInterface
     {
         return $this->createQueryBuilder('s')
-            ->innerJoin('s.vendor', 'vendor')
-            ->andWhere('vendor = :vendor')
-            ->setParameter('vendor', $vendor)
+            ->andWhere('s.vendorId = :vendorId')
+            ->andWhere('s.channelId = :channelId')
+            ->setParameter('vendorId', $vendor->getId())
+            ->setParameter('channelId', $channel->getId())
             ->orderBy('s.endDate', self::ORDER_DESCENDING)
             ->setMaxResults(1)
             ->getQuery()

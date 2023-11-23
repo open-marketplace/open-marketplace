@@ -13,11 +13,14 @@
         <field name="status" column="status" type="string"/>
         <field name="totalAmount" column="total_amount" type="integer"/>
         <field name="totalCommissionAmount" column="total_commission_amount" type="integer"/>
-        <field name="currencyCode" column="currency_code" length="3" type="string"/>
 
         <many-to-one field="vendor" target-entity="BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface"
                      inversed-by="settlements">
             <join-column name="vendor_id" referenced-column-name="id" on-delete="CASCADE"/>
+        </many-to-one>
+
+        <many-to-one field="channel" target-entity="Sylius\Component\Core\Model\ChannelInterface">
+            <join-column name="channel_id" referenced-column-name="id" on-delete="CASCADE"/>
         </many-to-one>
 
         <field name="createdAt" column="created_at" type="datetime" nullable="true">

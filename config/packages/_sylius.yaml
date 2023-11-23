@@ -87,6 +87,12 @@ sylius_taxonomy:
                 model: Sylius\Component\Core\Model\Taxon
                 repository: BitBag\OpenMarketplace\Component\Vendor\Repository\TaxonRepository
 
+sylius_channel:
+    resources:
+        channel:
+            classes:
+                repository: BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepository
+
 sylius_ui:
     events:
         sylius.shop.checkout.header:
