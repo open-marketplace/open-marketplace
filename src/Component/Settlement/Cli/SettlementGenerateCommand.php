@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Cli;
 
+use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
@@ -33,6 +34,7 @@ final class SettlementGenerateCommand extends Command
         private OrderRepositoryInterface $orderRepository,
         private SettlementFactoryInterface $settlementFactory,
         private ObjectManager $settlementManager,
+        private ChannelRepositoryInterface $channelRepository,
         ) {
         parent::__construct();
     }
@@ -43,53 +45,123 @@ final class SettlementGenerateCommand extends Command
             ->setName(self::COMMAND_NAME)
             ->setDescription('Generates settlements for vendors')
             ->addArgument(
-                'vendors',
-                InputArgument::IS_ARRAY | InputArgument::OPTIONAL,
-                'Vendor ids separated by spaces(optional)'
+                'frequency',
+                InputArgument::OPTIONAL,
+                'For which frequency should generate settlement(weekly/monthly/quarterly)',
+                'weekly'
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $vendorIds = $input->getArgument('vendors');
-        if (false === empty($vendorIds)) {
-            $vendors = $this->vendorRepository->findBy(['id' => $vendorIds]);
-        } else {
-            $vendors = $this->vendorRepository->findAll();
+        $frequency = $input->getArgument('frequency');
+
+        if (false === in_array($frequency, VendorInterface::VALID_SETTLEMENT_FREQUENCY, true)) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Frequency "%s" is not valid. Available options are: %s',
+                    $frequency,
+                    implode(', ', VendorInterface::VALID_SETTLEMENT_FREQUENCY)
+                )
+            );
         }
+        $vendors = $this->vendorRepository->findAllByFrequency($frequency);
+        $channels = $this->channelRepository->findAllEnabled();
+        [$nextSettlementStartDate, $nextSettlementEndDate] = $this->getSettlementDateRangeFromFrequency($frequency);
 
-        /** @var VendorInterface $vendor */
+        $persistCount = 0;
         foreach ($vendors as $vendor) {
-            $settlement = $this->settlementRepository->findLastByVendor($vendor);
+            foreach ($channels as $channel) {
+                $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $channel);
+                if (
+                    null !== $lastSettlement
+                    && $lastSettlement->getEndDate() > $nextSettlementStartDate
+                ) {
+                    continue;
+                }
 
-            if (false === $this->shouldGenerateSettlementForVendor($settlement, $vendor)) {
-                continue;
-            }
-
-            $settlementDTOs = $this->orderRepository->getSettlementDTOForVendorFromDate($vendor, $settlement?->getEndDate());
-
-            if (empty($settlementDTOs)) {
-                continue;
-            }
-            $i = 0;
-            foreach ($settlementDTOs as $settlementDTO) {
-                $newSettlement = $this->settlementFactory->createNewFromDTOAndVendor($settlementDTO, $vendor);
-                $this->settlementManager->persist($newSettlement);
-                if (0 === $i % 50) {
+                ['total' => $total, 'commissionTotal' => $commissionTotal] = $this->orderRepository->findForSettlementByVendorAndChannelAndDates(
+                    $vendor,
+                    $channel,
+                    $nextSettlementStartDate,
+                    $nextSettlementEndDate
+                );
+                $nextSettlement = $this->settlementFactory->createNewForVendorAndChannel(
+                    $vendor,
+                    $channel,
+                    (int) $total,
+                    (int) $commissionTotal,
+                    $nextSettlementStartDate,
+                    $nextSettlementEndDate
+                );
+                $this->settlementManager->persist($nextSettlement);
+                if (0 === ($persistCount % 50)) {
                     $this->settlementManager->flush();
                 }
-                ++$i;
+                ++$persistCount;
             }
-            $this->settlementManager->flush();
         }
+        $this->settlementManager->flush();
 
         return Command::SUCCESS;
     }
 
-    private function shouldGenerateSettlementForVendor(?SettlementInterface $settlement, VendorInterface $vendor): bool
+    private function getSettlementDateRangeFromFrequency(string $frequency): array
+    {
+        $startDate = new \DateTime();
+        $endDate = new \DateTime();
+
+        return match ($frequency) {
+            'weekly' => [
+                $startDate->setTimestamp(strtotime('last week monday 00:00:00')),
+                $endDate->setTimestamp(strtotime('last week sunday 23:59:59')),
+            ],
+            'monthly' => [
+                $startDate->setTimestamp(strtotime('first day of last month 00:00:00')),
+                $endDate->setTimestamp(strtotime('last day of last month 23:59:59')),
+            ],
+            'quarterly' => [
+                $startDate->setTimestamp($this->getLastQuarterStartDate()),
+                $endDate->setTimestamp($this->getLastQuarterEndDate()),
+            ],
+            default => throw new \RuntimeException(sprintf('Invalid frequency "%s" given.', $frequency))
+        };
+    }
+
+    private function getLastQuarterStartDate(): int
+    {
+        $month = date('n');
+        $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
+
+        return mktime(
+            00,
+            00,
+            00,
+            $month - $countLastQuarterEndMonthAgo - 2,
+            1,
+            (int) date('Y')
+        );
+    }
+
+    private function getLastQuarterEndDate(): int
+    {
+        $month = date('n');
+        $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
+
+        return mktime(
+            23,
+            59,
+            59,
+            $month - $countLastQuarterEndMonthAgo + 1,
+            0,
+            (int) date('Y')
+        );
+    }
+
+    private function shouldGenerateSettlementForVendor(?SettlementInterface $settlement): bool
     {
         if (null === $settlement) {
-            return $vendor->getCreatedAt()->diff(new \DateTime())->d >= $vendor->getSettlementFrequency();
+            return true;
         }
 
         return $settlement->getEndDate()->diff(new \DateTime())->d >= $vendor->getSettlementFrequency();
