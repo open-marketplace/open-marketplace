@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Repository;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Component\Settlement\DTO\SettlementDTO;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
@@ -186,34 +185,29 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ;
     }
 
-    public function getSettlementDTOForVendorFromDate(VendorInterface $vendor, ?\DateTimeInterface $date): array
+    public function findForSettlementByVendorAndChannelAndDates(
+        VendorInterface $vendor,
+        ChannelInterface $channel,
+        \DateTimeInterface $nextSettlementStartDate,
+        \DateTimeInterface $nextSettlementEndDate
+    ): array
     {
-        $qb = $this->findAllByVendorQueryBuilder($vendor)
-            ->select(
-                sprintf(
-                    'NEW %s(
-                        SUM(o.total),
-                        SUM(o.commissionTotal),
-                        o.currencyCode,
-                        MIN(o.paidAt),
-                        MAX(o.paidAt)
-                    )',
-                    SettlementDTO::class
+        $qb = $this->findAllByVendorQueryBuilder($vendor);
+
+        return $qb
+            ->select('SUM(o.total) as total, SUM(o.commissionTotal) as commissionTotal')
+            ->andWhere('o.channel = :channel')
+            ->andWhere(
+                $qb->expr()->between(
+                    'o.paidAt',
+                    ':startDate',
+                    ':endDate'
                 )
             )
-            ->andWhere('o.mode = :secondaryOrderMode')
-            ->setParameter('secondaryOrderMode', OrderInterface::SECONDARY_ORDER_MODE)
-            ->groupBy('o.currencyCode');
-        if (null === $date) {
-            $qb
-                ->andWhere('o.paidAt IS NOT NULL');
-        } else {
-            $qb
-                ->andWhere('o.paidAt >= :date')
-                ->setParameter('date', $date);
-        }
-
-        return $qb->getQuery()
-            ->getArrayResult();
+            ->setParameter('channel', $channel->getId())
+            ->setParameter('startDate', $nextSettlementStartDate)
+            ->setParameter('endDate', $nextSettlementEndDate)
+            ->getQuery()
+            ->getSingleResult();
     }
 }

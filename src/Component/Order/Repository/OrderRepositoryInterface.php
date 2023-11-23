@@ -50,5 +50,10 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /** @phpstan-ignore-next-line */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
 
-    public function getSettlementDTOForVendorFromDate(VendorInterface $vendor, ?\DateTimeInterface $date): array;
+    public function findForSettlementByVendorAndChannelAndDates(
+        VendorInterface $vendor,
+        ChannelInterface $channel,
+        \DateTimeInterface $nextSettlementStartDate,
+        \DateTimeInterface $nextSettlementEndDate
+    ): array;
 }
