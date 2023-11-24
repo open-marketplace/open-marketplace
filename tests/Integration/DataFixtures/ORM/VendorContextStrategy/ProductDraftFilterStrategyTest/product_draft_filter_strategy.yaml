@@ -16,7 +16,7 @@ Sylius\Component\Currency\Model\Currency:
     code: 'USD'
 Sylius\Component\Locale\Model\Locale:
   locale:
-    createdAt: "<dateTimeBetween('-200 days', 'now')>"
+    createdAt: '<dateTimeBetween("-200 days", "now")>'
     code: 'en_US'
 Sylius\Component\Core\Model\Channel:
   channel:

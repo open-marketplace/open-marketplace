@@ -3,25 +3,25 @@ Sylius\Component\Addressing\Model\Country:
     code: 'PL'
 Sylius\Component\Core\Model\Customer:
   customer_oliver:
-    firstName: "John"
-    lastName: "Nowak"
-    email: "oliver@queen.com"
-    emailCanonical: "oliver@queen.com"
+    firstName: 'John'
+    lastName: 'Nowak'
+    email: 'oliver@queen.com'
+    emailCanonical: 'oliver@queen.com'
   customer_bruce:
-    firstName: "Bruce"
-    lastName: "Wayne"
-    email: "bruce.wayne@wayne.co"
-    emailCanonical: "bruce.wayne@wayne.co"
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'bruce.wayne@wayne.co'
+    emailCanonical: 'bruce.wayne@wayne.co'
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_oliver:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_oliver'
   user_bruce:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_bruce'
 BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   vendor_address:
@@ -44,7 +44,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
 BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation:
   opened_conversation_with_oliver:
     shopUser: '@user_oliver'
-    status: "open"
+    status: 'open'
   closed_conversation_with_oliver:
     shopUser: '@user_oliver'
     status: 'closed'

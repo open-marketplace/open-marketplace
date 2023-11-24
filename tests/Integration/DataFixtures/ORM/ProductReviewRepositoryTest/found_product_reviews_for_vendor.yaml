@@ -3,30 +3,30 @@ Sylius\Component\Addressing\Model\Country:
     code: 'PL'
 Sylius\Component\Core\Model\Customer:
   customer_adam:
-    firstName: "Adam"
-    lastName: "Ondra"
-    email: "adam@example.com"
-    emailCanonical: "adam@example.com"
+    firstName: 'Adam'
+    lastName: 'Ondra'
+    email: 'adam@example.com'
+    emailCanonical: 'adam@example.com'
   customer_alex:
-    firstName: "Alex"
-    lastName: "Honnold"
-    email: "alex@example.com"
-    emailCanonical: "alex@example.com"
+    firstName: 'Alex'
+    lastName: 'Honnold'
+    email: 'alex@example.com'
+    emailCanonical: 'alex@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_adam:
-    plainPassword: "password"
+    plainPassword: 'password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_adam'
-    username: "adam@ondra.com"
-    usernameCanonical: "adam@ondara.com"
+    username: 'adam@ondra.com'
+    usernameCanonical: 'adam@ondara.com'
   user_alex:
-    plainPassword: "password"
+    plainPassword: 'password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_alex'
-    username: "alex@honnold.com"
-    usernameCanonical: "alex@honnold.com"
+    username: 'alex@honnold.com'
+    usernameCanonical: 'alex@honnold.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   vendor_adam_address:
     country: '@poland'
@@ -73,20 +73,20 @@ BitBag\OpenMarketplace\Component\Product\Entity\Product:
     code: 'Harness-alex'
 Sylius\Component\Core\Model\ProductReview:
   first_product_review:
-    title: "Product Review"
-    comment: "comment"
+    title: 'Product Review'
+    comment: 'comment'
     rating: '3'
     author: '@customer_alex'
     reviewSubject: '@product_adam_1'
   second_product_review:
-    title: "Best Product Review"
-    comment: "comment"
+    title: 'Best Product Review'
+    comment: 'comment'
     rating: '5'
     author: '@customer_alex'
     reviewSubject: '@product_adam_2'
   third_product_review:
-    title: "Good Product Review"
-    comment: "comment"
+    title: 'Good Product Review'
+    comment: 'comment'
     rating: '4'
     author: '@customer_adam'
     reviewSubject: '@product_alex_1'

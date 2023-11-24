@@ -22,8 +22,8 @@ Sylius\Component\Locale\Model\Locale:
     code: 'en_US'
 Sylius\Component\Core\Model\Channel:
   channel:
-    code: "CODE"
-    name: "name"
+    code: 'CODE'
+    name: 'name'
     defaultLocale: '@locale'
     locales: [ '@locale' ]
     taxCalculationStrategy: 'order_items_based'
@@ -31,42 +31,42 @@ Sylius\Component\Core\Model\Channel:
     enabled: true
 Sylius\Component\Core\Model\Customer:
   customer_bruce:
-    firstName: "Bruce"
-    lastName: "Wayne"
-    email: "bruce.wayne@example.com"
-    emailCanonical: "bruce.wayne@example.com"
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'bruce.wayne@example.com'
+    emailCanonical: 'bruce.wayne@example.com'
   customer_peter:
-    firstName: "Peter"
-    lastName: "Weyland"
-    email: "peter.weyland@example.com"
-    emailCanonical: "peter.weyland@example.com"
+    firstName: 'Peter'
+    lastName: 'Weyland'
+    email: 'peter.weyland@example.com'
+    emailCanonical: 'peter.weyland@example.com'
   customer_john:
-    firstName: "John"
-    lastName: "Smith"
-    email: "john.smith@example.com"
-    emailCanonical: "john.smith@example.com"
+    firstName: 'John'
+    lastName: 'Smith'
+    email: 'john.smith@example.com'
+    emailCanonical: 'john.smith@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_bruce'
-    username: "bruce.wayne@example.com"
-    usernameCanonical: "bruce.wayne@example.com"
+    username: 'bruce.wayne@example.com'
+    usernameCanonical: 'bruce.wayne@example.com'
   user_peter:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_peter'
-    username: "peter.weyland@example.com"
-    usernameCanonical: "peter.weyland@example.com"
+    username: 'peter.weyland@example.com'
+    usernameCanonical: 'peter.weyland@example.com'
   user_john:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_john'
-    username: "john.smith@example.com"
-    usernameCanonical: "john.smith@example.com"
+    username: 'john.smith@example.com'
+    usernameCanonical: 'john.smith@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   vendor_address_bruce:
     country: '@country_us'
@@ -103,9 +103,9 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     commissionType: 'net'
 BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage:
   vendor_image_peter:
-    owner: "@vendor_peter"
-    path: "/dummy/file/path"
+    owner: '@vendor_peter'
+    path: '/dummy/file/path'
 BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage:
   vendor_backgroundimage_peter:
-    owner: "@vendor_peter"
-    path: "/dummy/file/path"
+    owner: '@vendor_peter'
+    path: '/dummy/file/path'

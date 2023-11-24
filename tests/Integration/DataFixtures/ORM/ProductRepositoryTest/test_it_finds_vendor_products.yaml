@@ -10,8 +10,8 @@ Sylius\Component\Locale\Model\Locale:
     code: 'en_US'
 Sylius\Component\Core\Model\Channel:
   channel:
-    code: "code"
-    name: "name"
+    code: 'code'
+    name: 'name'
     locales:
       - '@locale'
     default_locale: '@locale'
@@ -19,42 +19,42 @@ Sylius\Component\Core\Model\Channel:
     base_currency: '@dollar'
 Sylius\Component\Core\Model\Customer:
   customer_oliver:
-    firstName: "John"
-    lastName: "Nowak"
-    email: "test@example.com"
-    emailCanonical: "test2@example.com"
+    firstName: 'John'
+    lastName: 'Nowak'
+    email: 'test@example.com'
+    emailCanonical: 'test2@example.com'
   customer_bruce:
-    firstName: "Bruce"
-    lastName: "Wayne"
-    email: "test2@example.com"
-    emailCanonical: "test@example.com"
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'test2@example.com'
+    emailCanonical: 'test@example.com'
   customer_clark:
-    firstName: "Clark"
-    lastName: "Kent"
-    email: "test3@example.com"
-    emailCanonical: "test3@example.com"
+    firstName: 'Clark'
+    lastName: 'Kent'
+    email: 'test3@example.com'
+    emailCanonical: 'test3@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_oliver:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_oliver'
-    username: "oliver@queen.com"
-    usernameCanonical: "oliver@queen.com"
+    username: 'oliver@queen.com'
+    usernameCanonical: 'oliver@queen.com'
   user_bruce:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_bruce'
-    username: "bruce@wayne.com"
-    usernameCanonical: "bruce@wayne.com"
+    username: 'bruce@wayne.com'
+    usernameCanonical: 'bruce@wayne.com'
   user_clark:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_clark'
-    username: "clark@kent.com"
-    usernameCanonical: "clark@kent.com"
+    username: 'clark@kent.com'
+    usernameCanonical: 'clark@kent.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   vendor_address:
     country: '@USA'
@@ -76,11 +76,11 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
 Sylius\Component\Taxonomy\Model\TaxonTranslation:
   taxon_translation:
     locale: 'en_US'
-    name: "dsa"
-    slug: "dsa"
+    name: 'dsa'
+    slug: 'dsa'
 Sylius\Component\Core\Model\Taxon:
   taxon:
-    code: "menu_category"
+    code: 'menu_category'
     translations:
       - '@taxon_translation'
     enabled: true
@@ -97,7 +97,7 @@ BitBag\OpenMarketplace\Component\Product\Entity\Product:
   first_product:
     mainTaxon: '@taxon'
     vendor: '@vendor_oliver'
-    code: "code"
+    code: 'code'
     channels:
       - '@channel'
     translations:
@@ -105,7 +105,7 @@ BitBag\OpenMarketplace\Component\Product\Entity\Product:
   second_product:
     mainTaxon: '@taxon'
     vendor: '@vendor_oliver'
-    code: "code2"
+    code: 'code2'
     channels:
       - '@channel'
     translations:
@@ -113,7 +113,7 @@ BitBag\OpenMarketplace\Component\Product\Entity\Product:
   third_product_without_translation:
     mainTaxon: '@taxon'
     vendor: '@vendor_oliver'
-    code: "code3"
+    code: 'code3'
     channels:
       - '@channel'
 Sylius\Component\Core\Model\ProductTaxon:
@@ -126,14 +126,14 @@ Sylius\Component\Core\Model\ProductTaxon:
 Sylius\Component\Core\Model\ProductVariant:
   first_variant:
     product: '@first_product'
-    code: "code"
+    code: 'code'
 BitBag\OpenMarketplace\Component\Order\Entity\Order:
   bruce_order_made_with_oliver:
-    currency_code: "USD"
-    locale_code: "en-US"
+    currency_code: 'USD'
+    locale_code: 'en-US'
     vendor: '@vendor_oliver'
     customer: '@customer_bruce'
   clarks_order_made_with_random_vendor:
-    currency_code: "USD"
-    locale_code: "en-US"
+    currency_code: 'USD'
+    locale_code: 'en-US'
     customer: '@customer_clark'

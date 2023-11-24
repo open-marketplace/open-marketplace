@@ -1,0 +1,47 @@
+Sylius\Component\Core\Model\Customer:
+  customer_oliver:
+    firstName: 'John'
+    lastName: 'Nowak'
+    email: 'test1@example.com'
+    emailCanonical: 'test1@example.com'
+  customer_bruce:
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'test2@example.com'
+    emailCanonical: 'test2@example.com'
+  customer_clark:
+    firstName: 'Clark'
+    lastName: 'Kent'
+    email: 'test3@example.com'
+    emailCanonical: 'test3@example.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
+  user_oliver:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
+    enabled: 'true'
+    customer: '@customer_oliver'
+    username: 'bruce.wayne@example.com'
+  user_bruce:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
+    enabled: 'true'
+    customer: '@customer_bruce'
+    username: 'bruce.wayne@example.com'
+  user_clark:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
+    enabled: 'true'
+    customer: '@customer_clark'
+    username: 'bruce.wayne@example.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
+  vendor_bruce:
+    shopUser: '@user_bruce'
+    companyName: 'Wayne Enterprises, Inc.'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '555123123'
+    slug: 'Wayne-Enterprises-Inc'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+    settlementFrequency: 'monthly'

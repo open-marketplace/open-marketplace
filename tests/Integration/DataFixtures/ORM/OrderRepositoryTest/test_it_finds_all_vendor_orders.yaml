@@ -3,42 +3,42 @@ Sylius\Component\Addressing\Model\Country:
     code: 'PL'
 Sylius\Component\Core\Model\Customer:
   customer_oliver:
-    firstName: "John"
-    lastName: "Nowak"
-    email: "test@example.com"
-    emailCanonical: "test2@example.com"
+    firstName: 'John'
+    lastName: 'Nowak'
+    email: 'test@example.com'
+    emailCanonical: 'test2@example.com'
   customer_bruce:
-    firstName: "Bruce"
-    lastName: "Wayne"
-    email: "test2@example.com"
-    emailCanonical: "test@example.com"
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'test2@example.com'
+    emailCanonical: 'test@example.com'
   customer_clark:
-    firstName: "Clark"
-    lastName: "Kent"
-    email: "test3@example.com"
-    emailCanonical: "test3@example.com"
+    firstName: 'Clark'
+    lastName: 'Kent'
+    email: 'test3@example.com'
+    emailCanonical: 'test3@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_oliver:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_oliver'
-    username: "oliver@queen.com"
-    usernameCanonical: "oliver@queen.com"
+    username: 'oliver@queen.com'
+    usernameCanonical: 'oliver@queen.com'
   user_bruce:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_bruce'
-    username: "bruce@wayne.com"
-    usernameCanonical: "bruce@wayne.com"
+    username: 'bruce@wayne.com'
+    usernameCanonical: 'bruce@wayne.com'
   user_clark:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_clark'
-    username: "clark@kent.com"
-    usernameCanonical: "clark@kent.com"
+    username: 'clark@kent.com'
+    usernameCanonical: 'clark@kent.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   vendor_address:
     country: '@poland'
@@ -60,18 +60,18 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
 BitBag\OpenMarketplace\Component\Product\Entity\Product:
   first_product:
     vendor: '@vendor_oliver'
-    code: "code"
+    code: 'code'
 Sylius\Component\Core\Model\ProductVariant:
   first_variant:
     product: '@first_product'
-    code: "code"
+    code: 'code'
 BitBag\OpenMarketplace\Component\Order\Entity\Order:
   bruce_order_made_with_oliver:
-    currency_code: "USD"
-    locale_code: "en-US"
+    currency_code: 'USD'
+    locale_code: 'en-US'
     vendor: '@vendor_oliver'
     customer: '@customer_bruce'
   clarks_order_made_with_random_vendor:
-    currency_code: "USD"
-    locale_code: "en-US"
+    currency_code: 'USD'
+    locale_code: 'en-US'
     customer: '@customer_clark'

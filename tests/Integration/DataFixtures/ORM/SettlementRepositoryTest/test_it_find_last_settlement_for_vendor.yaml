@@ -7,8 +7,8 @@ Sylius\Component\Currency\Model\Currency:
     code: 'USD'
 Sylius\Component\Core\Model\Channel:
   channel_us:
-    code: "US"
-    name: "name"
+    code: 'US'
+    name: 'name'
     defaultLocale: '@locale'
     locales: [ '@locale' ]
     taxCalculationStrategy: 'order_items_based'
@@ -16,17 +16,17 @@ Sylius\Component\Core\Model\Channel:
     enabled: true
 Sylius\Component\Core\Model\Customer:
   customer_bruce:
-    firstName: "Bruce"
-    lastName: "Wayne"
-    email: "bruce.wayne@example.com"
-    emailCanonical: "bruce.wayne@example.com"
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'bruce.wayne@example.com'
+    emailCanonical: 'bruce.wayne@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
-    plainPassword: "123password"
+    plainPassword: '123password'
     roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
-    enabled: "true"
+    enabled: 'true'
     customer: '@customer_bruce'
-    username: "bruce.wayne@example.com"
+    username: 'bruce.wayne@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_bruce:
     shopUser: '@user_bruce'
