@@ -204,6 +204,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_1_main'
+    channel: "@channel_us"
   bruce_order_made_by_john_1:
     primaryOrder: '@bruce_order_made_by_john_1_main'
     mode: "secondary"
@@ -219,6 +220,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     billingAddress: '@address_john'
     paid_at: '<dateTimeBetween("-21 days", "-8 days")>'
     commission_total: 35
+    channel: "@channel_us"
   bruce_order_made_by_john_2_main:
     mode: "primary"
     currency_code: "EUR"
@@ -228,6 +230,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2_main'
+    channel: "@channel_us"
   bruce_order_made_by_john_2:
     primaryOrder: '@bruce_order_made_by_john_2_main'
     mode: "secondary"
@@ -241,6 +244,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     tokenValue: 'bruce_order_made_by_john_2'
     paid_at: '<dateTimeBetween("-7 days", "now")>'
     commission_total: 70
+    channel: "@channel_us"
   peter_order_made_by_john_main:
     mode: "primary"
     currency_code: "USD"
@@ -250,6 +254,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'peter_order_made_by_john_main'
+    channel: "@channel_us"
   peter_order_made_by_john:
     primaryOrder: '@peter_order_made_by_john'
     mode: "secondary"
@@ -263,6 +268,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     tokenValue: 'peter_order_made_by_john'
     paid_at: '<dateTimeBetween("-200 days", "-8 days")>'
     commission_total: 100
+    channel: "@channel_us"
   order_made_by_peter_main:
     mode: "primary"
     currency_code: "USD"
@@ -272,6 +278,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter_main'
+    channel: "@channel_us"
   order_made_by_peter:
     primaryOrder: '@order_made_by_peter_main'
     mode: "secondary"
@@ -284,6 +291,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     tokenValue: 'order_made_by_peter'
     paid_at: '<dateTimeBetween("-7 days", "now")>'
     commission_total: 10
+    channel: "@channel_us"
 BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
   bruce_order_made_by_john_1_item_1:
     order: '@bruce_order_made_by_john_1'
