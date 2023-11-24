@@ -330,5 +330,11 @@ Sylius\Component\Core\Model\OrderItemUnit:
   peter_order_made_by_john_1_item_1_unit:
     __construct: [ '@peter_order_made_by_john_1_item_1' ]
     shipment: '@peter_order_made_by_john_shipment'
-
-
+BitBag\OpenMarketplace\Component\Settlement\Entity\Settlement:
+  vendor_bruce_settlement:
+    vendor: '@vendor_bruce'
+    total_amount: 1002
+    total_commission_amount: 70
+    start_date: '<date_create("last week monday 00:00:00")>'
+    end_date: '<date_create("last week sunday 23:59:59")>'
+    channel: '@channel_eu'

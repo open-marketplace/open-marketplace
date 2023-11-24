@@ -117,6 +117,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     commission: 10
     commissionType: 'net'
     createdAt: '<dateTimeBetween("-200 days", "-7 days")>'
+    settlement_frequency: 'quarterly'
   vendor_peter:
     shopUser: '@user_peter'
     companyName: 'Weyland Corp'
@@ -205,6 +206,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_1_main'
+    channel: '@channel_us'
   bruce_order_made_by_john_1:
     primaryOrder: '@bruce_order_made_by_john_1_main'
     mode: 'secondary'
@@ -218,8 +220,9 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     tokenValue: 'bruce_order_made_by_john_1'
     shippingAddress: '@address_john'
     billingAddress: '@address_john'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
     commission_total: 35
+    channel: '@channel_us'
   bruce_order_made_by_john_2_main:
     mode: 'primary'
     currency_code: 'EUR'
@@ -229,7 +232,8 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2_main'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
+    channel: '@channel_eu'
   bruce_order_made_by_john_2:
     primaryOrder: '@bruce_order_made_by_john_2_main'
     mode: 'secondary'
@@ -241,8 +245,9 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
     commission_total: 70
+    channel: '@channel_eu'
   peter_order_made_by_john_main:
     mode: 'primary'
     currency_code: 'USD'
@@ -252,6 +257,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'peter_order_made_by_john_main'
+    channel: '@channel_eu'
   peter_order_made_by_john:
     primaryOrder: '@peter_order_made_by_john'
     mode: 'secondary'
@@ -263,8 +269,9 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'peter_order_made_by_john'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
     commission_total: 100
+    channel: '@channel_eu'
   order_made_by_peter_main:
     mode: 'primary'
     currency_code: 'USD'
@@ -274,6 +281,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter_main'
+    channel: '@channel_us'
   order_made_by_peter:
     primaryOrder: '@order_made_by_peter_main'
     mode: 'secondary'
@@ -284,8 +292,9 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter'
-    paid_at: '<dateTime()>'
+    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
     commission_total: 10
+    channel: '@channel_us'
 BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
   bruce_order_made_by_john_1_item_1:
     order: '@bruce_order_made_by_john_1'
