@@ -20,6 +20,10 @@ interface SettlementInterface extends ResourceInterface, TimestampableInterface
 {
     public const STATUS_NEW = 'new';
 
+    public const AVAILABLE_STATUSES = [
+        self::STATUS_NEW,
+    ];
+
     public function getId(): ?int;
 
     public function getVendor(): VendorInterface;

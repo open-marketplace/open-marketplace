@@ -174,6 +174,12 @@ open_marketplace:
         monthly: Monthly
         quarterly: Quarterly
         period: Period
+        total_amount: Total amount
+        total_commission_amount: Total commission
+        total_profit_amount: Total profit for vendor
+        currency_code: Currency code
+        settlement_status:
+            new: New
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.

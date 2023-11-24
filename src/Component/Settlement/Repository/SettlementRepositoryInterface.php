@@ -19,4 +19,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface SettlementRepositoryInterface extends RepositoryInterface
 {
     public function findLastByVendorAndChannel(VendorInterface $vendor, ChannelInterface $channel): ?SettlementInterface;
+
+    public function findAllPeriods(): array;
 }
