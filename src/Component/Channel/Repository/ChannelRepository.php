@@ -15,7 +15,7 @@ use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository as BaseChannelRep
 
 class ChannelRepository extends BaseChannelRepository implements ChannelRepositoryInterface
 {
-    public function findAllEnabled(): iterable
+    public function findAllEnabled(): array
     {
         return $this->findBy(['enabled' => true]);
     }
