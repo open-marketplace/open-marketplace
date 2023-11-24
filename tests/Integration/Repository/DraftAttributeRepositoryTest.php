@@ -26,7 +26,7 @@ final class DraftAttributeRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_all_draft_attributes_for_given_vendor(): void
     {
-        $this->loadFixturesFromFile('DraftAttributeRepositoryTest/test_it_finds_all_draft_attributes_for_given_vendor.yml');
+        $this->loadFixturesFromFile('DraftAttributeRepositoryTest/test_it_finds_all_draft_attributes_for_given_vendor.yaml');
 
         $vendorOliver = $this->getEntityManager()->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $vendorBruce = $this->getEntityManager()->getRepository(Vendor::class)->findOneBy(['slug' => 'bruce-wayne-company']);

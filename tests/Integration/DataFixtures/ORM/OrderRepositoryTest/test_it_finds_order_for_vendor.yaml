@@ -20,21 +20,21 @@ Sylius\Component\Core\Model\Customer:
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_oliver:
     plainPassword: "123password"
-    roles: ["ROLE_USER"]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_oliver'
     username: "oliver@queen.com"
     usernameCanonical: "oliver@queen.com"
   user_bruce:
     plainPassword: "123password"
-    roles: ["ROLE_USER"]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_bruce'
     username: "bruce@wayne.com"
     usernameCanonical: "bruce@wayne.com"
   user_clark:
     plainPassword: "123password"
-    roles: [ "ROLE_USER" ]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_clark'
     username: "clark@kent.com"

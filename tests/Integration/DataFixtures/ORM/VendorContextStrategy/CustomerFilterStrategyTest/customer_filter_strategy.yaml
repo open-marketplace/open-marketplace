@@ -20,21 +20,21 @@ Sylius\Component\Core\Model\Customer:
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
     plainPassword: "123password"
-    roles: ["ROLE_USER", "ROLE_VENDOR"]
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
     enabled: "true"
     customer: '@customer_bruce'
     username: "bruce.wayne@example.com"
     usernameCanonical: "bruce.wayne@example.com"
   user_peter:
     plainPassword: "123password"
-    roles: ["ROLE_USER", "ROLE_VENDOR"]
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
     enabled: "true"
     customer: '@customer_peter'
     username: "peter.weyland@example.com"
     usernameCanonical: "peter.weyland@example.com"
   user_john:
     plainPassword: "123password"
-    roles: ["ROLE_USER"]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_john'
     username: "john.smith@example.com"
@@ -60,22 +60,31 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
-  attribute_bruce_1:
+BitBag\OpenMarketplace\Component\Order\Entity\Order:
+  bruce_order_made_by_john_1:
+    currency_code: "USD"
+    locale_code: "en-US"
     vendor: '@vendor_bruce'
-    code: 'attribute_bruce_1'
-    type: 'text'
-    storageType: 'text'
-    translatable: 'true'
-  attribute_bruce_2:
+    customer: '@customer_john'
+    paymentState: "awaiting_payment"
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_john_1'
+  bruce_order_made_by_peter:
+    currency_code: "USD"
+    locale_code: "en-US"
     vendor: '@vendor_bruce'
-    code: 'attribute_bruce_2'
-    type: 'text'
-    storageType: 'text'
-    translatable: 'true'
-  attribute_peter_1:
+    customer: '@customer_peter'
+    paymentState: "paid"
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_peter'
+  peter_order_made_by_john:
+    currency_code: "USD"
+    locale_code: "en-US"
     vendor: '@vendor_peter'
-    code: 'attribute_peter_1'
-    type: 'text'
-    storageType: 'text'
-    translatable: 'true'
+    customer: '@customer_john'
+    paymentState: "paid"
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'peter_order_made_by_john'

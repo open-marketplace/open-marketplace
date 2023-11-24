@@ -24,7 +24,7 @@ final class TaxonRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_vendor_products(): void
     {
-        $this->loadFixturesFromFile('TaxonRepositoryTest/test_it_finds_vendor_taxons.yml');
+        $this->loadFixturesFromFile('TaxonRepositoryTest/test_it_finds_vendor_taxons.yaml');
 
         $taxon = $this->repository->findForVendorPage('slug', 'en_US');
 
@@ -33,7 +33,7 @@ final class TaxonRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_null_wuth_incorrect_slug(): void
     {
-        $this->loadFixturesFromFile('TaxonRepositoryTest/test_it_finds_vendor_taxons.yml');
+        $this->loadFixturesFromFile('TaxonRepositoryTest/test_it_finds_vendor_taxons.yaml');
 
         $taxon = $this->repository->findForVendorPage('badSlug', 'en_US');
 

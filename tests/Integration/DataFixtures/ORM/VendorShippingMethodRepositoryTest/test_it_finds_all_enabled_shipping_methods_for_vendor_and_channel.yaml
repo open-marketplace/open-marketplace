@@ -1,0 +1,94 @@
+Sylius\Component\Addressing\Model\Country:
+  poland:
+    code: 'PL'
+Sylius\Component\Currency\Model\Currency:
+  dollar:
+    code: 'USD'
+Sylius\Component\Locale\Model\Locale:
+  locale:
+    createdAt: '<dateTimeBetween("-200 days", "now")>'
+    code: 'en_US'
+Sylius\Component\Core\Model\Channel:
+  channel:
+    code: "code"
+    name: "name"
+    default_locale: '@locale'
+    tax_calculation_strategy: 'order_items_based'
+    base_currency: '@dollar'
+Sylius\Component\Core\Model\Customer:
+  customer_oliver:
+    firstName: "John"
+    lastName: "Nowak"
+    email: "test@example.com"
+    emailCanonical: "test2@example.com"
+  customer_bruce:
+    firstName: "Bruce"
+    lastName: "Wayne"
+    email: "test2@example.com"
+    emailCanonical: "test@example.com"
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
+  user_oliver:
+    plainPassword: "123password"
+    roles: [ 'ROLE_USER' ]
+    enabled: "true"
+    customer: '@customer_oliver'
+    username: "oliver@queen.com"
+    usernameCanonical: "oliver@queen.com"
+  user_bruce:
+    plainPassword: "123password"
+    roles: [ 'ROLE_USER' ]
+    enabled: "true"
+    customer: '@customer_bruce'
+    username: "bruce@wayne.com"
+    usernameCanonical: "bruce@wayne.com"
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
+  oliver_vendor_address:
+    country: '@poland'
+    city: 'Warsaw'
+    postalCode: '00-999'
+    street: 'Avenue 2115'
+  bruce_vendor_address:
+    country: '@poland'
+    city: 'Poznan'
+    postalCode: '61-512'
+    street: 'Umultowska 54'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
+  vendor_oliver:
+    shopUser: '@user_oliver'
+    companyName: 'Test company name'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '333111222'
+    vendorAddress: '@oliver_vendor_address'
+    slug: 'oliver-queen-company'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+  vendor_bruce:
+    shopUser: '@user_bruce'
+    companyName: 'Test company name'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '333111222'
+    vendorAddress: '@bruce_vendor_address'
+    slug: 'bruce-wayne-company'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+Sylius\Component\Addressing\Model\Zone:
+  us:
+    code: 'US'
+    name: 'United States of America'
+    type: 'country'
+    scope: 'all'
+Sylius\Component\Core\Model\ShippingMethod:
+  shipping_method_ups:
+    code: 'ups'
+    calculator: 'flat_rate'
+    zone: '@us'
+BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod:
+  vendor_shipping_method_ups:
+    vendor: '@vendor_oliver'
+    shippingMethod: '@shipping_method_ups'
+    channelCode: 'CODE'
+

@@ -1,6 +1,20 @@
 Sylius\Component\Addressing\Model\Country:
   poland:
     code: 'PL'
+Sylius\Component\Currency\Model\Currency:
+  dollar:
+    code: 'USD'
+Sylius\Component\Locale\Model\Locale:
+  locale:
+    createdAt: '<dateTimeBetween("-200 days", "now")>'
+    code: 'en_US'
+Sylius\Component\Core\Model\Channel:
+  channel:
+    code: "code"
+    name: "name"
+    default_locale: '@locale'
+    tax_calculation_strategy: 'order_items_based'
+    base_currency: '@dollar'
 Sylius\Component\Core\Model\Customer:
   customer_oliver:
     firstName: "John"
@@ -15,14 +29,14 @@ Sylius\Component\Core\Model\Customer:
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_oliver:
     plainPassword: "123password"
-    roles: ["ROLE_USER"]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_oliver'
     username: "oliver@queen.com"
     usernameCanonical: "oliver@queen.com"
   user_bruce:
     plainPassword: "123password"
-    roles: ["ROLE_USER"]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_bruce'
     username: "bruce@wayne.com"
@@ -41,7 +55,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
 BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_oliver:
     shopUser: '@user_oliver'
-    companyName: 'Queen company'
+    companyName: 'Test company name'
     taxIdentifier: '1234567'
     bankAccountNumber: 'PL97109024021972765458596357'
     phoneNumber: '333111222'
@@ -52,7 +66,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     commissionType: 'net'
   vendor_bruce:
     shopUser: '@user_bruce'
-    companyName: 'Wayne enterprise'
+    companyName: 'Test company name'
     taxIdentifier: '1234567'
     bankAccountNumber: 'PL97109024021972765458596357'
     phoneNumber: '333111222'
@@ -61,3 +75,43 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation:
+  translation1:
+    translatable: '@first_olivers_attribute'
+    name: 'name1'
+    locale: '@locale'
+  translation2:
+    translatable: '@second_olivers_attribute'
+    name: 'name2'
+    locale: '@locale'
+  translation3:
+    translatable: '@first_bruces_attribute'
+    name: 'name3'
+    locale: '@locale'
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
+  first_olivers_attribute:
+    addTranslation: '@translation1'
+    currentLocale: '@locale'
+    vendor: '@vendor_oliver'
+    code: 'testcode1'
+    name: 'testname1'
+    type: 'checkbox'
+    storage_type: 'boolean'
+    translatable: false
+  second_olivers_attribute:
+    addTranslation: '@translation2'
+    currentLocale: '@locale'
+    vendor: '@vendor_oliver'
+    code: 'testcode2'
+    name: 'testname2'
+    type: 'checkbox'
+    storage_type: 'boolean'
+  first_bruces_attribute:
+    addTranslation: '@translation3'
+    currentLocale: '@locale'
+    vendor: '@vendor_bruce'
+    code: 'testcode3'
+    name: 'testname3'
+    type: 'checkbox'
+    storage_type: 'boolean'
+

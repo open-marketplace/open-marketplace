@@ -1,6 +1,34 @@
 Sylius\Component\Addressing\Model\Country:
-  poland:
+  country_pl:
     code: 'PL'
+  country_us:
+    code: 'US'
+Sylius\Component\Addressing\Model\Zone:
+  zone_us:
+    code: 'US'
+    name: 'United States of America'
+    type: 'country'
+    scope: 'all'
+Sylius\Component\Addressing\Model\ZoneMember:
+  zone_member_us:
+    code: 'US'
+    belongsTo: '@zone_us'
+Sylius\Component\Currency\Model\Currency:
+  dollar:
+    code: 'USD'
+Sylius\Component\Locale\Model\Locale:
+  locale:
+    createdAt: '<dateTimeBetween("-200 days", "now")>'
+    code: 'en_US'
+Sylius\Component\Core\Model\Channel:
+  channel:
+    code: "CODE"
+    name: "name"
+    defaultLocale: '@locale'
+    locales: [ '@locale' ]
+    taxCalculationStrategy: 'order_items_based'
+    baseCurrency: '@dollar'
+    enabled: true
 Sylius\Component\Core\Model\Customer:
   customer_bruce:
     firstName: "Bruce"
@@ -20,25 +48,36 @@ Sylius\Component\Core\Model\Customer:
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
     plainPassword: "123password"
-    roles: ["ROLE_USER", "ROLE_VENDOR"]
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
     enabled: "true"
     customer: '@customer_bruce'
     username: "bruce.wayne@example.com"
     usernameCanonical: "bruce.wayne@example.com"
   user_peter:
     plainPassword: "123password"
-    roles: ["ROLE_USER", "ROLE_VENDOR"]
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
     enabled: "true"
     customer: '@customer_peter'
     username: "peter.weyland@example.com"
     usernameCanonical: "peter.weyland@example.com"
   user_john:
     plainPassword: "123password"
-    roles: ["ROLE_USER"]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_john'
     username: "john.smith@example.com"
     usernameCanonical: "john.smith@example.com"
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
+  vendor_address_bruce:
+    country: '@country_us'
+    city: 'Arkham City'
+    postalCode: '00000'
+    street: 'Avenue 2115'
+  vendor_address_peter:
+    country: '@country_us'
+    city: 'San Francisco'
+    postalCode: '94016'
+    street: 'Unknown 1'
 BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_bruce:
     shopUser: '@user_bruce'
@@ -46,6 +85,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     taxIdentifier: '1234567'
     bankAccountNumber: 'PL97109024021972765458596357'
     phoneNumber: '555123123'
+    vendorAddress: '@vendor_address_bruce'
     slug: 'Wayne-Enterprises-Inc'
     description: 'description'
     commission: 10
@@ -54,54 +94,18 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     shopUser: '@user_peter'
     companyName: 'Weyland Corp'
     taxIdentifier: '7654321'
-    bankAccountNumber: 'PL97109024021972765458596357'
+    bankAccountNumber: 'PL14109024029586826934815556'
     phoneNumber: '555444333'
+    vendorAddress: '@vendor_address_peter'
     slug: 'Weyland-Corp'
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Component\Product\Entity\Product:
-  product_bruce_1:
-    vendor: '@vendor_bruce'
-    code: "bruce_1"
-    enabled: true
-  product_bruce_2:
-    vendor: '@vendor_bruce'
-    code: "bruce_2"
-    enabled: true
-  product_peter_1:
-    vendor: '@vendor_peter'
-    code: "peter_2"
-    enabled: true
-Sylius\Component\Core\Model\ProductVariant:
-  product_variant_product_bruce_1_1:
-    product: '@product_bruce_1'
-    code: "bruce_1_1"
-    enabled: true
-    onHold: 2
-    onHand: 3
-    tracked: true
-  product_variant_product_bruce_1_2:
-    product: '@product_bruce_1'
-    code: "bruce_1_2"
-    enabled: true
-    onHand: 1
-    tracked: true
-  product_variant_product_bruce_2_1:
-    product: '@product_bruce_2'
-    code: "bruce_2_1"
-    enabled: true
-    onHand: 0
-    tracked: false
-  product_variant_product_peter_1_1:
-    product: '@product_peter_1'
-    code: "peter_1_1"
-    enabled: true
-    onHand: 3
-    tracked: true
-  product_variant_product_peter_1_2:
-    product: '@product_peter_1'
-    code: "peter_1_2"
-    enabled: true
-    onHand: 1
-    tracked: true
+BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage:
+  vendor_image_peter:
+    owner: "@vendor_peter"
+    path: "/dummy/file/path"
+BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage:
+  vendor_backgroundimage_peter:
+    owner: "@vendor_peter"
+    path: "/dummy/file/path"

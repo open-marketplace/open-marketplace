@@ -7,7 +7,7 @@ Sylius\Component\Core\Model\Customer:
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
     plainPassword: "123password"
-    roles: ["ROLE_USER", "ROLE_VENDOR"]
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
     enabled: "true"
     customer: '@customer_bruce'
     username: "bruce.wayne@example.com"

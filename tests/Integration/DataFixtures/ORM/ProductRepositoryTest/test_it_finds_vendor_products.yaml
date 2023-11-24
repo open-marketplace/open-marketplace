@@ -1,6 +1,22 @@
 Sylius\Component\Addressing\Model\Country:
-  poland:
-    code: 'PL'
+  USA:
+    code: 'US'
+Sylius\Component\Currency\Model\Currency:
+  dollar:
+    code: 'USD'
+Sylius\Component\Locale\Model\Locale:
+  locale:
+    createdAt: '<dateTimeBetween("-200 days", "now")>'
+    code: 'en_US'
+Sylius\Component\Core\Model\Channel:
+  channel:
+    code: "code"
+    name: "name"
+    locales:
+      - '@locale'
+    default_locale: '@locale'
+    tax_calculation_strategy: 'order_items_based'
+    base_currency: '@dollar'
 Sylius\Component\Core\Model\Customer:
   customer_oliver:
     firstName: "John"
@@ -20,28 +36,28 @@ Sylius\Component\Core\Model\Customer:
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_oliver:
     plainPassword: "123password"
-    roles: ["ROLE_USER"]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_oliver'
     username: "oliver@queen.com"
     usernameCanonical: "oliver@queen.com"
   user_bruce:
     plainPassword: "123password"
-    roles: ["ROLE_USER"]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_bruce'
     username: "bruce@wayne.com"
     usernameCanonical: "bruce@wayne.com"
   user_clark:
     plainPassword: "123password"
-    roles: [ "ROLE_USER" ]
+    roles: [ 'ROLE_USER' ]
     enabled: "true"
     customer: '@customer_clark'
     username: "clark@kent.com"
     usernameCanonical: "clark@kent.com"
 BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
   vendor_address:
-    country: '@poland'
+    country: '@USA'
     city: 'Warsaw'
     postalCode: '00-999'
     street: 'Avenue 2115'
@@ -57,10 +73,56 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
+Sylius\Component\Taxonomy\Model\TaxonTranslation:
+  taxon_translation:
+    locale: 'en_US'
+    name: "dsa"
+    slug: "dsa"
+Sylius\Component\Core\Model\Taxon:
+  taxon:
+    code: "menu_category"
+    translations:
+      - '@taxon_translation'
+    enabled: true
+Sylius\Component\Core\Model\ProductTranslation:
+  first_product_US_translation:
+    name: 'test_name1'
+    slug: 'test_slug1'
+    locale: 'en_US'
+  second_product_US_translation:
+    name: 'test_name2'
+    slug: 'test_slug2'
+    locale: 'en_US'
 BitBag\OpenMarketplace\Component\Product\Entity\Product:
   first_product:
+    mainTaxon: '@taxon'
     vendor: '@vendor_oliver'
     code: "code"
+    channels:
+      - '@channel'
+    translations:
+      - '@first_product_US_translation'
+  second_product:
+    mainTaxon: '@taxon'
+    vendor: '@vendor_oliver'
+    code: "code2"
+    channels:
+      - '@channel'
+    translations:
+      - '@second_product_US_translation'
+  third_product_without_translation:
+    mainTaxon: '@taxon'
+    vendor: '@vendor_oliver'
+    code: "code3"
+    channels:
+      - '@channel'
+Sylius\Component\Core\Model\ProductTaxon:
+  firs_relation:
+    taxon: '@taxon'
+    product: '@first_product'
+  second_relation:
+    taxon: '@taxon'
+    product: '@second_product'
 Sylius\Component\Core\Model\ProductVariant:
   first_variant:
     product: '@first_product'
