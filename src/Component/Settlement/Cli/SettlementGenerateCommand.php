@@ -13,7 +13,6 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Cli;
 
 use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
-use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
@@ -65,7 +64,7 @@ final class SettlementGenerateCommand extends Command
                 )
             );
         }
-        $vendors = $this->vendorRepository->findAllByFrequency($frequency);
+        $vendors = $this->vendorRepository->findAllBySettlementFrequency($frequency);
         $channels = $this->channelRepository->findAllEnabled();
         [$nextSettlementStartDate, $nextSettlementEndDate] = $this->getSettlementDateRangeFromFrequency($frequency);
 
@@ -133,7 +132,7 @@ final class SettlementGenerateCommand extends Command
         $month = date('n');
         $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
 
-        return mktime(
+        $dateTime = mktime(
             00,
             00,
             00,
@@ -141,6 +140,12 @@ final class SettlementGenerateCommand extends Command
             1,
             (int) date('Y')
         );
+
+        if (false === $dateTime) {
+            throw new \RuntimeException('Cannot generate last quarter start date');
+        }
+
+        return $dateTime;
     }
 
     private function getLastQuarterEndDate(): int
@@ -148,7 +153,7 @@ final class SettlementGenerateCommand extends Command
         $month = date('n');
         $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
 
-        return mktime(
+        $dateTime = mktime(
             23,
             59,
             59,
@@ -156,14 +161,10 @@ final class SettlementGenerateCommand extends Command
             0,
             (int) date('Y')
         );
-    }
-
-    private function shouldGenerateSettlementForVendor(?SettlementInterface $settlement): bool
-    {
-        if (null === $settlement) {
-            return true;
+        if (false === $dateTime) {
+            throw new \RuntimeException('Cannot generate last quarter end date');
         }
 
-        return $settlement->getEndDate()->diff(new \DateTime())->d >= $vendor->getSettlementFrequency();
+        return $dateTime;
     }
 }
