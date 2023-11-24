@@ -190,8 +190,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ChannelInterface $channel,
         \DateTimeInterface $nextSettlementStartDate,
         \DateTimeInterface $nextSettlementEndDate
-    ): array
-    {
+    ): array {
         $qb = $this->findAllByVendorQueryBuilder($vendor);
 
         return $qb
