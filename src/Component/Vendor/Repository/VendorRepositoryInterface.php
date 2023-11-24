@@ -19,5 +19,5 @@ interface VendorRepositoryInterface extends RepositoryInterface
     public function findOneBySlug(string $slug): ?VendorInterface;
 
     /** @return iterable|VendorInterface[] */
-    public function findAllByFrequency(string $frequency): iterable;
+    public function findAllBySettlementFrequency(string $frequency): iterable;
 }

@@ -20,28 +20,50 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
     roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
     enabled: 'true'
     customer: '@customer_oliver'
-    username: 'bruce.wayne@example.com'
+    username: 'oliver@example.com'
   user_bruce:
     plainPassword: '123password'
     roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
     enabled: 'true'
     customer: '@customer_bruce'
-    username: 'bruce.wayne@example.com'
+    username: 'bruce@example.com'
   user_clark:
     plainPassword: '123password'
     roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
     enabled: 'true'
     customer: '@customer_clark'
-    username: 'bruce.wayne@example.com'
+    username: 'clark@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
-  vendor_bruce:
-    shopUser: '@user_bruce'
-    companyName: 'Wayne Enterprises, Inc.'
+  vendor_oliver:
+    shopUser: '@user_oliver'
+    companyName: 'Oliver Enterprises, Inc.'
     taxIdentifier: '1234567'
     bankAccountNumber: 'PL97109024021972765458596357'
     phoneNumber: '555123123'
-    slug: 'Wayne-Enterprises-Inc'
+    slug: 'Oliver-Enterprises-Inc'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+    settlementFrequency: 'weekly'
+  vendor_bruce:
+    shopUser: '@user_bruce'
+    companyName: 'Bruce Enterprises, Inc.'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '555123123'
+    slug: 'Bruce-Enterprises-Inc'
     description: 'description'
     commission: 10
     commissionType: 'net'
     settlementFrequency: 'monthly'
+  vendor_clark:
+    shopUser: '@user_clark'
+    companyName: 'Clark Enterprises, Inc.'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '555123123'
+    slug: 'Clark-Enterprises-Inc'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+    settlementFrequency: 'weekly'

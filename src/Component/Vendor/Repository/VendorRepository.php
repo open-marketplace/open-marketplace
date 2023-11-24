@@ -26,7 +26,7 @@ final class VendorRepository extends EntityRepository implements VendorRepositor
             ;
     }
 
-    public function findAllByFrequency(string $frequency): iterable
+    public function findAllBySettlementFrequency(string $frequency): iterable
     {
         return $this->createQueryBuilder('v')
             ->andWhere('v.settlementFrequency = :frequency')
