@@ -21,7 +21,7 @@ final class VendorOwnsVariantVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, [self::OWNS_VARIANT])) {
+        if (self::OWNS_VARIANT != $attribute) {
             return false;
         }
 
@@ -40,16 +40,14 @@ final class VendorOwnsVariantVoter extends Voter
         TokenInterface $token
     ) {
         $user = $token->getUser();
-        if (!$user instanceof ShopUserInterface || null == $subject) {
+        if (!$user instanceof ShopUserInterface || null === $subject) {
             return false;
         }
 
-        switch ($attribute) {
-            case self::OWNS_VARIANT:
-                return $this->doesUserOwnTheData($subject, $user);
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::OWNS_VARIANT => $this->doesUserOwnTheData($subject, $user),
+            default => false,
+        };
     }
 
     private function doesUserOwnTheData(object $data, ShopUserInterface $user): bool
@@ -57,10 +55,6 @@ final class VendorOwnsVariantVoter extends Voter
         $loggedInVendor = $user->getVendor();
         /** @phpstan-ignore-next-line */
         $vendorData = $data->getProduct()->getVendor();
-        if ($loggedInVendor === $vendorData) {
-            return true;
-        }
-
-        return false;
+        return $loggedInVendor === $vendorData;
     }
 }
