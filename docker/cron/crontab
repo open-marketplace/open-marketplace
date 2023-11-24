@@ -1,2 +1,5 @@
 * * * * * php /srv/sylius/bin/console sylius:remove-expired-carts
 * * * * * php /srv/sylius/bin/console sylius:cancel-unpaid-orders
+0 9 * * 1 php /srv/sylius/bin/console bitbag:settlement:generate weekly
+0 9 1 * * php /srv/sylius/bin/console bitbag:settlement:generate monthly
+0 9 1 1,4,7,10 * php /srv/sylius/bin/console bitbag:settlement:generate quarterly
