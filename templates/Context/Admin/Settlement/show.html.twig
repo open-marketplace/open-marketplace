@@ -1,0 +1,12 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% block title %}{{ 'open_marketplace.ui.settlement'|trans }} | {{ settlement.vendor.companyName }}{% endblock %}
+
+{% block content %}
+    {% include 'Context/Admin/Settlement/Show/_header.html.twig' %}
+    <div class="ui grid">
+        <div class="sixteen wide mobile ten wide computer column">
+            {{ sylius_template_event('open_marketplace.admin.settlement.show.details', _context) }}
+        </div>
+    </div>
+{% endblock %}
