@@ -12,6 +12,7 @@
             <argument type="service" id="open_marketplace.factory.settlement"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.repository.channel"/>
+            <argument type="tagged_iterator" tag="bitbag.open_marketplace.strategy.settlement.period"/>
             <tag name="console.command"/>
         </service>
     </services>

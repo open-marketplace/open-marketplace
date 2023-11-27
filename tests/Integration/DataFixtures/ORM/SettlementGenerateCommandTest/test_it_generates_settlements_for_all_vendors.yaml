@@ -74,7 +74,11 @@ Sylius\Component\Core\Model\Customer:
     lastName: 'Smith'
     email: 'john.smith@example.com'
     emailCanonical: 'john.smith@example.com'
-    phoneNumber: 123456789
+  customer_tommy:
+    firstName: 'Tommy'
+    lastName: 'Mush'
+    email: 'tommy.mush@example.com'
+    emailCanonical: 'tommy.mush@example.com'
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
     plainPassword: '123password'
@@ -97,6 +101,13 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
     customer: '@customer_john'
     username: 'john.smith@example.com'
     usernameCanonical: 'john.smith@example.com'
+  user_tommy:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
+    enabled: 'true'
+    customer: '@customer_tommy'
+    username: 'tommy.mush@example.com'
+    usernameCanonical: 'tommy.mush@example.com'
 Sylius\Component\Core\Model\Address:
   address_john:
     firstName: 'John'
@@ -117,7 +128,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     commission: 10
     commissionType: 'net'
     createdAt: '<dateTimeBetween("-200 days", "-7 days")>'
-    settlement_frequency: 'quarterly'
+    settlement_frequency: 'monthly'
   vendor_peter:
     shopUser: '@user_peter'
     companyName: 'Weyland Corp'
@@ -128,6 +139,18 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
+    settlement_frequency: 'weekly'
+  vendor_tommy:
+    shopUser: '@user_tommy'
+    companyName: 'Tommy Corp'
+    taxIdentifier: '7654321'
+    bankAccountNumber: 'NL78INGB4783095582'
+    phoneNumber: '555444333'
+    slug: 'Tommy-Corp'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+    settlement_frequency: 'quarterly'
 BitBag\OpenMarketplace\Component\Product\Entity\Product:
   product_bruce_1:
     vendor: '@vendor_bruce'
@@ -136,7 +159,12 @@ BitBag\OpenMarketplace\Component\Product\Entity\Product:
     channels: [ '@channel_us', '@channel_eu' ]
   product_peter_1:
     vendor: '@vendor_peter'
-    code: 'peter_2'
+    code: 'peter_1'
+    enabled: true
+    channels: [ '@channel_us', '@channel_eu' ]
+  product_tommy_1:
+    vendor: '@vendor_tommy'
+    code: 'tommy_1'
     enabled: true
     channels: [ '@channel_us', '@channel_eu' ]
 Sylius\Component\Core\Model\ProductVariant:
@@ -144,21 +172,22 @@ Sylius\Component\Core\Model\ProductVariant:
     product: '@product_bruce_1'
     code: 'bruce_1_1'
     enabled: true
-    onHold: 2
-    onHand: 3
-    tracked: true
+    tracked: false
   product_variant_product_bruce_1_2:
     product: '@product_bruce_1'
     code: 'bruce_1_2'
     enabled: true
-    onHand: 1
-    tracked: true
+    tracked: false
   product_variant_product_peter_1_1:
     product: '@product_peter_1'
     code: 'peter_1_1'
     enabled: true
-    onHand: 3
-    tracked: true
+    tracked: false
+  product_variant_product_tommy_1_1:
+    product: '@product_tommy_1'
+    code: 'tommy_1_1'
+    enabled: true
+    tracked: false
 Sylius\Component\Core\Model\ChannelPricing:
   pricing_product_variant_product_bruce_1_1_us:
     price: 10
@@ -196,6 +225,18 @@ Sylius\Component\Core\Model\ChannelPricing:
     minimumPrice: 4
     channelCode: 'EU'
     productVariant: '@product_variant_product_peter_1_1'
+  pricing_product_variant_product_tommy_1_1_eu:
+    price: 20
+    originalPrice: 50
+    minimumPrice: 30
+    channelCode: 'EU'
+    productVariant: '@product_variant_product_tommy_1_1'
+  pricing_product_variant_product_tommy_1_1_us:
+    price: 23
+    originalPrice: 78
+    minimumPrice: 45
+    channelCode: 'US'
+    productVariant: '@product_variant_product_tommy_1_1'
 BitBag\OpenMarketplace\Component\Order\Entity\Order:
   bruce_order_made_by_john_1_main:
     mode: 'primary'
@@ -220,7 +261,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     tokenValue: 'bruce_order_made_by_john_1'
     shippingAddress: '@address_john'
     billingAddress: '@address_john'
-    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
+    paid_at: '<date_create("first day of last month")>' #ok
     commission_total: 35
     channel: '@channel_us'
   bruce_order_made_by_john_2_main:
@@ -232,7 +273,6 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2_main'
-    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
     channel: '@channel_eu'
   bruce_order_made_by_john_2:
     primaryOrder: '@bruce_order_made_by_john_2_main'
@@ -245,7 +285,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2'
-    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
+    paid_at: '<date_create("first day of last month")>' #ok
     commission_total: 70
     channel: '@channel_eu'
   peter_order_made_by_john_main:
@@ -269,7 +309,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'peter_order_made_by_john'
-    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
+    paid_at: '<date_create("last week tuesday")>' #ok
     commission_total: 100
     channel: '@channel_eu'
   order_made_by_peter_main:
@@ -288,13 +328,37 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     currency_code: 'USD'
     locale_code: 'en-US'
     customer: '@customer_peter'
+    vendor: '@vendor_tommy'
     paymentState: 'paid'
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter'
-    paid_at: '<dateTimeBetween("-5 month", "-4 month")>'
+    paid_at: '<dateTimeBetween("-5 month", "-3 month")>'
     commission_total: 10
     channel: '@channel_us'
+  bruce_order_made_by_john_3_main:
+    mode: 'primary'
+    currency_code: 'USD'
+    locale_code: 'en-US'
+    customer: '@customer_john'
+    paymentState: 'paid'
+    state: 'new'
+    checkoutState: 'completed'
+    channel: '@channel_eu'
+  bruce_order_made_by_john_3:
+    primaryOrder: '@bruce_order_made_by_john_3_main'
+    mode: 'secondary'
+    currency_code: 'USD'
+    locale_code: 'en-US'
+    vendor: '@vendor_tommy'
+    customer: '@customer_john'
+    paymentState: 'paid'
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_john_3'
+    paid_at: '<date_create("first day of last month")>' #ok
+    commission_total: 55
+    channel: '@channel_eu'
 BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
   bruce_order_made_by_john_1_item_1:
     order: '@bruce_order_made_by_john_1'
@@ -308,6 +372,14 @@ BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
     order: '@peter_order_made_by_john'
     variant: '@product_variant_product_peter_1_1'
     unit_price: 700
+  bruce_order_made_by_john_3_item_1:
+    order: '@bruce_order_made_by_john_3'
+    variant: '@product_variant_product_tommy_1_1'
+    unit_price: 400
+  order_made_by_peter_item_1:
+    order: '@order_made_by_peter'
+    variant: '@product_variant_product_tommy_1_1'
+    unit_price: 400
 BitBag\OpenMarketplace\Component\Order\Entity\Shipment:
   bruce_order_made_by_john_1_shipment:
     vendor: '@vendor_bruce'
@@ -316,6 +388,10 @@ BitBag\OpenMarketplace\Component\Order\Entity\Shipment:
   bruce_order_made_by_john_2_shipment:
     vendor: '@vendor_bruce'
     order: '@bruce_order_made_by_john_2'
+    method: '@shipping_method_fedex'
+  bruce_order_made_by_john_3_shipment:
+    vendor: '@vendor_bruce'
+    order: '@bruce_order_made_by_john_3'
     method: '@shipping_method_fedex'
   peter_order_made_by_john_shipment:
     vendor: '@vendor_peter'
@@ -331,5 +407,9 @@ Sylius\Component\Core\Model\OrderItemUnit:
   peter_order_made_by_john_1_item_1_unit:
     __construct: [ '@peter_order_made_by_john_1_item_1' ]
     shipment: '@peter_order_made_by_john_shipment'
-
-
+  bruce_order_made_by_john_3_item_1_unit:
+    __construct: [ '@bruce_order_made_by_john_3_item_1' ]
+    shipment: '@bruce_order_made_by_john_3_shipment'
+  order_made_by_peter_item_1_unit:
+    __construct: [ '@order_made_by_peter_item_1' ]
+    shipment: '@bruce_order_made_by_john_3_shipment'
