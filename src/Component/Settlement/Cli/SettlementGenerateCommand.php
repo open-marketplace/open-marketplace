@@ -52,6 +52,7 @@ final class SettlementGenerateCommand extends Command
         $channels = $this->channelRepository->findAllEnabled();
 
         $persistCount = 0;
+        /** @var VendorInterface $vendor */
         foreach ($vendors as $vendor) {
             [$nextSettlementStartDate, $nextSettlementEndDate] = $this->getSettlementDateRangeFromVendor($vendor);
             if (null === $nextSettlementStartDate || null === $nextSettlementEndDate) {
@@ -92,7 +93,7 @@ final class SettlementGenerateCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function getSettlementDateRangeFromVendor(VendorInterface $vendor): ?array
+    private function getSettlementDateRangeFromVendor(VendorInterface $vendor): array
     {
         /** @var AbstractSettlementPeriodResolverStrategy $settlementPeriodResolver */
         foreach ($this->settlementPeriodResolvers as $settlementPeriodResolver) {

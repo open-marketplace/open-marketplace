@@ -22,4 +22,9 @@ final class MonthlySettlementPeriodResolver extends AbstractSettlementPeriodReso
             new \DateTime('last day of last month 23:59:59'),
         ];
     }
+
+    public function getSettlementFrequency(): string
+    {
+        return self::SETTLEMENT_FREQUENCY;
+    }
 }

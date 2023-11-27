@@ -17,8 +17,10 @@ abstract class AbstractSettlementPeriodResolverStrategy
 {
     public function supports(VendorInterface $vendor): bool
     {
-        return $vendor->getSettlementFrequency() === static::SETTLEMENT_FREQUENCY;
+        return $vendor->getSettlementFrequency() === $this->getSettlementFrequency();
     }
 
     abstract public function resolve(): array;
+
+    abstract public function getSettlementFrequency(): string;
 }

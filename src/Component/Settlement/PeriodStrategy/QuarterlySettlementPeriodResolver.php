@@ -23,6 +23,11 @@ final class QuarterlySettlementPeriodResolver extends AbstractSettlementPeriodRe
         ];
     }
 
+    public function getSettlementFrequency(): string
+    {
+        return self::SETTLEMENT_FREQUENCY;
+    }
+
     private function getLastQuarterStartDate(): int
     {
         $month = date('n');

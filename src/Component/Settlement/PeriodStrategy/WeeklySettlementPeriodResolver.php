@@ -22,4 +22,9 @@ final class WeeklySettlementPeriodResolver extends AbstractSettlementPeriodResol
             new \DateTime('last week sunday 23:59:59'),
         ];
     }
+
+    public function getSettlementFrequency(): string
+    {
+        return self::SETTLEMENT_FREQUENCY;
+    }
 }
