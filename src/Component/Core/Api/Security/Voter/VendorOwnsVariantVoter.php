@@ -21,7 +21,7 @@ final class VendorOwnsVariantVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (self::OWNS_VARIANT != $attribute) {
+        if (self::OWNS_VARIANT !== $attribute) {
             return false;
         }
 
@@ -55,6 +55,7 @@ final class VendorOwnsVariantVoter extends Voter
         $loggedInVendor = $user->getVendor();
         /** @phpstan-ignore-next-line */
         $vendorData = $data->getProduct()->getVendor();
+
         return $loggedInVendor === $vendorData;
     }
 }
