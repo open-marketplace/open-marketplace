@@ -66,7 +66,7 @@ final class UpdateAction
             $productDraft->ownRelations();
             $this->listingPersister->uploadImages($productDraft);
 
-            $this->productDraftRepository->save($productDraft);
+            $this->productDraftRepository->add($productDraft);
 
             /** @var Session $session */
             $session = $this->requestStack->getSession();

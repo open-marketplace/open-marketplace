@@ -20,8 +20,6 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface as BaseProductRe
 
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
-    public function save(ProductInterface $product): void;
-
     public function createVendorShopListQueryBuilder(
         VendorInterface $vendor,
         ChannelInterface $channel,
