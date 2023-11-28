@@ -22,7 +22,7 @@ final class MonthlySettlementPeriodResolverSpec extends ObjectBehavior
         $this->shouldHaveType(MonthlySettlementPeriodResolver::class);
     }
 
-    public function it_support_vendor_when_settlement_frequency_is_monthly(
+    public function it_supports_vendor_when_settlement_frequency_is_monthly(
         VendorInterface $vendor,
     ): void {
         $vendor->getSettlementFrequency()->willReturn('monthly');
@@ -30,7 +30,7 @@ final class MonthlySettlementPeriodResolverSpec extends ObjectBehavior
         $this->supports($vendor)->shouldBe(true);
     }
 
-    public function it_does_not_support_vendor_when_settlement_frequency_is_not_monthly(
+    public function it_does_not_supports_vendor_when_settlement_frequency_is_not_monthly(
         VendorInterface $vendor,
     ): void {
         $vendor->getSettlementFrequency()->willReturn('weekly');

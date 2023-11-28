@@ -18,8 +18,8 @@ final class QuarterlySettlementPeriodResolver extends AbstractSettlementPeriodRe
     public function resolve(): array
     {
         return [
-            (new \DateTime())->setTimestamp($this->getLastQuarterStartDate()),
-            (new \DateTime())->setTimestamp($this->getLastQuarterEndDate()),
+            (new \DateTime())->setTimestamp(self::getLastQuarterStartDate()),
+            (new \DateTime())->setTimestamp(self::getLastQuarterEndDate()),
         ];
     }
 
@@ -28,7 +28,7 @@ final class QuarterlySettlementPeriodResolver extends AbstractSettlementPeriodRe
         return self::SETTLEMENT_FREQUENCY;
     }
 
-    private function getLastQuarterStartDate(): int
+    public static function getLastQuarterStartDate(): int
     {
         $month = date('n');
         $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
@@ -49,7 +49,7 @@ final class QuarterlySettlementPeriodResolver extends AbstractSettlementPeriodRe
         return $dateTime;
     }
 
-    private function getLastQuarterEndDate(): int
+    public static function getLastQuarterEndDate(): int
     {
         $month = date('n');
         $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);

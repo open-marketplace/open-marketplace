@@ -55,9 +55,7 @@ final class SettlementGenerateCommand extends Command
         /** @var VendorInterface $vendor */
         foreach ($vendors as $vendor) {
             [$nextSettlementStartDate, $nextSettlementEndDate] = $this->getSettlementDateRangeFromVendor($vendor);
-            if (null === $nextSettlementStartDate || null === $nextSettlementEndDate) {
-                continue;
-            }
+
             foreach ($channels as $channel) {
                 $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $channel);
                 if (
@@ -102,6 +100,6 @@ final class SettlementGenerateCommand extends Command
             }
         }
 
-        return [null, null];
+        throw new \InvalidArgumentException(sprintf('Could not find period resolver for vendor with settlement frequency "%s"', $vendor->getSettlementFrequency()));
     }
 }

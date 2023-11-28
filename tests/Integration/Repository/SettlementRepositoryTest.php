@@ -23,7 +23,7 @@ final class SettlementRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_last_settlement_for_vendor(): void
     {
-        $this->loadFixturesFromFile('SettlementRepositoryTest/test_it_find_last_settlement_for_vendor.yaml');
+        $this->loadFixturesFromFile('SettlementRepositoryTest/test_it_finds_last_settlement_for_vendor.yaml');
         $vendorRepository = self::getContainer()->get('open_marketplace.repository.vendor');
         $channelRepository = self::getContainer()->get('sylius.repository.channel');
         $vendor = $vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);

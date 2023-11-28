@@ -22,7 +22,7 @@ final class QuarterlySettlementPeriodResolverSpec extends ObjectBehavior
         $this->shouldHaveType(QuarterlySettlementPeriodResolver::class);
     }
 
-    public function it_support_vendor_when_settlement_frequency_is_quarterly(
+    public function it_supports_vendor_when_settlement_frequency_is_quarterly(
         VendorInterface $vendor,
     ): void {
         $vendor->getSettlementFrequency()->willReturn('quarterly');
@@ -30,7 +30,7 @@ final class QuarterlySettlementPeriodResolverSpec extends ObjectBehavior
         $this->supports($vendor)->shouldBe(true);
     }
 
-    public function it_does_not_support_vendor_when_settlement_frequency_is_not_quarterly(
+    public function it_does_not_supports_vendor_when_settlement_frequency_is_not_quarterly(
         VendorInterface $vendor,
     ): void {
         $vendor->getSettlementFrequency()->willReturn('weekly');
@@ -41,49 +41,8 @@ final class QuarterlySettlementPeriodResolverSpec extends ObjectBehavior
     public function it_returns_valid_next_settlement_start_and_end_date_time(
     ): void {
         $this->resolve()->shouldBeLike([
-            (new \DateTime())->setTimestamp($this->getLastQuarterStartDate()),
-            (new \DateTime())->setTimestamp($this->getLastQuarterEndDate()),
+            (new \DateTime())->setTimestamp(QuarterlySettlementPeriodResolver::getLastQuarterStartDate()),
+            (new \DateTime())->setTimestamp(QuarterlySettlementPeriodResolver::getLastQuarterEndDate()),
         ]);
-    }
-
-    private function getLastQuarterStartDate(): int
-    {
-        $month = date('n');
-        $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
-
-        $dateTime = mktime(
-            00,
-            00,
-            00,
-            $month - $countLastQuarterEndMonthAgo - 2,
-            1,
-            (int) date('Y')
-        );
-
-        if (false === $dateTime) {
-            throw new \RuntimeException('Cannot generate last quarter start date');
-        }
-
-        return $dateTime;
-    }
-
-    private function getLastQuarterEndDate(): int
-    {
-        $month = date('n');
-        $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
-
-        $dateTime = mktime(
-            23,
-            59,
-            59,
-            $month - $countLastQuarterEndMonthAgo + 1,
-            0,
-            (int) date('Y')
-        );
-        if (false === $dateTime) {
-            throw new \RuntimeException('Cannot generate last quarter end date');
-        }
-
-        return $dateTime;
     }
 }
