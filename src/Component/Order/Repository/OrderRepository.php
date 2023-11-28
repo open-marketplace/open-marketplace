@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Repository;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
@@ -31,7 +32,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ;
     }
 
-    public function findAllSecondaryOrders(): QueryBuilder
+    public function findAllSecondaryOrdersQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->createListQueryBuilder();
         $alias = $queryBuilder->getRootAliases()[0];
@@ -208,5 +209,25 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('endDate', $nextSettlementEndDate)
             ->getQuery()
             ->getSingleResult();
+    }
+
+    public function findForSettlementQueryBuilder(SettlementInterface $settlement): QueryBuilder
+    {
+        return $this->findAllByVendorQueryBuilder($settlement->getVendor())
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.paidAt BETWEEN :startDate AND :endDate')
+            ->setParameter('channel', $settlement->getChannel())
+            ->setParameter('startDate', $settlement->getStartDate())
+            ->setParameter('endDate', $settlement->getEndDate())
+        ;
+    }
+
+    public function countOrderForSettlement(SettlementInterface $settlement): int
+    {
+        return (int) $this->findForSettlementQueryBuilder($settlement)
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
     }
 }

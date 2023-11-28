@@ -1,0 +1,81 @@
+sylius_ui:
+    events:
+        open_marketplace.admin.settlement.show.details:
+            blocks:
+                content:
+                    template: 'Configuration/Event/Admin/Settlement/Show/details.html.twig'
+                    priority: 10
+        open_marketplace.admin.settlement.show.details_content:
+            blocks:
+                labels:
+                    template: 'Configuration/Event/Admin/Settlement/Show/detailsAccordion.html.twig'
+                    priority: 20
+                grid:
+                    template: 'Configuration/Event/Admin/Settlement/Show/orderGrid.html.twig'
+                    priority: 10
+#        open_marketplace.admin.vendor.form:
+#            blocks:
+#                content:
+#                    template: 'Configuration/Event/Admin/Vendor/Update/content.html.twig'
+#                    priority: 10
+#        open_marketplace.admin.vendor.form.content:
+#            blocks:
+#                content:
+#                    template: 'Configuration/Event/Admin/Vendor/Update/columns.html.twig'
+#                    priority: 10
+#        open_marketplace.admin.vendor.form.first_column:
+#            blocks:
+#                content:
+#                    template: 'Configuration/Event/Admin/Vendor/Update/firstColumn.html.twig'
+#                    priority: 10
+#        open_marketplace.admin.vendor.form.vendor_details:
+#            blocks:
+#                content:
+#                    template: 'Configuration/Event/Admin/Vendor/Update/_details.html.twig'
+#                    priority: 10
+#        open_marketplace.admin.vendor.form.vendor_commission:
+#            blocks:
+#                content:
+#                    template: 'Configuration/Event/Admin/Vendor/Update/_commission.html.twig'
+#                    priority: 10
+#        open_marketplace.admin.vendor.form.vendor_settlement:
+#            blocks:
+#                content:
+#                    template: 'Configuration/Event/Admin/Vendor/Update/_settlement.html.twig'
+#                    priority: 10
+#        open_marketplace.admin.vendor.form.second_column:
+#            blocks:
+#                content:
+#                    template: 'Configuration/Event/Admin/Vendor/Update/secondColumn.html.twig'
+#                    priority: 10
+#        open_marketplace.admin.vendor.form.vendor_address:
+#            blocks:
+#                content:
+#                    template: 'Configuration/Event/Admin/Vendor/Update/vendorAddress.html.twig'
+#                    priority: 10
+#        sylius.shop.account.layout.menu:
+#            blocks:
+#                vendor:
+#                    template: "Configuration/Event/Shop/Account/Menu/content.html.twig"
+#                    priority: 7
+#        open_marketplace.shop.product.index.search:
+#            blocks:
+#                before_search_legacy:
+#                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+#                    priority: 35
+#                    context:
+#                        event: sylius.shop.product.index.before_search
+#                search:
+#                    template: "Context/Vendor/VendorPage/_search.html.twig"
+#                    priority: 30
+#                after_search_legacy:
+#                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+#                    priority: 25
+#                    context:
+#                        event: sylius.shop.product.index.after_search
+#                pagination:
+#                    template: "@SyliusShop/Product/Index/_pagination.html.twig"
+#                    priority: 20
+#                sorting:
+#                    template: "@SyliusShop/Product/Index/_sorting.html.twig"
+#                    priority: 10

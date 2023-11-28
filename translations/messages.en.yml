@@ -180,6 +180,11 @@ open_marketplace:
         currency_code: Currency code
         settlement_status:
             new: New
+        show_settlements: Show settlements
+        created_at: Created at
+        updated_at: Updated at
+        channel: Channel
+        total_orders: Total orders
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.
