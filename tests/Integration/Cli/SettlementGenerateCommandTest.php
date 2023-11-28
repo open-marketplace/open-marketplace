@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Cli;
 
 use ApiTestCase\JsonApiTestCase;
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
+use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\QuarterlySettlementPeriodResolver;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -29,83 +31,98 @@ final class SettlementGenerateCommandTest extends JsonApiTestCase
         $this->channelRepository = self::getContainer()->get('sylius.repository.channel');
     }
 
-    public function test_it_throws_exception_if_settlement_frequency_is_not_valid(): void
+    public function test_it_throws_exception_if_period_resolver_for_settlement_frequency_does_not_exist(): void
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Frequency "wrong_frequency" is not valid. Available options are: weekly, monthly, quarterly');
-        $this->commandTester->execute(['frequency' => 'wrong_frequency']);
+        $this->loadFixturesFromFile('SettlementGenerateCommandTest/test_it_throws_exception_if_period_resolver_for_settlement_frequency_does_not_exist.yaml');
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Could not find period resolver for vendor with settlement frequency "daily"');
+        $this->commandTester->execute([]);
     }
 
-    public function test_it_generates_settlements_for_all_vendors_with_weekly_frequency(): void
+    public function test_it_generates_settlements_for_all_vendors(): void
     {
-        $this->loadFixturesFromFile('SettlementGenerateCommandTest/test_it_generates_settlements_for_all_vendors_with_weekly_frequency.yaml');
+        $this->loadFixturesFromFile('SettlementGenerateCommandTest/test_it_generates_settlements_for_all_vendors.yaml');
         $this->assertCount(0, $this->settlementRepository->findAll());
         $this->commandTester->execute([]);
         $this->commandTester->assertCommandIsSuccessful();
         $vendorWeyland = $this->vendorRepository->findOneBySlug('Weyland-Corp');
         $vendorWayne = $this->vendorRepository->findOneBySlug('Wayne-Enterprises-Inc');
+        $vendorTommy = $this->vendorRepository->findOneBySlug('Tommy-Corp');
         $channelEu = $this->channelRepository->findOneBy(['code' => 'EU']);
         $channelUs = $this->channelRepository->findOneBy(['code' => 'US']);
         $settlementsVendorWeyland = $this->settlementRepository->findBy(['vendor' => $vendorWeyland]);
         $settlementsVendorWayne = $this->settlementRepository->findBy(['vendor' => $vendorWayne]);
-        $startDate = new \DateTime('last week monday 00:00:00');
-        $endDate = new \DateTime('last week sunday 23:59:59');
+        $settlementsVendorTommy = $this->settlementRepository->findBy(['vendor' => $vendorTommy]);
+        [$weeklyStartDate, $weeklyEndDate] = $this->getStartAndEndDate('weekly');
+        [$monthlyStartDate, $monthlyEndDate] = $this->getStartAndEndDate('monthly');
+        [$quarterlyStartDate, $quarterlyEndDate] = $this->getStartAndEndDate('quarterly');
+
         $this->assertCount(2, $settlementsVendorWayne);
-        $this->assertSame(540, $settlementsVendorWayne[0]->getTotalAmount());
-        $this->assertSame(35, $settlementsVendorWayne[0]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWayne[0]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWayne[0]->getEndDate()->getTimestamp());
-        $this->assertSame($channelUs, $settlementsVendorWayne[0]->getChannel());
-        $this->assertSame(1002, $settlementsVendorWayne[1]->getTotalAmount());
-        $this->assertSame(70, $settlementsVendorWayne[1]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWayne[1]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWayne[1]->getEndDate()->getTimestamp());
-        $this->assertSame($channelEu, $settlementsVendorWayne[1]->getChannel());
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 540,
+                'totalCommissionAmount' => 35,
+                'startDate' => $monthlyStartDate,
+                'endDate' => $monthlyEndDate,
+                'channel' => $channelUs,
+            ],
+            $settlementsVendorWayne[0]
+        );
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 1002,
+                'totalCommissionAmount' => 70,
+                'startDate' => $monthlyStartDate,
+                'endDate' => $monthlyEndDate,
+                'channel' => $channelEu,
+            ],
+            $settlementsVendorWayne[1]
+        );
 
         $this->assertCount(2, $settlementsVendorWeyland);
-        $this->assertSame(0, $settlementsVendorWeyland[0]->getTotalAmount());
-        $this->assertSame(0, $settlementsVendorWeyland[0]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWeyland[0]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWeyland[0]->getEndDate()->getTimestamp());
-        $this->assertSame($channelUs, $settlementsVendorWeyland[0]->getChannel());
-        $this->assertSame(700, $settlementsVendorWeyland[1]->getTotalAmount());
-        $this->assertSame(100, $settlementsVendorWeyland[1]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWeyland[1]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWeyland[1]->getEndDate()->getTimestamp());
-        $this->assertSame($channelEu, $settlementsVendorWeyland[1]->getChannel());
-    }
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 0,
+                'totalCommissionAmount' => 0,
+                'startDate' => $weeklyStartDate,
+                'endDate' => $weeklyEndDate,
+                'channel' => $channelUs,
+            ],
+            $settlementsVendorWeyland[0]
+        );
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 700,
+                'totalCommissionAmount' => 100,
+                'startDate' => $weeklyStartDate,
+                'endDate' => $weeklyEndDate,
+                'channel' => $channelEu,
+            ],
+            $settlementsVendorWeyland[1]
+        );
 
-    public function test_it_generates_settlements_for_all_vendors_with_quarterly_frequency(): void
-    {
-        $this->loadFixturesFromFile('SettlementGenerateCommandTest/test_it_generates_settlements_for_all_vendors_with_quarterly_frequency.yaml');
-        $this->assertCount(0, $this->settlementRepository->findAll());
-        $this->commandTester->execute(['frequency' => 'quarterly']);
-        $this->commandTester->assertCommandIsSuccessful();
-
-        $vendorWeyland = $this->vendorRepository->findOneBySlug('Weyland-Corp');
-        $vendorWayne = $this->vendorRepository->findOneBySlug('Wayne-Enterprises-Inc');
-        $channelEu = $this->channelRepository->findOneBy(['code' => 'EU']);
-        $channelUs = $this->channelRepository->findOneBy(['code' => 'US']);
-
-        $settlementsVendorWeyland = $this->settlementRepository->findBy(['vendor' => $vendorWeyland]);
-        $settlementsVendorWayne = $this->settlementRepository->findBy(['vendor' => $vendorWayne]);
-        $startDate = new \DateTime();
-        $endDate = new \DateTime();
-        $startDate->setTimestamp($this->getLastQuarterStartDate());
-        $endDate->setTimestamp($this->getLastQuarterEndDate());
-        $this->assertCount(2, $settlementsVendorWayne);
-        $this->assertSame(540, $settlementsVendorWayne[0]->getTotalAmount());
-        $this->assertSame(35, $settlementsVendorWayne[0]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWayne[0]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWayne[0]->getEndDate()->getTimestamp());
-        $this->assertSame($channelUs, $settlementsVendorWayne[0]->getChannel());
-        $this->assertSame(1002, $settlementsVendorWayne[1]->getTotalAmount());
-        $this->assertSame(70, $settlementsVendorWayne[1]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWayne[1]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWayne[1]->getEndDate()->getTimestamp());
-        $this->assertSame($channelEu, $settlementsVendorWayne[1]->getChannel());
-
-        $this->assertCount(0, $settlementsVendorWeyland);
+        $this->assertCount(2, $settlementsVendorTommy);
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 400,
+                'totalCommissionAmount' => 10,
+                'startDate' => $quarterlyStartDate,
+                'endDate' => $quarterlyEndDate,
+                'channel' => $channelUs,
+            ],
+            $settlementsVendorTommy[0]
+        );
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 0,
+                'totalCommissionAmount' => 0,
+                'startDate' => $quarterlyStartDate,
+                'endDate' => $quarterlyEndDate,
+                'channel' => $channelEu,
+            ],
+            $settlementsVendorTommy[1]
+        );
     }
 
     public function test_it_not_generates_settlements_for_if_settlement_already_exist(): void
@@ -116,14 +133,18 @@ final class SettlementGenerateCommandTest extends JsonApiTestCase
         $vendorWayne = $this->vendorRepository->findOneBySlug('Wayne-Enterprises-Inc');
         $channelEu = $this->channelRepository->findOneBy(['code' => 'EU']);
         $channelUs = $this->channelRepository->findOneBy(['code' => 'US']);
-        $startDate = new \DateTime('last week monday 00:00:00');
-        $endDate = new \DateTime('last week sunday 23:59:59');
+        [$startDate, $endDate] = $this->getStartAndEndDate('weekly');
         $this->assertCount(1, $settlements);
-        $this->assertSame(1002, $settlements[0]->getTotalAmount());
-        $this->assertSame(70, $settlements[0]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlements[0]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlements[0]->getEndDate()->getTimestamp());
-        $this->assertSame($channelEu, $settlements[0]->getChannel());
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 1002,
+                'totalCommissionAmount' => 70,
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'channel' => $channelEu,
+            ],
+            $settlements[0]
+        );
 
         $this->commandTester->execute([]);
         $this->commandTester->assertCommandIsSuccessful();
@@ -131,63 +152,64 @@ final class SettlementGenerateCommandTest extends JsonApiTestCase
         $settlementsVendorWayne = $this->settlementRepository->findBy(['vendor' => $vendorWayne]);
         $this->assertCount(2, $settlementsVendorWayne);
         $this->assertSame($settlements[0], $settlementsVendorWayne[0]);
-        $this->assertSame(540, $settlementsVendorWayne[1]->getTotalAmount());
-        $this->assertSame(35, $settlementsVendorWayne[1]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWayne[1]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWayne[1]->getEndDate()->getTimestamp());
-        $this->assertSame($channelUs, $settlementsVendorWayne[1]->getChannel());
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 540,
+                'totalCommissionAmount' => 35,
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'channel' => $channelUs,
+            ],
+            $settlementsVendorWayne[1]
+        );
 
         $this->assertCount(2, $settlementsVendorWeyland);
-        $this->assertSame(0, $settlementsVendorWeyland[0]->getTotalAmount());
-        $this->assertSame(0, $settlementsVendorWeyland[0]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWeyland[0]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWeyland[0]->getEndDate()->getTimestamp());
-        $this->assertSame($channelUs, $settlementsVendorWeyland[0]->getChannel());
-        $this->assertSame(700, $settlementsVendorWeyland[1]->getTotalAmount());
-        $this->assertSame(100, $settlementsVendorWeyland[1]->getTotalCommissionAmount());
-        $this->assertSame($startDate->getTimestamp(), $settlementsVendorWeyland[1]->getStartDate()->getTimestamp());
-        $this->assertSame($endDate->getTimestamp(), $settlementsVendorWeyland[1]->getEndDate()->getTimestamp());
-        $this->assertSame($channelEu, $settlementsVendorWeyland[1]->getChannel());
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 0,
+                'totalCommissionAmount' => 0,
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'channel' => $channelUs,
+            ],
+            $settlementsVendorWeyland[0]
+        );
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 700,
+                'totalCommissionAmount' => 100,
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'channel' => $channelEu,
+            ],
+            $settlementsVendorWeyland[1]
+        );
     }
 
-    private function getLastQuarterStartDate(): int
+    private function getStartAndEndDate(string $frequency): array
     {
-        $month = date('n');
-        $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
-
-        $dateTime = mktime(
-            00,
-            00,
-            00,
-            $month - $countLastQuarterEndMonthAgo - 2,
-            1,
-            (int) date('Y')
-        );
-
-        if (false === $dateTime) {
-            throw new \RuntimeException('Cannot generate last quarter start date');
-        }
-
-        return $dateTime;
+        return match ($frequency) {
+            'weekly' => [
+                new \DateTime('last week monday 00:00:00'),
+                new \DateTime('last week sunday 23:59:59'),
+            ],
+            'monthly' => [
+                new \DateTime('first day of last month 00:00:00'),
+                new \DateTime('last day of last month 23:59:59'),
+            ],
+            'quarterly' => [
+                (new \DateTime())->setTimestamp(QuarterlySettlementPeriodResolver::getLastQuarterStartDate()),
+                (new \DateTime())->setTimestamp(QuarterlySettlementPeriodResolver::getLastQuarterEndDate()),
+            ],
+        };
     }
 
-    private function getLastQuarterEndDate(): int
+    private function assertSettlementSame(array $expected, SettlementInterface $actual): void
     {
-        $month = date('n');
-        $countLastQuarterEndMonthAgo = (int) abs(((ceil($month / 3) - 1) * 3) - $month);
-
-        $dateTime = mktime(
-            23,
-            59,
-            59,
-            $month - $countLastQuarterEndMonthAgo + 1,
-            0,
-            (int) date('Y')
-        );
-        if (false === $dateTime) {
-            throw new \RuntimeException('Cannot generate last quarter end date');
-        }
-
-        return $dateTime;
+        $this->assertSame($expected['totalAmount'], $actual->getTotalAmount());
+        $this->assertSame($expected['totalCommissionAmount'], $actual->getTotalCommissionAmount());
+        $this->assertSame($expected['startDate']->getTimestamp(), $actual->getStartDate()->getTimestamp());
+        $this->assertSame($expected['endDate']->getTimestamp(), $actual->getEndDate()->getTimestamp());
+        $this->assertSame($expected['channel'], $actual->getChannel());
     }
 }
