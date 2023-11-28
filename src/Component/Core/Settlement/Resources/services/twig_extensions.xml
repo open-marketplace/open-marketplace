@@ -5,7 +5,7 @@
     <services>
         <defaults autowire="false" autoconfigure="false" />
 
-        <service class="BitBag\OpenMarketplace\Component\Core\Settlement\Twig\Extension\SettlementOrderCount"
+        <service class="BitBag\OpenMarketplace\Component\Core\Settlement\Twig\Extension\SettlementOrderCountExtension"
                  id="bitbag.open_marketplace.component.core.settlement.twig.extension.settlement_order_count">
             <argument type="service" id="sylius.repository.order" />
             <tag name="twig.extension" />

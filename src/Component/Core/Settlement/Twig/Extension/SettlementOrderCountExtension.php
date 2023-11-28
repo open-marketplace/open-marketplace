@@ -11,15 +11,15 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Settlement\Twig\Extension;
 
-use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepository;
+use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-final class SettlementOrderCount extends AbstractExtension
+final class SettlementOrderCountExtension extends AbstractExtension
 {
     public function __construct(
-        private OrderRepository $orderRepository,
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 
