@@ -16,8 +16,6 @@ Sylius\Component\Addressing\Model\ZoneMember:
 Sylius\Component\Currency\Model\Currency:
   dollar:
     code: 'USD'
-  euro:
-    code: 'EUR'
 Sylius\Component\Locale\Model\Locale:
   locale:
     createdAt: '<dateTimeBetween("-200 days", "now")>'
@@ -31,21 +29,13 @@ Sylius\Component\Core\Model\Channel:
     taxCalculationStrategy: 'order_items_based'
     baseCurrency: '@dollar'
     enabled: true
-  channel_eu:
-    code: 'EU'
-    name: 'name'
-    defaultLocale: '@locale'
-    locales: [ '@locale' ]
-    taxCalculationStrategy: 'order_items_based'
-    baseCurrency: '@euro'
-    enabled: true
 Sylius\Component\Core\Model\ShippingMethod:
   shipping_method_ups:
     code: 'ups'
     calculator: 'flat_rate'
     zone: '@zone_us'
     enabled: true
-    channels: [ '@channel_us', '@channel_eu' ]
+    channels: [ '@channel_us' ]
     configuration:
       CODE:
         amount: 5
@@ -54,7 +44,7 @@ Sylius\Component\Core\Model\ShippingMethod:
     calculator: 'flat_rate'
     zone: '@zone_us'
     enabled: true
-    channels: [ '@channel_us', '@channel_eu' ]
+    channels: [ '@channel_us' ]
     configuration:
       CODE:
         amount: 5
@@ -74,11 +64,7 @@ Sylius\Component\Core\Model\Customer:
     lastName: 'Smith'
     email: 'john.smith@example.com'
     emailCanonical: 'john.smith@example.com'
-  customer_tommy:
-    firstName: 'Tommy'
-    lastName: 'Mush'
-    email: 'tommy.mush@example.com'
-    emailCanonical: 'tommy.mush@example.com'
+    phoneNumber: 123456789
 BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
     plainPassword: '123password'
@@ -101,13 +87,6 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
     customer: '@customer_john'
     username: 'john.smith@example.com'
     usernameCanonical: 'john.smith@example.com'
-  user_tommy:
-    plainPassword: '123password'
-    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
-    enabled: 'true'
-    customer: '@customer_tommy'
-    username: 'tommy.mush@example.com'
-    usernameCanonical: 'tommy.mush@example.com'
 Sylius\Component\Core\Model\Address:
   address_john:
     firstName: 'John'
@@ -128,7 +107,6 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     commission: 10
     commissionType: 'net'
     createdAt: '<dateTimeBetween("-200 days", "-7 days")>'
-    settlement_frequency: 'monthly'
   vendor_peter:
     shopUser: '@user_peter'
     companyName: 'Weyland Corp'
@@ -139,55 +117,37 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-    settlement_frequency: 'weekly'
-  vendor_tommy:
-    shopUser: '@user_tommy'
-    companyName: 'Tommy Corp'
-    taxIdentifier: '7654321'
-    bankAccountNumber: 'NL78INGB4783095582'
-    phoneNumber: '555444333'
-    slug: 'Tommy-Corp'
-    description: 'description'
-    commission: 10
-    commissionType: 'net'
-    settlement_frequency: 'quarterly'
 BitBag\OpenMarketplace\Component\Product\Entity\Product:
   product_bruce_1:
     vendor: '@vendor_bruce'
     code: 'bruce_1'
     enabled: true
-    channels: [ '@channel_us', '@channel_eu' ]
+    channels: [ '@channel_us' ]
   product_peter_1:
     vendor: '@vendor_peter'
-    code: 'peter_1'
+    code: 'peter_2'
     enabled: true
-    channels: [ '@channel_us', '@channel_eu' ]
-  product_tommy_1:
-    vendor: '@vendor_tommy'
-    code: 'tommy_1'
-    enabled: true
-    channels: [ '@channel_us', '@channel_eu' ]
+    channels: [ '@channel_us' ]
 Sylius\Component\Core\Model\ProductVariant:
   product_variant_product_bruce_1_1:
     product: '@product_bruce_1'
     code: 'bruce_1_1'
     enabled: true
-    tracked: false
+    onHold: 2
+    onHand: 3
+    tracked: true
   product_variant_product_bruce_1_2:
     product: '@product_bruce_1'
     code: 'bruce_1_2'
     enabled: true
-    tracked: false
+    onHand: 1
+    tracked: true
   product_variant_product_peter_1_1:
     product: '@product_peter_1'
     code: 'peter_1_1'
     enabled: true
-    tracked: false
-  product_variant_product_tommy_1_1:
-    product: '@product_tommy_1'
-    code: 'tommy_1_1'
-    enabled: true
-    tracked: false
+    onHand: 3
+    tracked: true
 Sylius\Component\Core\Model\ChannelPricing:
   pricing_product_variant_product_bruce_1_1_us:
     price: 10
@@ -207,36 +167,6 @@ Sylius\Component\Core\Model\ChannelPricing:
     minimumPrice: 5
     channelCode: 'US'
     productVariant: '@product_variant_product_peter_1_1'
-  pricing_product_variant_product_bruce_1_1_eu:
-    price: 9
-    originalPrice: 14
-    minimumPrice: 0
-    channelCode: 'EU'
-    productVariant: '@product_variant_product_bruce_1_1'
-  pricing_product_variant_product_bruce_1_2_eu:
-    price: 12
-    originalPrice: 24
-    minimumPrice: 9
-    channelCode: 'EU'
-    productVariant: '@product_variant_product_bruce_1_2'
-  pricing_product_variant_product_peter_1_1_eu:
-    price: 8
-    originalPrice: 11
-    minimumPrice: 4
-    channelCode: 'EU'
-    productVariant: '@product_variant_product_peter_1_1'
-  pricing_product_variant_product_tommy_1_1_eu:
-    price: 20
-    originalPrice: 50
-    minimumPrice: 30
-    channelCode: 'EU'
-    productVariant: '@product_variant_product_tommy_1_1'
-  pricing_product_variant_product_tommy_1_1_us:
-    price: 23
-    originalPrice: 78
-    minimumPrice: 45
-    channelCode: 'US'
-    productVariant: '@product_variant_product_tommy_1_1'
 BitBag\OpenMarketplace\Component\Order\Entity\Order:
   bruce_order_made_by_john_1_main:
     mode: 'primary'
@@ -261,23 +191,24 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     tokenValue: 'bruce_order_made_by_john_1'
     shippingAddress: '@address_john'
     billingAddress: '@address_john'
-    paid_at: '<date_create("first day of last month")>'
+    paid_at: '<date_create("last week tuesday")>'
     commission_total: 35
     channel: '@channel_us'
   bruce_order_made_by_john_2_main:
     mode: 'primary'
-    currency_code: 'EUR'
+    currency_code: 'USD'
     locale_code: 'en-US'
     customer: '@customer_john'
     paymentState: 'paid'
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2_main'
-    channel: '@channel_eu'
+    paid_at: '<date_create("last week tuesday")>'
+    channel: '@channel_us'
   bruce_order_made_by_john_2:
     primaryOrder: '@bruce_order_made_by_john_2_main'
     mode: 'secondary'
-    currency_code: 'EUR'
+    currency_code: 'USD'
     locale_code: 'en-US'
     vendor: '@vendor_bruce'
     customer: '@customer_john'
@@ -285,9 +216,9 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'bruce_order_made_by_john_2'
-    paid_at: '<date_create("first day of last month")>'
+    paid_at: '<date_create("last week tuesday")>'
     commission_total: 70
-    channel: '@channel_eu'
+    channel: '@channel_us'
   peter_order_made_by_john_main:
     mode: 'primary'
     currency_code: 'USD'
@@ -297,7 +228,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'peter_order_made_by_john_main'
-    channel: '@channel_eu'
+    channel: '@channel_us'
   peter_order_made_by_john:
     primaryOrder: '@peter_order_made_by_john'
     mode: 'secondary'
@@ -311,7 +242,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     tokenValue: 'peter_order_made_by_john'
     paid_at: '<date_create("last week tuesday")>'
     commission_total: 100
-    channel: '@channel_eu'
+    channel: '@channel_us'
   order_made_by_peter_main:
     mode: 'primary'
     currency_code: 'USD'
@@ -328,37 +259,13 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     currency_code: 'USD'
     locale_code: 'en-US'
     customer: '@customer_peter'
-    vendor: '@vendor_tommy'
     paymentState: 'paid'
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter'
-    paid_at: '<dateTimeBetween("-5 month", "-3 month")>'
+    paid_at: '<date_create("last week tuesday")>'
     commission_total: 10
     channel: '@channel_us'
-  bruce_order_made_by_john_3_main:
-    mode: 'primary'
-    currency_code: 'USD'
-    locale_code: 'en-US'
-    customer: '@customer_john'
-    paymentState: 'paid'
-    state: 'new'
-    checkoutState: 'completed'
-    channel: '@channel_eu'
-  bruce_order_made_by_john_3:
-    primaryOrder: '@bruce_order_made_by_john_3_main'
-    mode: 'secondary'
-    currency_code: 'USD'
-    locale_code: 'en-US'
-    vendor: '@vendor_tommy'
-    customer: '@customer_john'
-    paymentState: 'paid'
-    state: 'new'
-    checkoutState: 'completed'
-    tokenValue: 'bruce_order_made_by_john_3'
-    paid_at: '<date_create("first day of last month")>'
-    commission_total: 55
-    channel: '@channel_eu'
 BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
   bruce_order_made_by_john_1_item_1:
     order: '@bruce_order_made_by_john_1'
@@ -372,14 +279,6 @@ BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
     order: '@peter_order_made_by_john'
     variant: '@product_variant_product_peter_1_1'
     unit_price: 700
-  bruce_order_made_by_john_3_item_1:
-    order: '@bruce_order_made_by_john_3'
-    variant: '@product_variant_product_tommy_1_1'
-    unit_price: 400
-  order_made_by_peter_item_1:
-    order: '@order_made_by_peter'
-    variant: '@product_variant_product_tommy_1_1'
-    unit_price: 400
 BitBag\OpenMarketplace\Component\Order\Entity\Shipment:
   bruce_order_made_by_john_1_shipment:
     vendor: '@vendor_bruce'
@@ -388,10 +287,6 @@ BitBag\OpenMarketplace\Component\Order\Entity\Shipment:
   bruce_order_made_by_john_2_shipment:
     vendor: '@vendor_bruce'
     order: '@bruce_order_made_by_john_2'
-    method: '@shipping_method_fedex'
-  bruce_order_made_by_john_3_shipment:
-    vendor: '@vendor_bruce'
-    order: '@bruce_order_made_by_john_3'
     method: '@shipping_method_fedex'
   peter_order_made_by_john_shipment:
     vendor: '@vendor_peter'
@@ -407,9 +302,11 @@ Sylius\Component\Core\Model\OrderItemUnit:
   peter_order_made_by_john_1_item_1_unit:
     __construct: [ '@peter_order_made_by_john_1_item_1' ]
     shipment: '@peter_order_made_by_john_shipment'
-  bruce_order_made_by_john_3_item_1_unit:
-    __construct: [ '@bruce_order_made_by_john_3_item_1' ]
-    shipment: '@bruce_order_made_by_john_3_shipment'
-  order_made_by_peter_item_1_unit:
-    __construct: [ '@order_made_by_peter_item_1' ]
-    shipment: '@bruce_order_made_by_john_3_shipment'
+BitBag\OpenMarketplace\Component\Settlement\Entity\Settlement:
+  vendor_bruce_settlement:
+    vendor: '@vendor_bruce'
+    total_amount: 1002
+    total_commission_amount: 70
+    start_date: '<date_create("last week monday 00:00:00")>'
+    end_date: '<date_create("last week sunday 23:59:59")>'
+    channel: '@channel_us'

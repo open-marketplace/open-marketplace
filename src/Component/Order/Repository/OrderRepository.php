@@ -214,8 +214,10 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     public function findForSettlementQueryBuilder(SettlementInterface $settlement): QueryBuilder
     {
         return $this->findAllByVendorQueryBuilder($settlement->getVendor())
+            ->andWhere('o.mode = :secondaryOrderMode')
             ->andWhere('o.channel = :channel')
             ->andWhere('o.paidAt BETWEEN :startDate AND :endDate')
+            ->setParameter('secondaryOrderMode', OrderInterface::SECONDARY_ORDER_MODE)
             ->setParameter('channel', $settlement->getChannel())
             ->setParameter('startDate', $settlement->getStartDate())
             ->setParameter('endDate', $settlement->getEndDate())
