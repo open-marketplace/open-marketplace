@@ -1,5 +1,5 @@
 imports:
-    - tests/Behat/Resources/suites.yml
+    - tests/Behat/Resources/suites.yaml
 
 default:
     extensions:
