@@ -41,6 +41,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\ProductListing\IndexPageInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
@@ -53,8 +54,9 @@ final class ProductListingContext extends RawMinkContext
         private UserRepositoryInterface $userRepository,
         private DraftAttributeFactoryInterface $draftAttributeFactory,
         private VendorExampleFactory $vendorExampleFactory,
-        private FactoryInterface $countryFactory
-    ) {
+        private FactoryInterface $countryFactory,
+        private IndexPageInterface $productListingPageIndexPage,
+        ) {
     }
 
     /**
@@ -84,7 +86,7 @@ final class ProductListingContext extends RawMinkContext
         $this->getPage()->fillField('Username', $admin->getUsername());
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
-        ($this->getPage()->findLink('Logout'));
+        $this->getPage()->findLink('Logout');
     }
 
     /**
@@ -400,8 +402,9 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thisProductListingVisibilityIsHidden(): void
     {
+        /** @var ListingInterface $productListing */
         $productListing = $this->sharedStorage->get('product_listing' . '0');
-        $productListing->setHidden(true);
+        $productListing->remove();
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
     }
@@ -497,5 +500,13 @@ final class ProductListingContext extends RawMinkContext
     {
         return $this->entityManager->getRepository(ChannelInterface::class)
             ->findAll()[0];
+    }
+
+    /**
+     * @Given /^I confirm my action$/
+     */
+    public function iConfirmMyAction(): void
+    {
+        $this->productListingPageIndexPage->confirmAction();
     }
 }

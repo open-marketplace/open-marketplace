@@ -11,6 +11,7 @@ imports:
   - suites/ui/admin/product_listing.yaml
   - suites/ui/admin/product_listing.yaml
   - suites/ui/admin/product_pricing.yaml
+  - suites/ui/admin/restoring_product.yaml
   - suites/ui/admin/verifying_vendors.yaml
   - suites/ui/admin/viewing_payments.yaml
   - suites/ui/admin/viewing_shipments.yaml
