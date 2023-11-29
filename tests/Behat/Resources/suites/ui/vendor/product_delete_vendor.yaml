@@ -9,4 +9,4 @@ default:
             - open_marketplace.behat.context.setup.vendor
             - sylius.behat.context.hook.doctrine_orm
             filters:
-                tags: '@product_removal_vendor&&@javascript&&@ui'
+                tags: '@product_removal_vendor&&@ui'
