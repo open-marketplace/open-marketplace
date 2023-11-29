@@ -11,24 +11,21 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 
-class DashboardStatisticsContext extends RawMinkContext implements Context
+final class DashboardStatisticsContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     /**
      * @BeforeScenario
      */
-    public function clearData()
+    public function clearData(): void
     {
         $purger = new ORMPurger($this->entityManager);
         $purger->purge();

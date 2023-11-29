@@ -11,24 +11,17 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
-final class VendorEditingContext extends RawMinkContext implements Context
+final class VendorEditingContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ExampleFactoryInterface $vendorExampleFactory
+        private EntityManagerInterface $entityManager,
+        private ExampleFactoryInterface $vendorExampleFactory
     ) {
-        $this->entityManager = $entityManager;
-        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**

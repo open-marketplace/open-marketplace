@@ -21,30 +21,18 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 
 final class VendorContext implements Context
 {
-    private ShopUserExampleFactory $shopUserExampleFactory;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
-    private EntityManagerInterface $entityManager;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ShopUserExampleFactory $shopUserExampleFactory,
-        ExampleFactoryInterface $vendorExampleFactory,
-        EntityManagerInterface $entityManager,
-        SharedStorageInterface $sharedStorage
+        private ShopUserExampleFactory $shopUserExampleFactory,
+        private ExampleFactoryInterface $vendorExampleFactory,
+        private EntityManagerInterface $entityManager,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->vendorExampleFactory = $vendorExampleFactory;
-        $this->entityManager = $entityManager;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
-     * @Given there is an vendor user :username with password :password
+     * @Given there is a vendor user :username with password :password
      */
-    public function thereIsAnVendorUserWithPassword(string $username, string $password)
+    public function thereIsAVendorUserWithPassword(string $username, string $password): void
     {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserExampleFactory->create();

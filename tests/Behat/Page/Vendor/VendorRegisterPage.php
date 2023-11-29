@@ -13,7 +13,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-class VendorRegisterPage extends SymfonyPage
+final class VendorRegisterPage extends SymfonyPage
 {
     public function getRouteName(): string
     {

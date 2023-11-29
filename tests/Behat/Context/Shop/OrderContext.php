@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Shop;
 
-use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Order\Entity\Order;
@@ -25,38 +24,23 @@ use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\ShowProductPage;
 use Webmozart\Assert\Assert;
 
-class OrderContext extends RawMinkContext implements Context
+final class OrderContext extends RawMinkContext
 {
-    private ShowProductPage $productPage;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private OrderRepository $orderRepository;
-
-    private PaymentMethodFactoryInterface $paymentMethodFactory;
-
-    private PaymentMethodRepository $methodRepository;
-
     public function __construct(
-        ShowProductPage $productPage,
-        SharedStorageInterface $sharedStorage,
-        OrderRepository $orderRepository,
-        PaymentMethodFactoryInterface $paymentMethodFactory,
-        PaymentMethodRepository $methodRepository
+        private ShowProductPage $productPage,
+        private SharedStorageInterface $sharedStorage,
+        private OrderRepository $orderRepository,
+        private PaymentMethodFactoryInterface $paymentMethodFactory,
+        private PaymentMethodRepository $methodRepository
     ) {
-        $this->productPage = $productPage;
-        $this->sharedStorage = $sharedStorage;
-        $this->orderRepository = $orderRepository;
-        $this->paymentMethodFactory = $paymentMethodFactory;
-        $this->methodRepository = $methodRepository;
     }
 
     /**
      * @Then I should see :count orders
      */
-    public function iShouldSeeOrders($count)
+    public function iShouldSeeOrders(int $count): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $tableWrapper = $page->find('css', 'table');
         $orders = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($orders), $count);
@@ -65,9 +49,9 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Then I should see :count :mode order(s)
      */
-    public function iShouldSeeOrdersWithMode($count, $mode)
+    public function iShouldSeeOrdersWithMode(int $count, string $mode): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $tableWrapper = $page->find('css', 'table');
         $orders = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($orders), $count);
@@ -84,9 +68,9 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Then I should see :count :mode order(s) in order history
      */
-    public function iShouldSeeOrdersWithModeInHistory($count, $mode)
+    public function iShouldSeeOrdersWithModeInHistory(int $count, string $mode): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $tableWrapper = $page->find('css', 'table');
         $orders = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($orders), $count);
@@ -107,8 +91,8 @@ class OrderContext extends RawMinkContext implements Context
         int $count,
         string $status,
         string $color
-    ) {
-        $page = $this->getSession()->getPage();
+    ): void {
+        $page = $this->getPage();
         $tableWrapper = $page->find('css', 'table');
         $orders = $tableWrapper->findAll('css', '.item');
         Assert::eq(count($orders), $count);
@@ -121,43 +105,43 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Given I complete checkout
      */
-    public function iCompleteCheckout()
+    public function iCompleteCheckout(): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $page->find('css', 'button')->press();
     }
 
     /**
      * @Given I submit form
      */
-    public function iSubmitForm()
+    public function iSubmitForm(): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $page->find('css', '.ui.large.primary.icon.labeled.button')->press();
     }
 
     /**
      * @Given I choose shipment
      */
-    public function iChooseShipment()
+    public function iChooseShipment(): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $page->find('css', '.ui.large.primary.icon.labeled.button')->press();
     }
 
     /**
      * @Given I choose payment
      */
-    public function iChoosePayment()
+    public function iChoosePayment(): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $page->find('css', '.ui.large.primary.icon.labeled.button')->press();
     }
 
     /**
      * @Given I have :count products in cart
      */
-    public function iHaveProductsInCart($count)
+    public function iHaveProductsInCart(int $count): void
     {
         $products = $this->sharedStorage->get('products');
         for ($i = 1; $i <= $count; ++$i) {
@@ -171,7 +155,7 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Given I have product :name in cart
      */
-    public function iHaveProductInCart(string $name)
+    public function iHaveProductInCart(string $name): void
     {
         $product = $this->sharedStorage->get('product');
         $slug = $product->getSlug();
@@ -182,19 +166,19 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Given I click :button
      */
-    public function iClickButton($button)
+    public function iClickButton(string $button): void
     {
-        $this->getSession()->getPage()->pressButton($button);
+        $this->getPage()->pressButton($button);
     }
 
     /**
      * @Then I should see :ordersCount orders on page :pageNumber
      */
-    public function iShouldSeeOrdersOnPage($ordersCount, $pageNumber)
+    public function iShouldSeeOrdersOnPage(int $ordersCount, int $pageNumber): void
     {
         $paginationLimit = $this->sharedStorage->get('pagination_limit');
-        $this->visitPath("/en_US/account/vendor/orders?limit=$paginationLimit&page=$pageNumber");
-        $page = $this->getSession()->getPage();
+        $this->visitPath(sprintf('/en_US/account/vendor/orders?limit=%d&page=%d', $paginationLimit, $pageNumber));
+        $page = $this->getPage();
         $table = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
         $orderRows = $table->findAll('css', '.item');
 
@@ -204,7 +188,7 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Given Pagination is set to display :paginationLimit orders per page
      */
-    public function paginationIsSetToDisplayOrderPerPage($paginationLimit)
+    public function paginationIsSetToDisplayOrderPerPage(int $paginationLimit): void
     {
         $this->sharedStorage->set('pagination_limit', $paginationLimit);
     }
@@ -212,9 +196,9 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Then I should see customer with name :name
      */
-    public function iShouldSeeClientWithName($name)
+    public function iShouldSeeClientWithName(string $name): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $table = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
         assertStringContainsString($name, $table->getText());
     }
@@ -222,16 +206,16 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Then I should not see customer with name :name
      */
-    public function iShouldNotSeeClientWithName($name)
+    public function iShouldNotSeeClientWithName(string $name): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         assertStringNotContainsString($name, $page->getText());
     }
 
     /**
      * @Given I am on customers page
      */
-    public function iAmOnCustomersPage()
+    public function iAmOnCustomersPage(): void
     {
         $this->visitPath('en_US/account/vendor/customers');
     }
@@ -239,9 +223,9 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Then I should see customer details with name :name
      */
-    public function iShouldSeeCustomerDetailsWithName($name)
+    public function iShouldSeeCustomerDetailsWithName(string $name): void
     {
-        $page = $this->getSession()->getPage();
+        $page = $this->getPage();
         $card = $page->find('css', '.ui.fluid.card');
         assertStringContainsString($name, $card->getText());
     }
@@ -249,7 +233,7 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Given I add this product to the cart
      */
-    public function iAddThisProductToTheCart()
+    public function iAddThisProductToTheCart(): void
     {
         $product = $this->sharedStorage->get('product');
 
@@ -263,7 +247,7 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Given I finalize order
      */
-    public function iFinalizeOrder()
+    public function iFinalizeOrder(): void
     {
         $this->visitPath('/en_US/checkout/address');
         $this->fillField('sylius_checkout_address[billingAddress][firstName]', 'Test name');
@@ -282,7 +266,7 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Then primary order should not have number
      */
-    public function primaryOrderShouldNotHaveNumber()
+    public function primaryOrderShouldNotHaveNumber(): void
     {
         /** @var Order|null $order */
         $order = $this->orderRepository->findOneBy(['mode' => OrderInterface::PRIMARY_ORDER_MODE]);
@@ -292,11 +276,11 @@ class OrderContext extends RawMinkContext implements Context
         }
     }
 
-    private function fillField($field, $value)
+    private function fillField(string $field, string $value): void
     {
         $field = $this->fixStepArgument($field);
         $value = $this->fixStepArgument($value);
-        $this->getSession()->getPage()->fillField($field, $value);
+        $this->getPage()->fillField($field, $value);
     }
 
     private function fixStepArgument($argument): array|string
@@ -304,35 +288,15 @@ class OrderContext extends RawMinkContext implements Context
         return str_replace('\\"', '"', $argument);
     }
 
-    private function selectOption($select, $option)
+    private function selectOption(string $select, string $option): void
     {
         $select = $this->fixStepArgument($select);
         $option = $this->fixStepArgument($option);
-        $this->getSession()->getPage()->selectFieldOption($select, $option);
+        $this->getPage()->selectFieldOption($select, $option);
     }
 
-    /**
-     * @return DocumentElement
-     */
-    private function getPage()
+    private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
-    }
-
-    /**
-     * @Given There is payment method
-     */
-    public function thereIsPaymentMethod()
-    {
-        $payment = $this->paymentMethodFactory->create([
-            'name' => ucfirst($name),
-            'code' => $code,
-            'description' => $description,
-            'gatewayName' => $gatewayFactory,
-            'gatewayFactory' => $gatewayFactory,
-            'enabled' => true,
-            'channels' => ($addForCurrentChannel && $this->sharedStorage->has('channel')) ? [$this->sharedStorage->get('channel')] : [],
-        ]);
-        $this->methodRepository->add($payment);
     }
 }

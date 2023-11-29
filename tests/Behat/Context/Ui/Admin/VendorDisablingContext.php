@@ -11,32 +11,23 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
-use Webmozart\Assert\Assert;
 
-final class VendorDisablingContext extends RawMinkContext implements Context
+final class VendorDisablingContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ExampleFactoryInterface $vendorExampleFactory,
+        private EntityManagerInterface $entityManager,
+        private ExampleFactoryInterface $vendorExampleFactory,
     ) {
-        $this->entityManager = $entityManager;
-        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
      * @Given There is a :ifEnabled vendor
      */
-    public function thereIsAVendor($ifEnabled)
+    public function thereIsAVendor($ifEnabled): void
     {
         $flag = 'enabled' == $ifEnabled ? true : false;
 
@@ -58,39 +49,12 @@ final class VendorDisablingContext extends RawMinkContext implements Context
     /**
      * @When I click :buttonText
      */
-    public function iClick($buttonText)
+    public function iClick(string $buttonText): void
     {
         $this->getPage()->pressButton($buttonText);
     }
 
-    /**
-     * @When I choose :element
-     */
-    public function iChoose($element)
-    {
-        $page = $this->getSession()->getPage();
-        $findName = $page->find('css', $element);
-        if (!$findName) {
-            throw new Exception($element . ' could not be found');
-        }
-        $findName->click();
-    }
-
-    /**
-     * @Then I should not see :ifEnabled button
-     */
-    public function iShouldNotSeeButton($ifEnabled)
-    {
-        $element = '#' . strtolower($ifEnabled);
-        $page = $this->getSession()->getPage();
-        $findName = $page->find('css', $element);
-        Assert::null($findName);
-    }
-
-    /**
-     * @return DocumentElement
-     */
-    private function getPage()
+    private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
     }

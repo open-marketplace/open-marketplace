@@ -22,34 +22,19 @@ use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
 {
-    private ProductReviewPageInterface $productReviewPage;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private ObjectManager $manager;
-
-    private ProductReviewRepositoryInterface $productReviewRepository;
-
-    private CustomerRepositoryInterface $customerRepository;
-
     public function __construct(
-        ProductReviewPageInterface $productReviewPage,
-        SharedStorageInterface $sharedStorage,
-        ObjectManager $manager,
-        ProductReviewRepositoryInterface $productReviewRepository,
-        CustomerRepositoryInterface $customerRepository,
+        private ProductReviewPageInterface $productReviewPage,
+        private SharedStorageInterface $sharedStorage,
+        private ObjectManager $manager,
+        private ProductReviewRepositoryInterface $productReviewRepository,
+        private CustomerRepositoryInterface $customerRepository,
         ) {
-        $this->productReviewPage = $productReviewPage;
-        $this->sharedStorage = $sharedStorage;
-        $this->manager = $manager;
-        $this->productReviewRepository = $productReviewRepository;
-        $this->customerRepository = $customerRepository;
     }
 
     /**
      * @Then I should see :count reviews
      */
-    public function iShouldSeeReviews($count): void
+    public function iShouldSeeReviews(int $count): void
     {
         $reviews = $this->productReviewPage->getReviews();
         Assert::eq(count($reviews), $count);
@@ -94,7 +79,7 @@ final class ProductReviewContext implements Context
     /**
      * @Given /^I am on edit page of review added by "([^"]+)" to (this product)$/
      */
-    public function iAmOnEditPageOfReviewAddedByToProduct(string $customer, ProductInterface $product)
+    public function iAmOnEditPageOfReviewAddedByToProduct(string $customer, ProductInterface $product): void
     {
         $customer = $this->customerRepository->findOneBy(['email' => $customer]);
         $productReview = $this->productReviewRepository->findOneBy(['reviewSubject' => $product, 'author' => $customer]);

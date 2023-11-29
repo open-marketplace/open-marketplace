@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
-use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
@@ -22,65 +21,51 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\vendor\CustomerDashboardPage;
 use Webmozart\Assert\Assert;
 
-class CustomerDashboardContext extends MinkContext implements Context
+final class CustomerDashboardContext extends MinkContext
 {
-    private CustomerDashboardPage $dashboardPage;
-
-    private UserRepositoryInterface $userRepository;
-
-    private ExampleFactoryInterface $userFactory;
-
-    private ObjectManager $manager;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
     public function __construct(
-        CustomerDashboardPage $dashboardPage,
-        UserRepositoryInterface $userRepository,
-        ExampleFactoryInterface $userFactory,
-        ObjectManager $manager,
-        ExampleFactoryInterface $vendorExampleFactory,
+        private CustomerDashboardPage $dashboardPage,
+        private UserRepositoryInterface $userRepository,
+        private ExampleFactoryInterface $userFactory,
+        private ObjectManager $manager,
+        private ExampleFactoryInterface $vendorExampleFactory,
         ) {
-        $this->dashboardPage = $dashboardPage;
-        $this->userRepository = $userRepository;
-        $this->userFactory = $userFactory;
-        $this->manager = $manager;
-        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
-     * @Then I should see :arg1 inside sidebar
+     * @Then /^I should (see|not see) "([^"]*)" inside sidebar$/
      */
-    public function iShouldSeeInsideSidebar($arg1): void
+    public function iShouldSeeInsideSidebar(string $see, string $value): void
     {
-        Assert::true($this->dashboardPage->itemWithValueExistsInsideSidebar($arg1), "Cannot find $arg1 inside sidebar");
+        $exist = 'see' === $see;
+        Assert::same(
+            $this->dashboardPage->itemWithValueExistsInsideSidebar($value),
+            $exist,
+            sprintf(
+                '%s %s inside sidebar',
+                $exist ? 'Cannot find' : 'Found',
+                $value
+            )
+        );
     }
 
     /**
-     * @Then I should not see :arg1 inside sidebar
-     */
-    public function iShouldNotSeeInsideSidebar($arg1): void
-    {
-        Assert::true($this->dashboardPage->itemWithValueDoesntExistsInsideSidebar($arg1), "Found $arg1 inside sidebar");
-    }
-
-    /**
-     * @Given there is a :status vendor user :vendor_user_email registered in country :country_code
+     * @Given there is a :status vendor user :vendorUserEmail registered in country :countryCode
      */
     public function thereIsAVendorUserRegisteredInCountry(
-        $status,
-        $vendor_user_email,
-        $country_code
+        string $status,
+        string $vendorUserEmail,
+        string $countryCode
     ): void {
         /** @var ShopUserInterface $user */
-        $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
+        $user = $this->userFactory->create(['email' => $vendorUserEmail, 'password' => 'password', 'enabled' => true]);
         $user->setVerifiedAt(new \DateTime());
         $user->addRole('ROLE_USER');
         $user->addRole('ROLE_VENDOR');
 
         $this->userRepository->add($user);
 
-        $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
+        $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $countryCode]);
 
         $options = [
             'company_name' => 'Test',

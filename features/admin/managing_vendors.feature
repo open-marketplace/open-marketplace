@@ -17,7 +17,7 @@ Feature: Listing vendors
 
   @ui
   Scenario: Vendor details page has link to associated customer
-    Given there is an vendor user "vendor" with password "password"
+    Given there is a vendor user "vendor" with password "password"
     And I am on "/admin"
     And I follow "Vendors"
     And I follow "Details"

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
-use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
@@ -25,36 +24,21 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductListingContext extends RawMinkContext implements Context
+final class ProductListingContext extends RawMinkContext
 {
-    private ShopUserExampleFactory $shopUserExampleFactory;
-
-    private FactoryInterface $vendorFactory;
-
-    private EntityManagerInterface $entityManager;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private DraftConverter $acceptanceOperator;
-
     public function __construct(
-        ShopUserExampleFactory $shopUserExampleFactory,
-        FactoryInterface $vendorFactory,
-        EntityManagerInterface $entityManager,
-        SharedStorageInterface $sharedStorage,
-        DraftConverter $acceptanceOperator,
+        private ShopUserExampleFactory $shopUserExampleFactory,
+        private FactoryInterface $vendorFactory,
+        private EntityManagerInterface $entityManager,
+        private SharedStorageInterface $sharedStorage,
+        private DraftConverter $acceptanceOperator,
         ) {
-        $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->vendorFactory = $vendorFactory;
-        $this->entityManager = $entityManager;
-        $this->sharedStorage = $sharedStorage;
-        $this->acceptanceOperator = $acceptanceOperator;
     }
 
     /**
      * @Given There is a product listing accepted by administrator created by vendor
      */
-    public function thereIsAProductListingAcceptedByAdministratorCreatedByVendor()
+    public function thereIsAProductListingAcceptedByAdministratorCreatedByVendor(): void
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -95,7 +79,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Given This product listing has status accepted
      */
-    public function thisProductListingHasStatusAccepted()
+    public function thisProductListingHasStatusAccepted(): void
     {
         $draft = $this->entityManager->getRepository(Draft::class)->findOneBy(['code' => 'code']);
         $newProduct = $this->acceptanceOperator->convertToSimpleProduct($draft);
@@ -108,7 +92,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Then I click button with id :id
      */
-    public function iClickButton($id)
+    public function iClickButton($id): void
     {
         $page = $this->getSession()->getPage();
         $button = $page->find('css', '#' . $id);
@@ -118,7 +102,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Then I should be notified no page exits
      */
-    public function iShouldBeNotifiedNoPageExits()
+    public function iShouldBeNotifiedNoPageExits(): void
     {
         $status = $this->getSession()->getStatusCode();
         Assert::eq($status, 404);

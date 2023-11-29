@@ -13,7 +13,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Page;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
+final class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
 {
     public function getRouteName(): string
     {
@@ -57,11 +57,11 @@ class VendorPagePage extends SymfonyPage implements VendorPagePageInterface
                 continue;
             }
 
-            $comparationValue = $productField[$i - 1] <= $productField[$i];
+            $comparatorValue = $productField[$i - 1] <= $productField[$i];
 
             if (
-                ('asc' === $sorting['value'] && !$comparationValue) ||
-                ('desc' === $sorting['value'] && $comparationValue)
+                ('asc' === $sorting['value'] && !$comparatorValue) ||
+                ('desc' === $sorting['value'] && $comparatorValue)
             ) {
                 return false;
             }

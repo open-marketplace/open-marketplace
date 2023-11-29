@@ -11,36 +11,26 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Container\ContainerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class VendorVerificationContext extends RawMinkContext implements Context
+final class VendorVerificationContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    private ContainerInterface $container;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ContainerInterface $container,
-        ExampleFactoryInterface $vendorExampleFactory,
+        private EntityManagerInterface $entityManager,
+        private FactoryInterface $countryFactory,
+        private ExampleFactoryInterface $vendorExampleFactory,
         ) {
-        $this->entityManager = $entityManager;
-        $this->container = $container;
-        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
      * @Given There is an unverified Vendor
      */
-    public function thereIsAnUnverifiedVendor()
+    public function thereIsAnUnverifiedVendor(): void
     {
-        $vendorCountry = $this->container->get('sylius.factory.country')->createNew();
+        $vendorCountry = $this->countryFactory->createNew();
         $vendorCountry->setCode('US');
         $this->entityManager->persist($vendorCountry);
 
@@ -67,7 +57,7 @@ final class VendorVerificationContext extends RawMinkContext implements Context
     /**
      * @When I click :buttonText
      */
-    public function iClick($buttonText)
+    public function iClick(string $buttonText): void
     {
         $this->getSession()->getPage()->pressButton($buttonText);
         sleep(1);

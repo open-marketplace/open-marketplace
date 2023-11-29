@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\Order;
@@ -25,40 +24,22 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
 
-final class ViewShipmentContext extends RawMinkContext implements Context
+final class ViewShipmentContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    private OrderExampleFactoryInterface $orderExampleFactory;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private ShipmentFactoryInterface $shipmentFactory;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private StateMachineFactoryInterface $stateMachineFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        OrderExampleFactoryInterface $orderExampleFactory,
-        OrderRepositoryInterface $orderRepository,
-        ShipmentFactoryInterface $shipmentFactory,
-        SharedStorageInterface $sharedStorage,
-        StateMachineFactoryInterface $stateMachineFactory,
+        private EntityManagerInterface $entityManager,
+        private OrderExampleFactoryInterface $orderExampleFactory,
+        private OrderRepositoryInterface $orderRepository,
+        private ShipmentFactoryInterface $shipmentFactory,
+        private SharedStorageInterface $sharedStorage,
+        private StateMachineFactoryInterface $stateMachineFactory,
         ) {
-        $this->entityManager = $entityManager;
-        $this->orderExampleFactory = $orderExampleFactory;
-        $this->orderRepository = $orderRepository;
-        $this->shipmentFactory = $shipmentFactory;
-        $this->sharedStorage = $sharedStorage;
-        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     /**
      * @BeforeScenario
      */
-    public function clearData()
+    public function clearData(): void
     {
         $purger = new ORMPurger($this->entityManager);
         $purger->purge();
@@ -67,7 +48,7 @@ final class ViewShipmentContext extends RawMinkContext implements Context
     /**
      * @Given store has primary and secondary order
      */
-    public function storeHasPrimaryAndSecondaryOrderWithPayment()
+    public function storeHasPrimaryAndSecondaryOrderWithPayment(): void
     {
         /** @var Order[] $orders */
         $orders = $this->orderExampleFactory->createArray();
@@ -85,7 +66,7 @@ final class ViewShipmentContext extends RawMinkContext implements Context
     /**
      * @Then I should see :count shipment(s) for :mode order(s)
      */
-    public function iShouldSeeShipments($count, $mode)
+    public function iShouldSeeShipments(int $count, string $mode): void
     {
         $page = $this->getSession()->getPage();
         $tableWrapper = $page->find('css', 'table');
@@ -101,7 +82,7 @@ final class ViewShipmentContext extends RawMinkContext implements Context
         }
     }
 
-    private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition): void
+    private function applyShipmentTransitionOnOrder(OrderInterface $order, string $transition): void
     {
         foreach ($order->getShipments() as $shipment) {
             $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition);

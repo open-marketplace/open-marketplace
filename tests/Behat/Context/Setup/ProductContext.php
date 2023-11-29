@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\Product\Repository\ProductRepository;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
@@ -32,7 +33,6 @@ use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -41,70 +41,25 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-class ProductContext implements Context
+final class ProductContext implements Context
 {
-    private VendorRepository $vendorRepository;
-
-    private ProductVariantRepository $productVariantRepository;
-
-    private ProductRepository $productRepository;
-
-    private ShopUserExampleFactory $userExampleFactory;
-
-    private EntityManagerInterface $manager;
-
-    private ProductExampleFactory $productExampleFactory;
-
-    private TaxonExampleFactory $taxonFactory;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private RepositoryInterface $shippingMethodRepository;
-
-    private SlugGeneratorInterface $slugGenerator;
-
-    private ProductVariantResolverInterface $defaultVariantResolver;
-
-    private ProductFactoryInterface $productFactory;
-
-    private FactoryInterface $channelPricingFactory;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
-    private UserRepositoryInterface $userRepository;
-
     public function __construct(
-        ShopUserExampleFactory $userExampleFactory,
-        VendorRepository $vendorRepository,
-        ProductVariantRepository $productVariantRepository,
-        ProductRepository $productRepository,
-        EntityManagerInterface $manager,
-        ProductExampleFactory $productExampleFactory,
-        TaxonExampleFactory $taxonFactory,
-        SharedStorageInterface $sharedStorage,
-        RepositoryInterface $shippingMethodRepository,
-        SlugGeneratorInterface $slugGenerator,
-        ProductVariantResolverInterface $defaultVariantResolver,
-        ProductFactoryInterface $productFactory,
-        FactoryInterface $channelPricingFactory,
-        ExampleFactoryInterface $vendorExampleFactory,
-        UserRepositoryInterface $userRepository,
+        private ShopUserExampleFactory $userExampleFactory,
+        private VendorRepository $vendorRepository,
+        private ProductVariantRepository $productVariantRepository,
+        private ProductRepository $productRepository,
+        private EntityManagerInterface $manager,
+        private ProductExampleFactory $productExampleFactory,
+        private TaxonExampleFactory $taxonFactory,
+        private SharedStorageInterface $sharedStorage,
+        private RepositoryInterface $shippingMethodRepository,
+        private SlugGeneratorInterface $slugGenerator,
+        private ProductVariantResolverInterface $defaultVariantResolver,
+        private ProductFactoryInterface $productFactory,
+        private FactoryInterface $channelPricingFactory,
+        private ExampleFactoryInterface $vendorExampleFactory,
+        private UserRepositoryInterface $userRepository,
         ) {
-        $this->vendorRepository = $vendorRepository;
-        $this->productVariantRepository = $productVariantRepository;
-        $this->productRepository = $productRepository;
-        $this->userExampleFactory = $userExampleFactory;
-        $this->manager = $manager;
-        $this->productExampleFactory = $productExampleFactory;
-        $this->taxonFactory = $taxonFactory;
-        $this->sharedStorage = $sharedStorage;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->slugGenerator = $slugGenerator;
-        $this->defaultVariantResolver = $defaultVariantResolver;
-        $this->productFactory = $productFactory;
-        $this->channelPricingFactory = $channelPricingFactory;
-        $this->vendorExampleFactory = $vendorExampleFactory;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -161,7 +116,7 @@ class ProductContext implements Context
      * @Given store has :productsCount products from different Vendors
      * @Given store has :productsCount products from different Vendors with default commission settings
      */
-    public function storeHasProductsFromDifferentVendors($productsCount)
+    public function storeHasProductsFromDifferentVendors($productsCount): void
     {
         $this->createTaxon();
         for ($i = 1; $i <= $productsCount; ++$i) {
@@ -178,7 +133,7 @@ class ProductContext implements Context
     /**
      * @Given store has :productsCount products from different Vendors with random commission settings
      */
-    public function storeHasProductsFromDifferentVendorsWithRandomCommissions($productsCount)
+    public function storeHasProductsFromDifferentVendorsWithRandomCommissions($productsCount): void
     {
         $this->createTaxon();
         $commissionTypes = [VendorInterface::NET_COMMISSION, VendorInterface::GROSS_COMMISSION];
@@ -199,7 +154,7 @@ class ProductContext implements Context
     /**
      * @Given store has :vendorsCount vendors with different product each
      */
-    public function storeHasVendorsWithDifferentProductEach(int $vendorsCount)
+    public function storeHasVendorsWithDifferentProductEach(int $vendorsCount): void
     {
         $name = 'product-';
         $basePrice = 100;
@@ -219,7 +174,7 @@ class ProductContext implements Context
         int $price = 100,
         string $date = 'now',
         ChannelInterface $channel = null
-    ): \Sylius\Component\Core\Model\ProductInterface {
+    ): ProductInterface {
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');
         }
@@ -262,7 +217,7 @@ class ProductContext implements Context
         return $product;
     }
 
-    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null)
+    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null): ChannelPricingInterface
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
@@ -275,7 +230,7 @@ class ProductContext implements Context
     /**
      * @Then product on hand count should be :count
      */
-    public function productOnHoldCountShouldBe(int $count)
+    public function productOnHoldCountShouldBe(int $count): void
     {
         $product = $this->sharedStorage->get('product');
 
@@ -285,16 +240,16 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given There is a product with variant code :variant_code owned by logged in vendor
+     * @Given There is a product with variant code :variantCode owned by logged in vendor
      */
-    public function thereIsProductWithVariantCodeOwnedByLoggedInVendor($variant_code)
+    public function thereIsProductWithVariantCodeOwnedByLoggedInVendor(string $variantCode): void
     {
         $vendor = $this->sharedStorage->get('vendor');
 
         $this->createTaxon();
         $product = $this->createDefaultProduct();
         $product->setVendor($vendor);
-        $product->getVariants()[0]->setCode($variant_code);
+        $product->getVariants()[0]->setCode($variantCode);
         $this->productRepository->add($product);
         $this->sharedStorage->set('product', $product);
     }
@@ -302,7 +257,7 @@ class ProductContext implements Context
     /**
      * @Given one of it belongs to :shippingCategory shipping category
      */
-    public function oneOfItBelongsToShippingCategory(ShippingCategoryInterface $shippingCategory)
+    public function oneOfItBelongsToShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
         $products = $this->sharedStorage->get('products');
         $products[1]->getVariants()->first()->setShippingCategory($shippingCategory);
@@ -313,7 +268,7 @@ class ProductContext implements Context
     /**
      * @Given one of it not belongs to :shippingCategory shipping category
      */
-    public function oneOfItNotBelongsToShippingCategory(ShippingCategoryInterface $shippingCategory)
+    public function oneOfItNotBelongsToShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
         $products = $this->sharedStorage->get('products');
         $products[1]->getVariants()->first()->setShippingCategory(null);
@@ -324,7 +279,7 @@ class ProductContext implements Context
     /**
      * @Given vendor uses this shipping method
      */
-    public function vendorUsesThisShippingMethod()
+    public function vendorUsesThisShippingMethod(): void
     {
         /** @var VendorInterface $vendor */
         $vendor = $this->sharedStorage->get('vendor');
@@ -343,7 +298,7 @@ class ProductContext implements Context
     /**
      * @Given product belongs to :taxonSlug taxon
      */
-    public function onlyOneProductBelongsToTaxon($taxonSlug)
+    public function onlyOneProductBelongsToTaxon(string $taxonSlug): void
     {
         $channel = $this->sharedStorage->get('channel');
         $menuTaxon = $channel->getMenuTaxon();
@@ -372,7 +327,7 @@ class ProductContext implements Context
     /**
      * @Given product has name :name
      */
-    public function productHasName($name)
+    public function productHasName(string $name): void
     {
         $products = $this->sharedStorage->get('products');
 
