@@ -1,0 +1,10 @@
+default:
+    suites:
+        ui_managing_settlements:
+            contexts:
+                - open_marketplace.behat.context.setup.settlement
+                - open_marketplace.behat.context.ui.admin.settlement
+                - Behat\MinkExtension\Context\MinkContext
+                - sylius.behat.context.hook.doctrine_orm
+            filters:
+                tags: "@managing_settlements&&@ui"
