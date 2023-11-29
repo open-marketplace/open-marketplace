@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Settlement\Entity;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -37,7 +38,7 @@ interface SettlementInterface extends ResourceInterface, TimestampableInterface
 
     public function setTotalCommissionAmount(int $totalCommissionAmount): void;
 
-    public function getTotalProfit(): int;
+    public function getTotalProfitAmount(): int;
 
     public function getStartDate(): \DateTimeInterface;
 
@@ -47,7 +48,7 @@ interface SettlementInterface extends ResourceInterface, TimestampableInterface
 
     public function setEndDate(\DateTimeInterface $endDate): void;
 
-    public function getCurrencyCode(): string;
+    public function getChannel(): ChannelInterface;
 
-    public function setCurrencyCode(string $currencyCode): void;
+    public function setChannel(ChannelInterface $channel): void;
 }

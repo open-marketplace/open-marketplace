@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Settlement\Entity;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 class Settlement implements SettlementInterface
@@ -28,7 +29,7 @@ class Settlement implements SettlementInterface
 
     protected int $totalCommissionAmount;
 
-    protected string $currencyCode;
+    protected ChannelInterface $channel;
 
     protected \DateTimeInterface $startDate;
 
@@ -79,7 +80,7 @@ class Settlement implements SettlementInterface
         $this->totalCommissionAmount = $totalCommissionAmount;
     }
 
-    public function getTotalProfit(): int
+    public function getTotalProfitAmount(): int
     {
         return $this->totalAmount - $this->totalCommissionAmount;
     }
@@ -104,13 +105,13 @@ class Settlement implements SettlementInterface
         $this->endDate = $endDate;
     }
 
-    public function getCurrencyCode(): string
+    public function getChannel(): ChannelInterface
     {
-        return $this->currencyCode;
+        return $this->channel;
     }
 
-    public function setCurrencyCode(string $currencyCode): void
+    public function setChannel(ChannelInterface $channel): void
     {
-        $this->currencyCode = $currencyCode;
+        $this->channel = $channel;
     }
 }

@@ -44,7 +44,7 @@ final class ProductDraftFilterStrategyTest extends IntegrationTestCase
 
     public function test_it_filters_resources(): void
     {
-        $this->loadFixturesFromFile('VendorContextStrategy/ProductDraftFilterStrategyTest/product_draft_filter_strategy.yml');
+        $this->loadFixturesFromFile('VendorContextStrategy/ProductDraftFilterStrategyTest/product_draft_filter_strategy.yaml');
 
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
         $queryBuilder = $this->productDraftRepository->createQueryBuilder('o');

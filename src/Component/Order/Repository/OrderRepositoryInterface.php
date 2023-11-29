@@ -19,7 +19,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface as BaseOrderReposi
 
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
-    public function findAllByVendor(VendorInterface $vendor): QueryBuilder;
+    public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder;
 
     public function findAllSecondaryOrders(): QueryBuilder;
 
@@ -49,4 +49,11 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /** @phpstan-ignore-next-line */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
+
+    public function findForSettlementByVendorAndChannelAndDates(
+        VendorInterface $vendor,
+        ChannelInterface $channel,
+        \DateTimeInterface $nextSettlementStartDate,
+        \DateTimeInterface $nextSettlementEndDate
+    ): array;
 }

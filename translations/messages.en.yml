@@ -170,9 +170,9 @@ open_marketplace:
         password: Password
         settlement: Settlement
         settlement_frequency: Settlement frequency
-        7_days: Weekly
-        30_days: Monthly
-        90_days: Quarterly
+        weekly: Weekly
+        monthly: Monthly
+        quarterly: Quarterly
         period: Period
     email:
         vendor_profile_update: Vendor profile update requested

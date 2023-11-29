@@ -21,7 +21,7 @@ use Sylius\Component\Order\Model\OrderInterface as OrderInterfaceAlias;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
-    public function findAllByVendor(VendorInterface $vendor): QueryBuilder
+    public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder
     {
         $vendorId = $vendor->getId();
 
@@ -183,5 +183,30 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('customerId', $customerId)
             ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
             ;
+    }
+
+    public function findForSettlementByVendorAndChannelAndDates(
+        VendorInterface $vendor,
+        ChannelInterface $channel,
+        \DateTimeInterface $nextSettlementStartDate,
+        \DateTimeInterface $nextSettlementEndDate
+    ): array {
+        $qb = $this->findAllByVendorQueryBuilder($vendor);
+
+        return $qb
+            ->select('SUM(o.total) as total, SUM(o.commissionTotal) as commissionTotal')
+            ->andWhere('o.channel = :channel')
+            ->andWhere(
+                $qb->expr()->between(
+                    'o.paidAt',
+                    ':startDate',
+                    ':endDate'
+                )
+            )
+            ->setParameter('channel', $channel->getId())
+            ->setParameter('startDate', $nextSettlementStartDate)
+            ->setParameter('endDate', $nextSettlementEndDate)
+            ->getQuery()
+            ->getSingleResult();
     }
 }

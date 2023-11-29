@@ -27,12 +27,12 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
 
     public const STATUS_VERIFIED = 'verified';
 
-    public const DEFAULT_SETTLEMENT_FREQUENCY = 7;
+    public const DEFAULT_SETTLEMENT_FREQUENCY = 'weekly';
 
     public const VALID_SETTLEMENT_FREQUENCY = [
-        7,
-        30,
-        90,
+        'weekly',
+        'monthly',
+        'quarterly',
     ];
 
     public function getId(): ?int;
@@ -127,13 +127,17 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
 
     public function setCommissionType(string $commissionType): void;
 
-    public function getSettlementFrequency(): int;
+    public function getSettlementFrequency(): string;
 
-    public function setSettlementFrequency(int $settlementFrequency): void;
+    public function setSettlementFrequency(string $settlementFrequency): void;
 
     public function getValidSettlementFrequency(): array;
 
     public function getSettlements(): Collection;
 
     public function setSettlements(Collection $settlements): void;
+
+    public function getCreatedAt(): DateTimeInterface;
+
+    public function setCreatedAt(DateTimeInterface $createdAt): void;
 }
