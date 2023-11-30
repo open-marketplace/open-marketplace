@@ -1,6 +1,6 @@
 default:
     suites:
-        restoring_visibility:
+        restoring_visibility_admin:
             contexts:
                 - open_marketplace.behat.context.ui.admin.product_listing
                 - open_marketplace.behat.context.

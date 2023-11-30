@@ -11,7 +11,7 @@ Feature: Filling vendor registration form by a customer
   Scenario: Attempting to submit empty form
     When I am on "/en_US/account/vendor/register"
     And I press "Become a Vendor"
-    Then I should see "sylius-validation-error" "8" times
+    Then I should see "sylius-validation-error" "7" times
 
   Scenario: Filling form with data that fails validation
     When I am on "/en_US/account/vendor/register"
@@ -24,7 +24,7 @@ Feature: Filling vendor registration form by a customer
     And I fill in "profile_vendorAddress_street" with "et"
     And I fill in "profile_vendorAddress_postalCode" with "de"
     And I press "Become a Vendor"
-    Then I should see "sylius-validation-error" "9" times
+    Then I should see "sylius-validation-error" "8" times
 
   Scenario: Correct completion of the form
     When I am on "/en_US/account/vendor/register"
