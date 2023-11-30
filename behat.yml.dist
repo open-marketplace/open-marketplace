@@ -14,7 +14,7 @@ default:
             files_path: "%paths.base%/tests/Behat/Resources/fixtures/"
             base_url: "https://127.0.0.1:8080/"
             default_session: symfony
-            javascript_session: chrome
+            javascript_session: chrome_headless
             sessions:
                 symfony:
                     symfony: ~

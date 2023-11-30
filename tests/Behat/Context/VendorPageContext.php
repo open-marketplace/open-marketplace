@@ -203,7 +203,7 @@ class VendorPageContext extends MinkContext implements Context
     }
 
     /**
-     * @Then i should see products sorted by :field
+     * @Then I should see products sorted by :field
      */
     public function iShouldSeeProductsSorted()
     {
