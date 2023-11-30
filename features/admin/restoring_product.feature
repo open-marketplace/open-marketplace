@@ -9,7 +9,7 @@ Feature: Restoring product listing visibility
     And there is a vendor user "test@company.domain" registered in country "PL"
     And the store operates on a channel named "Web-US" in "USD" currency
 
-  @ui @javascript
+  @ui
   Scenario: Restoring visibility of product listing
     Given there is 1 product listing created by vendor
     And This product listing visibility is removed
