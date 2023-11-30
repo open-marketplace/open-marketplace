@@ -15,10 +15,17 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
+    public function save(ProductInterface $product): void
+    {
+        $this->_em->persist($product);
+        $this->_em->flush();
+    }
+
     public function createVendorShopListQueryBuilder(
         VendorInterface $vendor,
         ChannelInterface $channel,

@@ -14,11 +14,14 @@ namespace BitBag\OpenMarketplace\Component\Product\Repository;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
 
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
+    public function save(ProductInterface $product): void;
+
     public function createVendorShopListQueryBuilder(
         VendorInterface $vendor,
         ChannelInterface $channel,

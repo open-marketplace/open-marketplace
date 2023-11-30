@@ -13,11 +13,19 @@ namespace BitBag\OpenMarketplace\Component\ProductListing\Repository;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-interface DraftRepositoryInterface extends RepositoryInterface
+interface DraftRepositoryInterface
 {
     public function save(DraftInterface $productDraft): void;
 
     public function findLatestDraft(ListingInterface $productListing): ?DraftInterface;
+
+    /**
+     * @return mixed
+     */
+    public function find(
+        int $id,
+        ?int $lockMode = null,
+        ?int $lockVersion = null
+    );
 }

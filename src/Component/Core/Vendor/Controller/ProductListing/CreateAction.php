@@ -71,7 +71,7 @@ final class CreateAction
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             $this->listingPersister->createNewProductListing($productDraft, $vendor);
-            $this->productDraftRepository->add($productDraft);
+            $this->productDraftRepository->save($productDraft);
 
             /** @var Session $session */
             $session = $this->requestStack->getSession();

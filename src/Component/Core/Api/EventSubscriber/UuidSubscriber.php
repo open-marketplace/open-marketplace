@@ -44,6 +44,7 @@ final class UuidSubscriber implements EventSubscriberInterface
 
     public function updateUuid(LifecycleEventArgs $event): void
     {
+        /** @var object $object */
         $object = $event->getObject();
 
         if (!$object instanceof UuidAwareInterface) {
