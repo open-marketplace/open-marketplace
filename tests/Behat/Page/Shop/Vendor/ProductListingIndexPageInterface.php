@@ -9,11 +9,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\OpenMarketplace\Behat\Page\ProductListing;
+namespace Tests\BitBag\OpenMarketplace\Behat\Page\Shop\Vendor;
 
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 
-interface IndexPageInterface extends BaseIndexPageInterface
+interface ProductListingIndexPageInterface extends IndexPageInterface
 {
     public function confirmAction(): void;
+
+    public function openActionDropdown(): void;
 }

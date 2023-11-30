@@ -26,6 +26,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Shop\Vendor\ProductListingIndexPageInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
@@ -36,6 +37,7 @@ final class ProductListingContext extends RawMinkContext
         private FactoryInterface $vendorFactory,
         private SharedStorageInterface $sharedStorage,
         private AdminUserExampleFactory $adminUserExampleFactory,
+        private ProductListingIndexPageInterface $productListingIndexPage,
         ) {
     }
 
@@ -108,6 +110,14 @@ final class ProductListingContext extends RawMinkContext
     public function iClickButton(string $button): void
     {
         $this->getPage()->pressButton($button);
+    }
+
+    /**
+     * @Given /^I confirm my action$/
+     */
+    public function iConfirmMyAction(): void
+    {
+        $this->productListingIndexPage->confirmAction();
     }
 
     private function getPage(): DocumentElement
@@ -284,5 +294,13 @@ final class ProductListingContext extends RawMinkContext
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
         $this->getPage()->findLink('Logout');
+    }
+
+    /**
+     * @Given /^I open action dropdown$/
+     */
+    public function iOpenActionDropdown(): void
+    {
+        $this->productListingIndexPage->openActionDropdown();
     }
 }

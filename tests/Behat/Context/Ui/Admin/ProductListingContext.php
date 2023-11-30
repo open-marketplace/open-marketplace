@@ -41,7 +41,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Tests\BitBag\OpenMarketplace\Behat\Page\ProductListing\IndexPageInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\ProductListing\IndexPageInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext

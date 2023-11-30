@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\OpenMarketplace\Behat\Page\ProductListing;
+namespace Tests\BitBag\OpenMarketplace\Behat\Page\Admin\ProductListing;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
