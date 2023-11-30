@@ -7,7 +7,7 @@ Feature: Hiding product listing visibility
     And I am logged in as "vendor@email.com"
     And the store operates on a channel named "Web-US" in "USD" currency
 
-  @ui
+  @ui @javascript
   Scenario: Deleting product listing
     Given there is 1 product listing created by vendor
     And Product listing status is "Created"
