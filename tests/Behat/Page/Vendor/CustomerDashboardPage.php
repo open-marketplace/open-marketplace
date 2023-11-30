@@ -12,8 +12,9 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
-final class CustomerDashboardPage extends SymfonyPage
+class CustomerDashboardPage extends SymfonyPage implements SymfonyPageInterface
 {
     public function getRouteName(): string
     {
@@ -33,5 +34,20 @@ final class CustomerDashboardPage extends SymfonyPage
         }
 
         return false;
+    }
+
+    public function itemWithValueDoesntExistsInsideSidebar($value): bool
+    {
+        $sidebars = $this->getDocument()->findAll('css', '.grid .four .menu');
+        foreach ($sidebars as $sidebar) {
+            $links = $sidebar->findAll('css', '.item');
+            foreach ($links as $link) {
+                if ($value === $link->getText()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

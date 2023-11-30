@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Vendor;
 
+use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
@@ -26,25 +27,38 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Tests\BitBag\OpenMarketplace\Behat\Page\Shop\Vendor\ProductListingIndexPageInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductListingContext extends RawMinkContext
+final class ProductListingContext extends RawMinkContext implements Context
 {
+    private EntityManagerInterface $entityManager;
+
+    private ShopUserExampleFactory $shopUserExampleFactory;
+
+    private FactoryInterface $vendorFactory;
+
+    private SharedStorageInterface $sharedStorage;
+
+    private AdminUserExampleFactory $adminUserExampleFactory;
+
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private ShopUserExampleFactory $shopUserExampleFactory,
-        private FactoryInterface $vendorFactory,
-        private SharedStorageInterface $sharedStorage,
-        private AdminUserExampleFactory $adminUserExampleFactory,
-        private ProductListingIndexPageInterface $productListingIndexPage,
+        EntityManagerInterface $entityManager,
+        ShopUserExampleFactory $shopUserExampleFactory,
+        FactoryInterface $vendorFactory,
+        SharedStorageInterface $sharedStorage,
+        AdminUserExampleFactory $adminUserExampleFactory,
         ) {
+        $this->entityManager = $entityManager;
+        $this->shopUserExampleFactory = $shopUserExampleFactory;
+        $this->vendorFactory = $vendorFactory;
+        $this->sharedStorage = $sharedStorage;
+        $this->adminUserExampleFactory = $adminUserExampleFactory;
     }
 
     /**
      * @BeforeScenario
      */
-    public function clearData(): void
+    public function clearData()
     {
         $purger = new ORMPurger($this->entityManager);
         $purger->purge();
@@ -54,10 +68,10 @@ final class ProductListingContext extends RawMinkContext
      * @Given there is an :verified vendor user :username with password :password
      */
     public function thereIsAnVendorUserWithPassword(
-        string $verified,
-        string $username,
-        string $password
-    ): void {
+        $verified,
+        $username,
+        $password
+    ) {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserExampleFactory->create();
         $user->setUsername($username);
@@ -87,10 +101,10 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given This product listing visibility is hidden
      */
-    public function thisProductListingVisibilityIsHidden(): void
+    public function thisProductListingVisibilityIsHidden()
     {
         $productListing = $this->sharedStorage->get('product_listing' . '0');
-        $productListing->remove();
+        $productListing->setHidden(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
     }
@@ -98,7 +112,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given I should see product's listing status :status
      */
-    public function iShouldSeeProductsListingStatus(string $status): void
+    public function iShouldSeeProductsListingStatus($status)
     {
         $productListingStatus = $this->getPage()->find('css', sprintf('table > tbody > tr > td:contains("%s")', $status));
         Assert::notNull($productListingStatus);
@@ -107,20 +121,15 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given I click :button button
      */
-    public function iClickButton(string $button): void
+    public function iClickButton($button)
     {
         $this->getPage()->pressButton($button);
     }
 
     /**
-     * @Given /^I confirm my action$/
+     * @return DocumentElement
      */
-    public function iConfirmMyAction(): void
-    {
-        $this->productListingIndexPage->confirmAction();
-    }
-
-    private function getPage(): DocumentElement
+    private function getPage()
     {
         return $this->getSession()->getPage();
     }
@@ -128,7 +137,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is :arg2 product listing created by vendor
      */
-    public function thereIsProductListingCreatedByVendor(int $count): void
+    public function thereIsProductListingCreatedByVendor($count)
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -172,7 +181,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is :count product listing created by vendor with status :status
      */
-    public function thereIsProductListingCreatedByVendorWithStatus(int $count, string $status): void
+    public function thereIsProductListingCreatedByVendorWithStatus2($count, $status)
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -215,12 +224,12 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given Product listing status is :status
+     * @Given Product listing status is :arg1
      */
-    public function productListingStatusIs(string $status): void
+    public function productListingStatusIs($arg1)
     {
         $draft = $this->entityManager->getRepository(Draft::class)->findOneBy(['code' => 'code0']);
-        $draft->setStatus($status);
+        $draft->setStatus(DraftInterface::STATUS_CREATED);
         $this->entityManager->persist($draft);
         $this->entityManager->flush();
     }
@@ -228,7 +237,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should see dropdown with hide option
      */
-    public function iShouldSeeDropdownWithHideOption(): void
+    public function iShouldSeeDropdownWithHideOption()
     {
         $page = $this->getPage();
         $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
@@ -238,7 +247,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should see non unique code error message
      */
-    public function iShouldSeeNonUniqueCodeMessage(): void
+    public function iShouldSeeNonUniqueCodeMessage()
     {
         $text = $this->getPage()->getText();
         $isErrorMessagePresent = false !== stripos($text, 'Product Listing with given code already exists');
@@ -248,7 +257,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given I choose main taxon :taxon
      */
-    public function iChooseMainTaxon(string $taxon): void
+    public function iChooseMainTaxon($taxon)
     {
         $page = $this->getPage();
         $page->findById('sylius_product_mainTaxon')->setValue($taxon);
@@ -257,7 +266,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should get validation error
      */
-    public function iShouldGetValidationError(): void
+    public function iShouldGetValidationError()
     {
         $page = $this->getSession()->getPage();
         $this->getSession()->reload();
@@ -269,7 +278,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is an admin user :username with password :password
      */
-    public function thereIsAnAdminUserWithPassword(string $username, string $password): void
+    public function thereIsAnAdminUserWithPassword($username, $password)
     {
         $admin = $this->adminUserExampleFactory->create();
         $admin->setUsername($username);
@@ -285,7 +294,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given I am logged in as an admin
      */
-    public function iAmLoggedInAsAnAdmin(): void
+    public function iAmLoggedInAsAnAdmin()
     {
         $admin = $this->sharedStorage->get('admin');
 
@@ -293,14 +302,6 @@ final class ProductListingContext extends RawMinkContext
         $this->getPage()->fillField('Username', $admin->getUsername());
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
-        $this->getPage()->findLink('Logout');
-    }
-
-    /**
-     * @Given /^I open action dropdown$/
-     */
-    public function iOpenActionDropdown(): void
-    {
-        $this->productListingIndexPage->openActionDropdown();
+        ($this->getPage()->findLink('Logout'));
     }
 }

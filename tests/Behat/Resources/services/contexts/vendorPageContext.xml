@@ -3,7 +3,7 @@
     <services>
         <defaults public="true" />
         <service
-                class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\VendorPageContext"
+                class="Tests\BitBag\OpenMarketplace\Behat\Context\VendorPageContext"
                 id="tests.open_marketplace.behat.context.vendor_page_context"
         >
             <argument type="service" id="doctrine.orm.entity_manager"/>

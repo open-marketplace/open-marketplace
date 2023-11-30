@@ -6,6 +6,9 @@
                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\VendorSetupContext"
                 id="tests.bitbag.open_marketplace.behat.context.vendor.vendor_setup_context" >
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="sylius.fixture.example_factory.shop_user" />
+            <argument type="service" id="sylius.manager.shop_user" />
         </service>
     </services>
 </container>

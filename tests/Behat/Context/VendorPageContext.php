@@ -9,8 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context;
 
+use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
@@ -33,27 +34,60 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\VendorPagePageInterface;
 use Webmozart\Assert\Assert;
 
-final class VendorPageContext extends MinkContext
+class VendorPageContext extends MinkContext implements Context
 {
+    private EntityManagerInterface $entityManager;
+
+    private RepositoryInterface $countryRepository;
+
+    private VendorRepositoryInterface $vendorRepository;
+
+    private ProductFactoryInterface $productFactory;
+
+    private SlugGeneratorInterface $slugGenerator;
+
+    private ProductVariantResolverInterface $defaultVariantResolver;
+
+    private SharedStorageInterface $sharedStorage;
+
+    private ProductRepositoryInterface $productRepository;
+
+    private FactoryInterface $channelPricingFactory;
+
+    private VendorPagePageInterface $vendorPagePage;
+
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private RepositoryInterface $countryRepository,
-        private VendorRepositoryInterface $vendorRepository,
-        private ProductFactoryInterface $productFactory,
-        private SlugGeneratorInterface $slugGenerator,
-        private ProductVariantResolverInterface $defaultVariantResolver,
-        private SharedStorageInterface $sharedStorage,
-        private ProductRepositoryInterface $productRepository,
-        private FactoryInterface $channelPricingFactory,
-        private VendorPagePageInterface $vendorPagePage,
-        private ExampleFactoryInterface $vendorExampleFactory,
+        EntityManagerInterface $entityManager,
+        RepositoryInterface $countryRepository,
+        VendorRepositoryInterface $vendorRepository,
+        ProductFactoryInterface $productFactory,
+        SlugGeneratorInterface $slugGenerator,
+        ProductVariantResolverInterface $defaultVariantResolver,
+        SharedStorageInterface $sharedStorage,
+        ProductRepositoryInterface $productRepository,
+        FactoryInterface $channelPricingFactory,
+        VendorPagePageInterface $vendorPagePage,
+        ExampleFactoryInterface $vendorExampleFactory,
         ) {
+        $this->entityManager = $entityManager;
+        $this->countryRepository = $countryRepository;
+        $this->vendorRepository = $vendorRepository;
+        $this->productFactory = $productFactory;
+        $this->slugGenerator = $slugGenerator;
+        $this->defaultVariantResolver = $defaultVariantResolver;
+        $this->sharedStorage = $sharedStorage;
+        $this->productRepository = $productRepository;
+        $this->channelPricingFactory = $channelPricingFactory;
+        $this->vendorPagePage = $vendorPagePage;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
      * @Given there is a :vendorStatus vendor
      */
-    public function thereIsAVendor(string $verifiedStatus): void
+    public function thereIsAVendor(string $verifiedStatus)
     {
         $shopUser = $this->sharedStorage->get('user');
 
@@ -83,7 +117,7 @@ final class VendorPageContext extends MinkContext
     /**
      * @Given the vendor has :number products
      */
-    public function theVendorHasMoreThanOnePageOfProducts(int $number): void
+    public function theVendorHasMoreThanOnePageOfProducts(int $number)
     {
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'test-company']);
         for ($i = 1; $i <= $number; ++$i) {
@@ -94,7 +128,7 @@ final class VendorPageContext extends MinkContext
     /**
      * @Given the vendor has :number products with different dates and prices
      */
-    public function theVendorHasMoreThanOnePageOfProductsWithDifferentDatesAndPrices(int $number): void
+    public function theVendorHasMoreThanOnePageOfProductsWithDifferentDatesAndPrices(int $number)
     {
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'test-company']);
         if (null === $vendor) {
@@ -125,7 +159,7 @@ final class VendorPageContext extends MinkContext
     /**
      * @Then I should see :count products in the list
      */
-    public function iShouldSeeProductsInTheList(int $count): void
+    public function iShouldSeeProductsInTheList(int $count)
     {
         $this->vendorPagePage->open(['vendor_slug' => 'SLUG']);
         $productsCount = $this->vendorPagePage->countProduct();
@@ -135,7 +169,7 @@ final class VendorPageContext extends MinkContext
     /**
      * @Then I should see :count products on page :pageNumber
      */
-    public function iShouldSeeProductsOnPage(int $count, string $pageNumber): void
+    public function iShouldSeeProductsOnPage(int $count, string $pageNumber)
     {
         $this->vendorPagePage->open(
             [
@@ -152,7 +186,7 @@ final class VendorPageContext extends MinkContext
     /**
      * @Given sorting is set to :sortField :value
      */
-    public function sortingIsSetTo(string $sortField, string $value): void
+    public function sortingIsSetTo($sortField, $value)
     {
         $sortType = [
             'ascending' => 'asc',
@@ -169,9 +203,9 @@ final class VendorPageContext extends MinkContext
     }
 
     /**
-     * @Then I should see products sorted by :field
+     * @Then i should see products sorted by :field
      */
-    public function iShouldSeeProductsSorted(): void
+    public function iShouldSeeProductsSorted()
     {
         $shopSorting = $this->sharedStorage->get('sorting');
 
@@ -190,7 +224,7 @@ final class VendorPageContext extends MinkContext
     /**
      * @Then I should see :count products on :slug taxon page
      */
-    public function iShouldSeeProductsOnTaxonPage(int $count, string $slug): void
+    public function iShouldSeeProductsOnTaxonPage($count, $slug)
     {
         $this->visit("/en_US/vendors/SLUG/taxons/$slug");
 
@@ -203,7 +237,7 @@ final class VendorPageContext extends MinkContext
     /**
      * @Then I should see :count products when search for :name
      */
-    public function iShouldSeeProductsWhenSearchFor(int $count, string $name): void
+    public function iShouldSeeProductsWhenSearchFor($count, $name)
     {
         $this->vendorPagePage->open(
             [
@@ -275,13 +309,13 @@ final class VendorPageContext extends MinkContext
         return $product;
     }
 
-    private function saveProduct(ProductInterface $product): void
+    private function saveProduct(ProductInterface $product)
     {
         $this->productRepository->add($product);
         $this->sharedStorage->set('product', $product);
     }
 
-    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null): ChannelPricingInterface
+    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null)
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();

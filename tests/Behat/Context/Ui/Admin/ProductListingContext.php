@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
+use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\VendorExampleFactory;
@@ -29,40 +30,62 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
-use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\ProductListing\IndexPageInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductListingContext extends RawMinkContext
+final class ProductListingContext extends RawMinkContext implements Context
 {
+    private EntityManagerInterface $entityManager;
+
+    private AdminUserExampleFactory $adminUserExampleFactory;
+
+    private ShopUserExampleFactory $shopUserExampleFactory;
+
+    private SharedStorageInterface $sharedStorage;
+
+    private UserRepositoryInterface $userRepository;
+
+    private DraftAttributeFactoryInterface $draftAttributeFactory;
+
+    private ExampleFactoryInterface $vendorExampleFactory;
+
+    private FactoryInterface $countryFactory;
+
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private AdminUserExampleFactory $adminUserExampleFactory,
-        private ShopUserExampleFactory $shopUserExampleFactory,
-        private SharedStorageInterface $sharedStorage,
-        private UserRepositoryInterface $userRepository,
-        private DraftAttributeFactoryInterface $draftAttributeFactory,
-        private VendorExampleFactory $vendorExampleFactory,
-        private FactoryInterface $countryFactory,
-        private IndexPageInterface $productListingPageIndexPage,
-        ) {
+        EntityManagerInterface $entityManager,
+        AdminUserExampleFactory $adminUserExampleFactory,
+        ShopUserExampleFactory $shopUserExampleFactory,
+        SharedStorageInterface $sharedStorage,
+        UserRepositoryInterface $userRepository,
+        DraftAttributeFactoryInterface $draftAttributeFactory,
+        VendorExampleFactory $vendorExampleFactory,
+        FactoryInterface $countryFactory
+    ) {
+        $this->entityManager = $entityManager;
+        $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->shopUserExampleFactory = $shopUserExampleFactory;
+        $this->sharedStorage = $sharedStorage;
+        $this->userRepository = $userRepository;
+        $this->draftAttributeFactory = $draftAttributeFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
+        $this->countryFactory = $countryFactory;
     }
 
     /**
      * @Given there is an admin user :username with password :password
      */
-    public function thereIsAnAdminUserWithPassword(string $username, string $password): void
+    public function thereIsAnAdminUserWithPassword($username, $password)
     {
         $admin = $this->adminUserExampleFactory->create();
         $admin->setUsername($username);
@@ -78,7 +101,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given I am logged in as an admin
      */
-    public function iAmLoggedInAsAnAdmin(): void
+    public function iAmLoggedInAsAnAdmin()
     {
         $admin = $this->sharedStorage->get('admin');
 
@@ -86,13 +109,13 @@ final class ProductListingContext extends RawMinkContext
         $this->getPage()->fillField('Username', $admin->getUsername());
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
-        $this->getPage()->findLink('Logout');
+        ($this->getPage()->findLink('Logout'));
     }
 
     /**
      * @Given I am logged in as an user :email with password :password
      */
-    public function iAmLoggedInAsUserWithPassword(string $email, string $password): void
+    public function iAmLoggedInAsUserWithPassword(string $email, string $password)
     {
         $this->visitPath('/en_US/login');
         $this->getPage()->fillField('Username', $email);
@@ -101,23 +124,22 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given there is a vendor user :vendorUserEmail registered in country :countryCode
+     * @Given there is a vendor user :vendor_user_email registered in country :country_code
      */
-    public function thereIsAVendorUserRegisteredInCountry(string $vendorUserEmail, $countryCode): void
+    public function thereIsAVendorUserRegisteredInCountry($vendor_user_email, $country_code): void
     {
-        /** @var ShopUserInterface $user */
-        $user = $this->shopUserExampleFactory->create(['email' => $vendorUserEmail, 'password' => 'password', 'enabled' => true]);
+        $user = $this->shopUserExampleFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);
 
         $this->userRepository->add($user);
 
-        $country = $this->entityManager->getRepository(Country::class)->findOneBy(['code' => $countryCode]);
+        $country = $this->entityManager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
 
         if (null === $country) {
             /** @var CountryInterface $country */
             $country = $this->countryFactory->createNew();
-            $country->setCode($countryCode);
+            $country->setCode($country_code);
             $country->enable();
             $this->entityManager->persist($country);
         }
@@ -145,9 +167,9 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given there is :count product listing created by vendor
+     * @Given there is :arg2 product listing created by vendor
      */
-    public function thereIsProductListingCreatedByVendor(int $count): void
+    public function thereIsProductListingCreatedByVendor($count)
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -190,7 +212,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is/are :count product listing(s)
      */
-    public function thereAreProductListings(int $count): void
+    public function thereAreProductListings($count)
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -219,7 +241,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is product listing enabled for channel
      */
-    public function thereIsProductListingForChannel(): void
+    public function thereIsProductListingForChannel()
     {
         $vendor = $this->sharedStorage->get('vendor');
         $channel = $this->getChannel();
@@ -249,7 +271,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then there should be product with channel enabled
      */
-    public function thereShouldBeProductWithChannel(): void
+    public function thereShouldBeProductWithChannel()
     {
         $setChannel = $this->getChannel();
         $products = $this->entityManager->getRepository(Product::class)->findAll();
@@ -270,7 +292,7 @@ final class ProductListingContext extends RawMinkContext
         string $code,
         string $name,
         string $status
-    ): void {
+    ) {
         $vendor = $this->sharedStorage->get('vendor');
 
         $productListing = $this->createProductListing($vendor, $code);
@@ -288,7 +310,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should see :count product listing(s)
      */
-    public function iShouldSeeProductListings(int $count): void
+    public function iShouldSeeProductListings($count)
     {
         $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
         Assert::notEmpty($rows, 'Could not find any rows');
@@ -298,7 +320,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should see url :url
      */
-    public function iShouldSeeUrl(string $url): void
+    public function iShouldSeeUrl($url)
     {
         $currentUrl = $this->getSession()->getCurrentUrl();
         $matches = preg_match($url, $currentUrl);
@@ -308,7 +330,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given I should see product's listing status :status
      */
-    public function iShouldSeeProductsListingStatus(string $status): void
+    public function iShouldSeeProductsListingStatus($status)
     {
         $productListingStatus = $this->getPage()->find('css', sprintf('table > tbody > tr > td:contains("%s")', $status));
         Assert::notNull($productListingStatus);
@@ -317,7 +339,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given I click :button button
      */
-    public function iClickButton(string $button): void
+    public function iClickButton($button)
     {
         $this->getPage()->pressButton($button);
     }
@@ -325,12 +347,15 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should be redirected to :url
      */
-    public function iShouldBeRedirectedTo(string $url): void
+    public function iShouldBeRedirectedTo($url)
     {
         Assert::eq($url, $this->getSession()->getCurrentUrl());
     }
 
-    private function getPage(): DocumentElement
+    /**
+     * @return DocumentElement
+     */
+    private function getPage()
     {
         return $this->getSession()->getPage();
     }
@@ -400,11 +425,10 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given This product listing visibility is removed
      */
-    public function thisProductListingVisibilityIsHidden(): void
+    public function thisProductListingVisibilityIsHidden()
     {
-        /** @var ListingInterface $productListing */
         $productListing = $this->sharedStorage->get('product_listing' . '0');
-        $productListing->remove();
+        $productListing->setHidden(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
     }
@@ -412,7 +436,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given There is attribute with code :code
      */
-    public function thereIsAttributeWithCode(string $code): void
+    public function thereIsAttributeWithCode($code)
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -438,10 +462,10 @@ final class ProductListingContext extends RawMinkContext
      * @Given there is a product listing with code :code and name :name and status :status with attribute and image
      */
     public function thereIsAProductListingWithCodeAndNameAndStatusWithAttributeAndImage(
-        string $code,
-        string $name,
-        string $status
-    ): void {
+        $code,
+        $name,
+        $status
+    ) {
         $vendor = $this->sharedStorage->get('vendor');
 
         $attribute = $this->sharedStorage->get('attribute');
@@ -452,6 +476,7 @@ final class ProductListingContext extends RawMinkContext
         $attributeValue->setValue('attribute_testing_value');
 
         $productListing = $this->createProductListing($vendor, $code);
+        /** @var DraftInterface $productDraft */
         $productDraft = $this->createProductListingDraft($productListing, $code, $status);
         $productDraft->addAttribute($attributeValue);
         $productTranslation = $this->createProductListingTranslation($productDraft, $name);
@@ -477,7 +502,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @When I click :buttonText
      */
-    public function iClick(string $buttonText): void
+    public function iClick($buttonText)
     {
         $this->getPage()->pressButton($buttonText);
     }
@@ -485,7 +510,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should see image
      */
-    public function iShouldSeeImage(): void
+    public function iShouldSeeImage()
     {
         $page = $this->getSession()->getPage();
 
@@ -500,13 +525,5 @@ final class ProductListingContext extends RawMinkContext
     {
         return $this->entityManager->getRepository(ChannelInterface::class)
             ->findAll()[0];
-    }
-
-    /**
-     * @Given /^I confirm my action$/
-     */
-    public function iConfirmMyAction(): void
-    {
-        $this->productListingPageIndexPage->confirmAction();
     }
 }

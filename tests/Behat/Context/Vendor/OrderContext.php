@@ -17,10 +17,16 @@ use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\OrderShowPageInterface;
 
 final class OrderContext implements Context
 {
+    private OrderShowPageInterface $orderShowPage;
+
+    private SharedStorageInterface $sharedStorage;
+
     public function __construct(
-        private OrderShowPageInterface $orderShowPage,
-        private SharedStorageInterface $sharedStorage,
+        OrderShowPageInterface $orderShowPage,
+        SharedStorageInterface $sharedStorage,
     ) {
+        $this->orderShowPage = $orderShowPage;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -53,7 +59,7 @@ final class OrderContext implements Context
     /**
      * @Given I resend the order confirmation email as vendor
      */
-    public function iResendTheOrderConfirmationEmailAsVendor(): void
+    public function iResendTheOrderConfirmationEmailAsVendor()
     {
         $this->orderShowPage->clickResendEmail();
     }
@@ -88,7 +94,7 @@ final class OrderContext implements Context
     /**
      * @Then I should see shipping state :state
      */
-    public function iShouldSeeShippingState(string $state): void
+    public function iShouldSeeShippingState(string $state)
     {
         $shippingStateText = $this->orderShowPage->getShippingStateText();
         assertStringContainsString($state, $shippingStateText);

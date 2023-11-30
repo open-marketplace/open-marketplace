@@ -37,19 +37,52 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext extends RawMinkContext
 {
+    private SharedStorageInterface $sharedStorage;
+
+    private FactoryInterface $orderFactory;
+
+    private OrderRepository $orderRepository;
+
+    private ShopUserExampleFactory $userExampleFactory;
+
+    private EntityManagerInterface $entityManager;
+
+    private UserRepository $userRepository;
+
+    private ShipmentFactoryInterface $shipmentFactory;
+
+    private ShippingMethodRepositoryInterface $shippingMethodRepository;
+
+    private StateMachineFactoryInterface $stateMachineFactory;
+
+    private AddressFactoryInterface $addressFactory;
+
+    private ExampleFactoryInterface $vendorExampleFactory;
+
     public function __construct(
-        private SharedStorageInterface $sharedStorage,
-        private FactoryInterface $orderFactory,
-        private OrderRepository $orderRepository,
-        private ShopUserExampleFactory $userExampleFactory,
-        private EntityManagerInterface $entityManager,
-        private UserRepository $userRepository,
-        private ShipmentFactoryInterface $shipmentFactory,
-        private ShippingMethodRepositoryInterface $shippingMethodRepository,
-        private StateMachineFactoryInterface $stateMachineFactory,
-        private AddressFactoryInterface $addressFactory,
-        private ExampleFactoryInterface $vendorExampleFactory,
+        SharedStorageInterface $sharedStorage,
+        FactoryInterface $orderFactory,
+        OrderRepository $orderRepository,
+        ShopUserExampleFactory $userExampleFactory,
+        EntityManagerInterface $entityManager,
+        UserRepository $userRepository,
+        ShipmentFactoryInterface $shipmentFactory,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        StateMachineFactoryInterface $stateMachineFactory,
+        AddressFactoryInterface $addressFactory,
+        ExampleFactoryInterface $vendorExampleFactory,
         ) {
+        $this->sharedStorage = $sharedStorage;
+        $this->orderFactory = $orderFactory;
+        $this->orderRepository = $orderRepository;
+        $this->userExampleFactory = $userExampleFactory;
+        $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
+        $this->shipmentFactory = $shipmentFactory;
+        $this->shippingMethodRepository = $shippingMethodRepository;
+        $this->stateMachineFactory = $stateMachineFactory;
+        $this->addressFactory = $addressFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
     }
 
     /**
@@ -77,7 +110,7 @@ final class OrderContext extends RawMinkContext
     /**
      * @Given There is order with property :propertyName with value :value made with other seller
      */
-    public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller($propertyName, $value): void
+    public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller($propertyName, $value)
     {
         $vendor = $this->createDefaultVendor();
 
@@ -197,7 +230,7 @@ final class OrderContext extends RawMinkContext
         ?string $number = null,
         ?ChannelInterface $channel = null,
         ?string $localeCode = null
-    ): OrderInterface {
+    ) {
         $order = $this->createCart($customer, $channel, $localeCode);
 
         if (null !== $number) {
@@ -235,13 +268,13 @@ final class OrderContext extends RawMinkContext
         /** @var OpenMarketplaceOrderInterface $secondaryOrder */
         $secondaryOrder = $this->createOrder(
             $customer,
-            null,
+            $number = null,
             $channel,
             $localeCode
         );
         $primaryOrder = $this->createOrder(
             $customer,
-            null,
+            $number = null,
             $channel,
             $localeCode
         );
@@ -311,7 +344,7 @@ final class OrderContext extends RawMinkContext
     /**
      * @Given I am on customer details page
      */
-    public function iAmOnCustomerDetailsPage(): void
+    public function iAmOnCustomerDetailsPage()
     {
         $order = $this->sharedStorage->get('order');
         $this->visitPath('/en_US/account/vendor/customers/' . $order->getCustomer()->getId());

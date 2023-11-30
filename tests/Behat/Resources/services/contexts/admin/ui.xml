@@ -13,7 +13,6 @@
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
             <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
             <argument type="service" id="sylius.factory.country" />
-            <argument type="service" id="tests.open_marketplace.behat.page.product_listing.index" />
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_listing" public="true"
@@ -26,7 +25,7 @@
         <service id="open_marketplace.behat.context.ui.admin.vendor_verification" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorVerificationContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="sylius.factory.country"/>
+            <argument type="service" id="service_container"/>
             <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
         </service>
 

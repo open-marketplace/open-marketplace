@@ -1,5 +1,5 @@
 imports:
-    - tests/Behat/Resources/suites.yaml
+    - tests/Behat/Resources/suites.yml
 
 default:
     extensions:
@@ -14,7 +14,7 @@ default:
             files_path: "%paths.base%/tests/Behat/Resources/fixtures/"
             base_url: "https://127.0.0.1:8080/"
             default_session: symfony
-            javascript_session: chrome_headless
+            javascript_session: chrome
             sessions:
                 symfony:
                     symfony: ~

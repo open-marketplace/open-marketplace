@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
+use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\Order;
@@ -21,20 +22,32 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ViewPaymentContext extends RawMinkContext
+class ViewPaymentContext extends RawMinkContext implements Context
 {
+    private EntityManagerInterface $entityManager;
+
+    private OrderExampleFactoryInterface $orderExampleFactory;
+
+    private OrderRepositoryInterface $orderRepository;
+
+    private SharedStorageInterface $sharedStorage;
+
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private OrderExampleFactoryInterface $orderExampleFactory,
-        private OrderRepositoryInterface $orderRepository,
-        private SharedStorageInterface $sharedStorage
+        EntityManagerInterface $entityManager,
+        OrderExampleFactoryInterface $orderExampleFactory,
+        OrderRepositoryInterface $orderRepository,
+        SharedStorageInterface $sharedStorage
     ) {
+        $this->entityManager = $entityManager;
+        $this->orderExampleFactory = $orderExampleFactory;
+        $this->orderRepository = $orderRepository;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @BeforeScenario
      */
-    public function clearData(): void
+    public function clearData()
     {
         $purger = new ORMPurger($this->entityManager);
         $purger->purge();
@@ -43,7 +56,7 @@ final class ViewPaymentContext extends RawMinkContext
     /**
      * @Given store has primary and secondary order
      */
-    public function storeHasPrimaryAndSecondaryOrderWithPayment(): void
+    public function storeHasPrimaryAndSecondaryOrderWithPayment()
     {
         $options['complete_date'] = new \DateTime();
         $orders = $this->orderExampleFactory->createArray($options);
@@ -56,7 +69,7 @@ final class ViewPaymentContext extends RawMinkContext
     /**
      * @Given store has primary and secondary order with payment state :paymentState
      */
-    public function storeHasPrimaryAndSecondaryOrderWithPaymentState(string $paymentState): void
+    public function storeHasPrimaryAndSecondaryOrderWithPaymentState(string $paymentState)
     {
         $options['complete_date'] = new \DateTime();
         $orders = $this->orderExampleFactory->createArray($options);
@@ -71,7 +84,7 @@ final class ViewPaymentContext extends RawMinkContext
     /**
      * @Then I should see :count payment(s) for :mode order(s)
      */
-    public function iShouldSeePayments(int $count, string $mode): void
+    public function iShouldSeePayments($count, $mode)
     {
         $page = $this->getSession()->getPage();
         $tableWrapper = $page->find('css', 'table');
@@ -90,12 +103,12 @@ final class ViewPaymentContext extends RawMinkContext
     /**
      * @Then statistics should omit primary order
      */
-    public function iViewStatistics(): void
+    public function iViewStatistics()
     {
         $page = $this->getSession()->getPage();
         $totalSalesStats = $this->currencyToInt($page->find('css', '#total-sales')->getText());
         $newOrdersStats = (int) $page->find('css', '#new-orders')->getText();
-        $averageOrderValueStats = $this->currencyToInt($page->find('css', '#average-order-value')->getText());
+        $avarageOrderValueStats = $this->currencyToInt($page->find('css', '#average-order-value')->getText());
 
         /** @var Order $order */
         $order = $this->orderRepository->findOneBy(['mode' => OrderInterface::SECONDARY_ORDER_MODE]);
@@ -106,11 +119,11 @@ final class ViewPaymentContext extends RawMinkContext
 
         $totalSales = $this->orderRepository->getTotalPaidSalesForChannelInPeriod($channel, $startDate, $endDate);
         $newOrders = $this->orderRepository->countPaidForChannelInPeriod($channel, $startDate, $endDate);
-        $averageOrderValue = $totalSales / $newOrders;
+        $avarageOrderValue = $totalSales / $newOrders;
 
         Assert::eq($totalSalesStats, $totalSales);
         Assert::eq($newOrdersStats, $newOrders);
-        Assert::eq($averageOrderValueStats, $averageOrderValue);
+        Assert::eq($avarageOrderValueStats, $avarageOrderValue);
     }
 
     private function currencyToInt(string $value): int

@@ -12,14 +12,30 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftAttributeRepositoryInterface;
 use function PHPUnit\Framework\assertTrue;
+use Sylius\Behat\Service\SharedStorageInterface;
 
 final class DraftAttributeContext extends RawMinkContext
 {
+    private SharedStorageInterface $sharedStorage;
+
+    private DraftAttributeRepositoryInterface $attributeRepository;
+
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        DraftAttributeRepositoryInterface $attributeRepository
+    ) {
+        $this->sharedStorage = $sharedStorage;
+        $this->attributeRepository = $attributeRepository;
+    }
+
     /**
      * @When I fill form with :code and name with :name and submit
      */
-    public function iFillCodeWithAndNameWith(string $code, string $name): void
+    public function iFillCodeWithAndNameWith($code, $name)
     {
         $page = $this->getSession()->getPage();
         $codeInput = $page->find('css', '#sylius_product_attribute_code');
@@ -33,17 +49,16 @@ final class DraftAttributeContext extends RawMinkContext
     }
 
     /**
-     * @Then I should see attribute with :code and :name type :type
+     * @Then I should see attribute with :arg1 and :arg2 type :type
      */
     public function iShouldSeeAttributeWithAnd(
-        string $code,
-        string $name,
-        string $type
-    ): void {
+        $code,
+        $name,
+        $type
+    ) {
         $page = $this->getSession()->getPage();
         $gridTable = $page->find('css', '.ui.sortable.stackable.very.basic.celled.table');
         $rows = $gridTable->findAll('css', '.item');
-        $rowWithValueExist = false;
         foreach ($rows as $row) {
             if (
                 str_contains($row->getText(), $code) &&
@@ -55,5 +70,72 @@ final class DraftAttributeContext extends RawMinkContext
         }
 
         assertTrue($rowWithValueExist);
+    }
+
+    /**
+     * @Given I have Attribute type :type name :name code :code
+     */
+    public function iHaveAttributeTypeNameCode(
+        $type,
+        $name,
+        $code
+    ) {
+        $vendor = $this->sharedStorage->get('vendor');
+        $locale = $this->sharedStorage->get('locale');
+
+        $draftAttributeTranslation = new DraftAttributeTranslation();
+        $draftAttributeTranslation->setLocale($locale->getCode());
+        $draftAttributeTranslation->setName($name);
+
+        $attribute = new DraftAttribute();
+        $draftAttributeTranslation->setTranslatable($attribute);
+
+        $attribute->setTranslatable(false);
+        $attribute->setCreatedAt(new \DateTime());
+        $attribute->setVendor($vendor);
+        $attribute->setCode($code);
+        $attribute->setStorageType('text');
+        $attribute->addTranslation($draftAttributeTranslation);
+
+        $this->attributeRepository->add($attribute);
+    }
+
+    /**
+     * @Given I fill product draft form
+     */
+    public function iFillProductDraftForm()
+    {
+        $page = $this->getSession()->getPage();
+
+        $codeInput = $page->find('css', '#sylius_product_code');
+        $codeInput->setValue('Testingcode');
+
+        $nameInput = $page->find('css', '#sylius_product_translations_en_US_name');
+        $nameInput->setValue('TestingName');
+
+        $slugInput = $page->find('css', '#sylius_product_translations_en_US_slug');
+        $slugInput->setValue('TestingSlug');
+
+        $priceInput = $page->find('css', '#sylius_product_productListingPrice_WEB-US_price');
+        $priceInput->setValue(1);
+
+        $originalPriceInput = $page->find('css', '#sylius_product_productListingPrice_WEB-US_originalPrice');
+        $originalPriceInput->setValue(1);
+
+        $priceInput = $page->find('css', '#sylius_product_productListingPrice_WEB-US_price');
+        $priceInput->setValue(1);
+    }
+
+    /**
+     * @Given I pick attribute
+     */
+    public function iPickAttribute()
+    {
+        $page = $this->getSession()->getPage();
+
+        $wrapper = $page->find('css', '.ui.fluid.action.input');
+        $wrapper->press();
+
+        $div = $page->find('css', '[data-value="name"]');
     }
 }

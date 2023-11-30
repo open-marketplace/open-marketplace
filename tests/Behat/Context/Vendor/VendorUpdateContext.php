@@ -25,33 +25,58 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Factory\TaxonFactory;
+use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class VendorUpdateContext extends RawMinkContext
+class VendorUpdateContext extends RawMinkContext
 {
+    private SharedStorageInterface $sharedStorage;
+
+    private UserRepositoryInterface $userRepository;
+
+    private ExampleFactoryInterface $userFactory;
+
+    private ObjectManager $manager;
+
+    private LogoImageFactoryInterface $vendorImageFactory;
+
+    private TaxonFactoryInterface $taxonFactory;
+
+    private ExampleFactoryInterface $vendorExampleFactory;
+
+    private FactoryInterface $countryFactory;
+
     public function __construct(
-        private SharedStorageInterface $sharedStorage,
-        private UserRepositoryInterface $userRepository,
-        private ExampleFactoryInterface $userFactory,
-        private ObjectManager $manager,
-        private LogoImageFactoryInterface $vendorImageFactory,
-        private TaxonFactory $taxonFactory,
-        private ExampleFactoryInterface $vendorExampleFactory,
-        private FactoryInterface $countryFactory,
+        SharedStorageInterface $sharedStorage,
+        UserRepositoryInterface $userRepository,
+        ExampleFactoryInterface $userFactory,
+        ObjectManager $manager,
+        LogoImageFactoryInterface $vendorImageFactory,
+        TaxonFactory $taxonFactory,
+        ExampleFactoryInterface $vendorExampleFactory,
+        FactoryInterface $countryFactory,
         ) {
+        $this->sharedStorage = $sharedStorage;
+        $this->userRepository = $userRepository;
+        $this->userFactory = $userFactory;
+        $this->manager = $manager;
+        $this->vendorImageFactory = $vendorImageFactory;
+        $this->taxonFactory = $taxonFactory;
+        $this->vendorExampleFactory = $vendorExampleFactory;
+        $this->countryFactory = $countryFactory;
     }
 
     /**
-     * @Given there is a :status vendor user :vendorUserEmail registered in country :countryCode
+     * @Given there is a :status vendor user :vendor_user_email registered in country :country_code
      */
     public function thereIsAVendorUserRegisteredInCountry(
-        string $status,
-        string $vendorUserEmail,
-        string $countryCode
+        $status,
+        $vendor_user_email,
+        $country_code
     ): void {
         /** @var ShopUserInterface $user */
-        $user = $this->userFactory->create(['email' => $vendorUserEmail, 'password' => 'password', 'enabled' => true]);
+        $user = $this->userFactory->create(['email' => $vendor_user_email, 'password' => 'password', 'enabled' => true]);
         $user->setVerifiedAt(new \DateTime());
         $user->addRole('ROLE_USER');
         $user->addRole('ROLE_VENDOR');
@@ -60,11 +85,11 @@ final class VendorUpdateContext extends RawMinkContext
 
         $this->userRepository->add($user);
 
-        $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $countryCode]);
+        $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => $country_code]);
         if (null === $country) {
             /** @var CountryInterface $country */
             $country = $this->countryFactory->createNew();
-            $country->setCode($countryCode);
+            $country->setCode($country_code);
             $country->enable();
             $this->manager->persist($country);
         }
@@ -93,7 +118,7 @@ final class VendorUpdateContext extends RawMinkContext
     /**
      * @Then Pending update data should appear in database
      */
-    public function pendingUpdateDataShouldAppearInDatabase(): void
+    public function pendingUpdateDataShouldAppearInDatabase()
     {
         $vendor = $this->sharedStorage->get('vendor');
         $pendingData = $this->manager->getRepository(ProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
@@ -104,34 +129,34 @@ final class VendorUpdateContext extends RawMinkContext
     /**
      * @Given There is pending update data with token value :token for logged in vendor
      */
-    public function thereIsPendingUpdateDataWithTokenValueForLoggedInVendor(string $token): void
+    public function thereIsPendingUpdateDataWithTokenValueForLoggedInVendor($token): void
     {
         $vendor = $this->sharedStorage->get('vendor');
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => 'PL']);
-        $pendingUpdate = new ProfileUpdate();
-        $pendingUpdate->setVendorAddress(new Address());
-        $pendingUpdate->setVendor($vendor);
-        $pendingUpdate->setToken($token);
-        $pendingUpdate->setCompanyName('new Company');
-        $pendingUpdate->setTaxIdentifier('new ID');
-        $pendingUpdate->setBankAccountNumber('new iban');
-        $pendingUpdate->setPhoneNumber('new number');
-        $pendingUpdate->setDescription('new description');
-        $pendingUpdate->getVendorAddress()->setStreet('new street');
-        $pendingUpdate->getVendorAddress()->setCity('new city');
-        $pendingUpdate->getVendorAddress()->setPostalCode('new code');
-        $pendingUpdate->getVendorAddress()->setCountry($country);
+        $pendigUpdate = new ProfileUpdate();
+        $pendigUpdate->setVendorAddress(new Address());
+        $pendigUpdate->setVendor($vendor);
+        $pendigUpdate->setToken($token);
+        $pendigUpdate->setCompanyName('new Company');
+        $pendigUpdate->setTaxIdentifier('new ID');
+        $pendigUpdate->setBankAccountNumber('new iban');
+        $pendigUpdate->setPhoneNumber('new number');
+        $pendigUpdate->setDescription('new description');
+        $pendigUpdate->getVendorAddress()->setStreet('new street');
+        $pendigUpdate->getVendorAddress()->setCity('new city');
+        $pendigUpdate->getVendorAddress()->setPostalCode('new code');
+        $pendigUpdate->getVendorAddress()->setCountry($country);
 
-        $this->manager->persist($pendingUpdate);
+        $this->manager->persist($pendigUpdate);
         $this->manager->flush();
 
-        $this->sharedStorage->set('pendingUpdate', $pendingUpdate);
+        $this->sharedStorage->set('pendingUpdate', $pendigUpdate);
     }
 
     /**
      * @Then I should get validation error
      */
-    public function iShouldGetValidationError(): void
+    public function iShouldGetValidationError()
     {
         $page = $this->getSession()->getPage();
         $label = $page->find('css', '.ui.red.pointing.label.sylius-validation-error');
@@ -140,7 +165,7 @@ final class VendorUpdateContext extends RawMinkContext
     /**
      * @Given vendor have logo attached to profile
      */
-    public function vendorHaveLogoAttachedToProfile(): void
+    public function vendorHaveLogoAttachedToProfile()
     {
         /** @var VendorInterface $vendor */
         $vendor = $this->sharedStorage->get('vendor');
@@ -153,7 +178,7 @@ final class VendorUpdateContext extends RawMinkContext
     /**
      * @When I visit confirmation page
      */
-    public function iVisitConfirmationPage(): void
+    public function iVisitConfirmationPage()
     {
         $repository = $this->manager->getRepository(ProfileUpdate::class);
         $updateData = $repository->findAll();
@@ -165,7 +190,7 @@ final class VendorUpdateContext extends RawMinkContext
     /**
      * @Then Logo should be updated
      */
-    public function imageShouldBeUpdated(): void
+    public function imageShouldBeUpdated()
     {
         $oldImagePath = $this->sharedStorage->get('path');
         $session = $this->getSession();
@@ -181,10 +206,10 @@ final class VendorUpdateContext extends RawMinkContext
      * @Given Vendor company name is :companyName tax ID is :taxId phone number is :phoneNumber
      */
     public function vendorCompanyNameIsTaxIdIsPhoneNumberIs(
-        string $companyName,
-        string $taxId,
-        string $phoneNumber
-    ): void {
+        $companyName,
+        $taxId,
+        $phoneNumber
+    ) {
         /** @var VendorInterface $vendor */
         $vendor = $this->sharedStorage->get('vendor');
         $vendor->setCompanyName($companyName);
@@ -200,10 +225,10 @@ final class VendorUpdateContext extends RawMinkContext
      * @Then I should see form initialized with :companyName :taxId :phoneNumber
      */
     public function iShouldSeeAsDefaultFormValues(
-        string $companyName,
-        string $taxId,
-        string $phoneNumber
-    ): void {
+        $companyName,
+        $taxId,
+        $phoneNumber
+    ) {
         $page = $this->getSession()->getPage();
         $companyNameInput = $page->find('css', '#profile_companyName');
         $taxIdInput = $page->find('css', '#profile_taxIdentifier');
@@ -217,7 +242,7 @@ final class VendorUpdateContext extends RawMinkContext
     /**
      * @Given the channel has a menu taxon
      */
-    public function theChannelHasAsAMenuTaxon(): void
+    public function theChannelHasAsAMenuTaxon()
     {
         /** @var ChannelInterface $channel */
         $channel = $this->sharedStorage->get('channel');

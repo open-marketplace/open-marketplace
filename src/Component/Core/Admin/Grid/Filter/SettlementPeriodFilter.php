@@ -47,7 +47,7 @@ final class SettlementPeriodFilter implements FilterInterface
         }
     }
 
-    private function formatDateForQuery(string $startDate): string
+    public function formatDateForQuery(string $startDate): string
     {
         return implode('-', array_reverse(explode('/', $startDate)));
     }

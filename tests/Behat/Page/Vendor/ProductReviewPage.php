@@ -22,8 +22,9 @@ final class ProductReviewPage extends SymfonyPage implements ProductReviewPageIn
     public function getReviews(): array
     {
         $page = $this->getDocument();
+        $tableWrapper = $page->find('css', 'table.table');
 
-        return $page->find('css', 'table.table')->findAll('css', 'tr.item');
+        return $tableWrapper->findAll('css', 'tr.item');
     }
 
     public function clickButton(string $button): void

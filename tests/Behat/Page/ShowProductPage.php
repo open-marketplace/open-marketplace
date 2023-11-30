@@ -11,9 +11,12 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Page;
 
+use Behat\Mink\Driver\Selenium2Driver;
+use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\JQueryHelper;
 
-final class ShowProductPage extends SymfonyPage
+class ShowProductPage extends SymfonyPage
 {
     public function getRouteName(): string
     {
@@ -24,5 +27,15 @@ final class ShowProductPage extends SymfonyPage
     {
         $addToCart = $this->getDocument()->find('css', 'button');
         $addToCart->click();
+    }
+
+    private function waitForCartSummary(): void
+    {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
+            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+            $this->getDocument()->waitFor(3, function (): bool {
+                return $this->summaryPage->isOpen();
+            });
+        }
     }
 }

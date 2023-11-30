@@ -1,12 +1,13 @@
 default:
     suites:
-        restoring_visibility_admin:
+        restoring_visibility:
             contexts:
                 - open_marketplace.behat.context.ui.admin.product_listing
+                - open_marketplace.behat.context.
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.channel
                 - open_marketplace.behat.context.setup.vendor
                 - sylius.behat.context.hook.doctrine_orm
             filters:
-                tags: '@product_removal_admin@javascript&&@ui'
+                tags: '@product_removal_admin&&@ui'

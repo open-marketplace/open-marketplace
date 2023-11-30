@@ -11,17 +11,18 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
+use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertStringContainsString;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class VendorShippingMethodsContext extends RawMinkContext
+class VendorShippingMethodsContext extends RawMinkContext implements Context
 {
     /**
      * @Given I click :button button
      */
-    public function iClickButton(string $button): void
+    public function iClickButton(string $button)
     {
         $this->getSession()->getPage()->pressButton($button);
     }

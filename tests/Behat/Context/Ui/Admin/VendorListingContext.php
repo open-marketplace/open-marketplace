@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
+use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +20,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\Customer;
 use Webmozart\Assert\Assert;
 
-final class VendorListingContext extends RawMinkContext
+final class VendorListingContext extends RawMinkContext implements Context
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
@@ -31,7 +32,7 @@ final class VendorListingContext extends RawMinkContext
     /**
      * @Given There is an admin user :username with password :password
      */
-    public function thereIsAnAdminUserWithPassword(string $username, string $password): void
+    public function thereIsAnAdminUserWithPassword($username, $password): void
     {
         $admin = $this->adminUserExample->create();
         $admin->setUsername($username);
@@ -54,7 +55,7 @@ final class VendorListingContext extends RawMinkContext
     /**
      * @Given There are :count vendors listed
      */
-    public function thereAreVendors(int $count): void
+    public function thereAreVendors($count): void
     {
         for ($i = 0; $i < $count; ++$i) {
             $options = [
@@ -75,7 +76,7 @@ final class VendorListingContext extends RawMinkContext
     /**
      * @Then I should see :count vendor rows
      */
-    public function iShouldSeeVendorRows(int $count): void
+    public function iShouldSeeVendorRows($count): void
     {
         $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
         Assert::notEmpty($rows, 'Could not find any rows');

@@ -11,26 +11,26 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
+use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\VendorRegisterPage;
 use Webmozart\Assert\Assert;
 
-final class VendorRegisterContext extends MinkContext
+class VendorRegisterContext extends MinkContext implements Context
 {
-    public function __construct(private VendorRegisterPage $vendorRegisterPage)
+    private VendorRegisterPage $vendorRegisterPage;
+
+    public function __construct(VendorRegisterPage $vendorRegisterPage)
     {
+        $this->vendorRegisterPage = $vendorRegisterPage;
     }
 
     /**
      * @Then I should see :itemCLass :times times
      */
-    public function iShouldSeeTimes(string $itemCLass, int $times): void
+    public function iShouldSeeTimes($itemCLass, $times): void
     {
         $validationMessageCount = $this->vendorRegisterPage->getValidationMessageCount($itemCLass);
-        Assert::eq(
-            $times,
-            $validationMessageCount,
-            sprintf('expected %d got %d', $times, $validationMessageCount)
-        );
+        Assert::eq($times, $validationMessageCount, "expected $times got $validationMessageCount");
     }
 }

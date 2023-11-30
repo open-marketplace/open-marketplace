@@ -3,7 +3,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="true" />
-        <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Conversation\ConversationContext"
+        <service class="Tests\BitBag\OpenMarketplace\Behat\Context\ConversationContext"
                 id="tests.open_marketplace.behat.context.conversation_context">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />

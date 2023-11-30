@@ -11,17 +11,21 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
+use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\MinkContext;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class VendorCommissionContext extends MinkContext
+final class VendorCommissionContext extends MinkContext implements Context
 {
+    private OrderRepositoryInterface $orderRepository;
+
     public function __construct(
-        private OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository
     ) {
+        $this->orderRepository = $orderRepository;
     }
 
     /**

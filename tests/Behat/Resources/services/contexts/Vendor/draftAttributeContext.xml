@@ -5,6 +5,8 @@
         <service
                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Vendor\DraftAttributeContext"
                 id="tests.open_marketplace.behat.context.draft_attribute_context" >
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="open_marketplace.repository.product_draft_attribute"/>
         </service>
     </services>
 </container>
