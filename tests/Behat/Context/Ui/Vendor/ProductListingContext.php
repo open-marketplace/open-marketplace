@@ -88,7 +88,7 @@ final class ProductListingContext extends RawMinkContext
     public function thisProductListingVisibilityIsHidden(): void
     {
         $productListing = $this->sharedStorage->get('product_listing' . '0');
-        $productListing->setHidden(true);
+        $productListing->remove();
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
     }
@@ -110,10 +110,7 @@ final class ProductListingContext extends RawMinkContext
         $this->getPage()->pressButton($button);
     }
 
-    /**
-     * @return DocumentElement
-     */
-    private function getPage()
+    private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
     }
@@ -286,6 +283,6 @@ final class ProductListingContext extends RawMinkContext
         $this->getPage()->fillField('Username', $admin->getUsername());
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
-        ($this->getPage()->findLink('Logout'));
+        $this->getPage()->findLink('Logout');
     }
 }
