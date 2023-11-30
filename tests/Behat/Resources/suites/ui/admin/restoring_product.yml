@@ -1,9 +1,8 @@
 default:
     suites:
-        restoring_visibility_admin:
+        restoring_visibility:
             contexts:
                 - open_marketplace.behat.context.ui.admin.product_listing
-                - open_marketplace.behat.context.
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.channel
