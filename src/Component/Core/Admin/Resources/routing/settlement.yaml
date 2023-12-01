@@ -11,10 +11,9 @@ open_marketplace_admin_settlements_show_orders:
   path: /settlement/{id}/orders
   methods: [GET]
   defaults:
-    _controller: sylius.controller.order:indexAction
+    _controller: open_marketplace.controller.settlement:showOrderAction
     _sylius:
       section: admin
       permission: true
       template: 'Context/Admin/Settlement/showOrders.html.twig'
       grid: open_marketplace_admin_settlement_order
-      settlement: expr:service('open_marketplace.repository.settlement').find(service('request_stack').getCurrentRequest().get('id'))

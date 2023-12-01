@@ -26,19 +26,19 @@
     <tr>
         <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.period'|trans }}</strong></td>
         <td>
-            {{ settlement.startDate|format_datetime(pattern='dd/MM/YYYY HH:mm:ss') }} -
-            {{ settlement.endDate|format_datetime(pattern='dd/MM/YYYY HH:mm:ss') }}
+            {{ settlement.startDate|format_datetime() }} -
+            {{ settlement.endDate|format_datetime() }}
         </td>
     </tr>
     <tr>
         <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.created_at'|trans }}</strong>
         </td>
-        <td>{{ settlement.createdAt|format_datetime(pattern='dd/MM/YYYY HH:mm:ss') }}</td>
+        <td>{{ settlement.createdAt|format_datetime() }}</td>
     </tr>
     <tr>
         <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.updated_at'|trans }}</strong>
         </td>
-        <td>{{ settlement.updatedAt|format_datetime(pattern='dd/MM/YYYY HH:mm:ss') }}</td>
+        <td>{{ settlement.updatedAt|format_datetime() }}</td>
     </tr>
     <tr>
         <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.channel'|trans }}</strong></td>

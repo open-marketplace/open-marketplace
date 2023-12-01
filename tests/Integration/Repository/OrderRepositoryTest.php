@@ -86,4 +86,17 @@ final class OrderRepositoryTest extends JsonApiTestCase
             $this->orderRepository->countOrderForSettlement($settlements[0])
         );
     }
+
+    public function test_it_create_query_builder_to_find_order_for_settlement(): void
+    {
+        $this->loadFixturesFromFile('OrderRepositoryTest/test_it_create_query_builder_to_find_order_for_settlement.yaml');
+        $settlementRepository = self::getContainer()->get('open_marketplace.repository.settlement');
+        $settlements = $settlementRepository->findAll();
+        $this->assertCount(1, $settlements);
+
+        $this->assertCount(
+            2,
+            $this->orderRepository->findForSettlementQueryBuilder($settlements[0])->getQuery()->getResult()
+        );
+    }
 }
