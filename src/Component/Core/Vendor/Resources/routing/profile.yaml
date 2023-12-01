@@ -1,35 +1,35 @@
 open_marketplace_vendor_profile_details:
-    path: /profile
-    methods: [GET]
-    defaults:
-        _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:showVendorProfileAction
-        _sylius:
-            template: "Context/Vendor/Profile/index.html.twig"
+  path: /profile
+  methods: [ GET ]
+  defaults:
+    _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:showVendorProfileAction
+    _sylius:
+      template: "Context/Vendor/Profile/index.html.twig"
 
 open_marketplace_vendor_profile_update:
-    path: /profile/update
-    methods: [GET, POST]
-    defaults:
-        autowire: true
-        _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:customUpdateAction
-        _sylius:
-            template: "Context/Vendor/Profile/update.html.twig"
-            form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType
-            event: update
-            flash: open_marketplace.ui.vendor_updated
-            redirect:
-                route: sylius_shop_account_dashboard
+  path: /profile/update
+  methods: [ GET, POST ]
+  defaults:
+    autowire: true
+    _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:customUpdateAction
+    _sylius:
+      template: "Context/Vendor/Profile/update.html.twig"
+      form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType
+      event: update
+      flash: open_marketplace.ui.vendor_updated
+      redirect:
+        route: sylius_shop_account_dashboard
 
 open_marketplace_vendor_profile_confirm_link:
-    path: /profile-update/{token}
-    methods: [GET]
-    defaults:
-        _controller: bitbag.open_marketplace.component.core.vendor.controller.profile.confirm_update
-        _sylius:
-            template: "Context/Vendor/Profile/update.html.twig"
-            form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType
-            event: update
-            repository:
-                method: findOneByActivationToken
-                arguments:
-                    token: $token
+  path: /profile-update/{token}
+  methods: [ GET ]
+  defaults:
+    _controller: bitbag.open_marketplace.component.core.vendor.controller.profile.confirm_update
+    _sylius:
+      template: "Context/Vendor/Profile/update.html.twig"
+      form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType
+      event: update
+      repository:
+        method: findOneByActivationToken
+        arguments:
+          token: $token
