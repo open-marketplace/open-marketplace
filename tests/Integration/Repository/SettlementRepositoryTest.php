@@ -50,6 +50,19 @@ final class SettlementRepositoryTest extends JsonApiTestCase
         );
     }
 
+    public function test_it_finds_all_settlements_by_vendor(): void
+    {
+        $this->loadFixturesFromFile('SettlementRepositoryTest/test_it_finds_all_settlements_by_vendor.yaml');
+        $vendorRepository = self::getContainer()->get('open_marketplace.repository.vendor');
+        $vendor = $vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+        $settlements = $this->repository->findAllByVendorQueryBuilder($vendor)->getQuery()->getResult();
+        $this->assertCount(3, $settlements);
+
+        foreach ($settlements as $settlement) {
+            $this->assertSame($vendor, $settlement->getVendor());
+        }
+    }
+
     private function generatePeriod(string $startDate, string $endDate): string
     {
         return sprintf(
