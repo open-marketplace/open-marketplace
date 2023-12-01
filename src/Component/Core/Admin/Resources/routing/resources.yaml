@@ -45,7 +45,7 @@ open_marketplace_admin_resource_settlement:
     resource: |
         alias: open_marketplace.settlement
         section: admin
-        only: ['index']
+        only: ['index', 'show']
         templates: "@SyliusAdmin\\Crud"
         grid: open_marketplace_admin_settlement
     type: sylius.resource

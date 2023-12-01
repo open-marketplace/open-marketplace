@@ -7,13 +7,6 @@
                 <div class="sub header"> {{ [settlement.startDate|format_date(pattern='dd/MM/YYYY'), settlement.endDate|format_date(pattern='dd/MM/YYYY')]|join(' - ') }}</div>
             </div>
         </h1>
-        {% include "Context/Admin/Settlement/Show/_breadcrumb.html.twig" %}
-    </div>
-    <div class="middle aligned column">
-        <div class="ui right floated buttons">
-            <a class="ui labeled icon button green" href="{{ path('open_marketplace_admin_settlements_show_orders', {'id': settlement.id}) }}">
-                <i class="cart up icon"></i> {{ 'open_marketplace.ui.show_orders'|trans }}
-            </a>
-        </div>
+        {% include "Context/Admin/Settlement/ShowOrders/_breadcrumb.html.twig" %}
     </div>
 </div>

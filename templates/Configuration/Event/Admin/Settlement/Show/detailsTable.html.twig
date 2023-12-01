@@ -1,0 +1,52 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
+<table class="ui very basic celled table">
+    <tbody>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.status'|trans }}</strong></td>
+        <td>
+            {% include 'Configuration/Grid/Admin/Field/settlementStatus.html.twig' with {data: settlement.status} %}
+        </td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.total_amount'|trans }}</strong>
+        </td>
+        <td>{{ money.format(settlement.totalAmount, settlement.channel.baseCurrency.code) }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong
+                    class="gray text">{{ 'open_marketplace.ui.total_commission_amount'|trans }}</strong></td>
+        <td>{{ money.format(settlement.totalCommissionAmount, settlement.channel.baseCurrency.code) }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong
+                    class="gray text">{{ 'open_marketplace.ui.total_profit_amount'|trans }}</strong></td>
+        <td>{{ money.format(settlement.totalAmount - settlement.totalCommissionAmount, settlement.channel.baseCurrency.code) }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.period'|trans }}</strong></td>
+        <td>
+            {{ settlement.startDate|format_datetime(pattern='dd/MM/YYYY HH:mm:ss') }} -
+            {{ settlement.endDate|format_datetime(pattern='dd/MM/YYYY HH:mm:ss') }}
+        </td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.created_at'|trans }}</strong>
+        </td>
+        <td>{{ settlement.createdAt|format_datetime(pattern='dd/MM/YYYY HH:mm:ss') }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.updated_at'|trans }}</strong>
+        </td>
+        <td>{{ settlement.updatedAt|format_datetime(pattern='dd/MM/YYYY HH:mm:ss') }}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.channel'|trans }}</strong></td>
+        <td>{% include '@SyliusAdmin/Common/_channel.html.twig' with {'channel': settlement.channel} %}</td>
+    </tr>
+    <tr>
+        <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.total_orders'|trans }}</strong></td>
+        <td>{{ count_orders_for_settlement(settlement) }}</td>
+    </tr>
+    </tbody>
+</table>

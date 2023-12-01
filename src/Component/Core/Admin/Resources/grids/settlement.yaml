@@ -78,6 +78,6 @@ sylius_grid:
             label: open_marketplace.ui.details
             options:
               link:
-                route: open_marketplace_admin_settlements_show
+                route: open_marketplace_admin_settlement_show
                 parameters:
                   id: resource.id

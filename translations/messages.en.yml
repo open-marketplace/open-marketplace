@@ -185,6 +185,7 @@ open_marketplace:
         updated_at: Updated at
         channel: Channel
         total_orders: Total orders
+        show_orders: Show orders
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.
