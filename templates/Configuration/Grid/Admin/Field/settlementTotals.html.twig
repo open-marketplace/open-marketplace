@@ -1,3 +1,1 @@
-{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
-
-{{ money.format(attribute(data, options.vars.method), data.channel.baseCurrency.code) }}
+{{ attribute(data, options.vars.method)|sylius_format_money(data.channel.baseCurrency.code, sylius_base_locale) }}

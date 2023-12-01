@@ -1,0 +1,73 @@
+sylius_grid:
+  grids:
+    vendor_account_settlement:
+      driver:
+        name: doctrine/orm
+        options:
+          class: '%open_marketplace.model.settlement.class%'
+          repository:
+            method: findAllByVendorQueryBuilder
+            arguments:
+              - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
+      sorting:
+        id: asc
+      fields:
+        id:
+          type: string
+          sortable: ~
+          label: open_marketplace.ui.id
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        totalAmount:
+          type: twig
+          label: open_marketplace.ui.total_amount
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementTotals.html.twig"
+            vars:
+              method: getTotalAmount
+        totalCommissionAmount:
+          type: twig
+          label: open_marketplace.ui.total_commission_amount
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementTotals.html.twig"
+            vars:
+              method: getTotalCommissionAmount
+        totalProfitAmount:
+          type: twig
+          label: open_marketplace.ui.total_profit_amount
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementTotals.html.twig"
+            vars:
+              method: getTotalProfitAmount
+        status:
+          type: twig
+          label: open_marketplace.ui.status
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementStatus.html.twig"
+        period:
+          type: twig
+          label: open_marketplace.ui.period
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementPeriod.html.twig"
+      filters:
+        channel:
+          type: entities
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+          options:
+            field: "channels.id"
+        status:
+          type: settlement_status
+          label: open_marketplace.ui.status
+        period:
+          type: settlement_period
+          label: open_marketplace.ui.period

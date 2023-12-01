@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Repository;
 
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 
@@ -44,5 +45,12 @@ final class SettlementRepository extends EntityRepository implements SettlementR
             )
             ->getQuery()
             ->getSingleColumnResult();
+    }
+
+    public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.vendor = :vendor')
+            ->setParameter('vendor', $vendor);
     }
 }

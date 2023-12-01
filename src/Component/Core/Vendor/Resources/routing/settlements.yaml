@@ -1,0 +1,8 @@
+open_marketplace_vendor_settlements_index:
+  path: /settlements
+  methods: [ GET ]
+  defaults:
+    _controller: open_marketplace.controller.settlement:indexAction
+    _sylius:
+      template: "Context/Vendor/Settlement/index.html.twig"
+      grid: vendor_account_settlement

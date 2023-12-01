@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Repository;
 
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -21,4 +22,6 @@ interface SettlementRepositoryInterface extends RepositoryInterface
     public function findLastByVendorAndChannel(VendorInterface $vendor, ChannelInterface $channel): ?SettlementInterface;
 
     public function findAllPeriods(): array;
+
+    public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder;
 }
