@@ -34,4 +34,28 @@ final class SettlementRepositoryTest extends JsonApiTestCase
         $this->assertSame(10000, $settlement->getTotalAmount());
         $this->assertSame(100, $settlement->getTotalCommissionAmount());
     }
+
+    public function test_it_finds_all_available_periods(): void
+    {
+        $this->loadFixturesFromFile('SettlementRepositoryTest/test_it_finds_all_available_periods.yaml');
+
+        $period[] = $this->generatePeriod('last week monday', 'last week sunday');
+        $period[] = $this->generatePeriod('first day of last month', 'last day of last month');
+        $period[] = $this->generatePeriod('first day of January', 'last day of January');
+        $period[] = $this->generatePeriod('first day of April', 'last day of June');
+
+        $this->assertSame(
+            $period,
+            $this->repository->findAllPeriods()
+        );
+    }
+
+    private function generatePeriod(string $startDate, string $endDate): string
+    {
+        return sprintf(
+            '%s - %s',
+            (new \DateTime($startDate))->format('j/m/Y'),
+            (new \DateTime($endDate))->format('j/m/Y')
+        );
+    }
 }

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Repository;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -21,7 +22,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
     public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder;
 
-    public function findAllSecondaryOrders(): QueryBuilder;
+    public function findAllSecondaryOrdersQueryBuilder(): QueryBuilder;
 
     public function findOrderForVendor(VendorInterface $vendor, string $id): ?OrderInterface;
 
@@ -56,4 +57,8 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
         \DateTimeInterface $nextSettlementStartDate,
         \DateTimeInterface $nextSettlementEndDate
     ): array;
+
+    public function findForSettlementQueryBuilder(SettlementInterface $settlement): QueryBuilder;
+
+    public function countOrderForSettlement(SettlementInterface $settlement): int;
 }

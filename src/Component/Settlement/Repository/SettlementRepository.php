@@ -30,4 +30,19 @@ final class SettlementRepository extends EntityRepository implements SettlementR
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findAllPeriods(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->distinct(true)
+            ->select(
+                'CONCAT(
+                    DATE_FORMAT(s.startDate, \'%e/%m/%Y\'),
+                    \' - \',
+                    DATE_FORMAT(s.endDate, \'%e/%m/%Y\')
+                )'
+            )
+            ->getQuery()
+            ->getSingleColumnResult();
+    }
 }

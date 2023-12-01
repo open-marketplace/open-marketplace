@@ -4,6 +4,7 @@ sylius_grid:
             enable_vendor_action: "Configuration/Grid/Admin/Action/enableVendor.html.twig"
             edit_vendor: "Configuration/Grid/Admin/Action/editVendor.html.twig"
             show_product_listings: "Configuration/Grid/Admin/Action/showVendorProductListings.html.twig"
+            show_settlements: "Configuration/Grid/Admin/Action/showVendorSettlements.html.twig"
     grids:
         open_marketplace_admin_vendor:
             driver:
@@ -47,3 +48,5 @@ sylius_grid:
                         type: enable_vendor_action
                     show_product_listings:
                         type: show_product_listings
+                    show_settlements:
+                        type: show_settlements
