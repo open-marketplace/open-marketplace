@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 class PaymentRefresherSpec extends ObjectBehavior
 {
@@ -31,18 +32,28 @@ class PaymentRefresherSpec extends ObjectBehavior
     }
 
     public function it_refreshes_payment(
-        OrderInterface $order,
-        PaymentInterface $payment,
+        OrderInterface $secondaryOrder,
+        OrderInterface $primaryOrder,
+        PaymentInterface $secondaryOrderPayment,
+        PaymentInterface $primaryOrderPayment,
+        PaymentMethodInterface $paymentMethod,
     ): void {
-        $order->recalculateItemsTotal()->shouldBeCalledOnce();
-        $order->recalculateAdjustmentsTotal()->shouldBeCalledOnce();
-        $order->getTotal()->willReturn(100);
+        $secondaryOrder->recalculateItemsTotal()->shouldBeCalledOnce();
+        $secondaryOrder->recalculateAdjustmentsTotal()->shouldBeCalledOnce();
 
-        $payments = new ArrayCollection([$payment->getWrappedObject()]);
-        $order->getPayments()->willReturn($payments);
+        $secondaryOrder->getTotal()->willReturn(100)->shouldBeCalledOnce();
+        $secondaryOrderPayment->setAmount(100)->shouldBeCalledOnce();
 
-        $this->refreshPayment($order);
+        $secondaryOrderPayments = new ArrayCollection([$secondaryOrderPayment->getWrappedObject()]);
+        $primaryOrderPayments = new ArrayCollection([$primaryOrderPayment->getWrappedObject()]);
 
-        $payment->setAmount(100)->shouldHaveBeenCalledTimes(1);
+        $secondaryOrder->getPayments()->willReturn($secondaryOrderPayments);
+        $secondaryOrder->getPrimaryOrder()->willReturn($primaryOrder);
+        $primaryOrder->getPayments()->willReturn($primaryOrderPayments);
+
+        $primaryOrderPayment->getMethod()->willReturn($paymentMethod);
+        $secondaryOrderPayment->setMethod($paymentMethod)->shouldBeCalledOnce();
+
+        $this->refreshPayment($secondaryOrder);
     }
 }

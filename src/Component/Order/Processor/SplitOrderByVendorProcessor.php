@@ -34,8 +34,14 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
     public function process(OrderInterface $order): array
     {
         $isPrimaryOrder = $order->isPrimary() && 0 < $order->getSecondaryOrders()->count();
+
         if ($isPrimaryOrder) {
-            return [$order, ...$order->getSecondaryOrders()];
+            $orders = [$order, ...$order->getSecondaryOrders()];
+            foreach ($orders as $iOrder) {
+                $this->paymentRefresher->refreshPayment($iOrder);
+            }
+
+            return $orders;
         }
 
         $this->eventDispatcher->dispatch(new PreSplitOrderEvent($order), PreSplitOrderEvent::NAME);
@@ -58,8 +64,8 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
 
         $orders = [$order, ...$secondaryOrders];
 
-        foreach ($orders as $order) {
-            $this->paymentRefresher->refreshPayment($order);
+        foreach ($orders as $iOrder) {
+            $this->paymentRefresher->refreshPayment($iOrder);
         }
 
         $this->entityManager->flush();

@@ -170,7 +170,7 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     And I submit form
     Then I should see "Envelope"
 
-  @ui @development
+  @ui
   Scenario: Browsing orders history, can see selected shipping method
     Given store has 2 products from same Vendor
     And store has payment method "Cash on delivery" with code "cash_on_delivery"

@@ -21,6 +21,11 @@
             <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
             <argument type="service" id="sylius.repository.shop_user"/>
         </service>
-
+        <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\PaymentMethodContext"
+            id="tests.open_marketplace.behat.context.setup.payment_method" public="true">
+            <argument type="service" id="sylius.repository.payment_method"/>
+            <argument type="service" id="sylius.factory.payment_method"/>
+            <argument type="service" id="sylius.behat.shared_storage"/>
+        </service>
     </services>
 </container>
