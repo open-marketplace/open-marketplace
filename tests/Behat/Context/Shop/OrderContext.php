@@ -155,6 +155,23 @@ class OrderContext extends RawMinkContext implements Context
     }
 
     /**
+     * @Given I choose payment method by code :code
+     */
+    public function iChoosePaymentMethodByCode(string $code): void
+    {
+        $page = $this->getSession()->getPage();
+
+        $radioButton = $page->find('css', "input[type='radio']");
+
+        if (null === $radioButton) {
+            throw new \InvalidArgumentException(sprintf('Could not find payment method with code "%s".', $code));
+        }
+
+        $radioButton->selectOption($code);
+        $page->find('css', '.ui.large.primary.icon.labeled.button')->press();
+    }
+
+    /**
      * @Given I have :count products in cart
      */
     public function iHaveProductsInCart($count)
@@ -265,6 +282,28 @@ class OrderContext extends RawMinkContext implements Context
      */
     public function iFinalizeOrder()
     {
+        $this->iProvideAddressInformation();
+        $this->iChooseShipment();
+        $this->iChoosePayment();
+        $this->iCompleteCheckout();
+    }
+
+    /**
+     * @Given I finalize order with payment method :code
+     */
+    public function iFinalizeOrderWithPaymentMethodCode(string $code)
+    {
+        $this->iProvideAddressInformation();
+        $this->iChooseShipment();
+        $this->iChoosePaymentMethodByCode($code);
+        $this->iCompleteCheckout();
+    }
+
+    /**
+     * @Given I provide address information
+     */
+    public function iProvideAddressInformation(): void
+    {
         $this->visitPath('/en_US/checkout/address');
         $this->fillField('sylius_checkout_address[billingAddress][firstName]', 'Test name');
         $this->fillField('sylius_checkout_address[billingAddress][lastName]', 'Test name');
@@ -274,9 +313,6 @@ class OrderContext extends RawMinkContext implements Context
         $this->fillField('sylius_checkout_address[billingAddress][city]', 'Test city');
         $this->fillField('sylius_checkout_address[billingAddress][postcode]', 'Test code');
         $this->iSubmitForm();
-        $this->iChooseShipment();
-        $this->iChoosePayment();
-        $this->iCompleteCheckout();
     }
 
     /**
