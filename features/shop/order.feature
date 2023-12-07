@@ -171,15 +171,15 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     Then I should see "Envelope"
 
   @ui
-  Scenario: Browsing orders history, can see selected shipping method
-    Given store has 2 products from same Vendor
+  Scenario: Browsing orders history, can see selected payment method
+    Given store has 1 products from same Vendor
     And store has payment method "Cash on delivery" with code "cash_on_delivery"
     And store has payment method "Bank transfer" with code "bank_transfer"
     And I have 1 products in cart
-    And I finalize order with payment method "bank_transfer"
+    When I finalize order with payment method "bank_transfer"
     And I am on "/"
     And I follow "My account"
     And I follow "Order history"
     Then I should see 1 orders
-    And I follow "Show"
-    Then I should see "Bank transfer"
+    And I follow "Show" button
+    Then I should see "Bank transfer" payment method

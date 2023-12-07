@@ -340,7 +340,7 @@ class OrderContext extends RawMinkContext implements Context
         return str_replace('\\"', '"', $argument);
     }
 
-    private function selectOption($select, $option)
+    private function selectOption($select, $option): void
     {
         $select = $this->fixStepArgument($select);
         $option = $this->fixStepArgument($option);
@@ -350,7 +350,7 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @return DocumentElement
      */
-    private function getPage()
+    private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
     }
@@ -358,7 +358,7 @@ class OrderContext extends RawMinkContext implements Context
     /**
      * @Given There is payment method
      */
-    public function thereIsPaymentMethod()
+    public function thereIsPaymentMethod(): void
     {
         $payment = $this->paymentMethodFactory->create([
             'name' => ucfirst($name),
@@ -370,5 +370,22 @@ class OrderContext extends RawMinkContext implements Context
             'channels' => ($addForCurrentChannel && $this->sharedStorage->has('channel')) ? [$this->sharedStorage->get('channel')] : [],
         ]);
         $this->methodRepository->add($payment);
+    }
+
+    /**
+     * @Then I should see :name payment method
+     */
+    public function iShouldSeePaymentMethod(string $name): void
+    {
+        $this->assertSession()->pageTextContains($this->fixStepArgument($name));
+    }
+
+    /**
+     * @Then I follow :label button
+     */
+    public function iFollowButton(string $label): void
+    {
+        $label = $this->fixStepArgument($label);
+        $this->getSession()->getPage()->clickLink($label);
     }
 }
