@@ -13,7 +13,7 @@ namespace BitBag\OpenMarketplace\Component\ProductListing\Entity;
 
 use Ramsey\Uuid\UuidInterface;
 use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
-use Webmozart\Assert\Assert;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 
 class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeValueInterface
 {
@@ -44,10 +44,8 @@ class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeVa
         parent::setSubject($product);
     }
 
-    public function getAttribute(): ?DraftAttributeInterface
+    public function getAttribute(): ?AttributeInterface
     {
-        Assert::isInstanceOf($this->attribute, DraftAttributeInterface::class);
-
         return $this->attribute;
     }
 }
