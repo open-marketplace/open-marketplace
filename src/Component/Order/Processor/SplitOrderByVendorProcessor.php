@@ -37,9 +37,7 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
 
         if ($isPrimaryOrder) {
             $orders = [$order, ...$order->getSecondaryOrders()];
-            foreach ($orders as $iOrder) {
-                $this->paymentRefresher->refreshPayment($iOrder);
-            }
+            $this->refreshPayments($orders);
 
             return $orders;
         }
@@ -63,12 +61,7 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
         $this->eventDispatcher->dispatch(new PostSplitOrderEvent($secondaryOrders), PostSplitOrderEvent::NAME);
 
         $orders = [$order, ...$secondaryOrders];
-
-        foreach ($orders as $iOrder) {
-            $this->paymentRefresher->refreshPayment($iOrder);
-        }
-
-        $this->entityManager->flush();
+        $this->refreshPayments($orders);
 
         return $orders;
     }
@@ -82,5 +75,14 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
         }
 
         return false;
+    }
+
+    private function refreshPayments(array $orders): void
+    {
+        foreach ($orders as $order) {
+            $this->paymentRefresher->refreshPayment($order);
+        }
+
+        $this->entityManager->flush();
     }
 }
