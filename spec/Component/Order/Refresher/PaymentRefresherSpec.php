@@ -40,9 +40,9 @@ class PaymentRefresherSpec extends ObjectBehavior
     ): void {
         $secondaryOrder->recalculateItemsTotal()->shouldBeCalledOnce();
         $secondaryOrder->recalculateAdjustmentsTotal()->shouldBeCalledOnce();
-
         $secondaryOrder->getTotal()->willReturn(100)->shouldBeCalledOnce();
         $secondaryOrderPayment->setAmount(100)->shouldBeCalledOnce();
+        $secondaryOrderPayment->setMethod($paymentMethod)->shouldBeCalledOnce();
 
         $secondaryOrderPayments = new ArrayCollection([$secondaryOrderPayment->getWrappedObject()]);
         $primaryOrderPayments = new ArrayCollection([$primaryOrderPayment->getWrappedObject()]);
@@ -52,7 +52,6 @@ class PaymentRefresherSpec extends ObjectBehavior
         $primaryOrder->getPayments()->willReturn($primaryOrderPayments);
 
         $primaryOrderPayment->getMethod()->willReturn($paymentMethod);
-        $secondaryOrderPayment->setMethod($paymentMethod)->shouldBeCalledOnce();
 
         $this->refreshPayment($secondaryOrder);
     }
