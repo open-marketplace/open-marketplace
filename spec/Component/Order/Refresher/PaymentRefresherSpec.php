@@ -38,20 +38,19 @@ class PaymentRefresherSpec extends ObjectBehavior
         PaymentInterface $primaryOrderPayment,
         PaymentMethodInterface $paymentMethod,
     ): void {
-        $secondaryOrder->recalculateItemsTotal()->shouldBeCalledOnce();
-        $secondaryOrder->recalculateAdjustmentsTotal()->shouldBeCalledOnce();
-        $secondaryOrder->getTotal()->willReturn(100)->shouldBeCalledOnce();
-        $secondaryOrderPayment->setAmount(100)->shouldBeCalledOnce();
-        $secondaryOrderPayment->setMethod($paymentMethod)->shouldBeCalledOnce();
-
         $secondaryOrderPayments = new ArrayCollection([$secondaryOrderPayment->getWrappedObject()]);
         $primaryOrderPayments = new ArrayCollection([$primaryOrderPayment->getWrappedObject()]);
 
-        $secondaryOrder->getPayments()->willReturn($secondaryOrderPayments);
+        $secondaryOrder->getTotal()->willReturn(100);
         $secondaryOrder->getPrimaryOrder()->willReturn($primaryOrder);
+        $secondaryOrder->getPayments()->willReturn($secondaryOrderPayments);
         $primaryOrder->getPayments()->willReturn($primaryOrderPayments);
-
         $primaryOrderPayment->getMethod()->willReturn($paymentMethod);
+        $secondaryOrderPayment->setAmount(100);
+
+        $secondaryOrder->recalculateItemsTotal()->shouldBeCalledOnce();
+        $secondaryOrder->recalculateAdjustmentsTotal()->shouldBeCalledOnce();
+        $secondaryOrderPayment->setMethod($paymentMethod)->shouldBeCalledOnce();
 
         $this->refreshPayment($secondaryOrder);
     }
