@@ -82,7 +82,5 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
         foreach ($orders as $order) {
             $this->paymentRefresher->refreshPayment($order);
         }
-
-        $this->entityManager->flush();
     }
 }
