@@ -36,9 +36,7 @@ final class PaymentRefresher implements PaymentRefresherInterface
 
     private function refreshPaymentMethodAndAmount(OrderInterface $secondaryOrder): void
     {
-        $secondaryOrderPaymentCollection = $secondaryOrder->getPayments();
-        $secondaryOrderPayment = $secondaryOrderPaymentCollection->last();
-
+        $secondaryOrderPayment = $secondaryOrder->getLastPayment();
         if (!$secondaryOrderPayment instanceof PaymentInterface) {
             return;
         }
@@ -51,8 +49,7 @@ final class PaymentRefresher implements PaymentRefresherInterface
             return;
         }
 
-        $primaryOrderPaymentCollection = $primaryOrder->getPayments();
-        $primaryOrderPayment = $primaryOrderPaymentCollection->last();
+        $primaryOrderPayment = $primaryOrder->getLastPayment();
 
         if (!$primaryOrderPayment instanceof PaymentInterface) {
             return;
