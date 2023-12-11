@@ -11,7 +11,7 @@ Feature: Creating a product listing with attribute
     And there is draft attribute with code "extended" and type "checkbox"
     And there is draft attribute with code "universal" and type "checkbox"
 
-  @ui @development
+  @ui
   Scenario: Creating product listing and sending to verification
     Given I am on "/"
     And I follow "My account"
