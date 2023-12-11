@@ -303,4 +303,13 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->getPage()->pressButton('Login');
         ($this->getPage()->findLink('Logout'));
     }
+
+    /**
+     * @When I click :label on confirmation modal
+     */
+    public function iClickOnConfirmationModal(string $label): void
+    {
+        $confirmationModal = $this->getPage()->findById($label);
+        $confirmationModal->click();
+    }
 }

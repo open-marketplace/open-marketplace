@@ -23,9 +23,9 @@ Feature: Creating a product listing with attribute
     And I fill in "Minimum price" with "30"
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
-    And I select 'extended' from "sylius_product_attribute_choice"
+    And I select "extended" from "sylius_product_attribute_choice"
     And I click "Save" button
     And I follow "Product list"
     And I click "Send for verification" button
-    And I click "Yes" on confirmation modal
-    And I should see "Product has been sent for verification"
+    And I click "confirmation-button" on confirmation modal
+    And I should see "Under verification"
