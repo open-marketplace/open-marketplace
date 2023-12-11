@@ -35,3 +35,22 @@ Feature: Verifying product listing
     And I should see url "#\/admin\/product-listings\/(\d+)#"
     When I click "Accept" button
     Then there should be product with channel enabled
+
+    @ui
+    Scenario: Accept updated product listing with attributes
+    Given there is product listing enabled for channel
+    And there is a product 'green-jeans' for listing
+    And there is draft attribute with code 'attribute-1' and type 'text'
+    And there is draft attribute with code 'attribute-2' and type 'text'
+    And there is already published product with attribute 'attribute-1' with value 'value-1'
+    And product listing has attribute 'attribute-2' with value 'value-2'
+    And I am on "/admin"
+    And I follow "Product listings"
+    And I should see 1 product listing
+    And I should see product's listing status "Under verification"
+    And I follow "Details"
+    And I should see url "#\/admin\/product-listings\/(\d+)#"
+    When I click "Accept" button
+    And I follow "Details"
+    And I should see 'attribute-2' with value 'value-2'
+    And I should not see 'attribute-1' with value 'value-1'
