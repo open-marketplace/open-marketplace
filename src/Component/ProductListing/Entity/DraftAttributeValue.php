@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\ProductListing\Entity;
 
 use Ramsey\Uuid\UuidInterface;
-use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
 
 class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeValueInterface
 {
