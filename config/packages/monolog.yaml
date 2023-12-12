@@ -1,0 +1,10 @@
+monolog:
+  channels:
+    - 'settlements_email'
+  handlers:
+    settlements_email:
+      type: stream
+      level: debug
+      path: "%kernel.logs_dir%/settlements_email_%kernel.environment%.log"
+      channels:
+        - 'settlements_email'
