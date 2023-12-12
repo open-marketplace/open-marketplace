@@ -18,7 +18,7 @@ sylius_grid:
           form_options:
             class: "%sylius.model.channel.class%"
           options:
-            field: "channels.id"
+            field: "channel.id"
         vendor:
           type: entity
           label: open_marketplace.ui.vendor
