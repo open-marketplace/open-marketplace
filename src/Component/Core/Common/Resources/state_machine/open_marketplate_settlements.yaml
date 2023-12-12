@@ -1,0 +1,17 @@
+winzou_state_machine:
+  open_marketplace_settlement:
+    class: "%open_marketplace.model.settlement.class%"
+    property_path: status
+    graph: open_marketplace_settlement
+    state_machine_class: "%sylius.state_machine.class%"
+    states:
+      open: ~
+      accepted: ~
+      settled: ~
+    transitions:
+      close:
+        from: [open]
+        to: accepted
+      settle:
+        from: [accepted]
+        to: settled
