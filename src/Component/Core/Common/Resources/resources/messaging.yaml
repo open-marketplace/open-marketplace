@@ -15,6 +15,7 @@ sylius_resource:
                 model: BitBag\OpenMarketplace\Component\Messaging\Entity\Category
                 interface: BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation\CategoryInterface
                 repository: BitBag\OpenMarketplace\Component\Messaging\Repository\CategoryRepository
+                form: BitBag\OpenMarketplace\Component\Core\Common\Form\Type\Messaging\CategoryType
 
         open_marketplace.conversation_message:
             driver: doctrine/orm
