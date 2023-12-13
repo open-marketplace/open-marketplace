@@ -6,8 +6,8 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Sender;
 
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Psr\Log\LoggerInterface;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class SettlementsCreatedEmailSender implements SettlementsCreatedEmailSenderInterface
 {
@@ -31,6 +31,8 @@ final class SettlementsCreatedEmailSender implements SettlementsCreatedEmailSend
              *
              * We don't need to define these arguments as for now but we will have to provide them in the future.
              * We can ignore checking this line and remove it when method signature changes.
+             */
+            /**
              * @phpstan-ignore-next-line
              */
             $this->sender->send(
@@ -46,7 +48,8 @@ final class SettlementsCreatedEmailSender implements SettlementsCreatedEmailSend
             );
         } catch (\Exception $exception) {
             $this->logger->error(
-                sprintf('An exception occurred while sending settlement created email for vendor with id %s: %s',
+                sprintf(
+                    'An exception occurred while sending settlement created email for vendor with id %s: %s',
                     $vendor->getId(),
                     $exception->getMessage()
                 )
