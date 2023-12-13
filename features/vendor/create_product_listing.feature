@@ -37,5 +37,5 @@ Feature:Creating a product listing.
     And I fill in "Minimum price" with "30"
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
-    Then I click "Save" button
+    And I click "Save" button
     And I should see non unique code error message
