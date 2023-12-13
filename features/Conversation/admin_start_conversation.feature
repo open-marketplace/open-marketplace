@@ -16,6 +16,7 @@ Feature: Starting conversation by Administrator
     And I am on "/admin"
     And I follow "Messages"
     And I follow "Create"
+    And I select "test category" from "mvm_conversation[category]"
     And I fill in "Message" with "test Message"
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
@@ -24,6 +25,7 @@ Feature: Starting conversation by Administrator
   Scenario: Vendor begins conversation
     Given I am logged in as "test@company.domain"
     And I am on "/en_US/account/vendor/conversation/create"
+    And I select "test category" from "mvm_conversation[category]"
     And I fill in "Message" with "test Message"
     And I press "Submit"
     Then I should see "test Message"
@@ -48,6 +50,7 @@ Feature: Starting conversation by Administrator
     And I am on "/admin"
     And I follow "Messages"
     And I follow "Create"
+    And I select "test category" from "mvm_conversation[category]"
     And I fill in "Message" with "test Message"
     And I select "company" from "mvm_conversation_vendorUser"
     And I press "Submit"
@@ -70,3 +73,10 @@ Feature: Starting conversation by Administrator
     And I am logged in as "second@company.domain"
     And I am on "/en_US/account/vendor/conversations"
     Then I should see "You have no open threads"
+
+  Scenario: Conversation must have category
+    Given I am logged in as "test@company.domain"
+    And I am on "/en_US/account/vendor/conversation/create"
+    And I fill in "Message" with "test Message"
+    And I press "Submit"
+    Then I should see "This value should not be blank."
