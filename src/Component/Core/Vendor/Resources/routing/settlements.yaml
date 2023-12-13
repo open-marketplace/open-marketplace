@@ -6,3 +6,15 @@ open_marketplace_vendor_settlements_index:
     _sylius:
       template: "Context/Vendor/Settlement/index.html.twig"
       grid: vendor_account_settlement
+
+open_marketplace_vendor_settlement_settle:
+  path: /settlements/{id}/settle
+  methods: [ POST ]
+  defaults:
+    _controller: open_marketplace.controller.settlement:applyStateMachineTransitionAction
+    _sylius:
+      state_machine:
+        graph: open_marketplace_settlement
+        transition: accept
+      redirect: referer
+      flash: open_marketplace.ui.settlement_accepted

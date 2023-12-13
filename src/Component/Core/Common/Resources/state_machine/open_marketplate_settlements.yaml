@@ -9,8 +9,8 @@ winzou_state_machine:
       accepted: ~
       settled: ~
     transitions:
-      close:
-        from: [open]
+      accept:
+        from: [new]
         to: accepted
       settle:
         from: [accepted]

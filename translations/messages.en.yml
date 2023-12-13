@@ -180,6 +180,8 @@ open_marketplace:
         currency_code: Currency code
         settlement_status:
             new: New
+            accepted: Accepted
+            settled: Settled
         show_settlements: Show settlements
         created_at: Created at
         updated_at: Updated at

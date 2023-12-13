@@ -1,4 +1,7 @@
 sylius_grid:
+  templates:
+    action:
+      accept: "Configuration/Grid/Vendor/Action/accept.html.twig"
   grids:
     vendor_account_settlement:
       driver:
@@ -10,12 +13,7 @@ sylius_grid:
             arguments:
               - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
       sorting:
-        id: asc
       fields:
-        id:
-          type: string
-          sortable: ~
-          label: open_marketplace.ui.id
         channel:
           type: twig
           label: sylius.ui.channel
@@ -71,3 +69,8 @@ sylius_grid:
         period:
           type: settlement_period
           label: open_marketplace.ui.period
+      actions:
+        item:
+          accept:
+            type: accept
+            label: open_marketplace.ui.accept
