@@ -44,6 +44,7 @@ class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeVa
         parent::setSubject($product);
     }
 
+    /** @return DraftAttributeInterface */
     public function getAttribute(): ?AttributeInterface
     {
         return $this->attribute;

@@ -215,7 +215,7 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given there is a product :name for listing
+     * @Given there is a product :name attached to the product listing
      */
     public function thereIsProductsForListing(string $name): void
     {

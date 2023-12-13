@@ -27,7 +27,7 @@ Feature:Creating a product listing.
   @ui
   Scenario: Creating product listing with non unique code
     Given there is 1 product listing created by vendor with status "verified"
-    And I am on "/"
+    When I am on "/"
     And I follow "My account"
     And I follow "Product listings"
     And I follow "Create Product listing"
@@ -37,5 +37,5 @@ Feature:Creating a product listing.
     And I fill in "Minimum price" with "30"
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
-    When I click "Save" button
+    Then I click "Save" button
     Then I should see non unique code error message
