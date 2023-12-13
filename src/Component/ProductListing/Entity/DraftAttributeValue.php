@@ -48,16 +48,14 @@ class DraftAttributeValue extends BaseAttributeValue implements DraftAttributeVa
     {
         if (null !== $attribute && !$attribute instanceof DraftAttributeInterface) {
             throw new \InvalidArgumentException(
-            'Attribute passed to DraftAttributeValue must be instance of DraftAttributeInterface or null'
+                'Attribute passed to DraftAttributeValue must be instance of DraftAttributeInterface or null'
             );
         }
 
         $this->attribute = $attribute;
     }
 
-    /**
-     * @return DraftAttributeInterface|null
-     */
+    /** @return DraftAttributeInterface|null */
     public function getAttribute(): ?AttributeInterface
     {
         if (null !== $this->attribute && !$this->attribute instanceof DraftAttributeInterface) {
