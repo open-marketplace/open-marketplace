@@ -38,4 +38,4 @@ Feature:Creating a product listing.
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
     Then I click "Save" button
-    Then I should see non unique code error message
+    And I should see non unique code error message
