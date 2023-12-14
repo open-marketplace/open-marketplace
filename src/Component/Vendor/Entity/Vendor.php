@@ -14,6 +14,7 @@ namespace BitBag\OpenMarketplace\Component\Vendor\Entity;
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -69,7 +70,7 @@ class Vendor implements VendorInterface
 
     protected string $commissionType = self::NET_COMMISSION;
 
-    protected string $settlementFrequency = self::DEFAULT_SETTLEMENT_FREQUENCY;
+    protected string $settlementFrequency = VendorSettlementFrequency::DEFAULT_SETTLEMENT_FREQUENCY;
 
     public function __construct()
     {
@@ -379,7 +380,7 @@ class Vendor implements VendorInterface
 
     public function getValidSettlementFrequency(): array
     {
-        return self::VALID_SETTLEMENT_FREQUENCY;
+        return VendorSettlementFrequency::SETTLEMENT_FREQUENCIES;
     }
 
     public function getCreatedAt(): DateTimeInterface

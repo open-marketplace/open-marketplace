@@ -20,8 +20,14 @@ interface SettlementInterface extends ResourceInterface, TimestampableInterface
 {
     public const STATUS_NEW = 'new';
 
+    public const STATUS_ACCEPTED = 'accepted';
+
+    public const STATUS_SETTLED = 'settled';
+
     public const AVAILABLE_STATUSES = [
         self::STATUS_NEW,
+        self::STATUS_ACCEPTED,
+        self::STATUS_SETTLED,
     ];
 
     public function getId(): ?int;
