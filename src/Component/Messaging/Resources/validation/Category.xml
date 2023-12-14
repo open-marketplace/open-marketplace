@@ -12,15 +12,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                     http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="BitBag\OpenMarketplace\Component\Messaging\Entity\Category">
         <property name="name">
-            <constraint name="Length">
-                <option name="min">3</option>
-                <option name="max">255</option>
-                <option name="minMessage">validator.message.minimum</option>
-                <option name="maxMessage">validator.message.maximum</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
+            <constraint name="NotBlank"/>
         </property>
     </class>
 </constraint-mapping>
