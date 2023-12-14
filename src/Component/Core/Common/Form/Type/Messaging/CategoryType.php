@@ -37,6 +37,6 @@ final class CategoryType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'open_marketplace_category';
+        return 'open_marketplace_messaging_conversation_category';
     }
 }
