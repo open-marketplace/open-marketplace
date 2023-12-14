@@ -15,4 +15,4 @@ Feature: Verifying validation of message category
     And I follow "Edit"
     And I fill in "Name" with ""
     When I press "Save changes"
-    Then I should see "Required length: 3 characters."
+    Then I should see "This value should not be blank."
