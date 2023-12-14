@@ -39,7 +39,6 @@ final class AttributesOperator implements AttributesOperatorInterface
         $oldProductAttributeValues = $product->getAttributes();
 
         foreach ($oldProductAttributeValues as $oldProductAttributeValue) {
-            $oldProductAttributeValue = $this->entityManager->merge($oldProductAttributeValue);
             $this->entityManager->remove($oldProductAttributeValue);
         }
 
