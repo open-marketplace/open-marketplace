@@ -13,12 +13,12 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\AcceptanceOperator\ProductDraftAcceptanceOperator;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
@@ -35,15 +35,15 @@ final class ProductListingContext extends RawMinkContext implements Context
 
     private SharedStorageInterface $sharedStorage;
 
-    private ProductDraftAcceptanceOperator $acceptanceOperator;
+    private DraftConverter $acceptanceOperator;
 
     public function __construct(
         ShopUserExampleFactory $shopUserExampleFactory,
         FactoryInterface $vendorFactory,
         EntityManagerInterface $entityManager,
         SharedStorageInterface $sharedStorage,
-        ProductDraftAcceptanceOperator $acceptanceOperator
-    ) {
+        DraftConverter $acceptanceOperator,
+        ) {
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
         $this->entityManager = $entityManager;
@@ -58,25 +58,26 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         $vendor = $this->sharedStorage->get('vendor');
 
-        $productListing = new ProductListing();
+        $productListing = new Listing();
         $productListing->setCode('code');
         $productListing->setVendor($vendor);
 
-        $productDraft = new ProductDraft();
+        $productDraft = new Draft();
         $productDraft->setCode('code');
-        $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+        $productDraft->setStatus(DraftInterface::STATUS_UNDER_VERIFICATION);
         $productDraft->setPublishedAt(new \DateTime());
         $productDraft->setVersionNumber(0);
         $productDraft->setProductListing($productListing);
+        $productListing->insertDraft($productDraft);
 
-        $productTranslation = new ProductTranslation();
+        $productTranslation = new DraftTranslation();
         $productTranslation->setLocale('en_US');
         $productTranslation->setSlug('product-listing-slug');
-        $productTranslation->setName('product-listing-');
+        $productTranslation->setName('ProductListingName');
         $productTranslation->setDescription('product-listing-');
         $productTranslation->setProductDraft($productDraft);
 
-        $productPricing = new ProductListingPrice();
+        $productPricing = new ListingPrice();
         $productPricing->setProductDraft($productDraft);
         $productPricing->setPrice(1000);
         $productPricing->setOriginalPrice(1000);
@@ -96,12 +97,12 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function thisProductListingHasStatusAccepted()
     {
-        $draft = $this->entityManager->getRepository(ProductDraft::class)->findOneBy(['code' => 'code']);
-        $newProduct = $this->acceptanceOperator->acceptProductDraft($draft);
+        $draft = $this->entityManager->getRepository(Draft::class)->findOneBy(['code' => 'code']);
+        $newProduct = $this->acceptanceOperator->convertToSimpleProduct($draft);
         $draft->setStatus('verified');
         $this->entityManager->persist($newProduct);
         $this->entityManager->flush();
-        $listing = $this->entityManager->getRepository(ProductListing::class)->findOneBy(['code' => 'code']);
+        $listing = $this->entityManager->getRepository(Listing::class)->findOneBy(['code' => 'code']);
     }
 
     /**

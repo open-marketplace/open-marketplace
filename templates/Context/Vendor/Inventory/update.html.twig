@@ -4,7 +4,7 @@
 {% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb_page %}
-    <a href="{{ path('vendor_product_variant_index') }}" class="section">{{ 'sylius.ui.inventory'|trans }}</a>
+    <a href="{{ path('open_marketplace_vendor_inventory_index') }}" class="section">{{ 'sylius.ui.inventory'|trans }}</a>
     <div class="divider"> / </div>
     <div class="active section"> {{ resource.id }} </div>
     <div class="divider"> / </div>
@@ -14,7 +14,7 @@
 {% block subcontent %}
     <div class="ui segment">
         <h3>{{ resource.code }}</h3>
-        {{ form_start(form, {'action': path('vendor_product_variant_update', { 'id': resource.id }), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'action': path('open_marketplace_vendor_inventory_update', { 'id': resource.id }), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         <input type="hidden" name="_method" value="PUT" />
         {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
 

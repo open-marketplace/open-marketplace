@@ -8,15 +8,15 @@
         >
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.repository.country"/>
-            <argument type="service" id="open_marketplace.repository.vendor_repository"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.repository.vendor"/>
             <argument type="service" id="sylius.custom_factory.product"/>
             <argument type="service" id="sylius.generator.slug"/>
             <argument type="service" id="sylius.product_variant_resolver.default"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
-            <argument type="service" id="open_marketplace.repository.product_repository"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product.repository.product"/>
             <argument type="service" id="sylius.factory.channel_pricing"/>
             <argument type="service" id="tests.open_marketplace.behat.page.vendor_page_page"/>
-            <argument type="service" id="open_marketplace.fixture.example_factory.vendor"/>
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
         </service>
     </services>
 </container>

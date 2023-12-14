@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\EventListener\AccessDeniedListener"
+                 id="bitbag.open_marketplace.component.core.vendor.event_listener.access_denied_listener">
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="router"/>
+
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\EventListener\RegisterListener"
+                 id="bitbag.open_marketplace.component.core.vendor.event_listener.register_listener">
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.generator.slug"/>
+            <argument type="service" id="sylius.image_uploader"/>
+            <argument type="service" id="security.token_storage"/>
+
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="generateSlug"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadLogoImage"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="uploadBackgroundImage"/>
+            <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="connectShopUser"/>
+        </service>
+    </services>
+</container>

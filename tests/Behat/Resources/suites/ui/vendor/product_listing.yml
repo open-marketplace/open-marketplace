@@ -3,10 +3,11 @@ default:
     vendor_ui_managing_product_listings:
       contexts:
         - open_marketplace.behat.context.ui.vendor.product_listing
+        - tests.open_marketplace.behat.context.setup.draft_attribute
         - Behat\MinkExtension\Context\MinkContext
         - sylius.behat.context.setup.channel
         - sylius.behat.context.hook.doctrine_orm
         - sylius.behat.context.setup.shop_security
         - sylius.behat.context.setup.taxonomy
       filters:
-        tags: '@vendor_managing_product_listings && @ui'
+        tags: '@vendor_managing_product_listings&&@ui'

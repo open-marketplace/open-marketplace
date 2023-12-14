@@ -14,11 +14,10 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\MinkContext;
-use BitBag\OpenMarketplace\Entity\Conversation\Category;
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileFactory;
-use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Category;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\AddressFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactory;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -29,7 +28,7 @@ class ConversationContext extends MinkContext implements Context
 {
     private EntityManagerInterface $manager;
 
-    private VendorProfileFactory $vendorProfileFactory;
+    private ProfileFactory $vendorProfileFactory;
 
     private ExampleFactoryInterface $userFactory;
 
@@ -42,7 +41,7 @@ class ConversationContext extends MinkContext implements Context
     public function __construct(
         EntityManagerInterface $manager,
         ExampleFactoryInterface $userFactory,
-        VendorProfileFactoryInterface $vendorProfileFactory,
+        ProfileFactoryInterface $vendorProfileFactory,
         AddressFactoryInterface $addressFactory,
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository

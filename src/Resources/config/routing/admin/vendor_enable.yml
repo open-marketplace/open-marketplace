@@ -1,4 +1,0 @@
-open_marketplace_admin_vendor_enable:
-    path: /vendors/{id}/enable
-    methods: [PUT]
-    controller: open_marketplace.controller.vendor_controller:enablingVendorAction

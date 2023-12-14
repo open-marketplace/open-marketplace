@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\VendorFixture"
+                 id="bitbag.open_marketplace.component.core.common.fixture.vendor">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\ProductListingFixture"
+                 id="bitbag.open_marketplace.component.core.common.fixture.product_listing">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.product_listing" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\OrderFixture"
+                 id="bitbag.open_marketplace.component.core.common.fixture.order">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.order" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\ConversationCategoryFixture"
+                 id="bitbag.open_marketplace.component.core.common.fixture.conversation_category">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="open_marketplace.factory.conversation_category" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\ConversationFixture"
+                 id="bitbag.open_marketplace.component.core.common.fixture.conversation">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.conversation" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\AttributeFixture"
+                 id="bitbag.open_marketplace.component.core.common.fixture.attribute">
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.attribute" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+    </services>
+</container>

@@ -1,7 +1,0 @@
-vendor_profile:
-    path: /vendor/profile
-    methods: [GET]
-    defaults:
-        _controller: open_marketplace.controller.vendor_controller:showAction
-        _sylius:
-            template: "Context/Vendor/Profile/index.html.twig"

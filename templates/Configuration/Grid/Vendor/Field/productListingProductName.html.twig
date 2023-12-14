@@ -1,6 +1,6 @@
 {% set product = data.productListing.product %}
 {% if product is same as null%}
-    <a class="" href="{{ path('open_marketplace_vendor_product_draft_show_product',{'id':  data.id   }) }}">
+    <a class="" href="{{ path('open_marketplace_vendor_product_listings_show',{'id':  data.id   }) }}">
         {{ data.getName(current_locale())  }}
     </a>
 {% else %}

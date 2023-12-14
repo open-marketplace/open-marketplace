@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft" table="bitbag_open_marketplace_product_draft">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="uuid" type="uuid" unique="true" />
+
+        <field name="code" column="code" type="string" unique="false" nullable="false" />
+        <field name="shippingRequired" column="shipping_required" type="boolean" />
+        <field name="isVerified" column="is_verified" type="boolean" unique="false" nullable="false" />
+        <field name="verifiedAt" column="verified_at" type="datetime" unique="false" nullable="true"/>
+        <field name="publishedAt" column="published_at" type="datetime" unique="false" nullable="true"/>
+        <field name="createdAt" column="created_at" type="datetime" unique="false" nullable="false"/>
+        <field name="status" column="status" type="string" unique="false" nullable="false" />
+        <field name="versionNumber" column="version_number" type="integer" unique="false" nullable="false" />
+
+        <many-to-one field="productListing" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface" inversed-by="productDrafts">
+            <join-column name="product_listing_id" referenced-column-name="id" on-delete="CASCADE"/>
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
+
+        <one-to-many field="images" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImageInterface" mapped-by="owner">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="translations" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface" mapped-by="productDraft" index-by="locale">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="productListingPrices" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface" mapped-by="productDraft" index-by="channelCode">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="attributes" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue"
+                     mapped-by="subject" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="productDraftTaxons" target-entity="BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTaxonInterface"
+                     mapped-by="productDraft" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
+        <many-to-one field="mainTaxon" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
+            <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
+        <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
+            <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </many-to-one>
+
+        <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
+            <join-table name="bitbag_open_marketplace_product_draft_channels">
+                <join-columns>
+                    <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+    </mapped-superclass>
+</doctrine-mapping>

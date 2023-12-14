@@ -12,13 +12,13 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorShippingMethod;
-use BitBag\OpenMarketplace\Entity\VendorShippingMethodInterface;
-use BitBag\OpenMarketplace\Repository\ProductRepository;
-use BitBag\OpenMarketplace\Repository\VendorRepository;
+use BitBag\OpenMarketplace\Component\Product\Repository\ProductRepository;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethodInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository;
@@ -52,7 +52,7 @@ class ProductContext implements Context
 
     private ShopUserExampleFactory $userExampleFactory;
 
-    private EntityManagerInterface $manager;
+    private EntityManagerInterface $entityManager;
 
     private ProductExampleFactory $productExampleFactory;
 
@@ -79,7 +79,7 @@ class ProductContext implements Context
         VendorRepository $vendorRepository,
         ProductVariantRepository $productVariantRepository,
         ProductRepository $productRepository,
-        EntityManagerInterface $manager,
+        EntityManagerInterface $entityManager,
         ProductExampleFactory $productExampleFactory,
         TaxonExampleFactory $taxonFactory,
         SharedStorageInterface $sharedStorage,
@@ -95,7 +95,7 @@ class ProductContext implements Context
         $this->productVariantRepository = $productVariantRepository;
         $this->productRepository = $productRepository;
         $this->userExampleFactory = $userExampleFactory;
-        $this->manager = $manager;
+        $this->entityManager = $entityManager;
         $this->productExampleFactory = $productExampleFactory;
         $this->taxonFactory = $taxonFactory;
         $this->sharedStorage = $sharedStorage;
@@ -116,7 +116,7 @@ class ProductContext implements Context
         $this->createTaxon();
         $vendor = $this->createDefaultVendor(null);
         for ($i = 1; $i <= $productsCount; ++$i) {
-            $products[$i] = $this->createDefaultProduct();
+            $products[$i] = $this->productExampleFactory->create();
             $products[$i]->setVendor($vendor);
             $this->vendorRepository->add($vendor);
             $this->productRepository->add($products[$i]);
@@ -135,7 +135,7 @@ class ProductContext implements Context
         $user = $this->userRepository->findOneBy(['username' => $username]);
         $vendor = $user->getVendor();
         for ($i = 1; $i <= $productsCount; ++$i) {
-            $products[$i] = $this->createDefaultProduct();
+            $products[$i] = $this->productExampleFactory->create();
             $products[$i]->setVendor($vendor);
             $this->vendorRepository->add($vendor);
             $this->productRepository->add($products[$i]);
@@ -151,7 +151,7 @@ class ProductContext implements Context
     {
         $this->createTaxon();
         for ($i = 1; $i <= $productsCount; ++$i) {
-            $products[$i] = $this->createDefaultProduct();
+            $products[$i] = $this->productExampleFactory->create();
             $this->productRepository->add($products[$i]);
 
             $this->sharedStorage->set('products', $products);
@@ -167,7 +167,7 @@ class ProductContext implements Context
         $this->createTaxon();
         for ($i = 1; $i <= $productsCount; ++$i) {
             $vendors[$i] = $this->createDefaultVendor($i);
-            $products[$i] = $this->createDefaultProduct();
+            $products[$i] = $this->productExampleFactory->create();
             $products[$i]->setVendor($vendors[$i]);
             $this->vendorRepository->add($vendors[$i]);
             $this->productRepository->add($products[$i]);
@@ -185,10 +185,10 @@ class ProductContext implements Context
         $commissionTypes = [VendorInterface::NET_COMMISSION, VendorInterface::GROSS_COMMISSION];
         for ($i = 1; $i <= $productsCount; ++$i) {
             $vendor = $this->createDefaultVendor($i);
-            $vendor->setCommission(rand(1, 10));
+            $vendor->setCommission(random_int(1, 10));
             $vendor->setCommissionType($commissionTypes[array_rand($commissionTypes)]);
             $vendors[$i] = $vendor;
-            $products[$i] = $this->createDefaultProduct();
+            $products[$i] = $this->productExampleFactory->create();
             $products[$i]->setVendor($vendors[$i]);
             $this->vendorRepository->add($vendors[$i]);
             $this->productRepository->add($products[$i]);
@@ -212,6 +212,29 @@ class ProductContext implements Context
 
             $this->sharedStorage->set('products', $products);
         }
+    }
+
+    /**
+     * @Given there is a product :name attached to the product listing
+     */
+    public function thereIsProductsForListing(string $name): void
+    {
+        $listing = $this->sharedStorage->get('product_listing');
+        Assert::isInstanceOf($listing, ListingInterface::class);
+
+        $product = $this->createProduct(
+            $name,
+            $listing->getVendor()
+        );
+
+        $listing->setProduct($product);
+
+        $this->sharedStorage->set('product', $product);
+
+        $this->entityManager->persist($product);
+        $this->entityManager->persist($listing);
+
+        $this->entityManager->flush();
     }
 
     private function createProduct(
@@ -281,7 +304,7 @@ class ProductContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $variant = $this->productVariantRepository->findOneBy(['product' => $product]);
-        $this->manager->refresh($variant);
+        $this->entityManager->refresh($variant);
         Assert::same($count, $variant->getOnHand());
     }
 
@@ -293,7 +316,7 @@ class ProductContext implements Context
         $vendor = $this->sharedStorage->get('vendor');
 
         $this->createTaxon();
-        $product = $this->createDefaultProduct();
+        $product = $this->productExampleFactory->create();
         $product->setVendor($vendor);
         $product->getVariants()[0]->setCode($variant_code);
         $this->productRepository->add($product);
@@ -308,7 +331,7 @@ class ProductContext implements Context
         $products = $this->sharedStorage->get('products');
         $products[1]->getVariants()->first()->setShippingCategory($shippingCategory);
 
-        $this->manager->flush();
+        $this->entityManager->flush();
     }
 
     /**
@@ -319,7 +342,7 @@ class ProductContext implements Context
         $products = $this->sharedStorage->get('products');
         $products[1]->getVariants()->first()->setShippingCategory(null);
 
-        $this->manager->flush();
+        $this->entityManager->flush();
     }
 
     /**
@@ -336,9 +359,9 @@ class ProductContext implements Context
         $vendorShippingMethod->setShippingMethod($shippingMethod);
         $vendorShippingMethod->setChannelCode($this->sharedStorage->get('channel')->getCode());
         $vendor->addShippingMethod($vendorShippingMethod);
-        $this->manager->persist($vendorShippingMethod);
-        $this->manager->persist($vendor);
-        $this->manager->flush();
+        $this->entityManager->persist($vendorShippingMethod);
+        $this->entityManager->persist($vendor);
+        $this->entityManager->flush();
     }
 
     /**
@@ -364,10 +387,10 @@ class ProductContext implements Context
         $productTaxon->setProduct($products[1]);
         $productTaxon->setTaxon($taxon);
 
-        $this->manager->persist($productTaxon);
-        $this->manager->persist($products[1]);
-        $this->manager->persist($taxon);
-        $this->manager->flush();
+        $this->entityManager->persist($productTaxon);
+        $this->entityManager->persist($products[1]);
+        $this->entityManager->persist($taxon);
+        $this->entityManager->flush();
     }
 
     /**
@@ -379,9 +402,9 @@ class ProductContext implements Context
 
         $products[1]->setName($name);
 
-        $this->manager->persist($products[1]);
+        $this->entityManager->persist($products[1]);
 
-        $this->manager->flush();
+        $this->entityManager->flush();
     }
 
     private function createDefaultVendor(?int $iteration): VendorInterface
@@ -404,17 +427,9 @@ class ProductContext implements Context
         $vendor = $this->vendorExampleFactory->create($options);
         $vendor->setShopUser($user);
 
-        $this->manager->persist($user);
+        $this->entityManager->persist($user);
 
         return $vendor;
-    }
-
-    private function createDefaultProduct(): ProductInterface
-    {
-        $factory = $this->productExampleFactory;
-        $product = $factory->create();
-
-        return $product;
     }
 
     private function createTaxon()
@@ -422,8 +437,8 @@ class ProductContext implements Context
         $taxon = $this->taxonFactory->create();
         $channel = $this->sharedStorage->get('channel');
         $channel->setMenuTaxon($taxon);
-        $this->manager->persist($channel);
-        $this->manager->persist($taxon);
-        $this->manager->flush();
+        $this->entityManager->persist($channel);
+        $this->entityManager->persist($taxon);
+        $this->entityManager->flush();
     }
 }

@@ -26,7 +26,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Wayne"
         email: "test2@example.com"
         emailCanonical: "test@example.com"
-BitBag\OpenMarketplace\Entity\ShopUser:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]
@@ -41,7 +41,7 @@ BitBag\OpenMarketplace\Entity\ShopUser:
         customer: '@customer_bruce'
         username: "bruce@wayne.com"
         usernameCanonical: "bruce@wayne.com"
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
     oliver_vendor_address:
         country: '@poland'
         city: 'Warsaw'
@@ -52,7 +52,7 @@ BitBag\OpenMarketplace\Entity\VendorAddress:
         city: 'Poznan'
         postalCode: '61-512'
         street: 'Umultowska 54'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     vendor_oliver:
         shopUser: '@user_oliver'
         companyName: 'Test company name'
@@ -73,7 +73,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
         description: 'description'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation:
     translation1:
         translatable: '@first_olivers_attribute'
         name: 'name1'
@@ -86,7 +86,7 @@ BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation:
         translatable: '@first_bruces_attribute'
         name: 'name3'
         locale: '@locale'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
     first_olivers_attribute:
         addTranslation: '@translation1'
         currentLocale: '@locale'

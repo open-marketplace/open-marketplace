@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                    http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage">
+        <property name="file">
+            <constraint name="NotBlank">
+                <option name="message">validator.message.not_blank</option>
+                <option name="groups">
+                    <value>ApiUploadVendorBackgroundImage</value>
+                </option>
+            </constraint>
+            <constraint name="Image">
+                <option name="minWidth">1000</option>
+                <option name="minWidthMessage">validator.message.minimum_image_width</option>
+                <option name="maxWidth">1400</option>
+                <option name="maxWidthMessage">validator.message.maximum_image_width</option>
+                <option name="minHeight">200</option>
+                <option name="minHeightMessage">validator.message.minimum_image_height</option>
+                <option name="maxHeight">300</option>
+                <option name="maxHeightMessage">validator.message.maximum_image_height</option>
+                <option name="groups">
+                    <value>VendorLogo</value>
+                    <value>ApiUploadVendorImage</value>
+                </option>
+            </constraint>
+            <constraint name="File">
+                <option name="maxSize">2048000</option>
+                <option name="maxSizeMessage">validator.message.maximum_file_size</option>
+                <option name="mimeTypes">
+                    <value>image/jpeg</value>
+                    <value>image/png</value>
+                    <value>image/svg+xml</value>
+                </option>
+                <option name="mimeTypesMessage">validator.message.image_mime_type</option>
+                <option name="groups">
+                    <value>VendorBackground</value>
+                    <value>ApiUploadVendorBackgroundImage</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="owner">
+            <constraint name="NotBlank">
+                <option name="message">validator.message.not_blank</option>
+                <option name="groups">
+                    <value>ApiUploadVendorBackgroundImage</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

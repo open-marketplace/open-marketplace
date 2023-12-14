@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Repository;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\OpenMarketplace\Entity\Conversation\Conversation;
-use BitBag\OpenMarketplace\Entity\ShopUser;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser;
 
 final class ConversationRepositoryTest extends JsonApiTestCase
 {

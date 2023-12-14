@@ -12,7 +12,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Wayne"
         email: "bruce.wayne@wayne.co"
         emailCanonical: "bruce.wayne@wayne.co"
-BitBag\OpenMarketplace\Entity\ShopUser:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
     user_oliver:
         plainPassword: "123password"
         roles: ["ROLE_USER"]
@@ -23,13 +23,13 @@ BitBag\OpenMarketplace\Entity\ShopUser:
         roles: [ "ROLE_USER" ]
         enabled: "true"
         customer: '@customer_bruce'
-BitBag\OpenMarketplace\Entity\VendorAddress:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
     vendor_address:
         country: '@poland'
         city: 'Warsaw'
         postalCode: '00-999'
         street: 'Avenue 2115'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     vendor_oliver:
         shopUser: '@user_oliver'
         companyName: 'Test company name'
@@ -40,7 +40,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
         slug: 'test-slug'
         commission: 10
         commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\ProductListing:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing:
     listing:
         createdAt: '<dateTimeBetween("-40min","-5min")>'
         code: "Test"

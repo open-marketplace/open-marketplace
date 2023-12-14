@@ -2,7 +2,7 @@
 {% use 'Context/Vendor/Common/_breadcrumb.html.twig' %}
 
 {% block breadcrumb_page %}
-    <a href="{{ path('open_marketplace_vendor_conversation_index') }}" class="section">{{ 'open_marketplace.ui.conversations_listing.breadcrumb_header'|trans }}</a>
+    <a href="{{ path('open_marketplace_vendor_messaging_conversation_index') }}" class="section">{{ 'open_marketplace.ui.conversations_listing.breadcrumb_header'|trans }}</a>
     <div class="divider"> / </div>
 
     {% if conversation is not null  %}

@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
-use BitBag\OpenMarketplace\Repository\CustomerRepositoryInterface;
-use BitBag\OpenMarketplace\Repository\ProductReviewRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Product\Repository\ProductReviewRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Repository\CustomerRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;

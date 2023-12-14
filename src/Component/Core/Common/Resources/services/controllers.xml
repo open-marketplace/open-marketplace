@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\ShowThreadAction"
+                 id="bitbag.open_marketplace.component.core.common.controller.messaging.show_thread">
+            <argument type="service" id="twig" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="open_marketplace.repository.conversation" />
+            <argument type="service" id="security.authorization_checker"/>
+
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\CreateThreadAction"
+                 id="bitbag.open_marketplace.component.core.common.controller.messaging.create_thread">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="api_platform.router"/>
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message"/>
+            <argument type="service" id="open_marketplace.repository.conversation"/>
+
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging\CreateMessageAction"
+                 id="bitbag.open_marketplace.component.core.common.controller.messaging.create_message">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message" />
+            <argument type="service" id="router"/>
+            <argument type="service" id="session.flash_bag"/>
+
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\OrderController"
+                 id="bitbag.open_marketplace.component.core.common.controller.resource.order"
+                 parent="sylius.controller.order"
+                 autowire="false">
+            <argument type="service" id="bitbag.open_marketplace.component.order.processor.split_order_by_vendor"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\VendorController"
+                 id="bitbag.open_marketplace.component.core.common.controller.resource.vendor"
+                 parent="open_marketplace.controller.vendor">
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.profile_updater" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\DraftAttributeController"
+                 id="bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute"
+                 parent="open_marketplace.controller.product_draft_attribute">
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.updater.product_attribute_updater"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
+        </service>
+    </services>
+</container>

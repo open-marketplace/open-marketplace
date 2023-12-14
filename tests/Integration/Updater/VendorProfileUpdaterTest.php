@@ -12,15 +12,15 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Updater;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\OpenMarketplace\Entity\Vendor;
-use BitBag\OpenMarketplace\Entity\VendorProfileInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateBackgroundImage;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdateImage;
-use BitBag\OpenMarketplace\Factory\AddressFactoryInterface;
-use BitBag\OpenMarketplace\Factory\VendorProfileFactoryInterface;
-use BitBag\OpenMarketplace\Updater\VendorProfileUpdater;
-use BitBag\OpenMarketplace\Updater\VendorProfileUpdaterInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\BackgroundImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\LogoImage;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\AddressFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdater;
+use BitBag\OpenMarketplace\Component\Vendor\ProfileUpdaterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\Country;
@@ -28,11 +28,11 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 class VendorProfileUpdaterTest extends JsonApiTestCase
 {
-    private VendorProfileUpdaterInterface $vendorProfileUpdater;
+    private ProfileUpdaterInterface $vendorProfileUpdater;
 
     private EntityManagerInterface $entityManager;
 
-    private VendorProfileFactoryInterface $vendorProfileFactory;
+    private ProfileFactoryInterface $vendorProfileFactory;
 
     private AddressFactoryInterface $vendorAddressFactory;
 
@@ -50,21 +50,21 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
         $this->countryRepository = $this->entityManager->getRepository(Country::class);
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
-        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
-        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(VendorProfileUpdate::class);
-        $this->vendorAddressFactory = static::$container->get('open_marketplace.factory.vendor_address_factory');
-        $this->vendorProfileFactory = static::$container->get('open_marketplace.factory.vendor_profile_factory');
-        $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('open_marketplace.service.vendor_profile_image_factory');
-        $this->vendorProfileUpdateBackgroundImageFactoryInterface = static::$container->get('open_marketplace.service.vendor_profile_background_image_factory');
+        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
+        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
+        $this->vendorAddressFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.address');
+        $this->vendorProfileFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_factory');
+        $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_logo_image_factory');
+        $this->vendorProfileUpdateBackgroundImageFactoryInterface = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_background_image_factory');
         $this->imageUploader = static::$container->get('sylius.image_uploader');
-        $this->vendorLogoOperator = static::$container->get('open_marketplace.operator.vendor_logo');
-        $this->VendorBackgroundImageOperator = static::$container->get('open_marketplace.operator.vendor_background');
+        $this->vendorLogoOperator = static::$container->get('bitbag.open_marketplace.component.vendor.profile.logo_image_operator');
+        $this->vendorBackgroundImageOperator = static::$container->get('bitbag.open_marketplace.component.vendor.profile.background_image_operator');
 
-        $remover = static::$container->get('open_marketplace.remover.profile_update_remover');
-        $vendorProfileFactory = static::$container->get('open_marketplace.factory.vendor_profile_update_factory');
+        $remover = static::$container->get('bitbag.open_marketplace.component.vendor.profile.profile_update_remover');
+        $vendorProfileFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_update_factory');
 
         $senderMock = $this->createMock(SenderInterface::class);
-        $this->vendorProfileUpdater = new VendorProfileUpdater(
+        $this->vendorProfileUpdater = new ProfileUpdater(
             $this->entityManager,
             $senderMock,
             $remover,
@@ -73,7 +73,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             $this->vendorProfileUpdateBackgroundImageFactoryInterface,
             $this->imageUploader,
             $this->vendorLogoOperator,
-            $this->VendorBackgroundImageOperator
+            $this->vendorBackgroundImageOperator
         );
     }
 
@@ -86,9 +86,9 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
         $vendorFormData = $this->createFakeUpdateFormData();
 
-        $fakeImage = new VendorProfileUpdateImage();
+        $fakeImage = new LogoImage();
         $fakeImage->setPath('fakepath');
-        $fakeBackgroundImage = new VendorProfileUpdateBackgroundImage();
+        $fakeBackgroundImage = new BackgroundImage();
         $fakeBackgroundImage->setPath('fakepath');
 
         $this->vendorProfileUpdater
@@ -100,7 +100,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->assertNotEquals($pendingData->getCompanyName(), $vendorDataBeforeFormSubmit->getCompanyName());
     }
 
-    private function createFakeUpdateFormData(): VendorProfileInterface
+    private function createFakeUpdateFormData(): ProfileInterface
     {
         $poland = $this->countryRepository
             ->findOneBy(['code' => 'PL']);
@@ -127,16 +127,16 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $currentVendor = $this->vendorRepository
             ->findOneBy(['taxIdentifier' => '1234567']);
 
-        $fakeImage = new VendorProfileUpdateImage();
+        $fakeImage = new LogoImage();
         $fakeImage->setPath('fakepath');
-        $fakeBackgroundImage = new VendorProfileUpdateBackgroundImage();
+        $fakeBackgroundImage = new BackgroundImage();
         $fakeBackgroundImage->setPath('fakepath');
 
         $this->vendorProfileUpdater
             ->createPendingVendorProfileUpdate($vendorFormData, $currentVendor, $fakeImage, $fakeBackgroundImage);
 
         $pendingData = $this->entityManager
-            ->getRepository(VendorProfileUpdate::class)
+            ->getRepository(ProfileUpdate::class)
             ->findOneBy(['vendor' => $currentVendor]);
 
         $this->assertEquals($vendorFormData->getCompanyName(), $pendingData->getCompanyName());

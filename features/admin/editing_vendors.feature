@@ -14,9 +14,9 @@ Feature: Editing Vendors
     Given There is a "verified" Vendor who "requested" change
     When I follow "Vendors"
     And I follow "Edit"
-    And I fill in "vendor_edit_vendorAddress_city" with "Zgorzelec"
-    And I fill in "vendor_edit_vendorAddress_postalCode" with "59-900"
-    And I fill in "vendor_edit_vendorAddress_street" with "Grove street"
+    And I fill in "vendor_vendorAddress_city" with "Zgorzelec"
+    And I fill in "vendor_vendorAddress_postalCode" with "59-900"
+    And I fill in "vendor_vendorAddress_street" with "Grove street"
     And I press "Save changes"
     Then I should see "Vendor has been successfully updated."
 
@@ -25,9 +25,9 @@ Feature: Editing Vendors
     Given There is a "verified" Vendor who "did not requested" change
     When I follow "Vendors"
     And I follow "Edit"
-    And I fill in "vendor_edit_vendorAddress_city" with "Zgorzelec"
-    And I fill in "vendor_edit_vendorAddress_postalCode" with "59-900"
-    And I fill in "vendor_edit_vendorAddress_street" with "Grove street"
+    And I fill in "vendor_vendorAddress_city" with "Zgorzelec"
+    And I fill in "vendor_vendorAddress_postalCode" with "59-900"
+    And I fill in "vendor_vendorAddress_street" with "Grove street"
     And I press "Save changes"
     Then I should see "Vendor has been successfully updated."
 

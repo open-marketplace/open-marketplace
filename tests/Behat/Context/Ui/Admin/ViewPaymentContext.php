@@ -13,9 +13,9 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\Order;
-use BitBag\OpenMarketplace\Entity\OrderInterface;
-use BitBag\OpenMarketplace\Fixture\Factory\OrderExampleFactoryInterface;
+use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFactoryInterface;
+use BitBag\OpenMarketplace\Component\Order\Entity\Order;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;

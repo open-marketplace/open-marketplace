@@ -1,0 +1,64 @@
+open_marketplace_vendor_orders_listing:
+    path: /orders
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            template: "Context/Vendor/Order/index.html.twig"
+            grid: vendor_account_order
+
+open_marketplace_vendor_orders_show:
+    path: /orders/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "Context/Vendor/Order/show.html.twig"
+            repository:
+                method: findOrderForVendor
+                arguments:
+                    - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
+                    - $id
+
+open_marketplace_vendor_orders_cancel:
+    path: //{id}/cancel
+    methods: [PUT]
+    defaults:
+        _controller: open_marketplace.controller.order.order_controller:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: sylius_order
+                transition: cancel
+            redirect: referer
+
+open_marketplace_vendor_orders_resend_confirmation_email:
+    path: /{id}/resend-confirmation-email
+    methods: [GET]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.vendor.controller.order.resend_confirmation_email
+
+open_marketplace_vendor_orders_shipment_ship:
+    path: /orders/{orderId}/shipments/{id}/ship
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            event: ship
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            redirect: referer
+            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+                        id: $id

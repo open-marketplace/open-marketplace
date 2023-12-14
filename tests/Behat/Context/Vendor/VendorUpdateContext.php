@@ -12,11 +12,11 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\VendorAddressUpdate;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Entity\VendorProfileUpdate;
-use BitBag\OpenMarketplace\Factory\VendorImageFactoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\Address;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\LogoImageFactoryInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -39,7 +39,7 @@ class VendorUpdateContext extends RawMinkContext
 
     private ObjectManager $manager;
 
-    private VendorImageFactoryInterface $vendorImageFactory;
+    private LogoImageFactoryInterface $vendorImageFactory;
 
     private TaxonFactoryInterface $taxonFactory;
 
@@ -52,7 +52,7 @@ class VendorUpdateContext extends RawMinkContext
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
         ObjectManager $manager,
-        VendorImageFactoryInterface $vendorImageFactory,
+        LogoImageFactoryInterface $vendorImageFactory,
         TaxonFactory $taxonFactory,
         ExampleFactoryInterface $vendorExampleFactory,
         FactoryInterface $countryFactory,
@@ -120,7 +120,7 @@ class VendorUpdateContext extends RawMinkContext
     public function pendingUpdateDataShouldAppearInDatabase()
     {
         $vendor = $this->sharedStorage->get('vendor');
-        $pendingData = $this->manager->getRepository(VendorProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
+        $pendingData = $this->manager->getRepository(ProfileUpdate::class)->findOneBy(['vendor' => $vendor]);
 
         Assert::notEq(null, $pendingData);
     }
@@ -132,8 +132,8 @@ class VendorUpdateContext extends RawMinkContext
     {
         $vendor = $this->sharedStorage->get('vendor');
         $country = $this->manager->getRepository(Country::class)->findOneBy(['code' => 'PL']);
-        $pendigUpdate = new VendorProfileUpdate();
-        $pendigUpdate->setVendorAddress(new VendorAddressUpdate());
+        $pendigUpdate = new ProfileUpdate();
+        $pendigUpdate->setVendorAddress(new Address());
         $pendigUpdate->setVendor($vendor);
         $pendigUpdate->setToken($token);
         $pendigUpdate->setCompanyName('new Company');
@@ -178,7 +178,7 @@ class VendorUpdateContext extends RawMinkContext
      */
     public function iVisitConfirmationPage()
     {
-        $repository = $this->manager->getRepository(VendorProfileUpdate::class);
+        $repository = $this->manager->getRepository(ProfileUpdate::class);
         $updateData = $repository->findAll();
         $token = $updateData[0]->getToken();
         $session = $this->getSession();
@@ -228,9 +228,9 @@ class VendorUpdateContext extends RawMinkContext
         $phoneNumber
     ) {
         $page = $this->getSession()->getPage();
-        $companyNameInput = $page->find('css', '#vendor_companyName');
-        $taxIdInput = $page->find('css', '#vendor_taxIdentifier');
-        $phoneNumberInput = $page->find('css', '#vendor_phoneNumber');
+        $companyNameInput = $page->find('css', '#profile_companyName');
+        $taxIdInput = $page->find('css', '#profile_taxIdentifier');
+        $phoneNumberInput = $page->find('css', '#profile_phoneNumber');
 
         Assert::eq($companyName, $companyNameInput->getAttribute('value'));
         Assert::eq($taxId, $taxIdInput->getAttribute('value'));

@@ -17,7 +17,7 @@ Sylius\Component\Core\Model\Customer:
     lastName: "Smith"
     email: "john.smith@example.com"
     emailCanonical: "john.smith@example.com"
-BitBag\OpenMarketplace\Entity\ShopUser:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
     plainPassword: "123password"
     roles: ["ROLE_USER", "ROLE_VENDOR"]
@@ -39,7 +39,7 @@ BitBag\OpenMarketplace\Entity\ShopUser:
     customer: '@customer_john'
     username: "john.smith@example.com"
     usernameCanonical: "john.smith@example.com"
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_bruce:
     shopUser: '@user_bruce'
     companyName: 'Wayne Enterprises, Inc.'
@@ -58,7 +58,7 @@ BitBag\OpenMarketplace\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute:
+BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute:
   attribute_bruce_1:
     vendor: '@vendor_bruce'
     code: 'attribute_bruce_1'

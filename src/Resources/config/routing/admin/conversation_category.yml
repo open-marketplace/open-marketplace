@@ -1,9 +1,0 @@
-bitbag_open_marketplace_conversation_category:
-    resource: |
-        alias: open_marketplace.conversation_category
-        section: admin
-        except: ['show']
-        templates: "@SyliusAdmin\\Crud"
-        grid: conversation_category
-    type: sylius.resource
-    prefix: /admin

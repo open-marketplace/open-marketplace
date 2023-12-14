@@ -65,7 +65,7 @@ Sylius\Component\Core\Model\Customer:
     email: "john.smith@example.com"
     emailCanonical: "john.smith@example.com"
     phoneNumber: 123456789
-BitBag\OpenMarketplace\Entity\ShopUser:
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
   user_bruce:
     plainPassword: "123password"
     roles: ["ROLE_USER", "ROLE_VENDOR"]
@@ -95,7 +95,7 @@ Sylius\Component\Core\Model\Address:
     city: 'Arkham City'
     postcode: '00000'
     street: 'Avenue 2115'
-BitBag\OpenMarketplace\Entity\Vendor:
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
   vendor_bruce:
     shopUser: '@user_bruce'
     companyName: 'Wayne Enterprises, Inc.'
@@ -114,14 +114,14 @@ BitBag\OpenMarketplace\Entity\Vendor:
     description: 'description'
     commission: 10
     commissionType: 'net'
-BitBag\OpenMarketplace\Entity\Conversation\Conversation:
+BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation:
   bruce_conversation:
     shopUser: '@user_bruce'
   peter_conversation:
     shopUser: '@user_peter'
   conversation_to_archive:
     shopUser: '@user_bruce'
-BitBag\OpenMarketplace\Entity\Conversation\Message:
+BitBag\OpenMarketplace\Component\Messaging\Entity\Message:
   peter_message:
     content: "Own by Peter"
     conversation: '@peter_conversation'

@@ -3,8 +3,12 @@ api_platform:
         paths:
             - '%kernel.project_dir%/vendor/sylius/sylius/src/Sylius/Bundle/ApiBundle/Resources/config/api_resources'
             - '%kernel.project_dir%/config/api_platform'
-            - '%kernel.project_dir%/src/Entity'
-            - '%kernel.project_dir%/src/Resources/config/api_resources'
+            - '%kernel.project_dir%/src/Component/Core/Api/Resources/api_resources'
+            - '%kernel.project_dir%/src/Component/Messaging/Entity'
+            - '%kernel.project_dir%/src/Component/Order/Entity'
+            - '%kernel.project_dir%/src/Component/Product/Entity'
+            - '%kernel.project_dir%/src/Component/ProductListing/Entity'
+            - '%kernel.project_dir%/src/Component/Vendor/Entity'
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:

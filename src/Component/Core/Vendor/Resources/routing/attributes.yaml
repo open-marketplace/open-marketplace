@@ -1,0 +1,77 @@
+open_marketplace_vendor_attributes_index:
+    path: /product-attributes
+    methods: [ GET, POST ]
+    defaults:
+        _controller: open_marketplace.controller.product_draft_attribute:indexAction
+        _sylius:
+            template: "Context/Vendor/DraftAttributes/index.html.twig"
+            grid: vendor_draft_attribute
+
+open_marketplace_vendor_attributes_create:
+    path: /product-attributes/{type}/new
+    methods: [GET, POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:createAction
+        _sylius:
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type
+            template: "Context/Vendor/DraftAttributes/create.html.twig"
+            redirect: open_marketplace_vendor_attributes_index
+            permission: true
+            vars:
+                subheader: sylius.ui.manage_attributes_of_your_products
+                templates:
+                    form: "@SyliusAdmin/ProductAttribute/_form.html.twig"
+                route:
+                    parameters:
+                        type: $type
+
+open_marketplace_product_draft_attribute_update:
+    path: /product-attributes/{id}/update
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:updateAction
+        _sylius:
+            template: "Context/Vendor/DraftAttributes/update.html.twig"
+            redirect: open_marketplace_vendor_attributes_index
+            vars:
+                templates:
+                    form: "@SyliusAdmin/ProductAttribute/_form.html.twig"
+                route:
+                    parameters:
+                        id: $id
+
+open_marketplace_vendor_attributes_update:
+    alias: open_marketplace_product_draft_attribute_update
+
+open_marketplace_product_draft_attribute_delete:
+    path: /product-attributes/{id}/delete
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:deleteAction
+        _sylius:
+            redirect: open_marketplace_vendor_attributes_index
+
+open_marketplace_vendor_attributes_delete:
+    alias: open_marketplace_product_draft_attribute_delete
+
+open_marketplace_vendor_attributes_types:
+    path: /attribute-types
+    methods: [GET]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:getAttributeTypesAction
+        template: "Context/Vendor/DraftAttributes/attributeTypes.html.twig"
+
+open_marketplace_vendor_attributes_listing:
+    path: /attributes
+    methods: [GET]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:renderAttributesAction
+        template: "Context/Vendor/ProductListing/form/_attributeChoice.html.twig"
+
+open_marketplace_vendor_attributes_render_forms:
+    path: /attribute-forms
+    methods: [GET]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.resource.draft_attribute:renderAttributeValueFormsAction
+        template: "Context/Vendor/ProductListing/form/attributeValues.html.twig"

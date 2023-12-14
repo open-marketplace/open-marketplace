@@ -14,28 +14,30 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\Product;
-use BitBag\OpenMarketplace\Entity\ProductInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttribute;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeTranslation;
-use BitBag\OpenMarketplace\Entity\ProductListing\DraftAttributeValue;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPriceInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslationInterface;
-use BitBag\OpenMarketplace\Entity\VendorInterface;
-use BitBag\OpenMarketplace\Factory\DraftAttributeFactoryInterface;
-use BitBag\OpenMarketplace\Fixture\Factory\VendorExampleFactory;
+use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\VendorExampleFactory;
+use BitBag\OpenMarketplace\Component\Product\Entity\Product;
+use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
+use BitBag\OpenMarketplace\Component\Product\Factory\ProductAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Component\Product\Factory\ProductAttributeValueFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Factory\DraftAttributeFactoryInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -46,40 +48,18 @@ use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
-    private EntityManagerInterface $entityManager;
-
-    private AdminUserExampleFactory $adminUserExampleFactory;
-
-    private ShopUserExampleFactory $shopUserExampleFactory;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private UserRepositoryInterface $userRepository;
-
-    private DraftAttributeFactoryInterface $draftAttributeFactory;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
-    private FactoryInterface $countryFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        AdminUserExampleFactory $adminUserExampleFactory,
-        ShopUserExampleFactory $shopUserExampleFactory,
-        SharedStorageInterface $sharedStorage,
-        UserRepositoryInterface $userRepository,
-        DraftAttributeFactoryInterface $draftAttributeFactory,
-        VendorExampleFactory $vendorExampleFactory,
-        FactoryInterface $countryFactory
+        private EntityManagerInterface $entityManager,
+        private AdminUserExampleFactory $adminUserExampleFactory,
+        private ShopUserExampleFactory $shopUserExampleFactory,
+        private SharedStorageInterface $sharedStorage,
+        private UserRepositoryInterface $userRepository,
+        private DraftAttributeFactoryInterface $draftAttributeFactory,
+        private VendorExampleFactory $vendorExampleFactory,
+        private FactoryInterface $countryFactory,
+        private ProductAttributeFactoryInterface $productAttributeFactory,
+        private ProductAttributeValueFactoryInterface $productAttributeValueFactory
     ) {
-        $this->entityManager = $entityManager;
-        $this->adminUserExampleFactory = $adminUserExampleFactory;
-        $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->sharedStorage = $sharedStorage;
-        $this->userRepository = $userRepository;
-        $this->draftAttributeFactory = $draftAttributeFactory;
-        $this->vendorExampleFactory = $vendorExampleFactory;
-        $this->countryFactory = $countryFactory;
     }
 
     /**
@@ -174,24 +154,24 @@ final class ProductListingContext extends RawMinkContext implements Context
         $vendor = $this->sharedStorage->get('vendor');
 
         for ($i = 0; $i < $count; ++$i) {
-            $productListing = new ProductListing();
+            $productListing = new Listing();
             $productListing->setCode('code' . $i);
             $productListing->setVendor($vendor);
 
-            $productDraft = new ProductDraft();
+            $productDraft = new Draft();
             $productDraft->setCode('code' . $i);
             $productDraft->setVersionNumber(0);
             $productDraft->setProductListing($productListing);
             $productListing->sendToVerification($productDraft);
 
-            $productTranslation = new ProductTranslation();
+            $productTranslation = new DraftTranslation();
             $productTranslation->setLocale('en_US');
             $productTranslation->setSlug('product-listing-' . $i);
             $productTranslation->setName('product-listing-' . $i);
             $productTranslation->setDescription('product-listing-' . $i);
             $productTranslation->setProductDraft($productDraft);
 
-            $productPricing = new ProductListingPrice();
+            $productPricing = new ListingPrice();
             $productPricing->setProductDraft($productDraft);
             $productPricing->setPrice(1000);
             $productPricing->setOriginalPrice(1000);
@@ -257,8 +237,11 @@ final class ProductListingContext extends RawMinkContext implements Context
         );
         $productPricing = $this->createProductListingPricing($productDraft);
 
+        $productListing->insertDraft($productDraft);
         $productListing->setPublishedAt($productDraft->getPublishedAt());
         $productListing->setVerificationStatus($productDraft->getStatus());
+
+        $this->sharedStorage->set('product_listing', $productListing);
 
         $this->entityManager->persist($productListing);
         $this->entityManager->persist($productDraft);
@@ -353,79 +336,9 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @return DocumentElement
-     */
-    private function getPage()
-    {
-        return $this->getSession()->getPage();
-    }
-
-    private function createProductListing(VendorInterface $vendor, string $code): ProductListingInterface
-    {
-        $productListing = new ProductListing();
-        $productListing->setCode($code);
-        $productListing->setVendor($vendor);
-
-        return $productListing;
-    }
-
-    private function createProductListingDraft(
-        ProductListingInterface $productListing,
-        string $code = 'code',
-        string $status = 'under_verification',
-        int $versionNumber = 0,
-        string $publishedAt = 'now'
-    ): ProductDraftInterface {
-        $productDraft = new ProductDraft();
-        $productDraft->setCode($code);
-        $productDraft->setStatus($status);
-        $productDraft->setPublishedAt(new \DateTime($publishedAt));
-        $productDraft->setVersionNumber($versionNumber);
-        $productDraft->setProductListing($productListing);
-        $channel = $this->getChannel();
-        $productDraft->setChannels(new ArrayCollection([$channel]));
-
-        return $productDraft;
-    }
-
-    private function createProductListingTranslation(
-        ProductDraftInterface $productDraft,
-        string $name = 'product-listing-name',
-        string $description = 'product-listing-description',
-        string $slug = 'product-listing-slug',
-        string $locale = 'en_US'
-    ): ProductTranslationInterface {
-        $productTranslation = new ProductTranslation();
-        $productTranslation->setLocale($locale);
-        $productTranslation->setSlug($slug);
-        $productTranslation->setName($name);
-        $productTranslation->setDescription($description);
-        $productTranslation->setProductDraft($productDraft);
-
-        return $productTranslation;
-    }
-
-    private function createProductListingPricing(
-        ProductDraftInterface $productDraft,
-        int $price = 1000,
-        int $originalPrice = 1000,
-        int $minimumPrice = 1000,
-        string $channelCode = 'web_us'
-    ): ProductListingPriceInterface {
-        $productPricing = new ProductListingPrice();
-        $productPricing->setProductDraft($productDraft);
-        $productPricing->setPrice($price);
-        $productPricing->setOriginalPrice($originalPrice);
-        $productPricing->setMinimumPrice($minimumPrice);
-        $productPricing->setChannelCode($channelCode);
-
-        return $productPricing;
-    }
-
-    /**
      * @Given This product listing visibility is removed
      */
-    public function thisProductListingVisibilityIsHidden()
+    public function thisProductListingVisibilityIsHidden(): void
     {
         $productListing = $this->sharedStorage->get('product_listing' . '0');
         $productListing->setHidden(true);
@@ -436,7 +349,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Given There is attribute with code :code
      */
-    public function thereIsAttributeWithCode($code)
+    public function thereIsAttributeWithCode($code): void
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -465,7 +378,7 @@ final class ProductListingContext extends RawMinkContext implements Context
         $code,
         $name,
         $status
-    ) {
+    ): void {
         $vendor = $this->sharedStorage->get('vendor');
 
         $attribute = $this->sharedStorage->get('attribute');
@@ -476,14 +389,14 @@ final class ProductListingContext extends RawMinkContext implements Context
         $attributeValue->setValue('attribute_testing_value');
 
         $productListing = $this->createProductListing($vendor, $code);
-        /** @var ProductDraftInterface $productDraft */
+        /** @var DraftInterface $productDraft */
         $productDraft = $this->createProductListingDraft($productListing, $code, $status);
         $productDraft->addAttribute($attributeValue);
         $productTranslation = $this->createProductListingTranslation($productDraft, $name);
 
         $productPricing = $this->createProductListingPricing($productDraft);
 
-        $draftImage = new ProductDraftImage();
+        $draftImage = new DraftImage();
         $draftImage->setOwner($productDraft);
         $draftImage->setPath('path/to/file');
 
@@ -502,7 +415,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @When I click :buttonText
      */
-    public function iClick($buttonText)
+    public function iClick($buttonText): void
     {
         $this->getPage()->pressButton($buttonText);
     }
@@ -510,7 +423,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Then I should see image
      */
-    public function iShouldSeeImage()
+    public function iShouldSeeImage(): void
     {
         $page = $this->getSession()->getPage();
 
@@ -519,6 +432,162 @@ final class ProductListingContext extends RawMinkContext implements Context
         $imagePath = $image->getAttribute('src');
 
         Assert::contains($imagePath, 'path/to/file', 'no image found');
+    }
+
+    /**
+     * @Given product listing has attribute :code with value :value
+     */
+    public function productListingHasAttributeWithValue(string $code, string $value): void
+    {
+        $productListing = $this->sharedStorage->get('product_listing');
+        Assert::isInstanceOf($productListing, ListingInterface::class);
+
+        $attribute = $this->sharedStorage->get(sprintf('draft_attribute_%s', $code));
+        Assert::isInstanceOf($attribute, DraftAttributeInterface::class);
+
+        $attributeValue = new DraftAttributeValue();
+
+        $attributeValue->setAttribute($attribute);
+        $attributeValue->setLocaleCode('en_US');
+        $attributeValue->setValue($value);
+
+        $latestDraft = $productListing->getLatestDraft();
+        $latestDraft->addAttribute($attributeValue);
+
+        $this->entityManager->persist($latestDraft);
+        $this->entityManager->persist($productListing);
+        $this->entityManager->persist($attributeValue);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given there is already published product with attribute :string with value :value
+     */
+    public function thereIsAlreadyPublishedProductWithAttributeWithValue(
+        string $code,
+        string $value
+    ): void {
+        $productListing = $this->sharedStorage->get('product_listing');
+        Assert::isInstanceOf($productListing, ListingInterface::class);
+
+        $attribute = $this->sharedStorage->get(sprintf('draft_attribute_%s', $code));
+        Assert::isInstanceOf($attribute, DraftAttributeInterface::class);
+
+        $product = $this->sharedStorage->get('product');
+        Assert::isInstanceOf($product, ProductInterface::class);
+        $productListing->setProduct($product);
+
+        $productAttribute = $this->productAttributeFactory->createClone($attribute);
+
+        $productAttributeValue = $this->productAttributeValueFactory->createWithProductAttributeAndValue(
+            $productAttribute,
+            $value
+        );
+
+        $product->addAttribute($productAttributeValue);
+
+        $this->entityManager->persist($productListing);
+        $this->entityManager->persist($productAttribute);
+        $this->entityManager->persist($productAttributeValue);
+        $this->entityManager->persist($product);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @When I should see :attribute with value :value
+     */
+    public function iShouldSeeWithValue(string $attribute, string $value)
+    {
+        $page = $this->getPage();
+
+        $element = $page->find('css', 'div#attributes');
+        $attribFound = $element->find('css', sprintf('table > tbody > tr > td:contains("%s")', $value));
+
+        Assert::notNull($attribFound);
+    }
+
+    /**
+     * @When I should not see :attribute with value :value
+     */
+    public function iShouldNotSeeWithValue(string $attribute, string $value): void
+    {
+        $page = $this->getPage();
+
+        $element = $page->find('css', 'div#attributes');
+        $foundAttribute = $element->find('css', sprintf('table > tbody > tr > td:contains("%s")', $value));
+
+        Assert::null($foundAttribute);
+    }
+
+    /**
+     * @return DocumentElement
+     */
+    private function getPage()
+    {
+        return $this->getSession()->getPage();
+    }
+
+    private function createProductListing(VendorInterface $vendor, string $code): ListingInterface
+    {
+        $productListing = new Listing();
+        $productListing->setCode($code);
+        $productListing->setVendor($vendor);
+
+        return $productListing;
+    }
+
+    private function createProductListingDraft(
+        ListingInterface $productListing,
+        string $code = 'code',
+        string $status = 'under_verification',
+        int $versionNumber = 0,
+        string $publishedAt = 'now'
+    ): DraftInterface {
+        $productDraft = new Draft();
+        $productDraft->setCode($code);
+        $productDraft->setStatus($status);
+        $productDraft->setPublishedAt(new \DateTime($publishedAt));
+        $productDraft->setVersionNumber($versionNumber);
+        $productDraft->setProductListing($productListing);
+        $channel = $this->getChannel();
+        $productDraft->setChannels(new ArrayCollection([$channel]));
+
+        return $productDraft;
+    }
+
+    private function createProductListingTranslation(
+        DraftInterface $productDraft,
+        string $name = 'product-listing-name',
+        string $description = 'product-listing-description',
+        string $slug = 'product-listing-slug',
+        string $locale = 'en_US'
+    ): DraftTranslationInterface {
+        $productTranslation = new DraftTranslation();
+        $productTranslation->setLocale($locale);
+        $productTranslation->setSlug($slug);
+        $productTranslation->setName($name);
+        $productTranslation->setDescription($description);
+        $productTranslation->setProductDraft($productDraft);
+
+        return $productTranslation;
+    }
+
+    private function createProductListingPricing(
+        DraftInterface $productDraft,
+        int $price = 1000,
+        int $originalPrice = 1000,
+        int $minimumPrice = 1000,
+        string $channelCode = 'web_us'
+    ): ListingPriceInterface {
+        $productPricing = new ListingPrice();
+        $productPricing->setProductDraft($productDraft);
+        $productPricing->setPrice($price);
+        $productPricing->setOriginalPrice($originalPrice);
+        $productPricing->setMinimumPrice($minimumPrice);
+        $productPricing->setChannelCode($channelCode);
+
+        return $productPricing;
     }
 
     private function getChannel(): ChannelInterface

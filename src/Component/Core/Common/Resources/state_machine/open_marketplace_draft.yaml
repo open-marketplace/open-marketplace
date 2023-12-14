@@ -1,0 +1,35 @@
+winzou_state_machine:
+    open_marketplace_draft:
+        class: '%open_marketplace.model.product_draft.class%'
+        property_path: status
+        graph: open_marketplace_draft
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            created: ~
+            under_verification: ~
+            accepted: ~
+            rejected: ~
+        transitions:
+            send_to_verification:
+                from: ['created']
+                to: 'under_verification'
+            accept_product_draft:
+                from: ['under_verification']
+                to: 'accepted'
+            reject_product_draft:
+                from: ['under_verification']
+                to: 'rejected'
+        callbacks:
+            after:
+                send_to_verification:
+                    on: [ 'send_to_verification' ]
+                    do: [ '@bitbag.open_marketplace.component.core.common.state_machine.product_draft_callbacks', 'sendToVerification' ]
+                    args: [ 'object' ]
+                accept_product_listing:
+                    on: ['accept_product_draft']
+                    do: ['@bitbag.open_marketplace.component.core.common.state_machine.product_draft_callbacks', 'accept']
+                    args: ['object']
+                reject_product_listing:
+                    on: [ 'reject_product_draft' ]
+                    do: [ '@bitbag.open_marketplace.component.core.common.state_machine.product_draft_callbacks', 'reject' ]
+                    args: [ 'object' ]

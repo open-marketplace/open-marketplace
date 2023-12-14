@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Order\EventListener\CalculateOrderCommissionListener"
+                 id="bitbag.open_marketplace.component.order.event_listener.calculate_order_commission">
+
+            <argument type="tagged_iterator" tag="bitbag.open_marketplace.component.order.commission_calculator" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+
+            <tag name="kernel.event_listener" event="order.post_split" method="calculate"/>
+        </service>
+    </services>
+</container>

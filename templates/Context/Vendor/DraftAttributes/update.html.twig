@@ -7,7 +7,7 @@
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
 
 {% block breadcrumb_page %}
-    <a href="{{ path('bitbag_open_marketplace_vendor_draft_attribute_index') }}" class="section">{{ 'sylius.ui.attributes'|trans }}</a>
+    <a href="{{ path('open_marketplace_vendor_attributes_index') }}" class="section">{{ 'sylius.ui.attributes'|trans }}</a>
     <div class="divider"> / </div>
     <div class="active section"> {{ resource.id }} </div>
     <div class="divider"> / </div>
@@ -17,7 +17,7 @@
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block subcontent %}
-    {{ form_start(form, {'action': path('open_marketplace_draft_attribute_update', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {{ form_start(form, {'action': path('open_marketplace_product_draft_attribute_update', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
 
     {% if configuration.vars.templates.form is defined %}
@@ -30,7 +30,7 @@
     {% endif %}
 
 
-    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path('bitbag_open_marketplace_vendor_draft_attribute_index', configuration.vars.route.parameters|default({}))}} %}
+    {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path('open_marketplace_vendor_attributes_index', configuration.vars.route.parameters|default({}))}} %}
 
     {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

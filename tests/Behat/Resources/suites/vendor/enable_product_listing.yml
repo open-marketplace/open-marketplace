@@ -14,4 +14,4 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.geographical
             filters:
-                tags: "@enable_product && @ui"
+                tags: "@enable_product&&@ui"

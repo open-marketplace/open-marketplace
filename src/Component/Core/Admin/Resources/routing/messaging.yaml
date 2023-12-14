@@ -1,0 +1,46 @@
+open_marketplace_admin_messaging_conversation_index:
+    path: /conversations
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.controller.conversation:index
+
+open_marketplace_admin_messaging_conversation_create:
+    path: /conversation/create
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_thread
+        _sylius:
+            template: "Context/Admin/Conversation/create.html.twig"
+            redirect: open_marketplace_admin_messaging_conversation_show
+            mail_redirect: mvm_vendor_conversation_show
+
+open_marketplace_admin_messaging_conversation_show:
+    path: /conversations/{id}
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.show_thread
+        _sylius:
+            template: "Context/Admin/Conversation/show.html.twig"
+
+open_marketplace_admin_messaging_conversation_archive:
+    path: /conversations/{id}/archive
+    methods: [GET,POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.admin.controller.messaging.send_archive_request
+        _sylius:
+            redirect: open_marketplace_admin_messaging_conversation_index
+
+open_marketplace_admin_messaging_conversation_message_add:
+    path: /conversations/{id}/message/add
+    methods: [GET, POST]
+    defaults:
+        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_message
+        _sylius:
+            redirect: open_marketplace_admin_messaging_conversation_show
+            mail_redirect: open_marketplace_admin_messaging_conversation_show
+
+open_marketplace_admin_messaging_conversation_category_index:
+    path: /conversation-categories
+    methods: [GET]
+    defaults:
+        _controller: open_marketplace.controller.conversation_category:index

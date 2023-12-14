@@ -1,0 +1,33 @@
+open_marketplace_vendor_customers_index:
+    path: /customers
+    defaults:
+        _controller: sylius.controller.customer:indexAction
+        _sylius:
+            template: "Context/Vendor/Customers/index.html.twig"
+            grid: open_marketplace_vendor_clients
+
+open_marketplace_vendor_customers_show:
+    path: /customers/{id}
+    methods: [GET]
+    defaults:
+        id: 0
+        _controller: sylius.controller.customer:showAction
+        _sylius:
+            permission: true
+            template: "Context/Vendor/Customers/show.html.twig"
+            repository:
+                method: findCustomerForVendor
+                arguments:
+                    - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
+                    - $id
+
+open_marketplace_vendor_customers_order_index:
+    path: /customers/{id}/orders
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "Context/Vendor/Order/index.html.twig"
+            grid: vendor_account_customer_orders

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="open_marketplace.form.type.vendor.validation_groups" type="collection">
+            <parameter>Default</parameter>
+            <parameter>VendorUserRegister</parameter>
+            <parameter>VendorLogo</parameter>
+            <parameter>sylius</parameter>
+        </parameter>
+    </parameters>
+    <services>
+        <defaults public="false" autowire="false" autoconfigure="false" />
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\ProfileType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.profile">
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
+            <argument>%open_marketplace.form.type.vendor.validation_groups%</argument>
+
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\BackgroundImageType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.background_image">
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\BackgroundImage</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\Profile\LogoImageType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.logo_image">
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\LogoImage</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductReviewType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_review">
+            <argument>%sylius.model.product_review.class%</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\VendorShippingMethodsType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.vendor_shipping_methods">
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor_shipping_method" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\VendorShippingMethodChoiceType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.vendor_shipping_method_choice">
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <tag name="form.type" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_attribute">
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute</argument>
+            <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
+            <argument>BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeTranslationType</argument>
+            <argument type="service" id="sylius.form_registry.attribute_type"/>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeTranslationType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_attribute_translation">
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeTranslation</argument>
+            <argument>%sylius.form.type.product_attribute_translation.validation_groups%</argument>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeChoiceType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_attribute_choice_type">
+            <argument type="service" id="open_marketplace.repository.product_draft_attribute"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeValueType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_attribute_value_type">
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttributeValue</argument>
+            <argument>%sylius.form.type.product_attribute_value.validation_groups%</argument>
+            <argument>BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeChoiceType</argument>
+            <argument type="service" id="open_marketplace.repository.product_draft_attribute"/>
+            <argument type="service" id="sylius.repository.locale"/>
+            <argument type="service" id="sylius.form_registry.attribute_type"/>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\ListingType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.listing">
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
+            <tag name="form.type" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftTranslationsCollectionType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_translations_collection">
+            <argument type="service" id="sylius.translation_locale_provider.admin"/>
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftTranslationType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_translation">
+            <tag name="form.type"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftPriceType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_price">
+            <argument>%open_marketplace.model.product_listing_price.class%</argument>
+            <argument>%sylius.form.type.channel_pricing.validation_groups%</argument>
+            <argument type="service" id="sylius.repository.channel_pricing" />
+            <tag name="form.type" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftImageType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_image">
+            <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftTaxonAutocompleteChoiceType"
+                 id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_taxon_autocomplete_choice">
+            <argument type="service" id="bitbag.open_marketplace.component.core.vendor.factory.product_taxon" />
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.repository.draft_taxon" />
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>

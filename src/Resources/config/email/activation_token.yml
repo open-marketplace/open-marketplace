@@ -1,7 +1,0 @@
-sylius_mailer:
-    sender:
-        name: 'example owner name'
-        address: no-reply@example.com
-    emails:
-        vendor_profile_update:
-            template: "Context/Vendor/Email/profileUpdate.html.twig"

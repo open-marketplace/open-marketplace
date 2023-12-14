@@ -11,16 +11,15 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Vendor;
 
-use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftInterface;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListingPrice;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductTranslation;
-use BitBag\OpenMarketplace\Entity\ShopUserInterface;
-use BitBag\OpenMarketplace\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -29,7 +28,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductListingContext extends RawMinkContext implements Context
+final class ProductListingContext extends RawMinkContext
 {
     private EntityManagerInterface $entityManager;
 
@@ -141,25 +140,25 @@ final class ProductListingContext extends RawMinkContext implements Context
         $vendor = $this->sharedStorage->get('vendor');
 
         for ($i = 0; $i < $count; ++$i) {
-            $productListing = new ProductListing();
+            $productListing = new Listing();
             $productListing->setCode('code' . $i);
             $productListing->setVendor($vendor);
 
-            $productDraft = new ProductDraft();
+            $productDraft = new Draft();
             $productDraft->setCode('code' . $i);
-            $productDraft->setStatus(ProductDraftInterface::STATUS_UNDER_VERIFICATION);
+            $productDraft->setStatus(DraftInterface::STATUS_UNDER_VERIFICATION);
             $productDraft->setPublishedAt(new \DateTime());
             $productDraft->setVersionNumber(0);
             $productDraft->setProductListing($productListing);
 
-            $productTranslation = new ProductTranslation();
+            $productTranslation = new DraftTranslation();
             $productTranslation->setLocale('en_US');
             $productTranslation->setSlug('product-listing-' . $i);
             $productTranslation->setName('product-listing-' . $i);
             $productTranslation->setDescription('product-listing-' . $i);
             $productTranslation->setProductDraft($productDraft);
 
-            $productPricing = new ProductListingPrice();
+            $productPricing = new ListingPrice();
             $productPricing->setProductDraft($productDraft);
             $productPricing->setPrice(1000);
             $productPricing->setOriginalPrice(1000);
@@ -185,26 +184,26 @@ final class ProductListingContext extends RawMinkContext implements Context
         $vendor = $this->sharedStorage->get('vendor');
 
         for ($i = 0; $i < $count; ++$i) {
-            $productListing = new ProductListing();
+            $productListing = new Listing();
             $productListing->setCode('code' . $i);
             $productListing->setVendor($vendor);
             $productListing->setVerificationStatus($status);
 
-            $productDraft = new ProductDraft();
+            $productDraft = new Draft();
             $productDraft->setCode('code' . $i);
             $productDraft->setStatus($status);
             $productDraft->setPublishedAt(new \DateTime());
             $productDraft->setVersionNumber(0);
             $productDraft->setProductListing($productListing);
 
-            $productTranslation = new ProductTranslation();
+            $productTranslation = new DraftTranslation();
             $productTranslation->setLocale('en_US');
             $productTranslation->setSlug('product-listing-' . $i);
             $productTranslation->setName('product-listing-' . $i);
             $productTranslation->setDescription('product-listing-' . $i);
             $productTranslation->setProductDraft($productDraft);
 
-            $productPricing = new ProductListingPrice();
+            $productPricing = new ListingPrice();
             $productPricing->setProductDraft($productDraft);
             $productPricing->setPrice(1000);
             $productPricing->setOriginalPrice(1000);
@@ -227,8 +226,8 @@ final class ProductListingContext extends RawMinkContext implements Context
      */
     public function productListingStatusIs($arg1)
     {
-        $draft = $this->entityManager->getRepository(ProductDraft::class)->findOneBy(['code' => 'code0']);
-        $draft->setStatus(ProductDraftInterface::STATUS_CREATED);
+        $draft = $this->entityManager->getRepository(Draft::class)->findOneBy(['code' => 'code0']);
+        $draft->setStatus(DraftInterface::STATUS_CREATED);
         $this->entityManager->persist($draft);
         $this->entityManager->flush();
     }
@@ -241,6 +240,21 @@ final class ProductListingContext extends RawMinkContext implements Context
         $page = $this->getPage();
         $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
         Assert::notNull($dropdown);
+    }
+
+    /**
+     * @When I fill form with non unique code
+     */
+    public function iFillFormWithNonUniqueCode(): void
+    {
+        $page = $this->getPage();
+
+        $page->fillField('Code', 'code0');
+        $page->fillField('Price', '10');
+        $page->fillField('Original price', '20');
+        $page->fillField('Minimum price', '30');
+        $page->fillField('Name', 'test');
+        $page->fillField('Slug', 'product');
     }
 
     /**
@@ -302,5 +316,14 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
         ($this->getPage()->findLink('Logout'));
+    }
+
+    /**
+     * @When I click :label on confirmation modal
+     */
+    public function iClickOnConfirmationModal(string $label): void
+    {
+        $confirmationModal = $this->getPage()->findById($label);
+        $confirmationModal->click();
     }
 }

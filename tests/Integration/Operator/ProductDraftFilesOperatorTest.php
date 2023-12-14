@@ -12,11 +12,11 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Operator;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\OpenMarketplace\Entity\Product;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraft;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductDraftImage;
-use BitBag\OpenMarketplace\Entity\ProductListing\ProductListing;
-use BitBag\OpenMarketplace\Operator\ProductDraftFilesOperator;
+use BitBag\OpenMarketplace\Component\Product\Entity\Product;
+use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter\Operator\ImagesOperator;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
 use Gaufrette\Filesystem;
 
 final class ProductDraftFilesOperatorTest extends JsonApiTestCase
@@ -25,7 +25,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
     {
         parent::setUp();
 
-        $this->productFromDraftFactory = $this->getContainer()->get('open_marketplace.factory.product_from_draft_factory');
+        $this->productFromDraftFactory = $this->getContainer()->get('bitbag.open_marketplace.component.product_listing.draft_converter.factory.simple_product');
 
         $fileSystemMap = $this->getContainer()->get('knp_gaufrette.filesystem_map');
 
@@ -33,9 +33,9 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->fileSystem = new Filesystem($fileAdapter);
 
-        $productImageFactory = $this->getContainer()->get('open_marketplace.factory.product_image');
+        $productImageFactory = $this->getContainer()->get('bitbag.open_marketplace.component.product.factory.product_image');
 
-        $this->productDraftFilesOperator = new ProductDraftFilesOperator($this->fileSystem, $productImageFactory);
+        $this->productDraftFilesOperator = new ImagesOperator($this->fileSystem, $productImageFactory);
     }
 
     public function test_it_copies_draft_image_to_product(): void
@@ -46,8 +46,8 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
         $this->create_draft_fixture_with_file();
 
-        $draftFixture = $manager->getRepository(ProductDraft::class)->findOneBy(['code' => 'FIXTURE']);
-        $cratedProduct = $this->productFromDraftFactory->createSimpleProduct($draftFixture);
+        $draftFixture = $manager->getRepository(Draft::class)->findOneBy(['code' => 'FIXTURE']);
+        $cratedProduct = $this->productFromDraftFactory->create($draftFixture);
 
         $this->productDraftFilesOperator->copyFilesToProduct($draftFixture, $cratedProduct);
 
@@ -66,11 +66,11 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
     {
         $manager = $this->getEntityManager();
 
-        $listing = $this->getEntityManager()->getRepository(ProductListing::class)->findAll()[0];
+        $listing = $this->getEntityManager()->getRepository(Listing::class)->findAll()[0];
 
-        $image1 = new ProductDraftImage();
+        $image1 = new DraftImage();
 
-        $draftFixture = new ProductDraft();
+        $draftFixture = new Draft();
         $draftFixture->setCode('FIXTURE');
         $draftFixture->setProductListing($listing);
         $draftFixture->addImage($image1);

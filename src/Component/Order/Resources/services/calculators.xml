@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="false" autoconfigure="false" />
+
+        <instanceof id="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorCommissionCalculatorInterface" autowire="true">
+            <tag name="bitbag.open_marketplace.component.order.commission_calculator" default-priority-method="getPriority" />
+        </instanceof>
+
+        <service class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\NoVendorCommissionCalculator"
+                 id="bitbag.open_marketplace.component.order.commission_calculator.no_vendor" />
+
+        <service class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorNetCommissionCalculator"
+                 id="bitbag.open_marketplace.component.order.commission_calculator.net" />
+
+        <service class="BitBag\OpenMarketplace\Component\Order\CommissionCalculator\VendorGrossCommissionCalculator"
+                 id="bitbag.open_marketplace.component.order.commission_calculator.gross" />
+
+        <service class="BitBag\OpenMarketplace\Component\Order\Calculator\ShipmentUnitsRecalculator"
+                 id="bitbag.open_marketplace.component.order.calculator.shipment_units_recalculator" />
+    </services>
+</container>
