@@ -18,7 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
 
 final class MessageType extends AbstractType
 {
@@ -35,11 +34,6 @@ final class MessageType extends AbstractType
             ->add('file', FileType::class, [
                 'label' => 'open_marketplace.ui.form.conversation_message.file',
                 'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '10485760',
-                    ]),
-                ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'open_marketplace.ui.form.conversation_message.submit',
