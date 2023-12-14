@@ -2,6 +2,7 @@ imports:
     - suites/shop/account_order.yml
     - suites/shop/vendor_page.yml
     - suites/shop/order.yml
+    - suites/ui/admin/message_categories.yml
 
     - suites/ui/admin/customer_orders.yml
     - suites/ui/admin/dashboard_statistics.yml
@@ -34,3 +35,5 @@ imports:
     - suites/vendor/vendor_update.yml
 
     - suites/start_conversation.yml
+    - suites/ui/admin/message_categories.yml
+
