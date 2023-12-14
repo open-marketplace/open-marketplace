@@ -19,10 +19,8 @@ All types of contributions are encouraged and valued. See the [Table of Contents
   - [Reporting Bugs](#reporting-bugs)
   - [Suggesting Enhancements](#suggesting-enhancements)
   - [Your First Code Contribution](#your-first-code-contribution)
-  - [Improving The Documentation](#improving-the-documentation)
-- [Styleguides](#styleguides)
-  - [Commit Messages](#commit-messages)
-- [Join The Project Team](#join-the-project-team)
+- [Styleguide](#styleguide)
+- [Communication](#communication)
 
 
 
@@ -124,3 +122,34 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/BitBag
 - **Explain why this enhancement would be useful** to most Open Marketplace users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
 
 <!-- You might want to create an issue template for enhancement suggestions that can be used as a guide and that defines the structure of the information to be included. If you do so, reference it here in the description. -->
+
+### Your First Code Contribution
+Thank you for your interest in contributing! These guidelines will help you get started with making your first contribution. We value and appreciate your input, so thank you in advance for taking the time to contribute to our project.
+
+#### Getting Started
+
+To begin, please make sure you have reviewed all documents related to contributing and our code of conduct. 
+
+Once you're ready to contribute, follow these steps:
+
+1. **Fork the repository:** Start by creating your own fork of the project repository. This will allow you to work on your changes without affecting the main project.
+2. **Clone the repository:** Clone the forked repository to your local machine using `git clone https://github.com/your-username/repository.git`.
+3. **Create a new branch:** Create a new branch for your contribution. This helps keep your changes organized and makes it easier to merge them later. You can create a branch using `git checkout -b branch-name`.
+4. **Make your changes:** Now it's time to make your contribution! Whether it's fixing a bug, adding a new feature, or improving documentation, your contribution is valuable. Feel free to explore the codebase and make your changes accordingly.
+5. **Test your changes:** Before submitting your contribution, make sure to test your changes locally to ensure they work as intended. This includes running any necessary tests and checking for any potential issues.
+6. **Commit and push:** Once you're satisfied with your changes, commit them using `git commit -m "Your commit message"`. Then, push the changes to your forked repository with `git push origin branch-name`.
+7. **Submit a pull request:** Finally, head over to the original repository on GitHub and submit a pull request. In your pull request, provide a clear and descriptive explanation of the changes you've made. This will help the project maintainers review and merge your contribution more efficiently.
+
+## Styleguide
+
+We adhere to a specific set of code style and guidelines to maintain consistency across the project. Please ensure that your contributions follow these guidelines to streamline the review process. You can find the guidelines in the [project's documentation](https://github.com/BitBagCommerce/OpenMarketplace/STYLEGUIDE.md).
+
+## Communication
+
+If you have any questions or need assistance while making your contribution, feel free to reach out to us. You can use GitHub issues, our Slack channel, or any other communication methods mentioned in the project documentation. We're here to help you have a smooth and successful experience contributing to our project.
+
+Once again, thank you for your interest in contributing to our project. We greatly appreciate your time and effort. Together, we can make the project even better!
+
+Happy contributing!
+
+
