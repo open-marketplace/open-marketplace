@@ -14,7 +14,11 @@ class AttributesConverterTest extends JsonApiTestCase
     {
         parent::setUp();
 
-        $this->entityManager = $this->getEntityManager();
+        $this->entityManager = $this->getContainer()
+            ->get('doctrine')
+            ->getManager()
+        ;
+
         $this->attributesConverter = $this->getContainer()->get('bitbag.open_marketplace.component.product_listing.draft_converter.operator.attributes');
     }
 
@@ -22,7 +26,9 @@ class AttributesConverterTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('AttributesConverterTest/test_it_removes_attributes_from_product.yml');
         $draft = $this->entityManager->getRepository(Draft::class)->findAll()[0];
-        $product = $draft->getProductListing()->getProduct();
+
+        $productListing = $draft->getProductListing();
+        $product = $productListing->getProduct();
 
         $this->assertCount(1, $product->getAttributes());
 
