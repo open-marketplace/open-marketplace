@@ -1,0 +1,11 @@
+default:
+    suites:
+        ui_message_category:
+            contexts:
+                - open_marketplace.behat.context.ui.admin.product_listing
+                - Behat\MinkExtension\Context\MinkContext
+                - sylius.behat.context.setup.shop_security
+                - open_marketplace.behat.context.setup.vendor
+                - sylius.behat.context.hook.doctrine_orm
+            filters:
+                tags: '@message_category&&@ui'
