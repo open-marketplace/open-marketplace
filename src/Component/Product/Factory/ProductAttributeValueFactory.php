@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Product\Factory;
 
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
 final class ProductAttributeValueFactory implements ProductAttributeValueFactoryInterface
@@ -24,5 +25,16 @@ final class ProductAttributeValueFactory implements ProductAttributeValueFactory
     {
         /** @phpstan-ignore-next-line  */
         return new $this->classFQN();
+    }
+
+    public function createWithProductAttributeAndValue(
+        ProductAttributeInterface $productAttribute,
+        mixed $value
+    ): ProductAttributeValueInterface {
+        $productAttributeValue = $this->create();
+        $productAttributeValue->setAttribute($productAttribute);
+        $productAttributeValue->setValue($value);
+
+        return $productAttributeValue;
     }
 }
