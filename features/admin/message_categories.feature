@@ -1,4 +1,4 @@
-@message_category
+@messaging
 Feature: Verifying validation of message category
   In order to create new message category
   As an Administrator
@@ -8,7 +8,7 @@ Feature: Verifying validation of message category
     Given there is an administrator with name "admin"
     And there is conversation category "test category"
 
-  Scenario: AdminUser begins conversation
+  Scenario: Administrator begins conversation
     Given I am logged in as an administrator
     And I am on "/admin"
     And I follow "Message categories"

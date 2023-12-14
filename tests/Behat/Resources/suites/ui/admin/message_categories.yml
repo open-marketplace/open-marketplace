@@ -9,4 +9,4 @@ default:
         - sylius.behat.context.ui.shop.account
         - sylius.behat.context.hook.doctrine_orm
       filters:
-        tags: '@message_category'
+        tags: '@messaging'
