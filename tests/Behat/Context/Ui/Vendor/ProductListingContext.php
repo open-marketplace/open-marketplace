@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Vendor;
 
-use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
@@ -29,7 +28,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductListingContext extends RawMinkContext implements Context
+final class ProductListingContext extends RawMinkContext
 {
     private EntityManagerInterface $entityManager;
 
@@ -241,6 +240,21 @@ final class ProductListingContext extends RawMinkContext implements Context
         $page = $this->getPage();
         $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
         Assert::notNull($dropdown);
+    }
+
+    /**
+     * @When I fill form with non unique code
+     */
+    public function iFillFormWithNonUniqueCode(): void
+    {
+        $page = $this->getPage();
+
+        $page->fillField('Code', 'code0');
+        $page->fillField('Price', '10');
+        $page->fillField('Original price', '20');
+        $page->fillField('Minimum price', '30');
+        $page->fillField('Name', 'test');
+        $page->fillField('Slug', 'product');
     }
 
     /**

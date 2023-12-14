@@ -31,11 +31,6 @@ Feature:Creating a product listing.
     And I follow "My account"
     And I follow "Product listings"
     And I follow "Create Product listing"
-    And I fill in "Code" with "code0"
-    And I fill in "Price" with "10"
-    And I fill in "Original price" with "20"
-    And I fill in "Minimum price" with "30"
-    And I fill in "Name" with "test"
-    And I fill in "Slug" with "product"
+    And I fill form with non unique code
     And I click "Save" button
-    And I should see non unique code error message
+    Then I should see non unique code error message
