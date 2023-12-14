@@ -31,10 +31,7 @@ maintainability and readability of the codebase. Please adhere to the guidelines
 - Use descriptive and meaningful names for variables, functions, classes, and files.
 - Follow the standard naming conventions for the programming language used in the project.
 - Prefer clarity over brevity in naming. Avoid overly abbreviated or cryptic names.
-- Use lowercase letters with underscores for file names (e.g., `my_file_name.py`).
-- Use CamelCase for class names (e.g., `ClassName`).
-- Use lowercase with underscores for function and variable names (e.g., `my_function`, `my_variable`).
-- Constants should be written in uppercase with underscores (e.g., `MAX_SIZE`).
+- Follow [PSR-12 rules](https://www.php-fig.org/psr/psr-12/) when contributing the project.
 
 ## Code Formatting
 
