@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Component\ProductListing\Entity;
 
 use BitBag\OpenMarketplace\Component\Core\Api\UuidAwareInterface;
 use Ramsey\Uuid\UuidInterface;
+use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 interface DraftAttributeValueInterface extends AttributeValueInterface, UuidAwareInterface
@@ -25,5 +26,5 @@ interface DraftAttributeValueInterface extends AttributeValueInterface, UuidAwar
 
     public function setDraft(?DraftInterface $product): void;
 
-    public function getAttribute(): ?DraftAttributeInterface;
+    public function getAttribute(): ?AttributeInterface;
 }
