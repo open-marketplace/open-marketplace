@@ -4,10 +4,13 @@
     <i class="circular cart icon"></i>
     <div class="content">
         {{ 'open_marketplace.ui.summary_of_your_order'|trans }}
-        {% for suborder in order.secondaryOrders %}
-            <span> #{{ suborder.number }}</span>
-        {% endfor %}
-
+        {% if order.primary %}
+            {% for suborder in order.secondaryOrders %}
+                <span> #{{ suborder.number }}</span>
+            {% endfor %}
+        {% else %}
+            <span> #{{ order.number }}</span>
+        {% endif %}
         <div class="sub header">
             <div class="ui horizontal divided list">
                 <div class="item">
