@@ -6,6 +6,7 @@ imports:
     - suites/ui/admin/customer_orders.yml
     - suites/ui/admin/dashboard_statistics.yml
     - suites/ui/admin/disabling_vendors.yml
+    - suites/ui/admin/message_categories.yml
     - suites/ui/admin/editing_vendors.yml
     - suites/ui/admin/managing_vendors.yml
     - suites/ui/admin/order_viewing.yml
