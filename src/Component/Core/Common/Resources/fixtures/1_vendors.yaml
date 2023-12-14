@@ -15,6 +15,7 @@ sylius_fixtures:
                                 shipping_methods:
                                     - dhl_express
                                     - ups
+                                settlement_frequency: !php/const BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency::MONTHLY
                             -   email: 'good-and-better@example.com'
                                 company_name: 'Good & Better'
                                 first_name: 'John'
@@ -25,6 +26,7 @@ sylius_fixtures:
                                 shipping_methods:
                                     - fedex
                                     - ups
+                                settlement_frequency: !php/const BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency::WEEKLY
                             -   email: 'lisa-comp@example.com'
                                 company_name: 'Computers, Chips and Mobile'
                                 first_name: 'Lisa'
@@ -35,6 +37,7 @@ sylius_fixtures:
                                 shipping_methods:
                                     - dhl_express
                                     - fedex
+                                settlement_frequency: !php/const BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency::QUARTERLY
                             -   email: 'health@example.com'
                                 company_name: 'Health & Style'
                                 first_name: 'Clark'
@@ -46,4 +49,4 @@ sylius_fixtures:
                                     - dhl_express
                                     - ups
                                     - fedex
-
+                                settlement_frequency: !php/const BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency::QUARTERLY
