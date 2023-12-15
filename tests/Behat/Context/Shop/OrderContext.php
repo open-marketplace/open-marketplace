@@ -347,9 +347,6 @@ class OrderContext extends RawMinkContext implements Context
         $this->getSession()->getPage()->selectFieldOption($select, $option);
     }
 
-    /**
-     * @return DocumentElement
-     */
     private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();

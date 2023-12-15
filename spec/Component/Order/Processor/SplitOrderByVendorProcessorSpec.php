@@ -81,9 +81,8 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher
     ): void {
         $order->isPrimary()->willReturn(true);
-        $order->getSecondaryOrders()->willReturn(new ArrayCollection([$subOrder]));
+        $order->getSecondaryOrders()->willReturn(new ArrayCollection([$subOrder->getWrappedObject()]));
 
-        $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldNotBeCalled((object) []);
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldNotBeCalled();
 
         $this->process($order);

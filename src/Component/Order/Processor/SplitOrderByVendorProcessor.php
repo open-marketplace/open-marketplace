@@ -24,7 +24,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
 {
     public function __construct(
-        private EntityManager $entityManager,
         private OrderManagerInterface $orderManager,
         private PaymentRefresherInterface $paymentRefresher,
         private EventDispatcherInterface $eventDispatcher

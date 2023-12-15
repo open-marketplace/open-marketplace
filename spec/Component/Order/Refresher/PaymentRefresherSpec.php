@@ -13,7 +13,6 @@ namespace spec\BitBag\OpenMarketplace\Component\Order\Refresher;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresher;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -37,14 +36,11 @@ class PaymentRefresherSpec extends ObjectBehavior
         PaymentInterface $secondaryOrderPayment,
         PaymentInterface $primaryOrderPayment,
         PaymentMethodInterface $paymentMethod,
-    ): void {
-        $secondaryOrderPayments = new ArrayCollection([$secondaryOrderPayment->getWrappedObject()]);
-        $primaryOrderPayments = new ArrayCollection([$primaryOrderPayment->getWrappedObject()]);
-
+        ): void {
         $secondaryOrder->getTotal()->willReturn(100);
         $secondaryOrder->getPrimaryOrder()->willReturn($primaryOrder);
-        $secondaryOrder->getPayments()->willReturn($secondaryOrderPayments);
-        $primaryOrder->getPayments()->willReturn($primaryOrderPayments);
+        $secondaryOrder->getLastPayment()->willReturn($secondaryOrderPayment);
+        $primaryOrder->getLastPayment()->willReturn($primaryOrderPayment);
         $primaryOrderPayment->getMethod()->willReturn($paymentMethod);
         $secondaryOrderPayment->setAmount(100);
 
