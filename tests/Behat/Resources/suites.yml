@@ -34,5 +34,3 @@ imports:
     - suites/vendor/vendor_update.yml
 
     - suites/start_conversation.yml
-    - suites/ui/admin/message_categories.yml
-
