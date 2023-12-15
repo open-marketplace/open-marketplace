@@ -8,5 +8,3 @@ framework:
             - '%kernel.project_dir%/src/Component/Messaging/Resources/validation/'
             - '%kernel.project_dir%/src/Component/ProductListing/Resources/validation/'
             - '%kernel.project_dir%/src/Component/Vendor/Resources/validation/'
-            - '%kernel.project_dir%/src/Component/Messaging/Resources/validation/'
-
