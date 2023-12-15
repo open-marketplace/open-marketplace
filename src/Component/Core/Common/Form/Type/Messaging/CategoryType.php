@@ -32,7 +32,7 @@ final class CategoryType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('data_class',Category::class);
+        $resolver->setDefault('data_class', Category::class);
     }
 
     public function getBlockPrefix(): string
