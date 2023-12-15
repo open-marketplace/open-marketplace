@@ -8,4 +8,4 @@ default:
                 - open_marketplace.behat.context.setup.vendor
                 - sylius.behat.context.hook.doctrine_orm
             filters:
-                tags: '@message_category&&@ui'
+                tags: '@messaging&&@ui'

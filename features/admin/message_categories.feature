@@ -1,4 +1,4 @@
-@message_category
+@messaging
 Feature: Verifying validation of message category
   In order to create new message category
   As an Administrator
