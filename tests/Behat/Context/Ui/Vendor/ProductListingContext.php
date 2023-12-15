@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Vendor;
 
-use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
@@ -29,7 +28,7 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductListingContext extends RawMinkContext implements Context
+final class ProductListingContext extends RawMinkContext
 {
     private EntityManagerInterface $entityManager;
 
@@ -245,6 +244,21 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
+     * @When I fill form with non unique code
+     */
+    public function iFillFormWithNonUniqueCode(): void
+    {
+        $page = $this->getPage();
+
+        $page->fillField('Code', 'code0');
+        $page->fillField('Price', '10');
+        $page->fillField('Original price', '20');
+        $page->fillField('Minimum price', '30');
+        $page->fillField('Name', 'test');
+        $page->fillField('Slug', 'product');
+    }
+
+    /**
      * @Then I should see non unique code error message
      */
     public function iShouldSeeNonUniqueCodeMessage()
@@ -303,5 +317,14 @@ final class ProductListingContext extends RawMinkContext implements Context
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
         ($this->getPage()->findLink('Logout'));
+    }
+
+    /**
+     * @When I click :label on confirmation modal
+     */
+    public function iClickOnConfirmationModal(string $label): void
+    {
+        $confirmationModal = $this->getPage()->findById($label);
+        $confirmationModal->click();
     }
 }
