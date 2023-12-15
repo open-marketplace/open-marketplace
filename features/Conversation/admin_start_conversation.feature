@@ -84,6 +84,7 @@ Feature: Starting conversation by Administrator
   Scenario: Admin adds attachment to conversation
     Given I am logged in as an administrator
     And I am on "/admin/conversation/create"
+    And I select "test category" from "mvm_conversation[category]"
     And I fill in "Message" with "test Message"
     And I select "company" from "mvm_conversation_vendorUser"
     And I attach the file "images/valid_logo.png" to "mvm_conversation_messages___name___file"
@@ -94,6 +95,7 @@ Feature: Starting conversation by Administrator
   Scenario: Filling form with not allowed attachment
     Given I am logged in as an administrator
     And I am on "/admin/conversation/create"
+    And I select "test category" from "mvm_conversation[category]"
     And I fill in "Message" with "test Message"
     And I select "company" from "mvm_conversation_vendorUser"
     And I attach the file "unsafe.html" to "mvm_conversation_messages___name___file"
