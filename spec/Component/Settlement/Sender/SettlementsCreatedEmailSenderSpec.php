@@ -42,7 +42,7 @@ final class SettlementsCreatedEmailSenderSpec extends ObjectBehavior
         SettlementInterface $settlement,
         ShopUserInterface $shopUser,
         ChannelInterface $channel,
-    ): void {
+        ): void {
         $settlements = [$settlement->getWrappedObject()];
         $vendor->getShopUser()->willReturn($shopUser);
         $shopUser->getEmail()->willReturn('email@domain.com');
