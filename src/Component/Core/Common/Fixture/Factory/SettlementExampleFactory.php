@@ -33,7 +33,7 @@ final class SettlementExampleFactory extends AbstractExampleFactory
         private ChannelRepositoryInterface $channelRepository,
         private SettlementFactoryInterface $settlementFactory,
         private iterable $settlementPeriodResolvers,
-    ) {
+        ) {
         $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
     }
