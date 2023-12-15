@@ -6,6 +6,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfig;
 use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -29,7 +30,13 @@ final class PaymentMethodContext implements Context
         $paymentMethod->setName($paymentMethodName);
         $paymentMethod->setCode($paymentMethodCode);
 
+        $gateway = new GatewayConfig();
+        $gateway->setGatewayName('offline');
+        $gateway->setFactoryName('offline');
+        $gateway->setConfig([]);
+
         $paymentMethod->addChannel($this->sharedStorage->get('channel'));
+        $paymentMethod->setGatewayConfig($gateway);
 
         $this->paymentMethodRepository->add($paymentMethod);
     }

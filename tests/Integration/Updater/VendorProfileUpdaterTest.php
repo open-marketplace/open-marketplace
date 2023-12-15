@@ -51,7 +51,6 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
         $this->countryRepository = $this->entityManager->getRepository(Country::class);
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
-        $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
         $this->vendorAddressFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.address');
         $this->vendorProfileFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_factory');
         $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_logo_image_factory');
