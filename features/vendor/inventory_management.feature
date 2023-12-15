@@ -57,7 +57,7 @@ Feature: Vendor can manage his inventory
       Given There is a product with variant code "testing_variant_code" owned by logged in vendor
       And I am on "/en_US/account/vendor/product-variants/inventory"
       And I follow "Edit"
-      And I fill in "sylius_product_variant[onHand]" with "1000000001"
+      When I fill in "sylius_product_variant[onHand]" with "1000000001"
       And I submit inventory form
       Then I should see "This value should be less than or equal to 1000000000."
 
