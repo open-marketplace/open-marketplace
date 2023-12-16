@@ -180,6 +180,6 @@ Feature: Spliting orders when cart was filled with products from different Vendo
     And I am on "/"
     And I follow "My account"
     And I follow "Order history"
-    Then I should see 1 orders
+    And I should see 1 orders
     And I follow "Show" button
     Then I should see "Bank transfer" payment method
