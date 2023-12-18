@@ -64,9 +64,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  id="bitbag.open_marketplace.component.core.vendor.form.type.product_listing.draft_attribute">
             <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftAttribute</argument>
             <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
-            <argument>
-                BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeTranslationType
-            </argument>
+            <argument>BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing\DraftAttributeTranslationType</argument>
             <argument type="service" id="sylius.form_registry.attribute_type"/>
             <tag name="form.type"/>
         </service>
