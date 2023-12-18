@@ -11,9 +11,13 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 
+use Behat\Mink\Element\NodeElement;
+
 interface VendorSettlementPageInterface
 {
     public function openSettlementsIndex(): void;
 
     public function getSettlements(): array;
+
+    public function findAcceptButton(): ?NodeElement;
 }

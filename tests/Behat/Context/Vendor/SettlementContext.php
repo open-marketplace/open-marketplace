@@ -38,4 +38,25 @@ final class SettlementContext extends MinkContext
         $settlements = $this->vendorSettlementPage->getSettlements();
         Assert::eq(count($settlements), $count);
     }
+
+    /**
+     * @When I accept first possible settlement
+     */
+    public function iAcceptFirstPossibleSettlement(): void
+    {
+        $button = $this->vendorSettlementPage->findAcceptButton();
+        Assert::notNull($button);
+
+        $button->click();
+    }
+
+    /**
+     * @When I see :count settlements with status :status
+     */
+    public function iSeeSettlementsWithStatus(string $count, string $status): void
+    {
+        $settlements = $this->vendorSettlementPage->getSettlementsWithStatus($status);
+
+        Assert::eq(count($settlements), $count);
+    }
 }

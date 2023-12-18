@@ -21,7 +21,9 @@ Feature: Vendor can accept settlements
   Scenario: Vendor can accept new settlements
     Given there is a "new" settlement with total amount of "100.00" and commission amount of "10.00"
     When I visit the vendor settlements page
-    And I see 1 settlement with status "New"
+    And I see 1 settlements with status "New"
+    And I see 0 settlements with status "Accepted"
     And I accept first possible settlement
     Then I should see "Settlement has been accepted successfully."
-    And I should see "Accepted" within the first settlement
+    And I see 0 settlements with status "New"
+    And I see 1 settlements with status "Accepted"

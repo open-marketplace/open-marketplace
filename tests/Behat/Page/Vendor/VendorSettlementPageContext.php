@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 
+use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 final class VendorSettlementPageContext extends SymfonyPage implements VendorSettlementPageInterface
 {
@@ -31,5 +33,17 @@ final class VendorSettlementPageContext extends SymfonyPage implements VendorSet
             ->find('css', 'table.table')
             ->findAll('css', 'tr.item')
         ;
+    }
+
+    public function findAcceptButton(): ?NodeElement
+    {
+        return $this->getDocument()->findButton('Accept');
+    }
+
+    public function getSettlementsWithStatus(string $status): array
+    {
+        $locator = sprintf('table.table > tbody > tr.item:contains("%s")', $status);
+
+        return $this->getDocument()->findAll('css', $locator);
     }
 }
