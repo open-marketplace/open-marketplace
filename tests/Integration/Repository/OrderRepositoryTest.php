@@ -69,8 +69,8 @@ final class OrderRepositoryTest extends JsonApiTestCase
         $lastSettlementVendorWeyland = $this->orderRepository->findForSettlementByVendorAndChannelAndDates($vendorWeyland, $channel, $startDate, $endDate);
         $lastSettlementVendorWayne = $this->orderRepository->findForSettlementByVendorAndChannelAndDates($vendorWayne, $channel, $startDate, $endDate);
 
-        $this->assertSame($lastSettlementVendorWeyland['total'], '700');
-        $this->assertSame($lastSettlementVendorWeyland['commissionTotal'], '100');
+        $this->assertSame($lastSettlementVendorWeyland['total'], '70');
+        $this->assertSame($lastSettlementVendorWeyland['commissionTotal'], '1002');
         $this->assertNull($lastSettlementVendorWayne['total']);
         $this->assertNull($lastSettlementVendorWayne['commissionTotal']);
     }
