@@ -1,0 +1,12 @@
+default:
+  suites:
+    ui_message_category:
+      contexts:
+        - tests.open_marketplace.behat.context.conversation_context
+        - sylius.behat.context.setup.shop_security
+        - sylius.behat.context.setup.admin_security
+        - sylius.behat.context.setup.admin_user
+        - sylius.behat.context.ui.shop.account
+        - sylius.behat.context.hook.doctrine_orm
+      filters:
+        tags: '@messaging'
