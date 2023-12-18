@@ -1,0 +1,13 @@
+default:
+  suites:
+    vendor_settlements:
+      contexts:
+        - tests.open_marketplace.behat.context.vendor.settlement_context
+        - tests.open_marketplace.behat.context.setup.settlement
+        - open_marketplace.behat.context.setup.vendor
+        - sylius.behat.context.hook.doctrine_orm
+        - sylius.behat.context.setup.shop_security
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.user
+      filters:
+        tags: "@vendor_settlements&&@ui"

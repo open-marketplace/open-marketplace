@@ -27,6 +27,11 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
 
     public const STATUS_VERIFIED = 'verified';
 
+    public const STATUSES = [
+        self::STATUS_UNVERIFIED,
+        self::STATUS_VERIFIED,
+    ];
+
     public function getId(): ?int;
 
     public function setId(?int $id): void;

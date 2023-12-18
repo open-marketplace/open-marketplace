@@ -3,13 +3,15 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
-        <service id="open_marketplace.behat.context.setup.vendor" public="true"
-                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\VendorContext">
+        <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\VendorContext"
+            id="open_marketplace.behat.context.setup.vendor"
+            public="true"
+        >
             <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
             <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="sylius.factory.country" />
         </service>
-
     </services>
 </container>

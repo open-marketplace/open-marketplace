@@ -42,14 +42,9 @@ final class SettlementExampleFactory extends AbstractExampleFactory
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $shopUser = $this->shopUserRepository->findOneBy(['username' => $options['vendor']]);
-        Assert::isInstanceOf($shopUser, ShopUserInterface::class);
+        $vendor = $this->getVendor($options);
 
-        $vendor = $shopUser->getVendor();
-        Assert::isInstanceOf($vendor, VendorInterface::class);
-
-        $channel = $this->channelRepository->findOneBy(['code' => $options['channel']]);
-        Assert::isInstanceOf($channel, ChannelInterface::class);
+        $channel = $this->getChannel($options);
 
         [$from, $to] = $this->getSettlementDateRangeFromVendor($vendor);
 
@@ -71,6 +66,7 @@ final class SettlementExampleFactory extends AbstractExampleFactory
     {
         $resolver
             ->setDefault('vendor', LazyOption::randomOne($this->shopUserRepository))
+            ->setAllowedTypes('vendor', ['string', VendorInterface::class])
             ->setDefault('status', SettlementInterface::STATUS_NEW)
             ->setAllowedValues('status', SettlementInterface::AVAILABLE_STATUSES)
             ->setDefault('totalAmount', 0)
@@ -79,7 +75,7 @@ final class SettlementExampleFactory extends AbstractExampleFactory
             ->setAllowedTypes('totalCommissionAmount', ['int'])
             ->setDefault('channel', LazyOption::randomOne($this->channelRepository))
             ->setDefault('startDate', new \DateTime())
-            ->setDefault('endDate', new \DateTime())
+            ->setDefault('endDate', new \DateTime('-3 months'))
         ;
     }
 
@@ -93,5 +89,35 @@ final class SettlementExampleFactory extends AbstractExampleFactory
         }
 
         throw new \InvalidArgumentException(sprintf('Could not find period resolver for vendor with settlement frequency "%s"', $vendor->getSettlementFrequency()));
+    }
+
+    private function getVendor(array $options): VendorInterface
+    {
+        $vendor = $options['vendor'];
+        if ($vendor instanceof VendorInterface) {
+            return $vendor;
+        }
+
+        $shopUser = $this->shopUserRepository->findOneBy(['username' => $vendor]);
+        Assert::isInstanceOf($shopUser, ShopUserInterface::class);
+
+        $vendor = $shopUser->getVendor();
+        Assert::isInstanceOf($vendor, VendorInterface::class);
+
+        return $vendor;
+    }
+
+    private function getChannel(array $options): ChannelInterface
+    {
+        $channel = $options['channel'];
+
+        if ($channel instanceof ChannelInterface) {
+            return $channel;
+        }
+
+        $channel = $this->channelRepository->findOneBy(['code' => $options['channel']]);
+        Assert::isInstanceOf($channel, ChannelInterface::class);
+
+        return $channel;
     }
 }
