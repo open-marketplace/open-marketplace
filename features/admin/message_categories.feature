@@ -10,9 +10,9 @@ Feature: Verifying validation of message category
 
   @ui
   Scenario: Incorrect message category name
-    And I am on "/admin"
+    When I am on "/admin"
     And I follow "Message categories"
     And I follow "Create"
     And I fill in "Name" with ""
-    When I click "Create" button
+    And I click "Create" button
     Then I should see "This value should not be blank."
