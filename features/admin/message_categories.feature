@@ -10,9 +10,9 @@ Feature: Verifying validation of message category
 
   Scenario: Administrator begins conversation
     Given I am logged in as an administrator
-    And I am on "/admin"
+    When I am on "/admin"
     And I follow "Message categories"
     And I follow "Edit"
     And I fill in "Name" with ""
-    When I press "Save changes"
+    And I press "Save changes"
     Then I should see "This value should not be blank."
