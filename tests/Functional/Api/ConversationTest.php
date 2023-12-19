@@ -8,29 +8,34 @@
 
 declare(strict_types=1);
 
-namespace Test\BitBag\OpenMarketplace\Functional\Api;
+namespace Tests\BitBag\OpenMarketplace\Functional\Api;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\Order;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\OpenMarketplace\Functional\FunctionalTestCase;
 
 final class ConversationTest extends FunctionalTestCase
 {
     use ShopUserLoginTrait;
 
+    private array $fixturesData;
+
     public function setUp(): void
     {
         $this->entityManager = static::getContainer()->get('doctrine.orm.entity_manager');
         $this->orderRepository = $this->entityManager->getRepository(Order::class);
 
-        $this->loadFixturesFromFile('Api/ConversationTest/conversation.yml');
+        $this->fixturesData = $this->loadFixturesFromFile('Api/ConversationTest/conversation.yml');
     }
 
     public function test_vendor_can_start_conversation(): void
     {
         $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+        $category = $this->fixturesData['peter_category'];
 
         $this->client->request('POST', '/api/v2/shop/account/vendor/conversations', [], [], $header, json_encode([
+            'category' => '/api/v2/shop/account/vendor/categories/' . $category->getId(),
             'messages' => [
                 [
                     'content' => 'hello',
@@ -44,9 +49,12 @@ final class ConversationTest extends FunctionalTestCase
 
     public function test_vendor_can_reply_to_conversation(): void
     {
-        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+        $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+        $category = $this->fixturesData['peter_category'];
 
-        $this->client->request('GET', '/api/v2/shop/account/vendor/conversations', [], [], $header);
+        $this->client->request('GET', '/api/v2/shop/account/vendor/conversations', [], [], $header, json_encode([
+            'category' => '/api/v2/shop/account/vendor/categories/' . $category->getId(),
+        ]));
 
         $response = $this->client->getResponse();
         $conversationIRI = json_decode($response->getContent(), true)['hydra:member'][0]['@id'];
@@ -111,5 +119,21 @@ final class ConversationTest extends FunctionalTestCase
         $responseData = json_decode($response->getContent(), true);
 
         $this->assertEquals($responseData['status'], 'closed');
+    }
+
+    public function test_validate_not_blank_category(): void
+    {
+        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+
+        $this->client->request('POST', '/api/v2/shop/account/vendor/conversations', [], [], $header, json_encode([
+            'messages' => [
+                [
+                    'content' => 'hello',
+                ],
+            ],
+        ]));
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'Api/VendorConversation/test_validate_not_blank_category_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

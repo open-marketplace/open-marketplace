@@ -5,14 +5,14 @@ Feature: Verifying validation of message category
   I need to be able to validate message category
 
   Background:
-    Given there is an admin user "admin" with password "admin"
-    And I am logged in as an admin
+    Given there is an administrator with name "admin"
+    And there is conversation category "test category"
 
-  @ui
-  Scenario: Incorrect message category name
+  Scenario: Administrator begins conversation
+    Given I am logged in as an administrator
     When I am on "/admin"
     And I follow "Message categories"
-    And I follow "Create"
+    And I follow "Edit"
     And I fill in "Name" with ""
-    And I click "Create" button
+    And I press "Save changes"
     Then I should see "This value should not be blank."

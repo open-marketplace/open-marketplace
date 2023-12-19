@@ -9,6 +9,7 @@ Feature: Rejecting product listing
     And there is an vendor user "vendor" with password "vendor"
     And I am logged in as an admin
     And there is a vendor user "test@company.domain" registered in country "PL"
+    And there is conversation category "test category"
 
 
   @ui
@@ -20,6 +21,7 @@ Feature: Rejecting product listing
     And I should see product's listing status "Under verification"
     And I follow "Details"
     And I should see url "#\/admin\/product-listings\/(\d+)#"
+    And I select "test category" from "mvm_conversation[category]"
     And I fill in "mvm_conversation[messages][__name__][content]" with "reason to reject"
     And I click "Reject" button
     Then I should see url "#\/admin\/product-listings\/$#"

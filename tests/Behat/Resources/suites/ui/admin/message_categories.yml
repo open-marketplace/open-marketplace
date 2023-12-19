@@ -1,11 +1,12 @@
 default:
-    suites:
-        ui_message_category:
-            contexts:
-                - open_marketplace.behat.context.ui.admin.product_listing
-                - Behat\MinkExtension\Context\MinkContext
-                - sylius.behat.context.setup.shop_security
-                - open_marketplace.behat.context.setup.vendor
-                - sylius.behat.context.hook.doctrine_orm
-            filters:
-                tags: '@messaging&&@ui'
+  suites:
+    ui_message_category:
+      contexts:
+        - tests.open_marketplace.behat.context.conversation_context
+        - sylius.behat.context.setup.shop_security
+        - sylius.behat.context.setup.admin_security
+        - sylius.behat.context.setup.admin_user
+        - sylius.behat.context.ui.shop.account
+        - sylius.behat.context.hook.doctrine_orm
+      filters:
+        tags: '@messaging'

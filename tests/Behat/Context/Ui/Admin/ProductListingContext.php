@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\VendorExampleFactory;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\Category;
 use BitBag\OpenMarketplace\Component\Product\Entity\Product;
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\Product\Factory\ProductAttributeFactoryInterface;
@@ -594,5 +595,16 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         return $this->entityManager->getRepository(ChannelInterface::class)
             ->findAll()[0];
+    }
+
+    /**
+     * @Given there is conversation category :categoryName
+     */
+    public function thereIsConversationCategory($categoryName)
+    {
+        $category = new Category();
+        $category->setName($categoryName);
+        $this->entityManager->persist($category);
+        $this->entityManager->flush();
     }
 }
