@@ -57,6 +57,13 @@ final class UpdateAction
             throw new AccessDeniedException();
         }
 
+        if ($productListing->isRemoved()) {
+            /** @var Session $session */
+            $session = $this->requestStack->getSession();
+            $session->getFlashBag()->add('error', 'This product has been deleted');
+            return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listings_index'));
+        }
+
         $productDraft = $this->listingPersister->resolveLatestDraft($productListing);
 
         $form = $this->formFactory->create(ListingType::class, $productDraft);
