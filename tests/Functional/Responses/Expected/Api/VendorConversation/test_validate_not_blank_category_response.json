@@ -1,0 +1,13 @@
+{
+  "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+  "@type": "ConstraintViolationList",
+  "hydra:title": "An error occurred",
+  "hydra:description": "category: This value should not be blank.",
+  "violations": [
+    {
+      "propertyPath": "category",
+      "message": "This value should not be blank.",
+      "code": "c1051bb4-d103-4f74-8988-acbcafc7fdc3"
+    }
+  ]
+}
