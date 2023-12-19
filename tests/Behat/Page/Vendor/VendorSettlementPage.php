@@ -14,7 +14,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-final class VendorSettlementPageContext extends SymfonyPage implements VendorSettlementPageInterface
+final class VendorSettlementPage extends SymfonyPage implements VendorSettlementPageInterface
 {
     public function getRouteName(): string
     {
