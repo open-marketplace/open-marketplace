@@ -41,9 +41,9 @@ final class SettlementRepository extends EntityRepository implements SettlementR
                     DATE_FORMAT(s.startDate, \'%e/%m/%Y\'),
                     \' - \',
                     DATE_FORMAT(s.endDate, \'%e/%m/%Y\')
-                ), s.startDate'
+                ) as period'
             )
-            ->orderBy('s.startDate', self::ORDER_DESCENDING)
+            ->orderBy('period', self::ORDER_DESCENDING)
             ->getQuery()
             ->getSingleColumnResult()
         ;
