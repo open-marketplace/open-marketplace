@@ -17,9 +17,16 @@ Feature: Vendor can accept settlements
     When I visit the vendor settlements page
     Then I should see 3 settlements
 
-  @ui @development
+  @ui
+  Scenario: Vendor can not accept settlements with status other than "New"
+    And there is a "accepted" settlement
+    And there is a "settled" settlement
+    When I visit the vendor settlements page
+    Then I should not see any accept button
+
+  @ui
   Scenario: Vendor can accept new settlements
-    Given there is a "new" settlement with total amount of "100.00" and commission amount of "10.00"
+    Given there is a "new" settlement
     When I visit the vendor settlements page
     And I see 1 settlements with status "New"
     And I see 0 settlements with status "Accepted"
@@ -27,3 +34,14 @@ Feature: Vendor can accept settlements
     Then I should see "Settlement has been accepted successfully."
     And I see 0 settlements with status "New"
     And I see 1 settlements with status "Accepted"
+
+  @ui
+  Scenario: Vendor can filter settlements by status
+    Given there is a "new" settlement with total amount of "100.00" and commission amount of "10.00"
+    And there is a "accepted" settlement with total amount of "540.00" and commission amount of "74.00"
+    And there is a "accepted" settlement with total amount of "130.00" and commission amount of "12.71"
+    When I visit the vendor settlements page
+    And I see 3 settlements
+    And I filter settlements by status "Accepted"
+    Then I see 2 settlements
+    And I see 0 settlements with status "New"

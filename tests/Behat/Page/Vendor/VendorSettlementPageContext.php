@@ -34,15 +34,27 @@ final class VendorSettlementPageContext extends SymfonyPage implements VendorSet
         ;
     }
 
-    public function findAcceptButton(): ?NodeElement
+    public function findFirstAcceptButton(): ?NodeElement
     {
         return $this->getDocument()->findButton('Accept');
     }
 
-    public function getSettlementsWithStatus(string $status): array
+    public function getSettlementsWithStatus(string $status = null): array
     {
-        $locator = sprintf('table.table > tbody > tr.item:contains("%s")', $status);
+        $locator = null !== $status
+            ? sprintf('table.table > tbody > tr.item:contains("%s")', $status)
+            : 'table.table > tbody > tr.item'
+        ;
 
         return $this->getDocument()->findAll('css', $locator);
+    }
+
+    public function filterByStatus(string $status): void
+    {
+        $form = $this->getSession()->getPage()->find('css', 'form');
+        $statusDropdown = $form->find('css', 'select[id="criteria_status_status"]');
+        $statusDropdown->selectOption($status);
+
+        $form->submit();
     }
 }

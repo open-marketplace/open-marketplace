@@ -27,12 +27,13 @@ final class SettlementContext implements Context
 
     /**
      * @Given there is a :status settlement with total amount of :totalAmount and commission amount of :commissionTotalAmount
+     * @Given there is a :status settlement
      */
     public function thereIsASettlementWithTotalAmountOfAndCommissionAmountOf(
         string $status,
-        float $totalAmount,
-        float $commissionTotalAmount
-    ): void {
+        float $totalAmount = 0,
+        float $commissionTotalAmount = 0,
+        ): void {
         $vendor = $this->sharedStorage->get('vendor');
 
         $settlement = $this->settlementExampleFactory->create([

@@ -19,5 +19,9 @@ interface VendorSettlementPageInterface
 
     public function getSettlements(): array;
 
-    public function findAcceptButton(): ?NodeElement;
+    public function findFirstAcceptButton(): ?NodeElement;
+
+    public function getSettlementsWithStatus(string $status = null): array;
+
+    public function filterByStatus(string $status);
 }
