@@ -31,15 +31,6 @@ final class SettlementContext extends MinkContext
     }
 
     /**
-     * @Then I should see :count settlements
-     */
-    public function iShouldSeeSettlements($count): void
-    {
-        $settlements = $this->vendorSettlementPage->getSettlements();
-        Assert::eq(count($settlements), $count);
-    }
-
-    /**
      * @When I accept first possible settlement
      */
     public function iAcceptFirstPossibleSettlement(): void
@@ -51,8 +42,8 @@ final class SettlementContext extends MinkContext
     }
 
     /**
-     * @When I see :count settlements with status :status
-     * @When I see :arg1 settlements
+     * @When I should see :count settlements with status :status
+     * @When I should see :count settlements
      */
     public function iSeeSettlementsWithStatus(string $count, string $status = null): void
     {
@@ -76,5 +67,13 @@ final class SettlementContext extends MinkContext
     public function iFilterSettlementsByStatus(string $status): void
     {
         $this->vendorSettlementPage->filterByStatus($status);
+    }
+
+    /**
+     * @When I filter settlements by period :period
+     */
+    public function iFilterSettlementsByPeriod(string $period): void
+    {
+        $this->vendorSettlementPage->filterByPeriod($period);
     }
 }

@@ -28,12 +28,12 @@ Feature: Vendor can accept settlements
   Scenario: Vendor can accept new settlements
     Given there is a "new" settlement
     When I visit the vendor settlements page
-    And I see 1 settlements with status "New"
-    And I see 0 settlements with status "Accepted"
+    And I should see 1 settlements with status "New"
+    And I should see 0 settlements with status "Accepted"
     And I accept first possible settlement
     Then I should see "Settlement has been accepted successfully."
-    And I see 0 settlements with status "New"
-    And I see 1 settlements with status "Accepted"
+    And I should see 0 settlements with status "New"
+    And I should see 1 settlements with status "Accepted"
 
   @ui
   Scenario: Vendor can filter settlements by status
@@ -41,7 +41,17 @@ Feature: Vendor can accept settlements
     And there is a "accepted" settlement with total amount of "540.00" and commission amount of "74.00"
     And there is a "accepted" settlement with total amount of "130.00" and commission amount of "12.71"
     When I visit the vendor settlements page
-    And I see 3 settlements
+    And I should see 3 settlements
     And I filter settlements by status "Accepted"
-    Then I see 2 settlements
-    And I see 0 settlements with status "New"
+    Then I should see 2 settlements
+    And I should see 0 settlements with status "New"
+
+  @ui @development
+  Scenario: Vendor can filter settlements by period
+    Given there is a settlement with period from "19/11/2023" to "26/12/2023"
+    Given there is a settlement with period from "27/11/2023" to "03/12/2023"
+    Given there is a settlement with period from "04/12/2023" to "11/12/2023"
+    Given there is a settlement with period from "11/12/2023" to "17/12/2023"
+    When I visit the vendor settlements page
+    And I filter settlements by period "19/11/2023 - 26/12/2023"
+    Then I should see 1 settlements

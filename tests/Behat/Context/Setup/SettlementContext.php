@@ -46,4 +46,23 @@ final class SettlementContext implements Context
         $this->entityManager->persist($settlement);
         $this->entityManager->flush();
     }
+
+    /**
+     * @Given there is a settlement with period from :from to :to
+     */
+    public function thereIsASettlementWithPeriodFromTo(
+        string $from,
+        string $to,
+    ): void {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        $settlement = $this->settlementExampleFactory->create([
+            'vendor' => $vendor,
+            'startDate' => \DateTime::createFromFormat('d/m/Y H:i:s', sprintf('%s 00:00:00', $from)),
+            'endDate' => \DateTime::createFromFormat('d/m/Y H:i:s', sprintf('%s 23:59:59', $to)),
+        ]);
+
+        $this->entityManager->persist($settlement);
+        $this->entityManager->flush();
+    }
 }

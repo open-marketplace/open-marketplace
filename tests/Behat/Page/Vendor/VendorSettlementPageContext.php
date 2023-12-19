@@ -57,4 +57,14 @@ final class VendorSettlementPageContext extends SymfonyPage implements VendorSet
 
         $form->submit();
     }
+
+    public function filterByPeriod(string $period): void
+    {
+        $form = $this->getSession()->getPage()->find('css', 'form');
+        $form->clickLink('Clear filters');
+        $statusDropdown = $form->find('css', 'select[id="criteria_period_period"]');
+        $statusDropdown->selectOption($period);
+
+        $form->submit();
+    }
 }

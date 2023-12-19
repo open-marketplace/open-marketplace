@@ -46,7 +46,12 @@ final class SettlementExampleFactory extends AbstractExampleFactory
 
         $channel = $this->getChannel($options);
 
-        [$from, $to] = $this->getSettlementDateRangeFromVendor($vendor);
+        $from = $options['startDate'];
+        $to = $options['endDate'];
+
+        if (null === $from && null === $to) {
+            [$from, $to] = $this->getSettlementDateRangeFromVendor($vendor);
+        }
 
         $settlement = $this->settlementFactory->createNewForVendorAndChannel(
             $vendor,
@@ -69,13 +74,13 @@ final class SettlementExampleFactory extends AbstractExampleFactory
             ->setAllowedTypes('vendor', ['string', VendorInterface::class])
             ->setDefault('status', SettlementInterface::STATUS_NEW)
             ->setAllowedValues('status', SettlementInterface::AVAILABLE_STATUSES)
-            ->setDefault('totalAmount', 0)
+            ->setDefault('totalAmount', random_int(100, 10000))
             ->setAllowedTypes('totalAmount', ['int'])
-            ->setDefault('totalCommissionAmount', 0)
+            ->setDefault('totalCommissionAmount', random_int(10, 100))
             ->setAllowedTypes('totalCommissionAmount', ['int'])
             ->setDefault('channel', LazyOption::randomOne($this->channelRepository))
-            ->setDefault('startDate', new \DateTime())
-            ->setDefault('endDate', new \DateTime('-3 months'))
+            ->setDefault('startDate', null)
+            ->setDefault('endDate', null)
         ;
     }
 

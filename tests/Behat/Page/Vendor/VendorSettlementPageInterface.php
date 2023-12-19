@@ -23,5 +23,7 @@ interface VendorSettlementPageInterface
 
     public function getSettlementsWithStatus(string $status = null): array;
 
-    public function filterByStatus(string $status);
+    public function filterByStatus(string $status): void;
+
+    public function filterByPeriod(string $period): void;
 }

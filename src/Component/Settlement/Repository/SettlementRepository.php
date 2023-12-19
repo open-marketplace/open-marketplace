@@ -51,8 +51,10 @@ final class SettlementRepository extends EntityRepository implements SettlementR
 
     public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder
     {
-        return $this->createQueryBuilder('s')
+        $result = $this->createQueryBuilder('s')
             ->andWhere('s.vendor = :vendor')
             ->setParameter('vendor', $vendor);
+
+        return $result;
     }
 }
