@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Order\Refresher;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use Doctrine\ORM\EntityManager;
+use Sylius\Component\Core\Model\PaymentInterface;
 
 final class PaymentRefresher implements PaymentRefresherInterface
 {
@@ -27,10 +28,33 @@ final class PaymentRefresher implements PaymentRefresherInterface
     {
         $secondaryOrder->recalculateItemsTotal();
         $secondaryOrder->recalculateAdjustmentsTotal();
-        $payment = $secondaryOrder->getPayments()[0];
-        if ($payment) {
-            $payment->setAmount($secondaryOrder->getTotal());
-            $this->entityManager->persist($payment);
+
+        $this->refreshPaymentMethodAndAmount($secondaryOrder);
+
+        $this->entityManager->persist($secondaryOrder);
+    }
+
+    private function refreshPaymentMethodAndAmount(OrderInterface $secondaryOrder): void
+    {
+        $secondaryOrderPayment = $secondaryOrder->getLastPayment();
+        if (!$secondaryOrderPayment instanceof PaymentInterface) {
+            return;
         }
+
+        $secondaryOrderPayment->setAmount($secondaryOrder->getTotal());
+
+        $primaryOrder = $secondaryOrder->getPrimaryOrder();
+
+        if (!$primaryOrder instanceof OrderInterface) {
+            return;
+        }
+
+        $primaryOrderPayment = $primaryOrder->getLastPayment();
+
+        if (!$primaryOrderPayment instanceof PaymentInterface) {
+            return;
+        }
+
+        $secondaryOrderPayment->setMethod($primaryOrderPayment->getMethod());
     }
 }

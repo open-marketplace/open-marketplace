@@ -18,7 +18,6 @@ use BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessor
 use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresherInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -27,13 +26,11 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 {
     public function let(
-        EntityManager $entityManager,
         OrderManagerInterface $orderManager,
         PaymentRefresherInterface $paymentRefresher,
         EventDispatcherInterface $eventDispatcher
     ): void {
         $this->beConstructedWith(
-            $entityManager,
             $orderManager,
             $paymentRefresher,
             $eventDispatcher
@@ -81,9 +78,8 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher
     ): void {
         $order->isPrimary()->willReturn(true);
-        $order->getSecondaryOrders()->willReturn(new ArrayCollection([$subOrder]));
+        $order->getSecondaryOrders()->willReturn(new ArrayCollection([$subOrder->getWrappedObject()]));
 
-        $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldNotBeCalled((object) []);
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldNotBeCalled();
 
         $this->process($order);
