@@ -13,7 +13,6 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Webmozart\Assert\Assert;
 
 final class VendorSettlementPageContext extends SymfonyPage implements VendorSettlementPageInterface
 {
