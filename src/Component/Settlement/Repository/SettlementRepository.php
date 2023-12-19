@@ -41,10 +41,12 @@ final class SettlementRepository extends EntityRepository implements SettlementR
                     DATE_FORMAT(s.startDate, \'%e/%m/%Y\'),
                     \' - \',
                     DATE_FORMAT(s.endDate, \'%e/%m/%Y\')
-                )'
+                ), s.startDate'
             )
+            ->orderBy('s.startDate', self::ORDER_DESCENDING)
             ->getQuery()
-            ->getSingleColumnResult();
+            ->getSingleColumnResult()
+        ;
     }
 
     public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder
