@@ -19,7 +19,7 @@ Feature: Vendor can accept settlements
 
   @ui
   Scenario: Vendor can not accept settlements with status other than "New"
-    And there is a "accepted" settlement
+    Given there is a "accepted" settlement
     And there is a "settled" settlement
     When I visit the vendor settlements page
     Then I should not see any accept button
