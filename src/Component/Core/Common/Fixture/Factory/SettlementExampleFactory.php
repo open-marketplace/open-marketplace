@@ -38,20 +38,12 @@ final class SettlementExampleFactory extends AbstractExampleFactory
         $this->configureOptions($this->optionsResolver);
     }
 
-    public function create(array $options = [])
+    public function create(array $options = []): SettlementInterface
     {
         $options = $this->optionsResolver->resolve($options);
-
         $vendor = $this->getVendor($options);
-
         $channel = $this->getChannel($options);
-
-        $from = $options['startDate'];
-        $to = $options['endDate'];
-
-        if (null === $from && null === $to) {
-            [$from, $to] = $this->getSettlementDateRangeFromVendor($vendor);
-        }
+        [$from, $to] = $this->getPeriod($options, $vendor);
 
         $settlement = $this->settlementFactory->createNewForVendorAndChannel(
             $vendor,
@@ -124,5 +116,17 @@ final class SettlementExampleFactory extends AbstractExampleFactory
         Assert::isInstanceOf($channel, ChannelInterface::class);
 
         return $channel;
+    }
+
+    private function getPeriod(array $options, VendorInterface $vendor): array
+    {
+        $from = $options['startDate'];
+        $to = $options['endDate'];
+
+        if (null !== $from && null !== $to) {
+            return [$from, $to];
+        }
+
+        return  $this->getSettlementDateRangeFromVendor($vendor);
     }
 }

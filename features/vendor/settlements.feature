@@ -46,12 +46,12 @@ Feature: Vendor can accept settlements
     Then I should see 2 settlements
     And I should see 0 settlements with status "New"
 
-  @ui @development
+  @ui
   Scenario: Vendor can filter settlements by period
     Given there is a settlement with period from "19/11/2023" to "26/12/2023"
-    Given there is a settlement with period from "27/11/2023" to "03/12/2023"
-    Given there is a settlement with period from "04/12/2023" to "11/12/2023"
-    Given there is a settlement with period from "11/12/2023" to "17/12/2023"
+    And there is a settlement with period from "27/11/2023" to "03/12/2023"
+    And there is a settlement with period from "04/12/2023" to "11/12/2023"
+    And there is a settlement with period from "11/12/2023" to "17/12/2023"
     When I visit the vendor settlements page
     And I filter settlements by period "19/11/2023 - 26/12/2023"
     Then I should see 1 settlements
