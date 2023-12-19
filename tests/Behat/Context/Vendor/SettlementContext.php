@@ -12,13 +12,13 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\MinkExtension\Context\MinkContext;
-use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\VendorSettlementPageInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\SettlementPageInterface;
 use Webmozart\Assert\Assert;
 
 final class SettlementContext extends MinkContext
 {
     public function __construct(
-        private VendorSettlementPageInterface $vendorSettlementPage,
+        private SettlementPageInterface $settlementPage,
     ) {
     }
 
@@ -27,7 +27,7 @@ final class SettlementContext extends MinkContext
      */
     public function iVisitTheVendorSettlementsPage(): void
     {
-        $this->vendorSettlementPage->openSettlementsIndex();
+        $this->settlementPage->openSettlementsIndex();
     }
 
     /**
@@ -35,7 +35,7 @@ final class SettlementContext extends MinkContext
      */
     public function iAcceptFirstPossibleSettlement(): void
     {
-        $button = $this->vendorSettlementPage->findFirstAcceptButton();
+        $button = $this->settlementPage->findFirstAcceptButton();
         Assert::notNull($button);
 
         $button->click();
@@ -47,7 +47,7 @@ final class SettlementContext extends MinkContext
      */
     public function iSeeSettlementsWithStatus(string $count, string $status = null): void
     {
-        $settlements = $this->vendorSettlementPage->getSettlementsWithStatus($status);
+        $settlements = $this->settlementPage->getSettlementsWithStatus($status);
 
         Assert::eq(count($settlements), $count);
     }
@@ -57,7 +57,7 @@ final class SettlementContext extends MinkContext
      */
     public function iShouldNotSeeAnyAcceptButton(): void
     {
-        $button = $this->vendorSettlementPage->findFirstAcceptButton();
+        $button = $this->settlementPage->findFirstAcceptButton();
         Assert::null($button);
     }
 
@@ -66,7 +66,7 @@ final class SettlementContext extends MinkContext
      */
     public function iFilterSettlementsByStatus(string $status): void
     {
-        $this->vendorSettlementPage->filterByStatus($status);
+        $this->settlementPage->filterByStatus($status);
     }
 
     /**
@@ -74,6 +74,6 @@ final class SettlementContext extends MinkContext
      */
     public function iFilterSettlementsByPeriod(string $period): void
     {
-        $this->vendorSettlementPage->filterByPeriod($period);
+        $this->settlementPage->filterByPeriod($period);
     }
 }

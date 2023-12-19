@@ -13,7 +13,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 
 use Behat\Mink\Element\NodeElement;
 
-interface VendorSettlementPageInterface
+interface SettlementPageInterface
 {
     public function openSettlementsIndex(): void;
 

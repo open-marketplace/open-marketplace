@@ -12,8 +12,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
     >
     <services>
         <service
-                class="Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\VendorSettlementPage"
-                id="tests.open_marketplace.behat.page.vendor_settlement_page"
+                class="Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\SettlementPage"
+                id="tests.open_marketplace.behat.page.vendor.settlement_page"
                 parent="sylius.behat.symfony_page"
                 public="true"
         />
