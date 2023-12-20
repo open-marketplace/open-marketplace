@@ -1,0 +1,14 @@
+default:
+  suites:
+    admin_settlements:
+      contexts:
+        - tests.open_marketplace.behat.context.admin.settlement
+        - tests.open_marketplace.behat.context.setup.settlement
+        - tests.open_marketplace.behat.context.setup.admin_user
+        - open_marketplace.behat.context.setup.vendor
+        - sylius.behat.context.hook.doctrine_orm
+        - sylius.behat.context.setup.admin_security
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.user
+      filters:
+        tags: "@admin_settlements&&@ui"

@@ -35,11 +35,13 @@ final class VendorContext implements Context
 
     /**
      * @Given there is a :status vendor user :vendorUserEmail registered in country with code :countryCode
+     * @Given there is a :status vendor user :vendorUserEmail registered in country with code :countryCode named :name
      */
     public function thereIsAVendorUserRegisteredInCountry(
         string $status,
         string $vendorUserEmail,
-        string $countryCode
+        string $countryCode,
+        string $name = null
     ): void {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserExampleFactory->create(['email' => $vendorUserEmail, 'password' => 'password', 'enabled' => true]);
@@ -61,7 +63,7 @@ final class VendorContext implements Context
         }
 
         $options = [
-            'company_name' => 'Test',
+            'company_name' => $name ?? 'Test',
             'phone_number' => '333333333',
             'tax_identifier' => '543455',
             'bank_account_number' => 'NL31INGB4405427607',

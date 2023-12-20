@@ -65,4 +65,20 @@ final class SettlementContext implements Context
         $this->entityManager->persist($settlement);
         $this->entityManager->flush();
     }
+
+    /**
+     * @Given there is a :status settlement for vendor :vendorEmail
+     */
+    public function thereIsASettlementForVendor(
+        string $status,
+        string $vendorEmail,
+    ): void {
+        $settlement = $this->settlementExampleFactory->create([
+            'status' => $status,
+            'vendor' => $vendorEmail,
+        ]);
+
+        $this->entityManager->persist($settlement);
+        $this->entityManager->flush();
+    }
 }
