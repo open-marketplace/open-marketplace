@@ -61,6 +61,7 @@ final class UpdateAction
             /** @var Session $session */
             $session = $this->requestStack->getSession();
             $session->getFlashBag()->add('error', 'open_marketplace.ui.product_listing_removed');
+
             return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listings_index'));
         }
 
