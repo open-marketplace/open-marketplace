@@ -1,5 +1,5 @@
 @vendor_settlements
-Feature: Vendor can manage settlements 
+Feature: Vendor can manage settlements
   In order to settle my settlements
   As a Vendor
   I want to visit settlements page, filter and accept them
@@ -28,12 +28,11 @@ Feature: Vendor can manage settlements
   Scenario: Vendor can accept new settlements
     Given there is a "new" settlement
     When I visit the vendor settlements page
-    And I should see 1 settlements with status "New"
-    And I should see 0 settlements with status "Accepted"
     And I accept first possible settlement
+    And I should see 1 settlements
     Then I should see "Settlement has been accepted successfully."
-    And I should see 0 settlements with status "New"
     And I should see 1 settlements with status "Accepted"
+    And I should see 0 settlements with status "New"
 
   @ui
   Scenario: Vendor can filter settlements by status
