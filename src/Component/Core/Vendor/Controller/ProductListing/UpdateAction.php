@@ -60,7 +60,7 @@ final class UpdateAction
         if ($productListing->isRemoved()) {
             /** @var Session $session */
             $session = $this->requestStack->getSession();
-            $session->getFlashBag()->add('error', 'This product has been deleted');
+            $session->getFlashBag()->add('error', 'open_marketplace.ui.product_listing_removed');
             return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listings_index'));
         }
 
