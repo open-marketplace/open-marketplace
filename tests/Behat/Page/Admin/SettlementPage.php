@@ -22,9 +22,9 @@ final class SettlementPage extends SymfonyPage implements SettlementPageInterfac
         return 'open_marketplace_admin_settlement_index';
     }
 
-    public function openSettlementsIndex(): void
+    public function openSettlementsIndex(array $sorting = []): void
     {
-        $this->open();
+        $this->open($sorting);
     }
 
     public function getSettlements(): array
@@ -42,6 +42,13 @@ final class SettlementPage extends SymfonyPage implements SettlementPageInterfac
         ;
 
         return $this->getDocument()->findAll('css', $locator);
+    }
+
+    public function getSortedSettlements(array $sorting): array
+    {
+        $this->open($sorting);
+
+        return $this->getSettlements();
     }
 
     public function filterByStatus(string $status): void

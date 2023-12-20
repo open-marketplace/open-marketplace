@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
 use Behat\MinkExtension\Context\MinkContext;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\SettlementPageInterface;
 use Webmozart\Assert\Assert;
 
@@ -19,6 +20,7 @@ final class SettlementContext extends MinkContext
 {
     public function __construct(
         private SettlementPageInterface $adminSettlementPage,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -73,6 +75,18 @@ final class SettlementContext extends MinkContext
         $this->adminSettlementPage->filterByChannel($channelName);
     }
 
+    /**
+     * @Then I should see settlement for channel :channelName first
+     */
+    public function iShouldSeeSettlementForChannelFirst(string $channelName): void
+    {
+        $sorting = $this->sharedStorage->get('sorting');
+
+        $settlements = $this->adminSettlementPage->getSortedSettlements($sorting);
+        $firstSettlement = $settlements[0];
+
+        Assert::contains($firstSettlement->getText(), $channelName);
+    }
 
     /**
      * @Then I clear filters

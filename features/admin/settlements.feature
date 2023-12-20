@@ -58,6 +58,15 @@
       Then I should see 1 settlements
 
     @ui
+    Scenario: Admin can sort settlements by channel
+      Given there is a settlement for channel "Web-US"
+      And there is a settlement for channel "Web-PL"
+      When I visit the admin settlements page
+      Then I should see 2 settlements
+      And I sort the list by "channel" in "ascending" order
+      Then I should see settlement for channel "Web-PL" first
+
+    @ui
     Scenario: Admin can clear filters on setllement page
       Given there is a "new" settlement for vendor "bruce@domain.io"
       And there is a "accepted" settlement for vendor "secondary@example.io"

@@ -13,11 +13,13 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Page\Admin;
 
 interface SettlementPageInterface
 {
-    public function openSettlementsIndex(): void;
+    public function openSettlementsIndex(array $sorting = []): void;
 
     public function getSettlements(): array;
 
     public function getSettlementsWithStatus(string $status = null): array;
+
+    public function getSortedSettlements(array $sorting): array;
 
     public function filterByStatus(string $status): void;
 
