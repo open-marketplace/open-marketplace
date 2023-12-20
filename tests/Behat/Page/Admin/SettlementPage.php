@@ -71,6 +71,15 @@ final class SettlementPage extends SymfonyPage implements SettlementPageInterfac
         $form->submit();
     }
 
+    public function filterByChannel(string $channelName): void
+    {
+        $form = $this->getForm();
+        $vendorDropdown = $form->find('css', 'select[id="criteria_channel"]');
+        $vendorDropdown->selectOption($channelName);
+
+        $form->submit();
+    }
+
     public function clearFilters(): void
     {
         $form = $this->getForm();

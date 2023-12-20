@@ -66,9 +66,18 @@ final class SettlementContext extends MinkContext
     }
 
     /**
+     * @Then I filter settlements by channel :channelName
+     */
+    public function iFilterSettlementsByChannel(string $channelName): void
+    {
+        $this->adminSettlementPage->filterByChannel($channelName);
+    }
+
+
+    /**
      * @Then I clear filters
      */
-    public function iClearFilters()
+    public function iClearFilters(): void
     {
         $this->adminSettlementPage->clearFilters();
     }

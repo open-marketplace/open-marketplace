@@ -25,5 +25,7 @@ interface SettlementPageInterface
 
     public function filterByVendor(string $vendor): void;
 
+    public function filterByChannel(string $channelName): void;
+
     public function clearFilters(): void;
 }
