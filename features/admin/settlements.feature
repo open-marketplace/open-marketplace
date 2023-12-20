@@ -55,7 +55,7 @@
       When I visit the admin settlements page
       Then I should see 2 settlements
       And I filter settlements by channel "Web-PL"
-      Then I should see 1 settlements
+      And I should see 1 settlements
 
     @ui
     Scenario: Admin can sort settlements by channel
@@ -64,7 +64,7 @@
       When I visit the admin settlements page
       Then I should see 2 settlements
       And I sort the list by "channel" in "ascending" order
-      Then I should see settlement for channel "Web-PL" first
+      And I should see settlement for channel "Web-PL" first
 
     @ui
     Scenario: Admin can clear filters on setllement page
