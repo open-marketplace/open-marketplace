@@ -51,7 +51,7 @@ final class SettlementPage extends SymfonyPage implements SettlementPageInterfac
 
     public function filterByStatus(string $status): void
     {
-        $form = $this->getSession()->getPage()->find('css', 'form');
+        $form = $this->getForm();
         $statusDropdown = $form->find('css', 'select[id="criteria_status_status"]');
         $statusDropdown->selectOption($status);
 
@@ -61,10 +61,17 @@ final class SettlementPage extends SymfonyPage implements SettlementPageInterfac
     public function filterByPeriod(string $period): void
     {
         $form = $this->getSession()->getPage()->find('css', 'form');
-        $form->clickLink('Clear filters');
-        $statusDropdown = $form->find('css', 'select[id="criteria_period_period"]');
-        $statusDropdown->selectOption($period);
+        $periodDropdown = $form->find('css', 'select[id="criteria_period_period"]');
+        $periodDropdown->selectOption($period);
 
         $form->submit();
+    }
+
+    private function getForm()
+    {
+        $session = $this->getSession();
+        $page = $session->getPage();
+
+        return  $page->find('css', 'form');
     }
 }
