@@ -1,8 +1,8 @@
 @vendor_settlements
-Feature: Vendor can accept settlements
+Feature: Vendor can manage settlements 
   In order to settle my settlements
   As a Vendor
-  I want to visit settlements page and accept them
+  I want to visit settlements page, filter and accept them
 
   Background:
     Given the store operates on a channel named "United States"
