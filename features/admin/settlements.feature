@@ -13,12 +13,15 @@
       And the store operates on a channel named "Web-PL" in "PLN" currency
 
     @ui
-    Scenario: Admin can see settlements
+    Scenario: Admin can see settlements of all vendors
       Given there is a "new" settlement for vendor "bruce@domain.io"
       And there is a "accepted" settlement for vendor "bruce@domain.io"
       And there is a "settled" settlement for vendor "bruce@domain.io"
+      And there is a "new" settlement for vendor "secondary@example.io"
+      And there is a "accepted" settlement for vendor "secondary@example.io"
+      And there is a "settled" settlement for vendor "secondary@example.io"
       When I visit the admin settlements page
-      Then I should see 3 settlements
+      Then I should see 6 settlements
 
     @ui
     Scenario: Admin can filter settlements by status
