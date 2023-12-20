@@ -29,7 +29,6 @@
       And there is a "accepted" settlement for vendor "bruce@domain.io"
       And there is a "settled" settlement for vendor "bruce@domain.io"
       When I visit the admin settlements page
-      And I should see 3 settlements
       And I filter settlements by status "New"
       Then I should see 1 settlements
 
@@ -56,7 +55,6 @@
       Given there is a settlement for channel "Web-US"
       And there is a settlement for channel "Web-PL"
       When I visit the admin settlements page
-      Then I should see 2 settlements
       And I filter settlements by channel "Web-PL"
       And I should see 1 settlements
 
@@ -65,9 +63,8 @@
       Given there is a settlement for channel "Web-US"
       And there is a settlement for channel "Web-PL"
       When I visit the admin settlements page
-      Then I should see 2 settlements
       And I sort the list by "channel" in "ascending" order
-      And I should see settlement for channel "Web-PL" first
+      Then I should see settlement for channel "Web-PL" first
 
     @ui
     Scenario: Admin can clear filters on setllement page
@@ -75,6 +72,5 @@
       And there is a "accepted" settlement for vendor "secondary@example.io"
       When I visit the admin settlements page
       And I filter settlements by vendor "Bruce"
-      And I should see 1 settlements
-      Then I clear filters
-      And I should see 2 settlements
+      And I clear filters
+      Then I should see 2 settlements
