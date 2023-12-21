@@ -20,7 +20,6 @@ final class SettlementCreatorTest extends JsonApiTestCase
     public function setUp(): void
     {
         parent::setUp();
-        /** @var SettlementCreatorInterface $settlementCreator */
         $this->settlementCreator = $this->get('bitbag.open_marketplace.component.settlement.provider.settlement_creator');
     }
 
