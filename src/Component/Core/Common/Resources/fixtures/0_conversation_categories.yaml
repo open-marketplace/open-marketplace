@@ -10,4 +10,5 @@ sylius_fixtures:
                             - 'Problems with my product listing'
                             - 'Issues with the order'
                             - 'Product listing rejection'
+                            - 'Problems with settlement'
                             - 'Other'
