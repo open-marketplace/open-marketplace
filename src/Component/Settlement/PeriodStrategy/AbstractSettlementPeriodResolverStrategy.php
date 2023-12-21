@@ -27,10 +27,10 @@ abstract class AbstractSettlementPeriodResolverStrategy
     protected function checkSupportsFrequencyType(bool $cyclical): bool
     {
         return $cyclical === in_array(
-                $this->getSettlementFrequency(),
-                VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES,
-                true
-            )
+            $this->getSettlementFrequency(),
+            VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES,
+            true
+        )
         ;
     }
 

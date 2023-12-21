@@ -14,7 +14,6 @@ namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
 use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
-use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\AbstractSettlementPeriodResolverStrategy;
 use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolverInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;

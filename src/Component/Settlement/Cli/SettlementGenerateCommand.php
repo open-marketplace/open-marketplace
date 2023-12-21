@@ -14,7 +14,6 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Cli;
 use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
-use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\AbstractSettlementPeriodResolverStrategy;
 use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolverInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Sender\SettlementsCreatedEmailSenderInterface;
