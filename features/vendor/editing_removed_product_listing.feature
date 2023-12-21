@@ -14,6 +14,6 @@ Feature: Trying to editing removed a product listing.
   Scenario: Trying to edit removed product listing
     Given there is 1 product listing created by vendor
     And there is removed product listing by vendor
-    Given I am on edit page product listing "/en_US/account/vendor/product-listings/edit"
-    Then I should see "This product has been deleted"
+    When I am on edit page product listing "/en_US/account/vendor/product-listings/edit"
+    Then I should see "The product listing you are trying to reach has been deleted."
 

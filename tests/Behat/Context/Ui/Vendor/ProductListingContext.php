@@ -113,7 +113,7 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given I am on edit page product listing :url
+     * @When I am on edit page product listing :url
      */
     public function iAmOnProductListingPageWithIUrl($url)
     {
