@@ -12,19 +12,23 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\StateMachine;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Manager\VirtualWalletManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 
 final class OrderCallbacks
 {
     public function __construct(
-        private ObjectManager $orderManager,
+        private ObjectManager $objectManager,
+        private VirtualWalletManagerInterface $virtualWalletManager,
     ) {
     }
 
     public function setPaidAt(OrderInterface $order): void
     {
         $order->setPaidAt(new \DateTime());
-        $this->orderManager->persist($order);
-        $this->orderManager->flush();
+        $this->virtualWalletManager->stash($order);
+
+        $this->objectManager->persist($order);
+        $this->objectManager->flush();
     }
 }
