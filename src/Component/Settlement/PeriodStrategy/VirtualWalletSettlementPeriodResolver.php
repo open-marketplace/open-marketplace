@@ -18,12 +18,12 @@ final class VirtualWalletSettlementPeriodResolver extends AbstractSettlementPeri
 {
     private const SETTLEMENT_FREQUENCY = VendorSettlementFrequency::VIRTUAL_WALLET;
 
-    public function resolve(?\DateTimeInterface $lastSettlementCreatedAt): array
+    public function resolve(?\DateTimeInterface $lastSettlementEndsAt): array
     {
-        Assert::isInstanceOf($lastSettlementCreatedAt, \DateTime::class);
+        Assert::isInstanceOf($lastSettlementEndsAt, \DateTime::class);
 
         return [
-            $lastSettlementCreatedAt->modify('+1 second'),
+            $lastSettlementEndsAt->modify('+1 second'),
             new \DateTime(),
         ];
     }
