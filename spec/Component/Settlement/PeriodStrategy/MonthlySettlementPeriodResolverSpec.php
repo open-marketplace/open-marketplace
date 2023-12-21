@@ -38,6 +38,14 @@ final class MonthlySettlementPeriodResolverSpec extends ObjectBehavior
         $this->supports($vendor)->shouldBe(false);
     }
 
+    public function it_does_not_supports_vendor_when_settlement_frequency_is_not_cyclical(
+        VendorInterface $vendor,
+    ): void {
+        $vendor->getSettlementFrequency()->willReturn('monthly');
+
+        $this->supports($vendor, false)->shouldBe(false);
+    }
+
     public function it_returns_valid_next_settlement_start_and_end_date_time(
     ): void {
         $this->resolve()->shouldBeLike([
