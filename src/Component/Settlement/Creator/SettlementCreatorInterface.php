@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Settlement\Provider;
+namespace BitBag\OpenMarketplace\Component\Settlement\Creator;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
-interface SettlementProviderInterface
+interface SettlementCreatorInterface
 {
-    public function provideSettlementForVendorAndChannels(
+    public function createSettlementsForVendorAndChannels(
         VendorInterface $vendor,
         array $channels,
         bool $flush = true,

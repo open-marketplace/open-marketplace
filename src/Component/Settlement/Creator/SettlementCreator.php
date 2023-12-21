@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Settlement\Provider;
+namespace BitBag\OpenMarketplace\Component\Settlement\Creator;
 
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
@@ -20,7 +20,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class SettlementProvider implements SettlementProviderInterface
+final class SettlementCreator implements SettlementCreatorInterface
 {
     public function __construct(
         private SettlementRepositoryInterface $settlementRepository,
@@ -31,7 +31,7 @@ final class SettlementProvider implements SettlementProviderInterface
         ) {
     }
 
-    public function provideSettlementForVendorAndChannels(
+    public function createSettlementsForVendorAndChannels(
         VendorInterface $vendor,
         array $channels,
         bool $flush = true
@@ -42,7 +42,7 @@ final class SettlementProvider implements SettlementProviderInterface
 
         /** @var ChannelInterface $channel */
         foreach ($channels as $channel) {
-            $settlement = $this->provideSettlementForVendorAndChannel(
+            $settlement = $this->createSettlementForVendorAndChannelIfNotExists(
                 $vendor,
                 $channel,
                 $nextSettlementStartDate,
@@ -65,7 +65,7 @@ final class SettlementProvider implements SettlementProviderInterface
         return $generatedSettlements;
     }
 
-    private function provideSettlementForVendorAndChannel(
+    private function createSettlementForVendorAndChannelIfNotExists(
         VendorInterface $vendor,
         ChannelInterface $channel,
         \DateTime $nextSettlementStartDate,

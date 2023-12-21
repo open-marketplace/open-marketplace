@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Settlement\Cli;
 
 use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
-use BitBag\OpenMarketplace\Component\Settlement\Provider\SettlementProviderInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Creator\SettlementCreatorInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Sender\SettlementsCreatedEmailSenderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
@@ -28,7 +28,7 @@ final class SettlementGenerateCommand extends Command
     public function __construct(
         private VendorRepositoryInterface $vendorRepository,
         private ChannelRepositoryInterface $channelRepository,
-        private SettlementProviderInterface $settlementProvider,
+        private SettlementCreatorInterface $settlementCreator,
         private ObjectManager $settlementManager,
         private SettlementsCreatedEmailSenderInterface $settlementsCreatedEmailSender,
         ) {
@@ -50,7 +50,7 @@ final class SettlementGenerateCommand extends Command
         $persistCount = 0;
         /** @var VendorInterface $vendor */
         foreach ($vendors as $vendor) {
-            $newSettlements = $this->settlementProvider->provideSettlementForVendorAndChannels(
+            $newSettlements = $this->settlementCreator->createSettlementsForVendorAndChannels(
                 $vendor,
                 $channels,
                 false,

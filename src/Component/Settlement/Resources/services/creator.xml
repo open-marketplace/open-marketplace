@@ -10,8 +10,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="false" autowire="false" autoconfigure="false" />
-        <service class="BitBag\OpenMarketplace\Component\Settlement\Provider\SettlementProvider"
-                 id="bitbag.open_marketplace.component.settlement.provider.settlement_provider">
+        <service class="BitBag\OpenMarketplace\Component\Settlement\Creator\SettlementCreator"
+                id="bitbag.open_marketplace.component.settlement.provider.settlement_creator"
+        >
             <argument type="service" id="open_marketplace.repository.settlement"/>
             <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="open_marketplace.factory.settlement"/>
