@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy;
 
 use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
+use Webmozart\Assert\Assert;
 
 final class VirtualWalletSettlementPeriodResolver extends AbstractSettlementPeriodResolverStrategy
 {
@@ -19,6 +20,7 @@ final class VirtualWalletSettlementPeriodResolver extends AbstractSettlementPeri
 
     public function resolve(?\DateTimeInterface $lastSettlementCreatedAt): array
     {
+        Assert::isInstanceOf($lastSettlementCreatedAt, \DateTime::class);
         return [
             $lastSettlementCreatedAt->modify('+1 second'),
             new \DateTime(),

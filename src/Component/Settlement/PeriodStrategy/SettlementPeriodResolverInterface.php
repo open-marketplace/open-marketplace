@@ -18,6 +18,6 @@ interface SettlementPeriodResolverInterface
     public function getSettlementDateRangeForVendor(
         VendorInterface $vendor,
         ?\DateTimeInterface $lastSettlementCreatedAt = null,
-        $cyclical = true
+        bool $cyclical = true
     ): array;
 }
