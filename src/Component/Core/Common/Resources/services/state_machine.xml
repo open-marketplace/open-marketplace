@@ -23,5 +23,19 @@
              id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition">
         <argument type="service" id="SM\Factory\Factory"/>
     </service>
+
+    <service class="BitBag\OpenMarketplace\Component\Core\Common\StateMachine\SettlementStateMachineTransition"
+             id="open_marketplace.component.core.common.state_machine.settlement_state_machine_transition"
+    >
+        <argument type="service" id="SM\Factory\Factory"/>
+        <argument type="service" id="doctrine.orm.entity_manager"/>
+    </service>
+
+    <service class="BitBag\OpenMarketplace\Component\Core\Common\StateMachine\SettlementCallbacks"
+             id="open_marketplace.component.core.common.state_machine.settlement_callbacks"
+             public="true"
+    >
+        <argument type="service" id="open_marketplace.component.core.common.state_machine.settlement_state_machine_transition"/>
+    </service>
 </services>
 </container>

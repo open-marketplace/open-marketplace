@@ -15,3 +15,9 @@ winzou_state_machine:
       settle:
         from: [accepted]
         to: settled
+    callbacks:
+      after:
+        accept:
+          on: [ "accept" ]
+          do: [ "@open_marketplace.component.core.common.state_machine.settlement_callbacks", "payout" ]
+          args: [ "object" ]
