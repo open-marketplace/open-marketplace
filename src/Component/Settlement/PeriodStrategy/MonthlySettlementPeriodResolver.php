@@ -17,7 +17,7 @@ final class MonthlySettlementPeriodResolver extends AbstractSettlementPeriodReso
 {
     protected const SETTLEMENT_FREQUENCY = VendorSettlementFrequency::MONTHLY;
 
-    public function resolve(?\DateTimeInterface $lastSettlementEndsAt): array
+    public function resolve(?\DateTimeInterface $lastSettlementEndsAt = null): array
     {
         return [
             new \DateTime('first day of last month 00:00:00'),

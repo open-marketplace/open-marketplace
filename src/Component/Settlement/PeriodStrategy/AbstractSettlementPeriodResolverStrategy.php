@@ -16,7 +16,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 abstract class AbstractSettlementPeriodResolverStrategy
 {
-    public function supports(VendorInterface $vendor, bool $cyclical): bool
+    public function supports(VendorInterface $vendor, bool $cyclical = true): bool
     {
         return
             $vendor->getSettlementFrequency() === $this->getSettlementFrequency() &&
