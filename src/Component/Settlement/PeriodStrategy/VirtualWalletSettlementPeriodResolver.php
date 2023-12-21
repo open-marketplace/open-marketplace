@@ -13,15 +13,15 @@ namespace BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy;
 
 use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 
-final class WeeklySettlementPeriodResolver extends AbstractSettlementPeriodResolverStrategy
+final class VirtualWalletSettlementPeriodResolver extends AbstractSettlementPeriodResolverStrategy
 {
-    protected const SETTLEMENT_FREQUENCY = VendorSettlementFrequency::WEEKLY;
+    private const SETTLEMENT_FREQUENCY = VendorSettlementFrequency::VIRTUAL_WALLET;
 
     public function resolve(?\DateTimeInterface $lastSettlementCreatedAt): array
     {
         return [
-            new \DateTime('last week monday 00:00:00'),
-            new \DateTime('last week sunday 23:59:59'),
+            $lastSettlementCreatedAt->modify('+1 second'),
+            new \DateTime(),
         ];
     }
 

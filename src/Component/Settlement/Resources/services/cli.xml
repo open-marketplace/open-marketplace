@@ -19,7 +19,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sylius.repository.channel"/>
             <argument type="service" id="bitbag.open_marketplace.component.settlement.sender.settlements_created_email_sender"/>
-            <argument type="tagged_iterator" tag="bitbag.open_marketplace.strategy.settlement.period"/>
+            <argument type="service" id="open_marketplace.component.settlement.period_strategy.settlement_period_resolver"/>
             <tag name="console.command"/>
         </service>
     </services>

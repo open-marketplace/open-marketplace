@@ -11,16 +11,30 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy;
 
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 
 abstract class AbstractSettlementPeriodResolverStrategy
 {
-    public function supports(VendorInterface $vendor): bool
+    public function supports(VendorInterface $vendor, bool $cyclical): bool
     {
-        return $vendor->getSettlementFrequency() === $this->getSettlementFrequency();
+        return
+            $vendor->getSettlementFrequency() === $this->getSettlementFrequency() &&
+            $this->checkSupportsFrequencyType($cyclical)
+        ;
     }
 
-    abstract public function resolve(): array;
+    protected function checkSupportsFrequencyType(bool $cyclical): bool
+    {
+        return $cyclical === in_array(
+                $this->getSettlementFrequency(),
+                VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES,
+                true
+            )
+        ;
+    }
+
+    abstract public function resolve(?\DateTimeInterface $lastSettlementEndsAt): array;
 
     abstract public function getSettlementFrequency(): string;
 }

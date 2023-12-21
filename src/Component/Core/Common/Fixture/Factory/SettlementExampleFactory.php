@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterfa
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\AbstractSettlementPeriodResolverStrategy;
+use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolverInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
@@ -32,7 +33,7 @@ final class SettlementExampleFactory extends AbstractExampleFactory
         private RepositoryInterface $shopUserRepository,
         private ChannelRepositoryInterface $channelRepository,
         private SettlementFactoryInterface $settlementFactory,
-        private iterable $settlementPeriodResolvers,
+        private SettlementPeriodResolverInterface $settlementPeriodResolver,
         ) {
         $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
@@ -76,18 +77,6 @@ final class SettlementExampleFactory extends AbstractExampleFactory
         ;
     }
 
-    private function getSettlementDateRangeFromVendor(VendorInterface $vendor): array
-    {
-        /** @var AbstractSettlementPeriodResolverStrategy $settlementPeriodResolver */
-        foreach ($this->settlementPeriodResolvers as $settlementPeriodResolver) {
-            if ($settlementPeriodResolver->supports($vendor)) {
-                return $settlementPeriodResolver->resolve();
-            }
-        }
-
-        throw new \InvalidArgumentException(sprintf('Could not find period resolver for vendor with settlement frequency "%s"', $vendor->getSettlementFrequency()));
-    }
-
     private function getVendor(array $options): VendorInterface
     {
         $vendor = $options['vendor'];
@@ -127,6 +116,6 @@ final class SettlementExampleFactory extends AbstractExampleFactory
             return [$from, $to];
         }
 
-        return  $this->getSettlementDateRangeFromVendor($vendor);
+        return $this->settlementPeriodResolver->getSettlementDateRangeForVendor($vendor);
     }
 }

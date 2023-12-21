@@ -15,6 +15,7 @@ use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterfa
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\AbstractSettlementPeriodResolverStrategy;
+use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolverInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Sender\SettlementsCreatedEmailSenderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
@@ -36,7 +37,7 @@ final class SettlementGenerateCommand extends Command
         private ObjectManager $settlementManager,
         private ChannelRepositoryInterface $channelRepository,
         private SettlementsCreatedEmailSenderInterface $settlementsCreatedEmailSender,
-        private iterable $settlementPeriodResolvers,
+        private SettlementPeriodResolverInterface $settlementPeriodResolvers,
         ) {
         parent::__construct();
     }
@@ -56,7 +57,7 @@ final class SettlementGenerateCommand extends Command
         $persistCount = 0;
         /** @var VendorInterface $vendor */
         foreach ($vendors as $vendor) {
-            [$nextSettlementStartDate, $nextSettlementEndDate] = $this->getSettlementDateRangeFromVendor($vendor);
+            [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolvers->getSettlementDateRangeForVendor($vendor);
             $newVendorSettlements = [];
 
             foreach ($channels as $channel) {
@@ -97,17 +98,5 @@ final class SettlementGenerateCommand extends Command
         $this->settlementManager->flush();
 
         return Command::SUCCESS;
-    }
-
-    private function getSettlementDateRangeFromVendor(VendorInterface $vendor): array
-    {
-        /** @var AbstractSettlementPeriodResolverStrategy $settlementPeriodResolver */
-        foreach ($this->settlementPeriodResolvers as $settlementPeriodResolver) {
-            if ($settlementPeriodResolver->supports($vendor)) {
-                return $settlementPeriodResolver->resolve();
-            }
-        }
-
-        throw new \InvalidArgumentException(sprintf('Could not find period resolver for vendor with settlement frequency "%s"', $vendor->getSettlementFrequency()));
     }
 }
