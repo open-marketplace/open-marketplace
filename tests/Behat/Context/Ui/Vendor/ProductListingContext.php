@@ -102,7 +102,7 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given there is removed product listing by vendor
+     * @Given the product listing is removed
      */
     public function thereProductListingIsRemoved()
     {

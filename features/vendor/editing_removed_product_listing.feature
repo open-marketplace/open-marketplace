@@ -1,8 +1,7 @@
 @vendor_managing_product_listings
 Feature: Trying to editing removed a product listing.
-  As a vendor, after I have saved new draft of already existing
-  product listing, admin must see "Created" status set for this
-  product listing.
+  As a vendor, after I have removed product listing
+  vendor can't access edit page of this product listing
 
   Background:
     Given there is an "verified" vendor user "vendor" with password "vendor"
@@ -13,7 +12,7 @@ Feature: Trying to editing removed a product listing.
   @ui
   Scenario: Trying to edit removed product listing
     Given there is 1 product listing created by vendor
-    And there is removed product listing by vendor
+    And the product listing is removed
     When I am on edit page product listing "/en_US/account/vendor/product-listings/edit"
     Then I should see "The product listing you are trying to reach has been deleted."
 
