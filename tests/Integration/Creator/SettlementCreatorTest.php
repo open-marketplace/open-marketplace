@@ -30,7 +30,6 @@ final class SettlementCreatorTest extends JsonApiTestCase
         $vendor = $vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
         $channels = $channelRepository->findBy(['code' => ['US', 'EU']]);
 
-
         [$retrievedSettlements, $generatedSettlements] = $this->settlementCreator->generateSettlementForVendorAndChannel($vendor, $channels, false);
         $this->assertCount(0, $retrievedSettlements);
         $this->assertCount(2, $generatedSettlements);
