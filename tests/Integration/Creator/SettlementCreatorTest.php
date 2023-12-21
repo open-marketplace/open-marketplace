@@ -19,7 +19,7 @@ final class SettlementCreatorTest extends JsonApiTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->settlementCreator = $this->get('bitbag.open_marketplace.component.settlement.provider.settlement_creator');
+        $this->settlementCreator = $this->get('bitbag.open_marketplace.component.settlement.creator.settlement');
     }
 
     public function test_it_creates_settlement_for_vendor(): void
@@ -30,7 +30,7 @@ final class SettlementCreatorTest extends JsonApiTestCase
         $vendor = $vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
         $channels = $channelRepository->findBy(['code' => ['US', 'EU']]);
 
-        $generatedSettlements = $this->settlementCreator->createSettlementsForVendorAndChannel($vendor, $channels, false);
+        $generatedSettlements = $this->settlementCreator->createSettlementsForVendorAndChannels($vendor, $channels, false);
         $this->assertCount(2, $generatedSettlements);
 
         $settlementUS = $generatedSettlements[0];
