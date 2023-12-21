@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Creator;
 
 use ApiTestCase\JsonApiTestCase;
+use BitBag\OpenMarketplace\Component\Settlement\Creator\SettlementCreatorInterface;
 use Webmozart\Assert\Assert;
 
 final class SettlementCreatorTest extends JsonApiTestCase
@@ -19,6 +20,7 @@ final class SettlementCreatorTest extends JsonApiTestCase
     public function setUp(): void
     {
         parent::setUp();
+        /** @var SettlementCreatorInterface $settlementCreator */
         $this->settlementCreator = $this->get('bitbag.open_marketplace.component.settlement.provider.settlement_creator');
     }
 
@@ -30,8 +32,7 @@ final class SettlementCreatorTest extends JsonApiTestCase
         $vendor = $vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
         $channels = $channelRepository->findBy(['code' => ['US', 'EU']]);
 
-        [$retrievedSettlements, $generatedSettlements] = $this->settlementCreator->createSettlementForVendorAndChannel($vendor, $channels, false);
-        $this->assertCount(0, $retrievedSettlements);
+        $generatedSettlements = $this->settlementCreator->createSettlementsForVendorAndChannel($vendor, $channels, false);
         $this->assertCount(2, $generatedSettlements);
 
         $settlementUS = $generatedSettlements[0];
