@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Creator;
 
 use ApiTestCase\JsonApiTestCase;
-use BitBag\OpenMarketplace\Component\Settlement\Creator\SettlementCreatorInterface;
 use Webmozart\Assert\Assert;
 
 final class SettlementCreatorTest extends JsonApiTestCase
