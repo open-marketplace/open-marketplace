@@ -12,10 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Settlement\Cli;
 
 use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
-use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
-use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
-use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolverInterface;
-use BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Provider\SettlementProviderInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Sender\SettlementsCreatedEmailSenderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
@@ -30,13 +27,10 @@ final class SettlementGenerateCommand extends Command
 
     public function __construct(
         private VendorRepositoryInterface $vendorRepository,
-        private SettlementRepositoryInterface $settlementRepository,
-        private OrderRepositoryInterface $orderRepository,
-        private SettlementFactoryInterface $settlementFactory,
-        private ObjectManager $settlementManager,
         private ChannelRepositoryInterface $channelRepository,
+        private SettlementProviderInterface $settlementProvider,
+        private ObjectManager $settlementManager,
         private SettlementsCreatedEmailSenderInterface $settlementsCreatedEmailSender,
-        private SettlementPeriodResolverInterface $settlementPeriodResolvers,
         ) {
         parent::__construct();
     }
@@ -56,44 +50,20 @@ final class SettlementGenerateCommand extends Command
         $persistCount = 0;
         /** @var VendorInterface $vendor */
         foreach ($vendors as $vendor) {
-            [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolvers->getSettlementDateRangeForVendor($vendor);
-            $newVendorSettlements = [];
+            $newSettlements = $this->settlementProvider->provideSettlementForVendorAndChannels(
+                $vendor,
+                $channels,
+                false,
+            );
 
-            foreach ($channels as $channel) {
-                $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $channel);
-                if (
-                    null !== $lastSettlement
-                    && $lastSettlement->getEndDate() > $nextSettlementStartDate
-                ) {
-                    continue;
-                }
-
-                ['total' => $total, 'commissionTotal' => $commissionTotal] = $this->orderRepository->findForSettlementByVendorAndChannelAndDates(
-                    $vendor,
-                    $channel,
-                    $nextSettlementStartDate,
-                    $nextSettlementEndDate
-                );
-                $nextSettlement = $this->settlementFactory->createNewForVendorAndChannel(
-                    $vendor,
-                    $channel,
-                    (int) $total,
-                    (int) $commissionTotal,
-                    $nextSettlementStartDate,
-                    $nextSettlementEndDate
-                );
-
-                $newVendorSettlements[] = $nextSettlement;
-                $this->settlementManager->persist($nextSettlement);
-
-                if (0 === ($persistCount % 50)) {
-                    $this->settlementManager->flush();
-                }
-                ++$persistCount;
+            if (0 === ($persistCount % 50)) {
+                $this->settlementManager->flush();
             }
+            ++$persistCount;
 
-            $this->settlementsCreatedEmailSender->send($vendor, $newVendorSettlements);
+            $this->settlementsCreatedEmailSender->send($vendor, $newSettlements);
         }
+
         $this->settlementManager->flush();
 
         return Command::SUCCESS;

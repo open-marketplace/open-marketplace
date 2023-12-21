@@ -21,6 +21,7 @@ final class VirtualWalletSettlementPeriodResolver extends AbstractSettlementPeri
     public function resolve(?\DateTimeInterface $lastSettlementCreatedAt): array
     {
         Assert::isInstanceOf($lastSettlementCreatedAt, \DateTime::class);
+
         return [
             $lastSettlementCreatedAt->modify('+1 second'),
             new \DateTime(),

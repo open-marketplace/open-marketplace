@@ -10,15 +10,13 @@ We are hiring developers from all over the world. Join us and start your new, ex
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="false" autowire="false" autoconfigure="false" />
-        <service class="BitBag\OpenMarketplace\Component\Settlement\Cli\SettlementGenerateCommand"
-                id="bitbag.open_marketplace.component.settlement.cli.settlement_generate_command"
-        >
-            <argument type="service" id="bitbag.open_marketplace.component.vendor.repository.vendor"/>
-            <argument type="service" id="sylius.repository.channel"/>
-            <argument type="service" id="bitbag.open_marketplace.component.settlement.provider.settlement_provider"/>
+        <service class="BitBag\OpenMarketplace\Component\Settlement\Provider\SettlementProvider"
+                 id="bitbag.open_marketplace.component.settlement.provider.settlement_provider">
+            <argument type="service" id="open_marketplace.repository.settlement"/>
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="open_marketplace.factory.settlement"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="bitbag.open_marketplace.component.settlement.sender.settlements_created_email_sender"/>
-            <tag name="console.command"/>
+            <argument type="service" id="open_marketplace.component.settlement.period_strategy.settlement_period_resolver"/>
         </service>
     </services>
 </container>
