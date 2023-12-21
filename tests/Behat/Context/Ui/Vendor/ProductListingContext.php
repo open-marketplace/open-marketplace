@@ -26,11 +26,14 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
 {
     private EntityManagerInterface $entityManager;
+
+    private ProductListingInterface $productListingPage;
 
     private ShopUserExampleFactory $shopUserExampleFactory;
 
@@ -46,12 +49,14 @@ final class ProductListingContext extends RawMinkContext
         FactoryInterface $vendorFactory,
         SharedStorageInterface $sharedStorage,
         AdminUserExampleFactory $adminUserExampleFactory,
-        ) {
+        ProductListingInterface $productListingPage
+    ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
         $this->sharedStorage = $sharedStorage;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->productListingPage = $productListingPage;
     }
 
     /**
@@ -97,11 +102,31 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
+     * @Given there is removed product listing by vendor
+     */
+    public function thereProductListingIsRemoved()
+    {
+        $productListing = $this->sharedStorage->get('product_listing0');
+        $productListing->setRemoved(true);
+        $this->entityManager->persist($productListing);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given I am on edit page product listing :url
+     */
+    public function iAmOnProductListingPageWithIUrl($url)
+    {
+        $productListing = $this->sharedStorage->get('product_listing0');
+        $this->productListingPage->tryToOpen(['id' => $productListing->getId()]);
+    }
+
+    /**
      * @Given This product listing visibility is hidden
      */
     public function thisProductListingVisibilityIsHidden()
     {
-        $productListing = $this->sharedStorage->get('product_listing' . '0');
+        $productListing = $this->sharedStorage->get('product_listing0');
         $productListing->setHidden(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
