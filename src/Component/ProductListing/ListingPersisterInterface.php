@@ -34,8 +34,4 @@ interface ListingPersisterInterface
     public function uploadImages(
         DraftInterface $productDraft
     ): void;
-
-    public function deleteImages(
-        DraftInterface $productDraft
-    ): void;
 }

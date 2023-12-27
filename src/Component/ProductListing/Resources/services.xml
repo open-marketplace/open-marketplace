@@ -15,14 +15,6 @@
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.cloner.draft" />
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator" />
             <argument type="service" id="sylius.image_uploader"/>
-            <argument type="service">
-                <service class="Gaufrette\Filesystem">
-                    <argument>%sylius.uploader.filesystem%</argument>
-                    <factory service="knp_gaufrette.filesystem_map" method="get" />
-                </service>
-            </argument>
-            <argument type="service" id="bitbag.open_marketplace.component.product_listing.repository.draft_images"/>
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
     </services>
 </container>

@@ -26,16 +26,5 @@
                 </service>
             </argument>
         </service>
-
-        <service class="BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftImageRepository"
-                 id="bitbag.open_marketplace.component.product_listing.repository.draft_images">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service">
-                <service class="Doctrine\ORM\Mapping\ClassMetadata">
-                    <argument>BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage</argument>
-                    <factory service="doctrine.orm.default_entity_manager" method="getClassMetadata"/>
-                </service>
-            </argument>
-        </service>
     </services>
 </container>

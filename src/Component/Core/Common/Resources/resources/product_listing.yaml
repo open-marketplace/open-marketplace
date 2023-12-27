@@ -30,9 +30,6 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage
-                interface: BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImageInterface
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftImageRepository
 
         open_marketplace.product_draft_taxons:
             driver: doctrine/orm

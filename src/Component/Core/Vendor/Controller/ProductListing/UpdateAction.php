@@ -72,7 +72,6 @@ final class UpdateAction
 
         if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
             $productDraft->ownRelations();
-            $this->listingPersister->deleteImages($productDraft);
             $this->listingPersister->uploadImages($productDraft);
 
             $this->productDraftRepository->save($productDraft);
