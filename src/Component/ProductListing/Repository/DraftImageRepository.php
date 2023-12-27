@@ -15,7 +15,7 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class DraftImageRepository extends EntityRepository implements DraftImageRepositoryInterface
+final class DraftImageRepository extends EntityRepository implements DraftImageRepositoryInterface
 {
     public function findVendorDraftImages(DraftInterface $draft): array
     {
