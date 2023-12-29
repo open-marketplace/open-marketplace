@@ -14,17 +14,24 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Vendor;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslation;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftTranslationInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPrice;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -137,43 +144,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thereIsProductListingCreatedByVendor($count)
     {
-        $vendor = $this->sharedStorage->get('vendor');
-
-        for ($i = 0; $i < $count; ++$i) {
-            $productListing = new Listing();
-            $productListing->setCode('code' . $i);
-            $productListing->setVendor($vendor);
-
-            $productDraft = new Draft();
-            $productDraft->setCode('code' . $i);
-            $productDraft->setStatus(DraftInterface::STATUS_UNDER_VERIFICATION);
-            $productDraft->setPublishedAt(new \DateTime());
-            $productDraft->setVersionNumber(0);
-            $productDraft->setProductListing($productListing);
-
-            $productTranslation = new DraftTranslation();
-            $productTranslation->setLocale('en_US');
-            $productTranslation->setSlug('product-listing-' . $i);
-            $productTranslation->setName('product-listing-' . $i);
-            $productTranslation->setDescription('product-listing-' . $i);
-            $productTranslation->setProductDraft($productDraft);
-
-            $productPricing = new ListingPrice();
-            $productPricing->setProductDraft($productDraft);
-            $productPricing->setPrice(1000);
-            $productPricing->setOriginalPrice(1000);
-            $productPricing->setMinimumPrice(1000);
-            $productPricing->setChannelCode('en_US');
-
-            $this->entityManager->persist($productListing);
-            $this->entityManager->persist($productDraft);
-            $this->entityManager->persist($productTranslation);
-            $this->entityManager->persist($productPricing);
-
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
-        }
-
-        $this->entityManager->flush();
+        $this->createProuctListing($count);
     }
 
     /**
@@ -181,44 +152,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thereIsProductListingCreatedByVendorWithStatus2($count, $status)
     {
-        $vendor = $this->sharedStorage->get('vendor');
-
-        for ($i = 0; $i < $count; ++$i) {
-            $productListing = new Listing();
-            $productListing->setCode('code' . $i);
-            $productListing->setVendor($vendor);
-            $productListing->setVerificationStatus($status);
-
-            $productDraft = new Draft();
-            $productDraft->setCode('code' . $i);
-            $productDraft->setStatus($status);
-            $productDraft->setPublishedAt(new \DateTime());
-            $productDraft->setVersionNumber(0);
-            $productDraft->setProductListing($productListing);
-
-            $productTranslation = new DraftTranslation();
-            $productTranslation->setLocale('en_US');
-            $productTranslation->setSlug('product-listing-' . $i);
-            $productTranslation->setName('product-listing-' . $i);
-            $productTranslation->setDescription('product-listing-' . $i);
-            $productTranslation->setProductDraft($productDraft);
-
-            $productPricing = new ListingPrice();
-            $productPricing->setProductDraft($productDraft);
-            $productPricing->setPrice(1000);
-            $productPricing->setOriginalPrice(1000);
-            $productPricing->setMinimumPrice(1000);
-            $productPricing->setChannelCode('en_US');
-
-            $this->entityManager->persist($productListing);
-            $this->entityManager->persist($productDraft);
-            $this->entityManager->persist($productTranslation);
-            $this->entityManager->persist($productPricing);
-
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
-        }
-
-        $this->entityManager->flush();
+        $this->createProuctListing($count, $status);
     }
 
     /**
@@ -325,5 +259,172 @@ final class ProductListingContext extends RawMinkContext
     {
         $confirmationModal = $this->getPage()->findById($label);
         $confirmationModal->click();
+    }
+
+    /**
+     * @Given There is a product listing with code :code and name :name and status :status with attribute and image
+     */
+    public function thereIsAProductListingWithCodeAndNameAndStatusWithAttributeAndImage(
+        $code,
+        $name,
+        $status
+    ): void {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        $productListing = $this->createProductListing($vendor, $code);
+        /** @var DraftInterface $productDraft */
+        $productDraft = $this->createProductListingDraft($productListing, $code, $status);
+        $productTranslation = $this->createProductListingTranslation($productDraft, $name);
+
+        $productPricing = $this->createProductListingPricing($productDraft);
+
+        $draftImage = new DraftImage();
+        $draftImage->setOwner($productDraft);
+        $draftImage->setPath('/ff/ab/006f4e168af4e80d635e7b22e889.jpg');
+
+        $productDraft->addImage($draftImage);
+
+        $this->entityManager->persist($productListing);
+        $this->entityManager->persist($productDraft);
+        $this->entityManager->persist($productTranslation);
+        $this->entityManager->persist($productPricing);
+        $this->entityManager->persist($draftImage);
+        $this->sharedStorage->set('draft', $draftImage);
+
+        $this->entityManager->flush();
+    }
+
+    private function createProductListing(VendorInterface $vendor, string $code): ListingInterface
+    {
+        $productListing = new Listing();
+        $productListing->setCode($code);
+        $productListing->setVendor($vendor);
+
+        return $productListing;
+    }
+
+    private function createProductListingDraft(
+        ListingInterface $productListing,
+        string $code = 'code',
+        string $status = 'under_verification',
+        int $versionNumber = 0,
+        string $publishedAt = 'now'
+    ): DraftInterface {
+        $productDraft = new Draft();
+        $productDraft->setCode($code);
+        $productDraft->setStatus($status);
+        $productDraft->setPublishedAt(new \DateTime($publishedAt));
+        $productDraft->setVersionNumber($versionNumber);
+        $productDraft->setProductListing($productListing);
+        $channel = $this->getChannel();
+        $productDraft->setChannels(new ArrayCollection([$channel]));
+
+        return $productDraft;
+    }
+
+    private function createProductListingTranslation(
+        DraftInterface $productDraft,
+        string $name = 'product-listing-name',
+        string $description = 'product-listing-description',
+        string $slug = 'product-listing-slug',
+        string $locale = 'en_US'
+    ): DraftTranslationInterface {
+        $productTranslation = new DraftTranslation();
+        $productTranslation->setLocale($locale);
+        $productTranslation->setSlug($slug);
+        $productTranslation->setName($name);
+        $productTranslation->setDescription($description);
+        $productTranslation->setProductDraft($productDraft);
+
+        return $productTranslation;
+    }
+
+    private function createProductListingPricing(
+        DraftInterface $productDraft,
+        int $price = 1000,
+        int $originalPrice = 1000,
+        int $minimumPrice = 1000,
+        string $channelCode = 'web_us'
+    ): ListingPriceInterface {
+        $productPricing = new ListingPrice();
+        $productPricing->setProductDraft($productDraft);
+        $productPricing->setPrice($price);
+        $productPricing->setOriginalPrice($originalPrice);
+        $productPricing->setMinimumPrice($minimumPrice);
+        $productPricing->setChannelCode($channelCode);
+
+        return $productPricing;
+    }
+
+    private function getChannel(): ChannelInterface
+    {
+        return $this->entityManager->getRepository(ChannelInterface::class)
+            ->findAll()[0];
+    }
+
+    /**
+     * @Then I should see image
+     */
+    public function iShouldSeeImage(): void
+    {
+        $page = $this->getSession()->getPage();
+
+        $mediaContainer = $page->find('css', '.ui.segments[data-tab="media"]');
+        $image = $mediaContainer->find('css', 'img');
+        $imagePath = $image->getAttribute('src');
+
+        Assert::contains($imagePath, '/ff/ab/006f4e168af4e80d635e7b22e889.jpg', 'no image found');
+    }
+
+    /**
+     * @Then I should not see image
+     */
+    public function iShouldNotSeeImage(): void
+    {
+        $page = $this->getSession()->getPage();
+
+        $mediaContainer = $page->find('css', '.ui.segments[data-tab="media"]');
+        $image = $mediaContainer->find('css', 'img');
+        $imagePath = $image->getAttribute('src');
+
+        Assert::notContains($imagePath, 'public/media/image/ff/ab/006f4e168af4e80d635e7b22e889.jpg', 'no image found');
+    }
+
+    public function createProuctListing($count, $status='under_verification'): void
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        for ($i = 0; $i < $count; ++$i) {
+            $productListing = $this->createProductListing(
+                $vendor,
+                'code' . $i
+            );
+
+            $productDraft = $this->createProductListingDraft(
+                $productListing,
+                'code' . $i,
+                $status
+            );
+
+            $productTranslation = $this->createProductListingTranslation(
+                $productDraft,
+                'product-listing-name' . $i,
+                'product-listing-description' . $i,
+                'product-listing-slug' . $i
+            );
+
+            $productPricing = $this->createProductListingPricing(
+                $productDraft
+            );
+
+            $this->entityManager->persist($productListing);
+            $this->entityManager->persist($productDraft);
+            $this->entityManager->persist($productTranslation);
+            $this->entityManager->persist($productPricing);
+
+            $this->sharedStorage->set('product_listing' . $i, $productListing);
+        }
+
+        $this->entityManager->flush();
     }
 }
