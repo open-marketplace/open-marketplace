@@ -23,6 +23,7 @@ Feature: Creating a product listing with attribute
     And I fill in "Minimum price" with "30"
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
+    And I fill in "Description" with "test description"
     And I select "extended" from "sylius_product_attribute_choice"
     And I click "Save" button
     And I follow "Product list"

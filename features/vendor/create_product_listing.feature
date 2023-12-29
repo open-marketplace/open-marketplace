@@ -20,6 +20,7 @@ Feature:Creating a product listing.
     And I fill in "Minimum price" with "30"
     And I fill in "Name" with "test"
     And I fill in "Slug" with "product"
+    And I fill in "Description" with "test description"
     When I click "Save" button
     Then I should see product's listing status "Created"
     And I should see "Product listing created."
