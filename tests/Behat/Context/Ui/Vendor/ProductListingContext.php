@@ -390,7 +390,7 @@ final class ProductListingContext extends RawMinkContext
         Assert::notContains($imagePath, 'public/media/image/ff/ab/006f4e168af4e80d635e7b22e889.jpg', 'no image found');
     }
 
-    public function createProuctListing($count, $status='under_verification'): void
+    public function createProuctListing($count, $status = 'under_verification'): void
     {
         $vendor = $this->sharedStorage->get('vendor');
 
