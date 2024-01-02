@@ -11,9 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy;
 
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
+
 final class MonthlySettlementPeriodResolver extends AbstractSettlementPeriodResolverStrategy
 {
-    protected const SETTLEMENT_FREQUENCY = 'monthly';
+    protected const SETTLEMENT_FREQUENCY = VendorSettlementFrequency::MONTHLY;
 
     public function resolve(): array
     {

@@ -16,6 +16,7 @@ use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\AbstractSettlementPeriodResolverStrategy;
 use BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Sender\SettlementsCreatedEmailSenderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -34,6 +35,7 @@ final class SettlementGenerateCommand extends Command
         private SettlementFactoryInterface $settlementFactory,
         private ObjectManager $settlementManager,
         private ChannelRepositoryInterface $channelRepository,
+        private SettlementsCreatedEmailSenderInterface $settlementsCreatedEmailSender,
         private iterable $settlementPeriodResolvers,
         ) {
         parent::__construct();
@@ -55,6 +57,7 @@ final class SettlementGenerateCommand extends Command
         /** @var VendorInterface $vendor */
         foreach ($vendors as $vendor) {
             [$nextSettlementStartDate, $nextSettlementEndDate] = $this->getSettlementDateRangeFromVendor($vendor);
+            $newVendorSettlements = [];
 
             foreach ($channels as $channel) {
                 $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $channel);
@@ -79,12 +82,17 @@ final class SettlementGenerateCommand extends Command
                     $nextSettlementStartDate,
                     $nextSettlementEndDate
                 );
+
+                $newVendorSettlements[] = $nextSettlement;
                 $this->settlementManager->persist($nextSettlement);
+
                 if (0 === ($persistCount % 50)) {
                     $this->settlementManager->flush();
                 }
                 ++$persistCount;
             }
+
+            $this->settlementsCreatedEmailSender->send($vendor, $newVendorSettlements);
         }
         $this->settlementManager->flush();
 

@@ -20,3 +20,4 @@ open_marketplace:
         product_listing_rejected: 'Product listing rejected.'
         product_listing_send_to_verification: 'Product listing sent to verification.'
         archive_message_send: 'Message requesting archivization of conversation has been sent'
+        settlement_accepted: 'Settlement has been accepted successfully.'

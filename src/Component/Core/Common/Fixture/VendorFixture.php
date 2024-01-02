@@ -37,6 +37,7 @@ final class VendorFixture extends AbstractResourceFixture
                 ->booleanNode('enabled')->end()
                 ->scalarNode('password')->cannotBeEmpty()->end()
                 ->scalarNode('customer_group')->end()
+                ->scalarNode('settlement_frequency')->end()
                 ->arrayNode('shipping_methods')
                     ->scalarPrototype()->end()
                 ->end()

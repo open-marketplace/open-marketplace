@@ -27,12 +27,9 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
 
     public const STATUS_VERIFIED = 'verified';
 
-    public const DEFAULT_SETTLEMENT_FREQUENCY = 'weekly';
-
-    public const VALID_SETTLEMENT_FREQUENCY = [
-        'weekly',
-        'monthly',
-        'quarterly',
+    public const STATUSES = [
+        self::STATUS_UNVERIFIED,
+        self::STATUS_VERIFIED,
     ];
 
     public function getId(): ?int;

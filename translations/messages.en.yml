@@ -180,6 +180,8 @@ open_marketplace:
         currency_code: Currency code
         settlement_status:
             new: New
+            accepted: Accepted
+            settled: Settled
         show_settlements: Show settlements
         created_at: Created at
         updated_at: Updated at
@@ -187,6 +189,11 @@ open_marketplace:
         total_orders: Total orders
         show_orders: Show orders
     email:
+        settlements_created:
+            subject: Settlement created
+            greetings: Hey, a new settlement has been created.
+            info: Settlement details
+            link_placeholder: View settlements info in your admin panel
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.
         request_profile_update_info: For security purposes, we need to verify your decision. Click on the link below if you want to make a change or ignore this message.
