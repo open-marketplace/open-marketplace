@@ -56,7 +56,7 @@
       And there is a settlement for channel "Web-PL"
       When I visit the admin settlements page
       And I filter settlements by channel "Web-PL"
-      And I should see 1 settlements
+      Then I should see 1 settlements
 
     @ui
     Scenario: Admin can sort settlements by channel
