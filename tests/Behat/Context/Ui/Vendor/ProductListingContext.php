@@ -106,7 +106,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thereProductListingIsRemoved()
     {
-        $productListing = $this->sharedStorage->get('product_listing0');
+        $productListing = $this->sharedStorage->get('product_listing');
         $productListing->setRemoved(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
@@ -117,19 +117,8 @@ final class ProductListingContext extends RawMinkContext
      */
     public function iAmOnProductListingPageWithIUrl($url)
     {
-        $productListing = $this->sharedStorage->get('product_listing0');
+        $productListing = $this->sharedStorage->get('product_listing');
         $this->productListingPage->tryToOpen(['id' => $productListing->getId()]);
-    }
-
-    /**
-     * @Given This product listing visibility is hidden
-     */
-    public function thisProductListingVisibilityIsHidden()
-    {
-        $productListing = $this->sharedStorage->get('product_listing0');
-        $productListing->setHidden(true);
-        $this->entityManager->persist($productListing);
-        $this->entityManager->flush();
     }
 
     /**
@@ -195,7 +184,7 @@ final class ProductListingContext extends RawMinkContext
             $this->entityManager->persist($productTranslation);
             $this->entityManager->persist($productPricing);
 
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
+            $this->sharedStorage->set('product_listing', $productListing);
         }
 
         $this->entityManager->flush();
@@ -240,7 +229,7 @@ final class ProductListingContext extends RawMinkContext
             $this->entityManager->persist($productTranslation);
             $this->entityManager->persist($productPricing);
 
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
+            $this->sharedStorage->set('product_listing', $productListing);
         }
 
         $this->entityManager->flush();
