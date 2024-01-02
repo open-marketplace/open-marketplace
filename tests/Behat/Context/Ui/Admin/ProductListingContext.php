@@ -337,17 +337,6 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given This product listing visibility is removed
-     */
-    public function thisProductListingVisibilityIsHidden(): void
-    {
-        $productListing = $this->sharedStorage->get('product_listing' . '0');
-        $productListing->setHidden(true);
-        $this->entityManager->persist($productListing);
-        $this->entityManager->flush();
-    }
-
-    /**
      * @Given There is attribute with code :code
      */
     public function thereIsAttributeWithCode($code): void

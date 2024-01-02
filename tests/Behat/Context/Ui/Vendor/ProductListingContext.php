@@ -26,11 +26,14 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
 {
     private EntityManagerInterface $entityManager;
+
+    private ProductListingInterface $productListingPage;
 
     private ShopUserExampleFactory $shopUserExampleFactory;
 
@@ -46,12 +49,14 @@ final class ProductListingContext extends RawMinkContext
         FactoryInterface $vendorFactory,
         SharedStorageInterface $sharedStorage,
         AdminUserExampleFactory $adminUserExampleFactory,
-        ) {
+        ProductListingInterface $productListingPage
+    ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
         $this->sharedStorage = $sharedStorage;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->productListingPage = $productListingPage;
     }
 
     /**
@@ -97,14 +102,23 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given This product listing visibility is hidden
+     * @Given the product listing is removed
      */
-    public function thisProductListingVisibilityIsHidden()
+    public function thereProductListingIsRemoved()
     {
-        $productListing = $this->sharedStorage->get('product_listing' . '0');
-        $productListing->setHidden(true);
+        $productListing = $this->sharedStorage->get('product_listing');
+        $productListing->setRemoved(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @When I am on edit page product listing :url
+     */
+    public function iAmOnProductListingPageWithIUrl($url)
+    {
+        $productListing = $this->sharedStorage->get('product_listing');
+        $this->productListingPage->tryToOpen(['id' => $productListing->getId()]);
     }
 
     /**
@@ -170,7 +184,7 @@ final class ProductListingContext extends RawMinkContext
             $this->entityManager->persist($productTranslation);
             $this->entityManager->persist($productPricing);
 
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
+            $this->sharedStorage->set('product_listing', $productListing);
         }
 
         $this->entityManager->flush();
@@ -215,7 +229,7 @@ final class ProductListingContext extends RawMinkContext
             $this->entityManager->persist($productTranslation);
             $this->entityManager->persist($productPricing);
 
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
+            $this->sharedStorage->set('product_listing', $productListing);
         }
 
         $this->entityManager->flush();

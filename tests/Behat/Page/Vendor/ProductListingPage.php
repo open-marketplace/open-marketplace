@@ -10,17 +10,12 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
 
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-interface ProductReviewPageInterface extends PageInterface
+final class ProductListingPage extends SymfonyPage implements ProductListingInterface
 {
-    public function getRouteName(): string;
-
-    public function getReviews(): array;
-
-    public function clickButton(string $button): void;
-
-    public function clickButtonFirstReview(string $button): void;
-
-    public function clickEditFirstReview(): void;
+    public function getRouteName(): string
+    {
+        return 'open_marketplace_vendor_product_listings_edit';
+    }
 }
