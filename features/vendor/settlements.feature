@@ -31,6 +31,7 @@ Feature: Vendor can manage settlements
     And I accept first possible settlement
     Then I should see "Settlement has been accepted successfully."
     And I should see 1 settlements with status "Settled"
+    And I should see 0 settlements with status "New"
 
   @ui
   Scenario: Vendor can filter settlements by status
@@ -38,7 +39,6 @@ Feature: Vendor can manage settlements
     And there is a "accepted" settlement with total amount of "540.00" and commission amount of "74.00"
     And there is a "accepted" settlement with total amount of "130.00" and commission amount of "12.71"
     When I visit the vendor settlements page
-    And I should see 3 settlements
     And I filter settlements by status "Accepted"
     Then I should see 2 settlements
     And I should see 0 settlements with status "New"
