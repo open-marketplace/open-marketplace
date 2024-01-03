@@ -8,10 +8,11 @@ Feature: Vendor can remove images for product listing.
     And I am logged in as "vendor@email.com"
     And the store operates on a channel named "Web-US" in "USD" currency
     And there is an admin user "admin" with password "password"
+    And there is 1 product listing created by vendor with status "verified"
 
   @ui
   Scenario: Trying to edit removed product listing
-    Given There is a product listing with code "product-listing-code" and name "product-listing-name" and status "verified" with attribute and image
+    Given the product listing has an image attached
     When I am on "/"
     And I follow "My account"
     And I follow "Product listings"
@@ -19,6 +20,9 @@ Feature: Vendor can remove images for product listing.
     Then I should see image
     And I follow "Delete"
     And I click "Save draft" button
+
+  @ui
+  Scenario: Visiting product listing after deleted image:
     Given I am on "/"
     And I follow "My account"
     And I follow "Product listings"

@@ -144,7 +144,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thereIsProductListingCreatedByVendor($count)
     {
-        $this->createProuctListing($count);
+        $this->createProudctListinByVendor($count);
     }
 
     /**
@@ -152,7 +152,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thereIsProductListingCreatedByVendorWithStatus2($count, $status)
     {
-        $this->createProuctListing($count, $status);
+        $this->createProudctListinByVendor($count, $status);
     }
 
     /**
@@ -262,34 +262,82 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given There is a product listing with code :code and name :name and status :status with attribute and image
+     * @Given the product listing has an image attached
      */
-    public function thereIsAProductListingWithCodeAndNameAndStatusWithAttributeAndImage(
-        $code,
-        $name,
-        $status
-    ): void {
-        $vendor = $this->sharedStorage->get('vendor');
+    public function theProductListingHasAnImageAttached(): void
+    {
+        $productDraft = $this->sharedStorage->get('draft');
 
-        $productListing = $this->createProductListing($vendor, $code);
-        /** @var DraftInterface $productDraft */
-        $productDraft = $this->createProductListingDraft($productListing, $code, $status);
-        $productTranslation = $this->createProductListingTranslation($productDraft, $name);
-
-        $productPricing = $this->createProductListingPricing($productDraft);
-
+        file_put_contents('public/media/image/test/test.jpg', '');
         $draftImage = new DraftImage();
         $draftImage->setOwner($productDraft);
-        $draftImage->setPath('/ff/ab/006f4e168af4e80d635e7b22e889.jpg');
-
+        $draftImage->setPath('test.jpg');
         $productDraft->addImage($draftImage);
 
-        $this->entityManager->persist($productListing);
-        $this->entityManager->persist($productDraft);
-        $this->entityManager->persist($productTranslation);
-        $this->entityManager->persist($productPricing);
         $this->entityManager->persist($draftImage);
-        $this->sharedStorage->set('draft', $draftImage);
+        $this->entityManager->persist($productDraft);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Then I should see image
+     */
+    public function iShouldSeeImage(): void
+    {
+        $page = $this->getSession()->getPage();
+        $mediaContainer = $page->find('css', '.ui.segments[data-tab="media"]');
+        $image = $mediaContainer->find('css', 'img');
+        $imagePath = $image->getAttribute('src');
+
+        Assert::contains($imagePath, 'test.jpg', 'no image found');
+    }
+
+    /**
+     * @Then I should not see image
+     */
+    public function iShouldNotSeeImage(): void
+    {
+        $page = $this->getSession()->getPage();
+        $mediaContainer = $page->find('css', '.ui.segments[data-tab="media"]');
+        Assert::notContains($mediaContainer->getHtml(), 'test.jpg', 'image found');
+    }
+
+    public function createProudctListinByVendor($count, $status = 'under_verification'): void
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        for ($i = 0; $i < $count; ++$i) {
+            $productListing = $this->createProductListing(
+                $vendor,
+                'code' . $i
+            );
+
+            $productDraft = $this->createProductListingDraft(
+                $productListing,
+                'code' . $i,
+                $status
+            );
+
+            $productTranslation = $this->createProductListingTranslation(
+                $productDraft,
+                'product-listing-name' . $i,
+                'product-listing-description' . $i,
+                'product-listing-slug' . $i
+            );
+
+            $productPricing = $this->createProductListingPricing(
+                $productDraft
+            );
+
+            $this->entityManager->persist($productListing);
+            $this->entityManager->persist($productDraft);
+            $this->entityManager->persist($productTranslation);
+            $this->entityManager->persist($productPricing);
+            $this->sharedStorage->set('draft', $productDraft);
+
+            $this->sharedStorage->set('product_listing', $productListing);
+        }
 
         $this->entityManager->flush();
     }
@@ -360,71 +408,5 @@ final class ProductListingContext extends RawMinkContext
     {
         return $this->entityManager->getRepository(ChannelInterface::class)
             ->findAll()[0];
-    }
-
-    /**
-     * @Then I should see image
-     */
-    public function iShouldSeeImage(): void
-    {
-        $page = $this->getSession()->getPage();
-
-        $mediaContainer = $page->find('css', '.ui.segments[data-tab="media"]');
-        $image = $mediaContainer->find('css', 'img');
-        $imagePath = $image->getAttribute('src');
-
-        Assert::contains($imagePath, '/ff/ab/006f4e168af4e80d635e7b22e889.jpg', 'no image found');
-    }
-
-    /**
-     * @Then I should not see image
-     */
-    public function iShouldNotSeeImage(): void
-    {
-        $page = $this->getSession()->getPage();
-
-        $mediaContainer = $page->find('css', '.ui.segments[data-tab="media"]');
-        $image = $mediaContainer->find('css', 'img');
-        $imagePath = $image->getAttribute('src');
-
-        Assert::notContains($imagePath, 'public/media/image/ff/ab/006f4e168af4e80d635e7b22e889.jpg', 'no image found');
-    }
-
-    public function createProuctListing($count, $status = 'under_verification'): void
-    {
-        $vendor = $this->sharedStorage->get('vendor');
-
-        for ($i = 0; $i < $count; ++$i) {
-            $productListing = $this->createProductListing(
-                $vendor,
-                'code' . $i
-            );
-
-            $productDraft = $this->createProductListingDraft(
-                $productListing,
-                'code' . $i,
-                $status
-            );
-
-            $productTranslation = $this->createProductListingTranslation(
-                $productDraft,
-                'product-listing-name' . $i,
-                'product-listing-description' . $i,
-                'product-listing-slug' . $i
-            );
-
-            $productPricing = $this->createProductListingPricing(
-                $productDraft
-            );
-
-            $this->entityManager->persist($productListing);
-            $this->entityManager->persist($productDraft);
-            $this->entityManager->persist($productTranslation);
-            $this->entityManager->persist($productPricing);
-
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
-        }
-
-        $this->entityManager->flush();
     }
 }

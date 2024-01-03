@@ -13,7 +13,6 @@ namespace BitBag\OpenMarketplace\Component\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\DraftGeneratorInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftImageRepository;
@@ -79,9 +78,8 @@ final class ListingPersister implements ListingPersisterInterface
     {
         $productDraftImages = $this->draftRepository->findVendorDraftImages($productDraft);
         foreach ($productDraftImages as $image) {
-            $entity = $this->entityManager->find(DraftImage::class, $image->getId());
-            if (null !== $entity && null !== $image->getPath()) {
-                $this->entityManager->remove($entity);
+            if (null !== $image && null !== $image->getPath()) {
+                $this->entityManager->remove($image);
 
                 /** @var string $key */
                 $key = $image->getPath();
