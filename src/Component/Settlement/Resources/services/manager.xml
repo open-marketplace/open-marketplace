@@ -13,7 +13,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
         <service class="BitBag\OpenMarketplace\Component\Settlement\Manager\VirtualWalletManager"
             id="open_marketplace.component.settlement.manager.virtual_wallet">
-            <argument type="service" id="open_marketplace.component.settlement.provider.virtual_wallet"/>
+            <argument type="service" id="open_marketplace.component.settlement.creator.virtual_wallet"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
     </services>

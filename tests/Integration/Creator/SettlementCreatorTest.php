@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Creator;
 
 use ApiTestCase\JsonApiTestCase;
-use Webmozart\Assert\Assert;
 
 final class SettlementCreatorTest extends JsonApiTestCase
 {
@@ -42,18 +41,7 @@ final class SettlementCreatorTest extends JsonApiTestCase
         $this->assertSame(1002, $settlementEU->getTotalAmount());
         $this->assertSame(70, $settlementEU->getTotalCommissionAmount());
 
-        try {
-            $settlementUS->getId('');
-        } catch (\Error $e) {
-            Assert::isInstanceOf($e, \Error::class);
-            Assert::same($e->getMessage(), "Typed property BitBag\OpenMarketplace\Component\Settlement\Entity\Settlement::\$id must not be accessed before initialization");
-        }
-
-        try {
-            $settlementEU->getId('');
-        } catch (\Error $e) {
-            Assert::isInstanceOf($e, \Error::class);
-            Assert::same($e->getMessage(), "Typed property BitBag\OpenMarketplace\Component\Settlement\Entity\Settlement::\$id must not be accessed before initialization");
-        }
+        $this->expectException(\Error::class);
+        $settlementUS->getId();
     }
 }

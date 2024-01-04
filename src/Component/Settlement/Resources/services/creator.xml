@@ -21,7 +21,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Settlement\Creator\VirtualWalletCreator"
-                id="open_marketplace.component.settlement.provider.virtual_wallet"
+                id="open_marketplace.component.settlement.creator.virtual_wallet"
         >
             <argument type="service" id="open_marketplace.factory.virtual_wallet"/>
             <argument type="service" id="open_marketplace.repository.virtual_wallet"/>
