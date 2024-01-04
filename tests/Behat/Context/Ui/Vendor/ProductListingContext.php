@@ -47,18 +47,22 @@ final class ProductListingContext extends RawMinkContext
 
     private AdminUserExampleFactory $adminUserExampleFactory;
 
+    private string $imagePath;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         ShopUserExampleFactory $shopUserExampleFactory,
         FactoryInterface $vendorFactory,
         SharedStorageInterface $sharedStorage,
         AdminUserExampleFactory $adminUserExampleFactory,
-        ) {
+        string $imagePath
+    ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
         $this->sharedStorage = $sharedStorage;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->imagePath = $imagePath;
     }
 
     /**
@@ -268,7 +272,7 @@ final class ProductListingContext extends RawMinkContext
     {
         $productDraft = $this->sharedStorage->get('draft');
 
-        file_put_contents('public/media/image/test/test.jpg', '');
+        file_put_contents($this->imagePath . '/test.jpg', '');
         $draftImage = new DraftImage();
         $draftImage->setOwner($productDraft);
         $draftImage->setPath('test.jpg');
