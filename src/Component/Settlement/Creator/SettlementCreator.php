@@ -34,9 +34,9 @@ final class SettlementCreator implements SettlementCreatorInterface
     public function createSettlementsForVendorAndChannels(
         VendorInterface $vendor,
         array $channels,
-        bool $flush = true
+        bool $cyclical = true
     ): array {
-        [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor($vendor);
+        [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor($vendor, $cyclical);
 
         $generatedSettlements = [];
 
@@ -58,11 +58,35 @@ final class SettlementCreator implements SettlementCreatorInterface
             $generatedSettlements[] = $settlement;
         }
 
-        if ($flush) {
-            $this->settlementManager->flush();
-        }
-
         return $generatedSettlements;
+    }
+
+    public function createSettlementForVendorAndChannelAndAmount(
+        VendorInterface $vendor,
+        ChannelInterface $channel,
+        int $amount,
+        bool $cyclical = false
+    ): SettlementInterface {
+        $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $channel);
+
+        [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor(
+            $vendor,
+            $cyclical,
+            !$lastSettlement ?: $lastSettlement->getCreatedAt()
+        );
+
+        $settlement = $this->settlementFactory->createNewForVendorAndChannel(
+            $vendor,
+            $channel,
+            $amount,
+            0,
+            $nextSettlementStartDate,
+            $nextSettlementEndDate
+        );
+
+        $this->settlementManager->persist($settlement);
+
+        return $settlement;
     }
 
     private function createSettlementForVendorAndChannelIfNotExists(

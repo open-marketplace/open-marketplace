@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Entity;
 
+use BitBag\OpenMarketplace\Component\Core\Settlement\Exception\NotEnoughFundsException;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -68,7 +69,7 @@ class VirtualWallet implements VirtualWalletInterface
     public function withdraw(SettlementInterface $settlement): void
     {
         if ($this->balance < $settlement->getTotalProfitAmount()) {
-            throw new \InvalidArgumentException('Not enough funds to withdraw');
+            throw new NotEnoughFundsException('Not enough funds to withdraw');
         }
 
         $this->balance -= $settlement->getTotalProfitAmount();

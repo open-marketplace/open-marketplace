@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Vendor;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\OrderOperationVoter;
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -83,6 +84,13 @@ final class MenuListener
                 ->addChild('settlements', ['route' => 'open_marketplace_vendor_settlements_index'])
                 ->setLabel('open_marketplace.ui.settlements')
                 ->setLabelAttribute('icon', 'money');
+
+            if (!in_array($vendor->getSettlementFrequency(), VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES, true)) {
+                $menu
+                    ->addChild('vendor', ['route' => 'open_marketplace_vendor_virtual_wallet_index'])
+                    ->setLabel('open_marketplace.ui.virtual_wallets')
+                    ->setLabelAttribute('icon', 'credit card');
+            }
 
             $menu
                 ->addChild('clients', ['route' => 'open_marketplace_vendor_customers_index'])

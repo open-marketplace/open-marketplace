@@ -35,9 +35,6 @@ final class VirtualWalletCreator implements VirtualWalletCreatorInterface
             return $virtualWallet;
         }
 
-        $virtualWallet = $this->virtualWalletFactory->createForVendorAndChannel($vendor, $channel);
-        $this->virtualWalletRepository->add($virtualWallet);
-
-        return $virtualWallet;
+        return $this->virtualWalletFactory->createForVendorAndChannel($vendor, $channel);
     }
 }

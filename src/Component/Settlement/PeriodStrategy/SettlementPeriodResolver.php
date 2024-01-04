@@ -22,9 +22,9 @@ final class SettlementPeriodResolver implements SettlementPeriodResolverInterfac
 
     public function getSettlementDateRangeForVendor(
         VendorInterface $vendor,
+        bool $cyclical = true,
         ?\DateTimeInterface $lastSettlementCreatedAt = null,
-        bool $cyclical = true
-    ): array {
+        ): array {
         /** @var AbstractSettlementPeriodResolverStrategy $settlementPeriodResolver */
         foreach ($this->settlementPeriodResolvers as $settlementPeriodResolver) {
             if ($settlementPeriodResolver->supports($vendor, $cyclical)) {

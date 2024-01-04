@@ -13,6 +13,7 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Repository;
 
 use BitBag\OpenMarketplace\Component\Settlement\Entity\VirtualWalletInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 
@@ -23,10 +24,19 @@ final class VirtualWalletRepository extends EntityRepository implements VirtualW
         return $this->createQueryBuilder('wv')
             ->andWhere('wv.vendor = :vendor')
             ->andWhere('wv.channel = :channel')
-            ->setParameter('vendorId', $vendor)
-            ->setParameter('channelId', $channel)
+            ->setParameter('vendor', $vendor)
+            ->setParameter('channel', $channel)
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder
+    {
+        $result = $this->createQueryBuilder('wv')
+            ->andWhere('wv.vendor = :vendor')
+            ->setParameter('vendor', $vendor);
+
+        return $result;
     }
 }

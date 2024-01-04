@@ -53,7 +53,7 @@ final class SettlementGenerateCommand extends Command
             $newSettlements = $this->settlementCreator->createSettlementsForVendorAndChannels(
                 $vendor,
                 $channels,
-                false,
+                true,
             );
 
             if (0 === ($persistCount % 50)) {

@@ -67,7 +67,7 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         $resolverB->supports($vendor, $cyclical)->shouldNotBeCalled();
         $resolverB->resolve(null)->shouldNotBeCalled();
 
-        $this->getSettlementDateRangeForVendor($vendor, null, $cyclical)->shouldBeLike([$from, $to]);
+        $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$from, $to]);
     }
 
     public function it_should_only_call_second_one_resolver(

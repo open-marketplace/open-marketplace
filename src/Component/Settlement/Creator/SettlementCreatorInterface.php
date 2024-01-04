@@ -11,13 +11,22 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Creator;
 
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 interface SettlementCreatorInterface
 {
     public function createSettlementsForVendorAndChannels(
         VendorInterface $vendor,
         array $channels,
-        bool $flush = true,
+        bool $cyclical = false,
         ): array;
+
+    public function createSettlementForVendorAndChannelAndAmount(
+        VendorInterface $vendor,
+        ChannelInterface $channel,
+        int $amount,
+        bool $cyclical = true
+    ): SettlementInterface;
 }
