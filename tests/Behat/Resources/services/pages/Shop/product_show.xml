@@ -6,7 +6,6 @@
                 id="tests.open_marketplace.behat.page.show_product_page"
                 parent="sylius.behat.symfony_page"
                 public="true" >
-
         </service>
     </services>
 </container>

@@ -312,7 +312,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     paid_at: '<date_create("last week tuesday")>'
     commission_total: 100
     channel: '@channel_eu'
-  order_made_by_peter_main:
+  tommy_order_made_by_peter_main:
     mode: 'primary'
     currency_code: 'USD'
     locale_code: 'en-US'
@@ -320,10 +320,10 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     paymentState: 'paid'
     state: 'new'
     checkoutState: 'completed'
-    tokenValue: 'order_made_by_peter_main'
+    tokenValue: 'tommy_order_made_by_peter_main'
     channel: '@channel_us'
-  order_made_by_peter:
-    primaryOrder: '@order_made_by_peter_main'
+  tommy_order_made_by_peter:
+    primaryOrder: '@tommy_order_made_by_peter_main'
     mode: 'secondary'
     currency_code: 'USD'
     locale_code: 'en-US'
@@ -332,11 +332,35 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     paymentState: 'paid'
     state: 'new'
     checkoutState: 'completed'
-    tokenValue: 'order_made_by_peter'
-    paid_at: '<dateTimeBetween("-5 month", "-3 month")>'
+    tokenValue: 'tommy_order_made_by_peter'
+    paid_at: '<date_create("- 1 day")>'
     commission_total: 10
     channel: '@channel_us'
-  bruce_order_made_by_john_3_main:
+  tommy_order_made_by_john_main:
+    mode: 'primary'
+    currency_code: 'USD'
+    locale_code: 'en-US'
+    customer: '@customer_john'
+    paymentState: 'paid'
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'tommy_order_made_by_john_main'
+    channel: '@channel_us'
+  tommy_order_made_by_john:
+    primaryOrder: '@tommy_order_made_by_john_main'
+    mode: 'secondary'
+    currency_code: 'USD'
+    locale_code: 'en-US'
+    customer: '@customer_john'
+    vendor: '@vendor_tommy'
+    paymentState: 'paid'
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'tommy_order_made_by_john'
+    paid_at: '<date_create(" - 91 days")>'
+    commission_total: 10
+    channel: '@channel_us'
+  tommy_order_made_by_john_eu_main:
     mode: 'primary'
     currency_code: 'USD'
     locale_code: 'en-US'
@@ -345,8 +369,8 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     channel: '@channel_eu'
-  bruce_order_made_by_john_3:
-    primaryOrder: '@bruce_order_made_by_john_3_main'
+  tommy_order_made_by_john_eu:
+    primaryOrder: '@tommy_order_made_by_john_eu_main'
     mode: 'secondary'
     currency_code: 'USD'
     locale_code: 'en-US'
@@ -355,8 +379,8 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     paymentState: 'paid'
     state: 'new'
     checkoutState: 'completed'
-    tokenValue: 'bruce_order_made_by_john_3'
-    paid_at: '<date_create("first day of last month")>'
+    tokenValue: 'tommy_order_made_by_john_eu'
+    paid_at: '<date_create("-5 months")>'
     commission_total: 55
     channel: '@channel_eu'
 BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
@@ -372,12 +396,16 @@ BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
     order: '@peter_order_made_by_john'
     variant: '@product_variant_product_peter_1_1'
     unit_price: 700
-  bruce_order_made_by_john_3_item_1:
-    order: '@bruce_order_made_by_john_3'
+  tommy_order_made_by_john_eu_item_1:
+    order: '@tommy_order_made_by_john_eu'
     variant: '@product_variant_product_tommy_1_1'
     unit_price: 400
-  order_made_by_peter_item_1:
-    order: '@order_made_by_peter'
+  tommy_order_made_by_peter_item_1:
+    order: '@tommy_order_made_by_peter'
+    variant: '@product_variant_product_tommy_1_1'
+    unit_price: 400
+  tommy_order_made_by_john_item_1:
+    order: '@tommy_order_made_by_john'
     variant: '@product_variant_product_tommy_1_1'
     unit_price: 400
 BitBag\OpenMarketplace\Component\Order\Entity\Shipment:
@@ -389,9 +417,17 @@ BitBag\OpenMarketplace\Component\Order\Entity\Shipment:
     vendor: '@vendor_bruce'
     order: '@bruce_order_made_by_john_2'
     method: '@shipping_method_fedex'
-  bruce_order_made_by_john_3_shipment:
+  tommy_order_made_by_john_eu_shipment:
     vendor: '@vendor_bruce'
-    order: '@bruce_order_made_by_john_3'
+    order: '@tommy_order_made_by_john_eu'
+    method: '@shipping_method_fedex'
+  tommy_order_made_by_peter_shipment:
+    vendor: '@vendor_bruce'
+    order: '@tommy_order_made_by_peter'
+    method: '@shipping_method_fedex'
+  tommy_order_made_by_john_shipment:
+    vendor: '@vendor_bruce'
+    order: '@tommy_order_made_by_john'
     method: '@shipping_method_fedex'
   peter_order_made_by_john_shipment:
     vendor: '@vendor_peter'
@@ -407,9 +443,12 @@ Sylius\Component\Core\Model\OrderItemUnit:
   peter_order_made_by_john_1_item_1_unit:
     __construct: [ '@peter_order_made_by_john_1_item_1' ]
     shipment: '@peter_order_made_by_john_shipment'
-  bruce_order_made_by_john_3_item_1_unit:
-    __construct: [ '@bruce_order_made_by_john_3_item_1' ]
-    shipment: '@bruce_order_made_by_john_3_shipment'
-  order_made_by_peter_item_1_unit:
-    __construct: [ '@order_made_by_peter_item_1' ]
-    shipment: '@bruce_order_made_by_john_3_shipment'
+  tommy_order_made_by_john_eu_item_1_unit:
+    __construct: [ '@tommy_order_made_by_john_eu_item_1' ]
+    shipment: '@tommy_order_made_by_john_eu_shipment'
+  tommy_order_made_by_peter_item_1_unit:
+    __construct: [ '@tommy_order_made_by_peter_item_1' ]
+    shipment: '@tommy_order_made_by_john_eu_shipment'
+  tommy_order_made_by_john_item_1_unit:
+    __construct: [ '@tommy_order_made_by_john_item_1' ]
+    shipment: '@tommy_order_made_by_john_shipment'

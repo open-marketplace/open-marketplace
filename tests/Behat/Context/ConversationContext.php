@@ -83,22 +83,6 @@ class ConversationContext extends MinkContext implements Context
     }
 
     /**
-     * @When I press in menu :arg1
-     */
-    public function iPressInMenu($arg1)
-    {
-        $this->getPage()->pressButton("$arg1");
-    }
-
-    /**
-     * @Then I select :arg1 variant
-     */
-    public function iSelectVariant($arg1)
-    {
-        throw new PendingException();
-    }
-
-    /**
      * @Given there is conversation category :categoryName
      */
     public function thereIsConversationCategory($categoryName)

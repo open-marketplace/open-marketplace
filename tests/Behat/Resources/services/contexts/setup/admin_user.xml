@@ -10,10 +10,10 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
 
         <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\AdminUserContext"
-                 id="tests.open_marketplace.behat.context.setup.admin_user" public="true">
+            id="tests.open_marketplace.behat.context.setup.admin_user" public="true"
+        >
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
         </service>
-
     </services>
 </container>
