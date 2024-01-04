@@ -5,7 +5,7 @@ winzou_state_machine:
     graph: open_marketplace_settlement
     state_machine_class: "%sylius.state_machine.class%"
     states:
-      open: ~
+      new: ~
       accepted: ~
       settled: ~
     transitions:

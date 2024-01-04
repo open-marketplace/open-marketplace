@@ -36,6 +36,7 @@
              public="true"
     >
         <argument type="service" id="open_marketplace.component.core.common.state_machine.settlement_state_machine_transition"/>
+        <argument type="service" id="doctrine.orm.entity_manager"/>
     </service>
 </services>
 </container>

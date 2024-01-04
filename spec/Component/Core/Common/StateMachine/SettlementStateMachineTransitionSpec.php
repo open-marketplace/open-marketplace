@@ -45,6 +45,7 @@ final class SettlementStateMachineTransitionSpec extends ObjectBehavior
     public function it_applies_transition(
         SettlementInterface $settlement,
         FactoryInterface $settlementStateMachineFactory,
+        EntityManagerInterface $entityManager,
         StateMachineInterface $stateMachine,
         ): void {
         $settlementStateMachineFactory->get(
@@ -67,12 +68,16 @@ final class SettlementStateMachineTransitionSpec extends ObjectBehavior
         $settlementStateMachineFactory->get($settlement, SettlementTransitions::GRAPH)
             ->shouldBeCalled();
 
+        $entityManager->persist($settlement)
+            ->shouldBeCalled();
+
         $this->applyIfCan($settlement, SettlementTransitions::ACCEPT);
     }
 
     public function it_cannot_apply_transition(
         SettlementInterface $settlement,
         FactoryInterface $settlementStateMachineFactory,
+        EntityManagerInterface $entityManager,
         StateMachineInterface $stateMachine,
         ): void {
         $settlementStateMachineFactory->get(
@@ -92,43 +97,9 @@ final class SettlementStateMachineTransitionSpec extends ObjectBehavior
         $stateMachine->apply(SettlementTransitions::SETTLE)
             ->shouldNotBeCalled();
 
+        $entityManager->persist($settlement)
+            ->shouldNotBeCalled();
+
         $this->applyIfCan($settlement, SettlementTransitions::SETTLE);
-    }
-
-    public function it_applies_transition_and_flushes(
-        SettlementInterface $settlement,
-        FactoryInterface $settlementStateMachineFactory,
-        EntityManagerInterface $entityManager,
-        StateMachineInterface $stateMachine,
-        ): void {
-        $flush = true;
-
-        $settlementStateMachineFactory->get(
-            $settlement,
-            SettlementTransitions::GRAPH
-        )->willReturn($stateMachine);
-
-        $stateMachine->can(SettlementTransitions::ACCEPT)
-            ->willReturn(true);
-
-        $stateMachine->apply(SettlementTransitions::ACCEPT)
-            ->willReturn(true);
-
-        $stateMachine->can(SettlementTransitions::ACCEPT)
-            ->shouldBeCalled();
-
-        $stateMachine->apply(SettlementTransitions::ACCEPT)
-            ->shouldBeCalled();
-
-        $settlementStateMachineFactory->get($settlement, SettlementTransitions::GRAPH)
-            ->shouldBeCalled();
-
-        $this->applyIfCan(
-            $settlement,
-            SettlementTransitions::ACCEPT,
-            $flush
-        );
-
-        $entityManager->flush()->shouldHaveBeenCalled();
     }
 }

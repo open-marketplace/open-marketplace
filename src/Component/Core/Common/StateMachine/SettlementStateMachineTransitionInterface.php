@@ -18,6 +18,5 @@ interface SettlementStateMachineTransitionInterface
     public function applyIfCan(
         SettlementInterface $settlement,
         string $transition,
-        bool $flush = false
     ): void;
 }

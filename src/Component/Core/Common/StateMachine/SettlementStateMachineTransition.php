@@ -27,7 +27,6 @@ final class SettlementStateMachineTransition implements SettlementStateMachineTr
     public function applyIfCan(
         SettlementInterface $settlement,
         string $transition,
-        bool $flush = false
     ): void {
         $stateMachine = $this->productDraftStateMachineFactory->get(
             $settlement,
@@ -39,12 +38,6 @@ final class SettlementStateMachineTransition implements SettlementStateMachineTr
         }
 
         $stateMachine->apply($transition);
-
-        if (false === $flush) {
-            return;
-        }
-
         $this->entityManager->persist($settlement);
-        $this->entityManager->flush();
     }
 }
