@@ -46,7 +46,7 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         $resolverB->supports($vendor, $cyclical)->willReturn(false);
 
         $this->shouldThrow(\InvalidArgumentException::class)
-            ->during('getSettlementDateRangeForVendor', [$vendor->getWrappedObject(), null, $cyclical]);
+            ->during('getSettlementDateRangeForVendor', [$vendor->getWrappedObject(), $cyclical, null]);
     }
 
     public function it_should_call_only_one_resolver(
@@ -89,6 +89,6 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
 
         $resolverA->resolve(null)->shouldNotBeCalled();
 
-        $this->getSettlementDateRangeForVendor($vendor, null, $cyclical)->shouldBeLike([$from, $to]);
+        $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$from, $to]);
     }
 }
