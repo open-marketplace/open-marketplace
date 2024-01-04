@@ -13,11 +13,13 @@ namespace BitBag\OpenMarketplace\Component\Core\Common\StateMachine;
 
 use BitBag\OpenMarketplace\Component\Settlement\Contracts\SettlementTransitions;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 final class SettlementCallbacks implements SettlementCallbacksInterface
 {
     public function __construct(
         private SettlementStateMachineTransitionInterface $settlementStateMachineTransition,
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -30,7 +32,8 @@ final class SettlementCallbacks implements SettlementCallbacksInterface
         $this->settlementStateMachineTransition->applyIfCan(
             $settlement,
             SettlementTransitions::SETTLE,
-            true
         );
+
+        $this->entityManager->flush();
     }
 }

@@ -16,14 +16,18 @@ use BitBag\OpenMarketplace\Component\Core\Common\StateMachine\SettlementCallback
 use BitBag\OpenMarketplace\Component\Core\Common\StateMachine\SettlementStateMachineTransitionInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Contracts\SettlementTransitions;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 
 final class SettlementCallbacksSpec extends ObjectBehavior
 {
-    public function let(SettlementStateMachineTransitionInterface $settlementStateMachineTransition): void
-    {
+    public function let(
+        SettlementStateMachineTransitionInterface $settlementStateMachineTransition,
+        EntityManagerInterface $entityManager
+    ): void {
         $this->beConstructedWith(
-            $settlementStateMachineTransition
+            $settlementStateMachineTransition,
+            $entityManager,
         );
     }
 
@@ -39,13 +43,15 @@ final class SettlementCallbacksSpec extends ObjectBehavior
 
     public function it_should_apply_payout_transaction(
         SettlementStateMachineTransitionInterface $settlementStateMachineTransition,
+        EntityManagerInterface $entityManager,
         SettlementInterface $settlement
     ): void {
         $settlementStateMachineTransition->applyIfCan(
             $settlement,
             SettlementTransitions::SETTLE,
-            true
         )->shouldBeCalled();
+
+        $entityManager->flush()->shouldBeCalled();
 
         $this->payout($settlement);
     }
