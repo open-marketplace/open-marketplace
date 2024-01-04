@@ -23,10 +23,6 @@ final class SettlementCallbacks implements SettlementCallbacksInterface
     ) {
     }
 
-    /**
-     * Configure this callback to process vendors' payouts.
-     * If you want to wait for the payout success confirmation, remove state machine transition here and implement it in right place.
-     */
     public function payout(SettlementInterface $settlement): void
     {
         $this->settlementStateMachineTransition->applyIfCan(
