@@ -18,7 +18,11 @@ class ChannelRepository extends BaseChannelRepository implements ChannelReposito
 {
     public function findAllEnabled(): array
     {
-        return $this->findBy(['enabled' => true]);
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.enabled = true')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     public function findOneEnabledByCode(string $code): ?ChannelInterface
