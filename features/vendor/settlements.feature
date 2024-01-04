@@ -30,7 +30,7 @@ Feature: Vendor can manage settlements
     When I visit the vendor settlements page
     And I accept first possible settlement
     Then I should see "Settlement has been accepted successfully."
-    And I should see 1 settlements with status "Accepted"
+    And I should see 1 settlements with status "Settled"
     And I should see 0 settlements with status "New"
 
   @ui
