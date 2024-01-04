@@ -26,11 +26,11 @@ final class ProfitWithdrawalType extends AbstractType
 {
     public function __construct(
         private ChannelRepositoryInterface $channelRepository,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
     ) {
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('totalAmount', MoneyType::class, [

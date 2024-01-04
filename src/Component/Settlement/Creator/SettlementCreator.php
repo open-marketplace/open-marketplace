@@ -72,7 +72,7 @@ final class SettlementCreator implements SettlementCreatorInterface
         [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor(
             $vendor,
             $cyclical,
-            !$lastSettlement ?: $lastSettlement->getCreatedAt()
+            !$lastSettlement ? null : $lastSettlement->getCreatedAt()
         );
 
         $settlement = $this->settlementFactory->createNewForVendorAndChannel(

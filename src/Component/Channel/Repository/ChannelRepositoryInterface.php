@@ -12,8 +12,11 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Channel\Repository;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface as BaseChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 interface ChannelRepositoryInterface extends BaseChannelRepositoryInterface
 {
     public function findAllEnabled(): array;
+
+    public function findOneEnabledByCode(string $code): ?ChannelInterface;
 }

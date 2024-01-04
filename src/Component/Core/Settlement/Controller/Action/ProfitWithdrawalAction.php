@@ -27,6 +27,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 use Webmozart\Assert\Assert;
@@ -99,10 +101,12 @@ final class ProfitWithdrawalAction
     private function addFlash(string $type, string $message): void
     {
         $session = $this->requestStack->getSession();
+        Assert::isInstanceOf($session, SessionInterface::class);
 
-        $flashbag = $session->getFlashBag();
+        $flashBag = $session->getBag('flashes');
+        Assert::isInstanceOf($flashBag, FlashBagInterface::class);
 
-        $flashbag->add($type, $message);
+        $flashBag->add($type, $message);
     }
 
     private function getTotalAmount(FormInterface $form): int
