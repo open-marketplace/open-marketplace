@@ -32,3 +32,4 @@ imports:
     - suites/shop/vendor_page.yml
     - suites/ui/admin/product_pricing.yml
     - suites/vendor/settlements.yml
+    - suites/ui/admin/settlements.yml
