@@ -11,7 +11,7 @@ Feature:Creating a product listing without price.
   @ui
   Scenario: Creating a product listing without price
     Given I am on "/"
-    And I follow "My account"
+    When I follow "My account"
     And I follow "Product listings"
     And I follow "Create Product listing"
     And I fill in "Code" with "productTest"

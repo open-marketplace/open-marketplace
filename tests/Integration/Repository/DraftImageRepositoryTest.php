@@ -15,7 +15,7 @@ use ApiTestCase\JsonApiTestCase;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
 
-class DraftImageRepositoryTest extends JsonApiTestCase
+final class DraftImageRepositoryTest extends JsonApiTestCase
 {
     public function setUp(): void
     {
@@ -29,8 +29,8 @@ class DraftImageRepositoryTest extends JsonApiTestCase
         $this->loadFixturesFromFile('DraftImageRepositoryTest/test_it_finds_image_for_product_listing.yml');
 
         $draft = $this->entityManager->getRepository(Draft::class)->findOneBy(['versionNumber' => '1']);
-        $queryBuilder = $this->repository->findVendorDraftImages($draft);
+        $vendorImages = $this->repository->findVendorDraftImages($draft);
 
-        self::assertCount(1, $queryBuilder);
+        $this->assertCount(1, $vendorImages);
     }
 }

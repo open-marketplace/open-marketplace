@@ -13,9 +13,10 @@ namespace BitBag\OpenMarketplace\Component\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\DraftGeneratorInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
-use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftImageRepository;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftImageRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Gaufrette\Filesystem;
@@ -30,7 +31,7 @@ final class ListingPersister implements ListingPersisterInterface
         private DraftGeneratorInterface $draftGenerator,
         private ImageUploaderInterface $imageUploader,
         private Filesystem $filesystem,
-        private DraftImageRepository $draftRepository,
+        private DraftImageRepositoryInterface $draftImageRepository,
         private EntityManagerInterface $entityManager
     ) {
     }
@@ -76,7 +77,9 @@ final class ListingPersister implements ListingPersisterInterface
 
     public function deleteImages(DraftInterface $productDraft): void
     {
-        $productDraftImages = $this->draftRepository->findVendorDraftImages($productDraft);
+        $productDraftImages = $this->draftImageRepository->findVendorDraftImages($productDraft);
+
+        /** @var DraftImage $image */
         foreach ($productDraftImages as $image) {
             if (null !== $image && null !== $image->getPath()) {
                 $this->entityManager->remove($image);

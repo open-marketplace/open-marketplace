@@ -24,7 +24,7 @@ Feature: Vendor can remove images for product listing.
   @ui
   Scenario: Visiting product listing after deleted image:
     Given I am on "/"
-    And I follow "My account"
+    When I follow "My account"
     And I follow "Product listings"
     And I follow "Edit"
     Then I should not see image
