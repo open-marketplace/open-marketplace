@@ -30,8 +30,7 @@ abstract class AbstractSettlementPeriodResolverStrategy
             $this->getSettlementFrequency(),
             VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES,
             true
-        )
-        ;
+        );
     }
 
     abstract public function resolve(?\DateTimeInterface $lastSettlementEndsAt): array;

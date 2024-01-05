@@ -13,10 +13,15 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Repository;
 
 use BitBag\OpenMarketplace\Component\Settlement\Entity\VirtualWalletInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface VirtualWalletRepositoryInterface extends RepositoryInterface
 {
     public function findByVendorAndChannel(VendorInterface $vendor, ChannelInterface $channel): ?VirtualWalletInterface;
+
+    public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder;
+
+    public function findAllByVendorWithPositiveBalance(VendorInterface $vendor): array;
 }

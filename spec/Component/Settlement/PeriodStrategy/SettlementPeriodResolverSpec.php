@@ -41,9 +41,13 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         ): void {
         $cyclical = true;
         $vendor->getSettlementFrequency()->willReturn(VendorSettlementFrequency::MONTHLY);
+        $vendor->getCreatedAt()->willReturn(new \DateTime());
 
         $resolverA->supports($vendor, $cyclical)->willReturn(false);
+        $resolverA->resolve()->shouldNotBeCalled();
+
         $resolverB->supports($vendor, $cyclical)->willReturn(false);
+        $resolverB->resolve()->shouldNotBeCalled();
 
         $this->shouldThrow(\InvalidArgumentException::class)
             ->during('getSettlementDateRangeForVendor', [$vendor->getWrappedObject(), $cyclical, null]);
@@ -90,5 +94,27 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         $resolverA->resolve(null)->shouldNotBeCalled();
 
         $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$from, $to]);
+    }
+
+    public function it_should_provide_longer_period_if_from_smaller_than_last_settlement_ends_at(
+        VendorInterface $vendor,
+        AbstractSettlementPeriodResolverStrategy $resolverA,
+        AbstractSettlementPeriodResolverStrategy $resolverB,
+        ): void {
+        $cyclical = true;
+
+        $from = new \DateTime('-1 month');
+        $lastSettlementsEndsAt = $from->modify('-1 week');
+        $to = new \DateTime();
+
+        $vendor->getSettlementFrequency()->willReturn(VendorSettlementFrequency::MONTHLY);
+
+        $resolverB->supports($vendor, $cyclical)->willReturn(true);
+        $resolverB->resolve($from)->willReturn([$from, $to]);
+        $resolverA->supports($vendor, $cyclical)->willReturn(false);
+
+        $resolverA->resolve(null)->shouldNotBeCalled();
+
+        $this->getSettlementDateRangeForVendor($vendor, $cyclical, $lastSettlementsEndsAt)->shouldBeLike([$lastSettlementsEndsAt->modify('+ 1 second'), $to]);
     }
 }

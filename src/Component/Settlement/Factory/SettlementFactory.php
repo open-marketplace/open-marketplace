@@ -30,6 +30,7 @@ final class SettlementFactory implements SettlementFactoryInterface
         int $commissionTotal,
         \DateTimeInterface $nextSettlementStartDate,
         \DateTimeInterface $nextSettlementEndDate,
+        string $settlementFrequency = null,
         ): SettlementInterface {
         $settlement = $this->createNew();
         $settlement->setVendor($vendor);

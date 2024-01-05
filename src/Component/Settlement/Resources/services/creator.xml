@@ -26,5 +26,17 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="open_marketplace.factory.virtual_wallet"/>
             <argument type="service" id="open_marketplace.repository.virtual_wallet"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Settlement\Creator\CompensatorySettlementsCreator"
+                id="bitbag.open_marketplace.component.settlement.creator.compensatory_settlements"
+        >
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="open_marketplace.repository.settlement"/>
+            <argument type="service" id="sylius.repository.channel"/>
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="open_marketplace.factory.settlement"/>
+            <argument type="service" id="open_marketplace.repository.virtual_wallet"/>
+            <argument type="service" id="open_marketplace.component.settlement.manager.virtual_wallet"/>
+        </service>
     </services>
 </container>

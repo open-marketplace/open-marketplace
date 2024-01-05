@@ -9,15 +9,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy;
+namespace BitBag\OpenMarketplace\Component\Settlement\Creator;
 
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Doctrine\ORM\Event\PostUpdateEventArgs;
 
-interface SettlementPeriodResolverInterface
+interface CompensatorySettlementsCreatorInterface
 {
-    public function getSettlementDateRangeForVendor(
+    public function createCompensatorySettlements(
         VendorInterface $vendor,
-        bool $cyclical = true,
-        ?\DateTimeInterface $lastSettlementEndsAt = null,
+        PostUpdateEventArgs $eventArgs,
+        string $previousFrequency,
         ): array;
 }

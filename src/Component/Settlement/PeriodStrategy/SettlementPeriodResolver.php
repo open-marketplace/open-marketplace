@@ -23,13 +23,21 @@ final class SettlementPeriodResolver implements SettlementPeriodResolverInterfac
     public function getSettlementDateRangeForVendor(
         VendorInterface $vendor,
         bool $cyclical = true,
-        ?\DateTimeInterface $lastSettlementCreatedAt = null,
+        ?\DateTimeInterface $lastSettlementEndsAt = null,
         ): array {
         /** @var AbstractSettlementPeriodResolverStrategy $settlementPeriodResolver */
         foreach ($this->settlementPeriodResolvers as $settlementPeriodResolver) {
-            if ($settlementPeriodResolver->supports($vendor, $cyclical)) {
-                return $settlementPeriodResolver->resolve($lastSettlementCreatedAt ?? $vendor->getCreatedAt());
+            if (!$settlementPeriodResolver->supports($vendor, $cyclical)) {
+                continue;
             }
+            $lastSettlementEndsAt = $lastSettlementEndsAt ?? $vendor->getCreatedAt();
+
+            [$from, $to] = $settlementPeriodResolver->resolve($lastSettlementEndsAt);
+
+            return [
+                $from < $lastSettlementEndsAt ? $from : \DateTime::createFromInterface($lastSettlementEndsAt)->modify('+1 second'),
+                $to,
+            ];
         }
 
         throw new \InvalidArgumentException(sprintf('Could not find period resolver for vendor with settlement frequency "%s"', $vendor->getSettlementFrequency()));

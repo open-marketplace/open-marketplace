@@ -392,4 +392,13 @@ class Vendor implements VendorInterface
     {
         $this->createdAt = $createdAt;
     }
+
+    public function hasCyclicalSettlementFrequency(): bool
+    {
+        return in_array(
+            $this->getSettlementFrequency(),
+            VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES,
+            true
+        );
+    }
 }

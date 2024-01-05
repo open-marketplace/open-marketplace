@@ -30,5 +30,18 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  method="uploadBackgroundImage"/>
             <tag name="kernel.event_listener" event="open_marketplace.vendor.pre_create" method="connectShopUser"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\EventListener\VendorListener"
+            id="bitbag.open_marketplace.component.core.vendor.event_listener.vendor_listener"
+        >
+            <argument type="service" id="bitbag.open_marketplace.component.settlement.creator.compensatory_settlements"/>
+            <tag
+                name="doctrine.orm.entity_listener"
+                event="postUpdate"
+                entity="BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor"
+                method="postUpdate"
+                lazy="true"
+            />
+        </service>
     </services>
 </container>

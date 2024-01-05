@@ -33,10 +33,19 @@ final class VirtualWalletRepository extends EntityRepository implements VirtualW
 
     public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder
     {
-        $result = $this->createQueryBuilder('wv')
+        $queryBuilder = $this->createQueryBuilder('wv')
             ->andWhere('wv.vendor = :vendor')
             ->setParameter('vendor', $vendor);
 
-        return $result;
+        return $queryBuilder;
+    }
+
+    public function findAllByVendorWithPositiveBalance(VendorInterface $vendor): array
+    {
+        return $this->findAllByVendorQueryBuilder($vendor)
+            ->andWhere('wv.balance > 0')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }

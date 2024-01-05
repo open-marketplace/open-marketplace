@@ -24,6 +24,6 @@ interface SettlementFactoryInterface extends FactoryInterface
         int $total,
         int $commissionTotal,
         \DateTimeInterface $nextSettlementStartDate,
-        \DateTimeInterface $nextSettlementEndDate
-    ): SettlementInterface;
+        \DateTimeInterface $nextSettlementEndDate,
+        ): SettlementInterface;
 }

@@ -13,10 +13,11 @@ namespace BitBag\OpenMarketplace\Component\Settlement\Manager;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
+use Doctrine\ORM\Event\PostUpdateEventArgs;
 
 interface VirtualWalletManagerInterface
 {
     public function stash(OrderInterface $order): void;
 
-    public function withdraw(SettlementInterface $settlement): void;
+    public function withdraw(SettlementInterface $settlement, PostUpdateEventArgs $eventArgs = null): void;
 }
