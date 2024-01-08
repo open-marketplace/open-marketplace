@@ -55,7 +55,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
         VirtualWalletInterface $virtualWallet,
         VirtualWalletCreatorInterface $virtualWalletCreator,
         EntityManagerInterface $entityManager,
-    ): void {
+        ): void {
         $order->getVendor()->willReturn(null);
 
         $order->getChannel()->shouldNotBeCalled();
@@ -75,7 +75,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
         VirtualWalletInterface $virtualWallet,
         VirtualWalletCreatorInterface $virtualWalletCreator,
         EntityManagerInterface $entityManager,
-    ): void {
+        ): void {
         $order->getVendor()->willReturn($vendor);
         $order->getChannel()->willReturn($channel);
 
@@ -117,7 +117,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
         VirtualWalletInterface $virtualWallet,
         VirtualWalletCreatorInterface $virtualWalletCreator,
         EntityManagerInterface $entityManager,
-    ): void {
+        ): void {
         $settlement->getVendor()->willReturn($vendor);
         $settlement->getChannel()->willReturn($channel);
 
@@ -136,7 +136,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
         VirtualWalletInterface $virtualWallet,
         VirtualWalletCreatorInterface $virtualWalletCreator,
         EntityManagerInterface $entityManager,
-    ): void {
+        ): void {
         $settlement->getVendor()->willReturn($vendor);
         $settlement->getChannel()->willReturn($channel);
 
@@ -164,7 +164,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
         VirtualWalletInterface $virtualWallet,
         VirtualWalletCreatorInterface $virtualWalletCreator,
         EntityManagerInterface $entityManager,
-    ): void {
+        ): void {
         $settlement->getVendor()->willReturn($vendor);
         $settlement->getChannel()->willReturn($channel);
 
@@ -196,7 +196,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
         VirtualWalletInterface $virtualWallet,
         VirtualWalletCreatorInterface $virtualWalletCreator,
         EntityManagerInterface $entityManager,
-    ): void {
+        ): void {
         $settlement->getVendor()->willReturn($vendor);
         $settlement->getChannel()->willReturn($channel);
 
@@ -212,7 +212,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
 
         $unitOfWork = Mockery::mock(UnitOfWork::class);
         $unitOfWork->shouldReceive('getEntityChangeSet')->withArgs([$vendor->getWrappedObject()])->andReturn([
-            'settlementFrequency' => ['bar', VendorSettlementFrequency::VIRTUAL_WALLET]
+            'settlementFrequency' => ['bar', VendorSettlementFrequency::VIRTUAL_WALLET],
         ]);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
@@ -230,7 +230,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
         VirtualWalletInterface $virtualWallet,
         VirtualWalletCreatorInterface $virtualWalletCreator,
         EntityManagerInterface $entityManager,
-    ): void {
+        ): void {
         $settlement->getVendor()->willReturn($vendor);
         $settlement->getChannel()->willReturn($channel);
 
@@ -246,7 +246,7 @@ final class VirtualWalletManagerSpec extends ObjectBehavior
 
         $unitOfWork = Mockery::mock(UnitOfWork::class);
         $unitOfWork->shouldReceive('getEntityChangeSet')->withArgs([$vendor->getWrappedObject()])->andReturn([
-            'settlementFrequency' => [VendorSettlementFrequency::VIRTUAL_WALLET, 'baz']
+            'settlementFrequency' => [VendorSettlementFrequency::VIRTUAL_WALLET, 'baz'],
         ]);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
