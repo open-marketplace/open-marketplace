@@ -104,7 +104,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     commission: 10
     commissionType: 'net'
     createdAt: '<dateTimeBetween("-200 days", "-7 days")>'
-    settlement_frequency: 'monthly'
+    settlement_frequency: !php/const BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency::VIRTUAL_WALLET
 BitBag\OpenMarketplace\Component\Product\Entity\Product:
   product_bruce_1:
     vendor: '@vendor_bruce'

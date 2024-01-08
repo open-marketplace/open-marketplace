@@ -21,9 +21,9 @@ final class SettlementCreatorTest extends JsonApiTestCase
         $this->settlementCreator = $this->get('bitbag.open_marketplace.component.settlement.creator.settlement');
     }
 
-    public function test_it_creates_settlement_for_vendor(): void
+    public function test_it_creates_settlement_for_vendor_and_channels(): void
     {
-        $this->loadFixturesFromFile('SettlementCreatorTest/test_it_creates_settlement_for_vendor.yaml');
+        $this->loadFixturesFromFile('SettlementCreatorTest/test_it_creates_settlement_for_vendor_and_channels.yaml');
         $vendorRepository = self::getContainer()->get('open_marketplace.repository.vendor');
         $channelRepository = self::getContainer()->get('sylius.repository.channel');
         $vendor = $vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
@@ -43,5 +43,25 @@ final class SettlementCreatorTest extends JsonApiTestCase
 
         $this->expectException(\Error::class);
         $settlementUS->getId();
+    }
+
+    public function test_it_creates_settlement_for_vendor_and_channel_and_amount(): void
+    {
+        $this->loadFixturesFromFile('SettlementCreatorTest/test_it_creates_settlement_for_vendor_and_channel_and_amount.yaml');
+        $vendorRepository = self::getContainer()->get('open_marketplace.repository.vendor');
+        $channelRepository = self::getContainer()->get('sylius.repository.channel');
+
+        $vendor = $vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
+        $channel = $channelRepository->findOneBy(['code' => ['US', 'EU']]);
+
+        $amount = 1000;
+
+        $settlement = $this->settlementCreator->createSettlementForVendorAndChannelAndAmount($vendor, $channel, $amount);
+
+        $this->assertSame(1000, $settlement->getTotalAmount());
+        $this->assertSame(0, $settlement->getTotalCommissionAmount());
+
+        $this->expectException(\Error::class);
+        $settlement->getId();
     }
 }

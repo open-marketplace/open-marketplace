@@ -1,0 +1,225 @@
+Sylius\Component\Addressing\Model\Country:
+  country_pl:
+    code: 'PL'
+  country_us:
+    code: 'US'
+Sylius\Component\Addressing\Model\Zone:
+  zone_us:
+    code: 'US'
+    name: 'United States of America'
+    type: 'country'
+    scope: 'all'
+Sylius\Component\Addressing\Model\ZoneMember:
+  zone_member_us:
+    code: 'US'
+    belongsTo: '@zone_us'
+Sylius\Component\Currency\Model\Currency:
+  dollar:
+    code: 'USD'
+  euro:
+    code: 'EUR'
+Sylius\Component\Locale\Model\Locale:
+  locale:
+    createdAt: '<dateTimeBetween("-200 days", "now")>'
+    code: 'en_US'
+Sylius\Component\Core\Model\Channel:
+  channel_us:
+    code: 'US'
+    name: 'name'
+    defaultLocale: '@locale'
+    locales: [ '@locale' ]
+    taxCalculationStrategy: 'order_items_based'
+    baseCurrency: '@dollar'
+    enabled: true
+  channel_eu:
+    code: 'EU'
+    name: 'name'
+    defaultLocale: '@locale'
+    locales: [ '@locale' ]
+    taxCalculationStrategy: 'order_items_based'
+    baseCurrency: '@euro'
+    enabled: true
+Sylius\Component\Core\Model\ShippingMethod:
+  shipping_method_ups:
+    code: 'ups'
+    calculator: 'flat_rate'
+    zone: '@zone_us'
+    enabled: true
+    channels: [ '@channel_us', '@channel_eu' ]
+    configuration:
+      CODE:
+        amount: 5
+  shipping_method_fedex:
+    code: 'fedex'
+    calculator: 'flat_rate'
+    zone: '@zone_us'
+    enabled: true
+    channels: [ '@channel_us', '@channel_eu' ]
+    configuration:
+      CODE:
+        amount: 5
+Sylius\Component\Core\Model\Customer:
+  customer_bruce:
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'bruce.wayne@example.com'
+    emailCanonical: 'bruce.wayne@example.com'
+  customer_john:
+    firstName: 'John'
+    lastName: 'Smith'
+    email: 'john.smith@example.com'
+    emailCanonical: 'john.smith@example.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
+  user_bruce:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
+    enabled: 'true'
+    customer: '@customer_bruce'
+    username: 'bruce.wayne@example.com'
+    usernameCanonical: 'bruce.wayne@example.com'
+  user_john:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_john'
+    username: 'john.smith@example.com'
+    usernameCanonical: 'john.smith@example.com'
+Sylius\Component\Core\Model\Address:
+  address_john:
+    firstName: 'John'
+    lastName: 'Smith'
+    countryCode: 'US'
+    city: 'Arkham City'
+    postcode: '00000'
+    street: 'Avenue 2115'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
+  vendor_bruce:
+    shopUser: '@user_bruce'
+    companyName: 'Wayne Enterprises, Inc.'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL31109024026812185484588836'
+    phoneNumber: '555123123'
+    slug: 'Wayne-Enterprises-Inc'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+    createdAt: '<dateTimeBetween("-200 days", "-7 days")>'
+    settlement_frequency: !php/const BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency::MONTHLY
+BitBag\OpenMarketplace\Component\Product\Entity\Product:
+  product_bruce_1:
+    vendor: '@vendor_bruce'
+    code: 'bruce_1'
+    enabled: true
+    channels: [ '@channel_us', '@channel_eu' ]
+Sylius\Component\Core\Model\ProductVariant:
+  product_variant_product_bruce_1_1:
+    product: '@product_bruce_1'
+    code: 'bruce_1_1'
+    enabled: true
+    tracked: false
+  product_variant_product_bruce_1_2:
+    product: '@product_bruce_1'
+    code: 'bruce_1_2'
+    enabled: true
+    tracked: false
+Sylius\Component\Core\Model\ChannelPricing:
+  pricing_product_variant_product_bruce_1_1_us:
+    price: 10
+    originalPrice: 15
+    minimumPrice: 0
+    channelCode: 'US'
+    productVariant: '@product_variant_product_bruce_1_1'
+  pricing_product_variant_product_bruce_1_2_us:
+    price: 13
+    originalPrice: 25
+    minimumPrice: 10
+    channelCode: 'US'
+    productVariant: '@product_variant_product_bruce_1_2'
+  pricing_product_variant_product_bruce_1_1_eu:
+    price: 9
+    originalPrice: 14
+    minimumPrice: 0
+    channelCode: 'EU'
+    productVariant: '@product_variant_product_bruce_1_1'
+  pricing_product_variant_product_bruce_1_2_eu:
+    price: 12
+    originalPrice: 24
+    minimumPrice: 9
+    channelCode: 'EU'
+    productVariant: '@product_variant_product_bruce_1_2'
+BitBag\OpenMarketplace\Component\Order\Entity\Order:
+  bruce_order_made_by_john_1_main:
+    mode: 'primary'
+    currency_code: 'USD'
+    locale_code: 'en-US'
+    customer: '@customer_john'
+    paymentState: 'paid'
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_john_1_main'
+    channel: '@channel_us'
+  bruce_order_made_by_john_1:
+    primaryOrder: '@bruce_order_made_by_john_1_main'
+    mode: 'secondary'
+    currency_code: 'USD'
+    locale_code: 'en-US'
+    vendor: '@vendor_bruce'
+    customer: '@customer_john'
+    paymentState: 'paid'
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_john_1'
+    shippingAddress: '@address_john'
+    billingAddress: '@address_john'
+    paid_at: '<date_create("first day of last month")>'
+    commission_total: 35
+    channel: '@channel_us'
+  bruce_order_made_by_john_2_main:
+    mode: 'primary'
+    currency_code: 'EUR'
+    locale_code: 'en-US'
+    customer: '@customer_john'
+    paymentState: 'paid'
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_john_2_main'
+    channel: '@channel_eu'
+  bruce_order_made_by_john_2:
+    primaryOrder: '@bruce_order_made_by_john_2_main'
+    mode: 'secondary'
+    currency_code: 'EUR'
+    locale_code: 'en-US'
+    vendor: '@vendor_bruce'
+    customer: '@customer_john'
+    paymentState: 'paid'
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'bruce_order_made_by_john_2'
+    paid_at: '<date_create("first day of last month")>'
+    commission_total: 70
+    channel: '@channel_eu'
+BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
+  bruce_order_made_by_john_1_item_1:
+    order: '@bruce_order_made_by_john_1'
+    variant: '@product_variant_product_bruce_1_1'
+    unit_price: 540
+  bruce_order_made_by_john_2_item_1:
+    order: '@bruce_order_made_by_john_2'
+    variant: '@product_variant_product_bruce_1_2'
+    unit_price: 1002
+BitBag\OpenMarketplace\Component\Order\Entity\Shipment:
+  bruce_order_made_by_john_1_shipment:
+    vendor: '@vendor_bruce'
+    order: '@bruce_order_made_by_john_1'
+    method: '@shipping_method_ups'
+  bruce_order_made_by_john_2_shipment:
+    vendor: '@vendor_bruce'
+    order: '@bruce_order_made_by_john_2'
+    method: '@shipping_method_fedex'
+Sylius\Component\Core\Model\OrderItemUnit:
+  bruce_order_made_by_john_1_item_1_unit:
+    __construct: [ '@bruce_order_made_by_john_1_item_1' ]
+    shipment: '@bruce_order_made_by_john_1_shipment'
+  bruce_order_made_by_john_2_item_1_unit:
+    __construct: [ '@bruce_order_made_by_john_2_item_1' ]
+    shipment: '@bruce_order_made_by_john_2_shipment'
