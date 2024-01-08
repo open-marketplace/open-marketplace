@@ -39,7 +39,7 @@ class ListingPersisterSpec extends ObjectBehavior
         DraftImageRepositoryInterface $draftImageRepository,
         EntityManagerInterface $entityManager,
         DraftInterface $productDraft,
-        ImageInterface $image,
+        ImageInterface $image
     ) {
         $this->beConstructedWith(
             $productListingFactory,
@@ -66,7 +66,6 @@ class ListingPersisterSpec extends ObjectBehavior
         ListingInterface $productListing,
         FactoryInterface $productListingFactory
     ): void {
-
         $productListingFactory->createNew()->willReturn($productListing);
         $productDraft->getCode()->willReturn('ABC123');
 
@@ -125,6 +124,7 @@ class ListingPersisterSpec extends ObjectBehavior
         $filesystem->has($path)->shouldHaveBeenCalled();
         $filesystem->delete($path)->shouldBeCalled();
     }
+
     public function it_vendor_can_not_delete_images_that_not_exist(
         DraftInterface $productDraft,
         DraftImageRepositoryInterface $draftImageRepository,
