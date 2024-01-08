@@ -6,6 +6,7 @@ imports:
     - suites/ui/vendor/product_listing.yml
     - suites/ui/admin/product_listing.yml
     - suites/start_conversation.yml
+    - suites/ui/admin/message_categories.yml
     - suites/ui/admin/managing_vendors.yml
     - suites/ui/admin/verifying_vendors.yml
     - suites/ui/admin/order_viewing.yml

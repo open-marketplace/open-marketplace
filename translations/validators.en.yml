@@ -17,3 +17,7 @@ validator:
     vendor_already_exists: Vendor for current user already exists
     positive_or_zero_commission: Commission value must be positive or zero
     product_listing_unique_code: Product Listing with given code already exists
+
+    messaging:
+      message:
+        not_allowed_mime_types: The mime type of the file is not allowed ({{ type }})

@@ -118,6 +118,7 @@ BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation:
   bruce_conversation:
     shopUser: '@user_bruce'
   peter_conversation:
+    category: '@peter_category'
     shopUser: '@user_peter'
   conversation_to_archive:
     shopUser: '@user_bruce'
@@ -131,4 +132,6 @@ BitBag\OpenMarketplace\Component\Messaging\Entity\Message:
   archive_request:
     content: '\<span>ARCHIVE_REQUEST_MESSAGE</span>'
     conversation: "@conversation_to_archive"
-
+BitBag\OpenMarketplace\Component\Messaging\Entity\Category:
+  peter_category:
+    name: "Category for Peter"

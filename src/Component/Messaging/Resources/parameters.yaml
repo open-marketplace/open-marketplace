@@ -1,0 +1,12 @@
+parameters:
+    bitbag.open_marketplace.component.messaging.message.not_allowed_mime_types:
+        - application/x-msdownload
+        - application/x-shockwave-flash
+        - application/x-sh
+        - application/x-python
+        - application/x-ruby
+        - application/bat
+        - application/php
+        - application/javascript
+        - text/x-php
+        - text/html

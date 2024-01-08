@@ -1,5 +1,7 @@
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
+
 {% block content %}
     {% include "Context/Common/Conversation/_createConversationForm.html.twig" %}
 {% endblock %}

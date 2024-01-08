@@ -1,16 +1,16 @@
 # How to customize BitBag OpenMarketplace
 
-BitBag Open Marketplace is created on the sylius of e-commerce platform.
+BitBag Open Marketplace is created on the Sylius e-commerce platform.
 
-[sylius documentation](https://docs.sylius.com/en/latest/index.html#)
+[Sylius documentation](https://docs.sylius.com/en/latest/index.html#)
 
 ### Managing resources
 
-In order to understand resource layer, see [sylius resource layer](https://sylius-older.readthedocs.io/en/latest/book/resource_layer.html)
+In order to understand resource layer, see [Sylius resource layer](https://docs.sylius.com/en/latest/book/architecture/resource_layer.html)
 
 ### Customizing model
 
-[sylius customizing model guide](https://sylius-older.readthedocs.io/en/latest/customization/model.html)
+[Sylius customizing model guide](https://docs.sylius.com/en/latest/customization/model.html)
 
 List of resources created by open marketplace app can be fetched using command
 
@@ -38,7 +38,7 @@ Example details view for vendor
 
 ### Customizing form
 
-[sylius customizing form guide](https://sylius-older.readthedocs.io/en/latest/customization/form.html)
+[Sylius customizing form guide](https://docs.sylius.com/en/latest/customization/form.html)
 
 List of forms customized by open marketplace app can be fetched using command
 
@@ -46,7 +46,7 @@ List of forms customized by open marketplace app can be fetched using command
 
 ### Customizing repositories
 
-[sylius customizing repositories guide](https://sylius-older.readthedocs.io/en/latest/customization/repository.html)
+[Sylius customizing repositories guide](https://docs.sylius.com/en/latest/customization/repository.html)
 
 List of repositories customized by open marketplace app can be fetched using command
 
@@ -54,7 +54,7 @@ List of repositories customized by open marketplace app can be fetched using com
 
 ### Customizing routes 
 
-Example of sylius route configuration
+Example of Sylius route configuration
 ```
 app_product_create:
     path: /my-stores/{store}/products/new 
@@ -87,7 +87,7 @@ To obtain detail view of specific route type
 
 ### Customizing state machine 
 
-In order to customize state machine read [sylius state machine guide](https://sylius-older.readthedocs.io/en/latest/customization/state_machine.html)
+In order to customize state machine read [Sylius state machine guide](https://docs.sylius.com/en/latest/customization/state_machine.html)
 
 List of all states machines can be obtained
 
@@ -97,5 +97,5 @@ List of all states machines can be obtained
 ### Customizing templates 
 
 Views added by BitBag OpenMarketplace located in templates directory can be overwritten directly,
-to customize sylius views see [sylius customizing template guide](https://sylius-older.readthedocs.io/en/latest/customization/template.html)
+to customize Sylius views see [Sylius customizing template guide](https://docs.sylius.com/en/latest/customization/template.html)
 
