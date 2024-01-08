@@ -28,7 +28,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-class ListingPersisterSpec extends ObjectBehavior
+final class ListingPersisterSpec extends ObjectBehavior
 {
     public function let(
         FactoryInterface $productListingFactory,
@@ -67,37 +67,40 @@ class ListingPersisterSpec extends ObjectBehavior
         FactoryInterface $productListingFactory
     ): void {
         $productListingFactory->createNew()->willReturn($productListing);
-        $productDraft->getCode()->willReturn('ABC123');
+        $productDraft->getCode()->willReturn('mug');
 
         $this->createNewProductListing($productDraft, $vendor);
 
-        $productListing->setCode('ABC123')->shouldHaveBeenCalled();
+        $productListing->setCode('mug')->shouldHaveBeenCalled();
         $productListing->insertDraft($productDraft)->shouldHaveBeenCalled();
         $productListing->setVendor($vendor)->shouldHaveBeenCalled();
         $productDraft->setProductListing($productListing)->shouldHaveBeenCalled();
         $productDraft->ownRelations()->shouldHaveBeenCalled();
     }
 
-    public function it_resolve_latest_draft(
+    public function it_resolves_latest_draft(
         ListingInterface $productListing,
         DraftGeneratorInterface $draftGenerator,
         DraftInterface $productDraft
     ): void {
         $draftGenerator->generateNextDraft($productListing)->willReturn($productDraft);
         $this->resolveLatestDraft($productListing);
+        $draftGenerator->generateNextDraft($productListing)->shouldBeCalledOnce();
     }
 
-    public function it_update_latest_draft_with(
+    public function it_updates_latest_draft_with(
         ListingInterface $productListing,
         DraftInterface $productDraft,
-        DraftGeneratorInterface $draftGenerator
+        DraftGeneratorInterface $draftGenerator,
+        ImageUploaderInterface $imageUploader,
+        ImageInterface $image
     ): void {
         $draftGenerator->generateNextDraft($productListing)->willReturn($productDraft);
-        $this->resolveLatestDraft($productListing);
         $this->uploadImages($productDraft);
+        $imageUploader->upload($image)->shouldBeCalledOnce();
     }
 
-    public function it_upload_images(
+    public function it_uploads_images(
         DraftInterface $productDraft,
         ImageUploaderInterface $imageUploader,
         ImageInterface $image
@@ -106,7 +109,7 @@ class ListingPersisterSpec extends ObjectBehavior
         $imageUploader->upload($image)->shouldBeCalledOnce();
     }
 
-    public function it_vendor_can_delete_images_with_correct_path(
+    public function it_can_delete_images_with_correct_path(
         DraftInterface $productDraft,
         DraftImageRepositoryInterface $draftImageRepository,
         DraftImageInterface $draftImage,
@@ -125,7 +128,7 @@ class ListingPersisterSpec extends ObjectBehavior
         $filesystem->delete($path)->shouldBeCalled();
     }
 
-    public function it_vendor_can_not_delete_images_that_not_exist(
+    public function it_can_not_delete_images_that_not_exist(
         DraftInterface $productDraft,
         DraftImageRepositoryInterface $draftImageRepository,
         DraftImageInterface $draftImage,
@@ -143,7 +146,7 @@ class ListingPersisterSpec extends ObjectBehavior
         $filesystem->delete($path)->shouldNotBeCalled();
     }
 
-    public function it_vendor_can_not_delete_images_with_incorrect_path(
+    public function it_can_not_delete_images_with_incorrect_path(
         DraftInterface $productDraft,
         DraftImageRepositoryInterface $draftImageRepository,
         DraftImageInterface $draftImage,
