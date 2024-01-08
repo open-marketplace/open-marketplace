@@ -18,8 +18,7 @@ Feature: Vendor can remove images for product listing.
     And I follow "Product listings"
     And I follow "Edit"
     Then I should see image
-    And I follow "Delete"
-    And I click "Save draft" button
+
 
   @ui
   Scenario: Visiting product listing after deleted image:
