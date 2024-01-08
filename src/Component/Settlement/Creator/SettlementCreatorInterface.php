@@ -19,14 +19,12 @@ interface SettlementCreatorInterface
 {
     public function createSettlementsForVendorAndChannels(
         VendorInterface $vendor,
-        array $channels,
-        bool $cyclical = false,
-        ): array;
+        array $channels
+    ): array;
 
     public function createSettlementForVendorAndChannelAndAmount(
         VendorInterface $vendor,
         ChannelInterface $channel,
         int $amount,
-        bool $cyclical = true
-    ): SettlementInterface;
+        ): SettlementInterface;
 }

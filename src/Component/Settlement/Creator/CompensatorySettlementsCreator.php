@@ -47,8 +47,6 @@ final class CompensatorySettlementsCreator implements CompensatorySettlementsCre
             : $this->createNonCyclicalSettlements($vendor, $eventArgs)
         ;
 
-        $this->entityManager->flush();
-
         return $settlements;
     }
 
@@ -62,7 +60,7 @@ final class CompensatorySettlementsCreator implements CompensatorySettlementsCre
             $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $virtualWallet->getChannel());
 
             $compensatorySettlementFrom = $lastSettlement
-                ? (\DateTime::createFromInterface($lastSettlement->getEndDate()))->modify('+ 1 second')
+                ? (\DateTime::createFromInterface($lastSettlement->getEndDate()))->modify('+1 second')
                 : $vendor->getCreatedAt()
             ;
 

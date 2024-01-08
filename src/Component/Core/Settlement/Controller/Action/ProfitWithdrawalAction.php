@@ -80,7 +80,6 @@ final class ProfitWithdrawalAction
             $vendor,
             $channel,
             $totalAmount,
-            false
         );
 
         try {

@@ -14,6 +14,7 @@ namespace BitBag\OpenMarketplace\Component\Core\Vendor\EventListener;
 use BitBag\OpenMarketplace\Component\Settlement\Creator\CompensatorySettlementsCreatorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PostUpdateEventArgs;
 
 final class VendorListener
@@ -22,6 +23,7 @@ final class VendorListener
 
     public function __construct(
         private CompensatorySettlementsCreatorInterface $compensatorySettlementsCreator,
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -48,5 +50,7 @@ final class VendorListener
         }
 
         $this->compensatorySettlementsCreator->createCompensatorySettlements($vendor, $eventArgs, $previousFrequency);
+
+        $this->entityManager->flush();
     }
 }

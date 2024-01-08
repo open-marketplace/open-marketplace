@@ -97,13 +97,7 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
 
         $resolverA->resolve($vendorCreatedAt)->shouldNotBeCalled();
 
-        $result = $this->getSettlementDateRangeForVendor($vendor, $cyclical);
-        $var1 = $result[0]->format('Y-m-d H:i:s');
-        $var2 = $result[1]->format('Y-m-d H:i:s');
-        $var3 = $from->format('Y-m-d');
-        $var4 = $to->format('Y-m-d');
-
-        $result->shouldBeLike([$from, $to]);
+        $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$from, $to]);
     }
 
     public function it_should_provide_longer_period_if_from_smaller_than_last_settlement_ends_at(

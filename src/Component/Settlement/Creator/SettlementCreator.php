@@ -33,11 +33,9 @@ final class SettlementCreator implements SettlementCreatorInterface
 
     public function createSettlementsForVendorAndChannels(
         VendorInterface $vendor,
-        array $channels,
-        bool $cyclical = true
+        array $channels
     ): array {
-        [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor($vendor, $cyclical);
-
+        $cyclical = true;
         $generatedSettlements = [];
 
         /** @var ChannelInterface $channel */
@@ -45,8 +43,7 @@ final class SettlementCreator implements SettlementCreatorInterface
             $settlement = $this->createSettlementForVendorAndChannelIfNotExists(
                 $vendor,
                 $channel,
-                $nextSettlementStartDate,
-                $nextSettlementEndDate
+                $cyclical
             );
 
             if (!$settlement instanceof SettlementInterface) {
@@ -65,14 +62,14 @@ final class SettlementCreator implements SettlementCreatorInterface
         VendorInterface $vendor,
         ChannelInterface $channel,
         int $amount,
-        bool $cyclical = false
-    ): SettlementInterface {
+        ): SettlementInterface {
         $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $channel);
+        $cyclical = false;
 
         [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor(
             $vendor,
             $cyclical,
-            !$lastSettlement ? null : $lastSettlement->getCreatedAt()
+            !$lastSettlement ? null : $lastSettlement->getEndDate()
         );
 
         $settlement = $this->settlementFactory->createNewForVendorAndChannel(
@@ -92,10 +89,16 @@ final class SettlementCreator implements SettlementCreatorInterface
     private function createSettlementForVendorAndChannelIfNotExists(
         VendorInterface $vendor,
         ChannelInterface $channel,
-        \DateTime $nextSettlementStartDate,
-        \DateTime $nextSettlementEndDate
+        bool $cyclical = true
     ): ?SettlementInterface {
         $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $channel);
+
+        [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor(
+            $vendor,
+            $cyclical,
+            !$lastSettlement ? null : $lastSettlement->getEndDate()
+        );
+
         if (
             null !== $lastSettlement
             && $lastSettlement->getEndDate() > $nextSettlementStartDate
