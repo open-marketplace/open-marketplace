@@ -30,16 +30,28 @@ final class SettlementPeriodResolver implements SettlementPeriodResolverInterfac
             if (!$settlementPeriodResolver->supports($vendor, $cyclical)) {
                 continue;
             }
-            $lastSettlementEndsAt = $lastSettlementEndsAt ?? $vendor->getCreatedAt();
 
-            [$from, $to] = $settlementPeriodResolver->resolve($lastSettlementEndsAt);
+            $vendorCreatedAt = $vendor->getCreatedAt();
+
+            [$from, $to] = $settlementPeriodResolver->resolve($lastSettlementEndsAt ?? $vendorCreatedAt);
 
             return [
-                $from < $lastSettlementEndsAt ? $from : \DateTime::createFromInterface($lastSettlementEndsAt)->modify('+1 second'),
+                $this->getFrom($from, $lastSettlementEndsAt),
                 $to,
             ];
         }
 
         throw new \InvalidArgumentException(sprintf('Could not find period resolver for vendor with settlement frequency "%s"', $vendor->getSettlementFrequency()));
+    }
+
+    private function getFrom(
+        \DateTime $from,
+        ?\DateTimeInterface $lastSettlementEndsAt
+    ): \DateTime {
+        if (null === $lastSettlementEndsAt || $from >= $lastSettlementEndsAt) {
+            return $from;
+        }
+
+        return \DateTime::createFromInterface($lastSettlementEndsAt)->modify('+1 second');
     }
 }

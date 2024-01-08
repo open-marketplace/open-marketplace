@@ -40,14 +40,16 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         AbstractSettlementPeriodResolverStrategy $resolverB,
         ): void {
         $cyclical = true;
+        $vendorCreatedAt = new \DateTime('-2 month');
+
         $vendor->getSettlementFrequency()->willReturn(VendorSettlementFrequency::MONTHLY);
-        $vendor->getCreatedAt()->willReturn(new \DateTime());
+        $vendor->getCreatedAt()->willReturn($vendorCreatedAt);
 
         $resolverA->supports($vendor, $cyclical)->willReturn(false);
-        $resolverA->resolve()->shouldNotBeCalled();
+        $resolverA->resolve($vendorCreatedAt)->shouldNotBeCalled();
 
         $resolverB->supports($vendor, $cyclical)->willReturn(false);
-        $resolverB->resolve()->shouldNotBeCalled();
+        $resolverB->resolve($vendorCreatedAt)->shouldNotBeCalled();
 
         $this->shouldThrow(\InvalidArgumentException::class)
             ->during('getSettlementDateRangeForVendor', [$vendor->getWrappedObject(), $cyclical, null]);
@@ -68,9 +70,9 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         $vendor->getCreatedAt()->willReturn($vendorCreatedAt);
 
         $resolverA->supports($vendor, $cyclical)->willReturn(true);
-        $resolverA->resolve($from)->willReturn([$from, $to]);
+        $resolverA->resolve($vendorCreatedAt)->willReturn([$from, $to]);
         $resolverB->supports($vendor, $cyclical)->shouldNotBeCalled();
-        $resolverB->resolve(null)->shouldNotBeCalled();
+        $resolverB->resolve($vendorCreatedAt)->shouldNotBeCalled();
 
         $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$from, $to]);
     }
@@ -90,12 +92,18 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         $vendor->getCreatedAt()->willReturn($vendorCreatedAt);
 
         $resolverB->supports($vendor, $cyclical)->willReturn(true);
-        $resolverB->resolve($from)->willReturn([$from, $to]);
+        $resolverB->resolve($vendorCreatedAt)->willReturn([$from, $to]);
         $resolverA->supports($vendor, $cyclical)->willReturn(false);
 
-        $resolverA->resolve(null)->shouldNotBeCalled();
+        $resolverA->resolve($vendorCreatedAt)->shouldNotBeCalled();
 
-        $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$from, $to]);
+        $result = $this->getSettlementDateRangeForVendor($vendor, $cyclical);
+        $var1 = $result[0]->format('Y-m-d H:i:s');
+        $var2 = $result[1]->format('Y-m-d H:i:s');
+        $var3 = $from->format('Y-m-d');
+        $var4 = $to->format('Y-m-d');
+
+        $result->shouldBeLike([$from, $to]);
     }
 
     public function it_should_provide_longer_period_if_from_smaller_than_last_settlement_ends_at(
@@ -105,21 +113,23 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         ): void {
         $cyclical = true;
 
+        $vendorCreatedAt = new \DateTime('-2 months');
         $from = new \DateTime('-1 month');
         $lastSettlementsEndsAt = $from->modify('-1 week');
         $to = new \DateTime();
 
         $vendor->getSettlementFrequency()->willReturn(VendorSettlementFrequency::MONTHLY);
+        $vendor->getCreatedAt()->willReturn($vendorCreatedAt);
 
         $resolverB->supports($vendor, $cyclical)->willReturn(true);
-        $resolverB->resolve($from)->willReturn([$from, $to]);
+        $resolverB->resolve($lastSettlementsEndsAt)->willReturn([$from, $to]);
         $resolverA->supports($vendor, $cyclical)->willReturn(false);
-        $resolverA->resolve(null)->shouldNotBeCalled();
+        $resolverA->resolve($lastSettlementsEndsAt)->shouldNotBeCalled();
 
         $this->getSettlementDateRangeForVendor($vendor, $cyclical, $lastSettlementsEndsAt)->shouldBeLike([$lastSettlementsEndsAt->modify('+ 1 second'), $to]);
     }
 
-    public function it_should_use_created_at_from_vendor(
+    public function it_should_use_not_created_at_from_vendor(
         VendorInterface $vendor,
         AbstractSettlementPeriodResolverStrategy $resolverA,
     ): void {
@@ -133,8 +143,8 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         $vendor->getCreatedAt()->willReturn($vendorCreatedAt);
 
         $resolverA->supports($vendor, $cyclical)->willReturn(true);
-        $resolverA->resolve($from)->willReturn([$from, $to]);
+        $resolverA->resolve($vendorCreatedAt)->willReturn([$from, $to]);
 
-        $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$vendorCreatedAt->modify('+ 1 second'), $to]);
+        $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$from, $to]);
     }
 }
