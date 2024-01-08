@@ -10,6 +10,7 @@
             <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
+            <argument type="service" id="sylius.factory.locale" />
         </service>
 
     </services>
