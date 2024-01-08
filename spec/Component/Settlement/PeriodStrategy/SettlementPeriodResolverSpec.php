@@ -62,9 +62,10 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
 
         $from = new \DateTime('-1 month');
         $to = new \DateTime();
+        $vendorCreatedAt = new \DateTime('-2 month');
 
         $vendor->getSettlementFrequency()->willReturn(VendorSettlementFrequency::MONTHLY);
-        $vendor->getCreatedAt()->willReturn($from);
+        $vendor->getCreatedAt()->willReturn($vendorCreatedAt);
 
         $resolverA->supports($vendor, $cyclical)->willReturn(true);
         $resolverA->resolve($from)->willReturn([$from, $to]);
@@ -83,9 +84,10 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
 
         $from = new \DateTime('-1 month');
         $to = new \DateTime();
+        $vendorCreatedAt = new \DateTime('-2 month');
 
         $vendor->getSettlementFrequency()->willReturn(VendorSettlementFrequency::MONTHLY);
-        $vendor->getCreatedAt()->willReturn($from);
+        $vendor->getCreatedAt()->willReturn($vendorCreatedAt);
 
         $resolverB->supports($vendor, $cyclical)->willReturn(true);
         $resolverB->resolve($from)->willReturn([$from, $to]);
@@ -112,9 +114,27 @@ final class SettlementPeriodResolverSpec extends ObjectBehavior
         $resolverB->supports($vendor, $cyclical)->willReturn(true);
         $resolverB->resolve($from)->willReturn([$from, $to]);
         $resolverA->supports($vendor, $cyclical)->willReturn(false);
-
         $resolverA->resolve(null)->shouldNotBeCalled();
 
         $this->getSettlementDateRangeForVendor($vendor, $cyclical, $lastSettlementsEndsAt)->shouldBeLike([$lastSettlementsEndsAt->modify('+ 1 second'), $to]);
+    }
+
+    public function it_should_use_created_at_from_vendor(
+        VendorInterface $vendor,
+        AbstractSettlementPeriodResolverStrategy $resolverA,
+    ): void {
+        $cyclical = true;
+
+        $vendorCreatedAt = new \DateTime('-2 weeks');
+        $from = new \DateTime('-1 month');
+        $to = new \DateTime();
+
+        $vendor->getSettlementFrequency()->willReturn(VendorSettlementFrequency::MONTHLY);
+        $vendor->getCreatedAt()->willReturn($vendorCreatedAt);
+
+        $resolverA->supports($vendor, $cyclical)->willReturn(true);
+        $resolverA->resolve($from)->willReturn([$from, $to]);
+
+        $this->getSettlementDateRangeForVendor($vendor, $cyclical)->shouldBeLike([$vendorCreatedAt->modify('+ 1 second'), $to]);
     }
 }
