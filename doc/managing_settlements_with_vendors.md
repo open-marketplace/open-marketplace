@@ -25,6 +25,13 @@ Settlements might be generated for the following frequencies:
 - `monthly` - settlements are generated every month,
 - `quarterly` - settlements are generated every quarter,
 
+Important note: Frequencies are dictating periods for which settlements are generated.
+Weekly settlement will be generated for previous week, monthly for previous month and quarterly for previous quarter.
+Profit for orders paid in this settlement frequency period will be settled in the next settlement frequency period.
+
+E.g. If you have weekly settlement frequency, settlement for `2024-01-01` - `2024-01-07` will be generated during first run of command after `2024-01-07 23:59:59`.
+This settlement will contain all orders paid between `2024-01-01 00:00:00` and `2024-01-07 23:59:59`.
+
 To generate settlements, use `/docker/cron/crontab` file, make sure it contains line :
 ``` bash
 0 9 * * 1 php /srv/sylius/bin/console bitbag:settlement:generate
