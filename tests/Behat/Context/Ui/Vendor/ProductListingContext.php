@@ -335,7 +335,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given the channel uses another locale :locales
      */
-    public function theChannelUsesAnotherLocale($locales)
+    public function theChannelUsesAnotherLocale(string $locales): void
     {
         /** @var Channel $channel */
         $channel = $this->sharedStorage->get('channel');
@@ -347,5 +347,19 @@ final class ProductListingContext extends RawMinkContext
         $this->entityManager->persist($locale);
         $this->entityManager->persist($channel);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @When I fill form with default data
+     */
+    public function iFillFormWithDefaultData(): void
+    {
+        $page = $this->getPage();
+
+        $page->fillField('Price', '10');
+        $page->fillField('Original price', '20');
+        $page->fillField('Minimum price', '30');
+        $page->fillField('Name', 'test');
+        $page->fillField('Slug', 'product');
     }
 }
