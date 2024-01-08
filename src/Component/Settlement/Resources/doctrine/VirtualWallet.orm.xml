@@ -19,5 +19,9 @@
         <many-to-one field="channel" target-entity="Sylius\Component\Core\Model\ChannelInterface">
             <join-column name="channel_id" referenced-column-name="id" on-delete="CASCADE"/>
         </many-to-one>
+
+        <unique-constraints>
+            <unique-constraint columns="vendor_id,channel_id" name="vendor_channel" />
+        </unique-constraints>
     </mapped-superclass>
 </doctrine-mapping>
