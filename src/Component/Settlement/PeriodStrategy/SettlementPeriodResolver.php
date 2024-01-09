@@ -36,7 +36,7 @@ final class SettlementPeriodResolver implements SettlementPeriodResolverInterfac
             [$from, $to] = $settlementPeriodResolver->resolve($lastSettlementEndsAt ?? $vendorCreatedAt);
 
             return [
-                $this->getFrom($from, $lastSettlementEndsAt),
+                $this->getFrom($from, $to, $lastSettlementEndsAt),
                 $to,
             ];
         }
@@ -46,9 +46,14 @@ final class SettlementPeriodResolver implements SettlementPeriodResolverInterfac
 
     private function getFrom(
         \DateTime $from,
+        \DateTime $to,
         ?\DateTimeInterface $lastSettlementEndsAt
     ): \DateTime {
-        if (null === $lastSettlementEndsAt || $from >= $lastSettlementEndsAt) {
+        if (
+            null === $lastSettlementEndsAt
+            || ($from >= $lastSettlementEndsAt
+            || $to <= $lastSettlementEndsAt)
+        ) {
             return $from;
         }
 

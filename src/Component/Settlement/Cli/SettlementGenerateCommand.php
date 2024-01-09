@@ -58,7 +58,7 @@ final class SettlementGenerateCommand extends Command
             if (0 === ($persistCount % 50)) {
                 $this->settlementManager->flush();
             }
-            ++$persistCount;
+            $persistCount += count($newSettlements);
 
             $this->settlementsCreatedEmailSender->send($vendor, $newSettlements);
         }
