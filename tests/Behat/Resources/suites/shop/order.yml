@@ -20,5 +20,6 @@ default:
             - sylius.behat.context.transform.shared_storage
             - sylius.behat.context.setup.user
             - Behat\MinkExtension\Context\MinkContext
+            - tests.open_marketplace.behat.context.setup.payment_method
             filters:
                 tags: "@shop_order&&@ui"
