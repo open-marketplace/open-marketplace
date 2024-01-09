@@ -31,6 +31,8 @@ interface ListingInterface extends ResourceInterface, VendorAwareInterface, Uuid
 
     public function setEnabled(bool $enabled): void;
 
+    public function setRemoved(bool $removed): void;
+
     public function isRemoved(): bool;
 
     public function remove(): void;

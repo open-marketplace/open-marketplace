@@ -27,11 +27,14 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
 {
     private EntityManagerInterface $entityManager;
+
+    private ProductListingInterface $productListingPage;
 
     private ShopUserExampleFactory $shopUserExampleFactory;
 
@@ -49,7 +52,8 @@ final class ProductListingContext extends RawMinkContext
         FactoryInterface $vendorFactory,
         SharedStorageInterface $sharedStorage,
         AdminUserExampleFactory $adminUserExampleFactory,
-        FactoryInterface $localeFactory
+        FactoryInterface $localeFactory,
+        ProductListingInterface $productListingPage
     ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
@@ -57,6 +61,7 @@ final class ProductListingContext extends RawMinkContext
         $this->sharedStorage = $sharedStorage;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
         $this->localeFactory = $localeFactory;
+        $this->productListingPage = $productListingPage;
     }
 
     /**
@@ -102,14 +107,23 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given This product listing visibility is hidden
+     * @Given the product listing is removed
      */
-    public function thisProductListingVisibilityIsHidden()
+    public function thereProductListingIsRemoved()
     {
-        $productListing = $this->sharedStorage->get('product_listing' . '0');
-        $productListing->setHidden(true);
+        $productListing = $this->sharedStorage->get('product_listing');
+        $productListing->setRemoved(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @When I am on edit page product listing :url
+     */
+    public function iAmOnProductListingPageWithIUrl($url)
+    {
+        $productListing = $this->sharedStorage->get('product_listing');
+        $this->productListingPage->tryToOpen(['id' => $productListing->getId()]);
     }
 
     /**

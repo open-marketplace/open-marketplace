@@ -3,7 +3,7 @@ default:
         order_details:
             contexts:
                 - tests.open_marketplace.behat.context.vendor.order_context
-                - tests.open_marketplace.behat.context.setup.order_context
+                - tests.open_marketplace.behat.context.setup.order
                 - tests.open_marketplace.behat.context.vendor.vendor_update_context
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.setup.shop_security
