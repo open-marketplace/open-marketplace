@@ -41,6 +41,11 @@ final class MenuListener
             ->setLabelAttribute('icon', 'money bill alternate');
 
         $mvmRootMenuItem
+            ->addChild('virtual_wallet', ['route' => 'open_marketplace_admin_virtual_wallet_index'])
+            ->setLabel('open_marketplace.ui.virtual_wallets')
+            ->setLabelAttribute('icon', 'credit card');
+
+        $mvmRootMenuItem
             ->addChild('conversations', ['route' => 'open_marketplace_admin_messaging_conversation_index'])
             ->setLabel('open_marketplace.ui.menu.conversations')
             ->setLabelAttribute('icon', 'inbox');

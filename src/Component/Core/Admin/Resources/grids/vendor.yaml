@@ -5,6 +5,7 @@ sylius_grid:
             edit_vendor: "Configuration/Grid/Admin/Action/editVendor.html.twig"
             show_product_listings: "Configuration/Grid/Admin/Action/showVendorProductListings.html.twig"
             show_settlements: "Configuration/Grid/Admin/Action/showVendorSettlements.html.twig"
+            show_virtual_wallets: "Configuration/Grid/Admin/Action/showVendorVirtualWallets.html.twig"
     grids:
         open_marketplace_admin_vendor:
             driver:
@@ -50,3 +51,5 @@ sylius_grid:
                         type: show_product_listings
                     show_settlements:
                         type: show_settlements
+                    show_virtual_wallets:
+                        type: show_virtual_wallets

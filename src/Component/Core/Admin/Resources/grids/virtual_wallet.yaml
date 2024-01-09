@@ -1,0 +1,44 @@
+sylius_grid:
+  grids:
+    open_marketplace_admin_virtual_wallet:
+      driver:
+        name: doctrine/orm
+        options:
+          class: '%open_marketplace.model.virtual_wallet.class%'
+      sorting:
+        id: asc
+      filters:
+        channel:
+          type: entities
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+          options:
+            field: "channel.id"
+        vendor:
+          type: entity
+          label: open_marketplace.ui.vendor
+          form_options:
+            class: "BitBag\\OpenMarketplace\\Component\\Vendor\\Entity\\Vendor"
+      fields:
+        id:
+          type: string
+          label: open_marketplace.ui.id
+        vendor:
+          type: string
+          label: open_marketplace.ui.vendor
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        balance:
+          type: twig
+          label: open_marketplace.ui.balance
+          path: .
+          sortable: ~
+          options:
+            template: "Configuration/Grid/Admin/Field/money.html.twig"
+            vars:
+              method: getBalance

@@ -191,6 +191,7 @@ open_marketplace:
             accepted: Accepted
             settled: Settled
         show_settlements: Show settlements
+        show_virtual_wallets: Show virtual wallets
         created_at: Created at
         updated_at: Updated at
         channel: Channel
