@@ -9,6 +9,7 @@ Feature: Editing a product listing.
     And I am logged in as "vendor@email.com"
     And the store operates on a channel named "Web-US" in "USD" currency
     And there is an admin user "admin" with password "password"
+    And the channel uses another locale "pl"
 
   @ui
   Scenario: Accept product listing
