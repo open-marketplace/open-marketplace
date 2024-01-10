@@ -84,11 +84,11 @@ final class ListingPersisterSpec extends ObjectBehavior
         DraftInterface $productDraft
     ): void {
         $draftGenerator->generateNextDraft($productListing)->willReturn($productDraft);
+
         $this->resolveLatestDraft($productListing);
-        $draftGenerator->generateNextDraft($productListing)->shouldBeCalledOnce();
     }
 
-    public function it_updates_latest_draft_with(
+    public function it_updates_latest_draft(
         ListingInterface $productListing,
         DraftInterface $productDraft,
         DraftGeneratorInterface $draftGenerator,
@@ -96,8 +96,9 @@ final class ListingPersisterSpec extends ObjectBehavior
         ImageInterface $image
     ): void {
         $draftGenerator->generateNextDraft($productListing)->willReturn($productDraft);
-        $this->uploadImages($productDraft);
         $imageUploader->upload($image)->shouldBeCalledOnce();
+
+        $this->uploadImages($productDraft);
     }
 
     public function it_uploads_images(
@@ -105,8 +106,9 @@ final class ListingPersisterSpec extends ObjectBehavior
         ImageUploaderInterface $imageUploader,
         ImageInterface $image
     ): void {
-        $this->uploadImages($productDraft);
         $imageUploader->upload($image)->shouldBeCalledOnce();
+
+        $this->uploadImages($productDraft);
     }
 
     public function it_can_delete_images_with_correct_path(
@@ -120,15 +122,14 @@ final class ListingPersisterSpec extends ObjectBehavior
         $draftImage->getPath()->willReturn($path);
         $filesystem->has($path)->willReturn(true);
         $draftImageRepository->findVendorDraftImages($productDraft)->willReturn([$draftImage->getWrappedObject()]);
+        $entityManager->remove($draftImage)->shouldBeCalledOnce();
+        $filesystem->has($path)->shouldBeCalledOnce();
+        $filesystem->delete($path)->shouldBeCalledOnce();
 
         $this->deleteImages($productDraft);
-
-        $entityManager->remove($draftImage)->shouldBeCalledOnce();
-        $filesystem->has($path)->shouldHaveBeenCalled();
-        $filesystem->delete($path)->shouldBeCalled();
     }
 
-    public function it_can_not_delete_images_that_not_exist(
+    public function it_can_not_delete_images_that_do_not_exist(
         DraftInterface $productDraft,
         DraftImageRepositoryInterface $draftImageRepository,
         DraftImageInterface $draftImage,
@@ -138,12 +139,11 @@ final class ListingPersisterSpec extends ObjectBehavior
         $path = '/path/to/your/file.jpg';
         $draftImage->getPath()->willReturn(null);
         $draftImageRepository->findVendorDraftImages($productDraft)->willReturn([]);
-
-        $this->deleteImages($productDraft);
-
         $entityManager->remove($draftImage)->shouldNotBeCalled();
         $filesystem->has($path)->shouldNotBeCalled();
         $filesystem->delete($path)->shouldNotBeCalled();
+
+        $this->deleteImages($productDraft);
     }
 
     public function it_can_not_delete_images_with_incorrect_path(
@@ -158,11 +158,10 @@ final class ListingPersisterSpec extends ObjectBehavior
         $draftImage->getPath()->willReturn($path);
         $filesystem->has($incorrectPath)->willReturn(false);
         $draftImageRepository->findVendorDraftImages($productDraft)->willReturn([$draftImage->getWrappedObject()]);
+        $entityManager->remove($draftImage)->shouldBeCalledOnce();
+        $filesystem->has($path)->shouldBeCalledOnce();
+        $filesystem->delete($path)->shouldNotBeCalled();
 
         $this->deleteImages($productDraft);
-
-        $entityManager->remove($draftImage)->shouldBeCalledOnce();
-        $filesystem->has($path)->shouldHaveBeenCalled();
-        $filesystem->delete($path)->shouldNotBeCalled();
     }
 }

@@ -162,7 +162,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thereIsProductListingCreatedByVendor($count)
     {
-        $this->createProudctListinByVendor($count);
+        $this->createProudctListingByVendor($count);
     }
 
     /**
@@ -170,7 +170,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thereIsProductListingCreatedByVendorWithStatus2($count, $status)
     {
-        $this->createProudctListinByVendor($count, $status);
+        $this->createProudctListingByVendor($count, $status);
     }
 
     /**
@@ -321,7 +321,7 @@ final class ProductListingContext extends RawMinkContext
         Assert::notContains($mediaContainer->getHtml(), 'test.jpg', 'image found');
     }
 
-    public function createProudctListinByVendor($count, $status = 'under_verification'): void
+    public function createProudctListingByVendor($count, $status = 'under_verification'): void
     {
         $vendor = $this->sharedStorage->get('vendor');
 
