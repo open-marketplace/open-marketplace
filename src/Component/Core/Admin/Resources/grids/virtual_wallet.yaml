@@ -6,7 +6,7 @@ sylius_grid:
         options:
           class: '%open_marketplace.model.virtual_wallet.class%'
       sorting:
-        id: asc
+        vendor: asc
       filters:
         channel:
           type: entities
@@ -21,12 +21,10 @@ sylius_grid:
           form_options:
             class: "BitBag\\OpenMarketplace\\Component\\Vendor\\Entity\\Vendor"
       fields:
-        id:
-          type: string
-          label: open_marketplace.ui.id
         vendor:
           type: string
           label: open_marketplace.ui.vendor
+          sortable: vendor.id
         channel:
           type: twig
           label: sylius.ui.channel

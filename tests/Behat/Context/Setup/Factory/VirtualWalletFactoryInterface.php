@@ -9,22 +9,25 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
+namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup\Factory;
 
-use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Entity\VirtualWalletInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 
-interface OrderExampleFactoryInterface extends ExampleFactoryInterface
+interface VirtualWalletFactoryInterface
 {
-    public function createArray(array $options = []): array;
-
-    public function createOrderWithTotalAmount(
+    public function createVirtualWalletWithBalance(
         ChannelInterface $channel,
         VendorInterface $vendor,
         CustomerInterface $customer,
-        int $totalAmount
-    ): OrderInterface;
+        int $balance = 0,
+        ): VirtualWalletInterface;
+
+    public function createVirtualWallet(
+        ChannelInterface $channel,
+        VendorInterface $vendor,
+        CustomerInterface $customer,
+        ): VirtualWalletInterface;
 }

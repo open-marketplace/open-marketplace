@@ -18,6 +18,7 @@ use BitBag\OpenMarketplace\Component\Order\Factory\OrderItemFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessorInterface;
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\Product\Repository\ProductRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
@@ -27,7 +28,9 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -87,6 +90,23 @@ final class OrderExampleFactory extends AbstractExampleFactory implements OrderE
         }
 
         return $orders;
+    }
+
+    public function createOrderWithTotalAmount(
+        ChannelInterface $channel,
+        VendorInterface $vendor,
+        CustomerInterface $customer,
+        int $totalAmount
+    ): OrderInterface {
+        $order = $this->orderFactory->createNew();
+        $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
+        $order->setLocaleCode($localeCode);
+        $order->setChannel($channel);
+        $order->setCustomer($customer);
+        $order->setVendor($vendor);
+        $this->generateItemForTotalAmount($order, $totalAmount);
+
+        return $order;
     }
 
     protected function configureOptions(OptionsResolver $resolver): void
@@ -278,16 +298,14 @@ final class OrderExampleFactory extends AbstractExampleFactory implements OrderE
         }
         $this->orderManager->persist($order);
 
-        /** @var OrderInterface $order */
-        $order = $order;
-        $orders = $this->splitOrderByVendorProcessor->process($order);
+        $ordersFromSplit = $this->splitOrderByVendorProcessor->process($order);
 
-        foreach ($orders as $order) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
-            $this->orderManager->flush();
+        foreach ($ordersFromSplit as $orderFromSplit) {
+            $this->applyCheckoutStateTransition($orderFromSplit, OrderCheckoutTransitions::TRANSITION_COMPLETE);
         }
+        $this->orderManager->flush();
 
-        return $orders;
+        return $ordersFromSplit;
     }
 
     protected function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
@@ -338,5 +356,32 @@ final class OrderExampleFactory extends AbstractExampleFactory implements OrderE
                 $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP);
             }
         }
+    }
+
+    private function generateItemForTotalAmount(OrderInterface $order, int $totalAmount): void
+    {
+        $channel = $order->getChannel();
+        $locale = $order->getLocaleCode();
+        if (null === $channel || null === $locale) {
+            throw new \InvalidArgumentException('Order has no channel or locale code');
+        }
+
+        /** @var ProductInterface $product */
+        $product = $this->productRepository->findLatestByChannel($channel, $locale, 1)[0];
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $product->getVariants()->first();
+
+        /** @var ChannelPricingInterface $pricing */
+        $pricing = $variant->getChannelPricingForChannel($channel);
+        $pricing->setPrice($totalAmount);
+
+        $variant->setCurrentLocale($locale);
+        $item = $this->orderItemFactory->createNew();
+        $item->setUnitPrice($totalAmount);
+        $item->setVariant($variant);
+        $this->orderItemQuantityModifier->modify($item, 1);
+
+        $order->addItem($item);
     }
 }
