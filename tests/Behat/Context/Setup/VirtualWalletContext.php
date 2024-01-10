@@ -38,8 +38,7 @@ final class VirtualWalletContext implements Context
         string $vendorEmail,
         string $channelName,
         float $balance
-    ): void
-    {
+    ): void {
         $vendor = $this->getVendorByEmail($vendorEmail);
         $channel = $this->entityManager->getRepository(Channel::class)->findOneBy(['name' => $channelName]);
 
