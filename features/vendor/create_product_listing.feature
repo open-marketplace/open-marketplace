@@ -35,3 +35,18 @@ Feature:Creating a product listing.
     And I fill form with non unique code
     And I click "Save" button
     Then I should see non unique code error message
+
+  @ui
+  Scenario: Creating product listing without description
+    Given I am on "/"
+    And I follow "My account"
+    And I follow "Product listings"
+    And I follow "Create Product listing"
+    And I fill in "Code" with "productTest"
+    And I fill in "Price" with "10"
+    And I fill in "Original price" with "20"
+    And I fill in "Minimum price" with "30"
+    And I fill in "Name" with "test"
+    And I fill in "Slug" with "product"
+    When I click "Save" button
+    Then I should see "This form contains errors."

@@ -32,6 +32,7 @@ final class DraftTranslationType extends AbstractType
                 'label' => 'sylius.form.product.slug',
             ])
             ->add('description', TextareaType::class, [
+                'required' => false,
                 'label' => 'sylius.form.product.description',
             ])
             ->add('metaKeywords', TextType::class, [
