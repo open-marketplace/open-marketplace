@@ -100,6 +100,7 @@ final class OrderExampleFactory extends AbstractExampleFactory implements OrderE
     ): OrderInterface {
         $order = $this->orderFactory->createNew();
         $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
+        $order->setCurrencyCode($channel->getBaseCurrency()?->getCode());
         $order->setLocaleCode($localeCode);
         $order->setChannel($channel);
         $order->setCustomer($customer);

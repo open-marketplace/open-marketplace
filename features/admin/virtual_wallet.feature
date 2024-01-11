@@ -70,5 +70,5 @@
       And there is a virtual wallet for vendor "secondary@example.io" and channel "Web-US" with balance "75.19"
       When I visit the admin virtual wallets page
       And I filter virtual wallets by vendor "Bruce"
-      And I clear filters
+      And I clear filter
       Then I should see 2 virtual wallets

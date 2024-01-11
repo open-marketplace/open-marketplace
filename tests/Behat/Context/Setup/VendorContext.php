@@ -12,15 +12,19 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class VendorContext implements Context
 {
@@ -112,5 +116,39 @@ final class VendorContext implements Context
         $this->entityManager->flush();
 
         $this->sharedStorage->set('vendor', $vendor);
+    }
+
+    /**
+     * @Given vendor :vendorEmail has :frequency settlement frequency
+     */
+    public function vendorHasSettlementFrequency(string $vendorEmail, string $frequency): void
+    {
+        $frequency = StringInflector::nameToLowercaseCode($frequency);
+        Assert::inArray($frequency, VendorSettlementFrequency::SETTLEMENT_FREQUENCIES);
+        $vendor = $this->getVendorByEmail($vendorEmail);
+        $vendor->setSettlementFrequency($frequency);
+        $this->entityManager->persist($vendor);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given vendor :vendorEmail was created on :dateTimeString
+     */
+    public function vendorWasCreatedOn(string $vendorEmail, string $dateTimeString): void
+    {
+        $vendor = $this->getVendorByEmail($vendorEmail);
+        $vendor->setCreatedAt(new \DateTime($dateTimeString));
+
+        $this->entityManager->persist($vendor);
+        $this->entityManager->flush();
+    }
+
+    private function getVendorByEmail(string $vendorEmail): VendorInterface
+    {
+        $shopUser = $this->entityManager->getRepository(ShopUserInterface::class)->findOneBy(['username' => $vendorEmail]);
+        $vendor = $shopUser->getVendor();
+        Assert::isInstanceOf($vendor, VendorInterface::class);
+
+        return $vendor;
     }
 }

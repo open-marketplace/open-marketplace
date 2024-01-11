@@ -11,12 +11,12 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\VirtualWalletPageInterface;
 use Webmozart\Assert\Assert;
 
-final class VirtualWalletContext extends MinkContext
+final class VirtualWalletContext extends RawMinkContext
 {
     public function __construct(
         private VirtualWalletPageInterface $virtualWalletPage,
@@ -85,10 +85,10 @@ final class VirtualWalletContext extends MinkContext
     }
 
     /**
-     * @Then I clear filters
+     * @Then I should see :amount as balance for :channelName channel
      */
-    public function iClearFilters(): void
+    public function iShouldSeeAsBalanceForChannel(string $amount, string $channelName): void
     {
-        $this->virtualWalletPage->clearFilters();
+        $this->virtualWalletPage->checkExistsVirtualWalletForAmountAndChannel($amount, $channelName);
     }
 }

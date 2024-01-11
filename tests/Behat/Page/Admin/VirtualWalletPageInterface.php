@@ -19,6 +19,11 @@ interface VirtualWalletPageInterface
 
     public function getSortedVirtualWallets(array $sorting): array;
 
+    public function checkExistsVirtualWalletForAmountAndChannel(
+        string $amount,
+        string $channelName,
+    ): void;
+
     public function filterByVendor(string $vendor): void;
 
     public function filterByChannel(string $channelName): void;

@@ -35,7 +35,6 @@ final class SettlementCreator implements SettlementCreatorInterface
         VendorInterface $vendor,
         array $channels
     ): array {
-        $cyclical = true;
         $generatedSettlements = [];
 
         /** @var ChannelInterface $channel */
@@ -43,7 +42,7 @@ final class SettlementCreator implements SettlementCreatorInterface
             $settlement = $this->createSettlementForVendorAndChannelIfNotExists(
                 $vendor,
                 $channel,
-                $cyclical
+                $vendor->hasCyclicalSettlementFrequency()
             );
 
             if (!$settlement instanceof SettlementInterface) {
@@ -64,11 +63,10 @@ final class SettlementCreator implements SettlementCreatorInterface
         int $amount,
         ): SettlementInterface {
         $lastSettlement = $this->settlementRepository->findLastByVendorAndChannel($vendor, $channel);
-        $cyclical = false;
 
         [$nextSettlementStartDate, $nextSettlementEndDate] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor(
             $vendor,
-            $cyclical,
+            $vendor->hasCyclicalSettlementFrequency(),
             !$lastSettlement ? null : $lastSettlement->getEndDate()
         );
 

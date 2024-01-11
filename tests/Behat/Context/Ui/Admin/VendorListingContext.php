@@ -11,34 +11,23 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\Customer;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\VendorPageInterface;
 use Webmozart\Assert\Assert;
 
-final class VendorListingContext extends RawMinkContext implements Context
+final class VendorListingContext extends RawMinkContext
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
         private AdminUserExampleFactory $adminUserExample,
         private ExampleFactoryInterface $vendorExampleFactory,
+        private VendorPageInterface $vendorPage,
         ) {
-    }
-
-    /**
-     * @Given There is an admin user :username with password :password
-     */
-    public function thereIsAnAdminUserWithPassword($username, $password): void
-    {
-        $admin = $this->adminUserExample->create();
-        $admin->setUsername($username);
-        $admin->setPlainPassword($password);
-        $this->entityManager->persist($admin);
-        $this->entityManager->flush();
     }
 
     /**
@@ -110,11 +99,19 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given /^I should see settlement frequency "([^"]*)"$/
+     * @Given I am on admin vendor listing page
+     * @Given I visit admin vendor listing page
      */
-    public function iShouldSeeSettlementFrequency(string $frequency): void
+    public function iAmOnAdminVendorListingPage(): void
     {
-        $content = $this->getPage()->getText();
-        Assert::contains($content, $frequency);
+        $this->vendorPage->open();
+    }
+
+    /**
+     * @When I click edit button for :vendorName
+     */
+    public function iClickFor(string $vendorName): void
+    {
+        $this->vendorPage->clickEditButton($vendorName);
     }
 }

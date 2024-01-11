@@ -34,3 +34,4 @@ imports:
     - suites/vendor/settlements.yml
     - suites/ui/admin/settlements.yml
     - suites/ui/admin/virtual_wallets.yml
+    - suites/ui/admin/settlements_frequency.yml

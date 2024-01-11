@@ -14,6 +14,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Page\Admin;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 final class VirtualWalletPage extends SymfonyPage implements VirtualWalletPageInterface
 {
@@ -34,6 +35,14 @@ final class VirtualWalletPage extends SymfonyPage implements VirtualWalletPageIn
         $this->open($sorting);
 
         return $this->getVirtualWallets();
+    }
+
+    public function checkExistsVirtualWalletForAmountAndChannel(string $amount, string $channelName): void
+    {
+        $locator = sprintf('table.table > tbody > tr.item:contains("%s") > td:contains("%s")', $amount, $channelName);
+
+        $row = $this->getDocument()->find('css', $locator);
+        Assert::notNull($row);
     }
 
     public function filterByVendor(string $vendor): void
