@@ -30,17 +30,6 @@ final class VendorListingContext extends RawMinkContext
     }
 
     /**
-     * @Given I am logged in as an admin
-     */
-    public function iAmLoggedInAsAnAdmin(): void
-    {
-        $this->visitPath('/admin/login');
-        $this->getPage()->fillField('Username', 'admin');
-        $this->getPage()->fillField('Password', 'admin');
-        $this->getPage()->pressButton('Login');
-    }
-
-    /**
      * @Given There are :count vendors listed
      */
     public function thereAreVendors($count): void
@@ -92,11 +81,6 @@ final class VendorListingContext extends RawMinkContext
         Assert::contains($content, 'Commission Type');
     }
 
-    private function getPage(): DocumentElement
-    {
-        return $this->getSession()->getPage();
-    }
-
     /**
      * @Given I am on admin vendor listing page
      * @Given I visit admin vendor listing page
@@ -112,5 +96,10 @@ final class VendorListingContext extends RawMinkContext
     public function iClickFor(string $vendorName): void
     {
         $this->vendorPage->clickEditButton($vendorName);
+    }
+
+    private function getPage(): DocumentElement
+    {
+        return $this->getSession()->getPage();
     }
 }

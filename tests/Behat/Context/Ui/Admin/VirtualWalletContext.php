@@ -91,4 +91,12 @@ final class VirtualWalletContext extends RawMinkContext
     {
         $this->virtualWalletPage->checkExistsVirtualWalletForAmountAndChannel($amount, $channelName);
     }
+
+    /**
+     * @When I clear virtual wallets filters
+     */
+    public function iClearVirtualWalletsFilters(): void
+    {
+        $this->virtualWalletPage->clearFilters();
+    }
 }

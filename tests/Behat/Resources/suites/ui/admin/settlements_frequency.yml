@@ -17,6 +17,7 @@ default:
         - sylius.behat.context.hook.doctrine_orm
         - open_marketplace.behat.context.ui.admin.vendor_editing
         - open_marketplace.behat.context.ui.admin.vendor_listing
+        - open_marketplace.behat.context.ui.admin.admin
         - tests.open_marketplace.behat.context.admin.settlement
         - tests.open_marketplace.behat.context.admin.virtual_wallet
         - tests.open_marketplace.behat.context.common.grid_sorting

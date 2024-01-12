@@ -49,5 +49,8 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
+        <service id="open_marketplace.behat.context.ui.admin.admin" public="true"
+                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\AdminContext">
+        </service>
     </services>
 </container>
