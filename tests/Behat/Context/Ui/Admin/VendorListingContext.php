@@ -14,7 +14,6 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\Customer;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\VendorPageInterface;

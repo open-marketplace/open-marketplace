@@ -28,7 +28,6 @@ final class AdminContext extends RawMinkContext
         $page->pressButton('Login');
     }
 
-
     private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
