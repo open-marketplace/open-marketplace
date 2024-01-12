@@ -72,6 +72,8 @@ final class SettlementCreatorSpec extends ObjectBehavior
 
         $channels = [$channelA, $channelB];
 
+        $vendor->hasCyclicalSettlementFrequency()->willReturn(true);
+
         $settlementRepository->findLastByVendorAndChannel(
             $vendor,
             $channelA,
@@ -138,7 +140,6 @@ final class SettlementCreatorSpec extends ObjectBehavior
         SettlementInterface $settlement,
         SettlementInterface $lastSettlement,
         SettlementRepositoryInterface $settlementRepository,
-        OrderRepositoryInterface $orderRepository,
         SettlementFactoryInterface $settlementFactory,
         EntityManagerInterface $settlementManager,
         SettlementPeriodResolverInterface $settlementPeriodResolver,
@@ -147,6 +148,8 @@ final class SettlementCreatorSpec extends ObjectBehavior
         $to = new \DateTime('2021-01-31');
         $lastSettlementEndDate = new \DateTime('2020-12-29');
         $amount = 9481;
+
+        $vendor->hasCyclicalSettlementFrequency()->willReturn(false);
 
         $settlementRepository->findLastByVendorAndChannel(
             $vendor,
