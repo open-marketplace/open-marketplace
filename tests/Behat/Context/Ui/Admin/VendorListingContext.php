@@ -24,7 +24,6 @@ final class VendorListingContext extends RawMinkContext
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private AdminUserExampleFactory $adminUserExample,
         private ExampleFactoryInterface $vendorExampleFactory,
         private VendorPageInterface $vendorPage,
         ) {

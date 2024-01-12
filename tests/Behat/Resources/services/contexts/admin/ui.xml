@@ -20,7 +20,6 @@
         <service id="open_marketplace.behat.context.ui.admin.vendor_listing" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorListingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
             <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
             <argument type="service" id="tests.open_marketplace.behat.page.admin.vendor_page"/>
         </service>
