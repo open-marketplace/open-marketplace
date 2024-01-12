@@ -54,8 +54,7 @@ Feature: In case of creating the order
   Scenario: Trying to set negative commission
     Given there is a vendor user "test@company.domain" registered in country "PL"
     And I am logged in as an administrator
-    And I am on "/admin"
-    And I follow "Vendors"
+    And I am on admin vendor listing page
     And I follow "Edit"
     And I fill in "Commission" with "-10"
     And I click "Save changes" button
