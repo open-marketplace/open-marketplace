@@ -25,6 +25,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
+use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingInterface;
 use Webmozart\Assert\Assert;
@@ -43,12 +44,15 @@ final class ProductListingContext extends RawMinkContext
 
     private AdminUserExampleFactory $adminUserExampleFactory;
 
+    private FactoryInterface $localeFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         ShopUserExampleFactory $shopUserExampleFactory,
         FactoryInterface $vendorFactory,
         SharedStorageInterface $sharedStorage,
         AdminUserExampleFactory $adminUserExampleFactory,
+        FactoryInterface $localeFactory,
         ProductListingInterface $productListingPage
     ) {
         $this->entityManager = $entityManager;
@@ -56,6 +60,7 @@ final class ProductListingContext extends RawMinkContext
         $this->vendorFactory = $vendorFactory;
         $this->sharedStorage = $sharedStorage;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->localeFactory = $localeFactory;
         $this->productListingPage = $productListingPage;
     }
 
@@ -269,6 +274,7 @@ final class ProductListingContext extends RawMinkContext
         $page->fillField('Minimum price', '30');
         $page->fillField('Name', 'test');
         $page->fillField('Slug', 'product');
+        $page->fillField('Description', 'product description');
     }
 
     /**
@@ -339,5 +345,38 @@ final class ProductListingContext extends RawMinkContext
     {
         $confirmationModal = $this->getPage()->findById($label);
         $confirmationModal->click();
+    }
+
+    /**
+     * @Given the channel uses another locale :locales
+     */
+    public function theChannelUsesAnotherLocale(string $locales): void
+    {
+        /** @var Channel $channel */
+        $channel = $this->sharedStorage->get('channel');
+
+        $locale = $this->localeFactory->createNew();
+        $locale->setCode($locales);
+        $channel->addLocale($locale);
+
+        $this->entityManager->persist($locale);
+        $this->entityManager->persist($channel);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @When I fill form with default data
+     */
+    public function iFillFormWithDefaultData(): void
+    {
+        $page = $this->getPage();
+
+        $page->fillField('Code', 'code');
+        $page->fillField('Price', '10');
+        $page->fillField('Original price', '20');
+        $page->fillField('Minimum price', '30');
+        $page->fillField('Name', 'test');
+        $page->fillField('Slug', 'product');
+        $page->fillField('Description', 'product description');
     }
 }
