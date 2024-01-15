@@ -166,6 +166,7 @@ open_marketplace:
         vendor_test_credentials: Vendor test credentials
         username: Username
         password: Password
+        tax_category: Tax Category
     email:
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.

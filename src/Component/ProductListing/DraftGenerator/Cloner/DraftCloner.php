@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 final class DraftCloner implements DraftClonerInterface
 {
@@ -34,6 +35,10 @@ final class DraftCloner implements DraftClonerInterface
         $destination->setShippingCategory($base->getShippingCategory());
         $destination->setChannels($base->getChannels());
         $destination->setMainTaxon($base->getMainTaxon());
+
+        if ($base->getTaxCategory() instanceof TaxCategoryInterface) {
+            $destination->setTaxCategory($base->getTaxCategory());
+        }
 
         $destination->clearProductDraftTaxons();
         $this->draftTaxonCloner->clone($base, $destination);
