@@ -37,5 +37,11 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="description">
+            <constraint name="NotBlank">
+                <option name="message">sylius.product.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
