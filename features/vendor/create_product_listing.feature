@@ -11,12 +11,11 @@ Feature:Creating a product listing.
   @ui
   Scenario: Creating product listing
     Given I am on "/"
-    And I follow "My account"
+    When I follow "My account"
     And I follow "Product listings"
     And I follow "Create Product listing"
-    And I fill in "Code" with "productTest"
-    And I fill form with default data
-    When I click "Save" button
+    And I fill form with non unique code
+    And I click "Save" button
     Then I should see product's listing status "Created"
     And I should see "Product listing created."
 

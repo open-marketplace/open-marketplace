@@ -274,6 +274,7 @@ final class ProductListingContext extends RawMinkContext
         $page->fillField('Minimum price', '30');
         $page->fillField('Name', 'test');
         $page->fillField('Slug', 'product');
+        $page->fillField('Description', 'product description');
     }
 
     /**
@@ -370,10 +371,12 @@ final class ProductListingContext extends RawMinkContext
     {
         $page = $this->getPage();
 
+        $page->fillField('Code', 'code');
         $page->fillField('Price', '10');
         $page->fillField('Original price', '20');
         $page->fillField('Minimum price', '30');
         $page->fillField('Name', 'test');
         $page->fillField('Slug', 'product');
+        $page->fillField('Description', 'product description');
     }
 }
