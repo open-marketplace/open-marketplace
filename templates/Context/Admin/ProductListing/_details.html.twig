@@ -11,11 +11,7 @@
 
         <div class="ui hidden divider"></div>
 
-        {% include 'Context/Admin/ProductListing/details/_pricing.html.twig' %}
-
-        <div class="ui hidden divider"></div>
-
-        {% include 'Context/Admin/ProductListing/details/_taxCategory.html.twig' %}
+        {% include 'Context/Common/ProductListing/_pricing.html.twig' with { taxCategory: true } %}
     </div>
 </div>
 <div class="ui hidden divider"></div>

@@ -44,14 +44,11 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                            </div>
-                        </div>
-                        <div class="ui segments">
-                            <div class="ui segment">
-                                <h3>{{ 'sylius.ui.tax_category'|trans }}</h3>
-                            </div>
-                            <div class="ui segment">
-                                {{ form_row(form.taxCategory) }}
+                                <div class="ui segment">
+                                    <div class="ui content">
+                                        {{ form_row(form.taxCategory) }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="ui segments">
