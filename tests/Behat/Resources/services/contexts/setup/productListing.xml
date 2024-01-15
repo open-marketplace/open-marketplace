@@ -11,6 +11,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter"/>
+            <argument type="service" id="sylius.factory.tax_category" />
             <argument type="service" id="sylius.fixture.example_factory.product"/>
             <argument type="service" id="sylius.fixture.example_factory.taxon"/>
         </service>

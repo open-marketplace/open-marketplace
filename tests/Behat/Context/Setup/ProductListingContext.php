@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
@@ -23,32 +24,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
-    private ShopUserExampleFactory $shopUserExampleFactory;
-
-    private FactoryInterface $vendorFactory;
-
-    private EntityManagerInterface $entityManager;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private DraftConverter $acceptanceOperator;
-
     public function __construct(
-        ShopUserExampleFactory $shopUserExampleFactory,
-        FactoryInterface $vendorFactory,
-        EntityManagerInterface $entityManager,
-        SharedStorageInterface $sharedStorage,
-        DraftConverter $acceptanceOperator,
+        private ShopUserExampleFactory $shopUserExampleFactory,
+        private FactoryInterface $vendorFactory,
+        private EntityManagerInterface $entityManager,
+        private SharedStorageInterface $sharedStorage,
+        private DraftConverter $acceptanceOperator,
+        private FactoryInterface $taxCategoryExampleFactory,
         ) {
-        $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->vendorFactory = $vendorFactory;
-        $this->entityManager = $entityManager;
-        $this->sharedStorage = $sharedStorage;
-        $this->acceptanceOperator = $acceptanceOperator;
     }
 
     /**
@@ -122,5 +110,65 @@ final class ProductListingContext extends RawMinkContext implements Context
     {
         $status = $this->getSession()->getStatusCode();
         Assert::eq($status, 404);
+    }
+
+    /**
+     * @Given there is tax category :categoryName with code :code
+     */
+    public function thereIsTaxCategoryWithCode(
+        $categoryName,
+        $code,
+    ) {
+        /** @var TaxCategoryInterface $taxCategory */
+        $taxCategory = $this->taxCategoryExampleFactory->createNew();
+        $taxCategory->setName($categoryName);
+        $taxCategory->setCode($code);
+
+        $this->entityManager->persist($taxCategory);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Then I should see :count product listing(s)
+     */
+    public function iShouldSeeProductListings($count)
+    {
+        $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
+        Assert::notEmpty($rows, 'Could not find any rows');
+        Assert::eq($count, count($rows), 'Rows numbers are not equal');
+    }
+
+    /**
+     * @Then I should see url :url
+     */
+    public function iShouldSeeUrl($url)
+    {
+        $currentUrl = $this->getSession()->getCurrentUrl();
+        $matches = preg_match($url, $currentUrl);
+        Assert::eq(1, $matches);
+    }
+
+    /**
+     * @Given I should see taxCategory :taxCategory for product listing
+     */
+    public function iShouldSeeTaxCategoryForProductListing($taxCategory)
+    {
+        $productListingTaxCategory = $this->getPage()
+            ->find(
+                'css',
+                sprintf(
+                    'table > tbody > tr > td:contains("%s")',
+                    $taxCategory,
+                ),
+            );
+        Assert::notNull($productListingTaxCategory);
+    }
+
+    /**
+     * @return DocumentElement
+     */
+    private function getPage()
+    {
+        return $this->getSession()->getPage();
     }
 }
