@@ -9,10 +9,6 @@ Feature: Vendor can filter reviews of his products
     And the store has customer "Alex Holannd" with email "alex@honnold.pl"
     And there is a "verified" vendor user "kim@jain.pl" registered in country "PL"
     And I am logged in as "kim@jain.pl"
-    And There is a product with variant code "Quickdraws-x6" owned by logged in vendor
-    And this product has a new review titled "Good" and rated 4 added by customer "alex@honnold.pl"
-    And there is a "verified" vendor user "addam@ondra.pl" registered in country "PL"
-    And I am logged in as "addam@ondra.pl"
 
 
   @ui
@@ -58,3 +54,48 @@ Feature: Vendor can filter reviews of his products
     When I select "1" from "criteria[rating]"
     And I click "Filter"
     Then I should see "2" reviews
+
+  @ui
+  Scenario: Filtering by author name
+    Given There is a product with variant code "Apple" owned by logged in vendor
+    And this product has one review from customer "alex@honnold.pl"
+    And I am on "/en_US/account/vendor/product-reviews"
+    When I fill in "criteria[author][value]" with "Alex"
+    And I click "Filter"
+    Then I should see "1" reviews
+
+  @ui
+  Scenario: Filtering by author last name
+    Given There is a product with variant code "Apple" owned by logged in vendor
+    And this product has one review from customer "alex@honnold.pl"
+    And I am on "/en_US/account/vendor/product-reviews"
+    When I fill in "criteria[author][value]" with "Holannd"
+    And I click "Filter"
+    Then I should see "1" reviews
+
+  @ui
+  Scenario: Filtering by author email address
+    Given There is a product with variant code "Apple" owned by logged in vendor
+    And this product has one review from customer "alex@honnold.pl"
+    And I am on "/en_US/account/vendor/product-reviews"
+    When I fill in "criteria[author][value]" with "alex@honnold.pl"
+    And I click "Filter"
+    Then I should see "1" reviews
+
+  @ui
+  Scenario: Filtering by product name
+    Given There is a product with name "Apple-x5" owned by logged in vendor
+    And this product has one review from customer "kim@jain.pl"
+    And I am on "/en_US/account/vendor/product-reviews"
+    When I fill in "criteria[reviewSubject][value]" with "Apple-x5"
+    And I click "Filter"
+    Then I should see "1" reviews
+
+  @ui
+  Scenario: Filtering by product code
+    Given There is a product with variant code "Apple-macbook-max" owned by logged in vendor
+    And this product has one review from customer "kim@jain.pl"
+    And I am on "/en_US/account/vendor/product-reviews"
+    When I fill in "criteria[reviewSubject][value]" with "Apple-macbook-max"
+    And I click "Filter"
+    Then I should see "1" reviews

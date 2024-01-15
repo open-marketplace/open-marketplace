@@ -318,7 +318,21 @@ class ProductContext implements Context
         $this->createTaxon();
         $product = $this->productExampleFactory->create();
         $product->setVendor($vendor);
-        $product->getVariants()[0]->setCode($variant_code);
+        $product->setCode($variant_code);
+        $this->productRepository->add($product);
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Given There is a product with name :name owned by logged in vendor
+     */
+    public function thereIsProductWithNameOwnedByLoggedInVendor($name)
+    {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        $this->createTaxon();
+        $product = $this->productExampleFactory->create(['name' => $name]);
+        $product->setVendor($vendor);
         $this->productRepository->add($product);
         $this->sharedStorage->set('product', $product);
     }
