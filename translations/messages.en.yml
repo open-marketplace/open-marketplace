@@ -49,6 +49,7 @@ open_marketplace:
         status: Status
         tax_identifier: Tax Identifier
         not_blank: This field cannot be empty
+        missing_translation: missing translation
         company_name: Company name
         shop_user: Shop user
         country: Country
