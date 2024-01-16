@@ -35,7 +35,7 @@ Feature: Creating a product listing
     Then I should see url "#\/admin\/product-listings\/(\d+)#"
     And I should see taxCategory "Clothing" for product listing
 
-  @ui @test
+  @ui
   Scenario: Admin accepts product listing with a tax category
     Given I am on "/"
     And there is tax category "Other" with code "other"
@@ -64,3 +64,33 @@ Feature: Creating a product listing
     And I follow "Details"
     Then I should see url "#\/admin\/products\/(\d+)#"
     And I should see taxCategory "Other" for product listing
+
+  @ui
+  Scenario: Admin rejects product listing with a tax category
+    Given I am on "/"
+    And there is tax category "Other" with code "other"
+    And I follow "My account"
+    And I follow "Product list"
+    And I follow "Create Product"
+    And I fill in "Code" with "productTest"
+    And I fill in "Price" with "10"
+    And I fill in "sylius_product[taxCategory]" with "other"
+    And I fill in "Name" with "test"
+    And I fill in "Slug" with "product"
+    And I click "Save draft" button
+    And I follow "Product list"
+    And I click "Send for verification" button
+    Then I should see product's listing status "Under verification"
+    And I should see "Product listing sent to verification."
+    And I am logged in as an admin
+    When I am on "/admin"
+    And I follow "Product listings"
+    And I should see 1 product listing
+    And I follow "Details"
+    And I should see url "#\/admin\/product-listings\/(\d+)#"
+    And I should see taxCategory "Other" for product listing
+    And I fill in "mvm_conversation[messages][__name__][content]" with "reason to reject"
+    And I click "Reject" button
+    And I am logged in as "vendor@email.com"
+    And I am on "/en_US/account/vendor/conversations"
+    And I should see "reason to reject"

@@ -117,6 +117,16 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
+     * @Then I should see :count product listing(s)
+     */
+    public function iShouldSeeProductListings($count)
+    {
+        $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
+        Assert::notEmpty($rows, 'Could not find any rows');
+        Assert::eq($count, count($rows), 'Rows numbers are not equal');
+    }
+
+    /**
      * @Given I click :button button
      */
     public function iClickButton($button)
@@ -240,6 +250,16 @@ final class ProductListingContext extends RawMinkContext
         $page = $this->getPage();
         $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
         Assert::notNull($dropdown);
+    }
+
+    /**
+     * @Then I should see url :url
+     */
+    public function iShouldSeeUrl($url)
+    {
+        $currentUrl = $this->getSession()->getCurrentUrl();
+        $matches = preg_match($url, $currentUrl);
+        Assert::eq(1, $matches);
     }
 
     /**
