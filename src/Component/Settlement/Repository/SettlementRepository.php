@@ -53,7 +53,8 @@ final class SettlementRepository extends EntityRepository implements SettlementR
     {
         $result = $this->createQueryBuilder('s')
             ->andWhere('s.vendor = :vendor')
-            ->setParameter('vendor', $vendor);
+            ->setParameter('vendor', $vendor)
+            ->orderBy('s.createdAt', self::ORDER_DESCENDING);
 
         return $result;
     }
