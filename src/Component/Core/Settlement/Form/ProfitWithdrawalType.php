@@ -12,10 +12,10 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Settlement\Form;
 
 use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Form\AbstractType;
-use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
