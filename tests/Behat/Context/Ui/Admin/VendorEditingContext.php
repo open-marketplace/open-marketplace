@@ -56,9 +56,9 @@ final class VendorEditingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @When  /^there is an address form filled with: "([^"]*)" "([^"]*)" "([^"]*)"$/
+     * @When  /^there is an address form filled with city: "([^"]*)" postal code: "([^"]*)" street: "([^"]*)"$/
      */
-    public function thereIsAnAddressFormFilledWith($city, $postalCode, $street): void
+    public function thereIsAnAddressFormFilledWithCityPostalCodeAddress($city, $postalCode, $street): void
     {
         $this->getPage()->fillField("vendor_vendorAddress_city", $city);
         $this->getPage()->fillField("vendor_vendorAddress_postalCode", $postalCode);

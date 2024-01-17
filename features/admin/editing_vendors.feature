@@ -11,7 +11,7 @@ Feature: Editing Vendors
     Given There is a "verified" Vendor who "requested" change
     When I follow "Vendors"
     And I follow "Edit"
-    And there is an address form filled with: "Warszawa" "22-000" "street"
+    And there is an address form filled with city: "Warszawa" postal code: "22-000" street: "Groove Street"
     And I press "Save changes"
     Then I should see "Vendor has been successfully updated."
 
@@ -20,7 +20,7 @@ Feature: Editing Vendors
     Given There is a "verified" Vendor who "requested" change
     When I follow "Vendors"
     And I follow "Edit"
-    And there is an address form filled with: "" "22-000" "Groove street"
+    And there is an address form filled with city: "" postal code: "22-000" street: "Groove Street"
     And I press "Save changes"
     Then I should see "This form contains errors."
 
@@ -29,7 +29,7 @@ Feature: Editing Vendors
     Given There is a "verified" Vendor who "requested" change
     When I follow "Vendors"
     And I follow "Edit"
-    And there is an address form filled with: "Warszawa" "" "Groove street"
+    And there is an address form filled with city: "Warszawa" postal code: "" street: "Groove Street"
     And I press "Save changes"
     Then I should see "This form contains errors."
 
@@ -38,7 +38,7 @@ Feature: Editing Vendors
     Given There is a "verified" Vendor who "requested" change
     When I follow "Vendors"
     And I follow "Edit"
-    And there is an address form filled with: "Warszawa" "22-000" ""
+    And there is an address form filled with city: "Warszawa" postal code: "22-000" street: ""
     And I press "Save changes"
     Then I should see "This form contains errors."
 
@@ -47,7 +47,7 @@ Feature: Editing Vendors
     Given There is a "verified" Vendor who "did not requested" change
     When I follow "Vendors"
     And I follow "Edit"
-    And there is an address form filled with: "Warszawa" "22-000" "Groove street"
+    And there is an address form filled with city: "Warszawa" postal code: "22-000" street: "Groove Street"
     And I press "Save changes"
     Then I should see "Vendor has been successfully updated."
 
