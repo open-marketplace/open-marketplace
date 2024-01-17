@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Valid;
 
 final class VendorType extends AbstractResourceType
 {
@@ -35,6 +36,7 @@ final class VendorType extends AbstractResourceType
             ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'open_marketplace.ui.vendor_address',
+                'constraints' => [new Valid()],
             ])
             ->add('commission', NumberType::class, [
                 'label' => 'open_marketplace.ui.commission',

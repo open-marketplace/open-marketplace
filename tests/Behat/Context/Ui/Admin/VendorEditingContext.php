@@ -54,4 +54,19 @@ final class VendorEditingContext extends RawMinkContext implements Context
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
     }
+
+    /**
+     * @When  /^there is an address form filled with: "([^"]*)" "([^"]*)" "([^"]*)"$/
+     */
+    public function thereIsAnAddressFormFilledWith($city, $postalCode, $street): void
+    {
+        $this->getPage()->fillField("vendor_vendorAddress_city", $city);
+        $this->getPage()->fillField("vendor_vendorAddress_postalCode", $postalCode);
+        $this->getPage()->fillField("vendor_vendorAddress_street", $street);
+    }
+
+    private function getPage()
+    {
+        return $this->getSession()->getPage();
+    }
 }
