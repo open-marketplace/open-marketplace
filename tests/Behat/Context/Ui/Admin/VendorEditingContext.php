@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -58,14 +59,17 @@ final class VendorEditingContext extends RawMinkContext implements Context
     /**
      * @When  /^there is an address form filled with city: "([^"]*)" postal code: "([^"]*)" street: "([^"]*)"$/
      */
-    public function thereIsAnAddressFormFilledWithCityPostalCodeAddress($city, $postalCode, $street): void
-    {
-        $this->getPage()->fillField("vendor_vendorAddress_city", $city);
-        $this->getPage()->fillField("vendor_vendorAddress_postalCode", $postalCode);
-        $this->getPage()->fillField("vendor_vendorAddress_street", $street);
+    public function thereIsAnAddressFormFilledWithCityPostalCodeAddress(
+        $city,
+        $postalCode,
+        $street
+    ): void {
+        $this->getPage()->fillField('vendor_vendorAddress_city', $city);
+        $this->getPage()->fillField('vendor_vendorAddress_postalCode', $postalCode);
+        $this->getPage()->fillField('vendor_vendorAddress_street', $street);
     }
 
-    private function getPage()
+    private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
     }
