@@ -9,29 +9,6 @@
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 {% set criteria = app.request.query.get('criteria') %}
 
-<div class="ui stackable two column grid">
-    <div class="column">
-        <h1 class="ui header">
-                <i class="icon list"></i>
-                <div class="content">
-                    {{ 'open_marketplace.ui.product_listings'|trans }}
-                    <div class="sub header">{{ 'open_marketplace.ui.manage_products'|trans }}</div>
-                </div>
-        </h1>
-    </div>
-    <div class="middle aligned column">
-        <div class="ui right floated buttons">
-            {% if definition.actionGroups.main is defined %}
-                {% for action in definition.getEnabledActions('main') %}
-                    {{ sylius_grid_render_action(grid, action, null) }}
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-</div>
-
-<div class="ui divider"></div>
-
 {% if definition.enabledFilters|length > 0 %}
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">

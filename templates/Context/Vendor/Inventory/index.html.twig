@@ -8,5 +8,11 @@
 {% endblock %}
 
 {% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.inventory',
+        "subheader": 'open_marketplace.ui.manage_product_listing_stock',
+        "icon": 'clipboard'
+    } %}
+
     {{ sylius_grid_render(resources, '@SyliusShop/Grid/_default.html.twig') }}
 {% endblock %}

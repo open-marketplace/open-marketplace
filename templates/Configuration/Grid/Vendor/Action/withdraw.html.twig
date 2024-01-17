@@ -1,9 +1,11 @@
 {% if data.vendor.settlementFrequency|default(null) == constant('BitBag\\OpenMarketplace\\Component\\Vendor\\Contracts\\VendorSettlementFrequency::VIRTUAL_WALLET') %}
     <form action="{{ path('open_marketplace_vendor_profit_withdrawal_create', { channelCode: data.channel.code }) }}" method="post">
         <input type="hidden" name="_method" value="POST">
-        <button class="ui green labeled icon button" type="submit">
-            <i class="icon check"></i> {{ action.label|trans }}
-        </button>
+        <div class="ui buttons">
+            <button class="ui green labeled icon button" type="submit">
+                <i class="icon dollar"></i> {{ action.label|trans }}
+            </button>
+        </div>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}" />
     </form>
 {% endif %}

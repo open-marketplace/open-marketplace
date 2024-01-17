@@ -12,6 +12,11 @@
 {% endblock %}
 
 {% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.edit_inventory',
+        "icon": 'clipboard'
+    } %}
+
     <div class="ui segment">
         <h3>{{ resource.code }}</h3>
         {{ form_start(form, {'action': path('open_marketplace_vendor_inventory_update', { 'id': resource.id }), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}

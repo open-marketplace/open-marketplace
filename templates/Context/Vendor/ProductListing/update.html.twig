@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block subcontent %}
-    {{ include('Context/Vendor/ProductListing/_form.html.twig') }}
+    {{ include('Context/Vendor/ProductListing/_form.html.twig', {"editMode": true}) }}
 {% endblock %}
 
 {% block stylesheets %}
