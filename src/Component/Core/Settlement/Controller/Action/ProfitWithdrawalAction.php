@@ -113,6 +113,6 @@ final class ProfitWithdrawalAction
         $totalAmount = $form->get('totalAmount')->getData();
         Assert::notNull($totalAmount);
 
-        return (int) floor($totalAmount * 100);
+        return (int) floor($totalAmount);
     }
 }
