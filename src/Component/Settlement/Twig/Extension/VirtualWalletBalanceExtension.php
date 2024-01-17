@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Twig\Extension;
 
-use BitBag\OpenMarketplace\Component\Settlement\Twig\Runtime\VirtualWalletBalanceRuntimeInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Twig\Runtime\VirtualWalletBalanceRuntime;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -20,7 +20,7 @@ final class VirtualWalletBalanceExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('bitbag_open_marketplace_settlement_virtual_wallet_balance_by_channel', [VirtualWalletBalanceRuntimeInterface::class, 'getVirtualWalletBalanceByChannel']),
+            new TwigFunction('bitbag_open_marketplace_settlement_virtual_wallet_balance_by_channel', [VirtualWalletBalanceRuntime::class, 'getVirtualWalletBalanceByChannel']),
         ];
     }
 }
