@@ -63,12 +63,7 @@ final class MenuListener
             $menu
                 ->addChild('product_list', ['route' => 'open_marketplace_vendor_product_listings_index'])
                 ->setLabel('open_marketplace.ui.product_list')
-                ->setLabelAttribute('icon', 'inbox');
-
-            $menu
-                ->addChild('inventory', ['route' => 'open_marketplace_vendor_inventory_index'])
-                ->setLabel('open_marketplace.ui.inventory')
-                ->setLabelAttribute('icon', 'clipboard');
+                ->setLabelAttribute('icon', 'list');
 
             $menu
                 ->addChild('attributes', ['route' => 'open_marketplace_vendor_attributes_index'])
@@ -76,9 +71,33 @@ final class MenuListener
                 ->setLabelAttribute('icon', 'tag');
 
             $menu
+                ->addChild('inventory', ['route' => 'open_marketplace_vendor_inventory_index'])
+                ->setLabel('open_marketplace.ui.inventory')
+                ->setLabelAttribute('icon', 'clipboard');
+
+            $menu
+                ->addChild('product_reviews', ['route' => 'open_marketplace_vendor_product_review_index'])
+                ->setLabel('open_marketplace.ui.menu.product_reviews')
+                ->setLabelAttribute('icon', 'star');
+
+            $menu
                 ->addChild('order_list', ['route' => 'open_marketplace_vendor_orders_listing'])
                 ->setLabel('open_marketplace.ui.order_list')
                 ->setLabelAttribute('icon', 'suitcase');
+
+            $menu
+                ->addChild('clients', ['route' => 'open_marketplace_vendor_customers_index'])
+                ->setLabel('open_marketplace.ui.clients')
+                ->setLabelAttribute('icon', 'users');
+
+            $menu
+                ->addChild('profile', ['route' => 'open_marketplace_vendor_profile_details'])
+                ->setLabel('open_marketplace.ui.vendor_profile')
+                ->setLabelAttribute('icon', 'user');
+            $menu
+                ->addChild('conversations', ['route' => 'open_marketplace_vendor_messaging_conversation_index'])
+                ->setLabel('open_marketplace.ui.menu.conversations')
+                ->setLabelAttribute('icon', 'envelope open');
 
             $menu
                 ->addChild('settlements', ['route' => 'open_marketplace_vendor_settlements_index'])
@@ -93,27 +112,9 @@ final class MenuListener
             }
 
             $menu
-                ->addChild('clients', ['route' => 'open_marketplace_vendor_customers_index'])
-                ->setLabel('open_marketplace.ui.clients')
-                ->setLabelAttribute('icon', 'users');
-
-            $menu
                 ->addChild('shipping', ['route' => 'open_marketplace_vendor_shipping_methods_form'])
                 ->setLabel('open_marketplace.ui.shipping_methods')
                 ->setLabelAttribute('icon', 'shipping');
-
-            $menu
-                ->addChild('profile', ['route' => 'open_marketplace_vendor_profile_details'])
-                ->setLabel('open_marketplace.ui.vendor_profile')
-                ->setLabelAttribute('icon', 'pencil');
-            $menu
-                ->addChild('conversations', ['route' => 'open_marketplace_vendor_messaging_conversation_index'])
-                ->setLabel('open_marketplace.ui.menu.conversations')
-                ->setLabelAttribute('icon', 'envelope open');
-            $menu
-                ->addChild('product_reviews', ['route' => 'open_marketplace_vendor_product_review_index'])
-                ->setLabel('open_marketplace.ui.menu.product_reviews')
-                ->setLabelAttribute('icon', 'star');
         }
 
         $eventName = 'open_marketplace.menu.shop.vendor';
