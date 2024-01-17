@@ -35,3 +35,5 @@ open_marketplace_vendor_taxonomy:
   resource: "routing/taxonomy.yaml"
   prefix: /taxons
 
+open_marketplace_vendor_virtual_wallet:
+  resource: "routing/virtual_wallet.yaml"

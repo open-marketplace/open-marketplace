@@ -1,0 +1,35 @@
+sylius_grid:
+  templates:
+    action:
+      withdraw: "Configuration/Grid/Vendor/Action/withdraw.html.twig"
+  grids:
+    vendor_account_virtual_wallet_index:
+      driver:
+        name: doctrine/orm
+        options:
+          class: '%open_marketplace.model.virtual_wallet.class%'
+          repository:
+            method: findAllByVendorQueryBuilder
+            arguments:
+              - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
+      sorting:
+      fields:
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        balance:
+          type: twig
+          label: open_marketplace.ui.balance
+          path: .
+          options:
+            template: "Configuration/Grid/Vendor/Field/money.html.twig"
+            vars:
+              method: getBalance
+      actions:
+        item:
+          withdraw:
+            type: withdraw
+            label: open_marketplace.ui.withdraw

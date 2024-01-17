@@ -185,4 +185,9 @@ trait OrderTrait
     {
         $this->paidAt = $paidAt;
     }
+
+    public function getTotalProfitAmount(): int
+    {
+        return $this->getTotal() - $this->getCommissionTotal();
+    }
 }

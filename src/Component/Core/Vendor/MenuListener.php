@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Vendor;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\OrderOperationVoter;
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -62,12 +63,7 @@ final class MenuListener
             $menu
                 ->addChild('product_list', ['route' => 'open_marketplace_vendor_product_listings_index'])
                 ->setLabel('open_marketplace.ui.product_list')
-                ->setLabelAttribute('icon', 'inbox');
-
-            $menu
-                ->addChild('inventory', ['route' => 'open_marketplace_vendor_inventory_index'])
-                ->setLabel('open_marketplace.ui.inventory')
-                ->setLabelAttribute('icon', 'clipboard');
+                ->setLabelAttribute('icon', 'list');
 
             $menu
                 ->addChild('attributes', ['route' => 'open_marketplace_vendor_attributes_index'])
@@ -75,14 +71,19 @@ final class MenuListener
                 ->setLabelAttribute('icon', 'tag');
 
             $menu
+                ->addChild('inventory', ['route' => 'open_marketplace_vendor_inventory_index'])
+                ->setLabel('open_marketplace.ui.inventory')
+                ->setLabelAttribute('icon', 'clipboard');
+
+            $menu
+                ->addChild('product_reviews', ['route' => 'open_marketplace_vendor_product_review_index'])
+                ->setLabel('open_marketplace.ui.menu.product_reviews')
+                ->setLabelAttribute('icon', 'star');
+
+            $menu
                 ->addChild('order_list', ['route' => 'open_marketplace_vendor_orders_listing'])
                 ->setLabel('open_marketplace.ui.order_list')
                 ->setLabelAttribute('icon', 'suitcase');
-
-            $menu
-                ->addChild('settlements', ['route' => 'open_marketplace_vendor_settlements_index'])
-                ->setLabel('open_marketplace.ui.settlements')
-                ->setLabelAttribute('icon', 'money');
 
             $menu
                 ->addChild('clients', ['route' => 'open_marketplace_vendor_customers_index'])
@@ -90,22 +91,30 @@ final class MenuListener
                 ->setLabelAttribute('icon', 'users');
 
             $menu
-                ->addChild('shipping', ['route' => 'open_marketplace_vendor_shipping_methods_form'])
-                ->setLabel('open_marketplace.ui.shipping_methods')
-                ->setLabelAttribute('icon', 'shipping');
-
-            $menu
                 ->addChild('profile', ['route' => 'open_marketplace_vendor_profile_details'])
                 ->setLabel('open_marketplace.ui.vendor_profile')
-                ->setLabelAttribute('icon', 'pencil');
+                ->setLabelAttribute('icon', 'user');
             $menu
                 ->addChild('conversations', ['route' => 'open_marketplace_vendor_messaging_conversation_index'])
                 ->setLabel('open_marketplace.ui.menu.conversations')
                 ->setLabelAttribute('icon', 'envelope open');
+
             $menu
-                ->addChild('product_reviews', ['route' => 'open_marketplace_vendor_product_review_index'])
-                ->setLabel('open_marketplace.ui.menu.product_reviews')
-                ->setLabelAttribute('icon', 'star');
+                ->addChild('settlements', ['route' => 'open_marketplace_vendor_settlements_index'])
+                ->setLabel('open_marketplace.ui.settlements')
+                ->setLabelAttribute('icon', 'money');
+
+            if (!in_array($vendor->getSettlementFrequency(), VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES, true)) {
+                $menu
+                    ->addChild('vendor', ['route' => 'open_marketplace_vendor_virtual_wallet_index'])
+                    ->setLabel('open_marketplace.ui.virtual_wallets')
+                    ->setLabelAttribute('icon', 'credit card');
+            }
+
+            $menu
+                ->addChild('shipping', ['route' => 'open_marketplace_vendor_shipping_methods_form'])
+                ->setLabel('open_marketplace.ui.shipping_methods')
+                ->setLabelAttribute('icon', 'shipping');
         }
 
         $eventName = 'open_marketplace.menu.shop.vendor';

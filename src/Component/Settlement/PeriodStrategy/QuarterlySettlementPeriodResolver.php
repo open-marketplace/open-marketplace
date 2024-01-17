@@ -17,7 +17,7 @@ final class QuarterlySettlementPeriodResolver extends AbstractSettlementPeriodRe
 {
     protected const SETTLEMENT_FREQUENCY = VendorSettlementFrequency::QUARTERLY;
 
-    public function resolve(): array
+    public function resolve(?\DateTimeInterface $lastSettlementEndsAt = null): array
     {
         return [
             (new \DateTime())->setTimestamp(self::getLastQuarterStartDate()),

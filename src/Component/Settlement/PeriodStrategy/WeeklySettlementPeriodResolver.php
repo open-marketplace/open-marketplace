@@ -17,7 +17,7 @@ final class WeeklySettlementPeriodResolver extends AbstractSettlementPeriodResol
 {
     protected const SETTLEMENT_FREQUENCY = VendorSettlementFrequency::WEEKLY;
 
-    public function resolve(): array
+    public function resolve(?\DateTimeInterface $lastSettlementEndsAt = null): array
     {
         return [
             new \DateTime('last week monday 00:00:00'),

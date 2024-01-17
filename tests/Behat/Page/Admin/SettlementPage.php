@@ -14,6 +14,7 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Page\Admin;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 final class SettlementPage extends SymfonyPage implements SettlementPageInterface
 {
@@ -39,6 +40,33 @@ final class SettlementPage extends SymfonyPage implements SettlementPageInterfac
         $locator = null !== $status
             ? sprintf('table.table > tbody > tr.item:contains("%s")', $status)
             : 'table.table > tbody > tr.item'
+        ;
+
+        return $this->getDocument()->findAll('css', $locator);
+    }
+
+    public function getSettlementsForVendor(string $vendorName): array
+    {
+        $locator = sprintf('table.table > tbody > tr.item:contains("%s")', $vendorName);
+
+        return $this->getDocument()->findAll('css', $locator);
+    }
+
+    public function checkExistsSettlementForAmountAndChannel(string $amount, string $channelName): void
+    {
+        $locator = sprintf('table.table > tbody > tr.item:contains("%s") > td:contains("%s")', $amount, $channelName);
+
+        $row = $this->getDocument()->find('css', $locator);
+        Assert::notNull($row);
+    }
+
+    public function getSettlementsByPeriodEndsToday(bool $endsToday): array
+    {
+        $endsTodayString = sprintf(' - %s', date('d/m/Y'));
+
+        $locator = $endsToday
+            ? sprintf('table.table > tbody > tr.item:contains("%s")', $endsTodayString)
+            : sprintf('table.table > tbody > tr.item:not(:contains("%s"))', $endsTodayString)
         ;
 
         return $this->getDocument()->findAll('css', $locator);

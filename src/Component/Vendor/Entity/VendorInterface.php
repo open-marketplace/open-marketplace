@@ -137,4 +137,6 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
     public function getCreatedAt(): DateTimeInterface;
 
     public function setCreatedAt(DateTimeInterface $createdAt): void;
+
+    public function hasCyclicalSettlementFrequency(): bool;
 }

@@ -17,6 +17,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
         >
             <argument type="service" id="tests.open_marketplace.behat.page.admin.settlement_page"/>
             <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="open_marketplace.component.settlement.period_strategy.settlement_period_resolver"/>
         </service>
     </services>
 </container>

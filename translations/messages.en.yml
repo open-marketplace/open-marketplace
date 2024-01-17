@@ -61,6 +61,14 @@ open_marketplace:
         pending_update_message: Your profile has been edited. Please approve the changes by clicking on the link in the email sent to you.
         vendors: Vendors
         settlements: Settlements
+        virtual_wallets: Virtual wallets
+        virtual_wallet: Virtual wallet
+        profit_withdrawal_amount: Profit withdrawal amount
+        profit_withdrawal: Profit withdrawal
+        virtual_wallet_balance: Virtual wallet balance
+        create_settlement: Create settlement
+        balance: Balance
+        withdraw: Withdraw
         logo: Logo
         background: Background
         review: Review
@@ -183,6 +191,7 @@ open_marketplace:
             accepted: Accepted
             settled: Settled
         show_settlements: Show settlements
+        show_virtual_wallets: Show virtual wallets
         created_at: Created at
         updated_at: Updated at
         channel: Channel

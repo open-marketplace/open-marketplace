@@ -6,5 +6,10 @@
                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\Factory\VendorFactory"
                 id="tests.open_marketplace.behat.context.setup.factory.vendor_factory" >
         </service>
+        <service
+                class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\Factory\VirtualWalletFactory"
+                id="tests.open_marketplace.behat.context.setup.factory.virtual_wallet_factory">
+                <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.order"/>
+        </service>
     </services>
 </container>

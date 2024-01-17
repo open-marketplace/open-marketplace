@@ -21,7 +21,16 @@ interface VendorSettlementFrequency
 
     public const QUARTERLY = 'quarterly';
 
+    public const VIRTUAL_WALLET = 'virtual_wallet';
+
     public const SETTLEMENT_FREQUENCIES = [
+        self::QUARTERLY,
+        self::MONTHLY,
+        self::WEEKLY,
+        self::VIRTUAL_WALLET,
+    ];
+
+    public const CYCLICAL_SETTLEMENT_FREQUENCIES = [
         self::QUARTERLY,
         self::MONTHLY,
         self::WEEKLY,

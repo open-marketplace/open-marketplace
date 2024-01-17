@@ -20,6 +20,12 @@ sylius_grid:
           sortable: channel.code
           options:
             template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        period:
+          type: twig
+          label: open_marketplace.ui.period
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementPeriod.html.twig"
         totalAmount:
           type: twig
           label: open_marketplace.ui.total_amount
@@ -49,12 +55,6 @@ sylius_grid:
           label: open_marketplace.ui.status
           options:
             template: "Configuration/Grid/Admin/Field/settlementStatus.html.twig"
-        period:
-          type: twig
-          label: open_marketplace.ui.period
-          path: .
-          options:
-            template: "Configuration/Grid/Admin/Field/settlementPeriod.html.twig"
       filters:
         channel:
           type: entities
@@ -62,7 +62,7 @@ sylius_grid:
           form_options:
             class: "%sylius.model.channel.class%"
           options:
-            field: "channels.id"
+            field: "channel.id"
         status:
           type: settlement_status
           label: open_marketplace.ui.status

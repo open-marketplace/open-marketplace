@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
 use Behat\MinkExtension\Context\MinkContext;
+use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\SettlementPageInterface;
 use Webmozart\Assert\Assert;
@@ -21,7 +22,8 @@ final class SettlementContext extends MinkContext
     public function __construct(
         private SettlementPageInterface $adminSettlementPage,
         private SharedStorageInterface $sharedStorage,
-    ) {
+        private SettlementPeriodResolverInterface $settlementPeriodResolver,
+        ) {
     }
 
     /**
@@ -41,6 +43,24 @@ final class SettlementContext extends MinkContext
         $settlements = $this->adminSettlementPage->getSettlementsWithStatus($status);
 
         Assert::eq(count($settlements), $count);
+    }
+
+    /**
+     * @When I should see :count settlement(s) for vendor :vendorName
+     */
+    public function iSeeSettlementsForVendor(string $count, string $vendorName): void
+    {
+        $settlements = $this->adminSettlementPage->getSettlementsForVendor($vendorName);
+
+        Assert::eq(count($settlements), $count);
+    }
+
+    /**
+     * @When I should see settlement total with amount of :amount for :channelName channel
+     */
+    public function iSeeSettlementForAmountForChannel(string $amount, string $channelName): void
+    {
+        $settlements = $this->adminSettlementPage->checkExistsSettlementForAmountAndChannel($amount, $channelName);
     }
 
     /**
@@ -89,7 +109,25 @@ final class SettlementContext extends MinkContext
     }
 
     /**
-     * @Then I clear filters
+     * @Then I should see :amount settlement(s) with today as end of settlement period
+     */
+    public function iShouldSeeSettlementsEndingToday(string $amount): void
+    {
+        $settlements = $this->adminSettlementPage->getSettlementsByPeriodEndsToday(true);
+        Assert::count($settlements, (int) $amount);
+    }
+
+    /**
+     * @Then I should see :amount settlement(s) with different day as end of settlement period
+     */
+    public function iShouldSeeSettlementsEndingDifferentDay(string $amount): void
+    {
+        $settlements = $this->adminSettlementPage->getSettlementsByPeriodEndsToday(false);
+        Assert::count($settlements, (int) $amount);
+    }
+
+    /**
+     * @Then I clear settlement filters
      */
     public function iClearFilters(): void
     {

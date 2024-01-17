@@ -30,4 +30,10 @@ interface SettlementPageInterface
     public function filterByChannel(string $channelName): void;
 
     public function clearFilters(): void;
+
+    public function getSettlementsForVendor(string $vendorName);
+
+    public function checkExistsSettlementForAmountAndChannel(string $amount, string $channelName): void;
+
+    public function getSettlementsByPeriodEndsToday(bool $endsToday): array;
 }

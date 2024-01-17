@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Core\Vendor\EventListener;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\EventSubscriber;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Exception\ShopUserHasNoVendorContextException;
 use BitBag\OpenMarketplace\Component\Core\Vendor\Exception\ShopUserNotFoundException;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
 
-class AccessDeniedListener implements EventSubscriberInterface
+class AccessDeniedSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private VendorContextInterface $vendorProvider,

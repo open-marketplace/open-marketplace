@@ -7,4 +7,4 @@ sylius_resource:
         interface: BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface
         repository: BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepository
         factory: BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactory
-        controller: BitBag\OpenMarketplace\Component\Settlement\Controller\SettlementController
+        controller: BitBag\OpenMarketplace\Component\Core\Settlement\Controller\SettlementController

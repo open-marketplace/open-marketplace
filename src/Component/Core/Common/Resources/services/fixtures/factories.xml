@@ -84,7 +84,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="open_marketplace.factory.settlement"/>
-            <argument type="tagged_iterator" tag="bitbag.open_marketplace.strategy.settlement.period"/>
+            <argument type="service" id="open_marketplace.component.settlement.period_strategy.settlement_period_resolver"/>
         </service>
     </services>
 </container>

@@ -72,5 +72,5 @@
       And there is a "accepted" settlement for vendor "secondary@example.io"
       When I visit the admin settlements page
       And I filter settlements by vendor "Bruce"
-      And I clear filters
+      And I clear settlement filters
       Then I should see 2 settlements

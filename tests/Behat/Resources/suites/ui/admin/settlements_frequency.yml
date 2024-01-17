@@ -1,0 +1,26 @@
+default:
+  suites:
+    admin_settlements_frequency:
+      contexts:
+        - sylius.behat.context.transform.shared_storage
+        - sylius.behat.context.transform.channel
+        - tests.open_marketplace.behat.context.setup.settlement
+        - tests.open_marketplace.behat.context.setup.admin_user
+        - tests.open_marketplace.behat.context.setup.virtual_wallet
+        - tests.open_marketplace.behat.context.setup.order_context
+        - open_marketplace.behat.context.setup.vendor
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.user
+        - sylius.behat.context.setup.admin_security
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.product
+        - sylius.behat.context.hook.doctrine_orm
+        - open_marketplace.behat.context.ui.admin.vendor_editing
+        - open_marketplace.behat.context.ui.admin.vendor_listing
+        - open_marketplace.behat.context.ui.admin.admin
+        - tests.open_marketplace.behat.context.admin.settlement
+        - tests.open_marketplace.behat.context.admin.virtual_wallet
+        - tests.open_marketplace.behat.context.common.grid_sorting
+        - sylius.behat.context.transform.lexical
+      filters:
+        tags: "@admin_settlements_frequency&&@ui"

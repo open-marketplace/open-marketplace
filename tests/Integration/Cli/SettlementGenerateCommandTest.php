@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Integration\Cli;
 
 use ApiTestCase\JsonApiTestCase;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\QuarterlySettlementPeriodResolver;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -29,6 +30,7 @@ final class SettlementGenerateCommandTest extends JsonApiTestCase
         $this->settlementRepository = self::getContainer()->get('open_marketplace.repository.settlement');
         $this->vendorRepository = self::getContainer()->get('bitbag.open_marketplace.component.vendor.repository.vendor');
         $this->channelRepository = self::getContainer()->get('sylius.repository.channel');
+        $this->orderRepository = self::getContainer()->get('sylius.repository.order');
     }
 
     public function test_it_throws_exception_if_period_resolver_for_settlement_frequency_does_not_exist(): void
@@ -183,6 +185,67 @@ final class SettlementGenerateCommandTest extends JsonApiTestCase
                 'channel' => $channelEu,
             ],
             $settlementsVendorWeyland[1]
+        );
+    }
+
+    public function test_it_generates_settlements_for_incomplete_period(): void
+    {
+        $this->loadFixturesFromFile('SettlementGenerateCommandTest/test_it_generates_settlements_for_incomplete_period.yaml');
+        $settlements = $this->settlementRepository->findAll();
+        $vendorWayne = $this->vendorRepository->findOneBySlug('Wayne-Enterprises-Inc');
+        $channelUs = $this->channelRepository->findOneBy(['code' => 'US']);
+        $channelEu = $this->channelRepository->findOneBy(['code' => 'EU']);
+
+        [$startDate, $endDate] = $this->getStartAndEndDate('weekly');
+
+        /** @var OrderInterface $lastWayneOrder */
+        $lastWayneOrder = $this->orderRepository->findOneBy(['vendor' => $vendorWayne], ['paidAt' => 'DESC']);
+
+        $to = \DateTime::createFromInterface($lastWayneOrder->getPaidAt())->modify('- 1 hour');
+        $from = new \DateTime('last week monday');
+
+        $settlement = $settlements[0];
+        $settlement->setStartDate($from);
+        $settlement->setEndDate($to);
+
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 1002,
+                'totalCommissionAmount' => 70,
+                'startDate' => $from,
+                'endDate' => $to,
+                'channel' => $channelEu,
+            ],
+            $settlement
+        );
+
+        $this->getEntityManager()->flush();
+
+        $this->commandTester->execute([]);
+        $this->commandTester->assertCommandIsSuccessful();
+        $settlementsVendorWayne = $this->settlementRepository->findBy(['vendor' => $vendorWayne]);
+        $this->assertCount(3, $settlementsVendorWayne);
+        $this->assertSame($settlements[0], $settlementsVendorWayne[0]);
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 0,
+                'totalCommissionAmount' => 0,
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'channel' => $channelUs,
+            ],
+            $settlementsVendorWayne[1]
+        );
+
+        $this->assertSettlementSame(
+            [
+                'totalAmount' => 540,
+                'totalCommissionAmount' => 35,
+                'startDate' => \DateTime::createFromInterface($settlement->getEndDate())->modify('+ 1 second'),
+                'endDate' => $endDate,
+                'channel' => $channelEu,
+            ],
+            $settlementsVendorWayne[2]
         );
     }
 

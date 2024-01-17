@@ -1,0 +1,9 @@
+sylius_resource:
+  resources:
+    open_marketplace.virtual_wallet:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\OpenMarketplace\Component\Settlement\Entity\VirtualWallet
+        interface: BitBag\OpenMarketplace\Component\Settlement\Entity\VirtualWalletInterface
+        repository: BitBag\OpenMarketplace\Component\Settlement\Repository\VirtualWalletRepository
+        factory: BitBag\OpenMarketplace\Component\Settlement\Factory\VirtualWalletFactory

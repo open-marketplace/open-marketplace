@@ -13,16 +13,25 @@ We are hiring developers from all over the world. Join us and start your new, ex
     <services>
         <defaults public="false" autowire="false" autoconfigure="false" />
 
+        <service class="BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolver"
+                 id="open_marketplace.component.settlement.period_strategy.settlement_period_resolver">
+            <argument type="tagged_iterator" tag="bitbag.open_marketplace.strategy.settlement.period"/>
+        </service>
+
         <service class="BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\WeeklySettlementPeriodResolver"
-                 id="bitbag.open_marketplace.component.settlement.settlement_period_strategy.weekly_settlement_period_resolver">
+                 id="bitbag.open_marketplace.component.settlement.period_strategy.weekly_settlement_period_resolver">
             <tag name="bitbag.open_marketplace.strategy.settlement.period"/>
         </service>
         <service class="BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\MonthlySettlementPeriodResolver"
-                 id="bitbag.open_marketplace.component.settlement.settlement_period_strategy.monthly_settlement_period_resolver">
+                 id="bitbag.open_marketplace.component.settlement.period_strategy.monthly_settlement_period_resolver">
             <tag name="bitbag.open_marketplace.strategy.settlement.period"/>
         </service>
         <service class="BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\QuarterlySettlementPeriodResolver"
-                 id="bitbag.open_marketplace.component.settlement.settlement_period_strategy.quarterly_settlement_period_resolver">
+                 id="bitbag.open_marketplace.component.settlement.period_strategy.quarterly_settlement_period_resolver">
+            <tag name="bitbag.open_marketplace.strategy.settlement.period"/>
+        </service>
+        <service class="BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\VirtualWalletSettlementPeriodResolver"
+                 id="bitbag.open_marketplace.component.settlement.period_strategy.virtual_wallet_settlement_period_resolver">
             <tag name="bitbag.open_marketplace.strategy.settlement.period"/>
         </service>
     </services>

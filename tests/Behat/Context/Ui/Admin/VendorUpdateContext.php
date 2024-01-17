@@ -11,24 +11,19 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\VendorUpdatePageInterface;
 
-final class VendorEditingContext extends RawMinkContext implements Context
+final class VendorUpdateContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ExampleFactoryInterface $vendorExampleFactory
-    ) {
-        $this->entityManager = $entityManager;
-        $this->vendorExampleFactory = $vendorExampleFactory;
+        private EntityManagerInterface $entityManager,
+        private ExampleFactoryInterface $vendorExampleFactory,
+        private VendorUpdatePageInterface $vendorUpdatePage,
+        ) {
     }
 
     /**
@@ -53,5 +48,29 @@ final class VendorEditingContext extends RawMinkContext implements Context
 
         $this->entityManager->persist($vendor);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^I should see settlement frequency "([^"]*)"$/
+     */
+    public function iShouldSeeSettlementFrequency(string $frequency): void
+    {
+        $this->vendorUpdatePage->checkSettlementFrequency($frequency);
+    }
+
+    /**
+     * @When I set settlement frequency to :frequency
+     */
+    public function iSetSettlementFrequencyTo(string $frequency): void
+    {
+        $this->vendorUpdatePage->setSettlementFrequency($frequency);
+    }
+
+    /**
+     * @When I submit vendor update form
+     */
+    public function iSubmitVendorUpdateForm(): void
+    {
+        $this->vendorUpdatePage->submitVendorForm();
     }
 }
