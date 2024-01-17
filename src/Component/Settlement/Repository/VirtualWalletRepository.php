@@ -44,6 +44,7 @@ final class VirtualWalletRepository extends EntityRepository implements VirtualW
     {
         return $this->findAllByVendorQueryBuilder($vendor)
             ->andWhere('wv.balance > 0')
+            ->orderBy('wv.id', self::ORDER_DESCENDING)
             ->getQuery()
             ->getResult()
         ;
