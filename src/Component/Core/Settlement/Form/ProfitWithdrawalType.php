@@ -38,7 +38,7 @@ final class ProfitWithdrawalType extends AbstractType
                 'currency' => $options['currency'],
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'open_marketplace.ui.create_settlement',
+                'label' => 'open_marketplace.ui.withdraw',
                 'attr' => [
                     'class' => 'ui primary big button',
                 ],

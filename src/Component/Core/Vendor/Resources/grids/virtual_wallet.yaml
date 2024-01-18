@@ -32,4 +32,4 @@ sylius_grid:
         item:
           withdraw:
             type: withdraw
-            label: open_marketplace.ui.withdraw
+            label: open_marketplace.ui.withdraw_funds

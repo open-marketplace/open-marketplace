@@ -1,3 +1,9 @@
+{% include "Context/Vendor/_header.html.twig" with {
+    "header": 'open_marketplace.ui.virtual_wallets',
+    "subheader": 'open_marketplace.ui.manage_your_wallets',
+    "icon": 'credit card'
+} %}
+
 {{ form_start(form, { 'attr': {'class': 'ui form dirtylisten'}}) }}
 {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
 <div>

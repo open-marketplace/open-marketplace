@@ -77,10 +77,11 @@ open_marketplace:
         profit_withdrawal_amount: Withdrawal amount
         profit_withdrawal: Profit withdrawal
         my_wallets: My wallets
-        virtual_wallet_balance: Virtual wallet balance
+        virtual_wallet_balance: Wallet balance
         create_settlement: Create settlement
         balance: Balance
         withdraw: Withdraw
+        withdraw_funds: Withdraw funds
         logo: Logo
         background: Background
         review: Review
