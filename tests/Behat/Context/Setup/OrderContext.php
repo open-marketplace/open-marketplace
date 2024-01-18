@@ -67,8 +67,10 @@ final class OrderContext extends RawMinkContext
     /**
      * @Given There is order with property :propertyName with value :value made with logged in seller
      */
-    public function thereIsOrderWithPropertyWithValueMadeWithLoggedInSeller($propertyName, $value): void
-    {
+    public function thereIsOrderWithPropertyWithValueMadeWithLoggedInSeller(
+        string $propertyName,
+        string $value
+    ): void {
         $vendor = $this->sharedStorage->get('vendor');
 
         $order = $this->createDefaultOrder();
@@ -89,8 +91,10 @@ final class OrderContext extends RawMinkContext
     /**
      * @Given There is order with property :propertyName with value :value made with other seller
      */
-    public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller($propertyName, $value)
-    {
+    public function thereIsOrderWithPropertyWithValueMadeWithSomeSeller(
+        string $propertyName,
+        string $value
+    ): void {
         $vendor = $this->createDefaultVendor();
 
         $order = $this->createDefaultOrder();
@@ -202,6 +206,20 @@ final class OrderContext extends RawMinkContext
         $customer = $order->getCustomer();
         $order->setBillingAddress($this->createAddress($customer, $country, $city, $postalCode, $street));
         $this->entityManager->flush();
+    }
+
+    /**
+     * @Given The customer :customer has new order
+     */
+    public function thereIsFulfilledOrder(string $customer): void
+    {
+        $orders = $this->orderExampleFactory->createArray(['customer' => $customer]);
+
+        foreach ($orders as $order) {
+            $this->orderRepository->add($order);
+        }
+
+        $this->sharedStorage->set('primary_order', reset($orders));
     }
 
     private function createOrder(

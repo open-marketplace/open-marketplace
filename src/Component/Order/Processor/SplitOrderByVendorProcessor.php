@@ -18,13 +18,11 @@ use BitBag\OpenMarketplace\Component\Order\Event\PreSplitOrderEvent;
 use BitBag\OpenMarketplace\Component\Order\OrderManagerInterface;
 use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresherInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
-use Doctrine\ORM\EntityManager;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorInterface
 {
     public function __construct(
-        private EntityManager $entityManager,
         private OrderManagerInterface $orderManager,
         private PaymentRefresherInterface $paymentRefresher,
         private EventDispatcherInterface $eventDispatcher
@@ -34,8 +32,12 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
     public function process(OrderInterface $order): array
     {
         $isPrimaryOrder = $order->isPrimary() && 0 < $order->getSecondaryOrders()->count();
+
         if ($isPrimaryOrder) {
-            return [$order, ...$order->getSecondaryOrders()];
+            $orders = [$order, ...$order->getSecondaryOrders()];
+            $this->refreshPayments($orders);
+
+            return $orders;
         }
 
         $this->eventDispatcher->dispatch(new PreSplitOrderEvent($order), PreSplitOrderEvent::NAME);
@@ -57,12 +59,7 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
         $this->eventDispatcher->dispatch(new PostSplitOrderEvent($secondaryOrders), PostSplitOrderEvent::NAME);
 
         $orders = [$order, ...$secondaryOrders];
-
-        foreach ($orders as $order) {
-            $this->paymentRefresher->refreshPayment($order);
-        }
-
-        $this->entityManager->flush();
+        $this->refreshPayments($orders);
 
         return $orders;
     }
@@ -76,5 +73,12 @@ final class SplitOrderByVendorProcessor implements SplitOrderByVendorProcessorIn
         }
 
         return false;
+    }
+
+    private function refreshPayments(array $orders): void
+    {
+        foreach ($orders as $order) {
+            $this->paymentRefresher->refreshPayment($order);
+        }
     }
 }

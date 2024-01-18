@@ -7,7 +7,7 @@ default:
         - tests.open_marketplace.behat.context.setup.settlement
         - tests.open_marketplace.behat.context.setup.admin_user
         - tests.open_marketplace.behat.context.setup.virtual_wallet
-        - tests.open_marketplace.behat.context.setup.order_context
+        - tests.open_marketplace.behat.context.setup.order
         - open_marketplace.behat.context.setup.vendor
         - sylius.behat.context.setup.channel
         - sylius.behat.context.setup.user

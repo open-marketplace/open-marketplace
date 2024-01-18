@@ -72,7 +72,7 @@
                             <div class="ui segment">
                                 <div class="ui styled fluid accordion">
                                     {% for index, translations in form.translations %}
-                                        {% set flag = translations.vars.name|split('_')[1]|lower %}
+                                        {% set flag = translations.vars.name|split('_')[1]|default(translations.vars.name)|lower %}
                                         <div data-locale="{{ translations.vars.name }}">
                                             <div class="title {% if index == "en_US" %}active{% endif %}">
                                                 <i class="dropdown icon"></i>

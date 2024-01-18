@@ -59,6 +59,7 @@ open_marketplace:
         tax_identifier: Tax Identifier
         bank_account_number: Bank account number
         not_blank: This field cannot be empty
+        missing_translation: missing translation
         company_name: Company name
         shop_user: Shop user
         country: Country

@@ -25,12 +25,16 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
+use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
 {
     private EntityManagerInterface $entityManager;
+
+    private ProductListingInterface $productListingPage;
 
     private ShopUserExampleFactory $shopUserExampleFactory;
 
@@ -40,18 +44,24 @@ final class ProductListingContext extends RawMinkContext
 
     private AdminUserExampleFactory $adminUserExampleFactory;
 
+    private FactoryInterface $localeFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         ShopUserExampleFactory $shopUserExampleFactory,
         FactoryInterface $vendorFactory,
         SharedStorageInterface $sharedStorage,
         AdminUserExampleFactory $adminUserExampleFactory,
-        ) {
+        FactoryInterface $localeFactory,
+        ProductListingInterface $productListingPage
+    ) {
         $this->entityManager = $entityManager;
         $this->shopUserExampleFactory = $shopUserExampleFactory;
         $this->vendorFactory = $vendorFactory;
         $this->sharedStorage = $sharedStorage;
         $this->adminUserExampleFactory = $adminUserExampleFactory;
+        $this->localeFactory = $localeFactory;
+        $this->productListingPage = $productListingPage;
     }
 
     /**
@@ -98,14 +108,23 @@ final class ProductListingContext extends RawMinkContext
     }
 
     /**
-     * @Given This product listing visibility is hidden
+     * @Given the product listing is removed
      */
-    public function thisProductListingVisibilityIsHidden()
+    public function thereProductListingIsRemoved()
     {
-        $productListing = $this->sharedStorage->get('product_listing' . '0');
-        $productListing->setHidden(true);
+        $productListing = $this->sharedStorage->get('product_listing');
+        $productListing->setRemoved(true);
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @When I am on edit page product listing :url
+     */
+    public function iAmOnProductListingPageWithIUrl($url)
+    {
+        $productListing = $this->sharedStorage->get('product_listing');
+        $this->productListingPage->tryToOpen(['id' => $productListing->getId()]);
     }
 
     /**
@@ -171,7 +190,7 @@ final class ProductListingContext extends RawMinkContext
             $this->entityManager->persist($productTranslation);
             $this->entityManager->persist($productPricing);
 
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
+            $this->sharedStorage->set('product_listing', $productListing);
         }
 
         $this->entityManager->flush();
@@ -216,7 +235,7 @@ final class ProductListingContext extends RawMinkContext
             $this->entityManager->persist($productTranslation);
             $this->entityManager->persist($productPricing);
 
-            $this->sharedStorage->set('product_listing' . $i, $productListing);
+            $this->sharedStorage->set('product_listing', $productListing);
         }
 
         $this->entityManager->flush();
@@ -256,6 +275,7 @@ final class ProductListingContext extends RawMinkContext
         $page->fillField('Minimum price', '30');
         $page->fillField('Name', 'test');
         $page->fillField('Slug', 'product');
+        $page->fillField('Description', 'product description');
     }
 
     /**
@@ -326,5 +346,38 @@ final class ProductListingContext extends RawMinkContext
     {
         $confirmationModal = $this->getPage()->findById($label);
         $confirmationModal->click();
+    }
+
+    /**
+     * @Given the channel uses another locale :locales
+     */
+    public function theChannelUsesAnotherLocale(string $locales): void
+    {
+        /** @var Channel $channel */
+        $channel = $this->sharedStorage->get('channel');
+
+        $locale = $this->localeFactory->createNew();
+        $locale->setCode($locales);
+        $channel->addLocale($locale);
+
+        $this->entityManager->persist($locale);
+        $this->entityManager->persist($channel);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @When I fill form with default data
+     */
+    public function iFillFormWithDefaultData(): void
+    {
+        $page = $this->getPage();
+
+        $page->fillField('Code', 'code');
+        $page->fillField('Price', '10');
+        $page->fillField('Original price', '20');
+        $page->fillField('Minimum price', '30');
+        $page->fillField('Name', 'test');
+        $page->fillField('Slug', 'product');
+        $page->fillField('Description', 'product description');
     }
 }

@@ -13,10 +13,10 @@ namespace spec\BitBag\OpenMarketplace\Component\Order\Refresher;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresher;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 class PaymentRefresherSpec extends ObjectBehavior
 {
@@ -31,18 +31,23 @@ class PaymentRefresherSpec extends ObjectBehavior
     }
 
     public function it_refreshes_payment(
-        OrderInterface $order,
-        PaymentInterface $payment,
-    ): void {
-        $order->recalculateItemsTotal()->shouldBeCalledOnce();
-        $order->recalculateAdjustmentsTotal()->shouldBeCalledOnce();
-        $order->getTotal()->willReturn(100);
+        OrderInterface $secondaryOrder,
+        OrderInterface $primaryOrder,
+        PaymentInterface $secondaryOrderPayment,
+        PaymentInterface $primaryOrderPayment,
+        PaymentMethodInterface $paymentMethod,
+        ): void {
+        $secondaryOrder->getTotal()->willReturn(100);
+        $secondaryOrder->getPrimaryOrder()->willReturn($primaryOrder);
+        $secondaryOrder->getLastPayment()->willReturn($secondaryOrderPayment);
+        $primaryOrder->getLastPayment()->willReturn($primaryOrderPayment);
+        $primaryOrderPayment->getMethod()->willReturn($paymentMethod);
+        $secondaryOrderPayment->setAmount(100);
 
-        $payments = new ArrayCollection([$payment->getWrappedObject()]);
-        $order->getPayments()->willReturn($payments);
+        $secondaryOrder->recalculateItemsTotal()->shouldBeCalledOnce();
+        $secondaryOrder->recalculateAdjustmentsTotal()->shouldBeCalledOnce();
+        $secondaryOrderPayment->setMethod($paymentMethod)->shouldBeCalledOnce();
 
-        $this->refreshPayment($order);
-
-        $payment->setAmount(100)->shouldHaveBeenCalledTimes(1);
+        $this->refreshPayment($secondaryOrder);
     }
 }

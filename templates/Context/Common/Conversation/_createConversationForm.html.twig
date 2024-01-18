@@ -12,6 +12,7 @@
 
 <div class="ui form">
     {{ form_start(form, { attr: { class: 'ui form'}}) }}
+    {{ form_errors(form) }}
         <div class="ui stackable grid">
             <div class="column ten wide">
                 {% if form.category is defined %}

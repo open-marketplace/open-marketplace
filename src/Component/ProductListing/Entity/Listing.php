@@ -89,6 +89,11 @@ class Listing implements ListingInterface
         $this->enabled = $enabled;
     }
 
+    public function setRemoved(bool $removed): void
+    {
+        $this->removed = $removed;
+    }
+
     public function isRemoved(): bool
     {
         return $this->removed;
