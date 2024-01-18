@@ -37,7 +37,7 @@ final class SettlementCreator implements SettlementCreatorInterface
     ): array {
         if (false === $vendor->hasCyclicalSettlementFrequency()) {
             return throw new \InvalidArgumentException(
-                sprintf("Could not find period resolver for vendor with settlement frequency \"%s\"", $vendor->getSettlementFrequency())
+                sprintf('Could not find period resolver for vendor with settlement frequency "%s"', $vendor->getSettlementFrequency())
             );
         }
 
