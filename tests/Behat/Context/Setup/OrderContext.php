@@ -458,10 +458,9 @@ final class OrderContext extends RawMinkContext
         $paidAt = $from->modify('-1 day');
         $order->setPaidAt($paidAt);
 
-        $this->settlementCreator->createSettlementForVendorAndChannelAndAmount(
+        $this->settlementCreator->createSettlementsForAutoGeneration(
             $vendor,
-            $order->getChannel(),
-            $order->getTotal()
+            [$order->getChannel()],
         );
 
         $this->entityManager->persist($order);

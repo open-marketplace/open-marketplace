@@ -76,7 +76,7 @@ final class ProfitWithdrawalAction
 
         $totalAmount = $this->getTotalAmount($form);
 
-        $settlement = $this->settlementCreator->createSettlementForVendorAndChannelAndAmount(
+        $settlement = $this->settlementCreator->createSettlementForWithdrawal(
             $vendor,
             $channel,
             $totalAmount,

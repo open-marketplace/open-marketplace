@@ -126,7 +126,7 @@ final class SettlementCreatorSpec extends ObjectBehavior
 
         $settlementManager->persist($settlementB)->shouldBeCalled();
 
-        $this->createSettlementsForVendorAndChannels(
+        $this->createSettlementsForAutoGeneration(
             $vendor,
             $channels
         )->shouldBeLike([
@@ -175,7 +175,7 @@ final class SettlementCreatorSpec extends ObjectBehavior
 
         $settlementManager->persist($settlement)->shouldBeCalled();
 
-        $this->createSettlementForVendorAndChannelAndAmount(
+        $this->createSettlementForWithdrawal(
             $vendor,
             $channel,
             $amount

@@ -17,12 +17,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 interface SettlementCreatorInterface
 {
-    public function createSettlementsForVendorAndChannels(
+    public function createSettlementsForAutoGeneration(
         VendorInterface $vendor,
         array $channels
     ): array;
 
-    public function createSettlementForVendorAndChannelAndAmount(
+    public function createSettlementForWithdrawal(
         VendorInterface $vendor,
         ChannelInterface $channel,
         int $amount,

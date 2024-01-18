@@ -50,10 +50,14 @@ final class SettlementGenerateCommand extends Command
         $persistCount = 0;
         /** @var VendorInterface $vendor */
         foreach ($vendors as $vendor) {
-            $newSettlements = $this->settlementCreator->createSettlementsForVendorAndChannels(
+            $newSettlements = $this->settlementCreator->createSettlementsForAutoGeneration(
                 $vendor,
                 $channels,
             );
+
+            if (count($newSettlements) === 0) {
+                continue;
+            }
 
             if (0 === ($persistCount % 50)) {
                 $this->settlementManager->flush();

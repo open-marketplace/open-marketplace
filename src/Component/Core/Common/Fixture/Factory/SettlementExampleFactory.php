@@ -115,6 +115,6 @@ final class SettlementExampleFactory extends AbstractExampleFactory
             return [$from, $to];
         }
 
-        return $this->settlementPeriodResolver->getSettlementDateRangeForVendor($vendor);
+        return $this->settlementPeriodResolver->getSettlementDateRangeForVendor($vendor, true);
     }
 }
