@@ -27,9 +27,6 @@ sylius_grid:
         status:
           type: settlement_status
           label: open_marketplace.ui.status
-        period:
-          type: settlement_period
-          label: open_marketplace.ui.period
       fields:
         id:
           type: string

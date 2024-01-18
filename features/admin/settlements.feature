@@ -34,16 +34,6 @@
 
     @ui
     Scenario: Admin can filter settlements by period
-      Given there is a settlement with period from "19/11/2023" to "26/12/2023"
-      And there is a settlement with period from "27/11/2023" to "03/12/2023"
-      And there is a settlement with period from "04/12/2023" to "11/12/2023"
-      And there is a settlement with period from "11/12/2023" to "17/12/2023"
-      When I visit the admin settlements page
-      And I filter settlements by period "19/11/2023 - 26/12/2023"
-      Then I should see 1 settlements
-
-    @ui
-    Scenario: Admin can filter settlements by period
       Given there is a "new" settlement for vendor "bruce@domain.io"
       And there is a "accepted" settlement for vendor "secondary@example.io"
       When I visit the admin settlements page

@@ -19,9 +19,5 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  id="bitbag.open_marketplace.component.core.admin.grid.filter.settlement_status">
             <tag name="sylius.grid_filter" type="settlement_status" form_type="BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\SettlementStatusFilterType" />
         </service>
-        <service class="BitBag\OpenMarketplace\Component\Core\Admin\Grid\Filter\SettlementPeriodFilter"
-                 id="bitbag.open_marketplace.component.core.admin.grid.filter.settlement_period">
-            <tag name="sylius.grid_filter" type="settlement_period" form_type="BitBag\OpenMarketplace\Component\Core\Admin\Form\Type\SettlementPeriodFilterType" />
-        </service>
     </services>
 </container>
