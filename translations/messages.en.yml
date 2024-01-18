@@ -76,6 +76,7 @@ open_marketplace:
         virtual_wallet: Virtual wallet
         profit_withdrawal_amount: Withdrawal amount
         profit_withdrawal: Profit withdrawal
+        my_wallets: My wallets
         virtual_wallet_balance: Virtual wallet balance
         create_settlement: Create settlement
         balance: Balance

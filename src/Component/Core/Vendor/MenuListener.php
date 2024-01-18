@@ -104,13 +104,6 @@ final class MenuListener
                 ->setLabel('open_marketplace.ui.settlements')
                 ->setLabelAttribute('icon', 'money');
 
-            if (!in_array($vendor->getSettlementFrequency(), VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES, true)) {
-                $menu
-                    ->addChild('vendor', ['route' => 'open_marketplace_vendor_virtual_wallet_index'])
-                    ->setLabel('open_marketplace.ui.virtual_wallets')
-                    ->setLabelAttribute('icon', 'credit card');
-            }
-
             $menu
                 ->addChild('shipping', ['route' => 'open_marketplace_vendor_shipping_methods_form'])
                 ->setLabel('open_marketplace.ui.shipping_methods')
