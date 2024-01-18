@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Vendor;
 
 use BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\OrderOperationVoter;
-use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;

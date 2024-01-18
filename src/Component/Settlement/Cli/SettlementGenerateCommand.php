@@ -55,7 +55,7 @@ final class SettlementGenerateCommand extends Command
                 $channels,
             );
 
-            if (count($newSettlements) === 0) {
+            if (0 === count($newSettlements)) {
                 continue;
             }
 

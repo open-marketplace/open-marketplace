@@ -35,7 +35,7 @@ final class SettlementCreator implements SettlementCreatorInterface
         VendorInterface $vendor,
         array $channels
     ): array {
-        if ($vendor->hasCyclicalSettlementFrequency() === false) {
+        if (false === $vendor->hasCyclicalSettlementFrequency()) {
             return [];
         }
 
@@ -43,10 +43,10 @@ final class SettlementCreator implements SettlementCreatorInterface
 
         /** @var ChannelInterface $channel */
         foreach ($channels as $channel) {
-                $settlement = $this->createSettlementForVendorAndChannelIfNotExists(
-                    $vendor,
-                    $channel,
-                );
+            $settlement = $this->createSettlementForVendorAndChannelIfNotExists(
+                $vendor,
+                $channel,
+            );
 
             if (!$settlement instanceof SettlementInterface) {
                 continue;
