@@ -16,8 +16,14 @@ use BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory\OrderExampleFac
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface as OpenMarketplaceOrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Factory\ShipmentFactoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepository;
+use BitBag\OpenMarketplace\Component\Settlement\Creator\SettlementCreatorInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
+use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolverInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker\Factory;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
@@ -27,7 +33,9 @@ use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface as CoreCustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderShippingTransitions;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -50,8 +58,10 @@ final class OrderContext extends RawMinkContext
         private StateMachineFactoryInterface $stateMachineFactory,
         private AddressFactoryInterface $addressFactory,
         private ExampleFactoryInterface $vendorExampleFactory,
-        private OrderExampleFactoryInterface $orderExampleFactory
-    ) {
+        private OrderExampleFactoryInterface $orderExampleFactory,
+        private SettlementPeriodResolverInterface $settlementPeriodResolver,
+        private SettlementCreatorInterface $settlementCreator,
+        ) {
     }
 
     /**
@@ -335,5 +345,165 @@ final class OrderContext extends RawMinkContext
     {
         $order = $this->sharedStorage->get('order');
         $this->visitPath('/en_US/account/vendor/customers/' . $order->getCustomer()->getId());
+    }
+
+    /**
+     * @Given vendor :vendorEmail has an order with number :number for :price in channel :channelCode
+     * @Given vendor :vendorEmail has an order with number :number priced at :price in channel :channelCode
+     */
+    public function vendorHasAnOrderWithCodeForInChannel(
+        string $vendorEmail,
+        string $number,
+        string $price,
+        string $channelCode
+    ): void {
+        $price = $this->getPriceFromString($price);
+
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $this->userRepository->findOneBy(['username' => $vendorEmail]);
+        $channel = $this->entityManager->getRepository(Channel::class)->findOneBy(['name' => $channelCode]);
+
+        /** @var VendorInterface $vendor */
+        $vendor = $shopUser->getVendor();
+
+        /** @var CoreCustomerInterface $customer */
+        $customer = $shopUser->getCustomer();
+
+        $order = $this->orderExampleFactory->createOrderWithTotalAmount(
+            $channel,
+            $vendor,
+            $customer ?? $this->sharedStorage->get('customer'),
+            $price
+        );
+
+        $order->setNumber($number);
+
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+
+        $this->sharedStorage->set($number, $order);
+    }
+
+    /**
+     * @Given order :orderNumber has been paid in current settlement cycle
+     */
+    public function orderHasBeenPaidInCurrentSettlementCycle(string $orderNumber): void
+    {
+        $faker = Factory::create();
+        $lastSettlement = $this->entityManager->getRepository(SettlementInterface::class)->findOneBy([]);
+        $order = $this->sharedStorage->get($orderNumber);
+
+        /** @var VendorInterface $vendor */
+        $vendor = $order->getVendor();
+        Assert::isInstanceOf($vendor, VendorInterface::class);
+
+        [$from, $to] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor(
+            $vendor,
+            $vendor->hasCyclicalSettlementFrequency(),
+            $lastSettlement?->getEndDate()
+        );
+        $paidAt = $faker->dateTimeBetween($from, $to);
+        $order->setPaidAt($paidAt);
+
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given order :orderNumber has been paid at the beginning of current settlement cycle
+     */
+    public function orderHasBeenPaidAtTheBeginningOfCurrentSettlementCycle(string $orderNumber): void
+    {
+        $lastSettlement = $this->entityManager->getRepository(SettlementInterface::class)->findOneBy([]);
+        $order = $this->sharedStorage->get($orderNumber);
+
+        /** @var VendorInterface $vendor */
+        $vendor = $order->getVendor();
+        Assert::isInstanceOf($vendor, VendorInterface::class);
+
+        $frequency = $vendor->getSettlementFrequency();
+
+        switch ($frequency) {
+            case VendorSettlementFrequency::MONTHLY:
+                $modifier = '-1 month';
+
+                break;
+            case VendorSettlementFrequency::WEEKLY:
+                $modifier = '-1 week';
+
+                break;
+            case VendorSettlementFrequency::QUARTERLY:
+                $modifier = '-3 months';
+
+                break;
+            default:
+                $modifier = '-1 day';
+
+                break;
+        }
+
+        [$from, $to] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor(
+            $vendor,
+            $vendor->hasCyclicalSettlementFrequency(),
+            $lastSettlement?->getEndDate()
+        );
+
+        $from = min($from->modify($modifier), $vendor->getCreatedAt());
+
+        $order->setPaidAt($from->modify('+1 hour'));
+
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given order :orderNumber has been included in previously generated settlement
+     */
+    public function orderHasBeenIncludedInPreviouslyGeneratedSettlement(string $orderNumber): void
+    {
+        $lastSettlement = $this->entityManager->getRepository(SettlementInterface::class)->findOneBy([]);
+        $order = $this->sharedStorage->get($orderNumber);
+
+        /** @var VendorInterface $vendor */
+        $vendor = $order->getVendor();
+        Assert::isInstanceOf($vendor, VendorInterface::class);
+
+        [$from, $to] = $this->settlementPeriodResolver->getSettlementDateRangeForVendor(
+            $vendor,
+            $vendor->hasCyclicalSettlementFrequency(),
+            $lastSettlement?->getEndDate()
+        );
+        $paidAt = $from->modify('-1 day');
+        $order->setPaidAt($paidAt);
+
+        $this->settlementCreator->createSettlementsForAutoGeneration(
+            $vendor,
+            [$order->getChannel()],
+        );
+
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+    }
+
+    private function getPriceFromString(string $priceString): int
+    {
+        $sign = $priceString[0];
+        $price = substr($priceString, 1);
+        $this->validatePriceString($price);
+
+        $price = (int) round((float) $price * 100, 2);
+
+        if ('-' === $sign) {
+            $price *= -1;
+        }
+
+        return $price;
+    }
+
+    private function validatePriceString(string $price): void
+    {
+        if (!preg_match('/^\d+(?:\.\d{1,2})?$/', $price)) {
+            throw new \InvalidArgumentException('Price string should not have more than 2 decimal digits.');
+        }
     }
 }

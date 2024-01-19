@@ -78,7 +78,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
     public function test_it_doesnt_update_any_vendor_data_immediately(): void
     {
-        $this->loadFixturesFromFile('VendorProfileUpdaterTest/test_it_doesnt_update_any_vendor_data_immediately.yml');
+        $this->loadFixturesFromFile('VendorProfileUpdaterTest/test_it_doesnt_update_any_vendor_data_immediately.yaml');
 
         $vendorDataBeforeFormSubmit = $this->vendorRepository
             ->findOneBy(['taxIdentifier' => '1234567']);
@@ -108,7 +108,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
             ->createAddress('Grand Street', 'Warsaw', '00-22', $poland);
 
         $vendorData = $this->vendorProfileFactory
-            ->createVendor('Grand Company', '221133', '0-33 221 333 111', 'description', $address);
+            ->createVendor('Grand Company', '221133', 'PL14109024029586826934815556', '0-33 221 333 111', 'description', $address);
 
         $vendorData->setSlug('test-slug');
 
@@ -120,7 +120,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
     public function test_it_creates_pending_data_row_from_data(): void
     {
-        $this->loadFixturesFromFile('VendorProfileUpdaterTest/test_it_creates_pending_data_row_from_data.yml');
+        $this->loadFixturesFromFile('VendorProfileUpdaterTest/test_it_creates_pending_data_row_from_data.yaml');
 
         $vendorFormData = $this->createFakeUpdateFormData();
         $currentVendor = $this->vendorRepository
@@ -143,7 +143,7 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
 
     public function test_vendor_information_is_updated_and_removed_correctly(): void
     {
-        $this->loadFixturesFromFile('VendorProfileUpdaterTest/test_vendor_data_are_updated_and_removed_correctly.yml');
+        $this->loadFixturesFromFile('VendorProfileUpdaterTest/test_vendor_data_are_updated_and_removed_correctly.yaml');
 
         $currentVendor = $this->vendorRepository
             ->findOneBy(['taxIdentifier' => '1234567']);

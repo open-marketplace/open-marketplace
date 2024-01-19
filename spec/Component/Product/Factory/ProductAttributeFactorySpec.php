@@ -19,7 +19,7 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 
 final class ProductAttributeFactorySpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProductAttributeFactoryInterface::class);
     }

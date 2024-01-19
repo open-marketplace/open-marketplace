@@ -4,12 +4,19 @@
   "@type": "hydra:Collection",
   "hydra:member": [
     {
-      "@id": "/api/v2/shop/orders/order_made_by_peter",
+      "@id": "/api/v2/shop/orders/order_made_by_peter_1",
       "@type": "Order",
-      "tokenValue": "order_made_by_peter",
+      "tokenValue": "order_made_by_peter_1",
+      "id": "@integer@",
+      "itemsTotal": 0
+    },
+    {
+      "@id": "/api/v2/shop/orders/order_made_by_peter_2",
+      "@type": "Order",
+      "tokenValue": "order_made_by_peter_2",
       "id": "@integer@",
       "itemsTotal": 0
     }
   ],
-  "hydra:totalItems": 1
+  "hydra:totalItems": 2
 }

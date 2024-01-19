@@ -1,0 +1,30 @@
+sylius_fixtures:
+  suites:
+    open_marketplace:
+      fixtures:
+        settlement:
+          options:
+            custom:
+              -   vendor: 'camille@example.com'
+                  status: !php/const BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface::STATUS_NEW
+                  totalAmount: 1000
+                  totalCommissionAmount: 100
+                  channel: 'open-marketplace'
+
+              -   vendor: 'good-and-better@example.com'
+                  status: !php/const BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface::STATUS_ACCEPTED
+                  totalAmount: 2500
+                  totalCommissionAmount: 540
+                  channel: 'open-marketplace'
+
+              -   vendor: 'lisa-comp@example.com'
+                  status: !php/const BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface::STATUS_SETTLED
+                  totalAmount: 250
+                  totalCommissionAmount: 75
+                  channel: 'open-marketplace'
+
+              -   vendor: 'health@example.com'
+                  status: !php/const BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface::STATUS_NEW
+                  totalAmount: 1270
+                  totalCommissionAmount: 335
+                  channel: 'open-marketplace'

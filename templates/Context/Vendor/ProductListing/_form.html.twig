@@ -1,4 +1,14 @@
 {% block subcontent %}
+    {% set header = 'open_marketplace.ui.create_product_listing' %}
+    {% if editMode == true %}
+        {% set header = 'open_marketplace.ui.edit_product_listing' %}
+    {% endif %}
+
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": header,
+        "icon": 'edit'
+    } %}
+
     {{ form_start(form, { 'attr': {'class': 'ui form dirtylisten'}}) }}
         {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
         <div class="ui stackable grid sylius-tabular-form">

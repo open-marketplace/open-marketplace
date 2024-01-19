@@ -1,0 +1,80 @@
+sylius_grid:
+  templates:
+    filter:
+      settlement_status: 'Configuration/Grid/Admin/Filter/settlementStatus.html.twig'
+      settlement_period: 'Configuration/Grid/Admin/Filter/settlementPeriod.html.twig'
+  grids:
+    open_marketplace_admin_settlement:
+      driver:
+        name: doctrine/orm
+        options:
+          class: '%open_marketplace.model.settlement.class%'
+      sorting:
+        id: asc
+      filters:
+        channel:
+          type: entities
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+          options:
+            field: "channel.id"
+        vendor:
+          type: entity
+          label: open_marketplace.ui.vendor
+          form_options:
+            class: "BitBag\\OpenMarketplace\\Component\\Vendor\\Entity\\Vendor"
+        status:
+          type: settlement_status
+          label: open_marketplace.ui.status
+      fields:
+        id:
+          type: string
+          sortable: ~
+          label: open_marketplace.ui.id
+        vendor:
+          type: string
+          label: open_marketplace.ui.vendor
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        totalAmount:
+          type: twig
+          label: open_marketplace.ui.total_amount
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementTotals.html.twig"
+            vars:
+              method: getTotalAmount
+        totalCommissionAmount:
+          type: twig
+          label: open_marketplace.ui.total_commission_amount
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementTotals.html.twig"
+            vars:
+              method: getTotalCommissionAmount
+        status:
+          type: twig
+          label: open_marketplace.ui.status
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementStatus.html.twig"
+        period:
+          type: twig
+          label: open_marketplace.ui.period
+          path: .
+          options:
+            template: "Configuration/Grid/Admin/Field/settlementPeriod.html.twig"
+      actions:
+        item:
+          details:
+            type: details
+            label: open_marketplace.ui.details
+            options:
+              link:
+                route: open_marketplace_admin_settlement_show
+                parameters:
+                  id: resource.id

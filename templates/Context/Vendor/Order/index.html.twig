@@ -8,5 +8,11 @@
 {% endblock %}
 
 {% block subcontent %}
-    {{ sylius_grid_render(resources, 'Context/Vendor/Common/_vendorOrders.html.twig') }}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.orders',
+        "subheader": 'open_marketplace.ui.manage_orders',
+        "icon": 'suitcase'
+    } %}
+
+    {{ sylius_grid_render(resources, '@SyliusShop/Grid/_default.html.twig') }}
 {% endblock %}

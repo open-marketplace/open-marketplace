@@ -21,7 +21,6 @@ final class BackgroundImageCascadesTest extends IntegrationTestCase
     public function setUp(): void
     {
         parent::setUp();
-//        $this->dataFixturesPath = __DIR__ . '/DataFixtures/ORM';
         $this->entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
 
@@ -30,7 +29,7 @@ final class BackgroundImageCascadesTest extends IntegrationTestCase
 
     public function test_it_removes_background_image_only(): void
     {
-        $this->loadFixturesFromFile('BackgroundImageCascadesTest/cascade_tests.yml');
+        $this->loadFixturesFromFile('BackgroundImageCascadesTest/cascade_tests.yaml');
 
         /** @var VendorInterface $vendor */
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Weyland-Corp']);

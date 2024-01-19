@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="false" autowire="false" autoconfigure="false" />
+        <service class="BitBag\OpenMarketplace\Component\Settlement\Cli\SettlementGenerateCommand"
+                id="bitbag.open_marketplace.component.settlement.cli.settlement_generate_command"
+        >
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.repository.vendor"/>
+            <argument type="service" id="sylius.repository.channel"/>
+            <argument type="service" id="bitbag.open_marketplace.component.settlement.creator.settlement"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="bitbag.open_marketplace.component.settlement.sender.settlements_created_email_sender"/>
+            <tag name="console.command"/>
+        </service>
+    </services>
+</container>

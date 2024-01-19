@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Order\Repository;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
@@ -19,9 +20,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Order\Model\OrderInterface as OrderInterfaceAlias;
 
-class OrderRepository extends BaseOrderRepository
+class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
-    public function findAllByVendor(VendorInterface $vendor): QueryBuilder
+    public function findAllByVendorQueryBuilder(VendorInterface $vendor): QueryBuilder
     {
         $vendorId = $vendor->getId();
 
@@ -31,7 +32,7 @@ class OrderRepository extends BaseOrderRepository
             ;
     }
 
-    public function findAllSecondaryOrders(): QueryBuilder
+    public function findAllSecondaryOrdersQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->createListQueryBuilder();
         $alias = $queryBuilder->getRootAliases()[0];
@@ -182,6 +183,53 @@ class OrderRepository extends BaseOrderRepository
             ->andWhere('o.mode != :mode')
             ->setParameter('customerId', $customerId)
             ->setParameter('mode', OrderInterface::PRIMARY_ORDER_MODE)
+            ;
+    }
+
+    public function findForSettlementByVendorAndChannelAndDates(
+        VendorInterface $vendor,
+        ChannelInterface $channel,
+        \DateTimeInterface $nextSettlementStartDate,
+        \DateTimeInterface $nextSettlementEndDate
+    ): array {
+        $qb = $this->findAllByVendorQueryBuilder($vendor);
+
+        return $qb
+            ->select('SUM(o.total) as total, SUM(o.commissionTotal) as commissionTotal')
+            ->andWhere('o.channel = :channel')
+            ->andWhere(
+                $qb->expr()->between(
+                    'o.paidAt',
+                    ':startDate',
+                    ':endDate'
+                )
+            )
+            ->setParameter('channel', $channel->getId())
+            ->setParameter('startDate', $nextSettlementStartDate)
+            ->setParameter('endDate', $nextSettlementEndDate)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function findForSettlementQueryBuilder(SettlementInterface $settlement): QueryBuilder
+    {
+        return $this->findAllByVendorQueryBuilder($settlement->getVendor())
+            ->andWhere('o.mode = :secondaryOrderMode')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.paidAt BETWEEN :startDate AND :endDate')
+            ->setParameter('secondaryOrderMode', OrderInterface::SECONDARY_ORDER_MODE)
+            ->setParameter('channel', $settlement->getChannel())
+            ->setParameter('startDate', $settlement->getStartDate())
+            ->setParameter('endDate', $settlement->getEndDate())
+        ;
+    }
+
+    public function countOrderForSettlement(SettlementInterface $settlement): int
+    {
+        return (int) $this->findForSettlementQueryBuilder($settlement)
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
             ;
     }
 }

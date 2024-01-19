@@ -13,10 +13,11 @@
 {% endblock %}
 
 {% block subcontent %}
+    <br />
     <div class="ui stackable two column grid">
         <div class="ten wide column">
             <h1 class="ui header">
-                <i class="circular user icon"></i>
+                <i class="user icon"></i>
                 <div class="content">
                     {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
                     <div class="sub header">
