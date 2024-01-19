@@ -1,0 +1,7 @@
+sylius_mailer:
+  sender:
+    name: 'OpenMarketplace'
+    address: no-reply@bitbag.io
+  emails:
+    settlements_created:
+      template: "Context/Vendor/Email/settlementsCreated.html.twig"

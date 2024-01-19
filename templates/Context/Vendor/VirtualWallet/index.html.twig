@@ -1,0 +1,18 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% use 'Context/Vendor/Common/_breadcrumb.html.twig' %}
+
+{% block title %}{{ 'open_marketplace.ui.virtual_wallets'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb_page %}
+    <div class="active section">{{ 'open_marketplace.ui.virtual_wallets'|trans }}</div>
+{% endblock %}
+
+{% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.virtual_wallets',
+        "subheader": 'open_marketplace.ui.manage_your_wallets',
+        "icon": 'credit card',
+    } %}
+
+    {{ sylius_grid_render(resources, '@SyliusShop/Grid/_default.html.twig') }}
+{% endblock %}

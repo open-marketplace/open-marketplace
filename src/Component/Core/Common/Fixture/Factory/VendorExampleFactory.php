@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
 
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUserInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorShippingMethod;
@@ -21,7 +22,6 @@ use BitBag\OpenMarketplace\Component\Vendor\Profile\Factory\ProfileFactoryInterf
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -38,7 +38,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class VendorExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+final class VendorExampleFactory extends AbstractExampleFactory
 {
     private Generator $faker;
 
@@ -93,6 +93,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         $vendor = $this->profileFactory->createNew();
         $vendor->setCompanyName($options['company_name']);
         $vendor->setTaxIdentifier($options['tax_identifier']);
+        $vendor->setBankAccountNumber($options['bank_account_number']);
         $vendor->setPhoneNumber($options['phone_number']);
         $vendor->setStatus($options['status']);
         $vendor->setEnabled($options['enabled']);
@@ -100,6 +101,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
         $vendor->setDescription($options['description']);
         $vendor->setShopUser($user);
         $vendor->setVendorAddress($vendorAddress);
+        $vendor->setSettlementFrequency($options['settlement_frequency']);
 
         if (null !== $options['image']) {
             /** @var string $imagePath */
@@ -178,6 +180,7 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
             )
             ->setDefault('company_name', fn (Options $options): string => $this->faker->company)
             ->setDefault('tax_identifier', fn (Options $options): string => $this->faker->companySuffix)
+            ->setDefault('bank_account_number', fn (Options $options): string => $this->faker->iban)
             ->setDefault('phone_number', fn (Options $options): string => $this->faker->phoneNumber)
             ->setDefault('status', VendorInterface::STATUS_VERIFIED)
             ->setDefault('enabled', true)
@@ -189,7 +192,9 @@ final class VendorExampleFactory extends AbstractExampleFactory implements Examp
             ->setNormalizer('country', LazyOption::getOneBy($this->countryRepository, 'code'))
             ->setDefault('city', fn (Options $options): string => $this->faker->city)
             ->setDefault('street', fn (Options $options): string => $this->faker->streetAddress)
-            ->setDefault('postcode', fn (Options $options): string => $this->faker->postcode);
+            ->setDefault('postcode', fn (Options $options): string => $this->faker->postcode)
+            ->setDefault('settlement_frequency', VendorSettlementFrequency::DEFAULT_SETTLEMENT_FREQUENCY)
+        ;
     }
 
     private function countryCheck(): void

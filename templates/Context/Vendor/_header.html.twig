@@ -1,0 +1,23 @@
+<br />
+<div class="ui stackable two column grid">
+    <div class="column">
+        <h1 class="ui header">
+            <i class="{{ icon}} icon"></i>
+            <div class="content">
+                {{ header|trans }}
+                {% if subheader is defined %}
+                    <div class="sub header">{{ subheader|trans }}</div>
+                {% endif %}
+            </div>
+        </h1>
+    </div>
+    {% if buttons is defined %}
+        {% if buttonsData is not defined %}
+            {% set buttonsData = {} %}
+        {% endif %}
+
+        {% include buttons with buttonsData %}
+    {% endif %}
+</div>
+
+<div class="ui divider"></div>

@@ -18,7 +18,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\Channel;
 
-class ProductRepositoryTest extends JsonApiTestCase
+final class ProductRepositoryTest extends JsonApiTestCase
 {
     public function setUp(): void
     {
@@ -30,7 +30,7 @@ class ProductRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_vendor_products(): void
     {
-        $this->loadFixturesFromFile('ProductRepositoryTest/test_it_finds_vendor_products.yml');
+        $this->loadFixturesFromFile('ProductRepositoryTest/test_it_finds_vendor_products.yaml');
         /** @var VendorInterface $vendorOliver */
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBySlug('oliver-queen-company');
         $channel = $this->entityManager->getRepository(Channel::class)->findAll()[0];

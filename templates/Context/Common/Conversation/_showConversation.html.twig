@@ -19,13 +19,9 @@
                     <div class="sub header">
                         {{ 'open_marketplace.ui.conversation.with'|trans }}
                         {% if conversation.messages.first.adminUser is not null %}
-                            <div>
-                                {{ 'open_marketplace.ui.admin'|trans }}
-                            </div>
+                            {{ 'open_marketplace.ui.admin'|trans }}
                         {% else %}
-                            <div>
-                                {{ conversation.messages.first.shopUser.username }}
-                            </div>
+                            {{ conversation.messages.first.shopUser.username }}
                         {% endif %}
                     </div>
                 </div>

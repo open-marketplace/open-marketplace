@@ -1,0 +1,87 @@
+Sylius\Component\Addressing\Model\Country:
+  poland:
+    code: 'PL'
+Sylius\Component\Core\Model\Customer:
+  customer_oliver:
+    firstName: 'John'
+    lastName: 'Nowak'
+    email: 'test@example.com'
+    emailCanonical: 'test2@example.com'
+  customer_bruce:
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'test2@example.com'
+    emailCanonical: 'test@example.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
+  user_oliver:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_oliver'
+    username: 'oliver@queen.com'
+    usernameCanonical: 'oliver@queen.com'
+  user_bruce:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_bruce'
+    username: 'bruce@wayne.com'
+    usernameCanonical: 'bruce@wayne.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
+  oliver_vendor_address:
+    country: '@poland'
+    city: 'Warsaw'
+    postalCode: '00-999'
+    street: 'Avenue 2115'
+  bruce_vendor_address:
+    country: '@poland'
+    city: 'Poznan'
+    postalCode: '61-512'
+    street: 'Umultowska 54'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
+  vendor_oliver:
+    shopUser: '@user_oliver'
+    companyName: 'Test company name'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '333111222'
+    vendorAddress: '@oliver_vendor_address'
+    slug: 'oliver-queen-company'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+  vendor_bruce:
+    shopUser: '@user_bruce'
+    companyName: 'Test company name'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '333111222'
+    vendorAddress: '@bruce_vendor_address'
+    slug: 'bruce-wayne-company'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing:
+  product_listing_oliver_1:
+    vendor: '@vendor_oliver'
+    code: 'Oliver product'
+  product_listing_oliver_2:
+    vendor: '@vendor_oliver'
+    code: 'Oliver product 2'
+  product_listing_bruce_1:
+    vendor: '@vendor_bruce'
+    code: 'Bruce product'
+BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft:
+  product_draft_oliver_1_1:
+    product_listing: '@product_listing_oliver_1'
+    version_number: '1'
+  product_draft_oliver_1_2:
+    product_listing: '@product_listing_oliver_1'
+    version_number: '2'
+  product_draft_oliver_2_1:
+    product_listing: '@product_listing_oliver_2'
+    version_number: '1'
+  product_draft_bruce_1:
+    product_listing: '@product_listing_bruce_1'
+    version_number: '1'
+

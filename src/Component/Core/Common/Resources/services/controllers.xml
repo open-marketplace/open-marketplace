@@ -37,7 +37,6 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="form.factory" />
             <argument type="service" id="bitbag.open_marketplace.component.messaging.persister.message" />
             <argument type="service" id="router"/>
-            <argument type="service" id="session.flash_bag"/>
 
             <tag name="controller.service_arguments" />
         </service>
@@ -62,6 +61,28 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_generator.factory.draft_attribute"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter.updater.product_attribute_updater"/>
             <argument type="service" id="bitbag.open_marketplace.component.vendor.context.vendor"/>
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Settlement\Controller\Action\ProfitWithdrawalAction"
+                 id="bitbag.open_marketplace.component.core.settlement.controller.action.profit_withdrawal"
+        >
+            <argument type="service">
+                <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
+                    <factory service="sylius.resource_registry" method="get"/>
+                    <argument type="string">open_marketplace.settlement</argument>
+                </service>
+            </argument>
+            <argument type="service" id="bitbag.open_marketplace.component.core.api.context.vendor"/>
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="bitbag.open_marketplace.component.settlement.creator.settlement"/>
+            <argument type="service" id="sylius.repository.channel"/>
+            <argument type="service" id="open_marketplace.component.settlement.manager.virtual_wallet"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+
+            <tag name="controller.service_arguments"/>
         </service>
     </services>
 </container>

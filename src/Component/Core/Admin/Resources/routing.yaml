@@ -9,3 +9,6 @@ open_marketplace_admin_product_listing:
 
 open_marketplace_admin_vendor:
     resource: "routing/vendor.yaml"
+
+open_marketplace_admin_settlement:
+    resource: "routing/settlement.yaml"

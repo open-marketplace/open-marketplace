@@ -14,11 +14,12 @@ namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Messaging;
 use BitBag\OpenMarketplace\Component\Core\Common\Form\Type\Messaging\MessageType;
 use BitBag\OpenMarketplace\Component\Messaging\Entity\Message;
 use BitBag\OpenMarketplace\Component\Messaging\MessagePersisterInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class CreateMessageAction
@@ -26,8 +27,7 @@ final class CreateMessageAction
     public function __construct(
         private FormFactoryInterface $formFactory,
         private MessagePersisterInterface $messagePersister,
-        private UrlGeneratorInterface $urlGenerator,
-        private FlashBag $flashBag
+        private UrlGeneratorInterface $urlGenerator
     ) {
     }
 
@@ -46,7 +46,13 @@ final class CreateMessageAction
             $this->messagePersister
                 ->createWithConversation($id, $message, $file);
         } else {
-            $this->flashBag->add('error', (string) $form->get('file')->getErrors());
+            /** @var Session $session */
+            $session = $request->getSession();
+            $flashBag = $session->getFlashBag();
+            /** @var FormError $error */
+            foreach ($form->getErrors(true) as $error) {
+                $flashBag->add('error', $error->getMessage());
+            }
         }
 
         return new RedirectResponse($this->urlGenerator->generate($redirect, [

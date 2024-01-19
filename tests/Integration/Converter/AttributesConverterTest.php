@@ -24,7 +24,7 @@ class AttributesConverterTest extends JsonApiTestCase
 
     public function test_it_removes_attributes_from_product(): void
     {
-        $this->loadFixturesFromFile('AttributesConverterTest/test_it_removes_attributes_from_product.yml');
+        $this->loadFixturesFromFile('AttributesConverterTest/test_it_removes_attributes_from_product.yaml');
         $draft = $this->entityManager->getRepository(Draft::class)->findAll()[0];
 
         $productListing = $draft->getProductListing();

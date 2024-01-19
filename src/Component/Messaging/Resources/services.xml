@@ -12,7 +12,7 @@
         <service class="BitBag\OpenMarketplace\Component\Messaging\MessagePersister"
                  id="bitbag.open_marketplace.component.messaging.persister.message">
             <argument type="service" id="bitbag.open_marketplace.component.core.common.resolver.resource.current_user_resolver" />
-            <argument type="service" id="bitbag.open_marketplace.component.order.uploader.attachment" />
+            <argument type="service" id="bitbag.open_marketplace.component.messaging.uploader.attachment" />
             <argument type="service" id="open_marketplace.repository.conversation" />
         </service>
     </services>

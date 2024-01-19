@@ -7,7 +7,9 @@
     <div class="active section">{{ 'open_marketplace.ui.create_new_conversation_breadcrumb'|trans }}</div>
 {% endblock %}
 
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
 {% block subcontent %}
+    <br />
     {% include "Context/Common/Conversation/_createConversationForm.html.twig" %}
 {% endblock %}

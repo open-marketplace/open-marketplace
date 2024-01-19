@@ -100,6 +100,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     shopUser: '@user_bruce'
     companyName: 'Wayne Enterprises, Inc.'
     taxIdentifier: '1234567'
+    bankAccountNumber: 'PL84109024022516138548468193'
     phoneNumber: '555123123'
     slug: 'Wayne-Enterprises-Inc'
     description: 'description'
@@ -109,6 +110,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     shopUser: '@user_peter'
     companyName: 'Weyland Corp'
     taxIdentifier: '7654321'
+    bankAccountNumber: 'PL11109024028914597692969454'
     phoneNumber: '555444333'
     slug: 'Weyland-Corp'
     description: 'description'
@@ -118,6 +120,7 @@ BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation:
   bruce_conversation:
     shopUser: '@user_bruce'
   peter_conversation:
+    category: '@peter_category'
     shopUser: '@user_peter'
   conversation_to_archive:
     shopUser: '@user_bruce'
@@ -131,4 +134,6 @@ BitBag\OpenMarketplace\Component\Messaging\Entity\Message:
   archive_request:
     content: '\<span>ARCHIVE_REQUEST_MESSAGE</span>'
     conversation: "@conversation_to_archive"
-
+BitBag\OpenMarketplace\Component\Messaging\Entity\Category:
+  peter_category:
+    name: "Category for Peter"

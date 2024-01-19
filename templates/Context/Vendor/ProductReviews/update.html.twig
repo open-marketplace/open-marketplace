@@ -16,6 +16,11 @@
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
 {% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.edit_product_review',
+        "icon": 'star'
+    } %}
+
     <div class="ui segment">
         {{ form_start(form, { 'attr': {'class': 'ui form'}}) }}
         <div class="ui stackable grid">

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service class="Tests\BitBag\OpenMarketplace\Behat\Context\Setup\ProductListingContext"
+                 id="open_marketplace.behat.context.setup.product_listing" public="true"
+        >
+            <argument type="service" id="sylius.fixture.example_factory.shop_user"/>
+            <argument type="service" id="bitbag.open_marketplace.component.vendor.factory.vendor"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter"/>
+            <argument type="service" id="sylius.fixture.example_factory.product"/>
+            <argument type="service" id="sylius.fixture.example_factory.taxon"/>
+        </service>
+
+    </services>
+</container>
