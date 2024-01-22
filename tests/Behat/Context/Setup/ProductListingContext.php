@@ -235,7 +235,6 @@ final class ProductListingContext extends RawMinkContext implements Context
         return $this->getSession()->getPage();
     }
 
-
     private function createProductDraft($status): DraftInterface
     {
         $productDraft = new Draft();
