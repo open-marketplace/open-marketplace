@@ -53,10 +53,10 @@ Feature: Creating a product listing
     And I fill in conversation message content with "reason to reject"
     Then I click "Reject" button
 
-#  @ui @test
-#  Scenario: Vendor gets the product listing reject message
-#    Given There is a rejected product listing created by vendor
-#    And  I am logged in as "vendor@email.com"
-#    When I am on a dashboard page
-#    And I am on "/en_US/account/vendor/conversations"
-#    Then I should see "reason to reject"
+  @ui
+  Scenario: Vendor gets the product listing reject message
+    Given There is a rejected product listing created by vendor
+    And  I am logged in as "vendor@email.com"
+    When I am on a dashboard page
+    And I am on a conversations page
+    Then I should see "Listing with selected tax category was rejected"

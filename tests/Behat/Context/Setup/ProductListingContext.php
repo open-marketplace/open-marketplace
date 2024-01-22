@@ -14,6 +14,10 @@ namespace Tests\BitBag\OpenMarketplace\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
+use BitBag\OpenMarketplace\Component\Messaging\Entity\MessageInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Factory\CategoryFactoryInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Factory\ConversationFactoryInterface;
+use BitBag\OpenMarketplace\Component\Messaging\Factory\MessageFactoryInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftConverter;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Draft;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
@@ -25,36 +29,51 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingPriceInterface
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategory;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Symfony\Component\Routing\Generator\UrlGenerator;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext implements Context
 {
     public function __construct(
-        private ShopUserExampleFactory $shopUserExampleFactory,
-        private FactoryInterface $vendorFactory,
         private EntityManagerInterface $entityManager,
         private SharedStorageInterface $sharedStorage,
         private DraftConverter $acceptanceOperator,
         private FactoryInterface $taxCategoryExampleFactory,
+        private ConversationFactoryInterface $conversationFactory,
+        private MessageFactoryInterface $messageFactory,
+        private CategoryFactoryInterface $categoryFactory,
+        private UserContextInterface $userContext,
+        private RouterInterface $router,
         ) {
     }
 
     /**
      * @Given I am on a dashboard page
      */
-    public function iAmOnADashboardPage()
+    public function iAmOnADashboardPage(): void
     {
         $this->visitPath('/en_US/account/dashboard');
     }
 
     /**
+     * @Given I am on a conversations page
+     */
+    public function iAmOnConversationsPage(): void
+    {
+        $this->visitPath('/en_US/account/vendor/conversations');
+    }
+
+    /**
      * @Given I am on an admin dashboard page
      */
-    public function iAmOnAnAdminDashboardPage()
+    public function iAmOnAnAdminDashboardPage(): void
     {
         $this->visitPath('/admin');
     }
@@ -86,6 +105,38 @@ final class ProductListingContext extends RawMinkContext implements Context
         );
 
         $this->entityManager->persist($productListing);
+//        $this->entityManager->flush();
+
+        /** @var DraftInterface $draft */
+        $draft = $productListing->getLatestDraft();
+
+        $draftViewURL = $this->router->generate(
+            'open_marketplace_vendor_product_listings_show',
+            [
+                'id' => $draft->getId(),
+                '_locale' => 'en_US',
+            ],
+            UrlGenerator::ABSOLUTE_URL
+        );
+
+        $category = $this->categoryFactory->createNewWithName(
+            'Product listing rejection'
+        );
+
+        $this->entityManager->persist($category);
+
+        $conversation = $this->conversationFactory->createNew();
+        $conversation->setShopUser($productListing->getVendor()->getShopUser());
+        $conversation->setRejectedListingURL($draftViewURL);
+        $conversation->setCategory($category);
+
+        $message = $this->createMessage(
+            'Listing with selected tax category was rejected',
+        );
+
+        $conversation->addMessage($message);
+
+        $this->entityManager->persist($conversation);
         $this->entityManager->flush();
     }
 
@@ -269,9 +320,26 @@ final class ProductListingContext extends RawMinkContext implements Context
 
         return $productPricing;
     }
-//
-//    private function createMessage($message): void
-//    {
-//
-//    }
+
+    private function createMessage(
+        string $content,
+    ): MessageInterface {
+        /** @var MessageInterface $message */
+        $message = $this->messageFactory->createNew();
+
+        $user = $this->userContext->getUser();
+
+        if ($user instanceof AdminUserInterface) {
+            $message->setAdminUser($user);
+        }
+
+        if ($user instanceof ShopUserInterface) {
+            $message->setShopUser($user);
+            $message->setAuthor($user);
+        }
+
+        $message->setContent($content);
+
+        return $message;
+    }
 }
