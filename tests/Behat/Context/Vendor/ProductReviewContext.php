@@ -11,6 +11,8 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\DocumentElement;
+use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Product\Repository\ProductReviewRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\CustomerRepositoryInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -20,7 +22,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductReviewPageInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductReviewContext implements Context
+final class ProductReviewContext extends RawMinkContext implements Context
 {
     private ProductReviewPageInterface $productReviewPage;
 
@@ -38,7 +40,7 @@ final class ProductReviewContext implements Context
         ObjectManager $manager,
         ProductReviewRepositoryInterface $productReviewRepository,
         CustomerRepositoryInterface $customerRepository,
-        ) {
+    ) {
         $this->productReviewPage = $productReviewPage;
         $this->sharedStorage = $sharedStorage;
         $this->manager = $manager;
@@ -86,7 +88,7 @@ final class ProductReviewContext implements Context
         ProductInterface $product,
         int $count,
         string $status,
-        ): void {
+    ): void {
         $productReviews = $this->productReviewRepository->findBy(['reviewSubject' => $product, 'status' => $status]);
         Assert::count($productReviews, $count);
     }
@@ -97,7 +99,8 @@ final class ProductReviewContext implements Context
     public function iAmOnEditPageOfReviewAddedByToProduct(string $customer, ProductInterface $product)
     {
         $customer = $this->customerRepository->findOneBy(['email' => $customer]);
-        $productReview = $this->productReviewRepository->findOneBy(['reviewSubject' => $product, 'author' => $customer]);
+        $productReview = $this->productReviewRepository->findOneBy(['reviewSubject' => $product, 'author' => $customer]
+        );
         $this->sharedStorage->set('review', $productReview);
 
         $this->productReviewPage->open(['id' => $productReview->getId()]);
@@ -119,5 +122,34 @@ final class ProductReviewContext implements Context
     {
         $this->manager->refresh($review);
         Assert::same($review->getComment(), $comment);
+    }
+
+    /**
+     * @Given I am on vendor product reviews listing page
+     */
+    public function iAmOnVendorProductReviewsListingPage(): void
+    {
+        $this->visitPath('/en_US/account/vendor/product-reviews');
+    }
+
+    /**
+     * @When I fill in the author field with :name value
+     */
+    public function iFillInTheAuthorFieldWithName(string $name): void
+    {
+        $this->getPage()->fillField('criteria[author][value]', $name);
+    }
+
+    /**
+     * @When I fill in the review subject field with :subject value
+     */
+    public function iFillInTheReviewSubjectWithName(string $subject): void
+    {
+        $this->getPage()->fillField('criteria[reviewSubject][value]', $subject);
+    }
+
+    private function getPage(): DocumentElement
+    {
+        return $this->getSession()->getPage();
     }
 }
