@@ -12,19 +12,19 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <import resource="services/*.xml"/>
     </imports>
     <services>
-        <defaults autowire="false" autoconfigure="false" />
+        <defaults autowire="false" autoconfigure="false"/>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\MenuListener"
                  id="bitbag.open_marketplace.component.core.vendor.menu_listener">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="security.helper" />
-            <argument type="service" id="sm.factory" />
-            <argument type="service" id="security.csrf.token_manager" />
+            <argument type="service" id="knp_menu.factory"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="security.helper"/>
+            <argument type="service" id="sm.factory"/>
+            <argument type="service" id="security.csrf.token_manager"/>
 
-            <tag name="knp_menu.menu_builder" method="createVendorSidebar" alias="open_marketplace.core.vendor.menu" />
-            <tag name="knp_menu.menu_builder" method="addOrderCancelButton" alias="sylius.vendor.order.show" />
-            <tag name="knp_menu.menu_builder" method="addShowCustomerOrdersButton" alias="sylius.vendor.customer.show" />
+            <tag name="knp_menu.menu_builder" method="createVendorSidebar" alias="open_marketplace.core.vendor.menu"/>
+            <tag name="knp_menu.menu_builder" method="addOrderCancelButton" alias="sylius.vendor.order.show"/>
+            <tag name="knp_menu.menu_builder" method="addShowCustomerOrdersButton" alias="sylius.vendor.customer.show"/>
         </service>
     </services>
 </container>

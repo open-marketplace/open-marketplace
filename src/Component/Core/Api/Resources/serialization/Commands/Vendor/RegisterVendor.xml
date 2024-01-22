@@ -17,6 +17,9 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <attribute name="taxIdentifier">
             <group>shop:account:vendor:create</group>
         </attribute>
+        <attribute name="bankAccountNumber">
+            <group>shop:account:vendor:create</group>
+        </attribute>
         <attribute name="phoneNumber">
             <group>shop:account:vendor:create</group>
         </attribute>

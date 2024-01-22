@@ -1,4 +1,4 @@
 imports:
-    - { resource: 'grids/*.yaml' }
-    - { resource: 'emails/*.yaml' }
-    - { resource: 'ui/ui.yaml' }
+  - { resource: 'grids/*.yaml' }
+  - { resource: 'emails/*.yaml' }
+  - { resource: 'ui/ui.yaml' }

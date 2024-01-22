@@ -6,7 +6,7 @@
         <defaults autowire="false" autoconfigure="false" />
 
         <service class="BitBag\OpenMarketplace\Component\Messaging\Uploader\AttachmentUploader"
-                 id="bitbag.open_marketplace.component.order.uploader.attachment">
+                 id="bitbag.open_marketplace.component.messaging.uploader.attachment">
             <argument>%env(MESSAGES_FILE_UPLOAD_DIRECTORY)%</argument>
         </service>
     </services>

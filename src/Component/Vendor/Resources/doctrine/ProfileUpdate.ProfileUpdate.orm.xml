@@ -11,6 +11,7 @@
         </id>
         <field name="companyName" column="company_name" type="text" />
         <field name="taxIdentifier" column="tax_identifier" type="text" />
+        <field name="bankAccountNumber" column="bank_account_number" type="text" />
         <field name="phoneNumber" column="phone_number" type="text" />
         <field name="token" column="token" type="text" />
         <field name="description" column="description" type="string" length="2048" />

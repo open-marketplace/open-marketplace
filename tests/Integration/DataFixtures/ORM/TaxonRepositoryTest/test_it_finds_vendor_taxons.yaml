@@ -1,0 +1,149 @@
+Sylius\Component\Addressing\Model\Country:
+  USA:
+    code: 'US'
+Sylius\Component\Currency\Model\Currency:
+  dollar:
+    code: 'USD'
+Sylius\Component\Locale\Model\Locale:
+  locale:
+    createdAt: '<dateTimeBetween("-200 days", "now")>'
+    code: 'en_US'
+Sylius\Component\Core\Model\Channel:
+  channel:
+    code: 'code'
+    name: 'name'
+    locales:
+      - '@locale'
+    default_locale: '@locale'
+    tax_calculation_strategy: 'order_items_based'
+    base_currency: '@dollar'
+Sylius\Component\Core\Model\Customer:
+  customer_oliver:
+    firstName: 'John'
+    lastName: 'Nowak'
+    email: 'test@example.com'
+    emailCanonical: 'test2@example.com'
+  customer_bruce:
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'test2@example.com'
+    emailCanonical: 'test@example.com'
+  customer_clark:
+    firstName: 'Clark'
+    lastName: 'Kent'
+    email: 'test3@example.com'
+    emailCanonical: 'test3@example.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
+  user_oliver:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_oliver'
+    username: 'oliver@queen.com'
+    usernameCanonical: 'oliver@queen.com'
+  user_bruce:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_bruce'
+    username: 'bruce@wayne.com'
+    usernameCanonical: 'bruce@wayne.com'
+  user_clark:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_clark'
+    username: 'clark@kent.com'
+    usernameCanonical: 'clark@kent.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
+  vendor_address:
+    country: '@USA'
+    city: 'Warsaw'
+    postalCode: '00-999'
+    street: 'Avenue 2115'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
+  vendor_oliver:
+    shopUser: '@user_oliver'
+    companyName: 'Test company name'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '333111222'
+    vendorAddress: '@vendor_address'
+    slug: 'oliver-queen-company'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+Sylius\Component\Taxonomy\Model\TaxonTranslation:
+  taxon_translation:
+    locale: 'en_US'
+    name: 'name'
+    slug: 'slug'
+  taxon2_translation:
+    locale: 'en_US'
+    name: 'name2'
+    slug: 'slug2'
+Sylius\Component\Core\Model\Taxon:
+  taxon:
+    code: 'menu_category'
+    translations:
+      - '@taxon_translation'
+    enabled: true
+  taxon2:
+    code: 'menu_category_child'
+    translations:
+      - '@taxon2_translation'
+    enabled: true
+    parent: '@taxon'
+Sylius\Component\Core\Model\ProductTranslation:
+  first_product_US_translation:
+    name: 'test_name1'
+    slug: 'test_slug1'
+    locale: 'en_US'
+  second_product_US_translation:
+    name: 'test_name2'
+    slug: 'test_slug2'
+    locale: 'en_US'
+BitBag\OpenMarketplace\Component\Product\Entity\Product:
+  first_product:
+    mainTaxon: '@taxon'
+    vendor: '@vendor_oliver'
+    code: 'code'
+    channels:
+      - '@channel'
+    translations:
+      - '@first_product_US_translation'
+  second_product:
+    mainTaxon: '@taxon'
+    vendor: '@vendor_oliver'
+    code: 'code2'
+    channels:
+      - '@channel'
+    translations:
+      - '@second_product_US_translation'
+  third_product_without_translation:
+    mainTaxon: '@taxon'
+    vendor: '@vendor_oliver'
+    code: 'code3'
+    channels:
+      - '@channel'
+Sylius\Component\Core\Model\ProductTaxon:
+  firs_relation:
+    taxon: '@taxon'
+    product: '@first_product'
+  second_relation:
+    taxon: '@taxon'
+    product: '@second_product'
+Sylius\Component\Core\Model\ProductVariant:
+  first_variant:
+    product: '@first_product'
+    code: 'code'
+BitBag\OpenMarketplace\Component\Order\Entity\Order:
+  bruce_order_made_with_oliver:
+    currency_code: 'USD'
+    locale_code: 'en-US'
+    vendor: '@vendor_oliver'
+    customer: '@customer_bruce'
+  clarks_order_made_with_random_vendor:
+    currency_code: 'USD'
+    locale_code: 'en-US'
+    customer: '@customer_clark'

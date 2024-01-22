@@ -19,6 +19,7 @@ interface ProfileFactoryInterface
     public function createVendor(
         string $companyName,
         string $taxIdentifier,
+        string $bankAccountNumber,
         string $phoneNumber,
         string $description,
         AddressInterface $address

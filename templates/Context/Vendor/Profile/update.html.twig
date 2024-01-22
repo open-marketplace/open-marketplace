@@ -12,15 +12,17 @@
 {% endblock %}
 
 {% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.your_vendor_profile',
+        "subheader": 'open_marketplace.ui.edit_your_vendor_information',
+        "icon": 'user',
+    } %}
+
     <div class="ui segment">
         {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-        <h1 class="ui dividing header">
-            {{ 'open_marketplace.ui.your_vendor_profile'|trans }}
-            <div class="sub header">{{ 'open_marketplace.ui.edit_your_vendor_information'|trans }}</div>
-        </h1>
-
         {{ form_row(form.companyName, sylius_test_form_attribute('companyName')) }}
         {{ form_row(form.taxIdentifier) }}
+        {{ form_row(form.bankAccountNumber) }}
         {{ form_row(form.phoneNumber) }}
 
         <div class="field" id="add-avatar">

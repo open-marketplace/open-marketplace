@@ -26,18 +26,24 @@ final class MenuListener
                 ->setLabel('open_marketplace.ui.marketplace');
 
         $mvmRootMenuItem
-            ->addChild('open_marketplace_product_listings', [
-                'route' => 'open_marketplace_admin_product_listing_index',
-            ])
+            ->addChild('open_marketplace_product_listings', ['route' => 'open_marketplace_admin_product_listing_index'])
             ->setLabel('open_marketplace.ui.product_listings')
             ->setLabelAttribute('icon', 'list');
 
         $mvmRootMenuItem
-            ->addChild('vendors', [
-                'route' => 'open_marketplace_admin_vendor_index',
-            ])
+            ->addChild('vendors', ['route' => 'open_marketplace_admin_vendor_index'])
             ->setLabel('open_marketplace.ui.vendors')
             ->setLabelAttribute('icon', 'users');
+
+        $mvmRootMenuItem
+            ->addChild('settlement', ['route' => 'open_marketplace_admin_settlement_index'])
+            ->setLabel('open_marketplace.ui.settlements')
+            ->setLabelAttribute('icon', 'money bill alternate');
+
+        $mvmRootMenuItem
+            ->addChild('virtual_wallet', ['route' => 'open_marketplace_admin_virtual_wallet_index'])
+            ->setLabel('open_marketplace.ui.virtual_wallets')
+            ->setLabelAttribute('icon', 'credit card');
 
         $mvmRootMenuItem
             ->addChild('conversations', ['route' => 'open_marketplace_admin_messaging_conversation_index'])

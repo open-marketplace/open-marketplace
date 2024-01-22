@@ -21,7 +21,7 @@ final class ProductReviewRepositoryTest extends JsonApiTestCase
 {
     public function test_find_product_reviews_for_vendor(): void
     {
-        $this->loadFixturesFromFile('ProductReviewRepositoryTest/found_product_reviews_for_vendor.yml');
+        $this->loadFixturesFromFile('ProductReviewRepositoryTest/found_product_reviews_for_vendor.yaml');
 
         /** @var VendorRepositoryInterface $vendorRepository */
         $vendorRepository = $this->getEntityManager()->getRepository(Vendor::class);
@@ -37,7 +37,7 @@ final class ProductReviewRepositoryTest extends JsonApiTestCase
 
     public function test_find_product_reviews_for_vendor_not_found(): void
     {
-        $this->loadFixturesFromFile('ProductReviewRepositoryTest/not_found_product_reviews_for_vendor.yml');
+        $this->loadFixturesFromFile('ProductReviewRepositoryTest/not_found_product_reviews_for_vendor.yaml');
 
         /** @var VendorRepositoryInterface $vendorRepository */
         $vendorRepository = $this->getEntityManager()->getRepository(Vendor::class);

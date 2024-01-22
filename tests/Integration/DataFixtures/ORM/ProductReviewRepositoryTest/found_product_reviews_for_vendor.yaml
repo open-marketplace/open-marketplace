@@ -1,0 +1,93 @@
+Sylius\Component\Addressing\Model\Country:
+  poland:
+    code: 'PL'
+Sylius\Component\Core\Model\Customer:
+  customer_adam:
+    firstName: 'Adam'
+    lastName: 'Ondra'
+    email: 'adam@example.com'
+    emailCanonical: 'adam@example.com'
+  customer_alex:
+    firstName: 'Alex'
+    lastName: 'Honnold'
+    email: 'alex@example.com'
+    emailCanonical: 'alex@example.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
+  user_adam:
+    plainPassword: 'password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_adam'
+    username: 'adam@ondra.com'
+    usernameCanonical: 'adam@ondara.com'
+  user_alex:
+    plainPassword: 'password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_alex'
+    username: 'alex@honnold.com'
+    usernameCanonical: 'alex@honnold.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Address:
+  vendor_adam_address:
+    country: '@poland'
+    city: 'Poznan'
+    postalCode: '61-512'
+    street: 'Umultowska 54'
+  vendor_alex_address:
+    country: '@poland'
+    city: 'Warsaw'
+    postalCode: '00-999'
+    street: 'Avenue 20'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
+  vendor_adam:
+    shopUser: '@user_adam'
+    companyName: 'Skalnik'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '333111222'
+    vendorAddress: '@vendor_adam_address'
+    slug: 'adam-ondra-company'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+  vendor_alex:
+    shopUser: '@user_alex'
+    companyName: '8a'
+    taxIdentifier: '7654321'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '123432234'
+    vendorAddress: '@vendor_alex_address'
+    slug: 'alex-honnold-company'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+BitBag\OpenMarketplace\Component\Product\Entity\Product:
+  product_adam_1:
+    vendor: '@vendor_adam'
+    code: 'Harness-adam'
+  product_adam_2:
+    vendor: '@vendor_adam'
+    code: 'Climbing boots-adam'
+  product_alex_1:
+    vendor: '@vendor_alex'
+    code: 'Harness-alex'
+Sylius\Component\Core\Model\ProductReview:
+  first_product_review:
+    title: 'Product Review'
+    comment: 'comment'
+    rating: '3'
+    author: '@customer_alex'
+    reviewSubject: '@product_adam_1'
+  second_product_review:
+    title: 'Best Product Review'
+    comment: 'comment'
+    rating: '5'
+    author: '@customer_alex'
+    reviewSubject: '@product_adam_2'
+  third_product_review:
+    title: 'Good Product Review'
+    comment: 'comment'
+    rating: '4'
+    author: '@customer_adam'
+    reviewSubject: '@product_alex_1'
+
