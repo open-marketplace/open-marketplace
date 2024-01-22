@@ -20,7 +20,7 @@
             {% if channelPricing.originalPrice != null %}
                 <td>{{ money.format(channelPricing.originalPrice, channel.baseCurrency.code) }}</td>
             {% else %}
-                <td>-</td>
+                <td>N/A</td>
             {% endif %}
         </tr>
     {% endfor %}

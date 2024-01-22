@@ -11,8 +11,7 @@ Feature: Creating a product listing
 
   @ui
   Scenario: Creating product listing and sending to verification
-    Given I am on "/"
-    When I follow "My account"
+    When I am on a dashboard page
     And I follow "Product list"
     And I follow "Create Product"
     And I fill form with default data
