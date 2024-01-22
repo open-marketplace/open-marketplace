@@ -33,7 +33,7 @@ final class VendorEditingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given There is a :ifVerified Vendor who :ifRequested change
+     * @Given There is a :ifVerified Vendor who :ifRequested a profile change
      */
     public function thereIsAVendorWhoChange($ifVerified, $ifRequested): void
     {
@@ -57,16 +57,37 @@ final class VendorEditingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @When  /^there is an address form filled with city: "([^"]*)" postal code: "([^"]*)" street: "([^"]*)"$/
+     * @When there is an address form filled with default values
      */
-    public function thereIsAnAddressFormFilledWithCityPostalCodeAddress(
-        $city,
-        $postalCode,
-        $street
-    ): void {
-        $this->getPage()->fillField('vendor_vendorAddress_city', $city);
-        $this->getPage()->fillField('vendor_vendorAddress_postalCode', $postalCode);
-        $this->getPage()->fillField('vendor_vendorAddress_street', $street);
+    public function thereIsAnAddressFormFilledWithDefaultValues(): void
+    {
+        $this->getPage()->fillField('vendor_vendorAddress_city', "Warsaw");
+        $this->getPage()->fillField('vendor_vendorAddress_postalCode', "87-100");
+        $this->getPage()->fillField('vendor_vendorAddress_street', "Groove Street");
+    }
+
+    /**
+     * @When I leave the city field empty
+     */
+    public function iLeaveTheCityFieldEmpty(): void
+    {
+        $this->getPage()->fillField('vendor_vendorAddress_street', "");
+    }
+
+    /**
+     * @When I leave the postal code field empty
+     */
+    public function iLeaveThePostalCodeFieldEmpty(): void
+    {
+        $this->getPage()->fillField('vendor_vendorAddress_postalCode', "");
+    }
+
+    /**
+     * @When I leave the street field empty
+     */
+    public function iLeaveTheStreetFieldEmpty(): void
+    {
+        $this->getPage()->fillField('vendor_vendorAddress_street', "");
     }
 
     private function getPage(): DocumentElement
