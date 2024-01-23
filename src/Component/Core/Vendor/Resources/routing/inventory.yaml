@@ -2,7 +2,7 @@ open_marketplace_vendor_inventory_index:
     path: /product-variants/inventory
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_variant:indexAction
+        _controller: sylius.controller.product_variant::indexAction
         _sylius:
             template: "Context/Vendor/Inventory/index.html.twig"
             grid: vendor_product_variant
@@ -19,7 +19,7 @@ open_marketplace_vendor_inventory_update:
     path: /product-variants/{id}/inventory
     methods: [ GET, PUT ]
     defaults:
-        _controller: sylius.controller.product_variant:updateAction
+        _controller: sylius.controller.product_variant::updateAction
         _sylius:
             template: "Context/Vendor/Inventory/update.html.twig"
             grid: sylius_admin_product_variant
