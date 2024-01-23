@@ -70,7 +70,7 @@ class Draft implements ResourceInterface, DraftInterface
     /** @var Collection<array-key, ChannelInterface> */
     protected Collection $channels;
 
-    protected ?TaxCategoryInterface $taxCategory;
+    protected ?TaxCategoryInterface $taxCategory = null;
 
     public function __construct()
     {
@@ -86,7 +86,6 @@ class Draft implements ResourceInterface, DraftInterface
         $this->mainTaxon = null;
         $this->productDraftTaxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
-        $this->taxCategory = null;
     }
 
     public function getId(): ?int
@@ -614,7 +613,7 @@ class Draft implements ResourceInterface, DraftInterface
         return $this->taxCategory;
     }
 
-    public function setTaxCategory(TaxCategoryInterface $category): void
+    public function setTaxCategory(?TaxCategoryInterface $category): void
     {
         $this->taxCategory = $category;
     }
