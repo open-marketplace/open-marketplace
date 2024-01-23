@@ -193,6 +193,7 @@ open_marketplace:
         vendor_test_credentials: Vendor test credentials
         username: Username
         password: Password
+        tax_category: Tax category
         settlement: Settlement
         settlement_frequency: Settlement frequency
         weekly: Weekly

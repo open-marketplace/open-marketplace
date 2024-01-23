@@ -60,7 +60,7 @@
     </div>
     <div class="ui hidden divider"></div>
 
-    {% include 'Context/Vendor/ProductListing/details/_pricing.html.twig' %}
+    {% include 'Context/Common/ProductListing/_pricing.html.twig' with { taxCategory: true } %}
     <div class="ui hidden divider"></div>
     {% include 'Context/Vendor/ProductListing/details/_shipping.html.twig' %}
     <div class="ui hidden divider"></div>
