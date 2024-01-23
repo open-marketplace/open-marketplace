@@ -14,6 +14,7 @@ namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProductListing;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
+use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
@@ -77,10 +78,11 @@ final class ListingType extends AbstractType
                 'label' => 'sylius.form.product.main_taxon',
                 'required' => false,
             ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-                $product = $event->getData();
-                $form = $event->getForm();
-            })
+            ->add('taxCategory', TaxCategoryChoiceType::class, [
+                'required' => false,
+                'placeholder' => '---',
+                'label' => 'sylius.form.product_variant.tax_category',
+            ])
             ->add('images', CollectionType::class, [
                 'entry_type' => DraftImageType::class,
                 'entry_options' => ['product' => $options['data']],

@@ -8,14 +8,23 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
+namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListing;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-final class ProductListingPage extends SymfonyPage implements ProductListingInterface
+final class EditPage extends SymfonyPage implements EditPageInterface
 {
     public function getRouteName(): string
     {
         return 'open_marketplace_vendor_product_listings_edit';
+    }
+
+    public function fillTaxCategory(string $taxCategoryName): void
+    {
+        $this->getDocument()
+            ->fillField(
+                'sylius_product[taxCategory]',
+                $taxCategoryName,
+            );
     }
 }

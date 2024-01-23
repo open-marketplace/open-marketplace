@@ -64,6 +64,7 @@ final class SimpleProductFactory implements SimpleProductFactoryInterface
         $productVariant = $this->productVariantFactory->createNewForProduct($product, true, 0);
         $productVariant->setShippingRequired($productDraft->isShippingRequired());
         $productVariant->setShippingCategory($productDraft->getShippingCategory());
+        $productVariant->setTaxCategory($productDraft->getTaxCategory());
 
         /** @var DraftTranslationInterface $translation */
         foreach ($productDraft->getTranslations() as $translation) {

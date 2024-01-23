@@ -10,5 +10,13 @@
                  decorates="open_marketplace.factory.conversation_message">
             <argument type="service" id="bitbag.open_marketplace.component.messaging.factory.message.inner" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Messaging\Factory\ConversationFactory"
+                 id="bitbag.open_marketplace.component.messaging.factory.convesation">
+        </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Messaging\Factory\CategoryFactory"
+                 id="bitbag.open_marketplace.component.messaging.factory.category">
+        </service>
     </services>
 </container>

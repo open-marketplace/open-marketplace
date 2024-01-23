@@ -10,8 +10,7 @@ Feature:Creating a product listing.
 
   @ui
   Scenario: Creating product listing
-    Given I am on "/"
-    When I follow "My account"
+    When I am on a dashboard page
     And I follow "Product listings"
     And I follow "Create Product listing"
     And I fill form with non unique code
@@ -22,8 +21,7 @@ Feature:Creating a product listing.
   @ui
   Scenario: Creating product listing with non unique code
     Given there is 1 product listing created by vendor with status "verified"
-    When I am on "/"
-    And I follow "My account"
+    When I am on a dashboard page
     And I follow "Product listings"
     And I follow "Create Product listing"
     And I fill form with non unique code
@@ -32,8 +30,7 @@ Feature:Creating a product listing.
 
   @ui
   Scenario: Creating product listing without description
-    Given I am on "/"
-    And I follow "My account"
+    When I am on a dashboard page
     And I follow "Product listings"
     And I follow "Create Product listing"
     And I fill in "Code" with "productTest"
