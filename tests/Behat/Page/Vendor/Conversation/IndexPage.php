@@ -8,11 +8,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor;
+namespace Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\Conversation;
 
-use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-interface ProductListingInterface extends PageInterface
+final class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    public function getRouteName(): string;
+    public function getRouteName(): string
+    {
+        return 'open_marketplace_vendor_messaging_conversation_index';
+    }
 }

@@ -21,6 +21,8 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.messaging.factory.category"/>
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <argument type="service" id="router.default" />
+            <argument type="service" id="tests.open_marketplace.behat.page.admin.product_listing_show_page"/>
+            <argument type="service" id="tests.open_marketplace.behat.page.vendor.product_listing_create_page"/>
         </service>
     </services>
 </container>

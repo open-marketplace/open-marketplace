@@ -27,41 +27,22 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListing\EditPageInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListing\IndexPageInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    private ProductListingInterface $productListingPage;
-
-    private ShopUserExampleFactory $shopUserExampleFactory;
-
-    private FactoryInterface $vendorFactory;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private AdminUserExampleFactory $adminUserExampleFactory;
-
-    private FactoryInterface $localeFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ShopUserExampleFactory $shopUserExampleFactory,
-        FactoryInterface $vendorFactory,
-        SharedStorageInterface $sharedStorage,
-        AdminUserExampleFactory $adminUserExampleFactory,
-        FactoryInterface $localeFactory,
-        ProductListingInterface $productListingPage
-    ) {
-        $this->entityManager = $entityManager;
-        $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->vendorFactory = $vendorFactory;
-        $this->sharedStorage = $sharedStorage;
-        $this->adminUserExampleFactory = $adminUserExampleFactory;
-        $this->localeFactory = $localeFactory;
-        $this->productListingPage = $productListingPage;
+        private EntityManagerInterface $entityManager,
+        private ShopUserExampleFactory $shopUserExampleFactory,
+        private FactoryInterface $vendorFactory,
+        private SharedStorageInterface $sharedStorage,
+        private AdminUserExampleFactory $adminUserExampleFactory,
+        private FactoryInterface $localeFactory,
+        private IndexPageInterface $productListingShowVendorPage,
+        private EditPageInterface $productListingEditVendorPage,
+        ) {
     }
 
     /**
@@ -124,7 +105,7 @@ final class ProductListingContext extends RawMinkContext
     public function iAmOnProductListingPageWithIUrl($url)
     {
         $productListing = $this->sharedStorage->get('product_listing');
-        $this->productListingPage->tryToOpen(['id' => $productListing->getId()]);
+        $this->productListingEditVendorPage->tryToOpen(['id' => $productListing->getId()]);
     }
 
     /**
@@ -132,7 +113,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function iShouldSeeProductsListingStatus($status)
     {
-        $productListingStatus = $this->getPage()->find('css', sprintf('table > tbody > tr > td:contains("%s")', $status));
+        $productListingStatus = $this->productListingShowVendorPage->findStatus($status);
         Assert::notNull($productListingStatus);
     }
 
@@ -141,7 +122,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function iShouldSeeProductListings($count)
     {
-        $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
+        $rows = $this->productListingShowVendorPage->getTableRows();
         Assert::notEmpty($rows, 'Could not find any rows');
         Assert::eq($count, count($rows), 'Rows numbers are not equal');
     }
@@ -165,7 +146,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is :arg2 product listing created by vendor
      */
-    public function thereIsProductListingCreatedByVendor($count)
+    public function thereIsProductListingCreatedByVendor(int $count): void
     {
         $vendor = $this->sharedStorage->get('vendor');
 
@@ -209,8 +190,10 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is :count product listing created by vendor with status :status
      */
-    public function thereIsProductListingCreatedByVendorWithStatus2($count, $status)
-    {
+    public function thereIsProductListingCreatedByVendorWithStatus2(
+        int $count,
+        string $status,
+    ): void {
         $vendor = $this->sharedStorage->get('vendor');
 
         for ($i = 0; $i < $count; ++$i) {
@@ -254,7 +237,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given Product listing status is :arg1
      */
-    public function productListingStatusIs($arg1)
+    public function productListingStatusIs($arg1): void
     {
         $draft = $this->entityManager->getRepository(Draft::class)->findOneBy(['code' => 'code0']);
         $draft->setStatus(DraftInterface::STATUS_CREATED);
@@ -265,17 +248,16 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should see dropdown with hide option
      */
-    public function iShouldSeeDropdownWithHideOption()
+    public function iShouldSeeDropdownWithHideOption(): void
     {
-        $page = $this->getPage();
-        $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
+        $dropdown = $this->productListingShowVendorPage->findDropdownLink();
         Assert::notNull($dropdown);
     }
 
     /**
      * @Then I should see url :url
      */
-    public function iShouldSeeUrl($url)
+    public function iShouldSeeUrl($url): void
     {
         $currentUrl = $this->getSession()->getCurrentUrl();
         $matches = preg_match($url, $currentUrl);

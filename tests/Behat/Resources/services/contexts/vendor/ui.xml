@@ -11,7 +11,8 @@
             <argument type="service" id="sylius.behat.shared_storage"/>
             <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
             <argument type="service" id="sylius.factory.locale" />
-            <argument type="service" id="tests.open_marketplace.behat.page.vendor.product_listing_page"/>
+            <argument type="service" id="tests.open_marketplace.behat.page.vendor.product_listing_index_page"/>
+            <argument type="service" id="tests.open_marketplace.behat.page.vendor.product_listing_edit_page"/>
         </service>
 
     </services>

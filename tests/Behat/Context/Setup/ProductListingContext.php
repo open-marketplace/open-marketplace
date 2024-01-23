@@ -37,6 +37,8 @@ use Sylius\Component\Taxation\Model\TaxCategory;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RouterInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\ProductListing\ShowPageInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListing\CreatePageInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext implements Context
@@ -51,6 +53,8 @@ final class ProductListingContext extends RawMinkContext implements Context
         private CategoryFactoryInterface $categoryFactory,
         private UserContextInterface $userContext,
         private RouterInterface $router,
+        private ShowPageInterface $showAdminPage,
+        private CreatePageInterface $productListingCreateVendorPage,
         ) {
     }
 
@@ -105,7 +109,6 @@ final class ProductListingContext extends RawMinkContext implements Context
         );
 
         $this->entityManager->persist($productListing);
-//        $this->entityManager->flush();
 
         /** @var DraftInterface $draft */
         $draft = $productListing->getLatestDraft();
@@ -210,7 +213,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Then I click button with id :id
      */
-    public function iClickButton($id): void
+    public function iClickButton(string $id): void
     {
         $page = $this->getSession()->getPage();
         $button = $page->find('css', '#' . $id);
@@ -220,7 +223,7 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Then I should be notified no page exits
      */
-    public function iShouldBeNotifiedNoPageExits()
+    public function iShouldBeNotifiedNoPageExits(): void
     {
         $status = $this->getSession()->getStatusCode();
         Assert::eq($status, 404);
@@ -229,33 +232,31 @@ final class ProductListingContext extends RawMinkContext implements Context
     /**
      * @Then I fill in conversation message content with :message
      */
-    public function iFillInConversationMessageContentWithMessage($message): void
-    {
-        $this->getSession()
-            ->getPage()
-            ->fillField('mvm_conversation[messages][__name__][content]', $message);
+    public function iFillInConversationMessageContentWithMessage(
+        string $message
+    ): void {
+        $this->showAdminPage->fillRejectMessage($message);
     }
 
     /**
      * @Then I fill in Tax category with :taxCategory
      */
-    public function iFillInTaxCategoryWithTaxCategory($taxCategory): void
-    {
-        $this->getSession()
-            ->getPage()
-            ->fillField('sylius_product[taxCategory]', $taxCategory);
+    public function iFillInTaxCategoryWithTaxCategory(
+        string $taxCategoryName,
+    ): void {
+        $this->productListingCreateVendorPage->fillTaxCategory($taxCategoryName);
     }
 
     /**
-     * @Given there is tax category :categoryName with code :code
+     * @Given there is tax category :taxCategoryName with code :code
      */
     public function thereIsTaxCategoryWithCode(
-        string $categoryName,
+        string $taxCategoryName,
         string $code,
     ): void {
         /** @var TaxCategoryInterface $taxCategory */
         $taxCategory = $this->taxCategoryExampleFactory->createNew();
-        $taxCategory->setName($categoryName);
+        $taxCategory->setName($taxCategoryName);
         $taxCategory->setCode($code);
 
         $this->entityManager->persist($taxCategory);
@@ -263,16 +264,17 @@ final class ProductListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given I should see taxCategory :taxCategory for product listing
+     * @Given I should see taxCategory :taxCategoryName for product listing
      */
-    public function iShouldSeeTaxCategoryForProductListing($taxCategory): void
-    {
+    public function iShouldSeeTaxCategoryForProductListing(
+        string $taxCategoryName
+    ): void {
         $productListingTaxCategory = $this->getPage()
             ->find(
                 'css',
                 sprintf(
                     'table > tbody > tr > td:contains("%s")',
-                    $taxCategory,
+                    $taxCategoryName,
                 ),
             );
         Assert::notNull($productListingTaxCategory);
@@ -286,8 +288,9 @@ final class ProductListingContext extends RawMinkContext implements Context
         return $this->getSession()->getPage();
     }
 
-    private function createProductDraft($status): DraftInterface
-    {
+    private function createProductDraft(
+        string $status
+    ): DraftInterface {
         $productDraft = new Draft();
         $productDraft->setCode('code');
         $productDraft->setStatus($status);
@@ -297,8 +300,9 @@ final class ProductListingContext extends RawMinkContext implements Context
         return $productDraft;
     }
 
-    private function createProductTranslation($productDraft): DraftTranslationInterface
-    {
+    private function createProductTranslation(
+        DraftInterface $productDraft
+    ): DraftTranslationInterface {
         $productTranslation = new DraftTranslation();
         $productTranslation->setLocale('en_US');
         $productTranslation->setSlug('product-listing-slug');
@@ -309,8 +313,9 @@ final class ProductListingContext extends RawMinkContext implements Context
         return $productTranslation;
     }
 
-    private function createProductPricing($productDraft): ListingPriceInterface
-    {
+    private function createProductPricing(
+        DraftInterface $productDraft
+    ): ListingPriceInterface {
         $productPricing = new ListingPrice();
         $productPricing->setProductDraft($productDraft);
         $productPricing->setPrice(1000);
