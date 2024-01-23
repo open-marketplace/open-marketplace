@@ -46,6 +46,7 @@ final class RegisterVendorHandlerSpec extends ObjectBehavior
     ): void {
         $command->getCompanyName()->willReturn('companyName');
         $command->getTaxIdentifier()->willReturn('taxIdentifier');
+        $command->getBankAccountNumber()->willReturn('iban');
         $command->getPhoneNumber()->willReturn('phoneNumber');
         $command->getDescription()->willReturn('description');
         $command->getVendorAddress()->willReturn($vendorAddress);
@@ -56,6 +57,7 @@ final class RegisterVendorHandlerSpec extends ObjectBehavior
 
         $vendor->setCompanyName('companyName')->shouldBeCalled();
         $vendor->setTaxIdentifier('taxIdentifier')->shouldBeCalled();
+        $vendor->setBankAccountNumber('iban')->shouldBeCalled();
         $vendor->setPhoneNumber('phoneNumber')->shouldBeCalled();
         $vendor->setDescription('description')->shouldBeCalled();
         $vendor->setVendorAddress($vendorAddress)->shouldBeCalled();
@@ -68,7 +70,7 @@ final class RegisterVendorHandlerSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_shop_user_is_not_set(): void
     {
-        $command = new RegisterVendor('companyName', 'taxIdentifier', 'phoneNumber', 'description', new Address());
+        $command = new RegisterVendor('companyName', 'taxIdentifier', 'iban', 'phoneNumber', 'description', new Address());
         $command->setSlug('slug');
 
         $this
@@ -79,7 +81,7 @@ final class RegisterVendorHandlerSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_slug_is_not_set(): void
     {
-        $command = new RegisterVendor('companyName', 'taxIdentifier', 'phoneNumber', 'description', new Address());
+        $command = new RegisterVendor('companyName', 'taxIdentifier', 'iban', 'phoneNumber', 'description', new Address());
         $shopUser = new ShopUser();
         $command->setShopUser($shopUser);
 

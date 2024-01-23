@@ -27,6 +27,7 @@ final class ProfileFactory implements ProfileFactoryInterface
     public function createVendor(
         string $companyName,
         string $taxIdentifier,
+        string $bankAccountNumber,
         string $phoneNumber,
         string $description,
         AddressInterface $address
@@ -35,6 +36,7 @@ final class ProfileFactory implements ProfileFactoryInterface
         $vendor->setPhoneNumber($phoneNumber);
         $vendor->setCompanyName($companyName);
         $vendor->setTaxIdentifier($taxIdentifier);
+        $vendor->setBankAccountNumber($bankAccountNumber);
         $vendor->setDescription($description);
         $vendor->setVendorAddress($address);
 

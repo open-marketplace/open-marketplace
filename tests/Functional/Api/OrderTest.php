@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Test\BitBag\OpenMarketplace\Functional\Api;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\Order;
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\OpenMarketplace\Functional\FunctionalTestCase;
@@ -145,5 +146,31 @@ final class OrderTest extends FunctionalTestCase
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'Api/OrderTest/test_get_shop_orders_by_vendor', Response::HTTP_OK);
+    }
+
+    public function test_it_sets_paid_at_for_secondary_orders_when_primary_order_is_paid(): void
+    {
+        $header = $this->getHeaderForAdmin('clark.kent@example.com');
+        /** @var OrderInterface $order */
+        $order = $this->orderRepository->findOneBy(['tokenValue' => 'order_made_by_peter_main']);
+        foreach ($order->getSecondaryOrders() as $secondaryOrder) {
+            $this->assertNull($secondaryOrder->getPaidAt());
+        }
+        $paymentId = $order->getLastPayment()->getId();
+
+        $this->client->request(
+            'PATCH',
+            sprintf('/api/v2/admin/payments/%d/complete', $paymentId),
+            [],
+            [],
+            $header
+        );
+        $this->assertResponseCode($this->client->getResponse(), 200);
+
+        $order = $this->orderRepository->findOneBy(['tokenValue' => 'order_made_by_peter_main']);
+
+        foreach ($order->getSecondaryOrders() as $secondaryOrder) {
+            $this->assertNotNull($secondaryOrder->getPaidAt());
+        }
     }
 }

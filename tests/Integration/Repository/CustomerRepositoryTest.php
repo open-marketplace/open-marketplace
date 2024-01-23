@@ -26,7 +26,7 @@ final class CustomerRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_all_customers_of_vendor(): void
     {
-        $this->loadFixturesFromFile('CustomerRepositoryTest/test_it_finds_all_customers_of_vendor.yml');
+        $this->loadFixturesFromFile('CustomerRepositoryTest/test_it_finds_all_customers_of_vendor.yaml');
 
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $queryBuilder = $this->repository->findVendorCustomers($vendorOliver);
@@ -37,7 +37,7 @@ final class CustomerRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_order_for_vendor(): void
     {
-        $this->loadFixturesFromFile('CustomerRepositoryTest/test_it_finds_order_for_vendor.yml');
+        $this->loadFixturesFromFile('CustomerRepositoryTest/test_it_finds_order_for_vendor.yaml');
 
         $vendorOliver = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => 'test2@example.com']);

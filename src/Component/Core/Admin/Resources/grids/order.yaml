@@ -5,4 +5,4 @@ sylius_grid:
         options:
           class: BitBag\OpenMarketplace\Component\Order\Entity\Order
           repository:
-            method: findAllSecondaryOrders
+            method: findAllSecondaryOrdersQueryBuilder

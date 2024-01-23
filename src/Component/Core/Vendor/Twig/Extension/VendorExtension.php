@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Vendor\Twig\Extension;
 
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\ProfileUpdate\ProfileUpdate;
 use BitBag\OpenMarketplace\Component\Vendor\VendorContextInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -52,6 +53,7 @@ class VendorExtension extends AbstractExtension
     {
         return [
             new TwigFunction('is_pending_vendor_profile_update', [$this, 'isPendingVendorProfileUpdate']),
+            new TwigFunction('has_vendor_virtual_wallet_strategy', [$this, 'hasVirtualWalletStrategy']),
             new TwigFunction('current_locale', [$this, 'currentLocale']),
             new TwigFunction('get_channel', [$this, 'getChannel']),
             new TwigFunction('get_channel_main_taxon', [$this, 'getChannelMainTaxon']),
@@ -69,6 +71,13 @@ class VendorExtension extends AbstractExtension
         }
 
         return false;
+    }
+
+    public function hasVirtualWalletStrategy(): bool
+    {
+        $vendor = $this->vendorProvider->getVendor();
+
+        return !in_array($vendor->getSettlementFrequency(), VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES, true);
     }
 
     public function currentLocale(): string

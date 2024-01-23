@@ -13,6 +13,7 @@ imports:
     - { resource: "./../../src/Component/Core/Common/Resources/config.yaml" }
     - { resource: "./../../src/Component/Core/Shop/Resources/config.yaml" }
     - { resource: "./../../src/Component/Core/Vendor/Resources/config.yaml" }
+    - { resource: "./../../src/Component/Core/Settlement/Resources/config.yaml" }
     - { resource: "./../../src/Component/Messaging/Resources/config.yaml" }
     - { resource: "./../../src/Component/Override/Resources/config.yaml" }
 
@@ -87,6 +88,12 @@ sylius_taxonomy:
             classes:
                 model: Sylius\Component\Core\Model\Taxon
                 repository: BitBag\OpenMarketplace\Component\Vendor\Repository\TaxonRepository
+
+sylius_channel:
+    resources:
+        channel:
+            classes:
+                repository: BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepository
 
 sylius_ui:
     events:

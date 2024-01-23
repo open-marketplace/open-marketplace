@@ -50,4 +50,10 @@ interface OrderInterface extends BaseOrderInterface, OptionalVendorAwareInterfac
     public function getCommissionTotal(): int;
 
     public function setCommissionTotal(int $commissionTotal): void;
+
+    public function getPaidAt(): ?\DateTimeInterface;
+
+    public function setPaidAt(?\DateTimeInterface $paidAt): void;
+
+    public function getTotalProfitAmount(): int;
 }

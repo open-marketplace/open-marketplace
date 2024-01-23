@@ -1,0 +1,75 @@
+sylius_grid:
+  grids:
+    open_marketplace_admin_settlement_order:
+      driver:
+        options:
+          class: BitBag\OpenMarketplace\Component\Order\Entity\Order
+          repository:
+            method: findForSettlementQueryBuilder
+            arguments:
+              settlement: expr:service('open_marketplace.repository.settlement').find(service('request_stack').getCurrentRequest().get('id'))
+            sorting:
+              number: desc
+      fields:
+        date:
+          type: datetime
+          label: sylius.ui.date
+          path: checkoutCompletedAt
+          sortable: checkoutCompletedAt
+          options:
+            format: d-m-Y H:i:s
+        number:
+          type: twig
+          label: sylius.ui.number
+          path: .
+          sortable: ~
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+        customer:
+          type: twig
+          label: sylius.ui.customer
+          sortable: customer.lastName
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+        total:
+          type: twig
+          label: sylius.ui.total
+          path: .
+          sortable: total
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
+        currencyCode:
+          type: string
+          label: sylius.ui.currency
+          sortable: ~
+      filters:
+        number:
+          type: string
+          label: sylius.ui.number
+        customer:
+          type: string
+          label: sylius.ui.customer
+          options:
+            fields: [customer.email, customer.firstName, customer.lastName]
+        date:
+          type: date
+          label: sylius.ui.date
+          options:
+            field: checkoutCompletedAt
+            inclusive_to: true
+        total:
+          type: money
+          label: sylius.ui.total
+          options:
+            currency_field: currencyCode
+        shipping_method:
+          type: entity
+          label: sylius.ui.shipping_method
+          options:
+            fields: [shipments.method]
+          form_options:
+            class: "%sylius.model.shipping_method.class%"
+      actions:
+        item:
+          show:
+            type: show

@@ -38,6 +38,9 @@ final class ProfileType extends AbstractResourceType
             ->add('taxIdentifier', TextType::class, [
                 'label' => 'open_marketplace.ui.tax_identifier',
             ])
+            ->add('bankAccountNumber', TextType::class, [
+                'label' => 'open_marketplace.ui.bank_account_number',
+            ])
             ->add('phoneNumber', TelType::class, [
                 'label' => 'open_marketplace.ui.phone_number',
             ])

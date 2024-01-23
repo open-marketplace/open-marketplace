@@ -16,9 +16,11 @@ open_marketplace:
         new_product_draft: New Product Listing
         edit_product_draft: Edit Product Listing
         draft_attributes: Attributes
+        manage_product_listing_attributes: Manage product listings attributes
         no_draft_attributes: No attributes set.
         no_draft_taxons: No taxons set.
         inventory: Inventory
+        manage_product_listing_stock: Manage your product listings stock
         clients: Customers
         order_list: Orders
         summary_of_your_order: Summary of your order(s)
@@ -40,15 +42,24 @@ open_marketplace:
         become_a_vendor: Become a Vendor
         product_listings: Product listings
         product_listing: Product listing
+        create_product_listing: Create new product listing
+        edit_product_listing: Edit product listing
+        show_product_listing: Product listing details
+        create_draft_attribute: Create attribute
+        edit_draft_attribute: Edit attribute
+        edit_inventory: Edit stock
+        edit_product_review: Edit product review
         marketplace: Marketplace
-        my_vendor_account: My vendor account
+        my_vendor_account: Profile
         manage_your_vendor_information_and_preferences: Manage your vendor information and preferences
         your_vendor_profile: Your vendor profile
         edit_your_vendor_information: Edit your vendor information
         publishedAt: Published at
         status: Status
         tax_identifier: Tax Identifier
+        bank_account_number: Bank account number
         not_blank: This field cannot be empty
+        missing_translation: missing translation
         company_name: Company name
         shop_user: Shop user
         country: Country
@@ -59,12 +70,26 @@ open_marketplace:
         postal_code: Postal code
         pending_update_message: Your profile has been edited. Please approve the changes by clicking on the link in the email sent to you.
         vendors: Vendors
+        settlements: Settlements
+        manage_your_finances: Manage your finances
+        virtual_wallets: Virtual wallets
+        manage_your_wallets: Manage your wallets and money withdraws
+        virtual_wallet: Virtual wallet
+        profit_withdrawal_amount: Withdrawal amount
+        profit_withdrawal: Profit withdrawal
+        my_wallets: My wallets
+        virtual_wallet_balance: Wallet balance
+        create_settlement: Create settlement
+        balance: Balance
+        withdraw: Withdraw
+        withdraw_funds: Withdraw funds
         logo: Logo
         background: Background
         review: Review
         invalid_logo: Please upload a valid image (jpg/png/svg)
         description: Description
         shipping_methods: Shipping methods
+        manage_shipping_methods: Manage shipping methods accepted in your store
         open: Open
         closed: Closed
         minimum: minimum
@@ -101,7 +126,7 @@ open_marketplace:
             no_subject: No subject
             header: Message from administrator
             with: Started by
-            your_response_header: Your response:
+            your_response_header: "Your response:"
             attachment: Attachment
             archive_request_text_first_line: Administrator wants to archive this thread.
             archive_request_text_second_line: Have you solved your issue?
@@ -123,7 +148,9 @@ open_marketplace:
         menu:
             conversations: Messages
             conversation_categories: Message categories
-            product_reviews: Product Reviews
+            product_reviews: Product reviews
+        product_reviews: Product reviews
+        manage_product_reviews: Manage your product reviews
         new_conversation_category: New conversation category
         edit_conversation_category: Edit conversation category
         unverified: Unverified
@@ -166,7 +193,38 @@ open_marketplace:
         vendor_test_credentials: Vendor test credentials
         username: Username
         password: Password
+        tax_category: Tax category
+        settlement: Settlement
+        settlement_frequency: Settlement frequency
+        weekly: Weekly
+        monthly: Monthly
+        quarterly: Quarterly
+        period: Period
+        total_amount: Total amount
+        total_commission_amount: Commission
+        total_profit_amount: Settlement amount
+        currency_code: Currency code
+        settlement_status:
+            new: New
+            accepted: Accepted
+            settled: Settled
+        show_settlements: Show settlements
+        show_virtual_wallets: Show virtual wallets
+        created_at: Created at
+        updated_at: Updated at
+        channel: Channel
+        total_orders: Total orders
+        show_orders: Show orders
+        orders: Orders
+        manage_orders: Manage your orders
+        customers: Customers
+        manage_customers: Manage customers who ordered in your store
     email:
+        settlements_created:
+            subject: Settlement created
+            greetings: Hey, a new settlement has been created.
+            info: Settlement details
+            link_placeholder: View settlements info in your admin panel
         vendor_profile_update: Vendor profile update requested
         request_profile_update_greeting: Hey, you asked to change your company details.
         request_profile_update_info: For security purposes, we need to verify your decision. Click on the link below if you want to make a change or ignore this message.

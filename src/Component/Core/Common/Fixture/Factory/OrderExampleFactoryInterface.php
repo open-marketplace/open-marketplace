@@ -11,9 +11,20 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
 
+use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 
 interface OrderExampleFactoryInterface extends ExampleFactoryInterface
 {
     public function createArray(array $options = []): array;
+
+    public function createOrderWithTotalAmount(
+        ChannelInterface $channel,
+        VendorInterface $vendor,
+        CustomerInterface $customer,
+        int $totalAmount
+    ): OrderInterface;
 }
