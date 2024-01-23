@@ -8,5 +8,11 @@
 {% endblock %}
 
 {% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.customers',
+        "subheader": 'open_marketplace.ui.manage_customers',
+        "icon": 'users'
+    } %}
+
     {{ sylius_grid_render(resources, '@SyliusAdmin/Grid/_default.html.twig') }}
 {% endblock %}

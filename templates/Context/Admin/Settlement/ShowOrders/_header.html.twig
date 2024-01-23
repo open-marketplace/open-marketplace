@@ -1,0 +1,12 @@
+<div id="header" class="ui stackable two column grid">
+    <div class="column">
+        <h1 class="ui header">
+            <i class="circular money icon"></i>
+            <div class="content">
+                {{ settlement.vendor.companyName }}
+                <div class="sub header"> {{ [settlement.startDate|format_date(), settlement.endDate|format_date()]|join(' - ') }}</div>
+            </div>
+        </h1>
+        {% include "Context/Admin/Settlement/ShowOrders/_breadcrumb.html.twig" %}
+    </div>
+</div>

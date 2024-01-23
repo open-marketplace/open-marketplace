@@ -5,6 +5,7 @@
     "uuid": "@string@",
     "companyName": "Wayne Enterprises",
     "taxIdentifier": "345",
+    "bankAccountNumber": "PL14109024029586826934815556",
     "phoneNumber": "123456789",
     "vendorAddress": {
         "@type": "Address",

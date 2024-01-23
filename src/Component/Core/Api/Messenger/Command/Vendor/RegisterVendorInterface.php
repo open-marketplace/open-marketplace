@@ -21,6 +21,8 @@ interface RegisterVendorInterface extends ShopUserAwareInterface, VendorSlugAwar
 
     public function getTaxIdentifier(): string;
 
+    public function getBankAccountNumber(): string;
+
     public function getPhoneNumber(): string;
 
     public function getDescription(): string;

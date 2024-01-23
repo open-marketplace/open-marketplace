@@ -40,3 +40,22 @@ open_marketplace_admin_resource_vendor:
         templates: "@SyliusAdmin\\Crud"
         grid: open_marketplace_admin_vendor
     type: sylius.resource
+
+open_marketplace_admin_resource_settlement:
+    resource: |
+        alias: open_marketplace.settlement
+        section: admin
+        only: ['index', 'show']
+        templates: "@SyliusAdmin\\Crud"
+        grid: open_marketplace_admin_settlement
+    type: sylius.resource
+
+open_marketplace_admin_resource_virtual_wallet:
+    resource: |
+        alias: open_marketplace.virtual_wallet
+        section: admin
+        only: ['index']
+        templates: "@SyliusAdmin\\Crud"
+        grid: open_marketplace_admin_virtual_wallet
+    type: sylius.resource
+

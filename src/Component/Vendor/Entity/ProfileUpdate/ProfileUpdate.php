@@ -26,6 +26,8 @@ class ProfileUpdate implements ProfileUpdateInterface
 
     protected ?string $taxIdentifier;
 
+    protected ?string $bankAccountNumber;
+
     protected ?string $phoneNumber;
 
     protected ?AddressInterface $vendorAddress;
@@ -76,6 +78,16 @@ class ProfileUpdate implements ProfileUpdateInterface
     public function setTaxIdentifier(?string $taxIdentifier): void
     {
         $this->taxIdentifier = $taxIdentifier;
+    }
+
+    public function getBankAccountNumber(): ?string
+    {
+        return $this->bankAccountNumber;
+    }
+
+    public function setBankAccountNumber(?string $bankAccountNumber): void
+    {
+        $this->bankAccountNumber = $bankAccountNumber;
     }
 
     public function getPhoneNumber(): ?string

@@ -1,0 +1,23 @@
+winzou_state_machine:
+  open_marketplace_settlement:
+    class: "%open_marketplace.model.settlement.class%"
+    property_path: status
+    graph: open_marketplace_settlement
+    state_machine_class: "%sylius.state_machine.class%"
+    states:
+      new: ~
+      accepted: ~
+      settled: ~
+    transitions:
+      accept:
+        from: [new]
+        to: accepted
+      settle:
+        from: [accepted]
+        to: settled
+    callbacks:
+      after:
+        accept:
+          on: [ "accept" ]
+          do: [ "@open_marketplace.component.core.common.state_machine.settlement_callbacks", "payout" ]
+          args: [ "object" ]

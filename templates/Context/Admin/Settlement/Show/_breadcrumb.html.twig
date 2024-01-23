@@ -1,0 +1,10 @@
+{% import '@SyliusAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+
+{% set breadcrumbs = [
+    { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+    { label: 'open_marketplace.ui.settlements'|trans, url: path('open_marketplace_admin_settlement_index') },
+    { label: settlement.vendor.companyName, url: path('open_marketplace_admin_settlement_index', {'criteria': {'vendor': settlement.vendor.id}}) },
+    { label: settlement.id }
+] %}
+
+{{ breadcrumb.crumble(breadcrumbs) }}

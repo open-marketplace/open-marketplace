@@ -52,5 +52,12 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Common\Fixture\SettlementFixture"
+                 id="bitbag.open_marketplace.component.core.common.fixture.settlement_fixture">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.settlement" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

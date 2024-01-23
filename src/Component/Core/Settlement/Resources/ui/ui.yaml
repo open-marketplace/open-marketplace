@@ -1,0 +1,22 @@
+sylius_ui:
+  events:
+    open_marketplace.admin.settlement.show.details:
+      blocks:
+        content:
+          template: 'Configuration/Event/Admin/Settlement/Show/details.html.twig'
+          priority: 10
+    open_marketplace.admin.settlement.show.details_content:
+      blocks:
+        table:
+          template: 'Configuration/Event/Admin/Settlement/Show/detailsTable.html.twig'
+          priority: 10
+    open_marketplace.admin.settlement.show_orders.details:
+      blocks:
+        content:
+          template: 'Configuration/Event/Admin/Settlement/ShowOrders/details.html.twig'
+          priority: 10
+    open_marketplace.admin.settlement.show_orders.details_content:
+      blocks:
+        grid:
+          template: 'Configuration/Event/Admin/Settlement/ShowOrders/grid.html.twig'
+          priority: 10

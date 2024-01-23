@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
 class Draft implements ResourceInterface, DraftInterface
@@ -68,6 +69,8 @@ class Draft implements ResourceInterface, DraftInterface
 
     /** @var Collection<array-key, ChannelInterface> */
     protected Collection $channels;
+
+    protected ?TaxCategoryInterface $taxCategory = null;
 
     public function __construct()
     {
@@ -603,5 +606,15 @@ class Draft implements ResourceInterface, DraftInterface
         foreach ($this->getImages() as $image) {
             $image->setOwner($this);
         }
+    }
+
+    public function getTaxCategory(): ?TaxCategoryInterface
+    {
+        return $this->taxCategory;
+    }
+
+    public function setTaxCategory(?TaxCategoryInterface $category): void
+    {
+        $this->taxCategory = $category;
     }
 }

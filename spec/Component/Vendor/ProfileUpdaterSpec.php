@@ -70,6 +70,7 @@ final class ProfileUpdaterSpec extends ObjectBehavior
     ): void {
         $vendorData->getCompanyName()->willReturn('CompanyName');
         $vendorData->getTaxIdentifier()->willReturn('TaxIdentifier');
+        $vendorData->getBankAccountNumber()->willReturn('iban');
         $vendorData->getPhoneNumber()->willReturn('11339321');
         $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddress);
@@ -95,6 +96,7 @@ final class ProfileUpdaterSpec extends ObjectBehavior
         $newPendingUpdate->getToken()->willReturn('testing-token');
         $vendorData->getCompanyName()->willReturn('testcompany');
         $vendorData->getTaxIdentifier()->willReturn('testTaxID');
+        $vendorData->getBankAccountNumber()->willReturn('testIban');
         $vendorData->getPhoneNumber()->willReturn('testNumber');
         $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
@@ -106,6 +108,7 @@ final class ProfileUpdaterSpec extends ObjectBehavior
 
         $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
         $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
+        $newPendingUpdate->setBankAccountNumber('testIban')->shouldBeCalled();
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
 
@@ -140,6 +143,7 @@ final class ProfileUpdaterSpec extends ObjectBehavior
         $newPendingUpdate->getToken()->willReturn('testing-token');
         $vendorData->getCompanyName()->willReturn('testcompany');
         $vendorData->getTaxIdentifier()->willReturn('testTaxID');
+        $vendorData->getBankAccountNumber()->willReturn('testIban');
         $vendorData->getPhoneNumber()->willReturn('testNumber');
         $vendorData->getDescription()->willReturn('description');
         $vendorData->getVendorAddress()->willReturn($vendorAddressUpdate);
@@ -158,6 +162,7 @@ final class ProfileUpdaterSpec extends ObjectBehavior
 
         $newPendingUpdate->setCompanyName('testcompany')->shouldBeCalled();
         $newPendingUpdate->setTaxIdentifier('testTaxID')->shouldBeCalled();
+        $newPendingUpdate->setBankAccountNumber('testIban')->shouldBeCalled();
         $newPendingUpdate->setPhoneNumber('testNumber')->shouldBeCalled();
         $newPendingUpdate->setDescription('description')->shouldBeCalled();
         $imageFromForm->getPath()->willReturn('path/to/file');

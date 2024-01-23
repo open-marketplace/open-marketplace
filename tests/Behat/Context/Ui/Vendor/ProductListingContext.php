@@ -34,45 +34,25 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory;
 use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListing\EditPageInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListing\IndexPageInterface;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingPage;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    private ProductListingInterface $productListingPage;
-
-    private ShopUserExampleFactory $shopUserExampleFactory;
-
-    private FactoryInterface $vendorFactory;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private AdminUserExampleFactory $adminUserExampleFactory;
-
-    private FactoryInterface $localeFactory;
-
-    private string $imagePath;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ShopUserExampleFactory $shopUserExampleFactory,
-        FactoryInterface $vendorFactory,
-        SharedStorageInterface $sharedStorage,
-        AdminUserExampleFactory $adminUserExampleFactory,
-        string $imagePath,
-        FactoryInterface $localeFactory,
-        ProductListingInterface $productListingPage
-    ) {
-        $this->entityManager = $entityManager;
-        $this->shopUserExampleFactory = $shopUserExampleFactory;
-        $this->vendorFactory = $vendorFactory;
-        $this->sharedStorage = $sharedStorage;
-        $this->adminUserExampleFactory = $adminUserExampleFactory;
-        $this->imagePath = $imagePath;
-        $this->localeFactory = $localeFactory;
-        $this->productListingPage = $productListingPage;
+        private EntityManagerInterface $entityManager,
+        private ShopUserExampleFactory $shopUserExampleFactory,
+        private FactoryInterface $vendorFactory,
+        private SharedStorageInterface $sharedStorage,
+        private AdminUserExampleFactory $adminUserExampleFactory,
+        private string $imagePath,
+        private ProductListingPage $productListingPage,
+        private FactoryInterface $localeFactory,
+        private IndexPageInterface $productListingShowVendorPage,
+        private EditPageInterface $productListingEditVendorPage,
+        ) {
     }
 
     /**
@@ -111,6 +91,7 @@ final class ProductListingContext extends RawMinkContext
         $vendor->setDescription('description');
         $vendor->setPhoneNumber('987654321');
         $vendor->setTaxIdentifier('123456789');
+        $vendor->setBankAccountNumber('iban');
         $this->entityManager->persist($vendor);
 
         $this->sharedStorage->set('vendor', $vendor);
@@ -134,7 +115,7 @@ final class ProductListingContext extends RawMinkContext
     public function iAmOnProductListingPageWithIUrl($url)
     {
         $productListing = $this->sharedStorage->get('product_listing');
-        $this->productListingPage->tryToOpen(['id' => $productListing->getId()]);
+        $this->productListingEditVendorPage->tryToOpen(['id' => $productListing->getId()]);
     }
 
     /**
@@ -142,8 +123,18 @@ final class ProductListingContext extends RawMinkContext
      */
     public function iShouldSeeProductsListingStatus($status)
     {
-        $productListingStatus = $this->getPage()->find('css', sprintf('table > tbody > tr > td:contains("%s")', $status));
+        $productListingStatus = $this->productListingShowVendorPage->findStatus($status);
         Assert::notNull($productListingStatus);
+    }
+
+    /**
+     * @Then I should see :count product listing(s)
+     */
+    public function iShouldSeeProductListings($count)
+    {
+        $rows = $this->productListingShowVendorPage->getTableRows();
+        Assert::notEmpty($rows, 'Could not find any rows');
+        Assert::eq($count, count($rows), 'Rows numbers are not equal');
     }
 
     /**
@@ -165,7 +156,7 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is :arg2 product listing created by vendor
      */
-    public function thereIsProductListingCreatedByVendor($count)
+    public function thereIsProductListingCreatedByVendor(int $count): void
     {
         $this->createProudctListingByVendor($count);
     }
@@ -173,15 +164,54 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Given there is :count product listing created by vendor with status :status
      */
-    public function thereIsProductListingCreatedByVendorWithStatus2($count, $status)
-    {
-        $this->createProudctListingByVendor($count, $status);
+    public function thereIsProductListingCreatedByVendorWithStatus2(
+        int $count,
+        string $status,
+    ): void {
+        $vendor = $this->sharedStorage->get('vendor');
+
+        for ($i = 0; $i < $count; ++$i) {
+            $productListing = new Listing();
+            $productListing->setCode('code' . $i);
+            $productListing->setVendor($vendor);
+            $productListing->setVerificationStatus($status);
+
+            $productDraft = new Draft();
+            $productDraft->setCode('code' . $i);
+            $productDraft->setStatus($status);
+            $productDraft->setPublishedAt(new \DateTime());
+            $productDraft->setVersionNumber(0);
+            $productDraft->setProductListing($productListing);
+
+            $productTranslation = new DraftTranslation();
+            $productTranslation->setLocale('en_US');
+            $productTranslation->setSlug('product-listing-' . $i);
+            $productTranslation->setName('product-listing-' . $i);
+            $productTranslation->setDescription('product-listing-' . $i);
+            $productTranslation->setProductDraft($productDraft);
+
+            $productPricing = new ListingPrice();
+            $productPricing->setProductDraft($productDraft);
+            $productPricing->setPrice(1000);
+            $productPricing->setOriginalPrice(1000);
+            $productPricing->setMinimumPrice(1000);
+            $productPricing->setChannelCode('en_US');
+
+            $this->entityManager->persist($productListing);
+            $this->entityManager->persist($productDraft);
+            $this->entityManager->persist($productTranslation);
+            $this->entityManager->persist($productPricing);
+
+            $this->sharedStorage->set('product_listing', $productListing);
+        }
+
+        $this->entityManager->flush();
     }
 
     /**
      * @Given Product listing status is :arg1
      */
-    public function productListingStatusIs($arg1)
+    public function productListingStatusIs($arg1): void
     {
         $draft = $this->entityManager->getRepository(Draft::class)->findOneBy(['code' => 'code0']);
         $draft->setStatus(DraftInterface::STATUS_CREATED);
@@ -192,11 +222,20 @@ final class ProductListingContext extends RawMinkContext
     /**
      * @Then I should see dropdown with hide option
      */
-    public function iShouldSeeDropdownWithHideOption()
+    public function iShouldSeeDropdownWithHideOption(): void
     {
-        $page = $this->getPage();
-        $dropdown = $page->find('css', '.ui.labeled.icon.floating.dropdown.link.button');
+        $dropdown = $this->productListingShowVendorPage->findDropdownLink();
         Assert::notNull($dropdown);
+    }
+
+    /**
+     * @Then I should see url :url
+     */
+    public function iShouldSeeUrl($url): void
+    {
+        $currentUrl = $this->getSession()->getCurrentUrl();
+        $matches = preg_match($url, $currentUrl);
+        Assert::eq(1, $matches);
     }
 
     /**
