@@ -2,7 +2,7 @@ open_marketplace_vendor_taxonomy_ajax_taxon_root_nodes:
     path: /root-nodes
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -14,7 +14,7 @@ open_marketplace_vendor_taxonomy_ajax_taxon_leafs:
     path: /leafs
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -28,7 +28,7 @@ open_marketplace_vendor_taxonomy_ajax_taxon_by_code:
     path: /leaf
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -41,7 +41,7 @@ open_marketplace_vendor_taxonomy_ajax_taxon_by_name_phrase:
     path: /search
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -59,7 +59,7 @@ open_marketplace_vendor_taxonomy_ajax_generate_taxon_slug:
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
-        _controller: sylius.controller.taxon_slug:generateAction
+        _controller: sylius.controller.taxon_slug::generateAction
         _format: json
 
 open_marketplace_vendor_taxonomy_ajax_taxon_move:
@@ -68,7 +68,7 @@ open_marketplace_vendor_taxonomy_ajax_taxon_move:
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
-        _controller: sylius.controller.taxon:updateAction
+        _controller: sylius.controller.taxon::updateAction
         _format: json
         _sylius:
             permission: true
