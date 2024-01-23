@@ -60,7 +60,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="router.default"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="session.flash_bag"/>
+            <argument type="service" id="request_stack"/>
 
             <tag name="controller.service_arguments" />
         </service>
