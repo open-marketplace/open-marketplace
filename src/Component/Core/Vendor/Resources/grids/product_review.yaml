@@ -43,37 +43,37 @@ sylius_grid:
           options:
             format: d-m-Y H:i
 
-            filters:
-                status:
-                    type: select
-                    label: sylius.ui.status
-                    form_options:
-                        choices:
-                            sylius.ui.new: New
-                            sylius.ui.accepted: accepted
-                            sylius.ui.rejected: rejected
-                rating:
-                    type: select
-                    label: sylius.ui.rating
-                    form_options:
-                        choices:
-                            1: 1
-                            2: 2
-                            3: 3
-                            4: 4
-                            5: 5
-                reviewSubject:
-                    type: string
-                    label: sylius.ui.product
-                    options:
-                        fields: [reviewSubject.code, reviewSubject.translations.name]
-                author:
-                    type: string
-                    label: sylius.ui.customer
-                    options:
-                        fields: [author.email ,author.firstName , author.lastName]
-            actions:
-                item:
-                    dropdown:
-                        type: product_review_dropdown
+      filters:
+        status:
+          type: select
+          label: sylius.ui.status
+          form_options:
+            choices:
+              sylius.ui.new: New
+              sylius.ui.accepted: accepted
+              sylius.ui.rejected: rejected
+        rating:
+          type: select
+          label: sylius.ui.rating
+          form_options:
+            choices:
+              1: 1
+              2: 2
+              3: 3
+              4: 4
+              5: 5
+        reviewSubject:
+          type: string
+          label: sylius.ui.product
+          options:
+            fields: [ reviewSubject.code, reviewSubject.translations.name ]
+        author:
+          type: string
+          label: sylius.ui.customer
+          options:
+            fields: [ author.email ,author.firstName , author.lastName ]
+      actions:
+        item:
+          dropdown:
+            type: product_review_dropdown
 
