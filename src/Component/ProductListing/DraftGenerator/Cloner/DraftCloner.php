@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner;
 
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 final class DraftCloner implements DraftClonerInterface
 {
