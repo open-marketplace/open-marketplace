@@ -182,5 +182,5 @@ interface DraftInterface extends AttributeSubjectInterface, ResourceInterface, U
 
     public function getTaxCategory(): ?TaxCategoryInterface;
 
-    public function setTaxCategory(TaxCategoryInterface $category): void;
+    public function setTaxCategory(?TaxCategoryInterface $category): void;
 }
