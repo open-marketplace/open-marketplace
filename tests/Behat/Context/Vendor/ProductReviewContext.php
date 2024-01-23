@@ -40,7 +40,7 @@ final class ProductReviewContext extends RawMinkContext implements Context
         ObjectManager $manager,
         ProductReviewRepositoryInterface $productReviewRepository,
         CustomerRepositoryInterface $customerRepository,
-    ) {
+        ) {
         $this->productReviewPage = $productReviewPage;
         $this->sharedStorage = $sharedStorage;
         $this->manager = $manager;
@@ -88,7 +88,7 @@ final class ProductReviewContext extends RawMinkContext implements Context
         ProductInterface $product,
         int $count,
         string $status,
-    ): void {
+        ): void {
         $productReviews = $this->productReviewRepository->findBy(['reviewSubject' => $product, 'status' => $status]);
         Assert::count($productReviews, $count);
     }
@@ -99,7 +99,8 @@ final class ProductReviewContext extends RawMinkContext implements Context
     public function iAmOnEditPageOfReviewAddedByToProduct(string $customer, ProductInterface $product)
     {
         $customer = $this->customerRepository->findOneBy(['email' => $customer]);
-        $productReview = $this->productReviewRepository->findOneBy(['reviewSubject' => $product, 'author' => $customer]
+        $productReview = $this->productReviewRepository->findOneBy(
+            ['reviewSubject' => $product, 'author' => $customer]
         );
         $this->sharedStorage->set('review', $productReview);
 
