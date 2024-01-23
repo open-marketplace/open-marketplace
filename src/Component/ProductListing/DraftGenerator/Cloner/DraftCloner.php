@@ -35,10 +35,7 @@ final class DraftCloner implements DraftClonerInterface
         $destination->setShippingCategory($base->getShippingCategory());
         $destination->setChannels($base->getChannels());
         $destination->setMainTaxon($base->getMainTaxon());
-
-        if ($base->getTaxCategory() instanceof TaxCategoryInterface) {
-            $destination->setTaxCategory($base->getTaxCategory());
-        }
+        $destination->setTaxCategory($base->getTaxCategory());
 
         $destination->clearProductDraftTaxons();
         $this->draftTaxonCloner->clone($base, $destination);
