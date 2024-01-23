@@ -100,6 +100,7 @@ final class ProductListingContext extends RawMinkContext
         $vendor->setDescription('description');
         $vendor->setPhoneNumber('987654321');
         $vendor->setTaxIdentifier('123456789');
+        $vendor->setBankAccountNumber('iban');
         $this->entityManager->persist($vendor);
 
         $this->sharedStorage->set('vendor', $vendor);

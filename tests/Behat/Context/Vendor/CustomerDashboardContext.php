@@ -86,6 +86,7 @@ class CustomerDashboardContext extends MinkContext implements Context
             'company_name' => 'Test',
             'phone_number' => '333333333',
             'tax_identifier' => '543455',
+            'bank_account_number' => 'NL31INGB4405427607',
             'street' => 'Secret 13',
             'city' => 'Warsaw',
             'postcode' => '00-111',

@@ -9,16 +9,16 @@ We are hiring developers from all over the world. Join us and start your new, ex
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults autowire="false" autoconfigure="false" />
+        <defaults autowire="false" autoconfigure="false"/>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\TokenOwningVoter"
                  id="bitbag.open_marketplace.component.core.vendor.security.voter.token_owning">
-            <tag name="security.voter" />
+            <tag name="security.voter"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Security\Voter\OrderOperationVoter"
                  id="bitbag.open_marketplace.component.core.vendor.security.voter.order_operation">
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sm.factory"/>
             <tag name="security.voter"/>
         </service>
     </services>

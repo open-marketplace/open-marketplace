@@ -1,68 +1,68 @@
 sylius_grid:
-    grids:
-        vendor_product_variant:
-            driver:
-                name: doctrine/orm
-                options:
-                    class: "%sylius.model.product_variant.class%"
-                    repository:
-                        method: createQueryBuilderByVendor
-                        arguments:
-                            - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
-            sorting:
-                position: asc
-            fields:
-                name:
-                    type: twig
-                    path: .
-                    label: sylius.ui.name
-                    options:
-                        template: "@SyliusAdmin/ProductVariant/Grid/Field/name.html.twig"
-                code:
-                    type: string
-                    label: sylius.ui.code
-                inventory:
-                    type: twig
-                    path: .
-                    label: sylius.ui.inventory
-                    options:
-                        template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
-                position:
-                    type: twig
-                    label: sylius.ui.position
-                    path: .
-                    sortable: position
-                    options:
-                        template: "@SyliusAdmin/ProductVariant/Grid/Field/position.html.twig"
-            filters:
-                code:
-                    type: string
-                    label: sylius.ui.code
-                name:
-                    type: string
-                    label: sylius.ui.name
-                    options:
-                        fields: [translations.name]
-            actions:
-                main:
-                    generate:
-                        type: generate_variants
-                        options:
-                            product: expr:service('sylius.repository.product').find($productId)
-                    update_positions:
-                        type: update_product_variant_positions
-                    create:
-                        type: create
-                        options:
-                            link:
-                                parameters:
-                                    productId: $productId
-                item:
-                    update:
-                        type: update
-                        options:
-                            link:
-                                route: open_marketplace_vendor_inventory_update
-                                parameters:
-                                    id: resource.id
-                                    productId: $productId
+  grids:
+    vendor_product_variant:
+      driver:
+        name: doctrine/orm
+        options:
+          class: "%sylius.model.product_variant.class%"
+          repository:
+            method: createQueryBuilderByVendor
+            arguments:
+              - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
+      sorting:
+        position: asc
+      fields:
+        name:
+          type: twig
+          path: .
+          label: sylius.ui.name
+          options:
+            template: "@SyliusAdmin/ProductVariant/Grid/Field/name.html.twig"
+        code:
+          type: string
+          label: sylius.ui.code
+        inventory:
+          type: twig
+          path: .
+          label: sylius.ui.inventory
+          options:
+            template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
+        position:
+          type: twig
+          label: sylius.ui.position
+          path: .
+          sortable: position
+          options:
+            template: "@SyliusAdmin/ProductVariant/Grid/Field/position.html.twig"
+      filters:
+        code:
+          type: string
+          label: sylius.ui.code
+        name:
+          type: string
+          label: sylius.ui.name
+          options:
+            fields: [ translations.name ]
+      actions:
+        main:
+          generate:
+            type: generate_variants
+            options:
+              product: expr:service('sylius.repository.product').find($productId)
+          update_positions:
+            type: update_product_variant_positions
+          create:
+            type: create
+            options:
+              link:
+                parameters:
+                  productId: $productId
+        item:
+          update:
+            type: update
+            options:
+              link:
+                route: open_marketplace_vendor_inventory_update
+                parameters:
+                  id: resource.id
+                  productId: $productId

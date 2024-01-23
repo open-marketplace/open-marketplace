@@ -2,8 +2,11 @@ default:
     suites:
         ui_managing_vendors:
             contexts:
+                - tests.open_marketplace.behat.context.setup.admin_user
                 - open_marketplace.behat.context.setup.vendor
                 - open_marketplace.behat.context.ui.admin.vendor_listing
+                - open_marketplace.behat.context.ui.admin.vendor_editing
+                - open_marketplace.behat.context.ui.admin.admin
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.hook.doctrine_orm
             filters:

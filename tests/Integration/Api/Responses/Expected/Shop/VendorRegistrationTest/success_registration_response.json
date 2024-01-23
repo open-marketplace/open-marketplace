@@ -1,8 +1,0 @@
-{
-    "@context": "\/api\/v2\/contexts\/Vendor",
-    "@id": "\/api\/v2\/shop\/account\/vendors\/@integer@",
-    "@type": "Vendor",
-    "id": "@integer@",
-    "companyName": "Wayland Corp",
-    "slug": "Wayland-Corp"
-}

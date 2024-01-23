@@ -1,0 +1,10 @@
+<div class="middle aligned column">
+    <div class="ui right floated buttons">
+        {% if has_vendor_virtual_wallet_strategy() %}
+            <a href="{{ path('open_marketplace_vendor_virtual_wallet_index') }}" class="ui blue button">
+                <i class="credit card icon"></i>
+                {{ 'open_marketplace.ui.my_wallets'|trans }}
+            </a>
+        {% endif %}
+    </div>
+</div>

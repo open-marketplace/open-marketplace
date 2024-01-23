@@ -1,76 +1,76 @@
 sylius_grid:
-    templates:
-        action:
-            product_review_dropdown: "Configuration/Grid/Vendor/Action/productReviewDropdown.html.twig"
-    grids:
-        open_marketplace_vendor_product_review:
-            driver:
-                name: doctrine/orm
-                options:
-                    class: "%sylius.model.product_review.class%"
-                    repository:
-                        method: createVendorReviewsQueryBuilder
-                        arguments:
-                            - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
+  templates:
+    action:
+      product_review_dropdown: "Configuration/Grid/Vendor/Action/productReviewDropdown.html.twig"
+  grids:
+    open_marketplace_vendor_product_review:
+      driver:
+        name: doctrine/orm
+        options:
+          class: "%sylius.model.product_review.class%"
+          repository:
+            method: createVendorReviewsQueryBuilder
+            arguments:
+              - "expr:service('bitbag.open_marketplace.component.vendor.context.vendor').getVendor()"
 
-            sorting:
-                date: desc
+      sorting:
+        date: desc
 
-            fields:
-                reviewSubject:
-                    type: string
-                    label: sylius.ui.product
-                author:
-                    type: string
-                    label: sylius.ui.customer
-                status:
-                    type: twig
-                    label: sylius.ui.status
-                    options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/ProductReview/Label/Status"
-                    sortable: status
-                rating:
-                    type: string
-                    label: sylius.ui.rating
-                    sortable: rating
-                date:
-                    type: datetime
-                    label: sylius.ui.date
-                    path: createdAt
-                    sortable: createdAt
-                    options:
-                        format: d-m-Y H:i
+      fields:
+        reviewSubject:
+          type: string
+          label: sylius.ui.product
+        author:
+          type: string
+          label: sylius.ui.customer
+        status:
+          type: twig
+          label: sylius.ui.status
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/ProductReview/Label/Status"
+          sortable: status
+        rating:
+          type: string
+          label: sylius.ui.rating
+          sortable: rating
+        date:
+          type: datetime
+          label: sylius.ui.date
+          path: createdAt
+          sortable: createdAt
+          options:
+            format: d-m-Y H:i
 
-            filters:
-                status:
-                    type: select
-                    label: sylius.ui.status
-                    form_options:
-                        choices:
-                            sylius.ui.new: New
-                            sylius.ui.accepted: accepted
-                            sylius.ui.rejected: rejected
-                rating:
-                    type: select
-                    label: sylius.ui.rating
-                    form_options:
-                        choices:
-                            1: 1
-                            2: 2
-                            3: 3
-                            4: 4
-                            5: 5
-                product:
-                    type: string
-                    label: sylius.ui.product
-                customer:
-                    type: string
-                    label: sylius.ui.customer
+      filters:
+        status:
+          type: select
+          label: sylius.ui.status
+          form_options:
+            choices:
+              sylius.ui.new: New
+              sylius.ui.accepted: accepted
+              sylius.ui.rejected: rejected
+        rating:
+          type: select
+          label: sylius.ui.rating
+          form_options:
+            choices:
+              1: 1
+              2: 2
+              3: 3
+              4: 4
+              5: 5
+        product:
+          type: string
+          label: sylius.ui.product
+        customer:
+          type: string
+          label: sylius.ui.customer
 
-            actions:
-                item:
-                    dropdown:
-                        type: product_review_dropdown
+      actions:
+        item:
+          dropdown:
+            type: product_review_dropdown
 

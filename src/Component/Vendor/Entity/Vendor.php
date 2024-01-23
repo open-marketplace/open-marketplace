@@ -13,6 +13,8 @@ namespace BitBag\OpenMarketplace\Component\Vendor\Entity;
 
 use BitBag\OpenMarketplace\Component\Product\Entity\ProductInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\Listing;
+use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,6 +32,8 @@ class Vendor implements VendorInterface
 
     protected ?string $taxIdentifier;
 
+    protected ?string $bankAccountNumber;
+
     protected ?string $phoneNumber;
 
     protected ?AddressInterface $vendorAddress;
@@ -39,6 +43,8 @@ class Vendor implements VendorInterface
     protected bool $enabled = true;
 
     protected ?DateTimeInterface $editedAt = null;
+
+    protected DateTimeInterface $createdAt;
 
     protected ?string $slug;
 
@@ -57,14 +63,20 @@ class Vendor implements VendorInterface
     /** @var Collection<int, VendorShippingMethodInterface> */
     protected Collection $shippingMethods;
 
+    /** @var Collection<int, SettlementInterface> */
+    protected Collection $settlements;
+
     protected ?int $commission = 0;
 
     protected string $commissionType = self::NET_COMMISSION;
+
+    protected string $settlementFrequency = VendorSettlementFrequency::DEFAULT_SETTLEMENT_FREQUENCY;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->shippingMethods = new ArrayCollection();
+        $this->settlements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,6 +117,16 @@ class Vendor implements VendorInterface
     public function setTaxIdentifier(?string $taxIdentifier): void
     {
         $this->taxIdentifier = $taxIdentifier;
+    }
+
+    public function getBankAccountNumber(): ?string
+    {
+        return $this->bankAccountNumber;
+    }
+
+    public function setBankAccountNumber(?string $bankAccountNumber): void
+    {
+        $this->bankAccountNumber = $bankAccountNumber;
     }
 
     public function getPhoneNumber(): ?string
@@ -330,9 +352,53 @@ class Vendor implements VendorInterface
         $this->commissionType = $commissionType;
     }
 
+    public function getSettlements(): Collection
+    {
+        return $this->settlements;
+    }
+
+    public function setSettlements(Collection $settlements): void
+    {
+        $this->settlements = $settlements;
+    }
+
+    public function getSettlementFrequency(): string
+    {
+        return $this->settlementFrequency;
+    }
+
+    public function setSettlementFrequency(string $settlementFrequency): void
+    {
+        $this->settlementFrequency = $settlementFrequency;
+    }
+
     public function __toString(): string
     {
         /**  @phpstan-ignore-next-line */
         return $this->getCompanyName();
+    }
+
+    public function getValidSettlementFrequency(): array
+    {
+        return VendorSettlementFrequency::SETTLEMENT_FREQUENCIES;
+    }
+
+    public function getCreatedAt(): DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function hasCyclicalSettlementFrequency(): bool
+    {
+        return in_array(
+            $this->getSettlementFrequency(),
+            VendorSettlementFrequency::CYCLICAL_SETTLEMENT_FREQUENCIES,
+            true
+        );
     }
 }

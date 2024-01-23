@@ -10,14 +10,14 @@
 {% endblock %}
 
 {% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.shipping_methods',
+        "subheader": 'open_marketplace.ui.manage_shipping_methods',
+        "icon": 'shipping',
+    } %}
+
     <div class="ui form segment">
         {{ form_start(form) }}
-        <h1 class="ui dividing header">
-            {{ 'open_marketplace.ui.your_vendor_profile'|trans }}
-            <div class="sub header">{{ 'open_marketplace.ui.edit_your_vendor_information'|trans }}</div>
-        </h1>
-
-
         {% for channel in form.channels %}
             <div class="ui top attached tabular menu">
                 <a class="item active" data-tab="{{ channel.vars.name }}">{{ channel.vars.label }}</a>

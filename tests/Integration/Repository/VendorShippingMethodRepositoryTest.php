@@ -26,7 +26,7 @@ final class VendorShippingMethodRepositoryTest extends JsonApiTestCase
 
     public function test_it_finds_all_enabled_shipping_methods_for_vendor_and_channel(): void
     {
-        $this->loadFixturesFromFile('VendorShippingMethodRepositoryTest/test_it_finds_all_enabled_shipping_methods_for_vendor_and_channel.yml');
+        $this->loadFixturesFromFile('VendorShippingMethodRepositoryTest/test_it_finds_all_enabled_shipping_methods_for_vendor_and_channel.yaml');
 
         $vendor = $this->entityManager->getRepository(Vendor::class)->findOneBy(['slug' => 'oliver-queen-company']);
         $channel = $this->entityManager->getRepository(Channel::class)->findOneBy(['code' => 'code']);

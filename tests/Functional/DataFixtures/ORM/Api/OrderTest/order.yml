@@ -87,6 +87,16 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
     customer: '@customer_john'
     username: "john.smith@example.com"
     usernameCanonical: "john.smith@example.com"
+Sylius\Component\Core\Model\AdminUser:
+  test_admin:
+    enabled: true
+    username: "Clark Kent"
+    firstName: "Clark"
+    lastName: "Kent"
+    email: "clark.kent@example.com"
+    emailCanonical: "clark.kent@example.com"
+    localeCode: 'en_US'
+    roles: ["ROLE_ADMINISTRATION_ACCESS","ROLE_API_ACCESS"]
 Sylius\Component\Core\Model\Address:
   address_john:
     firstName: "John"
@@ -100,6 +110,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     shopUser: '@user_bruce'
     companyName: 'Wayne Enterprises, Inc.'
     taxIdentifier: '1234567'
+    bankAccountNumber: 'PL31109024026812185484588836'
     phoneNumber: '555123123'
     slug: 'Wayne-Enterprises-Inc'
     description: 'description'
@@ -109,6 +120,7 @@ BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
     shopUser: '@user_peter'
     companyName: 'Weyland Corp'
     taxIdentifier: '7654321'
+    bankAccountNumber: 'PL17109024022586255711928552'
     phoneNumber: '555444333'
     slug: 'Weyland-Corp'
     description: 'description'
@@ -236,16 +248,26 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     state: 'new'
     checkoutState: 'completed'
     tokenValue: 'order_made_by_peter_main'
-  order_made_by_peter:
+  order_made_by_peter_1:
     primaryOrder: '@order_made_by_peter_main'
     mode: "secondary"
     currency_code: "USD"
     locale_code: "en-US"
     customer: '@customer_peter'
-    paymentState: "paid"
+    paymentState: "awaiting_payment"
     state: 'new'
     checkoutState: 'completed'
-    tokenValue: 'order_made_by_peter'
+    tokenValue: 'order_made_by_peter_1'
+  order_made_by_peter_2:
+    primaryOrder: '@order_made_by_peter_main'
+    mode: "secondary"
+    currency_code: "USD"
+    locale_code: "en-US"
+    customer: '@customer_peter'
+    paymentState: "awaiting_payment"
+    state: 'new'
+    checkoutState: 'completed'
+    tokenValue: 'order_made_by_peter_2'
 BitBag\OpenMarketplace\Component\Order\Entity\OrderItem:
   bruce_order_made_by_john_1_item_1:
     order: '@bruce_order_made_by_john_1'
@@ -273,5 +295,39 @@ Sylius\Component\Core\Model\OrderItemUnit:
   bruce_order_made_by_john_1_item_1_unit:
     __construct: ["@bruce_order_made_by_john_1_item_1"]
     shipment: '@bruce_order_made_by_john_1_shipment'
-
-
+Sylius\Component\Core\Model\PaymentMethod:
+  payment_method_cash_on_delivery:
+    code: 'CASH_ON_DELIVERY'
+    enabled: true
+    gatewayConfig: '@gateway_offline'
+    currentLocale: 'en_US'
+    translations:
+      - '@payment_method_cash_on_delivery_translation'
+    channels: ['@channel']
+Sylius\Component\Payment\Model\PaymentMethodTranslation:
+  payment_method_cash_on_delivery_translation:
+    name: 'Cash on delivery'
+    locale: 'en_US'
+    description: '<paragraph(2)>'
+    translatable: '@payment_method_cash_on_delivery'
+Sylius\Bundle\PayumBundle\Model\GatewayConfig:
+  gateway_offline:
+    gatewayName: 'Offline'
+    factoryName: 'offline'
+    config: []
+Sylius\Component\Core\Model\Payment:
+  peter_order_payment_main:
+    order: "@order_made_by_peter_main"
+    method: "@payment_method_cash_on_delivery"
+    currencyCode: "USD"
+    state: "new"
+  peter_order_payment_1:
+    order: "@order_made_by_peter_1"
+    method: "@payment_method_cash_on_delivery"
+    currencyCode: "USD"
+    state: "new"
+  peter_order_payment_2:
+    order: "@order_made_by_peter_2"
+    method: "@payment_method_cash_on_delivery"
+    currencyCode: "USD"
+    state: "new"
