@@ -166,7 +166,7 @@ final class ProductListingContext extends RawMinkContext
         int $count,
         string $status,
     ): void {
-        $this->createProudctListingByVendor($count,$status);
+        $this->createProudctListingByVendor($count, $status);
     }
 
     /**
