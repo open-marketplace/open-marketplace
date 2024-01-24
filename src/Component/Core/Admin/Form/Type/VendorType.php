@@ -36,7 +36,6 @@ final class VendorType extends AbstractResourceType
             ])
             ->add('vendorAddress', VendorAddressType::class, [
                 'label' => 'open_marketplace.ui.vendor_address',
-                'constraints' => [new Valid()],
             ])
             ->add('commission', NumberType::class, [
                 'label' => 'open_marketplace.ui.commission',
