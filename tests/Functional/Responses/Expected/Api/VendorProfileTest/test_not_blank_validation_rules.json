@@ -12,6 +12,36 @@
             "code": "@string@"
         },
         {
+            "propertyPath": "vendorAddress.city",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.city",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.street",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.street",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.postalCode",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "postalCode.street",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
             "propertyPath": "taxIdentifier",
             "message": "Required length: 3 characters.",
             "code": "@string@"
