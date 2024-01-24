@@ -61,9 +61,9 @@ final class VendorEditingContext extends RawMinkContext implements Context
      */
     public function thereIsAnAddressFormFilledWithDefaultValues(): void
     {
-        $this->getPage()->fillField('vendor_vendorAddress_city', "Warsaw");
-        $this->getPage()->fillField('vendor_vendorAddress_postalCode', "87-100");
-        $this->getPage()->fillField('vendor_vendorAddress_street', "Groove Street");
+        $this->getPage()->fillField('vendor_vendorAddress_city', 'Warsaw');
+        $this->getPage()->fillField('vendor_vendorAddress_postalCode', '87-100');
+        $this->getPage()->fillField('vendor_vendorAddress_street', 'Groove Street');
     }
 
     /**
@@ -71,7 +71,7 @@ final class VendorEditingContext extends RawMinkContext implements Context
      */
     public function iLeaveTheCityFieldEmpty(): void
     {
-        $this->getPage()->fillField('vendor_vendorAddress_street', "");
+        $this->getPage()->fillField('vendor_vendorAddress_street', '');
     }
 
     /**
@@ -79,7 +79,7 @@ final class VendorEditingContext extends RawMinkContext implements Context
      */
     public function iLeaveThePostalCodeFieldEmpty(): void
     {
-        $this->getPage()->fillField('vendor_vendorAddress_postalCode', "");
+        $this->getPage()->fillField('vendor_vendorAddress_postalCode', '');
     }
 
     /**
@@ -87,7 +87,7 @@ final class VendorEditingContext extends RawMinkContext implements Context
      */
     public function iLeaveTheStreetFieldEmpty(): void
     {
-        $this->getPage()->fillField('vendor_vendorAddress_street', "");
+        $this->getPage()->fillField('vendor_vendorAddress_street', '');
     }
 
     private function getPage(): DocumentElement
