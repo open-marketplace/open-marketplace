@@ -36,7 +36,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListing\EditPageInterface;
 use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListing\IndexPageInterface;
-use Tests\BitBag\OpenMarketplace\Behat\Page\Vendor\ProductListingPage;
 use Webmozart\Assert\Assert;
 
 final class ProductListingContext extends RawMinkContext
@@ -48,7 +47,6 @@ final class ProductListingContext extends RawMinkContext
         private SharedStorageInterface $sharedStorage,
         private AdminUserExampleFactory $adminUserExampleFactory,
         private string $imagePath,
-        private ProductListingPage $productListingPage,
         private FactoryInterface $localeFactory,
         private IndexPageInterface $productListingShowVendorPage,
         private EditPageInterface $productListingEditVendorPage,
@@ -168,44 +166,7 @@ final class ProductListingContext extends RawMinkContext
         int $count,
         string $status,
     ): void {
-        $vendor = $this->sharedStorage->get('vendor');
-
-        for ($i = 0; $i < $count; ++$i) {
-            $productListing = new Listing();
-            $productListing->setCode('code' . $i);
-            $productListing->setVendor($vendor);
-            $productListing->setVerificationStatus($status);
-
-            $productDraft = new Draft();
-            $productDraft->setCode('code' . $i);
-            $productDraft->setStatus($status);
-            $productDraft->setPublishedAt(new \DateTime());
-            $productDraft->setVersionNumber(0);
-            $productDraft->setProductListing($productListing);
-
-            $productTranslation = new DraftTranslation();
-            $productTranslation->setLocale('en_US');
-            $productTranslation->setSlug('product-listing-' . $i);
-            $productTranslation->setName('product-listing-' . $i);
-            $productTranslation->setDescription('product-listing-' . $i);
-            $productTranslation->setProductDraft($productDraft);
-
-            $productPricing = new ListingPrice();
-            $productPricing->setProductDraft($productDraft);
-            $productPricing->setPrice(1000);
-            $productPricing->setOriginalPrice(1000);
-            $productPricing->setMinimumPrice(1000);
-            $productPricing->setChannelCode('en_US');
-
-            $this->entityManager->persist($productListing);
-            $this->entityManager->persist($productDraft);
-            $this->entityManager->persist($productTranslation);
-            $this->entityManager->persist($productPricing);
-
-            $this->sharedStorage->set('product_listing', $productListing);
-        }
-
-        $this->entityManager->flush();
+        $this->createProudctListingByVendor($count,$status);
     }
 
     /**
