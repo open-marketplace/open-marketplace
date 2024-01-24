@@ -1,46 +1,46 @@
 open_marketplace_vendor_messaging_conversation_index:
-    path: /conversations
-    methods: [GET]
-    defaults:
-        _controller:  bitbag.open_marketplace.component.core.vendor.controller.messaging.list_threads
-        _sylius:
-            template: "Context/Vendor/Conversation/index.html.twig"
+  path: /conversations
+  methods: [ GET ]
+  defaults:
+    _controller: bitbag.open_marketplace.component.core.vendor.controller.messaging.list_threads
+    _sylius:
+      template: "Context/Vendor/Conversation/index.html.twig"
 
 open_marketplace_vendor_messaging_conversation_show:
-    path: /conversations/{id}
-    methods: [GET,POST]
-    defaults:
-        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.show_thread
-        _sylius:
-            template: "Context/Vendor/Conversation/show.html.twig"
+  path: /conversations/{id}
+  methods: [ GET,POST ]
+  defaults:
+    _controller: bitbag.open_marketplace.component.core.common.controller.messaging.show_thread
+    _sylius:
+      template: "Context/Vendor/Conversation/show.html.twig"
 
 open_marketplace_vendor_messaging_conversation_message_add:
-    path: /conversations/{id}/message/add
-    methods: [GET, POST]
-    defaults:
-        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_message
-        _sylius:
-            redirect: open_marketplace_vendor_messaging_conversation_show
-            mail_redirect: open_marketplace_vendor_messaging_conversation_show
+  path: /conversations/{id}/message/add
+  methods: [ GET, POST ]
+  defaults:
+    _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_message
+    _sylius:
+      redirect: open_marketplace_vendor_messaging_conversation_show
+      mail_redirect: open_marketplace_vendor_messaging_conversation_show
 
 open_marketplace_vendor_messaging_conversation_create:
-    path: /conversation/create
-    methods: [GET,POST]
-    defaults:
-        _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_thread
-        _sylius:
-            template: "Context/Vendor/Conversation/create.html.twig"
-            redirect: open_marketplace_vendor_messaging_conversation_show
-            mail_redirect: open_marketplace_admin_messaging_conversation_show
+  path: /conversation/create
+  methods: [ GET,POST ]
+  defaults:
+    _controller: bitbag.open_marketplace.component.core.common.controller.messaging.create_thread
+    _sylius:
+      template: "Context/Vendor/Conversation/create.html.twig"
+      redirect: open_marketplace_vendor_messaging_conversation_show
+      mail_redirect: open_marketplace_admin_messaging_conversation_show
 
 open_marketplace_vendor_messaging_conversation_archive:
-    path: /conversations/{id}/archive
-    methods: [PATCH]
-    defaults:
-        _controller: open_marketplace.controller.conversation:applyStateMachineTransitionAction
-        _sylius:
-            state_machine:
-                graph: open_marketplace_conversation
-                transition: close
-            redirect: referer
-            flash: open_marketplace.ui.conversation_successfully_closed
+  path: /conversations/{id}/archive
+  methods: [ PATCH ]
+  defaults:
+    _controller: open_marketplace.controller.conversation:applyStateMachineTransitionAction
+    _sylius:
+      state_machine:
+        graph: open_marketplace_conversation
+        transition: close
+      redirect: referer
+      flash: open_marketplace.ui.conversation_successfully_closed

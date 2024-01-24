@@ -53,7 +53,7 @@ class VendorFilterStrategyTest extends IntegrationTestCase
 
     public function test_it_filters_resources(): void
     {
-        $this->loadFixturesFromFile('VendorContextStrategy/VendorFilterStrategyTest/vendor_filter_strategy.yml');
+        $this->loadFixturesFromFile('VendorContextStrategy/VendorFilterStrategyTest/vendor_filter_strategy.yaml');
 
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
         $queryBuilder = $this->draftAttributeRepository->createQueryBuilder('o');

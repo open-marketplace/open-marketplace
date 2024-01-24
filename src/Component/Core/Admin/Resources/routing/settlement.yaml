@@ -1,0 +1,19 @@
+open_marketplace_admin_settlement_show:
+  path: /settlement/{id}
+  defaults:
+    _controller: open_marketplace.controller.settlement:showAction
+    _sylius:
+      section: admin
+      template: 'Context/Admin/Settlement/show.html.twig'
+      permission: true
+
+open_marketplace_admin_settlements_show_orders:
+  path: /settlement/{id}/orders
+  methods: [GET]
+  defaults:
+    _controller: open_marketplace.controller.settlement:showOrderAction
+    _sylius:
+      section: admin
+      permission: true
+      template: 'Context/Admin/Settlement/showOrders.html.twig'
+      grid: open_marketplace_admin_settlement_order

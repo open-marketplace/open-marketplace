@@ -1,0 +1,33 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.new_'~metadata.name) %}
+{% set event_prefix = metadata.applicationName ~ '.vendor.' ~ metadata.name ~ '.create' %}
+
+{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('open_marketplace_vendor_virtual_wallet_index') }}" class="section">{{ 'open_marketplace.ui.virtual_wallet'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ channel.name  ~ ' - ' ~ 'open_marketplace.ui.profit_withdrawal'|trans }}</div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+    {{ include('Context/Vendor/Settlement/_form.html.twig') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.create.stylesheets'], { 'metadata': metadata }) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
+{% endblock %}

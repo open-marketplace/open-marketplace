@@ -42,7 +42,7 @@ final class ProfileFactorySpec extends ObjectBehavior
     public function it_returns_valid_address(AddressInterface $vendorAddress, FactoryInterface $vendorFactory): void
     {
         $vendorFactory->createNew()->willReturn(new Vendor());
-        $vendor = $this->createVendor('some street', 'City', '22-111', 'description', $vendorAddress);
+        $vendor = $this->createVendor('some street', 'City', 'iban', '22-111', 'description', $vendorAddress);
         $vendor->shouldHaveType(ProfileInterface::class);
         $vendor->getVendorAddress()->shouldBeEqualTo($vendorAddress);
     }

@@ -5,8 +5,8 @@
         <defaults autowire="false" autoconfigure="false" />
 
         <service class="BitBag\OpenMarketplace\Component\Order\EventListener\CalculateOrderCommissionListener"
-                 id="bitbag.open_marketplace.component.order.event_listener.calculate_order_commission">
-
+                id="bitbag.open_marketplace.component.order.event_listener.calculate_order_commission"
+        >
             <argument type="tagged_iterator" tag="bitbag.open_marketplace.component.order.commission_calculator" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
 

@@ -12,6 +12,11 @@
 {% set productDraft = product_draft %}
 
 {% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.show_product_listing',
+        "icon": 'file',
+    } %}
+
     {% set productDraft = product_draft%}
 
     <h4 class="ui top attached large header">{{ 'sylius.ui.details'|trans }}</h4>
@@ -55,7 +60,7 @@
     </div>
     <div class="ui hidden divider"></div>
 
-    {% include 'Context/Vendor/ProductListing/details/_pricing.html.twig' %}
+    {% include 'Context/Common/ProductListing/_pricing.html.twig' with { taxCategory: true } %}
     <div class="ui hidden divider"></div>
     {% include 'Context/Vendor/ProductListing/details/_shipping.html.twig' %}
     <div class="ui hidden divider"></div>
@@ -69,6 +74,9 @@
     <div class="ui hidden divider"></div>
 {% endblock %}
 
+{% set event_prefix = metadata.applicationName ~ '.vendor.' ~ metadata.name ~ '.create' %}
 {% block stylesheets %}
-    {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
+    {{ parent() }}
+
+    {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.create.stylesheets'], { 'metadata': metadata }) }}
 {% endblock %}

@@ -1,0 +1,11 @@
+{% if data.status == 'new' %}
+    <form action="{{ path('open_marketplace_vendor_settlement_settle', { id: data.id }) }}" method="post">
+        <input type="hidden" name="_method" value="POST">
+        <div class="ui buttons">
+            <button class="ui green labeled icon button" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('archieve-button') }}>
+                <i class="icon check"></i> {{ action.label|trans }}
+            </button>
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}" />
+    </form>
+{% endif %}

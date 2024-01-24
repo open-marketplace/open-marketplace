@@ -1,0 +1,20 @@
+default:
+  suites:
+    admin_virtual_wallets:
+      contexts:
+        - tests.open_marketplace.behat.context.admin.virtual_wallet
+        - tests.open_marketplace.behat.context.setup.virtual_wallet
+        - tests.open_marketplace.behat.context.setup.admin_user
+        - tests.open_marketplace.behat.context.common.grid_sorting
+        - tests.open_marketplace.behat.context.setup.product
+        - sylius.behat.context.setup.product
+        - open_marketplace.behat.context.setup.vendor
+        - sylius.behat.context.hook.doctrine_orm
+        - sylius.behat.context.setup.admin_security
+        - sylius.behat.context.setup.channel
+        - sylius.behat.context.setup.user
+        - sylius.behat.context.transform.channel
+        - sylius.behat.context.transform.lexical
+        - sylius.behat.context.transform.shared_storage
+      filters:
+        tags: "@admin_virtual_wallets&&@ui"

@@ -1,0 +1,107 @@
+Sylius\Component\Addressing\Model\Country:
+  poland:
+    code: 'PL'
+Sylius\Component\Core\Model\Customer:
+  customer_bruce:
+    firstName: 'Bruce'
+    lastName: 'Wayne'
+    email: 'bruce.wayne@example.com'
+    emailCanonical: 'bruce.wayne@example.com'
+  customer_peter:
+    firstName: 'Peter'
+    lastName: 'Weyland'
+    email: 'peter.weyland@example.com'
+    emailCanonical: 'peter.weyland@example.com'
+  customer_john:
+    firstName: 'John'
+    lastName: 'Smith'
+    email: 'john.smith@example.com'
+    emailCanonical: 'john.smith@example.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\ShopUser:
+  user_bruce:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
+    enabled: 'true'
+    customer: '@customer_bruce'
+    username: 'bruce.wayne@example.com'
+    usernameCanonical: 'bruce.wayne@example.com'
+  user_peter:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER', 'ROLE_VENDOR' ]
+    enabled: 'true'
+    customer: '@customer_peter'
+    username: 'peter.weyland@example.com'
+    usernameCanonical: 'peter.weyland@example.com'
+  user_john:
+    plainPassword: '123password'
+    roles: [ 'ROLE_USER' ]
+    enabled: 'true'
+    customer: '@customer_john'
+    username: 'john.smith@example.com'
+    usernameCanonical: 'john.smith@example.com'
+BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor:
+  vendor_bruce:
+    shopUser: '@user_bruce'
+    companyName: 'Wayne Enterprises, Inc.'
+    taxIdentifier: '1234567'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '555123123'
+    slug: 'Wayne-Enterprises-Inc'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+  vendor_peter:
+    shopUser: '@user_peter'
+    companyName: 'Weyland Corp'
+    taxIdentifier: '7654321'
+    bankAccountNumber: 'PL97109024021972765458596357'
+    phoneNumber: '555444333'
+    slug: 'Weyland-Corp'
+    description: 'description'
+    commission: 10
+    commissionType: 'net'
+BitBag\OpenMarketplace\Component\Product\Entity\Product:
+  product_bruce_1:
+    vendor: '@vendor_bruce'
+    code: 'bruce_1'
+    enabled: true
+  product_bruce_2:
+    vendor: '@vendor_bruce'
+    code: 'bruce_2'
+    enabled: true
+  product_peter_1:
+    vendor: '@vendor_peter'
+    code: 'peter_2'
+    enabled: true
+Sylius\Component\Core\Model\ProductVariant:
+  product_variant_product_bruce_1_1:
+    product: '@product_bruce_1'
+    code: 'bruce_1_1'
+    enabled: true
+    onHold: 2
+    onHand: 3
+    tracked: true
+  product_variant_product_bruce_1_2:
+    product: '@product_bruce_1'
+    code: 'bruce_1_2'
+    enabled: true
+    onHand: 1
+    tracked: true
+  product_variant_product_bruce_2_1:
+    product: '@product_bruce_2'
+    code: 'bruce_2_1'
+    enabled: true
+    onHand: 0
+    tracked: false
+  product_variant_product_peter_1_1:
+    product: '@product_peter_1'
+    code: 'peter_1_1'
+    enabled: true
+    onHand: 3
+    tracked: true
+  product_variant_product_peter_1_2:
+    product: '@product_peter_1'
+    code: 'peter_1_2'
+    enabled: true
+    onHand: 1
+    tracked: true

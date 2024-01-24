@@ -1,0 +1,18 @@
+open_marketplace_vendor_virtual_wallet_index:
+  path: /virtual-wallets
+  methods: [ GET ]
+  defaults:
+    _controller: open_marketplace.controller.virtual_wallet:indexAction
+    _sylius:
+      template: "Context/Vendor/VirtualWallet/index.html.twig"
+      grid: vendor_account_virtual_wallet_index
+
+open_marketplace_vendor_profit_withdrawal_create:
+  path: /profit-withdrawal/{channelCode}
+  methods: [ GET, POST ]
+  defaults:
+    _controller: bitbag.open_marketplace.component.core.settlement.controller.action.profit_withdrawal
+    _sylius:
+      template: "Context/Vendor/Settlement/create.html.twig"
+      event: profit_withdrawal_create
+      form: BitBag\OpenMarketplace\Component\Core\Settlement\Form\ProfitWithdrawalType

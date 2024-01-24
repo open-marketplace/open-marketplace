@@ -1,0 +1,28 @@
+{% block body %}
+    {% autoescape false %}
+        {% set logo = channel.hostname is not null ? 'http://' ~ channel.hostname ~ asset('open-marketplace-logo.png') : absolute_url(asset('open-marketplace-logo.png')) %}
+
+        <div style="font-family: sans-serif; background: #eee; padding-top: 30px; padding-bottom: 30px; font-size: 16px; color: #333; line-height: 1.5">
+            <div style="max-width: 600px; margin: 20px auto;">
+                <div style="margin-bottom: 30px; text-align: center;">
+                    {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
+                        {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
+                        <a href="{{ url|raw }}">
+                            <img src="{{ logo }}" alt="OpenMarketplace" style="width: 320px">
+                        </a>
+                    {% else %}
+                        <img src="{{ logo }}" alt="OpenMarketplace" style="width: 320px">
+                    {% endif %}
+                </div>
+
+                <div style="background: #fff; padding: 40px 30px;">
+                    {% block content %}{% endblock %}
+                </div>
+
+                <div style="text-align: center; padding: 20px 0;">
+                    <a href="https://open-marketplace.io/" target="_blank" style="color: #1abb9c; text-decoration: none;">OpenMarketplace</a>
+                </div>
+            </div>
+        </div>
+    {% endautoescape %}
+{% endblock %}

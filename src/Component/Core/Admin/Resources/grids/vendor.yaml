@@ -4,14 +4,14 @@ sylius_grid:
             enable_vendor_action: "Configuration/Grid/Admin/Action/enableVendor.html.twig"
             edit_vendor: "Configuration/Grid/Admin/Action/editVendor.html.twig"
             show_product_listings: "Configuration/Grid/Admin/Action/showVendorProductListings.html.twig"
+            show_settlements: "Configuration/Grid/Admin/Action/showVendorSettlements.html.twig"
+            show_virtual_wallets: "Configuration/Grid/Admin/Action/showVendorVirtualWallets.html.twig"
     grids:
         open_marketplace_admin_vendor:
             driver:
                 name: doctrine/orm
                 options:
                     class: '%open_marketplace.model.vendor.class%'
-                    repository:
-                        method: createListQueryBuilder
             sorting:
                 id: asc
             fields:
@@ -49,3 +49,7 @@ sylius_grid:
                         type: enable_vendor_action
                     show_product_listings:
                         type: show_product_listings
+                    show_settlements:
+                        type: show_settlements
+                    show_virtual_wallets:
+                        type: show_virtual_wallets

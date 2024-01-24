@@ -90,6 +90,7 @@ final class SimpleProductUpdater implements SimpleProductUpdaterInterface
         $productVariant = $this->productVariantRepository->findOneBy(['product' => $product]);
         $productVariant->setShippingRequired($productDraft->isShippingRequired());
         $productVariant->setShippingCategory($productDraft->getShippingCategory());
+        $productVariant->setTaxCategory($productDraft->getTaxCategory());
 
         /** @var ListingPriceInterface $productListingPrice */
         foreach ($productDraft->getProductListingPrices() as $productListingPrice) {
