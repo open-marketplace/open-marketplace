@@ -156,7 +156,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function thereIsProductListingCreatedByVendor(int $count): void
     {
-        $this->createProudctListingByVendor($count);
+        $this->createProductListingByVendor($count);
     }
 
     /**
@@ -166,7 +166,7 @@ final class ProductListingContext extends RawMinkContext
         int $count,
         string $status,
     ): void {
-        $this->createProudctListingByVendor($count, $status);
+        $this->createProductListingByVendor($count, $status);
     }
 
     /**
@@ -307,15 +307,7 @@ final class ProductListingContext extends RawMinkContext
      */
     public function iFillFormWithDefaultData(): void
     {
-        $page = $this->getPage();
-
-        $page->fillField('Code', 'code');
-        $page->fillField('Price', '10');
-        $page->fillField('Original price', '20');
-        $page->fillField('Minimum price', '30');
-        $page->fillField('Name', 'test');
-        $page->fillField('Slug', 'product');
-        $page->fillField('Description', 'product description');
+        $this->productListingEditVendorPage->fillFormWithDefaultData();
     }
 
     /**
@@ -360,7 +352,7 @@ final class ProductListingContext extends RawMinkContext
         Assert::notContains($mediaContainer->getHtml(), 'test.jpg', 'image found');
     }
 
-    public function createProudctListingByVendor($count, $status = 'under_verification'): void
+    public function createProductListingByVendor($count, $status = 'under_verification'): void
     {
         $vendor = $this->sharedStorage->get('vendor');
 

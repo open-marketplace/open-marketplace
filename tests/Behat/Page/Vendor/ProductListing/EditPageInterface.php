@@ -15,4 +15,6 @@ use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 interface EditPageInterface extends PageInterface
 {
     public function fillTaxCategory(string $taxCategoryName): void;
+
+    public function fillFormWithDefaultData(): void;
 }
