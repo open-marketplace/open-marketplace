@@ -18,4 +18,12 @@ interface VendorUpdatePageInterface
     public function setSettlementFrequency(string $frequency): void;
 
     public function submitVendorForm(): void;
+
+    public function leaveTheStreetFieldEmpty(): void;
+
+    public function leaveThePostalCodeFieldEmpty(): void;
+
+    public function leaveTheCityFieldEmpty(): void;
+
+    public function fillAddressFormWithDefaultData(): void;
 }
