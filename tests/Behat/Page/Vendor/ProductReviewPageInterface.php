@@ -23,4 +23,8 @@ interface ProductReviewPageInterface extends PageInterface
     public function clickButtonFirstReview(string $button): void;
 
     public function clickEditFirstReview(): void;
+
+    public function fillReviewSubject(string $subject): void;
+
+    public function fillAuthor(string $name): void;
 }

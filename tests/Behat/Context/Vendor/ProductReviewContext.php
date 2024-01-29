@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Vendor;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use BitBag\OpenMarketplace\Component\Product\Repository\ProductReviewRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\CustomerRepositoryInterface;
@@ -138,7 +137,7 @@ final class ProductReviewContext extends RawMinkContext implements Context
      */
     public function iFillInTheAuthorFieldWithName(string $name): void
     {
-        $this->getPage()->fillField('criteria[author][value]', $name);
+        $this->productReviewPage->fillAuthor($name);
     }
 
     /**
@@ -146,11 +145,6 @@ final class ProductReviewContext extends RawMinkContext implements Context
      */
     public function iFillInTheReviewSubjectWithName(string $subject): void
     {
-        $this->getPage()->fillField('criteria[reviewSubject][value]', $subject);
-    }
-
-    private function getPage(): DocumentElement
-    {
-        return $this->getSession()->getPage();
+        $this->productReviewPage->fillReviewSubject($subject);
     }
 }
