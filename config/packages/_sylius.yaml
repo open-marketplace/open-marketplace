@@ -31,7 +31,7 @@ sylius_order:
                 model: BitBag\OpenMarketplace\Component\Order\Entity\Order
                 controller: BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource\OrderController
                 repository: BitBag\OpenMarketplace\Component\Order\Repository\OrderRepository
-                form: Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType\OrderType
+                form: Sylius\Bundle\OrderBundle\Form\Type\OrderType
         order_item:
             classes:
                 model: BitBag\OpenMarketplace\Component\Order\Entity\OrderItem
