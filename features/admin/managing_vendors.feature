@@ -7,7 +7,7 @@ Feature: Listing vendors
   @ui
   Scenario: Listing vendors
     Given There is an admin user "admin" with password "admin"
-    And I am logged in as an admin
+    And I am logged in as an administrator
     And There are 5 vendors listed
     And I am on "/admin"
     When I follow "Vendors"
@@ -16,7 +16,7 @@ Feature: Listing vendors
   @ui
   Scenario: Vendor details page has link to associated customer
     Given There is an admin user "admin" with password "admin"
-    And I am logged in as an admin
+    And I am logged in as an administrator
     And there is an vendor user "vendor" with password "password"
     And I am on "/admin"
     And I follow "Vendors"

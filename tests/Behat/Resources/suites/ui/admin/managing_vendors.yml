@@ -6,5 +6,6 @@ default:
                 - open_marketplace.behat.context.ui.admin.vendor_listing
                 - Behat\MinkExtension\Context\MinkContext
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.admin_security
             filters:
                 tags: "@managing_vendors&&@ui"

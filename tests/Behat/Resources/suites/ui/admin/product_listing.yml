@@ -10,5 +10,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - open_marketplace.behat.context.setup.vendor
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.ui.admin.impersonating_customers
             filters:
                 tags: '@managing_product_listings&&@ui'

@@ -15,7 +15,7 @@ Feature: Product pricing
     And I follow "Edit"
     And I fill in "sylius_product[variant][channelPricings][web_us][price]" with "222222222222222222222222"
     And I click "Save changes"
-    Then I should see "This value is not valid."
+    Then I should see "Please enter a valid money amount."
 
   @ui
   Scenario: Setting correct value as price

@@ -7,7 +7,7 @@ Feature: Listing product listings
   Background:
     Given there is an admin user "admin" with password "admin"
     And there is an vendor user "vendor" with password "vendor"
-    And I am logged in as an admin
+    And I am logged in as an administrator
     And the store operates on a single channel
 
   @ui

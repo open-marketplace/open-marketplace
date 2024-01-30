@@ -15,6 +15,7 @@
             <argument type="service" id="sylius.factory.country" />
             <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_attribute" />
             <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_attribute_value" />
+            <argument type="service" id="sylius.behat.shop_security" />
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_listing" public="true"
