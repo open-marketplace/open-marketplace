@@ -67,8 +67,7 @@
       "adjustmentsTotal": 0,
       "product": {
         "@id": "/api/v2/shop/products/bruce_1",
-        "@type": "Product",
-        "defaultVariant": "/api/v2/shop/product-variants/bruce_1_1"
+        "@type": "Product"
       },
       "discountedUnitPrice": 0,
       "subtotal": 0,

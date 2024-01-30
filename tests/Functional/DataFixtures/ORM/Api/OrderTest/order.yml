@@ -180,7 +180,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     currency_code: "USD"
     locale_code: "en-US"
     vendor: '@vendor_bruce'
-    customer: '@customer_john'
+    customer: '@customer_bruce'
     paymentState: "awaiting_payment"
     state: 'new'
     checkoutState: 'completed'
@@ -202,7 +202,7 @@ BitBag\OpenMarketplace\Component\Order\Entity\Order:
     currency_code: "USD"
     locale_code: "en-US"
     vendor: '@vendor_bruce'
-    customer: '@customer_john'
+    customer: '@customer_bruce'
     paymentState: "paid"
     state: 'new'
     checkoutState: 'completed'
