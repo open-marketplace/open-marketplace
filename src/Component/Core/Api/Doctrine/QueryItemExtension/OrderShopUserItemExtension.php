@@ -50,7 +50,7 @@ final class OrderShopUserItemExtension implements QueryItemExtensionInterface
 
         $queryBuilder
             ->andWhere(sprintf('%s.customer = :%s', $rootAlias, $customerParameterName))
-            ->setParameter($customerParameterName, $user->getCustomer()->getId())
+            ->setParameter($customerParameterName, $customer->getId())
         ;
 
         $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
