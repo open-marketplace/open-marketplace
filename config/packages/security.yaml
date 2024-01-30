@@ -52,7 +52,6 @@ security:
             logout:
                 path: sylius_admin_logout
                 target: sylius_admin_login
-#            entry_point: jwt
 
         new_api_admin_user:
             pattern: "%sylius.security.new_api_admin_regex%/.*"
@@ -95,7 +94,7 @@ security:
                 default_target_path: sylius_shop_homepage
                 use_forward: false
                 use_referer: true
-#                enable_csrf: true
+                enable_csrf: true
                 csrf_parameter: _csrf_shop_security_token
                 csrf_token_id: shop_authenticate
             remember_me:
@@ -107,7 +106,6 @@ security:
                 path: sylius_shop_logout
                 target: sylius_shop_login
                 invalidate_session: false
-#            entry_point: jwt
 
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -118,17 +116,18 @@ security:
             security: false
 
     access_control:
-        - { path: "%sylius.security.admin_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "%sylius.security.admin_regex%/_partial", role: PUBLIC_ACCESS, ips: [127.0.0.1, ::1] }
         - { path: "%sylius.security.admin_regex%/_partial", role: ROLE_NO_ACCESS }
-        - { path: "%sylius.security.shop_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "%sylius.security.shop_regex%/_partial", role: PUBLIC_ACCESS, ips: [127.0.0.1, ::1] }
         - { path: "%sylius.security.shop_regex%/_partial", role: ROLE_NO_ACCESS }
 
-        - { path: "%sylius.security.admin_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "%sylius.security.shop_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.admin_regex%/login", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.shop_regex%/login", role: PUBLIC_ACCESS }
 
-        - { path: "%sylius.security.shop_regex%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "%sylius.security.shop_regex%/verify", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.shop_regex%/register", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.shop_regex%/verify", role: PUBLIC_ACCESS }
 
+        - { path: "%sylius.security.admin_regex%/forgotten-password", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
         - { path: "%sylius.security.shop_regex%/account/vendor/conversation/create", role: ROLE_USER }
         - { path: "%sylius.security.shop_regex%/account/vendor/conversations", role: ROLE_USER }
@@ -137,9 +136,10 @@ security:
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }
 
         - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
-        - { path: "%sylius.security.new_api_admin_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.new_api_admin_route%/reset-password-requests", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.new_api_admin_route%/authentication-token", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.new_api_user_account_vendor_regex%/register", role: ROLE_USER }
         - { path: "%sylius.security.new_api_user_account_vendor_regex%", role: ROLE_VENDOR }
         - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
-        - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.new_api_shop_regex%/.*", role: PUBLIC_ACCESS }
