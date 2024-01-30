@@ -69,5 +69,13 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Api\Doctrine\QueryItemExtension\OrderShopUserItemExtension"
+                id="bit_bag.open_marketplace.component.core.api.doctrine.query_item_extension.order_shop_user_item_extension"
+                 decorates="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderShopUserItemExtension"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
     </services>
 </container>
