@@ -3,6 +3,7 @@
   "@id": "/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_1",
   "@type": "Order",
   "customer": "/api/v2/shop/account/vendor/customers/@string@",
+  "channel": "/api/v2/shop/channels/@string@",
   "shippingAddress": {
     "@id": "/api/v2/shop/addresses/@string@",
     "@type": "Address",
@@ -81,6 +82,7 @@
   "total": 0,
   "state": "new",
   "taxTotal": 0,
+  "taxExcludedTotal": 0,
   "shippingTotal": 0,
   "orderPromotionTotal": 0
 }

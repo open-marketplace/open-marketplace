@@ -18,14 +18,13 @@ final class CheckoutProcessEnd2EndTest extends End2EndTestCase
 {
     public function test_it_for_shipment_methods_for_multiple_vendors_during_order(): void
     {
-//        $this->loadFixturesFromFile('CheckoutProcessEnd2EndTest/test_it_for_shipment_methods_for_multiple_vendors.yml');
-//        $token = $this->createCartAndCheckResponse();
-//        $this->addProductsToCartAndCheckResponse($token);
-//        $extractedOrderResponse = $this->fillAddressInformationAndCheckResponse($token);
-//        $this->checkAvailableShippingMethods($token, $extractedOrderResponse['shipments']);
-//        $this->changeDefaultShippingMethodAndCheckResponse($token, (string) $extractedOrderResponse['shipments'][1]['id']);
-//        $this->selectPaymentMethodAndCheckResponse($token, (string) $extractedOrderResponse['payments'][0]['id']);
-//        $this->completeCheckoutAndCheckResponse($token);
+        $this->loadFixturesFromFile('CheckoutProcessEnd2EndTest/test_it_for_shipment_methods_for_multiple_vendors.yml');
+        $token = $this->createCartAndCheckResponse();
+        $this->addProductsToCartAndCheckResponse($token);
+        $extractedOrderResponse = $this->fillAddressInformationAndCheckResponse($token);
+        $this->changeDefaultShippingMethodAndCheckResponse($token, (string) $extractedOrderResponse['shipments'][1]['id']);
+        $this->selectPaymentMethodAndCheckResponse($token, (string) $extractedOrderResponse['payments'][0]['id']);
+        $this->completeCheckoutAndCheckResponse($token);
     }
 
     private function createCartAndCheckResponse(): string
@@ -73,15 +72,6 @@ final class CheckoutProcessEnd2EndTest extends End2EndTestCase
         );
 
         return $this->extractResponse($response);
-    }
-
-    private function checkAvailableShippingMethods(string $token, array $shipments): void
-    {
-        $response = $this->executeGetShipmentMethodsRequest($token, (string) $shipments[0]['id']);
-        $this->assertResponse($response, 'CheckoutProcessEnd2EndTest/get_first_shipment_available_shipping_methods_response', Response::HTTP_OK);
-
-        $response = $this->executeGetShipmentMethodsRequest($token, (string) $shipments[1]['id']);
-        $this->assertResponse($response, 'CheckoutProcessEnd2EndTest/get_second_shipment_available_shipping_methods_response', Response::HTTP_OK);
     }
 
     private function changeDefaultShippingMethodAndCheckResponse(string $token, $shipmentId): void
@@ -185,19 +175,6 @@ final class CheckoutProcessEnd2EndTest extends End2EndTestCase
     private function extractResponse(Response $response): array
     {
         return json_decode($response->getContent(), true);
-    }
-
-    private function executeGetShipmentMethodsRequest(string $token, string $shipmentsIds): Response
-    {
-        $this->client->request(
-            'GET',
-            '/api/v2/shop/orders/' . $token . '/shipments/' . $shipmentsIds . '/methods',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
-        );
-
-        return $this->client->getResponse();
     }
 
     private function executeChangeDefaultShippingMethodRequest(string $token, string $shipmentsIds): Response

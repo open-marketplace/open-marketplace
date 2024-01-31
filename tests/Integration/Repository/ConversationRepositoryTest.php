@@ -25,7 +25,7 @@ final class ConversationRepositoryTest extends JsonApiTestCase
     public function test_it_finds_all_conversations_with_status_and_user(): void
     {
         $conversationRepository = static::getContainer()->get('open_marketplace.repository.conversation');
-        $this->loadFixturesFromFile('ConversationRepositoryTest/test_it_finds_all_conversations_with_status_and_user.yml');
+        $this->loadFixturesFromFile('ConversationRepositoryTest/test_it_finds_all_conversations_with_status_and_user.yaml');
 
         $userOliver = $this->getEntityManager()->getRepository(ShopUser::class)->findOneBy(['username' => 'oliver@queen.com']);
         $userBruce = $this->getEntityManager()->getRepository(ShopUser::class)->findOneBy(['username' => 'oliver@queen.com']);

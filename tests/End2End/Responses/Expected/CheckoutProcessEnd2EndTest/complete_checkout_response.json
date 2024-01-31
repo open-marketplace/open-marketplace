@@ -2,6 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Order",
     "@id": "\/api\/v2\/shop\/orders\/@string@",
     "@type": "Order",
+    "channel": "/api/v2/shop/channels/CODE",
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
@@ -94,6 +95,9 @@
     "itemsTotal": 41,
     "total": 51,
     "taxTotal": 0,
+    "state": "new",
+    "taxExcludedTotal": 0,
+    "taxIncludedTotal": 0,
     "shippingTotal": 10,
     "orderPromotionTotal": 0
 }
