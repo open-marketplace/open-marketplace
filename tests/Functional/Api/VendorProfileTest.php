@@ -106,6 +106,7 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
             'companyName' => 'Wayne Enterprises',
             'taxIdentifier' => '345',
+            'bankAccountNumber' => 'PL14109024029586826934815556',
             'phoneNumber' => '123456789',
             'description' => 'Wayne Enterprises Desc',
             'vendorAddress' => [
@@ -155,6 +156,7 @@ final class VendorProfileTest extends FunctionalTestCase
         $this->client->request('PUT', '/api/v2/shop/account/vendors/' . $vendor->getUuid()->toString(), [], [], $header, json_encode([
             'companyName' => '',
             'taxIdentifier' => '',
+            'bankAccountNumber' => '',
             'phoneNumber' => '',
             'description' => '',
             'vendorAddress' => [

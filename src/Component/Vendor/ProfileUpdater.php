@@ -92,6 +92,7 @@ final class ProfileUpdater implements ProfileUpdaterInterface
     ): void {
         $vendor->setCompanyName($data->getCompanyName());
         $vendor->setTaxIdentifier($data->getTaxIdentifier());
+        $vendor->setBankAccountNumber($data->getBankAccountNumber());
         $vendor->setPhoneNumber($data->getPhoneNumber());
         $vendor->setDescription($data->getDescription());
 

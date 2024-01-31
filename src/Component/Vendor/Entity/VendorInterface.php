@@ -27,6 +27,11 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
 
     public const STATUS_VERIFIED = 'verified';
 
+    public const STATUSES = [
+        self::STATUS_UNVERIFIED,
+        self::STATUS_VERIFIED,
+    ];
+
     public function getId(): ?int;
 
     public function setId(?int $id): void;
@@ -38,6 +43,10 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
     public function getTaxIdentifier(): ?string;
 
     public function setTaxIdentifier(?string $taxIdentifier): void;
+
+    public function getBankAccountNumber(): ?string;
+
+    public function setBankAccountNumber(?string $bankAccountNumber): void;
 
     public function getPhoneNumber(): ?string;
 
@@ -114,4 +123,20 @@ interface VendorInterface extends ProfileInterface, UuidAwareInterface
     public function getCommissionType(): string;
 
     public function setCommissionType(string $commissionType): void;
+
+    public function getSettlementFrequency(): string;
+
+    public function setSettlementFrequency(string $settlementFrequency): void;
+
+    public function getValidSettlementFrequency(): array;
+
+    public function getSettlements(): Collection;
+
+    public function setSettlements(Collection $settlements): void;
+
+    public function getCreatedAt(): DateTimeInterface;
+
+    public function setCreatedAt(DateTimeInterface $createdAt): void;
+
+    public function hasCyclicalSettlementFrequency(): bool;
 }

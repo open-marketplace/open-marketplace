@@ -11,60 +11,27 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\Context;
 use Behat\Mink\Element\DocumentElement;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\Customer;
+use Tests\BitBag\OpenMarketplace\Behat\Page\Admin\VendorPageInterface;
 use Webmozart\Assert\Assert;
 
-final class VendorListingContext extends RawMinkContext implements Context
+final class VendorListingContext extends RawMinkContext
 {
-    private EntityManagerInterface $entityManager;
-
-    private AdminUserExampleFactory $adminUserExample;
-
-    private ExampleFactoryInterface $vendorExampleFactory;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        AdminUserExampleFactory $adminUserExample,
-        ExampleFactoryInterface $vendorExampleFactory,
+        private EntityManagerInterface $entityManager,
+        private ExampleFactoryInterface $vendorExampleFactory,
+        private VendorPageInterface $vendorPage,
         ) {
-        $this->entityManager = $entityManager;
-        $this->adminUserExample = $adminUserExample;
-        $this->vendorExampleFactory = $vendorExampleFactory;
-    }
-
-    /**
-     * @Given There is an admin user :username with password :password
-     */
-    public function thereIsAnAdminUserWithPassword($username, $password)
-    {
-        $admin = $this->adminUserExample->create();
-        $admin->setUsername($username);
-        $admin->setPlainPassword($password);
-        $this->entityManager->persist($admin);
-        $this->entityManager->flush();
-    }
-
-    /**
-     * @Given I am logged in as an admin
-     */
-    public function iAmLoggedInAsAnAdmin()
-    {
-        $this->visitPath('/admin/login');
-        $this->getPage()->fillField('Username', 'admin');
-        $this->getPage()->fillField('Password', 'admin');
-        $this->getPage()->pressButton('Login');
     }
 
     /**
      * @Given There are :count vendors listed
      */
-    public function thereAreVendors($count)
+    public function thereAreVendors($count): void
     {
         for ($i = 0; $i < $count; ++$i) {
             $options = [
@@ -85,7 +52,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     /**
      * @Then I should see :count vendor rows
      */
-    public function iShouldSeeVendorRows($count)
+    public function iShouldSeeVendorRows($count): void
     {
         $rows = $this->getPage()->findAll('css', 'table > tbody > tr');
         Assert::notEmpty($rows, 'Could not find any rows');
@@ -95,7 +62,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     /**
      * @Then page should contain valid customer :email link
      */
-    public function iShouldSeeValidCustomerLink(string $email)
+    public function iShouldSeeValidCustomerLink(string $email): void
     {
         /** @var Customer $customer */
         $customer = $this->entityManager->getRepository(Customer::class)->findOneBy(['email' => $email]);
@@ -106,7 +73,7 @@ final class VendorListingContext extends RawMinkContext implements Context
     /**
      * @Given /^I should see vendors commission data$/
      */
-    public function iShouldSeeVendorsCommissionData()
+    public function iShouldSeeVendorsCommissionData(): void
     {
         $content = $this->getPage()->getText();
         Assert::contains($content, 'Commission (%)');
@@ -114,9 +81,23 @@ final class VendorListingContext extends RawMinkContext implements Context
     }
 
     /**
-     * @return DocumentElement
+     * @Given I am on admin vendor listing page
+     * @Given I visit admin vendor listing page
      */
-    private function getPage()
+    public function iAmOnAdminVendorListingPage(): void
+    {
+        $this->vendorPage->open();
+    }
+
+    /**
+     * @When I click edit button for :vendorName
+     */
+    public function iClickFor(string $vendorName): void
+    {
+        $this->vendorPage->clickEditButton($vendorName);
+    }
+
+    private function getPage(): DocumentElement
     {
         return $this->getSession()->getPage();
     }

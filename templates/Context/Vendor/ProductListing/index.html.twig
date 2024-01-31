@@ -8,5 +8,16 @@
 {% endblock %}
 
 {% block subcontent %}
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.product_listings',
+        "subheader": 'open_marketplace.ui.manage_products',
+        "icon": 'list',
+        "buttons": "Context/Vendor/ProductListing/_menu.html.twig",
+        "buttonsData": {
+            "definition": resources.definition,
+            "data": resources.data,
+            "grid": resources,
+        },
+    } %}
     {{ sylius_grid_render(resources, 'Context/Vendor/ProductListing/_productListings.html.twig') }}
 {% endblock %}

@@ -40,7 +40,7 @@ final class ProductDraftFilesOperatorTest extends JsonApiTestCase
 
     public function test_it_copies_draft_image_to_product(): void
     {
-        $this->loadFixturesFromFile('ProductDraftFilesOperatorTest/test_it_copies_draft_images_to_product.yml');
+        $this->loadFixturesFromFile('ProductDraftFilesOperatorTest/test_it_copies_draft_images_to_product.yaml');
 
         $manager = $this->getEntityManager();
 

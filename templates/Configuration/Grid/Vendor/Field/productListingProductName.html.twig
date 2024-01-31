@@ -4,7 +4,12 @@
         {{ data.getName(current_locale())  }}
     </a>
 {% else %}
-    <a class="" href="{{ path('sylius_shop_product_show',{'slug':  data.getSlug(current_locale()) }) }}">
-        {{ data.getName(current_locale())  }}
-    </a>
+    {% set slug = data.getSlug(current_locale()) %}
+    {% if slug != '' %}
+        <a class="" href="{{ path('sylius_shop_product_show',{'slug':  data.getSlug(current_locale()) }) }}">
+            {{ data.getName(current_locale())  }}
+        </a>
+    {% else %}
+        {{ 'N/A (' ~ 'open_marketplace.ui.missing_translation'|trans ~ ')'  }}
+    {% endif %}
 {% endif %}

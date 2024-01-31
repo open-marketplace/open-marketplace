@@ -8,27 +8,14 @@
 {% endblock %}
 
 {% block subcontent %}
-    <div class="ui stackable two column grid">
-        <div class="ten wide column">
-            <h1 class="ui header">
-                <i class="icon user"></i>
-                <div class="content">
-                    {{ 'open_marketplace.ui.my_vendor_account'|trans }}
-                    <div class="sub header">{{ 'open_marketplace.ui.manage_your_vendor_information_and_preferences'|trans }}</div>
-                </div>
-            </h1>
-        </div>
-        <div class="middle aligned six wide column">
-            {% if is_pending_vendor_profile_update() is same as true %}
-                <a href="{{ path('open_marketplace_vendor_profile_update') }}" class="ui right floated blue button">
-                    <i class="pencil icon"></i>
-                    {{ 'sylius.ui.edit'|trans }}
-                </a>
-            {% endif %}
-        </div>
-    </div>
+    {% include "Context/Vendor/_header.html.twig" with {
+        "header": 'open_marketplace.ui.my_vendor_account',
+        "subheader": 'open_marketplace.ui.manage_your_vendor_information_and_preferences',
+        "icon": 'user',
+        "buttons": "Context/Vendor/Profile/_menu.html.twig"
+    } %}
 
-    <div class="ui divider"></div>
+    <br />
 
     {{ sylius_template_event('sylius.shop.account.dashboard.after_content_header', {'vendor': vendor}) }}
 
@@ -54,6 +41,10 @@
                         <tr>
                             <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.tax_identifier'|trans }}</strong></td>
                             <td>{{ vendor.taxIdentifier }}</td>
+                        </tr>
+                        <tr>
+                            <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.bank_account_number'|trans }}</strong></td>
+                            <td>{{ vendor.bankAccountNumber }}</td>
                         </tr>
                         <tr>
                             <td class="five wide"><strong class="gray text">{{ 'open_marketplace.ui.phone_number'|trans }}</strong></td>

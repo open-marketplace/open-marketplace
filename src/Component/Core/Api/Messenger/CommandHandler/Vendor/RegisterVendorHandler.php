@@ -41,6 +41,7 @@ final class RegisterVendorHandler
 
         $vendor->setCompanyName($command->getCompanyName());
         $vendor->setTaxIdentifier($command->getTaxIdentifier());
+        $vendor->setBankAccountNumber($command->getBankAccountNumber());
         $vendor->setPhoneNumber($command->getPhoneNumber());
         $vendor->setDescription($command->getDescription());
         $vendor->setVendorAddress($command->getVendorAddress());

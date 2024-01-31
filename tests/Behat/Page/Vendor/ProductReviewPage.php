@@ -45,4 +45,16 @@ final class ProductReviewPage extends SymfonyPage implements ProductReviewPageIn
         $editLint = $page->find('css', 'table.table tr.item:first-child a');
         $editLint->press();
     }
+
+    public function fillReviewSubject(string $subject): void
+    {
+        $page = $this->getDocument();
+        $page->fillField('criteria[reviewSubject][value]', $subject);
+    }
+
+    public function fillAuthor(string $name): void
+    {
+        $page = $this->getDocument();
+        $page->fillField('criteria[author][value]', $name);
+    }
 }

@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 interface DraftInterface extends AttributeSubjectInterface, ResourceInterface, UuidAwareInterface
 {
@@ -178,4 +179,8 @@ interface DraftInterface extends AttributeSubjectInterface, ResourceInterface, U
     public function markAsCreated(): void;
 
     public function ownRelations(): void;
+
+    public function getTaxCategory(): ?TaxCategoryInterface;
+
+    public function setTaxCategory(?TaxCategoryInterface $category): void;
 }

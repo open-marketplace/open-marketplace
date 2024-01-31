@@ -69,6 +69,7 @@ class ConversationContext extends MinkContext implements Context
         $vendor = $this->vendorProfileFactory->createVendor(
             'someCompany',
             'TaxID',
+            'iban',
             '333222111',
             'description',
             $address
@@ -79,22 +80,6 @@ class ConversationContext extends MinkContext implements Context
         $this->manager->persist($vendor);
         $this->manager->flush();
         $this->sharedStorage->set('vendor', $vendor);
-    }
-
-    /**
-     * @When I press in menu :arg1
-     */
-    public function iPressInMenu($arg1)
-    {
-        $this->getPage()->pressButton("$arg1");
-    }
-
-    /**
-     * @Then I select :arg1 variant
-     */
-    public function iSelectVariant($arg1)
-    {
-        throw new PendingException();
     }
 
     /**

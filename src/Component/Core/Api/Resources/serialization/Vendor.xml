@@ -52,6 +52,12 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:account:vendor:read</group>
             <group>shop:account:vendor:update</group>
         </attribute>
+        <attribute name="bankAccountNumber">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
+            <group>shop:account:vendor:read</group>
+            <group>shop:account:vendor:update</group>
+        </attribute>
         <attribute name="phoneNumber">
             <group>admin:vendor:update</group>
             <group>admin:vendor:read</group>
@@ -83,6 +89,10 @@ We are hiring developers from all over the world. Join us and start your new, ex
         <attribute name="backgroundImage">
             <group>shop:vendor:read</group>
             <group>shop:account:vendor:read</group>
+        </attribute>
+        <attribute name="settlementFrequency">
+            <group>admin:vendor:update</group>
+            <group>admin:vendor:read</group>
         </attribute>
     </class>
 </serializer>

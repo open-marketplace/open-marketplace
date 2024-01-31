@@ -14,5 +14,6 @@ default:
         - sylius.behat.context.setup.customer
         - sylius.behat.context.setup.user
         - tests.bitbag.open_marketplace.behat.context.vendor.vendor_commission_context
+        - open_marketplace.behat.context.ui.admin.vendor_listing
       filters:
         tags: "@vendor_commission"

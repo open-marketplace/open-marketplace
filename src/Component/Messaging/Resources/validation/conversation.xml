@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+This file was created by developers working at BitBag
+Do you need more information about us and what we do? Visit our https://bitbag.io website!
+We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+-->
+
 <constraint-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xmlns="http://symfony.com/schema/dic/constraint-mapping"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                     http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="BitBag\OpenMarketplace\Component\Messaging\Entity\Conversation">
         <property name="messages">
-            <constraint name="Valid" />
+            <constraint name="Valid"/>
         </property>
     </class>
 </constraint-mapping>

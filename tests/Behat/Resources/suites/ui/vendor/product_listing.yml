@@ -3,6 +3,7 @@ default:
     vendor_ui_managing_product_listings:
       contexts:
         - open_marketplace.behat.context.ui.vendor.product_listing
+        - open_marketplace.behat.context.setup.product_listing
         - tests.open_marketplace.behat.context.setup.draft_attribute
         - Behat\MinkExtension\Context\MinkContext
         - sylius.behat.context.setup.channel

@@ -1,39 +1,39 @@
 open_marketplace_vendor_inventory_index:
-    path: /product-variants/inventory
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_variant::indexAction
-        _sylius:
-            template: "Context/Vendor/Inventory/index.html.twig"
-            grid: vendor_product_variant
-            vars:
-                route:
-                    parameters:
-                        productId: $productId
-                templates:
-                    breadcrumb: "@SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig"
-                icon: cubes
-                subheader: sylius.ui.manage_variants
+  path: /product-variants/inventory
+  methods: [ GET ]
+  defaults:
+    _controller: sylius.controller.product_variant::indexAction
+    _sylius:
+      template: "Context/Vendor/Inventory/index.html.twig"
+      grid: vendor_product_variant
+      vars:
+        route:
+          parameters:
+            productId: $productId
+        templates:
+          breadcrumb: "@SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig"
+        icon: cubes
+        subheader: sylius.ui.manage_variants
 
 open_marketplace_vendor_inventory_update:
-    path: /product-variants/{id}/inventory
-    methods: [ GET, PUT ]
-    defaults:
-        _controller: sylius.controller.product_variant::updateAction
-        _sylius:
-            template: "Context/Vendor/Inventory/update.html.twig"
-            grid: sylius_admin_product_variant
-            redirect:
-                route: open_marketplace_vendor_inventory_index
-            repository:
-                method: findOneById
-                arguments:
-                    id: $id
-            vars:
-                route:
-                    parameters:
-                        id: $id
-                templates:
-                    form: "@SyliusAdmin/ProductVariant/_form.html.twig"
-                    breadcrumb: "@SyliusAdmin/ProductVariant/Update/_breadcrumb.html.twig"
-                    toolbar: "@SyliusAdmin/ProductVariant/Update/_toolbar.html.twig"
+  path: /product-variants/{id}/inventory
+  methods: [ GET, PUT ]
+  defaults:
+    _controller: sylius.controller.product_variant::updateAction
+    _sylius:
+      template: "Context/Vendor/Inventory/update.html.twig"
+      grid: sylius_admin_product_variant
+      redirect:
+        route: open_marketplace_vendor_inventory_index
+      repository:
+        method: findOneById
+        arguments:
+          id: $id
+      vars:
+        route:
+          parameters:
+            id: $id
+        templates:
+          form: "@SyliusAdmin/ProductVariant/_form.html.twig"
+          breadcrumb: "@SyliusAdmin/ProductVariant/Update/_breadcrumb.html.twig"
+          toolbar: "@SyliusAdmin/ProductVariant/Update/_toolbar.html.twig"

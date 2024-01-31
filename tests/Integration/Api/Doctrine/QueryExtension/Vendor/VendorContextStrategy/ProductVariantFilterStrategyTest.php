@@ -44,7 +44,7 @@ class ProductVariantFilterStrategyTest extends IntegrationTestCase
 
     public function test_it_filters_resources(): void
     {
-        $this->loadFixturesFromFile('VendorContextStrategy/ProductVariantFilterStrategyTest/product_variant_filter_strategy.yml');
+        $this->loadFixturesFromFile('VendorContextStrategy/ProductVariantFilterStrategyTest/product_variant_filter_strategy.yaml');
 
         $vendor = $this->vendorRepository->findOneBy(['slug' => 'Wayne-Enterprises-Inc']);
         $queryBuilder = $this->productVariantRepository->createQueryBuilder('o');

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Admin\Form\Type;
 
 use BitBag\OpenMarketplace\Component\Core\Common\Form\Type\VendorAddressType;
+use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -30,6 +31,9 @@ final class VendorType extends AbstractResourceType
             ->add('taxIdentifier', TextType::class, [
                 'label' => 'open_marketplace.ui.tax_identifier',
             ])
+            ->add('bankAccountNumber', TextType::class, [
+                'label' => 'open_marketplace.ui.bank_account_number',
+            ])
             ->add('phoneNumber', TextType::class, [
                 'label' => 'open_marketplace.ui.phone_number',
             ])
@@ -45,6 +49,14 @@ final class VendorType extends AbstractResourceType
                     'Net' => VendorInterface::NET_COMMISSION,
                     'Gross' => VendorInterface::GROSS_COMMISSION,
                 ],
-            ]);
+            ])
+            ->add('settlementFrequency', ChoiceType::class, [
+                'label' => 'open_marketplace.ui.settlement_frequency',
+                'choices' => VendorSettlementFrequency::SETTLEMENT_FREQUENCIES,
+                'choice_label' => function (string $frequency): string {
+                    return sprintf('open_marketplace.ui.%s', $frequency);
+                },
+            ])
+        ;
     }
 }

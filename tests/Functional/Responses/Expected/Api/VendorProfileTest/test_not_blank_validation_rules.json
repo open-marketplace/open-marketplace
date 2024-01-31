@@ -2,9 +2,7 @@
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
-    "hydra:description": "taxIdentifier: This field cannot be empty\ntaxIdentifier: Required length: 3 characters.\ncompanyName: This field cannot be empty\ncompanyName: Required length: 3 characters.\nphoneNumber: This field cannot be empty\nphoneNumber: Required length: 3 characters.\ndescription: This field cannot be empty\ndescription: Required length: 3 characters.",
-
-
+    "hydra:description": "taxIdentifier: This field cannot be empty\ntaxIdentifier: Required length: 3 characters.\nbankAccountNumber: This field cannot be empty\ncompanyName: This field cannot be empty\ncompanyName: Required length: 3 characters.\nphoneNumber: This field cannot be empty\nphoneNumber: Required length: 3 characters.\ndescription: This field cannot be empty\ndescription: Required length: 3 characters.\nvendorAddress.country: This field cannot be empty\nvendorAddress.city: This field cannot be empty\nvendorAddress.city: Required length: 3 characters.\nvendorAddress.street: This field cannot be empty\nvendorAddress.street: Required length: 3 characters.\nvendorAddress.postalCode: This field cannot be empty\nvendorAddress.postalCode: Required length: 3 characters.",
     "violations": [
         {
             "propertyPath": "taxIdentifier",
@@ -17,6 +15,11 @@
             "code": "@string@"
         },
         {
+            "propertyPath": "bankAccountNumber",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
             "propertyPath": "companyName",
             "message": "This field cannot be empty",
             "code": "@string@"
@@ -43,6 +46,41 @@
         },
         {
             "propertyPath": "description",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.country",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.city",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.city",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.street",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.street",
+            "message": "Required length: 3 characters.",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.postalCode",
+            "message": "This field cannot be empty",
+            "code": "@string@"
+        },
+        {
+            "propertyPath": "vendorAddress.postalCode",
             "message": "Required length: 3 characters.",
             "code": "@string@"
         }

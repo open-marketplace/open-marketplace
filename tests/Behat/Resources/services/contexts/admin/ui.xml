@@ -15,14 +15,15 @@
             <argument type="service" id="sylius.factory.country" />
             <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_attribute" />
             <argument type="service" id="bitbag.open_marketplace.component.product.factory.product_attribute_value" />
+            <argument type="service" id="sylius.factory.tax_category" />
             <argument type="service" id="sylius.behat.shop_security" />
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_listing" public="true"
                  class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorListingContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="sylius.fixture.example_factory.admin_user"/>
             <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
+            <argument type="service" id="tests.open_marketplace.behat.page.admin.vendor_page"/>
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_verification" public="true"
@@ -39,9 +40,10 @@
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.vendor_editing" public="true"
-                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorEditingContext">
+                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\VendorUpdateContext">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="bitbag.open_marketplace.component.core.common.fixture.factory.vendor"/>
+            <argument type="service" id="tests.open_marketplace.behat.page.admin.vendor_update_page"/>
         </service>
 
         <service id="open_marketplace.behat.context.ui.admin.dashboard_statistics" public="true"
@@ -49,6 +51,9 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
+        <service id="open_marketplace.behat.context.ui.admin.admin" public="true"
+                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\AdminContext">
+        </service>
         <service id="open_marketplace.behat.context.ui.admin.managing_products_context"
                 class="Tests\BitBag\OpenMarketplace\Behat\Context\Ui\Admin\ManagingProductsContext"
                  public="true"

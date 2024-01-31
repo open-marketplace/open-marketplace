@@ -9,20 +9,21 @@ We are hiring developers from all over the world. Join us and start your new, ex
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults autowire="false" autoconfigure="false" />
+        <defaults autowire="false" autoconfigure="false"/>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Messaging\ListThreadsAction"
                  id="bitbag.open_marketplace.component.core.vendor.controller.messaging.list_threads">
-            <argument type="service" id="twig" />
-            <argument type="service" id="open_marketplace.repository.conversation" />
-            <argument type="service" id="bitbag.open_marketplace.component.core.common.resolver.resource.current_user_resolver" />
+            <argument type="service" id="twig"/>
+            <argument type="service" id="open_marketplace.repository.conversation"/>
+            <argument type="service"
+                      id="bitbag.open_marketplace.component.core.common.resolver.resource.current_user_resolver"/>
 
-            <tag name="controller.service_arguments" />
+            <tag name="controller.service_arguments"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Profile\ConfirmUpdateAction"
                  id="bitbag.open_marketplace.component.core.vendor.controller.profile.confirm_update">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="bitbag.open_marketplace.component.vendor.profile_updater"/>
             <argument type="service" id="security.helper"/>
             <argument type="service" id="router"/>
@@ -35,54 +36,56 @@ We are hiring developers from all over the world. Join us and start your new, ex
                  id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.create">
             <argument type="service">
                 <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
-                    <factory service="sylius.resource_registry" method="get" />
+                    <factory service="sylius.resource_registry" method="get"/>
                     <argument type="string">open_marketplace.product_draft</argument>
                 </service>
             </argument>
-            <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
-            <argument type="service" id="sylius.resource_controller.new_resource_factory" />
-            <argument type="service" id="open_marketplace.factory.product_draft" />
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory"/>
+            <argument type="service" id="sylius.resource_controller.new_resource_factory"/>
+            <argument type="service" id="open_marketplace.factory.product_draft"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft"/>
-            <argument type="service" id="form.factory" />
-            <argument type="service" id="request_stack" />
-            <argument type="service" id="router" />
-            <argument type="service" id="twig" />
-            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="security.token_storage"/>
 
-            <tag name="controller.service_arguments" />
+            <tag name="controller.service_arguments"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\UpdateAction"
                  id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.update">
             <argument type="service">
                 <service class="Sylius\Component\Resource\Metadata\MetadataInterface">
-                    <factory service="sylius.resource_registry" method="get" />
+                    <factory service="sylius.resource_registry" method="get"/>
                     <argument type="string">open_marketplace.product_draft</argument>
                 </service>
             </argument>
-            <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
+            <argument type="service" id="sylius.resource_controller.request_configuration_factory"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.listing_persister"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="security.authorization_checker"/>
-            <argument type="service" id="form.factory" />
-            <argument type="service" id="request_stack" />
-            <argument type="service" id="twig" />
-            <argument type="service" id="router.default" />
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="router.default"/>
 
-            <tag name="controller.service_arguments" />
+            <tag name="controller.service_arguments"/>
         </service>
 
-        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\SendForVerificationAction"
-                 id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.send_for_verification">
-            <argument type="service" id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition"/>
+        <service
+                class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\SendForVerificationAction"
+                id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.send_for_verification">
+            <argument type="service"
+                      id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_transition"/>
             <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
-            <argument type="service" id="router.default" />
+            <argument type="service" id="router.default"/>
             <argument type="service" id="request_stack" />
 
-            <tag name="controller.service_arguments" />
+            <tag name="controller.service_arguments"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\RemoveAction"
@@ -92,29 +95,29 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="request_stack"/>
 
-            <tag name="controller.service_arguments" />
+            <tag name="controller.service_arguments"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\ProductListing\EnableAction"
                  id="bitbag.open_marketplace.component.core.vendor.controller.product_listing.enable">
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="router.default" />
+            <argument type="service" id="router.default"/>
             <argument type="service" id="request_stack"/>
 
-            <tag name="controller.service_arguments" />
+            <tag name="controller.service_arguments"/>
         </service>
 
         <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Order\ResendConfirmationEmailAction"
                  id="bitbag.open_marketplace.component.core.vendor.controller.order.resend_confirmation_email">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface" />
-            <argument type="service" id="security.csrf.token_manager" />
-            <argument type="service" id="request_stack" />
-            <argument type="service" id="translator" />
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface"/>
+            <argument type="service" id="security.csrf.token_manager"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="translator"/>
             <argument type="service" id="router.default"/>
 
-            <tag name="controller.service_arguments" />
+            <tag name="controller.service_arguments"/>
         </service>
     </services>
 </container>
