@@ -27,7 +27,7 @@ final class VendorUpdateContext extends RawMinkContext
     }
 
     /**
-     * @Given There is a :ifVerified Vendor who :ifRequested change
+     * @Given There is a :ifVerified Vendor who :ifRequested a profile change
      */
     public function thereIsAVendorWhoChange($ifVerified, $ifRequested): void
     {
@@ -72,5 +72,37 @@ final class VendorUpdateContext extends RawMinkContext
     public function iSubmitVendorUpdateForm(): void
     {
         $this->vendorUpdatePage->submitVendorForm();
+    }
+
+    /**
+     * @When there is an address form filled with default values
+     */
+    public function thereIsAnAddressFormFilledWithDefaultValues(): void
+    {
+        $this->vendorUpdatePage->fillAddressFormWithDefaultData();
+    }
+
+    /**
+     * @When I leave the city field empty
+     */
+    public function iLeaveTheCityFieldEmpty(): void
+    {
+        $this->vendorUpdatePage->leaveTheCityFieldEmpty();
+    }
+
+    /**
+     * @When I leave the postal code field empty
+     */
+    public function iLeaveThePostalCodeFieldEmpty(): void
+    {
+        $this->vendorUpdatePage->leaveThePostalCodeFieldEmpty();
+    }
+
+    /**
+     * @When I leave the street field empty
+     */
+    public function iLeaveTheStreetFieldEmpty(): void
+    {
+        $this->vendorUpdatePage->leaveTheStreetFieldEmpty();
     }
 }
