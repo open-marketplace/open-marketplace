@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace spec\BitBag\OpenMarketplace\Component\Settlement\Entity;
 
-use BitBag\OpenMarketplace\Component\Core\Settlement\Exception\NotEnoughFundsException;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\VirtualWallet;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\VirtualWalletInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Exception\NotEnoughFundsException;
 use PhpSpec\ObjectBehavior;
 
 final class VirtualWalletSpec extends ObjectBehavior

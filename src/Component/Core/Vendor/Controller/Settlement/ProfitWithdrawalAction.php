@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Core\Settlement\Controller\Action;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Controller\Settlement;
 
 use BitBag\OpenMarketplace\Component\Core\Api\Context\VendorContextInterface;
-use BitBag\OpenMarketplace\Component\Core\Settlement\Exception\NotEnoughFundsException;
-use BitBag\OpenMarketplace\Component\Core\Settlement\Form\ProfitWithdrawalType;
+use BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProfitWithdrawalType;
 use BitBag\OpenMarketplace\Component\Settlement\Creator\SettlementCreatorInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Exception\NotEnoughFundsException;
 use BitBag\OpenMarketplace\Component\Settlement\Manager\VirtualWalletManagerInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Repository\ChannelRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;

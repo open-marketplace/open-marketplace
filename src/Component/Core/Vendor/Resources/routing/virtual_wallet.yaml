@@ -11,8 +11,8 @@ open_marketplace_vendor_profit_withdrawal_create:
   path: /profit-withdrawal/{channelCode}
   methods: [ GET, POST ]
   defaults:
-    _controller: bitbag.open_marketplace.component.core.settlement.controller.action.profit_withdrawal
+    _controller: bitbag.open_marketplace.component.core.vendor.controller.settlement.profit_withdrawal
     _sylius:
       template: "Context/Vendor/Settlement/create.html.twig"
       event: profit_withdrawal_create
-      form: BitBag\OpenMarketplace\Component\Core\Settlement\Form\ProfitWithdrawalType
+      form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProfitWithdrawalType
