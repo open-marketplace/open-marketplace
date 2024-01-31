@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Channel\Repository;
+namespace BitBag\OpenMarketplace\Component\Settlement\Repository;
 
 use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository as BaseChannelRepository;
 use Sylius\Component\Core\Model\ChannelInterface;

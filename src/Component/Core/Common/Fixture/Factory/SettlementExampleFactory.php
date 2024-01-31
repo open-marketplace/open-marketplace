@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Core\Common\Fixture\Factory;
 
-use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\SettlementInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\PeriodStrategy\SettlementPeriodResolverInterface;
@@ -30,7 +29,7 @@ final class SettlementExampleFactory extends AbstractExampleFactory
 
     public function __construct(
         private RepositoryInterface $shopUserRepository,
-        private ChannelRepositoryInterface $channelRepository,
+        private RepositoryInterface $channelRepository,
         private SettlementFactoryInterface $settlementFactory,
         private SettlementPeriodResolverInterface $settlementPeriodResolver,
         ) {

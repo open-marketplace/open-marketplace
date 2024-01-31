@@ -93,7 +93,7 @@ sylius_channel:
     resources:
         channel:
             classes:
-                repository: BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepository
+                repository: BitBag\OpenMarketplace\Component\Settlement\Repository\ChannelRepository
 
 sylius_ui:
     events:
