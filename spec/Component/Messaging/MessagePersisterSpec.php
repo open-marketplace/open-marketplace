@@ -64,12 +64,11 @@ final class MessagePersisterSpec extends ObjectBehavior
 
         $conversationRepository->add($conversation)->shouldBeCalled();
 
-        $this->createWithConversation(1, $message, $file, true);
+        $this->createWithConversation(1, $message, $file);
     }
 
     public function it_processes_message_admin_create_not_send_file(
         CurrentUserResolverInterface $actualUserResolver,
-        AttachmentUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
         AdminUserInterface $admin,
         MessageInterface $message,
@@ -87,7 +86,7 @@ final class MessagePersisterSpec extends ObjectBehavior
 
         $conversationRepository->add($conversation)->shouldBeCalled();
 
-        $this->createWithConversation(1, $message, null, true);
+        $this->createWithConversation(1, $message);
     }
 
     public function it_throws_exception_if_user_is_not_found(
@@ -105,10 +104,8 @@ final class MessagePersisterSpec extends ObjectBehavior
 
     public function it_doesnt_strip_tags_on_false_parameter(
         CurrentUserResolverInterface $actualUserResolver,
-        AttachmentUploaderInterface $fileUploader,
         ConversationRepositoryInterface $conversationRepository,
         AdminUserInterface $admin,
-        UserInterface $user,
         MessageInterface $message,
         ConversationInterface $conversation
     ): void {

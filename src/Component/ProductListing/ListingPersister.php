@@ -13,9 +13,13 @@ namespace BitBag\OpenMarketplace\Component\ProductListing;
 
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\Cloner\DraftClonerInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\DraftGenerator\DraftGeneratorInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftImage;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 use BitBag\OpenMarketplace\Component\ProductListing\Entity\ListingInterface;
+use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftImageRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Gaufrette\Filesystem;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -26,7 +30,10 @@ final class ListingPersister implements ListingPersisterInterface
         private DraftClonerInterface $draftCloner,
         private DraftGeneratorInterface $draftGenerator,
         private ImageUploaderInterface $imageUploader,
-        ) {
+        private Filesystem $filesystem,
+        private DraftImageRepositoryInterface $draftImageRepository,
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     public function createNewProductListing(
@@ -65,6 +72,24 @@ final class ListingPersister implements ListingPersisterInterface
     ): void {
         foreach ($productDraft->getImages() as $image) {
             $this->imageUploader->upload($image);
+        }
+    }
+
+    public function deleteImages(DraftInterface $productDraft): void
+    {
+        $productDraftImages = $this->draftImageRepository->findVendorDraftImages($productDraft);
+
+        /** @var DraftImage $image */
+        foreach ($productDraftImages as $image) {
+            if (null !== $image && null !== $image->getPath()) {
+                $this->entityManager->remove($image);
+
+                /** @var string $key */
+                $key = $image->getPath();
+                if ($this->filesystem->has($key)) {
+                    $this->filesystem->delete($key);
+                }
+            }
         }
     }
 }
