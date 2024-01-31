@@ -135,5 +135,13 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.product_listing.repository.draft_taxon"/>
             <tag name="form.type"/>
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\ProfitWithdrawalType"
+                 id="open_marketplace.component.core.vendor.form.type.profit_withdrawal_type"
+        >
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="request_stack" />
+            <tag name="form.type"/>
+        </service>
     </services>
 </container>

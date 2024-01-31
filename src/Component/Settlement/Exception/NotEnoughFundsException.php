@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Core\Settlement\Exception;
+namespace BitBag\OpenMarketplace\Component\Settlement\Exception;
 
 final class NotEnoughFundsException extends \LogicException
 {

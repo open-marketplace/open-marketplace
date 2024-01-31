@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\OpenMarketplace\Component\Core\Settlement\Form;
+namespace BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type;
 
-use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Repository\ChannelRepositoryInterface;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
