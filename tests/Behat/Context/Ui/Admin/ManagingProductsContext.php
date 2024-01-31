@@ -561,8 +561,7 @@ class ManagingProductsContext implements Context
         $attribute,
         $value = null,
         $language = 'en_US'
-    )
-    {
+    ) {
         $this->createSimpleProductPage->addAttribute($attribute, $value ?? '', $language);
     }
 
@@ -573,8 +572,7 @@ class ManagingProductsContext implements Context
         string $value,
         string $language,
         string $attribute
-    ): void
-    {
+    ): void {
         $this->createSimpleProductPage->selectAttributeValue($attribute, $value, $language);
     }
 
@@ -620,8 +618,7 @@ class ManagingProductsContext implements Context
         ProductInterface $product,
         $value,
         $language = 'en_US'
-    )
-    {
+    ) {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $language), $value);
@@ -635,8 +632,7 @@ class ManagingProductsContext implements Context
         ProductInterface $product,
         $value,
         $language = 'en_US'
-    )
-    {
+    ) {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getAttributeSelectText($attributeName, $language), $value);
@@ -649,8 +645,7 @@ class ManagingProductsContext implements Context
         string $attributeName,
         ProductInterface $product,
         string $value
-    ): void
-    {
+    ): void {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getNonTranslatableAttributeValue($attributeName), $value);
@@ -784,8 +779,7 @@ class ManagingProductsContext implements Context
         ProductInterface $product,
         $slug,
         $locale = 'en_US'
-    )
-    {
+    ) {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getSlug($locale), $slug);
@@ -1133,8 +1127,7 @@ class ManagingProductsContext implements Context
         ProductInterface $product,
         string $price,
         ChannelInterface $channel
-    )
-    {
+    ) {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getPriceForChannel($channel), $price);
@@ -1147,8 +1140,7 @@ class ManagingProductsContext implements Context
         ProductInterface $product,
         string $originalPrice,
         ChannelInterface $channel
-    )
-    {
+    ) {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same(
@@ -1209,8 +1201,7 @@ class ManagingProductsContext implements Context
         $attribute,
         $language,
         $number
-    )
-    {
+    ) {
         Assert::same(
             $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
             sprintf('This value is too short. It should have %s characters or more.', $number),
