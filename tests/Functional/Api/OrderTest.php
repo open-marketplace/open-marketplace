@@ -28,7 +28,7 @@ final class OrderTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/OrderTest/order.yml');
     }
 
-    public function test_it_get_orders_by_vendor2(): void
+    public function test_it_get_orders_by_vendor(): void
     {
         $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
 
