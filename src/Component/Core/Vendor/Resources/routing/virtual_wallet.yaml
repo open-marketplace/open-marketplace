@@ -2,7 +2,7 @@ open_marketplace_vendor_virtual_wallet_index:
   path: /virtual-wallets
   methods: [ GET ]
   defaults:
-    _controller: open_marketplace.controller.virtual_wallet:indexAction
+    _controller: open_marketplace.controller.virtual_wallet::indexAction
     _sylius:
       template: "Context/Vendor/VirtualWallet/index.html.twig"
       grid: vendor_account_virtual_wallet_index

@@ -2,7 +2,7 @@ open_marketplace_vendor_product_listings_index:
   path: /product-listings
   methods: [ GET ]
   defaults:
-    _controller: open_marketplace.controller.product_listing:indexAction
+    _controller: open_marketplace.controller.product_listing::indexAction
     _sylius:
       template: "Context/Vendor/ProductListing/index.html.twig"
       grid: open_marketplace_vendor_product_listing
@@ -31,7 +31,7 @@ open_marketplace_vendor_product_listings_show:
   path: /product-listings/{id}
   methods: [ GET,POST ]
   defaults:
-    _controller: open_marketplace.controller.product_draft:showAction
+    _controller: open_marketplace.controller.product_draft::showAction
     _sylius:
       template: 'Context/Vendor/ProductListing/details.html.twig'
 

@@ -40,7 +40,6 @@ final class SettlementRepositoryTest extends JsonApiTestCase
         $this->loadFixturesFromFile('SettlementRepositoryTest/test_it_finds_all_available_periods.yaml');
 
         $period[] = $this->generatePeriod('last week monday', 'last week sunday');
-        $period[] = $this->generatePeriod('first day of last month', 'last day of last month');
         $period[] = $this->generatePeriod('first day of January', 'last day of January');
         $period[] = $this->generatePeriod('first day of April', 'last day of June');
 

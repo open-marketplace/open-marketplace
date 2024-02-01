@@ -43,4 +43,4 @@ open_marketplace_admin_messaging_conversation_category_index:
     path: /conversation-categories
     methods: [GET]
     defaults:
-        _controller: open_marketplace.controller.conversation_category:index
+        _controller: open_marketplace.controller.conversation_category::index

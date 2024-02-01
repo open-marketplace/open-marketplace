@@ -273,7 +273,7 @@ final class ProductListingContext extends RawMinkContext
         $this->getPage()->fillField('Username', $admin->getUsername());
         $this->getPage()->fillField('Password', $admin->getPlainPassword());
         $this->getPage()->pressButton('Login');
-        ($this->getPage()->findLink('Logout'));
+        $this->getPage()->findLink('Logout');
     }
 
     /**

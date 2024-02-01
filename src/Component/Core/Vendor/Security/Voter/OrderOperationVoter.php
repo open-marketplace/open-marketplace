@@ -38,7 +38,7 @@ final class OrderOperationVoter extends Voter
         return is_a($subjectType, OrderInterface::class, true);
     }
 
-    protected function supports(string $attribute, $subject): bool
+    protected function supports(string $attribute, mixed $subject): bool
     {
         if (self::CANCEL === $attribute && $subject instanceof OrderInterface) {
             return true;
@@ -49,7 +49,7 @@ final class OrderOperationVoter extends Voter
 
     protected function voteOnAttribute(
         string $attribute,
-        $subject,
+        mixed $subject,
         TokenInterface $token
     ): bool {
         return match ($attribute) {

@@ -19,7 +19,7 @@ final class VendorOwnsVariantVoter extends Voter
 {
     public const OWNS_VARIANT = 'OWNS_VARIANT';
 
-    protected function supports($attribute, $subject)
+    protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, [self::OWNS_VARIANT])) {
             return false;
@@ -28,17 +28,11 @@ final class VendorOwnsVariantVoter extends Voter
         return true;
     }
 
-    /*
-     * This method call is ignored because phpstan force us to type hint arguments but this method in symfony 4.4
-     * is declared without so type hinted arguments cause trouble
-     */
-
-    /** @phpstan-ignore-next-line */
     protected function voteOnAttribute(
-        $attribute,
-        $subject,
+        string $attribute,
+        mixed $subject,
         TokenInterface $token
-    ) {
+    ): bool {
         $user = $token->getUser();
         if (!$user instanceof ShopUserInterface || null == $subject) {
             return false;

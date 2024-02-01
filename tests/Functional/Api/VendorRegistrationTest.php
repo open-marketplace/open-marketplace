@@ -24,7 +24,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -58,7 +58,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
     {
         $this->loadFixturesFromFiles(['Api/VendorRegistrationTest/test_vendor_basic_registration.yml', 'Api/VendorRegistrationTest/test_existed_vendor_registration.yml']);
         $loginData = $this->logInShopUser('test@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -84,7 +84,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -98,7 +98,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -120,7 +120,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -138,7 +138,11 @@ final class VendorRegistrationTest extends FunctionalTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/internal_server_error', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse(
+            $response,
+            'Api/VendorRegistrationTest/wrong_iri_for_country_field_error_response',
+            Response::HTTP_BAD_REQUEST
+        );
     }
 
     public function test_not_existed_country()
@@ -146,7 +150,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -164,7 +168,11 @@ final class VendorRegistrationTest extends FunctionalTestCase
             ],
         ]));
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'Api/internal_server_error', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse(
+            $response,
+            'Api/VendorRegistrationTest/not_existed_country_field_error_response',
+            Response::HTTP_BAD_REQUEST
+        );
     }
 
     public function test_min_length_validation_rules()
@@ -172,7 +180,7 @@ final class VendorRegistrationTest extends FunctionalTestCase
         $this->loadFixturesFromFile('Api/VendorRegistrationTest/test_vendor_basic_registration.yml');
 
         $loginData = $this->logInShopUser('test@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 

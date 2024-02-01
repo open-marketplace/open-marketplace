@@ -74,6 +74,8 @@
     "itemsTotal": 41,
     "total": 51,
     "taxTotal": 0,
+    "taxExcludedTotal": 0,
+    "taxIncludedTotal": 0,
     "shippingTotal": 10,
     "orderPromotionTotal": 0
 }

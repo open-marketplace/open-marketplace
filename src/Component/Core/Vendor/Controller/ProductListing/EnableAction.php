@@ -15,7 +15,8 @@ use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepository
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 
 final class EnableAction
@@ -24,7 +25,7 @@ final class EnableAction
         private ListingRepositoryInterface $productListingRepository,
         private EntityManagerInterface $entityManager,
         private RouterInterface $router,
-        private FlashBagInterface $flashBag
+        private RequestStack $requestStack
     ) {
     }
 
@@ -43,8 +44,11 @@ final class EnableAction
         }
 
         $msgString = $enableState ? 'open_marketplace.ui.enabled' : 'open_marketplace.ui.disabled';
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $flashBag = $session->getFlashBag();
 
-        $this->flashBag->set('success', $msgString);
+        $flashBag->set('success', $msgString);
         $this->entityManager->persist($listing);
         $this->entityManager->flush();
 

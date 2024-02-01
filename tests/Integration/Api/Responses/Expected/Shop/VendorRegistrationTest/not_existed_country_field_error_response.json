@@ -1,0 +1,6 @@
+{
+    "@context": "/api/v2/contexts/Error",
+    "@type": "hydra:Error",
+    "hydra:title": "An error occurred",
+    "hydra:description": "Item not found for \u0022\/api\/v2\/shop\/countries\/RO\u0022."
+}

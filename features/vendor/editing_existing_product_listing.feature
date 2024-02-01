@@ -26,7 +26,7 @@ Feature: Editing a product listing.
   @ui
   Scenario: Admin see product listing with status created
     Given there is 1 product listing created by vendor with status "Created"
-    And I am logged in as an admin
+    And I am logged in as an administrator
     When I am on "/admin"
     And I follow "Product listings"
     Then I should see product's listing status "Created"

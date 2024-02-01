@@ -2,7 +2,7 @@ open_marketplace_vendor_shipping_methods_form:
   path: /shipping-methods
   methods: [ GET, POST ]
   defaults:
-    _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor:updateAction
+    _controller: bitbag.open_marketplace.component.core.common.controller.resource.vendor::updateAction
     _sylius:
       template: 'Context/Vendor/ShippingMethods/index.html.twig'
       form: BitBag\OpenMarketplace\Component\Core\Vendor\Form\Type\VendorShippingMethodsType

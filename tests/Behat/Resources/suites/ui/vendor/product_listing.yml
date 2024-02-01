@@ -10,5 +10,6 @@ default:
         - sylius.behat.context.hook.doctrine_orm
         - sylius.behat.context.setup.shop_security
         - sylius.behat.context.setup.taxonomy
+        - sylius.behat.context.setup.admin_security
       filters:
         tags: '@vendor_managing_product_listings&&@ui'

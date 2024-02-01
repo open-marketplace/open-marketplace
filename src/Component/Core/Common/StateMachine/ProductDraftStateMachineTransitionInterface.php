@@ -15,5 +15,9 @@ use BitBag\OpenMarketplace\Component\ProductListing\Entity\DraftInterface;
 
 interface ProductDraftStateMachineTransitionInterface
 {
+    public function can(DraftInterface $productDraft, string $transition): bool;
+
+    public function apply(DraftInterface $productDraft, string $transition): void;
+
     public function applyIfCan(DraftInterface $productDraft, string $transition): void;
 }

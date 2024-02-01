@@ -7,6 +7,8 @@
       "@id": "/api/v2/shop/orders/order_made_by_peter_1",
       "@type": "Order",
       "tokenValue": "order_made_by_peter_1",
+      "channel": "/api/v2/shop/channels/CODE",
+      "state": "new",
       "id": "@integer@",
       "itemsTotal": 0
     },
@@ -14,6 +16,8 @@
       "@id": "/api/v2/shop/orders/order_made_by_peter_2",
       "@type": "Order",
       "tokenValue": "order_made_by_peter_2",
+      "channel": "/api/v2/shop/channels/CODE",
+      "state": "new",
       "id": "@integer@",
       "itemsTotal": 0
     }

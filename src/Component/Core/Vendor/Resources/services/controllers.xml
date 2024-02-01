@@ -83,6 +83,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.product_listing..repository.draft"/>
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="router.default"/>
+            <argument type="service" id="request_stack" />
 
             <tag name="controller.service_arguments"/>
         </service>
@@ -92,7 +93,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="router.default"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="session.flash_bag"/>
+            <argument type="service" id="request_stack"/>
 
             <tag name="controller.service_arguments"/>
         </service>
@@ -102,7 +103,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="open_marketplace.repository.product_listing"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="router.default"/>
-            <argument type="service" id="session.flash_bag"/>
+            <argument type="service" id="request_stack"/>
 
             <tag name="controller.service_arguments"/>
         </service>
@@ -112,7 +113,7 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface"/>
             <argument type="service" id="security.csrf.token_manager"/>
-            <argument type="service" id="session"/>
+            <argument type="service" id="request_stack"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="router.default"/>
 

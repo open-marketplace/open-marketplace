@@ -27,7 +27,7 @@ final class VendorBackgroundImageVoter extends Voter
     ) {
     }
 
-    protected function supports(string $attribute, $subject): bool
+    protected function supports(string $attribute, mixed $subject): bool
     {
         if (!in_array($attribute, [self::DELETE])) {
             return false;
@@ -45,7 +45,7 @@ final class VendorBackgroundImageVoter extends Voter
      */
     protected function voteOnAttribute(
         string $attribute,
-        $subject,
+        mixed $subject,
         TokenInterface $token
     ): bool {
         if (self::DELETE === $attribute) {

@@ -130,6 +130,19 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.2.0"
     },
+    "league/flysystem-bundle": {
+        "version": "2.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "913dc3d7a5a1af0d2b044c5ac3a16e2f851d7380"
+        },
+        "files": [
+            "config/packages/flysystem.yaml",
+            "var/storage/.gitignore"
+        ]
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.18",
         "recipe": {
@@ -170,6 +183,15 @@
             "branch": "main",
             "version": "2.4",
             "ref": "518ac22defa04a8a1d82479ed362e2921487adf0"
+        }
+    },
+    "phpstan/phpstan": {
+        "version": "1.10",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "5e490cc197fb6bb1ae22e5abbc531ddc633b6767"
         }
     },
     "phpunit/phpunit": {
@@ -214,15 +236,6 @@
             "branch": "main",
             "version": "4.11",
             "ref": "b4edd2a1e6ac1827202f336cac2771cb529de542"
-        }
-    },
-    "sonata-project/doctrine-extensions": {
-        "version": "1.18",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "1.8",
-            "ref": "4ea4a4b6730f83239608d7d4c849533645c70169"
         }
     },
     "sonata-project/form-extensions": {
@@ -334,6 +347,18 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/mailer": {
+        "version": "6.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "4.3",
+            "ref": "df66ee1f226c46f01e85c29c2f7acce0596ba35a"
+        },
+        "files": [
+            "config/packages/mailer.yaml"
+        ]
+    },
     "symfony/messenger": {
         "version": "5.4",
         "recipe": {
@@ -381,20 +406,6 @@
         },
         "files": [
             "config/packages/security.yaml"
-        ]
-    },
-    "symfony/swiftmailer-bundle": {
-        "version": "3.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "2.5",
-            "ref": "f0b2fccdca2dfd97dc2fd5ad216d5e27c4f895ac"
-        },
-        "files": [
-            "config/packages/dev/swiftmailer.yaml",
-            "config/packages/swiftmailer.yaml",
-            "config/packages/test/swiftmailer.yaml"
         ]
     },
     "symfony/translation": {

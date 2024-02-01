@@ -37,3 +37,7 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+###> docker ###
+docker-compose.override.yml
+###< docker ###

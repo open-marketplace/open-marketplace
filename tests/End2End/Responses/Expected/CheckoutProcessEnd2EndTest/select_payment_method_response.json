@@ -1,6 +1,7 @@
 {
     "@context": "\/api\/v2\/contexts\/Order",
     "@id": "\/api\/v2\/shop\/orders\/@string@",
+    "channel": "/api/v2/shop/channels/CODE",
     "@type": "Order",
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
@@ -95,5 +96,8 @@
     "total": 51,
     "taxTotal": 0,
     "shippingTotal": 10,
+    "state": "cart",
+    "taxExcludedTotal": 0,
+    "taxIncludedTotal": 0,
     "orderPromotionTotal": 0
 }

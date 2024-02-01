@@ -9,12 +9,12 @@
       "customer": {
         "@id": "/api/v2/shop/account/vendor/customers/@string@",
         "@type": "Customer",
-        "email": "john.smith@example.com",
-        "firstName": "John",
-        "lastName": "Smith",
-        "phoneNumber": "123456789",
+        "email": "bruce.wayne@example.com",
+        "firstName": "Bruce",
+        "lastName": "Wayne",
         "subscribedToNewsletter": false
       },
+      "channel": "/api/v2/shop/channels/@string@",
       "shipments": [
         {
           "@id": "/api/v2/shop/shipments/@string@",
@@ -38,12 +38,12 @@
       "customer": {
         "@id": "/api/v2/shop/account/vendor/customers/@string@",
         "@type": "Customer",
-        "email": "john.smith@example.com",
-        "firstName": "John",
-        "lastName": "Smith",
-        "phoneNumber": "123456789",
+        "email": "bruce.wayne@example.com",
+        "firstName": "Bruce",
+        "lastName": "Wayne",
         "subscribedToNewsletter": false
       },
+      "channel": "/api/v2/shop/channels/@string@",
       "shipments": [
         {
           "@id": "/api/v2/shop/shipments/@string@",

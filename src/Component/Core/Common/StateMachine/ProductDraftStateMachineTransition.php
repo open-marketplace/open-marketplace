@@ -22,6 +22,26 @@ final class ProductDraftStateMachineTransition implements ProductDraftStateMachi
     ) {
     }
 
+    public function can(DraftInterface $productDraft, string $transition): bool
+    {
+        $stateMachine = $this->productDraftStateMachineFactory->get(
+            $productDraft,
+            DraftTransitions::GRAPH
+        );
+
+        return $stateMachine->can($transition);
+    }
+
+    public function apply(DraftInterface $productDraft, string $transition): void
+    {
+        $stateMachine = $this->productDraftStateMachineFactory->get(
+            $productDraft,
+            DraftTransitions::GRAPH
+        );
+
+        $stateMachine->apply($transition);
+    }
+
     public function applyIfCan(
         DraftInterface $productDraft,
         string $transition

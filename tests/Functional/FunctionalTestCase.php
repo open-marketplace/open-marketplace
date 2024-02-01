@@ -13,10 +13,11 @@ namespace Tests\BitBag\OpenMarketplace\Functional;
 
 use Sylius\Tests\Api\JsonApiTestCase as BaseJsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
+use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 
 abstract class FunctionalTestCase extends BaseJsonApiTestCase
 {
-    use AdminUserLoginTrait;
+    use AdminUserLoginTrait, ShopUserLoginTrait;
 
     protected string $filesPath;
 
