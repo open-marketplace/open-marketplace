@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
-use Ramsey\Uuid\UuidInterface;
+use Ramsey\Uuid\Uuid;
 use stdClass;
 
 final class UuidSubscriberSpec extends ObjectBehavior
@@ -37,9 +37,9 @@ final class UuidSubscriberSpec extends ObjectBehavior
         UuidGenerator $uuidGenerator,
         LifecycleEventArgs $event,
         EntityManager $objectManager,
-        UuidAwareInterface $uuidAware,
-        UuidInterface $uuid
+        UuidAwareInterface $uuidAware
     ): void {
+        $uuid = Uuid::fromString('d33b76df-7dbe-460a-8f8b-c96da048ceda');
         $uuidAware->getUuid()->willReturn(null);
         $event->getObject()->willReturn($uuidAware);
         $event->getObjectManager()->willReturn($objectManager);
@@ -54,9 +54,9 @@ final class UuidSubscriberSpec extends ObjectBehavior
         UuidGenerator $uuidGenerator,
         LifecycleEventArgs $event,
         EntityManager $objectManager,
-        UuidAwareInterface $uuidAware,
-        UuidInterface $uuid
+        UuidAwareInterface $uuidAware
     ): void {
+        $uuid = Uuid::fromString('d33b76df-7dbe-460a-8f8b-c96da048ceda');
         $uuidAware->getUuid()->willReturn(null);
         $event->getObject()->willReturn($uuidAware);
         $event->getObjectManager()->willReturn($objectManager);
@@ -71,9 +71,9 @@ final class UuidSubscriberSpec extends ObjectBehavior
         UuidGenerator $uuidGenerator,
         LifecycleEventArgs $event,
         EntityManager $objectManager,
-        UuidAwareInterface $uuidAware,
-        UuidInterface $uuid
+        UuidAwareInterface $uuidAware
     ): void {
+        $uuid = Uuid::fromString('d33b76df-7dbe-460a-8f8b-c96da048ceda');
         $uuidAware->getUuid()->willReturn($uuid);
         $event->getObject()->willReturn($uuidAware);
         $event->getObjectManager()->willReturn($objectManager);
