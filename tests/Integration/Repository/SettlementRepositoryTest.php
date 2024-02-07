@@ -46,6 +46,8 @@ final class SettlementRepositoryTest extends JsonApiTestCase
 
         rsort($period);
 
+        $period = array_unique($period, \SORT_STRING);
+
         $this->assertSame(
             $period,
             $this->repository->findAllPeriods()

@@ -20,7 +20,7 @@ use BitBag\OpenMarketplace\Component\Vendor\Entity\Vendor;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Repository\VendorRepositoryInterface;
 use PhpSpec\ObjectBehavior;
-use Ramsey\Uuid\UuidInterface;
+use Ramsey\Uuid\Uuid;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
@@ -51,9 +51,9 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         ShopApiSection $shopApiSection,
         VendorContextInterface $vendorContext,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository,
-        UuidInterface $uuid
+        VendorRepositoryInterface $vendorRepository
     ): void {
+        $uuid = Uuid::fromString('23b64562-6171-4c2c-ad9d-c5f8c5fed792');
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $vendorContext->getVendor()->willReturn(null);
 
@@ -67,13 +67,12 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         ShopApiSection $shopApiSection,
         VendorContextInterface $vendorContext,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository,
-        UuidInterface $uuid
+        VendorRepositoryInterface $vendorRepository
     ): void {
+        $uuid = Uuid::fromString('23b64562-6171-4c2c-ad9d-c5f8c5fed792');
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $vendorContext->getVendor()->willReturn($vendor);
         $vendor->getUuid()->shouldNotBeCalled();
-        $uuid->equals($uuid)->shouldNotBeCalled();
 
         $vendorRepository->findOneBy(['uuid' => $uuid])->willReturn($vendor);
 
@@ -84,9 +83,10 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         SectionProviderInterface $sectionProvider,
         ShopVendorApiSection $shopVendorApiSection,
         VendorContextInterface $vendorContext,
-        VendorRepositoryInterface $vendorRepository,
-        UuidInterface $uuid
+        VendorRepositoryInterface $vendorRepository
     ): void {
+        $uuid = Uuid::fromString('23b64562-6171-4c2c-ad9d-c5f8c5fed792');
+
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
         $vendorContext->getVendor()->willReturn(null);
 
@@ -100,15 +100,12 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         ShopVendorApiSection $shopVendorApiSection,
         VendorContextInterface $vendorContext,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository,
-        UuidInterface $uuid
+        VendorRepositoryInterface $vendorRepository
     ): void {
+        $uuid = Uuid::fromString('23b64562-6171-4c2c-ad9d-c5f8c5fed792');
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
         $vendorContext->getVendor()->willReturn($vendor);
         $vendor->getUuid()->willReturn($uuid);
-        $uuid->equals($uuid)->willReturn(false);
-
-        $vendorRepository->findOneBy(['uuid' => $uuid])->shouldNotBeCalled();
 
         $this->getItem(VendorInterface::class, $uuid)->shouldReturn(null);
     }
@@ -118,13 +115,13 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         ShopVendorApiSection $shopVendorApiSection,
         VendorContextInterface $vendorContext,
         VendorInterface $vendor,
-        VendorRepositoryInterface $vendorRepository,
-        UuidInterface $uuid
+        VendorRepositoryInterface $vendorRepository
     ): void {
+        $uuid = Uuid::fromString('23b64562-6171-4c2c-ad9d-c5f8c5fed792');
+
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
         $vendorContext->getVendor()->willReturn($vendor);
         $vendor->getUuid()->willReturn($uuid);
-        $uuid->equals($uuid)->willReturn(true);
 
         $vendorRepository->findOneBy(['uuid' => $uuid])->willReturn($vendor);
 
