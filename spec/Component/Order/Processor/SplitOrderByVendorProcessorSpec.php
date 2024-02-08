@@ -15,9 +15,9 @@ use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderItemInterface;
 use BitBag\OpenMarketplace\Component\Order\OrderManagerInterface;
 use BitBag\OpenMarketplace\Component\Order\Processor\SplitOrderByVendorProcessor;
-use BitBag\OpenMarketplace\Component\Order\Refresher\PaymentRefresherInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -27,12 +27,12 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 {
     public function let(
         OrderManagerInterface $orderManager,
-        PaymentRefresherInterface $paymentRefresher,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        EntityManagerInterface $entityManager
     ): void {
         $this->beConstructedWith(
             $orderManager,
-            $paymentRefresher,
+            $entityManager,
             $eventDispatcher
         );
     }
@@ -49,10 +49,9 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         OrderInterface $subOrder,
         VendorInterface $vendor,
         OrderManagerInterface $orderManager,
-        PaymentRefresherInterface $paymentRefresher,
         EventDispatcherInterface $eventDispatcher
     ): void {
-        $order->isPrimary()->willReturn(false);
+        $order->isPrimary()->willReturn(true);
         $order->getSecondaryOrders()->willReturn(new ArrayCollection([]));
 
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->willReturn((object) []);
@@ -64,25 +63,12 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(100);
         $subOrder->getVendor()->willReturn(null);
         $order->getVendor()->willReturn(null);
+        $order->addSecondaryOrder(Argument::any())->shouldBeCalledTimes(1);
         $orderManager->generateNewSecondaryOrder($order, $vendor, $orderItem)->willReturn($subOrder);
 
         $this->process($order);
 
-        $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldHaveBeenCalled();
-    }
-
-    public function it_quickly_returns_already_splitted_orders(
-        OrderInterface $order,
-        OrderInterface $subOrder,
-        EventDispatcherInterface $eventDispatcher
-    ): void {
-        $order->isPrimary()->willReturn(true);
-        $order->getSecondaryOrders()->willReturn(new ArrayCollection([$subOrder->getWrappedObject()]));
-
-        $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldNotBeCalled();
-
-        $this->process($order);
     }
 
     public function it_creates_2_secondary_orders_for_products_from_different_vendors(
@@ -95,10 +81,9 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
         VendorInterface $vendor,
         VendorInterface $vendor2,
         OrderManagerInterface $orderManager,
-        PaymentRefresherInterface $paymentRefresher,
         EventDispatcherInterface $eventDispatcher
     ): void {
-        $order->isPrimary()->willReturn(false);
+        $order->isPrimary()->willReturn(true);
         $order->getSecondaryOrders()->willReturn(new ArrayCollection([]));
 
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->willReturn((object) []);
@@ -120,7 +105,7 @@ final class SplitOrderByVendorProcessorSpec extends ObjectBehavior
 
         $this->process($order);
 
-        $paymentRefresher->refreshPayment($subOrder)->shouldHaveBeenCalled();
+        $order->addSecondaryOrder(Argument::any())->shouldHaveBeenCalledTimes(2);
         $eventDispatcher->dispatch(Argument::any(), Argument::any())->shouldHaveBeenCalled();
     }
 }

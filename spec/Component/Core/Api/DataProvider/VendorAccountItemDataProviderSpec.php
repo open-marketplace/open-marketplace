@@ -103,6 +103,7 @@ final class VendorAccountItemDataProviderSpec extends ObjectBehavior
         VendorRepositoryInterface $vendorRepository
     ): void {
         $uuid = Uuid::fromString('23b64562-6171-4c2c-ad9d-c5f8c5fed792');
+
         $sectionProvider->getSection()->willReturn($shopVendorApiSection);
         $vendorContext->getVendor()->willReturn($vendor);
         $vendor->getUuid()->willReturn($uuid);
