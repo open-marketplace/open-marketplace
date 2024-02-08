@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace BitBag\OpenMarketplace\Component\Core\Common\Controller\Resource;
 
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\CoreBundle\Controller\OrderController as BaseOrderController;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType;
@@ -190,5 +191,75 @@ final class OrderController extends BaseOrderController
                 'order' => $order,
             ]
         );
+    }
+
+    public function clearAction(Request $request): Response
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::DELETE);
+        /** @var OrderInterface $resource */
+        $resource = $this->getCurrentCart();
+
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $this->getParameterFromRequest($request, '_csrf_token'))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
+
+        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
+
+        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+            throw new HttpException($event->getErrorCode(), $event->getMessage());
+        }
+        if ($event->isStopped()) {
+            $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+            return $this->redirectHandler->redirectToIndex($configuration, $resource);
+        }
+
+        $this->removeOrder($resource);
+
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+
+        if (!$configuration->isHtmlRequest() && $this->viewHandler) {
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+
+        return $this->redirectHandler->redirectToIndex($configuration, $resource);
+    }
+
+    /**
+     * @return mixed
+     *
+     * @deprecated This function will be removed in Sylius 2.0, since Symfony 5.4, use explicit input sources instead
+     * based on Symfony\Component\HttpFoundation\Request::get
+     */
+    private function getParameterFromRequest(Request $request, string $key)
+    {
+        if ($request !== $result = $request->attributes->get($key, $request)) {
+            return $result;
+        }
+
+        if ($request->query->has($key)) {
+            return $request->query->all()[$key];
+        }
+
+        if ($request->request->has($key)) {
+            return $request->request->all()[$key];
+        }
+
+        return null;
+    }
+
+    private function removeOrder(OrderInterface $resource): void
+    {
+        if ($resource->isPrimary()) {
+            foreach ($resource->getSecondaryOrders() as $secondaryOrder) {
+                $this->repository->remove($secondaryOrder);
+            }
+        }
+
+        $this->repository->remove($resource);
     }
 }
