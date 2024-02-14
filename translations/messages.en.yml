@@ -90,6 +90,7 @@ open_marketplace:
         description: Description
         shipping_methods: Shipping methods
         manage_shipping_methods: Manage shipping methods accepted in your store
+        no_shipping_methods_available: No shipping methods available in this channel
         open: Open
         closed: Closed
         minimum: minimum
