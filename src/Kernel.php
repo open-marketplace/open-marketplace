@@ -27,6 +27,8 @@ final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
+    public const OPEN_MARKETPLACE_VERSION = '2.1.1';
+
     private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
     public function getCacheDir(): string

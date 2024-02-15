@@ -3,3 +3,7 @@ open_marketplace_shop_account:
 
 open_marketplace_shop_checkout:
     resource: "routing/checkout.yaml"
+
+open_marketplace_admin_ajax:
+    resource: "routing/admin/ajax.yaml"
+    prefix: /ajax
