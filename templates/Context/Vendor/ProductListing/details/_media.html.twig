@@ -1,16 +1,11 @@
 {% if productDraft.images|length == 0 %}
-    <div id="media" class="ui styled fluid">
-        <h4 class="ui top attached large header">{{ 'sylius.ui.media'|trans }}</h4>
+    <div id="media">
         <div class="ui attached segment">
             {{ 'open_marketplace.ui.no_media_uploaded'|trans }}
         </div>
     </div>
 {% else %}
-    <div id="media" class="ui styled fluid accordion">
-        <div class="title">
-            <i class="dropdown icon"></i>
-            {{ 'sylius.ui.media'|trans }}
-        </div>
+    <div id="media">
         <div class="content">
             <div class="ui small images">
                 {% for image in productDraft.images %}
