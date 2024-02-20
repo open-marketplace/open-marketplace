@@ -1,5 +1,5 @@
 <div class="ui stackable grid">
-    <div class="ten wide column">
+    <div class="seven wide column">
         <div class="ui segments">
             {% include 'Context/Vendor/Order/Partials/_payments.html.twig' %}
         </div>
@@ -7,7 +7,10 @@
             {% include 'Context/Vendor/Order/Partials/_shipments.html.twig' %}
         </div>
     </div>
-    <div class="six wide column">
+    <div class="four wide column">
+        <br />
+    </div>
+    <div class="five wide column" id="customer-details">
         <div class="ui segments">
             {% set customer = order.customer %}
             {% include 'Context/Vendor/Order/Partials/_customerInfo.html.twig' %}
@@ -16,6 +19,7 @@
             {% include 'Context/Vendor/Order/Partials/_addresses.html.twig' %}
         </div>
         <div class="ui segments">
+            <br />
             {% include 'Context/Vendor/Order/Partials/_resendEmail.html.twig' %}
         </div>
     </div>

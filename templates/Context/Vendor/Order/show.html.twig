@@ -13,7 +13,9 @@
 {% endblock %}
 
 {% block subcontent %}
-    {% include 'Context/Vendor/Order/Partials/_orderTitle.html.twig' %}
-    {% include 'Context/Vendor/Order/Partials/_orderTable.html.twig' %}
-    {% include 'Context/Vendor/Order/Partials/_orderDetails.html.twig' %}
+    <div class="order-details">
+        {% include 'Context/Vendor/Order/Partials/_orderTitle.html.twig' %}
+        {% include 'Context/Vendor/Order/Partials/_orderTable.html.twig' %}
+        {% include 'Context/Vendor/Order/Partials/_orderDetails.html.twig' %}
+    </div>
 {% endblock %}
