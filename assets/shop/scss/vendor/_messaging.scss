@@ -1,0 +1,46 @@
+.messaging-thread {
+  .sixteen.wide.column {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .message {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: none;
+
+    .content {
+      border-bottom: solid #f0f0f0 1px;
+      padding-bottom: 16px;
+    }
+  }
+
+  .sixteen.wide.column:last-child {
+    .content {
+      border-bottom: 0;
+    }
+  }
+
+  .created-at .label {
+    border: 0;
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: normal;
+    color: #c0c0c0;
+    font-style: italic;
+  }
+
+  .ui.labeled.icon.button.archive-button {
+    i {
+      width: 36px !important;
+    }
+    padding: 10px 16px !important;
+    padding-left: 36px !important;
+
+    position: absolute;
+    top: 16px;
+    right: -68px;
+  }
+}
