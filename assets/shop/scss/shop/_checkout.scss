@@ -1,0 +1,20 @@
+#sylius-shipping-methods {
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15) !important;
+  padding: 20px;
+  border: 1px solid rgba(34,36,38,.15) !important;
+
+  .ui.segment:not(:first-child) {
+    > .header {
+      margin-top: 20px;
+      border-top: solid #eee 1px;
+      padding-top: 20px;
+    }
+  }
+
+  .sylius-product-name {
+    font-size: 1.2rem !important;
+  }
+  .sylius-product-variant-code {
+    font-size: 1rem !important;
+  }
+}
