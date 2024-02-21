@@ -8,6 +8,6 @@
        class="item">{{ 'sylius.ui.add_your_review'|trans }}</a>
     {% if product.vendor is defined and product.vendor is not null %}
         <a href="{{ path('open_marketplace_shop_vendor_page_index', {'vendor_slug': product.vendor.slug, '_locale': product.translation.locale}) }}"
-           style="color: #1678c2; margin-left: auto" class="item">{{ product.vendor.companyName }}</a>
+           style="color: #39b99a; margin-left: auto" class="item">{{ product.vendor.companyName }}</a>
     {% endif %}
 </div>
