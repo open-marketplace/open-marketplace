@@ -9,6 +9,11 @@
 @import "vendor/_messaging";
 @import "vendor/_orders";
 
+#menu .item:hover {
+  color: white !important;
+  background-color: rgba(0, 0, 0, .14) !important;
+}
+
 body.pushable .pusher {
   background-color: #fbfbfb;
 }
