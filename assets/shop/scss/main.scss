@@ -1,26 +1,22 @@
-@import "./attributes/attributes";
-@import "Vendor/product_listing/product_listing_dropdown";
-@import "Vendor/product_review/dropdown";
-@import "./wishlist_button/index";
-@import "./vendor_page/vendor_banner";
-@import "./address_book/address_book";
-@import "./menu/horizontal_menu";
-@import "./error_pages/error_pages";
+@import "error_pages";
+@import "shop/_checkout";
+@import "shop/_vendor_page";
+@import "shop/_wishlists";
+@import "vendor/attributes";
+@import "vendor/_layout";
+@import "vendor/_forms";
+@import "vendor/_listing_dropdown";
+@import "vendor/_review_dropdown";
+@import "vendor/_messaging";
+@import "vendor/_orders";
 
-$base-box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.04);
-$base-border: 1px solid rgba(34, 36, 38, 0.1);
-$base-border-radius: 8px;
-$base-color: #339ae8;
+#menu .item:hover {
+  color: white !important;
+  background-color: rgba(0, 0, 0, .14) !important;
+}
+
 body.pushable .pusher {
   background-color: #fbfbfb;
-}
-.ui.cards > .card, .ui.card, .ui.segment, .ui.vertical.menu {
-  box-shadow: $base-box-shadow ;
-  border-radius: $base-border-radius;
-}
-
-.ui.segment {
-  border: 1px solid rgba(123,126,130, 0.15);
 }
 
 .ui.label.teal {
@@ -28,9 +24,10 @@ body.pushable .pusher {
 }
 
 .ui.label.blue {
-  background-color: #28afff !important;
+  background-color: #39b99a !important;
 }
 
+// Entity listing table responsiveness fix
 @media (max-width: 767px) {
   .ui.table:not(.unstackable) {
     thead {
@@ -47,10 +44,6 @@ body.pushable .pusher {
 
     tr > td, tr > th {
       display: table-cell!important;
-    }
-
-    tr > td:not(:first-of-type), tr > th:not(:first-of-type) {
-      border-left: $base-border!important;
     }
   }
 }

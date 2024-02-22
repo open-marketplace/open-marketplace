@@ -25,18 +25,20 @@
     {{ sylius_template_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
 
     <div class="ui small images">
-        {% for image in product.images if mainPhoto != image %}
-            {% set path = image.path is not null
-                ? image.path|imagine_filter('sylius_shop_product_small_thumbnail')
-                : asset('assets/shop/img/200x200.png') %}
-            <div class="ui image">
-                {% if product.isConfigurable() and product.enabledVariants|length > 0 %}
-                    {% include '@SyliusShop/Product/Show/_imageVariants.html.twig' %}
-                {% endif %}
-                <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" data-lightbox="sylius-product-image">
-                    <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
-                </a>
-            </div>
+        {% for image in product.images %}
+            {% if mainPhoto != image %}
+                {% set path = image.path is not null
+                    ? image.path|imagine_filter('sylius_shop_product_small_thumbnail')
+                    : asset('assets/shop/img/200x200.png') %}
+                <div class="ui image">
+                    {% if product.isConfigurable() and product.enabledVariants|length > 0 %}
+                        {% include '@SyliusShop/Product/Show/_imageVariants.html.twig' %}
+                    {% endif %}
+                    <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" data-lightbox="sylius-product-image">
+                        <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
+                    </a>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endif %}

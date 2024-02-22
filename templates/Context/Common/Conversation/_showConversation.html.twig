@@ -46,17 +46,15 @@
     <div class="ui stackable grid">
         {% for message in conversation.messages %}
             {% if app.user is same as message.author %}
-                <div class="twelve wide column">
+                <div class="sixteen wide column">
                     {% if message.content|raw is same as "<span>ARCHIVE_REQUEST_MESSAGE</span>" %}
                         <div class="ui icon message">
-                            <i class="icon envelope middle center aligned"></i>
                             <div class="content">
                                 {% include "Context/Common/Conversation/_archiveRequestMessage.html.twig" %}
                             </div>
                         </div>
                     {% else %}
                         <div class="ui icon message">
-                            <i class="icon envelope middle center aligned"></i>
                             <div class="content">
                                 <div class="header">
                                     {% if message.author.firstName is defined %}
@@ -79,20 +77,19 @@
                         </div>
                     {% endif %}
                 </div>
-                <div class="four wide column"><br /></div>
             {% else %}
-                <div class="four wide column"><br /></div>
-                <div class="twelve wide column">
+                <div class="sixteen wide column">
                     {% if message.content|raw is same as "<span>ARCHIVE_REQUEST_MESSAGE</span>" %}
                         <div class="ui icon message">
-                            <i class="icon envelope middle center aligned"></i>
                             <div class="content">
                                 {% include "Context/Common/Conversation/_archiveRequestMessage.html.twig" %}
+                            </div>
+                            <div class="created-at right top aligned" style="margin-bottom: 6px;">
+                                <a class="ui basic label">{{ message.createdAt|date }}</a>
                             </div>
                         </div>
                     {% else %}
                         <div class="ui icon message">
-                            <i class="icon envelope middle center aligned"></i>
                             <div class="content">
                                 <div class="header">
                                     {% if message.author.firstName is defined %}

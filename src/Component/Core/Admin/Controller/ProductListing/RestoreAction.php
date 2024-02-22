@@ -16,7 +16,8 @@ use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepository
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 
 final class RestoreAction
@@ -25,7 +26,7 @@ final class RestoreAction
         private ListingRepositoryInterface $productListingRepository,
         private RouterInterface $router,
         private EntityManagerInterface $entityManager,
-        private FlashBagInterface $flashBag
+        private RequestStack $requestStack
     ) {
     }
 
@@ -46,7 +47,11 @@ final class RestoreAction
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
 
-        $this->flashBag->set('success', 'open_marketplace.ui.restored');
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $flashBag = $session->getFlashBag();
+
+        $flashBag->set('success', 'open_marketplace.ui.restored');
 
         return new RedirectResponse($this->router->generate('open_marketplace_admin_product_listing_index'));
     }

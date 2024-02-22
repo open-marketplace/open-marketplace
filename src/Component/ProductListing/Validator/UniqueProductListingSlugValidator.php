@@ -31,7 +31,7 @@ final class UniqueProductListingSlugValidator extends ConstraintValidator
     ) {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof UniqueProductListingSlugConstraint) {
             throw new UnexpectedTypeException($constraint, UniqueProductListingSlugConstraint::class);

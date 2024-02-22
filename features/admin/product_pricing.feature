@@ -4,25 +4,21 @@ Feature: Product pricing
   I need to be able to set product price
 
   Background:
-    And the store operates on a single channel in "United States"
+    Given the store operates on a single channel in "United States"
     And the store operates on a channel named "Web-US" in "USD" currency
+    And the store has a product "test"
+    And I am logged in as an administrator
 
   @ui
   Scenario: Setting wrong value as price
-    Given I am logged in as an administrator
-    And the store has a product "testproduct"
-    And I am on "/admin/products/"
-    And I follow "Edit"
-    And I fill in "sylius_product[variant][channelPricings][web_us][price]" with "222222222222222222222222"
-    And I click "Save changes"
-    Then I should see "This value is not valid."
+    When I want to modify the "test" product
+    And I change its price to $222222222222222222222222 for "United States" channel
+    And I save my changes
+    Then I should be notified that price has to be valid amount
 
   @ui
   Scenario: Setting correct value as price
-    Given I am logged in as an administrator
-    And the store has a product "testproduct"
-    And I am on "/admin/products/"
-    And I follow "Edit"
-    And I fill in "sylius_product[variant][channelPricings][web_us][price]" with "222222"
-    And I click "Save changes"
+    When I want to modify the "test" product
+    And I change its price to $22222 for "United States" channel
+    And I save my changes
     Then I should see "Success"

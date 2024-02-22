@@ -16,30 +16,49 @@
         "icon": 'shipping',
     } %}
 
-    <div class="ui form segment">
-        {{ form_start(form) }}
-        {% for channel in form.channels %}
-            <div class="ui top attached tabular menu">
-                <a class="item active" data-tab="{{ channel.vars.name }}">{{ channel.vars.label }}</a>
-            </div>
-            <div class="ui bottom attached active tab segment" data-tab="{{ channel.vars.name }}">
-                <div class="field">
-                    <div id="{{ channel.vars.id }}">
-                        {% for method in channel %}
-                            <div class="field">
-                                <div class="ui labeled toggle checkbox">
-                                    {{ form_widget(method) }}
-                                    {{ form_label(method) }}
-                                </div>
+    <div class="ui stackable grid sylius-tabular-form">
+        <div class="sixteen wide column">
+            {{ form_start(form, { 'attr': {'class': 'ui form vendor-panel-form vendor-shipping-form'}}) }}
+
+            <div class="ui tab active">
+                <div class="ui segments">
+                    {% for channel in form.channels %}
+                        <h3>{{ channel.vars.label }}</h3>
+                        <div class="ui segment">
+                            <div id="{{ channel.vars.id }}">
+                                {% if channel.children|length > 0 %}
+                                    {% for method in channel %}
+                                        <div class="field">
+                                            <div class="ui labeled toggle checkbox">
+                                                {{ form_widget(method) }}
+                                                {{ form_label(method) }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="ui icon info yellow message">
+                                        <i class="info circle icon"></i>
+                                        <div class="content">
+                                            <div class="header">
+                                                {{ 'sylius.ui.info'|trans }}
+                                            </div>
+                                            <p>
+                                                {{ 'open_marketplace.ui.no_shipping_methods_available'|trans }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        {% endfor %}
+            <br />
 
-        <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
-        {{ form_row(form._token) }}
-        {{ form_end(form, {'render_rest': false}) }}
+            <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
+
+            {{ form_row(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
     </div>
 {% endblock %}

@@ -23,5 +23,7 @@
 
 {% block subcontent %}
     <br />
-    {% include "Context/Common/Conversation/_showConversation.html.twig" %}
+    <div class="messaging-thread">
+        {% include "Context/Common/Conversation/_showConversation.html.twig" %}
+    </div>
 {% endblock %}

@@ -1,0 +1,35 @@
+<div id="translations">
+    {% for translation in productDraft.translations %}
+        <h3>{{ 'sylius.ui.translations'|trans }} - {{ translation.locale|sylius_locale_name }}</h3>
+        <div class="ui content">
+            <table class="ui very basic celled table">
+                <tbody>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.name'|trans }}</strong></td>
+                    <td>{{ translation.name }}</td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.slug'|trans }}</strong></td>
+                    <td>{{ translation.slug }}</td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.description'|trans }}</strong></td>
+                    <td>{{ translation.description|nl2br }}</td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.meta_keywords'|trans }}</strong></td>
+                    <td>{{ translation.metaKeywords }}</td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.meta_description'|trans }}</strong></td>
+                    <td>{{ translation.metaDescription }}</td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.short_description'|trans }}</strong></td>
+                    <td>{{ translation.shortDescription }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+</div>

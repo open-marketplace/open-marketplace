@@ -9,7 +9,7 @@
         "icon": 'edit'
     } %}
 
-    {{ form_start(form, { 'attr': {'class': 'ui form dirtylisten'}}) }}
+    {{ form_start(form, { 'attr': {'class': 'ui form dirtylisten vendor-panel-form'}}) }}
         {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
         <div class="ui stackable grid sylius-tabular-form">
             <div class="sixteen wide column">
@@ -19,16 +19,12 @@
                         <div class="ui segments">
                             <div class="ui segment">
                                 <h3>{{ 'sylius.ui.details'|trans }}</h3>
-                            </div>
-                            <div class="ui segment">
                                 {{ form_row(form.code) }}
+                                {{ form_row(form.channels) }}
                             </div>
                         </div>
                         <div class="ui segments">
-                            {{ form_row(form.channels) }}
-                            <div class="ui segment">
-                                <h3>{{ 'sylius.ui.pricing'|trans }}</h3>
-                            </div>
+                            <h3>{{ 'sylius.ui.pricing'|trans }}</h3>
                             <div class="ui segment">
                                 <div class="ui styled fluid accordion">
                                     {% for channel, prices in form.productListingPrices %}
@@ -73,8 +69,6 @@
                         <div class="ui segments">
                             <div class="ui segment">
                                 <h3>{{ 'sylius.ui.translations'|trans }}</h3>
-                            </div>
-                            <div class="ui segment">
                                 <div class="ui styled fluid accordion">
                                     {% for index, translations in form.translations %}
                                         {% set flag = translations.vars.name|split('_')[1]|default(translations.vars.name)|lower %}
@@ -96,40 +90,40 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            {% form_theme form '@SyliusAdmin/Product/Attribute/attributesCollection.html.twig' %}
-            <div class="ui tab active segments" data-tab="attributes">
-                <div class="ui segment">
-                    <h3>{{ 'sylius.ui.attributes'|trans }}</h3>
-                </div>
-                <div class="ui segment">
-                    {{ render(url('open_marketplace_vendor_attributes_listing')) }}
-                    <div id="attributesContainer" data-count="{{ form.attributes|length }}">
-                        {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
-                    </div>
-                </div>
-            </div>
-                {% include 'Context/Vendor/ProductListing/form/_images.html.twig' %}
-                <div class="ui tab active segments" data-tab="taxonomy">
-                    <h3 class="ui top attached header">{{ 'sylius.ui.taxonomy'|trans }}</h3>
+                        {% form_theme form '@SyliusAdmin/Product/Attribute/attributesCollection.html.twig' %}
+                        <div class="ui segments" data-tab="attributes">
+                            <div class="ui segment">
+                                <h3>{{ 'sylius.ui.attributes'|trans }}</h3>
+                                {{ render(url('open_marketplace_vendor_attributes_listing')) }}
+                                <div id="attributesContainer" data-count="{{ form.attributes|length }}">
+                                    {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="ui attached segment">
-                        {{ form_row(form.mainTaxon, {
-                            'remote_url': path('open_marketplace_vendor_taxonomy_ajax_taxon_by_name_phrase'),
-                            'load_edit_url': path('open_marketplace_vendor_taxonomy_ajax_taxon_by_code')
-                        }) }}
+                        {% include 'Context/Vendor/ProductListing/form/_images.html.twig' %}
 
-                        <div style="margin-top: 20px;">
-                            <h4>{{ 'sylius.ui.product_taxon'|trans }}:</h4>
-                            <div id="sylius-product-taxonomy-tree" style="margin-left: 16px; margin-top: 20px;"
-                                 data-tree-root-nodes-url="{{ path('open_marketplace_vendor_taxonomy_ajax_taxon_root_nodes') }}"
-                                 data-tree-leafs-url="{{ path('open_marketplace_vendor_taxonomy_ajax_taxon_leafs') }}"
-                            >
-                                {{ form_widget(form.productDraftTaxons) }}
+                        <div class="ui segments" data-tab="taxonomy">
+                            <h3>{{ 'sylius.ui.taxonomy'|trans }}</h3>
 
-                                <div class="ui inverted dimmer">
-                                    <div class="ui loader"></div>
+                            <div class="ui attached segment">
+                                {{ form_row(form.mainTaxon, {
+                                    'remote_url': path('open_marketplace_vendor_taxonomy_ajax_taxon_by_name_phrase'),
+                                    'load_edit_url': path('open_marketplace_vendor_taxonomy_ajax_taxon_by_code')
+                                }) }}
+
+                                <div id="taxon-tree">
+                                    <h4>{{ 'sylius.ui.product_taxon'|trans }}:</h4>
+                                    <div id="sylius-product-taxonomy-tree" style="margin-left: 16px; margin-top: 20px;"
+                                         data-tree-root-nodes-url="{{ path('open_marketplace_vendor_taxonomy_ajax_taxon_root_nodes') }}"
+                                         data-tree-leafs-url="{{ path('open_marketplace_vendor_taxonomy_ajax_taxon_leafs') }}"
+                                    >
+                                        {{ form_widget(form.productDraftTaxons) }}
+
+                                        <div class="ui inverted dimmer">
+                                            <div class="ui loader"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

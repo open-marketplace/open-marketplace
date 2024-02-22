@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Creator;
 
-use BitBag\OpenMarketplace\Component\Channel\Repository\ChannelRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Order\Repository\OrderRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Entity\VirtualWalletInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Factory\SettlementFactoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Manager\VirtualWalletManagerInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Repository\ChannelRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Repository\SettlementRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Settlement\Repository\VirtualWalletRepositoryInterface;
 use BitBag\OpenMarketplace\Component\Vendor\Contracts\VendorSettlementFrequency;

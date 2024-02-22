@@ -1,5 +1,6 @@
 open_marketplace:
     ui:
+        there_is_a_new_version_of_open_marketplace_available: There is a new version of OpenMarketplace available.
         yes: Yes
         no: No
         none: None
@@ -78,7 +79,7 @@ open_marketplace:
         profit_withdrawal_amount: Withdrawal amount
         profit_withdrawal: Profit withdrawal
         my_wallets: My wallets
-        virtual_wallet_balance: Wallet balance
+        virtual_wallet_balance_on_channel: balance
         create_settlement: Create settlement
         balance: Balance
         withdraw: Withdraw
@@ -90,6 +91,7 @@ open_marketplace:
         description: Description
         shipping_methods: Shipping methods
         manage_shipping_methods: Manage shipping methods accepted in your store
+        no_shipping_methods_available: No shipping methods available in this channel
         open: Open
         closed: Closed
         minimum: minimum

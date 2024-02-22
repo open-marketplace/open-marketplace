@@ -16,7 +16,8 @@ use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepository
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 
 final class RemoveAction
@@ -25,7 +26,7 @@ final class RemoveAction
         private ListingRepositoryInterface $productListingRepository,
         private RouterInterface $router,
         private EntityManagerInterface $entityManager,
-        private FlashBag $flashBag
+        private RequestStack $requestStack
     ) {
     }
 
@@ -37,6 +38,9 @@ final class RemoveAction
         $productListing->remove();
 
         $product = $productListing->getProduct();
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $flashBag = $session->getFlashBag();
 
         if ($product) {
             $product->setEnabled(false);
@@ -45,7 +49,7 @@ final class RemoveAction
 
         $this->entityManager->persist($productListing);
         $this->entityManager->flush();
-        $this->flashBag->set('success', 'open_marketplace.ui.removed');
+        $flashBag->set('success', 'open_marketplace.ui.removed');
 
         return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listings_index'));
     }

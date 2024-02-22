@@ -18,6 +18,8 @@ use BitBag\OpenMarketplace\Component\ProductListing\Repository\DraftRepositoryIn
 use BitBag\OpenMarketplace\Component\ProductListing\Repository\ListingRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 
 final class SendForVerificationAction
@@ -26,7 +28,8 @@ final class SendForVerificationAction
         private ProductDraftStateMachineTransitionInterface $productDraftStateMachineTransition,
         private DraftRepositoryInterface $productDraftRepository,
         private ListingRepositoryInterface $productListingRepository,
-        private RouterInterface $router
+        private RouterInterface $router,
+        private RequestStack $requestStack
     ) {
     }
 
@@ -36,9 +39,17 @@ final class SendForVerificationAction
 
         /** @var DraftInterface $productDraft */
         $productDraft = $this->productDraftRepository->findLatestDraft($listing);
+        /** @var Session $session */
+        $session = $this->requestStack->getSession();
+        $flashBag = $session->getFlashBag();
 
         if (null != $productDraft && DraftInterface::STATUS_CREATED === $productDraft->getStatus()) {
-            $this->productDraftStateMachineTransition->applyIfCan($productDraft, DraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
+            if ($this->productDraftStateMachineTransition->can($productDraft, DraftTransitions::TRANSITION_SEND_TO_VERIFICATION)) {
+                $this->productDraftStateMachineTransition->apply($productDraft, DraftTransitions::TRANSITION_SEND_TO_VERIFICATION);
+                $flashBag->add('warning', 'open_marketplace.ui.product_listing_sent_to_verification');
+            } else {
+                $flashBag->add('warning', 'open_marketplace.ui.product_listing_cannot_send_to_verification');
+            }
         }
 
         return new RedirectResponse($this->router->generate('open_marketplace_vendor_product_listings_index'));

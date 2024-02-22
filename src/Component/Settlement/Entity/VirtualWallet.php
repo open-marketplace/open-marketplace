@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Settlement\Entity;
 
-use BitBag\OpenMarketplace\Component\Core\Settlement\Exception\NotEnoughFundsException;
 use BitBag\OpenMarketplace\Component\Order\Entity\OrderInterface;
+use BitBag\OpenMarketplace\Component\Settlement\Exception\NotEnoughFundsException;
 use BitBag\OpenMarketplace\Component\Vendor\Entity\VendorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 

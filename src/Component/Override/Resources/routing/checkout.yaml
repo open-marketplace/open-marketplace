@@ -4,7 +4,7 @@ sylius_shop_checkout_complete:
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
-        _controller: sylius.controller.order:updateAction
+        _controller: sylius.controller.order::updateAction
         _sylius:
             event: complete
             flash: false
@@ -31,7 +31,7 @@ sylius_shop_checkout_select_shipping:
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
-        _controller: sylius.controller.order:updateAction
+        _controller: sylius.controller.order::updateAction
         _sylius:
             event: select_shipping
             flash: false
@@ -51,6 +51,6 @@ sylius_shop_order_thank_you:
     requirements:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
     defaults:
-        _controller: sylius.controller.order:thankYouAction
+        _controller: sylius.controller.order::thankYouAction
         _sylius:
             template: "Context/Shop/Checkout/thankYou.html.twig"

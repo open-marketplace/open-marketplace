@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\OpenMarketplace\Behat\Page\Admin;
 
-use Behat\Mink\Element\DocumentElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Webmozart\Assert\Assert;
 
@@ -24,7 +23,7 @@ final class VendorUpdatePage extends SymfonyPage implements VendorUpdatePageInte
 
     public function checkSettlementFrequency(string $frequency): void
     {
-        $content = $this->getPage()->getText();
+        $content = $this->getDocument()->getText();
         Assert::contains($content, $frequency);
     }
 
@@ -39,8 +38,25 @@ final class VendorUpdatePage extends SymfonyPage implements VendorUpdatePageInte
         $this->getDocument()->pressButton('Save changes');
     }
 
-    private function getPage(): DocumentElement
+    public function leaveTheStreetFieldEmpty(): void
     {
-        return $this->getSession()->getPage();
+        $this->getDocument()->fillField('vendor_vendorAddress_street', '');
+    }
+
+    public function leaveThePostalCodeFieldEmpty(): void
+    {
+        $this->getDocument()->fillField('vendor_vendorAddress_postalCode', '');
+    }
+
+    public function leaveTheCityFieldEmpty(): void
+    {
+        $this->getDocument()->fillField('vendor_vendorAddress_street', '');
+    }
+
+    public function fillAddressFormWithDefaultData(): void
+    {
+        $this->getDocument()->fillField('vendor_vendorAddress_city', 'Warsaw');
+        $this->getDocument()->fillField('vendor_vendorAddress_postalCode', '87-100');
+        $this->getDocument()->fillField('vendor_vendorAddress_street', 'Groove Street');
     }
 }

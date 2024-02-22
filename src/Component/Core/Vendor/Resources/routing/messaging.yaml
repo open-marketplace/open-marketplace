@@ -37,7 +37,7 @@ open_marketplace_vendor_messaging_conversation_archive:
   path: /conversations/{id}/archive
   methods: [ PATCH ]
   defaults:
-    _controller: open_marketplace.controller.conversation:applyStateMachineTransitionAction
+    _controller: open_marketplace.controller.conversation::applyStateMachineTransitionAction
     _sylius:
       state_machine:
         graph: open_marketplace_conversation

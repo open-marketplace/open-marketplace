@@ -25,7 +25,7 @@ final class UniqueShopUserVendorValidator extends ConstraintValidator
     }
 
     /** @param UniqueShopUserVendor $constraint */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, UniqueShopUserVendor::class);
 

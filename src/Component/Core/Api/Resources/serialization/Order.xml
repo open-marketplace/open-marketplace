@@ -92,6 +92,10 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <group>shop:account:vendor:order:details</group>
         </attribute>
 
+        <attribute name="taxExcludedTotal">
+            <group>shop:account:vendor:order:details</group>
+        </attribute>
+
         <attribute name="localeCode">
             <group>shop:account:vendor:order:details</group>
         </attribute>

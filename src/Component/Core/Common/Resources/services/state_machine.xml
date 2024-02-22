@@ -14,7 +14,6 @@
     <service class="BitBag\OpenMarketplace\Component\Core\Common\StateMachine\ProductDraftCallbacks"
              id="bitbag.open_marketplace.component.core.common.state_machine.product_draft_callbacks"
              public="true">
-        <argument type="service" id="session.flash_bag" />
         <argument type="service" id="bitbag.open_marketplace.component.product_listing.draft_converter"/>
         <argument type="service" id="doctrine.orm.entity_manager"/>
     </service>

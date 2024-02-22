@@ -4,26 +4,14 @@
   "@type": "hydra:Collection",
   "hydra:member": [
     {
-      "@id": "/api/v2/shop/orders/bruce_order_made_by_john_1",
-      "@type": "Order",
-      "tokenValue": "bruce_order_made_by_john_1",
-      "id": "@integer@",
-      "itemsTotal": 0
-    },
-    {
-      "@id": "/api/v2/shop/orders/bruce_order_made_by_john_2",
-      "@type": "Order",
-      "tokenValue": "bruce_order_made_by_john_2",
-      "id": "@integer@",
-      "itemsTotal": 0
-    },
-    {
       "@id": "/api/v2/shop/orders/peter_order_made_by_john",
       "@type": "Order",
+      "channel": "/api/v2/shop/channels/@string@",
       "tokenValue": "peter_order_made_by_john",
       "id": "@integer@",
-      "itemsTotal": 0
+      "itemsTotal": 0,
+      "state": "new"
     }
   ],
-  "hydra:totalItems": 3
+  "hydra:totalItems":1
 }

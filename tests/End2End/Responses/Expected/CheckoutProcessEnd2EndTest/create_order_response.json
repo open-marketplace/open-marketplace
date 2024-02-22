@@ -4,5 +4,21 @@
     "@type": "Order",
     "tokenValue": "@string@",
     "id": "@integer@",
-    "itemsTotal": 0
+    "itemsTotal": 0,
+    "channel": "/api/v2/shop/channels/CODE",
+    "state": "cart",
+    "payments": [],
+    "shipments": [],
+    "currencyCode": "USD",
+    "localeCode": "en_US",
+    "checkoutState": "cart",
+    "paymentState": "cart",
+    "shippingState": "cart",
+    "items": [],
+    "total": 0,
+    "taxTotal": 0,
+    "taxExcludedTotal": 0,
+    "taxIncludedTotal": 0,
+    "shippingTotal": 0,
+    "orderPromotionTotal": 0
 }

@@ -31,7 +31,7 @@ final class VendorAwareVoter extends Voter
     ) {
     }
 
-    protected function supports(string $attribute, $subject): bool
+    protected function supports(string $attribute, mixed $subject): bool
     {
         $supportsAttribute = in_array($attribute, $this->supportedAttributes);
 
@@ -45,7 +45,7 @@ final class VendorAwareVoter extends Voter
      */
     protected function voteOnAttribute(
         string $attribute,
-        $subject,
+        mixed $subject,
         TokenInterface $token
     ): bool {
         if (

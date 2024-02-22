@@ -4,22 +4,21 @@
     "icon": 'credit card'
 } %}
 
-{{ form_start(form, { 'attr': {'class': 'ui form dirtylisten'}}) }}
+{{ form_start(form, { 'attr': {'class': 'ui form vendor-panel-form vendor-settlements-form'}}) }}
 {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
 <div>
     {{ form_errors(form) }}
-    <div class="ui tab active" data-tab="details">
-
+    <div class="ui tab active">
         <div class="ui segments">
+            <h3>
+                {% set balance = bitbag_open_marketplace_settlement_virtual_wallet_balance_by_channel(channel)%}
+                {{ channel.name }} {{ "open_marketplace.ui.virtual_wallet_balance_on_channel"|trans }}:
+                {{ balance|sylius_format_money(channel.baseCurrency.code, sylius_base_locale) }}
+            </h3>
             <div class="ui segment">
-                <h1>
-                    {% set balance = bitbag_open_marketplace_settlement_virtual_wallet_balance_by_channel(channel)%}
-                    {{ "open_marketplace.ui.virtual_wallet_balance"|trans }} :
-                    {{ balance|sylius_format_money(channel.baseCurrency.code, sylius_base_locale) }}
-                </h1>
-            </div>
-            <div class="ui segment">
-                {{ form_row(form.totalAmount) }}
+                <div class="field">
+                    {{ form_row(form.totalAmount) }}
+                </div>
             </div>
         </div>
         {{ form_widget(form.save) }}

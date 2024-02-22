@@ -46,21 +46,21 @@ class VendorProfileUpdaterTest extends JsonApiTestCase
     {
         parent::setUp();
 
-        $this->entityManager = static::$container->get('doctrine.orm.entity_manager');
+        $this->entityManager = static::getContainer()->get('doctrine.orm.entity_manager');
 
         $this->countryRepository = $this->entityManager->getRepository(Country::class);
         $this->vendorRepository = $this->entityManager->getRepository(Vendor::class);
         $this->vendorProfileUpdateRepository = $this->entityManager->getRepository(ProfileUpdate::class);
-        $this->vendorAddressFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.address');
-        $this->vendorProfileFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_factory');
-        $this->vendorProfileUpdateImageFactoryInterface = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_logo_image_factory');
-        $this->vendorProfileUpdateBackgroundImageFactoryInterface = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_background_image_factory');
-        $this->imageUploader = static::$container->get('sylius.image_uploader');
-        $this->vendorLogoOperator = static::$container->get('bitbag.open_marketplace.component.vendor.profile.logo_image_operator');
-        $this->vendorBackgroundImageOperator = static::$container->get('bitbag.open_marketplace.component.vendor.profile.background_image_operator');
+        $this->vendorAddressFactory = static::getContainer()->get('bitbag.open_marketplace.component.vendor.profile.factory.address');
+        $this->vendorProfileFactory = static::getContainer()->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_factory');
+        $this->vendorProfileUpdateImageFactoryInterface = static::getContainer()->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_logo_image_factory');
+        $this->vendorProfileUpdateBackgroundImageFactoryInterface = static::getContainer()->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_background_image_factory');
+        $this->imageUploader = static::getContainer()->get('sylius.image_uploader');
+        $this->vendorLogoOperator = static::getContainer()->get('bitbag.open_marketplace.component.vendor.profile.logo_image_operator');
+        $this->vendorBackgroundImageOperator = static::getContainer()->get('bitbag.open_marketplace.component.vendor.profile.background_image_operator');
 
-        $remover = static::$container->get('bitbag.open_marketplace.component.vendor.profile.profile_update_remover');
-        $vendorProfileFactory = static::$container->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_update_factory');
+        $remover = static::getContainer()->get('bitbag.open_marketplace.component.vendor.profile.profile_update_remover');
+        $vendorProfileFactory = static::getContainer()->get('bitbag.open_marketplace.component.vendor.profile.factory.profile_update_factory');
 
         $senderMock = $this->createMock(SenderInterface::class);
         $this->vendorProfileUpdater = new ProfileUpdater(

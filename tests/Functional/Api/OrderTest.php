@@ -70,7 +70,7 @@ final class OrderTest extends FunctionalTestCase
 
     public function test_forbidden_get_order_by_different_vendor(): void
     {
-        $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
         $this->client->request('GET', '/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_1', [], [], $header);
 
@@ -100,7 +100,7 @@ final class OrderTest extends FunctionalTestCase
 
     public function test_it_cancel_not_paid_order_by_vendor(): void
     {
-        $header = $this->getHeaderForLoginShopUser('bruce.wayne@example.com');
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
         $this->client->request('PATCH', '/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_1/cancel', [], [], $header);
 
@@ -110,7 +110,7 @@ final class OrderTest extends FunctionalTestCase
 
     public function test_it_cancel_order_by_different_vendor(): void
     {
-        $header = $this->getHeaderForLoginShopUser('peter.weyland@example.com');
+        $header = $this->getHeaderForLoginShopUser('john.smith@example.com');
 
         $this->client->request('PATCH', '/api/v2/shop/account/vendor/orders/bruce_order_made_by_john_2/cancel', [], [], $header);
 

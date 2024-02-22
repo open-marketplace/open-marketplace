@@ -27,4 +27,15 @@ final class EditPage extends SymfonyPage implements EditPageInterface
                 $taxCategoryName,
             );
     }
+
+    public function fillFormWithDefaultData(): void
+    {
+        $this->getDocument()->fillField('Code', 'code');
+        $this->getDocument()->fillField('Price', '10');
+        $this->getDocument()->fillField('Original price', '20');
+        $this->getDocument()->fillField('Minimum price', '30');
+        $this->getDocument()->fillField('Name', 'test');
+        $this->getDocument()->fillField('Slug', 'product');
+        $this->getDocument()->fillField('Description', 'product description');
+    }
 }

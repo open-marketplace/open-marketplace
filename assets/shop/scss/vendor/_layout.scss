@@ -1,0 +1,76 @@
+[data-route^="open_marketplace_vendor_"],
+[data-route^="sylius_shop_account_"], {
+    .breadcrumb {
+        padding-bottom: 20px;
+    }
+
+    .ui.grid {
+        margin-top: 0;
+    }
+
+    .accordion {
+        border-radius: 0 !important;
+        border: solid #e0e0e0 1px !important;
+        box-shadow: none !important;
+    }
+
+    // Sidebar aligns
+    .ui.fluid.vertical.menu .item {
+        padding-left: 1em;
+        padding-right: 0;
+        border-bottom: 1px solid #eee;
+
+        i.icon {
+            margin: 0 1em 0 0.5em;
+        }
+    }
+
+    .ui.container .ui.grid {
+        > .twelve.wide.column:last-child {
+            padding-top: 0;
+            padding-left: 60px;
+        }
+
+        // Border reset
+        .column:last-child .ui.segment {
+            border: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .column:last-child .ui.top.attached.styled.header {
+            background: none;
+            border: 0;
+            padding: 0;
+        }
+    }
+
+    h1.header {
+        margin-bottom: 20px;
+
+        > .icon + .content {
+            font-size: 2rem;
+        }
+
+        > .icon {
+            display: table-cell;
+            padding-right: 18px;
+            padding-top: 0;
+        }
+    }
+
+    .sylius-grid-wrapper {
+        .ui.dropdown > i {
+            width: 60px !important;
+        }
+
+        .ui.dropdown a i, .ui.dropdown button i {
+            width: 24px !important;
+        }
+    }
+
+    // orders filters
+    .sylius-filters .sylius-filters__group > .disabled.field label {
+        display: block !important;
+    }
+}

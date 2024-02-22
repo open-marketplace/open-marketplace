@@ -8,7 +8,7 @@ Feature: Verifying product listing
     Given there is an admin user "admin" with password "admin"
     And there is an vendor user "vendor" with password "vendor"
     And the store operates on a channel named "Web-US" in "USD" currency
-    And I am logged in as an admin
+    And I am logged in as an administrator
 
   @ui
   Scenario: Accept product listing
