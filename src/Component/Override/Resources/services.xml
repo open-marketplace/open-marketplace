@@ -32,5 +32,15 @@ We are hiring developers from all over the world. Join us and start your new, ex
             <argument type="service" id="bitbag.open_marketplace.component.order.factory.shipment" />
             <argument type="service" id="bitbag.open_marketplace.component.order.calculator.shipment_units_recalculator" />
         </service>
+
+        <service class="BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\AdminBundle\Controller\NotificationController"
+                id="bitbag.sylius.controller.admin.notification"
+                public="true"
+        >
+            <argument type="service" id="sylius.http_client" />
+            <argument type="service" id="sylius.http_message_factory" />
+            <argument type="string">%sylius.admin.notification.uri%</argument>
+            <argument type="string">%kernel.environment%</argument>
+        </service>
     </services>
 </container>

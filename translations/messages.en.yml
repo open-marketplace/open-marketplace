@@ -1,5 +1,6 @@
 open_marketplace:
     ui:
+        there_is_a_new_version_of_open_marketplace_available: There is a new version of OpenMarketplace available.
         yes: Yes
         no: No
         none: None
