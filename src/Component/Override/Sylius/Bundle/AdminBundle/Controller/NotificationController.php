@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
  * You can find more information about us on https://bitbag.io and write us
  * an email on hello@bitbag.io.
  */
+
+declare(strict_types=1);
 
 namespace BitBag\OpenMarketplace\Component\Override\Sylius\Bundle\AdminBundle\Controller;
 
@@ -37,11 +37,10 @@ final class NotificationController
     {
         $content = [
             'version' => Kernel::OPEN_MARKETPLACE_VERSION,
-            'hostname' => $request->getHost(),
+            'hostname' => \sprintf('%s,%s', 'open-marketplace;', $request->getHost()),
             'locale' => $request->getLocale(),
             'user_agent' => $request->headers->get('User-Agent'),
             'environment' => $this->environment,
-            'open-marketplace' => true,
         ];
         $headers = ['Content-Type' => 'application/json'];
 
