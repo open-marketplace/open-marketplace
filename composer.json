@@ -42,6 +42,9 @@
         "stripe/stripe-php": "^6.43",
         "sylius-labs/coding-standard": "^4.0"
     },
+    "replace": {
+        "bitbag/open-marketplace": "<=2.2.0"
+    },
     "config": {
         "preferred-install": {
             "*": "dist"
