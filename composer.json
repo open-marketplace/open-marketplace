@@ -1,7 +1,7 @@
 {
-    "name": "bitbag/open-marketplace",
+    "name": "open-marketplace/open-marketplace",
     "type": "project",
-    "description": "BitBag Multi-Vendor Marketplace Universe",
+    "description": "Sylius-based Multi-Vendor Marketplace",
     "license": "MIT",
     "require": {
         "php": "^8.0",

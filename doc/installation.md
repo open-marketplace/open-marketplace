@@ -21,7 +21,7 @@ Before creating your application, make sure you use at least PHP 8.0 and have Co
 ### 1. Create project
 
 ```diff
-$ composer create-project bitbag/open-marketplace project
+$ composer create-project open-marketplace/open-marketplace project
 $ cd project
 ```
 
