@@ -42,6 +42,7 @@ final class SettlementRepositoryTest extends JsonApiTestCase
         $period[] = $this->generatePeriod('last week monday', 'last week sunday');
         $period[] = $this->generatePeriod('first day of January', 'last day of January');
         $period[] = $this->generatePeriod('first day of April', 'last day of June');
+        $period[] = $this->generatePeriod('first day of June', 'last day of June');
 
         rsort($period);
 

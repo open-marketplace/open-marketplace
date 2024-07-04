@@ -28,7 +28,7 @@ final class ConversationPersister implements DataPersisterInterface
         return $data instanceof ConversationInterface;
     }
 
-    public function persist($data): void
+    public function persist(mixed $data): void
     {
         $data->setShopUser($this->security->getUser());
 
@@ -36,7 +36,7 @@ final class ConversationPersister implements DataPersisterInterface
         $this->manager->flush();
     }
 
-    public function remove($data): void
+    public function remove(mixed $data): void
     {
         $this->manager->remove($data);
         $this->manager->flush();

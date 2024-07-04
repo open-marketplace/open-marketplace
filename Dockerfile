@@ -37,6 +37,9 @@ COPY docker/php/prod/opcache.ini    $PHP_INI_DIR/conf.d/opcache.ini
 # copy file required by opcache preloading
 COPY config/preload.php /srv/open_marketplace/config/preload.php
 
+# Configure default timezone for PHP
+ENV PHP_DATE_TIMEZONE=UTC
+
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN set -eux; \

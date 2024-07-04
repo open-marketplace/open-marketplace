@@ -9,7 +9,7 @@
             <constraint name="Range">
                 <option name="min">0.00</option>
                 <option name="max">1000000000</option>
-                <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="notInRangeMessage">sylius.channel_pricing.price.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
@@ -17,7 +17,7 @@
             <constraint name="Range">
                 <option name="min">0.00</option>
                 <option name="max">1000000000</option>
-                <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="notInRangeMessage">sylius.channel_pricing.price.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
@@ -25,7 +25,7 @@
             <constraint name="Range">
                 <option name="min">0.00</option>
                 <option name="max">1000000000</option>
-                <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="notInRangeMessage">sylius.channel_pricing.price.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
