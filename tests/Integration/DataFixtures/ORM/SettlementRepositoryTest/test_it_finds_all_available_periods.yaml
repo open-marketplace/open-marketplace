@@ -88,8 +88,8 @@ BitBag\OpenMarketplace\Component\Settlement\Entity\Settlement:
     vendor: '@vendor_bruce'
     total_amount: 100500
     total_commission_amount: 1029
-    start_date: '<date_create("first day of last month")>'
-    end_date: '<date_create("last day of last month")>'
+    start_date: '<date_create("first day of June")>'
+    end_date: '<date_create("last day of June")>'
     channel: '@channel_us'
   vendor_tommy_settlement_1:
     vendor: '@vendor_tommy'
